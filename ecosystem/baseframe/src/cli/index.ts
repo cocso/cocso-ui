@@ -19,7 +19,6 @@ export const runCli = async (): Promise<void> => {
   try {
     const args = parseCliArgs(rawArgs);
 
-    // Handle help command or empty args
     if (args.command === 'help' || rawArgs.length === 0 || rawArgs.includes('--help') || rawArgs.includes('-h')) {
       showHelp();
       return;

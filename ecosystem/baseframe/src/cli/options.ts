@@ -20,7 +20,6 @@ export interface CliArgs {
  * Parse CLI arguments - simple implementation
  */
 export const parseCliArgs = (args: string[]): CliArgs => {
-  // 명령어가 없으면 help
   if (args.length === 0) {
     return {
       command: 'help',
@@ -32,8 +31,7 @@ export const parseCliArgs = (args: string[]): CliArgs => {
   }
 
   const command = args[0] as CliCommand;
-  
-  // 유효하지 않은 명령어면 help
+
   if (!['build', 'validate', 'help'].includes(command)) {
     return {
       command: 'help',

@@ -22,7 +22,6 @@ export const loadTokenSchema = async (filePath: string): Promise<Schema | null> 
       return null;
     }
 
-    // 경고가 있으면 출력하지만 스키마는 로드
     if (validation.warnings && validation.warnings.length > 0) {
       validation.warnings.forEach((warning) => console.warn(`   ⚠️  ${warning}`));
     }
@@ -41,11 +40,9 @@ export const loadTokenSchemas = async (patterns: string[]): Promise<Schema[]> =>
       gitignore: true,
     });
 
-    // 병렬로 모든 파일 로드
     const schemaPromises = files.map(file => loadTokenSchema(file));
     const results = await Promise.all(schemaPromises);
 
-    // null이 아닌 스키마만 필터링
     return results.filter((schema): schema is Schema => schema !== null);
   } catch (error) {
     console.error('파일 검색 중 오류:', error);
@@ -64,11 +61,9 @@ export const loadCocsoBaseTokens = async (): Promise<Schema[]> => {
       gitignore: false,
     });
 
-    // 병렬로 모든 파일 로드
     const schemaPromises = files.map(file => loadTokenSchema(file));
     const results = await Promise.all(schemaPromises);
 
-    // null이 아닌 스키마만 필터링
     return results.filter((schema): schema is Schema => schema !== null);
   } catch (error) {
     console.warn('COCSO 기본 토큰 로드 실패:', error instanceof Error ? error.message : error);
