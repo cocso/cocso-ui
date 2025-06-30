@@ -9,7 +9,7 @@ export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
   const inputPattern = args.inputPattern || DEFAULT_PATTERNS.join(',');
   const outputDir = args.outputDir || DEFAULT_OUTPUT_DIR;
   const formats = args.formats || ['css', 'json'];
-  const { verbose = false } = args;
+  const { verbose = false, individual = true } = args;
 
   console.log('🔧 토큰 빌드를 시작합니다...');
 
@@ -17,6 +17,7 @@ export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
     console.log(`📁 입력 패턴: ${inputPattern}`);
     console.log(`📤 출력 디렉토리: ${outputDir}`);
     console.log(`🎯 출력 형식: ${formats.join(', ')}`);
+    console.log(`📋 빌드 모드: ${individual ? '개별 빌드' : '통합 빌드'}`);
   }
 
   const core = new BaseframeCore();
@@ -43,14 +44,18 @@ export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
       });
     }
 
-    const builtFiles = await core.buildMultiple(outputDir, {
-      formats,
-    });
+    const builtFiles = await core.buildMultiple(outputDir, { formats, individual });
 
     console.log('🎉 토큰 빌드가 완료되었어요!');
 
+    if (individual) {
+      console.log(`📄 개별 파일 ${builtFiles.length}개가 생성되었어요:`);
+    } else {
+      console.log('📄 생성된 파일:');
+    }
+
     builtFiles.forEach((file) => {
-      console.log(`📄 생성됨: ${file}`);
+      console.log(`   📄 ${file}`);
     });
   } catch (error) {
     console.error('❌ 빌드 중 오류가 발생했어요:', error instanceof Error ? error.message : error);

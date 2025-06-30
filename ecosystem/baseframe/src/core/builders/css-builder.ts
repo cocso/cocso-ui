@@ -89,6 +89,5 @@ const extractTokensFromSchema = (
 
 export const buildCssFile = (schemas: Schema[], options: CssBuilderOptions = {}): string => {
   const css = buildCss(schemas, options);
-
   return css + '\n';
 };

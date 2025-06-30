@@ -14,6 +14,7 @@ export interface CliArgs {
   outputDir?: string;
   formats?: OutputFormat[];
   verbose?: boolean;
+  individual?: boolean;
 }
 
 /**
@@ -27,6 +28,7 @@ export const parseCliArgs = (args: string[]): CliArgs => {
       outputDir: DEFAULT_OUTPUT_DIR,
       formats: ['css', 'json'],
       verbose: false,
+      individual: true,
     };
   }
 
@@ -39,6 +41,7 @@ export const parseCliArgs = (args: string[]): CliArgs => {
       outputDir: DEFAULT_OUTPUT_DIR,
       formats: ['css', 'json'],
       verbose: false,
+      individual: true,
     };
   }
 
@@ -46,6 +49,9 @@ export const parseCliArgs = (args: string[]): CliArgs => {
   const outputDir = getArgValue(args, ['-o', '--output']) || DEFAULT_OUTPUT_DIR;
   const formatArg = getArgValue(args, ['-f', '--format']) || 'css,json';
   const verbose = hasFlag(args, ['-v', '--verbose']);
+  
+  const combined = hasFlag(args, ['--combined']);
+  const individual = !combined;
 
   return {
     command,
@@ -53,6 +59,7 @@ export const parseCliArgs = (args: string[]): CliArgs => {
     outputDir,
     formats: parseFormats(formatArg),
     verbose,
+    individual,
   };
 };
 
@@ -122,11 +129,13 @@ export const showHelp = (): void => {
   -i, --input <패턴>       입력 파일 패턴 (기본: tokens/**/*.{yaml,yml})
   -o, --output <디렉토리>   출력 디렉토리 (기본: dist)
   -f, --format <형식>      출력 형식, 쉼표로 구분 (기본: css,json)
+  --combined              모든 토큰을 하나의 파일로 통합 빌드
   -v, --verbose           자세한 출력
   -h, --help              도움말 표시
 
 예시:
-  baseframe build
+  baseframe build                                    # 각 토큰별로 개별 파일 생성 (기본)
+  baseframe build --combined                         # 모든 토큰을 tokens.css, tokens.json으로 통합 빌드
   baseframe build -i "src/**/*.tokens.yaml" -o "build" -f "css"
   baseframe validate -i "tokens/**/*.yaml" -v
 `);

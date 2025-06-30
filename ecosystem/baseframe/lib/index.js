@@ -13094,6 +13094,7 @@ var loadTokenSchema = async (filePath) => {
     if (validation.warnings && validation.warnings.length > 0) {
       validation.warnings.forEach((warning) => console.warn(`   ⚠️  ${warning}`));
     }
+    parsed.metadata.filePath = filePath;
     return parsed;
   } catch (error) {
     console.warn(`❌ ${filePath}: ${error instanceof Error ? error.message : "알 수 없는 오류"}`);
@@ -13237,7 +13238,7 @@ var buildJson = (schemas, options = {}) => {
 
 // src/core/index.ts
 import { writeFile, mkdir } from "fs/promises";
-import { join as join2, dirname } from "path";
+import { join as join2, dirname, basename } from "path";
 
 class BaseframeCore {
   schemas = [];
@@ -13249,31 +13250,62 @@ class BaseframeCore {
     const cocsoTokens = await loadCocsoBaseTokens();
     this.schemas.push(...cocsoTokens);
   }
-  buildOutput(format, options = {}) {
+  buildOutput(format, schemas, options = {}) {
+    const targetSchemas = schemas || this.schemas;
+    const { isIndividual = false } = options;
     switch (format) {
       case "css":
-        return buildCssFile(this.schemas, options);
+        return buildCssFile(targetSchemas, { includeComments: !isIndividual });
       case "json":
-        return buildJsonFile(this.schemas, options);
+        return buildJsonFile(targetSchemas, { includeMetadata: !isIndividual });
       default:
         throw new Error(`지원하지 않는 형식: ${format}`);
     }
   }
-  async buildToFile(format, outputPath, options = {}) {
-    const content = this.buildOutput(format, options);
+  async buildToFile(format, outputPath, schemas, options = {}) {
+    const content = this.buildOutput(format, schemas, options);
     await mkdir(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, content, "utf8");
   }
-  async buildMultiple(outputDir, options = {}) {
+  async buildCombined(outputDir, options = {}) {
     const { formats = ["css", "json"] } = options;
     const builtFiles = [];
     for (const format of formats) {
       const fileName = `tokens.${format}`;
       const outputPath = join2(outputDir, fileName);
-      await this.buildToFile(format, outputPath);
+      await this.buildToFile(format, outputPath, undefined, { isIndividual: false });
       builtFiles.push(outputPath);
     }
     return builtFiles;
+  }
+  async buildIndividual(outputDir, options = {}) {
+    const { formats = ["css", "json"] } = options;
+    const builtFiles = [];
+    for (const schema of this.schemas) {
+      const baseName = this.getSchemaBaseName(schema);
+      for (const format of formats) {
+        const fileName = `${baseName}.${format}`;
+        const outputPath = join2(outputDir, fileName);
+        await this.buildToFile(format, outputPath, [schema], { isIndividual: true });
+        builtFiles.push(outputPath);
+      }
+    }
+    return builtFiles;
+  }
+  async buildMultiple(outputDir, options = {}) {
+    const { individual = true } = options;
+    if (individual) {
+      return this.buildIndividual(outputDir, options);
+    } else {
+      return this.buildCombined(outputDir, options);
+    }
+  }
+  getSchemaBaseName(schema) {
+    if (schema.metadata.filePath) {
+      const fileName = basename(schema.metadata.filePath);
+      return fileName.replace(/\.(yaml|yml)$/, "");
+    }
+    return schema.data.collection || schema.metadata.id;
   }
   getSchemas() {
     return [...this.schemas];
@@ -13304,7 +13336,8 @@ var parseCliArgs = (args) => {
       inputPattern: DEFAULT_PATTERNS.join(","),
       outputDir: DEFAULT_OUTPUT_DIR,
       formats: ["css", "json"],
-      verbose: false
+      verbose: false,
+      individual: true
     };
   }
   const command = args[0];
@@ -13314,19 +13347,23 @@ var parseCliArgs = (args) => {
       inputPattern: DEFAULT_PATTERNS.join(","),
       outputDir: DEFAULT_OUTPUT_DIR,
       formats: ["css", "json"],
-      verbose: false
+      verbose: false,
+      individual: true
     };
   }
   const inputPattern = getArgValue(args, ["-i", "--input"]) || DEFAULT_PATTERNS.join(",");
   const outputDir = getArgValue(args, ["-o", "--output"]) || DEFAULT_OUTPUT_DIR;
   const formatArg = getArgValue(args, ["-f", "--format"]) || "css,json";
   const verbose = hasFlag(args, ["-v", "--verbose"]);
+  const combined = hasFlag(args, ["--combined"]);
+  const individual = !combined;
   return {
     command,
     inputPattern,
     outputDir,
     formats: parseFormats(formatArg),
-    verbose
+    verbose,
+    individual
   };
 }, getArgValue = (args, flags) => {
   for (const flag of flags) {
@@ -13358,11 +13395,13 @@ var parseCliArgs = (args) => {
   -i, --input <패턴>       입력 파일 패턴 (기본: tokens/**/*.{yaml,yml})
   -o, --output <디렉토리>   출력 디렉토리 (기본: dist)
   -f, --format <형식>      출력 형식, 쉼표로 구분 (기본: css,json)
+  --combined              모든 토큰을 하나의 파일로 통합 빌드
   -v, --verbose           자세한 출력
   -h, --help              도움말 표시
 
 예시:
-  baseframe build
+  baseframe build                                    # 각 토큰별로 개별 파일 생성 (기본)
+  baseframe build --combined                         # 모든 토큰을 tokens.css, tokens.json으로 통합 빌드
   baseframe build -i "src/**/*.tokens.yaml" -o "build" -f "css"
   baseframe validate -i "tokens/**/*.yaml" -v
 `);
@@ -13381,12 +13420,13 @@ var executeBuildCommand = async (args) => {
   const inputPattern = args.inputPattern || DEFAULT_PATTERNS.join(",");
   const outputDir = args.outputDir || DEFAULT_OUTPUT_DIR;
   const formats = args.formats || ["css", "json"];
-  const { verbose = false } = args;
+  const { verbose = false, individual = true } = args;
   console.log("\uD83D\uDD27 토큰 빌드를 시작합니다...");
   if (verbose) {
     console.log(`\uD83D\uDCC1 입력 패턴: ${inputPattern}`);
     console.log(`\uD83D\uDCE4 출력 디렉토리: ${outputDir}`);
     console.log(`\uD83C\uDFAF 출력 형식: ${formats.join(", ")}`);
+    console.log(`\uD83D\uDCCB 빌드 모드: ${individual ? "개별 빌드" : "통합 빌드"}`);
   }
   const core = new BaseframeCore;
   try {
@@ -13407,12 +13447,15 @@ var executeBuildCommand = async (args) => {
         console.log(`   - ${kind}: ${count}개`);
       });
     }
-    const builtFiles = await core.buildMultiple(outputDir, {
-      formats
-    });
+    const builtFiles = await core.buildMultiple(outputDir, { formats, individual });
     console.log("\uD83C\uDF89 토큰 빌드가 완료되었어요!");
+    if (individual) {
+      console.log(`\uD83D\uDCC4 개별 파일 ${builtFiles.length}개가 생성되었어요:`);
+    } else {
+      console.log("\uD83D\uDCC4 생성된 파일:");
+    }
     builtFiles.forEach((file) => {
-      console.log(`\uD83D\uDCC4 생성됨: ${file}`);
+      console.log(`   \uD83D\uDCC4 ${file}`);
     });
   } catch (error) {
     console.error("❌ 빌드 중 오류가 발생했어요:", error instanceof Error ? error.message : error);

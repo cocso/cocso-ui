@@ -26,6 +26,8 @@ export const loadTokenSchema = async (filePath: string): Promise<Schema | null> 
       validation.warnings.forEach((warning) => console.warn(`   ⚠️  ${warning}`));
     }
 
+    parsed.metadata.filePath = filePath;
+
     return parsed;
   } catch (error) {
     console.warn(`❌ ${filePath}: ${error instanceof Error ? error.message : '알 수 없는 오류'}`);

@@ -44,6 +44,5 @@ const extractTokensFromSchema = (schema: Schema): Record<string, TokenValue> => 
 
 export const buildJsonFile = (schemas: Schema[], options: JsonBuilderOptions = {}): string => {
   const json = buildJson(schemas, options);
-  
   return json + '\n';
 }; 

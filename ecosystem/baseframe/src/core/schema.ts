@@ -3,6 +3,7 @@ export interface BaseMetadata {
   name: string;
   description?: string;
   version?: string;
+  filePath?: string;
 }
 
 export type TokenValue = string | number | Record<string, unknown> | unknown[];
@@ -64,6 +65,7 @@ export interface BuildOptions {
   inputPattern?: string;
   outputDir?: string;
   formats?: OutputFormat[];
+  individual?: boolean;
 }
 
 export type OutputFormat = 'css' | 'json';
