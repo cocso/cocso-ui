@@ -1,13 +1,7 @@
 import type { BuildOptions, OutputFormat } from '../core';
 
-/**
- * CLI command types
- */
 export type CliCommand = 'build' | 'validate' | 'help';
 
-/**
- * Parsed CLI arguments
- */
 export interface CliArgs {
   command: CliCommand;
   inputPattern?: string;
@@ -17,9 +11,6 @@ export interface CliArgs {
   individual?: boolean;
 }
 
-/**
- * Parse CLI arguments - simple implementation
- */
 export const parseCliArgs = (args: string[]): CliArgs => {
   if (args.length === 0) {
     return {
@@ -63,9 +54,6 @@ export const parseCliArgs = (args: string[]): CliArgs => {
   };
 };
 
-/**
- * Get argument value by flags
- */
 const getArgValue = (args: string[], flags: string[]): string | undefined => {
   for (const flag of flags) {
     const index = args.indexOf(flag);
@@ -76,16 +64,10 @@ const getArgValue = (args: string[], flags: string[]): string | undefined => {
   return undefined;
 };
 
-/**
- * Check if flag exists in arguments
- */
 const hasFlag = (args: string[], flags: string[]): boolean => {
   return flags.some((flag) => args.includes(flag));
 };
 
-/**
- * Parse output formats from string
- */
 const parseFormats = (formatString: string): OutputFormat[] => {
   const validFormats: OutputFormat[] = ['css', 'json'];
   const formats = formatString.split(',').map((f) => f.trim());
@@ -95,9 +77,6 @@ const parseFormats = (formatString: string): OutputFormat[] => {
   ) as OutputFormat[];
 };
 
-/**
- * Default patterns for token files
- */
 export const DEFAULT_PATTERNS = [
   'tokens/**/*.yaml',
   'tokens/**/*.yml',
@@ -105,14 +84,8 @@ export const DEFAULT_PATTERNS = [
   '**/*.tokens.yml',
 ];
 
-/**
- * Default output directory
- */
 export const DEFAULT_OUTPUT_DIR = 'dist';
 
-/**
- * Show CLI help
- */
 export const showHelp = (): void => {
   console.log(`
 🎨 BASEFRAME - Design Token Management Tool
