@@ -2,9 +2,6 @@ import { BaseframeCore } from '../core';
 import type { CliArgs } from './options';
 import { DEFAULT_PATTERNS, DEFAULT_OUTPUT_DIR } from './options';
 
-/**
- * Execute build command
- */
 export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
   const inputPattern = args.inputPattern || DEFAULT_PATTERNS.join(',');
   const outputDir = args.outputDir || DEFAULT_OUTPUT_DIR;

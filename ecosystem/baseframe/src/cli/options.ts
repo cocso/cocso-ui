@@ -1,4 +1,4 @@
-import type { BuildOptions, OutputFormat } from '../core';
+import type { OutputFormat } from '../core';
 
 export type CliCommand = 'build' | 'validate' | 'help';
 
@@ -40,7 +40,7 @@ export const parseCliArgs = (args: string[]): CliArgs => {
   const outputDir = getArgValue(args, ['-o', '--output']) || DEFAULT_OUTPUT_DIR;
   const formatArg = getArgValue(args, ['-f', '--format']) || 'css,json';
   const verbose = hasFlag(args, ['-v', '--verbose']);
-  
+
   const combined = hasFlag(args, ['--combined']);
   const individual = !combined;
 
