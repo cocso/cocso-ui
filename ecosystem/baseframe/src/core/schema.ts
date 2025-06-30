@@ -66,6 +66,8 @@ export interface BuildOptions {
   outputDir?: string;
   formats?: OutputFormat[];
   individual?: boolean;
+  minify?: boolean;
+  selector?: string;
 }
 
 export type OutputFormat = 'css' | 'json';

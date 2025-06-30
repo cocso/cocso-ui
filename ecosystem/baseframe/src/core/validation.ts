@@ -1,69 +1,79 @@
 import type { Schema, ValidationResult } from './schema';
 
-export const isSchema = (obj: unknown): obj is Schema => {
-  if (typeof obj !== 'object' || obj === null) {
+const VALID_SCHEMA_KINDS = ['Tokens', 'PrimitiveTokens', 'SemanticTokens', 'ComponentTokens'] as const;
+
+export const isSchema = (candidateObject: unknown): candidateObject is Schema => {
+  if (typeof candidateObject !== 'object' || candidateObject === null) {
     return false;
   }
 
-  const candidate = obj as Record<string, unknown>;
+  const schemaCandidate = candidateObject as Record<string, unknown>;
 
-  if (!candidate.kind || typeof candidate.kind !== 'string') {
+  if (!schemaCandidate.kind || typeof schemaCandidate.kind !== 'string') {
     return false;
   }
 
-  return ['Tokens', 'PrimitiveTokens', 'SemanticTokens', 'ComponentTokens'].includes(
-    candidate.kind,
-  );
+  return VALID_SCHEMA_KINDS.includes(schemaCandidate.kind as any);
 };
 
-export const validateSchema = (schema: Schema): ValidationResult => {
-  const errors: string[] = [];
-  const warnings: string[] = [];
+const TOKEN_NAME_PATTERN = /^[\w\-$.]+$/;
 
-  if (!schema.metadata?.id?.trim()) {
-    errors.push('metadata.id가 필요해요.');
+export const validateSchema = (targetSchema: Schema): ValidationResult => {
+  const validationErrors: string[] = [];
+  const validationWarnings: string[] = [];
+
+  if (!targetSchema.metadata?.id?.trim()) {
+    validationErrors.push('metadata.id is required');
   }
 
-  if (!schema.metadata?.name?.trim()) {
-    warnings.push('metadata.name이 권장됩니다.');
+  if (!targetSchema.metadata?.name?.trim()) {
+    validationWarnings.push('metadata.name is recommended');
   }
 
-  if (!schema.data?.collection?.trim()) {
-    errors.push('data.collection이 필요해요.');
+  if (!targetSchema.data?.collection?.trim()) {
+    validationErrors.push('data.collection is required');
   }
 
-  if (!schema.data?.tokens || Object.keys(schema.data.tokens).length === 0) {
-    errors.push('최소 하나의 토큰이 필요해요.');
+  const tokenEntries = targetSchema.data?.tokens ? Object.entries(targetSchema.data.tokens) : [];
+  
+  if (!targetSchema.data?.tokens || tokenEntries.length === 0) {
+    validationErrors.push('At least one token is required');
   } else {
-    for (const [tokenName, tokenDef] of Object.entries(schema.data.tokens)) {
-      if (!tokenDef.values) {
-        errors.push(`토큰 '${tokenName}'에 values가 필요해요.`);
+    for (const [tokenName, tokenDefinition] of tokenEntries) {
+      if (!tokenDefinition.values) {
+        validationErrors.push(`Token '${tokenName}' requires values property`);
       }
 
-      if (!tokenDef.description?.trim()) {
-        warnings.push(`토큰 '${tokenName}'에 설명이 권장됩니다.`);
+      if (!tokenDefinition.description?.trim()) {
+        validationWarnings.push(`Token '${tokenName}' description is recommended`);
       }
 
-      if (!tokenName.match(/^[\w\-$.]+$/)) {
-        warnings.push(
-          `토큰 '${tokenName}' 이름이 권장 규칙과 다릅니다. (영문, 숫자, -, ., $ 만 사용)`,
+      if (!TOKEN_NAME_PATTERN.test(tokenName)) {
+        validationWarnings.push(
+          `Token '${tokenName}' name should follow naming convention (alphanumeric, -, ., $ only)`
         );
       }
     }
   }
 
-  if ('extends' in schema.data && schema.data.extends) {
-    if (!Array.isArray(schema.data.extends)) {
-      errors.push('data.extends는 배열이어야 해요.');
-    } else if (schema.data.extends.length === 0) {
-      warnings.push('extends 배열이 비어있어요.');
+  if ('extends' in targetSchema.data && targetSchema.data.extends) {
+    if (!Array.isArray(targetSchema.data.extends)) {
+      validationErrors.push('data.extends must be an array');
+    } else if (targetSchema.data.extends.length === 0) {
+      validationWarnings.push('extends array is empty');
     }
   }
 
-  return { valid: errors.length === 0, errors, warnings };
+  return { 
+    valid: validationErrors.length === 0, 
+    errors: validationErrors, 
+    warnings: validationWarnings 
+  };
 };
 
-export const formatTokenName = (name: string): string => {
-  const cleanName = name.replace(/^\$/, '').replace(/\./g, '-');
-  return `--cocso-${cleanName}`;
+const CSS_VARIABLE_PREFIX = '--cocso-';
+
+export const formatTokenName = (tokenName: string): string => {
+  const normalizedName = tokenName.replace(/^\$/, '').replace(/\./g, '-');
+  return `${CSS_VARIABLE_PREFIX}${normalizedName}`;
 };

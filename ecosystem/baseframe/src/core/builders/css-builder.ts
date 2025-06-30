@@ -1,93 +1,128 @@
+import postcss from 'postcss';
+// @ts-ignore
+import autoprefixer from 'autoprefixer';
+// @ts-ignore
+import cssnano from 'cssnano';
 import type { Schema, TokenCollection } from '../schema';
 import { formatTokenName } from '../validation';
 
 export interface CssBuilderOptions {
   includeComments?: boolean;
+  minify?: boolean;
+  selector?: string;
+  autoprefixer?: boolean;
 }
 
-export const buildCss = (schemas: Schema[], options: CssBuilderOptions = {}): string => {
-  const { includeComments = true } = options;
-  const outputLines: string[] = [];
+export const buildCss = async (schemas: Schema[], options: CssBuilderOptions = {}): Promise<string> => {
+  const { 
+    includeComments = true, 
+    minify = false, 
+    selector = ':root',
+    autoprefixer: enableAutoprefixer = true
+  } = options;
+
+  const cssRoot = postcss.root();
 
   if (includeComments) {
-    outputLines.push('/* COCSO Design Tokens - Generated CSS Variables */');
-    outputLines.push('');
+    cssRoot.append(postcss.comment({ text: ' COCSO Design Tokens - Generated CSS Variables ' }));
   }
 
-  outputLines.push(':root {');
+  const variablesRule = postcss.rule({ selector });
 
   for (const schema of schemas) {
     if (includeComments) {
-      outputLines.push(`  /* ${schema.metadata.name} (${schema.kind}) */`);
+      variablesRule.append(
+        postcss.comment({ text: ` ${schema.metadata.name} (${schema.kind}) ` })
+      );
     }
 
-    const tokens = extractTokensFromSchema(schema, schemas);
-    for (const [tokenName, tokenValue] of Object.entries(tokens)) {
-      const cssVariable = formatTokenName(tokenName);
-      outputLines.push(`  ${cssVariable}: ${String(tokenValue)};`);
-    }
-
-    if (includeComments) {
-      outputLines.push('');
+    const extractedTokens = extractTokensFromSchema(schema, schemas);
+    
+    for (const [tokenName, tokenValue] of Object.entries(extractedTokens)) {
+      const cssVariableName = formatTokenName(tokenName);
+      const cssDeclaration = postcss.decl({
+        prop: cssVariableName,
+        value: String(tokenValue)
+      });
+      
+      variablesRule.append(cssDeclaration);
     }
   }
 
-  if (outputLines[outputLines.length - 1] === '') {
-    outputLines.pop();
+  cssRoot.append(variablesRule);
+
+  const postcssPlugins = [];
+  
+  if (enableAutoprefixer) {
+    postcssPlugins.push(autoprefixer());
+  }
+  
+  if (minify) {
+    postcssPlugins.push(cssnano({
+      preset: ['default', {
+        discardComments: !includeComments,
+        normalizeWhitespace: true,
+        minifySelectors: true,
+        minifyParams: true,
+      }]
+    }));
   }
 
-  outputLines.push('}');
-
-  return outputLines.join('\n');
+  const cssProcessor = postcss(postcssPlugins);
+  const processResult = await cssProcessor.process(cssRoot, { from: undefined });
+  
+  return processResult.css;
 };
 
-const resolveTokenReference = (value: string | number, allSchemas: Schema[]): string | number => {
-  if (typeof value !== 'string') {
-    return value;
+const resolveTokenReference = (tokenValue: string | number, availableSchemas: Schema[]): string | number => {
+  if (typeof tokenValue !== 'string') {
+    return tokenValue;
   }
 
-  if (value.startsWith('$')) {
-    const cssVarName = formatTokenName(value);
-    return `var(${cssVarName})`;
+  if (tokenValue.startsWith('$')) {
+    const cssVariableName = formatTokenName(tokenValue);
+    return `var(${cssVariableName})`;
   }
 
-  for (const schema of allSchemas) {
-    if (schema.data?.tokens && schema.data.tokens[value]) {
-      const cssVarName = formatTokenName(value);
-      return `var(${cssVarName})`;
+  for (const schema of availableSchemas) {
+    if (schema.data?.tokens && schema.data.tokens[tokenValue]) {
+      const cssVariableName = formatTokenName(tokenValue);
+      return `var(${cssVariableName})`;
     }
   }
 
-  return value;
+  return tokenValue;
 };
 
 const extractTokensFromSchema = (
-  schema: Schema,
-  allSchemas: Schema[],
+  targetSchema: Schema,
+  availableSchemas: Schema[],
 ): Record<string, string | number> => {
-  const result: Record<string, string | number> = {};
+  const extractedTokens: Record<string, string | number> = {};
 
-  if (schema.data?.tokens) {
-    for (const [tokenName, tokenDef] of Object.entries(schema.data.tokens)) {
-      const value = tokenDef.values;
+  if (targetSchema.data?.tokens) {
+    for (const [tokenName, tokenDefinition] of Object.entries(targetSchema.data.tokens)) {
+      const tokenValue = tokenDefinition.values;
 
-      if (typeof value === 'object' && value !== null) {
-        if (Array.isArray(value)) {
-          const stringArray = value.map((item: unknown) => String(item));
-          result[tokenName] = stringArray.join(', ');
+      if (typeof tokenValue === 'object' && tokenValue !== null) {
+        if (Array.isArray(tokenValue)) {
+          const stringifiedArray = tokenValue.map((item: unknown) => String(item));
+          extractedTokens[tokenName] = stringifiedArray.join(', ');
         } else {
           continue;
         }
       } else {
-        result[tokenName] = resolveTokenReference(value, allSchemas);
+        extractedTokens[tokenName] = resolveTokenReference(tokenValue, availableSchemas);
       }
     }
   }
 
-  return result;
+  return extractedTokens;
 };
 
-export const buildCssFile = (schemas: Schema[], options: CssBuilderOptions = {}): string => {
-  const css = buildCss(schemas, options);
+export const buildCssFile = async (schemas: Schema[], options: CssBuilderOptions = {}): Promise<string> => {
+  const css = await buildCss(schemas, options);
   return css + '\n';
 };
+
+

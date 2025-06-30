@@ -7,68 +7,76 @@ import { isSchema, validateSchema } from './validation';
 
 export const loadTokenSchema = async (filePath: string): Promise<Schema | null> => {
   try {
-    const content = await readFile(filePath, 'utf8');
-    const parsed = parse(content);
+    const fileContent = await readFile(filePath, 'utf8');
+    const parsedSchema = parse(fileContent);
 
-    if (!isSchema(parsed)) {
-      console.warn(`⚠️  ${filePath}: 유효하지 않은 스키마 형식`);
+    if (!isSchema(parsedSchema)) {
+      console.warn(`Invalid schema format: ${filePath}`);
       return null;
     }
 
-    const validation = validateSchema(parsed);
-    if (!validation.valid) {
-      console.warn(`❌ ${filePath}: 검증 실패`);
-      validation.errors.forEach((error) => console.warn(`   ❌ ${error}`));
+    const validationResult = validateSchema(parsedSchema);
+    if (!validationResult.valid) {
+      console.warn(`Schema validation failed: ${filePath}`);
+      validationResult.errors.forEach((error) => console.warn(`  ${error}`));
       return null;
     }
 
-    if (validation.warnings && validation.warnings.length > 0) {
-      validation.warnings.forEach((warning) => console.warn(`   ⚠️  ${warning}`));
+    if (validationResult.warnings?.length) {
+      validationResult.warnings.forEach((warning) => console.warn(`  ${warning}`));
     }
 
-    parsed.metadata.filePath = filePath;
-
-    return parsed;
+    parsedSchema.metadata.filePath = filePath;
+    return parsedSchema;
   } catch (error) {
-    console.warn(`❌ ${filePath}: ${error instanceof Error ? error.message : '알 수 없는 오류'}`);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn(`Failed to load schema: ${filePath} - ${errorMessage}`);
     return null;
   }
 };
 
 export const loadTokenSchemas = async (patterns: string[]): Promise<Schema[]> => {
   try {
-    const files = await globby(patterns, {
+    const matchedFiles = await globby(patterns, {
       expandDirectories: true,
       gitignore: true,
     });
 
-    const schemaPromises = files.map(file => loadTokenSchema(file));
-    const results = await Promise.all(schemaPromises);
+    const loadPromises = matchedFiles.map(loadTokenSchema);
+    const loadResults = await Promise.all(loadPromises);
 
-    return results.filter((schema): schema is Schema => schema !== null);
+    return loadResults.filter((schema): schema is Schema => schema !== null);
   } catch (error) {
-    console.error('파일 검색 중 오류:', error);
+    console.error('File search error:', error);
     return [];
   }
 };
 
 export const loadCocsoBaseTokens = async (): Promise<Schema[]> => {
-  const baseTokenPath = join(process.cwd(), '../../packages/baseframe');
+  const BASE_TOKEN_PATH = join(process.cwd(), '../../packages/baseframe');
+  const TOKEN_FILE_PATTERNS = ['**/*.yaml', '**/*.yml'];
 
   try {
-    const files = await globby(['*.yaml', '*.yml'], {
-      cwd: baseTokenPath,
+    const tokenFiles = await globby(TOKEN_FILE_PATTERNS, {
+      cwd: BASE_TOKEN_PATH,
       absolute: true,
-      expandDirectories: false,
+      expandDirectories: true,
       gitignore: false,
     });
 
-    const schemaPromises = files.map(file => loadTokenSchema(file));
-    const results = await Promise.all(schemaPromises);
+    console.log(`Token search path: ${BASE_TOKEN_PATH}`);
+    console.log(`Found files:`, tokenFiles);
 
-    return results.filter((schema): schema is Schema => schema !== null);
+    const loadPromises = tokenFiles.map(loadTokenSchema);
+    const loadResults = await Promise.all(loadPromises);
+
+    const validSchemas = loadResults.filter((schema): schema is Schema => schema !== null);
+    console.log(`Loaded schemas count: ${validSchemas.length}`);
+
+    return validSchemas;
   } catch (error) {
-    console.warn('COCSO 기본 토큰 로드 실패:', error instanceof Error ? error.message : error);
+    const errorMessage = error instanceof Error ? error.message : error;
+    console.warn('Failed to load COCSO base tokens:', errorMessage);
     return [];
   }
 };

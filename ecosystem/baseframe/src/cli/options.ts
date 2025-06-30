@@ -88,27 +88,27 @@ export const DEFAULT_OUTPUT_DIR = 'dist';
 
 export const showHelp = (): void => {
   console.log(`
-🎨 BASEFRAME - Design Token Management Tool
+BASEFRAME
 
-사용법:
-  baseframe <명령어> [옵션]
+Usage:
+  baseframe <command> [options]
 
-명령어:
-  build       토큰을 빌드하고 출력 파일을 생성합니다
-  validate    토큰 파일의 유효성을 검증합니다
-  help        이 도움말을 표시합니다
+Commands:
+  build       Build tokens and generate output files
+  validate    Validate token file validity
+  help        Show this help message
 
-옵션:
-  -i, --input <패턴>       입력 파일 패턴 (기본: tokens/**/*.{yaml,yml})
-  -o, --output <디렉토리>   출력 디렉토리 (기본: dist)
-  -f, --format <형식>      출력 형식, 쉼표로 구분 (기본: css,json)
-  --combined              모든 토큰을 하나의 파일로 통합 빌드
-  -v, --verbose           자세한 출력
-  -h, --help              도움말 표시
+Options:
+  -i, --input <pattern>    Input file pattern (default: tokens/**/*.{yaml,yml})
+  -o, --output <directory> Output directory (default: dist)
+  -f, --format <format>    Output format, comma-separated (default: css,json)
+  -v, --verbose           Verbose output
+  -h, --help              Show help
+  --combined              Build all tokens into combined files
 
-예시:
-  baseframe build                                    # 각 토큰별로 개별 파일 생성 (기본)
-  baseframe build --combined                         # 모든 토큰을 tokens.css, tokens.json으로 통합 빌드
+Examples:
+  baseframe build                                    # Generate individual files (default)
+  baseframe build --combined                         # Generate combined tokens.css, tokens.json
   baseframe build -i "src/**/*.tokens.yaml" -o "build" -f "css"
   baseframe validate -i "tokens/**/*.yaml" -v
 `);

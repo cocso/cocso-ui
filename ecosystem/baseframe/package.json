@@ -1,10 +1,15 @@
 {
   "name": "@cocso-ui/baseframe",
   "version": "1.0.0",
-  "description": "깔끔하고 단순한 디자인 토큰 관리 도구 - CSS Variables 생성에 특화",
-  "module": "index.ts",
+  "description": "Clean and simple design token management tool specialized in CSS Variables generation",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "type": "module",
   "private": false,
+  "files": [
+    "lib/**/*",
+    "README.md"
+  ],
   "bin": {
     "baseframe": "lib/index.js"
   },
@@ -29,9 +34,11 @@
     "typescript"
   ],
   "dependencies": {
-    "cac": "^6.7.14",
     "globby": "^14.1.0",
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.0",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^7"
   },
   "devDependencies": {
     "@types/bun": "latest"

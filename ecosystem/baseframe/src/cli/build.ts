@@ -11,13 +11,13 @@ export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
   const formats = args.formats || ['css', 'json'];
   const { verbose = false, individual = true } = args;
 
-  console.log('🔧 토큰 빌드를 시작합니다...');
+  console.log('Starting token build...');
 
   if (verbose) {
-    console.log(`📁 입력 패턴: ${inputPattern}`);
-    console.log(`📤 출력 디렉토리: ${outputDir}`);
-    console.log(`🎯 출력 형식: ${formats.join(', ')}`);
-    console.log(`📋 빌드 모드: ${individual ? '개별 빌드' : '통합 빌드'}`);
+    console.log(`Input pattern: ${inputPattern}`);
+    console.log(`Output directory: ${outputDir}`);
+    console.log(`Output formats: ${formats.join(', ')}`);
+    console.log(`Build mode: ${individual ? 'individual' : 'combined'}`);
   }
 
   const core = new BaseframeCore();
@@ -26,39 +26,39 @@ export const executeBuildCommand = async (args: CliArgs): Promise<void> => {
     const patterns = inputPattern.split(',').map((p) => p.trim());
     await core.loadSchemas(patterns);
 
-    if (verbose) console.log('📦 COCSO 기본 토큰을 로드합니다...');
+    if (verbose) console.log('Loading COCSO base tokens...');
     await core.loadCocsoTokens();
 
     const schemas = core.getSchemas();
 
     if (schemas.length === 0) {
-      console.log('⚠️  유효한 토큰 스키마가 없어요.');
+      console.log('No valid token schemas found');
       return;
     }
 
     if (verbose) {
       const stats = core.getSchemaStats();
-      console.log(`✅ 로드된 스키마: ${schemas.length}개`);
+      console.log(`Loaded schemas: ${schemas.length}`);
       Object.entries(stats).forEach(([kind, count]) => {
-        console.log(`   - ${kind}: ${count}개`);
+        console.log(`   - ${kind}: ${count}`);
       });
     }
 
     const builtFiles = await core.buildMultiple(outputDir, { formats, individual });
 
-    console.log('🎉 토큰 빌드가 완료되었어요!');
+    console.log('Token build completed successfully!');
 
     if (individual) {
-      console.log(`📄 개별 파일 ${builtFiles.length}개가 생성되었어요:`);
+      console.log(`Generated ${builtFiles.length} individual files:`);
     } else {
-      console.log('📄 생성된 파일:');
+      console.log('Generated files:');
     }
 
     builtFiles.forEach((file) => {
-      console.log(`   📄 ${file}`);
+      console.log(`   ${file}`);
     });
   } catch (error) {
-    console.error('❌ 빌드 중 오류가 발생했어요:', error instanceof Error ? error.message : error);
+    console.error('Build error occurred:', error instanceof Error ? error.message : error);
     process.exit(1);
   }
 };

@@ -2,8 +2,8 @@ import { writeFile, mkdir } from 'fs/promises';
 import { join, dirname, basename } from 'path';
 import type { Schema, BuildOptions, OutputFormat } from './schema';
 import { loadTokenSchemas, loadCocsoBaseTokens } from './token-loader';
-import { buildCssFile, type CssBuilderOptions } from './builders/css-builder';
-import { buildJsonFile, type JsonBuilderOptions } from './builders/json-builder';
+import { buildCssFile } from './builders/css-builder';
+import { buildJsonFile } from './builders/json-builder';
 
 export class BaseframeCore {
   private schemas: Schema[] = [];
@@ -18,91 +18,98 @@ export class BaseframeCore {
     this.schemas.push(...cocsoTokens);
   }
 
-  buildOutput(format: OutputFormat, schemas?: Schema[], options: { isIndividual?: boolean } = {}): string {
+  async buildOutput(
+    outputFormat: OutputFormat,
+    schemas?: Schema[],
+    options: { isIndividual?: boolean; minify?: boolean; selector?: string } = {},
+  ): Promise<string> {
     const targetSchemas = schemas || this.schemas;
-    const { isIndividual = false } = options;
-    
-    switch (format) {
+    const { isIndividual = false, minify = false, selector = ':root' } = options;
+
+    switch (outputFormat) {
       case 'css':
-        return buildCssFile(targetSchemas, { includeComments: !isIndividual });
+        return await buildCssFile(targetSchemas, { 
+          includeComments: !isIndividual,
+          minify,
+          selector
+        });
       case 'json':
         return buildJsonFile(targetSchemas, { includeMetadata: !isIndividual });
       default:
-        throw new Error(`지원하지 않는 형식: ${format}`);
+        throw new Error(`Unsupported format: ${outputFormat}`);
     }
   }
 
-  async buildToFile(format: OutputFormat, outputPath: string, schemas?: Schema[], options: { isIndividual?: boolean } = {}): Promise<void> {
-    const content = this.buildOutput(format, schemas, options);
+  async buildToFile(
+    outputFormat: OutputFormat,
+    outputPath: string,
+    schemas?: Schema[],
+    options: {
+      isIndividual?: boolean;
+      minify?: boolean;
+      selector?: string;
+    } = {},
+  ): Promise<void> {
+    const generatedContent = await this.buildOutput(outputFormat, schemas, options);
 
     await mkdir(dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, content, 'utf8');
+    await writeFile(outputPath, generatedContent, 'utf8');
   }
 
-  /**
-   * 모든 토큰을 하나의 파일로 빌드
-   */
-  async buildCombined(outputDir: string, options: BuildOptions = {}): Promise<string[]> {
-    const { formats = ['css', 'json'] } = options;
-    const builtFiles: string[] = [];
+  async buildCombined(outputDirectory: string, buildOptions: BuildOptions = {}): Promise<string[]> {
+    const { formats = ['css', 'json'] } = buildOptions;
+    const generatedFiles: string[] = [];
 
-    for (const format of formats) {
-      const fileName = `tokens.${format}`;
-      const outputPath = join(outputDir, fileName);
+    for (const outputFormat of formats) {
+      const fileName = `tokens.${outputFormat}`;
+      const filePath = join(outputDirectory, fileName);
 
-      await this.buildToFile(format, outputPath, undefined, { isIndividual: false });
-      builtFiles.push(outputPath);
+      await this.buildToFile(outputFormat, filePath, undefined, { isIndividual: false });
+      generatedFiles.push(filePath);
     }
 
-    return builtFiles;
+    return generatedFiles;
   }
 
-  /**
-   * 각 토큰 파일별로 개별 빌드
-   */
-  async buildIndividual(outputDir: string, options: BuildOptions = {}): Promise<string[]> {
-    const { formats = ['css', 'json'] } = options;
-    const builtFiles: string[] = [];
+  async buildIndividual(outputDirectory: string, buildOptions: BuildOptions = {}): Promise<string[]> {
+    const { formats = ['css', 'json'] } = buildOptions;
+    const generatedFiles: string[] = [];
 
-    for (const schema of this.schemas) {
-      const baseName = this.getSchemaBaseName(schema);
-      
-      for (const format of formats) {
-        const fileName = `${baseName}.${format}`;
-        const outputPath = join(outputDir, fileName);
+    for (const targetSchema of this.schemas) {
+      const schemaBaseName = this.getSchemaBaseName(targetSchema);
 
-        await this.buildToFile(format, outputPath, [schema], { isIndividual: true });
-        builtFiles.push(outputPath);
+      for (const outputFormat of formats) {
+        const fileName = `${schemaBaseName}.${outputFormat}`;
+        const filePath = join(outputDirectory, fileName);
+
+        await this.buildToFile(outputFormat, filePath, [targetSchema], { isIndividual: true });
+        generatedFiles.push(filePath);
       }
     }
 
-    return builtFiles;
+    return generatedFiles;
   }
 
-  /**
-   * 빌드 방식을 선택할 수 있는 통합 메서드
-   */
-  async buildMultiple(outputDir: string, options: BuildOptions & { individual?: boolean } = {}): Promise<string[]> {
-    const { individual = true } = options; // 기본값을 개별 빌드로 변경
-    
+  async buildMultiple(
+    outputDirectory: string,
+    buildOptions: BuildOptions & { individual?: boolean } = {},
+  ): Promise<string[]> {
+    const { individual = true } = buildOptions;
+
     if (individual) {
-      return this.buildIndividual(outputDir, options);
+      return this.buildIndividual(outputDirectory, buildOptions);
     } else {
-      return this.buildCombined(outputDir, options);
+      return this.buildCombined(outputDirectory, buildOptions);
     }
   }
 
-  /**
-   * 스키마에서 파일 이름을 추출
-   */
-  private getSchemaBaseName(schema: Schema): string {
-    if (schema.metadata.filePath) {
-      const fileName = basename(schema.metadata.filePath);
-      return fileName.replace(/\.(yaml|yml)$/, '');
+  private getSchemaBaseName(targetSchema: Schema): string {
+    if (targetSchema.metadata.filePath) {
+      const originalFileName = basename(targetSchema.metadata.filePath);
+      return originalFileName.replace(/\.(yaml|yml)$/, '');
     }
-    
-    // fallback: collection name 또는 id 사용
-    return schema.data.collection || schema.metadata.id;
+
+    return targetSchema.data.collection || targetSchema.metadata.id;
   }
 
   getSchemas(): Schema[] {
@@ -114,13 +121,14 @@ export class BaseframeCore {
   }
 
   getSchemaStats(): Record<string, number> {
-    const stats: Record<string, number> = {};
+    const schemaStatistics: Record<string, number> = {};
 
-    for (const schema of this.schemas) {
-      stats[schema.kind] = (stats[schema.kind] || 0) + 1;
+    for (const currentSchema of this.schemas) {
+      const schemaKind = currentSchema.kind;
+      schemaStatistics[schemaKind] = (schemaStatistics[schemaKind] || 0) + 1;
     }
 
-    return stats;
+    return schemaStatistics;
   }
 }
 
