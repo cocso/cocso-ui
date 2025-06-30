@@ -1,0 +1,248 @@
+---
+kind: ComponentTokens
+metadata:
+  id: component-tokens
+  name: Component Design Tokens
+  description: 컴포넌트별 디자인 토큰들
+  version: 1.0.0
+
+data:
+  collection: components
+  extends:
+    - semantic-tokens
+  tokens:
+    # 버튼 컴포넌트 토큰
+    button-primary-bg:
+      values: "brand-primary"
+      description: 기본 버튼 배경색
+      tier: component
+      scope: public
+      status: active
+
+    button-primary-text:
+      values: "white"
+      description: 기본 버튼 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    button-primary-border:
+      values: "brand-primary"
+      description: 기본 버튼 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    button-secondary-bg:
+      values: "surface-primary"
+      description: 보조 버튼 배경색
+      tier: component
+      scope: public
+      status: active
+
+    button-secondary-text:
+      values: "text-primary"
+      description: 보조 버튼 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    button-secondary-border:
+      values: "border-default"
+      description: 보조 버튼 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    button-padding:
+      values: "spacing-component"
+      description: 버튼 내부 패딩
+      tier: component
+      scope: public
+      status: active
+
+    button-radius:
+      values: "radius-md"
+      description: 버튼 둥근 모서리
+      tier: component
+      scope: public
+      status: active
+
+    # 입력 필드 컴포넌트 토큰
+    input-bg:
+      values: "surface-primary"
+      description: 입력 필드 배경색
+      tier: component
+      scope: public
+      status: active
+
+    input-text:
+      values: "text-primary"
+      description: 입력 필드 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    input-border:
+      values: "border-default"
+      description: 입력 필드 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    input-border-focus:
+      values: "brand-primary"
+      description: 포커스된 입력 필드 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    input-placeholder:
+      values: "text-muted"
+      description: 입력 필드 플레이스홀더 색상
+      tier: component
+      scope: public
+      status: active
+
+    input-padding:
+      values: "spacing-component"
+      description: 입력 필드 내부 패딩
+      tier: component
+      scope: public
+      status: active
+
+    input-radius:
+      values: "radius-sm"
+      description: 입력 필드 둥근 모서리
+      tier: component
+      scope: public
+      status: active
+
+    # 카드 컴포넌트 토큰
+    card-bg:
+      values: "surface-elevated"
+      description: 카드 배경색
+      tier: component
+      scope: public
+      status: active
+
+    card-border:
+      values: "border-subtle"
+      description: 카드 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    card-shadow:
+      values: "shadow-sm"
+      description: 카드 그림자
+      tier: component
+      scope: public
+      status: active
+
+    card-padding:
+      values: "spacing-content"
+      description: 카드 내부 패딩
+      tier: component
+      scope: public
+      status: active
+
+    card-radius:
+      values: "radius-lg"
+      description: 카드 둥근 모서리
+      tier: component
+      scope: public
+      status: active
+
+    # 네비게이션 컴포넌트 토큰
+    nav-bg:
+      values: "surface-primary"
+      description: 네비게이션 배경색
+      tier: component
+      scope: public
+      status: active
+
+    nav-text:
+      values: "text-primary"
+      description: 네비게이션 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    nav-text-active:
+      values: "brand-primary"
+      description: 활성화된 네비게이션 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    nav-border:
+      values: "border-subtle"
+      description: 네비게이션 테두리 색상
+      tier: component
+      scope: public
+      status: active
+
+    nav-padding:
+      values: "spacing-content"
+      description: 네비게이션 패딩
+      tier: component
+      scope: public
+      status: active
+
+    # 얼럿 컴포넌트 토큰
+    alert-success-bg:
+      values: "#f0fdf4"
+      description: 성공 얼럿 배경색
+      tier: component
+      scope: public
+      status: active
+
+    alert-success-text:
+      values: "status-success"
+      description: 성공 얼럿 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    alert-warning-bg:
+      values: "#fffbeb"
+      description: 경고 얼럿 배경색
+      tier: component
+      scope: public
+      status: active
+
+    alert-warning-text:
+      values: "status-warning"
+      description: 경고 얼럿 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    alert-error-bg:
+      values: "#fef2f2"
+      description: 오류 얼럿 배경색
+      tier: component
+      scope: public
+      status: active
+
+    alert-error-text:
+      values: "status-error"
+      description: 오류 얼럿 텍스트 색상
+      tier: component
+      scope: public
+      status: active
+
+    alert-padding:
+      values: "spacing-component"
+      description: 얼럿 내부 패딩
+      tier: component
+      scope: public
+      status: active
+
+    alert-radius:
+      values: "radius-md"
+      description: 얼럿 둥근 모서리
+      tier: component
+      scope: public
+      status: active 

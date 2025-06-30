@@ -1,0 +1,42 @@
+{
+  "name": "@cocso-ui/baseframe",
+  "version": "1.0.0",
+  "description": "깔끔하고 단순한 디자인 토큰 관리 도구 - CSS Variables 생성에 특화",
+  "module": "index.ts",
+  "type": "module",
+  "private": false,
+  "bin": {
+    "baseframe": "lib/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bun build ./src/index.ts --outdir=lib --target=node --format=esm",
+    "build:node": "bun build ./src/index.ts --outdir=lib --target=node --format=esm",
+    "prepublishOnly": "bun run build",
+    "test": "bun test"
+  },
+  "keywords": [
+    "design-tokens",
+    "cli",
+    "css-variables",
+    "figma",
+    "typescript"
+  ],
+  "dependencies": {
+    "cac": "^6.7.14",
+    "globby": "^14.1.0",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

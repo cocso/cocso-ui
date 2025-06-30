@@ -1,0 +1,202 @@
+---
+kind: SemanticTokens
+metadata:
+  id: semantic-tokens
+  name: Semantic Design Tokens
+  description: 목적 기반 의미론적 토큰들
+  version: 1.0.0
+
+data:
+  collection: semantic
+  extends:
+    - foundation-primitives
+  tokens:
+    # 텍스트 의미론적 토큰
+    text-primary:
+      values:
+        light: "gray-900"
+        dark: "gray-50"
+      description: 기본 텍스트 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    text-secondary:
+      values:
+        light: "gray-600"
+        dark: "gray-300"
+      description: 보조 텍스트 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    text-muted:
+      values:
+        light: "gray-400"
+        dark: "gray-500"
+      description: 흐린 텍스트 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    # 배경 의미론적 토큰
+    surface-primary:
+      values:
+        light: "white"
+        dark: "gray-900"
+      description: 기본 배경 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    surface-secondary:
+      values:
+        light: "gray-50"
+        dark: "gray-800"
+      description: 보조 배경 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    surface-elevated:
+      values:
+        light: "white"
+        dark: "gray-800"
+      description: 상승된 표면 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    # 브랜드 의미론적 토큰
+    brand-primary:
+      values: "blue-500"
+      description: 기본 브랜드 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    brand-secondary:
+      values: "blue-100"
+      description: 보조 브랜드 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    # 상태 의미론적 토큰
+    status-success:
+      values: "#22c55e"
+      description: 성공 상태 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    status-warning:
+      values: "#f59e0b"
+      description: 경고 상태 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    status-error:
+      values: "#ef4444"
+      description: 오류 상태 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    # 테두리 의미론적 토큰
+    border-default:
+      values:
+        light: "gray-200"
+        dark: "gray-700"
+      description: 기본 테두리 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    border-subtle:
+      values:
+        light: "gray-100"
+        dark: "gray-800"
+      description: 은은한 테두리 색상
+      tier: semantic
+      scope: public
+      status: active
+
+    # 간격 의미론적 토큰
+    spacing-content:
+      values: "space-md"
+      description: 콘텐츠 기본 간격
+      tier: semantic
+      scope: public
+      status: active
+
+    spacing-component:
+      values: "space-sm"
+      description: 컴포넌트 내부 간격
+      tier: semantic
+      scope: public
+      status: active
+
+    spacing-section:
+      values: "space-xl"
+      description: 섹션 간 간격
+      tier: semantic
+      scope: public
+      status: active
+
+    # 타이포그래피 의미론적 토큰
+    typography-body:
+      values:
+        type: typography
+        value:
+          fontFamily: "font-family-sans"
+          fontSize: "font-size-base"
+          fontWeight: "font-weight-normal"
+          lineHeight: 1.5
+      description: 본문 타이포그래피
+      tier: semantic
+      scope: public
+      status: active
+
+    typography-heading:
+      values:
+        type: typography
+        value:
+          fontFamily: "font-family-sans"
+          fontSize: "font-size-lg"
+          fontWeight: "font-weight-semibold"
+          lineHeight: 1.25
+      description: 제목 타이포그래피
+      tier: semantic
+      scope: public
+      status: active
+
+    # 그림자 의미론적 토큰
+    shadow-sm:
+      values:
+        type: shadow
+        value:
+          - color: "rgba(0, 0, 0, 0.05)"
+            offsetX: "0px"
+            offsetY: "1px"
+            blur: "2px"
+            spread: "0px"
+      description: 작은 그림자
+      tier: semantic
+      scope: public
+      status: active
+
+    shadow-md:
+      values:
+        type: shadow
+        value:
+          - color: "rgba(0, 0, 0, 0.1)"
+            offsetX: "0px"
+            offsetY: "4px"
+            blur: "6px"
+            spread: "-1px"
+            description: 중간 그림자
+      tier: semantic
+      scope: public
+      status: active 

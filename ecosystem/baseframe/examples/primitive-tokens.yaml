@@ -1,0 +1,189 @@
+---
+kind: PrimitiveTokens
+metadata:
+  id: foundation-primitives
+  name: Foundation Primitive Tokens
+  description: 기초 원시 토큰 컬렉션
+  version: 1.0.0
+
+data:
+  collection: foundation
+  tokens:
+    # 색상 원시 토큰
+    blue-50:
+      values: "#f0f9ff"
+      description: 가장 밝은 파란색
+      tier: primitive
+      scope: public
+      status: active
+
+    blue-100:
+      values: "#e0f2fe"
+      description: 매우 밝은 파란색
+      tier: primitive
+      scope: public
+      status: active
+
+    blue-500:
+      values: "#3b82f6"
+      description: 기본 파란색
+      tier: primitive
+      scope: public
+      status: active
+
+    blue-900:
+      values: "#1e3a8a"
+      description: 매우 어두운 파란색
+      tier: primitive
+      scope: public
+      status: active
+
+    gray-50:
+      values: "#f9fafb"
+      description: 가장 밝은 회색
+      tier: primitive
+      scope: public
+      status: active
+
+    gray-900:
+      values: "#111827"
+      description: 매우 어두운 회색
+      tier: primitive
+      scope: public
+      status: active
+
+    # 크기 원시 토큰
+    space-xs:
+      values: "4px"
+      description: 매우 작은 간격
+      tier: primitive
+      scope: public
+      status: active
+
+    space-sm:
+      values: "8px"
+      description: 작은 간격
+      tier: primitive
+      scope: public
+      status: active
+
+    space-md:
+      values: "16px"
+      description: 중간 간격
+      tier: primitive
+      scope: public
+      status: active
+
+    space-lg:
+      values: "24px"
+      description: 큰 간격
+      tier: primitive
+      scope: public
+      status: active
+
+    space-xl:
+      values: "32px"
+      description: 매우 큰 간격
+      tier: primitive
+      scope: public
+      status: active
+
+    # 폰트 원시 토큰
+    font-family-sans:
+      values: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+      description: 기본 산세리프 폰트
+      tier: primitive
+      scope: public
+      status: active
+
+    font-size-xs:
+      values: "12px"
+      description: 매우 작은 폰트 크기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-size-sm:
+      values: "14px"
+      description: 작은 폰트 크기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-size-base:
+      values: "16px"
+      description: 기본 폰트 크기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-size-lg:
+      values: "18px"
+      description: 큰 폰트 크기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-weight-normal:
+      values: 400
+      description: 보통 폰트 굵기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-weight-medium:
+      values: 500
+      description: 중간 폰트 굵기
+      tier: primitive
+      scope: public
+      status: active
+
+    font-weight-semibold:
+      values: 600
+      description: 반굵은 폰트 굵기
+      tier: primitive
+      scope: public
+      status: active
+
+    # 둥근 모서리 원시 토큰
+    radius-none:
+      values: "0px"
+      description: 둥근 모서리 없음
+      tier: primitive
+      scope: public
+      status: active
+
+    radius-sm:
+      values: "4px"
+      description: 작은 둥근 모서리
+      tier: primitive
+      scope: public
+      status: active
+
+    radius-md:
+      values: "8px"
+      description: 중간 둥근 모서리
+      tier: primitive
+      scope: public
+      status: active
+
+    radius-lg:
+      values: "12px"
+      description: 큰 둥근 모서리
+      tier: primitive
+      scope: public
+      status: active
+
+  relationships:
+    $color.blue.500:
+      - type: derives
+        target: $color.blue.50
+        description: 같은 색상 계열의 연한 버전
+    $size.2:
+      - type: derives
+        target: $size.1
+        description: 기본 단위의 2배
+    $size.4:
+      - type: derives
+        target: $size.1
+        description: 기본 단위의 4배 
