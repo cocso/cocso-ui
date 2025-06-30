@@ -1,4 +1,4 @@
-# `@cocso-ui/baseframe`
+## `@cocso-ui/baseframe`
 
 이 Package는 YAML 파일을 `CSS`, `JSON` 등 다양한 형식으로 변환하여 스타일 토큰을 생성하는 도구에요.
 
