@@ -1,0 +1,32 @@
+kind: Tokens
+metadata:
+  id: gap
+  name: Gap
+  description: Flexbox 및 Grid 간격 토큰
+data:
+  collection: gap
+  tokens:
+    $gap.none:
+      values: '0px'
+      description: 간격 없음
+    $gap.xs:
+      values: '4px'
+      description: 매우 작은 간격
+    $gap.sm:
+      values: '8px'
+      description: 작은 간격
+    $gap.md:
+      values: '12px'
+      description: 중간 간격
+    $gap.lg:
+      values: '16px'
+      description: 큰 간격
+    $gap.xl:
+      values: '20px'
+      description: 매우 큰 간격
+    $gap.2xl:
+      values: '24px'
+      description: 2배 큰 간격
+    $gap.3xl:
+      values: '32px'
+      description: 3배 큰 간격

@@ -1,0 +1,23 @@
+kind: Tokens
+metadata:
+  id: border-width
+  name: Border Width
+  description: 테두리 두께 토큰
+data:
+  collection: border-width
+  tokens:
+    $border-width.none:
+      values: '0px'
+      description: 테두리 없음
+    $border-width.thin:
+      values: '1px'
+      description: 얇은 테두리
+    $border-width.medium:
+      values: '2px'
+      description: 중간 테두리
+    $border-width.thick:
+      values: '3px'
+      description: 두꺼운 테두리
+    $border-width.extra-thick:
+      values: '4px'
+      description: 매우 두꺼운 테두리

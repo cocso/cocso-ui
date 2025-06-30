@@ -1,0 +1,35 @@
+kind: Tokens
+metadata:
+  id: padding
+  name: Padding
+  description: 내부 여백 토큰
+data:
+  collection: padding
+  tokens:
+    $padding.none:
+      values: '0px'
+      description: 패딩 없음
+    $padding.xs:
+      values: '4px'
+      description: 매우 작은 패딩
+    $padding.sm:
+      values: '8px'
+      description: 작은 패딩
+    $padding.md:
+      values: '12px'
+      description: 중간 패딩
+    $padding.lg:
+      values: '16px'
+      description: 큰 패딩
+    $padding.xl:
+      values: '20px'
+      description: 매우 큰 패딩
+    $padding.2xl:
+      values: '24px'
+      description: 2배 큰 패딩
+    $padding.3xl:
+      values: '32px'
+      description: 3배 큰 패딩
+    $padding.4xl:
+      values: '40px'
+      description: 4배 큰 패딩

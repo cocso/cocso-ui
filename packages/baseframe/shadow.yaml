@@ -1,0 +1,29 @@
+kind: Tokens
+metadata:
+  id: shadow
+  name: Shadow
+  description: 그림자 토큰
+data:
+  collection: shadow
+  tokens:
+    $shadow.none:
+      values: 'none'
+      description: 그림자 없음
+    $shadow.sm:
+      values: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+      description: 작은 그림자
+    $shadow.md:
+      values: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+      description: 중간 그림자
+    $shadow.lg:
+      values: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+      description: 큰 그림자
+    $shadow.xl:
+      values: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+      description: 매우 큰 그림자
+    $shadow.2xl:
+      values: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+      description: 2배 큰 그림자
+    $shadow.inner:
+      values: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
+      description: 내부 그림자

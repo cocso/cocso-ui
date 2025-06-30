@@ -1,0 +1,32 @@
+kind: Tokens
+metadata:
+  id: radius
+  name: Border Radius
+  description: 둥근 모서리 토큰
+data:
+  collection: radius
+  tokens:
+    $radius.none:
+      values: '0px'
+      description: 둥근 모서리 없음
+    $radius.sm:
+      values: '4px'
+      description: 작은 둥근 모서리
+    $radius.md:
+      values: '6px'
+      description: 중간 둥근 모서리
+    $radius.lg:
+      values: '8px'
+      description: 큰 둥근 모서리
+    $radius.xl:
+      values: '12px'
+      description: 매우 큰 둥근 모서리
+    $radius.2xl:
+      values: '16px'
+      description: 2배 큰 둥근 모서리
+    $radius.3xl:
+      values: '24px'
+      description: 3배 큰 둥근 모서리
+    $radius.full:
+      values: '9999px'
+      description: 완전한 원형
