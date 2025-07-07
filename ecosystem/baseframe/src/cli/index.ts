@@ -1,10 +1,14 @@
-#!/usr/bin/env node
+import fs from 'fs-extra';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import yargs from 'yargs';
 
-import { parseCliArgs, showHelp } from './options';
-import { executeBuildCommand } from './build';
-import { executeValidateCommand } from './validate';
+const require = createRequire(import.meta.url);
+const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
+const sourcesDir = path.dirname(sourcesPath);
 
-const CLI_BANNER = `
+const PREFIX = 'cocso';
+const SIGNATURE = `
 ██████╗  █████╗ ███████╗███████╗███████╗██████╗  █████╗ ███╗   ███╗███████╗
 ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝
 ██████╔╝███████║███████╗█████╗  █████╗  ██████╔╝███████║██╔████╔██║█████╗  
@@ -13,35 +17,44 @@ const CLI_BANNER = `
 ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
 `;
 
-export const runCli = async (): Promise<void> => {
-  const rawArgs = process.argv.slice(2);
+const readYAMLFiles = (dir: string, fileList: string[] = []) => {
+  const files = fs.readdirSync(dir);
 
-  console.log(CLI_BANNER);
+  for (const file of files) {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
 
-  try {
-    const args = parseCliArgs(rawArgs);
-
-    if (args.command === 'help' || rawArgs.length === 0 || rawArgs.includes('--help') || rawArgs.includes('-h')) {
-      showHelp();
-      return;
+    if (stat.isDirectory()) {
+      readYAMLFiles(filePath, fileList);
+    } else if (stat.isFile() && (path.extname(file) === '.yaml' || path.extname(file) === '.yml')) {
+      fileList.push(filePath);
     }
-
-    switch (args.command) {
-      case 'build':
-        await executeBuildCommand(args);
-        break;
-
-      case 'validate':
-        await executeValidateCommand(args);
-        break;
-
-      default:
-        console.error(`Unknown command: ${args.command}`);
-        showHelp();
-        process.exit(1);
-    }
-  } catch (error) {
-    console.error('Error occurred:', error instanceof Error ? error.message : error);
-    process.exit(1);
   }
+
+  return fileList;
 };
+
+yargs(process.argv.slice(2))
+  .middleware((argv) => {
+    if (!argv.help && !argv.h && argv._.length > 0) {
+      process.stdout.write(SIGNATURE + '\n');
+    }
+  })
+  .command(
+    'css-vars [dir]',
+    'Generate css-variables tokens',
+    (yargs) => {
+      return yargs.positional('dir', {
+        describe: 'Output directory',
+        type: 'string',
+        default: './',
+      });
+    },
+    async () => {
+      const files = readYAMLFiles(sourcesDir);
+      console.log(files);
+    },
+  )
+  .demandCommand(1, 'You need to specify a command.')
+  .showHelpOnFail(true)
+  .help().argv;
