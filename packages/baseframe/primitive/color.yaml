@@ -2,230 +2,348 @@ kind: Tokens
 metadata:
   id: color
   name: Color
+  description: primitive color tokens for Baseframe
 data:
   collection: color
   tokens:
-    $color.palette.gray0:
-      values: '#FFFFFF'
-    $color.palette.gray50:
-      values: '#F4F5F6'
-    $color.palette.gray100:
-      values: '#E6E8EA'
-    $color.palette.gray200:
-      values: '#CDD1D5'
-    $color.palette.gray300:
-      values: '#B1B8BE'
-    $color.palette.gray400:
-      values: '#8A949E'
-    $color.palette.gray500:
-      values: '#6D7882'
-    $color.palette.gray600:
-      values: '#58616A'
-    $color.palette.gray700:
-      values: '#464C53'
-    $color.palette.gray800:
-      values: '#33363D'
-    $color.palette.gray900:
-      values: '#1E2124'
-    $color.palette.gray950:
-      values: '#131416'
-    $color.palette.gray1000:
-      values: '#000000'
+    $color.palette.gray-0:
+      value:
+        default: '#FFFFFF'
+    $color.palette.gray-50:
+      value:
+        default: '#F4F5F6'
+    $color.palette.gray-100:
+      value:
+        default: '#E6E8EA'
+    $color.palette.gray-200:
+      value:
+        default: '#CDD1D5'
+    $color.palette.gray-300:
+      value:
+        default: '#B1B8BE'
+    $color.palette.gray-400:
+      value:
+        default: '#8A949E'
+    $color.palette.gray-500:
+      value:
+        default: '#6D7882'
+    $color.palette.gray-600:
+      value:
+        default: '#58616A'
+    $color.palette.gray-700:
+      value:
+        default: '#464C53'
+    $color.palette.gray-800:
+      value:
+        default: '#33363D'
+    $color.palette.gray-900:
+      value:
+        default: '#1E2124'
+    $color.palette.gray-950:
+      value:
+        default: '#131416'
+    $color.palette.gray-1000:
+      value:
+        default: '#000000'
 
-    $color.palette.primary50:
-      values: '#ECF2FE'
-    $color.palette.primary100:
-      values: '#D8E5FD'
-    $color.palette.primary200:
-      values: '#B1CEFB'
-    $color.palette.primary300:
-      values: '#86AFF9'
-    $color.palette.primary400:
-      values: '#4C87F6'
-    $color.palette.primary500:
-      values: '#256EF4'
-    $color.palette.primary600:
-      values: '#0B50D0'
-    $color.palette.primary700:
-      values: '#083891'
-    $color.palette.primary800:
-      values: '#052561'
-    $color.palette.primary900:
-      values: '#03163A'
-    $color.palette.primary950:
-      values: '#020F27'
+    $color.palette.primary-50:
+      value:
+        default: '#ECF2FE'
+    $color.palette.primary-100:
+      value:
+        default: '#D8E5FD'
+    $color.palette.primary-200:
+      value:
+        default: '#B1CEFB'
+    $color.palette.primary-300:
+      value:
+        default: '#86AFF9'
+    $color.palette.primary-400:
+      value:
+        default: '#4C87F6'
+    $color.palette.primary-500:
+      value:
+        default: '#256EF4'
+    $color.palette.primary-600:
+      value:
+        default: '#0B50D0'
+    $color.palette.primary-700:
+      value:
+        default: '#083891'
+    $color.palette.primary-800:
+      value:
+        default: '#052561'
+    $color.palette.primary-900:
+      value:
+        default: '#03163A'
+    $color.palette.primary-950:
+      value:
+        default: '#020F27'
 
-    $color.palette.secondary50:
-      values: '#EEF2F7'
-    $color.palette.secondary100:
-      values: '#D6E0EB'
-    $color.palette.secondary200:
-      values: '#BACBDE'
-    $color.palette.secondary300:
-      values: '#90B0D5'
-    $color.palette.secondary400:
-      values: '#6B96C7'
-    $color.palette.secondary500:
-      values: '#346FB2'
-    $color.palette.secondary600:
-      values: '#1C589C'
-    $color.palette.secondary700:
-      values: '#063A74'
-    $color.palette.secondary800:
-      values: '#052B57'
-    $color.palette.secondary900:
-      values: '#031F3F'
-    $color.palette.secondary950:
-      values: '#02162C'
+    $color.palette.secondary-50:
+      value:
+        default: '#EEF2F7'
+    $color.palette.secondary-100:
+      value:
+        default: '#D6E0EB'
+    $color.palette.secondary-200:
+      value:
+        default: '#BACBDE'
+    $color.palette.secondary-300:
+      value:
+        default: '#90B0D5'
+    $color.palette.secondary-400:
+      value:
+        default: '#6B96C7'
+    $color.palette.secondary-500:
+      value:
+        default: '#346FB2'
+    $color.palette.secondary-600:
+      value:
+        default: '#1C589C'
+    $color.palette.secondary-700:
+      value:
+        default: '#063A74'
+    $color.palette.secondary-800:
+      value:
+        default: '#052B57'
+    $color.palette.secondary-900:
+      value:
+        default: '#031F3F'
+    $color.palette.secondary-950:
+      value:
+        default: '#02162C'
 
-    $color.palette.point50:
-      values: '#FBEFF0'
-    $color.palette.point100:
-      values: '#F5D6D9'
-    $color.palette.point200:
-      values: '#EBADB2'
-    $color.palette.point300:
-      values: '#E0858C'
-    $color.palette.point400:
-      values: '#D65C66'
-    $color.palette.point500:
-      values: '#D63D4A'
-    $color.palette.point600:
-      values: '#AB2B36'
-    $color.palette.point700:
-      values: '#7A1F26'
-    $color.palette.point800:
-      values: '#521419'
-    $color.palette.point900:
-      values: '#310C0F'
-    $color.palette.point950:
-      values: '#21080A'
+    $color.palette.point-50:
+      value:
+        default: '#FBEFF0'
+    $color.palette.point-100:
+      value:
+        default: '#F5D6D9'
+    $color.palette.point-200:
+      value:
+        default: '#EBADB2'
+    $color.palette.point-300:
+      value:
+        default: '#E0858C'
+    $color.palette.point-400:
+      value:
+        default: '#D65C66'
+    $color.palette.point-500:
+      value:
+        default: '#D63D4A'
+    $color.palette.point-600:
+      value:
+        default: '#AB2B36'
+    $color.palette.point-700:
+      value:
+        default: '#7A1F26'
+    $color.palette.point-800:
+      value:
+        default: '#521419'
+    $color.palette.point-900:
+      value:
+        default: '#310C0F'
+    $color.palette.point-950:
+      value:
+        default: '#21080A'
 
-    $color.palette.danger50:
-      values: '#FDEFEC'
-    $color.palette.danger100:
-      values: '#FCDFD9'
-    $color.palette.danger200:
-      values: '#F7AFA1'
-    $color.palette.danger300:
-      values: '#F48771'
-    $color.palette.danger400:
-      values: '#F05F42'
-    $color.palette.danger500:
-      values: '#DE3412'
-    $color.palette.danger600:
-      values: '#BD2C0F'
-    $color.palette.danger700:
-      values: '#8A240F'
-    $color.palette.danger800:
-      values: '#5C180A'
-    $color.palette.danger900:
-      values: '#390D05'
-    $color.palette.danger950:
-      values: '#260903'
+    $color.palette.danger-50:
+      value:
+        default: '#FDEFEC'
+    $color.palette.danger-100:
+      value:
+        default: '#FCDFD9'
+    $color.palette.danger-200:
+      value:
+        default: '#F7AFA1'
+    $color.palette.danger-300:
+      value:
+        default: '#F48771'
+    $color.palette.danger-400:
+      value:
+        default: '#F05F42'
+    $color.palette.danger-500:
+      value:
+        default: '#DE3412'
+    $color.palette.danger-600:
+      value:
+        default: '#BD2C0F'
+    $color.palette.danger-700:
+      value:
+        default: '#8A240F'
+    $color.palette.danger-800:
+      value:
+        default: '#5C180A'
+    $color.palette.danger-900:
+      value:
+        default: '#390D05'
+    $color.palette.danger-950:
+      value:
+        default: '#260903'
 
-    $color.palette.warning50:
-      values: '#FFF3DB'
-    $color.palette.warning100:
-      values: '#FFE0A3'
-    $color.palette.warning200:
-      values: '#FFC95C'
-    $color.palette.warning300:
-      values: '#FFB114'
-    $color.palette.warning400:
-      values: '#C78500'
-    $color.palette.warning500:
-      values: '#9E6A00'
-    $color.palette.warning600:
-      values: '#8A5C00'
-    $color.palette.warning700:
-      values: '#614100'
-    $color.palette.warning800:
-      values: '#422C00'
-    $color.palette.warning900:
-      values: '#2E1F00'
-    $color.palette.warning950:
-      values: '#241800'
+    $color.palette.warning-50:
+      value:
+        default: '#FFF3DB'
+    $color.palette.warning-100:
+      value:
+        default: '#FFE0A3'
+    $color.palette.warning-200:
+      value:
+        default: '#FFC95C'
+    $color.palette.warning-300:
+      value:
+        default: '#FFB114'
+    $color.palette.warning-400:
+      value:
+        default: '#C78500'
+    $color.palette.warning-500:
+      value:
+        default: '#9E6A00'
+    $color.palette.warning-600:
+      value:
+        default: '#8A5C00'
+    $color.palette.warning-700:
+      value:
+        default: '#614100'
+    $color.palette.warning-800:
+      value:
+        default: '#422C00'
+    $color.palette.warning-900:
+      value:
+        default: '#2E1F00'
+    $color.palette.warning-950:
+      value:
+        default: '#241800'
 
-    $color.palette.success50:
-      values: '#EAF6EC'
-    $color.palette.success100:
-      values: '#D8EEDD'
-    $color.palette.success200:
-      values: '#A9DAB4'
-    $color.palette.success300:
-      values: '#7EC88E'
-    $color.palette.success400:
-      values: '#3FA654'
-    $color.palette.success500:
-      values: '#228738'
-    $color.palette.success600:
-      values: '#267337'
-    $color.palette.success700:
-      values: '#285D33'
-    $color.palette.success800:
-      values: '#1F4727'
-    $color.palette.success900:
-      values: '#122B18'
-    $color.palette.success950:
-      values: '#0E2012'
+    $color.palette.success-50:
+      value:
+        default: '#EAF6EC'
+    $color.palette.success-100:
+      value:
+        default: '#D8EEDD'
+    $color.palette.success-200:
+      value:
+        default: '#A9DAB4'
+    $color.palette.success-300:
+      value:
+        default: '#7EC88E'
+    $color.palette.success-400:
+      value:
+        default: '#3FA654'
+    $color.palette.success-500:
+      value:
+        default: '#228738'
+    $color.palette.success-600:
+      value:
+        default: '#267337'
+    $color.palette.success-700:
+      value:
+        default: '#285D33'
+    $color.palette.success-800:
+      value:
+        default: '#1F4727'
+    $color.palette.success-900:
+      value:
+        default: '#122B18'
+    $color.palette.success-950:
+      value:
+        default: '#0E2012'
 
-    $color.palette.information50:
-      values: '#E7F4FE'
-    $color.palette.information100:
-      values: '#D3EBFD'
-    $color.palette.information200:
-      values: '#9ED2FA'
-    $color.palette.information300:
-      values: '#5FB5F7'
-    $color.palette.information400:
-      values: '#2098F3'
-    $color.palette.information500:
-      values: '#0B78CB'
-    $color.palette.information600:
-      values: '#096AB3'
-    $color.palette.information700:
-      values: '#085691'
-    $color.palette.information800:
-      values: '#053961'
-    $color.palette.information900:
-      values: '#03253F'
-    $color.palette.information950:
-      values: '#021A2C'
+    $color.palette.information-50:
+      value:
+        default: '#E7F4FE'
+    $color.palette.information-100:
+      value:
+        default: '#D3EBFD'
+    $color.palette.information-200:
+      value:
+        default: '#9ED2FA'
+    $color.palette.information-300:
+      value:
+        default: '#5FB5F7'
+    $color.palette.information-400:
+      value:
+        default: '#2098F3'
+    $color.palette.information-500:
+      value:
+        default: '#0B78CB'
+    $color.palette.information-600:
+      value:
+        default: '#096AB3'
+    $color.palette.information-700:
+      value:
+        default: '#085691'
+    $color.palette.information-800:
+      value:
+        default: '#053961'
+    $color.palette.information-900:
+      value:
+        default: '#03253F'
+    $color.palette.information-950:
+      value:
+        default: '#021A2C'
 
-    $color.palette.blackalpha0:
-      values: 'rgba(0, 0, 0, 0)'
-    $color.palette.blackalpha10:
-      values: 'rgba(0, 0, 0, 0.1)'
-    $color.palette.blackalpha25:
-      values: 'rgba(0, 0, 0, 0.25)'
-    $color.palette.blackalpha50:
-      values: 'rgba(0, 0, 0, 0.5)'
-    $color.palette.blackalpha75:
-      values: 'rgba(0, 0, 0, 0.75)'
-    $color.palette.blackalpha100:
-      values: 'rgba(0, 0, 0, 1)'
+    $color.palette.blackalpha-0:
+      value:
+        default: 'rgba(0, 0, 0, 0)'
+    $color.palette.blackalpha-10:
+      value:
+        default: 'rgba(0, 0, 0, 0.1)'
+    $color.palette.blackalpha-25:
+      value:
+        default: 'rgba(0, 0, 0, 0.25)'
+    $color.palette.blackalpha-50:
+      value:
+        default: 'rgba(0, 0, 0, 0.5)'
+    $color.palette.blackalpha-75:
+      value:
+        default: 'rgba(0, 0, 0, 0.75)'
+    $color.palette.blackalpha-100:
+      value:
+        default: 'rgba(0, 0, 0, 1)'
 
-    $color.palette.whitealpha0:
-      values: 'rgba(255, 255, 255, 0)'
-    $color.palette.whitealpha10:
-      values: 'rgba(255, 255, 255, 0.1)'
-    $color.palette.whitealpha25:
-      values: 'rgba(255, 255, 255, 0.25)'
-    $color.palette.whitealpha50:
-      values: 'rgba(255, 255, 255, 0.5)'
-    $color.palette.whitealpha75:
-      values: 'rgba(255, 255, 255, 0.75)'
-    $color.palette.whitealpha100:
-      values: 'rgba(255, 255, 255, 1)'
+    $color.palette.whitealpha-0:
+      value:
+        default: 'rgba(255, 255, 255, 0)'
+    $color.palette.whitealpha-10:
+      value:
+        default: 'rgba(255, 255, 255, 0.1)'
+    $color.palette.whitealpha-25:
+      value:
+        default: 'rgba(255, 255, 255, 0.25)'
+    $color.palette.whitealpha-50:
+      value:
+        default: 'rgba(255, 255, 255, 0.5)'
+    $color.palette.whitealpha-75:
+      value:
+        default: 'rgba(255, 255, 255, 0.75)'
+    $color.palette.whitealpha-100:
+      value:
+        default: 'rgba(255, 255, 255, 1)'
 
-    $color.palette.graphic100:
-      values: '#E5ECF9'
-    $color.palette.graphic300:
-      values: '#98ACC5'
-    $color.palette.graphic500:
-      values: '#61758F'
-    $color.palette.graphic700:
-      values: '#39506C'
-    $color.palette.graphic900:
-      values: '#223A58'
+    $color.palette.graphic-100:
+      value:
+        default: '#E5ECF9'
+    $color.palette.graphic-300:
+      value:
+        default: '#98ACC5'
+    $color.palette.graphic-500:
+      value:
+        default: '#61758F'
+    $color.palette.graphic-700:
+      value:
+        default: '#39506C'
+    $color.palette.graphic-900:
+      value:
+        default: '#223A58'
+
+    $color.alpha.shadow1:
+      value:
+        default: 'rgba(0, 0, 0, 0.05)'
+    $color.alpha.shadow2:
+      value:
+        default: 'rgba(0, 0, 0, 0.08)'
+    $color.alpha.shadow3:
+      value:
+        default: 'rgba(0, 0, 0, 0.12)'

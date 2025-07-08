@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import yargs from 'yargs';
+import YAML from 'yaml';
 
 const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
@@ -34,6 +35,17 @@ const readYAMLFiles = (dir: string, fileList: string[] = []) => {
   return fileList;
 };
 
+async function prepare() {
+  const filePaths = readYAMLFiles(sourcesDir);
+  const fileContents = await Promise.all(filePaths.map((name) => fs.readFile(name, 'utf-8')));
+  const models = fileContents.map((content) => YAML.parse(content));
+
+  for (const model of models) {
+    console.log(model.data);
+  }
+}
+
+// ========== CLI Setup ==========  //
 yargs(process.argv.slice(2))
   .middleware((argv) => {
     if (!argv.help && !argv.h && argv._.length > 0) {
@@ -51,8 +63,7 @@ yargs(process.argv.slice(2))
       });
     },
     async () => {
-      const files = readYAMLFiles(sourcesDir);
-      console.log(files);
+      prepare();
     },
   )
   .demandCommand(1, 'You need to specify a command.')
