@@ -4,7 +4,7 @@ metadata:
   name: Padding
   description: primitive padding tokens for Baseframe
 data:
-  collection: padding
+  collection: global
   tokens:
     $padding.x1:
       values:

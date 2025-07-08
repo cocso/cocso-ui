@@ -4,7 +4,7 @@ metadata:
   name: Shadow
   description: primitive shadow tokens for Baseframe
 data:
-  collection: shadow
+  collection: global
   tokens:
     $shadow.y.3:
       values:

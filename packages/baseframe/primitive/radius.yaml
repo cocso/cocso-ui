@@ -4,7 +4,7 @@ metadata:
   name: Border Radius
   description: primitive border radius tokens for Baseframe
 data:
-  collection: radius
+  collection: global
   tokens:
     $radius.xs.1:
       values:

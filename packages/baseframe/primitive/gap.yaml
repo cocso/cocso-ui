@@ -4,7 +4,7 @@ metadata:
   name: Gap
   description: primitive gap tokens for Baseframe
 data:
-  collection: gap
+  collection: global
   tokens:
     $gap.x1:
       values:

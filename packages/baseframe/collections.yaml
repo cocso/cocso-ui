@@ -1,0 +1,8 @@
+kind: TokenCollections
+metadata:
+  id: collections
+  name: collections
+data:
+  - name: global
+    modes:
+      - default
