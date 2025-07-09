@@ -1,20 +1,4 @@
-import type {
-  Value,
-  ParseResult,
-  HexColor,
-  RgbColor,
-  RgbaColor,
-  TokenRef,
-  SizeValue,
-  DurationValue,
-  NumberValue,
-  StringValue,
-  Token,
-  Collections,
-  CollectionDecl,
-  TokenDecl,
-  Ast,
-} from './types';
+import type { Value, TokenRef, SizeValue, ColorValue, ShadowLayer, ParseResult } from '../types';
 
 export function parseValue(value: string | number): ParseResult {
   const str = String(value).trim();
@@ -35,6 +19,9 @@ export function parseValue(value: string | number): ParseResult {
   const tokenRef = parseTokenRef(str);
   if (tokenRef.isValid) return tokenRef;
 
+  const shadow = parseShadow(str);
+  if (shadow.isValid) return shadow;
+
   const size = parseSize(str);
   if (size.isValid) return size;
 
@@ -42,6 +29,38 @@ export function parseValue(value: string | number): ParseResult {
   if (duration.isValid) return duration;
 
   return { isValid: true, value: { kind: 'StringValue', value: str } };
+}
+
+export function valueToString(value: Value): string {
+  switch (value.kind) {
+    case 'HexColor':
+      return value.value;
+    case 'RgbColor':
+      return `rgb(${value.r}, ${value.g}, ${value.b})`;
+    case 'RgbaColor':
+      return `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`;
+    case 'TokenRef':
+      return `$${value.collection}.${value.token}`;
+    case 'SizeValue':
+      return `${value.value}${value.unit}`;
+    case 'DurationValue':
+      return `${value.value}${value.unit}`;
+    case 'NumberValue':
+      return value.value.toString();
+    case 'StringValue':
+      return value.value;
+    case 'ShadowLayer':
+      const x = valueToString(value.offsetX);
+      const y = valueToString(value.offsetY);
+      const blur = valueToString(value.blur);
+      const spread = valueToString(value.spread);
+      const color = valueToString(value.color);
+      return `${x} ${y} ${blur} ${spread} ${color}`;
+    case 'Shadow':
+      return value.layers.map((layer) => valueToString(layer)).join(', ');
+    default:
+      return String(value);
+  }
 }
 
 function parseHex(value: string): ParseResult {
@@ -161,56 +180,97 @@ function parseDuration(value: string): ParseResult {
   };
 }
 
-export function valueToString(value: Value): string {
-  switch (value.kind) {
-    case 'HexColor':
-      return value.value;
-    case 'RgbColor':
-      return `rgb(${value.r}, ${value.g}, ${value.b})`;
-    case 'RgbaColor':
-      return `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`;
-    case 'TokenRef':
-      return `$${value.collection}.${value.token}`;
-    case 'SizeValue':
-      return `${value.value}${value.unit}`;
-    case 'DurationValue':
-      return `${value.value}${value.unit}`;
-    case 'NumberValue':
-      return value.value.toString();
-    case 'StringValue':
-      return value.value;
-    default:
-      return String(value);
+function parseColor(value: string): ParseResult {
+  if (!value) {
+    return { isValid: false, error: 'Missing color value' };
+  }
+
+  if (value.startsWith('$')) {
+    return parseTokenRef(value);
+  }
+
+  if (value.startsWith('var(')) {
+    return { isValid: true, value: { kind: 'StringValue', value } };
+  }
+
+  const hex = parseHex(value);
+  if (hex.isValid) return hex;
+
+  const rgb = parseRgb(value);
+  if (rgb.isValid) return rgb;
+
+  const rgba = parseRgba(value);
+  if (rgba.isValid) return rgba;
+
+  return { isValid: false, error: `Invalid color: ${value}` };
+}
+
+function parseShadow(value: string): ParseResult {
+  if (!value.includes('px') && !value.includes('$')) {
+    return { isValid: false, error: `Invalid shadow format: ${value}` };
+  }
+
+  try {
+    const layerStrings = value.split(',').map((s) => s.trim());
+    const layers: ShadowLayer[] = [];
+
+    for (const layerStr of layerStrings) {
+      const layer = parseShadowLayer(layerStr);
+      if (!layer.isValid || !layer.value) {
+        return { isValid: false, error: `Invalid shadow layer: ${layerStr}` };
+      }
+      layers.push(layer.value as ShadowLayer);
+    }
+
+    return { isValid: true, value: { kind: 'Shadow', layers } };
+  } catch (error) {
+    return { isValid: false, error: `Invalid shadow format: ${value}` };
   }
 }
 
-function buildCollections(collections: Collections): CollectionDecl[] {
-  return collections.data.map((collection) => ({
-    name: collection.name,
-    modes: collection.modes,
-  }));
+function parseShadowLayer(value: string): ParseResult {
+  const parts = value.trim().split(/\s+/);
+
+  if (parts.length < 4) {
+    return { isValid: false, error: `Invalid shadow layer format: ${value}` };
+  }
+
+  try {
+    const x = parseSizeOrTokenRef(parts[0]);
+    const y = parseSizeOrTokenRef(parts[1]);
+    const blur = parseSizeOrTokenRef(parts[2]);
+    const spread = parseSizeOrTokenRef(parts[3]);
+
+    if (!x.isValid || !y.isValid || !blur.isValid || !spread.isValid) {
+      return { isValid: false, error: `Invalid shadow dimensions: ${value}` };
+    }
+
+    const colorPart = parts.slice(4).join(' ').trim();
+    const color = parseColor(colorPart);
+
+    if (!color.isValid) {
+      return { isValid: false, error: `Invalid shadow color: ${colorPart}` };
+    }
+
+    return {
+      isValid: true,
+      value: {
+        kind: 'ShadowLayer',
+        color: color.value as ColorValue,
+        offsetX: x.value as SizeValue | TokenRef,
+        offsetY: y.value as SizeValue | TokenRef,
+        blur: blur.value as SizeValue | TokenRef,
+        spread: spread.value as SizeValue | TokenRef,
+      },
+    };
+  } catch (error) {
+    return { isValid: false, error: `Invalid shadow layer: ${value}` };
+  }
 }
 
-function buildTokens(token: Token): TokenDecl[] {
-  const { collection: name, tokens } = token.data;
-
-  return Object.entries(tokens).map(([tokenName, tokenData]) => {
-    const values = Object.entries(tokenData.values).map(([mode, value]) => ({
-      mode,
-      value: value as string | number,
-    }));
-
-    return { token: { name: tokenName, collection: name }, values };
-  });
-}
-
-function buildAllTokens(tokens: Token[]): TokenDecl[] {
-  return tokens.flatMap(buildTokens);
-}
-
-export function buildAst(tokens: Token[], collections: Collections): Ast {
-  return {
-    tokens: buildAllTokens(tokens),
-    collections: buildCollections(collections),
-  };
+function parseSizeOrTokenRef(value: string): ParseResult {
+  if (value.startsWith('$')) {
+    return parseTokenRef(value);
+  }
+  return parseSize(value);
 }

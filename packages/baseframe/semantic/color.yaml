@@ -578,4 +578,3 @@ data:
     $color.alpha.shadow3:
       values:
         default: rgba(0, 0, 0, 0.12)
-

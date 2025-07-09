@@ -25,7 +25,7 @@ function showBanner() {
 function findYamlFiles(dir: string): string[] {
   const files: string[] = [];
 
-  function scanDirectory(currentDir: string) {
+  function scanDir(currentDir: string) {
     const items = fs.readdirSync(currentDir);
 
     for (const item of items) {
@@ -33,21 +33,18 @@ function findYamlFiles(dir: string): string[] {
       const stat = fs.statSync(fullPath);
 
       if (stat.isDirectory()) {
-        scanDirectory(fullPath);
+        scanDir(fullPath);
       } else if (stat.isFile() && /\.ya?ml$/.test(item)) {
         files.push(fullPath);
       }
     }
   }
 
-  scanDirectory(dir);
+  scanDir(dir);
   return files;
 }
 
-async function loadTokens(): Promise<{
-  tokens: Token[];
-  collections: Collections | null;
-}> {
+function loadTokens(): { tokens: Token[]; collections: Collections | null } {
   const yamlFiles = findYamlFiles(sourcesDir);
   const tokens: Token[] = [];
   let collections: Collections | null = null;
@@ -70,8 +67,8 @@ async function loadTokens(): Promise<{
   return { tokens, collections };
 }
 
-async function generateCss(outputDir: string, prefix?: string): Promise<void> {
-  const { tokens, collections } = await loadTokens();
+function generateCss(outputDir: string, prefix?: string): void {
+  const { tokens, collections } = loadTokens();
 
   if (!collections) {
     console.error(' ❎ collections.yaml not found');
@@ -84,9 +81,9 @@ async function generateCss(outputDir: string, prefix?: string): Promise<void> {
     selectors: { global: { default: ':root' } },
   });
 
-  await fs.ensureDir(outputDir);
+  fs.ensureDirSync(outputDir);
   const outputPath = path.join(outputDir, 'tokens.css');
-  await fs.writeFile(outputPath, css, 'utf-8');
+  fs.writeFileSync(outputPath, css, 'utf-8');
 
   console.log(` ✅ Generated CSS variables: ${outputPath}`);
 }
@@ -107,9 +104,9 @@ yargs(process.argv.slice(2))
           type: 'string',
         });
     },
-    async (argv) => {
+    (argv) => {
       showBanner();
-      await generateCss(argv.dir as string, argv.prefix as string | undefined);
+      generateCss(argv.dir as string, argv.prefix as string | undefined);
     },
   )
   .demandCommand(1, 'You need to specify a command.')
