@@ -1,12 +1,14 @@
 import type {
-  TokenType,
-  CollectionDefinitions,
-  TokenCollectionDefinition,
-  ParsedAst,
-  TokenDeclaration,
-  TokenCollectionDeclaration,
-} from '../ast';
-import { validateAllTokens, parseAst } from '../ast';
+  Token,
+  Collections,
+  Collection,
+  Ast,
+  TokenDecl,
+  CollectionDecl,
+  Value,
+} from '../types';
+import { validateAllTokens, isTokenRef, getTokenRef } from '../validator';
+import { buildAst, parseValue, valueToString } from '../parser';
 
 export interface CssVarsOptions {
   prefix?: string;
@@ -18,48 +20,101 @@ export interface CssVarsOptions {
   };
 }
 
-function toCssVarName(name: string, prefix?: string): string {
+function toCssVar(name: string, prefix?: string): string {
   const clean = name.replace(/^\$/, '').replace(/\./g, '-');
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
-function toCssValue(value: string | number): string {
-  return typeof value === 'string' ? value : value.toString();
+function toCssValue(value: string | number | Value): string {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number') return value.toString();
+  return valueToString(value);
 }
 
-function makeDeclaration(token: TokenDeclaration, mode: string, prefix?: string): string {
+function resolveValue(
+  value: string | number,
+  allTokens: TokenDecl[],
+  mode: string,
+  prefix?: string,
+): string | number | Value {
+  const text = String(value);
+  
+  if (!text.startsWith('$')) {
+    return value;
+  }
+
+  const result = parseValue(text);
+  if (!result.isValid || !result.value || !isTokenRef(result.value)) {
+    throw new Error(`Invalid token reference: ${text}`);
+  }
+
+  const ref = getTokenRef(result.value);
+  if (!ref) {
+    throw new Error(`Could not parse token reference: ${text}`);
+  }
+
+  const fullName = `$${ref.collection}.${ref.token}`;
+  const found = allTokens.find(
+    (t) => t.token.name === fullName,
+  );
+
+  if (!found) {
+    throw new Error(`Token not found: ${text}`);
+  }
+
+  const varName = toCssVar(fullName, prefix);
+  return `var(${varName})`;
+}
+
+function makeDeclaration(
+  token: TokenDecl,
+  mode: string,
+  prefix?: string,
+  allTokens?: TokenDecl[],
+): string {
   const value = token.values.find((v) => v.mode === mode);
   if (!value) {
     throw new Error(`No value found for token '${token.token.name}' in mode '${mode}'`);
   }
 
-  const varName = toCssVarName(token.token.name, prefix);
-  return `${varName}: ${toCssValue(value.value)};`;
+  const resolved = allTokens ? resolveValue(value.value, allTokens, mode, prefix) : value.value;
+
+  const varName = toCssVar(token.token.name, prefix);
+  return `${varName}: ${toCssValue(resolved)};`;
 }
 
 function makeRule(
   selector: string,
-  tokens: TokenDeclaration[],
+  tokens: TokenDecl[],
   mode: string,
   prefix?: string,
+  allTokens?: TokenDecl[],
 ): string {
-  const decls = tokens.map((token) => `  ${makeDeclaration(token, mode, prefix)}`).join('\n');
-  return `${selector} {\n${decls}\n}`;
+  const declarations = tokens.map((token) => `  ${makeDeclaration(token, mode, prefix, allTokens)}`).join('\n');
+  return `${selector} {\n${declarations}\n}`;
 }
 
 function makeCss(
-  rules: { selector: string; tokens: TokenDeclaration[]; mode: string; prefix?: string }[],
+  rules: {
+    selector: string;
+    tokens: TokenDecl[];
+    mode: string;
+    prefix?: string;
+    allTokens?: TokenDecl[];
+  }[],
 ): string {
   return rules
-    .map(({ selector, tokens, mode, prefix }) => makeRule(selector, tokens, mode, prefix))
+    .map(({ selector, tokens, mode, prefix, allTokens }) =>
+      makeRule(selector, tokens, mode, prefix, allTokens),
+    )
     .join('\n\n');
 }
 
-export function generateFromAst(ast: ParsedAst, options: CssVarsOptions): string {
+export function generateFromAst(ast: Ast, options: CssVarsOptions): string {
   const { prefix, banner = '', selectors } = options;
-  const { tokens, tokenCollections } = ast;
+  const { tokens, collections } = ast;
 
-  const rules = tokenCollections.flatMap((collection) => {
+  const rules = collections.flatMap((collection) => {
     const collectionTokens = tokens.filter((token) => token.token.collection === collection.name);
 
     return collection.modes.map((mode) => {
@@ -71,7 +126,7 @@ export function generateFromAst(ast: ParsedAst, options: CssVarsOptions): string
         );
       }
 
-      return { selector, tokens: collectionTokens, mode, prefix };
+      return { selector, tokens: collectionTokens, mode, prefix, allTokens: tokens };
     });
   });
 
@@ -80,8 +135,8 @@ export function generateFromAst(ast: ParsedAst, options: CssVarsOptions): string
 }
 
 export function generate(
-  tokens: TokenType[],
-  collections: CollectionDefinitions,
+  tokens: Token[],
+  collections: Collections,
   options: CssVarsOptions,
 ): string {
   const collectionMap = new Map(
@@ -105,14 +160,12 @@ export function generate(
     });
   }
 
-  const ast = parseAst(tokens, collections);
+  const ast = buildAst(tokens, collections);
   return generateFromAst(ast, options);
 }
 
 export const cssVars = {
   generateCssVariables: generate,
   generateCssVarsFromAst: generateFromAst,
-  createCssVarName: toCssVarName,
+  createCssVarName: toCssVar,
 } as const;
-
-export type { TokenDeclaration, TokenCollectionDeclaration, ParsedAst };

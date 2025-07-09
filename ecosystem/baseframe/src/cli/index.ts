@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import YAML from 'yaml';
 import yargs from 'yargs';
-import { cssVars, TokenType, CollectionDefinitions } from '../core';
+import { cssVars, Token, Collections } from '../core';
 
 const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
@@ -25,7 +25,7 @@ function showBanner() {
 function findYamlFiles(dir: string): string[] {
   const files: string[] = [];
 
-  function scan(currentDir: string) {
+  function scanDirectory(currentDir: string) {
     const items = fs.readdirSync(currentDir);
 
     for (const item of items) {
@@ -33,24 +33,24 @@ function findYamlFiles(dir: string): string[] {
       const stat = fs.statSync(fullPath);
 
       if (stat.isDirectory()) {
-        scan(fullPath);
+        scanDirectory(fullPath);
       } else if (stat.isFile() && /\.ya?ml$/.test(item)) {
         files.push(fullPath);
       }
     }
   }
 
-  scan(dir);
+  scanDirectory(dir);
   return files;
 }
 
 async function loadTokens(): Promise<{
-  tokens: TokenType[];
-  collections: CollectionDefinitions | null;
+  tokens: Token[];
+  collections: Collections | null;
 }> {
   const yamlFiles = findYamlFiles(sourcesDir);
-  const tokens: TokenType[] = [];
-  let collections: CollectionDefinitions | null = null;
+  const tokens: Token[] = [];
+  let collections: Collections | null = null;
 
   for (const filePath of yamlFiles) {
     try {
@@ -93,7 +93,7 @@ async function generateCss(outputDir: string, prefix?: string): Promise<void> {
 
 yargs(process.argv.slice(2))
   .command(
-    'css-vars [dir]',
+    'css-vars [dir] [prefix]',
     'Generate CSS variables',
     (yargs) => {
       return yargs

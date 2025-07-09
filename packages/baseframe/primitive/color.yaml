@@ -347,3 +347,7 @@ data:
     $color.alpha.shadow3:
       values:
         default: 'rgba(0, 0, 0, 0.12)'
+
+    $color.background.white:
+      values:
+        default: $color.palette.gray-0
