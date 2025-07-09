@@ -100,7 +100,7 @@ yargs(process.argv.slice(2))
         .positional('dir', {
           describe: 'Output directory',
           type: 'string',
-          default: './',
+          default: './dist/',
         })
         .option('prefix', {
           describe: 'CSS variable prefix',

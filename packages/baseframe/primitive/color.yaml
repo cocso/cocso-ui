@@ -337,17 +337,3 @@ data:
     $color.palette.graphic-900:
       values:
         default: '#223A58'
-
-    $color.alpha.shadow1:
-      values:
-        default: 'rgba(0, 0, 0, 0.05)'
-    $color.alpha.shadow2:
-      values:
-        default: 'rgba(0, 0, 0, 0.08)'
-    $color.alpha.shadow3:
-      values:
-        default: 'rgba(0, 0, 0, 0.12)'
-
-    $color.background.white:
-      values:
-        default: $color.palette.gray-0

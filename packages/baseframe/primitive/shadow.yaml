@@ -6,16 +6,16 @@ metadata:
 data:
   collection: global
   tokens:
-    $shadow.y.3:
+    $shadow.y-3:
       values:
         default: '8px'
-    $shadow.y.4:
+    $shadow.y-4:
       values:
         default: '16px'
-    $shadow.blur.3:
+    $shadow.blur-3:
       values:
         default: '16px'
-    $shadow.blur.4:
+    $shadow.blur-4:
       values:
         default: '24px'
 
