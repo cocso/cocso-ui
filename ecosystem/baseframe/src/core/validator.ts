@@ -125,9 +125,7 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
       const ref = getTokenRef(result.value);
       if (ref) {
         const fullName = `$${ref.collection}.${ref.token}`;
-        const found = allTokens.find(
-          (t) => t.token.name === fullName,
-        );
+        const found = allTokens.find((t) => t.token.name === fullName);
 
         if (!found) {
           errors.push({

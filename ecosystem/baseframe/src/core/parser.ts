@@ -46,7 +46,7 @@ export function parseValue(value: string | number): ParseResult {
 
 function parseHex(value: string): ParseResult {
   const regex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
-  
+
   if (!regex.test(value)) {
     return { isValid: false, error: `Invalid hex color: ${value}` };
   }
@@ -57,7 +57,7 @@ function parseHex(value: string): ParseResult {
 function parseRgb(value: string): ParseResult {
   const regex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
   const match = value.match(regex);
-  
+
   if (!match) {
     return { isValid: false, error: `Invalid rgb color: ${value}` };
   }
@@ -77,7 +77,7 @@ function parseRgb(value: string): ParseResult {
 function parseRgba(value: string): ParseResult {
   const regex = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*([01]?\.?\d*)\s*\)$/;
   const match = value.match(regex);
-  
+
   if (!match) {
     return { isValid: false, error: `Invalid rgba color: ${value}` };
   }
@@ -101,14 +101,14 @@ function parseRgba(value: string): ParseResult {
 
 function parseTokenRef(value: string): ParseResult {
   const regex = /^\$[a-zA-Z][a-zA-Z0-9_-]*(?:\.[a-zA-Z][a-zA-Z0-9_-]*)+$/;
-  
+
   if (!regex.test(value)) {
     return { isValid: false, error: `Invalid token reference: ${value}` };
   }
 
   const clean = value.substring(1);
   const parts = clean.split('.');
-  
+
   if (parts.length < 2) {
     return { isValid: false, error: `Invalid token format: ${value}` };
   }
@@ -122,7 +122,7 @@ function parseTokenRef(value: string): ParseResult {
 function parseSize(value: string): ParseResult {
   const regex = /^([+-]?\d*\.?\d+)(px|rem|em|vw|vh|%)$/;
   const match = value.match(regex);
-  
+
   if (!match) {
     return { isValid: false, error: `Invalid size: ${value}` };
   }
@@ -143,7 +143,7 @@ function parseSize(value: string): ParseResult {
 function parseDuration(value: string): ParseResult {
   const regex = /^([+-]?\d*\.?\d+)(ms|s)$/;
   const match = value.match(regex);
-  
+
   if (!match) {
     return { isValid: false, error: `Invalid duration: ${value}` };
   }

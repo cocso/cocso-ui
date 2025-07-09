@@ -101,7 +101,15 @@ export interface StringValue {
   value: string;
 }
 
-export type Value = HexColor | RgbColor | RgbaColor | TokenRef | SizeValue | DurationValue | NumberValue | StringValue;
+export type Value =
+  | HexColor
+  | RgbColor
+  | RgbaColor
+  | TokenRef
+  | SizeValue
+  | DurationValue
+  | NumberValue
+  | StringValue;
 
 export interface ParseResult {
   isValid: boolean;
@@ -110,7 +118,12 @@ export interface ParseResult {
 }
 
 export interface ValidationError {
-  type: 'INVALID_COLLECTION' | 'MISSING_MODE' | 'INVALID_TOKEN_FORMAT' | 'INVALID_VALUE_FORMAT' | 'INVALID_PRIMITIVE_TOKEN';
+  type:
+    | 'INVALID_COLLECTION'
+    | 'MISSING_MODE'
+    | 'INVALID_TOKEN_FORMAT'
+    | 'INVALID_VALUE_FORMAT'
+    | 'INVALID_PRIMITIVE_TOKEN';
   message: string;
   tokenName?: string;
   collection?: string;

@@ -38,7 +38,7 @@ function resolveValue(
   prefix?: string,
 ): string | number | Value {
   const text = String(value);
-  
+
   if (!text.startsWith('$')) {
     return value;
   }
@@ -54,9 +54,7 @@ function resolveValue(
   }
 
   const fullName = `$${ref.collection}.${ref.token}`;
-  const found = allTokens.find(
-    (t) => t.token.name === fullName,
-  );
+  const found = allTokens.find((t) => t.token.name === fullName);
 
   if (!found) {
     throw new Error(`Token not found: ${text}`);
@@ -90,7 +88,9 @@ function makeRule(
   prefix?: string,
   allTokens?: TokenDecl[],
 ): string {
-  const declarations = tokens.map((token) => `  ${makeDeclaration(token, mode, prefix, allTokens)}`).join('\n');
+  const declarations = tokens
+    .map((token) => `  ${makeDeclaration(token, mode, prefix, allTokens)}`)
+    .join('\n');
   return `${selector} {\n${declarations}\n}`;
 }
 
