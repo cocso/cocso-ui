@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import YAML from 'yaml';
 import yargs from 'yargs';
-import { cssVars, Token, Collections } from '../core';
+import { cssVars, tailwind, type Token, type Collections } from '../core';
 
 const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
@@ -44,7 +44,7 @@ function findYamlFiles(dir: string): string[] {
   return files;
 }
 
-function loadTokens(): { tokens: Token[]; collections: Collections | null } {
+function loadTokens(): { tokens: Token[]; collections: Collections } {
   const yamlFiles = findYamlFiles(sourcesDir);
   const tokens: Token[] = [];
   let collections: Collections | null = null;
@@ -64,16 +64,16 @@ function loadTokens(): { tokens: Token[]; collections: Collections | null } {
     }
   }
 
+  if (!collections) {
+    console.error(' ❎ collections.yaml not found');
+    process.exit(1);
+  }
+
   return { tokens, collections };
 }
 
 function generateCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
-
-  if (!collections) {
-    console.error(' ❎ collections.yaml not found');
-    process.exit(1);
-  }
 
   const css = cssVars.generateCssVariables(tokens, collections, {
     prefix,
@@ -86,6 +86,21 @@ function generateCss(outputDir: string, prefix?: string): void {
   fs.writeFileSync(outputPath, css, 'utf-8');
 
   console.log(` ✅ Generated CSS variables: ${outputPath}`);
+}
+
+function generateTailwindCss(outputDir: string, prefix?: string): void {
+  const { tokens, collections } = loadTokens();
+
+  const tailwindCss = tailwind.generateTailwindCSS(tokens, collections, {
+    prefix,
+    banner: `/* Generated TailwindCSS 4.0 Configuration for Baseframe Design Tokens */\n/* Generated at: ${new Date().toISOString()} */\n\n`,
+  });
+
+  fs.ensureDirSync(outputDir);
+  const outputPath = path.join(outputDir, 'tailwind.css');
+  fs.writeFileSync(outputPath, tailwindCss, 'utf-8');
+
+  console.log(` ✅ Generated TailwindCSS 4.0 configuration: ${outputPath}`);
 }
 
 yargs(process.argv.slice(2))
@@ -107,6 +122,26 @@ yargs(process.argv.slice(2))
     (argv) => {
       showBanner();
       generateCss(argv.dir as string, argv.prefix as string | undefined);
+    },
+  )
+  .command(
+    'tailwindcss [dir] [prefix]',
+    'Generate TailwindCSS 4.0 configuration',
+    (yargs) => {
+      return yargs
+        .positional('dir', {
+          describe: 'Output directory',
+          type: 'string',
+          default: './dist/',
+        })
+        .option('prefix', {
+          describe: 'CSS variable prefix',
+          type: 'string',
+        });
+    },
+    (argv) => {
+      showBanner();
+      generateTailwindCss(argv.dir as string, argv.prefix as string | undefined);
     },
   )
   .demandCommand(1, 'You need to specify a command.')
