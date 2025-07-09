@@ -100,7 +100,7 @@ function parseRgba(value: string): ParseResult {
 }
 
 function parseTokenRef(value: string): ParseResult {
-  const regex = /^\$[a-zA-Z][a-zA-Z0-9_-]*(?:\.[a-zA-Z][a-zA-Z0-9_-]*)+$/;
+  const regex = /^\$[a-zA-Z0-9][a-zA-Z0-9_-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9_-]*)+$/;
 
   if (!regex.test(value)) {
     return { isValid: false, error: `Invalid token reference: ${value}` };
