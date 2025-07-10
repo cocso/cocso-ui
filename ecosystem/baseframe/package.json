@@ -1,33 +1,21 @@
 {
   "name": "@cocso-ui/baseframe",
-  "version": "1.0.0",
-  "description": "Clean and simple design token management tool specialized in CSS Variables generation",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "version": "0.0.1",
+  "description": "A CLI tool for managing and generating baseframe",
+  "main": "bin/index.js",
+  "module": "bin/index.js",
   "type": "module",
   "private": false,
-  "files": [
-    "lib/**/*",
-    "README.md"
-  ],
   "bin": {
-    "baseframe": "lib/index.js"
+    "baseframe": "bin/index.js"
   },
   "engines": {
     "node": ">=18.0.0",
     "bun": ">=1.0.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "build": "bun build.js"
   },
-  "keywords": [
-    "design-tokens",
-    "cli",
-    "typescript"
-  ],
   "dependencies": {
     "fs-extra": "^11.3.0",
     "yaml": "^2.8.0",
@@ -39,5 +27,8 @@
     "@types/yargs": "^17.0.33",
     "esbuild": "^0.25.5",
     "typescript": "^5.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
