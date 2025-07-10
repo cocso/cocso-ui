@@ -1,0 +1,14 @@
+kind: Tokens
+metadata:
+  id: letter-spacing
+  name: Letter Spacing
+  description: primitive letter spacing tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $letter-spacing.0:
+      values:
+        default: "0"
+    $letter-spacing.1:
+      values:
+        default: "1"

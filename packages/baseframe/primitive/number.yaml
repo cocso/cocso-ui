@@ -1,0 +1,77 @@
+kind: Tokens
+metadata:
+  id: number
+  name: Number
+  description: primitive number tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $number.0:
+      values:
+        default: "0px"
+    $number.1:
+      values:
+        default: "1px"
+    $number.2:
+      values:
+        default: "2px"
+    $number.3:
+      values:
+        default: "4px"
+    $number.4:
+      values:
+        default: "6px"
+    $number.5:
+      values:
+        default: "8px"
+    $number.6:
+      values:
+        default: "10px"
+    $number.7:
+      values:
+        default: "12px"
+    $number.8:
+      values:
+        default: "16px"
+    $number.9:
+      values:
+        default: "20px"
+    $number.10:
+      values:
+        default: "24px"
+    $number.11:
+      values:
+        default: "28px"
+    $number.12:
+      values:
+        default: "32px"
+    $number.13:
+      values:
+        default: "36px"
+    $number.14:
+      values:
+        default: "40px"
+    $number.15:
+      values:
+        default: "44px"
+    $number.16:
+      values:
+        default: "48px"
+    $number.17:
+      values:
+        default: "56px"
+    $number.18:
+      values:
+        default: "64px"
+    $number.19:
+      values:
+        default: "72px"
+    $number.20:
+      values:
+        default: "80px"
+    $number.21:
+      values:
+        default: "96px"
+    $number.max:
+      values:
+        default: "1000px"

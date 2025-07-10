@@ -1,0 +1,580 @@
+kind: Tokens
+metadata:
+  id: color
+  name: Color
+  description: semantic color tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $color.background.white:
+      values:
+        default: $color.palette.gray-0
+    $color.background.gray-subtler:
+      values:
+        default: $color.palette.gray-50
+    $color.background.gray-subtle:
+      values:
+        default: $color.palette.gray-100
+    $color.background.inverse:
+      values:
+        default: $color.palette.gray-900
+    $color.background.dim:
+      values:
+        default: $color.palette.blackalpha-75
+
+    $color.surface.white:
+      values:
+        default: $color.palette.gray-0
+    $color.surface.white-subtle:
+      values:
+        default: $color.palette.gray-0
+    $color.surface.white-subtler:
+      values:
+        default: $color.palette.gray-0
+    $color.surface.white-static:
+      values:
+        default: $color.palette.gray-0
+    $color.surface.inverse:
+      values:
+        default: $color.palette.gray-900
+    $color.surface.inverse-static:
+      values:
+        default: $color.palette.gray-900
+    $color.surface.gray-subtler:
+      values:
+        default: $color.palette.gray-50
+    $color.surface.gray-subtle:
+      values:
+        default: $color.palette.gray-100
+    $color.surface.gray-disabled:
+      values:
+        default: $color.palette.gray-200
+    $color.surface.primary-subtler:
+      values:
+        default: $color.palette.primary-50
+    $color.surface.secondary-subtler:
+      values:
+        default: $color.palette.secondary-50
+    $color.surface.point-subtler:
+      values:
+        default: $color.palette.point-50
+    $color.surface.danger-subtler:
+      values:
+        default: $color.palette.danger-50
+    $color.surface.warning-subtler:
+      values:
+        default: $color.palette.warning-50
+    $color.surface.success-subtler:
+      values:
+        default: $color.palette.success-50
+    $color.surface.information-subtler:
+      values:
+        default: $color.palette.information-50
+    $color.border.transparency:
+      values:
+        default: $color.palette.blackalpha-0
+    $color.border.inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.border.disabled:
+      values:
+        default: $color.palette.gray-300
+    $color.border.gray-light:
+      values:
+        default: $color.palette.gray-200
+    $color.border.gray:
+      values:
+        default: $color.palette.gray-300
+    $color.border.gray-dark:
+      values:
+        default: $color.palette.gray-600
+    $color.border.gray-darker:
+      values:
+        default: $color.palette.gray-900
+    $color.border.primary-light:
+      values:
+        default: $color.palette.primary-100
+    $color.border.primary:
+      values:
+        default: $color.palette.primary-500
+    $color.border.secondary-light:
+      values:
+        default: $color.palette.secondary-100
+    $color.border.secondary:
+      values:
+        default: $color.palette.secondary-700
+    $color.border.point-light:
+      values:
+        default: $color.palette.point-100
+    $color.border.point:
+      values:
+        default: $color.palette.point-500
+    $color.border.danger-light:
+      values:
+        default: $color.palette.danger-100
+    $color.border.danger:
+      values:
+        default: $color.palette.danger-500
+    $color.border.warning-light:
+      values:
+        default: $color.palette.warning-100
+    $color.border.warning:
+      values:
+        default: $color.palette.warning-500
+    $color.border.success-light:
+      values:
+        default: $color.palette.success-100
+    $color.border.success:
+      values:
+        default: $color.palette.success-500
+    $color.border.information-light:
+      values:
+        default: $color.palette.information-100
+    $color.border.information:
+      values:
+        default: $color.palette.information-500
+
+    $color.divider.gray-light:
+      values:
+        default: $color.palette.gray-200
+    $color.divider.gray:
+      values:
+        default: $color.palette.gray-400
+    $color.divider.gray-dark:
+      values:
+        default: $color.palette.gray-500
+    $color.divider.gray-darker:
+      values:
+        default: $color.palette.gray-900
+    $color.divider.inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.divider.primary-light:
+      values:
+        default: $color.palette.primary-100
+    $color.divider.primary:
+      values:
+        default: $color.palette.primary-500
+    $color.divider.secondary-light:
+      values:
+        default: $color.palette.secondary-100
+    $color.divider.secondary:
+      values:
+        default: $color.palette.secondary-700
+    $color.divider.error:
+      values:
+        default: $color.palette.danger-500
+    $color.divider.point:
+      values:
+        default: $color.palette.point-500
+
+    $color.text.bolder:
+      values:
+        default: $color.palette.gray-950
+    $color.text.basic:
+      values:
+        default: $color.palette.gray-900
+    $color.text.subtle:
+      values:
+        default: $color.palette.gray-700
+    $color.text.disabled:
+      values:
+        default: $color.palette.gray-400
+    $color.text.disabled-on:
+      values:
+        default: $color.palette.gray-500
+    $color.text.bolder-inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.text.basic-inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.text.subtle-inverse:
+      values:
+        default: $color.palette.gray-300
+    $color.text.static:
+      values:
+        default: $color.palette.gray-900
+    $color.text.inverse-static:
+      values:
+        default: $color.palette.gray-0
+    $color.text.primary:
+      values:
+        default: $color.palette.primary-600
+    $color.text.secondary:
+      values:
+        default: $color.palette.secondary-800
+    $color.text.point:
+      values:
+        default: $color.palette.point-600
+    $color.text.danger:
+      values:
+        default: $color.palette.danger-600
+    $color.text.warning:
+      values:
+        default: $color.palette.warning-600
+    $color.text.success:
+      values:
+        default: $color.palette.success-600
+    $color.text.information:
+      values:
+        default: $color.palette.information-600
+
+    $color.action.white:
+      values:
+        default: $color.palette.gray-0
+    $color.action.primary:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.action.primary-hover:
+      values:
+        default: $color.palette.primary-50
+    $color.action.primary-pressed:
+      values:
+        default: $color.palette.primary-100
+    $color.action.primary-selected:
+      values:
+        default: $color.palette.primary-50
+    $color.action.primary-active:
+      values:
+        default: $color.palette.primary-500
+    $color.action.secondary:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.action.secondary-hover:
+      values:
+        default: $color.palette.secondary-50
+    $color.action.secondary-pressed:
+      values:
+        default: $color.palette.secondary-100
+    $color.action.secondary-selected:
+      values:
+        default: $color.palette.secondary-50
+    $color.action.secondary-on:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.action.secondary-on-hover:
+      values:
+        default: $color.palette.gray-0
+    $color.action.secondary-on-pressed:
+      values:
+        default: $color.palette.secondary-100
+    $color.action.secondary-on-selected:
+      values:
+        default: $color.palette.gray-0
+    $color.action.secondary-active:
+      values:
+        default: $color.palette.secondary-700
+    $color.action.disabled:
+      values:
+        default: $color.palette.gray-200
+
+    $color.element.inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.element.inverse-static:
+      values:
+        default: $color.palette.gray-0
+    $color.element.gray-lighter:
+      values:
+        default: $color.palette.gray-50
+    $color.element.gray-light:
+      values:
+        default: $color.palette.gray-100
+    $color.element.gray:
+      values:
+        default: $color.palette.gray-500
+    $color.element.gray-dark:
+      values:
+        default: $color.palette.gray-600
+    $color.element.disabled-light:
+      values:
+        default: $color.palette.gray-200
+    $color.element.disabled-dark:
+      values:
+        default: $color.palette.gray-400
+    $color.element.primary:
+      values:
+        default: $color.palette.primary-500
+    $color.element.primary-light:
+      values:
+        default: $color.palette.primary-100
+    $color.element.primary-lighter:
+      values:
+        default: $color.palette.primary-50
+    $color.element.secondary:
+      values:
+        default: $color.palette.secondary-700
+    $color.element.secondary-light:
+      values:
+        default: $color.palette.secondary-100
+    $color.element.secondary-lighter:
+      values:
+        default: $color.palette.secondary-50
+    $color.element.point:
+      values:
+        default: $color.palette.point-500
+    $color.element.point-light:
+      values:
+        default: $color.palette.point-100
+    $color.element.point-lighter:
+      values:
+        default: $color.palette.point-50
+    $color.element.danger:
+      values:
+        default: $color.palette.danger-500
+    $color.element.danger-lighter:
+      values:
+        default: $color.palette.danger-50
+    $color.element.warning:
+      values:
+        default: $color.palette.warning-300
+    $color.element.warning-lighter:
+      values:
+        default: $color.palette.warning-50
+    $color.element.success:
+      values:
+        default: $color.palette.success-500
+    $color.element.success-lighter:
+      values:
+        default: $color.palette.success-50
+    $color.element.information:
+      values:
+        default: $color.palette.information-500
+    $color.element.information-lighter:
+      values:
+        default: $color.palette.information-50
+    $color.element.logo-text:
+      values:
+        default: '#575756'
+
+    $color.icon.gray:
+      values:
+        default: $color.palette.gray-800
+    $color.icon.gray-light:
+      values:
+        default: $color.palette.gray-700
+    $color.icon.gray-fill:
+      values:
+        default: $color.palette.gray-200
+    $color.icon.inverse:
+      values:
+        default: $color.palette.gray-0
+    $color.icon.disabled:
+      values:
+        default: $color.palette.gray-400
+    $color.icon.disabled-on:
+      values:
+        default: $color.palette.gray-500
+    $color.icon.primary:
+      values:
+        default: $color.palette.primary-500
+    $color.icon.secondary:
+      values:
+        default: $color.palette.secondary-800
+    $color.icon.point:
+      values:
+        default: $color.palette.point-500
+    $color.icon.danger:
+      values:
+        default: $color.palette.danger-500
+    $color.icon.warning:
+      values:
+        default: $color.palette.warning-500
+    $color.icon.success:
+      values:
+        default: $color.palette.success-500
+    $color.icon.information:
+      values:
+        default: $color.palette.information-500
+    $color.icon.inverse-static:
+      values:
+        default: $color.palette.gray-0
+    $color.icon.gray-static:
+      values:
+        default: $color.palette.gray-800
+    $color.icon.primary-static:
+      values:
+        default: $color.palette.primary-500
+    $color.icon.secondary-static:
+      values:
+        default: $color.palette.secondary-800
+    $color.icon.point-static:
+      values:
+        default: $color.palette.point-500
+    $color.icon.danger-static:
+      values:
+        default: $color.palette.danger-500
+    $color.icon.warning-static:
+      values:
+        default: $color.palette.warning-500
+    $color.icon.success-static:
+      values:
+        default: $color.palette.success-500
+    $color.icon.information-static:
+      values:
+        default: $color.palette.information-500
+
+    $color.link.default:
+      values:
+        default: $color.palette.primary-500
+    $color.link.hover:
+      values:
+        default: $color.palette.primary-600
+    $color.link.pressed:
+      values:
+        default: $color.palette.primary-700
+    $color.link.visited:
+      values:
+        default: '#5917B8'
+
+    $color.button.primary-fill:
+      values:
+        default: $color.palette.primary-500
+    $color.button.primary-fill-hover:
+      values:
+        default: $color.palette.primary-600
+    $color.button.primary-fill-pressed:
+      values:
+        default: $color.palette.primary-700
+    $color.button.secondary-fill:
+      values:
+        default: $color.palette.primary-50
+    $color.button.secondary-fill-hover:
+      values:
+        default: $color.palette.primary-100
+    $color.button.secondary-fill-pressed:
+      values:
+        default: $color.palette.primary-200
+    $color.button.secondary-border:
+      values:
+        default: $color.palette.primary-500
+    $color.button.tertiary-fill:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.button.tertiary-fill-hover:
+      values:
+        default: $color.palette.gray-50
+    $color.button.tertiary-fill-pressed:
+      values:
+        default: $color.palette.gray-100
+    $color.button.tertiary-border:
+      values:
+        default: $color.palette.gray-600
+    $color.button.text-fill:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.button.text-fill-hover:
+      values:
+        default: $color.palette.secondary-50
+    $color.button.text-fill-pressed:
+      values:
+        default: $color.palette.secondary-100
+    $color.button.text-border:
+      values:
+        default: $color.palette.blackalpha-0
+    $color.button.disabled-fill:
+      values:
+        default: $color.palette.gray-200
+    $color.button.disabled-border:
+      values:
+        default: $color.palette.gray-300
+
+    $color.input.surface:
+      values:
+        default: $color.palette.gray-0
+    $color.input.border:
+      values:
+        default: $color.palette.gray-600
+    $color.input.border-active:
+      values:
+        default: $color.palette.primary-500
+    $color.input.border-error:
+      values:
+        default: $color.palette.danger-500
+    $color.input.surface-disabled:
+      values:
+        default: $color.palette.gray-200
+    $color.input.border-disabled:
+      values:
+        default: $color.palette.gray-300
+
+    $color.graphic.blue-subtler:
+      values:
+        default: $color.palette.graphic-100
+    $color.graphic.blue-subtle:
+      values:
+        default: $color.palette.graphic-300
+    $color.graphic.blue:
+      values:
+        default: $color.palette.graphic-500
+    $color.graphic.blue-dark:
+      values:
+        default: $color.palette.graphic-700
+    $color.graphic.blue-darker:
+      values:
+        default: $color.palette.graphic-900
+    $color.graphic.red-subtler:
+      values:
+        default: $color.palette.point-50
+    $color.graphic.red-subtle:
+      values:
+        default: $color.palette.point-100
+    $color.graphic.red:
+      values:
+        default: $color.palette.point-200
+    $color.graphic.red-dark:
+      values:
+        default: $color.palette.point-400
+    $color.graphic.red-darker:
+      values:
+        default: $color.palette.point-700
+    $color.graphic.brand:
+      values:
+        default: $color.palette.primary-500
+
+    $color.alpha.base100:
+      values:
+        default: $color.palette.whitealpha-100
+    $color.alpha.base75:
+      values:
+        default: $color.palette.whitealpha-75
+    $color.alpha.base50:
+      values:
+        default: $color.palette.whitealpha-50
+    $color.alpha.base25:
+      values:
+        default: $color.palette.whitealpha-25
+    $color.alpha.base10:
+      values:
+        default: $color.palette.whitealpha-10
+    $color.alpha.base0:
+      values:
+        default: $color.palette.whitealpha-0
+    $color.alpha.inverse100:
+      values:
+        default: $color.palette.blackalpha-100
+    $color.alpha.inverse75:
+      values:
+        default: $color.palette.blackalpha-75
+    $color.alpha.inverse50:
+      values:
+        default: $color.palette.blackalpha-50
+    $color.alpha.inverse25:
+      values:
+        default: $color.palette.blackalpha-25
+    $color.alpha.inverse10:
+      values:
+        default: $color.palette.blackalpha-10
+    $color.alpha.inverse0:
+      values:
+        default: $color.palette.blackalpha-0
+    $color.alpha.shadow1:
+      values:
+        default: rgba(0, 0, 0, 0.05)
+    $color.alpha.shadow2:
+      values:
+        default: rgba(0, 0, 0, 0.08)
+    $color.alpha.shadow3:
+      values:
+        default: rgba(0, 0, 0, 0.12)

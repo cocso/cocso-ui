@@ -1,0 +1,53 @@
+kind: Tokens
+metadata:
+  id: radius
+  name: Border Radius
+  description: semantic border radius tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $radius.xs1:
+      values:
+        default: $number.2
+    $radius.xs2:
+      values:
+        default: $number.2
+    $radius.xs3:
+      values:
+        default: $number.2
+    $radius.sm1:
+      values:
+        default: $number.3
+    $radius.sm2:
+      values:
+        default: $number.3
+    $radius.sm3:
+      values:
+        default: $number.3
+    $radius.md1:
+      values:
+        default: $number.4
+    $radius.md2:
+      values:
+        default: $number.4
+    $radius.md3:
+      values:
+        default: $number.5
+    $radius.md4:
+      values:
+        default: $number.5
+    $radius.lg1:
+      values:
+        default: $number.6
+    $radius.lg2:
+      values:
+        default: $number.6
+    $radius.xl1:
+      values:
+        default: $number.7
+    $radius.xl2:
+      values:
+        default: $number.7
+    $radius.max:
+      values:
+        default: $number.max

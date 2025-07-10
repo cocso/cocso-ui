@@ -1,0 +1,19 @@
+{
+  "name": "@cocso-ui/baseframe-sources",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/baseframe"
+  },
+  "scripts": {
+  },
+  "main": "package.json",
+  "files": [
+    "*.yaml",
+    "components/*.yaml"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

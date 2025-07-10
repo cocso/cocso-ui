@@ -1,0 +1,20 @@
+kind: Tokens
+metadata:
+  id: border-width
+  name: Border Width
+  description: primitive border width tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $border-width.variable-regular:
+      values:
+        default: '1px'
+    $border-width.variable-medium:
+      values:
+        default: '2px'
+    $border-width.static-regular:
+      values:
+        default: '1px'
+    $border-width.static-medium:
+      values:
+        default: '2px'
