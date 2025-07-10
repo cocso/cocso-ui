@@ -10,17 +10,6 @@ import type {
 } from '../types';
 import { parseValue, buildAst } from '../parsers';
 
-export function isTokenRef(value: Value): boolean {
-  return value.kind === 'TokenRef';
-}
-
-export function getTokenRef(value: Value): { collection: string; token: string } | null {
-  if (value.kind === 'TokenRef') {
-    return { collection: value.collection, token: value.token };
-  }
-  return null;
-}
-
 function validateValue(value: string | number): ParseResult {
   return parseValue(value);
 }

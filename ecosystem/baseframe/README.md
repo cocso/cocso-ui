@@ -6,7 +6,7 @@ COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실
 
 <br />
 
-### 폴더 구조
+### Structure
 
 ```
 src/
@@ -30,4 +30,3 @@ src/
 ```
 
 각 폴더는 명확한 역할을 가지고 있어서 새로운 기능을 추가하거나 기존 기능을 수정할 때 쉽게 찾을 수 있어요.
-
