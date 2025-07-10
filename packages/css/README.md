@@ -11,5 +11,5 @@ pnpm install @cocso-ui/css
 ### Usage
 
 ```javascript
-import '@cocso-ui/css/tokens.min.css';
+import '@cocso-ui/css/tokens.css';
 ```
