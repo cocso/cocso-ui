@@ -9,7 +9,7 @@ export interface TailwindOptions {
 
 function createVarName(name: string, prefix?: string): string {
   let clean = name.replace(/^\$/, '');
-  
+
   if (clean.startsWith('number.')) {
     clean = clean.replace('number.', 'spacing-');
   } else if (clean.startsWith('letter-spacing.')) {
@@ -17,15 +17,11 @@ function createVarName(name: string, prefix?: string): string {
   } else {
     clean = clean.replace(/\./g, '-');
   }
-  
+
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
-function createTheme(
-  tokens: TokenDecl[],
-  mode: string,
-  options: TailwindOptions,
-): string {
+function createTheme(tokens: TokenDecl[], mode: string, options: TailwindOptions): string {
   const { prefix } = options;
   const vars: string[] = [];
   const processed = new Set<string>();
@@ -87,11 +83,9 @@ function createUtilities(): string[] {
     `@utility font-* { font-weight: --value(--font-weight-*); }`,
     `@utility tracking-* { letter-spacing: --value(--tracking-*); }`,
     `@utility shadow-* { box-shadow: --value(--shadow-*); }`,
-    `@utility border-width-* { border-width: --value(--border-width-*); }`
+    `@utility border-width-* { border-width: --value(--border-width-*); }`,
   ];
 }
-
-
 
 export function generateFromAst(ast: Ast, options: TailwindOptions): string {
   const { banner = '' } = options;
