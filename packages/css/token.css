@@ -148,10 +148,10 @@
   --shadow-y-4: 16px;
   --shadow-blur-3: 16px;
   --shadow-blur-4: 24px;
-  --shadow1: 0px 1px 2px 0px var(--color-alpha-shadow1), 0px 0px 2px 0px var(--color-alpha-shadow1);
-  --shadow2: 0px 0px 2px 0px var(--color-alpha-shadow1), 0px 4px 8px 0px var(--color-alpha-shadow2);
-  --shadow3: 0px 0px 2px 0px var(--color-alpha-shadow2), 0px var(--shadow-y-3) var(--shadow-blur-3) 0px var(--color-alpha-shadow3);
-  --shadow4: 0px 0px 2px 0px var(--color-alpha-shadow2), 0px var(--shadow-y-4) var(--shadow-blur-4) 0px var(--color-alpha-shadow3);
+  --shadow-1: 0px 1px 2px 0px var(--color-alpha-shadow1), 0px 0px 2px 0px var(--color-alpha-shadow1);
+  --shadow-2: 0px 0px 2px 0px var(--color-alpha-shadow1), 0px 4px 8px 0px var(--color-alpha-shadow2);
+  --shadow-3: 0px 0px 2px 0px var(--color-alpha-shadow2), 0px var(--shadow-y-3) var(--shadow-blur-3) 0px var(--color-alpha-shadow3);
+  --shadow-4: 0px 0px 2px 0px var(--color-alpha-shadow2), 0px var(--shadow-y-4) var(--shadow-blur-4) 0px var(--color-alpha-shadow3);
   --color-background-white: var(--color-palette-gray-0);
   --color-background-gray-subtler: var(--color-palette-gray-50);
   --color-background-gray-subtle: var(--color-palette-gray-100);

@@ -12,7 +12,7 @@ export interface CssVarsOptions {
   };
 }
 
-function createCssVarName(name: string, prefix?: string): string {
+function createVarName(name: string, prefix?: string): string {
   const clean = name.replace(/^\$/, '').replace(/\./g, '-');
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
@@ -28,8 +28,8 @@ function createDeclaration(
     throw new Error(`No value found for token '${token.token.name}' in mode '${mode}'`);
   }
 
-  const resolvedValue = resolveTokenValue(value.value, allTokens, createCssVarName, prefix);
-  const varName = createCssVarName(token.token.name, prefix);
+  const resolvedValue = resolveTokenValue(value.value, allTokens, createVarName, prefix);
+  const varName = createVarName(token.token.name, prefix);
   return `${varName}: ${toCssValue(resolvedValue)};`;
 }
 
@@ -76,6 +76,6 @@ export function generateCssVariables(
 
 export const cssVars = {
   generateCssVariables,
-  generateCssVarsFromAst: generateFromAst,
-  createCssVarName,
+  generateFromAst,
+  createVarName,
 } as const;
