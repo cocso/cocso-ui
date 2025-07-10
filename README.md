@@ -6,6 +6,12 @@
 
 <br />
 
-**Ecosystem**
+#### Base Libraries
 
-- [@cocso-ui/baseframe](./ecosystem/baseframe)
+- [css](./packages/css)
+
+#### References
+
+- [design-tokens/community-group](https://tr.designtokens.org/)
+- [daangn/seed-design](https://github.com/daangn/seed-design)
+- [ardakaracizmeli/design-system-checklist](https://www.designsystemchecklist.com)
