@@ -13,9 +13,15 @@
       "name": "@cocso-ui/baseframe-sources",
       "version": "0.0.0",
     },
+    "packages/css": {
+      "name": "@cocso-ui/css",
+      "version": "0.0.1",
+    },
   },
   "packages": {
     "@cocso-ui/baseframe-sources": ["@cocso-ui/baseframe-sources@workspace:packages/baseframe"],
+
+    "@cocso-ui/css": ["@cocso-ui/css@workspace:packages/css"],
 
     "prettier": ["prettier@3.6.1", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-5xGWRa90Sp2+x1dQtNpIpeOQpTDBs9cZDmA/qs2vDNN2i18PdapqY7CmBeyLlMuGqXJRIOPaCaVZTLNQRWUH/A=="],
 

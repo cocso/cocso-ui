@@ -1,0 +1,26 @@
+{
+  "name": "@cocso-ui/css",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/css"
+  },
+  "scripts": {},
+  "sideEffects": ["*.css"],
+  "type": "module",
+  "exports": {
+    "./*.css": "./*.css",
+    "./tokens.css": "./tokens.css",
+    "./tokens.min.css": "./tokens.min.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "*.css",
+    "package.json"
+  ],
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}
