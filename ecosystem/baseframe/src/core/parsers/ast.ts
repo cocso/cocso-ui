@@ -1,4 +1,4 @@
-import type { Token, Collections, CollectionDecl, TokenDecl, Ast } from '../types';
+import type { Token, Collections, Ast, TokenDecl, CollectionDecl } from '../types';
 
 export function buildAst(tokens: Token[], collections: Collections): Ast {
   return {

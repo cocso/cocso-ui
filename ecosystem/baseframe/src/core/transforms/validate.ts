@@ -8,7 +8,7 @@ import type {
   ValidationResult,
   ParseResult,
 } from '../types';
-import { parseValue, buildAst } from '../parser';
+import { parseValue, buildAst } from '../parsers';
 
 export function isTokenRef(value: Value): boolean {
   return value.kind === 'TokenRef';

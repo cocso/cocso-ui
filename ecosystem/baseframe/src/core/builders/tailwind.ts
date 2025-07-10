@@ -1,60 +1,10 @@
-import type {
-  Ast,
-  Collections,
-  Token,
-  TokenDecl,
-  Value,
-  TokenRef,
-  ValidationError,
-} from '../types';
-import { validateAllTokens } from '../validator';
-import { buildAst, parseValue, valueToString } from '../parser';
-import { createTokenResolver } from '../resolver';
+import type { Ast, Collections, Token, TokenDecl } from '../types';
+import { buildValidatedAst } from '../transforms';
+import { createCssVarName, toCssValue, resolveTokenValue } from './utils';
 
 export interface TailwindOptions {
   prefix?: string;
   banner?: string;
-}
-
-function createCssVarName(name: string, prefix?: string): string {
-  const clean = name.replace(/^\$/, '').replace(/\./g, '-');
-  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
-}
-
-function toCssValue(value: string | number | Value): string {
-  if (typeof value === 'string') return value;
-  if (typeof value === 'number') return value.toString();
-  return valueToString(value);
-}
-
-function resolveTokenValue(
-  value: string | number,
-  allTokens: TokenDecl[],
-  prefix?: string,
-): string | number {
-  const text = String(value);
-
-  if (!text.startsWith('$')) {
-    const parsed = parseValue(text);
-    if (parsed.isValid && parsed.value) {
-      const resolver = createTokenResolver(allTokens, 'default', (name) =>
-        createCssVarName(name, prefix),
-      );
-      const resolved = resolver.resolve(parsed.value);
-      return toCssValue(resolved);
-    }
-    return value;
-  }
-
-  const parsed = parseValue(text);
-  if (!parsed.isValid || !parsed.value) {
-    throw new Error(`Invalid token reference: ${text}`);
-  }
-
-  const resolver = createTokenResolver(allTokens, 'default', (name) =>
-    createCssVarName(name, prefix),
-  );
-  return resolver.resolveTokenRef(parsed.value as TokenRef);
 }
 
 function generateThemeVariables(
@@ -179,37 +129,17 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
   return parts.join('\n');
 }
 
-export function generate(
+export function generateTailwindCSS(
   tokens: Token[],
   collections: Collections,
-  options: TailwindOptions,
+  options: TailwindOptions = {},
 ): string {
-  const collectionMap = new Map(
-    collections.data.map((collection) => [collection.name, collection]),
-  );
-  const validation = validateAllTokens(tokens, collectionMap);
-
-  if (!validation.isValid) {
-    console.error('Token validation failed:');
-    validation.errors.forEach((error: ValidationError) => {
-      console.error(`  ${error.message}`);
-    });
-    throw new Error('Token validation failed. Please fix the errors above.');
-  }
-
-  if (validation.warnings.length > 0) {
-    console.warn('Token validation warnings:');
-    validation.warnings.forEach((warning: string) => {
-      console.warn(`  ${warning}`);
-    });
-  }
-
-  const ast = buildAst(tokens, collections);
+  const ast = buildValidatedAst(tokens, collections);
   return generateFromAst(ast, options);
 }
 
 export const tailwind = {
-  generateTailwindCSS: generate,
+  generateTailwindCSS,
   generateTailwindFromAst: generateFromAst,
   createCssVarName,
 } as const;

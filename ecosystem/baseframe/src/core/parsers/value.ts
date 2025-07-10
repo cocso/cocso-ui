@@ -1,4 +1,17 @@
-import type { Value, TokenRef, SizeValue, ColorValue, ShadowLayer, ParseResult } from '../types';
+import type {
+  ParseResult,
+  Value,
+  HexColor,
+  RgbColor,
+  RgbaColor,
+  SizeValue,
+  DurationValue,
+  NumberValue,
+  StringValue,
+  TokenRef,
+  ShadowLayer,
+  Shadow,
+} from '../types';
 
 export function parseValue(value: string | number): ParseResult {
   const str = String(value).trim();
@@ -256,7 +269,7 @@ function parseShadowLayer(value: string): ParseResult {
       isValid: true,
       value: {
         kind: 'ShadowLayer',
-        color: color.value as ColorValue,
+        color: color.value as RgbaColor,
         offsetX: x.value as SizeValue | TokenRef,
         offsetY: y.value as SizeValue | TokenRef,
         blur: blur.value as SizeValue | TokenRef,
