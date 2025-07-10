@@ -342,54 +342,54 @@
   --color-alpha-shadow1: rgba(0, 0, 0, 0.05);
   --color-alpha-shadow2: rgba(0, 0, 0, 0.08);
   --color-alpha-shadow3: rgba(0, 0, 0, 0.12);
-  --gap-1: var(--number-2);
-  --gap-2: var(--number-3);
-  --gap-3: var(--number-5);
-  --gap-4: var(--number-7);
-  --gap-5: var(--number-8);
-  --gap-6: var(--number-9);
-  --gap-7: var(--number-10);
-  --gap-8: var(--number-12);
-  --gap-9: var(--number-14);
-  --gap-10: var(--number-16);
-  --gap-11: var(--number-18);
-  --gap-12: var(--number-20);
-  --padding-1: var(--number-2);
-  --padding-2: var(--number-3);
-  --padding-3: var(--number-5);
-  --padding-4: var(--number-6);
-  --padding-5: var(--number-7);
-  --padding-6: var(--number-8);
-  --padding-7: var(--number-9);
-  --padding-8: var(--number-10);
-  --padding-9: var(--number-12);
-  --padding-10: var(--number-14);
-  --radius-xs1: var(--number-2);
-  --radius-xs2: var(--number-2);
-  --radius-xs3: var(--number-2);
-  --radius-sm1: var(--number-3);
-  --radius-sm2: var(--number-3);
-  --radius-sm3: var(--number-3);
-  --radius-md1: var(--number-4);
-  --radius-md2: var(--number-4);
-  --radius-md3: var(--number-5);
-  --radius-md4: var(--number-5);
-  --radius-lg1: var(--number-6);
-  --radius-lg2: var(--number-6);
-  --radius-xl1: var(--number-7);
-  --radius-xl2: var(--number-7);
-  --radius-max: var(--number-max);
-  --size-height-1: var(--number-5);
-  --size-height-2: var(--number-8);
-  --size-height-3: var(--number-9);
-  --size-height-4: var(--number-10);
-  --size-height-5: var(--number-12);
-  --size-height-6: var(--number-14);
-  --size-height-7: var(--number-16);
-  --size-height-8: var(--number-17);
-  --size-height-9: var(--number-18);
-  --size-height-10: var(--number-19);
-  --size-height-11: var(--number-20);
+  --gap-1: var(--spacing-2);
+  --gap-2: var(--spacing-3);
+  --gap-3: var(--spacing-5);
+  --gap-4: var(--spacing-7);
+  --gap-5: var(--spacing-8);
+  --gap-6: var(--spacing-9);
+  --gap-7: var(--spacing-10);
+  --gap-8: var(--spacing-12);
+  --gap-9: var(--spacing-14);
+  --gap-10: var(--spacing-16);
+  --gap-11: var(--spacing-18);
+  --gap-12: var(--spacing-20);
+  --padding-1: var(--spacing-2);
+  --padding-2: var(--spacing-3);
+  --padding-3: var(--spacing-5);
+  --padding-4: var(--spacing-6);
+  --padding-5: var(--spacing-7);
+  --padding-6: var(--spacing-8);
+  --padding-7: var(--spacing-9);
+  --padding-8: var(--spacing-10);
+  --padding-9: var(--spacing-12);
+  --padding-10: var(--spacing-14);
+  --radius-xs1: var(--spacing-2);
+  --radius-xs2: var(--spacing-2);
+  --radius-xs3: var(--spacing-2);
+  --radius-sm1: var(--spacing-3);
+  --radius-sm2: var(--spacing-3);
+  --radius-sm3: var(--spacing-3);
+  --radius-md1: var(--spacing-4);
+  --radius-md2: var(--spacing-4);
+  --radius-md3: var(--spacing-5);
+  --radius-md4: var(--spacing-5);
+  --radius-lg1: var(--spacing-6);
+  --radius-lg2: var(--spacing-6);
+  --radius-xl1: var(--spacing-7);
+  --radius-xl2: var(--spacing-7);
+  --radius-max: var(--spacing-max);
+  --size-height-1: var(--spacing-5);
+  --size-height-2: var(--spacing-8);
+  --size-height-3: var(--spacing-9);
+  --size-height-4: var(--spacing-10);
+  --size-height-5: var(--spacing-12);
+  --size-height-6: var(--spacing-14);
+  --size-height-7: var(--spacing-16);
+  --size-height-8: var(--spacing-17);
+  --size-height-9: var(--spacing-18);
+  --size-height-10: var(--spacing-19);
+  --size-height-11: var(--spacing-20);
 }
 
 @utility bg-* { background-color: var(--color-*, var(--color-palette-*)); }
@@ -424,9 +424,9 @@
 @utility max-w-* { max-width: var(--spacing-*); }
 @utility max-h-* { max-height: var(--spacing-*); }
 @utility gap-* { gap: var(--spacing-*); }
-@utility space-x-* > * + * { margin-left: var(--spacing-*); }
-@utility space-y-* > * + * { margin-top: var(--spacing-*); }
+@utility space-x-* { & > * + * { margin-left: var(--spacing-*); } }
+@utility space-y-* { & > * + * { margin-top: var(--spacing-*); } }
 @utility rounded-* { border-radius: var(--spacing-*); }
 
 @utility shadow-* { box-shadow: var(--shadow-*); }
-@utility border-*-width { border-width: var(--border-width-*); }
+@utility border-width-* { border-width: var(--border-width-*); }

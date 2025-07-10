@@ -82,7 +82,7 @@ function generateCss(outputDir: string, prefix?: string): void {
   });
 
   fs.ensureDirSync(outputDir);
-  const outputPath = path.join(outputDir, 'tokens.css');
+  const outputPath = path.join(outputDir, 'token.css');
   fs.writeFileSync(outputPath, css, 'utf-8');
 
   console.log(` ✅ Generated CSS variables: ${outputPath}`);
@@ -97,7 +97,7 @@ function generateTailwindCss(outputDir: string, prefix?: string): void {
   });
 
   fs.ensureDirSync(outputDir);
-  const outputPath = path.join(outputDir, 'tailwind.css');
+  const outputPath = path.join(outputDir, 'tailwind4.css');
   fs.writeFileSync(outputPath, tailwindCss, 'utf-8');
 
   console.log(` ✅ Generated TailwindCSS 4.0 configuration: ${outputPath}`);

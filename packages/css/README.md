@@ -11,5 +11,9 @@ pnpm install @cocso-ui/css
 ### Usage
 
 ```javascript
-import '@cocso-ui/css/tokens.css';
+// css-variable 토큰
+import '@cocso-ui/css/token.css';
+
+// tailwindcss4 기반 토큰
+import '@cocso-ui/css/tailwind4.css';
 ```
