@@ -7,22 +7,20 @@
     "directory": "packages/css"
   },
   "scripts": {},
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": ["*.css"],
   "type": "module",
   "exports": {
     "./*.css": "./*.css",
-    "./token.css": "./token.css",
-    "./token.min.css": "./token.min.css",
+    "./tokens.css": "./tokens.css",
+    "./tokens.min.css": "./tokens.min.css",
     "./package.json": "./package.json"
   },
   "files": [
-    "package.json",
-    "*.css"
+    "*.css",
+    "package.json"
   ],
   "devDependencies": {},
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }
