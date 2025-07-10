@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/css",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -11,8 +11,9 @@
   "type": "module",
   "exports": {
     "./*.css": "./*.css",
-    "./tokens.css": "./tokens.css",
-    "./tokens.min.css": "./tokens.min.css",
+    "./token.css": "./token.css",
+    "./token.min.css": "./token.min.css",
+    "./tailwind4.css": "./tailwind4.css",
     "./package.json": "./package.json"
   },
   "files": [

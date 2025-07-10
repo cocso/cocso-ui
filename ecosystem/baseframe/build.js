@@ -14,5 +14,8 @@ esbuild
     platform: 'node',
     target: ['node16'],
     external: [...Object.keys(pkg.dependencies)],
+    banner: {
+      js: '#!/usr/bin/env node',
+    },
   })
   .catch(() => process.exit(1));
