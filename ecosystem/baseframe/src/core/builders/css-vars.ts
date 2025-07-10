@@ -1,6 +1,6 @@
 import type { Ast, Collections, Token, TokenDecl } from '../types';
 import { buildValidatedAst } from '../transforms';
-import { createCssVarName, toCssValue, resolveTokenValue } from './utils';
+import { toCssValue, resolveTokenValue } from './utils';
 
 export interface CssVarsOptions {
   prefix?: string;
@@ -10,6 +10,11 @@ export interface CssVarsOptions {
       [mode: string]: string;
     };
   };
+}
+
+function createCssVarName(name: string, prefix?: string): string {
+  const clean = name.replace(/^\$/, '').replace(/\./g, '-');
+  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
 function createDeclaration(
@@ -23,7 +28,7 @@ function createDeclaration(
     throw new Error(`No value found for token '${token.token.name}' in mode '${mode}'`);
   }
 
-  const resolvedValue = resolveTokenValue(value.value, allTokens, prefix);
+  const resolvedValue = resolveTokenValue(value.value, allTokens, createCssVarName, prefix);
   const varName = createCssVarName(token.token.name, prefix);
   return `${varName}: ${toCssValue(resolvedValue)};`;
 }

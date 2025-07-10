@@ -1,10 +1,24 @@
 import type { Ast, Collections, Token, TokenDecl } from '../types';
 import { buildValidatedAst } from '../transforms';
-import { createCssVarName, toCssValue, resolveTokenValue } from './utils';
+import { toCssValue, resolveTokenValue } from './utils';
 
 export interface TailwindOptions {
   prefix?: string;
   banner?: string;
+}
+
+function createTailwindVarName(name: string, prefix?: string): string {
+  let clean = name.replace(/^\$/, '');
+
+  if (clean.startsWith('number.')) {
+    clean = clean.replace('number.', 'spacing-');
+  } else if (clean.startsWith('letter-spacing.')) {
+    clean = clean.replace('letter-spacing.', 'tracking-');
+  } else {
+    clean = clean.replace(/\./g, '-');
+  }
+
+  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
 function generateThemeVariables(
@@ -23,24 +37,15 @@ function generateThemeVariables(
     const value = token.values.find((v) => v.mode === mode);
     if (!value) return;
 
-    const resolvedValue = resolveTokenValue(value.value, tokens, prefix);
-    const name = token.token.name;
-    let varName: string;
+    const resolvedValue = resolveTokenValue(value.value, tokens, createTailwindVarName, prefix);
+    const cssValue = toCssValue(resolvedValue);
 
-    if (name.startsWith('$number.')) {
-      const numberName = name.replace('$number.', '');
-      varName = createCssVarName(`spacing-${numberName}`, prefix);
-      if (numberName === '1') {
-        variables.push(`  --spacing: ${toCssValue(resolvedValue)};`);
-      }
-    } else if (name.startsWith('$letter-spacing.')) {
-      const trackingName = name.replace('$letter-spacing.', '');
-      varName = createCssVarName(`tracking-${trackingName}`, prefix);
-    } else {
-      varName = createCssVarName(name, prefix);
+    if (token.token.name === '$number.1') {
+      variables.push(`  --spacing: ${cssValue};`);
     }
 
-    const cssValue = toCssValue(resolvedValue);
+    const varName = createTailwindVarName(token.token.name, prefix);
+
     variables.push(`  ${varName}: ${cssValue};`);
   });
 
@@ -83,12 +88,12 @@ function generateWildcardUtilities(): string[] {
     `@utility max-w-* { max-width: var(--spacing-*); }`,
     `@utility max-h-* { max-height: var(--spacing-*); }`,
     `@utility gap-* { gap: var(--spacing-*); }`,
-    `@utility space-x-* > * + * { margin-left: var(--spacing-*); }`,
-    `@utility space-y-* > * + * { margin-top: var(--spacing-*); }`,
+    `@utility space-x-* { & > * + * { margin-left: var(--spacing-*); } }`,
+    `@utility space-y-* { & > * + * { margin-top: var(--spacing-*); } }`,
     `@utility rounded-* { border-radius: var(--spacing-*); }`,
     '',
     `@utility shadow-* { box-shadow: var(--shadow-*); }`,
-    `@utility border-*-width { border-width: var(--border-width-*); }`,
+    `@utility border-width-* { border-width: var(--border-width-*); }`,
   );
 
   return utilities;
@@ -141,5 +146,5 @@ export function generateTailwindCSS(
 export const tailwind = {
   generateTailwindCSS,
   generateTailwindFromAst: generateFromAst,
-  createCssVarName,
+  createTailwindVarName,
 } as const;
