@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-export type DisplayProps = {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  size?: 'lg' | 'md' | 'sm';
-  color?: string;
-} & React.HTMLAttributes<HTMLHeadingElement>;
-
 function handleColor(color: string | undefined) {
   if (!color) {
     return undefined;
   }
   return `var(--color-${color.replace('.', '-')})`;
 }
+
+export type DisplayProps = {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  size?: 'lg' | 'md' | 'sm';
+  color?: string;
+} & React.HTMLAttributes<HTMLHeadingElement>;
 
 export const Display = React.forwardRef<HTMLHeadingElement, DisplayProps>(
   ({ as = 'h1', size = 'md', color = '', style, className, ...props }, ref) => {

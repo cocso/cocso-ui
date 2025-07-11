@@ -19,17 +19,14 @@ type BodyElement =
   | 'blockquote'
   | 'cite';
 
-export interface BodyProps<T extends React.ElementType = 'p'> {
+export type BodyProps<T extends React.ElementType = 'p'> = {
   as?: T & BodyElement;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
   fontWeight?: 'normal' | 'bold';
-}
+} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
-export type BodyPropsWithElement<T extends React.ElementType = 'p'> = BodyProps<T> &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof BodyProps<T>>;
-
-export const Body = React.forwardRef<HTMLElement, BodyPropsWithElement<BodyElement>>(
+export const Body = React.forwardRef<HTMLElement, BodyProps<BodyElement>>(
   (
     { as = 'p', size = 'md', color = '', fontWeight = 'normal', style, className, ...props },
     ref,
