@@ -1,0 +1,44 @@
+import * as React from 'react';
+export interface PrimitiveProps {
+    asChild?: boolean;
+}
+type PropsWithRef<E extends React.ElementType> = React.ComponentPropsWithRef<E> & PrimitiveProps;
+declare function createPrimitive<E extends React.ElementType>(element: E): React.ForwardRefExoticComponent<PropsWithRef<E>>;
+declare const Primitive: {
+    div: React.ForwardRefExoticComponent<PropsWithRef<"div">>;
+    span: React.ForwardRefExoticComponent<PropsWithRef<"span">>;
+    button: React.ForwardRefExoticComponent<PropsWithRef<"button">>;
+    input: React.ForwardRefExoticComponent<PropsWithRef<"input">>;
+    form: React.ForwardRefExoticComponent<PropsWithRef<"form">>;
+    label: React.ForwardRefExoticComponent<PropsWithRef<"label">>;
+    p: React.ForwardRefExoticComponent<PropsWithRef<"p">>;
+    h1: React.ForwardRefExoticComponent<PropsWithRef<"h1">>;
+    h2: React.ForwardRefExoticComponent<PropsWithRef<"h2">>;
+    h3: React.ForwardRefExoticComponent<PropsWithRef<"h3">>;
+    h4: React.ForwardRefExoticComponent<PropsWithRef<"h4">>;
+    h5: React.ForwardRefExoticComponent<PropsWithRef<"h5">>;
+    h6: React.ForwardRefExoticComponent<PropsWithRef<"h6">>;
+    section: React.ForwardRefExoticComponent<PropsWithRef<"section">>;
+    article: React.ForwardRefExoticComponent<PropsWithRef<"article">>;
+    header: React.ForwardRefExoticComponent<PropsWithRef<"header">>;
+    footer: React.ForwardRefExoticComponent<PropsWithRef<"footer">>;
+    main: React.ForwardRefExoticComponent<PropsWithRef<"main">>;
+    nav: React.ForwardRefExoticComponent<PropsWithRef<"nav">>;
+    aside: React.ForwardRefExoticComponent<PropsWithRef<"aside">>;
+    ul: React.ForwardRefExoticComponent<PropsWithRef<"ul">>;
+    ol: React.ForwardRefExoticComponent<PropsWithRef<"ol">>;
+    li: React.ForwardRefExoticComponent<PropsWithRef<"li">>;
+    img: React.ForwardRefExoticComponent<PropsWithRef<"img">>;
+    a: React.ForwardRefExoticComponent<PropsWithRef<"a">>;
+    strong: React.ForwardRefExoticComponent<PropsWithRef<"strong">>;
+    em: React.ForwardRefExoticComponent<PropsWithRef<"em">>;
+    small: React.ForwardRefExoticComponent<PropsWithRef<"small">>;
+    table: React.ForwardRefExoticComponent<PropsWithRef<"table">>;
+    thead: React.ForwardRefExoticComponent<PropsWithRef<"thead">>;
+    tbody: React.ForwardRefExoticComponent<PropsWithRef<"tbody">>;
+    tr: React.ForwardRefExoticComponent<PropsWithRef<"tr">>;
+    td: React.ForwardRefExoticComponent<PropsWithRef<"td">>;
+    th: React.ForwardRefExoticComponent<PropsWithRef<"th">>;
+};
+export { createPrimitive, Primitive };
+export type { PropsWithRef };
