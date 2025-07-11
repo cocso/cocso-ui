@@ -9,6 +9,7 @@ function handleColor(color: string | undefined) {
 
 type BodyElement =
   | 'p'
+  | 'a'
   | 'span'
   | 'div'
   | 'label'
@@ -19,14 +20,14 @@ type BodyElement =
   | 'blockquote'
   | 'cite';
 
-export type BodyProps<T extends React.ElementType = 'p'> = {
-  as?: T & BodyElement;
+export type BodyProps<T extends BodyElement = 'p'> = {
+  as?: T;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
   fontWeight?: 'normal' | 'bold';
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
-export const Body = React.forwardRef<HTMLElement, BodyProps<BodyElement>>(
+export const Body = React.forwardRef<React.ComponentRef<BodyElement>, BodyProps<BodyElement>>(
   (
     { as = 'p', size = 'md', color = '', fontWeight = 'normal', style, className, ...props },
     ref,
