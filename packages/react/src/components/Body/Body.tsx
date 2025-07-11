@@ -1,11 +1,6 @@
 import * as React from 'react';
-
-function handleColor(color: string | undefined) {
-  if (!color) {
-    return undefined;
-  }
-  return `var(--color-${color.replace('.', '-')})`;
-}
+import { createColor } from '../../utils/tokens';
+import { cn } from '../../utils/cn';
 
 type BodyElement =
   | 'p'
@@ -28,21 +23,21 @@ export type BodyProps<T extends BodyElement = 'p'> = {
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
 export const Body = React.forwardRef<React.ComponentRef<BodyElement>, BodyProps<BodyElement>>(
-  (
-    { as = 'p', size = 'md', color = '', fontWeight = 'normal', style, className, ...props },
-    ref,
-  ) => {
-    const Comp = as as React.ElementType;
-
-    const combinedClassName = `text-body text-body-${size}${fontWeight === 'bold' ? '-bold' : ''} ${className}`;
+  ({ as = 'p', size = 'md', color, fontWeight = 'normal', className, style, ...props }, ref) => {
+    const Element = as as React.ElementType;
+    const combinedClassName = cn(
+      'text-body',
+      `text-body-${size}${fontWeight === 'bold' ? '-bold' : ''}`,
+      className,
+    );
 
     return (
-      <Comp
+      <Element
         ref={ref}
         className={combinedClassName}
         style={
           {
-            '--text-color': handleColor(color),
+            '--text-color': createColor(color),
             ...style,
           } as React.CSSProperties
         }

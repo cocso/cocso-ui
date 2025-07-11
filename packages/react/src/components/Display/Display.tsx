@@ -1,11 +1,6 @@
 import * as React from 'react';
-
-function handleColor(color: string | undefined) {
-  if (!color) {
-    return undefined;
-  }
-  return `var(--color-${color.replace('.', '-')})`;
-}
+import { createColor } from '../../utils/tokens';
+import { cn } from '../../utils/cn';
 
 type DisplayElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -18,10 +13,9 @@ export type DisplayProps<T extends DisplayElement = 'h1'> = {
 export const Display = React.forwardRef<
   React.ComponentRef<DisplayElement>,
   DisplayProps<DisplayElement>
->(({ as = 'h1', size = 'md', color = '', style, className, ...props }, ref) => {
+>(({ as = 'h1', size = 'md', color, className, style, ...props }, ref) => {
   const Comp = as as React.ElementType;
-
-  const combinedClassName = `text-display text-display-${size} ${className}`;
+  const combinedClassName = cn('text-display', `text-display-${size}`, className);
 
   return (
     <Comp
@@ -29,7 +23,7 @@ export const Display = React.forwardRef<
       className={combinedClassName}
       style={
         {
-          '--text-color': handleColor(color),
+          '--text-color': createColor(color),
           ...style,
         } as React.CSSProperties
       }
