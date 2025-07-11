@@ -22,8 +22,19 @@ export type BodyProps<T extends BodyElement = 'p'> = {
   fontWeight?: 'normal' | 'bold';
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
-export const Body = React.forwardRef<React.ComponentRef<BodyElement>, BodyProps<BodyElement>>(
-  ({ as = 'p', size = 'md', color, fontWeight = 'normal', className, style, ...props }, ref) => {
+const BodyComponent = React.forwardRef(
+  <T extends BodyElement = 'p'>(
+    {
+      as = 'p' as T,
+      size = 'md',
+      color,
+      fontWeight = 'normal',
+      className,
+      style,
+      ...props
+    }: BodyProps<T>,
+    ref: React.ForwardedRef<React.ComponentRef<T>>,
+  ) => {
     const Element = as as React.ElementType;
     const combinedClassName = cn(
       'text-body',
@@ -45,6 +56,10 @@ export const Body = React.forwardRef<React.ComponentRef<BodyElement>, BodyProps<
       />
     );
   },
-);
+) as <T extends BodyElement = 'p'>(
+  props: BodyProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
+) => React.ReactElement;
 
-Body.displayName = 'Body';
+export const Body = Object.assign(BodyComponent, {
+  displayName: 'Body',
+});

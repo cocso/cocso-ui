@@ -10,26 +10,32 @@ export type HeadingProps<T extends HeadingElement = 'h2'> = {
   color?: string;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color'>;
 
-export const Heading = React.forwardRef<
-  React.ComponentRef<HeadingElement>,
-  HeadingProps<HeadingElement>
->(({ as = 'h2', size = 'md', color, className, style, ...props }, ref) => {
-  const Comp = as as React.ElementType;
-  const combinedClassName = cn('text-heading', `text-heading-${size}`, className);
+const HeadingComponent = React.forwardRef(
+  <T extends HeadingElement = 'h2'>(
+    { as = 'h2' as T, size = 'md', color, className, style, ...props }: HeadingProps<T>,
+    ref: React.ForwardedRef<React.ComponentRef<T>>,
+  ) => {
+    const Element = as as React.ElementType;
+    const combinedClassName = cn('text-heading', `text-heading-${size}`, className);
 
-  return (
-    <Comp
-      ref={ref}
-      className={combinedClassName}
-      style={
-        {
-          '--text-color': createColor(color),
-          ...style,
-        } as React.CSSProperties
-      }
-      {...props}
-    />
-  );
+    return (
+      <Element
+        ref={ref}
+        className={combinedClassName}
+        style={
+          {
+            '--text-color': createColor(color),
+            ...style,
+          } as React.CSSProperties
+        }
+        {...props}
+      />
+    );
+  },
+) as <T extends HeadingElement = 'h2'>(
+  props: HeadingProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
+) => React.ReactElement;
+
+export const Heading = Object.assign(HeadingComponent, {
+  displayName: 'Heading',
 });
-
-Heading.displayName = 'Heading';

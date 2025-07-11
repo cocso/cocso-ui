@@ -5,9 +5,9 @@ export type DisplayProps<T extends DisplayElement = 'h1'> = {
     size?: 'lg' | 'md' | 'sm';
     color?: string;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color'>;
-export declare const Display: React.ForwardRefExoticComponent<{
-    as?: DisplayElement | undefined;
-    size?: "lg" | "md" | "sm";
-    color?: string;
-} & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, "ref">, "size" | "color"> & React.RefAttributes<HTMLHeadingElement>>;
+export declare const Display: (<T extends DisplayElement = "h1">(props: DisplayProps<T> & {
+    ref?: React.ForwardedRef<React.ComponentRef<T>>;
+}) => React.ReactElement) & {
+    displayName: string;
+};
 export {};
