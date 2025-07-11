@@ -1,0 +1,1 @@
+import{jsx as n}from"react/jsx-runtime";var d=({size:e="md",color:l="gray-90",children:t,className:s="",...o})=>{let a={lg:"text-heading-l-mobile sm:text-heading-l",md:"text-heading-m-mobile sm:text-heading-m",sm:"text-heading-s-mobile sm:text-heading-s"}[e];return n("h2",{className:`${a} font-bold  ${s}`,...o,children:t})};export{d as Heading};

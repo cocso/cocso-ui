@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export type HeadingProps<E extends React.ElementType> = {
   size?: 'lg' | 'md' | 'sm';
+  color?: string;
   children: React.ReactNode;
   className?: string;
 } & React.ComponentPropsWithoutRef<E>;
