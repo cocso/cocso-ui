@@ -1,1 +1,3 @@
-export * from './components/heading';
+export * from './primitive';
+
+export * from './components/Heading';
