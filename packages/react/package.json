@@ -1,0 +1,32 @@
+{
+  "name": "@cocso-ui/react",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/react"
+  },
+  "scripts": {},
+  "type": "module",
+  "exports": {
+    "./": {
+      "import": "./index.js",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
