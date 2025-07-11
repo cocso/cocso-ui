@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-export type HeadingProps = {
+export type DisplayProps = {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+  size?: 'lg' | 'md' | 'sm';
   color?: string;
 } & React.HTMLAttributes<HTMLHeadingElement>;
 
@@ -13,11 +13,11 @@ function handleColor(color: string | undefined) {
   return `var(--color-${color.replace('.', '-')})`;
 }
 
-export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ as = 'h2', size = 'md', color = '', style, className, ...props }, ref) => {
+export const Display = React.forwardRef<HTMLHeadingElement, DisplayProps>(
+  ({ as = 'h1', size = 'md', color = '', style, className, ...props }, ref) => {
     const Comp = as;
 
-    const combinedClassName = `text-heading text-heading-${size} ${className}`;
+    const combinedClassName = `text-display text-display-${size} ${className}`;
 
     return (
       <Comp
@@ -35,4 +35,4 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   },
 );
 
-Heading.displayName = `Heading`;
+Display.displayName = `Display`;
