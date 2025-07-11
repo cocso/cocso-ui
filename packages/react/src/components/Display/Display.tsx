@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createColor } from '../../utils/tokens';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
 import { cn } from '../../utils/cn';
 
 type DisplayElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -8,11 +8,20 @@ export type DisplayProps<T extends DisplayElement = 'h1'> = {
   as?: T;
   size?: 'lg' | 'md' | 'sm';
   color?: string;
+  fontWeight?: FontWeightToken;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color'>;
 
 const DisplayComponent = React.forwardRef(
   <T extends DisplayElement = 'h1'>(
-    { as = 'h1' as T, size = 'md', color, className, style, ...props }: DisplayProps<T>,
+    {
+      as = 'h1' as T,
+      size = 'md',
+      color,
+      fontWeight = 'bold',
+      className,
+      style,
+      ...props
+    }: DisplayProps<T>,
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
@@ -24,7 +33,8 @@ const DisplayComponent = React.forwardRef(
         className={combinedClassName}
         style={
           {
-            '--text-color': createColor(color),
+            '--font-color': createColor(color),
+            '--font-weight': createFontWeight(fontWeight),
             ...style,
           } as React.CSSProperties
         }

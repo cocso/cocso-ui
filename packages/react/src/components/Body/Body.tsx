@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createColor } from '../../utils/tokens';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
 import { cn } from '../../utils/cn';
 
 type BodyElement =
@@ -19,7 +19,7 @@ export type BodyProps<T extends BodyElement = 'p'> = {
   as?: T;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
-  fontWeight?: 'normal' | 'bold';
+  fontWeight?: FontWeightToken;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
 const BodyComponent = React.forwardRef(
@@ -36,11 +36,7 @@ const BodyComponent = React.forwardRef(
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
-    const combinedClassName = cn(
-      'text-body',
-      `text-body-${size}${fontWeight === 'bold' ? '-bold' : ''}`,
-      className,
-    );
+    const combinedClassName = cn('text-body', `text-body-${size}`, className);
 
     return (
       <Element
@@ -48,7 +44,8 @@ const BodyComponent = React.forwardRef(
         className={combinedClassName}
         style={
           {
-            '--text-color': createColor(color),
+            '--font-color': createColor(color),
+            '--font-weight': createFontWeight(fontWeight),
             ...style,
           } as React.CSSProperties
         }
