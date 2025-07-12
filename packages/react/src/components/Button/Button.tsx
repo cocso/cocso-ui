@@ -8,8 +8,8 @@ type Default = (typeof tags)[0];
 
 export type ButtonProps<T extends Element = Default> = {
   as?: T;
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'text';
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'text';
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
   disabled?: boolean;
   loading?: boolean;
   color?: string;
@@ -34,19 +34,37 @@ const ButtonComponent = React.forwardRef(
   ) => {
     const Element = as as React.ElementType;
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        if (!disabled) {
+          (event.currentTarget as HTMLButtonElement).click();
+        }
+      }
+    };
+
     const variants = {
       variant,
       size,
-      ...(disabled && { disabled: 'true' }),
       ...(loading && { loading: 'true' }),
     };
 
-    const combinedClassName = createClassName('cocso-button', variants, [], className);
+    const compoundVariants = [...(disabled ? [{ variant, disabled: 'true' }] : [])];
+
+    const combinedClassName = createClassName(
+      'cocso-button',
+      variants,
+      compoundVariants,
+      className,
+    );
 
     return (
       <Element
         ref={ref}
         className={combinedClassName}
+        onKeyDown={handleKeyDown}
+        role="button"
+        disabled={disabled}
         style={
           {
             '--cocso-button-color': createColor(color),

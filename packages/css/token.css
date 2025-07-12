@@ -505,46 +505,52 @@
   outline-offset: 2px;
 }
 
-.cocso-button-disabled {
+.cocso-button--disabled_true {
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
-.cocso-button-text {
-  text-decoration: underline;
+.cocso-button--size_2xs {
+  padding-inline: var(--number-5);
+  min-width: var(--number-11);
+  min-height: var(--number-11);
+  font-size: 13px;
 }
 
 .cocso-button--size_xs {
-  padding-inline: var(--spacing-6);
-  min-width: var(--spacing-12);
-  min-height: var(--spacing-12);
+  padding-inline: var(--number-6);
+  min-width: var(--number-12);
+  min-height: var(--number-12);
   font-size: 15px;
 }
 
 .cocso-button--size_sm {
-  padding-inline: var(--spacing-7);
-  min-width: var(--spacing-14);
-  min-height: var(--spacing-14);
+  padding-inline: var(--number-7);
+  min-width: var(--number-14);
+  min-height: var(--number-14);
   font-size: 15px;
 }
 
 .cocso-button--size_md {
-  padding-inline: var(--spacing-8);
-  min-width: var(--spacing-16);
-  min-height: var(--spacing-16);
+  padding-inline: var(--number-8);
+  min-width: var(--number-16);
+  min-height: var(--number-16);
   font-size: 17px;
 }
 
 .cocso-button--size_lg {
-  padding-inline: var(--spacing-9);
-  min-width: var(--spacing-17);
-  min-height: var(--spacing-17);
+  padding-inline: var(--number-9);
+  min-width: var(--number-17);
+  min-height: var(--number-17);
   font-size: 19px;
 }
 
 .cocso-button--size_xl {
-  padding-inline: var(--spacing-10);
-  min-width: var(--spacing-18);
-  min-height: var(--spacing-18);
+  padding-inline: var(--number-10);
+  min-width: var(--number-18);
+  min-height: var(--number-18);
   font-size: 19px;
+}
+
+.cocso-button--variant_text {
+  text-decoration: underline;
 }
