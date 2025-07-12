@@ -575,3 +575,13 @@
   --cocso-button-color: var(--color-palette-gray-600);
   --color-button-background: var(--color-button-disabled-fill);
 }
+
+.cocso-button--variant_primary-disabled_true:hover {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
+}
+
+.cocso-button--variant_primary-disabled_true:active {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
+}
