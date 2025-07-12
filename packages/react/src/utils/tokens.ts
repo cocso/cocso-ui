@@ -22,5 +22,5 @@ export type FontWeightToken = keyof typeof FONT_WEIGHT_MAP;
 export function createFontWeight(token: string | undefined): string | undefined {
   if (!token) return undefined;
 
-  return FONT_WEIGHT_MAP[token as FontWeightToken] ?? token;
+  return token in FONT_WEIGHT_MAP ? FONT_WEIGHT_MAP[token as FontWeightToken] : token;
 }
