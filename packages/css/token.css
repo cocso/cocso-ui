@@ -495,8 +495,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--cocso-button-color);
+  font-weight: var(--cocso-button-weight);
   border-radius: 6px;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  --cocso-button-color: inherit;
+  --cocso-button-weight: inherit;
 }
 
 .cocso-button:focus {
