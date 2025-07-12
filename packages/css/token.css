@@ -497,16 +497,19 @@
   justify-content: center;
   color: var(--cocso-button-color);
   font-weight: var(--cocso-button-weight);
+  border-color: var(--color-button-border);
   border-radius: 6px;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  background-color: var(--color-button-background);
+
   --cocso-button-color: inherit;
   --cocso-button-weight: inherit;
+  --color-button-border: inherit;
+  --color-button-background: inherit;
 }
 
 .cocso-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-palette-primary-500);
-  outline-offset: 2px;
 }
 
 .cocso-button--disabled_true {
@@ -555,6 +558,20 @@
   font-size: 19px;
 }
 
-.cocso-button--variant_text {
-  text-decoration: underline;
+.cocso-button--variant_primary {
+  --cocso-button-color: var(--color-palette-gray-0);
+  --color-button-background: var(--color-button-primary-fill);
+}
+
+.cocso-button--variant_primary:hover {
+  --color-button-background: var(--color-button-primary-fill-hover);
+}
+
+.cocso-button--variant_primary:active {
+  --color-button-background: var(--color-button-primary-fill-pressed);
+}
+
+.cocso-button--variant_primary-disabled_true {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
 }

@@ -28,7 +28,17 @@ const meta = {
     },
     fontWeight: {
       control: 'select',
-      options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
+      options: [
+        'thin',
+        'extralight',
+        'light',
+        'normal',
+        'medium',
+        'semibold',
+        'bold',
+        'extrabold',
+        'black',
+      ],
     },
   },
 } satisfies Meta<typeof Button>;
@@ -41,6 +51,7 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     children: 'Button',
+    disabled: false,
   },
 };
 
@@ -121,4 +132,4 @@ export const AllVariants: Story = {
       <Button variant="text">Text</Button>
     </div>
   ),
-}; 
+};

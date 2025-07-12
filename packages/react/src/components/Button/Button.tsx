@@ -25,7 +25,7 @@ const ButtonComponent = React.forwardRef(
       disabled = false,
       loading = false,
       color,
-      fontWeight = 'bold',
+      fontWeight = 'normal',
       className,
       style,
       ...props
@@ -43,13 +43,9 @@ const ButtonComponent = React.forwardRef(
       }
     };
 
-    const variants = {
-      variant,
-      size,
-      ...(loading && { loading: 'true' }),
-    };
+    const variants = { variant, size, loading, disabled };
 
-    const compoundVariants = [...(disabled ? [{ variant, disabled: 'true' }] : [])];
+    const compoundVariants = [...(disabled ? [{ variant, disabled }] : [])];
 
     const combinedClassName = createClassName(
       'cocso-button',
