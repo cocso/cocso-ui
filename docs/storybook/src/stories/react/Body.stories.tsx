@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Body } from '@cocso-ui/react';
 
 const meta = {
-  title: 'Components/Body',
+  title: 'React/Body',
   component: Body,
   parameters: {
     layout: 'centered',
@@ -70,16 +70,16 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Article Example</h3>
         <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Body size="lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua.
           </Body>
           <Body size="md">
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
-            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
             esse cillum dolore eu fugiat nulla pariatur.
           </Body>
           <Body size="sm" color="#6B7280">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
             mollit anim id est laborum.
           </Body>
         </div>

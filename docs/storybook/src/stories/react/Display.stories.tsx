@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Display } from '@cocso-ui/react';
 
 const meta = {
-  title: 'Components/Display',
+  title: 'React/Display',
   component: Display,
   parameters: {
     layout: 'centered',

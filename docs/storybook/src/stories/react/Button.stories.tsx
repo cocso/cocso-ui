@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@cocso-ui/react';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'React/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -93,4 +93,4 @@ export const AllVariations: Story = {
       </div>
     </div>
   ),
-};
+}; 

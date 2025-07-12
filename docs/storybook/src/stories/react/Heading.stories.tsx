@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Heading } from '@cocso-ui/react';
 
 const meta = {
-  title: 'Components/Heading',
+  title: 'React/Heading',
   component: Heading,
   parameters: {
     layout: 'centered',
