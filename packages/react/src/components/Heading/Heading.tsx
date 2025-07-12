@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
-import { cn } from '../../utils/cn';
+import { createClassName } from '../../utils/cn';
 
-type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+const tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
+type Element = (typeof tags)[number];
+type Default = (typeof tags)[1];
 
-export type HeadingProps<T extends HeadingElement = 'h2'> = {
+export type HeadingProps<T extends Element = Default> = {
   as?: T;
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
   color?: string;
   fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color'>;
+} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
 const HeadingComponent = React.forwardRef(
-  <T extends HeadingElement = 'h2'>(
+  <T extends Element = Default>(
     {
-      as = 'h2' as T,
+      as = tags[1] as T,
       size = 'md',
       color,
       fontWeight = 'bold',
@@ -25,7 +27,9 @@ const HeadingComponent = React.forwardRef(
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
-    const combinedClassName = cn('text-heading', `text-heading-${size}`, className);
+
+    const variants = { size };
+    const combinedClassName = createClassName('cocso-heading', variants, [], className);
 
     return (
       <Element
@@ -33,8 +37,8 @@ const HeadingComponent = React.forwardRef(
         className={combinedClassName}
         style={
           {
-            '--font-color': createColor(color),
-            '--font-weight': createFontWeight(fontWeight),
+            '--cocso-heading-color': createColor(color),
+            '--cocso-heading-weight': createFontWeight(fontWeight),
             ...style,
           } as React.CSSProperties
         }
@@ -42,7 +46,7 @@ const HeadingComponent = React.forwardRef(
       />
     );
   },
-) as <T extends HeadingElement = 'h2'>(
+) as <T extends Element = Default>(
   props: HeadingProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
 ) => React.ReactElement;
 

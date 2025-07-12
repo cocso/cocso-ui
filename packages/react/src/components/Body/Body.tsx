@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
-import { cn } from '../../utils/cn';
+import { createClassName } from '../../utils/cn';
 
-type BodyElement =
-  | 'p'
-  | 'a'
-  | 'span'
-  | 'div'
-  | 'label'
-  | 'li'
-  | 'td'
-  | 'th'
-  | 'figcaption'
-  | 'blockquote'
-  | 'cite';
+const tags = [
+  'p',
+  'a',
+  'span',
+  'div',
+  'label',
+  'li',
+  'td',
+  'th',
+  'figcaption',
+  'blockquote',
+  'cite',
+] as const;
+type Element = (typeof tags)[number];
+type Default = (typeof tags)[0];
 
-export type BodyProps<T extends BodyElement = 'p'> = {
+export type BodyProps<T extends Element = Default> = {
   as?: T;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
@@ -23,9 +26,9 @@ export type BodyProps<T extends BodyElement = 'p'> = {
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
 const BodyComponent = React.forwardRef(
-  <T extends BodyElement = 'p'>(
+  <T extends Element = Default>(
     {
-      as = 'p' as T,
+      as = tags[0] as T,
       size = 'md',
       color,
       fontWeight = 'normal',
@@ -36,7 +39,9 @@ const BodyComponent = React.forwardRef(
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
-    const combinedClassName = cn('text-body', `text-body-${size}`, className);
+
+    const variants = { size };
+    const combinedClassName = createClassName('cocso-body', variants, [], className);
 
     return (
       <Element
@@ -44,8 +49,8 @@ const BodyComponent = React.forwardRef(
         className={combinedClassName}
         style={
           {
-            '--font-color': createColor(color),
-            '--font-weight': createFontWeight(fontWeight),
+            '--cocso-body-color': createColor(color),
+            '--cocso-body-weight': createFontWeight(fontWeight),
             ...style,
           } as React.CSSProperties
         }
@@ -53,7 +58,7 @@ const BodyComponent = React.forwardRef(
       />
     );
   },
-) as <T extends BodyElement = 'p'>(
+) as <T extends Element = Default>(
   props: BodyProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
 ) => React.ReactElement;
 

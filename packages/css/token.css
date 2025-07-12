@@ -389,12 +389,12 @@
   --size-height-11: var(--number-20);
 }
 
-.text-display, .text-heading, .text-body {
-  color: var(--font-color);
-  font-weight: var(--font-weight);
+.text-display {
+  color: var(--cocso-display-color);
+  font-weight: var(--cocso-display-weight);
   line-height: 1.5;
-  --font-color: inherit;
-  --font-weight: inherit;
+  --cocso-display-color: inherit;
+  --cocso-display-weight: inherit;
 }
 
 .text-display-lg {
@@ -407,6 +407,14 @@
 
 .text-display-sm {
   font-size: 28px;
+}
+
+.text-heading {
+  color: var(--cocso-heading-color);
+  font-weight: var(--cocso-heading-weight);
+  line-height: 1.5;
+  --cocso-heading-color: inherit;
+  --cocso-heading-weight: inherit;
 }
 
 .text-heading-xl {
@@ -431,6 +439,14 @@
 
 .text-heading-2xs {
   font-size: 15px;
+}
+
+.text-body {
+  color: var(--cocso-body-color);
+  font-weight: var(--cocso-body-weight);
+  line-height: 1.5;
+  --cocso-body-color: inherit;
+  --cocso-body-weight: inherit;
 }
 
 .text-body-lg {

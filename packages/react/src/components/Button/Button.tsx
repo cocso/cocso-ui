@@ -2,34 +2,46 @@ import * as React from 'react';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
 import { createClassName } from '../../utils/cn';
 
-const tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
+const tags = ['button'] as const;
 type Element = (typeof tags)[number];
 type Default = (typeof tags)[0];
 
-export type DisplayProps<T extends Element = Default> = {
+export type ButtonProps<T extends Element = Default> = {
   as?: T;
-  size?: 'lg' | 'md' | 'sm';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'text';
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+  disabled?: boolean;
+  loading?: boolean;
   color?: string;
   fontWeight?: FontWeightToken;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
-const DisplayComponent = React.forwardRef(
+const ButtonComponent = React.forwardRef(
   <T extends Element = Default>(
     {
       as = tags[0] as T,
+      variant = 'primary',
       size = 'md',
+      disabled = false,
+      loading = false,
       color,
       fontWeight = 'bold',
       className,
       style,
       ...props
-    }: DisplayProps<T>,
+    }: ButtonProps<T>,
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
 
-    const variants = { size };
-    const combinedClassName = createClassName('cocso-display', variants, [], className);
+    const variants = {
+      variant,
+      size,
+      ...(disabled && { disabled: 'true' }),
+      ...(loading && { loading: 'true' }),
+    };
+
+    const combinedClassName = createClassName('cocso-button', variants, [], className);
 
     return (
       <Element
@@ -37,8 +49,8 @@ const DisplayComponent = React.forwardRef(
         className={combinedClassName}
         style={
           {
-            '--cocso-display-color': createColor(color),
-            '--cocso-display-weight': createFontWeight(fontWeight),
+            '--cocso-button-color': createColor(color),
+            '--cocso-button-weight': createFontWeight(fontWeight),
             ...style,
           } as React.CSSProperties
         }
@@ -47,9 +59,9 @@ const DisplayComponent = React.forwardRef(
     );
   },
 ) as <T extends Element = Default>(
-  props: DisplayProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
+  props: ButtonProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
 ) => React.ReactElement;
 
-export const Display = Object.assign(DisplayComponent, {
-  displayName: 'Display',
+export const Button = Object.assign(ButtonComponent, {
+  displayName: 'Button',
 });
