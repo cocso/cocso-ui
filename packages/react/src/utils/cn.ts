@@ -9,6 +9,7 @@ export const createClassName = (
   ...additionalClasses: (string | undefined | null | false)[]
 ): string => {
   const variantClasses = Object.entries(variants)
+    .filter(([, value]) => value !== false && value !== null && value !== undefined)
     .map(([key, value]) => `${baseClass}--${key}_${value}`)
     .join(' ');
 
