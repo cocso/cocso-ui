@@ -40,3 +40,5 @@ yarn-error.log*
 *.pem
 
 .npmrc
+*storybook.log
+storybook-static

@@ -388,3 +388,200 @@
   --size-height-10: var(--number-19);
   --size-height-11: var(--number-20);
 }
+
+.cocso-display {
+  color: var(--cocso-display-color);
+  font-weight: var(--cocso-display-weight);
+  line-height: 1.5;
+  --cocso-display-color: inherit;
+  --cocso-display-weight: inherit;
+}
+
+.cocso-display--size_lg {
+  font-size: 44px;
+}
+
+.cocso-display--size_md {
+  font-size: 32px;
+}
+
+.cocso-display--size_sm {
+  font-size: 28px;
+}
+
+.cocso-heading {
+  color: var(--cocso-heading-color);
+  font-weight: var(--cocso-heading-weight);
+  line-height: 1.5;
+  --cocso-heading-color: inherit;
+  --cocso-heading-weight: inherit;
+}
+
+.cocso-heading--size_xl {
+  font-size: 28px;
+}
+
+.cocso-heading--size_lg {
+  font-size: 24px;
+}
+
+.cocso-heading--size_md {
+  font-size: 22px;
+}
+
+.cocso-heading--size_sm {
+  font-size: 19px;
+}
+
+.cocso-heading--size_xs {
+  font-size: 17px;
+}
+
+.cocso-heading--size_2xs {
+  font-size: 15px;
+}
+
+.cocso-body {
+  color: var(--cocso-body-color);
+  font-weight: var(--cocso-body-weight);
+  line-height: 1.5;
+  --cocso-body-color: inherit;
+  --cocso-body-weight: inherit;
+}
+
+.cocso-body--size_lg {
+  font-size: 19px;
+}
+
+.cocso-body--size_md {
+  font-size: 17px;
+}
+
+.cocso-body--size_sm {
+  font-size: 15px;
+}
+
+.cocso-body--size_xs {
+  font-size: 13px;
+}
+
+@media (min-width: 768px) {
+  .cocso-display--size_lg {
+    font-size: 60px;
+  }
+
+  .cocso-display--size_md {
+    font-size: 44px;
+  }
+
+  .cocso-display--size_sm {
+    font-size: 36px;
+  }
+
+  .cocso-heading--size_xl {
+    font-size: 40px;
+  }
+
+  .cocso-heading--size_lg {
+    font-size: 32px;
+  }
+
+  .cocso-heading--size_md {
+    font-size: 24px;
+  }
+}
+
+.cocso-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cocso-button-color);
+  font-weight: var(--cocso-button-weight);
+  border-color: var(--color-button-border);
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  background-color: var(--color-button-background);
+
+  --cocso-button-color: inherit;
+  --cocso-button-weight: inherit;
+  --color-button-border: inherit;
+  --color-button-background: inherit;
+}
+
+.cocso-button:focus {
+  outline: none;
+}
+
+.cocso-button--disabled_true {
+  cursor: not-allowed;
+}
+
+.cocso-button--size_2xs {
+  padding-inline: var(--number-5);
+  min-width: var(--number-11);
+  min-height: var(--number-11);
+  font-size: 13px;
+}
+
+.cocso-button--size_xs {
+  padding-inline: var(--number-6);
+  min-width: var(--number-12);
+  min-height: var(--number-12);
+  font-size: 15px;
+}
+
+.cocso-button--size_sm {
+  padding-inline: var(--number-7);
+  min-width: var(--number-14);
+  min-height: var(--number-14);
+  font-size: 15px;
+}
+
+.cocso-button--size_md {
+  padding-inline: var(--number-8);
+  min-width: var(--number-16);
+  min-height: var(--number-16);
+  font-size: 17px;
+}
+
+.cocso-button--size_lg {
+  padding-inline: var(--number-9);
+  min-width: var(--number-17);
+  min-height: var(--number-17);
+  font-size: 19px;
+}
+
+.cocso-button--size_xl {
+  padding-inline: var(--number-10);
+  min-width: var(--number-18);
+  min-height: var(--number-18);
+  font-size: 19px;
+}
+
+.cocso-button--variant_primary {
+  --cocso-button-color: var(--color-palette-gray-0);
+  --color-button-background: var(--color-button-primary-fill);
+}
+
+.cocso-button--variant_primary:hover {
+  --color-button-background: var(--color-button-primary-fill-hover);
+}
+
+.cocso-button--variant_primary:active {
+  --color-button-background: var(--color-button-primary-fill-pressed);
+}
+
+.cocso-button--variant_primary-disabled_true {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
+}
+
+.cocso-button--variant_primary-disabled_true:hover {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
+}
+
+.cocso-button--variant_primary-disabled_true:active {
+  --cocso-button-color: var(--color-palette-gray-600);
+  --color-button-background: var(--color-button-disabled-fill);
+}
