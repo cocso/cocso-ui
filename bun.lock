@@ -13,6 +13,7 @@
       "name": "@cocso-ui/storybook",
       "version": "0.0.0",
       "dependencies": {
+        "@cocso-ui/css": "workspace:*",
         "@cocso-ui/react": "workspace:*",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -46,14 +47,14 @@
       "name": "@cocso-ui/react",
       "version": "0.0.1-beta.9",
       "devDependencies": {
-        "@types/react": "latest",
-        "@types/react-dom": "latest",
-        "esbuild": "latest",
-        "typescript": "latest",
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "esbuild": "^0.25.6",
+        "typescript": "^5.8.3",
       },
       "peerDependencies": {
-        "react": "latest",
-        "react-dom": "latest",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
       },
     },
   },

@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@cocso-ui/css": "workspace:*",
     "@cocso-ui/react": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
