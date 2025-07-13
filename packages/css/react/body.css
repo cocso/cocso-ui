@@ -1,0 +1,23 @@
+.cocso-body {
+  color: var(--cocso-body-color);
+  font-weight: var(--cocso-body-weight);
+  line-height: 1.5;
+  --cocso-body-color: inherit;
+  --cocso-body-weight: inherit;
+}
+
+.cocso-body--size_lg {
+  font-size: 19px;
+}
+
+.cocso-body--size_md {
+  font-size: 17px;
+}
+
+.cocso-body--size_sm {
+  font-size: 15px;
+}
+
+.cocso-body--size_xs {
+  font-size: 13px;
+}

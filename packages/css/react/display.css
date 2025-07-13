@@ -1,0 +1,33 @@
+.cocso-display {
+  color: var(--cocso-display-color);
+  font-weight: var(--cocso-display-weight);
+  line-height: 1.5;
+  --cocso-display-color: inherit;
+  --cocso-display-weight: inherit;
+}
+
+.cocso-display--size_lg {
+  font-size: 44px;
+}
+
+.cocso-display--size_md {
+  font-size: 32px;
+}
+
+.cocso-display--size_sm {
+  font-size: 28px;
+}
+
+@media (min-width: 768px) {
+  .cocso-display--size_lg {
+    font-size: 60px;
+  }
+
+  .cocso-display--size_md {
+    font-size: 44px;
+  }
+
+  .cocso-display--size_sm {
+    font-size: 36px;
+  }
+}

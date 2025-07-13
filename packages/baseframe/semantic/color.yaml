@@ -451,7 +451,7 @@ data:
         default: $color.palette.primary-500
     $color.button.tertiary-fill:
       values:
-        default: $color.palette.whitealpha-0
+        default: $color.palette.gray-0
     $color.button.tertiary-fill-hover:
       values:
         default: $color.palette.gray-50

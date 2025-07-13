@@ -1,0 +1,40 @@
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cocso-spinner {
+  color: var(--cocso-spinner-color);
+  --cocso-spinner-color: inherit;
+  --cocso-spinner-bg: inherit;
+}
+
+.cocso-spinner > svg {
+  animation: spin .75s linear infinite;
+}
+
+.cocso-spinner--size_xs {
+  width: var(--number-8);
+  height: var(--number-8);
+}
+
+.cocso-spinner--size_sm {
+  width: var(--number-9);
+  height: var(--number-9);
+}
+
+.cocso-spinner--size_md {
+  width: var(--number-10);
+  height: var(--number-10);
+}
+
+.cocso-spinner--size_lg {
+  width: var(--number-11);
+  height: var(--number-11);
+}
+
+.cocso-spinner--size_xl {
+  width: var(--number-12);
+  height: var(--number-12);
+}
