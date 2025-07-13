@@ -4,6 +4,7 @@
   justify-content: center;
   color: var(--cocso-button-color);
   font-weight: var(--cocso-button-weight);
+  cursor: pointer;
   border: 1px solid var(--color-button-border);
   border-color: var(--color-button-border);
   border-radius: var(--number-5);
