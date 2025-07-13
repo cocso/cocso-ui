@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Spinner } from '@cocso-ui/react';
+import { Display } from '@cocso-ui/react';
 
 const meta = {
   title: 'React/Display',
-  component: Spinner,
+  component: Display,
   parameters: {
     layout: 'centered',
   },
@@ -22,10 +22,20 @@ const meta = {
     },
     fontWeight: {
       control: 'select',
-      options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
+      options: [
+        'thin',
+        'extralight',
+        'light',
+        'normal',
+        'medium',
+        'semibold',
+        'bold',
+        'extrabold',
+        'black',
+      ],
     },
   },
-} satisfies Meta<typeof Spinner>;
+} satisfies Meta<typeof Display>;
 
 export default meta;
 
@@ -52,14 +62,18 @@ export const AllVariations: Story = {
 
       {/* Hero Section Example */}
       <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Hero Section Example</h3>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          textAlign: 'center',
-          padding: '40px 20px'
-        }}>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
+          Hero Section Example
+        </h3>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+            textAlign: 'center',
+            padding: '40px 20px',
+          }}
+        >
           <Display as="h1" size="lg" color="#1F2937">
             다람쥐 헌 챗바퀴에 타고파
           </Display>
