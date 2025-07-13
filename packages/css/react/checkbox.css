@@ -63,6 +63,12 @@
   transition: opacity 0.2s ease-in-out;
 }
 
+.cocso-checkbox-icon > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .cocso-checkbox input[type="checkbox"] {
   position: absolute;
   width: 1px;
