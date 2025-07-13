@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 
 const tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
@@ -10,8 +10,8 @@ export type DisplayProps<T extends Element = Default> = {
   as?: T;
   size?: 'lg' | 'md' | 'sm';
   color?: string;
-  fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
+  weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<T>;
 
 const DisplayComponent = React.forwardRef(
   <T extends Element = Default>(
@@ -19,7 +19,7 @@ const DisplayComponent = React.forwardRef(
       as = tags[0] as T,
       size = 'md',
       color,
-      fontWeight = 'bold',
+      weight = 'bold',
       className,
       style,
       ...props
@@ -38,7 +38,7 @@ const DisplayComponent = React.forwardRef(
         style={
           {
             '--cocso-display-color': createColor(color),
-            '--cocso-display-weight': createFontWeight(fontWeight),
+            '--cocso-display-weight': createFontWeight(weight),
             ...style,
           } as React.CSSProperties
         }

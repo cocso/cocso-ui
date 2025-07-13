@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { type FontWeightToken } from '../../utils/token';
-declare const tags: readonly ["h1", "h2", "h3", "h4", "h5", "h6"];
+declare const tags: readonly ["label"];
 type Element = (typeof tags)[number];
 type Default = (typeof tags)[0];
-export type DisplayProps<T extends Element = Default> = {
+export type Label<T extends Element = Default> = {
     as?: T;
-    size?: 'lg' | 'md' | 'sm';
+    size?: 'lg' | 'md' | 'sm' | 'xs';
     color?: string;
     weight?: FontWeightToken;
-} & React.ComponentPropsWithoutRef<T>;
-export declare const Display: (<T extends Element = "h1">(props: DisplayProps<T> & {
+} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color'>;
+export declare const Label: (<T extends Element = "label">(props: Label<T> & {
     ref?: React.ForwardedRef<React.ComponentRef<T>>;
 }) => React.ReactElement) & {
     displayName: string;

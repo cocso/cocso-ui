@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 import { Spinner } from '../Spinner';
 
@@ -14,8 +14,8 @@ export type ButtonProps<T extends Element = Default> = {
   disabled?: boolean;
   loading?: boolean;
   color?: string;
-  fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
+  weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<T>;
 
 const getSpinnerSize = (buttonSize: ButtonProps['size']): 'xl' | 'lg' | 'md' | 'sm' | 'xs' => {
   const sizeMap = {
@@ -38,7 +38,7 @@ const ButtonComponent = React.forwardRef(
       disabled = false,
       loading = false,
       color,
-      fontWeight = 'normal',
+      weight = 'normal',
       className,
       style,
       children,
@@ -91,7 +91,7 @@ const ButtonComponent = React.forwardRef(
 
     const buttonStyle = {
       '--cocso-button-color': createColor(color),
-      '--cocso-button-weight': createFontWeight(fontWeight),
+      '--cocso-button-weight': createFontWeight(weight),
       ...style,
     } as React.CSSProperties;
 

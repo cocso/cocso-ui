@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type FontWeightToken } from '../../utils/tokens';
+import { type FontWeightToken } from '../../utils/token';
 declare const tags: readonly ["button"];
 type Element = (typeof tags)[number];
 type Default = (typeof tags)[0];
@@ -10,8 +10,8 @@ export type ButtonProps<T extends Element = Default> = {
     disabled?: boolean;
     loading?: boolean;
     color?: string;
-    fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
+    weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<T>;
 export declare const Button: (<T extends Element = "button">(props: ButtonProps<T> & {
     ref?: React.ForwardedRef<React.ComponentRef<T>>;
 }) => React.ReactElement) & {

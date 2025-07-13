@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createColor } from '../../utils/tokens';
+import { createColor } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 
 const tags = ['div'] as const;

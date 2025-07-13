@@ -57,7 +57,7 @@ export const AllVariations: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <Body as="p">다람쥐 헌 챗바퀴에 타고파</Body>
           <Body as="a" href="#" color="#2563EB">한글 링크 텍스트</Body>
-          <Body as="label" fontWeight="medium">폼 라벨 텍스트</Body>
+          <Body as="label" weight="medium">폼 라벨 텍스트</Body>
           <Body as="span" size="sm" color="#6B7280">인라인 한글 텍스트</Body>
           <Body as="blockquote" style={{ borderLeft: '4px solid #E5E7EB', paddingLeft: '16px' }}>
             인용구 한글 텍스트 예시
@@ -70,7 +70,7 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Article Example</h3>
         <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Body size="lg">
-            동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 
+            동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세.
             무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.
           </Body>
           <Body size="md">
@@ -84,4 +84,4 @@ export const AllVariations: Story = {
       </div>
     </div>
   ),
-}; 
+};
