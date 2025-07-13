@@ -1,4 +1,4 @@
-import "@cocso-ui/css/token.css";
+import "@cocso-ui/css/root.css";
 
 import type { Preview } from '@storybook/react-vite'
 

@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'text'],
+      options: ['primary', 'secondary', 'tertiary', 'danger', 'success', 'text'],
     },
     size: {
       control: 'select',
@@ -50,7 +50,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: 'primary',
-    children: 'Button',
+    children: '동일 성분 검색',
     disabled: false,
   },
 };
@@ -62,10 +62,10 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Variants</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="tertiary">Tertiary</Button>
-          <Button variant="text">Text</Button>
+          <Button variant="primary">primary</Button>
+          <Button variant="secondary">secondary</Button>
+          <Button variant="tertiary">tertiary</Button>
+          <Button variant="text">text</Button>
         </div>
       </div>
 
@@ -73,12 +73,12 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button size="xl">Extra Large</Button>
-          <Button size="lg">Large</Button>
-          <Button size="md">Medium</Button>
-          <Button size="sm">Small</Button>
-          <Button size="xs">Extra Small</Button>
-          <Button size="2xs">2X Small</Button>
+          <Button size="xl">대형 버튼</Button>
+          <Button size="lg">큰 버튼</Button>
+          <Button size="md">중간 버튼</Button>
+          <Button size="sm">작은 버튼</Button>
+          <Button size="xs">매우 작은 버튼</Button>
+          <Button size="2xs">최소 버튼</Button>
         </div>
       </div>
 
@@ -86,11 +86,11 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>States</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button>Normal</Button>
-          <Button disabled>Disabled</Button>
-          <Button loading>Loading</Button>
+          <Button>정상</Button>
+          <Button disabled>비활성화</Button>
+          <Button loading>로딩 중</Button>
         </div>
       </div>
     </div>
   ),
-}; 
+};

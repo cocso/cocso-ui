@@ -5,7 +5,7 @@ type Element = (typeof tags)[number];
 type Default = (typeof tags)[0];
 export type ButtonProps<T extends Element = Default> = {
     as?: T;
-    variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'text';
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success' | 'text';
     size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
     disabled?: boolean;
     loading?: boolean;

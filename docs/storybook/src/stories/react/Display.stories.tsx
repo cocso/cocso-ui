@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Display } from '@cocso-ui/react';
+import { Spinner } from '@cocso-ui/react';
 
 const meta = {
   title: 'React/Display',
-  component: Display,
+  component: Spinner,
   parameters: {
     layout: 'centered',
   },
@@ -25,7 +25,7 @@ const meta = {
       options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
     },
   },
-} satisfies Meta<typeof Display>;
+} satisfies Meta<typeof Spinner>;
 
 export default meta;
 
@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Display Text',
+    children: '동해물과 백두산이 마르고 닳도록',
   },
 };
 
@@ -44,33 +44,33 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <Display size="lg">Large Display</Display>
-          <Display size="md">Medium Display</Display>
-          <Display size="sm">Small Display</Display>
+          <Display size="lg">동해물과 백두산이 마르고 닳도록</Display>
+          <Display size="md">하느님이 보우하사 우리나라 만세</Display>
+          <Display size="sm">무궁화 삼천리 화려강산</Display>
         </div>
       </div>
 
       {/* Hero Section Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Hero Section Example</h3>
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          gap: '24px', 
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
           textAlign: 'center',
           padding: '40px 20px'
         }}>
           <Display as="h1" size="lg" color="#1F2937">
-            Welcome to COCSO UI
+            다람쥐 헌 챗바퀴에 타고파
           </Display>
           <Display as="h2" size="md" color="#6B7280">
-            A modern design system for React
+            까치 까치 까치 까치 까치 까치 까치 까치 까치 까치
           </Display>
           <Display as="h3" size="sm" color="#9CA3AF">
-            Built with TypeScript and Tailwind CSS
+            토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼
           </Display>
         </div>
       </div>
     </div>
   ),
-}; 
+};

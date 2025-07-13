@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Heading Component',
+    children: '다람쥐 헌 챗바퀴에 타고파',
   },
 };
 
@@ -44,12 +44,12 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Heading size="xl">Extra Large Heading</Heading>
-          <Heading size="lg">Large Heading</Heading>
-          <Heading size="md">Medium Heading</Heading>
-          <Heading size="sm">Small Heading</Heading>
-          <Heading size="xs">Extra Small Heading</Heading>
-          <Heading size="2xs">2X Small Heading</Heading>
+          <Heading size="xl">동해물과 백두산이 마르고 닳도록</Heading>
+          <Heading size="lg">하느님이 보우하사 우리나라 만세</Heading>
+          <Heading size="md">무궁화 삼천리 화려강산</Heading>
+          <Heading size="sm">대한사람 대한으로 길이 보전하세</Heading>
+          <Heading size="xs">다람쥐 헌 챗바퀴에 타고파</Heading>
+          <Heading size="2xs">까치 까치 까치 까치 까치</Heading>
         </div>
       </div>
 
@@ -57,12 +57,12 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Hierarchy</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Heading as="h1" size="xl">Main Title (H1)</Heading>
-          <Heading as="h2" size="lg">Section Title (H2)</Heading>
-          <Heading as="h3" size="md">Subsection Title (H3)</Heading>
-          <Heading as="h4" size="sm">Minor Title (H4)</Heading>
-          <Heading as="h5" size="xs">Small Title (H5)</Heading>
-          <Heading as="h6" size="2xs">Tiny Title (H6)</Heading>
+          <Heading as="h1" size="xl">동해물과 백두산이 마르고 닳도록 (H1)</Heading>
+          <Heading as="h2" size="lg">하느님이 보우하사 우리나라 만세 (H2)</Heading>
+          <Heading as="h3" size="md">무궁화 삼천리 화려강산 (H3)</Heading>
+          <Heading as="h4" size="sm">대한사람 대한으로 길이 보전하세 (H4)</Heading>
+          <Heading as="h5" size="xs">다람쥐 헌 챗바퀴에 타고파 (H5)</Heading>
+          <Heading as="h6" size="2xs">까치 까치 까치 까치 까치 (H6)</Heading>
         </div>
       </div>
     </div>
