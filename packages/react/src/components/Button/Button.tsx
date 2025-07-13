@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
 import { createClassName } from '../../utils/cn';
+import { Spinner } from '../Spinner';
 
 const tags = ['button'] as const;
 type Element = (typeof tags)[number];
@@ -28,24 +29,55 @@ const ButtonComponent = React.forwardRef(
       fontWeight = 'normal',
       className,
       style,
+      children,
+      onClick,
+      onKeyDown,
       ...props
     }: ButtonProps<T>,
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
+    const isDisabled = disabled || loading;
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        if (!disabled) {
-          (event.currentTarget as HTMLButtonElement).click();
+    const spinnerSize = {
+      '2xs': 'xs',
+      xs: 'xs',
+      sm: 'xs',
+      md: 'sm',
+      lg: 'md',
+      xl: 'md',
+    } as const;
+
+    const handleClick = React.useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (isDisabled) {
+          event.preventDefault();
+          return;
         }
-      }
-    };
+        onClick?.(event);
+      },
+      [isDisabled, onClick],
+    );
 
-    const variants = { variant, size, loading, disabled };
+    const handleKeyDown = React.useCallback(
+      (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          if (!isDisabled) {
+            (event.currentTarget as HTMLButtonElement).click();
+          }
+        }
+        onKeyDown?.(event);
+      },
+      [isDisabled, onKeyDown],
+    );
 
-    const compoundVariants = [...(disabled ? [{ variant, disabled }] : [])];
+    const variants = { variant, size, loading, disabled: isDisabled };
+
+    const compoundVariants = [
+      ...(disabled ? [{ variant, disabled }] : []),
+      ...(loading ? [{ variant, loading }] : []),
+    ];
 
     const combinedClassName = createClassName(
       'cocso-button',
@@ -58,9 +90,12 @@ const ButtonComponent = React.forwardRef(
       <Element
         ref={ref}
         className={combinedClassName}
+        onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="button"
-        disabled={disabled}
+        disabled={isDisabled}
+        aria-disabled={isDisabled}
+        aria-busy={loading}
         style={
           {
             '--cocso-button-color': createColor(color),
@@ -69,7 +104,13 @@ const ButtonComponent = React.forwardRef(
           } as React.CSSProperties
         }
         {...props}
-      />
+      >
+        {loading ? (
+          <Spinner className="cocso-button-spinner" size={spinnerSize[size]} color="currentColor" />
+        ) : (
+          children
+        )}
+      </Element>
     );
   },
 ) as <T extends Element = Default>(

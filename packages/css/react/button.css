@@ -6,9 +6,10 @@
   font-weight: var(--cocso-button-weight);
   border: 1px solid var(--color-button-border);
   border-color: var(--color-button-border);
-  border-radius: 6px;
+  border-radius: var(--number-5);
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   background-color: var(--color-button-background);
+  gap: var(--number-3);
 
   --cocso-button-color: inherit;
   --cocso-button-weight: inherit;
@@ -22,6 +23,14 @@
 
 .cocso-button--disabled_true {
   cursor: not-allowed;
+}
+
+.cocso-button--loading_true {
+  pointer-events: none;
+}
+
+.cocso-button-spinner {
+  flex-shrink: 0;
 }
 
 .cocso-button--size_2xs {

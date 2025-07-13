@@ -18,8 +18,8 @@ const SpinnerComponent = React.forwardRef(
     {
       as = tags[0] as T,
       size = 'md',
-      color = 'palette.primary.500',
-      bg = 'palette.gray.200',
+      color = 'palette.primary-500',
+      bg = 'palette.gray-200',
       className,
       style,
       ...props
@@ -51,7 +51,7 @@ const SpinnerComponent = React.forwardRef(
             cy="12"
             r="9"
             stroke="var(--cocso-spinner-bg, currentColor)"
-            strokeWidth="2"
+            strokeWidth="3"
           ></circle>
           <path
             className="opacity-75"

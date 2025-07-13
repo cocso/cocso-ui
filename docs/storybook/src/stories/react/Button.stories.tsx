@@ -55,6 +55,14 @@ export const Default: Story = {
   },
 };
 
+export const Loading: Story = {
+  args: {
+    variant: 'primary',
+    children: '저장하기',
+    loading: true,
+  },
+};
+
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -65,6 +73,8 @@ export const AllVariations: Story = {
           <Button variant="primary">primary</Button>
           <Button variant="secondary">secondary</Button>
           <Button variant="tertiary">tertiary</Button>
+          <Button variant="danger">danger</Button>
+          <Button variant="success">success</Button>
           <Button variant="text">text</Button>
         </div>
       </div>
@@ -89,6 +99,31 @@ export const AllVariations: Story = {
           <Button>정상</Button>
           <Button disabled>비활성화</Button>
           <Button loading>로딩 중</Button>
+        </div>
+      </div>
+
+      {/* Loading States by Variant */}
+      <div>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Loading States by Variant</h3>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" loading>Primary</Button>
+          <Button variant="secondary" loading>Secondary</Button>
+          <Button variant="tertiary" loading>Tertiary</Button>
+          <Button variant="danger" loading>Danger</Button>
+          <Button variant="success" loading>Success</Button>
+        </div>
+      </div>
+
+      {/* Loading States by Size */}
+      <div>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Loading States by Size</h3>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button size="xl" loading>XL</Button>
+          <Button size="lg" loading>LG</Button>
+          <Button size="md" loading>MD</Button>
+          <Button size="sm" loading>SM</Button>
+          <Button size="xs" loading>XS</Button>
+          <Button size="2xs" loading>2XS</Button>
         </div>
       </div>
     </div>
