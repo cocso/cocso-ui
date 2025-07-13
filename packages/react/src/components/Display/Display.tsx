@@ -24,7 +24,7 @@ const DisplayComponent = React.forwardRef(
       style,
       ...props
     }: DisplayProps<T>,
-    ref: React.ForwardedRef<React.ComponentRef<T>>,
+    ref?: React.ComponentPropsWithRef<T>['ref'],
   ) => {
     const Element = as as React.ElementType;
 
@@ -46,9 +46,7 @@ const DisplayComponent = React.forwardRef(
       />
     );
   },
-) as <T extends Element = Default>(
-  props: DisplayProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
-) => React.ReactElement;
+);
 
 export const Display = Object.assign(DisplayComponent, {
   displayName: 'Display',

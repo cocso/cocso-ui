@@ -24,7 +24,7 @@ const CheckboxComponent = React.forwardRef(
       className,
       ...props
     }: CheckboxProps,
-    ref: React.ForwardedRef<React.ComponentRef<'div'>>,
+    ref?: React.ComponentPropsWithRef<'div'>['ref'],
   ) => {
     const variants = { size, disabled, status };
     const compoundVariants = [...(disabled ? [{ status, disabled }] : [])];

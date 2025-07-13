@@ -24,7 +24,7 @@ const SpinnerComponent = React.forwardRef(
       style,
       ...props
     }: SpinnerProps<T>,
-    ref: React.ForwardedRef<React.ComponentRef<T>>,
+    ref?: React.ComponentPropsWithRef<T>['ref'],
   ) => {
     const Element = as as React.ElementType;
 
@@ -62,9 +62,7 @@ const SpinnerComponent = React.forwardRef(
       </Element>
     );
   },
-) as <T extends Element = Default>(
-  props: SpinnerProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
-) => React.ReactElement;
+);
 
 export const Spinner = Object.assign(SpinnerComponent, {
   displayName: 'Spinner',

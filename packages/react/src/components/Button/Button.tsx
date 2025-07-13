@@ -46,7 +46,7 @@ const ButtonComponent = React.forwardRef(
       onKeyDown,
       ...props
     }: ButtonProps<T>,
-    ref: React.ForwardedRef<React.ComponentRef<T>>,
+    ref?: React.ComponentPropsWithRef<T>['ref'],
   ) => {
     const Element = as as React.ElementType;
     const isButtonDisabled = disabled || loading;
@@ -120,9 +120,7 @@ const ButtonComponent = React.forwardRef(
       </Element>
     );
   },
-) as <T extends Element = Default>(
-  props: ButtonProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
-) => React.ReactElement;
+);
 
 export const Button = Object.assign(ButtonComponent, {
   displayName: 'Button',

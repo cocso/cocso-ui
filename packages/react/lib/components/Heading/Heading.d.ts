@@ -9,9 +9,12 @@ export type HeadingProps<T extends Element = Default> = {
     color?: string;
     weight?: FontWeightToken;
 } & React.ComponentPropsWithoutRef<T>;
-export declare const Heading: (<T extends Element = "h2">(props: HeadingProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+export declare const Heading: React.ForwardRefExoticComponent<{
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | undefined;
+    size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xs";
+    color?: string;
+    weight?: FontWeightToken;
+} & Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, "ref"> & React.RefAttributes<HTMLHeadingElement>> & {
     displayName: string;
 };
 export {};

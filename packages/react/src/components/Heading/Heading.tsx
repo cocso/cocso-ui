@@ -24,7 +24,7 @@ const HeadingComponent = React.forwardRef(
       style,
       ...props
     }: HeadingProps<T>,
-    ref: React.ForwardedRef<React.ComponentRef<T>>,
+    ref?: React.ComponentPropsWithRef<T>['ref'],
   ) => {
     const Element = as as React.ElementType;
 
@@ -46,9 +46,7 @@ const HeadingComponent = React.forwardRef(
       />
     );
   },
-) as <T extends Element = Default>(
-  props: HeadingProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
-) => React.ReactElement;
+);
 
 export const Heading = Object.assign(HeadingComponent, {
   displayName: 'Heading',

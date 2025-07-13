@@ -9,9 +9,12 @@ export type DisplayProps<T extends Element = Default> = {
     color?: string;
     weight?: FontWeightToken;
 } & React.ComponentPropsWithoutRef<T>;
-export declare const Display: (<T extends Element = "h1">(props: DisplayProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+export declare const Display: React.ForwardRefExoticComponent<{
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | undefined;
+    size?: "lg" | "md" | "sm";
+    color?: string;
+    weight?: FontWeightToken;
+} & Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, "ref"> & React.RefAttributes<HTMLHeadingElement>> & {
     displayName: string;
 };
 export {};

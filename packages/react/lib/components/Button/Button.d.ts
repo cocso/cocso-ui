@@ -12,9 +12,15 @@ export type ButtonProps<T extends Element = Default> = {
     color?: string;
     weight?: FontWeightToken;
 } & React.ComponentPropsWithoutRef<T>;
-export declare const Button: (<T extends Element = "button">(props: ButtonProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+export declare const Button: React.ForwardRefExoticComponent<{
+    as?: "button" | undefined;
+    variant?: "primary" | "secondary" | "tertiary" | "danger" | "success" | "text";
+    size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xs";
+    disabled?: boolean;
+    loading?: boolean;
+    color?: string;
+    weight?: FontWeightToken;
+} & Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>> & {
     displayName: string;
 };
 export {};
