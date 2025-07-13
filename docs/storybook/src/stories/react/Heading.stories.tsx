@@ -20,7 +20,7 @@ const meta = {
     color: {
       control: 'color',
     },
-    fontWeight: {
+    weight: {
       control: 'select',
       options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
     },

@@ -9,9 +9,7 @@ export type BodyProps<T extends Element = Default> = {
     color?: string;
     weight?: FontWeightToken;
 } & React.ComponentPropsWithoutRef<T>;
-export declare const Body: (<T extends Element = "p">(props: BodyProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+export declare const Body: React.ForwardRefExoticComponent<BodyProps<"p" | "a" | "span" | "div" | "label" | "li" | "td" | "th" | "figcaption" | "blockquote" | "cite"> & React.RefAttributes<HTMLElement>> & {
     displayName: string;
 };
 export {};
