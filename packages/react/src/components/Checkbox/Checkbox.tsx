@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { createClassName } from '../../utils/cn';
+import { Label } from '../Label';
 
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
 export type CheckboxProps = {
   id: string;
-  size?: 'md' | 'lg';
+  size?: 'lg' | 'md' | 'sm';
   status: CheckboxStatus;
   onChange: (next: CheckboxStatus) => void;
   label?: string;
@@ -105,7 +106,15 @@ const CheckboxComponent = React.forwardRef(
           />
         </div>
 
-        {label && <label htmlFor={id}>{label}</label>}
+        {label && (
+          <Label
+            className={createClassName('cocso-checkbox-label', variants)}
+            htmlFor={id}
+            size={size}
+          >
+            {label}
+          </Label>
+        )}
       </div>
     );
   },

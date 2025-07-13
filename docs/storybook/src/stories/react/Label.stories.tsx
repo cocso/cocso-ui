@@ -56,6 +56,7 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Font Weights</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <Label weight="thin">Thin 라벨 텍스트</Label>
+          <Label weight="extralight">Extralight 라벨 텍스트</Label>
           <Label weight="light">Light 라벨 텍스트</Label>
           <Label weight="normal">Normal 라벨 텍스트</Label>
           <Label weight="medium">Medium 라벨 텍스트</Label>
@@ -76,6 +77,11 @@ export const AllVariations: Story = {
           <Label as="div">Div 요소</Label>
           <Label as="a" href="#" style={{ textDecoration: 'underline' }}>Link 요소</Label>
           <Label as="li">List Item 요소</Label>
+          <Label as="td">Table Data 요소</Label>
+          <Label as="th">Table Header 요소</Label>
+          <Label as="figcaption">Figure Caption 요소</Label>
+          <Label as="blockquote">Blockquote 요소</Label>
+          <Label as="cite">Citation 요소</Label>
         </div>
       </div>
 
@@ -88,6 +94,19 @@ export const AllVariations: Story = {
           <Label color="#0066cc">파란색 라벨</Label>
           <Label color="#cc0000">빨간색 라벨</Label>
           <Label color="#00cc00">초록색 라벨</Label>
+          <Label color="#ff6600">주황색 라벨</Label>
+          <Label color="#9933cc">보라색 라벨</Label>
+        </div>
+      </div>
+
+      {/* Size and Weight Combinations */}
+      <div>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Size and Weight Combinations</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <Label size="lg" weight="bold">큰 굵은 라벨 (lg + bold)</Label>
+          <Label size="md" weight="semibold">중간 세미볼드 라벨 (md + semibold)</Label>
+          <Label size="sm" weight="medium">작은 미디엄 라벨 (sm + medium)</Label>
+          <Label size="xs" weight="normal">매우 작은 일반 라벨 (xs + normal)</Label>
         </div>
       </div>
 
@@ -122,6 +141,72 @@ export const AllVariations: Story = {
               fontSize: '14px'
             }} 
           />
+
+          <Label as="label" size="xs" weight="normal" style={{ marginTop: '16px', color: '#666' }}>
+            선택사항
+          </Label>
+          <input 
+            type="text" 
+            placeholder="선택사항을 입력하세요" 
+            style={{ 
+              padding: '8px 12px', 
+              border: '1px solid #ccc', 
+              borderRadius: '4px',
+              fontSize: '14px'
+            }} 
+          />
+        </div>
+      </div>
+
+      {/* Form Layout Example */}
+      <div>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Form Layout Example</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '600px' }}>
+          <div>
+            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              이름
+            </Label>
+            <input 
+              type="text" 
+              style={{ 
+                width: '100%',
+                padding: '8px 12px', 
+                border: '1px solid #ccc', 
+                borderRadius: '4px',
+                fontSize: '14px'
+              }} 
+            />
+          </div>
+          <div>
+            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              성
+            </Label>
+            <input 
+              type="text" 
+              style={{ 
+                width: '100%',
+                padding: '8px 12px', 
+                border: '1px solid #ccc', 
+                borderRadius: '4px',
+                fontSize: '14px'
+              }} 
+            />
+          </div>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              이메일
+            </Label>
+            <input 
+              type="email" 
+              style={{ 
+                width: '100%',
+                padding: '8px 12px', 
+                border: '1px solid #ccc', 
+                borderRadius: '4px',
+                fontSize: '14px'
+              }} 
+            />
+          </div>
         </div>
       </div>
     </div>

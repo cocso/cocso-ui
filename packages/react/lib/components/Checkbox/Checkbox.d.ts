@@ -2,7 +2,7 @@ import * as React from 'react';
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 export type CheckboxProps = {
     id: string;
-    size?: 'md' | 'lg';
+    size?: 'lg' | 'md' | 'sm';
     status: CheckboxStatus;
     onChange: (next: CheckboxStatus) => void;
     label?: string;
@@ -10,7 +10,7 @@ export type CheckboxProps = {
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'id'>;
 export declare const Checkbox: React.ForwardRefExoticComponent<{
     id: string;
-    size?: "md" | "lg";
+    size?: "lg" | "md" | "sm";
     status: CheckboxStatus;
     onChange: (next: CheckboxStatus) => void;
     label?: string;

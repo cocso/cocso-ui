@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['md', 'lg'],
+      options: ['sm', 'md', 'lg'],
     },
     status: {
       control: 'select',
@@ -34,6 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     id: 'default-checkbox',
+    size: 'md',
     status: 'off',
     label: '기본 체크박스',
     disabled: false,
@@ -89,11 +90,12 @@ export const AllVariations: Story = {
   },
   render: () => {
     const [states, setStates] = useState({
+      sm: 'off',
       md: 'off',
       lg: 'off',
     });
 
-    const handleChange = (size: 'md' | 'lg') => (next: any) => {
+    const handleChange = (size: 'sm' | 'md' | 'lg') => (next: any) => {
       setStates(prev => ({ ...prev, [size]: next }));
     };
 
@@ -103,6 +105,13 @@ export const AllVariations: Story = {
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <Checkbox
+              id="size-sm"
+              size="sm"
+              status={states.sm as any}
+              onChange={handleChange('sm')}
+              label="작은 크기 (sm)"
+            />
             <Checkbox
               id="size-md"
               size="md"

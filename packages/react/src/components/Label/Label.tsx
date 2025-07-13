@@ -8,7 +8,6 @@ const tags = [
   'a',
   'span',
   'div',
-  'label',
   'li',
   'td',
   'th',

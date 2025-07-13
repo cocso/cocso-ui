@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { type FontWeightToken } from '../../utils/token';
-declare const tags: readonly ["label", "p", "a", "span", "div", "label", "li", "td", "th", "figcaption", "blockquote", "cite"];
+declare const tags: readonly ["label", "p", "a", "span", "div", "li", "td", "th", "figcaption", "blockquote", "cite"];
 type Element = (typeof tags)[number];
 type Default = (typeof tags)[0];
 export type LabelProps<T extends Element = Default> = {
