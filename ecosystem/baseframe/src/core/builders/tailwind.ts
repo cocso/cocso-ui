@@ -96,9 +96,6 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
     parts.push(banner);
   }
 
-  parts.push('@import "tailwindcss";');
-  parts.push('');
-
   collections.forEach((collection) => {
     const collectionTokens = tokens.filter((token) => token.token.collection === collection.name);
 
