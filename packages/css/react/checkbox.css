@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   color: var(--cocso-checkbox-color);
+  cursor: pointer;
   border: 1px solid var(--cocso-checkbox-border);
   border-radius: 4px;
   background-color: var(--cocso-checkbox-background);
@@ -98,4 +99,10 @@
 
 .cocso-checkbox-label {
   color: var(--color-palette-gray-900);
+  cursor: pointer;
+}
+
+.cocso-checkbox-label--disabled_true {
+  color: var(--color-palette-gray-400);
+  cursor: not-allowed;
 }
