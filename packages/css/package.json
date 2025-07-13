@@ -19,7 +19,7 @@
   "files": [
     "*.css",
     "react/*.css",
-    "package.json",
+    "package.json"
   ],
   "devDependencies": {},
   "publishConfig": {
