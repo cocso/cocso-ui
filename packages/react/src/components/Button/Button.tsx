@@ -17,6 +17,18 @@ export type ButtonProps<T extends Element = Default> = {
   fontWeight?: FontWeightToken;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
 
+const getSpinnerSize = (buttonSize: ButtonProps['size']): 'xl' | 'lg' | 'md' | 'sm' | 'xs' => {
+  const sizeMap = {
+    '2xs': 'xs',
+    xs: 'xs',
+    sm: 'xs',
+    md: 'sm',
+    lg: 'md',
+    xl: 'md',
+  } as const;
+  return sizeMap[buttonSize!];
+};
+
 const ButtonComponent = React.forwardRef(
   <T extends Element = Default>(
     {
@@ -37,54 +49,51 @@ const ButtonComponent = React.forwardRef(
     ref: React.ForwardedRef<React.ComponentRef<T>>,
   ) => {
     const Element = as as React.ElementType;
-    const isDisabled = disabled || loading;
-
-    const spinnerSize = {
-      '2xs': 'xs',
-      xs: 'xs',
-      sm: 'xs',
-      md: 'sm',
-      lg: 'md',
-      xl: 'md',
-    } as const;
+    const isButtonDisabled = disabled || loading;
 
     const handleClick = React.useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (isDisabled) {
+        if (isButtonDisabled) {
           event.preventDefault();
           return;
         }
         onClick?.(event);
       },
-      [isDisabled, onClick],
+      [isButtonDisabled, onClick],
     );
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        const isEnterOrSpace = event.key === 'Enter' || event.key === ' ';
+
+        if (isEnterOrSpace) {
           event.preventDefault();
-          if (!isDisabled) {
+          if (!isButtonDisabled) {
             (event.currentTarget as HTMLButtonElement).click();
           }
         }
         onKeyDown?.(event);
       },
-      [isDisabled, onKeyDown],
+      [isButtonDisabled, onKeyDown],
     );
 
-    const variants = { variant, size, loading, disabled: isDisabled };
-
+    const variants = { variant, size, loading, disabled: isButtonDisabled };
     const compoundVariants = [
       ...(disabled ? [{ variant, disabled }] : []),
       ...(loading ? [{ variant, loading }] : []),
     ];
-
     const combinedClassName = createClassName(
       'cocso-button',
       variants,
       compoundVariants,
       className,
     );
+
+    const buttonStyle = {
+      '--cocso-button-color': createColor(color),
+      '--cocso-button-weight': createFontWeight(fontWeight),
+      ...style,
+    } as React.CSSProperties;
 
     return (
       <Element
@@ -93,20 +102,18 @@ const ButtonComponent = React.forwardRef(
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="button"
-        disabled={isDisabled}
-        aria-disabled={isDisabled}
+        disabled={isButtonDisabled}
+        aria-disabled={isButtonDisabled}
         aria-busy={loading}
-        style={
-          {
-            '--cocso-button-color': createColor(color),
-            '--cocso-button-weight': createFontWeight(fontWeight),
-            ...style,
-          } as React.CSSProperties
-        }
+        style={buttonStyle}
         {...props}
       >
         {loading ? (
-          <Spinner className="cocso-button-spinner" size={spinnerSize[size]} color="currentColor" />
+          <Spinner
+            className="cocso-button-spinner"
+            size={getSpinnerSize(size)}
+            color="currentColor"
+          />
         ) : (
           children
         )}
