@@ -1,0 +1,33 @@
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+.cocso-accordion-content {
+  overflow: hidden;
+}
+
+.cocso-accordion-content[data-state="open"] {
+  animation: slideDown 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.cocso-accordion-content[data-state="closed"] {
+  animation: slideUp 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.cocso-accordion-trigger[data-state="open"] > .cocso-accordion-chevron {
+  transform: rotate(180deg);
+}
