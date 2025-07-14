@@ -7,7 +7,8 @@ const AccordionItem = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Item>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => {
-  return <AccordionPrimitive.Item ref={ref} className="cocso-accordion-item" {...props} />;
+  const classNames = createClassName('cocso-accordion-item', {}, [], className);
+  return <AccordionPrimitive.Item ref={ref} className={classNames} {...props} />;
 });
 
 type TriggerProps = {
@@ -16,8 +17,9 @@ type TriggerProps = {
 
 const AccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trigger>, TriggerProps>(
   ({ className, children, chevron = true, ...props }, ref) => {
+    const classNames = createClassName('cocso-accordion-trigger', {}, [], className);
     return (
-      <AccordionPrimitive.Trigger ref={ref} className="cocso-accordion-trigger" {...props}>
+      <AccordionPrimitive.Trigger ref={ref} className={classNames} {...props}>
         <Slottable>
           {children}
           {chevron && (
@@ -47,7 +49,8 @@ const AccordionContent = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Content>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, ...props }, ref) => {
-  return <AccordionPrimitive.Content ref={ref} className="cocso-accordion-content" {...props} />;
+  const classNames = createClassName('cocso-accordion-content', {}, [], className);
+  return <AccordionPrimitive.Content ref={ref} className={classNames} {...props} />;
 });
 
 export const Accordion = Object.assign(AccordionPrimitive.Root, {

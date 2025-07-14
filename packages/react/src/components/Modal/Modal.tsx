@@ -4,18 +4,15 @@ import { createClassName } from '../../utils/cn';
 import { Heading } from '../Heading';
 import { Body } from '../Body';
 
-type ContentProps = {
-  portal?: boolean;
-};
-
 const ModalContent = forwardRef<
   ComponentRef<typeof ModalPrimitive.Content>,
   ComponentPropsWithoutRef<typeof ModalPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
+  const classNames = createClassName('cocso-modal-content', {}, [], className);
   return (
     <ModalPrimitive.Portal>
       <ModalPrimitive.Overlay className="cocso-modal-overlay" />
-      <ModalPrimitive.Content ref={ref} className="cocso-modal-content" {...props}>
+      <ModalPrimitive.Content ref={ref} className={classNames} {...props}>
         <div className="cocso-modal-close-wrapper">
           <ModalPrimitive.Close className="cocso-modal-close">
             <svg
@@ -44,8 +41,9 @@ const ModalTitle = forwardRef<
   ComponentRef<typeof ModalPrimitive.Title>,
   ComponentPropsWithoutRef<typeof ModalPrimitive.Title>
 >(({ className, children, ...props }, ref) => {
+  const classNames = createClassName('cocso-modal-title', {}, [], className);
   return (
-    <ModalPrimitive.Title ref={ref} className="cocso-modal-title" asChild {...props}>
+    <ModalPrimitive.Title ref={ref} className={classNames} asChild {...props}>
       <Heading color="text.basic">{children}</Heading>
     </ModalPrimitive.Title>
   );
@@ -55,8 +53,9 @@ const ModalDescription = forwardRef<
   ComponentRef<typeof ModalPrimitive.Description>,
   ComponentPropsWithoutRef<typeof ModalPrimitive.Description>
 >(({ className, children, ...props }, ref) => {
+  const classNames = createClassName('cocso-modal-description', {}, [], className);
   return (
-    <ModalPrimitive.Description ref={ref} className="cocso-modal-description" asChild {...props}>
+    <ModalPrimitive.Description ref={ref} className={classNames} asChild {...props}>
       <Body size="sm" color="text.subtle">
         {children}
       </Body>
