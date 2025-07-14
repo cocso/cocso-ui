@@ -136,7 +136,7 @@ data:
 
     $color.divider.gray-light:
       values:
-        default: $color.palette.gray-100
+        default: $color.palette.gray-200
     $color.divider.gray:
       values:
         default: $color.palette.gray-400
@@ -460,7 +460,7 @@ data:
         default: $color.palette.gray-100
     $color.button.tertiary-border:
       values:
-        default: $color.palette.gray-600
+        default: $color.palette.gray-200
     $color.button.text-fill:
       values:
         default: $color.palette.whitealpha-0

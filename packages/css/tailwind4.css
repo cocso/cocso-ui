@@ -195,7 +195,7 @@
   --color-border-success: var(--color-palette-success-500);
   --color-border-information-light: var(--color-palette-information-100);
   --color-border-information: var(--color-palette-information-500);
-  --color-divider-gray-light: var(--color-palette-gray-100);
+  --color-divider-gray-light: var(--color-palette-gray-200);
   --color-divider-gray: var(--color-palette-gray-400);
   --color-divider-gray-dark: var(--color-palette-gray-500);
   --color-divider-gray-darker: var(--color-palette-gray-900);
@@ -301,7 +301,7 @@
   --color-button-tertiary-fill: var(--color-palette-gray-0);
   --color-button-tertiary-fill-hover: var(--color-palette-gray-50);
   --color-button-tertiary-fill-pressed: var(--color-palette-gray-100);
-  --color-button-tertiary-border: var(--color-palette-gray-600);
+  --color-button-tertiary-border: var(--color-palette-gray-200);
   --color-button-text-fill: var(--color-palette-whitealpha-0);
   --color-button-text-fill-hover: var(--color-palette-secondary-50);
   --color-button-text-fill-pressed: var(--color-palette-secondary-100);

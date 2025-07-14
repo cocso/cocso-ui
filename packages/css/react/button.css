@@ -139,7 +139,7 @@
 
 .cocso-button--variant_tertiary {
   --cocso-button-color: var(--color-palette-gray-800);
-  --color-button-border: var(--color-palette-gray-200);
+  --color-button-border: var(--color-button-tertiary-border);
   --color-button-background: var(--color-button-tertiary-fill);
 }
 
