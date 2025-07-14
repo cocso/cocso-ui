@@ -307,7 +307,7 @@
   --color-button-text-fill-pressed: var(--color-palette-secondary-100);
   --color-button-text-border: var(--color-palette-blackalpha-0);
   --color-button-disabled-fill: var(--color-palette-gray-100);
-  --color-button-disabled-border: var(--color-palette-gray-300);
+  --color-button-disabled-border: var(--color-palette-gray-200);
   --color-input-surface: var(--color-palette-gray-0);
   --color-input-border: var(--color-palette-gray-600);
   --color-input-border-active: var(--color-palette-primary-500);

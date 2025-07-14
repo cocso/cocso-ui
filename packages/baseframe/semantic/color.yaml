@@ -478,7 +478,7 @@ data:
         default: $color.palette.gray-100
     $color.button.disabled-border:
       values:
-        default: $color.palette.gray-300
+        default: $color.palette.gray-200
 
     $color.input.surface:
       values:
