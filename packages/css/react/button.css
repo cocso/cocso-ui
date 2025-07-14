@@ -90,17 +90,17 @@
 }
 
 .cocso-button--variant_primary-disabled_true {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_primary-disabled_true:hover {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_primary-disabled_true:active {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
@@ -120,19 +120,19 @@
 }
 
 .cocso-button--variant_secondary-disabled_true {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_secondary-disabled_true:hover {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_secondary-disabled_true:active {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
@@ -152,19 +152,19 @@
 }
 
 .cocso-button--variant_tertiary-disabled_true {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_tertiary-disabled_true:hover {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_tertiary-disabled_true:active {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
@@ -183,19 +183,19 @@
 }
 
 .cocso-button--variant_danger-disabled_true {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_danger-disabled_true:hover {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_danger-disabled_true:active {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
@@ -214,19 +214,19 @@
 }
 
 .cocso-button--variant_success-disabled_true {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_success-disabled_true:hover {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }
 
 .cocso-button--variant_success-disabled_true:active {
-  --cocso-button-color: var(--color-palette-gray-600);
+  --cocso-button-color: var(--color-palette-gray-400);
   --color-button-border: var(--color-button-disabled-border);
   --color-button-background: var(--color-button-disabled-fill);
 }

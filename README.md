@@ -4,12 +4,12 @@
 
 이 라이브러리는 COCSO의 디자인 시스템을 기반으로 하여 일관된 사용자 경험을 제공하는 것을 목표로 하고 있어요.
 
-#### Base Libraries
+#### Libraries
 
 - [css](./packages/css)
 - [react](./packages/react)
 
-### Docs
+#### Docs
 
 - [storybook](./docs/storybook)
 

@@ -1,20 +1,22 @@
 import * as React from 'react';
-import { type FontWeightToken } from '../../utils/tokens';
-declare const tags: readonly ["button"];
-type Element = (typeof tags)[number];
-type Default = (typeof tags)[0];
-export type ButtonProps<T extends Element = Default> = {
-    as?: T;
+import { type FontWeightToken } from '../../utils/token';
+export type ButtonProps = {
+    asChild?: boolean;
     variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success' | 'text';
     size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
     disabled?: boolean;
     loading?: boolean;
     color?: string;
-    fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
-export declare const Button: (<T extends Element = "button">(props: ButtonProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+    weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<'button'>;
+export declare const Button: React.ForwardRefExoticComponent<{
+    asChild?: boolean;
+    variant?: "primary" | "secondary" | "tertiary" | "danger" | "success" | "text";
+    size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xs";
+    disabled?: boolean;
+    loading?: boolean;
+    color?: string;
+    weight?: FontWeightToken;
+} & Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>> & {
     displayName: string;
 };
-export {};

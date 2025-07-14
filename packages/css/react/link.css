@@ -1,0 +1,56 @@
+.cocso-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  color: var(--cocso-link-color);
+  font-weight: var(--cocso-link-weight);
+  line-height: 1.5;
+  cursor: pointer;
+  gap: var(--number-2);
+  transition: color 200ms ease-in-out;
+  --cocso-link-color: var(--color-link-default);
+  --cocso-link-weight: inherit;
+}
+
+.cocso-link:hover {
+  --cocso-link-color: var(--color-link-hover);
+}
+
+.cocso-link:active {
+  --cocso-link-color: var(--color-link-pressed);
+}
+
+.cocso-link:visited {
+  --cocso-link-color: var(--color-link-visited);
+}
+
+.cocso-link--size_lg {
+  font-size: 19px;
+}
+
+.cocso-link--size_md {
+  font-size: 17px;
+}
+
+.cocso-link--size_sm {
+  font-size: 15px;
+}
+
+.cocso-link--size_xs {
+  font-size: 13px;
+}
+
+.cocso-link--indicator_false {
+  text-decoration: none;
+}
+
+.cocso-link--indicator_true {
+  text-decoration: underline;
+}
+
+.cocso-link > svg {
+  width: var(--number-8);
+  height: var(--number-8);
+  flex-shrink: 0;
+}

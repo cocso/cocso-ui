@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { type FontWeightToken } from '../../utils/tokens';
-declare const tags: readonly ["h1", "h2", "h3", "h4", "h5", "h6"];
-type Element = (typeof tags)[number];
-type Default = (typeof tags)[0];
-export type DisplayProps<T extends Element = Default> = {
-    as?: T;
+import { type FontWeightToken } from '../../utils/token';
+export type DisplayProps = {
+    asChild?: boolean;
     size?: 'lg' | 'md' | 'sm';
     color?: string;
-    fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
-export declare const Display: (<T extends Element = "h1">(props: DisplayProps<T> & {
-    ref?: React.ForwardedRef<React.ComponentRef<T>>;
-}) => React.ReactElement) & {
+    weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<'h1'>;
+export declare const Display: React.ForwardRefExoticComponent<{
+    asChild?: boolean;
+    size?: "lg" | "md" | "sm";
+    color?: string;
+    weight?: FontWeightToken;
+} & Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, "ref"> & React.RefAttributes<HTMLHeadingElement>> & {
     displayName: string;
 };
-export {};

@@ -1,44 +1,30 @@
 import * as React from 'react';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/tokens';
+import { Slot } from '@radix-ui/react-slot';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 
-const tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
-type Element = (typeof tags)[number];
-type Default = (typeof tags)[0];
-
-export type DisplayProps<T extends Element = Default> = {
-  as?: T;
+export type DisplayProps = {
+  asChild?: boolean;
   size?: 'lg' | 'md' | 'sm';
   color?: string;
-  fontWeight?: FontWeightToken;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'size' | 'color' | 'fontWeight'>;
+  weight?: FontWeightToken;
+} & React.ComponentPropsWithoutRef<'h1'>;
 
-const DisplayComponent = React.forwardRef(
-  <T extends Element = Default>(
-    {
-      as = tags[0] as T,
-      size = 'md',
-      color,
-      fontWeight = 'bold',
-      className,
-      style,
-      ...props
-    }: DisplayProps<T>,
-    ref: React.ForwardedRef<React.ComponentRef<T>>,
-  ) => {
-    const Element = as as React.ElementType;
-
+const DisplayComponent = React.forwardRef<HTMLHeadingElement, DisplayProps>(
+  ({ asChild = false, size = 'md', color, weight = 'bold', className, style, ...props }, ref) => {
     const variants = { size };
-    const combinedClassName = createClassName('cocso-display', variants, [], className);
+    const classNames = createClassName('cocso-display', variants, [], className);
+
+    const Comp = asChild ? Slot : 'h1';
 
     return (
-      <Element
+      <Comp
         ref={ref}
-        className={combinedClassName}
+        className={classNames}
         style={
           {
             '--cocso-display-color': createColor(color),
-            '--cocso-display-weight': createFontWeight(fontWeight),
+            '--cocso-display-weight': createFontWeight(weight),
             ...style,
           } as React.CSSProperties
         }
@@ -46,9 +32,7 @@ const DisplayComponent = React.forwardRef(
       />
     );
   },
-) as <T extends Element = Default>(
-  props: DisplayProps<T> & { ref?: React.ForwardedRef<React.ComponentRef<T>> },
-) => React.ReactElement;
+);
 
 export const Display = Object.assign(DisplayComponent, {
   displayName: 'Display',

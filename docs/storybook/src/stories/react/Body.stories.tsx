@@ -9,9 +9,8 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: {
-      control: 'select',
-      options: ['p', 'a', 'span', 'div', 'label', 'li', 'td', 'th', 'figcaption', 'blockquote', 'cite'],
+    asChild: {
+      control: 'boolean',
     },
     size: {
       control: 'select',
@@ -20,7 +19,7 @@ const meta = {
     color: {
       control: 'color',
     },
-    fontWeight: {
+    weight: {
       control: 'select',
       options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
     },
@@ -51,16 +50,16 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Elements */}
+      {/* Semantic Elements with asChild */}
       <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements</h3>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <Body as="p">다람쥐 헌 챗바퀴에 타고파</Body>
-          <Body as="a" href="#" color="#2563EB">한글 링크 텍스트</Body>
-          <Body as="label" fontWeight="medium">폼 라벨 텍스트</Body>
-          <Body as="span" size="sm" color="#6B7280">인라인 한글 텍스트</Body>
-          <Body as="blockquote" style={{ borderLeft: '4px solid #E5E7EB', paddingLeft: '16px' }}>
-            인용구 한글 텍스트 예시
+          <Body asChild><p>다람쥐 헌 챗바퀴에 타고파</p></Body>
+          <Body asChild color="#2563EB"><a href="#">한글 링크 텍스트</a></Body>
+          <Body asChild weight="medium"><label>폼 라벨 텍스트</label></Body>
+          <Body asChild size="sm" color="#6B7280"><span>인라인 한글 텍스트</span></Body>
+          <Body asChild style={{ borderLeft: '4px solid #E5E7EB', paddingLeft: '16px' }}>
+            <blockquote>인용구 한글 텍스트 예시</blockquote>
           </Body>
         </div>
       </div>
@@ -70,7 +69,7 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Article Example</h3>
         <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Body size="lg">
-            동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 
+            동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세.
             무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.
           </Body>
           <Body size="md">
@@ -84,4 +83,4 @@ export const AllVariations: Story = {
       </div>
     </div>
   ),
-}; 
+};

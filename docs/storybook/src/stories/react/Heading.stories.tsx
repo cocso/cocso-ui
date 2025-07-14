@@ -9,9 +9,8 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: {
-      control: 'select',
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    asChild: {
+      control: 'boolean',
     },
     size: {
       control: 'select',
@@ -20,7 +19,7 @@ const meta = {
     color: {
       control: 'color',
     },
-    fontWeight: {
+    weight: {
       control: 'select',
       options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
     },
@@ -53,16 +52,16 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Hierarchy */}
+      {/* Semantic Hierarchy with asChild */}
       <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Hierarchy</h3>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Hierarchy (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Heading as="h1" size="xl">동해물과 백두산이 마르고 닳도록 (H1)</Heading>
-          <Heading as="h2" size="lg">하느님이 보우하사 우리나라 만세 (H2)</Heading>
-          <Heading as="h3" size="md">무궁화 삼천리 화려강산 (H3)</Heading>
-          <Heading as="h4" size="sm">대한사람 대한으로 길이 보전하세 (H4)</Heading>
-          <Heading as="h5" size="xs">다람쥐 헌 챗바퀴에 타고파 (H5)</Heading>
-          <Heading as="h6" size="2xs">까치 까치 까치 까치 까치 (H6)</Heading>
+          <Heading asChild size="xl"><h1>동해물과 백두산이 마르고 닳도록 (H1)</h1></Heading>
+          <Heading asChild size="lg"><h2>하느님이 보우하사 우리나라 만세 (H2)</h2></Heading>
+          <Heading asChild size="md"><h3>무궁화 삼천리 화려강산 (H3)</h3></Heading>
+          <Heading asChild size="sm"><h4>대한사람 대한으로 길이 보전하세 (H4)</h4></Heading>
+          <Heading asChild size="xs"><h5>다람쥐 헌 챗바퀴에 타고파 (H5)</h5></Heading>
+          <Heading asChild size="2xs"><h6>까치 까치 까치 까치 까치 (H6)</h6></Heading>
         </div>
       </div>
     </div>
