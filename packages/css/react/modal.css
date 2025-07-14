@@ -1,0 +1,68 @@
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.cocso-modal-overlay {
+  background-color: var(--color-palette-blackalpha-10);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cocso-modal-close-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.cocso-modal-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--number-10);
+  height: var(--number-10);
+  cursor: pointer;
+}
+
+.cocso-modal-content {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  padding: var(--number-8);
+  border-radius: 6px;
+  background-color: var(--color-palette-gray-0);
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cocso-modal-title {
+  text-align: center;
+  word-break: keep-all;
+}
+
+.cocso-modal-description {
+  margin-top: var(--number-5);
+  text-align: center;
+}
