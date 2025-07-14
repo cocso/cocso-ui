@@ -19,7 +19,7 @@
 }
 
 .cocso-modal-overlay {
-  background-color: var(--color-palette-blackalpha-10);
+  background-color: var(--color-palette-blackalpha-25);
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
