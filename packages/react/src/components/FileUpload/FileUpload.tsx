@@ -3,7 +3,7 @@ import { useRef, useState, useCallback } from 'react';
 import { Label } from '../Label';
 import { Body } from '../Body';
 
-interface FileItem {
+export interface FileItem {
   file: File;
   name: string;
   size: number;

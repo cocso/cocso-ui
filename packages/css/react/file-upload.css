@@ -58,5 +58,6 @@
   justify-content: center;
   width: var(--number-9);
   height: var(--number-9);
+  cursor: pointer;
 }
 
