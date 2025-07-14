@@ -10,6 +10,9 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    id: {
+      control: 'text',
+    },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],

@@ -1,20 +1,21 @@
 import * as React from 'react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 export type CheckboxProps = {
-    id: string;
+    id?: string;
     size?: 'lg' | 'md' | 'sm';
     status: CheckboxStatus;
     onChange: (next: CheckboxStatus) => void;
     label?: string;
     disabled?: boolean;
-} & Omit<React.ComponentPropsWithoutRef<'div'>, 'id'>;
+} & Omit<React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, 'checked' | 'onCheckedChange'>;
 export declare const Checkbox: React.ForwardRefExoticComponent<{
-    id: string;
+    id?: string;
     size?: "lg" | "md" | "sm";
     status: CheckboxStatus;
     onChange: (next: CheckboxStatus) => void;
     label?: string;
     disabled?: boolean;
-} & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref">, "id"> & React.RefAttributes<HTMLDivElement>> & {
+} & Omit<Omit<CheckboxPrimitive.CheckboxProps & import("react").RefAttributes<HTMLButtonElement>, "ref">, "checked" | "onCheckedChange"> & React.RefAttributes<never>> & {
     displayName: string;
 };

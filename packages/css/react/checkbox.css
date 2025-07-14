@@ -1,10 +1,10 @@
-.cocso-checkbox {
+.cocso-checkbox-wrapper {
   display: flex;
   align-items: center;
   gap: var(--number-5);
 }
 
-.cocso-checkbox-inner {
+.cocso-checkbox {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -20,42 +20,42 @@
   --cocso-checkbox-background: inherit;
 }
 
-.cocso-checkbox-inner--status_off {
+.cocso-checkbox--status_off {
   --cocso-checkbox-border: var(--color-divider-gray-light);
   --cocso-checkbox-background: var(--color-palette-gray-0);
 }
 
-.cocso-checkbox-inner--status_intermediate {
+.cocso-checkbox--status_intermediate {
   --cocso-checkbox-color: var(--color-palette-gray-0);
   --cocso-checkbox-border: var(--color-palette-primary-500);
   --cocso-checkbox-background: var(--color-palette-primary-500);
 }
 
-.cocso-checkbox-inner--status_on {
+.cocso-checkbox--status_on {
   --cocso-checkbox-color: var(--color-palette-gray-0);
   --cocso-checkbox-border: var(--color-palette-primary-500);
   --cocso-checkbox-background: var(--color-palette-primary-500);
 }
 
-.cocso-checkbox-inner--status_off-disabled_true {
+.cocso-checkbox--status_off-disabled_true {
   --cocso-checkbox-color: var(--color-palette-gray-400);
   --cocso-checkbox-border: var(--color-palette-gray-400);
   --cocso-checkbox-background: var(--color-palette-gray-300);
 }
 
-.cocso-checkbox-inner--status_intermediate-disabled_true {
+.cocso-checkbox--status_intermediate-disabled_true {
   --cocso-checkbox-color: var(--color-palette-gray-400);
   --cocso-checkbox-border: var(--color-palette-gray-400);
   --cocso-checkbox-background: var(--color-palette-gray-300);
 }
 
-.cocso-checkbox-inner--status_on-disabled_true {
+.cocso-checkbox--status_on-disabled_true {
   --cocso-checkbox-color: var(--color-palette-gray-400);
   --cocso-checkbox-border: var(--color-palette-gray-400);
   --cocso-checkbox-background: var(--color-palette-gray-300);
 }
 
-.cocso-checkbox-icon {
+.cocso-checkbox-indicator {
   position: absolute;
   top: var(--number-2);
   right: var(--number-2);
@@ -64,10 +64,12 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.cocso-checkbox-icon > svg {
+.cocso-checkbox-indicator > svg {
   display: block;
   max-width: 100%;
   height: auto;
+  transition: stroke 0.2s ease-in-out;
+  stroke: var(--cocso-checkbox-color);
 }
 
 .cocso-checkbox input[type="checkbox"] {
@@ -82,17 +84,17 @@
   border-width: 0;
 }
 
-.cocso-checkbox-inner--size_sm {
+.cocso-checkbox--size_sm {
   width: var(--number-8);
   height: var(--number-8);
 }
 
-.cocso-checkbox-inner--size_md {
+.cocso-checkbox--size_md {
   width: var(--number-9);
   height: var(--number-9);
 }
 
-.cocso-checkbox-inner--size_lg {
+.cocso-checkbox--size_lg {
   width: var(--number-10);
   height: var(--number-10);
 }

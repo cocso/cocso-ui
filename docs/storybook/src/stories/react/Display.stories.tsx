@@ -9,9 +9,8 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: {
-      control: 'select',
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    asChild: {
+      control: 'boolean',
     },
     size: {
       control: 'select',
@@ -74,14 +73,14 @@ export const AllVariations: Story = {
             padding: '40px 20px',
           }}
         >
-          <Display as="h1" size="lg" color="#1F2937">
-            다람쥐 헌 챗바퀴에 타고파
+          <Display asChild size="lg" color="#1F2937">
+            <h1>다람쥐 헌 챗바퀴에 타고파</h1>
           </Display>
-          <Display as="h2" size="md" color="#6B7280">
-            까치 까치 까치 까치 까치 까치 까치 까치 까치 까치
+          <Display asChild size="md" color="#6B7280">
+            <h2>까치 까치 까치 까치 까치 까치 까치 까치 까치 까치</h2>
           </Display>
-          <Display as="h3" size="sm" color="#9CA3AF">
-            토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼
+          <Display asChild size="sm" color="#9CA3AF">
+            <h3>토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼 토끼</h3>
           </Display>
         </div>
       </div>

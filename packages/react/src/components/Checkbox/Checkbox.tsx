@@ -1,122 +1,118 @@
 import * as React from 'react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { createClassName } from '../../utils/cn';
 import { Label } from '../Label';
 
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
 export type CheckboxProps = {
-  id: string;
+  id?: string;
   size?: 'lg' | 'md' | 'sm';
   status: CheckboxStatus;
   onChange: (next: CheckboxStatus) => void;
   label?: string;
   disabled?: boolean;
-} & Omit<React.ComponentPropsWithoutRef<'div'>, 'id'>;
+} & Omit<
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+  'checked' | 'onCheckedChange'
+>;
 
-const CheckboxComponent = React.forwardRef(
-  (
-    {
-      id,
-      size = 'md',
-      status,
-      onChange,
-      label,
-      disabled = false,
-      className,
-      ...props
-    }: CheckboxProps,
-    ref?: React.ComponentPropsWithRef<'div'>['ref'],
-  ) => {
-    const variants = { size, disabled, status };
-    const compoundVariants = [...(disabled ? [{ status, disabled }] : [])];
-    const innerClassName = createClassName(
-      'cocso-checkbox-inner',
-      variants,
-      compoundVariants,
-      className,
-    );
+const CheckboxComponent = React.forwardRef<
+  React.ComponentRef<typeof CheckboxPrimitive.Root>,
+  CheckboxProps
+>(({ id, size = 'md', status, onChange, label, disabled = false, className, ...props }, ref) => {
+  const variants = { size, disabled, status };
+  const compoundVariants = [...(disabled ? [{ status, disabled }] : [])];
+  const classNames = createClassName('cocso-checkbox', variants, compoundVariants, className);
 
-    const handleChange = () => {
-      if (!disabled) {
-        const newStatus: CheckboxStatus = status === 'on' ? 'off' : 'on';
-        onChange(newStatus);
+  const handleCheckedChange = (checked: CheckboxPrimitive.CheckedState) => {
+    if (!disabled) {
+      let newStatus: CheckboxStatus;
+      if (checked === true) {
+        newStatus = 'on';
+      } else if (checked === 'indeterminate') {
+        newStatus = 'intermediate';
+      } else {
+        newStatus = 'off';
       }
-    };
+      onChange(newStatus);
+    }
+  };
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        handleChange();
-      }
-    };
+  const getCheckedState = (): CheckboxPrimitive.CheckedState => {
+    switch (status) {
+      case 'on':
+        return true;
+      case 'intermediate':
+        return 'indeterminate';
+      case 'off':
+      default:
+        return false;
+    }
+  };
 
-    return (
-      <div
+  return (
+    <div className="cocso-checkbox-wrapper">
+      <CheckboxPrimitive.Root
         ref={ref}
-        className="cocso-checkbox"
-        tabIndex={disabled ? -1 : 0}
-        role="checkbox"
-        aria-checked={status === 'on' ? 'true' : status === 'intermediate' ? 'mixed' : 'false'}
-        aria-disabled={disabled}
-        onKeyDown={handleKeyDown}
+        id={id}
+        className={classNames}
+        checked={getCheckedState()}
+        onCheckedChange={handleCheckedChange}
+        disabled={disabled}
         {...props}
       >
-        <div className={innerClassName} onClick={handleChange}>
-          <div className="cocso-checkbox-icon" style={{ opacity: status === 'on' ? 1 : 0 }}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-          </div>
-          <div
-            className="cocso-checkbox-icon"
-            style={{ opacity: status === 'intermediate' ? 1 : 0 }}
+        <CheckboxPrimitive.Indicator
+          className="cocso-checkbox-indicator"
+          style={{ opacity: status === 'on' ? 1 : 0 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-            </svg>
-          </div>
-          <input
-            type="checkbox"
-            id={id}
-            checked={status === 'on'}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-        </div>
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </CheckboxPrimitive.Indicator>
 
-        {label && (
-          <Label
-            className={createClassName('cocso-checkbox-label', variants)}
-            htmlFor={id}
-            size={size}
+        <div
+          className="cocso-checkbox-indicator"
+          style={{ opacity: status === 'intermediate' ? 1 : 0 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            {label}
-          </Label>
-        )}
-      </div>
-    );
-  },
-);
+            <path d="M5 12h14" />
+          </svg>
+        </div>
+      </CheckboxPrimitive.Root>
+
+      {label && (
+        <Label 
+          className={createClassName('cocso-checkbox-label', variants)} 
+          size={size}
+          htmlFor={id}
+        >
+          {label}
+        </Label>
+      )}
+    </div>
+  );
+});
 
 export const Checkbox = Object.assign(CheckboxComponent, {
   displayName: 'Checkbox',

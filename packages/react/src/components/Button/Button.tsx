@@ -1,21 +1,18 @@
 import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 import { Spinner } from '../Spinner';
 
-const tags = ['button'] as const;
-type Element = (typeof tags)[number];
-type Default = (typeof tags)[0];
-
-export type ButtonProps<T extends Element = Default> = {
-  as?: T;
+export type ButtonProps = {
+  asChild?: boolean;
   variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success' | 'text';
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
   disabled?: boolean;
   loading?: boolean;
   color?: string;
   weight?: FontWeightToken;
-} & React.ComponentPropsWithoutRef<T>;
+} & React.ComponentPropsWithoutRef<'button'>;
 
 const getSpinnerSize = (buttonSize: ButtonProps['size']): 'xl' | 'lg' | 'md' | 'sm' | 'xs' => {
   const sizeMap = {
@@ -29,10 +26,10 @@ const getSpinnerSize = (buttonSize: ButtonProps['size']): 'xl' | 'lg' | 'md' | '
   return sizeMap[buttonSize!];
 };
 
-const ButtonComponent = React.forwardRef(
-  <T extends Element = Default>(
+const ButtonComponent = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
     {
-      as = tags[0] as T,
+      asChild = false,
       variant = 'primary',
       size = 'md',
       disabled = false,
@@ -45,10 +42,9 @@ const ButtonComponent = React.forwardRef(
       onClick,
       onKeyDown,
       ...props
-    }: ButtonProps<T>,
-    ref?: React.ComponentPropsWithRef<T>['ref'],
+    },
+    ref,
   ) => {
-    const Element = as as React.ElementType;
     const isButtonDisabled = disabled || loading;
 
     const handleClick = React.useCallback(
@@ -82,7 +78,7 @@ const ButtonComponent = React.forwardRef(
       ...(disabled ? [{ variant, disabled }] : []),
       ...(loading ? [{ variant, loading }] : []),
     ];
-    const combinedClassName = createClassName(
+    const classNames = createClassName(
       'cocso-button',
       variants,
       compoundVariants,
@@ -95,10 +91,12 @@ const ButtonComponent = React.forwardRef(
       ...style,
     } as React.CSSProperties;
 
+    const Comp = asChild ? Slot : 'button';
+
     return (
-      <Element
+      <Comp
         ref={ref}
-        className={combinedClassName}
+        className={classNames}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="button"
@@ -117,7 +115,7 @@ const ButtonComponent = React.forwardRef(
         ) : (
           children
         )}
-      </Element>
+      </Comp>
     );
   },
 );

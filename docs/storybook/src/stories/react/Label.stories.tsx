@@ -9,9 +9,8 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: {
-      control: 'select',
-      options: ['label', 'p', 'a', 'span', 'div', 'li', 'td', 'th', 'figcaption', 'blockquote', 'cite'],
+    asChild: {
+      control: 'boolean',
     },
     size: {
       control: 'select',
@@ -67,21 +66,21 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Elements */}
+      {/* Semantic Elements with asChild */}
       <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements</h3>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Label as="label">Label 요소</Label>
-          <Label as="p">Paragraph 요소</Label>
-          <Label as="span">Span 요소</Label>
-          <Label as="div">Div 요소</Label>
-          <Label as="a" href="#" style={{ textDecoration: 'underline' }}>Link 요소</Label>
-          <Label as="li">List Item 요소</Label>
-          <Label as="td">Table Data 요소</Label>
-          <Label as="th">Table Header 요소</Label>
-          <Label as="figcaption">Figure Caption 요소</Label>
-          <Label as="blockquote">Blockquote 요소</Label>
-          <Label as="cite">Citation 요소</Label>
+          <Label asChild><label>Label 요소</label></Label>
+          <Label asChild><p>Paragraph 요소</p></Label>
+          <Label asChild><span>Span 요소</span></Label>
+          <Label asChild><div>Div 요소</div></Label>
+          <Label asChild><a href="#" style={{ textDecoration: 'underline' }}>Link 요소</a></Label>
+          <Label asChild><li>List Item 요소</li></Label>
+          <Label asChild><td>Table Data 요소</td></Label>
+          <Label asChild><th>Table Header 요소</th></Label>
+          <Label asChild><figcaption>Figure Caption 요소</figcaption></Label>
+          <Label asChild><blockquote>Blockquote 요소</blockquote></Label>
+          <Label asChild><cite>Citation 요소</cite></Label>
         </div>
       </div>
 
@@ -114,8 +113,8 @@ export const AllVariations: Story = {
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Interactive Example</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <Label as="label" size="sm" weight="medium">
-            사용자 이름
+          <Label asChild size="sm" weight="medium">
+            <label>사용자 이름</label>
           </Label>
           <input 
             type="text" 
@@ -128,8 +127,8 @@ export const AllVariations: Story = {
             }} 
           />
           
-          <Label as="label" size="sm" weight="medium" style={{ marginTop: '16px' }}>
-            이메일 주소
+          <Label asChild size="sm" weight="medium" style={{ marginTop: '16px' }}>
+            <label>이메일 주소</label>
           </Label>
           <input 
             type="email" 
@@ -142,8 +141,8 @@ export const AllVariations: Story = {
             }} 
           />
 
-          <Label as="label" size="xs" weight="normal" style={{ marginTop: '16px', color: '#666' }}>
-            선택사항
+          <Label asChild size="xs" weight="normal" style={{ marginTop: '16px', color: '#666' }}>
+            <label>선택사항</label>
           </Label>
           <input 
             type="text" 
@@ -163,8 +162,8 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Form Layout Example</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '600px' }}>
           <div>
-            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
-              이름
+            <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              <label>이름</label>
             </Label>
             <input 
               type="text" 
@@ -178,8 +177,8 @@ export const AllVariations: Story = {
             />
           </div>
           <div>
-            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
-              성
+            <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              <label>성</label>
             </Label>
             <input 
               type="text" 
@@ -193,8 +192,8 @@ export const AllVariations: Story = {
             />
           </div>
           <div style={{ gridColumn: '1 / -1' }}>
-            <Label as="label" size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
-              이메일
+            <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
+              <label>이메일</label>
             </Label>
             <input 
               type="email" 

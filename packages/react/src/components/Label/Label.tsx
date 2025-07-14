@@ -1,52 +1,26 @@
 import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
 
-const tags = [
-  'label',
-  'p',
-  'a',
-  'span',
-  'div',
-  'li',
-  'td',
-  'th',
-  'figcaption',
-  'blockquote',
-  'cite',
-] as const;
-type Element = (typeof tags)[number];
-type Default = (typeof tags)[0];
-
-export type LabelProps<T extends Element = Default> = {
-  as?: T;
+export type LabelProps = {
+  asChild?: boolean;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
   weight?: FontWeightToken;
-} & React.ComponentPropsWithoutRef<T>;
+} & React.ComponentPropsWithoutRef<'label'>;
 
-const LabelComponent = React.forwardRef(
-  <T extends Element = Default>(
-    {
-      as = tags[0] as T,
-      size = 'md',
-      color,
-      weight = 'normal',
-      className,
-      style,
-      ...props
-    }: LabelProps<T>,
-    ref?: React.ComponentPropsWithRef<T>['ref'],
-  ) => {
-    const Element = as as React.ElementType;
-
+const LabelComponent = React.forwardRef<HTMLLabelElement, LabelProps>(
+  ({ asChild = false, size = 'md', color, weight = 'normal', className, style, ...props }, ref) => {
     const variants = { size };
-    const combinedClassName = createClassName('cocso-label', variants, [], className);
+    const classNames = createClassName('cocso-label', variants, [], className);
+
+    const Comp = asChild ? Slot : 'label';
 
     return (
-      <Element
+      <Comp
         ref={ref}
-        className={combinedClassName}
+        className={classNames}
         style={
           {
             '--cocso-label-color': createColor(color),
