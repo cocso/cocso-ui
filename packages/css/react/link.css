@@ -1,5 +1,5 @@
 .cocso-link {
-  display: inline-block;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
@@ -47,4 +47,10 @@
 
 .cocso-link--indicator_true {
   text-decoration: underline;
+}
+
+.cocso-link > svg {
+  width: var(--number-9);
+  height: var(--number-9);
+  flex-shrink: 0;
 }
