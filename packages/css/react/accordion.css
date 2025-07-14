@@ -36,6 +36,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 }
 
 .cocso-accordion-trigger > .cocso-accordion-chevron {
