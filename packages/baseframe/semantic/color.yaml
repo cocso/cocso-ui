@@ -475,7 +475,7 @@ data:
         default: $color.palette.blackalpha-0
     $color.button.disabled-fill:
       values:
-        default: $color.palette.gray-100
+        default: $color.palette.gray-50
     $color.button.disabled-border:
       values:
         default: $color.palette.gray-200

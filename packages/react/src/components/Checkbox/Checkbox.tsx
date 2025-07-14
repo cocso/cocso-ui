@@ -102,8 +102,8 @@ const CheckboxComponent = React.forwardRef<
       </CheckboxPrimitive.Root>
 
       {label && (
-        <Label 
-          className={createClassName('cocso-checkbox-label', variants)} 
+        <Label
+          className={createClassName('cocso-checkbox-label', { disabled })}
           size={size}
           htmlFor={id}
         >
