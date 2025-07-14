@@ -50,7 +50,7 @@
 }
 
 .cocso-link > svg {
-  width: var(--number-9);
-  height: var(--number-9);
+  width: var(--number-8);
+  height: var(--number-8);
   flex-shrink: 0;
 }
