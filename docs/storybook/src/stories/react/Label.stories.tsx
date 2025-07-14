@@ -116,43 +116,43 @@ export const AllVariations: Story = {
           <Label asChild size="sm" weight="medium">
             <label>사용자 이름</label>
           </Label>
-          <input 
-            type="text" 
-            placeholder="이름을 입력하세요" 
-            style={{ 
-              padding: '8px 12px', 
-              border: '1px solid #ccc', 
+          <input
+            type="text"
+            placeholder="이름을 입력하세요"
+            style={{
+              padding: '8px 12px',
+              border: '1px solid #ccc',
               borderRadius: '4px',
               fontSize: '14px'
-            }} 
+            }}
           />
-          
+
           <Label asChild size="sm" weight="medium" style={{ marginTop: '16px' }}>
             <label>이메일 주소</label>
           </Label>
-          <input 
-            type="email" 
-            placeholder="이메일을 입력하세요" 
-            style={{ 
-              padding: '8px 12px', 
-              border: '1px solid #ccc', 
+          <input
+            type="email"
+            placeholder="이메일을 입력하세요"
+            style={{
+              padding: '8px 12px',
+              border: '1px solid #ccc',
               borderRadius: '4px',
               fontSize: '14px'
-            }} 
+            }}
           />
 
           <Label asChild size="xs" weight="normal" style={{ marginTop: '16px', color: '#666' }}>
             <label>선택사항</label>
           </Label>
-          <input 
-            type="text" 
-            placeholder="선택사항을 입력하세요" 
-            style={{ 
-              padding: '8px 12px', 
-              border: '1px solid #ccc', 
+          <input
+            type="text"
+            placeholder="선택사항을 입력하세요"
+            style={{
+              padding: '8px 12px',
+              border: '1px solid #ccc',
               borderRadius: '4px',
               fontSize: '14px'
-            }} 
+            }}
           />
         </div>
       </div>
@@ -165,49 +165,49 @@ export const AllVariations: Story = {
             <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
               <label>이름</label>
             </Label>
-            <input 
-              type="text" 
-              style={{ 
+            <input
+              type="text"
+              style={{
                 width: '100%',
-                padding: '8px 12px', 
-                border: '1px solid #ccc', 
+                padding: '8px 12px',
+                border: '1px solid #ccc',
                 borderRadius: '4px',
                 fontSize: '14px'
-              }} 
+              }}
             />
           </div>
           <div>
             <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
               <label>성</label>
             </Label>
-            <input 
-              type="text" 
-              style={{ 
+            <input
+              type="text"
+              style={{
                 width: '100%',
-                padding: '8px 12px', 
-                border: '1px solid #ccc', 
+                padding: '8px 12px',
+                border: '1px solid #ccc',
                 borderRadius: '4px',
                 fontSize: '14px'
-              }} 
+              }}
             />
           </div>
           <div style={{ gridColumn: '1 / -1' }}>
             <Label asChild size="sm" weight="medium" style={{ display: 'block', marginBottom: '4px' }}>
               <label>이메일</label>
             </Label>
-            <input 
-              type="email" 
-              style={{ 
+            <input
+              type="email"
+              style={{
                 width: '100%',
-                padding: '8px 12px', 
-                border: '1px solid #ccc', 
+                padding: '8px 12px',
+                border: '1px solid #ccc',
                 borderRadius: '4px',
                 fontSize: '14px'
-              }} 
+              }}
             />
           </div>
         </div>
       </div>
     </div>
   ),
-}; 
+};

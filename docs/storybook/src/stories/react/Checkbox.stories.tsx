@@ -185,7 +185,7 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* Without Label */}
+        {/* Without Link */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Without Label</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -245,7 +245,7 @@ export const InteractiveExample: Story = {
         <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', fontWeight: '600' }}>
           체크박스 그룹 예제
         </h3>
-        
+
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <Checkbox
             id="select-all"
@@ -278,4 +278,4 @@ export const InteractiveExample: Story = {
       </div>
     );
   },
-}; 
+};

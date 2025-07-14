@@ -38,21 +38,21 @@
 }
 
 .cocso-checkbox--status_off-disabled_true {
-  --cocso-checkbox-color: var(--color-palette-gray-400);
-  --cocso-checkbox-border: var(--color-palette-gray-400);
-  --cocso-checkbox-background: var(--color-palette-gray-300);
+  --cocso-checkbox-color: var(--color-palette-gray-300);
+  --cocso-checkbox-border: var(--color-palette-gray-300);
+  --cocso-checkbox-background: var(--color-palette-gray-100);
 }
 
 .cocso-checkbox--status_intermediate-disabled_true {
-  --cocso-checkbox-color: var(--color-palette-gray-400);
-  --cocso-checkbox-border: var(--color-palette-gray-400);
-  --cocso-checkbox-background: var(--color-palette-gray-300);
+  --cocso-checkbox-color: var(--color-palette-gray-300);
+  --cocso-checkbox-border: var(--color-palette-gray-300);
+  --cocso-checkbox-background: var(--color-palette-gray-100);
 }
 
 .cocso-checkbox--status_on-disabled_true {
-  --cocso-checkbox-color: var(--color-palette-gray-400);
-  --cocso-checkbox-border: var(--color-palette-gray-400);
-  --cocso-checkbox-background: var(--color-palette-gray-300);
+  --cocso-checkbox-color: var(--color-palette-gray-300);
+  --cocso-checkbox-border: var(--color-palette-gray-300);
+  --cocso-checkbox-background: var(--color-palette-gray-100);
 }
 
 .cocso-checkbox-indicator {
