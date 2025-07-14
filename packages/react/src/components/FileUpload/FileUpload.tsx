@@ -173,7 +173,9 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
             />
 
             <Label size="xs" color="palette.gray-600">
-              파일을 여기에 끌어다 놓거나, 클릭하여 파일을 선택하세요 (최대 3MB)
+              파일을 여기에 끌어다 놓거나, 클릭하여 파일을 선택하세요
+              <br />
+              (최대 3MB)
             </Label>
 
             <svg
