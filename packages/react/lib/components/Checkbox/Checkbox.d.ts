@@ -16,6 +16,6 @@ export declare const Checkbox: React.ForwardRefExoticComponent<{
     onChange: (next: CheckboxStatus) => void;
     label?: string;
     disabled?: boolean;
-} & Omit<Omit<CheckboxPrimitive.CheckboxProps & import("react").RefAttributes<HTMLButtonElement>, "ref">, "checked" | "onCheckedChange"> & React.RefAttributes<never>> & {
+} & Omit<Omit<CheckboxPrimitive.CheckboxProps & React.RefAttributes<HTMLButtonElement>, "ref">, "checked" | "onCheckedChange"> & React.RefAttributes<HTMLButtonElement>> & {
     displayName: string;
 };
