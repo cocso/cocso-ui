@@ -3,10 +3,11 @@
 @import './react/accordion.css';
 @import './react/body.css';
 @import './react/button.css';
+@import './react/checkbox.css';
 @import './react/display.css';
 @import './react/heading.css';
 @import './react/label.css';
 @import './react/link.css';
 @import './react/modal.css';
-@import './react/checkbox.css';
+@import './react/one-time-password-field.css';
 @import './react/spinner.css';
