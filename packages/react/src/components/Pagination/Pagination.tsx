@@ -4,15 +4,15 @@ import { Slot } from '@radix-ui/react-slot';
 export type PaginationProps = {
   asChild?: boolean;
   page: number;
-  count: number;
+  totalPages: number;
+  maxVisible?: number;
   onChange: (pageNumber: number) => void;
-} & React.ComponentPropsWithoutRef<'div'>;
-
-const GROUP_MAX = 5;
-const HALF_GROUP = Math.ceil(GROUP_MAX / 2);
+} & Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'>;
 
 const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
-  ({ asChild = false, page, count, onChange, className, ...props }, ref) => {
+  ({ asChild = false, page, totalPages, maxVisible = 5, onChange, className, ...props }, ref) => {
+    const halfVisible = Math.ceil(maxVisible / 2);
+
     const renderPageButton = (pageNumber: number) => (
       <button
         key={pageNumber}
@@ -28,7 +28,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
 
     return (
       <Comp ref={ref} className={`cocso-pagination ${className || ''}`} {...props}>
-        {count > 1 && (
+        {totalPages > 1 && (
           <button
             className="cocso-pagination-arrow"
             disabled={page === 1}
@@ -50,30 +50,30 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
           </button>
         )}
 
-        {count <= GROUP_MAX + 2 ? (
-          Array(count)
+        {totalPages <= maxVisible + 2 ? (
+          Array(totalPages)
             .fill(0)
-            .map((item, index) => renderPageButton(index + 1))
+            .map((_, index) => renderPageButton(index + 1))
         ) : (
           <>
             {renderPageButton(1)}
-            {page > 1 + HALF_GROUP && <span className="cocso-pagination-trunc">...</span>}
-            {Array(GROUP_MAX)
+            {page > 1 + halfVisible && <span className="cocso-pagination-trunc">...</span>}
+            {Array(maxVisible)
               .fill(0)
               .map((_, index) => {
-                const pageNumber = page - HALF_GROUP + index + 1;
-                return pageNumber > 1 && pageNumber < count ? renderPageButton(pageNumber) : '';
+                const pageNumber = page - halfVisible + index + 1;
+                return pageNumber > 1 && pageNumber < totalPages ? renderPageButton(pageNumber) : '';
               })}
-            {page < count - HALF_GROUP && <span className="cocso-pagination-trunc">...</span>}
-            {renderPageButton(count)}
+            {page < totalPages - halfVisible && <span className="cocso-pagination-trunc">...</span>}
+            {renderPageButton(totalPages)}
           </>
         )}
 
-        {count > 1 && (
+        {totalPages > 1 && (
           <button
             className="cocso-pagination-arrow"
-            disabled={page === count}
-            onClick={() => page < count && onChange(page + 1)}
+            disabled={page === totalPages}
+            onClick={() => page < totalPages && onChange(page + 1)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

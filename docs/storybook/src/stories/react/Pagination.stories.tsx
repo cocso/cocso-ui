@@ -14,9 +14,13 @@ const meta = {
       control: { type: 'number', min: 1 },
       description: '현재 페이지 번호',
     },
-    count: {
+    totalPages: {
       control: { type: 'number', min: 1 },
       description: '전체 페이지 수',
+    },
+    maxVisible: {
+      control: { type: 'number', min: 3, max: 10 },
+      description: '한 번에 표시할 최대 페이지 버튼 수',
     },
     onChange: {
       description: '페이지 변경 시 호출되는 콜백 함수',
@@ -31,7 +35,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     page: 1,
-    count: 10,
+    totalPages: 10,
     onChange: () => {},
   },
 };
@@ -39,7 +43,7 @@ export const Default: Story = {
 export const SmallPageCount: Story = {
   args: {
     page: 1,
-    count: 5,
+    totalPages: 5,
     onChange: () => {},
   },
 };
@@ -47,7 +51,7 @@ export const SmallPageCount: Story = {
 export const LargePageCount: Story = {
   args: {
     page: 50,
-    count: 100,
+    totalPages: 100,
     onChange: () => {},
   },
 };
@@ -55,7 +59,7 @@ export const LargePageCount: Story = {
 export const SinglePage: Story = {
   args: {
     page: 1,
-    count: 1,
+    totalPages: 1,
     onChange: () => {},
   },
 };
@@ -82,7 +86,7 @@ export const AllVariations: Story = {
           </h3>
           <Pagination
             page={pages.small}
-            count={5}
+            totalPages={5}
             onChange={handlePageChange('small')}
           />
         </div>
@@ -94,7 +98,7 @@ export const AllVariations: Story = {
           </h3>
           <Pagination
             page={pages.medium}
-            count={10}
+            totalPages={10}
             onChange={handlePageChange('medium')}
           />
         </div>
@@ -106,7 +110,7 @@ export const AllVariations: Story = {
           </h3>
           <Pagination
             page={pages.large}
-            count={100}
+            totalPages={100}
             onChange={handlePageChange('large')}
           />
         </div>
@@ -118,7 +122,7 @@ export const AllVariations: Story = {
           </h3>
           <Pagination
             page={pages.single}
-            count={1}
+            totalPages={1}
             onChange={handlePageChange('single')}
           />
         </div>
@@ -139,7 +143,7 @@ export const InteractiveExample: Story = {
     const handleTotalPagesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newTotal = parseInt(event.target.value);
       setTotalPages(newTotal);
-      setCurrentPage(1); // 페이지 수가 변경되면 첫 페이지로 리셋
+      setCurrentPage(1);
     };
 
     return (
@@ -176,7 +180,7 @@ export const InteractiveExample: Story = {
 
         <Pagination
           page={currentPage}
-          count={totalPages}
+          totalPages={totalPages}
           onChange={handlePageChange}
         />
 
@@ -221,7 +225,7 @@ export const EdgeCases: Story = {
           </h3>
           <Pagination
             page={pages.first}
-            count={100}
+            totalPages={100}
             onChange={handlePageChange('first')}
           />
         </div>
@@ -233,7 +237,7 @@ export const EdgeCases: Story = {
           </h3>
           <Pagination
             page={pages.middle}
-            count={100}
+            totalPages={100}
             onChange={handlePageChange('middle')}
           />
         </div>
@@ -245,7 +249,7 @@ export const EdgeCases: Story = {
           </h3>
           <Pagination
             page={pages.last}
-            count={100}
+            totalPages={100}
             onChange={handlePageChange('last')}
           />
         </div>

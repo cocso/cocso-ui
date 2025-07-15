@@ -20,12 +20,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--number-13);
-  height: var(--number-13);
+  width: var(--number-12);
+  height: var(--number-12);
   color: var(--cocso-pagination-color);
   font-size: 16px;
   font-weight: var(--cocso-pagination-font-weight);
-  border-radius: var(--number-3);
+  border-radius: var(--number-4);
   background-color: var(--cocso-pagination-background);
   --cocso-pagination-color: var(--color-text-basic);
   --cocso-pagination-background: inherit;
