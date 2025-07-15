@@ -25,6 +25,7 @@
   color: var(--cocso-pagination-color);
   font-size: 16px;
   font-weight: var(--cocso-pagination-font-weight);
+  cursor: pointer;
   border-radius: var(--number-4);
   background-color: var(--cocso-pagination-background);
   --cocso-pagination-color: var(--color-text-basic);
