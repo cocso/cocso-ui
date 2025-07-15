@@ -20,8 +20,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--number-12);
-  height: var(--number-12);
+  width: var(--number-13);
+  height: var(--number-13);
   color: var(--cocso-pagination-color);
   font-size: 16px;
   font-weight: var(--cocso-pagination-font-weight);
