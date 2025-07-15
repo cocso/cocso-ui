@@ -4,5 +4,5 @@ export declare const Switch: import("react").ForwardRefExoticComponent<{
     size?: "lg" | "md";
     disabled?: boolean;
     label?: string;
-    labelPosition?: "left" | "right";
+    position?: "left" | "right";
 } & Omit<SwitchPrimitive.SwitchProps & import("react").RefAttributes<HTMLButtonElement>, "ref"> & import("react").RefAttributes<HTMLButtonElement>>;

@@ -8,28 +8,19 @@ type SwitchProps = {
   size?: 'lg' | 'md';
   disabled?: boolean;
   label?: string;
-  labelPosition?: 'left' | 'right';
+  position?: 'left' | 'right';
 } & ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>;
 
 const SwitchContent = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, SwitchProps>(
   (
-    {
-      id,
-      size = 'md',
-      disabled = false,
-      label,
-      labelPosition = 'right',
-      className,
-      children,
-      ...props
-    },
+    { id, size = 'md', disabled = false, label, position = 'right', className, children, ...props },
     ref,
   ) => {
     const classNames = createClassName('cocso-switch', { size, disabled }, [], className);
 
     return (
       <div className="cocso-switch-wrapper">
-        {labelPosition === 'left' && (
+        {position === 'left' && (
           <Label size={size} htmlFor={id}>
             {label}
           </Label>
@@ -37,7 +28,7 @@ const SwitchContent = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
         <SwitchPrimitive.Root ref={ref} className={classNames} {...props}>
           <SwitchPrimitive.Thumb className={createClassName('cocso-switch-thumb', { size })} />
         </SwitchPrimitive.Root>
-        {labelPosition === 'right' && (
+        {position === 'right' && (
           <Label size={size} htmlFor={id}>
             {label}
           </Label>
