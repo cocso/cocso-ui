@@ -38,42 +38,42 @@
   padding-inline: var(--number-5);
   min-width: var(--number-11);
   min-height: var(--number-11);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .cocso-button--size_xs {
   padding-inline: var(--number-6);
   min-width: var(--number-12);
   min-height: var(--number-12);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .cocso-button--size_sm {
   padding-inline: var(--number-7);
   min-width: var(--number-14);
   min-height: var(--number-14);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .cocso-button--size_md {
   padding-inline: var(--number-8);
   min-width: var(--number-16);
   min-height: var(--number-16);
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .cocso-button--size_lg {
   padding-inline: var(--number-9);
   min-width: var(--number-17);
   min-height: var(--number-17);
-  font-size: 19px;
+  font-size: 18px;
 }
 
 .cocso-button--size_xl {
   padding-inline: var(--number-10);
   min-width: var(--number-18);
   min-height: var(--number-18);
-  font-size: 19px;
+  font-size: 18px;
 }
 
 .cocso-button--variant_primary {
