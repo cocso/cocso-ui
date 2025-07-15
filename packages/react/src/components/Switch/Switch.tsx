@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { createClassName } from '../../utils/cn';
 import { Label } from '../Label';
 
 export type SwitchProps = {
-  asChild?: boolean;
   id: string;
   size?: 'lg' | 'md';
   disabled?: boolean;
@@ -18,26 +16,14 @@ const SwitchComponent = React.forwardRef<
   SwitchProps
 >(
   (
-    {
-      asChild = false,
-      id,
-      size = 'md',
-      disabled = false,
-      label,
-      position = 'right',
-      className,
-      children,
-      ...props
-    },
+    { id, size = 'md', disabled = false, label, position = 'right', className, children, ...props },
     ref,
   ) => {
     const switchClassNames = createClassName('cocso-switch', { size, disabled }, [], className);
     const thumbClassNames = createClassName('cocso-switch-thumb', { size });
 
-    const Comp = asChild ? Slot : 'div';
-
     return (
-      <Comp className="cocso-switch-wrapper">
+      <div className="cocso-switch-wrapper">
         {position === 'left' && (
           <Label size={size} htmlFor={id}>
             {label}
@@ -51,7 +37,7 @@ const SwitchComponent = React.forwardRef<
             {label}
           </Label>
         )}
-      </Comp>
+      </div>
     );
   },
 );
