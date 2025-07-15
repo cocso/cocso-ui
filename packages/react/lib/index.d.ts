@@ -10,4 +10,5 @@ export * from './components/Modal';
 export * from './components/OneTimePasswordField';
 export * from './components/Checkbox';
 export * from './components/Spinner';
+export * from './components/Switch';
 export * from './components/Toast';

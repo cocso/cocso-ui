@@ -11,7 +11,18 @@ export type LabelProps = {
 } & React.ComponentPropsWithoutRef<'label'>;
 
 const LabelComponent = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ asChild = false, size = 'md', color, weight = 'normal', className, style, ...props }, ref) => {
+  (
+    {
+      asChild = false,
+      size = 'md',
+      color = 'text.basic',
+      weight = 'normal',
+      className,
+      style,
+      ...props
+    },
+    ref,
+  ) => {
     const variants = { size };
     const classNames = createClassName('cocso-label', variants, [], className);
 
