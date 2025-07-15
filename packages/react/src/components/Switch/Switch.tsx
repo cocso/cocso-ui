@@ -1,41 +1,61 @@
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { createClassName } from '../../utils/cn';
 import { Label } from '../Label';
 
-type SwitchProps = {
+export type SwitchProps = {
+  asChild?: boolean;
   id: string;
   size?: 'lg' | 'md';
   disabled?: boolean;
   label?: string;
   position?: 'left' | 'right';
-} & ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>;
+} & React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>;
 
-const SwitchContent = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, SwitchProps>(
+const SwitchComponent = React.forwardRef<
+  React.ComponentRef<typeof SwitchPrimitive.Root>,
+  SwitchProps
+>(
   (
-    { id, size = 'md', disabled = false, label, position = 'right', className, children, ...props },
+    {
+      asChild = false,
+      id,
+      size = 'md',
+      disabled = false,
+      label,
+      position = 'right',
+      className,
+      children,
+      ...props
+    },
     ref,
   ) => {
-    const classNames = createClassName('cocso-switch', { size, disabled }, [], className);
+    const switchClassNames = createClassName('cocso-switch', { size, disabled }, [], className);
+    const thumbClassNames = createClassName('cocso-switch-thumb', { size });
+
+    const Comp = asChild ? Slot : 'div';
 
     return (
-      <div className="cocso-switch-wrapper">
+      <Comp className="cocso-switch-wrapper">
         {position === 'left' && (
           <Label size={size} htmlFor={id}>
             {label}
           </Label>
         )}
-        <SwitchPrimitive.Root ref={ref} className={classNames} {...props}>
-          <SwitchPrimitive.Thumb className={createClassName('cocso-switch-thumb', { size })} />
+        <SwitchPrimitive.Root ref={ref} className={switchClassNames} {...props}>
+          <SwitchPrimitive.Thumb className={thumbClassNames} />
         </SwitchPrimitive.Root>
         {position === 'right' && (
           <Label size={size} htmlFor={id}>
             {label}
           </Label>
         )}
-      </div>
+      </Comp>
     );
   },
 );
 
-export const Switch = Object.assign(SwitchContent, {});
+export const Switch = Object.assign(SwitchComponent, {
+  displayName: 'Switch',
+});
