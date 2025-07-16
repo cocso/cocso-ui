@@ -1,13 +1,11 @@
 import * as React from 'react';
 export type PaginationProps = {
-    asChild?: boolean;
     page: number;
     totalPages: number;
     maxVisible?: number;
     onChange: (pageNumber: number) => void;
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'>;
 export declare const Pagination: React.ForwardRefExoticComponent<{
-    asChild?: boolean;
     page: number;
     totalPages: number;
     maxVisible?: number;

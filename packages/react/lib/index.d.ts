@@ -11,5 +11,6 @@ export * from './components/OneTimePasswordField';
 export * from './components/Pagination';
 export * from './components/Checkbox';
 export * from './components/Spinner';
+export * from './components/StockQuantityStatus';
 export * from './components/Switch';
 export * from './components/Toast';

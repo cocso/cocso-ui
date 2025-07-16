@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
+import { createClassName } from '../../utils/cn';
 
 export type PaginationProps = {
-  asChild?: boolean;
   page: number;
   totalPages: number;
   maxVisible?: number;
@@ -10,7 +9,7 @@ export type PaginationProps = {
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'>;
 
 const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
-  ({ asChild = false, page, totalPages, maxVisible = 5, onChange, className, ...props }, ref) => {
+  ({ className, page, totalPages, maxVisible = 5, onChange, ...props }, ref) => {
     const halfVisible = Math.ceil(maxVisible / 2);
 
     const renderPageButton = (pageNumber: number) => (
@@ -24,10 +23,10 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
       </button>
     );
 
-    const Comp = asChild ? Slot : 'div';
+    const classNames = createClassName('cocso-pagination', {}, [], className);
 
     return (
-      <Comp ref={ref} className={`cocso-pagination ${className || ''}`} {...props}>
+      <div ref={ref} className={classNames} {...props}>
         {totalPages > 1 && (
           <button
             className="cocso-pagination-arrow"
@@ -62,7 +61,9 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
               .fill(0)
               .map((_, index) => {
                 const pageNumber = page - halfVisible + index + 1;
-                return pageNumber > 1 && pageNumber < totalPages ? renderPageButton(pageNumber) : '';
+                return pageNumber > 1 && pageNumber < totalPages
+                  ? renderPageButton(pageNumber)
+                  : '';
               })}
             {page < totalPages - halfVisible && <span className="cocso-pagination-trunc">...</span>}
             {renderPageButton(totalPages)}
@@ -90,7 +91,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
             </svg>
           </button>
         )}
-      </Comp>
+      </div>
     );
   },
 );
