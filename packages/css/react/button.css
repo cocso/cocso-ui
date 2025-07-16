@@ -7,7 +7,7 @@
   cursor: pointer;
   border: 1px solid var(--color-button-border);
   border-color: var(--color-button-border);
-  border-radius: var(--number-5);
+  border-radius: var(--color-button-border-radius);
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   background-color: var(--color-button-background);
   gap: var(--number-3);
@@ -15,6 +15,7 @@
   --cocso-button-color: inherit;
   --cocso-button-weight: inherit;
   --color-button-border: inherit;
+  --color-button-border-radius: inherit;
   --color-button-background: inherit;
 }
 
@@ -35,10 +36,11 @@
 }
 
 .cocso-button--size_2xs {
-  padding-inline: var(--number-5);
+  padding-inline: var(--number-4);
   min-width: var(--number-11);
   min-height: var(--number-11);
   font-size: 12px;
+  --color-button-border-radius: var(--number-3);
 }
 
 .cocso-button--size_xs {
@@ -46,6 +48,7 @@
   min-width: var(--number-12);
   min-height: var(--number-12);
   font-size: 14px;
+  --color-button-border-radius: var(--number-4);
 }
 
 .cocso-button--size_sm {
@@ -53,6 +56,7 @@
   min-width: var(--number-14);
   min-height: var(--number-14);
   font-size: 14px;
+  --color-button-border-radius: var(--number-4);
 }
 
 .cocso-button--size_md {
@@ -60,6 +64,7 @@
   min-width: var(--number-16);
   min-height: var(--number-16);
   font-size: 16px;
+  --color-button-border-radius: var(--number-5);
 }
 
 .cocso-button--size_lg {
@@ -67,6 +72,7 @@
   min-width: var(--number-17);
   min-height: var(--number-17);
   font-size: 18px;
+  --color-button-border-radius: var(--number-5);
 }
 
 .cocso-button--size_xl {
@@ -74,6 +80,7 @@
   min-width: var(--number-18);
   min-height: var(--number-18);
   font-size: 18px;
+  --color-button-border-radius: var(--number-5);
 }
 
 .cocso-button--variant_primary {
