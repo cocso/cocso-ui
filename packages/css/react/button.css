@@ -36,7 +36,7 @@
 }
 
 .cocso-button--size_2xs {
-  padding-inline: var(--number-4);
+  padding-inline: var(--number-5);
   min-width: var(--number-11);
   min-height: var(--number-11);
   font-size: 12px;
