@@ -13,4 +13,5 @@ export * from './components/Checkbox';
 export * from './components/Spinner';
 export * from './components/StockQuantityStatus';
 export * from './components/Switch';
+export * from './components/Tab';
 export * from './components/Toast';

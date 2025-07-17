@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/react",
-  "version": "0.0.1-beta.43",
+  "version": "0.0.1-beta.44",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -31,6 +31,7 @@
     "@radix-ui/react-one-time-password-field": "^0.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-switch": "^1.2.5",
+    "@radix-ui/react-tabs": "^1.1.12",
     "sonner": "^2.0.6"
   },
   "peerDependencies": {
