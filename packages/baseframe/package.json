@@ -6,8 +6,7 @@
     "url": "git+https://github.com/cocso/cocso-ui.git",
     "directory": "packages/baseframe"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "main": "package.json",
   "files": [
     "*.yaml",
