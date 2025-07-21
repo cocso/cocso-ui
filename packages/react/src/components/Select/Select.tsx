@@ -4,7 +4,7 @@ import { createClassName } from '../../utils/cn';
 export type SelectProps = {
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
   disabled?: boolean;
-} & React.ComponentPropsWithoutRef<'select'>;
+} & Omit<React.ComponentPropsWithoutRef<'select'>, 'size'>;
 
 const SelectComponent = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ size = 'md', disabled = false, className, style, children, ...props }, ref) => {
