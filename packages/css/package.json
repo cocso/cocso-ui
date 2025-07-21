@@ -1,13 +1,15 @@
 {
   "name": "@cocso-ui/css",
-  "version": "0.0.5-beta.45",
+  "version": "0.0.5-beta.47",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
     "directory": "packages/css"
   },
   "scripts": {},
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "type": "module",
   "exports": {
     "./*.css": "./*.css",
