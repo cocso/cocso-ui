@@ -16,3 +16,4 @@ export * from './components/StockQuantityStatus';
 export * from './components/Switch';
 export * from './components/Tab';
 export * from './components/Toast';
+export * from './components/Select';

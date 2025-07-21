@@ -1,4 +1,4 @@
-@keyframes overlayShow {
+@keyframes overlay-show {
   from {
     opacity: 0;
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes contentShow {
+@keyframes content-show {
   from {
     opacity: 0;
     transform: translate(-50%, -48%) scale(0.96);
@@ -22,7 +22,8 @@
   background-color: var(--color-palette-blackalpha-25);
   position: fixed;
   inset: 0;
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: var(--z-index-modal);
 }
 
 .cocso-modal-close-wrapper {
@@ -54,7 +55,8 @@
   padding: var(--number-8);
   border-radius: 6px;
   background-color: var(--color-palette-gray-0);
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: var(--z-index-modalContent);
 }
 
 .cocso-modal-title {

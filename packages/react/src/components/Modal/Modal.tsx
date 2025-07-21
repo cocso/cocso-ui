@@ -13,29 +13,37 @@ const ModalContent = forwardRef<
     <ModalPrimitive.Portal>
       <ModalPrimitive.Overlay className="cocso-modal-overlay" />
       <ModalPrimitive.Content ref={ref} className={classNames} {...props}>
-        <div className="cocso-modal-close-wrapper">
-          <ModalPrimitive.Close className="cocso-modal-close">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </ModalPrimitive.Close>
-        </div>
         {children}
       </ModalPrimitive.Content>
     </ModalPrimitive.Portal>
   );
 });
+
+const ModalClose = forwardRef<ComponentRef<'div'>, ComponentPropsWithoutRef<'div'>>(
+  ({ className, children, ...props }, ref) => {
+    const classNames = createClassName('cocso-modal-close-wrapper', {}, [], className);
+    return (
+      <div className={classNames} {...props}>
+        <ModalPrimitive.Close className="cocso-modal-close">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </ModalPrimitive.Close>
+      </div>
+    );
+  },
+);
 
 const ModalTitle = forwardRef<
   ComponentRef<typeof ModalPrimitive.Title>,
@@ -66,6 +74,7 @@ const ModalDescription = forwardRef<
 export const Modal = Object.assign(ModalPrimitive.Root, {
   Trigger: ModalPrimitive.Trigger,
   Content: ModalContent,
+  Close: ModalClose,
   Title: ModalTitle,
   Description: ModalDescription,
 });
