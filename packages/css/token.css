@@ -158,7 +158,7 @@
   --z-index-overlay: 100;
   --z-index-header: 150;
   --z-index-modal: 200;
-  --z-index-modalContent: 250;
+  --z-index-modal-content: 250;
   --color-background-white: var(--color-palette-gray-0);
   --color-background-gray-subtler: var(--color-palette-gray-50);
   --color-background-gray-subtle: var(--color-palette-gray-100);
@@ -183,7 +183,7 @@
   --color-border-transparency: var(--color-palette-blackalpha-0);
   --color-border-inverse: var(--color-palette-gray-0);
   --color-border-disabled: var(--color-palette-gray-300);
-  --color-border-gray-light: var(--color-palette-gray-200);
+  --color-border-gray-light: var(--color-palette-gray-100);
   --color-border-gray: var(--color-palette-gray-300);
   --color-border-gray-dark: var(--color-palette-gray-600);
   --color-border-gray-darker: var(--color-palette-gray-900);

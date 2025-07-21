@@ -1,0 +1,85 @@
+.cocso-select-wrapper {
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+  --color-select-border-radius: inherit;
+}
+
+.cocso-select {
+  height: 100%;
+  color: var(--color-text-basic);
+  border: 1px solid var(--color-border-gray-light);
+  border-radius: var(--color-select-border-radius);
+  background-color: var(--color-background-white);
+  appearance: none;
+  -o-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.cocso-select--disabled_true {
+  cursor: not-allowed;
+}
+
+.cocso-select--size_2xs {
+  padding-left: var(--number-5);
+  padding-right: calc(var(--number-7) + 16px);
+  min-width: var(--number-11);
+  height: var(--number-11);
+  font-size: 12px;
+  --color-select-border-radius: var(--number-3);
+}
+
+.cocso-select--size_xs {
+  padding-left: var(--number-6);
+  padding-right: calc(var(--number-8) + 16px);
+  min-width: var(--number-12);
+  height: var(--number-12);
+  font-size: 14px;
+  --color-select-border-radius: var(--number-4);
+}
+
+.cocso-select--size_sm {
+  padding-left: var(--number-7);
+  padding-right: calc(var(--number-9) + 16px);
+  min-width: var(--number-14);
+  height: var(--number-14);
+  font-size: 14px;
+  --color-select-border-radius: var(--number-4);
+}
+
+.cocso-select--size_md {
+  padding-left: var(--number-8);
+  padding-right: calc(var(--number-10) + 16px);
+  min-width: var(--number-16);
+  height: var(--number-16);
+  font-size: 16px;
+  --color-select-border-radius: var(--number-5);
+}
+
+.cocso-select--size_lg {
+  padding-left: var(--number-9);
+  padding-right: calc(var(--number-11) + 16px);
+  min-width: var(--number-17);
+  height: var(--number-17);
+  font-size: 18px;
+  --color-select-border-radius: var(--number-5);
+}
+
+.cocso-select--size_xl {
+  padding-left: var(--number-10);
+  padding-right: calc(var(--number-12) + 16px);
+  min-width: var(--number-18);
+  height: var(--number-18);
+  font-size: 18px;
+  --color-select-border-radius: var(--number-5);
+}
+
+.cocso-select-icon {
+  position: absolute;
+  top: 50%;
+  right: var(--number-5);
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-text-disabled);
+}
