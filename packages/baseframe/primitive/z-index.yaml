@@ -24,7 +24,7 @@ data:
     $z-index.modal:
       values:
         default: "200"
-    $z-index.modalContent:
+    $z-index.modal-content:
       values:
         default: "250"
 
