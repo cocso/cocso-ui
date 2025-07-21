@@ -12,7 +12,7 @@ const SelectComponent = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className="cocso-select-wrapper">
-        <select ref={ref} className={classNames} {...props}>
+        <select ref={ref} className={classNames} disabled={disabled} {...props}>
           {children}
         </select>
 

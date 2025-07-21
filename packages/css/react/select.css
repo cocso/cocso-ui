@@ -32,7 +32,7 @@
 
 .cocso-select--size_xs {
   padding-left: var(--number-6);
-  padding-right: calc(var(--number-8) + 16px);
+  padding-right: calc(var(--number-6) + 16px);
   min-width: var(--number-12);
   height: var(--number-12);
   font-size: 14px;
@@ -41,7 +41,7 @@
 
 .cocso-select--size_sm {
   padding-left: var(--number-7);
-  padding-right: calc(var(--number-9) + 16px);
+  padding-right: calc(var(--number-7) + 16px);
   min-width: var(--number-14);
   height: var(--number-14);
   font-size: 14px;
@@ -50,7 +50,7 @@
 
 .cocso-select--size_md {
   padding-left: var(--number-8);
-  padding-right: calc(var(--number-10) + 16px);
+  padding-right: calc(var(--number-8) + 16px);
   min-width: var(--number-16);
   height: var(--number-16);
   font-size: 16px;
@@ -59,7 +59,7 @@
 
 .cocso-select--size_lg {
   padding-left: var(--number-9);
-  padding-right: calc(var(--number-11) + 16px);
+  padding-right: calc(var(--number-9) + 16px);
   min-width: var(--number-17);
   height: var(--number-17);
   font-size: 18px;
@@ -68,7 +68,7 @@
 
 .cocso-select--size_xl {
   padding-left: var(--number-10);
-  padding-right: calc(var(--number-12) + 16px);
+  padding-right: calc(var(--number-10) + 16px);
   min-width: var(--number-18);
   height: var(--number-18);
   font-size: 18px;
@@ -82,4 +82,8 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: var(--color-text-disabled);
+}
+
+.cocso-select--disabled_true {
+  opacity: 0.5;
 }
