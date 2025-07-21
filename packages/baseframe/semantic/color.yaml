@@ -136,7 +136,7 @@ data:
 
     $color.divider.gray-light:
       values:
-        default: $color.palette.gray-200
+        default: $color.palette.gray-100
     $color.divider.gray:
       values:
         default: $color.palette.gray-400

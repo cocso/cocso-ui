@@ -2,6 +2,7 @@ export * from './components/Accordion';
 export * from './components/Body';
 export * from './components/Button';
 export * from './components/Display';
+export * from './components/Dropdown';
 export * from './components/FileUpload';
 export * from './components/Heading';
 export * from './components/Label';
