@@ -84,6 +84,7 @@ function createUtilities(): string[] {
     `@utility tracking-* { letter-spacing: --value(--tracking-*); }`,
     `@utility shadow-* { box-shadow: --value(--shadow-*); }`,
     `@utility border-width-* { border-width: --value(--border-width-*); }`,
+    `@utility z-* { z-index: --value(--z-index-*); }`,
   ];
 }
 
