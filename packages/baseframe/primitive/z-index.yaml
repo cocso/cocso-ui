@@ -15,12 +15,12 @@ data:
     $z-index.above:
       values:
         default: "1"
+    $z-index.header:
+      values:
+        default: "50"
     $z-index.overlay:
       values:
         default: "100"
-    $z-index.header:
-      values:
-        default: "150"
     $z-index.modal:
       values:
         default: "200"
