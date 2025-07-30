@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Select } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Select',
+  title: 'react/select',
   component: Select,
   parameters: {
     layout: 'centered',

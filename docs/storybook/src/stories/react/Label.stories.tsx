@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Label } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Label',
+  title: 'react/label',
   component: Label,
   parameters: {
     layout: 'centered',
@@ -39,7 +39,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -50,7 +49,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Font Weights */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Font Weights</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -66,7 +64,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Elements with asChild */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -84,7 +81,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Colors */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Colors</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -98,7 +94,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Size and Weight Combinations */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Size and Weight Combinations</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -109,7 +104,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Interactive Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Interactive Example</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -157,7 +151,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Form Layout Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Form Layout Example</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '600px' }}>

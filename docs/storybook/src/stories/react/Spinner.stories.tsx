@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Spinner } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Spinner',
+  title: 'react/spinner',
   component: Spinner,
   parameters: {
     layout: 'centered',
@@ -35,7 +35,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -60,7 +59,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Colors */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Colors</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -97,7 +95,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Background Colors */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Background Colors
@@ -124,25 +121,21 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Usage Examples */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Usage Examples
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* Loading Button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Spinner size="sm" color="#256EF4" />
             <span>Loading...</span>
           </div>
 
-          {/* Loading Text */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span>데이터를 불러오는 중</span>
             <Spinner size="sm" color="#6D7882" />
           </div>
 
-          {/* Centered Loading */}
           <div
             style={{
               display: 'flex',

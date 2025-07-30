@@ -3,7 +3,7 @@ import { Modal } from '@cocso-ui/react';
 import { useState } from 'react';
 
 const meta = {
-  title: 'React/Modal',
+  title: 'react/modal',
   component: Modal,
   parameters: {
     layout: 'centered',

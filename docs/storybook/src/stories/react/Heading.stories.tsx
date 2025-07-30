@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Heading } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Heading',
+  title: 'react/heading',
   component: Heading,
   parameters: {
     layout: 'centered',
@@ -39,7 +39,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -52,7 +51,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Hierarchy with asChild */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Hierarchy (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

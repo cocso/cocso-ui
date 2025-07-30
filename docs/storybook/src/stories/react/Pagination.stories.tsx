@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pagination } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Pagination',
+  title: 'react/pagination',
   component: Pagination,
   parameters: {
     layout: 'centered',
@@ -65,6 +65,11 @@ export const SinglePage: Story = {
 };
 
 export const AllVariations: Story = {
+  args: {
+    page: 1,
+    totalPages: 5,
+    onChange: () => {},
+  },
   render: () => {
     const [pages, setPages] = useState({
       small: 1,
@@ -79,7 +84,6 @@ export const AllVariations: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* Small Page Count */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             작은 페이지 수 (5페이지)
@@ -91,7 +95,6 @@ export const AllVariations: Story = {
           />
         </div>
 
-        {/* Medium Page Count */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             중간 페이지 수 (10페이지)
@@ -103,7 +106,6 @@ export const AllVariations: Story = {
           />
         </div>
 
-        {/* Large Page Count */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             큰 페이지 수 (100페이지) - 페이지네이션 그룹 표시
@@ -115,7 +117,6 @@ export const AllVariations: Story = {
           />
         </div>
 
-        {/* Single Page */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             단일 페이지 (1페이지)
@@ -132,6 +133,11 @@ export const AllVariations: Story = {
 };
 
 export const InteractiveExample: Story = {
+  args: {
+    page: 1,
+    totalPages: 20,
+    onChange: () => {},
+  },
   render: () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(20);
@@ -205,6 +211,11 @@ export const InteractiveExample: Story = {
 };
 
 export const EdgeCases: Story = {
+  args: {
+    page: 1,
+    totalPages: 1,
+    onChange: () => {},
+  },
   render: () => {
     const [pages, setPages] = useState({
       first: 1,
@@ -218,7 +229,6 @@ export const EdgeCases: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* First Page */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             첫 페이지 (이전 버튼 비활성화)
@@ -230,7 +240,6 @@ export const EdgeCases: Story = {
           />
         </div>
 
-        {/* Middle Page */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             중간 페이지 (양쪽 화살표 활성화)
@@ -242,7 +251,6 @@ export const EdgeCases: Story = {
           />
         </div>
 
-        {/* Last Page */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
             마지막 페이지 (다음 버튼 비활성화)

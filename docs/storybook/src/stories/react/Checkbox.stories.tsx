@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Checkbox } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Checkbox',
+  title: 'react/checkbox',
   component: Checkbox,
   parameters: {
     layout: 'centered',
@@ -104,7 +104,6 @@ export const AllVariations: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* All Sizes */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -132,7 +131,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* All States */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>States</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -157,7 +155,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* Disabled States */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Disabled States</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -185,7 +182,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* Without Link */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Without Label</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>

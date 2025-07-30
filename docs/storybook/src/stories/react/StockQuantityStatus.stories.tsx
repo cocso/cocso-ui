@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { StockQuantityStatus } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/StockQuantityStatus',
+  title: 'react/stock-quantity-status',
   component: StockQuantityStatus,
   parameters: {
     layout: 'centered',
@@ -27,9 +27,11 @@ export const Default: Story = {
 };
 
 export const AllVariations: Story = {
+  args: {
+    quantity: '보통',
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Quantity Statuses */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Quantity Statuses</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -54,13 +56,11 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Usage Examples */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Usage Examples
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* Product List Item */}
           <div
             style={{
               display: 'flex',
@@ -79,7 +79,6 @@ export const AllVariations: Story = {
             <StockQuantityStatus quantity="여유" />
           </div>
 
-          {/* Product List Item */}
           <div
             style={{
               display: 'flex',
@@ -98,7 +97,6 @@ export const AllVariations: Story = {
             <StockQuantityStatus quantity="보통" />
           </div>
 
-          {/* Product List Item */}
           <div
             style={{
               display: 'flex',
@@ -119,7 +117,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Status Meanings */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Status Meanings

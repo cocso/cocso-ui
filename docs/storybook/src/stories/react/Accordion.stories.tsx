@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Accordion } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Accordion',
+  title: 'react/accordion',
   component: Accordion,
   parameters: {
     layout: 'centered',
@@ -164,7 +164,6 @@ export const AllVariations: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      {/* Single Collapsible */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Single Collapsible
@@ -193,7 +192,6 @@ export const AllVariations: Story = {
         </Accordion>
       </div>
 
-      {/* Multiple */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Multiple
@@ -232,7 +230,6 @@ export const AllVariations: Story = {
         </Accordion>
       </div>
 
-      {/* Not Collapsible */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Single Not Collapsible

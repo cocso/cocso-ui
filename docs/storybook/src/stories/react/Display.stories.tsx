@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Display } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Display',
+  title: 'react/display',
   component: Display,
   parameters: {
     layout: 'centered',
@@ -49,7 +49,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -59,7 +58,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Hero Section Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Hero Section Example

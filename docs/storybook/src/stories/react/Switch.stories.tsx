@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Switch } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Switch',
+  title: 'react/switch',
   component: Switch,
   parameters: {
     layout: 'centered',
@@ -23,7 +23,7 @@ const meta = {
     label: {
       control: 'text',
     },
-    labelPosition: {
+    position: {
       control: 'select',
       options: ['left', 'right'],
     },
@@ -43,7 +43,7 @@ export const Default: Story = {
     size: 'md',
     disabled: false,
     label: '기본 스위치',
-    labelPosition: 'right',
+    position: 'right',
     checked: false,
   },
 };
@@ -54,7 +54,7 @@ export const Checked: Story = {
     size: 'md',
     disabled: false,
     label: '켜진 스위치',
-    labelPosition: 'right',
+    position: 'right',
     checked: true,
   },
 };
@@ -65,7 +65,7 @@ export const Disabled: Story = {
     size: 'md',
     disabled: true,
     label: '비활성화된 스위치',
-    labelPosition: 'right',
+    position: 'right',
     checked: false,
   },
 };
@@ -76,7 +76,7 @@ export const DisabledChecked: Story = {
     size: 'md',
     disabled: true,
     label: '비활성화된 켜진 스위치',
-    labelPosition: 'right',
+    position: 'right',
     checked: true,
   },
 };
@@ -87,7 +87,7 @@ export const LabelLeft: Story = {
     size: 'md',
     disabled: false,
     label: '라벨이 왼쪽에 있는 스위치',
-    labelPosition: 'left',
+    position: 'left',
     checked: false,
   },
 };
@@ -109,7 +109,6 @@ export const AllVariations: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* All Sizes */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -130,7 +129,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* All States */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>States</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -149,7 +147,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* Disabled States */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Disabled States</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -170,7 +167,6 @@ export const AllVariations: Story = {
           </div>
         </div>
 
-        {/* Label Positions */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Label Positions</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -179,19 +175,18 @@ export const AllVariations: Story = {
               checked={false}
               onCheckedChange={() => {}}
               label="라벨이 왼쪽"
-              labelPosition="left"
+              position="left"
             />
             <Switch
               id="label-right"
               checked={false}
               onCheckedChange={() => {}}
               label="라벨이 오른쪽"
-              labelPosition="right"
+              position="right"
             />
           </div>
         </div>
 
-        {/* Without Label */}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Without Label</h3>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -240,21 +235,21 @@ export const InteractiveExample: Story = {
             checked={switches.notifications}
             onCheckedChange={handleChange('notifications')}
             label="푸시 알림"
-            labelPosition="left"
+            position="left"
           />
           <Switch
             id="dark-mode"
             checked={switches.darkMode}
             onCheckedChange={handleChange('darkMode')}
             label="다크 모드"
-            labelPosition="left"
+            position="left"
           />
           <Switch
             id="auto-save"
             checked={switches.autoSave}
             onCheckedChange={handleChange('autoSave')}
             label="자동 저장"
-            labelPosition="left"
+            position="left"
           />
         </div>
 
