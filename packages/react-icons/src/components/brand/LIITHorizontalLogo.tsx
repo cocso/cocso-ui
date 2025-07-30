@@ -1,7 +1,7 @@
 import Icon from '../../icon';
 import { IconProps } from '../../types';
 
-export const LIITVerticalLogo = (props: IconProps) => (
+export const LIITHorizontalLogo = (props: IconProps) => (
   <Icon {...props}>
     <svg
       width="168"
@@ -33,4 +33,4 @@ export const LIITVerticalLogo = (props: IconProps) => (
   </Icon>
 );
 
-LIITVerticalLogo.displayName = 'LIITVerticalLogo';
+LIITHorizontalLogo.displayName = 'LIITHorizontalLogo';

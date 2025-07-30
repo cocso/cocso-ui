@@ -1,7 +1,7 @@
 import Icon from '../../icon';
 import { IconProps } from '../../types';
 
-export const DrugInfoVerticalLogo = (props: IconProps) => (
+export const DrugInfoHorizontalLogo = (props: IconProps) => (
   <Icon {...props}>
     <svg
       width="187"
@@ -60,4 +60,4 @@ export const DrugInfoVerticalLogo = (props: IconProps) => (
   </Icon>
 );
 
-DrugInfoVerticalLogo.displayName = 'DrugInfoVerticalLogo';
+DrugInfoHorizontalLogo.displayName = 'DrugInfoHorizontalLogo';

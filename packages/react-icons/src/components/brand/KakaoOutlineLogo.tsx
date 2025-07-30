@@ -13,4 +13,5 @@ export const KakaoOutlineLogo = (props: IconProps) => (
     </svg>
   </Icon>
 );
+
 KakaoOutlineLogo.displayName = 'KakaoOutlineLogo';

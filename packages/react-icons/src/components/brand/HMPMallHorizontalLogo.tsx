@@ -1,7 +1,7 @@
 import Icon from '../../icon';
 import { IconProps } from '../../types';
 
-export const HMPMallVerticalLogo = (props: IconProps) => (
+export const HMPMallHorizontalLogo = (props: IconProps) => (
   <Icon {...props}>
     <svg
       width="180"
@@ -33,4 +33,4 @@ export const HMPMallVerticalLogo = (props: IconProps) => (
   </Icon>
 );
 
-HMPMallVerticalLogo.displayName = 'HMPMallVerticalLogo';
+HMPMallHorizontalLogo.displayName = 'HMPMallHorizontalLogo';

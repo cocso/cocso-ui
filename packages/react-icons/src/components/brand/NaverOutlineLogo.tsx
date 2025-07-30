@@ -18,4 +18,5 @@ export const NaverOutlineLogo = (props: IconProps) => (
     </svg>
   </Icon>
 );
+
 NaverOutlineLogo.displayName = 'NaverOutlineLogo';

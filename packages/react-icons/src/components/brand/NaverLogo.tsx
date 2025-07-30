@@ -19,4 +19,5 @@ export const NaverLogo = (props: IconProps) => (
     </svg>
   </Icon>
 );
+
 NaverLogo.displayName = 'NaverLogo';
