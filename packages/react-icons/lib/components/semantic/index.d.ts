@@ -12,6 +12,7 @@ export * from './HubIcon';
 export * from './InfoIcon';
 export * from './MenuIcon';
 export * from './OpenInNewIcon';
+export * from './PlusIcon';
 export * from './RemoveCircleIcon';
 export * from './SearchIcon';
 export * from './SideNavigationIcon';
