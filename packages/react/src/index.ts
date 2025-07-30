@@ -10,6 +10,7 @@ export * from './components/Link';
 export * from './components/Modal';
 export * from './components/OneTimePasswordField';
 export * from './components/Pagination';
+export * from './components/Popover';
 export * from './components/Checkbox';
 export * from './components/Spinner';
 export * from './components/StockQuantityStatus';
