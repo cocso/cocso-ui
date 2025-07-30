@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Button',
+  title: 'react/button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -66,7 +66,6 @@ export const Loading: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Variants */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Variants</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -79,7 +78,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -92,7 +90,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* States */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>States</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -102,28 +99,18 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Loading States by Variant */}
       <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Loading States by Variant</h3>
+        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Font Weights</h3>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button variant="primary" loading>Primary</Button>
-          <Button variant="secondary" loading>Secondary</Button>
-          <Button variant="tertiary" loading>Tertiary</Button>
-          <Button variant="danger" loading>Danger</Button>
-          <Button variant="success" loading>Success</Button>
-        </div>
-      </div>
-
-      {/* Loading States by Size */}
-      <div>
-        <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Loading States by Size</h3>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button size="xl" loading>XL</Button>
-          <Button size="lg" loading>LG</Button>
-          <Button size="md" loading>MD</Button>
-          <Button size="sm" loading>SM</Button>
-          <Button size="xs" loading>XS</Button>
-          <Button size="2xs" loading>2XS</Button>
+          <Button weight="thin">Thin</Button>
+          <Button weight="extralight">Extra Light</Button>
+          <Button weight="light">Light</Button>
+          <Button weight="normal">Normal</Button>
+          <Button weight="medium">Medium</Button>
+          <Button weight="semibold">Semibold</Button>
+          <Button weight="bold">Bold</Button>
+          <Button weight="extrabold">Extra Bold</Button>
+          <Button weight="black">Black</Button>
         </div>
       </div>
     </div>

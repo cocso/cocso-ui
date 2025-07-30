@@ -9,7 +9,7 @@ interface FileObject {
 }
 
 const meta = {
-  title: 'React/FileUpload',
+  title: 'react/file-upload',
   component: FileUpload,
   parameters: {
     layout: 'centered',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button, toast, Toaster } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Toast',
+  title: 'react/toast',
   component: Toaster,
   parameters: {
     layout: 'centered',

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { OneTimePasswordField } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/OneTimePasswordField',
+  title: 'react/one-time-password-field',
   component: OneTimePasswordField,
   parameters: {
     layout: 'centered',
@@ -139,7 +139,7 @@ export const AllVariations: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* Basic Usage */}
+        {}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Basic Usage</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

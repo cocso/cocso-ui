@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Link } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Link',
+  title: 'react/link',
   component: Link,
   parameters: {
     layout: 'centered',
@@ -53,7 +53,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -64,7 +63,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* All Weights */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Font Weights</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -80,7 +78,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Indicator Variations */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Indicator</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -89,7 +86,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* asChild Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>asChild Example</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -102,7 +98,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Mixed Examples */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Mixed Examples</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

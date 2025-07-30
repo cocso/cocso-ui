@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Body } from '@cocso-ui/react';
 
 const meta = {
-  title: 'React/Body',
+  title: 'react/body',
   component: Body,
   parameters: {
     layout: 'centered',
@@ -39,7 +39,6 @@ export const Default: Story = {
 export const AllVariations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* All Sizes */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Sizes</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -50,7 +49,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Semantic Elements with asChild */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Semantic Elements (asChild)</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -64,7 +62,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {/* Article Example */}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Article Example</h3>
         <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
