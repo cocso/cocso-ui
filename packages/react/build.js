@@ -1,5 +1,4 @@
 import esbuild from 'esbuild';
-
 import pkg from './package.json' with { type: 'json' };
 
 const sharedConfig = {

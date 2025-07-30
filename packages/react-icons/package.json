@@ -19,36 +19,6 @@
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
       "require": "./lib/index.cjs"
-    },
-    "./brand": {
-      "types": "./lib/components/brand/index.d.ts",
-      "import": "./lib/components/brand/index.js",
-      "require": "./lib/components/brand/index.cjs"
-    },
-    "./semantic": {
-      "types": "./lib/components/semantic/index.d.ts",
-      "import": "./lib/components/semantic/index.js",
-      "require": "./lib/components/semantic/index.cjs"
-    },
-    "./graphic": {
-      "types": "./lib/components/graphic/index.d.ts",
-      "import": "./lib/components/graphic/index.js",
-      "require": "./lib/components/graphic/index.cjs"
-    },
-    "./brand/*": {
-      "types": "./lib/components/brand/*.d.ts",
-      "import": "./lib/components/brand/*.js",
-      "require": "./lib/components/brand/*.cjs"
-    },
-    "./semantic/*": {
-      "types": "./lib/components/semantic/*.d.ts",
-      "import": "./lib/components/semantic/*.js",
-      "require": "./lib/components/semantic/*.cjs"
-    },
-    "./graphic/*": {
-      "types": "./lib/components/graphic/*.d.ts",
-      "import": "./lib/components/graphic/*.js",
-      "require": "./lib/components/graphic/*.cjs"
     }
   },
   "files": [

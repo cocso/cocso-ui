@@ -1,1 +1,0 @@
-export { PartnerPhoneIcon } from './PartnerPhoneIcon';
