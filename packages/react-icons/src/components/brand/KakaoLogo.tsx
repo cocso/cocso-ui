@@ -3,21 +3,13 @@ import { IconProps } from '../../types';
 
 export const KakaoLogo = (props: IconProps) => (
   <Icon {...props}>
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="20" height="20" rx="4" fill="#FEE500" />
-      <g clipPath="url(#clip0_1198_3584)">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M10 4.40002C6.68613 4.40002 4 6.47533 4 9.03488C4 10.6267 5.03894 12.03 6.62103 12.8647L5.95536 15.2964C5.89655 15.5112 6.14228 15.6825 6.33099 15.558L9.24892 13.6322C9.49516 13.6559 9.74541 13.6698 10 13.6698C13.3137 13.6698 16 11.5946 16 9.03488C16 6.47533 13.3137 4.40002 10 4.40002"
-          fill="black"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_1198_3584">
-          <rect width="12" height="12" fill="white" transform="translate(4 4)" />
-        </clipPath>
-      </defs>
+    <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M18 0.200195C8.05835 0.200195 0 6.42611 0 14.1048C0 18.8802 3.11681 23.0901 7.86305 25.5941L5.86606 32.8892C5.68962 33.5338 6.42683 34.0476 6.99293 33.674L15.7467 27.8966C16.4854 27.9679 17.2362 28.0095 18 28.0095C27.9409 28.0095 35.9999 21.7838 35.9999 14.1048C35.9999 6.42611 27.9409 0.200195 18 0.200195Z"
+        fill="currentColor"
+      />
     </svg>
   </Icon>
 );
