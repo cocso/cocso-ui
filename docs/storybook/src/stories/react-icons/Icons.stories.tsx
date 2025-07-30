@@ -40,17 +40,23 @@ const categorizeIcons = () => {
     other: {}
   };
 
+  // 실제 폴더 구조를 기반으로 한 분류 규칙
+  // 각 폴더의 특성을 기반으로 분류
   Object.entries(icons).forEach(([name, component]) => {
-    if (name.includes('Logo')) {
+    // Brand 폴더: 일반적인 로고들 (Vertical이 아닌 Logo들)
+    if (name.includes('Logo') && !name.includes('Vertical')) {
       categories.brand[name] = component;
-    } else if (name.includes('Icon')) {
-      // Check if it's a graphic icon first
-      if (name.includes('PartnerPhone')) {
-        categories.graphic[name] = component;
-      } else {
-        categories.semantic[name] = component;
-      }
-    } else {
+    }
+    // Graphic 폴더: 특수한 그래픽 요소들 (Vertical Logo, Phone Icon 등)
+    else if (name.includes('Vertical') || name.includes('Phone')) {
+      categories.graphic[name] = component;
+    }
+    // Semantic 폴더: 의미론적 아이콘들 (일반적인 Icon들)
+    else if (name.includes('Icon') && !name.includes('Phone')) {
+      categories.semantic[name] = component;
+    }
+    // 기타: 분류되지 않은 아이콘들
+    else {
       categories.other[name] = component;
     }
   });
