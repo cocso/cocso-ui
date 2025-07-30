@@ -8,6 +8,7 @@
 
 - [css](./packages/css)
 - [react](./packages/react)
+- [react-icons](./packages/react-icons)
 
 #### Docs
 

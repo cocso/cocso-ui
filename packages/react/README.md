@@ -15,7 +15,7 @@ pnpm install @cocso-ui/react
 컴포넌트를 아래와 같은 형태로 import 할 수 있어요.
 
 ```javascript
-import {Button} from '@cocso-ui/react';
+import { Button } from '@cocso-ui/react';
 ```
 
 ### Dependencies
