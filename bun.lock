@@ -15,6 +15,7 @@
       "dependencies": {
         "@cocso-ui/css": "workspace:*",
         "@cocso-ui/react": "workspace:*",
+        "@cocso-ui/react-icons": "workspace:*",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
@@ -41,11 +42,11 @@
     },
     "packages/css": {
       "name": "@cocso-ui/css",
-      "version": "0.0.5-beta.47",
+      "version": "0.0.9",
     },
     "packages/react": {
       "name": "@cocso-ui/react",
-      "version": "0.0.1-beta.45",
+      "version": "0.0.1",
       "dependencies": {
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-checkbox": "^1.3.2",
@@ -57,6 +58,20 @@
         "@radix-ui/react-tabs": "^1.1.12",
         "sonner": "^2.0.6",
       },
+      "devDependencies": {
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "esbuild": "^0.25.8",
+        "typescript": "^5.8.3",
+      },
+      "peerDependencies": {
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+      },
+    },
+    "packages/react-icons": {
+      "name": "@cocso-ui/react-icons",
+      "version": "0.0.1-beta.1",
       "devDependencies": {
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
@@ -119,6 +134,8 @@
     "@cocso-ui/css": ["@cocso-ui/css@workspace:packages/css"],
 
     "@cocso-ui/react": ["@cocso-ui/react@workspace:packages/react"],
+
+    "@cocso-ui/react-icons": ["@cocso-ui/react-icons@workspace:packages/react-icons"],
 
     "@cocso-ui/storybook": ["@cocso-ui/storybook@workspace:docs/storybook"],
 
