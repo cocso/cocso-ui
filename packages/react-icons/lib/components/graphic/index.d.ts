@@ -1,1 +1,1 @@
-export { PartnerPhoneIcon } from './PartnerPhoneIcon';
+export * from './PartnerPhoneIcon';

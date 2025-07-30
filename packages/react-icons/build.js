@@ -1,7 +1,7 @@
 import esbuild from 'esbuild';
 import pkg from './package.json' with { type: 'json' };
 import fs from 'node:fs';
-import path from  'node:path';
+import path from 'node:path';
 
 const sharedConfig = {
   bundle: true,
@@ -47,8 +47,9 @@ const buildIndividualComponents = async () => {
 
     if (!fs.existsSync(categoryPath)) continue;
 
-    const files = fs.readdirSync(categoryPath)
-      .filter(file => file.endsWith('.tsx') && !file.startsWith('index'));
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter((file) => file.endsWith('.tsx') && !file.startsWith('index'));
 
     for (const file of files) {
       const componentName = path.basename(file, '.tsx');
@@ -83,25 +84,20 @@ const buildCategoryIndexes = async () => {
 
     if (!fs.existsSync(categoryPath)) continue;
 
-    const files = fs.readdirSync(categoryPath)
-      .filter(file => file.endsWith('.tsx') && !file.startsWith('index'));
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter((file) => file.endsWith('.tsx') && !file.startsWith('index'));
 
-    const exports = files.map(file => {
-      const componentName = path.basename(file, '.tsx');
-      return `export { ${componentName} } from './${componentName}';`;
-    }).join('\n');
+    const exports = files
+      .map((file) => {
+        const componentName = path.basename(file, '.tsx');
+        return `export { ${componentName} } from './${componentName}';`;
+      })
+      .join('\n');
 
-    fs.writeFileSync(`${libCategoryPath}/index.d.ts`, exports);
     fs.writeFileSync(`${libCategoryPath}/index.js`, exports);
     fs.writeFileSync(`${libCategoryPath}/index.cjs`, exports);
   }
-};
-
-const buildMainIndexTypes = async () => {
-  const categories = ['brand', 'semantic', 'graphic'];
-  const exports = categories.map(category => `export * from './components/${category}';`).join('\n');
-
-  fs.writeFileSync('./lib/index.d.ts', exports);
 };
 
 const build = async () => {
@@ -109,7 +105,6 @@ const build = async () => {
     await buildMainIndex();
     await buildIndividualComponents();
     await buildCategoryIndexes();
-    await buildMainIndexTypes();
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
