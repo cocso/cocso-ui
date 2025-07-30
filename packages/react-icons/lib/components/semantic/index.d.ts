@@ -5,6 +5,7 @@ export * from './CalculateIcon';
 export * from './CalendarMonthIcon';
 export * from './ChangeCircleIcon';
 export * from './CheckCircleIcon';
+export * from './CheckIcon';
 export * from './CloseIcon';
 export * from './DeleteIcon';
 export * from './HubIcon';
