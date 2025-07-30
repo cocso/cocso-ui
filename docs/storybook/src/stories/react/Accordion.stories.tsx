@@ -164,7 +164,6 @@ export const AllVariations: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Single Collapsible
@@ -193,7 +192,6 @@ export const AllVariations: Story = {
         </Accordion>
       </div>
 
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Multiple
@@ -232,7 +230,6 @@ export const AllVariations: Story = {
         </Accordion>
       </div>
 
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Single Not Collapsible

@@ -32,7 +32,6 @@ export const AllVariations: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Quantity Statuses</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -57,13 +56,11 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Usage Examples
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {}
           <div
             style={{
               display: 'flex',
@@ -82,7 +79,6 @@ export const AllVariations: Story = {
             <StockQuantityStatus quantity="여유" />
           </div>
 
-          {}
           <div
             style={{
               display: 'flex',
@@ -101,7 +97,6 @@ export const AllVariations: Story = {
             <StockQuantityStatus quantity="보통" />
           </div>
 
-          {}
           <div
             style={{
               display: 'flex',
@@ -122,7 +117,6 @@ export const AllVariations: Story = {
         </div>
       </div>
 
-      {}
       <div>
         <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
           Status Meanings

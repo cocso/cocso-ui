@@ -139,7 +139,6 @@ export const AllVariations: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {}
         <div>
           <h3 style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>Basic Usage</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
