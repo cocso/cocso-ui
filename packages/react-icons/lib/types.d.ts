@@ -1,6 +1,6 @@
-import { SVGAttributes } from "react";
+import { SVGAttributes } from 'react';
 export type IconProps = {
-    size?: number;
+    size?: number | string;
     width?: number | string;
     height?: number | string;
 } & SVGAttributes<SVGElement>;
