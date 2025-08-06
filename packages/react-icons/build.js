@@ -73,7 +73,7 @@ const sharedConfig = {
 esbuild
     .build({
         ...sharedConfig,
-        outfile: './dist/index.js',
+        outfile: './lib/index.js',
         format: 'esm',
         platform: 'neutral',
     })
@@ -82,7 +82,7 @@ esbuild
 esbuild
     .build({
         ...sharedConfig,
-        outfile: './dist/index.cjs',
+        outfile: './lib/index.cjs',
         format: 'cjs',
         platform: 'neutral',
     })
