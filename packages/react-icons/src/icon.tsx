@@ -9,7 +9,10 @@ const Icon = ({ children, width, height, size = DEFAULT_ICON_SIZE, ...props }: I
   return cloneElement(<Child>{children}</Child>, {
     width: width ?? size,
     height: height ?? size,
-    'aria-hidden': 'true',
+    'aria-hidden':
+      props['aria-hidden'] !== undefined
+        ? props['aria-hidden']
+        : !(props['aria-label'] || props['aria-labelledby']),
     ...props,
   });
 };
