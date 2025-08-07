@@ -4,8 +4,8 @@
     "": {
       "name": "@cocso-ui/baseframe",
       "dependencies": {
-        "fs-extra": "^11.3.0",
-        "yaml": "^2.8.0",
+        "fs-extra": "^11.3.1",
+        "yaml": "^2.8.1",
         "yargs": "^18.0.0",
       },
       "devDependencies": {
@@ -13,7 +13,7 @@
         "@types/fs-extra": "^11.0.4",
         "@types/yargs": "^17.0.33",
         "esbuild": "^0.25.8",
-        "typescript": "^5.8.3",
+        "typescript": "^5.9.2",
       },
     },
   },
