@@ -19,8 +19,3 @@
 - [design-tokens/community-group](https://tr.designtokens.org/)
 - [daangn/seed-design](https://github.com/daangn/seed-design)
 - [ardakaracizmeli/design-system-checklist](https://www.designsystemchecklist.com)
-
-#### Development
-
-- [Changeset 사용법](./CHANGESET_USAGE.md) - 버전 관리 및 배포 가이드
-- [GitHub Actions](./.github/workflows/) - 자동 배포 및 CI/CD
