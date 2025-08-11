@@ -22,7 +22,7 @@
       "persistent": true,
       "dependsOn": ["^build"]
     },
-    "storybook:build": {
+    "build:storybook": {
       "dependsOn": ["^build"],
       "outputs": ["storybook-static/**"]
     }
