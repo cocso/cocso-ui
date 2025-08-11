@@ -11,7 +11,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "turbo run build && changeset publish",
-    "release:ci": "changeset publish"
+    "release:ci": "turbo run build && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.4",
