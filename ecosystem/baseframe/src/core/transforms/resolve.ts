@@ -36,7 +36,7 @@ function resolveValue(
   cssVarNamer: (tokenName: string) => string,
 ): Value {
   switch (value.kind) {
-    case 'TokenRef':
+    case 'TokenRef': {
       const fullName = `$${value.collection}.${value.token}`;
       const found = allTokens.find((t) => t.token.name === fullName);
       if (!found) {
@@ -44,6 +44,7 @@ function resolveValue(
       }
       const varName = cssVarNamer(fullName);
       return { kind: 'StringValue', value: `var(${varName})` };
+    }
 
     case 'ShadowLayer':
       return {

@@ -15,6 +15,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
     const renderPageButton = (pageNumber: number) => (
       <button
         key={pageNumber}
+        type="button"
         className="cocso-pagination-item"
         onClick={() => onChange(pageNumber)}
         data-active={page === pageNumber}
@@ -30,6 +31,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
         {totalPages > 1 && (
           <button
             className="cocso-pagination-arrow"
+            type="button"
             disabled={page === 1}
             onClick={() => page > 1 && onChange(page - 1)}
           >
@@ -43,6 +45,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="m15 18-6-6 6-6" />
             </svg>
@@ -73,6 +76,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
         {totalPages > 1 && (
           <button
             className="cocso-pagination-arrow"
+            type="button"
             disabled={page === totalPages}
             onClick={() => page < totalPages && onChange(page + 1)}
           >
@@ -86,6 +90,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="m9 18 6-6-6-6" />
             </svg>

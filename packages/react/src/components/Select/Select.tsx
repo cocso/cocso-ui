@@ -27,6 +27,7 @@ const SelectComponent = React.forwardRef<HTMLSelectElement, SelectProps>(
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <path d="m6 9 6 6 6-6" />
           </svg>

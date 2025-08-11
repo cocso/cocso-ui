@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useRef, useState, useCallback } from 'react';
-import { Label } from '../Label';
+import { useCallback, useRef, useState } from 'react';
 import { Body } from '../Body';
+import { Label } from '../Label';
 
 export interface FileItem {
   file: File;
@@ -30,8 +30,8 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
           return true;
         }
 
-        const types = accept.split(',').map((type) => type.trim());
-        return types.some((type) => {
+        const types = accept.split(',').map(type => type.trim());
+        return types.some(type => {
           if (type.endsWith('/*')) {
             const baseType = type.slice(0, -2);
             return file.type.startsWith(baseType);
@@ -54,7 +54,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
       (newFiles: FileList) => {
         const fileArray = Array.from(newFiles);
 
-        const validFiles = fileArray.filter((file) => {
+        const validFiles = fileArray.filter(file => {
           if (!validateType(file)) {
             alert(`${file.name}은(는) 허용되지 않는 파일 타입입니다.`);
             return false;
@@ -72,7 +72,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
           return;
         }
 
-        const filesToAdd = validFiles.slice(0, remainingSlots).map((file) => ({
+        const filesToAdd = validFiles.slice(0, remainingSlots).map(file => ({
           file,
           name: file.name,
           size: file.size,
@@ -129,7 +129,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
     const handleRemove = useCallback(
       (fileName: string) => {
-        const updatedFiles = files.filter((file) => file.name !== fileName);
+        const updatedFiles = files.filter(file => file.name !== fileName);
         onFilesChange(updatedFiles);
         onRemove?.(fileName);
       },
@@ -145,6 +145,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
     return (
       <div className="cocso-file-upload-wrapper">
         {!hideDropzone && (
+          // biome-ignore lint/a11y/noStaticElementInteractions: This is a custom file upload component
           <div
             ref={dropZoneRef}
             onDragEnter={handleDragEnter}
@@ -156,7 +157,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
             data-drag-active={isDragActive}
           >
             <input
-              ref={(node) => {
+              ref={node => {
                 inputRef.current = node;
                 if (typeof ref === 'function') {
                   ref(node);
@@ -188,6 +189,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="M5 12h14" />
               <path d="M12 5v14" />
@@ -197,7 +199,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
         {files.length > 0 && (
           <div className="cocso-file-upload-list">
-            {files.map((file) => (
+            {files.map(file => (
               <div key={file.name} className="cocso-file-upload-item">
                 <Body size="xs">{file.name}</Body>
                 <button
@@ -215,6 +217,7 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    aria-hidden="true"
                   >
                     <path d="M18 6 6 18" />
                     <path d="m6 6 12 12" />

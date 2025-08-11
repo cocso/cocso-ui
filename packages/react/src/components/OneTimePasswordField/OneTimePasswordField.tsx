@@ -1,5 +1,5 @@
 import * as OneTimePasswordFieldPrimitive from '@radix-ui/react-one-time-password-field';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { createClassName } from '../../utils/cn';
 
 const OneTimePasswordFieldRoot = forwardRef<

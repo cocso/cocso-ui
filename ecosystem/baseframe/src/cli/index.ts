@@ -77,7 +77,7 @@ function generateCss(outputDir: string, prefix?: string): void {
 
   const css = cssVars.generateCssVariables(tokens, collections, {
     prefix,
-    banner: ``,
+    banner: '',
     selectors: { global: { default: ':root' } },
   });
 
@@ -93,7 +93,7 @@ function generateTailwindCss(outputDir: string, prefix?: string): void {
 
   const tailwindCss = tailwind.generateTailwindCSS(tokens, collections, {
     prefix,
-    banner: ``,
+    banner: '',
   });
 
   fs.ensureDirSync(outputDir);

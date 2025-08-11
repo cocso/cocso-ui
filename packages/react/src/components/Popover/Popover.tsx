@@ -1,5 +1,5 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { createClassName } from '../../utils/cn';
 
 const PopoverContent = forwardRef<

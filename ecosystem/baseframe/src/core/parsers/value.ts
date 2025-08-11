@@ -62,13 +62,14 @@ export function valueToString(value: Value): string {
       return value.value.toString();
     case 'StringValue':
       return value.value;
-    case 'ShadowLayer':
+    case 'ShadowLayer': {
       const x = valueToString(value.offsetX);
       const y = valueToString(value.offsetY);
       const blur = valueToString(value.blur);
       const spread = valueToString(value.spread);
       const color = valueToString(value.color);
       return `${x} ${y} ${blur} ${spread} ${color}`;
+    }
     case 'Shadow':
       return value.layers.map((layer) => valueToString(layer)).join(', ');
     default:
@@ -95,9 +96,9 @@ function parseRgb(value: string): ParseResult {
   }
 
   const [, r, g, b] = match;
-  const red = parseInt(r, 10);
-  const green = parseInt(g, 10);
-  const blue = parseInt(b, 10);
+  const red = Number.parseInt(r, 10);
+  const green = Number.parseInt(g, 10);
+  const blue = Number.parseInt(b, 10);
 
   if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
     return { isValid: false, error: `Invalid RGB values: ${value}` };
@@ -115,10 +116,10 @@ function parseRgba(value: string): ParseResult {
   }
 
   const [, r, g, b, a] = match;
-  const red = parseInt(r, 10);
-  const green = parseInt(g, 10);
-  const blue = parseInt(b, 10);
-  const alpha = parseFloat(a);
+  const red = Number.parseInt(r, 10);
+  const green = Number.parseInt(g, 10);
+  const blue = Number.parseInt(b, 10);
+  const alpha = Number.parseFloat(a);
 
   if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
     return { isValid: false, error: `Invalid RGB values: ${value}` };
@@ -160,7 +161,7 @@ function parseSize(value: string): ParseResult {
   }
 
   const [, numValue, unit] = match;
-  const num = parseFloat(numValue);
+  const num = Number.parseFloat(numValue);
 
   if (isNaN(num)) {
     return { isValid: false, error: `Invalid size value: ${value}` };
@@ -181,7 +182,7 @@ function parseDuration(value: string): ParseResult {
   }
 
   const [, numValue, unit] = match;
-  const num = parseFloat(numValue);
+  const num = Number.parseFloat(numValue);
 
   if (isNaN(num)) {
     return { isValid: false, error: `Invalid duration value: ${value}` };

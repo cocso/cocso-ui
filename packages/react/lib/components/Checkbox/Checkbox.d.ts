@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import * as React from 'react';
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 export type CheckboxProps = {
     id?: string;

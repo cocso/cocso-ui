@@ -1,5 +1,5 @@
 import * as TabPrimitive from '@radix-ui/react-tabs';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { createClassName } from '../../utils/cn';
 
 const TabPrimitiveRoot = forwardRef<

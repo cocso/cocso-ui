@@ -1,5 +1,5 @@
 import * as DropdownPrimitive from '@radix-ui/react-dropdown-menu';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { createClassName } from '../../utils/cn';
 
 const DropdownContent = forwardRef<

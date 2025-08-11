@@ -22,6 +22,7 @@ const StockQuantityStatusContent = React.forwardRef<HTMLDivElement, QuantityStat
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"
@@ -47,6 +48,7 @@ const StockQuantityStatusContent = React.forwardRef<HTMLDivElement, QuantityStat
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"
@@ -72,6 +74,7 @@ const StockQuantityStatusContent = React.forwardRef<HTMLDivElement, QuantityStat
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

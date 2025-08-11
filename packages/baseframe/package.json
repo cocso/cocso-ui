@@ -6,7 +6,10 @@
     "url": "git+https://github.com/cocso/cocso-ui.git",
     "directory": "packages/baseframe"
   },
-  "scripts": {},
+  "scripts": {
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --fix"
+  },
   "main": "package.json",
   "files": [
     "*.yaml",

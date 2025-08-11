@@ -1,9 +1,16 @@
 import Icon from '../../icon';
-import { IconProps } from '../../types';
+import type { IconProps } from '../../types';
 
 export const KakaoOutlineLogo = (props: IconProps) => (
   <Icon {...props}>
-    <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="36"
+      height="34"
+      viewBox="0 0 36 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

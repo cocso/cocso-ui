@@ -1,9 +1,16 @@
 import Icon from '../../icon';
-import { IconProps } from '../../types';
+import type { IconProps } from '../../types';
 
 export const NaverLogo = (props: IconProps) => (
   <Icon {...props}>
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <rect width="20" height="20" rx="4" fill="#03C75A" />
       <g clipPath="url(#clip0_1198_3588)">
         <path

@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
+import * as React from 'react';
 import { createClassName } from '../../utils/cn';
+import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
 import { Spinner } from '../Spinner';
 
 export type ButtonProps = {
@@ -78,12 +78,7 @@ const ButtonComponent = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ...(disabled ? [{ variant, disabled }] : []),
       ...(loading ? [{ variant, loading }] : []),
     ];
-    const classNames = createClassName(
-      'cocso-button',
-      variants,
-      compoundVariants,
-      className,
-    );
+    const classNames = createClassName('cocso-button', variants, compoundVariants, className);
 
     const buttonStyle = {
       '--cocso-button-color': createColor(color),
@@ -99,7 +94,6 @@ const ButtonComponent = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={classNames}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        role="button"
         disabled={isButtonDisabled}
         aria-disabled={isButtonDisabled}
         aria-busy={loading}
