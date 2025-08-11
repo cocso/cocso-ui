@@ -8,7 +8,9 @@
   },
   "scripts": {
     "build": "rm -rf lib && bun run build.js && bun x tsc",
-    "dev": "bun run build.js --watch"
+    "dev": "bun run build.js --watch",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --fix"
   },
   "sideEffects": false,
   "type": "module",

@@ -103,7 +103,7 @@ export const WithDismiss: Story = {
       <Button
         onClick={() =>
           toast('이 토스트는 수동으로 닫을 수 있습니다', {
-            duration: Infinity,
+            duration: Number.POSITIVE_INFINITY,
           })
         }
       >
@@ -136,7 +136,7 @@ export const CustomDuration: Story = {
         <Button onClick={() => toast('1초 후 사라집니다', { duration: 1000 })}>1초</Button>
         <Button onClick={() => toast('3초 후 사라집니다', { duration: 3000 })}>3초</Button>
         <Button onClick={() => toast('5초 후 사라집니다', { duration: 5000 })}>5초</Button>
-        <Button onClick={() => toast('수동으로 닫아주세요', { duration: Infinity })}>무제한</Button>
+        <Button onClick={() => toast('수동으로 닫아주세요', { duration: Number.POSITIVE_INFINITY })}>무제한</Button>
       </div>
     </div>
   ),

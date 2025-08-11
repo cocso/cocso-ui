@@ -1,8 +1,8 @@
 import * as ModalPrimitive from '@radix-ui/react-dialog';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { createClassName } from '../../utils/cn';
-import { Heading } from '../Heading';
 import { Body } from '../Body';
+import { Heading } from '../Heading';
 
 const ModalContent = forwardRef<
   ComponentRef<typeof ModalPrimitive.Content>,
@@ -35,6 +35,7 @@ const ModalClose = forwardRef<ComponentRef<'div'>, ComponentPropsWithoutRef<'div
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />

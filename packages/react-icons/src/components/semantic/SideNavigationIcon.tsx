@@ -1,9 +1,16 @@
 import Icon from '../../icon';
-import { IconProps } from '../../types';
+import type { IconProps } from '../../types';
 
 export const SideNavigationIcon = (props: IconProps) => (
   <Icon {...props}>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <mask
         id="mask0_1648_6828"
         style={{ maskType: 'alpha' }}

@@ -1,5 +1,5 @@
 const App = () => {
-  return <>@cocso-ui/storybook</>;
+  return <p>@cocso-ui/storybook</p>;
 };
 
 export default App;

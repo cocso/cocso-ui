@@ -1,5 +1,6 @@
-import * as React from 'react';
+import { CheckIcon } from '@cocso-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import * as React from 'react';
 import { createClassName } from '../../utils/cn';
 import { Label } from '../Label';
 
@@ -66,38 +67,14 @@ const CheckboxComponent = React.forwardRef<
           className="cocso-checkbox-indicator"
           style={{ opacity: status === 'on' ? 1 : 0 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <CheckIcon size={24} />
         </CheckboxPrimitive.Indicator>
 
         <div
           className="cocso-checkbox-indicator"
           style={{ opacity: status === 'intermediate' ? 1 : 0 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14" />
-          </svg>
+          <CheckIcon size={24} />
         </div>
       </CheckboxPrimitive.Root>
 

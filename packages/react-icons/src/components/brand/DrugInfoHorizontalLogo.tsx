@@ -1,5 +1,5 @@
 import Icon from '../../icon';
-import { IconProps } from '../../types';
+import type { IconProps } from '../../types';
 
 export const DrugInfoHorizontalLogo = (props: IconProps) => (
   <Icon {...props}>
@@ -9,6 +9,7 @@ export const DrugInfoHorizontalLogo = (props: IconProps) => (
       viewBox="0 0 187 42"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <path
         d="M26.3452 3.94439V0.242798H42.6212V3.94439H36.7416V19.5231H32.2249V3.94439H26.3452Z"

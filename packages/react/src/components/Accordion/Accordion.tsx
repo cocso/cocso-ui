@@ -1,7 +1,7 @@
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
-import { createClassName } from '../../utils/cn';
 import { Slottable } from '@radix-ui/react-slot';
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
+import { createClassName } from '../../utils/cn';
 
 const AccordionItem = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Item>,
@@ -34,6 +34,7 @@ const AccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trigg
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <path d="m6 9 6 6 6-6" />
               </svg>

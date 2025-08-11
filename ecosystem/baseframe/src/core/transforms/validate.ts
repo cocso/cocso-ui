@@ -122,7 +122,7 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
     if (!result.isValid) {
       errors.push({
         type: 'INVALID_VALUE_FORMAT',
-        message: result.error || `Invalid value format`,
+        message: result.error || 'Invalid value format',
         tokenName,
         collection,
         mode,

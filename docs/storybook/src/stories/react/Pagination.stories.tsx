@@ -147,7 +147,7 @@ export const InteractiveExample: Story = {
     };
 
     const handleTotalPagesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const newTotal = parseInt(event.target.value);
+      const newTotal = Number.parseInt(event.target.value);
       setTotalPages(newTotal);
       setCurrentPage(1);
     };

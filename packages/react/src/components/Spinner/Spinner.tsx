@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { createColor } from '../../utils/token';
 import { createClassName } from '../../utils/cn';
+import { createColor } from '../../utils/token';
 
 const tags = ['div'] as const;
 type Element = (typeof tags)[number];
@@ -44,7 +44,7 @@ const SpinnerComponent = React.forwardRef(
         }
         {...props}
       >
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle
             className="opacity-25"
             cx="12"
@@ -52,12 +52,12 @@ const SpinnerComponent = React.forwardRef(
             r="9"
             stroke="var(--cocso-spinner-bg, currentColor)"
             strokeWidth="3"
-          ></circle>
+          />
           <path
             className="opacity-75"
             fill="var(--cocso-spinner-color, currentColor)"
             d="M12 2a10 10 0 0110 10 10 10 0 01-5 8.66l-1-1.73a8 8 0 004-6.93 8 8 0 00-8-8V2z"
-          ></path>
+          />
         </svg>
       </Element>
     );

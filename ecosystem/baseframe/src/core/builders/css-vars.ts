@@ -55,7 +55,7 @@ export function generateFromAst(ast: Ast, options: CssVarsOptions): string {
       const collectionTokens = tokens.filter((token) => token.token.collection === collection.name);
 
       return collection.modes.map((mode) => {
-        const selector = selectors[collection.name]?.[mode] || `:root`;
+        const selector = selectors[collection.name]?.[mode] || ':root';
 
         return createRule(selector, collectionTokens, mode, tokens, prefix);
       });

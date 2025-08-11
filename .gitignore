@@ -26,6 +26,8 @@ coverage
 out/
 build
 dist
+lib
+lib/**
 
 .idea
 .idea/**
@@ -42,3 +44,7 @@ yarn-error.log*
 .npmrc
 *storybook.log
 storybook-static
+
+# Changeset
+.changeset/*.md
+!.changeset/README.md

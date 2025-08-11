@@ -1,5 +1,5 @@
-import Icon from "../../icon";
-import { IconProps } from "../../types";
+import Icon from '../../icon';
+import type { IconProps } from '../../types';
 
 export const CloseIcon = (props: IconProps) => (
   <Icon {...props}>
@@ -9,10 +9,11 @@ export const CloseIcon = (props: IconProps) => (
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <mask
         id="mask0_774_293"
-        style={{ maskType: "alpha" }}
+        style={{ maskType: 'alpha' }}
         maskUnits="userSpaceOnUse"
         x="0"
         y="0"
@@ -31,4 +32,4 @@ export const CloseIcon = (props: IconProps) => (
   </Icon>
 );
 
-CloseIcon.displayName = "CloseIcon";
+CloseIcon.displayName = 'CloseIcon';
