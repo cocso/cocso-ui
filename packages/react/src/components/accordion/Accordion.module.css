@@ -1,47 +1,47 @@
-.cocso-accordion-item {
+.item {
   overflow: hidden;
 }
 
-.cocso-accordion-content {
+.content {
   overflow: hidden;
 }
 
-.cocso-accordion-content[data-state="open"] {
-  animation: cocso-accordion-slide-down 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+.content[data-state="open"] {
+  animation: slide-down 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-.cocso-accordion-content[data-state="closed"] {
-  animation: cocso-accordion-slide-up 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+.content[data-state="closed"] {
+  animation: slide-up 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-.cocso-accordion-trigger {
+.trigger {
   display: flex;
   justify-content: space-between;
   width: 100%;
   cursor: pointer;
 }
 
-.cocso-accordion-trigger > .cocso-accordion-chevron {
+.chevron {
   display: inline-block;
   width: var(--number-10);
   height: var(--number-10);
   transition: transform 0.2s ease-in-out;
 }
 
-.cocso-accordion-trigger[data-state="closed"] > .cocso-accordion-chevron {
+.trigger[data-state="closed"] > .chevron {
   transform: rotate(0deg);
 }
 
-.cocso-accordion-trigger[data-state="open"] > .cocso-accordion-chevron {
+.trigger[data-state="open"] > .chevron {
   transform: rotate(180deg);
 }
 
-@keyframes cocso-accordion-slide-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
-}
-
-@keyframes cocso-accordion-slide-up {
+@keyframes slide-up {
   from { height: var(--radix-accordion-content-height); }
   to { height: 0; }
+}
+
+@keyframes slide-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
 }
