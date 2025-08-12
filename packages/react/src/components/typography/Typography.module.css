@@ -1,0 +1,11 @@
+.typography {
+  color: var(--cocso-typography-font-color);
+  font-size: var(--cocso-typography-font-size);
+  font-weight: var(--cocso-typography-font-weight);
+  line-height: var(--cocso-typography-line-height);
+
+  --cocso-typography-font-color: inherit;
+  --cocso-typography-font-size: inherit;
+  --cocso-typography-font-weight: inherit;
+  --cocso-typography-line-height: inherit;
+}

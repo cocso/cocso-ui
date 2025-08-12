@@ -1,39 +1,51 @@
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
-import { createClassName } from '../../utils/cn';
+import { type ComponentProps, forwardRef } from 'react';
+import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
+import { Typography } from '../typography/Typography';
 
-export type BodyProps = {
+export type FontSize = 'lg' | 'md' | 'sm' | 'xs';
+
+export type FontWeight = keyof typeof fontWeightToken;
+
+export type LineHeight = keyof typeof lineHeightToken;
+
+export interface BodyProps extends ComponentProps<'p'> {
   asChild?: boolean;
-  size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
-  weight?: FontWeightToken;
-} & React.ComponentPropsWithoutRef<'p'>;
+  size?: FontSize;
+  weight?: FontWeight;
+  lineHeight?: LineHeight;
+}
 
-const BodyComponent = React.forwardRef<HTMLParagraphElement, BodyProps>(
-  ({ asChild = false, size = 'md', color, weight = 'normal', className, style, ...props }, ref) => {
-    const variants = { size };
-    const classNames = createClassName('cocso-body', variants, [], className);
-
-    const Comp = asChild ? Slot : 'p';
-
+export const Body = forwardRef<HTMLParagraphElement, BodyProps>(
+  (
+    {
+      asChild,
+      className,
+      color,
+      size = 'md',
+      weight = 'regular',
+      lineHeight = 'normal',
+      style: _style,
+      ...props
+    },
+    ref,
+  ) => {
+    const fontSize = getFontSize(size);
     return (
-      <Comp
-        ref={ref}
-        className={classNames}
-        style={
-          {
-            '--cocso-body-color': createColor(color),
-            '--cocso-body-weight': createFontWeight(weight),
-            ...style,
-          } as React.CSSProperties
-        }
-        {...props}
-      />
+      <Typography ref={ref} size={fontSize} weight={weight} lineHeight={lineHeight} {...props} />
     );
   },
 );
 
-export const Body = Object.assign(BodyComponent, {
-  displayName: 'Body',
-});
+const getFontSize = (size: FontSize) => {
+  switch (size) {
+    case 'lg':
+      return 18;
+    case 'md':
+      return 16;
+    case 'sm':
+      return 14;
+    case 'xs':
+      return 12;
+  }
+};
