@@ -1,12 +1,12 @@
 import { type ComponentProps, forwardRef } from 'react';
 import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
-import { Typography } from '../typography/Typography';
+import { Typography } from '../typography';
 
-export type FontSize = 'lg' | 'md' | 'sm' | 'xs';
+type FontSize = 'lg' | 'md' | 'sm' | 'xs';
 
-export type FontWeight = keyof typeof fontWeightToken;
+type FontWeight = keyof typeof fontWeightToken;
 
-export type LineHeight = keyof typeof lineHeightToken;
+type LineHeight = keyof typeof lineHeightToken;
 
 export interface BodyProps extends ComponentProps<'p'> {
   asChild?: boolean;
@@ -39,6 +39,7 @@ export const Body = forwardRef<HTMLParagraphElement, BodyProps>(
         size={fontSize}
         weight={weight}
         lineHeight={lineHeight}
+        asChild={asChild}
         {...props}
       />
     );

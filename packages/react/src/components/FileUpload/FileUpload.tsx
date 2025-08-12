@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useCallback, useRef, useState } from 'react';
-import { Body } from '../Body';
+import { Body } from '../body';
 import { Label } from '../Label';
 
 export interface FileItem {

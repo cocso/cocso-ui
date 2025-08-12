@@ -1,7 +1,7 @@
 import * as ModalPrimitive from '@radix-ui/react-dialog';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
-import { createClassName } from '../../utils/cn';
-import { Body } from '../Body';
+import { createClassName } from '../../utils';
+import { Body } from '../body';
 import { Heading } from '../Heading';
 
 const ModalContent = forwardRef<

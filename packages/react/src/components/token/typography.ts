@@ -9,7 +9,8 @@ export const fontSize = {
   28: 28,
   32: 32,
   36: 36,
-  40: 40,
+  44: 44,
+  60: 60,
 } as const;
 
 /*
