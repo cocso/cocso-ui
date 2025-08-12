@@ -31,8 +31,16 @@ export const Body = forwardRef<HTMLParagraphElement, BodyProps>(
     ref,
   ) => {
     const fontSize = getFontSize(size);
+
     return (
-      <Typography ref={ref} size={fontSize} weight={weight} lineHeight={lineHeight} {...props} />
+      <Typography
+        ref={ref}
+        color={color}
+        size={fontSize}
+        weight={weight}
+        lineHeight={lineHeight}
+        {...props}
+      />
     );
   },
 );
