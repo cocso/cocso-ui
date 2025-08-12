@@ -11,6 +11,7 @@ export * from './CalculateIcon';
 export * from './DeleteIcon';
 export * from './HubIcon';
 export * from './ArrowIOSForwardIcon';
+export * from './KeyboardArrowDownIcon';
 export * from './AutoRenewIcon';
 export * from './AddIcon';
 export * from './CheckIcon';
