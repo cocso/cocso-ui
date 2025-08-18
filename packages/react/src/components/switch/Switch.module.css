@@ -4,12 +4,6 @@
   gap: var(--number-5);
 }
 
-.wrapper[aria-disabled="true"],
-.wrapper[data-disabled="true"] {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
 .switch {
   position: relative;
   width: var(--cocso-switch-width);
@@ -52,7 +46,8 @@
   transform: translateX(calc(var(--cocso-switch-width) - var(--cocso-switch-thumb-width) - var(--number-2)));
 }
 
-.switch[disabled] .thumb,
-.switch[data-disabled="true"] .thumb {
+.wrapper[aria-disabled="true"] {
   cursor: not-allowed;
+  opacity: 0.5;
 }
+
