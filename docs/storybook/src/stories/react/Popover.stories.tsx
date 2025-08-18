@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Popover } from '@cocso-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 const meta = {
-  title: 'React/Popover',
+  title: 'React/popover',
   component: Popover,
   parameters: {
     layout: 'centered',
@@ -23,7 +23,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// Basic Popover with Trigger Button
+// Basic popover with Trigger Button
 const BasicPopover = ({ children, ...props }: any) => {
   return (
     <Popover {...props}>
@@ -48,7 +48,7 @@ const BasicPopover = ({ children, ...props }: any) => {
   );
 };
 
-// Controlled Popover
+// Controlled popover
 const ControlledPopover = ({ children, ...props }: any) => {
   const [open, setOpen] = useState(false);
 
@@ -200,10 +200,10 @@ export const WithActions: Story = {
               fontSize: '14px',
               borderRadius: '4px',
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={e => {
               e.currentTarget.style.backgroundColor = '#f8f9fa';
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={e => {
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
@@ -219,10 +219,10 @@ export const WithActions: Story = {
               fontSize: '14px',
               borderRadius: '4px',
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={e => {
               e.currentTarget.style.backgroundColor = '#f8f9fa';
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={e => {
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
@@ -239,10 +239,10 @@ export const WithActions: Story = {
               borderRadius: '4px',
               color: '#dc3545',
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={e => {
               e.currentTarget.style.backgroundColor = '#f8f9fa';
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={e => {
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
