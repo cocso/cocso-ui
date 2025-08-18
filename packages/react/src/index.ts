@@ -8,7 +8,7 @@ export * from './components/FileUpload';
 export * from './components/heading';
 export * from './components/Link';
 export * from './components/Modal';
-export * from './components/OneTimePasswordField';
+export * from './components/one-time-password-field';
 export * from './components/Pagination';
 export * from './components/Popover';
 export * from './components/Select';
