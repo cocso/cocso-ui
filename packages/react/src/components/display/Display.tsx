@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type ComponentProps, forwardRef } from 'react';
 import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
-import { type FontSize as BaseFontSize, Typography } from '../typography';
+import { type ResponsiveFontSize as BaseFontSize, Typography } from '../typography';
 
 type FontSize = 'lg' | 'md' | 'sm';
 

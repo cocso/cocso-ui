@@ -8,12 +8,12 @@ import {
 } from '../token';
 import styles from './Typography.module.css';
 
-export type FontSizeType = keyof typeof fontSizeToken;
+export type FontSize = keyof typeof fontSizeToken;
 
-export type FontSize =
-  | FontSizeType
-  | [FontSizeType, FontSizeType?, FontSizeType?]
-  | { base: FontSizeType; tablet?: FontSizeType; desktop?: FontSizeType };
+export type ResponsiveFontSize =
+  | FontSize
+  | [FontSize, FontSize?, FontSize?]
+  | { base: FontSize; tablet?: FontSize; desktop?: FontSize };
 
 export type FontWeight = keyof typeof fontWeightToken;
 
@@ -21,7 +21,7 @@ export type LineHeight = keyof typeof lineHeightToken;
 
 export interface TypographyProps extends ComponentProps<'p'> {
   asChild?: boolean;
-  size?: FontSize;
+  size?: ResponsiveFontSize;
   weight?: FontWeight;
   lineHeight?: LineHeight;
 }
@@ -42,9 +42,9 @@ export const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
   ) => {
     const Comp = asChild ? Slot : 'p';
 
-    let base: FontSizeType | undefined;
-    let tablet: FontSizeType | undefined;
-    let desktop: FontSizeType | undefined;
+    let base: FontSize | undefined;
+    let tablet: FontSize | undefined;
+    let desktop: FontSize | undefined;
 
     if (Array.isArray(size)) {
       [base, tablet, desktop] = size;
