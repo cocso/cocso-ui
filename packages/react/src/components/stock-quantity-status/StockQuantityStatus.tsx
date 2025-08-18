@@ -1,3 +1,4 @@
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { Body } from '../body';
 import styles from './StockQuantityStatus.module.css';
@@ -16,7 +17,7 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
     } as CSSProperties;
 
     return (
-      <div ref={ref} className={styles.stock} style={style} {...props}>
+      <div ref={ref} className={cn(styles.stock, className)} style={style} {...props}>
         <span className={styles.indicator}>
           {quantity === '여유' ? (
             <svg

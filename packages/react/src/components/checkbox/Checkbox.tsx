@@ -1,5 +1,6 @@
 import { CheckIcon } from '@cocso-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { clsx as cn } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
@@ -78,7 +79,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
         <CheckboxPrimitive.Root
           ref={ref}
           id={id}
-          className={styles.checkbox}
+          className={cn(styles.checkbox, className)}
           style={style}
           checked={getCheckedState()}
           onCheckedChange={handleCheckedChange}
