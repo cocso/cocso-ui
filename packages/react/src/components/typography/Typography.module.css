@@ -10,6 +10,11 @@
   --cocso-typography-line-height: inherit;
 }
 
+.typography[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 @media (min-width: 768px) {
   .typography {
     font-size: var(--cocso-tablet-typography-font-size, var(--cocso-typography-font-size));

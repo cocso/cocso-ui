@@ -75,12 +75,11 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
     } as CSSProperties;
 
     return (
-      <div className={styles.wrapper}>
+      <div className={cn(styles.wrapper, className)} style={style}>
         <CheckboxPrimitive.Root
           ref={ref}
           id={id}
-          className={cn(styles.checkbox, className)}
-          style={style}
+          className={styles.checkbox}
           checked={getCheckedState()}
           onCheckedChange={handleCheckedChange}
           disabled={disabled}
