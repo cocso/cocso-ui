@@ -7,6 +7,7 @@ import {
   forwardRef,
   useId,
 } from 'react';
+import { match } from 'ts-pattern';
 import { Label } from '../Label';
 import styles from './Checkbox.module.css';
 
@@ -39,31 +40,25 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
     ref,
   ) => {
     const generatedId = useId();
-    const id = _id || generatedId;
+    const id = _id ?? generatedId;
 
     const handleCheckedChange = (checked: CheckboxPrimitive.CheckedState) => {
       if (!disabled) {
-        let nextStatus: CheckboxStatus;
-        if (checked === true) {
-          nextStatus = 'on';
-        } else if (checked === 'indeterminate') {
-          nextStatus = 'intermediate';
-        } else {
-          nextStatus = 'off';
-        }
+        const nextStatus = match(checked)
+          .with(true, () => 'on' as const)
+          .with('indeterminate', () => 'intermediate' as const)
+          .with(false, () => 'off' as const)
+          .exhaustive();
         onChange(nextStatus);
       }
     };
 
     const getCheckedState = (): CheckboxPrimitive.CheckedState => {
-      switch (status) {
-        case 'on':
-          return true;
-        case 'intermediate':
-          return 'indeterminate';
-        case 'off':
-          return false;
-      }
+      return match(status)
+        .with('on', () => true)
+        .with('intermediate', () => 'indeterminate' as const)
+        .with('off', () => false)
+        .exhaustive();
     };
 
     const style = {
@@ -114,34 +109,25 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
 );
 
 const getSize = (size: CheckboxSize) => {
-  switch (size) {
-    case 'lg':
-      return 'var(--number-10)';
-    case 'md':
-      return 'var(--number-9)';
-    case 'sm':
-      return 'var(--number-8)';
-  }
+  return match(size)
+    .with('lg', () => 'var(--number-10)')
+    .with('md', () => 'var(--number-9)')
+    .with('sm', () => 'var(--number-8)')
+    .exhaustive();
 };
 
 const getBorderColor = (status: CheckboxStatus) => {
-  switch (status) {
-    case 'on':
-      return 'var(--color-palette-primary-500)';
-    case 'intermediate':
-      return 'var(--color-palette-primary-500)';
-    case 'off':
-      return 'var(--color-divider-gray-light)';
-  }
+  return match(status)
+    .with('on', () => 'var(--color-palette-primary-500)')
+    .with('intermediate', () => 'var(--color-palette-primary-500)')
+    .with('off', () => 'var(--color-divider-gray-light)')
+    .exhaustive();
 };
 
 const getBackgroundColor = (status: CheckboxStatus) => {
-  switch (status) {
-    case 'on':
-      return 'var(--color-palette-primary-500)';
-    case 'intermediate':
-      return 'var(--color-palette-primary-500)';
-    case 'off':
-      return 'var(--color-palette-gray-0)';
-  }
+  return match(status)
+    .with('on', () => 'var(--color-palette-primary-500)')
+    .with('intermediate', () => 'var(--color-palette-primary-500)')
+    .with('off', () => 'var(--color-palette-gray-0)')
+    .exhaustive();
 };
