@@ -11,9 +11,9 @@ const AccordionItem = forwardRef<
   return <AccordionPrimitive.Item ref={ref} className={cn(styles.item, className)} {...props} />;
 });
 
-type TriggerProps = {
+interface TriggerProps extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
   chevron?: boolean;
-} & ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>;
+}
 
 const AccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trigger>, TriggerProps>(
   ({ className, children, chevron = true, ...props }, ref) => {
