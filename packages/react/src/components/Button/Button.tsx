@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 import { createClassName } from '../../utils/cn';
 import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../spinner';
 
 export type ButtonProps = {
   asChild?: boolean;
