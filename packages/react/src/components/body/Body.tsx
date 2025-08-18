@@ -1,6 +1,7 @@
 import { type ComponentProps, forwardRef } from 'react';
+import { match } from 'ts-pattern';
 import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
-import { Typography } from '../typography';
+import { type ResponsiveFontSize, Typography } from '../typography';
 
 type FontSize = 'lg' | 'md' | 'sm' | 'xs';
 
@@ -46,15 +47,11 @@ export const Body = forwardRef<HTMLParagraphElement, BodyProps>(
   },
 );
 
-const getFontSize = (size: FontSize) => {
-  switch (size) {
-    case 'lg':
-      return 18;
-    case 'md':
-      return 16;
-    case 'sm':
-      return 14;
-    case 'xs':
-      return 12;
-  }
+const getFontSize = (size: FontSize): ResponsiveFontSize => {
+  return match(size)
+    .with('lg', () => 18)
+    .with('md', () => 16)
+    .with('sm', () => 14)
+    .with('xs', () => 12)
+    .exhaustive() as ResponsiveFontSize;
 };

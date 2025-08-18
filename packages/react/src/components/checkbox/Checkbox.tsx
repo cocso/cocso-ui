@@ -15,14 +15,18 @@ type CheckboxSize = 'lg' | 'md' | 'sm';
 
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
-export type CheckboxProps = {
+export interface CheckboxProps
+  extends Omit<
+    ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+    'checked' | 'onCheckedChange' | 'onChange'
+  > {
   id?: string;
   size?: CheckboxSize;
   status: CheckboxStatus;
   onChange: (status: CheckboxStatus) => void;
   label?: string;
   disabled?: boolean;
-} & Omit<ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, 'checked' | 'onCheckedChange'>;
+}
 
 export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
   (

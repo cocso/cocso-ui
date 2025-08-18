@@ -1,7 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type ComponentProps, forwardRef } from 'react';
+import { match } from 'ts-pattern';
 import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
-import { type ResponsiveFontSize as BaseFontSize, Typography } from '../typography';
+import { type ResponsiveFontSize, Typography } from '../typography';
 
 type FontSize = 'lg' | 'md' | 'sm';
 
@@ -49,13 +50,10 @@ export const Display = forwardRef<HTMLHeadingElement, DisplayProps>(
   },
 );
 
-const getFontSize = (size: FontSize): BaseFontSize => {
-  switch (size) {
-    case 'lg':
-      return { base: 44, tablet: 60 };
-    case 'md':
-      return { base: 32, tablet: 44 };
-    case 'sm':
-      return { base: 28, tablet: 36 };
-  }
+const getFontSize = (size: FontSize) => {
+  return match(size)
+    .with('lg', () => ({ base: 44, tablet: 60 }))
+    .with('md', () => ({ base: 32, tablet: 44 }))
+    .with('sm', () => ({ base: 28, tablet: 36 }))
+    .exhaustive() as ResponsiveFontSize;
 };
