@@ -1,6 +1,7 @@
 import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
 import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
+import { match } from 'ts-pattern';
 import styles from './Select.module.css';
 
 type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
@@ -14,12 +15,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ size = 'md', disabled = false, className, style: _style, children, ...props }, ref) => {
     const style = {
       ..._style,
-      '--cocso-select-min-width': variables[size].minWidth,
-      '--cocso-select-height': variables[size].height,
-      '--cocso-select-padding-left': variables[size].paddingLeft,
-      '--cocso-select-padding-right': variables[size].paddingRight,
-      '--cocso-select-font-size': `${variables[size].fontSize}px`,
-      '--cocso-select-border-radius': variables[size].borderRadius,
+      ...getStyles(size),
     } as CSSProperties;
 
     return (
@@ -42,53 +38,54 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   },
 );
 
-const variables = {
-  '2xs': {
-    minWidth: 'var(--number-11)',
-    height: 'var(--number-11)',
-    paddingLeft: 'var(--number-5)',
-    paddingRight: 'calc(var(--number-8) + 16px)',
-    fontSize: 12,
-    borderRadius: 'var(--number-3)',
-  },
-  xs: {
-    minWidth: 'var(--number-12)',
-    height: 'var(--number-12)',
-    paddingLeft: 'var(--number-6)',
-    paddingRight: 'calc(var(--number-7) + 16px)',
-    fontSize: 14,
-    borderRadius: 'var(--number-3)',
-  },
-  sm: {
-    minWidth: 'var(--number-14)',
-    height: 'var(--number-14)',
-    paddingLeft: 'var(--number-7)',
-    paddingRight: 'calc(var(--number-7) + 16px)',
-    fontSize: 14,
-    borderRadius: 'var(--number-3)',
-  },
-  md: {
-    minWidth: 'var(--number-16)',
-    height: 'var(--number-16)',
-    paddingLeft: 'var(--number-8)',
-    paddingRight: 'calc(var(--number-8) + 16px)',
-    fontSize: 16,
-    borderRadius: 'var(--number-4)',
-  },
-  lg: {
-    minWidth: 'var(--number-17)',
-    height: 'var(--number-17)',
-    paddingLeft: 'var(--number-9)',
-    paddingRight: 'calc(var(--number-9) + 16px)',
-    fontSize: 18,
-    borderRadius: 'var(--number-4)',
-  },
-  xl: {
-    minWidth: 'var(--number-18)',
-    height: 'var(--number-18)',
-    paddingLeft: 'var(--number-10)',
-    paddingRight: 'calc(var(--number-10) + 16px)',
-    fontSize: 18,
-    borderRadius: 'var(--number-4)',
-  },
-} as const;
+const getStyles = (size: SelectSize) =>
+  match(size)
+    .with('2xs', () => ({
+      '--cocso-select-min-width': 'var(--number-11)',
+      '--cocso-select-height': 'var(--number-11)',
+      '--cocso-select-padding-left': 'var(--number-5)',
+      '--cocso-select-padding-right': 'calc(var(--number-8) + 16px)',
+      '--cocso-select-font-size': '12px',
+      '--cocso-select-border-radius': 'var(--number-3)',
+    }))
+    .with('xs', () => ({
+      '--cocso-select-min-width': 'var(--number-12)',
+      '--cocso-select-height': 'var(--number-12)',
+      '--cocso-select-padding-left': 'var(--number-6)',
+      '--cocso-select-padding-right': 'calc(var(--number-7) + 16px)',
+      '--cocso-select-font-size': '14px',
+      '--cocso-select-border-radius': 'var(--number-3)',
+    }))
+    .with('sm', () => ({
+      '--cocso-select-min-width': 'var(--number-14)',
+      '--cocso-select-height': 'var(--number-14)',
+      '--cocso-select-padding-left': 'var(--number-7)',
+      '--cocso-select-padding-right': 'calc(var(--number-7) + 16px)',
+      '--cocso-select-font-size': '14px',
+      '--cocso-select-border-radius': 'var(--number-3)',
+    }))
+    .with('md', () => ({
+      '--cocso-select-min-width': 'var(--number-16)',
+      '--cocso-select-height': 'var(--number-16)',
+      '--cocso-select-padding-left': 'var(--number-8)',
+      '--cocso-select-padding-right': 'calc(var(--number-8) + 16px)',
+      '--cocso-select-font-size': '16px',
+      '--cocso-select-border-radius': 'var(--number-4)',
+    }))
+    .with('lg', () => ({
+      '--cocso-select-min-width': 'var(--number-17)',
+      '--cocso-select-height': 'var(--number-17)',
+      '--cocso-select-padding-left': 'var(--number-9)',
+      '--cocso-select-padding-right': 'calc(var(--number-9) + 16px)',
+      '--cocso-select-font-size': '18px',
+      '--cocso-select-border-radius': 'var(--number-4)',
+    }))
+    .with('xl', () => ({
+      '--cocso-select-min-width': 'var(--number-18)',
+      '--cocso-select-height': 'var(--number-18)',
+      '--cocso-select-padding-left': 'var(--number-10)',
+      '--cocso-select-padding-right': 'calc(var(--number-10) + 16px)',
+      '--cocso-select-font-size': '18px',
+      '--cocso-select-border-radius': 'var(--number-4)',
+    }))
+    .exhaustive();
