@@ -3,7 +3,6 @@
 @import './react/button.css';
 @import './react/dropdown.css';
 @import './react/file-upload.css';
-@import './react/label.css';
 @import './react/link.css';
 @import './react/modal.css';
 @import './react/one-time-password-field.css';
@@ -11,5 +10,4 @@
 @import './react/popover.css';
 @import './react/select.css';
 @import './react/spinner.css';
-@import './react/stock-quantity-status.css';
 @import './react/switch.css';

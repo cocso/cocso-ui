@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useCallback, useRef, useState } from 'react';
 import { Body } from '../body';
-import { Label } from '../Label';
 
 export interface FileItem {
   file: File;
@@ -173,11 +172,11 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
               {...props}
             />
 
-            <Label size="xs" color="palette.gray-600">
+            <Body size="xs" color="palette.gray-600">
               파일을 여기에 끌어다 놓거나, 클릭하여 파일을 선택하세요
               <br />
               (최대 3MB)
-            </Label>
+            </Body>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"

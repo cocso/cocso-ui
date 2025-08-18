@@ -1,20 +1,23 @@
-import * as React from 'react';
-import { createClassName } from '../../utils/cn';
-import { Label } from '../Label';
+import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
+import { Body } from '../body';
+import styles from './StockQuantityStatus.module.css';
 
 export type QuantityStatus = '보통' | '여유' | '부족';
 
-export type QuantityStatusProps = {
+export interface QuantityStatusProps extends ComponentPropsWithoutRef<'div'> {
   quantity: QuantityStatus;
-} & React.ComponentPropsWithoutRef<'div'>;
+}
 
-const StockQuantityStatusContent = React.forwardRef<HTMLDivElement, QuantityStatusProps>(
-  ({ quantity, className, onChange, ...props }, ref) => {
-    const classNames = createClassName('cocso-stock-quantity-status', {}, [], className);
+export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProps>(
+  ({ quantity, className, onChange, style: _style, ...props }, ref) => {
+    const style = {
+      ..._style,
+      '--cocso-stock-quantity-status-color': getColor(quantity),
+    } as CSSProperties;
 
     return (
-      <div ref={ref} className={classNames} data-status={quantity} {...props}>
-        <span className="cocso-stock-quantity-status-indicator">
+      <div ref={ref} className={styles.stock} style={style} {...props}>
+        <span className={styles.indicator}>
           {quantity === '여유' ? (
             <svg
               width="16"
@@ -95,14 +98,21 @@ const StockQuantityStatusContent = React.forwardRef<HTMLDivElement, QuantityStat
             </svg>
           )}
         </span>
-        <Label size="sm" color="currentColor">
+        <Body size="sm" color="currentColor">
           {quantity}
-        </Label>
+        </Body>
       </div>
     );
   },
 );
 
-export const StockQuantityStatus = Object.assign(StockQuantityStatusContent, {
-  displayName: 'StockQuantityStatus',
-});
+export const getColor = (quantity: QuantityStatus): string => {
+  switch (quantity) {
+    case '여유':
+      return 'var(--color-palette-primary-500)';
+    case '보통':
+      return 'var(--color-palette-success-400)';
+    case '부족':
+      return 'var(--color-palette-danger-500)';
+  }
+};

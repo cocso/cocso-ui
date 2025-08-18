@@ -1,4 +1,4 @@
-import { type ComponentProps, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
 import { type ResponsiveFontSize, Typography } from '../typography';
@@ -9,7 +9,7 @@ type FontWeight = keyof typeof fontWeightToken;
 
 type LineHeight = keyof typeof lineHeightToken;
 
-export interface BodyProps extends ComponentProps<'p'> {
+export interface BodyProps extends ComponentPropsWithoutRef<'p'> {
   asChild?: boolean;
   color?: string;
   size?: FontSize;

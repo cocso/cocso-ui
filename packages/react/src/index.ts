@@ -6,7 +6,6 @@ export * from './components/Dropdown';
 export * from './components/display';
 export * from './components/FileUpload';
 export * from './components/heading';
-export * from './components/Label';
 export * from './components/Link';
 export * from './components/Modal';
 export * from './components/OneTimePasswordField';

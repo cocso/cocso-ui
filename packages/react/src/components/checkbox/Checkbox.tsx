@@ -8,7 +8,7 @@ import {
   useId,
 } from 'react';
 import { match } from 'ts-pattern';
-import { Label } from '../Label';
+import { Body } from '../body';
 import styles from './Checkbox.module.css';
 
 type CheckboxSize = 'lg' | 'md' | 'sm';
@@ -103,9 +103,9 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
         </CheckboxPrimitive.Root>
 
         {label && (
-          <Label className={styles.label} size={size} htmlFor={id} aria-disabled={disabled}>
-            {label}
-          </Label>
+          <Body className={styles.label} size={size} aria-disabled={disabled} asChild>
+            <label htmlFor={id}>{label}</label>
+          </Body>
         )}
       </div>
     );

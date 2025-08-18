@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import { type ComponentProps, type CSSProperties, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { cn, createColor } from '../../utils';
 import {
   fontSize as fontSizeToken,
@@ -19,7 +19,7 @@ export type FontWeight = keyof typeof fontWeightToken;
 
 export type LineHeight = keyof typeof lineHeightToken;
 
-export interface TypographyProps extends ComponentProps<'p'> {
+export interface TypographyProps extends ComponentPropsWithoutRef<'p'> {
   asChild?: boolean;
   size?: ResponsiveFontSize;
   weight?: FontWeight;
