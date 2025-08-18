@@ -1,6 +1,8 @@
-import * as React from 'react';
-import { useCallback, useRef, useState } from 'react';
+import { CloseIcon, PlusIcon } from '@cocso-ui/react-icons';
+import type * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useCallback, useRef, useState } from 'react';
 import { Body } from '../body';
+import styles from './FileUpload.module.css';
 
 export interface FileItem {
   file: File;
@@ -8,14 +10,14 @@ export interface FileItem {
   size: number;
 }
 
-type FileUploadProps = {
+export interface FileUploadProps extends ComponentPropsWithoutRef<'input'> {
   maxFiles?: number;
   files: FileItem[];
   onFilesChange: (files: FileItem[]) => void;
   onRemove?: (fileName: string) => void;
-} & React.ComponentPropsWithoutRef<'input'>;
+}
 
-const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
+export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
   ({ maxFiles = 2, files, onFilesChange, onRemove, multiple = true, accept, ...props }, ref) => {
     const [isDragActive, setIsDragActive] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -142,17 +144,17 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
     const hideDropzone = files.length >= maxFiles || (!multiple && files.length >= 1);
 
     return (
-      <div className="cocso-file-upload-wrapper">
+      <div className={styles.wrapper}>
         {!hideDropzone && (
           // biome-ignore lint/a11y/noStaticElementInteractions: This is a custom file upload component
           <div
             ref={dropZoneRef}
+            className={styles.uploader}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={handleClick}
-            className="cocso-file-upload"
             data-drag-active={isDragActive}
           >
             <input
@@ -178,49 +180,21 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
               (최대 3MB)
             </Body>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
+            <PlusIcon size={20} />
           </div>
         )}
 
         {files.length > 0 && (
-          <div className="cocso-file-upload-list">
+          <div className={styles.list}>
             {files.map(file => (
-              <div key={file.name} className="cocso-file-upload-item">
+              <div key={file.name} className={styles.item}>
                 <Body size="xs">{file.name}</Body>
                 <button
                   type="button"
                   onClick={() => handleRemove(file.name)}
-                  className="cocso-file-upload-remove"
+                  className={styles.remove}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M18 6 6 18" />
-                    <path d="m6 6 12 12" />
-                  </svg>
+                  <CloseIcon size={16} />
                 </button>
               </div>
             ))}
@@ -230,7 +204,3 @@ const FileUploadContent = React.forwardRef<HTMLInputElement, FileUploadProps>(
     );
   },
 );
-
-export const FileUpload = Object.assign(FileUploadContent, {
-  displayName: 'FileUpload',
-});
