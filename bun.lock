@@ -22,14 +22,14 @@
         "react-dom": "^19.1.1",
       },
       "devDependencies": {
-        "@storybook/react-vite": "^9.1.1",
-        "@types/react": "^19.1.9",
+        "@storybook/react-vite": "^9.1.2",
+        "@types/react": "^19.1.10",
         "@types/react-dom": "^19.1.7",
         "@vitejs/plugin-react": "^5.0.0",
         "globals": "^16.3.0",
-        "storybook": "^9.1.1",
+        "storybook": "^9.1.2",
         "typescript": "^5.9.2",
-        "vite": "^7.1.1",
+        "vite": "^7.1.2",
       },
     },
     "packages/baseframe": {
@@ -56,6 +56,7 @@
         "@radix-ui/react-tabs": "^1.1.12",
         "clsx": "^2.1.1",
         "sonner": "^2.0.7",
+        "ts-pattern": "^5.8.0",
       },
       "devDependencies": {
         "@types/react": "^19.1.10",
@@ -791,6 +792,8 @@
     "to-regex-range": ["to-regex-range@5.0.1", "", { "dependencies": { "is-number": "^7.0.0" } }, "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="],
 
     "ts-dedent": ["ts-dedent@2.2.0", "", {}, "sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ=="],
+
+    "ts-pattern": ["ts-pattern@5.8.0", "", {}, "sha512-kIjN2qmWiHnhgr5DAkAafF9fwb0T5OhMVSWrm8XEdTFnX6+wfXwYOFjeF86UZ54vduqiR7BfqScFmXSzSaH8oA=="],
 
     "tsconfig-paths": ["tsconfig-paths@4.2.0", "", { "dependencies": { "json5": "^2.2.2", "minimist": "^1.2.6", "strip-bom": "^3.0.0" } }, "sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg=="],
 
