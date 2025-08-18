@@ -1,3 +1,4 @@
+import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
 import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import styles from './Select.module.css';
@@ -13,12 +14,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ size = 'md', disabled = false, className, style: _style, children, ...props }, ref) => {
     const style = {
       ..._style,
-      '--cocso-select-min-width': getMinWidth(size),
-      '--cocso-select-height': getHeight(size),
-      '--cocso-select-padding-left': getPaddingLeft(size),
-      '--cocso-select-padding-right': getPaddingRight(size),
-      '--cocso-select-font-size': `${getFontSize(size)}px`,
-      '--cocso-select-border-radius': getBorderRadius(size),
+      '--cocso-select-min-width': variables[size].minWidth,
+      '--cocso-select-height': variables[size].height,
+      '--cocso-select-padding-left': variables[size].paddingLeft,
+      '--cocso-select-padding-right': variables[size].paddingRight,
+      '--cocso-select-font-size': `${variables[size].fontSize}px`,
+      '--cocso-select-border-radius': variables[size].borderRadius,
     } as CSSProperties;
 
     return (
@@ -34,124 +35,60 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </select>
 
         <span className={styles.icon}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          <KeyboardArrowDownIcon size={20} />
         </span>
       </div>
     );
   },
 );
 
-const getMinWidth = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 'var(--number-11)';
-    case 'xs':
-      return 'var(--number-12)';
-    case 'sm':
-      return 'var(--number-14)';
-    case 'md':
-      return 'var(--number-16)';
-    case 'lg':
-      return 'var(--number-17)';
-    case 'xl':
-      return 'var(--number-18)';
-  }
-};
-
-const getHeight = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 'var(--number-11)';
-    case 'xs':
-      return 'var(--number-12)';
-    case 'sm':
-      return 'var(--number-14)';
-    case 'md':
-      return 'var(--number-16)';
-    case 'lg':
-      return 'var(--number-17)';
-    case 'xl':
-      return 'var(--number-18)';
-  }
-};
-
-const getPaddingLeft = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 'var(--number-5)';
-    case 'xs':
-      return 'var(--number-6)';
-    case 'sm':
-      return 'var(--number-7)';
-    case 'md':
-      return 'var(--number-8)';
-    case 'lg':
-      return 'var(--number-9)';
-    case 'xl':
-      return 'var(--number-10)';
-  }
-};
-
-const getPaddingRight = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 'calc(var(--number-7) + 16px)';
-    case 'xs':
-      return 'calc(var(--number-7) + 16px)';
-    case 'sm':
-      return 'calc(var(--number-7) + 16px)';
-    case 'md':
-      return 'calc(var(--number-8) + 16px)';
-    case 'lg':
-      return 'calc(var(--number-9) + 16px)';
-    case 'xl':
-      return 'calc(var(--number-10) + 16px)';
-  }
-};
-
-const getFontSize = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 12;
-    case 'xs':
-      return 14;
-    case 'sm':
-      return 14;
-    case 'md':
-      return 16;
-    case 'lg':
-      return 18;
-    case 'xl':
-      return 18;
-  }
-};
-
-const getBorderRadius = (size: SelectSize) => {
-  switch (size) {
-    case '2xs':
-      return 'var(--number-3)';
-    case 'xs':
-      return 'var(--number-3)';
-    case 'sm':
-      return 'var(--number-3)';
-    case 'md':
-      return 'var(--number-4)';
-    case 'lg':
-      return 'var(--number-4)';
-    case 'xl':
-      return 'var(--number-4)';
-  }
-};
+const variables = {
+  '2xs': {
+    minWidth: 'var(--number-11)',
+    height: 'var(--number-11)',
+    paddingLeft: 'var(--number-5)',
+    paddingRight: 'calc(var(--number-8) + 16px)',
+    fontSize: 12,
+    borderRadius: 'var(--number-3)',
+  },
+  xs: {
+    minWidth: 'var(--number-12)',
+    height: 'var(--number-12)',
+    paddingLeft: 'var(--number-6)',
+    paddingRight: 'calc(var(--number-7) + 16px)',
+    fontSize: 14,
+    borderRadius: 'var(--number-3)',
+  },
+  sm: {
+    minWidth: 'var(--number-14)',
+    height: 'var(--number-14)',
+    paddingLeft: 'var(--number-7)',
+    paddingRight: 'calc(var(--number-7) + 16px)',
+    fontSize: 14,
+    borderRadius: 'var(--number-3)',
+  },
+  md: {
+    minWidth: 'var(--number-16)',
+    height: 'var(--number-16)',
+    paddingLeft: 'var(--number-8)',
+    paddingRight: 'calc(var(--number-8) + 16px)',
+    fontSize: 16,
+    borderRadius: 'var(--number-4)',
+  },
+  lg: {
+    minWidth: 'var(--number-17)',
+    height: 'var(--number-17)',
+    paddingLeft: 'var(--number-9)',
+    paddingRight: 'calc(var(--number-9) + 16px)',
+    fontSize: 18,
+    borderRadius: 'var(--number-4)',
+  },
+  xl: {
+    minWidth: 'var(--number-18)',
+    height: 'var(--number-18)',
+    paddingLeft: 'var(--number-10)',
+    paddingRight: 'calc(var(--number-10) + 16px)',
+    fontSize: 18,
+    borderRadius: 'var(--number-4)',
+  },
+} as const;
