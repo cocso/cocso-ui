@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { createClassName } from '../../utils/cn';
+import { clsx as cn } from 'clsx';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import styles from './Pagination.module.css';
 
-export type PaginationProps = {
+export interface PaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> {
   page: number;
   totalPages: number;
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
-} & Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'>;
+}
 
-const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
+export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
   ({ className, page, totalPages, maxVisible = 5, onChange, ...props }, ref) => {
     const halfVisible = Math.ceil(maxVisible / 2);
 
@@ -16,7 +17,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
       <button
         key={pageNumber}
         type="button"
-        className="cocso-pagination-item"
+        className={styles.item}
         onClick={() => onChange(pageNumber)}
         data-active={page === pageNumber}
       >
@@ -24,13 +25,11 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
       </button>
     );
 
-    const classNames = createClassName('cocso-pagination', {}, [], className);
-
     return (
-      <div ref={ref} className={classNames} {...props}>
+      <div ref={ref} className={cn(styles.pagination, className)} {...props}>
         {totalPages > 1 && (
           <button
-            className="cocso-pagination-arrow"
+            className={styles.arrow}
             type="button"
             disabled={page === 1}
             onClick={() => page > 1 && onChange(page - 1)}
@@ -59,7 +58,7 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
         ) : (
           <>
             {renderPageButton(1)}
-            {page > 1 + halfVisible && <span className="cocso-pagination-trunc">...</span>}
+            {page > 1 + halfVisible && <span className={styles.trunc}>...</span>}
             {Array(maxVisible)
               .fill(0)
               .map((_, index) => {
@@ -68,14 +67,14 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
                   ? renderPageButton(pageNumber)
                   : '';
               })}
-            {page < totalPages - halfVisible && <span className="cocso-pagination-trunc">...</span>}
+            {page < totalPages - halfVisible && <span className={styles.trunc}>...</span>}
             {renderPageButton(totalPages)}
           </>
         )}
 
         {totalPages > 1 && (
           <button
-            className="cocso-pagination-arrow"
+            className={styles.arrow}
             type="button"
             disabled={page === totalPages}
             onClick={() => page < totalPages && onChange(page + 1)}
@@ -100,7 +99,3 @@ const PaginationComponent = React.forwardRef<HTMLDivElement, PaginationProps>(
     );
   },
 );
-
-export const Pagination = Object.assign(PaginationComponent, {
-  displayName: 'Pagination',
-});

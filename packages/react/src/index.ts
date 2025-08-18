@@ -9,7 +9,7 @@ export * from './components/heading';
 export * from './components/Link';
 export * from './components/Modal';
 export * from './components/one-time-password-field';
-export * from './components/Pagination';
+export * from './components/pagination';
 export * from './components/popover';
 export * from './components/Select';
 export * from './components/Spinner';
