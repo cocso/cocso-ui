@@ -7,6 +7,7 @@ import {
   forwardRef,
   useId,
 } from 'react';
+import { match } from 'ts-pattern';
 import { Body } from '../body';
 import styles from './Switch.module.css';
 
@@ -67,29 +68,20 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
   },
 );
 
-const getSwitchWidth = (size: SwitchSize) => {
-  switch (size) {
-    case 'lg':
-      return 'var(--number-14)';
-    case 'md':
-      return 'var(--number-12)';
-  }
-};
+const getSwitchWidth = (size: SwitchSize) =>
+  match(size)
+    .with('lg', () => 'var(--number-14)')
+    .with('md', () => 'var(--number-12)')
+    .exhaustive();
 
-const getSwitchHeight = (size: SwitchSize) => {
-  switch (size) {
-    case 'lg':
-      return 'var(--number-10)';
-    case 'md':
-      return 'var(--number-9)';
-  }
-};
+const getSwitchHeight = (size: SwitchSize) =>
+  match(size)
+    .with('lg', () => 'var(--number-10)')
+    .with('md', () => 'var(--number-9)')
+    .exhaustive();
 
-const getThumbSize = (size: SwitchSize) => {
-  switch (size) {
-    case 'lg':
-      return 'var(--number-9)';
-    case 'md':
-      return 'var(--number-8)';
-  }
-};
+const getThumbSize = (size: SwitchSize) =>
+  match(size)
+    .with('lg', () => 'var(--number-9)')
+    .with('md', () => 'var(--number-8)')
+    .exhaustive();
