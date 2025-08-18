@@ -19,19 +19,7 @@ export interface DisplayProps extends ComponentProps<'h1'> {
 }
 
 export const Display = forwardRef<HTMLHeadingElement, DisplayProps>(
-  (
-    {
-      asChild,
-      className,
-      color,
-      size = 'md',
-      weight = 'regular',
-      lineHeight = 'normal',
-      style: _style,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ asChild, className, color, size = 'md', weight = 'regular', lineHeight, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h1';
     const fontSize = getFontSize(size);
 

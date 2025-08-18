@@ -1,39 +1,49 @@
-import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { createColor, createFontWeight, type FontWeightToken } from '../../utils/token';
-import { createClassName } from '../../utils/cn';
+import { type ComponentProps, forwardRef } from 'react';
+import { match } from 'ts-pattern';
+import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
+import { type ResponsiveFontSize, Typography } from '../typography';
 
-export type HeadingProps = {
+type FontSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+
+type FontWeight = keyof typeof fontWeightToken;
+
+type LineHeight = keyof typeof lineHeightToken;
+
+export interface HeadingProps extends ComponentProps<'h2'> {
   asChild?: boolean;
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
-  color?: string;
-  weight?: FontWeightToken;
-} & React.ComponentPropsWithoutRef<'h2'>;
+  size?: FontSize;
+  weight?: FontWeight;
+  lineHeight?: LineHeight;
+}
 
-const HeadingComponent = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ asChild = false, size = 'md', color, weight = 'bold', className, style, ...props }, ref) => {
-    const variants = { size };
-    const classNames = createClassName('cocso-heading', variants, [], className);
-
+export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({ asChild, className, color, size = 'md', weight = 'bold', lineHeight, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h2';
+    const fontSize = getFontSize(size);
 
     return (
-      <Comp
+      <Typography
         ref={ref}
-        className={classNames}
-        style={
-          {
-            '--cocso-heading-color': createColor(color),
-            '--cocso-heading-weight': createFontWeight(weight),
-            ...style,
-          } as React.CSSProperties
-        }
-        {...props}
-      />
+        color={color}
+        size={fontSize}
+        weight={weight}
+        lineHeight={lineHeight}
+        asChild
+      >
+        <Comp {...props} />
+      </Typography>
     );
   },
 );
 
-export const Heading = Object.assign(HeadingComponent, {
-  displayName: 'Heading',
-});
+const getFontSize = (size: FontSize) => {
+  return match(size)
+    .with('xl', () => ({ base: 28, tablet: 40 }))
+    .with('lg', () => ({ base: 24, tablet: 32 }))
+    .with('md', () => ({ base: 22, tablet: 24 }))
+    .with('sm', () => 18)
+    .with('xs', () => 16)
+    .with('2xs', () => 14)
+    .exhaustive() as ResponsiveFontSize;
+};
