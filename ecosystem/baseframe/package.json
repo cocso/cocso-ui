@@ -27,7 +27,7 @@
     "@types/bun": "^1.2.20",
     "@types/fs-extra": "^11.0.4",
     "@types/yargs": "^17.0.33",
-    "esbuild": "^0.25.8",
+    "esbuild": "^0.25.9",
     "typescript": "^5.9.2"
   },
   "publishConfig": {
