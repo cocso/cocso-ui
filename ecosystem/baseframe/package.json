@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/baseframe",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CLI tool for managing and generating baseframe",
   "main": "bin/index.js",
   "module": "bin/index.js",
