@@ -16,7 +16,7 @@ export interface LinkProps extends ComponentPropsWithoutRef<'a'> {
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ asChild, size, weight, lineHeight, indicator = true, className, style, ...props }, ref) => {
+  ({ asChild, className, style, size, weight, lineHeight, indicator = true, ...props }, ref) => {
     const Comp = asChild ? Slot : 'a';
 
     return (

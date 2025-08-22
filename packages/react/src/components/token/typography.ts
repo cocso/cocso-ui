@@ -21,7 +21,10 @@ export const fontSize = {
   @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
  */
 export const fontWeight = {
-  regular: 400,
+  thin: 100,
+  extraLight: 200,
+  light: 300,
+  normal: 400,
   medium: 500,
   semiBold: 600,
   bold: 700,

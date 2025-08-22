@@ -1,14 +1,14 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
-import type { fontWeight as fontWeightToken, lineHeight as lineHeightToken } from '../token';
-import { type ResponsiveFontSize, Typography } from '../typography';
+import {
+  type FontWeight,
+  type LineHeight,
+  type ResponsiveFontSize,
+  Typography,
+} from '../typography';
 
 type FontSize = 'lg' | 'md' | 'sm';
-
-type FontWeight = keyof typeof fontWeightToken;
-
-type LineHeight = keyof typeof lineHeightToken;
 
 export interface DisplayProps extends ComponentPropsWithoutRef<'h1'> {
   asChild?: boolean;
@@ -19,7 +19,7 @@ export interface DisplayProps extends ComponentPropsWithoutRef<'h1'> {
 }
 
 export const Display = forwardRef<HTMLHeadingElement, DisplayProps>(
-  ({ asChild, className, color, size = 'md', weight = 'regular', lineHeight, ...props }, ref) => {
+  ({ asChild, className, color, size = 'md', weight, lineHeight, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h1';
     const fontSize = getFontSize(size);
 

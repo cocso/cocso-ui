@@ -19,16 +19,7 @@ export interface BodyProps extends ComponentPropsWithoutRef<'p'> {
 
 export const Body = forwardRef<HTMLParagraphElement, BodyProps>(
   (
-    {
-      asChild,
-      className,
-      color,
-      size = 'md',
-      weight = 'regular',
-      lineHeight = 'normal',
-      style: _style,
-      ...props
-    },
+    { asChild, className, style: _style, color, size = 'md', weight, lineHeight, ...props },
     ref,
   ) => {
     const fontSize = getFontSize(size);

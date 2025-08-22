@@ -31,11 +31,11 @@ export const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
     {
       asChild,
       className,
+      style: _style,
       color,
       size = 16,
-      weight = 'regular',
+      weight = 'normal',
       lineHeight = 'normal',
-      style: _style,
       ...props
     },
     ref,

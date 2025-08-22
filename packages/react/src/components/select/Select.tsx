@@ -12,7 +12,7 @@ export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 's
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ size = 'md', disabled = false, className, style: _style, children, ...props }, ref) => {
+  ({ className, style: _style, size = 'md', disabled = false, children, ...props }, ref) => {
     const style = {
       ..._style,
       ...getStyles(size),

@@ -25,13 +25,13 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
   (
     {
       id: _id,
-      size = 'md',
-      disabled = false,
-      label,
-      position = 'right',
       className,
-      children,
       style: _style,
+      children,
+      disabled = false,
+      size = 'md',
+      position = 'right',
+      label,
       ...props
     },
     ref,

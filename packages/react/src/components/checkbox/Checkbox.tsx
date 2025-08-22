@@ -33,13 +33,13 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
   (
     {
       id: _id,
+      className,
+      style: _style,
       size = 'md',
       status,
       onChange,
       label,
       disabled = false,
-      className,
-      style: _style,
       ...props
     },
     ref,

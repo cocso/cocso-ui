@@ -16,11 +16,11 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
   (
     {
       asChild,
+      className,
+      style: _style,
       size = 'md',
       color = 'palette.primary-500',
       bg = 'palette.gray-200',
-      className,
-      style: _style,
       ...props
     },
     ref,
