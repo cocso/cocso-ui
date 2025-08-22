@@ -7,7 +7,7 @@ export * from './components/dropdown';
 export * from './components/file-upload';
 export * from './components/heading';
 export * from './components/link';
-export * from './components/Modal';
+export * from './components/modal';
 export * from './components/one-time-password-field';
 export * from './components/pagination';
 export * from './components/popover';
