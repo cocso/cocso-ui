@@ -17,7 +17,6 @@
   "exports": {
     "./*.css": "./*.css",
     "./colors.css": "./colors.css",
-    "./root.css": "./root.css",
     "./token.css": "./token.css",
     "./tailwind4.css": "./tailwind4.css",
     "./package.json": "./package.json"
