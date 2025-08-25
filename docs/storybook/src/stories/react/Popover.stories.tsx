@@ -23,7 +23,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// Basic popover with Trigger Button
+// Basic popover with Trigger button
 const BasicPopover = ({ children, ...props }: any) => {
   return (
     <Popover {...props}>

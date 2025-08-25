@@ -1,6 +1,6 @@
 export * from './components/accordion';
-export * from './components/Button';
 export * from './components/body';
+export * from './components/button';
 export * from './components/checkbox';
 export * from './components/display';
 export * from './components/dropdown';

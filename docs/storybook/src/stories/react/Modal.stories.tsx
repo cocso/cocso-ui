@@ -23,7 +23,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// modal with Trigger Button
+// modal with Trigger button
 const ModalWithTrigger = ({ children, ...props }: any) => {
   return (
     <Modal {...props}>
