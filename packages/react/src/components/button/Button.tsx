@@ -1,20 +1,30 @@
 import { Slot } from '@radix-ui/react-slot';
-import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
+import {
+  type ComponentPropsWithoutRef,
+  type CSSProperties,
+  forwardRef,
+  type ReactNode,
+} from 'react';
 import { match } from 'ts-pattern';
 import type { FontWeight } from '../typography';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
-export type ButtonType = 'secondary' | 'tertiary' | 'error' | 'warning';
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'success' | 'error' | 'warning';
 
-export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type'> {
+export type ButtonShape = 'square' | 'circle' | 'rounded';
+
+export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'prefix'> {
   asChild?: boolean;
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success' | 'text';
   size?: ButtonSize;
-  disabled?: boolean;
-  loading?: boolean;
   type?: ButtonType;
   weight?: FontWeight;
+  shape?: ButtonShape;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  svgOnly?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,12 +34,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       style: _style,
       children,
-      variant = 'primary',
       size = 'medium',
+      type = 'primary',
+      weight = 'normal',
+      shape = 'square',
+      prefix,
+      suffix,
+      svgOnly = false,
       disabled = false,
       loading = false,
-      weight = 'normal',
-      type = 'secondary',
       ...props
     },
     ref,
