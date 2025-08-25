@@ -1,9 +1,14 @@
-name: Release
+name: Changeset Release
 
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
 
 jobs:
   release:
@@ -32,7 +37,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: bun run release:ci
+          publish: bun run release
           title: "chore: version packages"
           commit: "chore: version packages"
         env:
