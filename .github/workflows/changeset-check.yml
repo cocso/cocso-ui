@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   changeset-check:
     name: Changeset Check
@@ -12,6 +17,15 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Ensure main is fetched
+        run: |
+          git fetch origin main:refs/remotes/origin/main --update-head-ok || true
+          echo "HEAD: $(git rev-parse --short HEAD)"
+          echo "origin/main: $(git rev-parse --short origin/main)"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -22,17 +36,22 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Check for Changeset
-        run: bunx changeset status --since main
-        continue-on-error: true
+        id: changeset
+        run: |
+          set +e
+          bunx changeset status --since origin/main
+          exit_code=$?
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+          exit 0
 
-      - name: Comment PR
+      - name: Comment PR when missing changeset
+        if: ${{ steps.changeset.outputs.exit_code != '0' }}
         uses: actions/github-script@v7
-        if: failure()
         with:
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '⚠️ **Changeset이 필요합니다!**\n\n이 PR에는 버전 변경사항이 포함되어 있습니다. `bun run changeset`을 실행하여 변경사항을 문서화해주세요.\n\n자세한 내용은 [Changeset 사용법](./CHANGESET_USAGE.md)을 참고하세요.'
+              body: '⚠️ **Changeset required!**\n\nThis PR introduces version-affecting changes but does not include a changeset. Please run `bun run changeset` locally, commit the generated file, and push it to this branch.'
             })
