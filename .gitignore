@@ -46,5 +46,4 @@ yarn-error.log*
 storybook-static
 
 # Changeset
-.changeset/*.md
 !.changeset/README.md
