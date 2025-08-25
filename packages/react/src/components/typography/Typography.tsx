@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
-import { cn, createColor } from '../../utils';
+import { createColor } from '../../utils';
 import {
   fontSize as fontSizeToken,
   fontWeight as fontWeightToken,
