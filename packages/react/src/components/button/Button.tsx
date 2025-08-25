@@ -3,6 +3,7 @@ import { clsx } from 'clsx';
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 import { forwardRef } from 'react';
 import { match } from 'ts-pattern';
+import { Spinner } from '../spinner';
 import { colors, fontWeight } from '../token';
 import type { FontWeight } from '../typography';
 import styles from './Button.module.css';
@@ -16,7 +17,7 @@ export type ButtonType =
   | 'success'
   | 'error'
   | 'warning'
-  | 'gray';
+  | 'neutral';
 
 export type ButtonShape = 'square' | 'circle' | 'rounded';
 
@@ -82,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         style={style}
         {...props}
       >
-        {loading && <span>Loading...</span>}
+        {loading && <Spinner size="xs" />}
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <span className={styles.content}>{children}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}
@@ -133,14 +134,14 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) => {
 
 const getColor = (type: ButtonType) => {
   return match(type)
-    .with('primary', 'success', 'error', 'gray', () => colors.white)
-    .with('secondary', 'tertiary', 'warning', () => colors.gray950)
+    .with('primary', 'success', 'error', 'neutral', () => colors.white)
+    .with('secondary', 'tertiary', 'warning', () => colors.neutral950)
     .exhaustive();
 };
 
 const getBorder = (type: ButtonType) => {
   return match(type)
-    .with('tertiary', () => `1px solid ${colors.gray100}`)
+    .with('tertiary', () => `1px solid ${colors.neutral100}`)
     .otherwise(() => 'none');
 };
 
@@ -152,30 +153,30 @@ const getBackgroundColor = (type: ButtonType) => {
     .with('success', () => colors.success500)
     .with('error', () => colors.danger500)
     .with('warning', () => colors.warning300)
-    .with('gray', () => colors.gray950)
+    .with('neutral', () => colors.neutral950)
     .exhaustive();
 };
 
 const getBackgroundColorHover = (type: ButtonType) => {
   return match(type)
     .with('primary', () => colors.primary600)
-    .with('secondary', () => colors.gray50)
-    .with('tertiary', () => colors.gray50)
+    .with('secondary', () => colors.neutral50)
+    .with('tertiary', () => colors.neutral50)
     .with('success', () => colors.success600)
     .with('error', () => colors.danger600)
     .with('warning', () => colors.warning400)
-    .with('gray', () => colors.gray800)
+    .with('neutral', () => colors.neutral800)
     .exhaustive();
 };
 
 const getBackgroundColorActive = (type: ButtonType) => {
   return match(type)
     .with('primary', () => colors.primary700)
-    .with('secondary', () => colors.gray100)
-    .with('tertiary', () => colors.gray100)
+    .with('secondary', () => colors.neutral100)
+    .with('tertiary', () => colors.neutral100)
     .with('success', () => colors.success700)
     .with('error', () => colors.danger700)
     .with('warning', () => colors.warning500)
-    .with('gray', () => colors.gray700)
+    .with('neutral', () => colors.neutral700)
     .exhaustive();
 };
