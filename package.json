@@ -2,6 +2,7 @@
   "name": "cocso-ui",
   "private": true,
   "scripts": {
+    "update:all": "cd packages/react && bun update && cd ../css && bun update && cd ../react-icons && bun update && cd ../baseframe && bun update && cd ../../docs/storybook && bun update && cd ../../ecosystem/baseframe && bun update && cd ../..",
     "build": "turbo run build",
     "build:storybook": "turbo run build:storybook --filter=@cocso-ui/storybook",
     "dev": "turbo run dev",
