@@ -54,7 +54,7 @@ const getBorderColor = (color: SpinnerColor) =>
 
 const getBackgroundColor = (color: SpinnerColor) =>
   match(color)
-    .with('primary', () => colors.primary200)
-    .with('neutral', () => colors.neutral200)
-    .with('white', () => colors.whiteAlpha30)
+    .with('primary', () => colors.primary100)
+    .with('neutral', () => colors.neutral100)
+    .with('white', () => colors.whiteAlpha20)
     .exhaustive();
