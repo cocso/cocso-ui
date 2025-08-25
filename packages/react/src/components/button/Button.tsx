@@ -60,6 +60,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       '--cocso-button-font-weight': fontWeight[weight],
       '--cocso-button-border-radius': getBorderRadius(shape, size),
       '--cocso-button-bg-color': getBackgroundColor(type),
+      '--cocso-button-bg-color-hover': getBackgroundColorHover(type),
+      '--cocso-button-bg-color-active': getBackgroundColorActive(type),
     } as CSSProperties;
 
     const Comp = asChild ? Slot : 'button';
@@ -143,5 +145,29 @@ const getBackgroundColor = (type: ButtonType) => {
     .with('error', () => colors.danger500)
     .with('warning', () => colors.warning300)
     .with('gray', () => colors.gray950)
+    .exhaustive();
+};
+
+const getBackgroundColorHover = (type: ButtonType) => {
+  return match(type)
+    .with('primary', () => colors.primary600)
+    .with('secondary', () => colors.gray50)
+    .with('tertiary', () => colors.gray50)
+    .with('success', () => colors.success600)
+    .with('error', () => colors.danger600)
+    .with('warning', () => colors.warning400)
+    .with('gray', () => colors.gray800)
+    .exhaustive();
+};
+
+const getBackgroundColorActive = (type: ButtonType) => {
+  return match(type)
+    .with('primary', () => colors.primary700)
+    .with('secondary', () => colors.gray100)
+    .with('tertiary', () => colors.gray100)
+    .with('success', () => colors.success700)
+    .with('error', () => colors.danger700)
+    .with('warning', () => colors.warning500)
+    .with('gray', () => colors.gray700)
     .exhaustive();
 };
