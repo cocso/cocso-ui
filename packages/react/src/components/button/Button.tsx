@@ -58,6 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...getSizeStyles(size),
       '--cocso-button-font-color': getColor(type),
       '--cocso-button-font-weight': fontWeight[weight],
+      '--cocso-button-border': getBorder(type),
       '--cocso-button-border-radius': getBorderRadius(shape, size),
       '--cocso-button-bg-color': getBackgroundColor(type),
       '--cocso-button-bg-color-hover': getBackgroundColorHover(type),
@@ -104,6 +105,7 @@ const getSizeStyles = (size: ButtonSize) => {
     .with('large', () => 14)
     .exhaustive();
   const fontSize = match(size)
+    .with('tiny', () => 12)
     .with('large', () => 16)
     .otherwise(() => 14);
 
@@ -134,6 +136,12 @@ const getColor = (type: ButtonType) => {
     .with('primary', 'success', 'error', 'gray', () => colors.white)
     .with('secondary', 'tertiary', 'warning', () => colors.gray950)
     .exhaustive();
+};
+
+const getBorder = (type: ButtonType) => {
+  return match(type)
+    .with('tertiary', () => `1px solid ${colors.gray100}`)
+    .otherwise(() => 'none');
 };
 
 const getBackgroundColor = (type: ButtonType) => {
