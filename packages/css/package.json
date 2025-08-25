@@ -16,7 +16,7 @@
   "type": "module",
   "exports": {
     "./*.css": "./*.css",
-    "./root.css": "./root.css",
+    "./colors.css": "./colors.css",
     "./token.css": "./token.css",
     "./tailwind4.css": "./tailwind4.css",
     "./package.json": "./package.json"

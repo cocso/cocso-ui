@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '@cocso-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 const meta = {
@@ -23,7 +23,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// Modal with Trigger Button
+// modal with Trigger button
 const ModalWithTrigger = ({ children, ...props }: any) => {
   return (
     <Modal {...props}>
@@ -46,7 +46,7 @@ const ModalWithTrigger = ({ children, ...props }: any) => {
   );
 };
 
-// Controlled Modal
+// Controlled modal
 const ControlledModal = ({ children, ...props }: any) => {
   const [open, setOpen] = useState(false);
 
