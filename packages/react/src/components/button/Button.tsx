@@ -83,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         style={style}
         {...props}
       >
-        {loading && <Spinner size="xs" />}
+        {loading && <Spinner size="small" color="white" />}
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <span className={styles.content}>{children}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}

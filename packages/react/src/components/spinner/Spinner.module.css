@@ -6,16 +6,16 @@
 .spinner {
   position: relative;
   display: inline-block;
-  width: var(--cocso-spinner-width);
-  height: var(--cocso-spinner-height);
-  border: 3px solid var(--cocso-spinner-bg-color);
+  width: var(--cocso-spinner-size);
+  height: var(--cocso-spinner-size);
+  border: var(--cocso-spinner-border-width) solid var(--cocso-spinner-bg-color);
   border-top-color: var(--cocso-spinner-border-color);
   border-radius: 50%;
   animation: donut-spin 0.75s linear infinite;
   transform-origin: center center;
 
-  --cocso-spinner-width: inherit;
-  --cocso-spinner-height: inherit;
+  --cocso-spinner-size: inherit;
+  --cocso-spinner-border-width: inherit;
   --cocso-spinner-border-color: inherit;
   --cocso-spinner-bg-color: inherit;
 }

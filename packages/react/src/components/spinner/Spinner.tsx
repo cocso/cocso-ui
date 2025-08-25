@@ -1,54 +1,60 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
-import { createColor } from '../../utils';
+import { match } from 'ts-pattern';
+import { colors } from '../token';
 import styles from './Spinner.module.css';
 
-type SpinnerSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+type SpinnerSize = 'xlarge' | 'large' | 'medium' | 'small';
+
+type SpinnerColor = 'primary' | 'neutral' | 'white';
 
 export interface SpinnerProps extends Omit<ComponentPropsWithoutRef<'div'>, 'size' | 'color'> {
   asChild?: boolean;
   size?: SpinnerSize;
-  color?: string;
-  bg?: string;
+  color?: SpinnerColor;
 }
 
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
-  (
-    {
-      asChild,
-      className,
-      style: _style,
-      size = 'md',
-      color = 'palette.primary-500',
-      bg = 'palette.gray-200',
-      ...props
-    },
-    ref,
-  ) => {
+  ({ asChild, size = 'medium', color = 'primary', className, style: _style, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     const style = {
       ..._style,
-      '--cocso-spinner-width': getSize(size),
-      '--cocso-spinner-height': getSize(size),
-      '--cocso-spinner-border-color': createColor(color),
-      '--cocso-spinner-bg-color': createColor(bg),
+      '--cocso-spinner-size': `${getSize(size)}px`,
+      '--cocso-spinner-border-width': `${getBorderWidth(size)}px`,
+      '--cocso-spinner-border-color': getBorderColor(color),
+      '--cocso-spinner-bg-color': getBackgroundColor(color),
     };
 
     return <Comp ref={ref} className={styles.spinner} style={style} {...props} />;
   },
 );
 
-const getSize = (size: SpinnerSize) => {
-  switch (size) {
-    case 'xl':
-      return 'var(--number-12)';
-    case 'lg':
-      return 'var(--number-11)';
-    case 'md':
-      return 'var(--number-10)';
-    case 'sm':
-      return 'var(--number-9)';
-    case 'xs':
-      return 'var(--number-8)';
-  }
-};
+const getSize = (size: SpinnerSize) =>
+  match(size)
+    .with('xlarge', () => 40)
+    .with('large', () => 32)
+    .with('medium', () => 24)
+    .with('small', () => 20)
+    .exhaustive();
+
+const getBorderWidth = (size: SpinnerSize) =>
+  match(size)
+    .with('xlarge', () => 5)
+    .with('large', () => 4)
+    .with('medium', () => 3)
+    .with('small', () => 3)
+    .exhaustive();
+
+const getBorderColor = (color: SpinnerColor) =>
+  match(color)
+    .with('primary', () => colors.primary500)
+    .with('neutral', () => colors.neutral600)
+    .with('white', () => colors.white)
+    .exhaustive();
+
+const getBackgroundColor = (color: SpinnerColor) =>
+  match(color)
+    .with('primary', () => colors.primary200)
+    .with('neutral', () => colors.neutral200)
+    .with('white', () => colors.whiteAlpha30)
+    .exhaustive();

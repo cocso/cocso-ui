@@ -1,5 +1,4 @@
 import '@cocso-ui/css/colors.css';
-import '@cocso-ui/css/root.css';
 import '@cocso-ui/react/styles.css';
 
 import type { Preview } from '@storybook/react-vite';
