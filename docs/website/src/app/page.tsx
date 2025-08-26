@@ -1,5 +1,7 @@
+import { redirect } from 'next/navigation';
+
 const Page = () => {
-  return <>div</>;
+  redirect('/introduction');
 };
 
 export default Page;
