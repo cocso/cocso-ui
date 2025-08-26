@@ -6,7 +6,10 @@ export const Header = () => {
     <header className="sticky row-between mx-auto h-14 w-full max-w-[var(--size-app-width)] border-neutral-200 border-b bg-white px-[var(--size-app-padding)]">
       <div className="row-between h-full w-full">
         <Logo />
-        <SearchToggle />
+
+        <div className="center-y">
+          <SearchToggle />
+        </div>
       </div>
     </header>
   );

@@ -4,7 +4,7 @@ export * from './components/button';
 export * from './components/checkbox';
 export * from './components/display';
 export * from './components/dropdown';
-export * from './components/file-upload';
+// export * from './components/file-upload';
 export * from './components/heading';
 export * from './components/link';
 export * from './components/modal';
