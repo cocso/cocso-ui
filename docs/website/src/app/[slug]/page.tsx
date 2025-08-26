@@ -2,7 +2,7 @@ import { colors, Heading, Typography } from '@cocso-ui/react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Section } from '~/components/ui';
-import { source } from '~/lib/source';
+import { source } from '~/libs/source';
 import { getMDXComponents } from '~/mdx-components';
 
 type Props = {

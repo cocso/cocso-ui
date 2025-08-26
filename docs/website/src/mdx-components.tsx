@@ -1,3 +1,4 @@
+import { Button } from '@cocso-ui/react';
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import * as tabsComponents from 'fumadocs-ui/components/tabs';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
@@ -16,6 +17,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CodeBlock,
 
     Section,
+
+    Button,
 
     ...tabsComponents,
     ...components,

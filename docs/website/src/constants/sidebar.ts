@@ -8,4 +8,8 @@ export const sidebar = {
       { type: 'page', name: 'Icons', url: '/icons' },
     ],
   },
+  components: {
+    title: 'Components',
+    items: [{ type: 'page', name: 'Button', url: '/button' }],
+  },
 } as const;
