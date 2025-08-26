@@ -3,14 +3,17 @@
 import { Typography } from '@cocso-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { sidebar } from '~/constants/sidebar';
 
-export const Sidebar = () => {
+type Props = ComponentProps<'nav'>;
+
+export const Sidebar = (props: Props) => {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden flex-1 border-neutral-200 border-r p-4 lg:block">
+    <nav {...props}>
       {Object.entries(sidebar).map(([key, value]) => {
         return (
           <div key={key} className="mb-6">

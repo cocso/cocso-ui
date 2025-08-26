@@ -7,8 +7,8 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
     <Fragment>
       <Header />
       <main className="mx-auto flex h-full w-full max-w-[var(--size-app-width)]">
-        <Sidebar />
-        <div className="w-full max-w-[960px]">{children}</div>
+        <Sidebar className="hidden flex-1 border-neutral-200 border-r p-4 lg:block" />
+        <div className="w-full lg:max-w-[960px]">{children}</div>
       </main>
     </Fragment>
   );
