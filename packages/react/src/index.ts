@@ -17,4 +17,5 @@ export * from './components/stock-quantity-status';
 export * from './components/switch';
 export * from './components/tab';
 export * from './components/toast';
+export * from './components/token';
 export * from './components/typography';

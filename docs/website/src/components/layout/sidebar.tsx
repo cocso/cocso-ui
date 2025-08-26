@@ -1,39 +1,49 @@
+'use client';
+
 import { Typography } from '@cocso-ui/react';
-import { headers } from 'next/headers';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import { source } from '~/lib/source';
+import { sidebar } from '~/constants/sidebar';
 
-export const Sidebar = async () => {
-  const pathname = (await headers()).get('x-pathname') ?? '';
-  const items = source.pageTree;
-
-  console.log(pathname);
+export const Sidebar = () => {
+  const pathname = usePathname();
 
   return (
-    <nav className="min-w-[220px] flex-1 p-4">
-      <ul className="w-full">
-        {items.children.map(item => {
-          if (item.type === 'page') {
-            return (
-              <li key={item.url} className="w-full">
-                <Typography asChild>
-                  <Link
-                    className={twMerge(
-                      'w-full rounded-2xl px-4 py-3',
-                      item.url === pathname && 'bg-neutral-100',
-                    )}
-                    href={item.url}
-                  >
-                    {item.name}
-                  </Link>
-                </Typography>
-              </li>
-            );
-          }
-          return null;
-        })}
-      </ul>
+    <nav className="hidden flex-1 border-neutral-200 border-r p-4 lg:block">
+      {Object.entries(sidebar).map(([key, value]) => {
+        return (
+          <div key={key} className="mb-6">
+            <Typography className="mb-3 px-4" size={14} weight="medium">
+              {value.title}
+            </Typography>
+
+            <ul>
+              {value.items.map(item => {
+                if (item.type === 'page') {
+                  return (
+                    <li key={item.url} className="w-full">
+                      <Typography
+                        className={twMerge(
+                          'center-y h-10 rounded-lg px-4 opacity-50 transition-all duration-150',
+                          pathname !== item.url && 'hover:opacity-70',
+                          pathname === item.url && 'bg-neutral-200 opacity-100',
+                        )}
+                        size={14}
+                        weight="medium"
+                        asChild
+                      >
+                        <Link href={item.url}>{item.name}</Link>
+                      </Typography>
+                    </li>
+                  );
+                }
+                return null;
+              })}
+            </ul>
+          </div>
+        );
+      })}
     </nav>
   );
 };

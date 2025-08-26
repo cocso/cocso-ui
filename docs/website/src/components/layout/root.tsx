@@ -1,6 +1,6 @@
 import { Fragment, type PropsWithChildren } from 'react';
-import { Sidebar } from '~/components/layout/sidebar';
 import { Header } from './header';
+import { Sidebar } from './sidebar';
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
   return (

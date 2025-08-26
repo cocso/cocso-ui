@@ -1,9 +1,13 @@
 import '~/styles/globals.css';
+import '@cocso-ui/css/colors.css';
+import '@cocso-ui/react/styles.css';
 
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 import { Layout } from '~/components/layout';
+import { SearchDialog } from '~/components/ui';
+import { Pretendard } from './_fonts';
 
 export const metadata: Metadata = {
   title: 'cocso-ui',
@@ -13,11 +17,9 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: PropsWithChildren) => {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body>
-        <RootProvider>
+      <body className={Pretendard.className}>
+        <RootProvider search={{ SearchDialog }}>
           <Layout>{children}</Layout>
-          {/*<div className="fade" data-side="left" aria-hidden="true" />*/}
-          {/*<div className="fade" data-side="right" aria-hidden="true" />*/}
         </RootProvider>
       </body>
     </html>
