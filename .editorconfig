@@ -14,8 +14,9 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[*.md]
+[*.{md,mdx}]
 trim_trailing_whitespace = false
+indent_size = 2
 
 [*.css]
 indent_style = space

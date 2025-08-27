@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/react-icons",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.1.11",
-    "@types/react-dom": "^19.1.7",
+    "@types/react-dom": "^19.1.8",
     "esbuild": "^0.25.9",
     "typescript": "^5.9.2"
   },

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@cocso-ui/react';
-import { PlusIcon, SearchIcon, SettingsIcon, CheckIcon } from '@cocso-ui/react-icons';
+import { CheckIcon, PlusIcon, SearchIcon, SettingsIcon } from '@cocso-ui/react-icons';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'react/Button',
@@ -19,7 +19,7 @@ const meta = {
       description: '버튼 내부에 표시될 내용',
       control: 'text',
     },
-    type: {
+    variant: {
       description: '버튼의 스타일 타입',
       control: 'select',
       options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning'],
@@ -46,7 +46,17 @@ const meta = {
     weight: {
       description: '폰트 굵기',
       control: 'select',
-      options: ['thin', 'extraLight', 'light', 'normal', 'medium', 'semiBold', 'bold', 'extraBold', 'black'],
+      options: [
+        'thin',
+        'extraLight',
+        'light',
+        'normal',
+        'medium',
+        'semiBold',
+        'bold',
+        'extraBold',
+        'black',
+      ],
       table: {
         defaultValue: { summary: 'medium' },
       },
@@ -105,12 +115,12 @@ export const Default: Story = {
 export const Types: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-      <Button type="primary">Primary</Button>
-      <Button type="secondary">Secondary</Button>
-      <Button type="tertiary">Tertiary</Button>
-      <Button type="success">Success</Button>
-      <Button type="error">Error</Button>
-      <Button type="warning">Warning</Button>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="tertiary">Tertiary</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="error">Error</Button>
+      <Button variant="warning">Warning</Button>
     </div>
   ),
   parameters: {
@@ -125,7 +135,15 @@ export const Types: Story = {
 // 버튼 크기별 스토리
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '12px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
       <Button size="tiny">Tiny</Button>
       <Button size="small">Small</Button>
       <Button size="medium">Medium</Button>
@@ -144,10 +162,20 @@ export const Sizes: Story = {
 // 버튼 모양별 스토리
 export const Shapes: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '12px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
       <Button shape="square">Square</Button>
       <Button shape="rounded">Rounded</Button>
-      <Button shape="circle" svgOnly><SearchIcon /></Button>
+      <Button shape="circle" svgOnly>
+        <SearchIcon />
+      </Button>
     </div>
   ),
   parameters: {
@@ -189,7 +217,9 @@ export const WithIcons: Story = {
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
       <Button prefix={<PlusIcon />}>Add Item</Button>
       <Button suffix={<SettingsIcon />}>Settings</Button>
-      <Button prefix={<SearchIcon />} suffix={<CheckIcon />}>Search & Check</Button>
+      <Button prefix={<SearchIcon />} suffix={<CheckIcon />}>
+        Search & Check
+      </Button>
     </div>
   ),
   parameters: {
@@ -205,10 +235,18 @@ export const WithIcons: Story = {
 export const IconOnly: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-      <Button type="primary" svgOnly size="tiny"><PlusIcon /></Button>
-      <Button type="secondary" svgOnly size="small"><SearchIcon /></Button>
-      <Button type="tertiary" svgOnly size="medium"><SettingsIcon /></Button>
-      <Button type="success" svgOnly size="large"><CheckIcon /></Button>
+      <Button variant="primary" svgOnly size="tiny">
+        <PlusIcon />
+      </Button>
+      <Button variant="secondary" svgOnly size="small">
+        <SearchIcon />
+      </Button>
+      <Button variant="tertiary" svgOnly size="medium">
+        <SettingsIcon />
+      </Button>
+      <Button variant="success" svgOnly size="large">
+        <CheckIcon />
+      </Button>
     </div>
   ),
   parameters: {
@@ -244,78 +282,134 @@ export const AllVariations: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1000px' }}>
       {/* Button Types */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Button Types</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Button Types
+        </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button type="primary">Primary</Button>
-          <Button type="secondary">Secondary</Button>
-          <Button type="tertiary">Tertiary</Button>
-          <Button type="success">Success</Button>
-          <Button type="error">Error</Button>
-          <Button type="warning">Warning</Button>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="tertiary">Tertiary</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="error">Error</Button>
+          <Button variant="warning">Warning</Button>
         </div>
       </div>
 
       {/* Button Sizes */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Button Sizes</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Button Sizes
+        </h3>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button type="primary" size="tiny">Tiny</Button>
-          <Button type="primary" size="small">Small</Button>
-          <Button type="primary" size="medium">Medium</Button>
-          <Button type="primary" size="large">Large</Button>
+          <Button variant="primary" size="tiny">
+            Tiny
+          </Button>
+          <Button variant="primary" size="small">
+            Small
+          </Button>
+          <Button variant="primary" size="medium">
+            Medium
+          </Button>
+          <Button variant="primary" size="large">
+            Large
+          </Button>
         </div>
       </div>
 
       {/* Button Shapes */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Button Shapes</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Button Shapes
+        </h3>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button type="secondary" shape="square">Square</Button>
-          <Button type="secondary" shape="rounded">Rounded</Button>
-          <Button type="secondary" shape="circle" svgOnly><SearchIcon /></Button>
+          <Button variant="secondary" shape="square">
+            Square
+          </Button>
+          <Button variant="secondary" shape="rounded">
+            Rounded
+          </Button>
+          <Button variant="secondary" shape="circle" svgOnly>
+            <SearchIcon />
+          </Button>
         </div>
       </div>
 
       {/* Button States */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Button States</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Button States
+        </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button type="primary">Normal</Button>
-          <Button type="primary" disabled>Disabled</Button>
-          <Button type="primary" loading>Loading</Button>
+          <Button variant="primary">Normal</Button>
+          <Button variant="primary" disabled>
+            Disabled
+          </Button>
+          <Button variant="primary" loading>
+            Loading
+          </Button>
         </div>
       </div>
 
       {/* With Icons */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>With Icons</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          With Icons
+        </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button type="primary" prefix={<PlusIcon />}>Add Item</Button>
-          <Button type="secondary" suffix={<SettingsIcon />}>Settings</Button>
-          <Button type="tertiary" prefix={<SearchIcon />} suffix={<CheckIcon />}>Search & Check</Button>
+          <Button variant="primary" prefix={<PlusIcon />}>
+            Add Item
+          </Button>
+          <Button variant="secondary" suffix={<SettingsIcon />}>
+            Settings
+          </Button>
+          <Button variant="tertiary" prefix={<SearchIcon />} suffix={<CheckIcon />}>
+            Search & Check
+          </Button>
         </div>
       </div>
 
       {/* Icon Only Buttons */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Icon Only Buttons</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Icon Only Buttons
+        </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button type="primary" svgOnly size="tiny"><PlusIcon /></Button>
-          <Button type="primary" svgOnly size="small"><PlusIcon /></Button>
-          <Button type="secondary" svgOnly size="medium"><SearchIcon /></Button>
-          <Button type="tertiary" svgOnly size="large"><SettingsIcon /></Button>
+          <Button variant="primary" svgOnly size="tiny">
+            <PlusIcon />
+          </Button>
+          <Button variant="primary" svgOnly size="small">
+            <PlusIcon />
+          </Button>
+          <Button variant="secondary" svgOnly size="medium">
+            <SearchIcon />
+          </Button>
+          <Button variant="tertiary" svgOnly size="large">
+            <SettingsIcon />
+          </Button>
         </div>
       </div>
 
       {/* Font Weights */}
       <div>
-        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Font Weights</h3>
+        <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>
+          Font Weights
+        </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button type="primary" weight="thin">Thin</Button>
-          <Button type="primary" weight="normal">Normal</Button>
-          <Button type="primary" weight="semiBold">Semibold</Button>
-          <Button type="primary" weight="bold">Bold</Button>
-          <Button type="primary" weight="black">Black</Button>
+          <Button variant="primary" weight="thin">
+            Thin
+          </Button>
+          <Button variant="primary" weight="normal">
+            Normal
+          </Button>
+          <Button variant="primary" weight="semiBold">
+            Semibold
+          </Button>
+          <Button variant="primary" weight="bold">
+            Bold
+          </Button>
+          <Button variant="primary" weight="black">
+            Black
+          </Button>
         </div>
       </div>
     </div>

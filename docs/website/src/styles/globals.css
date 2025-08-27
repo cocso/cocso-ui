@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+@import './utilities.css';
+
+@theme {
+  --breakpoint-lg: 1200px;
+
+  --size-app-width: 1200px;
+  --size-app-padding: 24px;
+
+  --z-index-above: 1;
+}
+
+@layer base {
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: var(--font-sans), sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
+    background-color: var(--color-neutral-50);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--color-neutral-200);
+    z-index: var(--z-index-above);
+    transform: translateX(calc(-1 * var(--size-app-width) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--color-neutral-200);
+    z-index: var(--z-index-above);
+    transform: translateX(calc(var(--size-app-width) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+  }
+}
