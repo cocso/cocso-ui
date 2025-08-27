@@ -9,4 +9,5 @@ export * from './COCSOLogo';
 export * from './KakaoOutlineLogo';
 export * from './KakaoLogo';
 export * from './NaverLogo';
+export * from './COCSOUIHorizontalLogo';
 export * from './HuonsLogo';

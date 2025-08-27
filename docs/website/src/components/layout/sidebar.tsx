@@ -20,7 +20,7 @@ export const Sidebar = (props: Props) => {
             <Typography
               className="mb-3 px-4 uppercase"
               size={12}
-              color={colors.neutral500}
+              color={colors.neutral400}
               weight="medium"
             >
               {value.title}
