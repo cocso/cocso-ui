@@ -1,8 +1,8 @@
 'use client';
 
 import { colors, Typography } from '@cocso-ui/react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Link } from 'next-view-transitions';
 import type { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { sidebar } from '~/constants/sidebar';
