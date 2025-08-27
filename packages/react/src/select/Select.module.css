@@ -1,0 +1,46 @@
+.wrapper {
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.select {
+  min-width: var(--cocso-select-min-width);
+  height: var(--cocso-select-height);
+  padding-left: var(--cocso-select-padding-left);
+  padding-right: var(--cocso-select-padding-right);
+  color: var(--color-text-basic);
+  font-size: var(--cocso-select-font-size);
+  border: 1px solid var(--color-border-gray-light);
+  border-radius: var(--cocso-select-border-radius);
+  background-color: var(--cocso-select-bg-color);
+  appearance: none;
+  -o-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  --cocso-select-min-width: inherit;
+  --cocso-select-height: inherit;
+  --cocso-select-padding-left: inherit;
+  --cocso-select-padding-right: inherit;
+  --cocso-select-font-size: inherit;
+  --cocso-select-border-radius: inherit;
+  --cocso-select-bg-color: var(--ds-white);
+}
+
+.select[disabled] {
+  cursor: not-allowed;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: var(--ds-spacing-5);
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-text-disabled);
+}
+
+.icon[disabled] {
+  cursor: not-allowed;
+}
