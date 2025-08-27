@@ -1,31 +1,19 @@
 'use client';
 
+import { ErrorBoundary, Suspense } from '@suspensive/react';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Component, type ReactNode, Suspense } from 'react';
+import type { ReactNode } from 'react';
 import { ComponentPreview } from './component-preview';
 
-class PreviewErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
-  state = { hasError: false };
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-  render() {
-    return this.state.hasError ? <div>컴포넌트를 불러오지 못했습니다.</div> : this.props.children;
-  }
-}
+type Props = { name: string; children?: ReactNode };
 
-interface ComponentExampleProps {
-  name: string;
-  children?: ReactNode;
-}
-
-export function ComponentExample({ name, children }: ComponentExampleProps) {
+export const ComponentExample = ({ name, children }: Props) => {
   const preview = (
-    <PreviewErrorBoundary>
+    <ErrorBoundary fallback={<div>컴포넌트를 불러오지 못했습니다.</div>}>
       <Suspense fallback={null}>
         <ComponentPreview name={name} />
       </Suspense>
-    </PreviewErrorBoundary>
+    </ErrorBoundary>
   );
 
   if (!children) {
@@ -38,4 +26,4 @@ export function ComponentExample({ name, children }: ComponentExampleProps) {
       <Tab value="Code">{children}</Tab>
     </Tabs>
   );
-}
+};

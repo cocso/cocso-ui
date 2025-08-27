@@ -1,8 +1,11 @@
 'use client';
 
-import { lazy, Suspense, useRef } from 'react';
+import { lazy, Suspense } from '@suspensive/react';
+import { useRef } from 'react';
 
-export function ComponentPreview({ name }: { name: string }) {
+type Props = { name: string };
+
+export const ComponentPreview = ({ name }: Props) => {
   const cache = useRef<Record<string, React.ComponentType<unknown>>>({});
 
   if (!cache.current[name]) {
@@ -18,4 +21,4 @@ export function ComponentPreview({ name }: { name: string }) {
       </div>
     </Suspense>
   );
-}
+};
