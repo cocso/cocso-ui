@@ -21,7 +21,7 @@ export type ButtonVariant =
 
 export type ButtonShape = 'square' | 'circle' | 'rounded';
 
-export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'prefix'> {
+export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'prefix'> {
   size?: ButtonSize;
   variant?: ButtonVariant;
   weight?: FontWeight;
