@@ -39,7 +39,7 @@
         "@cocso-ui/css": "workspace:^",
         "@cocso-ui/react": "workspace:^",
         "@cocso-ui/react-icons": "workspace:^",
-        "@suspensive/react": "^3.5.0",
+        "@suspensive/react": "^3.6.0",
         "fumadocs-core": "^15.7.2",
         "fumadocs-mdx": "^11.8.0",
         "fumadocs-ui": "^15.7.2",

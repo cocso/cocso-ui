@@ -5,7 +5,7 @@ import { match } from 'ts-pattern';
 import type { FontWeight, LineHeight, ResponsiveFontSize } from '../token';
 import { Typography } from '../typography';
 
-export type HeadingSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+export type HeadingSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 export interface HeadingProps extends ComponentPropsWithoutRef<'h2'> {
   asChild?: boolean;
@@ -41,6 +41,5 @@ const getFontSize = (size: HeadingSize) => {
     .with('md', () => ({ base: 22, tablet: 24 }))
     .with('sm', () => 18)
     .with('xs', () => 16)
-    .with('2xs', () => 14)
     .exhaustive() as ResponsiveFontSize;
 };

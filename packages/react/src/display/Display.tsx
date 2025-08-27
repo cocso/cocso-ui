@@ -4,7 +4,7 @@ import { match } from 'ts-pattern';
 import type { FontWeight, LineHeight, ResponsiveFontSize } from '../token';
 import { Typography } from '../typography';
 
-export type DisplaySize = 'large' | 'medium' | 'small';
+export type DisplaySize = 'lg' | 'md' | 'sm';
 
 export interface DisplayProps extends ComponentPropsWithoutRef<'h1'> {
   asChild?: boolean;
@@ -15,7 +15,7 @@ export interface DisplayProps extends ComponentPropsWithoutRef<'h1'> {
 }
 
 export const Display = forwardRef<HTMLHeadingElement, DisplayProps>(
-  ({ asChild, className, color, size = 'medium', weight, lineHeight, ...props }, ref) => {
+  ({ asChild, className, color, size = 'md', weight, lineHeight, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h1';
     const fontSize = getFontSize(size);
 
@@ -36,8 +36,8 @@ export const Display = forwardRef<HTMLHeadingElement, DisplayProps>(
 
 const getFontSize = (size: DisplaySize) => {
   return match(size)
-    .with('large', () => ({ base: 44, tablet: 60 }))
-    .with('medium', () => ({ base: 32, tablet: 44 }))
-    .with('small', () => ({ base: 28, tablet: 36 }))
+    .with('lg', () => ({ base: 44, tablet: 60 }))
+    .with('md', () => ({ base: 32, tablet: 44 }))
+    .with('sm', () => ({ base: 28, tablet: 36 }))
     .exhaustive() as ResponsiveFontSize;
 };
