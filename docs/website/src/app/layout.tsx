@@ -13,7 +13,7 @@ import { Pretendard } from './_fonts';
 export const metadata: Metadata = {
   metadataBase: new URL('https://cocso-ui.com'),
   title: { default: 'cocso-ui', template: '%s | cocso-ui' },
-  description: '',
+  description: 'Documentation for the COCSO UI component library.',
 };
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
