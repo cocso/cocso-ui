@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography } from '@cocso-ui/react';
+import { colors, Typography } from '@cocso-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ComponentProps } from 'react';
@@ -17,7 +17,12 @@ export const Sidebar = (props: Props) => {
       {Object.entries(sidebar).map(([key, value]) => {
         return (
           <div key={key} className="mb-6">
-            <Typography className="mb-3 px-4" size={14} weight="medium">
+            <Typography
+              className="mb-3 px-4 uppercase"
+              size={12}
+              color={colors.neutral500}
+              weight="medium"
+            >
               {value.title}
             </Typography>
 
@@ -30,7 +35,7 @@ export const Sidebar = (props: Props) => {
                         className={twMerge(
                           'center-y h-10 rounded-lg px-4 opacity-50 transition-all duration-150',
                           pathname !== item.url && 'hover:opacity-70',
-                          pathname === item.url && 'bg-neutral-200 opacity-100',
+                          pathname === item.url && 'bg-neutral-100 opacity-100',
                         )}
                         size={14}
                         weight="medium"

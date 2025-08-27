@@ -1,7 +1,7 @@
 import { structure } from 'fumadocs-core/mdx-plugins';
 import { createSearchAPI } from 'fumadocs-core/search/server';
 
-import { source } from '~/lib/source';
+import { source } from '~/libs/source';
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: source.getPages().map(page => ({

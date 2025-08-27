@@ -1,5 +1,5 @@
-import { Slot } from '@radix-ui/react-slot';
-import { clsx } from 'clsx';
+import { Primitive } from '@radix-ui/react-primitive';
+import { clsx as cx } from 'clsx';
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 import { forwardRef } from 'react';
 import { match } from 'ts-pattern';
@@ -10,7 +10,7 @@ import styles from './Button.module.css';
 
 export type ButtonSize = 'tiny' | 'small' | 'medium' | 'large';
 
-export type ButtonType =
+export type ButtonVariant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -22,9 +22,8 @@ export type ButtonType =
 export type ButtonShape = 'square' | 'circle' | 'rounded';
 
 export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'prefix'> {
-  asChild?: boolean;
   size?: ButtonSize;
-  type?: ButtonType;
+  variant?: ButtonVariant;
   weight?: FontWeight;
   shape?: ButtonShape;
   prefix?: ReactNode;
@@ -37,12 +36,11 @@ export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 't
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      asChild,
       className,
       style: _style,
       children,
       size = 'medium',
-      type = 'primary',
+      variant = 'primary',
       weight = 'medium',
       shape = 'square',
       prefix,
@@ -57,23 +55,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const style = {
       ..._style,
       ...getSizeStyles(size),
-      '--cocso-button-font-color': getColor(type),
+      '--cocso-button-font-color': getColor(variant),
       '--cocso-button-font-weight': fontWeight[weight],
-      '--cocso-button-border': getBorder(type),
+      '--cocso-button-border': getBorder(variant),
       '--cocso-button-border-radius': getBorderRadius(shape, size),
-      '--cocso-button-bg-color': getBackgroundColor(type),
-      '--cocso-button-bg-color-hover': getBackgroundColorHover(type),
-      '--cocso-button-bg-color-active': getBackgroundColorActive(type),
+      '--cocso-button-bg-color': getBackgroundColor(variant),
+      '--cocso-button-bg-color-hover': getBackgroundColorHover(variant),
+      '--cocso-button-bg-color-active': getBackgroundColorActive(variant),
     } as CSSProperties;
-
-    const Comp = asChild ? Slot : 'button';
 
     const isDisabled = disabled || loading;
 
     return (
-      <Comp
+      <Primitive.button
         ref={ref}
-        className={clsx(
+        className={cx(
           styles.button,
           isDisabled && styles.disabled,
           svgOnly && styles.svgOnly,
@@ -87,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <span className={styles.content}>{children}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}
-      </Comp>
+      </Primitive.button>
     );
   },
 );
@@ -132,21 +128,21 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) => {
     .exhaustive();
 };
 
-const getColor = (type: ButtonType) => {
-  return match(type)
+const getColor = (variant: ButtonVariant) => {
+  return match(variant)
     .with('primary', 'success', 'error', 'neutral', () => colors.white)
     .with('secondary', 'tertiary', 'warning', () => colors.neutral950)
     .exhaustive();
 };
 
-const getBorder = (type: ButtonType) => {
-  return match(type)
+const getBorder = (variant: ButtonVariant) => {
+  return match(variant)
     .with('tertiary', () => `1px solid ${colors.neutral100}`)
     .otherwise(() => 'none');
 };
 
-const getBackgroundColor = (type: ButtonType) => {
-  return match(type)
+const getBackgroundColor = (variant: ButtonVariant) => {
+  return match(variant)
     .with('primary', () => colors.primary500)
     .with('secondary', () => colors.white)
     .with('tertiary', () => colors.transparent)
@@ -157,8 +153,8 @@ const getBackgroundColor = (type: ButtonType) => {
     .exhaustive();
 };
 
-const getBackgroundColorHover = (type: ButtonType) => {
-  return match(type)
+const getBackgroundColorHover = (variant: ButtonVariant) => {
+  return match(variant)
     .with('primary', () => colors.primary600)
     .with('secondary', () => colors.neutral50)
     .with('tertiary', () => colors.neutral50)
@@ -169,8 +165,8 @@ const getBackgroundColorHover = (type: ButtonType) => {
     .exhaustive();
 };
 
-const getBackgroundColorActive = (type: ButtonType) => {
-  return match(type)
+const getBackgroundColorActive = (variant: ButtonVariant) => {
+  return match(variant)
     .with('primary', () => colors.primary700)
     .with('secondary', () => colors.neutral100)
     .with('tertiary', () => colors.neutral100)

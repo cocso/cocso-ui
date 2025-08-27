@@ -4,6 +4,7 @@ export * from './NaverOutlineLogo';
 export * from './HMPLogo';
 export * from './COCSOHorizontalLogo';
 export * from './DrugInfoHorizontalLogo';
+export * from './COCSOUILogo';
 export * from './COCSOLogo';
 export * from './KakaoOutlineLogo';
 export * from './KakaoLogo';
