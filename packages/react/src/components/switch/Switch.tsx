@@ -1,5 +1,5 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
@@ -49,7 +49,7 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
     } as CSSProperties;
 
     return (
-      <div className={cn(styles.wrapper, className)} aria-disabled={disabled} style={style}>
+      <div className={cx(styles.wrapper, className)} aria-disabled={disabled} style={style}>
         {position === 'left' && (
           <Body size={size} asChild>
             <label htmlFor={id}>{label}</label>

@@ -1,5 +1,5 @@
 import * as OneTimePasswordFieldPrimitive from '@radix-ui/react-one-time-password-field';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import styles from './OneTimePasswordField.module.css';
 
@@ -10,7 +10,7 @@ const OneTimePasswordFieldRoot = forwardRef<
   return (
     <OneTimePasswordFieldPrimitive.Root
       ref={ref}
-      className={cn(styles.otp, className)}
+      className={cx(styles.otp, className)}
       {...props}
     />
   );
@@ -23,7 +23,7 @@ const OneTimePasswordFieldInput = forwardRef<
   return (
     <OneTimePasswordFieldPrimitive.Input
       ref={ref}
-      className={cn(styles.input, className)}
+      className={cx(styles.input, className)}
       {...props}
     />
   );

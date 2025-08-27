@@ -1,6 +1,7 @@
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { Body } from '../body';
+import { colors } from '../token';
 import styles from './StockQuantityStatus.module.css';
 
 export type QuantityStatus = '보통' | '여유' | '부족';
@@ -17,7 +18,7 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
     } as CSSProperties;
 
     return (
-      <div ref={ref} className={cn(styles.stock, className)} style={style} {...props}>
+      <div ref={ref} className={cx(styles.stock, className)} style={style} {...props}>
         <span className={styles.indicator}>
           {quantity === '여유' ? (
             <svg
@@ -110,10 +111,10 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
 export const getColor = (quantity: QuantityStatus): string => {
   switch (quantity) {
     case '여유':
-      return 'var(--color-palette-primary-500)';
+      return colors.primary500;
     case '보통':
-      return 'var(--color-palette-success-400)';
+      return colors.success400;
     case '부족':
-      return 'var(--color-palette-danger-500)';
+      return colors.danger500;
   }
 };

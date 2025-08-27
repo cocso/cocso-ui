@@ -1,6 +1,6 @@
 import { CloseIcon } from '@cocso-ui/react-icons';
 import * as ModalPrimitive from '@radix-ui/react-dialog';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import { Body } from '../body';
 import { Heading } from '../heading';
@@ -13,7 +13,7 @@ const ModalContent = forwardRef<
   return (
     <ModalPrimitive.Portal>
       <ModalPrimitive.Overlay className={styles.overlay} />
-      <ModalPrimitive.Content ref={ref} className={cn(styles.content, className)} {...props}>
+      <ModalPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>
         {children}
       </ModalPrimitive.Content>
     </ModalPrimitive.Portal>
@@ -25,7 +25,7 @@ const ModalClose = forwardRef<
   ComponentPropsWithoutRef<typeof ModalPrimitive.Close>
 >(({ className, children, ...props }, ref) => {
   return (
-    <ModalPrimitive.Close ref={ref} className={cn(styles.close, className)} {...props}>
+    <ModalPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props}>
       <CloseIcon size={24} />
     </ModalPrimitive.Close>
   );
@@ -36,7 +36,7 @@ const ModalTitle = forwardRef<
   ComponentPropsWithoutRef<typeof ModalPrimitive.Title>
 >(({ className, children, ...props }, ref) => {
   return (
-    <ModalPrimitive.Title ref={ref} className={cn(styles.title, className)} asChild {...props}>
+    <ModalPrimitive.Title ref={ref} className={cx(styles.title, className)} asChild {...props}>
       <Heading color="text.basic">{children}</Heading>
     </ModalPrimitive.Title>
   );
@@ -49,7 +49,7 @@ const ModalDescription = forwardRef<
   return (
     <ModalPrimitive.Description
       ref={ref}
-      className={cn(styles.description, className)}
+      className={cx(styles.description, className)}
       asChild
       {...props}
     >

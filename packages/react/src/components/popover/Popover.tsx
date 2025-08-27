@@ -1,5 +1,5 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import styles from './Popover.module.css';
 
@@ -8,7 +8,7 @@ const PopoverContent = forwardRef<
   ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(({ className, ...props }, ref) => {
   return (
-    <PopoverPrimitive.Content ref={ref} className={cn(styles.content, className)} {...props} />
+    <PopoverPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props} />
   );
 });
 

@@ -1,6 +1,6 @@
 import { CheckIcon } from '@cocso-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
@@ -75,7 +75,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
     } as CSSProperties;
 
     return (
-      <div className={cn(styles.wrapper, className)} style={style}>
+      <div className={cx(styles.wrapper, className)} style={style}>
         <CheckboxPrimitive.Root
           ref={ref}
           id={id}

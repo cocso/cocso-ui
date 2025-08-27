@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { createColor } from '../../utils';
 import {
@@ -69,6 +69,6 @@ export const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
       '--cocso-typography-line-height': lineHeightToken[lineHeight],
     } as CSSProperties;
 
-    return <Comp ref={ref} className={cn(styles.typography, className)} style={style} {...props} />;
+    return <Comp ref={ref} className={cx(styles.typography, className)} style={style} {...props} />;
   },
 );

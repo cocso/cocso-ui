@@ -1,5 +1,5 @@
 import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
-import { clsx as cn } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import styles from './Select.module.css';
@@ -22,7 +22,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className={styles.wrapper}>
         <select
           ref={ref}
-          className={cn(styles.select, className)}
+          className={cx(styles.select, className)}
           style={style}
           disabled={disabled}
           {...props}

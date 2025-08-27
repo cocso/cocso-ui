@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import { clsx } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Body } from '../body';
 import type { FontWeight, LineHeight } from '../typography';
@@ -23,7 +23,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       <Body size={size} weight={weight} lineHeight={lineHeight} asChild>
         <Comp
           ref={ref}
-          className={clsx(styles.link, indicator && styles.indicator, className)}
+          className={cx(styles.link, indicator && styles.indicator, className)}
           style={style}
           {...props}
         >
