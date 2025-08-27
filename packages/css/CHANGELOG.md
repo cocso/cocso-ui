@@ -1,5 +1,12 @@
 # @cocso-ui/css
 
+## 0.0.14
+
+### Patch Changes
+
+- 661270c: - Add icons related to `cocso-ui`
+  - Change variant of button component
+
 ## 0.0.12
 
 ### Patch Changes
