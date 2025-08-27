@@ -1,21 +1,21 @@
 'use client';
 
-import { lazy, Suspense, useMemo } from 'react';
+import { lazy, Suspense, useRef } from 'react';
 
-export const ComponentPreview = ({ name }: { name: string }) => {
-  const Preview = useMemo(() => {
-    const Component = lazy(() => import(`../example/${name}.tsx`));
+export function ComponentPreview({ name }: { name: string }) {
+  const cache = useRef<Record<string, React.ComponentType<unknown>>>({});
 
-    if (!Component) {
-      return <div>컴포넌트가 존재하지 않습니다.</div>;
-    }
+  if (!cache.current[name]) {
+    cache.current[name] = lazy(() => import(`../example/${name}`));
+  }
 
-    return <Component />;
-  }, [name]);
+  const Component = cache.current[name];
 
   return (
     <Suspense fallback={null}>
-      <div className="center w-full">{Preview}</div>
+      <div className="center w-full">
+        <Component />
+      </div>
     </Suspense>
   );
-};
+}
