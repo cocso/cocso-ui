@@ -1,5 +1,14 @@
 # @cocso-ui/react
 
+## 0.1.8
+
+### Patch Changes
+
+- 4bfd4e2: - 브랜드 로고를 추가하고, Horizontal Logo를 Text Logo로 변경합니다.
+  - Button 컴포넌트에 asChild 옵션을 추가합니다.
+- Updated dependencies [4bfd4e2]
+  - @cocso-ui/react-icons@0.0.13
+
 ## 0.1.6
 
 ### Patch Changes
