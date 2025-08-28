@@ -26,7 +26,10 @@ esbuild
     format: 'esm',
     platform: 'neutral',
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error('[react] Error building ESM bundle:', error);
+    process.exit(1);
+  });
 
 esbuild
   .build({
@@ -35,4 +38,7 @@ esbuild
     format: 'cjs',
     platform: 'neutral',
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error('[react] Error building CJS bundle:', error);
+    process.exit(1);
+  });
