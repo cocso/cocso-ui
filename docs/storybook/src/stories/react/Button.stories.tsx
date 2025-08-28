@@ -1,4 +1,4 @@
-import { Button } from '@cocso-ui/react';
+import { Button, Link } from '@cocso-ui/react';
 import { CheckIcon, PlusIcon, SearchIcon, SettingsIcon } from '@cocso-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -30,9 +30,9 @@ const meta = {
     size: {
       description: '버튼의 크기',
       control: 'select',
-      options: ['tiny', 'small', 'medium', 'large'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       table: {
-        defaultValue: { summary: 'medium' },
+        defaultValue: { summary: 'md' },
       },
     },
     shape: {
@@ -48,13 +48,13 @@ const meta = {
       control: 'select',
       options: [
         'thin',
-        'extraLight',
+        'extralight',
         'light',
         'normal',
         'medium',
-        'semiBold',
+        'semibold',
         'bold',
-        'extraBold',
+        'extrabold',
         'black',
       ],
       table: {
@@ -144,16 +144,17 @@ export const Sizes: Story = {
         justifyContent: 'center',
       }}
     >
-      <Button size="tiny">Tiny</Button>
-      <Button size="small">Small</Button>
-      <Button size="medium">Medium</Button>
-      <Button size="large">Large</Button>
+      <Button size="xs">Extra Small</Button>
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+      <Button size="xl">Extra Large</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: '4가지 버튼 크기를 보여줍니다.',
+        story: '5가지 버튼 크기를 보여줍니다.',
       },
     },
   },
@@ -192,13 +193,13 @@ export const FontWeights: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
       <Button weight="thin">Thin</Button>
-      <Button weight="extraLight">Extra Light</Button>
+      <Button weight="extralight">Extra Light</Button>
       <Button weight="light">Light</Button>
       <Button weight="normal">Normal</Button>
       <Button weight="medium">Medium</Button>
-      <Button weight="semiBold">Semibold</Button>
+      <Button weight="semibold">Semibold</Button>
       <Button weight="bold">Bold</Button>
-      <Button weight="extraBold">Extra Bold</Button>
+      <Button weight="extrabold">Extra Bold</Button>
       <Button weight="black">Black</Button>
     </div>
   ),
@@ -235,17 +236,20 @@ export const WithIcons: Story = {
 export const IconOnly: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-      <Button variant="primary" svgOnly size="tiny">
+      <Button variant="primary" svgOnly size="xs">
         <PlusIcon />
       </Button>
-      <Button variant="secondary" svgOnly size="small">
+      <Button variant="secondary" svgOnly size="sm">
         <SearchIcon />
       </Button>
-      <Button variant="tertiary" svgOnly size="medium">
+      <Button variant="tertiary" svgOnly size="md">
         <SettingsIcon />
       </Button>
-      <Button variant="success" svgOnly size="large">
+      <Button variant="success" svgOnly size="lg">
         <CheckIcon />
+      </Button>
+      <Button variant="warning" svgOnly size="xl">
+        <SettingsIcon />
       </Button>
     </div>
   ),
@@ -276,6 +280,55 @@ export const States: Story = {
   },
 };
 
+// asChild 패턴을 사용한 버튼
+export const AsChild: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Button asChild variant="primary">
+          <Link href="/dashboard">Dashboard Link</Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link href="/settings">Settings Link</Link>
+        </Button>
+        <Button asChild variant="tertiary">
+          <Link href="/profile">Profile Link</Link>
+        </Button>
+      </div>
+      
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Button asChild variant="success" prefix={<CheckIcon />}>
+          <Link href="/success">Success Link</Link>
+        </Button>
+        <Button asChild variant="error" loading>
+          <Link href="/error">Error Link (Loading)</Link>
+        </Button>
+        <Button asChild variant="warning" suffix={<SettingsIcon />}>
+          <Link href="/warning">Warning Link</Link>
+        </Button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Button asChild variant="primary" size="lg" prefix={<PlusIcon />}>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+            External Link
+          </a>
+        </Button>
+        <Button asChild variant="secondary" size="sm" disabled>
+          <Link href="/disabled">Disabled Link</Link>
+        </Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'asChild prop을 사용하여 Button을 Link나 다른 컴포넌트로 렌더링하는 패턴을 보여줍니다. Button의 스타일과 기능(loading, prefix, suffix 등)은 유지되면서 실제 DOM 요소는 자식 컴포넌트로 렌더링됩니다.',
+      },
+    },
+  },
+};
+
 // 모든 변형을 한번에 보여주는 스토리
 export const AllVariations: Story = {
   render: () => (
@@ -301,17 +354,20 @@ export const AllVariations: Story = {
           Button Sizes
         </h3>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Button variant="primary" size="tiny">
-            Tiny
+          <Button variant="primary" size="xs">
+            Extra Small
           </Button>
-          <Button variant="primary" size="small">
+          <Button variant="primary" size="sm">
             Small
           </Button>
-          <Button variant="primary" size="medium">
+          <Button variant="primary" size="md">
             Medium
           </Button>
-          <Button variant="primary" size="large">
+          <Button variant="primary" size="lg">
             Large
+          </Button>
+          <Button variant="primary" size="xl">
+            Extra Large
           </Button>
         </div>
       </div>
@@ -374,17 +430,20 @@ export const AllVariations: Story = {
           Icon Only Buttons
         </h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Button variant="primary" svgOnly size="tiny">
+          <Button variant="primary" svgOnly size="xs">
             <PlusIcon />
           </Button>
-          <Button variant="primary" svgOnly size="small">
+          <Button variant="primary" svgOnly size="sm">
             <PlusIcon />
           </Button>
-          <Button variant="secondary" svgOnly size="medium">
+          <Button variant="secondary" svgOnly size="md">
             <SearchIcon />
           </Button>
-          <Button variant="tertiary" svgOnly size="large">
+          <Button variant="tertiary" svgOnly size="lg">
             <SettingsIcon />
+          </Button>
+          <Button variant="success" svgOnly size="xl">
+            <CheckIcon />
           </Button>
         </div>
       </div>
@@ -401,7 +460,7 @@ export const AllVariations: Story = {
           <Button variant="primary" weight="normal">
             Normal
           </Button>
-          <Button variant="primary" weight="semiBold">
+          <Button variant="primary" weight="semibold">
             Semibold
           </Button>
           <Button variant="primary" weight="bold">
@@ -427,8 +486,8 @@ export const AllVariations: Story = {
 export const Playground: Story = {
   args: {
     children: 'Playground Button',
-    type: 'primary',
-    size: 'medium',
+    variant: 'primary',
+    size: 'md',
     shape: 'square',
     weight: 'medium',
     disabled: false,
