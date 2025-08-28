@@ -88,9 +88,9 @@
     },
     "packages/react": {
       "name": "@cocso-ui/react",
-      "version": "0.1.4",
+      "version": "0.1.6",
       "dependencies": {
-        "@cocso-ui/react-icons": "^0.0.10",
+        "@cocso-ui/react-icons": "^0.0.11",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-checkbox": "^1.3.3",
         "@radix-ui/react-dialog": "^1.1.15",
@@ -118,7 +118,7 @@
     },
     "packages/react-icons": {
       "name": "@cocso-ui/react-icons",
-      "version": "0.0.10",
+      "version": "0.0.12",
       "devDependencies": {
         "@types/react": "^19.1.12",
         "@types/react-dom": "^19.1.8",
@@ -1441,6 +1441,8 @@
     "@changesets/write/fs-extra": ["fs-extra@7.0.1", "", { "dependencies": { "graceful-fs": "^4.1.2", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw=="],
 
     "@changesets/write/prettier": ["prettier@2.8.8", "", { "bin": { "prettier": "bin-prettier.js" } }, "sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q=="],
+
+    "@cocso-ui/react/@cocso-ui/react-icons": ["@cocso-ui/react-icons@0.0.11", "", { "peerDependencies": { "react": "^19.1.1", "react-dom": "^19.1.1" } }, "sha512-bUOF/iDWfzuLyCYZwZWzJhXWBPGLCGRhM3KRWlv9J8JdHsiVy8i72NF8vOhGU1o7AX0J/BYSh4NO0zD4selzGQ=="],
 
     "@isaacs/cliui/string-width": ["string-width@5.1.2", "", { "dependencies": { "eastasianwidth": "^0.2.0", "emoji-regex": "^9.2.2", "strip-ansi": "^7.0.1" } }, "sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA=="],
 
