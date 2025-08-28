@@ -18,4 +18,7 @@ esbuild
       js: '#!/usr/bin/env node',
     },
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error('[baseframe] Error building CLI bundle:', error);
+    process.exit(1);
+  });
