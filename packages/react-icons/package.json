@@ -7,25 +7,25 @@
     "directory": "packages/react-icons"
   },
   "scripts": {
-    "build": "rm -rf lib && bun run build.js && bun x tsc",
+    "build": "rm -rf dist && bun run build.js && bun x tsc",
     "dev": "bun run build.js --watch",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
   "sideEffects": false,
   "type": "module",
-  "main": "./lib/index.cjs",
-  "module": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./lib/index.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "peerDependencies": {
     "react": "^19.1.1",
