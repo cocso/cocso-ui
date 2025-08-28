@@ -99,8 +99,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
       return cloneElement(target, {
         ref,
-        ...target.props,
         ...props,
+        ...target.props,
         className: cx(cn, target.props.className),
         style: { ...style, ...target.props.style },
         children: renderButtonContent(ctx),
