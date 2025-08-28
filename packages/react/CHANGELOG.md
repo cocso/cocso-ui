@@ -1,5 +1,15 @@
 # @cocso-ui/react
 
+## 0.1.5
+
+### Patch Changes
+
+- c41daad: - `@cocso-ui/react`의 의존성 패키지를 변경합니다.
+  - 빌드 생성 폴더를 변경합니다.
+    - `lib` → `dist`
+- Updated dependencies [c41daad]
+  - @cocso-ui/react-icons@0.0.11
+
 ## 0.1.3
 
 ### Patch Changes
