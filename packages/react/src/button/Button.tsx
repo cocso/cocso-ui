@@ -7,7 +7,7 @@ import { Spinner } from '../spinner';
 import { colors, type FontWeight, fontWeight } from '../token';
 import styles from './Button.module.css';
 
-export type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
+export type ButtonSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 export type ButtonVariant =
   | 'primary'
@@ -89,18 +89,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)
+    .with('xl', () => 56)
     .with('lg', () => 48)
     .with('md', () => 40)
     .with('sm', () => 32)
     .with('xs', () => 24)
     .exhaustive();
   const inlinePadding = match(size)
+    .with('xl', () => 16)
     .with('lg', () => 14)
     .with('md', () => 10)
     .with('sm', () => 6)
     .with('xs', () => 0)
     .exhaustive();
   const fontSize = match(size)
+    .with('xl', () => 16)
     .with('lg', () => 16)
     .with('xs', () => 12)
     .otherwise(() => 14);
@@ -116,11 +119,8 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) => {
   return match(shape)
     .with('square', () => {
       return match(size)
-        .with('lg', () => '8px')
-        .with('md', () => '6px')
-        .with('sm', () => '6px')
         .with('xs', () => '4px')
-        .exhaustive();
+        .otherwise(() => '6px');
     })
     .with('circle', () => '100%')
     .with('rounded', () => '100px')
