@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.1.6
+
+### Patch Changes
+
+- 52fd725: `cocso-ui/react/button` 컴포넌트에 `xl` 사이즈를 추가합니다.
+
 ## 0.1.5
 
 ### Patch Changes
