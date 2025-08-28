@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/react",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -31,7 +31,7 @@
     "dist"
   ],
   "dependencies": {
-    "@cocso-ui/react-icons": "^0.0.11",
+    "@cocso-ui/react-icons": "workspace:^",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-dialog": "^1.1.15",

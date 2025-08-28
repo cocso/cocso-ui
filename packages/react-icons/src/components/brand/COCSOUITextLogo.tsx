@@ -1,7 +1,7 @@
 import Icon from '../../icon';
 import type { IconProps } from '../../types';
 
-export const COCSOUIHorizontalLogo = (props: IconProps) => (
+export const COCSOUITextLogo = (props: IconProps) => (
   <Icon {...props}>
     <svg
       width="97"
@@ -41,4 +41,4 @@ export const COCSOUIHorizontalLogo = (props: IconProps) => (
   </Icon>
 );
 
-COCSOUIHorizontalLogo.displayName = 'COCSOUIHorizontalLogo';
+COCSOUITextLogo.displayName = 'COCSOUITextLogo';

@@ -1,4 +1,4 @@
-import { COCSOUIHorizontalLogo, COCSOUILogo } from '@cocso-ui/react-icons';
+import { COCSOUILogo, COCSOUITextLogo } from '@cocso-ui/react-icons';
 import { SearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
 import { Link } from 'next-view-transitions';
 
@@ -8,7 +8,7 @@ export const Header = () => {
       <div className="row-between h-full w-full">
         <Link className="center-y ml-[var(--size-app-padding)] gap-0.5" href="/introduction">
           <COCSOUILogo size={28} />
-          <COCSOUIHorizontalLogo width={119.72} height={18} />
+          <COCSOUITextLogo width={119.72} height={18} />
         </Link>
 
         <div className="center-y h-full">

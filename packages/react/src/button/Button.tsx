@@ -1,7 +1,7 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { clsx as cx } from 'clsx';
-import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
-import { forwardRef } from 'react';
+import type { ComponentPropsWithoutRef, CSSProperties, ReactElement, ReactNode } from 'react';
+import { cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
 import { Spinner } from '../spinner';
 import { colors, type FontWeight, fontWeight } from '../token';
@@ -21,6 +21,7 @@ export type ButtonVariant =
 export type ButtonShape = 'square' | 'circle' | 'rounded';
 
 export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'prefix'> {
+  asChild?: boolean;
   size?: ButtonSize;
   variant?: ButtonVariant;
   weight?: FontWeight;
@@ -35,6 +36,7 @@ export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'p
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      asChild,
       className,
       style: _style,
       children,
@@ -64,24 +66,50 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     } as CSSProperties;
 
     const isDisabled = disabled || loading;
+    const cn = cx(
+      styles.button,
+      isDisabled && styles.disabled,
+      svgOnly && styles.svgOnly,
+      className,
+    );
 
-    return (
-      <Primitive.button
-        ref={ref}
-        className={cx(
-          styles.button,
-          isDisabled && styles.disabled,
-          svgOnly && styles.svgOnly,
-          className,
-        )}
-        disabled={isDisabled}
-        style={style}
-        {...props}
-      >
+    const renderButtonContent = (ctx: ReactNode) => (
+      <>
         {loading && <Spinner size="sm" color="white" />}
         {prefix && <span className={styles.prefix}>{prefix}</span>}
-        <span className={styles.content}>{children}</span>
+        <span className={styles.content}>{ctx}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}
+      </>
+    );
+
+    if (asChild) {
+      if (!isValidElement(children)) {
+        throw new Error('Button: asChild requires a single React element as a child');
+      }
+
+      interface ChildElementProps {
+        className?: string;
+        style?: CSSProperties;
+        children?: ReactNode;
+        [key: string]: unknown;
+      }
+
+      const target = children as ReactElement<ChildElementProps>;
+      const ctx = target.props.children;
+
+      return cloneElement(target, {
+        ref,
+        ...props,
+        ...target.props,
+        className: cx(cn, target.props.className),
+        style: { ...style, ...target.props.style },
+        children: renderButtonContent(ctx),
+      });
+    }
+
+    return (
+      <Primitive.button ref={ref} className={cn} disabled={isDisabled} style={style} {...props}>
+        {renderButtonContent(children)}
       </Primitive.button>
     );
   },
