@@ -9,7 +9,7 @@ data:
     $font-weight.thin:
       values:
         default: "100"
-    $font-weight.extra-light:
+    $font-weight.extralight:
       values:
         default: "200"
     $font-weight.light:
@@ -21,13 +21,13 @@ data:
     $font-weight.medium:
       values:
         default: "500"
-    $font-weight.semi-bold:
+    $font-weight.semibold:
       values:
         default: "600"
     $font-weight.bold:
       values:
         default: "700"
-    $font-weight.extra-bold:
+    $font-weight.extrabold:
       values:
         default: "800"
     $font-weight.black:
