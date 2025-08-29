@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
-@import '@cocso-ui/css/tailwind4.css';
 @import './utilities.css';
 
 @theme {
