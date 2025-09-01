@@ -1,0 +1,77 @@
+kind: Tokens
+metadata:
+  id: spacing
+  name: Spacing
+  description: primitive spacing tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $spacing.0:
+      values:
+        default: "0px"
+    $spacing.1:
+      values:
+        default: "1px"
+    $spacing.2:
+      values:
+        default: "2px"
+    $spacing.3:
+      values:
+        default: "4px"
+    $spacing.4:
+      values:
+        default: "6px"
+    $spacing.5:
+      values:
+        default: "8px"
+    $spacing.6:
+      values:
+        default: "10px"
+    $spacing.7:
+      values:
+        default: "12px"
+    $spacing.8:
+      values:
+        default: "16px"
+    $spacing.9:
+      values:
+        default: "20px"
+    $spacing.10:
+      values:
+        default: "24px"
+    $spacing.11:
+      values:
+        default: "28px"
+    $spacing.12:
+      values:
+        default: "32px"
+    $spacing.13:
+      values:
+        default: "36px"
+    $spacing.14:
+      values:
+        default: "40px"
+    $spacing.15:
+      values:
+        default: "44px"
+    $spacing.16:
+      values:
+        default: "48px"
+    $spacing.17:
+      values:
+        default: "56px"
+    $spacing.18:
+      values:
+        default: "64px"
+    $spacing.19:
+      values:
+        default: "72px"
+    $spacing.20:
+      values:
+        default: "80px"
+    $spacing.21:
+      values:
+        default: "96px"
+    $spacing.max:
+      values:
+        default: "1000px"

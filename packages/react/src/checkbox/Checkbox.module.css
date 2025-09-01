@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  gap: var(--number-5);
+  gap: var(--ds-spacing-5);
 }
 
 .checkbox {

@@ -9,8 +9,8 @@ import {
   useId,
 } from 'react';
 import { match } from 'ts-pattern';
-import { Body } from '../body';
 import { colors, spacing } from '../token';
+import { Typography } from '../typography';
 import styles from './Switch.module.css';
 
 export type SwitchSize = 'lg' | 'md';
@@ -56,17 +56,17 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
         style={style}
       >
         {position === 'left' && (
-          <Body size={size} asChild>
+          <Typography type="body" size={size} asChild>
             <label htmlFor={id}>{label}</label>
-          </Body>
+          </Typography>
         )}
         <SwitchPrimitive.Root ref={ref} className={styles.switch} disabled={disabled} {...props}>
           <SwitchPrimitive.Thumb className={styles.thumb} />
         </SwitchPrimitive.Root>
         {position === 'right' && (
-          <Body size={size} aria-disabled={disabled} asChild>
+          <Typography type="body" size={size} aria-disabled={disabled} asChild>
             <label htmlFor={id}>{label}</label>
-          </Body>
+          </Typography>
         )}
       </Primitive.div>
     );

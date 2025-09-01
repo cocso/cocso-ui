@@ -29,7 +29,7 @@
 }
 
 .switch[data-state="checked"] {
-  --cocso-switch-bg-color: var(--ds-primary-500);
+  --cocso-switch-bg-color: var(--ds-color-primary-500);
 }
 
 .thumb {
@@ -37,7 +37,7 @@
   width: var(--cocso-switch-thumb-width);
   height: var(--cocso-switch-thumb-width);
   border-radius: var(--ds-spacing-max);
-  background-color: var(--color-background-white);
+  background-color: var(--ds-color-white);
   transform: translateX(var(--ds-spacing-2));
   transition: transform 0.15s ease;
   will-change: transform;

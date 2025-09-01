@@ -20,7 +20,7 @@
   background-color: var(--cocso-pagination-bg-color);
   transition: background-color 0.15s ease-in-out;
 
-  --cocso-pagination-font-color: var(--ds-neutral-950);
+  --cocso-pagination-font-color: var(--ds-color-neutral-950);
   --cocso-pagination-font-weight: inherit;
   --cocso-pagination-bg-color: inherit;
 }
@@ -31,11 +31,11 @@
 }
 
 .arrow:not([disabled]):hover {
-  --cocso-pagination-bg-color: var(--ds-neutral-50);
+  --cocso-pagination-bg-color: var(--ds-color-neutral-50);
 }
 
 .arrow:not([disabled]):active {
-  --cocso-pagination-bg-color: var(--ds-neutral-100);
+  --cocso-pagination-bg-color: var(--ds-color-neutral-100);
 }
 
 .arrow > svg {
@@ -45,17 +45,17 @@
 }
 
 .item[data-active="true"] {
-  --cocso-pagination-font-color: var(--ds-white);
-  --cocso-pagination-bg-color: var(--ds-primary-500);
+  --cocso-pagination-font-color: var(--ds-color-white);
+  --cocso-pagination-bg-color: var(--ds-color-primary-500);
   --cocso-pagination-font-weight: 600;
 }
 
 .item[data-active="false"]:hover {
-  --cocso-pagination-bg-color: var(--ds-neutral-50);
+  --cocso-pagination-bg-color: var(--ds-color-neutral-50);
 }
 
 .item[data-active="false"]:active {
-  --cocso-pagination-bg-color: var(--ds-neutral-100);
+  --cocso-pagination-bg-color: var(--ds-color-neutral-100);
 }
 
 .trunc {
@@ -64,6 +64,6 @@
   justify-content: center;
   width: var(--ds-spacing-13);
   height: var(--ds-spacing-13);
-  color: var(--ds-neutral-950);
+  color: var(--ds-color-neutral-950);
   font-size: 16px;
 }
