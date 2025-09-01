@@ -7,10 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "@cocso-ui/storybook",
-    "@cocso-ui/website",
-    "@cocso-ui/baseframe",
-    "@cocso-ui/baseframe-sources"
-  ]
+  "ignore": ["@cocso-ui/storybook", "@cocso-ui/website"]
 }
