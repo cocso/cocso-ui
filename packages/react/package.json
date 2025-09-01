@@ -7,24 +7,26 @@
     "directory": "packages/react"
   },
   "scripts": {
-    "build": "rm -rf dist && bun run build.js && bun x tsc",
-    "dev": "bun run build.js --watch",
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c rollup.config.cjs",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
+  "sideEffects": false,
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./styles.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      }
     }
   },
   "files": [
@@ -51,9 +53,17 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.8",
-    "esbuild": "^0.25.9",
+    "@types/react-dom": "^19.1.9",
+    "react": "^19.1.1",
+    "rollup": "^4.50.0",
+    "rollup-plugin-dts": "^6.2.3",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^5.9.2"
   },
   "publishConfig": {
