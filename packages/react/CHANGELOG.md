@@ -1,5 +1,17 @@
 # @cocso-ui/react
 
+## 0.1.11
+
+### Patch Changes
+
+- 79e9f6d: 번들 툴링을 Rollup 기반으로 변경합니다.
+- e9a3e0a: spacing 토큰을 추가합니다.
+
+  Body, Heading, Display 컴포넌트를 Typography 컴포넌트와 연결합니다.
+
+- Updated dependencies [79e9f6d]
+  - @cocso-ui/react-icons@0.0.14
+
 ## 0.1.10
 
 ### Patch Changes
