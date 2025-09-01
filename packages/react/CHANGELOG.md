@@ -1,5 +1,13 @@
 # @cocso-ui/react
 
+## 0.1.12
+
+### Patch Changes
+
+- 17387b0: `@cocso-ui/react` 패키지에 스타일 export 옵션을 추가합니다.
+- Updated dependencies [17387b0]
+  - @cocso-ui/react-icons@0.0.15
+
 ## 0.1.11
 
 ### Patch Changes
