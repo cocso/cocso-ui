@@ -36,6 +36,7 @@ function buildJS(format, input, output) {
       postcss({
         modules: true,
         minimize: true,
+        extract: isESM
       }),
       resolve({ extensions }),
       isESM && commonjs(),

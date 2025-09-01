@@ -12,8 +12,9 @@
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
-  "sideEffects": false,
-  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": {
       "require": {
@@ -24,7 +25,8 @@
         "types": "./dist/esm/index.d.mts",
         "default": "./dist/esm/index.mjs"
       }
-    }
+    },
+    "./styles.css": "./dist/esm/index.css"
   },
   "files": [
     "dist"
