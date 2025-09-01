@@ -14,9 +14,6 @@
   },
   "sideEffects": false,
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": {
@@ -48,10 +45,6 @@
     "sonner": "^2.0.7",
     "ts-pattern": "^5.8.0"
   },
-  "peerDependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
-  },
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
@@ -65,6 +58,10 @@
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "publishConfig": {
     "access": "public"

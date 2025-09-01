@@ -1,4 +1,4 @@
 packages:
-  - docs/*
-  - ecosystem/*
-  - packages/*
+  - docs/**
+  - ecosystem/**
+  - packages/**
