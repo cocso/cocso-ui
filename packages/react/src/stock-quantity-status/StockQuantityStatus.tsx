@@ -12,7 +12,7 @@ export interface QuantityStatusProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProps>(
-  ({ className, style: _style, onChange, quantity, ...props }, ref) => {
+  ({ className, style: _style, quantity, ...props }, ref) => {
     const style = {
       ..._style,
       '--cocso-stock-quantity-status-color': getColor(quantity),
