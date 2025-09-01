@@ -1,5 +1,6 @@
 import '~/styles/globals.css';
 import '@cocso-ui/css/token.css';
+import '@cocso-ui/react/styles.css';
 
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { Metadata } from 'next';

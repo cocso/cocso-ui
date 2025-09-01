@@ -26,10 +26,7 @@
         "default": "./dist/esm/index.mjs"
       }
     },
-    "./styles.css": {
-      "require": "./dist/cjs/index.css",
-      "import": "./dist/esm/index.css"
-    }
+    "./styles.css": "./dist/esm/index.css"
   },
   "files": [
     "dist"
