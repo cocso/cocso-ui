@@ -11,9 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cocso-ui/css": "workspace:*",
-    "@cocso-ui/react": "workspace:*",
-    "@cocso-ui/react-icons": "workspace:*",
+    "@cocso-ui/css": "workspace:^",
+    "@cocso-ui/react": "workspace:^",
+    "@cocso-ui/react-icons": "workspace:^",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

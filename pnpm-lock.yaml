@@ -27,13 +27,13 @@ importers:
   docs/storybook:
     dependencies:
       '@cocso-ui/css':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/css
       '@cocso-ui/react':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/react
       '@cocso-ui/react-icons':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/react-icons
       react:
         specifier: ^19.1.1
@@ -166,8 +166,8 @@ importers:
   packages/react:
     dependencies:
       '@cocso-ui/react-icons':
-        specifier: ^0.0.13
-        version: 0.0.13(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: workspace:^
+        version: link:../react-icons
       '@radix-ui/react-accordion':
         specifier: ^1.2.12
         version: 1.2.12(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -586,12 +586,6 @@ packages:
 
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
-
-  '@cocso-ui/react-icons@0.0.13':
-    resolution: {integrity: sha512-VTCuoJk8tKOH+daXsXtiunCxRvXZ7k0ikrg7R7lIPyyYDtP6Mh95YhryR5wrcCO/7ELERMAxjKLJX3GOZWl6Nw==}
-    peerDependencies:
-      react: ^19.1.1
-      react-dom: ^19.1.1
 
   '@emnapi/runtime@1.5.0':
     resolution: {integrity: sha512-97/BJ3iXHww3djw6hYIfErCZFee7qCtrneuLa20UXFCOTCfBM2cvQHjWJ2EG0s0MtdNwInarqCTz35i4wWXHsQ==}
@@ -4442,11 +4436,6 @@ snapshots:
       fs-extra: 7.0.1
       human-id: 4.1.1
       prettier: 2.8.8
-
-  '@cocso-ui/react-icons@0.0.13(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
-    dependencies:
-      react: 19.1.1
-      react-dom: 19.1.1(react@19.1.1)
 
   '@emnapi/runtime@1.5.0':
     dependencies:
