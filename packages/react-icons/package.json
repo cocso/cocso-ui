@@ -13,7 +13,6 @@
     "lint:fix": "biome lint . --fix"
   },
   "sideEffects": false,
-  "type": "module",
   "exports": {
     ".": {
       "require": {
