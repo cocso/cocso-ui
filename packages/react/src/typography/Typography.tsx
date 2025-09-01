@@ -1,12 +1,7 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
-import {
-  type ComponentPropsWithoutRef,
-  type CSSProperties,
-  type ElementType,
-  forwardRef,
-} from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import type { FontSize, FontWeight, LineHeight, ResponsiveFontSize } from '../token';
 import {
@@ -70,15 +65,34 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       .with({ asChild: true }, () => Slot)
       .with({ type: 'display' }, () => 'h1' as const)
       .with({ type: 'heading' }, () => Primitive.h2)
-      .with({ type: 'body' }, () => Primitive.p)
-      .with({ type: 'custom' }, () => Primitive.p)
-      .otherwise(() => Primitive.p) as ElementType;
+      .otherwise(() => Primitive.p);
 
     const fontSize = match(type)
       .with('custom', () => (props as CustomTypographyProps).size ?? 16)
-      .with('body', () => getBodyFontSize((props as BodyTypographyProps).size ?? 'md'))
-      .with('display', () => getDisplayFontSize((props as DisplayTypographyProps).size ?? 'md'))
-      .with('heading', () => getHeadingFontSize((props as HeadingTypographyProps).size ?? 'md'))
+      .with('body', () =>
+        match((props as BodyTypographyProps).size ?? 'md')
+          .with('lg', () => 18 as FontSize)
+          .with('md', () => 16 as FontSize)
+          .with('sm', () => 14 as FontSize)
+          .with('xs', () => 12 as FontSize)
+          .exhaustive(),
+      )
+      .with('display', () =>
+        match((props as DisplayTypographyProps).size ?? 'md')
+          .with('lg', () => ({ base: 44 as FontSize, tablet: 60 as FontSize }))
+          .with('md', () => ({ base: 32 as FontSize, tablet: 44 as FontSize }))
+          .with('sm', () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
+          .exhaustive(),
+      )
+      .with('heading', () =>
+        match((props as HeadingTypographyProps).size ?? 'md')
+          .with('xl', () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
+          .with('lg', () => ({ base: 24 as FontSize, tablet: 32 as FontSize }))
+          .with('md', () => ({ base: 20 as FontSize, tablet: 24 as FontSize }))
+          .with('sm', () => 18 as FontSize)
+          .with('xs', () => 16 as FontSize)
+          .exhaustive(),
+      )
       .otherwise(() => 16);
 
     let base: FontSize;
@@ -105,35 +119,16 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       }),
       '--cocso-typography-font-weight': fontWeightToken[weight],
       '--cocso-typography-line-height': lineHeightToken[lineHeight],
-    } as CSSProperties;
+    };
 
-    return <Comp ref={ref} className={cx(styles.typography, className)} style={style} {...props} />;
+    return (
+      <Comp
+        // biome-ignore lint/suspicious/noExplicitAny: Polymorphic component with multiple element types (h1, h2, p, Slot) requires type assertion for ref compatibility
+        {...(ref && { ref: ref as any })}
+        className={cx(styles.typography, className)}
+        style={style}
+        {...props}
+      />
+    );
   },
 );
-
-const getBodyFontSize = (size: BodySize): ResponsiveFontSize => {
-  return match(size)
-    .with('lg', () => 18 as const)
-    .with('md', () => 16 as const)
-    .with('sm', () => 14 as const)
-    .with('xs', () => 12 as const)
-    .exhaustive();
-};
-
-const getDisplayFontSize = (size: DisplaySize): ResponsiveFontSize => {
-  return match(size)
-    .with('lg', () => ({ base: 44, tablet: 60 }) as const)
-    .with('md', () => ({ base: 32, tablet: 44 }) as const)
-    .with('sm', () => ({ base: 28, tablet: 36 }) as const)
-    .exhaustive();
-};
-
-const getHeadingFontSize = (size: HeadingSize): ResponsiveFontSize => {
-  return match(size)
-    .with('xl', () => ({ base: 28, tablet: 36 }) as const)
-    .with('lg', () => ({ base: 24, tablet: 32 }) as const)
-    .with('md', () => ({ base: 20, tablet: 24 }) as const)
-    .with('sm', () => 18 as const)
-    .with('xs', () => 16 as const)
-    .exhaustive();
-};
