@@ -1,5 +1,4 @@
 import '@cocso-ui/css/token.css';
-import '@cocso-ui/react/styles.css';
 
 import type { Preview } from '@storybook/react-vite';
 
