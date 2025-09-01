@@ -1,7 +1,12 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
+import {
+  type ComponentPropsWithoutRef,
+  type CSSProperties,
+  type ElementType,
+  forwardRef,
+} from 'react';
 import { match } from 'ts-pattern';
 import type { FontSize, FontWeight, LineHeight, ResponsiveFontSize } from '../token';
 import {
@@ -47,104 +52,88 @@ export type TypographyProps =
   | DisplayTypographyProps
   | HeadingTypographyProps;
 
-export const Typography = forwardRef<HTMLElement, TypographyProps>((allProps, ref) => {
-  const {
-    asChild,
-    className,
-    style: _style,
-    color,
-    type = 'custom',
-    weight = type === 'heading' ? 'bold' : 'normal',
-    lineHeight = 'normal',
-    ...props
-  } = allProps;
+export const Typography = forwardRef<HTMLElement, TypographyProps>(
+  (
+    {
+      asChild,
+      className,
+      style: _style,
+      color,
+      type = 'custom',
+      weight = type === 'heading' ? 'bold' : 'normal',
+      lineHeight = 'normal',
+      ...props
+    },
+    ref,
+  ) => {
+    const Comp = match({ asChild, type })
+      .with({ asChild: true }, () => Slot)
+      .with({ type: 'display' }, () => 'h1' as const)
+      .with({ type: 'heading' }, () => Primitive.h2)
+      .with({ type: 'body' }, () => Primitive.p)
+      .with({ type: 'custom' }, () => Primitive.p)
+      .otherwise(() => Primitive.p) as ElementType;
 
-  const Comp = match({ asChild, type })
-    .with({ asChild: true }, () => Slot)
-    .with({ type: 'display' }, () => 'h1')
-    .with({ type: 'heading' }, () => Primitive.h2)
-    .with({ type: 'body' }, () => Primitive.p)
-    .with({ type: 'custom' }, () => Primitive.p)
-    .otherwise(() => Primitive.p);
+    const fontSize = match(type)
+      .with('custom', () => (props as CustomTypographyProps).size ?? 16)
+      .with('body', () => getBodyFontSize((props as BodyTypographyProps).size ?? 'md'))
+      .with('display', () => getDisplayFontSize((props as DisplayTypographyProps).size ?? 'md'))
+      .with('heading', () => getHeadingFontSize((props as HeadingTypographyProps).size ?? 'md'))
+      .otherwise(() => 16);
 
-  const fontSize = getFontSizeForType(allProps);
+    let base: FontSize;
+    let tablet: FontSize | undefined;
+    let desktop: FontSize | undefined;
 
-  let base: FontSize | undefined;
-  let tablet: FontSize | undefined;
-  let desktop: FontSize | undefined;
+    if (Array.isArray(fontSize)) {
+      [base, tablet, desktop] = fontSize;
+    } else if (typeof fontSize === 'object') {
+      ({ base, tablet, desktop } = fontSize);
+    } else {
+      base = fontSize as FontSize;
+    }
 
-  if (Array.isArray(fontSize)) {
-    [base, tablet, desktop] = fontSize;
-  } else if (typeof fontSize === 'object') {
-    ({ base, tablet, desktop } = fontSize);
-  } else {
-    base = fontSize;
-  }
+    const style = {
+      ..._style,
+      '--cocso-typography-font-color': color,
+      '--cocso-typography-font-size': `${fontSizeToken[base]}px`,
+      ...(tablet !== undefined && {
+        '--cocso-tablet-typography-font-size': `${fontSizeToken[tablet]}px`,
+      }),
+      ...(desktop !== undefined && {
+        '--cocso-desktop-typography-font-size': `${fontSizeToken[desktop]}px`,
+      }),
+      '--cocso-typography-font-weight': fontWeightToken[weight],
+      '--cocso-typography-line-height': lineHeightToken[lineHeight],
+    } as CSSProperties;
 
-  const style = {
-    ..._style,
-    '--cocso-typography-font-color': color,
-    '--cocso-typography-font-size': `${fontSizeToken[base]}px`,
-    ...(tablet !== undefined && {
-      '--cocso-tablet-typography-font-size': `${fontSizeToken[tablet]}px`,
-    }),
-    ...(desktop !== undefined && {
-      '--cocso-desktop-typography-font-size': `${fontSizeToken[desktop]}px`,
-    }),
-    '--cocso-typography-font-weight': fontWeightToken[weight],
-    '--cocso-typography-line-height': lineHeightToken[lineHeight],
-  } as CSSProperties;
-
-  return (
-    <Comp ref={ref as any} className={cx(styles.typography, className)} style={style} {...props} />
-  );
-});
-
-const getFontSizeForType = (props: TypographyProps): ResponsiveFontSize => {
-  const type = props.type || 'custom';
-
-  if (type === 'custom') {
-    return (props as CustomTypographyProps).size || 16;
-  }
-
-  if (type === 'body') {
-    return getBodyFontSize((props as BodyTypographyProps).size || 'md');
-  }
-
-  if (type === 'display') {
-    return getDisplayFontSize((props as DisplayTypographyProps).size || 'md');
-  }
-
-  if (type === 'heading') {
-    return getHeadingFontSize((props as HeadingTypographyProps).size || 'md');
-  }
-
-  return 16;
-};
+    return <Comp ref={ref} className={cx(styles.typography, className)} style={style} {...props} />;
+  },
+);
 
 const getBodyFontSize = (size: BodySize): ResponsiveFontSize => {
   return match(size)
-    .with('lg', () => 18)
-    .with('md', () => 16)
-    .with('sm', () => 14)
-    .with('xs', () => 12)
-    .exhaustive() as ResponsiveFontSize;
+    .with('lg', () => 18 as const)
+    .with('md', () => 16 as const)
+    .with('sm', () => 14 as const)
+    .with('xs', () => 12 as const)
+    .exhaustive();
 };
 
 const getDisplayFontSize = (size: DisplaySize): ResponsiveFontSize => {
   return match(size)
-    .with('lg', () => ({ base: 44, tablet: 60 }))
-    .with('md', () => ({ base: 32, tablet: 44 }))
-    .with('sm', () => ({ base: 28, tablet: 36 }))
-    .exhaustive() as ResponsiveFontSize;
+    .with('lg', () => ({ base: 44, tablet: 60 }) as const)
+    .with('md', () => ({ base: 32, tablet: 44 }) as const)
+    .with('sm', () => ({ base: 28, tablet: 36 }) as const)
+    .exhaustive();
 };
 
 const getHeadingFontSize = (size: HeadingSize): ResponsiveFontSize => {
   return match(size)
-    .with('xl', () => ({ base: 28, tablet: 40 }))
-    .with('lg', () => ({ base: 24, tablet: 32 }))
-    .with('md', () => ({ base: 22, tablet: 24 }))
-    .with('sm', () => 18)
-    .with('xs', () => 16)
-    .exhaustive() as ResponsiveFontSize;
+    .with('xl', () => ({ base: 28, tablet: 36 }) as const)
+    .with('lg', () => ({ base: 24, tablet: 32 }) as const)
+    .with('md', () => ({ base: 20, tablet: 24 }) as const)
+    .with('sm', () => 18 as const)
+    .with('xs', () => 16 as const)
+    .exhaustive();
 };
