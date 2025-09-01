@@ -1,4 +1,4 @@
-import { colors, Heading, Typography } from '@cocso-ui/react';
+import { colors, Typography } from '@cocso-ui/react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Section } from '~/components/ui';
@@ -22,7 +22,9 @@ const Page = async ({ params }: Props) => {
   return (
     <>
       <Section>
-        <Heading size="lg">{page.data.title}</Heading>
+        <Typography type="heading" size="lg">
+          {page.data.title}
+        </Typography>
         <Typography className="mt-1" color={colors.neutral500} weight="medium">
           {page.data.description}
         </Typography>
