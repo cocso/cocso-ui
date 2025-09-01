@@ -17,9 +17,9 @@ const meta = {
     size: {
       description: '스피너의 크기',
       control: 'select',
-      options: ['xlarge', 'large', 'medium', 'small'],
+      options: ['xl', 'lg', 'md', 'sm'],
       table: {
-        defaultValue: { summary: 'medium' },
+        defaultValue: { summary: 'md' },
       },
     },
     color: {
@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>;
 // 기본 스피너
 export const Default: Story = {
   args: {
-    size: 'medium',
+    size: 'md',
     color: 'primary',
   },
 };
@@ -57,19 +57,19 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="small" />
+        <Spinner size="sm" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>Small (20px)</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="medium" />
+        <Spinner size="md" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>Medium (24px)</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="large" />
+        <Spinner size="lg" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>Large (32px)</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="xlarge" />
+        <Spinner size="xl" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>XLarge (40px)</span>
       </div>
     </div>
@@ -88,11 +88,11 @@ export const Colors: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="medium" color="primary" />
+        <Spinner size="md" color="primary" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>Primary</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <Spinner size="medium" color="neutral" />
+        <Spinner size="md" color="neutral" />
         <span style={{ fontSize: '12px', color: '#6B7280' }}>Neutral</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
@@ -104,7 +104,7 @@ export const Colors: Story = {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-          <Spinner size="medium" color="white" />
+          <Spinner size="md" color="white" />
         </div>
         <span style={{ fontSize: '12px', color: '#6B7280' }}>White (Dark BG)</span>
       </div>
@@ -125,14 +125,14 @@ export const UsageExamples: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '600px' }}>
       {/* 기본 로딩 텍스트 */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <Spinner size="small" color="primary" />
+        <Spinner size="sm" color="primary" />
         <span>Loading...</span>
       </div>
 
       {/* 텍스트가 뒤에 있는 경우 */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <span>데이터를 불러오는 중</span>
-        <Spinner size="small" color="neutral" />
+        <Spinner size="sm" color="neutral" />
       </div>
 
       {/* 큰 스피너와 설명 */}
@@ -146,7 +146,7 @@ export const UsageExamples: Story = {
         borderRadius: '12px',
         backgroundColor: '#F9FAFB'
       }}>
-        <Spinner size="large" color="primary" />
+        <Spinner size="lg" color="primary" />
         <span style={{ color: '#6B7280', fontSize: '14px' }}>페이지를 불러오는 중입니다...</span>
       </div>
 
@@ -168,7 +168,7 @@ export const UsageExamples: Story = {
           fontSize: '14px',
           cursor: 'pointer'
         }}>
-          <Spinner size="small" color="white" />
+          <Spinner size="sm" color="white" />
           Processing...
         </button>
 
@@ -184,7 +184,7 @@ export const UsageExamples: Story = {
           fontSize: '14px',
           cursor: 'pointer'
         }}>
-          <Spinner size="small" color="white" />
+          <Spinner size="sm" color="white" />
           Saving...
         </button>
       </div>
@@ -208,19 +208,19 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Spinner Sizes</h3>
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="small" />
+            <Spinner size="sm" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Small</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="medium" />
+            <Spinner size="md" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Medium</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="large" />
+            <Spinner size="lg" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Large</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="xlarge" />
+            <Spinner size="xl" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>XLarge</span>
           </div>
         </div>
@@ -231,11 +231,11 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Spinner Colors</h3>
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="medium" color="primary" />
+            <Spinner size="md" color="primary" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Primary</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="medium" color="neutral" />
+            <Spinner size="md" color="neutral" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Neutral</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
@@ -247,7 +247,7 @@ export const AllVariations: Story = {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Spinner size="medium" color="white" />
+              <Spinner size="md" color="white" />
             </div>
             <span style={{ fontSize: '12px', color: '#6B7280' }}>White</span>
           </div>
@@ -259,15 +259,15 @@ export const AllVariations: Story = {
         <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Size & Color Combinations</h3>
         <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="small" color="primary" />
+            <Spinner size="sm" color="primary" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Small Primary</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="medium" color="neutral" />
+            <Spinner size="md" color="neutral" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Medium Neutral</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Spinner size="large" color="primary" />
+            <Spinner size="lg" color="primary" />
             <span style={{ fontSize: '12px', color: '#6B7280' }}>Large Primary</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
@@ -279,7 +279,7 @@ export const AllVariations: Story = {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Spinner size="xlarge" color="white" />
+              <Spinner size="xl" color="white" />
             </div>
             <span style={{ fontSize: '12px', color: '#6B7280' }}>XLarge White</span>
           </div>
@@ -299,7 +299,7 @@ export const AllVariations: Story = {
 // Playground 스토리 (사용자가 직접 조작 가능)
 export const Playground: Story = {
   args: {
-    size: 'medium',
+    size: 'md',
     color: 'primary',
   },
   parameters: {

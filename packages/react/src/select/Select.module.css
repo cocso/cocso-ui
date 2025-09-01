@@ -9,9 +9,9 @@
   height: var(--cocso-select-height);
   padding-left: var(--cocso-select-padding-left);
   padding-right: var(--cocso-select-padding-right);
-  color: var(--color-text-basic);
+  color: var(--ds-color-neutral-950);
   font-size: var(--cocso-select-font-size);
-  border: 1px solid var(--color-border-gray-light);
+  border: 1px solid var(--ds-color-neutral-100);
   border-radius: var(--cocso-select-border-radius);
   background-color: var(--cocso-select-bg-color);
   appearance: none;
@@ -25,7 +25,7 @@
   --cocso-select-padding-right: inherit;
   --cocso-select-font-size: inherit;
   --cocso-select-border-radius: inherit;
-  --cocso-select-bg-color: var(--ds-white);
+  --cocso-select-bg-color: var(--ds-color-white);
 }
 
 .select[disabled] {
@@ -38,7 +38,7 @@
   right: var(--ds-spacing-5);
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--color-text-disabled);
+  color: var(--ds-color-neutral-500);
 }
 
 .icon[disabled] {
