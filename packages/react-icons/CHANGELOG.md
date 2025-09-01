@@ -1,5 +1,11 @@
 # @cocso-ui/react-icons
 
+## 0.0.14
+
+### Patch Changes
+
+- 79e9f6d: 번들 툴링을 Rollup 기반으로 변경합니다.
+
 ## 0.0.13
 
 ### Patch Changes
