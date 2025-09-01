@@ -2,8 +2,8 @@ import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Body } from '../body';
 import type { FontWeight, LineHeight } from '../token';
+import { Typography } from '../typography';
 import styles from './Link.module.css';
 
 export type LinkSize = 'lg' | 'md' | 'sm' | 'xs';
@@ -21,13 +21,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const Comp = asChild ? Slot : Primitive.a;
 
     return (
-      <Body size={size} weight={weight} lineHeight={lineHeight} asChild>
+      <Typography type="body" size={size} weight={weight} lineHeight={lineHeight} asChild>
         <Comp
           ref={ref}
           className={cx(styles.link, indicator && styles.indicator, className)}
           {...props}
         />
-      </Body>
+      </Typography>
     );
   },
 );

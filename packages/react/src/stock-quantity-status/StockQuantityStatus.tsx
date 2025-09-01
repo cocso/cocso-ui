@@ -1,8 +1,8 @@
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
-import { Body } from '../body';
 import { colors, spacing } from '../token';
+import { Typography } from '../typography';
 import styles from './StockQuantityStatus.module.css';
 
 export type QuantityStatus = '보통' | '여유' | '부족';
@@ -102,9 +102,9 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
             </svg>
           )}
         </span>
-        <Body size="sm" color="currentColor">
+        <Typography type="body" size="sm" color="currentColor">
           {quantity}
-        </Body>
+        </Typography>
       </div>
     );
   },
