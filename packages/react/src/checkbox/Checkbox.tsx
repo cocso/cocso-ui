@@ -9,8 +9,8 @@ import {
   useId,
 } from 'react';
 import { match } from 'ts-pattern';
-import { Body } from '../body';
 import { colors, spacing } from '../token';
+import { Typography } from '../typography';
 import styles from './Checkbox.module.css';
 
 export type CheckboxSize = 'lg' | 'md' | 'sm';
@@ -94,9 +94,15 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
         </CheckboxPrimitive.Root>
 
         {label && (
-          <Body className={styles.label} size={size} aria-disabled={disabled} asChild>
+          <Typography
+            type="body"
+            className={styles.label}
+            size={size}
+            aria-disabled={disabled}
+            asChild
+          >
             <label htmlFor={id}>{label}</label>
-          </Body>
+          </Typography>
         )}
       </div>
     );
