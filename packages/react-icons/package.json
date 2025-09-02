@@ -7,7 +7,7 @@
     "directory": "packages/react-icons"
   },
   "scripts": {
-    "prebuild": "rm -rf dist",
+    "prebuild": "rm -rf dist && node ./scripts/generate-index-file.mjs",
     "build": "rollup -c rollup.config.cjs",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
