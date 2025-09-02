@@ -23,8 +23,8 @@
 
 .chevron {
   display: inline-block;
-  width: var(--number-10);
-  height: var(--number-10);
+  width: var(--ds-spacing-10);
+  height: var(--ds-spacing-10);
   transition: transform 0.2s ease-in-out;
 }
 
