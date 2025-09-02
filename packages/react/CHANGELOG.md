@@ -1,5 +1,16 @@
 # @cocso-ui/react
 
+## 0.1.13
+
+### Patch Changes
+
+- 4b884b6: SettingsBackupRestore, SupervisedUserCircle, OutpatientMed, Medication 아이콘을 추가합니다.
+
+  `react-icons` 패키지 빌드 전 `index.tsx` 생성 스크립트를 추가합니다.
+
+- Updated dependencies [4b884b6]
+  - @cocso-ui/react-icons@0.0.16
+
 ## 0.1.12
 
 ### Patch Changes
