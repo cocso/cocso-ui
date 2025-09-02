@@ -121,14 +121,14 @@ const getSizeStyles = (size: ButtonSize) => {
     .with('lg', () => 48)
     .with('md', () => 40)
     .with('sm', () => 32)
-    .with('xs', () => 24)
+    .with('xs', () => 28)
     .exhaustive();
   const inlinePadding = match(size)
     .with('xl', () => 16)
     .with('lg', () => 14)
     .with('md', () => 10)
     .with('sm', () => 6)
-    .with('xs', () => 0)
+    .with('xs', () => 2)
     .exhaustive();
   const fontSize = match(size)
     .with('xl', () => 16)
