@@ -21,7 +21,7 @@ data:
         default: $color.neutral.950
     $color.text.secondary:
       values:
-        default: $color.neutral.600
+        default: $color.neutral.500
     $color.text.tertiary:
       values:
         default: $color.neutral.400

@@ -10,6 +10,7 @@ export * from './CheckCircleIcon';
 export * from './CheckIcon';
 export * from './CloseIcon';
 export * from './DeleteIcon';
+export * from './DownloadIcon';
 export * from './HubIcon';
 export * from './InfoIcon';
 export * from './KeyboardArrowDownIcon';
