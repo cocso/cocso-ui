@@ -84,4 +84,8 @@ export const colors = {
   success800: 'var(--ds-color-success-800)',
   success900: 'var(--ds-color-success-900)',
   success950: 'var(--ds-color-success-950)',
+
+  textPrimary: 'var(--ds-color-text-primary)',
+  textSecondary: 'var(--ds-color-text-secondary)',
+  textTertiary: 'var(--ds-color-text-tertiary)',
 };
