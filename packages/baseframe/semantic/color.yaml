@@ -15,3 +15,13 @@ data:
     $color.alpha.shadow3:
       values:
         default: rgba(0, 0, 0, 0.12)
+
+    $color.text.primary:
+      values:
+        default: $color.neutral.950
+    $color.text.secondary:
+      values:
+        default: $color.neutral.600
+    $color.text.tertiary:
+      values:
+        default: $color.neutral.400
