@@ -29,7 +29,7 @@ export * from './SearchIcon';
 export * from './SettingsBackupRestoreIcon';
 export * from './SettingsIcon';
 export * from './SideNavigationIcon';
-export * from './SpaceDashbaordIcon';
+export * from './SpaceDashboardIcon';
 export * from './SupervisedUserCircleIcon';
 export * from './TrendingUpIcon';
 export * from './VerifiedIcon';
