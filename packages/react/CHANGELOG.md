@@ -1,5 +1,20 @@
 # @cocso-ui/react
 
+## 0.2.0
+
+### Minor Changes
+
+- 1e77fb6: 텍스트 색상 토큰을 추가합니다.
+
+  버튼 컴포넌트 xs의 사이즈 토큰을 변경합니다.
+
+  Settler 페이지에서 사용되는 `react-icons`을 추가합니다.
+
+### Patch Changes
+
+- Updated dependencies [1e77fb6]
+  - @cocso-ui/react-icons@0.1.0
+
 ## 0.1.13
 
 ### Patch Changes
