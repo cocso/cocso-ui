@@ -2,6 +2,7 @@ import { CloseIcon } from '@cocso-ui/react-icons';
 import * as ModalPrimitive from '@radix-ui/react-dialog';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
+import { colors } from '../token';
 import { Typography } from '../typography';
 import styles from './Modal.module.css';
 
@@ -36,9 +37,7 @@ const ModalTitle = forwardRef<
 >(({ className, children, ...props }, ref) => {
   return (
     <ModalPrimitive.Title ref={ref} className={cx(styles.title, className)} asChild {...props}>
-      <Typography type="heading" color="text.basic">
-        {children}
-      </Typography>
+      <Typography type="heading">{children}</Typography>
     </ModalPrimitive.Title>
   );
 });
@@ -54,7 +53,7 @@ const ModalDescription = forwardRef<
       asChild
       {...props}
     >
-      <Typography type="body" size="sm" color="text.subtle">
+      <Typography type="body" color={colors.textSecondary} weight="medium">
         {children}
       </Typography>
     </ModalPrimitive.Description>
