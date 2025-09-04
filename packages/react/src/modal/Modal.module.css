@@ -6,7 +6,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: var(--ds-black-alpha-30);
+  background-color: var(--ds-color-black-alpha-30);
   animation: overlay-show 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--z-index-overlay);
 }
@@ -26,9 +26,9 @@
   width: 90vw;
   max-width: 420px;
   max-height: 85vh;
-  padding: var(--number-8);
+  padding: var(--ds-spacing-8);
   border-radius: 8px;
-  background-color: var(--ds-white);
+  background-color: var(--ds-color-white);
   animation: content-show 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--z-index-modal);
 }
