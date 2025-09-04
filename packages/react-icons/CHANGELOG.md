@@ -1,5 +1,11 @@
 # @cocso-ui/react-icons
 
+## 0.1.1
+
+### Patch Changes
+
+- de2aa44: DockToRightIcon, BusinessMessageIcon 추가
+
 ## 0.1.0
 
 ### Minor Changes
