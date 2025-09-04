@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.1
+
+### Patch Changes
+
+- 52672d5: 모달에 사용된 디자인 토큰을 변경합니다.
+
 ## 0.2.0
 
 ### Minor Changes
