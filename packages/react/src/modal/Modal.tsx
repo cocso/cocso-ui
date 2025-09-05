@@ -37,7 +37,9 @@ const ModalTitle = forwardRef<
 >(({ className, children, ...props }, ref) => {
   return (
     <ModalPrimitive.Title ref={ref} className={cx(styles.title, className)} asChild {...props}>
-      <Typography type="heading">{children}</Typography>
+      <Typography type="heading" size="sm">
+        {children}
+      </Typography>
     </ModalPrimitive.Title>
   );
 });
@@ -53,7 +55,7 @@ const ModalDescription = forwardRef<
       asChild
       {...props}
     >
-      <Typography type="body" color={colors.textSecondary} weight="medium">
+      <Typography size={15} color={colors.textSecondary} weight="medium">
         {children}
       </Typography>
     </ModalPrimitive.Description>

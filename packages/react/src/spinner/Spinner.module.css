@@ -11,7 +11,7 @@
   border: var(--cocso-spinner-border-width) solid var(--cocso-spinner-bg-color);
   border-top-color: var(--cocso-spinner-border-color);
   border-radius: 50%;
-  animation: donut-spin 0.75s linear infinite;
+  animation: donut-spin 0.5s linear infinite;
   transform-origin: center center;
 
   --cocso-spinner-size: inherit;
