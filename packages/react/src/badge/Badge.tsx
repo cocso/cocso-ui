@@ -19,7 +19,6 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     const style = {
       ..._style,
       '--cocso-badge-padding': getPadding(size),
-      '--cocso-badge-border': undefined,
       '--cocso-badge-border-radius': '6px',
       '--cocso-badge-bg-color': getBackgroundColor(variant),
     } as CSSProperties;

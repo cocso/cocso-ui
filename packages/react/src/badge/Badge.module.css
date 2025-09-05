@@ -5,12 +5,10 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
-  border: var(--cocso-badge-border);
   border-radius: var(--cocso-badge-border-radius);
   background-color: var(--cocso-badge-bg-color);
 
   --cocso-badge-padding: inherit;
-  --cocso-badge-border: inherit;
   --cocso-badge-border-radius: inherit;
   --cocso-badge-bg-color: inherit;
 }
