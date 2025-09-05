@@ -30,39 +30,38 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <Dropdown>
-      <Dropdown.Trigger asChild>
-        <Button variant="secondary">메뉴 열기</Button>
-      </Dropdown.Trigger>
-      <Dropdown.Portal>
-        <Dropdown.Content>
-          <Dropdown.Item>메뉴 아이템 1</Dropdown.Item>
-          <Dropdown.Item>메뉴 아이템 2</Dropdown.Item>
-          <Dropdown.Item>메뉴 아이템 3</Dropdown.Item>
-        </Dropdown.Content>
-      </Dropdown.Portal>
-    </Dropdown>
-  ),
-};
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+      <Dropdown>
+        <Dropdown.Trigger asChild>
+          <Button variant="secondary">메뉴 열기</Button>
+        </Dropdown.Trigger>
+        <Dropdown.Portal>
+          <Dropdown.Content>
+            <Dropdown.Item>메뉴 아이템 1</Dropdown.Item>
+            <Dropdown.Item>메뉴 아이템 2</Dropdown.Item>
+            <Dropdown.Item>메뉴 아이템 3</Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown.Portal>
+      </Dropdown>
 
-export const WithIconTrigger: Story = {
-  render: () => (
-    <Dropdown>
-      <Dropdown.Trigger asChild>
-        <Button variant="tertiary" svgOnly>
-          <MoreHorizIcon />
-        </Button>
-      </Dropdown.Trigger>
-      <Dropdown.Portal>
-        <Dropdown.Content>
-          <Dropdown.Item>편집</Dropdown.Item>
-          <Dropdown.Item>복사</Dropdown.Item>
-          <Dropdown.Item>삭제</Dropdown.Item>
-        </Dropdown.Content>
-      </Dropdown.Portal>
-    </Dropdown>
+      <Dropdown>
+        <Dropdown.Trigger asChild>
+          <Button variant="tertiary" svgOnly>
+            <MoreHorizIcon />
+          </Button>
+        </Dropdown.Trigger>
+        <Dropdown.Portal>
+          <Dropdown.Content>
+            <Dropdown.Item>편집</Dropdown.Item>
+            <Dropdown.Item>복사</Dropdown.Item>
+            <Dropdown.Item disabled>비활성화</Dropdown.Item>
+            <Dropdown.Item>삭제</Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown.Portal>
+      </Dropdown>
+    </div>
   ),
 };
 

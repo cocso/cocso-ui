@@ -68,103 +68,76 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    children: 'Typography Component',
-  },
-};
-
-export const AllTypes: Story = {
+export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '600px' }}>
-      <Typography type="display" size="lg">
-        Display Large
-      </Typography>
-      <Typography type="heading" size="xl">
-        Heading XL
-      </Typography>
-      <Typography type="body" size="lg">
-        Body Large - Lorem ipsum dolor sit amet.
-      </Typography>
-      <Typography type="custom" size={24}>
-        Custom 24px
-      </Typography>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Display</h4>
+        <Typography type="display" size="lg">
+          Display Large
+        </Typography>
+        <Typography type="display" size="md">
+          Display Medium
+        </Typography>
+        <Typography type="display" size="sm">
+          Display Small
+        </Typography>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Heading</h4>
+        <Typography type="heading" size="xl">
+          Heading XL
+        </Typography>
+        <Typography type="heading" size="lg">
+          Heading Large
+        </Typography>
+        <Typography type="heading" size="md">
+          Heading Medium
+        </Typography>
+        <Typography type="heading" size="sm">
+          Heading Small
+        </Typography>
+        <Typography type="heading" size="xs">
+          Heading XS
+        </Typography>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Body</h4>
+        <Typography type="body" size="lg">
+          Body Large
+        </Typography>
+        <Typography type="body" size="md">
+          Body Medium
+        </Typography>
+        <Typography type="body" size="sm">
+          Body Small
+        </Typography>
+        <Typography type="body" size="xs">
+          Body XS
+        </Typography>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Custom</h4>
+        <Typography type="custom" size={24}>
+          Custom 24px
+        </Typography>
+        <Typography type="custom" size={18}>
+          Custom 18px
+        </Typography>
+        <Typography type="custom" size={14}>
+          Custom 14px
+        </Typography>
+      </div>
     </div>
   ),
-};
-
-export const SpecTable: Story = {
-  render: () => (
-    <div style={{ maxWidth: '800px' }}>
-      <h3 style={{ marginBottom: '16px' }}>Typography Specifications</h3>
-
-      <h4 style={{ marginBottom: '12px' }}>Types & Sizes</h4>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #ddd' }}>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Type</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Available Sizes</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Default Element</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>display</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>sm, md, lg</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>h1</td>
-            <td style={{ padding: '8px' }}>
-              <Typography type="display" size="sm">
-                Display
-              </Typography>
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>heading</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>xs, sm, md, lg, xl</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>h2</td>
-            <td style={{ padding: '8px' }}>
-              <Typography type="heading" size="md">
-                Heading
-              </Typography>
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>body</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>xs, sm, md, lg</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>p</td>
-            <td style={{ padding: '8px' }}>
-              <Typography type="body" size="md">
-                Body text
-              </Typography>
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>custom</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>number | ResponsiveFontSize</td>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>p</td>
-            <td style={{ padding: '8px' }}>
-              <Typography type="custom" size={18}>
-                Custom
-              </Typography>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Typography 컴포넌트의 모든 types와 sizes 스펙을 테이블로 보여줍니다.',
-      },
-    },
-  },
 };
 
 export const Playground: Story = {
   args: {
-    children: 'Playground Typography',
+    children: 'Typography',
     type: 'custom',
     size: 16,
     weight: 'normal',

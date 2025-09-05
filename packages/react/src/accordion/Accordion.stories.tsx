@@ -36,77 +36,52 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div style={{ width: '400px' }}>
-      <Accordion type="single" collapsible>
-        <Accordion.Item value="item-1">
-          <Accordion.Header>
-            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-    </div>
-  ),
-};
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>Single Type</h4>
+        <Accordion type="single" collapsible>
+          <Accordion.Item value="item-1">
+            <Accordion.Header>
+              <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>
+              <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
+            </Accordion.Content>
+          </Accordion.Item>
+          <Accordion.Item value="item-2">
+            <Accordion.Header>
+              <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>
+              <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
+            </Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      </div>
 
-export const SingleType: Story = {
-  render: () => (
-    <div style={{ width: '400px' }}>
-      <Accordion type="single" collapsible>
-        <Accordion.Item value="item-1">
-          <Accordion.Header>
-            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item value="item-2">
-          <Accordion.Header>
-            <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item value="item-3">
-          <Accordion.Header>
-            <Accordion.Trigger>세 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>세 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-    </div>
-  ),
-};
-
-export const MultipleType: Story = {
-  render: () => (
-    <div style={{ width: '400px' }}>
-      <Accordion type="multiple">
-        <Accordion.Item value="item-1">
-          <Accordion.Header>
-            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item value="item-2">
-          <Accordion.Header>
-            <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>Multiple Type</h4>
+        <Accordion type="multiple">
+          <Accordion.Item value="multi-1">
+            <Accordion.Header>
+              <Accordion.Trigger>Multiple 첫 번째</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>
+              <div style={{ padding: '16px 0' }}>Multiple 첫 번째 내용입니다.</div>
+            </Accordion.Content>
+          </Accordion.Item>
+          <Accordion.Item value="multi-2">
+            <Accordion.Header>
+              <Accordion.Trigger>Multiple 두 번째</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>
+              <div style={{ padding: '16px 0' }}>Multiple 두 번째 내용입니다.</div>
+            </Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      </div>
     </div>
   ),
 };

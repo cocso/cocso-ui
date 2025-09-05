@@ -44,15 +44,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => (
     <div>
       <Toaster />
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <Button onClick={() => toast('기본 토스트')}>기본 토스트</Button>
-        <Button onClick={() => toast.success('성공!')}>성공 토스트</Button>
-        <Button onClick={() => toast.error('오류!')}>오류 토스트</Button>
-        <Button onClick={() => toast.warning('주의!')}>경고 토스트</Button>
+        <Button onClick={() => toast('기본 토스트')}>기본</Button>
+        <Button onClick={() => toast.success('성공!')}>성공</Button>
+        <Button onClick={() => toast.error('오류!')}>오류</Button>
+        <Button onClick={() => toast.warning('주의!')}>경고</Button>
+        <Button onClick={() => toast.info('정보!')}>정보</Button>
       </div>
     </div>
   ),

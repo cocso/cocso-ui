@@ -51,24 +51,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => {
-    const [page, setPage] = useState(1);
-    return <Pagination page={page} totalPages={10} onChange={setPage} />;
-  },
-};
+    const [page1, setPage1] = useState(1);
+    const [page2, setPage2] = useState(15);
 
-export const FewPages: Story = {
-  render: () => {
-    const [page, setPage] = useState(1);
-    return <Pagination page={page} totalPages={5} onChange={setPage} />;
-  },
-};
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
+            Few Pages (5 total)
+          </h4>
+          <Pagination page={page1} totalPages={5} onChange={setPage1} />
+        </div>
 
-export const ManyPages: Story = {
-  render: () => {
-    const [page, setPage] = useState(15);
-    return <Pagination page={page} totalPages={100} onChange={setPage} />;
+        <div style={{ textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
+            Many Pages (100 total)
+          </h4>
+          <Pagination page={page2} totalPages={100} onChange={setPage2} />
+        </div>
+      </div>
+    );
   },
 };
 

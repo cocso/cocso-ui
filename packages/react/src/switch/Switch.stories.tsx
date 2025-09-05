@@ -69,97 +69,52 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => {
-    const [checked, setChecked] = useState(false);
-    return <Switch checked={checked} onCheckedChange={setChecked} label="Default Switch" />;
-  },
-};
-
-export const AllSizes: Story = {
-  render: () => {
-    const [mdChecked, setMdChecked] = useState(true);
-    const [lgChecked, setLgChecked] = useState(true);
+    const [state1, setState1] = useState(true);
+    const [state2, setState2] = useState(false);
+    const [state3, setState3] = useState(true);
+    const [state4, setState4] = useState(true);
 
     return (
-      <div
-        style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}
-      >
-        <Switch size="md" checked={mdChecked} onCheckedChange={setMdChecked} label="Medium" />
-        <Switch size="lg" checked={lgChecked} onCheckedChange={setLgChecked} label="Large" />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
+        >
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
+          <Switch size="md" checked={state1} onCheckedChange={setState1} label="Medium" />
+          <Switch size="lg" checked={state2} onCheckedChange={setState2} label="Large" />
+        </div>
+
+        <div
+          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
+        >
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>
+            Label Positions
+          </h4>
+          <Switch
+            checked={state3}
+            onCheckedChange={setState3}
+            label="Label on Right"
+            position="right"
+          />
+          <Switch
+            checked={state4}
+            onCheckedChange={setState4}
+            label="Label on Left"
+            position="left"
+          />
+        </div>
+
+        <div
+          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
+        >
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
+          <Switch checked onChange={() => {}} label="Disabled On" disabled />
+          <Switch checked={false} onChange={() => {}} label="Disabled Off" disabled />
+        </div>
       </div>
     );
-  },
-};
-
-export const LabelPositions: Story = {
-  render: () => {
-    const [leftChecked, setLeftChecked] = useState(true);
-    const [rightChecked, setRightChecked] = useState(true);
-
-    return (
-      <div
-        style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}
-      >
-        <Switch
-          checked={leftChecked}
-          onCheckedChange={setLeftChecked}
-          label="Label on Left"
-          position="left"
-        />
-        <Switch
-          checked={rightChecked}
-          onCheckedChange={setRightChecked}
-          label="Label on Right"
-          position="right"
-        />
-      </div>
-    );
-  },
-};
-
-export const SpecTable: Story = {
-  render: () => (
-    <div style={{ maxWidth: '600px' }}>
-      <h3 style={{ marginBottom: '16px' }}>Switch Specifications</h3>
-
-      <h4 style={{ marginBottom: '12px' }}>Sizes</h4>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #ddd' }}>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Size</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Width × Height</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Thumb Size</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>md</td>
-            <td style={{ padding: '8px' }}>48px × 36px</td>
-            <td style={{ padding: '8px' }}>32px</td>
-            <td style={{ padding: '8px' }}>
-              <Switch size="md" checked onChange={() => {}} label="Medium" />
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>lg</td>
-            <td style={{ padding: '8px' }}>56px × 40px</td>
-            <td style={{ padding: '8px' }}>36px</td>
-            <td style={{ padding: '8px' }}>
-              <Switch size="lg" checked onChange={() => {}} label="Large" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Switch 컴포넌트의 모든 sizes 스펙을 테이블로 보여줍니다.',
-      },
-    },
   },
 };
 
@@ -171,7 +126,7 @@ export const Playground: Story = {
   },
   args: {
     checked: false,
-    label: 'Playground Switch',
+    label: 'Switch',
     size: 'md',
     position: 'right',
     disabled: false,

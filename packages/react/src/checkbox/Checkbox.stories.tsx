@@ -61,123 +61,39 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => {
-    const [status, setStatus] = useState<CheckboxStatus>('off');
-    return <Checkbox status={status} onChange={setStatus} label="Default Checkbox" />;
-  },
-};
-
-export const AllStates: Story = {
+export const AllVariants: Story = {
   render: () => {
     const [onState, setOnState] = useState<CheckboxStatus>('on');
     const [offState, setOffState] = useState<CheckboxStatus>('off');
     const [intermediateState, setIntermediateState] = useState<CheckboxStatus>('intermediate');
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <Checkbox status={onState} onChange={setOnState} label="Checked (On)" />
-        <Checkbox status={offState} onChange={setOffState} label="Unchecked (Off)" />
-        <Checkbox status={intermediateState} onChange={setIntermediateState} label="Intermediate" />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>States</h4>
+          <Checkbox status={onState} onChange={setOnState} label="Checked (On)" />
+          <Checkbox status={offState} onChange={setOffState} label="Unchecked (Off)" />
+          <Checkbox
+            status={intermediateState}
+            onChange={setIntermediateState}
+            label="Intermediate"
+          />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
+          <Checkbox size="sm" status="on" onChange={() => {}} label="Small" />
+          <Checkbox size="md" status="on" onChange={() => {}} label="Medium" />
+          <Checkbox size="lg" status="on" onChange={() => {}} label="Large" />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
+          <Checkbox status="on" onChange={() => {}} label="Disabled Checked" disabled />
+          <Checkbox status="off" onChange={() => {}} label="Disabled Unchecked" disabled />
+        </div>
       </div>
     );
-  },
-};
-
-export const AllSizes: Story = {
-  render: () => {
-    const [status, setStatus] = useState<CheckboxStatus>('on');
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <Checkbox size="sm" status={status} onChange={setStatus} label="Small" />
-        <Checkbox size="md" status={status} onChange={setStatus} label="Medium" />
-        <Checkbox size="lg" status={status} onChange={setStatus} label="Large" />
-      </div>
-    );
-  },
-};
-
-export const SpecTable: Story = {
-  render: () => (
-    <div style={{ maxWidth: '600px' }}>
-      <h3 style={{ marginBottom: '16px' }}>Checkbox Specifications</h3>
-
-      <h4 style={{ marginBottom: '12px' }}>States</h4>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '24px' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #ddd' }}>
-            <th style={{ textAlign: 'left', padding: '8px' }}>State</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Description</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>off</td>
-            <td style={{ padding: '8px' }}>체크되지 않음</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox status="off" onChange={() => {}} label="Off" />
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>on</td>
-            <td style={{ padding: '8px' }}>체크됨</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox status="on" onChange={() => {}} label="On" />
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>intermediate</td>
-            <td style={{ padding: '8px' }}>부분 선택</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox status="intermediate" onChange={() => {}} label="Intermediate" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h4 style={{ marginBottom: '12px' }}>Sizes</h4>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #ddd' }}>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Size</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Dimensions</th>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>sm</td>
-            <td style={{ padding: '8px' }}>32px</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox size="sm" status="on" onChange={() => {}} label="Small" />
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>md</td>
-            <td style={{ padding: '8px' }}>36px</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox size="md" status="on" onChange={() => {}} label="Medium" />
-            </td>
-          </tr>
-          <tr style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ padding: '8px', fontFamily: 'monospace' }}>lg</td>
-            <td style={{ padding: '8px' }}>40px</td>
-            <td style={{ padding: '8px' }}>
-              <Checkbox size="lg" status="on" onChange={() => {}} label="Large" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Checkbox 컴포넌트의 모든 states와 sizes 스펙을 테이블로 보여줍니다.',
-      },
-    },
   },
 };
 

@@ -29,39 +29,50 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <Popover>
-      <Popover.Trigger asChild>
-        <Button>팝오버 열기</Button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content>
-          <div style={{ padding: '16px', maxWidth: '200px' }}>
-            <h4 style={{ margin: '0 0 8px 0' }}>팝오버 제목</h4>
-            <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>팝오버의 내용입니다.</p>
-          </div>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover>
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+      <Popover>
+        <Popover.Trigger asChild>
+          <Button>기본 팝오버</Button>
+        </Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content>
+            <div style={{ padding: '16px', maxWidth: '200px' }}>
+              <h4 style={{ margin: '0 0 8px 0' }}>팝오버 제목</h4>
+              <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>팝오버의 내용입니다.</p>
+            </div>
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover>
+
+      <Popover>
+        <Popover.Trigger asChild>
+          <Button variant="secondary">폼 팝오버</Button>
+        </Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content>
+            <div style={{ padding: '16px', width: '200px' }}>
+              <h4 style={{ margin: '0 0 12px 0' }}>설정</h4>
+              <input
+                type="text"
+                placeholder="이름"
+                style={{
+                  width: '100%',
+                  padding: '6px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                }}
+              />
+            </div>
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover>
+    </div>
   ),
 };
 
 export const Playground: Story = {
-  render: args => (
-    <Popover {...args}>
-      <Popover.Trigger asChild>
-        <Button>Playground 팝오버</Button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content>
-          <div style={{ padding: '16px', maxWidth: '200px' }}>
-            <p style={{ margin: 0 }}>Controls 패널에서 설정을 조작해보세요.</p>
-          </div>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover>
-  ),
   args: {
     modal: false,
   },

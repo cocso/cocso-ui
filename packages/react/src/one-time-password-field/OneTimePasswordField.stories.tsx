@@ -50,47 +50,44 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => {
-    const [value, setValue] = useState('');
+    const [value4, setValue4] = useState('');
+    const [value6, setValue6] = useState('');
+    const [value8, setValue8] = useState('');
 
     return (
-      <OneTimePasswordField maxLength={6} value={value} onValueChange={setValue}>
-        {Array.from({ length: 6 }, (_, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-          <OneTimePasswordField.Input key={index} index={index} />
-        ))}
-      </OneTimePasswordField>
-    );
-  },
-};
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>4 Digits</h4>
+          <OneTimePasswordField maxLength={4} value={value4} onValueChange={setValue4}>
+            {Array.from({ length: 4 }, (_, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
+              <OneTimePasswordField.Input key={index} index={index} />
+            ))}
+          </OneTimePasswordField>
+        </div>
 
-export const FourDigits: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
+        <div style={{ textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>6 Digits</h4>
+          <OneTimePasswordField maxLength={6} value={value6} onValueChange={setValue6}>
+            {Array.from({ length: 6 }, (_, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
+              <OneTimePasswordField.Input key={index} index={index} />
+            ))}
+          </OneTimePasswordField>
+        </div>
 
-    return (
-      <OneTimePasswordField maxLength={4} value={value} onValueChange={setValue}>
-        {Array.from({ length: 4 }, (_, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-          <OneTimePasswordField.Input key={index} index={index} />
-        ))}
-      </OneTimePasswordField>
-    );
-  },
-};
-
-export const EightDigits: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-
-    return (
-      <OneTimePasswordField maxLength={8} value={value} onValueChange={setValue}>
-        {Array.from({ length: 8 }, (_, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-          <OneTimePasswordField.Input key={index} index={index} />
-        ))}
-      </OneTimePasswordField>
+        <div style={{ textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>8 Digits</h4>
+          <OneTimePasswordField maxLength={8} value={value8} onValueChange={setValue8}>
+            {Array.from({ length: 8 }, (_, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
+              <OneTimePasswordField.Input key={index} index={index} />
+            ))}
+          </OneTimePasswordField>
+        </div>
+      </div>
     );
   },
 };

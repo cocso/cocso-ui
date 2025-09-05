@@ -42,7 +42,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AllVariants: Story = {
   render: () => (
     <div style={{ width: '400px' }}>
       <Tab defaultValue="tab1">
@@ -66,26 +66,6 @@ export const Default: Story = {
 };
 
 export const Playground: Story = {
-  render: args => (
-    <div style={{ width: '400px' }}>
-      <Tab {...args}>
-        <Tab.List>
-          <Tab.Trigger value="tab1">탭 1</Tab.Trigger>
-          <Tab.Trigger value="tab2">탭 2</Tab.Trigger>
-          <Tab.Trigger value="tab3">탭 3</Tab.Trigger>
-        </Tab.List>
-        <Tab.Content value="tab1">
-          <div style={{ padding: '16px' }}>첫 번째 탭의 내용입니다.</div>
-        </Tab.Content>
-        <Tab.Content value="tab2">
-          <div style={{ padding: '16px' }}>두 번째 탭의 내용입니다.</div>
-        </Tab.Content>
-        <Tab.Content value="tab3">
-          <div style={{ padding: '16px' }}>세 번째 탭의 내용입니다.</div>
-        </Tab.Content>
-      </Tab>
-    </div>
-  ),
   args: {
     defaultValue: 'tab1',
   },
