@@ -10,6 +10,7 @@
   --color-white-alpha-70: var(--ds-color-white-alpha-70);
   --color-white-alpha-80: var(--ds-color-white-alpha-80);
   --color-white-alpha-90: var(--ds-color-white-alpha-90);
+
   --color-black: var(--ds-color-black);
   --color-black-alpha-5: var(--ds-color-black-alpha-5);
   --color-black-alpha-10: var(--ds-color-black-alpha-10);
@@ -21,6 +22,7 @@
   --color-black-alpha-70: var(--ds-color-black-alpha-70);
   --color-black-alpha-80: var(--ds-color-black-alpha-80);
   --color-black-alpha-90: var(--ds-color-black-alpha-90);
+
   --color-neutral-50: var(--ds-color-neutral-50);
   --color-neutral-100: var(--ds-color-neutral-100);
   --color-neutral-200: var(--ds-color-neutral-200);
@@ -32,6 +34,7 @@
   --color-neutral-800: var(--ds-color-neutral-800);
   --color-neutral-900: var(--ds-color-neutral-900);
   --color-neutral-950: var(--ds-color-neutral-950);
+
   --color-primary-50: var(--ds-color-primary-50);
   --color-primary-100: var(--ds-color-primary-100);
   --color-primary-200: var(--ds-color-primary-200);
@@ -43,6 +46,7 @@
   --color-primary-800: var(--ds-color-primary-800);
   --color-primary-900: var(--ds-color-primary-900);
   --color-primary-950: var(--ds-color-primary-950);
+
   --color-danger-50: var(--ds-color-danger-50);
   --color-danger-100: var(--ds-color-danger-100);
   --color-danger-200: var(--ds-color-danger-200);
@@ -54,6 +58,7 @@
   --color-danger-800: var(--ds-color-danger-800);
   --color-danger-900: var(--ds-color-danger-900);
   --color-danger-950: var(--ds-color-danger-950);
+
   --color-warning-50: var(--ds-color-warning-50);
   --color-warning-100: var(--ds-color-warning-100);
   --color-warning-200: var(--ds-color-warning-200);
@@ -65,6 +70,7 @@
   --color-warning-800: var(--ds-color-warning-800);
   --color-warning-900: var(--ds-color-warning-900);
   --color-warning-950: var(--ds-color-warning-950);
+
   --color-success-50: var(--ds-color-success-50);
   --color-success-100: var(--ds-color-success-100);
   --color-success-200: var(--ds-color-success-200);
@@ -76,6 +82,16 @@
   --color-success-800: var(--ds-color-success-800);
   --color-success-900: var(--ds-color-success-900);
   --color-success-950: var(--ds-color-success-950);
+
+  --z-index-modal-content: var(--ds-z-index-modal-content);
+  --color-alpha-shadow1: var(--ds-color-alpha-shadow1);
+  --color-alpha-shadow2: var(--ds-color-alpha-shadow2);
+  --color-alpha-shadow3: var(--ds-color-alpha-shadow3);
+
+  --color-text-primary: var(--ds-color-text-primary);
+  --color-text-secondary: var(--ds-color-text-secondary);
+  --color-text-tertiary: var(--ds-color-text-tertiary);
+
   --font-weight-thin: var(--ds-font-weight-thin);
   --font-weight-extralight: var(--ds-font-weight-extralight);
   --font-weight-light: var(--ds-font-weight-light);
@@ -85,24 +101,23 @@
   --font-weight-bold: var(--ds-font-weight-bold);
   --font-weight-extrabold: var(--ds-font-weight-extrabold);
   --font-weight-black: var(--ds-font-weight-black);
+
   --shadow-y-3: var(--ds-shadow-y-3);
   --shadow-y-4: var(--ds-shadow-y-4);
   --shadow-blur-3: var(--ds-shadow-blur-3);
   --shadow-blur-4: var(--ds-shadow-blur-4);
+
   --shadow-1: var(--ds-shadow-1);
   --shadow-2: var(--ds-shadow-2);
   --shadow-3: var(--ds-shadow-3);
   --shadow-4: var(--ds-shadow-4);
+
   --z-index-behind: var(--ds-z-index-behind);
   --z-index-base: var(--ds-z-index-base);
   --z-index-above: var(--ds-z-index-above);
   --z-index-header: var(--ds-z-index-header);
   --z-index-overlay: var(--ds-z-index-overlay);
   --z-index-modal: var(--ds-z-index-modal);
-  --z-index-modal-content: var(--ds-z-index-modal-content);
-  --color-alpha-shadow1: var(--ds-color-alpha-shadow1);
-  --color-alpha-shadow2: var(--ds-color-alpha-shadow2);
-  --color-alpha-shadow3: var(--ds-color-alpha-shadow3);
 }
 
 @utility bg-* { background-color: --value(--color-*); }
