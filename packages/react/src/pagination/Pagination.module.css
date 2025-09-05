@@ -20,7 +20,7 @@
   background-color: var(--cocso-pagination-bg-color);
   transition: background-color 0.15s ease-in-out;
 
-  --cocso-pagination-font-color: var(--ds-color-neutral-950);
+  --cocso-pagination-font-color: var(--ds-color-text-primary);
   --cocso-pagination-font-weight: inherit;
   --cocso-pagination-bg-color: inherit;
 }
@@ -64,6 +64,6 @@
   justify-content: center;
   width: var(--ds-spacing-13);
   height: var(--ds-spacing-13);
-  color: var(--ds-color-neutral-950);
+  color: var(--ds-color-text-primary);
   font-size: 16px;
 }

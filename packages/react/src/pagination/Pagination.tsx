@@ -1,3 +1,4 @@
+import { MoreHorizIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import styles from './Pagination.module.css';
@@ -58,7 +59,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
         ) : (
           <>
             {renderPageButton(1)}
-            {page > 1 + halfVisible && <span className={styles.trunc}>...</span>}
+            {page > 1 + halfVisible && (
+              <span className={styles.trunc}>
+                <MoreHorizIcon />
+              </span>
+            )}
             {Array(maxVisible)
               .fill(0)
               .map((_, index) => {
@@ -67,7 +72,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                   ? renderPageButton(pageNumber)
                   : '';
               })}
-            {page < totalPages - halfVisible && <span className={styles.trunc}>...</span>}
+            {page < totalPages - halfVisible && (
+              <span className={styles.trunc}>
+                <MoreHorizIcon />
+              </span>
+            )}
             {renderPageButton(totalPages)}
           </>
         )}
