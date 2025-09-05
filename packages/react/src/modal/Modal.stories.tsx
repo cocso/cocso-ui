@@ -45,6 +45,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const AllVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const [basicOpen, setBasicOpen] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);

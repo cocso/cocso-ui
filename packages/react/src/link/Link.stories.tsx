@@ -68,6 +68,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const AllVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  args: {},
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
       <div

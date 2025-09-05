@@ -52,6 +52,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const AllVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  args: {},
   render: () => {
     const [page1, setPage1] = useState(1);
     const [page2, setPage2] = useState(15);

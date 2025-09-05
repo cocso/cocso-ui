@@ -62,6 +62,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const AllVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const [onState, setOnState] = useState<CheckboxStatus>('on');
     const [offState, setOffState] = useState<CheckboxStatus>('off');
