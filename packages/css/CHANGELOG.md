@@ -1,5 +1,11 @@
 # @cocso-ui/css
 
+## 0.1.1
+
+### Patch Changes
+
+- c385ce1: Badge 컴포넌트 추가
+
 ## 0.1.0
 
 ### Minor Changes
