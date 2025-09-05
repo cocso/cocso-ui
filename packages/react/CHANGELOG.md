@@ -1,5 +1,12 @@
 # @cocso-ui/react
 
+## 0.2.2
+
+### Patch Changes
+
+- 0453d0d: 일부(Spinner) 컴포넌트의 토큰 값을 변경합니다.
+- c385ce1: Badge 컴포넌트 추가
+
 ## 0.2.1
 
 ### Patch Changes
