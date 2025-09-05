@@ -36,7 +36,7 @@ const getSize = (size: SpinnerSize) =>
     .with('xl', () => '40px')
     .with('lg', () => '32px')
     .with('md', () => '24px')
-    .with('sm', () => '20px')
+    .with('sm', () => '16px')
     .exhaustive();
 
 const getBorderWidth = (size: SpinnerSize) =>
