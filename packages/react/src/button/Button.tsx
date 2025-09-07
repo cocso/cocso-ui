@@ -108,7 +108,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Primitive.button ref={ref} className={cn} disabled={isDisabled} style={style} {...props}>
+      <Primitive.button
+        ref={ref}
+        className={cn}
+        disabled={isDisabled}
+        style={style}
+        data-size={size}
+        {...props}
+      >
         {renderButtonContent(children)}
       </Primitive.button>
     );
@@ -128,7 +135,7 @@ const getSizeStyles = (size: ButtonSize) => {
     .with('lg', () => 14)
     .with('md', () => 10)
     .with('sm', () => 6)
-    .with('xs', () => 2)
+    .with('xs', () => 6)
     .exhaustive();
   const fontSize = match(size)
     .with('xl', () => 16)
