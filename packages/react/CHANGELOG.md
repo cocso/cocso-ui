@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.5
+
+### Patch Changes
+
+- f622205: 버튼 컴포넌트에서 prefix, suffix를 포함하는 패딩 값을 수정합니다.
+
 ## 0.2.4
 
 ### Patch Changes
