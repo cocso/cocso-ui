@@ -19,6 +19,7 @@
 
   --cocso-button-height: inherit;
   --cocso-button-padding-inline: inherit;
+  --cocso-button-content-padding: inherit;
   --cocso-button-font-color: inherit;
   --cocso-button-font-size: inherit;
   --cocso-button-font-weight: inherit;
@@ -40,11 +41,7 @@
 }
 
 .content {
-  padding: 0 6px;
-}
-
-.button[data-size="xs"] .content {
-  padding: 0;
+  padding: var(--cocso-button-content-padding);
 }
 
 .prefix {

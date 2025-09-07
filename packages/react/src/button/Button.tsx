@@ -108,14 +108,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Primitive.button
-        ref={ref}
-        className={cn}
-        disabled={isDisabled}
-        style={style}
-        data-size={size}
-        {...props}
-      >
+      <Primitive.button ref={ref} className={cn} disabled={isDisabled} style={style} {...props}>
         {renderButtonContent(children)}
       </Primitive.button>
     );
@@ -134,8 +127,15 @@ const getSizeStyles = (size: ButtonSize) => {
     .with('xl', () => 16)
     .with('lg', () => 14)
     .with('md', () => 10)
-    .with('sm', () => 6)
+    .with('sm', () => 8)
     .with('xs', () => 6)
+    .exhaustive();
+  const contentPadding = match(size)
+    .with('xl', () => '0 6px')
+    .with('lg', () => '0 6px')
+    .with('md', () => '0 6px')
+    .with('sm', () => '0 2px')
+    .with('xs', () => '0')
     .exhaustive();
   const fontSize = match(size)
     .with('xl', () => 16)
@@ -146,6 +146,7 @@ const getSizeStyles = (size: ButtonSize) => {
   return {
     '--cocso-button-height': `${height}px`,
     '--cocso-button-padding-inline': `${inlinePadding}px`,
+    '--cocso-button-content-padding': contentPadding,
     '--cocso-button-font-size': `${fontSize}px`,
   };
 };
