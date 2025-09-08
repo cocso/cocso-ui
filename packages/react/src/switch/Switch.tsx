@@ -13,7 +13,7 @@ import { colors, spacing } from '../token';
 import { Typography } from '../typography';
 import styles from './Switch.module.css';
 
-export type SwitchSize = 'lg' | 'md';
+export type SwitchSize = 'sm' | 'md';
 
 export interface SwitchProps extends ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
   id?: string;
@@ -75,18 +75,18 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
 
 const getSwitchWidth = (size: SwitchSize) =>
   match(size)
-    .with('lg', () => spacing.s14)
-    .with('md', () => spacing.s12)
+    .with('md', () => spacing.s14)
+    .with('sm', () => spacing.s12)
     .exhaustive();
 
 const getSwitchHeight = (size: SwitchSize) =>
   match(size)
-    .with('lg', () => spacing.s10)
-    .with('md', () => spacing.s9)
+    .with('md', () => spacing.s10)
+    .with('sm', () => spacing.s9)
     .exhaustive();
 
 const getThumbSize = (size: SwitchSize) =>
   match(size)
-    .with('lg', () => spacing.s9)
-    .with('md', () => spacing.s8)
+    .with('md', () => spacing.s9)
+    .with('sm', () => spacing.s8)
     .exhaustive();
