@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.11
+
+### Patch Changes
+
+- 875f462: MonthPicker 컴포넌트를 추가합니다.
+
 ## 0.2.10
 
 ### Patch Changes
