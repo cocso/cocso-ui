@@ -2,7 +2,7 @@
 
 import { ArrowIOSForwardIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Button } from '../button';
 import { Dropdown } from '../dropdown';
 import { Typography } from '../typography';
@@ -41,12 +41,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       value?.getFullYear() ?? new Date().getFullYear(),
     );
 
-    useEffect(() => {
-      if (value) {
-        setDisplayYear(value.getFullYear());
-      }
-    }, [value]);
-
     const handleMonthSelect = (month: number) => {
       const newValue = new Date(displayYear, month - 1, 1);
       onValueChange?.(newValue);
@@ -58,9 +52,16 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       setDisplayYear(clampedYear);
     };
 
+    const handleOpenChange = (isOpen: boolean) => {
+      if (isOpen) {
+        setDisplayYear(value?.getFullYear() ?? new Date().getFullYear());
+      }
+      setOpen(isOpen);
+    };
+
     return (
       <div ref={ref} className={cx(styles.root, className)} {...props}>
-        <Dropdown open={open} onOpenChange={setOpen}>
+        <Dropdown open={open} onOpenChange={handleOpenChange}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>
             <Dropdown.Content className={styles.content} role="listbox" aria-label="월 선택">
