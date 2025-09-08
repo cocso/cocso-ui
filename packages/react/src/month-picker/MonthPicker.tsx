@@ -47,6 +47,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     },
     ref,
   ) => {
+    const [open, setOpen] = useState<boolean>(false);
+
     const [displayYear, setDisplayYear] = useState<number>(
       value?.getFullYear() ?? new Date().getFullYear(),
     );
@@ -60,6 +62,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const handleMonthSelect = (month: number) => {
       const newValue = new Date(displayYear, month - 1, 1);
       onValueChange?.(newValue);
+      setOpen(false);
     };
 
     const handleYearChange = (year: number) => {
@@ -77,7 +80,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         tabIndex={disabled ? -1 : 0}
         {...props}
       >
-        <Dropdown>
+        <Dropdown open={open} onOpenChange={setOpen}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>
             <Dropdown.Content className={styles.content} role="listbox" aria-label="월 선택">
