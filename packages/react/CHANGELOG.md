@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.10
+
+### Patch Changes
+
+- 9da5132: Switch 컴포넌트의 size 옵션을 sm, md로 변경합니다.
+
 ## 0.2.9
 
 ### Patch Changes
