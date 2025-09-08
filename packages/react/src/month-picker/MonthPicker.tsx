@@ -13,8 +13,6 @@ export interface MonthPickerProps extends ComponentPropsWithoutRef<'div'> {
   onValueChange?: (value: Date | undefined) => void;
   minYear?: number;
   maxYear?: number;
-  disabled?: boolean;
-  placeholder?: string;
 }
 
 const MONTHS = [
@@ -34,17 +32,7 @@ const MONTHS = [
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
-    {
-      className,
-      value,
-      onValueChange,
-      minYear = 1900,
-      maxYear = 2100,
-      disabled = false,
-      placeholder = '월을 선택하세요',
-      children,
-      ...props
-    },
+    { className, value, onValueChange, minYear = 1900, maxYear = 2100, children, ...props },
     ref,
   ) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -82,7 +70,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   size="xs"
                   variant="secondary"
                   onClick={() => handleYearChange(displayYear - 1)}
-                  disabled={displayYear <= minYear || disabled}
+                  disabled={displayYear <= minYear}
                   svgOnly
                   aria-label="이전 년도"
                 >
@@ -95,16 +83,15 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   type="button"
                   size="xs"
                   variant="secondary"
-                  className={styles.yearButton}
                   onClick={() => handleYearChange(displayYear + 1)}
-                  disabled={displayYear >= maxYear || disabled}
+                  disabled={displayYear >= maxYear}
                   aria-label="다음 년도"
                 >
                   <ArrowIOSForwardIcon />
                 </Button>
               </div>
 
-              <fieldset className={styles.grid} aria-label="월 목록">
+              <div className={styles.grid}>
                 {MONTHS.map((month, index) => {
                   const monthNumber = index + 1;
                   const isSelected =
@@ -116,7 +103,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                       type="button"
                       variant={isSelected ? 'tertiary' : 'secondary'}
                       onClick={() => handleMonthSelect(monthNumber)}
-                      disabled={disabled}
                       role="option"
                       aria-selected={isSelected}
                       aria-label={`${month} 선택`}
@@ -125,7 +111,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                     </Button>
                   );
                 })}
-              </fieldset>
+              </div>
             </Dropdown.Content>
           </Dropdown.Portal>
         </Dropdown>
