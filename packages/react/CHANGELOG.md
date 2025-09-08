@@ -1,5 +1,12 @@
 # @cocso-ui/react
 
+## 0.2.7
+
+### Patch Changes
+
+- 01b6aac: Select 컴포넌트에 `stretch` prop을 추가하여 전체 너비(`width: 100%`) 설정을 지원합니다.
+- 01b6aac: Select 컴포넌트의 `disabled` 상태 관리를 Button 컴포넌트와 동일한 패턴으로 `cx`를 통해 클래스 기반으로 변경합니다.
+
 ## 0.2.6
 
 ### Patch Changes
@@ -16,12 +23,7 @@
 
 ### Patch Changes
 
-- 45e5e49: ---
-  '@cocso-ui/react': patch
-
-  ***
-
-  버튼 컴포넌트 개선: `xs` 사이즈 버튼의 내부 콘텐츠 패딩을 제거하고, 가로 패딩을 2px에서 6px로 조정합니다. 또한, 모든 버튼 사이즈에서 prefix/suffix 요소의 `min-width` 속성을 제거합니다.
+- 45e5e49: 버튼 컴포넌트 개선: `xs` 사이즈 버튼의 내부 콘텐츠 패딩을 제거하고, 가로 패딩을 2px에서 6px로 조정합니다. 또한, 모든 버튼 사이즈에서 prefix/suffix 요소의 `min-width` 속성을 제거합니다.
 
 ## 0.2.3
 

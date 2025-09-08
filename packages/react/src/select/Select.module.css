@@ -4,6 +4,14 @@
   cursor: pointer;
 }
 
+.wrapper.stretch {
+  width: 100%;
+}
+
+.wrapper.stretch .select {
+  width: 100%;
+}
+
 .select {
   min-width: var(--cocso-select-min-width);
   height: var(--cocso-select-height);
@@ -28,7 +36,12 @@
   --cocso-select-bg-color: var(--ds-color-white);
 }
 
-.select[disabled] {
+.wrapper.disabled {
+  cursor: not-allowed;
+}
+
+.wrapper.disabled .select {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -41,6 +54,7 @@
   color: var(--ds-color-neutral-500);
 }
 
-.icon[disabled] {
+.wrapper.disabled .icon {
   cursor: not-allowed;
+  opacity: 0.4;
 }
