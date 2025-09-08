@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.6
+
+### Patch Changes
+
+- 01b6aac: select 컴포넌트의 classname 값을 wrapper와 병합합니다.
+
 ## 0.2.5
 
 ### Patch Changes
