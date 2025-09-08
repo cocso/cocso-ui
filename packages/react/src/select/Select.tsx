@@ -20,14 +20,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     } as CSSProperties;
 
     return (
-      <div className={styles.wrapper}>
-        <select
-          ref={ref}
-          className={cx(styles.select, className)}
-          style={style}
-          disabled={disabled}
-          {...props}
-        >
+      <div className={cx(styles.wrapper, className)}>
+        <select ref={ref} className={styles.select} style={style} disabled={disabled} {...props}>
           {children}
         </select>
 
