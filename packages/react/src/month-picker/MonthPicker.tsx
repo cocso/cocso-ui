@@ -71,15 +71,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        className={cx(styles.root, className)}
-        role="combobox"
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        tabIndex={disabled ? -1 : 0}
-        {...props}
-      >
+      <div ref={ref} className={cx(styles.root, className)} {...props}>
         <Dropdown open={open} onOpenChange={setOpen}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>
