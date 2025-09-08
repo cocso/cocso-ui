@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.8
+
+### Patch Changes
+
+- f1a14c8: README.md 파일을 업데이트 합니다.
+
 ## 0.2.7
 
 ### Patch Changes
