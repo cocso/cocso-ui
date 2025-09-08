@@ -201,6 +201,9 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+      rollup-plugin-preserve-directives:
+        specifier: ^0.4.0
+        version: 0.4.0(rollup@4.50.1)
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -3532,6 +3535,11 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       postcss: 8.x
+
+  rollup-plugin-preserve-directives@0.4.0:
+    resolution: {integrity: sha512-gx4nBxYm5BysmEQS+e2tAMrtFxrGvk+Pe5ppafRibQi0zlW7VYAbEGk6IKDw9sJGPdFWgVTE0o4BU4cdG0Fylg==}
+    peerDependencies:
+      rollup: 2.x || 3.x || 4.x
 
   rollup-pluginutils@2.8.2:
     resolution: {integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==}
@@ -7596,6 +7604,12 @@ snapshots:
       style-inject: 0.3.0
     transitivePeerDependencies:
       - ts-node
+
+  rollup-plugin-preserve-directives@0.4.0(rollup@4.50.1):
+    dependencies:
+      '@rollup/pluginutils': 5.3.0(rollup@4.50.1)
+      magic-string: 0.30.18
+      rollup: 4.50.1
 
   rollup-pluginutils@2.8.2:
     dependencies:
