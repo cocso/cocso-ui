@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.9
+
+### Patch Changes
+
+- 34cc4ab: Pagination 컴포넌트의 크기, 텍스트 토큰을 변경합니다.
+
 ## 0.2.8
 
 ### Patch Changes
