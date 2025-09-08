@@ -12,10 +12,10 @@
   display: flex;
   flex-direction: column;
   border-radius: var(--ds-spacing-3);
-  background-color: var(--color-background-white);
+  background-color: var(--ds-color-white);
   will-change: transform, opacity;
-  z-index: var(--z-index-overlay);
-  box-shadow: var(--shadow-1);
+  z-index: var(--ds-z-index-overlay);
+  box-shadow: var(--ds-shadow-2);
 }
 
 .content[data-side="top"] {

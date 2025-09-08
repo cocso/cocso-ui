@@ -1,0 +1,27 @@
+.root {
+  display: inline-block;
+  transform: translateZ(0);
+}
+
+.content {
+  padding: var(--ds-spacing-8);
+  min-width: 280px;
+  gap: var(--ds-spacing-8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: none;
+  gap: var(--ds-spacing-5);
+}

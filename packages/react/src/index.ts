@@ -5,6 +5,7 @@ export * from './checkbox';
 export * from './dropdown';
 export * from './link';
 export * from './modal';
+export * from './month-picker';
 export * from './one-time-password-field';
 export * from './pagination';
 export * from './popover';

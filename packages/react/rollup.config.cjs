@@ -6,6 +6,7 @@ const resolve = require("@rollup/plugin-node-resolve");
 const postcss = require("rollup-plugin-postcss");
 const dts = require("rollup-plugin-dts").default;
 const path = require("path");
+const preserveDirectives = require('rollup-plugin-preserve-directives');
 
 const packageJSON = require(path.join(process.cwd(), "package.json"));
 
@@ -48,6 +49,7 @@ function buildJS(format, input, output) {
           babelPresetTypescript
         ],
       }),
+      preserveDirectives.default()
     ].filter(Boolean),
   };
 }
