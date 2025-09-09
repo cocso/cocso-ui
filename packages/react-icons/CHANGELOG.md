@@ -1,5 +1,11 @@
 # @cocso-ui/react-icons
 
+## 0.1.2
+
+### Patch Changes
+
+- 3e028e4: `@cocso-ui/react-icons` 패키지에 서울제약 로고를 추가합니다.
+
 ## 0.1.1
 
 ### Patch Changes
