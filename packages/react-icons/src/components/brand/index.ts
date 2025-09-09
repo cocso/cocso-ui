@@ -12,3 +12,4 @@ export * from './KakaoLogo';
 export * from './KakaoOutlineLogo';
 export * from './NaverLogo';
 export * from './NaverOutlineLogo';
+export * from './SeoulPharmaLogo';
