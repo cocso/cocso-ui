@@ -1,5 +1,11 @@
 # @cocso-ui/react-icons
 
+## 0.1.3
+
+### Patch Changes
+
+- 9c11e2e: Business 도메인에서 사용되는 아이콘을 추가합니다.
+
 ## 0.1.2
 
 ### Patch Changes
