@@ -4,9 +4,9 @@ const babelPresetTypescript = require("@babel/preset-typescript");
 const commonjs = require("@rollup/plugin-commonjs");
 const resolve = require("@rollup/plugin-node-resolve");
 const postcss = require("rollup-plugin-postcss");
+const preserveDirectives = require('rollup-plugin-preserve-directives');
 const dts = require("rollup-plugin-dts").default;
 const path = require("path");
-const preserveDirectives = require('rollup-plugin-preserve-directives');
 
 const packageJSON = require(path.join(process.cwd(), "package.json"));
 
