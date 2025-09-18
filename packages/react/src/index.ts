@@ -2,6 +2,7 @@ export * from './accordion';
 export * from './badge';
 export * from './button';
 export * from './checkbox';
+export * from './day-picker';
 export * from './dropdown';
 export * from './link';
 export * from './modal';
