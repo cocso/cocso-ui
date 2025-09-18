@@ -13,18 +13,18 @@ import styles from './DayPicker.module.css';
 export interface DayPickerProps extends ComponentPropsWithoutRef<'div'> {
   value?: Date;
   onValueChange?: (value: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
   disabled?: boolean;
 }
 
 export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
-  ({ className, value, onValueChange, disabled, children, ...props }, ref) => {
+  ({ className, value, onValueChange, disabled, children, minDate, maxDate, ...props }, ref) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
-      if (date) {
-        onValueChange?.(date);
-        setOpen(false);
-      }
+      if (date) onValueChange?.(date);
+      setOpen(false);
     };
 
     return (
@@ -38,16 +38,14 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                 onChange={handleChange}
                 disabled={disabled}
                 locale={ko}
+                minDate={minDate}
+                maxDate={maxDate}
                 dateFormat="yyyy년 MM월 dd일"
                 showPopperArrow={false}
                 dayClassName={date => {
                   const day = date.getDay();
-                  if (day === 0) {
-                    return styles.sunday;
-                  }
-                  if (day === 6) {
-                    return styles.saturday;
-                  }
+                  if (day === 0) return styles.sunday;
+                  if (day === 6) return styles.saturday;
                   return '';
                 }}
                 renderCustomHeader={({

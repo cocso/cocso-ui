@@ -13,11 +13,13 @@ import styles from './MonthPicker.module.css';
 export interface MonthPickerProps extends ComponentPropsWithoutRef<'div'> {
   value?: Date;
   onValueChange?: (value: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
   disabled?: boolean;
 }
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
-  ({ className, value, onValueChange, children, disabled, ...props }, ref) => {
+  ({ className, value, onValueChange, children, minDate, maxDate, disabled, ...props }, ref) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
@@ -38,6 +40,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 onChange={handleChange}
                 disabled={disabled}
                 locale={ko}
+                minDate={minDate}
+                maxDate={maxDate}
                 dateFormat="yyyy년 MM월 dd일"
                 showPopperArrow={false}
                 renderCustomHeader={({
