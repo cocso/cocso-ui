@@ -23,10 +23,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
-      if (date) {
-        onValueChange?.(date);
-        setOpen(false);
-      }
+      if (date) onValueChange?.(date);
+      setOpen(false);
     };
 
     return (
