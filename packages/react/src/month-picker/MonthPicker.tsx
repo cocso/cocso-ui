@@ -49,7 +49,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   prevYearButtonDisabled,
                   nextYearButtonDisabled,
                 }) => (
-                  <div className={styles.header}>
+                  <>
                     <Button
                       type="button"
                       variant="secondary"
@@ -72,7 +72,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                     >
                       <ArrowIOSForwardIcon />
                     </Button>
-                  </div>
+                  </>
                 )}
                 inline
                 showMonthYearPicker

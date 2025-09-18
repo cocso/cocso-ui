@@ -55,15 +55,11 @@
 }
 
 :global(.react-datepicker__header--custom) {
-  padding-inline: var(--ds-spacing-8);
-  padding-bottom: var(--ds-spacing-5);
-}
-
-:global(.react-datepicker__header--custom > div) {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding-bottom: var(--ds-spacing-5);
 }
 
 :global(.react-datepicker__day-names) {

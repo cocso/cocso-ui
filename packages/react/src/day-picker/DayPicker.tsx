@@ -55,7 +55,7 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                   prevMonthButtonDisabled,
                   nextMonthButtonDisabled,
                 }) => (
-                  <div className={styles.header}>
+                  <>
                     <Button
                       type="button"
                       variant="secondary"
@@ -78,7 +78,7 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                     >
                       <ArrowIOSForwardIcon />
                     </Button>
-                  </div>
+                  </>
                 )}
                 inline
               />
