@@ -38,7 +38,7 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                 onChange={handleChange}
                 disabled={disabled}
                 locale={ko}
-                dateFormat="YYYY년 MM월 DD일"
+                dateFormat="yyyy년 MM월 dd일"
                 showPopperArrow={false}
                 dayClassName={date => {
                   const day = date.getDay();
