@@ -102,7 +102,7 @@
 }
 
 :global(.react-datepicker__day--selected) {
-  color: var(--ds-color-white);
+  color: var(--ds-color-white) !important;
   background-color: var(--ds-color-primary-500);
 }
 
