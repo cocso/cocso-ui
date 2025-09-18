@@ -12,7 +12,7 @@ import styles from './DayPicker.module.css';
 
 export interface DayPickerProps extends ComponentPropsWithoutRef<'div'> {
   value?: Date;
-  onValueChange?: (value: Date) => void;
+  onValueChange?: (value: Date | null) => void;
   minDate?: Date;
   maxDate?: Date;
   disabled?: boolean;
@@ -23,7 +23,7 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
-      if (date) onValueChange?.(date);
+      onValueChange?.(date);
       setOpen(false);
     };
 
