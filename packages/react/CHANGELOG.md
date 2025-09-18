@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.13
+
+### Patch Changes
+
+- 135a868: `react-datepicker` 기반으로 Date Picker, Month Picker 컴포넌트를 개선합니다.
+
 ## 0.2.12
 
 ### Patch Changes
