@@ -81,7 +81,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
             style={{ opacity: status === 'on' ? 1 : 0 }}
             aria-hidden="true"
           >
-            <CheckIcon size={24} />
+            <CheckIcon className={styles.icon} size={24} />
           </CheckboxPrimitive.Indicator>
 
           <div
@@ -89,7 +89,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
             style={{ opacity: status === 'intermediate' ? 1 : 0 }}
             aria-hidden="true"
           >
-            <CheckIcon size={24} />
+            <CheckIcon className={styles.icon} size={24} />
           </div>
         </CheckboxPrimitive.Root>
 

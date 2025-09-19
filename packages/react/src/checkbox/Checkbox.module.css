@@ -25,7 +25,7 @@
   --cocso-checkbox-bg-color: inherit;
 }
 
-.checkbox > svg {
+.icon {
   display: block;
   max-width: 100%;
   height: auto;
