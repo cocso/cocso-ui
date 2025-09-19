@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.16
+
+### Patch Changes
+
+- 795bdef: `Checkbox` 컴포넌트의 아이콘 svg 스타일이 적용되지 않는 오류를 해결합니다.
+
 ## 0.2.15
 
 ### Patch Changes
