@@ -113,3 +113,8 @@
 :global(.react-datepicker__day-name:nth-child(7)) {
   color: var(--ds-color-primary-600);
 }
+
+:global(.react-datepicker__day--disabled) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
