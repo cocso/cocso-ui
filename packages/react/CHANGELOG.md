@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.14
+
+### Patch Changes
+
+- 05928a1: DayPicker 컴포넌트에 day disabled 속성을 추가합니다.
+
 ## 0.2.13
 
 ### Patch Changes
