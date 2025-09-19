@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.15
+
+### Patch Changes
+
+- fb03cd2: `Checkbox` 컴포넌트의 토큰 오류를 수정합니다.
+
 ## 0.2.14
 
 ### Patch Changes
