@@ -47,10 +47,10 @@
 
 .indicator {
   position: absolute;
-  top: var(--number-1);
-  right: var(--number-1);
-  bottom: var(--number-1);
-  left: var(--number-1);
+  top: var(--ds-spacing-1);
+  right: var(--ds-spacing-1);
+  bottom: var(--ds-spacing-1);
+  left: var(--ds-spacing-1);
   transition: opacity 0.15s ease-in-out;
 }
 
@@ -60,6 +60,6 @@
 }
 
 .checkbox[disabled], .label[aria-disabled="true"] {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
