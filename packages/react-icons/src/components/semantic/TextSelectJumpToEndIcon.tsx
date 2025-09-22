@@ -2,7 +2,7 @@ import { useId } from 'react';
 import Icon from '../../icon';
 import type { IconProps } from '../../types';
 
-export const TextSelectJumpToEndIconIcon = (props: IconProps) => {
+export const TextSelectJumpToEndIcon = (props: IconProps) => {
   const id = useId();
 
   return (
@@ -37,4 +37,4 @@ export const TextSelectJumpToEndIconIcon = (props: IconProps) => {
   );
 };
 
-TextSelectJumpToEndIconIcon.displayName = 'TextSelectJumpToEndIcon';
+TextSelectJumpToEndIcon.displayName = 'TextSelectJumpToEndIcon';
