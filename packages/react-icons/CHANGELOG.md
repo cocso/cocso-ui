@@ -1,5 +1,11 @@
 # @cocso-ui/react-icons
 
+## 0.1.4
+
+### Patch Changes
+
+- 0ebd7d3: `@cocso-contract` 도메인에서 사용되는 아이콘을 추가합니다.
+
 ## 0.1.3
 
 ### Patch Changes
