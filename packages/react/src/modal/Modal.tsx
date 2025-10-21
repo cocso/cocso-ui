@@ -55,7 +55,7 @@ const ModalDescription = forwardRef<
       asChild
       {...props}
     >
-      <Typography size={15} color={colors.textSecondary} weight="medium">
+      <Typography size={14} color={colors.textSecondary} weight="medium">
         {children}
       </Typography>
     </ModalPrimitive.Description>

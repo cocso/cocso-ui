@@ -21,7 +21,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
     <ViewTransitions>
       <html lang="ko" dir="ltr" suppressHydrationWarning>
         <body className={Pretendard.className}>
-          <RootProvider search={{ SearchDialog }}>
+          <RootProvider theme={{ enabled: false }} search={{ SearchDialog }}>
             <Layout>{children}</Layout>
           </RootProvider>
         </body>
