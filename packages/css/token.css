@@ -88,7 +88,7 @@
   --ds-color-alpha-shadow3: rgba(0, 0, 0, 0.12);
 
   --ds-color-text-primary: var(--ds-color-neutral-950);
-  --ds-color-text-secondary: var(--ds-color-neutral-500);
+  --ds-color-text-secondary: var(--ds-color-neutral-600);
   --ds-color-text-tertiary: var(--ds-color-neutral-400);
 
   --ds-font-weight-thin: 100;
