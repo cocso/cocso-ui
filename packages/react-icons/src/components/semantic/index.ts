@@ -5,6 +5,7 @@ export * from './ArrowDownIcon';
 export * from './ArrowDropDownIcon';
 export * from './ArrowDropUpIcon';
 export * from './ArrowForwardIcon';
+export * from './ArrowIOSBackwardIcon';
 export * from './ArrowIOSForwardIcon';
 export * from './AutoRenewIcon';
 export * from './BusinessMessagesIcon';
