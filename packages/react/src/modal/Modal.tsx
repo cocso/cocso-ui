@@ -23,16 +23,15 @@ const ModalContent = forwardRef<
 const ModalClose = forwardRef<
   ComponentRef<typeof ModalPrimitive.Close>,
   ComponentPropsWithoutRef<typeof ModalPrimitive.Close>
->(({ asChild, children, ...props }, ref) => {
+>(({ asChild, className, children, ...props }, ref) => {
   return (
-    <ModalPrimitive.Close ref={ref} asChild={asChild} {...props}>
-      {asChild ? (
-        children
-      ) : (
-        <span className={styles.close}>
-          <CloseIcon size={24} />
-        </span>
-      )}
+    <ModalPrimitive.Close
+      ref={ref}
+      className={cx(!asChild && styles.close, className)}
+      asChild={asChild}
+      {...props}
+    >
+      {asChild ? children : <CloseIcon size={24} />}
     </ModalPrimitive.Close>
   );
 });
