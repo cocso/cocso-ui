@@ -1,5 +1,15 @@
 # @cocso-ui/react
 
+## 0.2.18
+
+### Patch Changes
+
+- 13a2052: - `RadioGroup` 컴포넌트를 추가합니다.
+  - `MonthPicker`, `DayPicker`에서 발생하던 Arrow Rotate 문제를 해결합니다.
+  - `Pagination` 컴포넌트 버튼에 scale transform을 추가합니다.
+- Updated dependencies [13a2052]
+  - @cocso-ui/react-icons@0.1.5
+
 ## 0.2.17
 
 ### Patch Changes
