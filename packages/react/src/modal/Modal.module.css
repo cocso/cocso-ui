@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   background-color: var(--ds-color-black-alpha-30);
-  animation: overlay-show 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--ds-z-index-overlay);
 }
 
@@ -27,13 +27,16 @@
   max-width: 380px;
   max-height: 85vh;
   padding: var(--ds-spacing-9);
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: var(--ds-color-white);
-  animation: content-show 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--ds-z-index-modal);
 }
 
 .close {
+  position: absolute;
+  top: var(--ds-spacing-9);
+  right: var(--ds-spacing-9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,5 +51,5 @@
 }
 
 .description {
-  margin-top: var(--ds-spacing-5);
+  margin-top: var(--ds-spacing-3);
 }

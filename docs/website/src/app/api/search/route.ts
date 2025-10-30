@@ -1,4 +1,3 @@
-import { structure } from 'fumadocs-core/mdx-plugins';
 import { createSearchAPI } from 'fumadocs-core/search/server';
 
 import { source } from '~/libs/source';
@@ -9,6 +8,6 @@ export const { GET } = createSearchAPI('advanced', {
     url: page.url,
     title: page.data.title ?? '',
     description: page.data.description,
-    structuredData: structure(page.data.content),
+    structuredData: page.data.structuredData,
   })),
 });

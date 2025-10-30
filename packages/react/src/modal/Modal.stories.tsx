@@ -59,17 +59,7 @@ export const AllVariants: Story = {
             <Button>기본 모달</Button>
           </Modal.Trigger>
           <Modal.Content>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: '16px',
-              }}
-            >
-              <Modal.Title>기본 모달</Modal.Title>
-              <Modal.Close />
-            </div>
+            <Modal.Title>기본 모달</Modal.Title>
             <Modal.Description>기본 모달의 설명입니다.</Modal.Description>
             <div
               style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
@@ -87,17 +77,7 @@ export const AllVariants: Story = {
             <Button variant="error">확인 모달</Button>
           </Modal.Trigger>
           <Modal.Content>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: '16px',
-              }}
-            >
-              <Modal.Title>항목 삭제</Modal.Title>
-              <Modal.Close />
-            </div>
+            <Modal.Title>항목 삭제</Modal.Title>
             <Modal.Description>정말로 삭제하시겠습니까?</Modal.Description>
             <div
               style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
