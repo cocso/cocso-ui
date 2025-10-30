@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowIOSForwardIcon } from '@cocso-ui/react-icons';
+import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
 import { ko } from 'date-fns/locale';
 import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
@@ -56,9 +56,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                       size="xs"
                       onClick={decreaseYear}
                       disabled={prevYearButtonDisabled}
-                      className={styles.backButton}
                     >
-                      <ArrowIOSForwardIcon />
+                      <ArrowIOSBackwardIcon />
                     </Button>
                     <Typography type="body" weight="semibold">
                       {date.toLocaleDateString('ko-KR', { year: 'numeric' })}
