@@ -10,12 +10,16 @@ const RadioGroupRoot = forwardRef<
   return <RadioGroupPrimitive.Root ref={ref} className={cx(styles.root, className)} {...props} />;
 });
 
+RadioGroupRoot.displayName = RadioGroupPrimitive.Root.displayName;
+
 const RadioGroupItem = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Item>,
   ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, ...props }, ref) => {
   return <RadioGroupPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props} />;
 });
+
+RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 
 const RadioGroupIndicator = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Indicator>,
@@ -29,6 +33,8 @@ const RadioGroupIndicator = forwardRef<
     />
   );
 });
+
+RadioGroupIndicator.displayName = RadioGroupPrimitive.Indicator.displayName;
 
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
