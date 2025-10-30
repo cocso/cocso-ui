@@ -8,10 +8,6 @@
   overflow: hidden;
 }
 
-.backButton {
-  transform: rotate(180deg);
-}
-
 .sunday {
   color: var(--ds-color-danger-600) !important;
 }

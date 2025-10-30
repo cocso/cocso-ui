@@ -8,10 +8,6 @@
   overflow: hidden;
 }
 
-.backButton {
-  transform: rotate(180deg);
-}
-
 :global(.react-datepicker) {
   position: relative;
   display: inline-block;

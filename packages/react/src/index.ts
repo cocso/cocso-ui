@@ -10,6 +10,7 @@ export * from './month-picker';
 export * from './one-time-password-field';
 export * from './pagination';
 export * from './popover';
+export * from './radio-group';
 export * from './select';
 export * from './spinner';
 export * from './stock-quantity-status';

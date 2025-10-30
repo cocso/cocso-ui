@@ -1,4 +1,4 @@
-import { MoreHorizIcon } from '@cocso-ui/react-icons';
+import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon, MoreHorizIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import styles from './Pagination.module.css';
@@ -35,20 +35,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
             disabled={page === 1}
             onClick={() => page > 1 && onChange(page - 1)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m15 18-6-6 6-6" />
-            </svg>
+            <ArrowIOSBackwardIcon />
           </button>
         )}
 
@@ -88,20 +75,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
             disabled={page === totalPages}
             onClick={() => page < totalPages && onChange(page + 1)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m9 18 6-6-6-6" />
-            </svg>
+            <ArrowIOSForwardIcon />
           </button>
         )}
       </div>

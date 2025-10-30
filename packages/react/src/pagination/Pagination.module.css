@@ -18,7 +18,8 @@
   cursor: pointer;
   border-radius: var(--ds-spacing-5);
   background-color: var(--cocso-pagination-bg-color);
-  transition: background-color 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  will-change: transform;
 
   --cocso-pagination-font-color: var(--ds-color-text-primary);
   --cocso-pagination-font-weight: inherit;
@@ -42,6 +43,10 @@
   width: var(--ds-spacing-8);
   height: var(--ds-spacing-8);
   flex-shrink: 0;
+}
+
+.arrow:active, .item:active {
+  transform: scale(0.98);
 }
 
 .item[data-active="true"] {

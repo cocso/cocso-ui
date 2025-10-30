@@ -1,0 +1,46 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.item {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  border: 2px solid var(--ds-color-text-primary);
+  border-radius: 100%;
+  background-color: white;
+}
+
+.item[data-state="checked"] {
+  border-color: var(--ds-color-primary-500);
+}
+
+.item[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.indicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.indicator:after {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--ds-color-primary-500);
+}
