@@ -1,5 +1,15 @@
 # @cocso-ui/react
 
+## 0.2.19
+
+### Patch Changes
+
+- 9919aaf: - 모달 컴포넌트의 Title, Description 크기를 변경합니다.
+  - 모달 컴포넌트의 Close 버튼에 `asChild` 속성을 추가합니다.
+  - 패키지 의존성 버전을 업데이트합니다.
+- Updated dependencies [9919aaf]
+  - @cocso-ui/react-icons@0.1.6
+
 ## 0.2.18
 
 ### Patch Changes
