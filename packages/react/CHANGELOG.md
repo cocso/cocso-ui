@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 0.2.20
+
+### Patch Changes
+
+- 71725f6: - Badge 컴포넌트의 패딩값을 조정합니다.
+
 ## 0.2.19
 
 ### Patch Changes
