@@ -12,3 +12,9 @@
   --cocso-badge-border-radius: inherit;
   --cocso-badge-bg-color: inherit;
 }
+
+.inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}

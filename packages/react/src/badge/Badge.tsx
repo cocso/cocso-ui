@@ -35,7 +35,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
           lineHeight="tight"
           asChild
         >
-          <span>{children}</span>
+          <span className={styles.inner}>{children}</span>
         </Typography>
       </div>
     );
@@ -45,8 +45,8 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
 const getPadding = (size: BadgeSize) =>
   match(size)
     .with('sm', () => '4px 8px')
-    .with('md', () => '6px 12px')
-    .with('lg', () => '8px 16px')
+    .with('md', () => '6px 10px')
+    .with('lg', () => '8px 12px')
     .exhaustive();
 
 const getFontSize = (size: BadgeSize) =>
