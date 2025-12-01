@@ -5,13 +5,21 @@
 @theme {
   --breakpoint-lg: 1200px;
 
-  --width-app-max: 1200px;
-  --max-width-app: 1200px;
-  --max-width-article: 960px;
-  --padding-app: 24px;
-  --margin-app: 24px;
+  --size-app-width: 1200px;
+  --size-article-width: 960px;
+  --size-header-height: 56px;
+  --size-app-padding: 24px;
 
-  --z-index-above: 1;
+  --top-header: var(--size-header-height);
+  --width-app-max: var(--size-app-width);
+  --max-width-app: var(--size-app-width);
+  --max-width-article: var(--size-article-width);
+  --height-header: var(--size-header-height);
+  --padding-app: var(--size-app-padding);
+  --margin-app: var(--size-app-padding);
+
+  --z-index-header: 50;
+  --z-index-screen-divider: 51;
 
   --color-divider: var(--color-neutral-200);
 }
@@ -49,7 +57,7 @@
     left: 50%;
     width: 1px;
     background-color: var(--color-divider);
-    z-index: var(--z-index-above);
+    z-index: var(--z-index-screen-divider);
     transform: translateX(calc(-1 * var(--width-app-max) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
   }
 
@@ -61,7 +69,7 @@
     left: 50%;
     width: 1px;
     background-color: var(--color-divider);
-    z-index: var(--z-index-above);
+    z-index: var(--z-index-screen-divider);
     transform: translateX(calc(var(--width-app-max) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
   }
 

@@ -8,8 +8,8 @@ export const Header = () => {
   const { setOpenSearch } = useSearchContext();
 
   return (
-    <header className="sticky mx-auto flex h-14 w-full max-w-app items-center justify-between border-neutral-200 border-b bg-white">
-      <div className="flex h-full w-full items-center justify-between">
+    <header className="sticky top-0 z-header mx-auto w-full max-w-app bg-white">
+      <div className="flex h-header w-full items-center justify-between border-neutral-200 border-b">
         <Link className="ml-app flex items-center gap-0.5" href="/introduction">
           <COCSOUILogo size={28} />
           <COCSOUITextLogo width={119.72} height={18} />
