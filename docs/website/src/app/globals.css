@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+@theme {
+  --breakpoint-lg: 1200px;
+
+  --width-app-max: 1200px;
+  --max-width-app: 1200px;
+  --max-width-article: 960px;
+  --padding-app: 24px;
+  --margin-app: 24px;
+
+  --z-index-above: 1;
+
+  --color-divider: var(--color-neutral-200);
+}
+
+@layer base {
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-synthesis: none;
+    font-optical-sizing: auto;
+    font-variant-ligatures: common-ligatures contextual;
+    font-family: var(--font-google-sans-flex), var(--font-pretendard), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    text-decoration-skip-ink: auto;
+    text-spacing-trim: space-first;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    background-color: var(--color-neutral-50);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--color-divider);
+    z-index: var(--z-index-above);
+    transform: translateX(calc(-1 * var(--width-app-max) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--color-divider);
+    z-index: var(--z-index-above);
+    transform: translateX(calc(var(--width-app-max) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+  }
+
+  code {
+    font-family: var(--font-geist-mono), 'Courier New"', var(--font-google-sans-flex), var(--font-pretendard), Courier, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", monospace;
+  }
+}

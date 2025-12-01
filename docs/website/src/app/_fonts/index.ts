@@ -1,8 +1,25 @@
+import { Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const Pretendard = localFont({
   src: './PretendardVariable.woff2',
   display: 'swap',
-  weight: '45 920',
+  weight: '400 700',
   preload: true,
+  variable: '--font-pretendard',
+});
+
+export const GoogleSansFlex = localFont({
+  src: './GoogleSansFlexVariable.woff2',
+  display: 'swap',
+  weight: '400 700',
+  preload: true,
+  variable: '--font-google-sans-flex',
+});
+
+export const GeistMono = Geist_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '700'],
+  variable: '--font-geist-mono',
 });
