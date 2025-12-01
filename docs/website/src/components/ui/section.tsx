@@ -27,7 +27,46 @@ const SectionText = ({ className, ...props }: SectionTextProps) => {
   return <p className={twMerge('text-neutral-700 leading-relaxed', className)} {...props} />;
 };
 
+interface SectionUnorderedListProps extends ComponentProps<'ul'> {}
+
+const SectionUnorderedList = ({ className, ...props }: SectionUnorderedListProps) => {
+  return (
+    <ul
+      className={twMerge(
+        'flex list-outside list-disc flex-col gap-2 pl-5 marker:text-neutral-400',
+        className,
+      )}
+      {...props}
+    />
+  );
+};
+
+interface SectionOrderedListProps extends ComponentProps<'ol'> {}
+
+const SectionOrderedList = ({ className, ...props }: SectionOrderedListProps) => {
+  return (
+    <ol
+      className={twMerge(
+        'flex list-outside list-decimal flex-col gap-2 pl-5 marker:font-sans marker:text-neutral-400',
+        className,
+      )}
+      {...props}
+    />
+  );
+};
+
+interface SectionListItemProps extends ComponentProps<'li'> {}
+
+const SectionListItem = ({ className, ...props }: SectionListItemProps) => {
+  return (
+    <li className={twMerge('pl-1 font-normal text-md leading-relaxed', className)} {...props} />
+  );
+};
+
 export const Section = Object.assign(SectionRoot, {
   Title: SectionTitle,
   Text: SectionText,
+  UnorderedList: SectionUnorderedList,
+  OrderedList: SectionOrderedList,
+  ListItem: SectionListItem,
 });
