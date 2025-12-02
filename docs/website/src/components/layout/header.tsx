@@ -9,7 +9,7 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-header mx-auto w-full max-w-app bg-white">
-      <div className="-mt-px flex h-header w-full items-center justify-between border-neutral-200 border-t border-b md:mt-0 md:border-t-0">
+      <div className="flex h-header w-full items-center justify-between border-y border-y-neutral-200 md:border-t-0 md:border-t-transparent">
         <Link className="ml-app flex items-center gap-0.5" href="/introduction">
           <COCSOUILogo size={28} />
           <COCSOUITextLogo width={119.72} height={18} />
