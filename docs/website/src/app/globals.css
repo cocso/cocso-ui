@@ -18,8 +18,8 @@
   --padding-app: var(--size-app-padding);
   --margin-app: var(--size-app-padding);
 
-  --z-index-header: 50;
-  --z-index-screen-divider: 51;
+  --z-index-header: 10;
+  --z-index-screen-divider: 11;
 
   --color-divider: var(--color-neutral-200);
 }

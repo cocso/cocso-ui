@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFFFFF',
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#FFFFFF',
 };
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
