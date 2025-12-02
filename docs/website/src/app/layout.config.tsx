@@ -5,6 +5,6 @@ export const baseOptions: BaseLayoutProps = {
     enabled: false,
   },
   themeSwitch: {
-    enabled: true,
+    enabled: false,
   },
 };
