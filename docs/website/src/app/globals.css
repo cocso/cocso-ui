@@ -107,3 +107,7 @@
     mask-size: cover;
   }
 }
+
+@utility corner-squircle {
+  corner-shape: superellipse(1.333);
+}

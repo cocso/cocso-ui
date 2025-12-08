@@ -24,7 +24,7 @@ const SectionTitle = ({ className, ...props }: SectionTitleProps) => {
 interface SectionTextProps extends ComponentProps<'p'> {}
 
 const SectionText = ({ className, ...props }: SectionTextProps) => {
-  return <p className={twMerge('text-neutral-700 leading-relaxed', className)} {...props} />;
+  return <p className={twMerge('text-neutral-800 leading-relaxed', className)} {...props} />;
 };
 
 interface SectionUnorderedListProps extends ComponentProps<'ul'> {}
@@ -59,7 +59,10 @@ interface SectionListItemProps extends ComponentProps<'li'> {}
 
 const SectionListItem = ({ className, ...props }: SectionListItemProps) => {
   return (
-    <li className={twMerge('pl-1 font-normal text-md leading-relaxed', className)} {...props} />
+    <li
+      className={twMerge('pl-1 font-normal text-md text-neutral-800 leading-relaxed', className)}
+      {...props}
+    />
   );
 };
 

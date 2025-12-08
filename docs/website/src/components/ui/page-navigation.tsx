@@ -26,7 +26,7 @@ export const PageNavigation = () => {
         <Link
           href={prevPage.url}
           className={twMerge(
-            'flex flex-1 flex-col gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors',
+            'corner-squircle flex flex-1 flex-col gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors',
             'hover:bg-neutral-50 active:bg-neutral-100',
           )}
         >
@@ -41,7 +41,7 @@ export const PageNavigation = () => {
         <Link
           href={nextPage.url}
           className={twMerge(
-            'flex flex-1 flex-col items-end gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors',
+            'corner-squircle flex flex-1 flex-col items-end gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors',
             'hover:bg-neutral-50 active:bg-neutral-100',
           )}
         >
