@@ -8,7 +8,7 @@ import type { PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Layout } from '~/components/layout';
 import { SearchDialog } from '~/components/ui';
-import { GeistMono, GoogleSansFlex, Pretendard } from './_fonts';
+import { GeistMono, Pretendard } from './_fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cocso-ui.com'),
@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 const RootLayout = async ({ children }: PropsWithChildren) => {
   return (
     <html lang="ko" dir="ltr" suppressHydrationWarning>
-      <body className={twMerge(Pretendard.variable, GeistMono.variable, GoogleSansFlex.variable)}>
+      <body className={twMerge(Pretendard.variable, GeistMono.variable)}>
         <RootProvider search={{ SearchDialog }} theme={{ enabled: false }}>
           <Layout>{children}</Layout>
         </RootProvider>

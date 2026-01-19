@@ -9,14 +9,6 @@ export const Pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-export const GoogleSansFlex = localFont({
-  src: './GoogleSansFlexVariable.woff2',
-  display: 'swap',
-  weight: '400 700',
-  preload: true,
-  variable: '--font-google-sans-flex',
-});
-
 export const GeistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
