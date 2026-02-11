@@ -45,5 +45,8 @@ yarn-error.log*
 *storybook.log
 storybook-static
 
+# OMC
+.omc
+
 # Changeset
 !.changeset/README.md

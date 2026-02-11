@@ -1,15 +1,15 @@
 'use client';
 
 import { colors, Typography } from '@cocso-ui/react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Link } from 'next-view-transitions';
 import type { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { sidebar } from '~/constants/sidebar';
 
-type Props = ComponentProps<'nav'>;
+interface SidebarProps extends ComponentProps<'nav'> {}
 
-export const Sidebar = (props: Props) => {
+export const Sidebar = (props: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -33,7 +33,7 @@ export const Sidebar = (props: Props) => {
                     <li key={item.url} className="w-full">
                       <Typography
                         className={twMerge(
-                          'center-y h-10 rounded-lg px-4 opacity-50 transition-all duration-150',
+                          'corner-squircle flex h-9 items-center rounded-xl px-4 opacity-50 transition-all duration-150',
                           pathname !== item.url && 'hover:opacity-70',
                           pathname === item.url && 'bg-neutral-100 opacity-100',
                         )}

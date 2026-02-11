@@ -1,6 +1,6 @@
-import type { Ast, Collections, Token, TokenDecl } from '../types';
 import { buildValidatedAst } from '../transforms';
-import { toCssValue, resolveTokenValue } from './utils';
+import type { Ast, Collections, Token, TokenDecl } from '../types';
+import { resolveTokenValue, toCssValue } from './utils';
 
 export interface CssVarsOptions {
   prefix?: string;
@@ -23,7 +23,7 @@ function createDeclaration(
   allTokens: TokenDecl[],
   prefix?: string,
 ): string {
-  const value = token.values.find((v) => v.mode === mode);
+  const value = token.values.find(v => v.mode === mode);
   if (!value) {
     throw new Error(`No value found for token '${token.token.name}' in mode '${mode}'`);
   }
@@ -41,7 +41,7 @@ function createRule(
   prefix?: string,
 ): string {
   const declarations = tokens
-    .map((token) => `  ${createDeclaration(token, mode, allTokens, prefix)}`)
+    .map(token => `  ${createDeclaration(token, mode, allTokens, prefix)}`)
     .join('\n');
   return `${selector} {\n${declarations}\n}`;
 }
@@ -51,10 +51,10 @@ export function generateFromAst(ast: Ast, options: CssVarsOptions): string {
   const { tokens, collections } = ast;
 
   const css = collections
-    .flatMap((collection) => {
-      const collectionTokens = tokens.filter((token) => token.token.collection === collection.name);
+    .flatMap(collection => {
+      const collectionTokens = tokens.filter(token => token.token.collection === collection.name);
 
-      return collection.modes.map((mode) => {
+      return collection.modes.map(mode => {
         const selector = selectors[collection.name]?.[mode] || ':root';
 
         return createRule(selector, collectionTokens, mode, tokens, prefix);

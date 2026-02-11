@@ -5,7 +5,10 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { ReactNode } from 'react';
 import { ComponentPreview } from './component-preview';
 
-type Props = { name: string; children?: ReactNode };
+interface Props {
+  name: string;
+  children?: ReactNode;
+}
 
 export const ComponentExample = ({ name, children }: Props) => {
   const preview = (

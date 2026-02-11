@@ -8,8 +8,7 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "types": ["node", "bun"]
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

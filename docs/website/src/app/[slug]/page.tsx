@@ -6,7 +6,9 @@ import { source } from '~/libs/source';
 import { getMDXComponents } from '~/mdx-components';
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
 const Page = async ({ params }: Props) => {
@@ -22,10 +24,10 @@ const Page = async ({ params }: Props) => {
   return (
     <>
       <Section>
-        <Typography type="heading" size="lg">
+        <Typography type="heading" size="lg" weight="semibold">
           {page.data.title}
         </Typography>
-        <Typography className="mt-1" color={colors.neutral500} weight="medium">
+        <Typography className="mt-1" color={colors.textSecondary} weight="medium">
           {page.data.description}
         </Typography>
       </Section>

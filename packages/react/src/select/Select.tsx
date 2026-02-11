@@ -14,14 +14,32 @@ export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 's
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, style: _style, size = 'md', disabled = false, stretch = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      style: _style,
+      size = 'md',
+      disabled = false,
+      stretch = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const style = {
       ..._style,
       ...getStyles(size),
     } as CSSProperties;
 
     return (
-      <div className={cx(styles.wrapper, stretch && styles.stretch, disabled && styles.disabled, className)}>
+      <div
+        className={cx(
+          styles.wrapper,
+          stretch && styles.stretch,
+          disabled && styles.disabled,
+          className,
+        )}
+      >
         <select ref={ref} className={styles.select} style={style} disabled={disabled} {...props}>
           {children}
         </select>

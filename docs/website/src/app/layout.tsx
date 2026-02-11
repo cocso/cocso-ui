@@ -1,14 +1,14 @@
-import '~/styles/globals.css';
+import '~/app/globals.css';
 import '@cocso-ui/css/token.css';
 import '@cocso-ui/react/styles.css';
 
-import { RootProvider } from 'fumadocs-ui/provider';
-import type { Metadata } from 'next';
-import { ViewTransitions } from 'next-view-transitions';
+import { RootProvider } from 'fumadocs-ui/provider/next';
+import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { Layout } from '~/components/layout';
 import { SearchDialog } from '~/components/ui';
-import { Pretendard } from './_fonts';
+import { GeistMono, Pretendard } from './_fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cocso-ui.com'),
@@ -16,17 +16,21 @@ export const metadata: Metadata = {
   description: 'Documentation for the COCSO UI component library.',
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#FFFFFF',
+};
+
 const RootLayout = async ({ children }: PropsWithChildren) => {
   return (
-    <ViewTransitions>
-      <html lang="ko" dir="ltr" suppressHydrationWarning>
-        <body className={Pretendard.className}>
-          <RootProvider search={{ SearchDialog }}>
-            <Layout>{children}</Layout>
-          </RootProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="ko" dir="ltr" suppressHydrationWarning>
+      <body className={twMerge(Pretendard.variable, GeistMono.variable)}>
+        <RootProvider search={{ SearchDialog }} theme={{ enabled: false }}>
+          <Layout>{children}</Layout>
+        </RootProvider>
+      </body>
+    </html>
   );
 };
 

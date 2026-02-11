@@ -1,17 +1,4 @@
-import type {
-  ParseResult,
-  Value,
-  HexColor,
-  RgbColor,
-  RgbaColor,
-  SizeValue,
-  DurationValue,
-  NumberValue,
-  StringValue,
-  TokenRef,
-  ShadowLayer,
-  Shadow,
-} from '../types';
+import type { ParseResult, RgbaColor, ShadowLayer, SizeValue, TokenRef, Value } from '../types';
 
 export function parseValue(value: string | number): ParseResult {
   const str = String(value).trim();
@@ -71,7 +58,7 @@ export function valueToString(value: Value): string {
       return `${x} ${y} ${blur} ${spread} ${color}`;
     }
     case 'Shadow':
-      return value.layers.map((layer) => valueToString(layer)).join(', ');
+      return value.layers.map(layer => valueToString(layer)).join(', ');
     default:
       return String(value);
   }
@@ -163,7 +150,7 @@ function parseSize(value: string): ParseResult {
   const [, numValue, unit] = match;
   const num = Number.parseFloat(numValue);
 
-  if (isNaN(num)) {
+  if (Number.isNaN(num)) {
     return { isValid: false, error: `Invalid size value: ${value}` };
   }
 
@@ -184,7 +171,7 @@ function parseDuration(value: string): ParseResult {
   const [, numValue, unit] = match;
   const num = Number.parseFloat(numValue);
 
-  if (isNaN(num)) {
+  if (Number.isNaN(num)) {
     return { isValid: false, error: `Invalid duration value: ${value}` };
   }
 
@@ -225,7 +212,7 @@ function parseShadow(value: string): ParseResult {
   }
 
   try {
-    const layerStrings = value.split(',').map((s) => s.trim());
+    const layerStrings = value.split(',').map(s => s.trim());
     const layers: ShadowLayer[] = [];
 
     for (const layerStr of layerStrings) {
@@ -237,7 +224,7 @@ function parseShadow(value: string): ParseResult {
     }
 
     return { isValid: true, value: { kind: 'Shadow', layers } };
-  } catch (error) {
+  } catch (_error) {
     return { isValid: false, error: `Invalid shadow format: ${value}` };
   }
 }
@@ -277,7 +264,7 @@ function parseShadowLayer(value: string): ParseResult {
         spread: spread.value as SizeValue | TokenRef,
       },
     };
-  } catch (error) {
+  } catch (_error) {
     return { isValid: false, error: `Invalid shadow layer: ${value}` };
   }
 }
