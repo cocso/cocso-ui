@@ -67,7 +67,6 @@ const formatValue = (value: Date | undefined) => {
   return `${value.getFullYear()}년 ${MONTHS[value.getMonth()]}`;
 };
 
-// 기본 사용법
 export const Default: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -89,7 +88,6 @@ export const Default: Story = {
   },
 };
 
-// 다양한 버튼 스타일
 export const ButtonVariants: Story = {
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
@@ -123,7 +121,6 @@ export const ButtonVariants: Story = {
   },
 };
 
-// Select와 함께 사용
 export const WithSelect: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -144,7 +141,6 @@ export const WithSelect: Story = {
   },
 };
 
-// 비활성화 상태
 export const Disabled: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 5, 1));
@@ -164,7 +160,6 @@ export const Disabled: Story = {
   },
 };
 
-// 년도 범위 제한
 export const YearRange: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -190,7 +185,6 @@ export const YearRange: Story = {
   },
 };
 
-// 폼에서 사용하는 예시
 export const FormExample: Story = {
   render: () => {
     const [formData, setFormData] = useState({

@@ -49,7 +49,6 @@ const formatValue = (value: Date | undefined) => {
   });
 };
 
-// 기본 사용법
 export const Default: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -71,7 +70,6 @@ export const Default: Story = {
   },
 };
 
-// 다양한 버튼 스타일
 export const ButtonVariants: Story = {
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
@@ -105,7 +103,6 @@ export const ButtonVariants: Story = {
   },
 };
 
-// Select와 함께 사용
 export const WithSelect: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -126,7 +123,6 @@ export const WithSelect: Story = {
   },
 };
 
-// 비활성화 상태
 export const Disabled: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 5, 15));
@@ -146,8 +142,6 @@ export const Disabled: Story = {
   },
 };
 
-
-// 폼에서 사용하는 예시
 export const FormExample: Story = {
   render: () => {
     const [formData, setFormData] = useState({
@@ -201,7 +195,6 @@ export const FormExample: Story = {
   },
 };
 
-// 미리 선택된 값
 export const WithPreselectedValue: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 11, 25));
@@ -221,7 +214,6 @@ export const WithPreselectedValue: Story = {
   },
 };
 
-// 오늘 날짜 하이라이트
 export const WithTodayHighlight: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -247,7 +239,6 @@ export const WithTodayHighlight: Story = {
   },
 };
 
-// 한국어 로케일 및 커스텀 헤더
 export const KoreanLocale: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -273,7 +264,6 @@ export const KoreanLocale: Story = {
   },
 };
 
-// MonthPicker 스타일 테마
 export const MonthPickerStyle: Story = {
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
@@ -299,7 +289,6 @@ export const MonthPickerStyle: Story = {
   },
 };
 
-// 다양한 날짜 포맷
 export const DateFormats: Story = {
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
