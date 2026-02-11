@@ -20,6 +20,7 @@ export const Header = () => {
           <button
             className="h-full cursor-pointer px-4 transition-colors duration-150 hover:bg-neutral-50 active:bg-neutral-100"
             type="button"
+            aria-label="검색"
             onClick={() => setOpenSearch(true)}
           >
             <SearchIcon size={24} />

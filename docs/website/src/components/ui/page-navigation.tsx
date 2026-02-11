@@ -17,8 +17,8 @@ export const PageNavigation = () => {
   const pages = Object.values(sidebar).flatMap((section): readonly Page[] => section.items);
   const currentIndex = pages.findIndex(page => page.url === pathname);
 
-  const prevPage = pages[currentIndex - 1];
-  const nextPage = pages[currentIndex + 1];
+  const prevPage = currentIndex > 0 ? pages[currentIndex - 1] : undefined;
+  const nextPage = currentIndex >= 0 && currentIndex < pages.length - 1 ? pages[currentIndex + 1] : undefined;
 
   return (
     <div className="mt-4 flex justify-between gap-4">
