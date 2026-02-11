@@ -77,6 +77,15 @@
     font-family: var(--font-geist-mono), 'Courier New', var(--font-pretendard), Courier, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", monospace;
   }
 
+  code:not(pre code) {
+    padding: 2px 5px;
+    border: solid 1px var(--color-fd-border);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    background: var(--color-fd-muted);
+  }
+
   *::marker {
     font-family: var(--font-pretendard), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
   }
