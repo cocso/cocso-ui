@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006 --disable-telemetry",
     "build": "storybook build",
+    "check-types": "tsc --noEmit",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix",
     "preview": "vite preview"

@@ -9,6 +9,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c rollup.config.cjs",
+    "check-types": "tsc --noEmit",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
