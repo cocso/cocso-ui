@@ -1,14 +1,14 @@
+import { buildAst, parseValue } from '../parsers';
 import type {
-  Token,
   Collection,
-  TokenDecl,
   Collections,
-  Value,
+  ParseResult,
+  Token,
+  TokenDecl,
   ValidationError,
   ValidationResult,
-  ParseResult,
+  Value,
 } from '../types';
-import { parseValue, buildAst } from '../parsers';
 
 function validateValue(value: string | number): ParseResult {
   return parseValue(value);
@@ -29,8 +29,8 @@ function validateAllValues(tokens: TokenDecl[]): Array<{
     result: ParseResult;
   }> = [];
 
-  tokens.forEach((token) => {
-    token.values.forEach((value) => {
+  tokens.forEach(token => {
+    token.values.forEach(value => {
       const result = validateValue(value.value);
       results.push({
         tokenName: token.token.name,
@@ -83,7 +83,7 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
 
   Object.entries(token.data.tokens).forEach(([tokenName, tokenData]) => {
     const tokenModes = Object.keys(tokenData.values);
-    const missingModes = collectionDef.modes.filter((mode) => !tokenModes.includes(mode));
+    const missingModes = collectionDef.modes.filter(mode => !tokenModes.includes(mode));
 
     if (missingModes.length > 0) {
       errors.push({
@@ -136,7 +136,7 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
 
       tokenRefs.forEach(({ collection: refCollection, token: refToken }) => {
         const refName = `$${refCollection}.${refToken}`;
-        const foundRef = allTokens.find((t) => t.token.name === refName);
+        const foundRef = allTokens.find(t => t.token.name === refName);
 
         if (!foundRef) {
           errors.push({
@@ -162,7 +162,7 @@ export function validateAllTokens(
   const errors: ValidationError[] = [];
   const warnings: string[] = [];
 
-  tokens.forEach((collection) => {
+  tokens.forEach(collection => {
     const result = validateCollection(collection, definitions);
     errors.push(...result.errors);
     warnings.push(...result.warnings);

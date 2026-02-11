@@ -1,11 +1,9 @@
-import type { Token, Collections, Ast, ValidationError } from '../types';
-import { validateAllTokens } from './validate';
 import { buildAst } from '../parsers';
+import type { Ast, Collections, Token, ValidationError } from '../types';
+import { validateAllTokens } from './validate';
 
 export function buildValidatedAst(tokens: Token[], collections: Collections): Ast {
-  const collectionMap = new Map(
-    collections.data.map((collection) => [collection.name, collection]),
-  );
+  const collectionMap = new Map(collections.data.map(collection => [collection.name, collection]));
 
   const validation = validateAllTokens(tokens, collectionMap);
 

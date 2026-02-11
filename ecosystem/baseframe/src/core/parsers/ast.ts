@@ -1,4 +1,4 @@
-import type { Token, Collections, Ast, TokenDecl, CollectionDecl } from '../types';
+import type { Ast, CollectionDecl, Collections, Token, TokenDecl } from '../types';
 
 export function buildAst(tokens: Token[], collections: Collections): Ast {
   return {
@@ -8,7 +8,7 @@ export function buildAst(tokens: Token[], collections: Collections): Ast {
 }
 
 function buildCollections(collections: Collections): CollectionDecl[] {
-  return collections.data.map((collection) => ({
+  return collections.data.map(collection => ({
     name: collection.name,
     modes: collection.modes,
   }));
