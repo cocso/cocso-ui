@@ -27,7 +27,7 @@ function generateIndexFiles() {
       .readdirSync(subdirPath)
       .filter((file) => file.endsWith('.tsx'))
       .map((file) => file.replace('.tsx', ''))
-      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+      .sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
 
     if (files.length === 0) {
       console.log(`No .tsx files found in ${subdirPath}`);
@@ -42,7 +42,7 @@ function generateIndexFiles() {
 
   const srcIndexPath = './src/index.ts';
   const srcIndexExports = subdirs
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+    .sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }))
     .map((subdir) => `export * from './components/${subdir}';`)
     .join('\n');
   fs.writeFileSync(srcIndexPath, `${srcIndexExports}\n`);
