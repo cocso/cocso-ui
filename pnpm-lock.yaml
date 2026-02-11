@@ -4,6 +4,50 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  build:
+    '@babel/preset-react':
+      specifier: ^7.28.5
+      version: 7.28.5
+    '@babel/preset-typescript':
+      specifier: ^7.28.5
+      version: 7.28.5
+    '@rollup/plugin-babel':
+      specifier: ^6.1.0
+      version: 6.1.0
+    '@rollup/plugin-commonjs':
+      specifier: ^28.0.9
+      version: 28.0.9
+    '@rollup/plugin-node-resolve':
+      specifier: ^16.0.3
+      version: 16.0.3
+    rollup:
+      specifier: ^4.53.3
+      version: 4.53.3
+    rollup-plugin-dts:
+      specifier: ^6.3.0
+      version: 6.3.0
+    rollup-plugin-postcss:
+      specifier: ^4.0.2
+      version: 4.0.2
+  core:
+    react:
+      specifier: ^19.2.1
+      version: 19.2.1
+    react-dom:
+      specifier: ^19.2.1
+      version: 19.2.1
+    typescript:
+      specifier: ^5.9.3
+      version: 5.9.3
+  types:
+    '@types/react':
+      specifier: ^19.2.7
+      version: 19.2.7
+    '@types/react-dom':
+      specifier: ^19.2.3
+      version: 19.2.3
+
 importers:
 
   .:
@@ -18,7 +62,7 @@ importers:
         specifier: ^2.6.3
         version: 2.6.3
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
 
   docs/storybook:
@@ -33,20 +77,20 @@ importers:
         specifier: workspace:^
         version: link:../../packages/react-icons
       react:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1
       react-dom:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1(react@19.2.1)
     devDependencies:
       '@storybook/react-vite':
         specifier: ^10.1.4
         version: 10.1.4(esbuild@0.27.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.53.3)(storybook@10.1.4(@testing-library/dom@10.4.1)(prettier@3.7.3)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
       '@types/react':
-        specifier: ^19.2.7
+        specifier: catalog:types
         version: 19.2.7
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: catalog:types
         version: 19.2.3(@types/react@19.2.7)
       '@vitejs/plugin-react':
         specifier: ^5.1.2
@@ -58,7 +102,7 @@ importers:
         specifier: ^10.1.4
         version: 10.1.4(@testing-library/dom@10.4.1)(prettier@3.7.3)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
       vite:
         specifier: ^7.2.7
@@ -94,10 +138,10 @@ importers:
         specifier: ^1.302.2
         version: 1.302.2
       react:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1
       react-dom:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1(react@19.2.1)
       shiki:
         specifier: ^3.19.0
@@ -116,16 +160,16 @@ importers:
         specifier: ^24.10.1
         version: 24.10.1
       '@types/react':
-        specifier: ^19.2.7
+        specifier: catalog:types
         version: 19.2.7
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: catalog:types
         version: 19.2.3(@types/react@19.2.7)
       tailwindcss:
         specifier: ^4.1.17
         version: 4.1.17
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
 
   ecosystem/baseframe:
@@ -150,7 +194,7 @@ importers:
         specifier: ^0.25.12
         version: 0.25.12
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
 
   packages/baseframe: {}
@@ -212,46 +256,46 @@ importers:
         version: 5.9.0
     devDependencies:
       '@babel/preset-react':
-        specifier: ^7.28.5
+        specifier: catalog:build
         version: 7.28.5(@babel/core@7.28.5)
       '@babel/preset-typescript':
-        specifier: ^7.28.5
+        specifier: catalog:build
         version: 7.28.5(@babel/core@7.28.5)
       '@rollup/plugin-babel':
-        specifier: ^6.1.0
+        specifier: catalog:build
         version: 6.1.0(@babel/core@7.28.5)(@types/babel__core@7.20.5)(rollup@4.53.3)
       '@rollup/plugin-commonjs':
-        specifier: ^28.0.9
+        specifier: catalog:build
         version: 28.0.9(rollup@4.53.3)
       '@rollup/plugin-node-resolve':
-        specifier: ^16.0.3
+        specifier: catalog:build
         version: 16.0.3(rollup@4.53.3)
       '@storybook/react':
         specifier: ^10.1.4
         version: 10.1.4(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(storybook@10.1.4(@testing-library/dom@10.4.1)(prettier@3.7.3)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)
       '@types/react':
-        specifier: ^19.2.7
+        specifier: catalog:types
         version: 19.2.7
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: catalog:types
         version: 19.2.3(@types/react@19.2.7)
       react:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1
       rollup:
-        specifier: ^4.53.3
+        specifier: catalog:build
         version: 4.53.3
       rollup-plugin-dts:
-        specifier: ^6.3.0
+        specifier: catalog:build
         version: 6.3.0(rollup@4.53.3)(typescript@5.9.3)
       rollup-plugin-postcss:
-        specifier: ^4.0.2
+        specifier: catalog:build
         version: 4.0.2(postcss@8.5.6)
       rollup-plugin-preserve-directives:
         specifier: ^0.4.0
         version: 0.4.0(rollup@4.53.3)
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
 
   packages/react-icons:
@@ -261,40 +305,40 @@ importers:
         version: 19.2.1(react@19.2.1)
     devDependencies:
       '@babel/preset-react':
-        specifier: ^7.28.5
+        specifier: catalog:build
         version: 7.28.5(@babel/core@7.28.5)
       '@babel/preset-typescript':
-        specifier: ^7.28.5
+        specifier: catalog:build
         version: 7.28.5(@babel/core@7.28.5)
       '@rollup/plugin-babel':
-        specifier: ^6.1.0
+        specifier: catalog:build
         version: 6.1.0(@babel/core@7.28.5)(@types/babel__core@7.20.5)(rollup@4.53.3)
       '@rollup/plugin-commonjs':
-        specifier: ^28.0.9
+        specifier: catalog:build
         version: 28.0.9(rollup@4.53.3)
       '@rollup/plugin-node-resolve':
-        specifier: ^16.0.3
+        specifier: catalog:build
         version: 16.0.3(rollup@4.53.3)
       '@types/react':
-        specifier: ^19.2.7
+        specifier: catalog:types
         version: 19.2.7
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: catalog:types
         version: 19.2.3(@types/react@19.2.7)
       react:
-        specifier: ^19.2.1
+        specifier: catalog:core
         version: 19.2.1
       rollup:
-        specifier: ^4.53.3
+        specifier: catalog:build
         version: 4.53.3
       rollup-plugin-dts:
-        specifier: ^6.3.0
+        specifier: catalog:build
         version: 6.3.0(rollup@4.53.3)(typescript@5.9.3)
       rollup-plugin-postcss:
-        specifier: ^4.0.2
+        specifier: catalog:build
         version: 4.0.2(postcss@8.5.6)
       typescript:
-        specifier: ^5.9.3
+        specifier: catalog:core
         version: 5.9.3
 
 packages:

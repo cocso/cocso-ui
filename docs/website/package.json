@@ -22,8 +22,8 @@
     "fumadocs-ui": "^16.2.3",
     "next": "^16.0.7",
     "posthog-js": "^1.302.2",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "catalog:core",
+    "react-dom": "catalog:core",
     "shiki": "^3.19.0",
     "tailwind-merge": "^3.4.0"
   },
@@ -31,9 +31,9 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
     "tailwindcss": "^4.1.17",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:core"
   }
 }

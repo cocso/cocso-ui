@@ -15,17 +15,17 @@
     "@cocso-ui/css": "workspace:^",
     "@cocso-ui/react": "workspace:^",
     "@cocso-ui/react-icons": "workspace:^",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react": "catalog:core",
+    "react-dom": "catalog:core"
   },
   "devDependencies": {
     "@storybook/react-vite": "^10.1.4",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "^5.1.2",
     "globals": "^16.5.0",
     "storybook": "^10.1.4",
-    "typescript": "^5.9.3",
+    "typescript": "catalog:core",
     "vite": "^7.2.7"
   }
 }
