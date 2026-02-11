@@ -21,10 +21,10 @@ const SectionTitle = ({ className, ...props }: SectionTitleProps) => {
   return <h2 className={twMerge('mb-2 font-semibold text-xl', className)} {...props} />;
 };
 
-interface SectionTextProps extends ComponentProps<'p'> {}
+interface SectionTextProps extends ComponentProps<'div'> {}
 
 const SectionText = ({ className, ...props }: SectionTextProps) => {
-  return <p className={twMerge('text-neutral-800 leading-relaxed', className)} {...props} />;
+  return <div className={twMerge('text-neutral-800 leading-relaxed', className)} {...props} />;
 };
 
 interface SectionUnorderedListProps extends ComponentProps<'ul'> {}

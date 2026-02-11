@@ -3,6 +3,34 @@ title: Icons
 description: 의미 전달과 시각적 일관성을 위한 아이콘 가이드
 ---
 
-## Icons
+<Section>
+  <Section.Text>
+    아이콘은 텍스트 없이도 기능과 상태를 직관적으로 전달합니다. COCSO-UI는 Google Material Symbols 기반의 시맨틱 아이콘 세트를 제공합니다.
+  </Section.Text>
+</Section>
 
-I love Anime.
+<Section>
+  <Section.Title>Semantic Icons</Section.Title>
+  <Section.Text>
+    현재 57개의 시맨틱 아이콘이 제공됩니다. 각 아이콘은 `size` 속성으로 크기를 조절할 수 있으며, SVG 기반이므로 어떤 해상도에서도 선명하게 렌더링됩니다.
+  </Section.Text>
+  <ComponentExample name="icon-grid" />
+</Section>
+
+<Section>
+  <Section.Title>사용 방법</Section.Title>
+  <Section.Text>
+    `@cocso-ui/react-icons` 패키지에서 필요한 아이콘을 import하여 사용합니다.
+  </Section.Text>
+
+```tsx
+import { SearchIcon, AddIcon } from '@cocso-ui/react-icons';
+
+<SearchIcon size={20} />
+<AddIcon size={24} />
+```
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
