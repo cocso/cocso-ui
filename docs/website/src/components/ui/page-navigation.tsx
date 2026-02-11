@@ -14,7 +14,7 @@ interface Page {
 
 export const PageNavigation = () => {
   const pathname = usePathname();
-  const pages = Object.values(sidebar).flatMap(section => section.items).filter((item): item is Page => item.type === 'page');
+  const pages = Object.values(sidebar).flatMap((section): readonly Page[] => section.items);
   const currentIndex = pages.findIndex(page => page.url === pathname);
 
   const prevPage = pages[currentIndex - 1];
