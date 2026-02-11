@@ -7,7 +7,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "biome format . --write",
     "check": "biome check .",
     "check-types": "turbo run check-types",
     "typecheck": "turbo run check-types",
@@ -19,7 +19,7 @@
     "@biomejs/biome": "^2.3.8",
     "@changesets/cli": "^2.29.8",
     "turbo": "^2.6.3",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:core"
   },
   "engines": {
     "node": ">=22"
