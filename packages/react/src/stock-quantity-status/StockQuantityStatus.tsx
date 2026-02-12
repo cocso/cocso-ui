@@ -110,7 +110,7 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
   },
 );
 
-export const getColor = (quantity: QuantityStatus) =>
+const getColor = (quantity: QuantityStatus) =>
   match(quantity)
     .with('여유', () => colors.primary500)
     .with('보통', () => colors.success400)
