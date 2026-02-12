@@ -74,7 +74,7 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: var(--ds-radius-lg);
 }
 
 :global(.react-datepicker__month-text:hover) {

@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
-import { colors } from '../token';
+import { colors, spacing } from '../token';
 import styles from './Spinner.module.css';
 
 export type SpinnerSize = 'xl' | 'lg' | 'md' | 'sm';
@@ -33,10 +33,10 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
 
 const getSize = (size: SpinnerSize) =>
   match(size)
-    .with('xl', () => '40px')
-    .with('lg', () => '32px')
-    .with('md', () => '24px')
-    .with('sm', () => '16px')
+    .with('xl', () => spacing.s14)
+    .with('lg', () => spacing.s12)
+    .with('md', () => spacing.s10)
+    .with('sm', () => spacing.s8)
     .exhaustive();
 
 const getBorderWidth = (size: SpinnerSize) =>

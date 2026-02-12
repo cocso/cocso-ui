@@ -27,7 +27,7 @@
   max-width: 380px;
   max-height: 85vh;
   padding: var(--ds-spacing-9);
-  border-radius: 12px;
+  border-radius: var(--ds-radius-xl);
   background-color: var(--ds-color-white);
   animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--ds-z-index-modal);

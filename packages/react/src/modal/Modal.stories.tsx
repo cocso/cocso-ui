@@ -74,7 +74,7 @@ export const AllVariants: Story = {
 
         <Modal open={confirmOpen} onOpenChange={setConfirmOpen}>
           <Modal.Trigger asChild>
-            <Button variant="error">확인 모달</Button>
+            <Button variant="danger">확인 모달</Button>
           </Modal.Trigger>
           <Modal.Content>
             <Modal.Title>항목 삭제</Modal.Title>
@@ -86,7 +86,7 @@ export const AllVariants: Story = {
                 <Button variant="secondary">취소</Button>
               </Modal.Close>
               <Modal.Close asChild>
-                <Button variant="error">삭제</Button>
+                <Button variant="danger">삭제</Button>
               </Modal.Close>
             </div>
           </Modal.Content>

@@ -86,7 +86,7 @@
   text-align: center;
   cursor: pointer;
   line-height: 1.7rem;
-  border-radius: 8px;
+  border-radius: var(--ds-radius-lg);
 }
 
 :global(.react-datepicker__day:hover) {
@@ -111,6 +111,6 @@
 }
 
 :global(.react-datepicker__day--disabled) {
-  opacity: 0.3;
+  opacity: 0.4;
   cursor: not-allowed;
 }
