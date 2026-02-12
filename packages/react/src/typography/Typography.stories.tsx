@@ -68,73 +68,127 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const containerStyle = { display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '600px' } as const;
+const sectionStyle = { marginBottom: 12, fontSize: 14, fontWeight: 600, color: '#666' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Typography 사용법입니다.' } },
+  },
+  render: () => (
+    <Typography type="body" size="md">
+      기본 텍스트입니다.
+    </Typography>
+  ),
+};
+
+export const Display: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: 'Display 타입의 모든 사이즈를 비교합니다. 대형 제목이나 히어로 영역에 사용됩니다.' } },
   },
-  args: {},
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '600px' }}>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Display</h4>
-        <Typography type="display" size="lg">
-          Display Large
-        </Typography>
-        <Typography type="display" size="md">
-          Display Medium
-        </Typography>
-        <Typography type="display" size="sm">
-          Display Small
-        </Typography>
-      </div>
+    <div style={containerStyle}>
+      <h4 style={sectionStyle}>Display</h4>
+      <Typography type="display" size="lg">
+        Display Large
+      </Typography>
+      <Typography type="display" size="md">
+        Display Medium
+      </Typography>
+      <Typography type="display" size="sm">
+        Display Small
+      </Typography>
+    </div>
+  ),
+};
 
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Heading</h4>
-        <Typography type="heading" size="xl">
-          Heading XL
-        </Typography>
-        <Typography type="heading" size="lg">
-          Heading Large
-        </Typography>
-        <Typography type="heading" size="md">
-          Heading Medium
-        </Typography>
-        <Typography type="heading" size="sm">
-          Heading Small
-        </Typography>
-        <Typography type="heading" size="xs">
-          Heading XS
-        </Typography>
-      </div>
+export const Heading: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'Heading 타입의 모든 사이즈를 비교합니다. 섹션 제목에 사용됩니다.' } },
+  },
+  render: () => (
+    <div style={containerStyle}>
+      <h4 style={sectionStyle}>Heading</h4>
+      <Typography type="heading" size="xl">
+        Heading XL
+      </Typography>
+      <Typography type="heading" size="lg">
+        Heading Large
+      </Typography>
+      <Typography type="heading" size="md">
+        Heading Medium
+      </Typography>
+      <Typography type="heading" size="sm">
+        Heading Small
+      </Typography>
+      <Typography type="heading" size="xs">
+        Heading XS
+      </Typography>
+    </div>
+  ),
+};
 
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Body</h4>
-        <Typography type="body" size="lg">
-          Body Large
-        </Typography>
-        <Typography type="body" size="md">
-          Body Medium
-        </Typography>
-        <Typography type="body" size="sm">
-          Body Small
-        </Typography>
-        <Typography type="body" size="xs">
-          Body XS
-        </Typography>
-      </div>
+export const Body: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'Body 타입의 모든 사이즈를 비교합니다. 본문 텍스트에 사용됩니다.' } },
+  },
+  render: () => (
+    <div style={containerStyle}>
+      <h4 style={sectionStyle}>Body</h4>
+      <Typography type="body" size="lg">
+        Body Large
+      </Typography>
+      <Typography type="body" size="md">
+        Body Medium
+      </Typography>
+      <Typography type="body" size="sm">
+        Body Small
+      </Typography>
+      <Typography type="body" size="xs">
+        Body XS
+      </Typography>
+    </div>
+  ),
+};
 
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Custom</h4>
-        <Typography type="custom" size={24}>
-          Custom 24px
-        </Typography>
-        <Typography type="custom" size={18}>
-          Custom 18px
-        </Typography>
-        <Typography type="custom" size={14}>
-          Custom 14px
-        </Typography>
-      </div>
+export const Weights: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 폰트 굵기를 비교합니다.' } },
+  },
+  render: () => (
+    <div style={containerStyle}>
+      <h4 style={sectionStyle}>Font Weights</h4>
+      <Typography type="body" size="md" weight="thin">
+        Thin (100)
+      </Typography>
+      <Typography type="body" size="md" weight="extralight">
+        Extra Light (200)
+      </Typography>
+      <Typography type="body" size="md" weight="light">
+        Light (300)
+      </Typography>
+      <Typography type="body" size="md" weight="normal">
+        Normal (400)
+      </Typography>
+      <Typography type="body" size="md" weight="medium">
+        Medium (500)
+      </Typography>
+      <Typography type="body" size="md" weight="semibold">
+        Semibold (600)
+      </Typography>
+      <Typography type="body" size="md" weight="bold">
+        Bold (700)
+      </Typography>
+      <Typography type="body" size="md" weight="extrabold">
+        Extra Bold (800)
+      </Typography>
+      <Typography type="body" size="md" weight="black">
+        Black (900)
+      </Typography>
     </div>
   ),
 };

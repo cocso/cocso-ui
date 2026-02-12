@@ -36,56 +36,96 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Accordion 사용법입니다. 하나의 항목만 열 수 있습니다.' } },
+  },
+  render: () => (
+    <div style={{ width: '400px' }}>
+      <Accordion type="single" collapsible>
+        <Accordion.Item value="item-1">
+          <Accordion.Header>
+            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="item-2">
+          <Accordion.Header>
+            <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="item-3">
+          <Accordion.Header>
+            <Accordion.Trigger>세 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>세 번째 아이템의 내용입니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
+    </div>
+  ),
+};
+
+export const Single: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: 'single 타입은 한 번에 하나의 항목만 열 수 있습니다. collapsible 옵션으로 열린 항목을 다시 닫을 수 있습니다.' } },
   },
-  args: {},
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px' }}>
-      <div>
-        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>Single Type</h4>
-        <Accordion type="single" collapsible>
-          <Accordion.Item value="item-1">
-            <Accordion.Header>
-              <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content>
-              <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다.</div>
-            </Accordion.Content>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Header>
-              <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content>
-              <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
-            </Accordion.Content>
-          </Accordion.Item>
-        </Accordion>
-      </div>
+    <div style={{ width: '400px' }}>
+      <Accordion type="single" collapsible>
+        <Accordion.Item value="item-1">
+          <Accordion.Header>
+            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>첫 번째 아이템의 내용입니다. 다른 항목을 열면 이 항목은 닫힙니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="item-2">
+          <Accordion.Header>
+            <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>두 번째 아이템의 내용입니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
+    </div>
+  ),
+};
 
-      <div>
-        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>Multiple Type</h4>
-        <Accordion type="multiple">
-          <Accordion.Item value="multi-1">
-            <Accordion.Header>
-              <Accordion.Trigger>Multiple 첫 번째</Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content>
-              <div style={{ padding: '16px 0' }}>Multiple 첫 번째 내용입니다.</div>
-            </Accordion.Content>
-          </Accordion.Item>
-          <Accordion.Item value="multi-2">
-            <Accordion.Header>
-              <Accordion.Trigger>Multiple 두 번째</Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content>
-              <div style={{ padding: '16px 0' }}>Multiple 두 번째 내용입니다.</div>
-            </Accordion.Content>
-          </Accordion.Item>
-        </Accordion>
-      </div>
+export const Multiple: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'multiple 타입은 여러 항목을 동시에 열 수 있습니다.' } },
+  },
+  render: () => (
+    <div style={{ width: '400px' }}>
+      <Accordion type="multiple">
+        <Accordion.Item value="multi-1">
+          <Accordion.Header>
+            <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>첫 번째 내용입니다. 다른 항목과 동시에 열 수 있습니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="multi-2">
+          <Accordion.Header>
+            <Accordion.Trigger>두 번째 아이템</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <div style={{ padding: '16px 0' }}>두 번째 내용입니다.</div>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
     </div>
   ),
 };

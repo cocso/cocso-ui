@@ -61,9 +61,36 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const columnStyle = { display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Checkbox 사용법입니다.' } },
+  },
+  render: () => {
+    const [status, setStatus] = useState<CheckboxStatus>('off');
+    return <Checkbox status={status} onChange={setStatus} label="Checkbox" />;
+  },
+};
+
+export const Sizes: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 사이즈를 비교합니다.' } },
+  },
+  render: () => (
+    <div style={columnStyle}>
+      <Checkbox size="sm" status="on" onChange={() => {}} label="Small" />
+      <Checkbox size="md" status="on" onChange={() => {}} label="Medium" />
+      <Checkbox size="lg" status="on" onChange={() => {}} label="Large" />
+    </div>
+  ),
+};
+
+export const States: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'on, off, intermediate 세 가지 상태를 비교합니다.' } },
   },
   render: () => {
     const [onState, setOnState] = useState<CheckboxStatus>('on');
@@ -71,39 +98,31 @@ export const AllVariants: Story = {
     const [intermediateState, setIntermediateState] = useState<CheckboxStatus>('intermediate');
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>States</h4>
-          <Checkbox status={onState} onChange={setOnState} label="Checked (On)" />
-          <Checkbox status={offState} onChange={setOffState} label="Unchecked (Off)" />
-          <Checkbox
-            status={intermediateState}
-            onChange={setIntermediateState}
-            label="Intermediate"
-          />
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-          <Checkbox size="sm" status="on" onChange={() => {}} label="Small" />
-          <Checkbox size="md" status="on" onChange={() => {}} label="Medium" />
-          <Checkbox size="lg" status="on" onChange={() => {}} label="Large" />
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
-          <Checkbox status="on" onChange={() => {}} label="Disabled Checked" disabled />
-          <Checkbox status="off" onChange={() => {}} label="Disabled Unchecked" disabled />
-        </div>
+      <div style={columnStyle}>
+        <Checkbox status={onState} onChange={setOnState} label="Checked (On)" />
+        <Checkbox status={offState} onChange={setOffState} label="Unchecked (Off)" />
+        <Checkbox status={intermediateState} onChange={setIntermediateState} label="Intermediate" />
       </div>
     );
   },
 };
 
+export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '비활성화 상태를 보여줍니다.' } },
+  },
+  render: () => (
+    <div style={columnStyle}>
+      <Checkbox status="on" onChange={() => {}} label="Disabled Checked" disabled />
+      <Checkbox status="off" onChange={() => {}} label="Disabled Unchecked" disabled />
+    </div>
+  ),
+};
+
 export const Playground: Story = {
   render: args => {
     const [status, setStatus] = useState<CheckboxStatus>(args.status || 'off');
-
     return <Checkbox {...args} status={status} onChange={setStatus} />;
   },
   args: {

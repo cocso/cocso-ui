@@ -67,63 +67,58 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const columnStyle = { display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Link 사용법입니다.' } },
+  },
+  args: {
+    children: 'Link',
+    href: '#',
+  },
+};
+
+export const Sizes: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 사이즈를 비교합니다.' } },
   },
-  args: {},
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-      <div
-        style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-      >
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-        <Link size="xs" href="#">
-          Extra Small Link
-        </Link>
-        <Link size="sm" href="#">
-          Small Link
-        </Link>
-        <Link size="md" href="#">
-          Medium Link
-        </Link>
-        <Link size="lg" href="#">
-          Large Link
-        </Link>
-      </div>
+    <div style={columnStyle}>
+      <Link size="xs" href="#">Extra Small Link</Link>
+      <Link size="sm" href="#">Small Link</Link>
+      <Link size="md" href="#">Medium Link</Link>
+      <Link size="lg" href="#">Large Link</Link>
+    </div>
+  ),
+};
 
-      <div
-        style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-      >
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Font Weights</h4>
-        <Link weight="light" href="#">
-          Light Link
-        </Link>
-        <Link weight="normal" href="#">
-          Normal Link
-        </Link>
-        <Link weight="medium" href="#">
-          Medium Link
-        </Link>
-        <Link weight="semibold" href="#">
-          Semibold Link
-        </Link>
-        <Link weight="bold" href="#">
-          Bold Link
-        </Link>
-      </div>
+export const Weights: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '사용 가능한 폰트 굵기를 비교합니다.' } },
+  },
+  render: () => (
+    <div style={columnStyle}>
+      <Link weight="light" href="#">Light Link</Link>
+      <Link weight="normal" href="#">Normal Link</Link>
+      <Link weight="medium" href="#">Medium Link</Link>
+      <Link weight="semibold" href="#">Semibold Link</Link>
+      <Link weight="bold" href="#">Bold Link</Link>
+    </div>
+  ),
+};
 
-      <div
-        style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-      >
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Indicator</h4>
-        <Link indicator href="#">
-          With Indicator
-        </Link>
-        <Link indicator={false} href="#">
-          Without Indicator
-        </Link>
-      </div>
+export const WithIndicator: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'indicator 속성의 on/off를 비교합니다.' } },
+  },
+  render: () => (
+    <div style={columnStyle}>
+      <Link indicator href="#">With Indicator</Link>
+      <Link indicator={false} href="#">Without Indicator</Link>
     </div>
   ),
 };

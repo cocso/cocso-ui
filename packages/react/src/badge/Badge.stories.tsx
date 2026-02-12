@@ -43,13 +43,38 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const rowStyle = { display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Badge 사용법입니다.' } },
+  },
+  args: {
+    children: 'Badge',
+  },
+};
+
+export const Sizes: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 사이즈를 비교합니다.' } },
   },
-  args: {},
   render: () => (
-    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+    <div style={rowStyle}>
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
+    </div>
+  ),
+};
+
+export const Variants: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 variant 스타일을 비교합니다.' } },
+  },
+  render: () => (
+    <div style={rowStyle}>
       <Badge variant="default">Default</Badge>
       <Badge variant="primary">Primary</Badge>
       <Badge variant="success">Success</Badge>

@@ -44,54 +44,93 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+export const Default: Story = {
   parameters: {
-    controls: { disable: true },
+    docs: { description: { story: '가장 기본적인 Modal 사용법입니다. 제목, 설명, 확인/취소 버튼이 포함됩니다.' } },
   },
   render: () => {
-    const [basicOpen, setBasicOpen] = useState(false);
-    const [confirmOpen, setConfirmOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     return (
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-        <Modal open={basicOpen} onOpenChange={setBasicOpen}>
-          <Modal.Trigger asChild>
-            <Button>기본 모달</Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Title>기본 모달</Modal.Title>
-            <Modal.Description>기본 모달의 설명입니다.</Modal.Description>
-            <div
-              style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
-            >
-              <Modal.Close asChild>
-                <Button variant="secondary">취소</Button>
-              </Modal.Close>
-              <Button>확인</Button>
-            </div>
-          </Modal.Content>
-        </Modal>
+      <Modal open={open} onOpenChange={setOpen}>
+        <Modal.Trigger asChild>
+          <Button>기본 모달</Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Title>기본 모달</Modal.Title>
+          <Modal.Description>기본 모달의 설명입니다.</Modal.Description>
+          <div
+            style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
+          >
+            <Modal.Close asChild>
+              <Button variant="secondary">취소</Button>
+            </Modal.Close>
+            <Button>확인</Button>
+          </div>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
 
-        <Modal open={confirmOpen} onOpenChange={setConfirmOpen}>
-          <Modal.Trigger asChild>
-            <Button variant="danger">확인 모달</Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Title>항목 삭제</Modal.Title>
-            <Modal.Description>정말로 삭제하시겠습니까?</Modal.Description>
-            <div
-              style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
-            >
-              <Modal.Close asChild>
-                <Button variant="secondary">취소</Button>
-              </Modal.Close>
-              <Modal.Close asChild>
-                <Button variant="danger">삭제</Button>
-              </Modal.Close>
-            </div>
-          </Modal.Content>
-        </Modal>
-      </div>
+export const Confirm: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '확인/취소 동작이 포함된 확인 모달입니다.' } },
+  },
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <Modal open={open} onOpenChange={setOpen}>
+        <Modal.Trigger asChild>
+          <Button>확인 모달</Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Title>변경 사항 저장</Modal.Title>
+          <Modal.Description>변경 사항을 저장하시겠습니까? 이 작업은 되돌릴 수 없습니다.</Modal.Description>
+          <div
+            style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
+          >
+            <Modal.Close asChild>
+              <Button variant="secondary">취소</Button>
+            </Modal.Close>
+            <Button>저장</Button>
+          </div>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
+
+export const Danger: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '삭제 등 위험한 동작을 확인하는 모달입니다.' } },
+  },
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <Modal open={open} onOpenChange={setOpen}>
+        <Modal.Trigger asChild>
+          <Button variant="danger">삭제 모달</Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Title>항목 삭제</Modal.Title>
+          <Modal.Description>정말로 삭제하시겠습니까?</Modal.Description>
+          <div
+            style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}
+          >
+            <Modal.Close asChild>
+              <Button variant="secondary">취소</Button>
+            </Modal.Close>
+            <Modal.Close asChild>
+              <Button variant="danger">삭제</Button>
+            </Modal.Close>
+          </div>
+        </Modal.Content>
+      </Modal>
     );
   },
 };

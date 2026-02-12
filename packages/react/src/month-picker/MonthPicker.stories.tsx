@@ -68,6 +68,9 @@ const formatValue = (value: Date | undefined) => {
 };
 
 export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 MonthPicker 사용법입니다. 버튼을 클릭하면 월 선택 패널이 열립니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -89,6 +92,10 @@ export const Default: Story = {
 };
 
 export const ButtonVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '다양한 버튼 variant를 트리거로 사용하는 예시입니다.' } },
+  },
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
     const [value2, setValue2] = useState<Date | undefined>();
@@ -122,6 +129,10 @@ export const ButtonVariants: Story = {
 };
 
 export const WithSelect: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'Select 컴포넌트를 트리거로 사용하는 예시입니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -142,6 +153,10 @@ export const WithSelect: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '비활성화된 MonthPicker입니다. 클릭해도 월 선택 패널이 열리지 않습니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 5, 1));
 
@@ -161,6 +176,10 @@ export const Disabled: Story = {
 };
 
 export const YearRange: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '선택 가능한 년도 범위를 제한한 예시입니다. 2020년부터 2030년까지만 선택할 수 있습니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -186,6 +205,10 @@ export const YearRange: Story = {
 };
 
 export const FormExample: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '폼 내에서 시작/종료 월을 선택하는 실용적인 예시입니다.' } },
+  },
   render: () => {
     const [formData, setFormData] = useState({
       startMonth: undefined as Date | undefined,

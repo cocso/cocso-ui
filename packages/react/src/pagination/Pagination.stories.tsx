@@ -51,32 +51,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Pagination 사용법입니다. 적은 수의 페이지를 표시합니다.' } },
+  },
+  render: () => {
+    const [page, setPage] = useState(1);
+    return <Pagination page={page} totalPages={5} onChange={setPage} />;
+  },
+};
+
+export const ManyPages: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '많은 페이지가 있을 때 ellipsis(...)가 표시되는 모습을 보여줍니다.' } },
   },
-  args: {},
   render: () => {
-    const [page1, setPage1] = useState(1);
-    const [page2, setPage2] = useState(15);
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
-            Few Pages (5 total)
-          </h4>
-          <Pagination page={page1} totalPages={5} onChange={setPage1} />
-        </div>
-
-        <div style={{ textAlign: 'center' }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
-            Many Pages (100 total)
-          </h4>
-          <Pagination page={page2} totalPages={100} onChange={setPage2} />
-        </div>
-      </div>
-    );
+    const [page, setPage] = useState(15);
+    return <Pagination page={page} totalPages={100} onChange={setPage} />;
   },
 };
 

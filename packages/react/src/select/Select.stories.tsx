@@ -38,15 +38,29 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const columnStyle = { display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Select 사용법입니다.' } },
+  },
+  render: () => (
+    <Select>
+      <option value="">선택하세요</option>
+      <option value="option1">옵션 1</option>
+      <option value="option2">옵션 2</option>
+      <option value="option3">옵션 3</option>
+    </Select>
+  ),
+};
+
+export const Sizes: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 사이즈를 비교합니다.' } },
   },
-  args: {},
   render: () => (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}
-    >
+    <div style={columnStyle}>
       <Select size="xs">
         <option value="">XS</option>
         <option value="1">옵션 1</option>
@@ -64,6 +78,19 @@ export const AllVariants: Story = {
         <option value="1">옵션 1</option>
       </Select>
     </div>
+  ),
+};
+
+export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '비활성화 상태를 보여줍니다.' } },
+  },
+  render: () => (
+    <Select disabled>
+      <option value="">비활성화됨</option>
+      <option value="1">옵션 1</option>
+    </Select>
   ),
 };
 

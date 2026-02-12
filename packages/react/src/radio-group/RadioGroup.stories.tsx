@@ -51,56 +51,66 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const columnStyle = { display: 'flex', flexDirection: 'column', gap: 12 } as const;
+
+export const Default: Story = {
   parameters: {
-    controls: { disable: true },
+    docs: { description: { story: '가장 기본적인 RadioGroup 사용법입니다.' } },
   },
   render: () => {
-    const [value1, setValue1] = useState('option1');
-    const [value2, setValue2] = useState('option2');
+    const [value, setValue] = useState('option1');
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Basic</h4>
-          <RadioGroup value={value1} onValueChange={setValue1}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <RadioGroup.Item value="option1" id="radio1">
-                <RadioGroup.Indicator />
-              </RadioGroup.Item>
-              <label htmlFor="radio1">옵션 1</label>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <RadioGroup.Item value="option2" id="radio2">
-                <RadioGroup.Indicator />
-              </RadioGroup.Item>
-            <label htmlFor="radio2">옵션 2</label>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <RadioGroup.Item value="option3" id="radio3">
-                <RadioGroup.Indicator />
-              </RadioGroup.Item>
-              <label htmlFor="radio3">옵션 3</label>
-            </div>
-          </RadioGroup>
+      <RadioGroup value={value} onValueChange={setValue}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <RadioGroup.Item value="option1" id="default-radio1">
+            <RadioGroup.Indicator />
+          </RadioGroup.Item>
+          <label htmlFor="default-radio1">옵션 1</label>
         </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <RadioGroup.Item value="option2" id="default-radio2">
+            <RadioGroup.Indicator />
+          </RadioGroup.Item>
+          <label htmlFor="default-radio2">옵션 2</label>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <RadioGroup.Item value="option3" id="default-radio3">
+            <RadioGroup.Indicator />
+          </RadioGroup.Item>
+          <label htmlFor="default-radio3">옵션 3</label>
+        </div>
+      </RadioGroup>
+    );
+  },
+};
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
-          <RadioGroup value={value2} onValueChange={setValue2} disabled>
-            <div style={{ display: "flex", alignItems: "center" }}>
+export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '전체 그룹 비활성화와 개별 항목 비활성화를 비교합니다.' } },
+  },
+  render: () => {
+    const [value, setValue] = useState('option2');
+
+    return (
+      <div style={columnStyle}>
+        <div>
+          <div style={{ marginBottom: 8, fontSize: 14, fontWeight: 600, color: '#666' }}>전체 비활성화</div>
+          <RadioGroup value={value} onValueChange={setValue} disabled>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option1" id="disabled-radio1">
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
               <label htmlFor="disabled-radio1">비활성화된 옵션 1</label>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option2" id="disabled-radio2">
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
               <label htmlFor="disabled-radio2">비활성화된 옵션 2</label>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option3" id="disabled-radio3">
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
@@ -109,22 +119,22 @@ export const AllVariants: Story = {
           </RadioGroup>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled Item</h4>
+        <div>
+          <div style={{ marginBottom: 8, fontSize: 14, fontWeight: 600, color: '#666' }}>개별 항목 비활성화</div>
           <RadioGroup defaultValue="option2">
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option1" id="partial-disabled-radio1">
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
               <label htmlFor="partial-disabled-radio1">옵션 1</label>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option2" id="partial-disabled-radio2" disabled>
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
               <label htmlFor="partial-disabled-radio2">비활성화된 옵션 2</label>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <RadioGroup.Item value="option3" id="partial-disabled-radio3">
                 <RadioGroup.Indicator />
               </RadioGroup.Item>
@@ -163,4 +173,3 @@ export const Playground: Story = {
     disabled: false,
   },
 };
-

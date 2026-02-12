@@ -50,6 +50,9 @@ const formatValue = (value: Date | undefined) => {
 };
 
 export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 DayPicker 사용법입니다. 버튼을 클릭하면 달력이 열립니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -71,6 +74,10 @@ export const Default: Story = {
 };
 
 export const ButtonVariants: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '다양한 버튼 variant를 트리거로 사용하는 예시입니다.' } },
+  },
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
     const [value2, setValue2] = useState<Date | undefined>();
@@ -104,6 +111,10 @@ export const ButtonVariants: Story = {
 };
 
 export const WithSelect: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'Select 컴포넌트를 트리거로 사용하는 예시입니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -124,6 +135,10 @@ export const WithSelect: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '비활성화된 DayPicker입니다. 클릭해도 달력이 열리지 않습니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 5, 15));
 
@@ -143,6 +158,10 @@ export const Disabled: Story = {
 };
 
 export const FormExample: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '폼 내에서 시작/종료 날짜를 선택하는 실용적인 예시입니다.' } },
+  },
   render: () => {
     const [formData, setFormData] = useState({
       startDate: undefined as Date | undefined,
@@ -196,6 +215,10 @@ export const FormExample: Story = {
 };
 
 export const WithPreselectedValue: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '초기값이 설정된 DayPicker입니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>(new Date(2024, 11, 25));
 
@@ -215,6 +238,10 @@ export const WithPreselectedValue: Story = {
 };
 
 export const WithTodayHighlight: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '오늘 날짜가 자동으로 하이라이트되는 달력입니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -240,6 +267,10 @@ export const WithTodayHighlight: Story = {
 };
 
 export const KoreanLocale: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '한국어 로케일이 적용된 달력입니다. 헤더가 "2025년 9월" 형식으로 표시됩니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -265,6 +296,10 @@ export const KoreanLocale: Story = {
 };
 
 export const MonthPickerStyle: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'MonthPicker와 동일한 스타일의 커스텀 헤더와 테마가 적용된 달력입니다.' } },
+  },
   render: () => {
     const [value, setValue] = useState<Date | undefined>();
 
@@ -290,6 +325,10 @@ export const MonthPickerStyle: Story = {
 };
 
 export const DateFormats: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '다양한 날짜 포맷과 버튼 크기를 조합한 예시입니다.' } },
+  },
   render: () => {
     const [value1, setValue1] = useState<Date | undefined>();
     const [value2, setValue2] = useState<Date | undefined>();

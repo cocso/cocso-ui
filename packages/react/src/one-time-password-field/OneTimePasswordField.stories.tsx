@@ -50,9 +50,30 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const columnStyle = { display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center' } as const;
+
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 OTP 입력 필드입니다. 기본 6자리를 지원합니다.' } },
+  },
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <OneTimePasswordField maxLength={6} value={value} onValueChange={setValue}>
+        {Array.from({ length: 6 }, (_, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
+          <OneTimePasswordField.Input key={index} index={index} />
+        ))}
+      </OneTimePasswordField>
+    );
+  },
+};
+
+export const Lengths: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: '4자리, 6자리, 8자리 길이를 비교합니다.' } },
   },
   render: () => {
     const [value4, setValue4] = useState('');
@@ -60,9 +81,9 @@ export const AllVariants: Story = {
     const [value8, setValue8] = useState('');
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
+      <div style={columnStyle}>
         <div style={{ textAlign: 'center' }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>4 Digits</h4>
+          <div style={{ marginBottom: 8, fontSize: 14, fontWeight: 600, color: '#666' }}>4자리</div>
           <OneTimePasswordField maxLength={4} value={value4} onValueChange={setValue4}>
             {Array.from({ length: 4 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
@@ -72,7 +93,7 @@ export const AllVariants: Story = {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>6 Digits</h4>
+          <div style={{ marginBottom: 8, fontSize: 14, fontWeight: 600, color: '#666' }}>6자리</div>
           <OneTimePasswordField maxLength={6} value={value6} onValueChange={setValue6}>
             {Array.from({ length: 6 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
@@ -82,7 +103,7 @@ export const AllVariants: Story = {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>8 Digits</h4>
+          <div style={{ marginBottom: 8, fontSize: 14, fontWeight: 600, color: '#666' }}>8자리</div>
           <OneTimePasswordField maxLength={8} value={value8} onValueChange={setValue8}>
             {Array.from({ length: 8 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
@@ -93,6 +114,21 @@ export const AllVariants: Story = {
       </div>
     );
   },
+};
+
+export const Disabled: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '비활성화 상태를 보여줍니다.' } },
+  },
+  render: () => (
+    <OneTimePasswordField maxLength={6} value="" onValueChange={() => {}} disabled>
+      {Array.from({ length: 6 }, (_, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
+        <OneTimePasswordField.Input key={index} index={index} />
+      ))}
+    </OneTimePasswordField>
+  ),
 };
 
 export const Playground: Story = {

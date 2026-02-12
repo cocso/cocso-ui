@@ -39,30 +39,41 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+const rowStyle = { display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' } as const;
+
+export const Default: Story = {
   parameters: {
-    controls: { disable: true },
+    docs: { description: { story: '가장 기본적인 Spinner 사용법입니다.' } },
   },
   args: {},
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '600', minWidth: '60px' }}>Sizes:</h4>
-        <Spinner size="sm" />
-        <Spinner size="md" />
-        <Spinner size="lg" />
-        <Spinner size="xl" />
-      </div>
+};
 
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '600', minWidth: '60px' }}>
-          Colors:
-        </h4>
-        <Spinner color="primary" />
-        <Spinner color="neutral" />
-        <div style={{ backgroundColor: '#333', padding: '8px', borderRadius: '4px' }}>
-          <Spinner color="white" />
-        </div>
+export const Sizes: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 사이즈를 비교합니다.' } },
+  },
+  render: () => (
+    <div style={rowStyle}>
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+      <Spinner size="xl" />
+    </div>
+  ),
+};
+
+export const Colors: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: '사용 가능한 모든 색상을 비교합니다. white는 어두운 배경에서 사용합니다.' } },
+  },
+  render: () => (
+    <div style={rowStyle}>
+      <Spinner color="primary" />
+      <Spinner color="neutral" />
+      <div style={{ backgroundColor: '#333', padding: 8, borderRadius: 4 }}>
+        <Spinner color="white" />
       </div>
     </div>
   ),

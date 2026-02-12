@@ -44,11 +44,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: { description: { story: '가장 기본적인 Toast 사용법입니다. 버튼을 클릭하면 토스트가 표시됩니다.' } },
+  },
+  render: () => (
+    <div>
+      <Toaster />
+      <Button onClick={() => toast('기본 토스트 메시지입니다.')}>토스트 표시</Button>
+    </div>
+  ),
+};
+
+export const Types: Story = {
   parameters: {
     controls: { disable: true },
+    docs: { description: { story: 'success, error, warning, info 네 가지 타입의 토스트를 비교합니다.' } },
   },
-  args: {},
   render: () => (
     <div>
       <Toaster />
