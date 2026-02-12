@@ -7,7 +7,7 @@ import { Spinner } from '../spinner';
 import { colors, type FontWeight, fontWeight, radius, spacing } from '../token';
 import styles from './Button.module.css';
 
-export type ButtonSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+export type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 
 export type ButtonVariant =
   | 'primary'
@@ -117,28 +117,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)
-    .with('xl', () => spacing.s17)
     .with('lg', () => spacing.s16)
     .with('md', () => spacing.s14)
     .with('sm', () => spacing.s12)
     .with('xs', () => spacing.s11)
     .exhaustive();
   const inlinePadding = match(size)
-    .with('xl', () => 16)
     .with('lg', () => 14)
     .with('md', () => 10)
     .with('sm', () => 8)
     .with('xs', () => 6)
     .exhaustive();
   const contentPadding = match(size)
-    .with('xl', () => '0 6px')
     .with('lg', () => '0 6px')
     .with('md', () => '0 6px')
     .with('sm', () => '0 2px')
     .with('xs', () => '0')
     .exhaustive();
   const fontSize = match(size)
-    .with('xl', () => 16)
     .with('lg', () => 16)
     .with('xs', () => 12)
     .otherwise(() => 14);

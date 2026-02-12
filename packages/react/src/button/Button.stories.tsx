@@ -31,7 +31,7 @@ const meta = {
     size: {
       description: '버튼의 크기',
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg'],
       table: {
         defaultValue: { summary: 'md' },
         type: { summary: 'ButtonSize' },
@@ -120,7 +120,6 @@ export const AllVariants: Story = {
           <Button size="sm">Small</Button>
           <Button size="md">Medium</Button>
           <Button size="lg">Large</Button>
-          <Button size="xl">Extra Large</Button>
         </div>
       </div>
 
@@ -178,7 +177,6 @@ export const SizeWithIcons: Story = {
           <Button size="sm">Small</Button>
           <Button size="md">Medium</Button>
           <Button size="lg">Large</Button>
-          <Button size="xl">Extra Large</Button>
         </div>
       </div>
 
@@ -190,7 +188,6 @@ export const SizeWithIcons: Story = {
           <Button size="sm" prefix={<PlusIcon size={16} />}>Add Item</Button>
           <Button size="md" prefix={<PlusIcon size={18} />}>Add Item</Button>
           <Button size="lg" prefix={<PlusIcon size={20} />}>Add New Item</Button>
-          <Button size="xl" prefix={<PlusIcon size={22} />}>Add New Item</Button>
         </div>
       </div>
 
@@ -202,7 +199,6 @@ export const SizeWithIcons: Story = {
           <Button size="sm" suffix={<SettingsIcon size={16} />}>Settings</Button>
           <Button size="md" suffix={<SettingsIcon size={18} />}>Settings</Button>
           <Button size="lg" suffix={<SettingsIcon size={20} />}>Settings</Button>
-          <Button size="xl" suffix={<SettingsIcon size={22} />}>Settings</Button>
         </div>
       </div>
 
@@ -214,7 +210,6 @@ export const SizeWithIcons: Story = {
           <Button size="sm" prefix={<SearchIcon size={16} />} suffix={<CheckIcon size={16} />}>Search</Button>
           <Button size="md" prefix={<SearchIcon size={18} />} suffix={<CheckIcon size={18} />}>Search & Verify</Button>
           <Button size="lg" prefix={<SearchIcon size={20} />} suffix={<CheckIcon size={20} />}>Search & Verify</Button>
-          <Button size="xl" prefix={<SearchIcon size={22} />} suffix={<CheckIcon size={22} />}>Search & Verify</Button>
         </div>
       </div>
 
@@ -226,7 +221,6 @@ export const SizeWithIcons: Story = {
           <Button size="sm" svgOnly><PlusIcon size={16} /></Button>
           <Button size="md" svgOnly><PlusIcon size={18} /></Button>
           <Button size="lg" svgOnly><PlusIcon size={20} /></Button>
-          <Button size="xl" svgOnly><PlusIcon size={22} /></Button>
         </div>
       </div>
     </div>
