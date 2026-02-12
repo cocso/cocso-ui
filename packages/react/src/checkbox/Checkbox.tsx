@@ -1,4 +1,4 @@
-import { CheckIcon } from '@cocso-ui/react-icons';
+import { CheckIcon, CheckIndeterminateSmallIcon } from '@cocso-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { clsx as cx } from 'clsx';
 import {
@@ -89,7 +89,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
             style={{ opacity: status === 'intermediate' ? 1 : 0 }}
             aria-hidden="true"
           >
-            <CheckIcon className={styles.icon} size={24} />
+            <CheckIndeterminateSmallIcon className={styles.icon} size={24} />
           </div>
         </CheckboxPrimitive.Root>
 
