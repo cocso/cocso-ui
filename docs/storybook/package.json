@@ -19,12 +19,12 @@
     "react-dom": "catalog:core"
   },
   "devDependencies": {
-    "@storybook/react-vite": "^10.1.4",
+    "@storybook/react-vite": "^10.2.8",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "^5.1.2",
     "globals": "^16.5.0",
-    "storybook": "^10.1.4",
+    "storybook": "^10.2.8",
     "typescript": "catalog:core",
     "vite": "^7.2.7"
   }

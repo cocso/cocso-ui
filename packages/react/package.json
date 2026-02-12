@@ -57,7 +57,7 @@
     "@rollup/plugin-babel": "catalog:build",
     "@rollup/plugin-commonjs": "catalog:build",
     "@rollup/plugin-node-resolve": "catalog:build",
-    "@storybook/react": "^10.1.4",
+    "@storybook/react": "^10.2.8",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "react": "catalog:core",
