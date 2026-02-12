@@ -1,0 +1,138 @@
+'use client';
+
+import {
+  AddIcon,
+  AdminMedsIcon,
+  AllInboxIcon,
+  ArrowDownIcon,
+  ArrowDropDownIcon,
+  ArrowDropUpIcon,
+  ArrowForwardIcon,
+  ArrowIOSBackwardIcon,
+  ArrowIOSForwardIcon,
+  AutoRenewIcon,
+  BusinessMessagesIcon,
+  CalculateIcon,
+  CalendarMonthIcon,
+  ChangeCircleIcon,
+  CheckbookIcon,
+  CheckCircleIcon,
+  CheckIcon,
+  CheckIndeterminateSmallIcon,
+  CloseIcon,
+  ContentCopyIcon,
+  DeleteIcon,
+  DirectionsRunIcon,
+  DockToRightIcon,
+  DomainIcon,
+  DownloadIcon,
+  EditDocumentIcon,
+  EditNoteIcon,
+  FileSaveIcon,
+  HubIcon,
+  InfoIcon,
+  KeyboardArrowDownIcon,
+  MedicationIcon,
+  MenuIcon,
+  MoreHorizIcon,
+  OpenInNewIcon,
+  OutpatientMedIcon,
+  PercentIcon,
+  PersonEditIcon,
+  PersonIcon,
+  PlusIcon,
+  RefreshIcon,
+  ReleaseAlertIcon,
+  RemoveCircleIcon,
+  SatelliteAltIcon,
+  SearchIcon,
+  SettingsBackupRestoreIcon,
+  SettingsIcon,
+  SideNavigationIcon,
+  SpaceDashboardIcon,
+  Stat1Icon,
+  StatMinus1Icon,
+  SupervisedUserCircleIcon,
+  TextSelectJumpToEndIcon,
+  ThumbUpIcon,
+  TrendingUpIcon,
+  VerifiedIcon,
+} from '@cocso-ui/react-icons';
+import type { ComponentType } from 'react';
+
+const icons: { name: string; component: ComponentType<{ size?: number }> }[] = [
+  { name: 'Add', component: AddIcon },
+  { name: 'AdminMeds', component: AdminMedsIcon },
+  { name: 'AllInbox', component: AllInboxIcon },
+  { name: 'ArrowDown', component: ArrowDownIcon },
+  { name: 'ArrowDropDown', component: ArrowDropDownIcon },
+  { name: 'ArrowDropUp', component: ArrowDropUpIcon },
+  { name: 'ArrowForward', component: ArrowForwardIcon },
+  { name: 'ArrowIOSBackward', component: ArrowIOSBackwardIcon },
+  { name: 'ArrowIOSForward', component: ArrowIOSForwardIcon },
+  { name: 'AutoRenew', component: AutoRenewIcon },
+  { name: 'BusinessMessages', component: BusinessMessagesIcon },
+  { name: 'Calculate', component: CalculateIcon },
+  { name: 'CalendarMonth', component: CalendarMonthIcon },
+  { name: 'ChangeCircle', component: ChangeCircleIcon },
+  { name: 'Checkbook', component: CheckbookIcon },
+  { name: 'CheckCircle', component: CheckCircleIcon },
+  { name: 'Check', component: CheckIcon },
+  { name: 'CheckIndeterminate', component: CheckIndeterminateSmallIcon },
+  { name: 'Close', component: CloseIcon },
+  { name: 'ContentCopy', component: ContentCopyIcon },
+  { name: 'Delete', component: DeleteIcon },
+  { name: 'DirectionsRun', component: DirectionsRunIcon },
+  { name: 'DockToRight', component: DockToRightIcon },
+  { name: 'Domain', component: DomainIcon },
+  { name: 'Download', component: DownloadIcon },
+  { name: 'EditDocument', component: EditDocumentIcon },
+  { name: 'EditNote', component: EditNoteIcon },
+  { name: 'FileSave', component: FileSaveIcon },
+  { name: 'Hub', component: HubIcon },
+  { name: 'Info', component: InfoIcon },
+  { name: 'KeyboardArrowDown', component: KeyboardArrowDownIcon },
+  { name: 'Medication', component: MedicationIcon },
+  { name: 'Menu', component: MenuIcon },
+  { name: 'MoreHoriz', component: MoreHorizIcon },
+  { name: 'OpenInNew', component: OpenInNewIcon },
+  { name: 'OutpatientMed', component: OutpatientMedIcon },
+  { name: 'Percent', component: PercentIcon },
+  { name: 'PersonEdit', component: PersonEditIcon },
+  { name: 'Person', component: PersonIcon },
+  { name: 'Plus', component: PlusIcon },
+  { name: 'Refresh', component: RefreshIcon },
+  { name: 'ReleaseAlert', component: ReleaseAlertIcon },
+  { name: 'RemoveCircle', component: RemoveCircleIcon },
+  { name: 'SatelliteAlt', component: SatelliteAltIcon },
+  { name: 'Search', component: SearchIcon },
+  { name: 'SettingsBackupRestore', component: SettingsBackupRestoreIcon },
+  { name: 'Settings', component: SettingsIcon },
+  { name: 'SideNavigation', component: SideNavigationIcon },
+  { name: 'SpaceDashboard', component: SpaceDashboardIcon },
+  { name: 'Stat1', component: Stat1Icon },
+  { name: 'StatMinus1', component: StatMinus1Icon },
+  { name: 'SupervisedUserCircle', component: SupervisedUserCircleIcon },
+  { name: 'TextSelectJumpToEnd', component: TextSelectJumpToEndIcon },
+  { name: 'ThumbUp', component: ThumbUpIcon },
+  { name: 'TrendingUp', component: TrendingUpIcon },
+  { name: 'Verified', component: VerifiedIcon },
+];
+
+export default function IconGrid() {
+  return (
+    <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
+      {icons.map(({ name, component: Icon }) => (
+        <div
+          key={name}
+          className="flex flex-col items-center gap-1.5 rounded-lg border border-neutral-100 px-2 py-3"
+        >
+          <Icon size={20} />
+          <span className="max-w-full truncate text-center text-[10px] text-neutral-500">
+            {name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
