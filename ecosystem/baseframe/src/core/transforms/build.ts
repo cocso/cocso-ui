@@ -8,18 +8,10 @@ export function buildValidatedAst(tokens: Token[], collections: Collections): As
   const validation = validateAllTokens(tokens, collectionMap);
 
   if (!validation.isValid) {
-    console.error('Token validation failed:');
-    validation.errors.forEach((error: ValidationError) => {
-      console.error(`  ${error.message}`);
-    });
-    throw new Error('Token validation failed. Please fix the errors above.');
-  }
-
-  if (validation.warnings.length > 0) {
-    console.warn('Token validation warnings:');
-    validation.warnings.forEach((warning: string) => {
-      console.warn(`  ${warning}`);
-    });
+    const details = validation.errors
+      .map((error: ValidationError) => `  ${error.message}`)
+      .join('\n');
+    throw new Error(`Token validation failed:\n${details}`);
   }
 
   return buildAst(tokens, collections);

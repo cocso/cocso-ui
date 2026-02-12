@@ -97,10 +97,6 @@
   --ds-shadow-y-4: 16px;
   --ds-shadow-blur-3: 16px;
   --ds-shadow-blur-4: 24px;
-  --ds-shadow-1: 0px 1px 2px 0px var(--ds-color-alpha-shadow1), 0px 0px 2px 0px var(--ds-color-alpha-shadow1);
-  --ds-shadow-2: 0px 0px 2px 0px var(--ds-color-alpha-shadow1), 0px 4px 8px 0px var(--ds-color-alpha-shadow2);
-  --ds-shadow-3: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-3) var(--ds-shadow-blur-3) 0px var(--ds-color-alpha-shadow3);
-  --ds-shadow-4: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-4) var(--ds-shadow-blur-4) 0px var(--ds-color-alpha-shadow3);
   --ds-spacing-0: 0px;
   --ds-spacing-1: 1px;
   --ds-spacing-2: 2px;
@@ -134,6 +130,13 @@
   --ds-color-alpha-shadow1: rgba(0, 0, 0, 0.05);
   --ds-color-alpha-shadow2: rgba(0, 0, 0, 0.08);
   --ds-color-alpha-shadow3: rgba(0, 0, 0, 0.12);
+}
+
+@theme inline {
+  --ds-shadow-1: 0px 1px 2px 0px var(--ds-color-alpha-shadow1), 0px 0px 2px 0px var(--ds-color-alpha-shadow1);
+  --ds-shadow-2: 0px 0px 2px 0px var(--ds-color-alpha-shadow1), 0px 4px 8px 0px var(--ds-color-alpha-shadow2);
+  --ds-shadow-3: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-3) var(--ds-shadow-blur-3) 0px var(--ds-color-alpha-shadow3);
+  --ds-shadow-4: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-4) var(--ds-shadow-blur-4) 0px var(--ds-color-alpha-shadow3);
   --ds-color-text-primary: var(--ds-color-neutral-950);
   --ds-color-text-secondary: var(--ds-color-neutral-600);
   --ds-color-text-tertiary: var(--ds-color-neutral-400);

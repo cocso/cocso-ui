@@ -1,6 +1,6 @@
 import { buildValidatedAst } from '../transforms';
 import type { Ast, Collections, Token, TokenDecl } from '../types';
-import { resolveTokenValue, toCssValue } from './utils';
+import { createVarName, resolveTokenValue, toCssValue } from './utils';
 
 export interface CssVarsOptions {
   prefix?: string;
@@ -10,11 +10,6 @@ export interface CssVarsOptions {
       [mode: string]: string;
     };
   };
-}
-
-function createVarName(name: string, prefix?: string): string {
-  const clean = name.replace(/^\$/, '').replace(/\./g, '-');
-  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
 function createDeclaration(

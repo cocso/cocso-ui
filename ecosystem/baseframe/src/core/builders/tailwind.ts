@@ -1,22 +1,16 @@
 import { buildValidatedAst } from '../transforms';
 import type { Ast, Collections, Token, TokenDecl } from '../types';
-import { resolveTokenValue, toCssValue } from './utils';
+import { createVarName, resolveTokenValue, toCssValue } from './utils';
 
 export interface TailwindOptions {
   prefix?: string;
   banner?: string;
 }
 
-function createVarName(name: string, prefix?: string): string {
-  let clean = name.replace(/^\$/, '');
-  clean = clean.replace(/\./g, '-');
-
-  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
-}
-
 function createTheme(tokens: TokenDecl[], mode: string, options: TailwindOptions): string {
   const { prefix } = options;
-  const vars: string[] = [];
+  const primitiveVars: string[] = [];
+  const inlineVars: string[] = [];
   const processed = new Set<string>();
 
   tokens.forEach(token => {
@@ -32,16 +26,29 @@ function createTheme(tokens: TokenDecl[], mode: string, options: TailwindOptions
 
     const resolved = resolveTokenValue(value.value, tokens, createVarName, prefix);
     const css = toCssValue(resolved);
-
-    if (token.token.name === '$number.1') {
-      vars.push(`  --spacing: ${css};`);
-    }
+    const hasVarRef = typeof css === 'string' && css.includes('var(');
 
     const varName = createVarName(token.token.name, prefix);
-    vars.push(`  ${varName}: ${css};`);
+    const line = `  ${varName}: ${css};`;
+
+    if (hasVarRef) {
+      inlineVars.push(line);
+    } else {
+      primitiveVars.push(line);
+    }
   });
 
-  return vars.length > 0 ? `@theme {\n${vars.join('\n')}\n}` : '';
+  const parts: string[] = [];
+
+  if (primitiveVars.length > 0) {
+    parts.push(`@theme {\n${primitiveVars.join('\n')}\n}`);
+  }
+
+  if (inlineVars.length > 0) {
+    parts.push(`@theme inline {\n${inlineVars.join('\n')}\n}`);
+  }
+
+  return parts.join('\n\n');
 }
 
 function createUtilities(): string[] {

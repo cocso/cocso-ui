@@ -8,12 +8,11 @@ export interface TokenResolver {
 
 export function createTokenResolver(
   allTokens: TokenDecl[],
-  mode: string,
   cssVarNamer: (tokenName: string) => string,
 ): TokenResolver {
   return {
     resolve(value: Value): Value {
-      return resolveValue(value, allTokens, mode, cssVarNamer);
+      return resolveValue(value, allTokens, cssVarNamer);
     },
     resolveTokenRef(tokenRef: TokenRef): string {
       const fullName = `$${tokenRef.collection}.${tokenRef.token}`;
@@ -32,7 +31,6 @@ export function createTokenResolver(
 function resolveValue(
   value: Value,
   allTokens: TokenDecl[],
-  mode: string,
   cssVarNamer: (tokenName: string) => string,
 ): Value {
   switch (value.kind) {
@@ -49,18 +47,18 @@ function resolveValue(
     case 'ShadowLayer':
       return {
         kind: 'ShadowLayer',
-        color: resolveValue(value.color, allTokens, mode, cssVarNamer) as ColorValue,
-        offsetX: resolveValue(value.offsetX, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        offsetY: resolveValue(value.offsetY, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        blur: resolveValue(value.blur, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        spread: resolveValue(value.spread, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
+        color: resolveValue(value.color, allTokens, cssVarNamer) as ColorValue,
+        offsetX: resolveValue(value.offsetX, allTokens, cssVarNamer) as SizeValue | TokenRef,
+        offsetY: resolveValue(value.offsetY, allTokens, cssVarNamer) as SizeValue | TokenRef,
+        blur: resolveValue(value.blur, allTokens, cssVarNamer) as SizeValue | TokenRef,
+        spread: resolveValue(value.spread, allTokens, cssVarNamer) as SizeValue | TokenRef,
       };
 
     case 'Shadow':
       return {
         kind: 'Shadow',
         layers: value.layers.map(
-          layer => resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer,
+          layer => resolveValue(layer, allTokens, cssVarNamer) as ShadowLayer,
         ),
       };
 

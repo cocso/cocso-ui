@@ -21,9 +21,7 @@ export function resolveTokenValue(
   if (!text.startsWith('$')) {
     const parsed = parseValue(text);
     if (parsed.isValid && parsed.value) {
-      const tokenResolver = createTokenResolver(allTokens, 'default', name =>
-        resolver(name, prefix),
-      );
+      const tokenResolver = createTokenResolver(allTokens, name => resolver(name, prefix));
       const resolved = tokenResolver.resolve(parsed.value);
       return toCssValue(resolved);
     }
@@ -35,6 +33,6 @@ export function resolveTokenValue(
     throw new Error(`Invalid token reference: ${text}`);
   }
 
-  const tokenResolver = createTokenResolver(allTokens, 'default', name => resolver(name, prefix));
+  const tokenResolver = createTokenResolver(allTokens, name => resolver(name, prefix));
   return tokenResolver.resolveTokenRef(parsed.value as TokenRef);
 }
