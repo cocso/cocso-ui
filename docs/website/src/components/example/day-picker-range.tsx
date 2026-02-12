@@ -11,7 +11,7 @@ export default function DayPickerRange() {
   return (
     <DayPicker
       value={value}
-      onValueChange={(date) => setValue(date ?? undefined)}
+      onValueChange={date => setValue(date ?? undefined)}
       minDate={today}
       maxDate={maxDate}
     />

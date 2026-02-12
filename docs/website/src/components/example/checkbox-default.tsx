@@ -6,10 +6,5 @@ import { useState } from 'react';
 export default function CheckboxDefault() {
   const [status, setStatus] = useState<'on' | 'off' | 'intermediate'>('off');
 
-  return (
-    <Checkbox
-      status={status}
-      onChange={(newStatus) => setStatus(newStatus)}
-    />
-  );
+  return <Checkbox status={status} onChange={newStatus => setStatus(newStatus)} />;
 }

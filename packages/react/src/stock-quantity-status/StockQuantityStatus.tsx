@@ -7,11 +7,11 @@ import styles from './StockQuantityStatus.module.css';
 
 export type QuantityStatus = '보통' | '여유' | '부족';
 
-export interface QuantityStatusProps extends ComponentPropsWithoutRef<'div'> {
+export interface StockQuantityStatusProps extends ComponentPropsWithoutRef<'div'> {
   quantity: QuantityStatus;
 }
 
-export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProps>(
+export const StockQuantityStatus = forwardRef<HTMLDivElement, StockQuantityStatusProps>(
   ({ className, style: _style, quantity, ...props }, ref) => {
     const style = {
       ..._style,
@@ -110,7 +110,7 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
   },
 );
 
-export const getColor = (quantity: QuantityStatus) =>
+const getColor = (quantity: QuantityStatus) =>
   match(quantity)
     .with('여유', () => colors.primary500)
     .with('보통', () => colors.success400)

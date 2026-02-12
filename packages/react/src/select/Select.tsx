@@ -5,7 +5,7 @@ import { match } from 'ts-pattern';
 import { spacing } from '../token';
 import styles from './Select.module.css';
 
-type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+export type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
 
 export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
   size?: SelectSize;

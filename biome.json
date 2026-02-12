@@ -6,8 +6,6 @@
       "**/*.ts",
       "**/*.tsx",
       "**/*.json",
-      "!docs/storybook",
-      "!**/*.stories.*",
       "!!**/node_modules",
       "!!**/dist",
       "!!**/lib",

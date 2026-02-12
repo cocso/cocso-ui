@@ -6,11 +6,5 @@ import { useState } from 'react';
 export default function PaginationDefault() {
   const [page, setPage] = useState(1);
 
-  return (
-    <Pagination
-      page={page}
-      totalPages={10}
-      onChange={setPage}
-    />
-  );
+  return <Pagination page={page} totalPages={10} onChange={setPage} />;
 }

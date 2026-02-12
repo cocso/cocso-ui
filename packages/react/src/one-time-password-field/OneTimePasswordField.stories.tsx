@@ -103,6 +103,7 @@ export const Playground: Story = {
     return (
       <OneTimePasswordField {...args} value={value} onValueChange={setValue}>
         {Array.from({ length: maxLength }, (_, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are fixed-count and never reorder
           <OneTimePasswordField.Input key={index} index={index} />
         ))}
       </OneTimePasswordField>

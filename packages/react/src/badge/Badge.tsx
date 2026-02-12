@@ -1,13 +1,13 @@
-import { clsx } from 'clsx';
+import { clsx as cx } from 'clsx';
 import { type ComponentProps, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { colors, type ResponsiveFontSize } from '../token';
 import { Typography } from '../typography';
 import styles from './Badge.module.css';
 
-type BadgeSize = 'sm' | 'md' | 'lg';
+export type BadgeSize = 'sm' | 'md' | 'lg';
 
-type BadgeVariant = 'default' | 'danger' | 'primary' | 'success' | 'warning';
+export type BadgeVariant = 'default' | 'danger' | 'primary' | 'success' | 'warning';
 
 export interface BadgeProps extends ComponentProps<'div'> {
   size?: BadgeSize;
@@ -27,7 +27,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     const fontSize = getFontSize(size);
 
     return (
-      <div ref={ref} className={clsx(styles.badge, className)} style={style} {...props}>
+      <div ref={ref} className={cx(styles.badge, className)} style={style} {...props}>
         <Typography
           color={fontColor}
           size={fontSize as ResponsiveFontSize}
