@@ -1,7 +1,7 @@
 import Icon from '../../icon';
 import type { IconProps } from '../../types';
 
-export const DeleteIcon = (props: IconProps) => {
+export const DollarIcon = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
@@ -16,14 +16,13 @@ export const DeleteIcon = (props: IconProps) => {
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path d="M4 7l16 0" />
-        <path d="M10 11l0 6" />
-        <path d="M14 11l0 6" />
-        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
+        <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+        <path d="M12 17v1m0 -8v1" />
       </svg>
     </Icon>
   );
 };
 
-DeleteIcon.displayName = 'DeleteIcon';
+DollarIcon.displayName = 'DollarIcon';
