@@ -17,7 +17,7 @@ const meta = {
     size: {
       description: '셀렉트 크기',
       control: 'select',
-      options: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       table: {
         defaultValue: { summary: 'md' },
         type: { summary: 'SelectSize' },
@@ -47,10 +47,6 @@ export const AllVariants: Story = {
     <div
       style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}
     >
-      <Select size="2xs">
-        <option value="">2XS</option>
-        <option value="1">옵션 1</option>
-      </Select>
       <Select size="xs">
         <option value="">XS</option>
         <option value="1">옵션 1</option>

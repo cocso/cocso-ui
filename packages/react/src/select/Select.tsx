@@ -5,7 +5,7 @@ import { match } from 'ts-pattern';
 import { spacing } from '../token';
 import styles from './Select.module.css';
 
-type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+export type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
   size?: SelectSize;
@@ -54,7 +54,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
 const getStyles = (size: SelectSize) =>
   match(size)
-    .with('2xs', () => ({
+    .with('xs', () => ({
       '--cocso-select-min-width': spacing.s11,
       '--cocso-select-height': spacing.s11,
       '--cocso-select-padding-left': spacing.s5,
@@ -62,23 +62,23 @@ const getStyles = (size: SelectSize) =>
       '--cocso-select-font-size': '12px',
       '--cocso-select-border-radius': spacing.s3,
     }))
-    .with('xs', () => ({
+    .with('sm', () => ({
       '--cocso-select-min-width': spacing.s12,
       '--cocso-select-height': spacing.s12,
       '--cocso-select-padding-left': spacing.s6,
       '--cocso-select-padding-right': `calc(${spacing.s7} + 16px)`,
       '--cocso-select-font-size': '14px',
-      '--cocso-select-border-radius': spacing.s3,
+      '--cocso-select-border-radius': spacing.s4,
     }))
-    .with('sm', () => ({
+    .with('md', () => ({
       '--cocso-select-min-width': spacing.s14,
       '--cocso-select-height': spacing.s14,
       '--cocso-select-padding-left': spacing.s7,
       '--cocso-select-padding-right': `calc(${spacing.s7} + 16px)`,
       '--cocso-select-font-size': '14px',
-      '--cocso-select-border-radius': spacing.s3,
+      '--cocso-select-border-radius': spacing.s4,
     }))
-    .with('md', () => ({
+    .with('lg', () => ({
       '--cocso-select-min-width': spacing.s16,
       '--cocso-select-height': spacing.s16,
       '--cocso-select-padding-left': spacing.s8,
@@ -86,20 +86,12 @@ const getStyles = (size: SelectSize) =>
       '--cocso-select-font-size': '16px',
       '--cocso-select-border-radius': spacing.s4,
     }))
-    .with('lg', () => ({
+    .with('xl', () => ({
       '--cocso-select-min-width': spacing.s17,
       '--cocso-select-height': spacing.s17,
       '--cocso-select-padding-left': spacing.s9,
       '--cocso-select-padding-right': `calc(${spacing.s9} + 16px)`,
-      '--cocso-select-font-size': '18px',
-      '--cocso-select-border-radius': spacing.s4,
-    }))
-    .with('xl', () => ({
-      '--cocso-select-min-width': spacing.s18,
-      '--cocso-select-height': spacing.s18,
-      '--cocso-select-padding-left': spacing.s10,
-      '--cocso-select-padding-right': `calc(${spacing.s10} + 16px)`,
-      '--cocso-select-font-size': '18px',
+      '--cocso-select-font-size': '16px',
       '--cocso-select-border-radius': spacing.s4,
     }))
     .exhaustive();
