@@ -13,7 +13,9 @@
     "build": "node build.js",
     "check-types": "tsc --noEmit",
     "lint": "biome lint .",
-    "lint:fix": "biome lint . --fix"
+    "lint:fix": "biome lint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "fs-extra": "^11.3.2",
@@ -24,7 +26,8 @@
     "@types/fs-extra": "^11.0.4",
     "@types/yargs": "^17.0.35",
     "esbuild": "^0.25.12",
-    "typescript": "catalog:core"
+    "typescript": "catalog:core",
+    "vitest": "^4.0.18"
   },
   "publishConfig": {
     "access": "public"
