@@ -32,7 +32,7 @@ const meta = {
     size: {
       description: '스위치의 크기',
       control: 'select',
-      options: ['md', 'lg'],
+      options: ['sm', 'md'],
       table: {
         defaultValue: { summary: 'md' },
         type: { summary: 'SwitchSize' },
@@ -85,8 +85,8 @@ export const AllVariants: Story = {
           style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
         >
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-          <Switch size="md" checked={state1} onCheckedChange={setState1} label="Medium" />
-          <Switch size="lg" checked={state2} onCheckedChange={setState2} label="Large" />
+          <Switch size="sm" checked={state1} onCheckedChange={setState1} label="Small" />
+          <Switch size="md" checked={state2} onCheckedChange={setState2} label="Medium" />
         </div>
 
         <div
