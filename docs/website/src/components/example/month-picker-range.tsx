@@ -11,7 +11,7 @@ export default function MonthPickerRange() {
   return (
     <MonthPicker
       value={value}
-      onValueChange={(date) => setValue(date ?? undefined)}
+      onValueChange={date => setValue(date ?? undefined)}
       minDate={minDate}
       maxDate={maxDate}
     />

@@ -6,7 +6,9 @@ export default function ButtonShape() {
     <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
       <Button shape="square">Square</Button>
       <Button shape="rounded">Rounded</Button>
-      <Button shape="circle" svgOnly aria-label="추가"><PlusIcon /></Button>
+      <Button shape="circle" svgOnly aria-label="추가">
+        <PlusIcon />
+      </Button>
     </div>
   );
 }
