@@ -1,5 +1,12 @@
 # @cocso-ui/react
 
+## 0.2.21
+
+### Patch Changes
+
+- Updated dependencies [6e35752]
+  - @cocso-ui/react-icons@0.2.0
+
 ## 0.2.20
 
 ### Patch Changes
