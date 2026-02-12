@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "update": "bun update",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
