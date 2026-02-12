@@ -7,7 +7,7 @@ export default function ButtonVariant() {
       <Button variant="secondary">Secondary</Button>
       <Button variant="tertiary">Tertiary</Button>
       <Button variant="success">Success</Button>
-      <Button variant="error">Error</Button>
+      <Button variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
       <Button variant="neutral">Neutral</Button>
     </div>

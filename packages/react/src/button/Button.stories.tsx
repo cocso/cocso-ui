@@ -22,7 +22,7 @@ const meta = {
     variant: {
       description: '버튼의 스타일 타입',
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning', 'neutral'],
+      options: ['primary', 'secondary', 'tertiary', 'success', 'danger', 'warning', 'neutral'],
       table: {
         defaultValue: { summary: 'primary' },
         type: { summary: 'ButtonVariant' },
@@ -106,7 +106,7 @@ export const AllVariants: Story = {
           <Button variant="secondary">Secondary</Button>
           <Button variant="tertiary">Tertiary</Button>
           <Button variant="success">Success</Button>
-          <Button variant="error">Error</Button>
+          <Button variant="danger">Danger</Button>
           <Button variant="warning">Warning</Button>
           <Button variant="neutral">Neutral</Button>
         </div>
@@ -244,7 +244,7 @@ export const VariantShowcase: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {['primary', 'secondary', 'tertiary', 'success', 'error', 'warning', 'neutral'].map((variant) => (
+      {['primary', 'secondary', 'tertiary', 'success', 'danger', 'warning', 'neutral'].map((variant) => (
         <div key={variant}>
           <h4 style={{ marginBottom: '12px', fontSize: '14px', fontWeight: '600', color: '#666', textTransform: 'capitalize' }}>
             {variant}

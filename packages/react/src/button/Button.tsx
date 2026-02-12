@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, CSSProperties, ReactElement, ReactNode }
 import { cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
 import { Spinner } from '../spinner';
-import { colors, type FontWeight, fontWeight } from '../token';
+import { colors, type FontWeight, fontWeight, radius, spacing } from '../token';
 import styles from './Button.module.css';
 
 export type ButtonSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -14,7 +14,7 @@ export type ButtonVariant =
   | 'secondary'
   | 'tertiary'
   | 'success'
-  | 'error'
+  | 'danger'
   | 'warning'
   | 'neutral';
 
@@ -56,7 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const style = {
       ..._style,
       ...getSizeStyles(size),
-      '--cocso-button-font-color': getColor(variant),
+      '--cocso-button-font-color': getFontColor(variant),
       '--cocso-button-font-weight': fontWeight[weight],
       '--cocso-button-border': getBorder(variant),
       '--cocso-button-border-radius': getBorderRadius(shape, size),
@@ -117,11 +117,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)
-    .with('xl', () => 56)
-    .with('lg', () => 48)
-    .with('md', () => 40)
-    .with('sm', () => 32)
-    .with('xs', () => 28)
+    .with('xl', () => spacing.s17)
+    .with('lg', () => spacing.s16)
+    .with('md', () => spacing.s14)
+    .with('sm', () => spacing.s12)
+    .with('xs', () => spacing.s11)
     .exhaustive();
   const inlinePadding = match(size)
     .with('xl', () => 16)
@@ -144,7 +144,7 @@ const getSizeStyles = (size: ButtonSize) => {
     .otherwise(() => 14);
 
   return {
-    '--cocso-button-height': `${height}px`,
+    '--cocso-button-height': height,
     '--cocso-button-padding-inline': `${inlinePadding}px`,
     '--cocso-button-content-padding': contentPadding,
     '--cocso-button-font-size': `${fontSize}px`,
@@ -155,17 +155,17 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) => {
   return match(shape)
     .with('square', () => {
       return match(size)
-        .with('xs', () => '4px')
-        .otherwise(() => '6px');
+        .with('xs', () => radius.sm)
+        .otherwise(() => radius.md);
     })
-    .with('circle', () => '100%')
-    .with('rounded', () => '100px')
+    .with('circle', () => radius.circle)
+    .with('rounded', () => radius.full)
     .exhaustive();
 };
 
-const getColor = (variant: ButtonVariant) => {
+const getFontColor = (variant: ButtonVariant) => {
   return match(variant)
-    .with('primary', 'success', 'error', 'neutral', () => colors.white)
+    .with('primary', 'success', 'danger', 'neutral', () => colors.white)
     .with('secondary', 'tertiary', 'warning', () => colors.neutral950)
     .exhaustive();
 };
@@ -182,7 +182,7 @@ const getBackgroundColor = (variant: ButtonVariant) => {
     .with('secondary', () => colors.white)
     .with('tertiary', () => colors.transparent)
     .with('success', () => colors.success500)
-    .with('error', () => colors.danger500)
+    .with('danger', () => colors.danger500)
     .with('warning', () => colors.warning300)
     .with('neutral', () => colors.neutral950)
     .exhaustive();
@@ -194,7 +194,7 @@ const getBackgroundColorHover = (variant: ButtonVariant) => {
     .with('secondary', () => colors.neutral50)
     .with('tertiary', () => colors.neutral50)
     .with('success', () => colors.success600)
-    .with('error', () => colors.danger600)
+    .with('danger', () => colors.danger600)
     .with('warning', () => colors.warning400)
     .with('neutral', () => colors.neutral800)
     .exhaustive();
@@ -206,7 +206,7 @@ const getBackgroundColorActive = (variant: ButtonVariant) => {
     .with('secondary', () => colors.neutral100)
     .with('tertiary', () => colors.neutral100)
     .with('success', () => colors.success700)
-    .with('error', () => colors.danger700)
+    .with('danger', () => colors.danger700)
     .with('warning', () => colors.warning500)
     .with('neutral', () => colors.neutral700)
     .exhaustive();
