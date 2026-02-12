@@ -5,7 +5,7 @@ import { match } from 'ts-pattern';
 import { spacing } from '../token';
 import styles from './Select.module.css';
 
-export type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+export type SelectSize = 'lg' | 'md' | 'sm' | 'xs';
 
 export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
   size?: SelectSize;
@@ -83,14 +83,6 @@ const getStyles = (size: SelectSize) =>
       '--cocso-select-height': spacing.s16,
       '--cocso-select-padding-left': spacing.s8,
       '--cocso-select-padding-right': `calc(${spacing.s8} + 16px)`,
-      '--cocso-select-font-size': '16px',
-      '--cocso-select-border-radius': spacing.s4,
-    }))
-    .with('xl', () => ({
-      '--cocso-select-min-width': spacing.s17,
-      '--cocso-select-height': spacing.s17,
-      '--cocso-select-padding-left': spacing.s9,
-      '--cocso-select-padding-right': `calc(${spacing.s9} + 16px)`,
       '--cocso-select-font-size': '16px',
       '--cocso-select-border-radius': spacing.s4,
     }))

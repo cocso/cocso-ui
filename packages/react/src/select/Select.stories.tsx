@@ -17,7 +17,7 @@ const meta = {
     size: {
       description: '셀렉트 크기',
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg'],
       table: {
         defaultValue: { summary: 'md' },
         type: { summary: 'SelectSize' },
@@ -61,10 +61,6 @@ export const AllVariants: Story = {
       </Select>
       <Select size="lg">
         <option value="">LG</option>
-        <option value="1">옵션 1</option>
-      </Select>
-      <Select size="xl">
-        <option value="">XL</option>
         <option value="1">옵션 1</option>
       </Select>
     </div>

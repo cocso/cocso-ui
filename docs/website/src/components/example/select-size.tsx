@@ -15,9 +15,6 @@ export default function SelectSize() {
       <Select size="lg">
         <option>Large</option>
       </Select>
-      <Select size="xl">
-        <option>XLarge</option>
-      </Select>
     </div>
   );
 }
