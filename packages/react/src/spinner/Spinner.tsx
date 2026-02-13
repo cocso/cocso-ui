@@ -1,6 +1,6 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { colors } from '../token';
@@ -27,7 +27,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
       '--cocso-spinner-bg-color': getBackgroundColor(color),
     };
 
-    return <Comp ref={ref} className={cx(styles.spinner, className)} style={style} {...props} />;
+    return <Comp ref={ref} className={cn(styles.spinner, className)} style={style} {...props} />;
   },
 );
 

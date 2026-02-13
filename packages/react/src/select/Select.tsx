@@ -1,5 +1,5 @@
 import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { spacing } from '../token';
@@ -33,7 +33,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div
-        className={cx(
+        className={cn(
           styles.wrapper,
           stretch && styles.stretch,
           disabled && styles.disabled,

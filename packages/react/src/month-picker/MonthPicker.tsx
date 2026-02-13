@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon } from '@cocso-ui/react-icons';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { ko } from 'date-fns/locale';
 import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -28,7 +28,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     };
 
     return (
-      <div ref={ref} className={cx(styles.root, className)} {...props}>
+      <div ref={ref} className={cn(styles.root, className)} {...props}>
         <Dropdown open={open} onOpenChange={setOpen}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>

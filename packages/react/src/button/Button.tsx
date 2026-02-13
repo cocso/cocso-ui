@@ -1,5 +1,5 @@
 import { Primitive } from '@radix-ui/react-primitive';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import type { ComponentPropsWithoutRef, CSSProperties, ReactElement, ReactNode } from 'react';
 import { cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
@@ -66,7 +66,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     } as CSSProperties;
 
     const isDisabled = disabled || loading;
-    const cn = cx(
+    const buttonClassName = cn(
       styles.button,
       isDisabled && styles.disabled,
       svgOnly && styles.svgOnly,
@@ -101,14 +101,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref,
         ...props,
         ...target.props,
-        className: cx(cn, target.props.className),
+        className: cn(buttonClassName, target.props.className),
         style: { ...style, ...target.props.style },
         children: renderButtonContent(ctx),
       });
     }
 
     return (
-      <Primitive.button ref={ref} className={cn} disabled={isDisabled} style={style} {...props}>
+      <Primitive.button
+        ref={ref}
+        className={buttonClassName}
+        disabled={isDisabled}
+        style={style}
+        {...props}
+      >
         {renderButtonContent(children)}
       </Primitive.button>
     );

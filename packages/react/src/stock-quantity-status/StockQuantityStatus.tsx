@@ -1,4 +1,4 @@
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { colors, spacing } from '../token';
@@ -20,7 +20,7 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, StockQuantityStatu
     } as CSSProperties;
 
     return (
-      <div ref={ref} className={cx(styles.stock, className)} style={style} {...props}>
+      <div ref={ref} className={cn(styles.stock, className)} style={style} {...props}>
         <span className={styles.indicator}>
           {quantity === '여유' ? (
             <svg

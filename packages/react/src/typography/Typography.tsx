@@ -1,6 +1,6 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import type { FontSize, FontWeight, LineHeight, ResponsiveFontSize } from '../token';
@@ -125,7 +125,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       <Comp
         // biome-ignore lint/suspicious/noExplicitAny: Polymorphic component with multiple element types (h1, h2, p, Slot) requires type assertion for ref compatibility
         {...(ref && { ref: ref as any })}
-        className={cx(styles.typography, className)}
+        className={cn(styles.typography, className)}
         style={style}
         {...props}
       />

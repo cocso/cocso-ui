@@ -1,4 +1,4 @@
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentProps, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { colors, type ResponsiveFontSize } from '../token';
@@ -27,7 +27,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     const fontSize = getFontSize(size);
 
     return (
-      <div ref={ref} className={cx(styles.badge, className)} style={style} {...props}>
+      <div ref={ref} className={cn(styles.badge, className)} style={style} {...props}>
         <Typography
           color={fontColor}
           size={fontSize as ResponsiveFontSize}

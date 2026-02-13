@@ -1,5 +1,5 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import styles from './RadioGroup.module.css';
 
@@ -7,7 +7,7 @@ const RadioGroupRoot = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Root>,
   ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => {
-  return <RadioGroupPrimitive.Root ref={ref} className={cx(styles.root, className)} {...props} />;
+  return <RadioGroupPrimitive.Root ref={ref} className={cn(styles.root, className)} {...props} />;
 });
 
 RadioGroupRoot.displayName = RadioGroupPrimitive.Root.displayName;
@@ -16,7 +16,7 @@ const RadioGroupItem = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Item>,
   ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, ...props }, ref) => {
-  return <RadioGroupPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props} />;
+  return <RadioGroupPrimitive.Item ref={ref} className={cn(styles.item, className)} {...props} />;
 });
 
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
@@ -28,7 +28,7 @@ const RadioGroupIndicator = forwardRef<
   return (
     <RadioGroupPrimitive.Indicator
       ref={ref}
-      className={cx(styles.indicator, className)}
+      className={cn(styles.indicator, className)}
       {...props}
     />
   );

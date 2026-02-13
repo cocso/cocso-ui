@@ -1,6 +1,6 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
@@ -51,7 +51,7 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
 
     return (
       <Primitive.div
-        className={cx(styles.wrapper, className)}
+        className={cn(styles.wrapper, className)}
         aria-disabled={disabled}
         style={style}
       >

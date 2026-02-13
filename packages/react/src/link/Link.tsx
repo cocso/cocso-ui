@@ -1,6 +1,6 @@
 import { Primitive } from '@radix-ui/react-primitive';
 import { Slot } from '@radix-ui/react-slot';
-import { clsx as cx } from 'clsx';
+import { clsx as cn } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import type { FontWeight, LineHeight } from '../token';
 import { Typography } from '../typography';
@@ -24,7 +24,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       <Typography type="body" size={size} weight={weight} lineHeight={lineHeight} asChild>
         <Comp
           ref={ref}
-          className={cx(styles.link, indicator && styles.indicator, className)}
+          className={cn(styles.link, indicator && styles.indicator, className)}
           {...props}
         />
       </Typography>
