@@ -42,8 +42,8 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
 
     const style = {
       ..._style,
-      '--cocso-switch-width': getSwitchWidth(size),
-      '--cocso-switch-height': getSwitchHeight(size),
+      '--cocso-switch-width': getWidth(size),
+      '--cocso-switch-height': getHeight(size),
       '--cocso-switch-thumb-width': getThumbSize(size),
       '--cocso-switch-thumb-height': getThumbSize(size),
       '--cocso-switch-bg-color': colors.neutral100,
@@ -73,13 +73,13 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
   },
 );
 
-const getSwitchWidth = (size: SwitchSize) =>
+const getWidth = (size: SwitchSize) =>
   match(size)
     .with('md', () => spacing.s14)
     .with('sm', () => spacing.s12)
     .exhaustive();
 
-const getSwitchHeight = (size: SwitchSize) =>
+const getHeight = (size: SwitchSize) =>
   match(size)
     .with('md', () => spacing.s10)
     .with('sm', () => spacing.s9)
