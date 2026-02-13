@@ -10,10 +10,6 @@ import type {
   Value,
 } from '../types';
 
-function validateValue(value: string | number): ParseResult {
-  return parseValue(value);
-}
-
 function validateAllValues(tokens: TokenDecl[]): Array<{
   tokenName: string;
   collection: string;
@@ -31,7 +27,7 @@ function validateAllValues(tokens: TokenDecl[]): Array<{
 
   tokens.forEach(token => {
     token.values.forEach(value => {
-      const result = validateValue(value.value);
+      const result = parseValue(value.value);
       results.push({
         tokenName: token.token.name,
         collection: token.token.collection,

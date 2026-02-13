@@ -12,10 +12,12 @@
   "scripts": {
     "build": "node build.js",
     "check-types": "tsc --noEmit",
+    "generate": "node bin/index.js css-vars ../../packages/css/ ds",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
   "dependencies": {
+    "@cocso-ui/baseframe-sources": "workspace:*",
     "fs-extra": "^11.3.2",
     "yaml": "^2.8.2",
     "yargs": "^18.0.0"

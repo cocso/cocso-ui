@@ -8,6 +8,11 @@ export function toCssValue(value: string | number | Value): string {
   return valueToString(value);
 }
 
+export function createVarName(name: string, prefix?: string): string {
+  const clean = name.replace(/^\$/, '').replace(/\./g, '-');
+  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
+}
+
 export type Resolver = (name: string, prefix?: string) => string;
 
 export function resolveTokenValue(
