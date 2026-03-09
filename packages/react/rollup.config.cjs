@@ -6,7 +6,7 @@ const resolve = require("@rollup/plugin-node-resolve");
 const postcss = require("rollup-plugin-postcss");
 const preserveDirectives = require('rollup-plugin-preserve-directives');
 const dts = require("rollup-plugin-dts").default;
-const path = require("path");
+const path = require("node:path");
 
 const packageJSON = require(path.join(process.cwd(), "package.json"));
 
@@ -57,7 +57,7 @@ function buildJS(format, input, output) {
 function buildDTS(format, input, output) {
   const isESM = format === "esm";
   return {
-    input: input,
+    input,
     output: [
       {
         format,

@@ -1,1 +1,1 @@
-export * from './StockQuantityStatus';
+export * from './stock-quantity-status';

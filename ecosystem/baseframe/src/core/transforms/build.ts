@@ -11,17 +11,17 @@ export function buildValidatedAst(tokens: Token[], collections: Collections): As
 
   if (!validation.isValid) {
     console.error('Token validation failed:');
-    validation.errors.forEach((error: ValidationError) => {
+    for (const error of validation.errors as ValidationError[]) {
       console.error(`  ${error.message}`);
-    });
+    }
     throw new Error('Token validation failed. Please fix the errors above.');
   }
 
   if (validation.warnings.length > 0) {
     console.warn('Token validation warnings:');
-    validation.warnings.forEach((warning: string) => {
+    for (const warning of validation.warnings as string[]) {
       console.warn(`  ${warning}`);
-    });
+    }
   }
 
   return buildAst(tokens, collections);

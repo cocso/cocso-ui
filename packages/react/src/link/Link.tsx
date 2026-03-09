@@ -4,7 +4,7 @@ import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import type { FontWeight, LineHeight } from '../token';
 import { Typography } from '../typography';
-import styles from './Link.module.css';
+import styles from './link.module.css';
 
 export type LinkSize = 'lg' | 'md' | 'sm' | 'xs';
 

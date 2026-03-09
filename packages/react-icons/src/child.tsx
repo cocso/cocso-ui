@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { Children, cloneElement, isValidElement, type ReactNode } from 'react';
 
 type ChildProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   [key: string]: unknown;
 };
 
 const Child = ({ children, ...props }: ChildProps) => {
-  const child: React.ReactNode = React.Children.only(children);
+  const child: ReactNode = Children.only(children);
 
-  return React.isValidElement(child) ? React.cloneElement(child, props) : null;
+  return isValidElement(child) ? cloneElement(child, props) : null;
 };
 
 export default Child;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { StockQuantityStatus } from './StockQuantityStatus';
+import { StockQuantityStatus } from './stock-quantity-status';
 
 const meta = {
   title: 'Components/StockQuantityStatus',

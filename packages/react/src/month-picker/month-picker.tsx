@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import { Button } from '../button';
 import { Dropdown } from '../dropdown';
 import { Typography } from '../typography';
-import styles from './MonthPicker.module.css';
+import styles from './month-picker.module.css';
 
 export interface MonthPickerProps extends ComponentPropsWithoutRef<'div'> {
   value?: Date;

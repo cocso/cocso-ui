@@ -3,7 +3,7 @@ import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { spacing } from '../token';
-import styles from './Select.module.css';
+import styles from './select.module.css';
 
 type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
 

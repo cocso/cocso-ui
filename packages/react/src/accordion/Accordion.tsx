@@ -1,43 +1,41 @@
 import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
-import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { Content, Header, Item, Root, Trigger } from '@radix-ui/react-accordion';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
-import styles from './Accordion.module.css';
+import styles from './accordion.module.css';
 
 const AccordionItem = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+  ComponentRef<typeof Item>,
+  ComponentPropsWithoutRef<typeof Item>
 >(({ className, ...props }, ref) => {
-  return <AccordionPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props} />;
+  return <Item ref={ref} className={cx(styles.item, className)} {...props} />;
 });
 
-interface TriggerProps extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
+interface TriggerProps extends ComponentPropsWithoutRef<typeof Trigger> {
   chevron?: boolean;
 }
 
-const AccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trigger>, TriggerProps>(
+const AccordionTrigger = forwardRef<ComponentRef<typeof Trigger>, TriggerProps>(
   ({ className, children, chevron = true, ...props }, ref) => {
     return (
-      <AccordionPrimitive.Trigger ref={ref} className={cx(styles.trigger, className)} {...props}>
+      <Trigger ref={ref} className={cx(styles.trigger, className)} {...props}>
         {children}
         {chevron && <KeyboardArrowDownIcon className={styles.chevron} />}
-      </AccordionPrimitive.Trigger>
+      </Trigger>
     );
   },
 );
 
 const AccordionContent = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+  ComponentRef<typeof Content>,
+  ComponentPropsWithoutRef<typeof Content>
 >(({ className, ...props }, ref) => {
-  return (
-    <AccordionPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props} />
-  );
+  return <Content ref={ref} className={cx(styles.content, className)} {...props} />;
 });
 
-export const Accordion = Object.assign(AccordionPrimitive.Root, {
+export const Accordion = Object.assign(Root, {
   Item: AccordionItem,
-  Header: AccordionPrimitive.Header,
+  Header,
   Trigger: AccordionTrigger,
   Content: AccordionContent,
 });

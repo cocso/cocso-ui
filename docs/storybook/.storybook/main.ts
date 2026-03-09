@@ -1,5 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
+const NODE_MODULES_REGEX = /node_modules/;
+
 const config: StorybookConfig = {
   stories: [
     "../src/**/*.mdx",
@@ -14,7 +16,7 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (prop) => (prop.parent ? !NODE_MODULES_REGEX.test(prop.parent.fileName) : true),
     },
   },
 };

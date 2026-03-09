@@ -1,5 +1,5 @@
 import { CheckIcon } from '@cocso-ui/react-icons';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { type CheckedState, Indicator, Root } from '@radix-ui/react-checkbox';
 import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
@@ -11,7 +11,7 @@ import {
 import { match } from 'ts-pattern';
 import { colors, spacing } from '../token';
 import { Typography } from '../typography';
-import styles from './Checkbox.module.css';
+import styles from './checkbox.module.css';
 
 export type CheckboxSize = 'lg' | 'md' | 'sm';
 
@@ -19,7 +19,7 @@ export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
 export interface CheckboxProps
   extends Omit<
-    ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+    ComponentPropsWithoutRef<typeof Root>,
     'checked' | 'onCheckedChange' | 'onChange'
   > {
   id?: string;
@@ -30,7 +30,7 @@ export interface CheckboxProps
   disabled?: boolean;
 }
 
-export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
+export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
   (
     { id: _id, className, style: _style, size = 'md', status, onChange, label, disabled, ...props },
     ref,
@@ -38,7 +38,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
     const generatedId = useId();
     const id = _id ?? generatedId;
 
-    const handleCheckedChange = (checked: CheckboxPrimitive.CheckedState) => {
+    const handleCheckedChange = (checked: CheckedState) => {
       if (!disabled) {
         const nextStatus = match(checked)
           .with(true, () => 'on' as const)
@@ -49,7 +49,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
       }
     };
 
-    const getCheckedState = (): CheckboxPrimitive.CheckedState => {
+    const getCheckedState = (): CheckedState => {
       return match(status)
         .with('on', () => true)
         .with('intermediate', () => 'indeterminate' as const)
@@ -67,7 +67,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
 
     return (
       <div className={cx(styles.wrapper, className)} style={style}>
-        <CheckboxPrimitive.Root
+        <Root
           ref={ref}
           id={id}
           className={styles.checkbox}
@@ -76,13 +76,13 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
           disabled={disabled}
           {...props}
         >
-          <CheckboxPrimitive.Indicator
+          <Indicator
             className={styles.indicator}
             style={{ opacity: status === 'on' ? 1 : 0 }}
             aria-hidden="true"
           >
             <CheckIcon className={styles.icon} size={24} />
-          </CheckboxPrimitive.Indicator>
+          </Indicator>
 
           <div
             className={styles.indicator}
@@ -91,7 +91,7 @@ export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, 
           >
             <CheckIcon className={styles.icon} size={24} />
           </div>
-        </CheckboxPrimitive.Root>
+        </Root>
 
         {label && (
           <Typography

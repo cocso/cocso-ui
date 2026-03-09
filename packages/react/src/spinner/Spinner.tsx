@@ -4,7 +4,7 @@ import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { match } from 'ts-pattern';
 import { colors } from '../token';
-import styles from './Spinner.module.css';
+import styles from './spinner.module.css';
 
 export type SpinnerSize = 'xl' | 'lg' | 'md' | 'sm';
 

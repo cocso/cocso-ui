@@ -9,7 +9,7 @@ import {
   fontWeight as fontWeightToken,
   lineHeight as lineHeightToken,
 } from '../token';
-import styles from './Typography.module.css';
+import styles from './typography.module.css';
 
 export type BodySize = 'lg' | 'md' | 'sm' | 'xs';
 export type DisplaySize = 'lg' | 'md' | 'sm';

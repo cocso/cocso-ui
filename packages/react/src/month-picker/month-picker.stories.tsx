@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Button } from '../button';
 import { Select } from '../select';
-import { MonthPicker } from './MonthPicker';
+import { MonthPicker } from './month-picker';
 
 const meta: Meta<typeof MonthPicker> = {
   title: 'Components/MonthPicker',

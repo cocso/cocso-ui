@@ -4,7 +4,7 @@ const babelPresetTypescript = require("@babel/preset-typescript");
 const commonjs = require("@rollup/plugin-commonjs");
 const resolve = require("@rollup/plugin-node-resolve");
 const dts = require("rollup-plugin-dts").default;
-const path = require("path");
+const path = require("node:path");
 
 const packageJSON = require(path.join(process.cwd(), "package.json"));
 
@@ -49,7 +49,7 @@ function buildJS(format, input, output) {
 function buildDTS(format, input, output) {
   const isESM = format === "esm";
   return {
-    input: input,
+    input,
     output: [
       {
         format,

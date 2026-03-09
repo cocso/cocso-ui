@@ -1,7 +1,7 @@
 import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon, MoreHorizIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
-import styles from './Pagination.module.css';
+import styles from './pagination.module.css';
 
 export interface PaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> {
   page: number;
@@ -40,7 +40,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
         )}
 
         {totalPages <= maxVisible + 2 ? (
-          Array(totalPages)
+          new Array(totalPages)
             .fill(0)
             .map((_, index) => renderPageButton(index + 1))
         ) : (
@@ -51,7 +51,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                 <MoreHorizIcon />
               </span>
             )}
-            {Array(maxVisible)
+            {new Array(maxVisible)
               .fill(0)
               .map((_, index) => {
                 const pageNumber = page - halfVisible + index + 1;

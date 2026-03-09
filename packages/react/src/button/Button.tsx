@@ -5,7 +5,7 @@ import { cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
 import { Spinner } from '../spinner';
 import { colors, type FontWeight, fontWeight } from '../token';
-import styles from './Button.module.css';
+import styles from './button.module.css';
 
 export type ButtonSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 

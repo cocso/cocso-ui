@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import { Button } from '../button';
 import { Dropdown } from '../dropdown';
 import { Typography } from '../typography';
-import styles from './DayPicker.module.css';
+import styles from './day-picker.module.css';
 
 export interface DayPickerProps extends ComponentPropsWithoutRef<'div'> {
   value?: Date;
@@ -44,8 +44,8 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                 showPopperArrow={false}
                 dayClassName={date => {
                   const day = date.getDay();
-                  if (day === 0) return styles.sunday;
-                  if (day === 6) return styles.saturday;
+                  if (day === 0) { return styles.sunday; }
+                  if (day === 6) { return styles.saturday; }
                   return '';
                 }}
                 renderCustomHeader={({

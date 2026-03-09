@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: 'Documentation for the COCSO UI component library.',
 };
 
-const RootLayout = async ({ children }: PropsWithChildren) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <ViewTransitions>
       <html lang="ko" dir="ltr" suppressHydrationWarning>

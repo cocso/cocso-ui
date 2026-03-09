@@ -1,7 +1,7 @@
 import { MoreHorizIcon } from '@cocso-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../button';
-import { Dropdown } from './Dropdown';
+import { Dropdown } from './dropdown';
 
 const meta = {
   title: 'Components/Dropdown',

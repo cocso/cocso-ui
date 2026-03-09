@@ -1,5 +1,5 @@
 import { Primitive } from '@radix-ui/react-primitive';
-import * as SwitchPrimitive from '@radix-ui/react-switch';
+import { Root, Thumb } from '@radix-ui/react-switch';
 import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
@@ -11,11 +11,11 @@ import {
 import { match } from 'ts-pattern';
 import { colors, spacing } from '../token';
 import { Typography } from '../typography';
-import styles from './Switch.module.css';
+import styles from './switch.module.css';
 
 export type SwitchSize = 'sm' | 'md';
 
-export interface SwitchProps extends ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
+export interface SwitchProps extends ComponentPropsWithoutRef<typeof Root> {
   id?: string;
   size?: SwitchSize;
   disabled?: boolean;
@@ -23,7 +23,7 @@ export interface SwitchProps extends ComponentPropsWithoutRef<typeof SwitchPrimi
   position?: 'left' | 'right';
 }
 
-export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, SwitchProps>(
+export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
   (
     {
       id: _id,
@@ -60,9 +60,9 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, Swit
             <label htmlFor={id}>{label}</label>
           </Typography>
         )}
-        <SwitchPrimitive.Root ref={ref} className={styles.switch} disabled={disabled} {...props}>
-          <SwitchPrimitive.Thumb className={styles.thumb} />
-        </SwitchPrimitive.Root>
+        <Root ref={ref} className={styles.switch} disabled={disabled} {...props}>
+          <Thumb className={styles.thumb} />
+        </Root>
         {position === 'right' && (
           <Typography type="body" size={size} aria-disabled={disabled} asChild>
             <label htmlFor={id}>{label}</label>

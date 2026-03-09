@@ -12,8 +12,11 @@ export interface CssVarsOptions {
   };
 }
 
+const LEADING_DOLLAR = /^\$/;
+const DOT_GLOBAL = /\./g;
+
 function createVarName(name: string, prefix?: string): string {
-  const clean = name.replace(/^\$/, '').replace(/\./g, '-');
+  const clean = name.replace(LEADING_DOLLAR, '').replace(DOT_GLOBAL, '-');
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 

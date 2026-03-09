@@ -3,8 +3,8 @@ import { valueToString, parseValue } from '../../parsers';
 import { createTokenResolver } from '../../transforms';
 
 export function toCssValue(value: string | number | Value): string {
-  if (typeof value === 'string') return value;
-  if (typeof value === 'number') return value.toString();
+  if (typeof value === 'string') { return value; }
+  if (typeof value === 'number') { return value.toString(); }
   return valueToString(value);
 }
 
@@ -31,7 +31,7 @@ export function resolveTokenValue(
   }
 
   const parsed = parseValue(text);
-  if (!parsed.isValid || !parsed.value) {
+  if (!(parsed.isValid && parsed.value)) {
     throw new Error(`Invalid token reference: ${text}`);
   }
 

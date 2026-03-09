@@ -1,6 +1,6 @@
 import { CheckIcon, PlusIcon, SearchIcon, SettingsIcon } from '@cocso-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import { Button } from './button';
 
 const meta = {
   title: 'Components/Button',

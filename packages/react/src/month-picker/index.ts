@@ -1,1 +1,1 @@
-export * from './MonthPicker';
+export * from './month-picker';

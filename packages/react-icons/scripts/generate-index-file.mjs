@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 function generateIndexFiles() {
   const componentsDir = './src/components';
@@ -19,7 +19,7 @@ function generateIndexFiles() {
     return;
   }
 
-  subdirs.forEach((subdir) => {
+  for (const subdir of subdirs) {
     const subdirPath = path.join(componentsDir, subdir);
     const indexPath = path.join(subdirPath, 'index.ts');
 
@@ -30,14 +30,14 @@ function generateIndexFiles() {
 
     if (files.length === 0) {
       console.log(`No .tsx files found in ${subdirPath}`);
-      return;
+      continue;
     }
 
     const exportStatements = files.map((file) => `export * from './${file}';`).join('\n');
     fs.writeFileSync(indexPath, exportStatements);
 
     console.log(`Generated ${indexPath} with ${files.length} exports:`, files);
-  });
+  }
 
   const srcIndexPath = './src/index.ts';
   const srcIndexExports = subdirs

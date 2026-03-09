@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { OneTimePasswordField } from './OneTimePasswordField';
+import { OneTimePasswordField } from './one-time-password-field';
 
 const meta = {
   title: 'Components/OneTimePasswordField',
