@@ -32,7 +32,7 @@ export const Sidebar = (props: Props) => {
                   return (
                     <li className="w-full" key={item.url}>
                       <Typography
-                        asChild
+                        render={<Link href={item.url} />}
                         className={twMerge(
                           'center-y h-10 rounded-lg px-4 opacity-50 transition-all duration-150',
                           pathname !== item.url && 'hover:opacity-70',
@@ -41,7 +41,7 @@ export const Sidebar = (props: Props) => {
                         size={14}
                         weight="medium"
                       >
-                        <Link href={item.url}>{item.name}</Link>
+                        {item.name}
                       </Typography>
                     </li>
                   );

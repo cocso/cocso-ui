@@ -3,43 +3,29 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { MonthPicker } from '../month-picker';
 
+const trigger = <button type="button">Select month</button>;
+
 describe('MonthPicker', () => {
   describe('rendering', () => {
     it('renders the root container', () => {
-      const { container } = render(
-        <MonthPicker>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      const { container } = render(<MonthPicker trigger={trigger} />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
     it('renders the trigger child element', () => {
-      render(
-        <MonthPicker>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} />);
       expect(screen.getByRole('button', { name: 'Select month' })).toBeInTheDocument();
     });
 
     it('does not show the calendar before the trigger is clicked', () => {
-      render(
-        <MonthPicker>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} />);
       expect(document.querySelector('.react-datepicker')).not.toBeInTheDocument();
     });
   });
 
   describe('calendar open/close', () => {
     it('opens the calendar dropdown when the trigger is clicked', async () => {
-      render(
-        <MonthPicker>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} />);
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
       await waitFor(() => {
         expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
@@ -47,11 +33,7 @@ describe('MonthPicker', () => {
     });
 
     it('renders a month-year picker calendar after opening', async () => {
-      render(
-        <MonthPicker>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} />);
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
       await waitFor(() => {
         expect(document.querySelector('.react-datepicker__month-wrapper')).toBeInTheDocument();
@@ -62,27 +44,16 @@ describe('MonthPicker', () => {
   describe('value prop', () => {
     it('accepts a value prop without throwing', () => {
       const date = new Date(2024, 2, 1);
-      expect(() =>
-        render(
-          <MonthPicker value={date}>
-            <button>Select month</button>
-          </MonthPicker>
-        )
-      ).not.toThrow();
+      expect(() => render(<MonthPicker trigger={trigger} value={date} />)).not.toThrow();
     });
   });
 
   describe('onValueChange', () => {
     it('calls onValueChange when a month is selected', async () => {
       const onValueChange = vi.fn();
-      render(
-        <MonthPicker onValueChange={onValueChange}>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} onValueChange={onValueChange} />);
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
 
-      // Wait for the menu content to render
       await waitFor(() => {
         expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
       });
@@ -98,14 +69,9 @@ describe('MonthPicker', () => {
 
     it('passes a Date or null to onValueChange', async () => {
       const onValueChange = vi.fn();
-      render(
-        <MonthPicker onValueChange={onValueChange}>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} onValueChange={onValueChange} />);
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
 
-      // Wait for the menu content to render
       await waitFor(() => {
         expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
       });
@@ -124,21 +90,11 @@ describe('MonthPicker', () => {
 
   describe('disabled state', () => {
     it('renders without throwing when disabled=true', () => {
-      expect(() =>
-        render(
-          <MonthPicker disabled>
-            <button>Select month</button>
-          </MonthPicker>
-        )
-      ).not.toThrow();
+      expect(() => render(<MonthPicker trigger={trigger} disabled />)).not.toThrow();
     });
 
     it('renders the trigger button when disabled', () => {
-      render(
-        <MonthPicker disabled>
-          <button>Select month</button>
-        </MonthPicker>
-      );
+      render(<MonthPicker trigger={trigger} disabled />);
       expect(screen.getByRole('button', { name: 'Select month' })).toBeInTheDocument();
     });
   });
@@ -148,11 +104,7 @@ describe('MonthPicker', () => {
       const min = new Date(2024, 0, 1);
       const max = new Date(2024, 11, 1);
       expect(() =>
-        render(
-          <MonthPicker maxDate={max} minDate={min}>
-            <button>Select month</button>
-          </MonthPicker>
-        )
+        render(<MonthPicker trigger={trigger} minDate={min} maxDate={max} />)
       ).not.toThrow();
     });
   });

@@ -1,33 +1,43 @@
-// TODO: @radix-ui/react-one-time-password-field has no Base UI equivalent.
-// See: https://github.com/mui/base-ui/issues/75
-// This component needs to be migrated to a different solution (e.g., input-otp) in a future iteration.
-// For now, this is a temporary stub that maintains the component's public API shape.
+import { OTPInput, type OTPInputProps, type SlotProps } from 'input-otp';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import styles from './one-time-password-field.module.css';
 
-export interface OneTimePasswordFieldRootProps extends ComponentPropsWithoutRef<'div'> {
-  value?: string;
+export interface OneTimePasswordFieldProps
+  extends Omit<OTPInputProps, 'onChange' | 'render' | 'children'> {
   onValueChange?: (value: string) => void;
-  maxLength?: number;
+  className?: string;
+  slotClassName?: string;
 }
 
-export interface OneTimePasswordFieldInputProps extends ComponentPropsWithoutRef<'input'> {
-  index?: number;
+function Slot({ char, hasFakeCaret, isActive, placeholderChar }: SlotProps & { className?: string }) {
+  return (
+    <div
+      className={cx(styles.slot, isActive && styles.slotActive)}
+      data-active={isActive || undefined}
+    >
+      {char ?? placeholderChar}
+      {hasFakeCaret && <div className={styles.caret} />}
+    </div>
+  );
 }
 
-const OneTimePasswordFieldRoot = forwardRef<HTMLDivElement, OneTimePasswordFieldRootProps>(
-  ({ className, ...props }, ref) => {
-    return <div className={cx(styles.otp, className)} ref={ref} {...props} />;
+export const OneTimePasswordField = forwardRef<HTMLInputElement, OneTimePasswordFieldProps>(
+  ({ className, slotClassName, onValueChange, ...props }, ref) => {
+    return (
+      <OTPInput
+        ref={ref}
+        onChange={onValueChange}
+        containerClassName={cx(styles.otp, className)}
+        render={({ slots }) => (
+          <>
+            {slots.map((slot, idx) => (
+              <Slot key={idx} {...slot} className={slotClassName} />
+            ))}
+          </>
+        )}
+        {...props}
+      />
+    );
   }
 );
-
-const OneTimePasswordFieldInput = forwardRef<HTMLInputElement, OneTimePasswordFieldInputProps>(
-  ({ className, ...props }, ref) => {
-    return <input className={cx(styles.input, className)} ref={ref} {...props} />;
-  }
-);
-
-export const OneTimePasswordField = Object.assign(OneTimePasswordFieldRoot, {
-  Input: OneTimePasswordFieldInput,
-});

@@ -15,11 +15,12 @@ export interface MonthPickerProps extends ComponentPropsWithoutRef<'div'> {
   maxDate?: Date;
   minDate?: Date;
   onValueChange?: (value: Date | null) => void;
+  trigger?: ReactElement;
   value?: Date;
 }
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
-  ({ className, value, onValueChange, children, minDate, maxDate, disabled, ...props }, ref) => {
+  ({ className, value, onValueChange, trigger, minDate, maxDate, disabled, ...props }, ref) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
@@ -30,7 +31,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     return (
       <div className={cx(styles.root, className)} ref={ref} {...props}>
         <Dropdown onOpenChange={(value) => setOpen(value)} open={open}>
-          <Dropdown.Trigger render={children as ReactElement} />
+          <Dropdown.Trigger render={trigger} />
           <Dropdown.Content className={styles.content}>
               <DatePicker
                 dateFormat="yyyy년 MM월 dd일"

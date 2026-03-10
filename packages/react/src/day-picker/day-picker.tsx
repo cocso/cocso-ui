@@ -15,11 +15,12 @@ export interface DayPickerProps extends ComponentPropsWithoutRef<'div'> {
   maxDate?: Date;
   minDate?: Date;
   onValueChange?: (value: Date | null) => void;
+  trigger?: ReactElement;
   value?: Date;
 }
 
 export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
-  ({ className, value, onValueChange, disabled, children, minDate, maxDate, ...props }, ref) => {
+  ({ className, value, onValueChange, disabled, trigger, minDate, maxDate, ...props }, ref) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleChange = (date: Date | null) => {
@@ -30,7 +31,7 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
     return (
       <div className={cx(styles.root, className)} ref={ref} {...props}>
         <Dropdown onOpenChange={(value) => setOpen(value)} open={open}>
-          <Dropdown.Trigger render={children as ReactElement} />
+          <Dropdown.Trigger render={trigger} />
           <Dropdown.Content aria-label="날짜 선택" className={styles.content}>
               <DatePicker
                 dateFormat="yyyy년 MM월 dd일"

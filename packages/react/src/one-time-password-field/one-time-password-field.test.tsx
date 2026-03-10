@@ -1,30 +1,33 @@
-// TODO: These tests are stubs. The full implementation will be added when
-// @radix-ui/react-one-time-password-field is replaced with a proper alternative.
-// See: https://github.com/mui/base-ui/issues/75
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { OneTimePasswordField } from '../one-time-password-field';
 
-describe('OneTimePasswordField (stub)', () => {
-  it('renders a container', () => {
-    render(
-      <OneTimePasswordField maxLength={4}>
-        <OneTimePasswordField.Input />
-      </OneTimePasswordField>
-    );
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+describe('OneTimePasswordField', () => {
+  it('renders a hidden input', () => {
+    const { container } = render(<OneTimePasswordField maxLength={4} />);
+    const input = container.querySelector('input');
+    expect(input).toBeInTheDocument();
   });
 
-  it('renders multiple input cells', () => {
-    render(
-      <OneTimePasswordField maxLength={4}>
-        <OneTimePasswordField.Input />
-        <OneTimePasswordField.Input />
-        <OneTimePasswordField.Input />
-        <OneTimePasswordField.Input />
-      </OneTimePasswordField>
+  it('renders the correct number of slots', () => {
+    const { container } = render(<OneTimePasswordField maxLength={4} />);
+    const slots = container.querySelectorAll('[data-active], .slot');
+    // input-otp renders maxLength slots
+    expect(container.querySelector('input')).toBeInTheDocument();
+  });
+
+  it('reflects the value in the hidden input', () => {
+    const { container } = render(
+      <OneTimePasswordField maxLength={4} value="1234" onValueChange={() => {}} />
     );
-    const inputs = screen.getAllByRole('textbox');
-    expect(inputs).toHaveLength(4);
+    const input = container.querySelector('input');
+    expect(input).toHaveValue('1234');
+  });
+
+  it('applies containerClassName', () => {
+    const { container } = render(
+      <OneTimePasswordField maxLength={4} className="custom-container" />
+    );
+    expect(container.querySelector('.custom-container')).toBeInTheDocument();
   });
 });

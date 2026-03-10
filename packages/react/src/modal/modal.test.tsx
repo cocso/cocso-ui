@@ -107,14 +107,12 @@ describe('Modal', () => {
   });
 
   describe('Modal.Close with render', () => {
-    it('renders a custom close element via render', () => {
+    it('renders a custom close element via render prop', () => {
       render(
         <Modal defaultOpen>
           <Modal.Content>
             <Modal.Title>Dialog</Modal.Title>
-            <Modal.Close>
-              <button type="button">Custom Close</button>
-            </Modal.Close>
+            <Modal.Close render={<button type="button">Custom Close</button>} />
           </Modal.Content>
         </Modal>
       );

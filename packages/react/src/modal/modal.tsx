@@ -1,7 +1,7 @@
 import { CloseIcon } from '@cocso-ui/react-icons';
 import { Dialog as DialogBase } from '@base-ui/react/dialog';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type ReactNode, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ReactElement, forwardRef } from 'react';
 import { colors } from '../token';
 import { Typography } from '../typography';
 import styles from './modal.module.css';
@@ -20,19 +20,14 @@ const ModalContent = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeof 
 );
 
 interface ModalCloseProps extends ComponentPropsWithoutRef<typeof DialogBase.Close> {
-  children?: ReactNode;
+  render?: ReactElement;
 }
 
 const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
-  ({ className, children, ...props }, ref) => {
-    if (children) {
+  ({ className, render: renderProp, ...props }, ref) => {
+    if (renderProp) {
       return (
-        <DialogBase.Close
-          render={children as React.ReactElement}
-          className={className}
-          ref={ref}
-          {...props}
-        />
+        <DialogBase.Close render={renderProp} className={className} ref={ref} {...props} />
       );
     }
     return (
