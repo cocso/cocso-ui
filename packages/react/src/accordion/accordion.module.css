@@ -28,11 +28,11 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.trigger:not([data-open]) > .chevron {
+.trigger:not([data-panel-open]) > .chevron {
   transform: rotate(0deg);
 }
 
-.trigger[data-open] > .chevron {
+.trigger[data-panel-open] > .chevron {
   transform: rotate(180deg);
 }
 
