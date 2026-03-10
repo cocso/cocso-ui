@@ -8,7 +8,6 @@ import { ViewTransitions } from 'next-view-transitions';
 import type { PropsWithChildren } from 'react';
 import { Layout } from '~/components/layout';
 import { SearchDialog } from '~/components/ui';
-import { Pretendard } from './_fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cocso-ui.com'),
@@ -20,7 +19,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <ViewTransitions>
       <html dir="ltr" lang="ko" suppressHydrationWarning>
-        <body className={Pretendard.className}>
+        <body>
           <RootProvider search={{ SearchDialog }}>
             <Layout>{children}</Layout>
           </RootProvider>
