@@ -5,133 +5,61 @@ import { Switch } from './switch';
 const meta = {
   title: 'Components/Switch',
   component: Switch,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'Switch 컴포넌트는 사용자가 설정을 켜거나 끌 수 있는 토글 스위치입니다.',
-      },
-    },
-  },
-  tags: ['autodocs'],
   argTypes: {
-    checked: {
-      description: '스위치의 체크 상태',
-      control: 'boolean',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
-    onCheckedChange: {
-      description: '스위치 상태 변경 시 호출되는 함수',
-      action: 'changed',
-      table: {
-        type: { summary: '(checked: boolean) => void' },
-      },
-    },
-    size: {
-      description: '스위치의 크기',
-      control: 'select',
-      options: ['md', 'lg'],
-      table: {
-        defaultValue: { summary: 'md' },
-        type: { summary: 'SwitchSize' },
-      },
-    },
-    label: {
-      description: '스위치 라벨 텍스트',
-      control: 'text',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    position: {
-      description: '라벨의 위치',
-      control: 'select',
-      options: ['left', 'right'],
-      table: {
-        defaultValue: { summary: 'right' },
-        type: { summary: "'left' | 'right'" },
-      },
-    },
-    disabled: {
-      description: '스위치 비활성화 여부',
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-        type: { summary: 'boolean' },
-      },
-    },
+    size: { control: 'select', options: ['sm', 'md'] },
+    position: { control: 'radio', options: ['left', 'right'] },
+    disabled: { control: 'boolean' },
   },
 } satisfies Meta<typeof Switch>;
 
 export default meta;
-
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
-  parameters: {
-    controls: { disable: true },
-  },
+export const Default: Story = {
   render: () => {
-    const [state1, setState1] = useState(true);
-    const [state2, setState2] = useState(false);
-    const [state3, setState3] = useState(true);
-    const [state4, setState4] = useState(true);
+    const [checked, setChecked] = useState(false);
+    return <Switch checked={checked} onCheckedChange={setChecked} />;
+  },
+};
 
+export const WithLabel: Story = {
+  render: () => {
+    const [checked, setChecked] = useState(false);
+    return <Switch checked={checked} label="알림 사용" onCheckedChange={setChecked} />;
+  },
+};
+
+export const Sizes: Story = {
+  render: () => {
+    const [s1, setS1] = useState(false);
+    const [s2, setS2] = useState(false);
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-        >
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-          <Switch checked={state1} label="Medium" onCheckedChange={setState1} size="md" />
-          <Switch checked={state2} label="Large" onCheckedChange={setState2} size="lg" />
-        </div>
-
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-        >
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>
-            Label Positions
-          </h4>
-          <Switch
-            checked={state3}
-            label="Label on Right"
-            onCheckedChange={setState3}
-            position="right"
-          />
-          <Switch
-            checked={state4}
-            label="Label on Left"
-            onCheckedChange={setState4}
-            position="left"
-          />
-        </div>
-
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
-        >
-          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
-          <Switch checked disabled label="Disabled On" onChange={() => {}} />
-          <Switch checked={false} disabled label="Disabled Off" onChange={() => {}} />
-        </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Switch checked={s1} label="Small" onCheckedChange={setS1} size="sm" />
+        <Switch checked={s2} label="Medium" onCheckedChange={setS2} size="md" />
       </div>
     );
   },
 };
 
-export const Playground: Story = {
-  render: args => {
-    const [checked, setChecked] = useState(args.checked || false);
+export const LabelPositions: Story = {
+  render: () => {
+    const [l, setL] = useState(false);
+    const [r, setR] = useState(false);
+    return (
+      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+        <Switch checked={l} label="왼쪽" onCheckedChange={setL} position="left" />
+        <Switch checked={r} label="오른쪽" onCheckedChange={setR} position="right" />
+      </div>
+    );
+  },
+};
 
-    return <Switch {...args} checked={checked} onCheckedChange={setChecked} />;
-  },
-  args: {
-    checked: false,
-    label: 'Switch',
-    size: 'md',
-    position: 'right',
-    disabled: false,
-  },
+export const Disabled: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Switch disabled label="비활성 off" onCheckedChange={() => {}} />
+      <Switch checked disabled label="비활성 on" onCheckedChange={() => {}} />
+    </div>
+  ),
 };
