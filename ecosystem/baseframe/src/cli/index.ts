@@ -1,9 +1,11 @@
-import { createRequire } from 'module';
-import path from 'path';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 import fs from 'fs-extra';
 import YAML from 'yaml';
 import yargs from 'yargs';
-import { cssVars, tailwind, type Token, type Collections } from '../core';
+import { type Collections, cssVars, type Token, tailwind } from '../core';
+
+const YAML_FILE_REGEX = /\.ya?ml$/;
 
 const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
@@ -14,11 +16,11 @@ function showBanner() {
     `
 ██████╗  █████╗ ███████╗███████╗███████╗██████╗  █████╗ ███╗   ███╗███████╗
 ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝
-██████╔╝███████║███████╗█████╗  █████╗  ██████╔╝███████║██╔████╔██║█████╗  
-██╔══██╗██╔══██║╚════██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝  
+██████╔╝███████║███████╗█████╗  █████╗  ██████╔╝███████║██╔████╔██║█████╗
+██╔══██╗██╔══██║╚════██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝
 ██████╔╝██║  ██║███████║███████╗██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗
 ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
-` + '\n',
+`
   );
 }
 
@@ -34,7 +36,7 @@ function findYamlFiles(dir: string): string[] {
 
       if (stat.isDirectory()) {
         scanDir(fullPath);
-      } else if (stat.isFile() && /\.ya?ml$/.test(item)) {
+      } else if (stat.isFile() && YAML_FILE_REGEX.test(item)) {
         files.push(fullPath);
       }
     }
@@ -107,7 +109,7 @@ yargs(process.argv.slice(2))
   .command(
     'css-vars [dir] [prefix]',
     'Generate CSS variables',
-    (yargs) => {
+    yargs => {
       return yargs
         .positional('dir', {
           describe: 'Output directory',
@@ -119,15 +121,15 @@ yargs(process.argv.slice(2))
           type: 'string',
         });
     },
-    (argv) => {
+    argv => {
       showBanner();
       generateCss(argv.dir as string, argv.prefix as string | undefined);
-    },
+    }
   )
   .command(
     'tailwindcss [dir] [prefix]',
     'Generate TailwindCSS 4.0 configuration',
-    (yargs) => {
+    yargs => {
       return yargs
         .positional('dir', {
           describe: 'Output directory',
@@ -139,10 +141,10 @@ yargs(process.argv.slice(2))
           type: 'string',
         });
     },
-    (argv) => {
+    argv => {
       showBanner();
       generateTailwindCss(argv.dir as string, argv.prefix as string | undefined);
-    },
+    }
   )
   .demandCommand(1, 'You need to specify a command.')
   .showHelpOnFail(true)

@@ -5,16 +5,16 @@ export const DomainIcon = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        height="24"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path d="M4 21v-15c0 -1 1 -2 2 -2h5c1 0 2 1 2 2v15" />
         <path d="M16 8h2c1 0 2 1 2 2v11" />

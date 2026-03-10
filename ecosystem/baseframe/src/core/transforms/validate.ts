@@ -1,14 +1,14 @@
+import { buildAst, parseValue } from '../parsers';
 import type {
-  Token,
   Collection,
-  TokenDecl,
   Collections,
-  Value,
+  ParseResult,
+  Token,
+  TokenDecl,
   ValidationError,
   ValidationResult,
-  ParseResult,
+  Value,
 } from '../types';
-import { parseValue, buildAst } from '../parsers';
 
 function validateValue(value: string | number): ParseResult {
   return parseValue(value);
@@ -29,8 +29,8 @@ function validateAllValues(tokens: TokenDecl[]): Array<{
     result: ParseResult;
   }> = [];
 
-  tokens.forEach((token) => {
-    token.values.forEach((value) => {
+  for (const token of tokens) {
+    for (const value of token.values) {
       const result = validateValue(value.value);
       results.push({
         tokenName: token.token.name,
@@ -39,8 +39,8 @@ function validateAllValues(tokens: TokenDecl[]): Array<{
         value: value.value,
         result,
       });
-    });
-  });
+    }
+  }
 
   return results;
 }
@@ -57,9 +57,9 @@ function getAllTokenRefs(value: Value): { collection: string; token: string }[] 
     refs.push(...getAllTokenRefs(value.blur));
     refs.push(...getAllTokenRefs(value.spread));
   } else if (value.kind === 'Shadow') {
-    value.layers.forEach((layer: Value) => {
+    for (const layer of value.layers) {
       refs.push(...getAllTokenRefs(layer));
-    });
+    }
   }
 
   return refs;
@@ -81,9 +81,9 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
     return { isValid: false, errors, warnings };
   }
 
-  Object.entries(token.data.tokens).forEach(([tokenName, tokenData]) => {
+  for (const [tokenName, tokenData] of Object.entries(token.data.tokens)) {
     const tokenModes = Object.keys(tokenData.values);
-    const missingModes = collectionDef.modes.filter((mode) => !tokenModes.includes(mode));
+    const missingModes = collectionDef.modes.filter(mode => !tokenModes.includes(mode));
 
     if (missingModes.length > 0) {
       errors.push({
@@ -94,7 +94,7 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
       });
     }
 
-    Object.entries(tokenData.values).forEach(([mode, value]) => {
+    for (const [mode, value] of Object.entries(tokenData.values)) {
       const result = parseValue(value);
       if (!result.isValid) {
         errors.push({
@@ -107,8 +107,8 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
           value,
         });
       }
-    });
-  });
+    }
+  }
 
   return { isValid: errors.length === 0, errors, warnings };
 }
@@ -118,7 +118,7 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
   const warnings: string[] = [];
   const valueResults = validateAllValues(tokens);
 
-  valueResults.forEach(({ tokenName, collection, mode, value, result }) => {
+  for (const { tokenName, collection, mode, value, result } of valueResults) {
     if (!result.isValid) {
       errors.push({
         type: 'INVALID_VALUE_FORMAT',
@@ -128,15 +128,15 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
         mode,
         value,
       });
-      return;
+      continue;
     }
 
     if (result.value) {
       const tokenRefs = getAllTokenRefs(result.value);
 
-      tokenRefs.forEach(({ collection: refCollection, token: refToken }) => {
+      for (const { collection: refCollection, token: refToken } of tokenRefs) {
         const refName = `$${refCollection}.${refToken}`;
-        const foundRef = allTokens.find((t) => t.token.name === refName);
+        const foundRef = allTokens.find(t => t.token.name === refName);
 
         if (!foundRef) {
           errors.push({
@@ -148,25 +148,25 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
             value,
           });
         }
-      });
+      }
     }
-  });
+  }
 
   return { isValid: errors.length === 0, errors, warnings };
 }
 
 export function validateAllTokens(
   tokens: Token[],
-  definitions: Map<string, Collection>,
+  definitions: Map<string, Collection>
 ): ValidationResult {
   const errors: ValidationError[] = [];
   const warnings: string[] = [];
 
-  tokens.forEach((collection) => {
+  for (const collection of tokens) {
     const result = validateCollection(collection, definitions);
     errors.push(...result.errors);
     warnings.push(...result.warnings);
-  });
+  }
 
   const collections: Collections = {
     kind: 'TokenCollections',

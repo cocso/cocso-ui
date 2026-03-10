@@ -1,0 +1,20 @@
+.link {
+  display: inline-flex;
+  gap: var(--ds-spacing-2);
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+}
+
+.link > svg {
+  flex-shrink: 0;
+  width: var(--ds-spacing-8);
+  height: var(--ds-spacing-8);
+}
+
+.indicator {
+  text-decoration: underline;
+}

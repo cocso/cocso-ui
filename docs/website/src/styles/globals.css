@@ -1,9 +1,13 @@
-@import 'tailwindcss';
-@import 'fumadocs-ui/css/neutral.css';
-@import 'fumadocs-ui/css/preset.css';
-@import './utilities.css';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@import "./utilities.css";
 
 @theme {
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+
   --breakpoint-lg: 1200px;
 
   --size-app-width: 1200px;
@@ -13,7 +17,8 @@
 }
 
 @layer base {
-  html, body {
+  html,
+  body {
     height: 100%;
   }
 
@@ -31,26 +36,41 @@
   }
 
   body::before {
-    content: '';
     position: fixed;
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 1px;
-    background-color: var(--color-neutral-200);
     z-index: var(--z-index-above);
-    transform: translateX(calc(-1 * var(--size-app-width) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+    width: 1px;
+    content: "";
+    background-color: var(--color-neutral-200);
+    transform: translateX(
+      calc(
+        -1 *
+        var(--size-app-width) /
+        2 -
+        var(--removed-body-scroll-bar-size, 0px) /
+        2
+      )
+    );
   }
 
   body::after {
-    content: '';
     position: fixed;
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 1px;
-    background-color: var(--color-neutral-200);
     z-index: var(--z-index-above);
-    transform: translateX(calc(var(--size-app-width) / 2 - var(--removed-body-scroll-bar-size, 0px) / 2));
+    width: 1px;
+    content: "";
+    background-color: var(--color-neutral-200);
+    transform: translateX(
+      calc(
+        var(--size-app-width) /
+        2 -
+        var(--removed-body-scroll-bar-size, 0px) /
+        2
+      )
+    );
   }
 }

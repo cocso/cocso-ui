@@ -1,0 +1,59 @@
+.wrapper {
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.wrapper.stretch {
+  width: 100%;
+}
+
+.wrapper.stretch .select {
+  width: 100%;
+}
+
+.select {
+  --cocso-select-min-width: inherit;
+  --cocso-select-height: inherit;
+  --cocso-select-padding-left: inherit;
+  --cocso-select-padding-right: inherit;
+  --cocso-select-font-size: inherit;
+  --cocso-select-border-radius: inherit;
+  --cocso-select-bg-color: var(--ds-color-white);
+  min-width: var(--cocso-select-min-width);
+  height: var(--cocso-select-height);
+  padding-right: var(--cocso-select-padding-right);
+  padding-left: var(--cocso-select-padding-left);
+  font-size: var(--cocso-select-font-size);
+  color: var(--ds-color-neutral-950);
+  -moz-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--cocso-select-bg-color);
+  border: 1px solid var(--ds-color-neutral-100);
+  border-radius: var(--cocso-select-border-radius);
+}
+
+.wrapper.disabled {
+  cursor: not-allowed;
+}
+
+.wrapper.disabled .select {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: var(--ds-spacing-5);
+  color: var(--ds-color-neutral-500);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.wrapper.disabled .icon {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

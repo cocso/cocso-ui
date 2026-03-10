@@ -3,14 +3,15 @@ import type { Ast, Collections, Token, TokenDecl } from '../types';
 import { resolveTokenValue, toCssValue } from './utils';
 
 export interface TailwindOptions {
-  prefix?: string;
   banner?: string;
+  prefix?: string;
 }
 
-function createVarName(name: string, prefix?: string): string {
-  let clean = name.replace(/^\$/, '');
-  clean = clean.replace(/\./g, '-');
+const LEADING_DOLLAR = /^\$/;
+const DOT_GLOBAL = /\./g;
 
+function createVarName(name: string, prefix?: string): string {
+  const clean = name.replace(LEADING_DOLLAR, '').replace(DOT_GLOBAL, '-');
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
@@ -19,15 +20,15 @@ function createTheme(tokens: TokenDecl[], mode: string, options: TailwindOptions
   const vars: string[] = [];
   const processed = new Set<string>();
 
-  tokens.forEach(token => {
+  for (const token of tokens) {
     if (processed.has(token.token.name)) {
-      return;
+      continue;
     }
     processed.add(token.token.name);
 
     const value = token.values.find(v => v.mode === mode);
     if (!value) {
-      return;
+      continue;
     }
 
     const resolved = resolveTokenValue(value.value, tokens, createVarName, prefix);
@@ -39,7 +40,7 @@ function createTheme(tokens: TokenDecl[], mode: string, options: TailwindOptions
 
     const varName = createVarName(token.token.name, prefix);
     vars.push(`  ${varName}: ${css};`);
-  });
+  }
 
   return vars.length > 0 ? `@theme {\n${vars.join('\n')}\n}` : '';
 }
@@ -94,17 +95,17 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
     parts.push(banner);
   }
 
-  collections.forEach(collection => {
+  for (const collection of collections) {
     const collectionTokens = tokens.filter(token => token.token.collection === collection.name);
 
-    collection.modes.forEach(mode => {
+    for (const mode of collection.modes) {
       const theme = createTheme(collectionTokens, mode, options);
       if (theme) {
         parts.push(theme);
         parts.push('');
       }
-    });
-  });
+    }
+  }
 
   const utilities = createUtilities();
 
@@ -119,7 +120,7 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
 export function generateTailwindCSS(
   tokens: Token[],
   collections: Collections,
-  options: TailwindOptions = {},
+  options: TailwindOptions = {}
 ): string {
   const ast = buildValidatedAst(tokens, collections);
   return generateFromAst(ast, options);

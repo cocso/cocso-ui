@@ -1,0 +1,213 @@
+import { Primitive } from '@radix-ui/react-primitive';
+import { clsx as cx } from 'clsx';
+import type { ComponentPropsWithoutRef, CSSProperties, ReactElement, ReactNode } from 'react';
+import { cloneElement, forwardRef, isValidElement } from 'react';
+import { match } from 'ts-pattern';
+import { Spinner } from '../spinner';
+import { colors, type FontWeight, fontWeight } from '../token';
+import styles from './button.module.css';
+
+export type ButtonSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'neutral';
+
+export type ButtonShape = 'square' | 'circle' | 'rounded';
+
+export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'prefix'> {
+  asChild?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  prefix?: ReactNode;
+  shape?: ButtonShape;
+  size?: ButtonSize;
+  suffix?: ReactNode;
+  svgOnly?: boolean;
+  variant?: ButtonVariant;
+  weight?: FontWeight;
+}
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      asChild,
+      className,
+      style: _style,
+      children,
+      size = 'md',
+      variant = 'primary',
+      weight = 'medium',
+      shape = 'square',
+      prefix,
+      suffix,
+      svgOnly = false,
+      disabled = false,
+      loading = false,
+      ...props
+    },
+    ref
+  ) => {
+    const style = {
+      ..._style,
+      ...getSizeStyles(size),
+      '--cocso-button-font-color': getColor(variant),
+      '--cocso-button-font-weight': fontWeight[weight],
+      '--cocso-button-border': getBorder(variant),
+      '--cocso-button-border-radius': getBorderRadius(shape, size),
+      '--cocso-button-bg-color': getBackgroundColor(variant),
+      '--cocso-button-bg-color-hover': getBackgroundColorHover(variant),
+      '--cocso-button-bg-color-active': getBackgroundColorActive(variant),
+    } as CSSProperties;
+
+    const isDisabled = disabled || loading;
+    const cn = cx(
+      styles.button,
+      isDisabled && styles.disabled,
+      svgOnly && styles.svgOnly,
+      className
+    );
+
+    const renderButtonContent = (ctx: ReactNode) => (
+      <>
+        {loading && <Spinner color="white" size="sm" />}
+        {prefix && <span className={styles.prefix}>{prefix}</span>}
+        <span className={styles.content}>{ctx}</span>
+        {suffix && <span className={styles.suffix}>{suffix}</span>}
+      </>
+    );
+
+    if (asChild) {
+      if (!isValidElement(children)) {
+        throw new Error('Button: asChild requires a single React element as a child');
+      }
+
+      interface ChildElementProps {
+        children?: ReactNode;
+        className?: string;
+        style?: CSSProperties;
+        [key: string]: unknown;
+      }
+
+      const target = children as ReactElement<ChildElementProps>;
+      const ctx = target.props.children;
+
+      return cloneElement(target, {
+        ref,
+        ...props,
+        ...target.props,
+        className: cx(cn, target.props.className),
+        style: { ...style, ...target.props.style },
+        children: renderButtonContent(ctx),
+      });
+    }
+
+    return (
+      <Primitive.button className={cn} disabled={isDisabled} ref={ref} style={style} {...props}>
+        {renderButtonContent(children)}
+      </Primitive.button>
+    );
+  }
+);
+
+const getSizeStyles = (size: ButtonSize) => {
+  const height = match(size)
+    .with('xl', () => 56)
+    .with('lg', () => 48)
+    .with('md', () => 40)
+    .with('sm', () => 32)
+    .with('xs', () => 28)
+    .exhaustive();
+  const inlinePadding = match(size)
+    .with('xl', () => 16)
+    .with('lg', () => 14)
+    .with('md', () => 10)
+    .with('sm', () => 8)
+    .with('xs', () => 6)
+    .exhaustive();
+  const contentPadding = match(size)
+    .with('xl', () => '0 6px')
+    .with('lg', () => '0 6px')
+    .with('md', () => '0 6px')
+    .with('sm', () => '0 2px')
+    .with('xs', () => '0')
+    .exhaustive();
+  const fontSize = match(size)
+    .with('xl', () => 16)
+    .with('lg', () => 16)
+    .with('xs', () => 12)
+    .otherwise(() => 14);
+
+  return {
+    '--cocso-button-height': `${height}px`,
+    '--cocso-button-padding-inline': `${inlinePadding}px`,
+    '--cocso-button-content-padding': contentPadding,
+    '--cocso-button-font-size': `${fontSize}px`,
+  };
+};
+
+const getBorderRadius = (shape: ButtonShape, size: ButtonSize) => {
+  return match(shape)
+    .with('square', () => {
+      return match(size)
+        .with('xs', () => '4px')
+        .otherwise(() => '6px');
+    })
+    .with('circle', () => '100%')
+    .with('rounded', () => '100px')
+    .exhaustive();
+};
+
+const getColor = (variant: ButtonVariant) => {
+  return match(variant)
+    .with('primary', 'success', 'error', 'neutral', () => colors.white)
+    .with('secondary', 'tertiary', 'warning', () => colors.neutral950)
+    .exhaustive();
+};
+
+const getBorder = (variant: ButtonVariant) => {
+  return match(variant)
+    .with('tertiary', () => `1px solid ${colors.neutral100}`)
+    .otherwise(() => 'none');
+};
+
+const getBackgroundColor = (variant: ButtonVariant) => {
+  return match(variant)
+    .with('primary', () => colors.primary500)
+    .with('secondary', () => colors.white)
+    .with('tertiary', () => colors.transparent)
+    .with('success', () => colors.success500)
+    .with('error', () => colors.danger500)
+    .with('warning', () => colors.warning300)
+    .with('neutral', () => colors.neutral950)
+    .exhaustive();
+};
+
+const getBackgroundColorHover = (variant: ButtonVariant) => {
+  return match(variant)
+    .with('primary', () => colors.primary600)
+    .with('secondary', () => colors.neutral50)
+    .with('tertiary', () => colors.neutral50)
+    .with('success', () => colors.success600)
+    .with('error', () => colors.danger600)
+    .with('warning', () => colors.warning400)
+    .with('neutral', () => colors.neutral800)
+    .exhaustive();
+};
+
+const getBackgroundColorActive = (variant: ButtonVariant) => {
+  return match(variant)
+    .with('primary', () => colors.primary700)
+    .with('secondary', () => colors.neutral100)
+    .with('tertiary', () => colors.neutral100)
+    .with('success', () => colors.success700)
+    .with('error', () => colors.danger700)
+    .with('warning', () => colors.warning500)
+    .with('neutral', () => colors.neutral700)
+    .exhaustive();
+};

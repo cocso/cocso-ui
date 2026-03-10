@@ -4,36 +4,36 @@ export interface HexColor {
 }
 
 export interface RgbColor {
+  b: number;
+  g: number;
   kind: 'RgbColor';
   r: number;
-  g: number;
-  b: number;
 }
 
 export interface RgbaColor {
+  a: number;
+  b: number;
+  g: number;
   kind: 'RgbaColor';
   r: number;
-  g: number;
-  b: number;
-  a: number;
 }
 
 export interface TokenRef {
-  kind: 'TokenRef';
   collection: string;
+  kind: 'TokenRef';
   token: string;
 }
 
 export interface SizeValue {
   kind: 'SizeValue';
-  value: number;
   unit: 'px' | 'rem' | 'em' | 'vw' | 'vh' | '%';
+  value: number;
 }
 
 export interface DurationValue {
   kind: 'DurationValue';
-  value: number;
   unit: 'ms' | 's';
+  value: number;
 }
 
 export interface NumberValue {
@@ -49,12 +49,12 @@ export interface StringValue {
 export type ColorValue = HexColor | RgbColor | RgbaColor | TokenRef;
 
 export interface ShadowLayer {
+  blur: SizeValue | TokenRef;
+  color: ColorValue;
   kind: 'ShadowLayer';
   offsetX: SizeValue | TokenRef;
   offsetY: SizeValue | TokenRef;
-  blur: SizeValue | TokenRef;
   spread: SizeValue | TokenRef;
-  color: ColorValue;
 }
 
 export interface Shadow {

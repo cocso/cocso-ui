@@ -8,14 +8,14 @@ export const NaverLogo = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="20"
+        aria-hidden="true"
+        fill="none"
         height="20"
         viewBox="0 0 20 20"
-        fill="none"
+        width="20"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
-        <rect width="20" height="20" rx="4" fill="#03C75A" />
+        <rect fill="#03C75A" height="20" rx="4" width="20" />
         <g clipPath={`url(#${id})`}>
           <path
             d="M11.7807 10.3517L8.07305 5H5V15H8.2193V9.6475L11.927 15H15V5H11.7807V10.3517Z"
@@ -24,7 +24,7 @@ export const NaverLogo = (props: IconProps) => {
         </g>
         <defs>
           <clipPath id={id}>
-            <rect width="10" height="10" fill="white" transform="translate(5 5)" />
+            <rect fill="white" height="10" transform="translate(5 5)" width="10" />
           </clipPath>
         </defs>
       </svg>

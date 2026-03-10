@@ -10,12 +10,12 @@ export const HuonsLogo = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="20"
+        aria-hidden="true"
+        fill="none"
         height="20"
         viewBox="0 0 339 300"
-        fill="none"
+        width="20"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path
           d="M165.312 299.156C131.496 298.866 93.5139 283.058 61.106 255.776C25.4434 225.743 4.77416 187.137 1.33683 144.137C-0.0978285 126.15 1.54082 108.487 6.20881 91.6355C10.5328 76.0275 17.3061 62.1289 26.3421 50.3249C35.4887 38.3863 48.4127 27.5436 63.7233 18.9757C69.1366 15.949 74.7766 13.225 80.4966 10.889C80.63 10.8223 89.8299 6.50637 108.115 2.67304C111.373 2.06904 114.696 1.59839 117.974 1.27306L118.765 1.21439C121.662 0.971721 124.555 0.846386 127.439 0.846386C146.156 0.846386 163.426 6.19708 177.386 16.317C181.952 19.6264 186.259 23.557 190.563 28.3357L190.88 28.693L191.355 28.6023C204.02 26.133 216.496 24.8783 228.436 24.8783C247.885 24.8783 266.077 28.1983 282.505 34.741C298.761 41.2116 312.911 52.9276 322.335 67.7289C339.977 95.4341 342.031 134.953 327.825 173.438C318.497 198.727 302.805 220.671 279.864 240.516C264.909 253.451 247.396 262.808 229.22 267.567L228.867 267.66L228.691 267.982C217.888 287.792 194.798 299.156 165.34 299.156H165.312Z"
@@ -47,34 +47,34 @@ export const HuonsLogo = (props: IconProps) => {
         />
         <defs>
           <linearGradient
+            gradientUnits="userSpaceOnUse"
             id={id1}
             x1="349.698"
-            y1="146.199"
             x2="154.61"
+            y1="146.199"
             y2="146.199"
-            gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#7DCDF4" />
             <stop offset="1" stopColor="#006FBC" />
           </linearGradient>
           <linearGradient
+            gradientUnits="userSpaceOnUse"
             id={id2}
             x1="-19.6087"
-            y1="155.036"
             x2="280.475"
+            y1="155.036"
             y2="155.036"
-            gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#7DCDF4" />
             <stop offset="1" stopColor="#006FBC" />
           </linearGradient>
           <linearGradient
+            gradientUnits="userSpaceOnUse"
             id={id3}
             x1="-19.4244"
-            y1="32.294"
             x2="280.66"
+            y1="32.294"
             y2="32.294"
-            gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#7DCDF4" />
             <stop offset="1" stopColor="#006FBC" />

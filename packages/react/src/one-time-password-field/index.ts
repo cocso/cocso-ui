@@ -1,1 +1,1 @@
-export * from './OneTimePasswordField';
+export * from './one-time-password-field';

@@ -1,1 +1,1 @@
-export * from './DayPicker';
+export * from './day-picker';
