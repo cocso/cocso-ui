@@ -7,8 +7,8 @@ describe('Accordion', () => {
   describe('rendering', () => {
     it('renders accordion items', () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
@@ -22,14 +22,14 @@ describe('Accordion', () => {
 
     it('renders multiple accordion items', () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-          <Accordion.Item value="item-2">
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 2</Accordion.Trigger>
             </Accordion.Header>
@@ -44,8 +44,8 @@ describe('Accordion', () => {
 
     it('renders chevron icon by default', () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
@@ -61,8 +61,8 @@ describe('Accordion', () => {
 
     it('does not render chevron when chevron=false', () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger chevron={false}>Section 1</Accordion.Trigger>
             </Accordion.Header>
@@ -79,8 +79,8 @@ describe('Accordion', () => {
   describe('behavior', () => {
     it('expands item content when trigger is clicked', async () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
@@ -96,7 +96,7 @@ describe('Accordion', () => {
 
     it('collapses item content when trigger is clicked again', async () => {
       render(
-        <Accordion collapsible defaultValue="item-1" type="single">
+        <Accordion defaultValue={['item-1']}>
           <Accordion.Item value="item-1">
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
@@ -109,13 +109,13 @@ describe('Accordion', () => {
       const trigger = screen.getByRole('button', { name: /Section 1/i });
       // Content is initially open; click to close
       await userEvent.click(trigger);
-      expect(trigger).toHaveAttribute('data-state', 'closed');
+      expect(trigger).toHaveAttribute('aria-expanded', 'false');
     });
 
     it('sets aria-expanded on trigger when open', async () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
@@ -130,16 +130,16 @@ describe('Accordion', () => {
       expect(trigger).toHaveAttribute('aria-expanded', 'true');
     });
 
-    it('only one item is open at a time with type="single"', async () => {
+    it('only one item is open at a time by default', async () => {
       render(
-        <Accordion type="single">
-          <Accordion.Item value="item-1">
+        <Accordion>
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-          <Accordion.Item value="item-2">
+          <Accordion.Item>
             <Accordion.Header>
               <Accordion.Trigger>Section 2</Accordion.Trigger>
             </Accordion.Header>

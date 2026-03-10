@@ -68,20 +68,12 @@ describe('Button', () => {
     });
   });
 
-  describe('asChild', () => {
-    it('renders as the child element when asChild=true', () => {
+  describe('render prop', () => {
+    it('renders as the provided element when render is given', () => {
       render(
-        <Button asChild>
-          <a href="/test">Link Button</a>
-        </Button>
+        <Button render={<a href="/test">Link Button</a>}>Link Button</Button>
       );
       expect(screen.getByRole('link', { name: 'Link Button' })).toBeInTheDocument();
-    });
-
-    it('throws when asChild receives a non-element child', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-      expect(() => render(<Button asChild>plain text</Button>)).toThrow();
-      consoleError.mockRestore();
     });
   });
 

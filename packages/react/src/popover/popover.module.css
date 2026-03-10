@@ -54,18 +54,18 @@
   will-change: transform, opacity;
 }
 
-.content[data-state="open"][data-side="top"] {
+.content[data-open][data-side="top"] {
   animation-name: slide-down-and-fade;
 }
 
-.content[data-state="open"][data-side="right"] {
+.content[data-open][data-side="right"] {
   animation-name: slide-left-and-fade;
 }
 
-.content[data-state="open"][data-side="bottom"] {
+.content[data-open][data-side="bottom"] {
   animation-name: slide-up-and-fade;
 }
 
-.content[data-state="open"][data-side="left"] {
+.content[data-open][data-side="left"] {
   animation-name: slide-right-and-fade;
 }

@@ -30,21 +30,17 @@ describe('Typography', () => {
     });
   });
 
-  describe('asChild', () => {
-    it('renders as the child element when asChild=true', () => {
+  describe('render prop', () => {
+    it('renders as the provided element when render is given', () => {
       render(
-        <Typography asChild>
-          <span>Span text</span>
-        </Typography>
+        <Typography render={<span>Span text</span>} />
       );
       expect(screen.getByText('Span text').tagName).toBe('SPAN');
     });
 
-    it('renders as anchor when asChild with an anchor child', () => {
+    it('renders as anchor when render is given an anchor', () => {
       render(
-        <Typography asChild>
-          <a href="/test">Link text</a>
-        </Typography>
+        <Typography render={<a href="/test">Link text</a>} />
       );
       expect(screen.getByRole('link', { name: 'Link text' })).toBeInTheDocument();
     });

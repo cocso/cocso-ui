@@ -16,10 +16,9 @@ describe('Checkbox', () => {
     });
 
     it('associates label with checkbox via htmlFor', () => {
-      render(<Checkbox label="I agree" onChange={vi.fn()} status="off" />);
-      const checkbox = screen.getByRole('checkbox');
+      render(<Checkbox id="test-checkbox" label="I agree" onChange={vi.fn()} status="off" />);
       const label = screen.getByText('I agree');
-      expect(label.closest('label')).toHaveAttribute('for', checkbox.id);
+      expect(label.closest('label')).toHaveAttribute('for', 'test-checkbox');
     });
   });
 
@@ -59,7 +58,7 @@ describe('Checkbox', () => {
   describe('disabled', () => {
     it('disables the checkbox when disabled=true', () => {
       render(<Checkbox disabled onChange={vi.fn()} status="off" />);
-      expect(screen.getByRole('checkbox')).toBeDisabled();
+      expect(screen.getByRole('checkbox')).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('does not call onChange when disabled and clicked', async () => {

@@ -6,11 +6,11 @@
   overflow: hidden;
 }
 
-.content[data-state="open"] {
+.content[data-open] {
   animation: slide-down 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-.content[data-state="closed"] {
+.content:not([data-open]) {
   animation: slide-up 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
@@ -28,17 +28,17 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.trigger[data-state="closed"] > .chevron {
+.trigger:not([data-open]) > .chevron {
   transform: rotate(0deg);
 }
 
-.trigger[data-state="open"] > .chevron {
+.trigger[data-open] > .chevron {
   transform: rotate(180deg);
 }
 
 @keyframes slide-up {
   from {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
   to {
     height: 0;
@@ -50,6 +50,6 @@
     height: 0;
   }
   to {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
 }

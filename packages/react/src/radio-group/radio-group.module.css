@@ -18,7 +18,7 @@
   border-radius: 100%;
 }
 
-.item[data-state="checked"] {
+.item[data-checked] {
   border-color: var(--ds-color-primary-500);
 }
 

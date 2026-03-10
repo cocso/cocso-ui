@@ -3,7 +3,7 @@
 import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon } from '@cocso-ui/react-icons';
 import { clsx as cx } from 'clsx';
 import { ko } from 'date-fns/locale';
-import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
+import { type ComponentPropsWithoutRef, type ReactElement, forwardRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Button } from '../button';
 import { Dropdown } from '../dropdown';
@@ -29,10 +29,9 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 
     return (
       <div className={cx(styles.root, className)} ref={ref} {...props}>
-        <Dropdown onOpenChange={setOpen} open={open}>
-          <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
-          <Dropdown.Portal>
-            <Dropdown.Content className={styles.content}>
+        <Dropdown onOpenChange={(value) => setOpen(value)} open={open}>
+          <Dropdown.Trigger render={children as ReactElement} />
+          <Dropdown.Content className={styles.content}>
               <DatePicker
                 dateFormat="yyyy년 MM월 dd일"
                 disabled={disabled}
@@ -77,7 +76,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 showPopperArrow={false}
               />
             </Dropdown.Content>
-          </Dropdown.Portal>
         </Dropdown>
       </div>
     );

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { MonthPicker } from '../month-picker';
@@ -41,7 +41,9 @@ describe('MonthPicker', () => {
         </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
-      expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      });
     });
 
     it('renders a month-year picker calendar after opening', async () => {
@@ -51,7 +53,9 @@ describe('MonthPicker', () => {
         </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
-      expect(document.querySelector('.react-datepicker__month-wrapper')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker__month-wrapper')).toBeInTheDocument();
+      });
     });
   });
 
@@ -78,6 +82,11 @@ describe('MonthPicker', () => {
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
 
+      // Wait for the menu content to render
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      });
+
       const monthCell = document.querySelector(
         '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)'
       ) as HTMLElement | null;
@@ -95,6 +104,11 @@ describe('MonthPicker', () => {
         </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
+
+      // Wait for the menu content to render
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      });
 
       const monthCell = document.querySelector(
         '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)'

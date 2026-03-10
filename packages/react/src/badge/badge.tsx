@@ -29,14 +29,12 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     return (
       <div className={clsx(styles.badge, className)} ref={ref} style={style} {...props}>
         <Typography
-          asChild
+          render={<span className={styles.inner}>{children}</span>}
           color={fontColor}
           lineHeight="tight"
           size={fontSize as ResponsiveFontSize}
           weight="medium"
-        >
-          <span className={styles.inner}>{children}</span>
-        </Typography>
+        />
       </div>
     );
   }

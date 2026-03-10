@@ -30,21 +30,17 @@ describe('Link', () => {
     });
   });
 
-  describe('asChild', () => {
-    it('renders as the child element when asChild=true', () => {
+  describe('render prop', () => {
+    it('renders as the provided element when render is given', () => {
       render(
-        <Link asChild>
-          <button type="button">Button link</button>
-        </Link>
+        <Link render={<button type="button">Button link</button>}>Button link</Link>
       );
       expect(screen.getByRole('button', { name: 'Button link' })).toBeInTheDocument();
     });
 
-    it('does not render an anchor when asChild=true', () => {
+    it('does not render an anchor when render is provided', () => {
       render(
-        <Link asChild>
-          <button type="button">Button link</button>
-        </Link>
+        <Link render={<button type="button">Button link</button>}>Button link</Link>
       );
       expect(screen.queryByRole('link')).not.toBeInTheDocument();
     });

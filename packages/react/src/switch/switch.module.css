@@ -23,12 +23,12 @@
 }
 
 .switch[disabled],
-.switch[data-disabled="true"] {
+.switch[data-disabled] {
   cursor: not-allowed;
   opacity: 0.4;
 }
 
-.switch[data-state="checked"] {
+.switch[data-checked] {
   --cocso-switch-bg-color: var(--ds-color-primary-500);
 }
 
@@ -45,7 +45,7 @@
   will-change: transform;
 }
 
-.thumb[data-state="checked"] {
+.thumb[data-checked] {
   transform: translateX(
     calc(
       var(--cocso-switch-width) -

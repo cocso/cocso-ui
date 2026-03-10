@@ -1,5 +1,4 @@
-import { Primitive } from '@radix-ui/react-primitive';
-import { Root, Thumb } from '@radix-ui/react-switch';
+import { Switch as SwitchBase } from '@base-ui/react/switch';
 import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
@@ -15,7 +14,7 @@ import styles from './switch.module.css';
 
 export type SwitchSize = 'sm' | 'md';
 
-export interface SwitchProps extends ComponentPropsWithoutRef<typeof Root> {
+export interface SwitchProps extends ComponentPropsWithoutRef<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
   label?: string;
@@ -23,7 +22,7 @@ export interface SwitchProps extends ComponentPropsWithoutRef<typeof Root> {
   size?: SwitchSize;
 }
 
-export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
+export const Switch = forwardRef<ComponentRef<typeof SwitchBase.Root>, SwitchProps>(
   (
     {
       id: _id,
@@ -50,25 +49,21 @@ export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
     } as CSSProperties;
 
     return (
-      <Primitive.div
+      <div
         aria-disabled={disabled}
         className={cx(styles.wrapper, className)}
         style={style}
       >
         {position === 'left' && (
-          <Typography asChild size={size} type="body">
-            <label htmlFor={id}>{label}</label>
-          </Typography>
+          <Typography render={<label htmlFor={id}>{label}</label>} size={size} type="body" />
         )}
-        <Root className={styles.switch} disabled={disabled} ref={ref} {...props}>
-          <Thumb className={styles.thumb} />
-        </Root>
+        <SwitchBase.Root className={styles.switch} disabled={disabled} ref={ref} {...props}>
+          <SwitchBase.Thumb className={styles.thumb} />
+        </SwitchBase.Root>
         {position === 'right' && (
-          <Typography aria-disabled={disabled} asChild size={size} type="body">
-            <label htmlFor={id}>{label}</label>
-          </Typography>
+          <Typography aria-disabled={disabled} render={<label htmlFor={id}>{label}</label>} size={size} type="body" />
         )}
-      </Primitive.div>
+      </div>
     );
   }
 );

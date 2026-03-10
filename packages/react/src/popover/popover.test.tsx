@@ -8,12 +8,8 @@ describe('Popover', () => {
     it('renders the trigger button', () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       expect(screen.getByRole('button', { name: 'Open Popover' })).toBeInTheDocument();
@@ -22,12 +18,8 @@ describe('Popover', () => {
     it('does not show content before the trigger is clicked', () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       expect(screen.queryByText('Popover content')).not.toBeInTheDocument();
@@ -38,12 +30,8 @@ describe('Popover', () => {
     it('opens the popover and shows content when trigger is clicked', async () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
@@ -53,12 +41,8 @@ describe('Popover', () => {
     it('renders content in document.body via Portal', async () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Portal content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Portal content</Popover.Content>
         </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
@@ -69,12 +53,8 @@ describe('Popover', () => {
     it('closes the popover when trigger is clicked again', async () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       const trigger = screen.getByRole('button', { name: 'Open Popover' });
@@ -87,12 +67,8 @@ describe('Popover', () => {
     it('sets aria-expanded on trigger when open', async () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       const trigger = screen.getByRole('button', { name: 'Open Popover' });
@@ -107,30 +83,22 @@ describe('Popover', () => {
       const onOpenChange = vi.fn();
       render(
         <Popover onOpenChange={onOpenChange}>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>Popover content</Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>Popover content</Popover.Content>
         </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
-      expect(onOpenChange).toHaveBeenCalledWith(true);
+      expect(onOpenChange).toHaveBeenCalledWith(true, expect.anything());
     });
 
     it('renders popover content with custom children', async () => {
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button>Open Popover</button>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content>
-              <p>Rich content</p>
-              <button>Action</button>
-            </Popover.Content>
-          </Popover.Portal>
+          <Popover.Trigger render={<button>Open Popover</button>} />
+          <Popover.Content>
+            <p>Rich content</p>
+            <button>Action</button>
+          </Popover.Content>
         </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));

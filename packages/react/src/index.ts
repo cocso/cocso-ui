@@ -7,7 +7,10 @@ export * from './dropdown';
 export * from './link';
 export * from './modal';
 export * from './month-picker';
-export * from './one-time-password-field';
+// TODO: @radix-ui/react-one-time-password-field has no Base UI equivalent.
+// See: https://github.com/mui/base-ui/issues/75
+// This component needs to be migrated to a different solution (e.g., input-otp) in a future iteration.
+// export * from './one-time-password-field';
 export * from './pagination';
 export * from './popover';
 export * from './radio-group';

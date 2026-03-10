@@ -16,17 +16,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Dropdown>
-      <Dropdown.Trigger asChild>
-        <Button variant="secondary">메뉴 열기</Button>
-      </Dropdown.Trigger>
-      <Dropdown.Portal>
-        <Dropdown.Content>
-          <Dropdown.Item>편집</Dropdown.Item>
-          <Dropdown.Item>복사</Dropdown.Item>
-          <Dropdown.Item disabled>비활성화</Dropdown.Item>
-          <Dropdown.Item>삭제</Dropdown.Item>
-        </Dropdown.Content>
-      </Dropdown.Portal>
+      <Dropdown.Trigger render={<Button variant="secondary">메뉴 열기</Button>} />
+      <Dropdown.Content>
+        <Dropdown.Item>편집</Dropdown.Item>
+        <Dropdown.Item>복사</Dropdown.Item>
+        <Dropdown.Item disabled>비활성화</Dropdown.Item>
+        <Dropdown.Item>삭제</Dropdown.Item>
+      </Dropdown.Content>
     </Dropdown>
   ),
 };

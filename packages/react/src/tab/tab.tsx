@@ -1,36 +1,36 @@
-import { Content, List, Root, Trigger } from '@radix-ui/react-tabs';
+import { Tabs } from '@base-ui/react/tabs';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 
-const TabPrimitiveRoot = forwardRef<
-  ComponentRef<typeof Root>,
-  ComponentPropsWithoutRef<typeof Root>
+const TabRoot = forwardRef<
+  ComponentRef<typeof Tabs.Root>,
+  ComponentPropsWithoutRef<typeof Tabs.Root>
 >(({ ...props }, ref) => {
-  return <Root ref={ref} {...props} />;
+  return <Tabs.Root ref={ref} {...props} />;
 });
 
-const TabPrimitiveList = forwardRef<
-  ComponentRef<typeof List>,
-  ComponentPropsWithoutRef<typeof List>
+const TabList = forwardRef<
+  ComponentRef<typeof Tabs.List>,
+  ComponentPropsWithoutRef<typeof Tabs.List>
 >(({ ...props }, ref) => {
-  return <List ref={ref} {...props} />;
+  return <Tabs.List ref={ref} {...props} />;
 });
 
-const TabPrimitiveTrigger = forwardRef<
-  ComponentRef<typeof Trigger>,
-  ComponentPropsWithoutRef<typeof Trigger>
+const TabTrigger = forwardRef<
+  ComponentRef<typeof Tabs.Tab>,
+  ComponentPropsWithoutRef<typeof Tabs.Tab>
 >(({ ...props }, ref) => {
-  return <Trigger ref={ref} {...props} />;
+  return <Tabs.Tab ref={ref} {...props} />;
 });
 
-const TabPrimitiveContent = forwardRef<
-  ComponentRef<typeof Content>,
-  ComponentPropsWithoutRef<typeof Content>
+const TabContent = forwardRef<
+  ComponentRef<typeof Tabs.Panel>,
+  ComponentPropsWithoutRef<typeof Tabs.Panel>
 >(({ ...props }, ref) => {
-  return <Content ref={ref} {...props} />;
+  return <Tabs.Panel ref={ref} {...props} />;
 });
 
-export const Tab = Object.assign(TabPrimitiveRoot, {
-  List: TabPrimitiveList,
-  Trigger: TabPrimitiveTrigger,
-  Content: TabPrimitiveContent,
+export const Tab = Object.assign(TabRoot, {
+  List: TabList,
+  Trigger: TabTrigger,
+  Content: TabContent,
 });

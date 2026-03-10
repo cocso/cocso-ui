@@ -1,32 +1,27 @@
-import { Indicator, Item, Root } from '@radix-ui/react-radio-group';
+import { RadioGroup as RadioGroupBase } from '@base-ui/react/radio-group';
+import { Radio as RadioBase } from '@base-ui/react/radio';
 import { clsx as cx } from 'clsx';
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
 import styles from './radio-group.module.css';
 
-const RadioGroupRoot = forwardRef<ComponentRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
+const RadioGroupRoot = forwardRef<ComponentRef<typeof RadioGroupBase>, ComponentPropsWithoutRef<typeof RadioGroupBase>>(
   ({ className, ...props }, ref) => {
-    return <Root className={cx(styles.root, className)} ref={ref} {...props} />;
+    return <RadioGroupBase className={cx(styles.root, className)} ref={ref} {...props} />;
   }
 );
 
-RadioGroupRoot.displayName = Root.displayName;
-
-const RadioGroupItem = forwardRef<ComponentRef<typeof Item>, ComponentPropsWithoutRef<typeof Item>>(
+const RadioGroupItem = forwardRef<ComponentRef<typeof RadioBase.Root>, ComponentPropsWithoutRef<typeof RadioBase.Root>>(
   ({ className, ...props }, ref) => {
-    return <Item className={cx(styles.item, className)} ref={ref} {...props} />;
+    return <RadioBase.Root className={cx(styles.item, className)} ref={ref} {...props} />;
   }
 );
-
-RadioGroupItem.displayName = Item.displayName;
 
 const RadioGroupIndicator = forwardRef<
-  ComponentRef<typeof Indicator>,
-  ComponentPropsWithoutRef<typeof Indicator>
+  ComponentRef<typeof RadioBase.Indicator>,
+  ComponentPropsWithoutRef<typeof RadioBase.Indicator>
 >(({ className, ...props }, ref) => {
-  return <Indicator className={cx(styles.indicator, className)} ref={ref} {...props} />;
+  return <RadioBase.Indicator className={cx(styles.indicator, className)} ref={ref} {...props} />;
 });
-
-RadioGroupIndicator.displayName = Indicator.displayName;
 
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,

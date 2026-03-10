@@ -1,4 +1,3 @@
-import { Primitive } from '@radix-ui/react-primitive';
 import { clsx as cx } from 'clsx';
 import type { ComponentPropsWithoutRef, CSSProperties, ReactElement, ReactNode } from 'react';
 import { cloneElement, forwardRef, isValidElement } from 'react';
@@ -21,7 +20,7 @@ export type ButtonVariant =
 export type ButtonShape = 'square' | 'circle' | 'rounded';
 
 export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'prefix'> {
-  asChild?: boolean;
+  render?: ReactElement;
   disabled?: boolean;
   loading?: boolean;
   prefix?: ReactNode;
@@ -36,7 +35,7 @@ export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'p
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      asChild,
+      render: renderProp,
       className,
       style: _style,
       children,
@@ -82,9 +81,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       </>
     );
 
-    if (asChild) {
-      if (!isValidElement(children)) {
-        throw new Error('Button: asChild requires a single React element as a child');
+    if (renderProp) {
+      if (!isValidElement(renderProp)) {
+        throw new Error('Button: render requires a valid React element');
       }
 
       interface ChildElementProps {
@@ -94,8 +93,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         [key: string]: unknown;
       }
 
-      const target = children as ReactElement<ChildElementProps>;
-      const ctx = target.props.children;
+      const target = renderProp as ReactElement<ChildElementProps>;
+      const ctx = target.props.children ?? children;
 
       return cloneElement(target, {
         ref,
@@ -108,9 +107,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Primitive.button className={cn} disabled={isDisabled} ref={ref} style={style} {...props}>
+      <button className={cn} disabled={isDisabled} ref={ref} style={style} {...props}>
         {renderButtonContent(children)}
-      </Primitive.button>
+      </button>
     );
   }
 );

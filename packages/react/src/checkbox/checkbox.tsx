@@ -1,5 +1,5 @@
 import { CheckIcon } from '@cocso-ui/react-icons';
-import { type CheckedState, Indicator, Root } from '@radix-ui/react-checkbox';
+import { Checkbox as CheckboxBase } from '@base-ui/react/checkbox';
 import { clsx as cx } from 'clsx';
 import {
   type ComponentPropsWithoutRef,
@@ -18,7 +18,7 @@ export type CheckboxSize = 'lg' | 'md' | 'sm';
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
 export interface CheckboxProps
-  extends Omit<ComponentPropsWithoutRef<typeof Root>, 'checked' | 'onCheckedChange' | 'onChange'> {
+  extends Omit<ComponentPropsWithoutRef<typeof CheckboxBase.Root>, 'checked' | 'onCheckedChange' | 'onChange' | 'indeterminate'> {
   disabled?: boolean;
   id?: string;
   label?: string;
@@ -27,7 +27,7 @@ export interface CheckboxProps
   status: CheckboxStatus;
 }
 
-export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
+export const Checkbox = forwardRef<ComponentRef<typeof CheckboxBase.Root>, CheckboxProps>(
   (
     { id: _id, className, style: _style, size = 'md', status, onChange, label, disabled, ...props },
     ref
@@ -35,22 +35,18 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
     const generatedId = useId();
     const id = _id ?? generatedId;
 
-    const handleCheckedChange = (checked: CheckedState) => {
+    const handleCheckedChange = (checked: boolean) => {
       if (!disabled) {
-        const nextStatus = match(checked)
-          .with(true, () => 'on' as const)
-          .with('indeterminate', () => 'intermediate' as const)
-          .with(false, () => 'off' as const)
-          .exhaustive();
+        const nextStatus = checked ? 'on' as const : 'off' as const;
         onChange(nextStatus);
       }
     };
 
-    const getCheckedState = (): CheckedState => {
+    const getCheckedState = (): { checked: boolean; indeterminate: boolean } => {
       return match(status)
-        .with('on', () => true)
-        .with('intermediate', () => 'indeterminate' as const)
-        .with('off', () => false)
+        .with('on', () => ({ checked: true, indeterminate: false }))
+        .with('intermediate', () => ({ checked: false, indeterminate: true }))
+        .with('off', () => ({ checked: false, indeterminate: false }))
         .exhaustive();
     };
 
@@ -62,10 +58,13 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
       '--cocso-checkbox-bg-color': getBackgroundColor(status),
     } as CSSProperties;
 
+    const checkedState = getCheckedState();
+
     return (
       <div className={cx(styles.wrapper, className)} style={style}>
-        <Root
-          checked={getCheckedState()}
+        <CheckboxBase.Root
+          checked={checkedState.checked}
+          indeterminate={checkedState.indeterminate}
           className={styles.checkbox}
           disabled={disabled}
           id={id}
@@ -73,13 +72,12 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
           ref={ref}
           {...props}
         >
-          <Indicator
-            aria-hidden="true"
+          <CheckboxBase.Indicator
             className={styles.indicator}
             style={{ opacity: status === 'on' ? 1 : 0 }}
           >
             <CheckIcon className={styles.icon} size={24} />
-          </Indicator>
+          </CheckboxBase.Indicator>
 
           <div
             aria-hidden="true"
@@ -88,18 +86,16 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
           >
             <CheckIcon className={styles.icon} size={24} />
           </div>
-        </Root>
+        </CheckboxBase.Root>
 
         {label && (
           <Typography
             aria-disabled={disabled}
-            asChild
+            render={<label htmlFor={id}>{label}</label>}
             className={styles.label}
             size={size}
             type="body"
-          >
-            <label htmlFor={id}>{label}</label>
-          </Typography>
+          />
         )}
       </div>
     );

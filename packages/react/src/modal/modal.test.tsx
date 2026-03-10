@@ -8,9 +8,7 @@ describe('Modal', () => {
     it('renders the trigger button', () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
         </Modal>
       );
       expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument();
@@ -19,9 +17,7 @@ describe('Modal', () => {
     it('does not show dialog content before trigger is clicked', () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>My Modal</Modal.Title>
           </Modal.Content>
@@ -35,9 +31,7 @@ describe('Modal', () => {
     it('opens the dialog when trigger is clicked', async () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>Dialog Title</Modal.Title>
           </Modal.Content>
@@ -50,9 +44,7 @@ describe('Modal', () => {
     it('renders title and description inside the dialog', async () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>My Title</Modal.Title>
             <Modal.Description>My Description</Modal.Description>
@@ -67,9 +59,7 @@ describe('Modal', () => {
     it('closes the dialog when the close button is clicked', async () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>Dialog Title</Modal.Title>
             <Modal.Close aria-label="Close dialog" />
@@ -86,9 +76,7 @@ describe('Modal', () => {
     it('closes the dialog when Escape key is pressed', async () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>Dialog Title</Modal.Title>
           </Modal.Content>
@@ -107,26 +95,24 @@ describe('Modal', () => {
       const onOpenChange = vi.fn();
       render(
         <Modal onOpenChange={onOpenChange}>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>Dialog</Modal.Title>
           </Modal.Content>
         </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
-      expect(onOpenChange).toHaveBeenCalledWith(true);
+      expect(onOpenChange).toHaveBeenCalledWith(true, expect.anything());
     });
   });
 
-  describe('Modal.Close with asChild', () => {
-    it('renders a custom close element via asChild', () => {
+  describe('Modal.Close with render', () => {
+    it('renders a custom close element via render', () => {
       render(
         <Modal defaultOpen>
           <Modal.Content>
             <Modal.Title>Dialog</Modal.Title>
-            <Modal.Close asChild>
+            <Modal.Close>
               <button type="button">Custom Close</button>
             </Modal.Close>
           </Modal.Content>
@@ -140,9 +126,7 @@ describe('Modal', () => {
     it('renders dialog content in the document body via portal', async () => {
       render(
         <Modal>
-          <Modal.Trigger asChild>
-            <button type="button">Open</button>
-          </Modal.Trigger>
+          <Modal.Trigger render={<button type="button">Open</button>} />
           <Modal.Content>
             <Modal.Title>Portal Dialog</Modal.Title>
           </Modal.Content>

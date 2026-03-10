@@ -71,12 +71,10 @@ describe('Spinner', () => {
     });
   });
 
-  describe('asChild', () => {
-    it('renders as the child element when asChild=true', () => {
+  describe('render prop', () => {
+    it('renders as the provided element when render is given', () => {
       render(
-        <Spinner asChild>
-          <span data-testid="custom-spinner" />
-        </Spinner>
+        <Spinner render={<span data-testid="custom-spinner" />} />
       );
       expect(screen.getByTestId('custom-spinner')).toBeInTheDocument();
     });

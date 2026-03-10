@@ -40,7 +40,7 @@ describe('Switch', () => {
   describe('disabled', () => {
     it('disables the switch when disabled=true', () => {
       render(<Switch disabled />);
-      expect(screen.getByRole('switch')).toBeDisabled();
+      expect(screen.getByRole('switch')).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('does not call onCheckedChange when disabled and clicked', async () => {

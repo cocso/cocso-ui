@@ -109,7 +109,7 @@ describe('RadioGroup', () => {
       );
 
       await userEvent.click(screen.getByRole('radio', { name: 'Option 1' }));
-      expect(onValueChange).toHaveBeenCalledWith('option-1');
+      expect(onValueChange).toHaveBeenCalledWith('option-1', expect.anything());
     });
 
     it('disables all items when the group is disabled', () => {
@@ -126,7 +126,7 @@ describe('RadioGroup', () => {
 
       const radios = screen.getAllByRole('radio');
       for (const radio of radios) {
-        expect(radio).toBeDisabled();
+        expect(radio).toHaveAttribute('aria-disabled', 'true');
       }
     });
   });

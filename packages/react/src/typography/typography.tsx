@@ -1,7 +1,5 @@
-import { Primitive } from '@radix-ui/react-primitive';
-import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ReactElement, cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
 import type { FontSize, FontWeight, LineHeight, ResponsiveFontSize } from '../token';
 import {
@@ -16,7 +14,7 @@ export type DisplaySize = 'lg' | 'md' | 'sm';
 export type HeadingSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 type TypographyPropsBase = {
-  asChild?: boolean;
+  render?: ReactElement;
   weight?: FontWeight;
   lineHeight?: LineHeight;
 } & ComponentPropsWithoutRef<'p'>;
@@ -50,7 +48,7 @@ export type TypographyProps =
 export const Typography = forwardRef<HTMLElement, TypographyProps>(
   (
     {
-      asChild,
+      render: renderProp,
       className,
       style: _style,
       color,
@@ -61,11 +59,10 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
     },
     ref
   ) => {
-    const Comp = match({ asChild, type })
-      .with({ asChild: true }, () => Slot)
-      .with({ type: 'display' }, () => 'h1' as const)
-      .with({ type: 'heading' }, () => Primitive.h2)
-      .otherwise(() => Primitive.p);
+    const Comp = match(type)
+      .with('display', () => 'h1' as const)
+      .with('heading', () => 'h2' as const)
+      .otherwise(() => 'p' as const);
 
     const fontSize = match(type)
       .with('custom', () => (props as CustomTypographyProps).size ?? 16)
@@ -121,11 +118,23 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       '--cocso-typography-line-height': lineHeightToken[lineHeight],
     };
 
+    const mergedClassName = cx(styles.typography, className);
+
+    if (renderProp && isValidElement(renderProp)) {
+      return cloneElement(renderProp, {
+        // biome-ignore lint/suspicious/noExplicitAny: Polymorphic ref requires type assertion
+        ...(ref && { ref: ref as any }),
+        className: cx(mergedClassName, (renderProp.props as Record<string, unknown>).className as string | undefined),
+        style: { ...style, ...((renderProp.props as Record<string, unknown>).style as Record<string, unknown> | undefined) },
+        ...props,
+      });
+    }
+
     return (
       <Comp
-        // biome-ignore lint/suspicious/noExplicitAny: Polymorphic component with multiple element types (h1, h2, p, Slot) requires type assertion for ref compatibility
+        // biome-ignore lint/suspicious/noExplicitAny: Polymorphic component with multiple element types (h1, h2, p) requires type assertion for ref compatibility
         {...(ref && { ref: ref as any })}
-        className={cx(styles.typography, className)}
+        className={mergedClassName}
         style={style}
         {...props}
       />

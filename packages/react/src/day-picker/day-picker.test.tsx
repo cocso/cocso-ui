@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { DayPicker } from '../day-picker';
@@ -41,7 +41,9 @@ describe('DayPicker', () => {
         </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
-      expect(screen.getByLabelText('날짜 선택')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByLabelText('날짜 선택')).toBeInTheDocument();
+      });
     });
 
     it('renders the inline calendar after opening', async () => {
@@ -51,8 +53,9 @@ describe('DayPicker', () => {
         </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
-      // react-datepicker renders a calendar table
-      expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      });
     });
   });
 
@@ -78,6 +81,11 @@ describe('DayPicker', () => {
         </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
+
+      // Wait for the menu content to render
+      await waitFor(() => {
+        expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
+      });
 
       // Click any enabled day cell in the calendar
       const dayCell = document.querySelector(

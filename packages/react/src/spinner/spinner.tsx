@@ -1,7 +1,5 @@
-import { Primitive } from '@radix-ui/react-primitive';
-import { Slot } from '@radix-ui/react-slot';
 import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ReactElement, cloneElement, forwardRef, isValidElement } from 'react';
 import { match } from 'ts-pattern';
 import { colors } from '../token';
 import styles from './spinner.module.css';
@@ -11,14 +9,13 @@ export type SpinnerSize = 'xl' | 'lg' | 'md' | 'sm';
 export type SpinnerColor = 'primary' | 'neutral' | 'white';
 
 export interface SpinnerProps extends Omit<ComponentPropsWithoutRef<'div'>, 'size' | 'color'> {
-  asChild?: boolean;
   color?: SpinnerColor;
+  render?: ReactElement;
   size?: SpinnerSize;
 }
 
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ asChild, className, style: _style, size = 'md', color = 'primary', ...props }, ref) => {
-    const Comp = asChild ? Slot : Primitive.div;
+  ({ render: renderProp, className, style: _style, size = 'md', color = 'primary', ...props }, ref) => {
     const style = {
       ..._style,
       '--cocso-spinner-size': getSize(size),
@@ -27,7 +24,18 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
       '--cocso-spinner-bg-color': getBackgroundColor(color),
     };
 
-    return <Comp className={cx(styles.spinner, className)} ref={ref} style={style} {...props} />;
+    const mergedClassName = cx(styles.spinner, className);
+
+    if (renderProp && isValidElement(renderProp)) {
+      return cloneElement(renderProp, {
+        ref,
+        className: cx(mergedClassName, (renderProp.props as Record<string, unknown>).className as string | undefined),
+        style: { ...style, ...((renderProp.props as Record<string, unknown>).style as Record<string, unknown> | undefined) },
+        ...props,
+      });
+    }
+
+    return <div className={mergedClassName} ref={ref} style={style} {...props} />;
   }
 );
 
