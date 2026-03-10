@@ -2,13 +2,12 @@
   "name": "@cocso-ui/storybook",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006 --disable-telemetry",
     "build": "storybook build",
-    "lint": "biome lint .",
-    "lint:fix": "biome lint . --fix",
-    "preview": "vite preview"
+    "check": "biome check .",
+    "check:write": "biome check --write .",
+    "clean": "rm -rf storybook-static .turbo node_modules"
   },
   "dependencies": {
     "@cocso-ui/css": "workspace:^",
@@ -21,8 +20,6 @@
     "@storybook/react-vite": "^10.2.16",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.4",
-    "globals": "^17.4.0",
     "storybook": "^10.2.16",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"
