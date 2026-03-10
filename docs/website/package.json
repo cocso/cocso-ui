@@ -6,6 +6,7 @@
   "scripts": {
     "update": "bun update",
     "dev": "next dev",
+    "prebuild": "node -e \"import('./node_modules/fumadocs-mdx/dist/next/index.js').then(m => m.postInstall({ configPath: 'source.config.ts', outDir: '.source' })).catch(e => { console.error(e); process.exit(1); })\"",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",

@@ -1,5 +1,5 @@
 import { COCSOUILogo, COCSOUITextLogo } from '@cocso-ui/react-icons';
-import { SearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
+import { SearchToggle } from './search-toggle';
 import { Link } from 'next-view-transitions';
 
 export const Header = () => {

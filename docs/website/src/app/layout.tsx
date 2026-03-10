@@ -2,7 +2,7 @@ import '~/styles/globals.css';
 import '@cocso-ui/css/token.css';
 import '@cocso-ui/react/styles.css';
 
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import type { Metadata } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import type { PropsWithChildren } from 'react';
