@@ -8,11 +8,11 @@ export const Header = () => {
       <div className="row-between h-full w-full">
         <Link className="center-y ml-[var(--size-app-padding)] gap-0.5" href="/introduction">
           <COCSOUILogo size={28} />
-          <COCSOUITextLogo width={119.72} height={18} />
+          <COCSOUITextLogo height={18} width={119.72} />
         </Link>
 
         <div className="center-y h-full">
-          <div className="h-full w-px bg-neutral-200" aria-hidden="true" />
+          <div aria-hidden="true" className="h-full w-px bg-neutral-200" />
           <SearchToggle className="cursor-pointer p-5" />
         </div>
       </div>

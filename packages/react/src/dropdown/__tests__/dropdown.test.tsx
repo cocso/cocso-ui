@@ -16,7 +16,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Item 1</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument();
     });
@@ -32,7 +32,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Item 1</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       expect(screen.queryByRole('menuitem', { name: 'Item 1' })).not.toBeInTheDocument();
     });
@@ -51,7 +51,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Item 2</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       expect(screen.getByRole('menuitem', { name: 'Item 1' })).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Portal Item</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       const item = screen.getByRole('menuitem', { name: 'Portal Item' });
@@ -90,7 +90,7 @@ describe('Dropdown', () => {
               <Dropdown.Item onSelect={onSelect}>Action</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       await userEvent.click(screen.getByRole('menuitem', { name: 'Action' }));
@@ -108,7 +108,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Close Me</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       expect(screen.getByRole('menuitem', { name: 'Close Me' })).toBeInTheDocument();
@@ -129,7 +129,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Share</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       expect(screen.getByRole('menuitem', { name: 'Edit' })).toBeInTheDocument();
@@ -151,7 +151,7 @@ describe('Dropdown', () => {
               <Dropdown.Item>Item</Dropdown.Item>
             </Dropdown.Content>
           </Dropdown.Portal>
-        </Dropdown>,
+        </Dropdown>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
       expect(onOpenChange).toHaveBeenCalledWith(true);

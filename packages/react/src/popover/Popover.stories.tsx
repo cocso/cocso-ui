@@ -59,7 +59,6 @@ export const AllVariants: Story = {
             <div style={{ padding: '16px', width: '200px' }}>
               <h4 style={{ margin: '0 0 12px 0' }}>설정</h4>
               <input
-                type="text"
                 placeholder="이름"
                 style={{
                   width: '100%',
@@ -67,6 +66,7 @@ export const AllVariants: Story = {
                   border: '1px solid #ccc',
                   borderRadius: '4px',
                 }}
+                type="text"
               />
             </div>
           </Popover.Content>

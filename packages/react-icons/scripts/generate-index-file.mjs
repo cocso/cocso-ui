@@ -11,8 +11,8 @@ function generateIndexFiles() {
 
   const subdirs = fs
     .readdirSync(componentsDir, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
 
   if (subdirs.length === 0) {
     console.log(`No subdirectories found in ${componentsDir}`);
@@ -25,15 +25,15 @@ function generateIndexFiles() {
 
     const files = fs
       .readdirSync(subdirPath)
-      .filter((file) => file.endsWith('.tsx'))
-      .map((file) => file.replace('.tsx', ''));
+      .filter(file => file.endsWith('.tsx'))
+      .map(file => file.replace('.tsx', ''));
 
     if (files.length === 0) {
       console.log(`No .tsx files found in ${subdirPath}`);
       continue;
     }
 
-    const exportStatements = files.map((file) => `export * from './${file}';`).join('\n');
+    const exportStatements = files.map(file => `export * from './${file}';`).join('\n');
     fs.writeFileSync(indexPath, exportStatements);
 
     console.log(`Generated ${indexPath} with ${files.length} exports:`, files);
@@ -41,7 +41,7 @@ function generateIndexFiles() {
 
   const srcIndexPath = './src/index.ts';
   const srcIndexExports = subdirs
-    .map((subdir) => `export * from './components/${subdir}';`)
+    .map(subdir => `export * from './components/${subdir}';`)
     .join('\n');
   fs.writeFileSync(srcIndexPath, srcIndexExports);
 

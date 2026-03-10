@@ -1,11 +1,4 @@
-import type {
-  ParseResult,
-  Value,
-  RgbaColor,
-  SizeValue,
-  TokenRef,
-  ShadowLayer,
-} from '../types';
+import type { ParseResult, RgbaColor, ShadowLayer, SizeValue, TokenRef, Value } from '../types';
 
 const HEX_REGEX = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 const RGB_REGEX = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
@@ -23,25 +16,39 @@ export function parseValue(value: string | number): ParseResult {
   }
 
   const hex = parseHex(str);
-  if (hex.isValid) { return hex; }
+  if (hex.isValid) {
+    return hex;
+  }
 
   const rgb = parseRgb(str);
-  if (rgb.isValid) { return rgb; }
+  if (rgb.isValid) {
+    return rgb;
+  }
 
   const rgba = parseRgba(str);
-  if (rgba.isValid) { return rgba; }
+  if (rgba.isValid) {
+    return rgba;
+  }
 
   const tokenRef = parseTokenRef(str);
-  if (tokenRef.isValid) { return tokenRef; }
+  if (tokenRef.isValid) {
+    return tokenRef;
+  }
 
   const shadow = parseShadow(str);
-  if (shadow.isValid) { return shadow; }
+  if (shadow.isValid) {
+    return shadow;
+  }
 
   const size = parseSize(str);
-  if (size.isValid) { return size; }
+  if (size.isValid) {
+    return size;
+  }
 
   const duration = parseDuration(str);
-  if (duration.isValid) { return duration; }
+  if (duration.isValid) {
+    return duration;
+  }
 
   return { isValid: true, value: { kind: 'StringValue', value: str } };
 }
@@ -73,7 +80,7 @@ export function valueToString(value: Value): string {
       return `${x} ${y} ${blur} ${spread} ${color}`;
     }
     case 'Shadow':
-      return value.layers.map((layer) => valueToString(layer)).join(', ');
+      return value.layers.map(layer => valueToString(layer)).join(', ');
     default:
       return String(value);
   }
@@ -202,13 +209,19 @@ function parseColor(value: string): ParseResult {
   }
 
   const hex = parseHex(value);
-  if (hex.isValid) { return hex; }
+  if (hex.isValid) {
+    return hex;
+  }
 
   const rgb = parseRgb(value);
-  if (rgb.isValid) { return rgb; }
+  if (rgb.isValid) {
+    return rgb;
+  }
 
   const rgba = parseRgba(value);
-  if (rgba.isValid) { return rgba; }
+  if (rgba.isValid) {
+    return rgba;
+  }
 
   return { isValid: false, error: `Invalid color: ${value}` };
 }
@@ -219,7 +232,7 @@ function parseShadow(value: string): ParseResult {
   }
 
   try {
-    const layerStrings = value.split(',').map((s) => s.trim());
+    const layerStrings = value.split(',').map(s => s.trim());
     const layers: ShadowLayer[] = [];
 
     for (const layerStr of layerStrings) {
@@ -249,7 +262,7 @@ function parseShadowLayer(value: string): ParseResult {
     const blur = parseSizeOrTokenRef(parts[2]);
     const spread = parseSizeOrTokenRef(parts[3]);
 
-    if (!(((x.isValid && y.isValid ) && blur.isValid ) && spread.isValid)) {
+    if (!(x.isValid && y.isValid && blur.isValid && spread.isValid)) {
       return { isValid: false, error: `Invalid shadow dimensions: ${value}` };
     }
 

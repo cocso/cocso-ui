@@ -78,16 +78,16 @@ export const AllVariants: Story = {
         style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
       >
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-        <Link size="xs" href="#">
+        <Link href="#" size="xs">
           Extra Small Link
         </Link>
-        <Link size="sm" href="#">
+        <Link href="#" size="sm">
           Small Link
         </Link>
-        <Link size="md" href="#">
+        <Link href="#" size="md">
           Medium Link
         </Link>
-        <Link size="lg" href="#">
+        <Link href="#" size="lg">
           Large Link
         </Link>
       </div>
@@ -96,19 +96,19 @@ export const AllVariants: Story = {
         style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
       >
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Font Weights</h4>
-        <Link weight="light" href="#">
+        <Link href="#" weight="light">
           Light Link
         </Link>
-        <Link weight="normal" href="#">
+        <Link href="#" weight="normal">
           Normal Link
         </Link>
-        <Link weight="medium" href="#">
+        <Link href="#" weight="medium">
           Medium Link
         </Link>
-        <Link weight="semibold" href="#">
+        <Link href="#" weight="semibold">
           Semibold Link
         </Link>
-        <Link weight="bold" href="#">
+        <Link href="#" weight="bold">
           Bold Link
         </Link>
       </div>
@@ -117,10 +117,10 @@ export const AllVariants: Story = {
         style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
       >
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Indicator</h4>
-        <Link indicator href="#">
+        <Link href="#" indicator>
           With Indicator
         </Link>
-        <Link indicator={false} href="#">
+        <Link href="#" indicator={false}>
           Without Indicator
         </Link>
       </div>

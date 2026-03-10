@@ -14,7 +14,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       expect(screen.getByRole('tablist')).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       expect(screen.getByRole('tabpanel')).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       expect(screen.getByText('Content 1')).toBeVisible();
@@ -61,7 +61,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute('aria-selected', 'true');
@@ -79,7 +79,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       await userEvent.click(screen.getByRole('tab', { name: 'Tab 2' }));
@@ -95,7 +95,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       await userEvent.click(screen.getByRole('tab', { name: 'Tab 2' }));
@@ -112,7 +112,7 @@ describe('Tab', () => {
           </Tab.List>
           <Tab.Content value="tab-1">Content 1</Tab.Content>
           <Tab.Content value="tab-2">Content 2</Tab.Content>
-        </Tab>,
+        </Tab>
       );
 
       screen.getByRole('tab', { name: 'Tab 1' }).focus();

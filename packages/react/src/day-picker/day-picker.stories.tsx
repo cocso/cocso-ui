@@ -56,7 +56,7 @@ export const Default: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -80,21 +80,21 @@ export const ButtonVariants: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value1} onValueChange={setValue1}>
+        <DayPicker onValueChange={setValue1} value={value1}>
           <Button variant="primary">
             {formatValue(value1)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
         </DayPicker>
 
-        <DayPicker value={value2} onValueChange={setValue2}>
+        <DayPicker onValueChange={setValue2} value={value2}>
           <Button variant="secondary">
             {formatValue(value2)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
         </DayPicker>
 
-        <DayPicker value={value3} onValueChange={setValue3}>
+        <DayPicker onValueChange={setValue3} value={value3}>
           <Button variant="tertiary">
             {formatValue(value3)}
             <KeyboardArrowDownIcon size={16} />
@@ -112,7 +112,7 @@ export const WithSelect: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Select style={{ minWidth: '200px' }}>
             <option value="">{formatValue(value)}</option>
           </Select>
@@ -133,8 +133,8 @@ export const Disabled: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue} disabled>
-          <Button variant="secondary" disabled>
+        <DayPicker disabled onValueChange={setValue} value={value}>
+          <Button disabled variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
@@ -145,7 +145,6 @@ export const Disabled: Story = {
     );
   },
 };
-
 
 // 폼에서 사용하는 예시
 export const FormExample: Story = {
@@ -170,10 +169,10 @@ export const FormExample: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label style={{ fontSize: '14px', fontWeight: '500' }}>시작 날짜</label>
           <DayPicker
-            value={formData.startDate}
             onValueChange={value => setFormData(prev => ({ ...prev, startDate: value }))}
+            value={formData.startDate}
           >
-            <Button variant="secondary" style={{ justifyContent: 'space-between' }}>
+            <Button style={{ justifyContent: 'space-between' }} variant="secondary">
               {formatValue(formData.startDate)}
               <KeyboardArrowDownIcon size={16} />
             </Button>
@@ -183,17 +182,17 @@ export const FormExample: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label style={{ fontSize: '14px', fontWeight: '500' }}>종료 날짜</label>
           <DayPicker
-            value={formData.endDate}
             onValueChange={value => setFormData(prev => ({ ...prev, endDate: value }))}
+            value={formData.endDate}
           >
-            <Button variant="secondary" style={{ justifyContent: 'space-between' }}>
+            <Button style={{ justifyContent: 'space-between' }} variant="secondary">
               {formatValue(formData.endDate)}
               <KeyboardArrowDownIcon size={16} />
             </Button>
           </DayPicker>
         </div>
 
-        <Button type="submit" style={{ marginTop: '8px' }}>
+        <Button style={{ marginTop: '8px' }} type="submit">
           제출
         </Button>
       </form>
@@ -208,7 +207,7 @@ export const WithPreselectedValue: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -228,7 +227,7 @@ export const WithTodayHighlight: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -254,7 +253,7 @@ export const KoreanLocale: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -280,7 +279,7 @@ export const MonthPickerStyle: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <DayPicker value={value} onValueChange={setValue}>
+        <DayPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -324,22 +323,22 @@ export const DateFormats: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <DayPicker value={value1} onValueChange={setValue1}>
-            <Button variant="secondary" size="sm">
+          <DayPicker onValueChange={setValue1} value={value1}>
+            <Button size="sm" variant="secondary">
               {formatShort(value1)}
               <KeyboardArrowDownIcon size={14} />
             </Button>
           </DayPicker>
 
-          <DayPicker value={value2} onValueChange={setValue2}>
+          <DayPicker onValueChange={setValue2} value={value2}>
             <Button variant="secondary">
               {formatValue(value2)}
               <KeyboardArrowDownIcon size={16} />
             </Button>
           </DayPicker>
 
-          <DayPicker value={value3} onValueChange={setValue3}>
-            <Button variant="secondary" size="lg">
+          <DayPicker onValueChange={setValue3} value={value3}>
+            <Button size="lg" variant="secondary">
               {formatLong(value3)}
               <KeyboardArrowDownIcon size={18} />
             </Button>

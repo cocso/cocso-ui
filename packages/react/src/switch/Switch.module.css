@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
-  align-items: center;
   gap: var(--ds-spacing-5);
+  align-items: center;
 }
 
 .wrapper[aria-disabled="true"] {
@@ -10,20 +10,20 @@
 }
 
 .switch {
+  --cocso-switch-width: inherit;
+  --cocso-switch-height: inherit;
+  --cocso-switch-bg-color: inherit;
   position: relative;
   width: var(--cocso-switch-width);
   height: var(--cocso-switch-height);
   cursor: pointer;
-  border-radius: var(--ds-spacing-max);
   background-color: var(--cocso-switch-bg-color);
+  border-radius: var(--ds-spacing-max);
   opacity: 1;
-
-  --cocso-switch-width: inherit;
-  --cocso-switch-height: inherit;
-  --cocso-switch-bg-color: inherit;
 }
 
-.switch[disabled], .switch[data-disabled="true"] {
+.switch[disabled],
+.switch[data-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.4;
 }
@@ -33,19 +33,24 @@
 }
 
 .thumb {
+  --cocso-switch-thumb-width: inherit;
+  --cocso-switch-thumb-height: inherit;
   display: block;
   width: var(--cocso-switch-thumb-width);
   height: var(--cocso-switch-thumb-width);
-  border-radius: var(--ds-spacing-max);
   background-color: var(--ds-color-white);
+  border-radius: var(--ds-spacing-max);
   transform: translateX(var(--ds-spacing-2));
   transition: transform 0.15s ease;
   will-change: transform;
-
-  --cocso-switch-thumb-width: inherit;
-  --cocso-switch-thumb-height: inherit;
 }
 
 .thumb[data-state="checked"] {
-  transform: translateX(calc(var(--cocso-switch-width) - var(--cocso-switch-thumb-width) - var(--ds-spacing-2)));
+  transform: translateX(
+    calc(
+      var(--cocso-switch-width) -
+      var(--cocso-switch-thumb-width) -
+      var(--ds-spacing-2)
+    )
+  );
 }

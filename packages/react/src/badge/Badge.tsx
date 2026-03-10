@@ -27,19 +27,19 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     const fontSize = getFontSize(size);
 
     return (
-      <div ref={ref} className={clsx(styles.badge, className)} style={style} {...props}>
+      <div className={clsx(styles.badge, className)} ref={ref} style={style} {...props}>
         <Typography
+          asChild
           color={fontColor}
+          lineHeight="tight"
           size={fontSize as ResponsiveFontSize}
           weight="medium"
-          lineHeight="tight"
-          asChild
         >
           <span className={styles.inner}>{children}</span>
         </Typography>
       </div>
     );
-  },
+  }
 );
 
 const getPadding = (size: BadgeSize) =>

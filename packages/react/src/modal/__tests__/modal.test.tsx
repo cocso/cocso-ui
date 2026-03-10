@@ -11,7 +11,7 @@ describe('Modal', () => {
           <Modal.Trigger asChild>
             <button type="button">Open</button>
           </Modal.Trigger>
-        </Modal>,
+        </Modal>
       );
       expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument();
     });
@@ -25,7 +25,7 @@ describe('Modal', () => {
           <Modal.Content>
             <Modal.Title>My Modal</Modal.Title>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
@@ -41,7 +41,7 @@ describe('Modal', () => {
           <Modal.Content>
             <Modal.Title>Dialog Title</Modal.Title>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('Modal', () => {
             <Modal.Title>My Title</Modal.Title>
             <Modal.Description>My Description</Modal.Description>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(screen.getByText('My Title')).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe('Modal', () => {
             <Modal.Title>Dialog Title</Modal.Title>
             <Modal.Close aria-label="Close dialog" />
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -92,7 +92,7 @@ describe('Modal', () => {
           <Modal.Content>
             <Modal.Title>Dialog Title</Modal.Title>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -113,7 +113,7 @@ describe('Modal', () => {
           <Modal.Content>
             <Modal.Title>Dialog</Modal.Title>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(onOpenChange).toHaveBeenCalledWith(true);
@@ -130,7 +130,7 @@ describe('Modal', () => {
               <button type="button">Custom Close</button>
             </Modal.Close>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       expect(screen.getByRole('button', { name: 'Custom Close' })).toBeInTheDocument();
     });
@@ -146,7 +146,7 @@ describe('Modal', () => {
           <Modal.Content>
             <Modal.Title>Portal Dialog</Modal.Title>
           </Modal.Content>
-        </Modal>,
+        </Modal>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
       const dialog = screen.getByRole('dialog');

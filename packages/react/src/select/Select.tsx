@@ -8,21 +8,39 @@ import styles from './select.module.css';
 type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
 
 export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
-  size?: SelectSize;
   disabled?: boolean;
+  size?: SelectSize;
   stretch?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, style: _style, size = 'md', disabled = false, stretch = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      style: _style,
+      size = 'md',
+      disabled = false,
+      stretch = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const style = {
       ..._style,
       ...getStyles(size),
     } as CSSProperties;
 
     return (
-      <div className={cx(styles.wrapper, stretch && styles.stretch, disabled && styles.disabled, className)}>
-        <select ref={ref} className={styles.select} style={style} disabled={disabled} {...props}>
+      <div
+        className={cx(
+          styles.wrapper,
+          stretch && styles.stretch,
+          disabled && styles.disabled,
+          className
+        )}
+      >
+        <select className={styles.select} disabled={disabled} ref={ref} style={style} {...props}>
           {children}
         </select>
 
@@ -31,7 +49,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </span>
       </div>
     );
-  },
+  }
 );
 
 const getStyles = (size: SelectSize) =>

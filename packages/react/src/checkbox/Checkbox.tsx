@@ -18,22 +18,19 @@ export type CheckboxSize = 'lg' | 'md' | 'sm';
 export type CheckboxStatus = 'on' | 'off' | 'intermediate';
 
 export interface CheckboxProps
-  extends Omit<
-    ComponentPropsWithoutRef<typeof Root>,
-    'checked' | 'onCheckedChange' | 'onChange'
-  > {
+  extends Omit<ComponentPropsWithoutRef<typeof Root>, 'checked' | 'onCheckedChange' | 'onChange'> {
+  disabled?: boolean;
   id?: string;
+  label?: string;
+  onChange: (status: CheckboxStatus) => void;
   size?: CheckboxSize;
   status: CheckboxStatus;
-  onChange: (status: CheckboxStatus) => void;
-  label?: string;
-  disabled?: boolean;
 }
 
 export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
   (
     { id: _id, className, style: _style, size = 'md', status, onChange, label, disabled, ...props },
-    ref,
+    ref
   ) => {
     const generatedId = useId();
     const id = _id ?? generatedId;
@@ -68,26 +65,26 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
     return (
       <div className={cx(styles.wrapper, className)} style={style}>
         <Root
-          ref={ref}
-          id={id}
-          className={styles.checkbox}
           checked={getCheckedState()}
-          onCheckedChange={handleCheckedChange}
+          className={styles.checkbox}
           disabled={disabled}
+          id={id}
+          onCheckedChange={handleCheckedChange}
+          ref={ref}
           {...props}
         >
           <Indicator
+            aria-hidden="true"
             className={styles.indicator}
             style={{ opacity: status === 'on' ? 1 : 0 }}
-            aria-hidden="true"
           >
             <CheckIcon className={styles.icon} size={24} />
           </Indicator>
 
           <div
+            aria-hidden="true"
             className={styles.indicator}
             style={{ opacity: status === 'intermediate' ? 1 : 0 }}
-            aria-hidden="true"
           >
             <CheckIcon className={styles.icon} size={24} />
           </div>
@@ -95,18 +92,18 @@ export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
 
         {label && (
           <Typography
-            type="body"
-            className={styles.label}
-            size={size}
             aria-disabled={disabled}
             asChild
+            className={styles.label}
+            size={size}
+            type="body"
           >
             <label htmlFor={id}>{label}</label>
           </Typography>
         )}
       </div>
     );
-  },
+  }
 );
 
 const getSize = (size: CheckboxSize) => {

@@ -11,11 +11,11 @@ import { Typography } from '../typography';
 import styles from './day-picker.module.css';
 
 export interface DayPickerProps extends ComponentPropsWithoutRef<'div'> {
-  value?: Date;
-  onValueChange?: (value: Date | null) => void;
-  minDate?: Date;
-  maxDate?: Date;
   disabled?: boolean;
+  maxDate?: Date;
+  minDate?: Date;
+  onValueChange?: (value: Date | null) => void;
+  value?: Date;
 }
 
 export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
@@ -28,26 +28,29 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
     };
 
     return (
-      <div ref={ref} className={cx(styles.root, className)} {...props}>
-        <Dropdown open={open} onOpenChange={setOpen}>
+      <div className={cx(styles.root, className)} ref={ref} {...props}>
+        <Dropdown onOpenChange={setOpen} open={open}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>
-            <Dropdown.Content className={styles.content} aria-label="날짜 선택">
+            <Dropdown.Content aria-label="날짜 선택" className={styles.content}>
               <DatePicker
-                selected={value}
-                onChange={handleChange}
-                disabled={disabled}
-                locale={ko}
-                minDate={minDate}
-                maxDate={maxDate}
                 dateFormat="yyyy년 MM월 dd일"
-                showPopperArrow={false}
                 dayClassName={date => {
                   const day = date.getDay();
-                  if (day === 0) { return styles.sunday; }
-                  if (day === 6) { return styles.saturday; }
+                  if (day === 0) {
+                    return styles.sunday;
+                  }
+                  if (day === 6) {
+                    return styles.saturday;
+                  }
                   return '';
                 }}
+                disabled={disabled}
+                inline
+                locale={ko}
+                maxDate={maxDate}
+                minDate={minDate}
+                onChange={handleChange}
                 renderCustomHeader={({
                   date,
                   decreaseMonth,
@@ -57,11 +60,11 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                 }) => (
                   <>
                     <Button
+                      disabled={prevMonthButtonDisabled}
+                      onClick={decreaseMonth}
+                      size="xs"
                       type="button"
                       variant="secondary"
-                      size="xs"
-                      onClick={decreaseMonth}
-                      disabled={prevMonthButtonDisabled}
                     >
                       <ArrowIOSBackwardIcon />
                     </Button>
@@ -69,24 +72,25 @@ export const DayPicker = forwardRef<HTMLDivElement, DayPickerProps>(
                       {date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })}
                     </Typography>
                     <Button
+                      disabled={nextMonthButtonDisabled}
+                      onClick={increaseMonth}
+                      size="xs"
                       type="button"
                       variant="secondary"
-                      size="xs"
-                      onClick={increaseMonth}
-                      disabled={nextMonthButtonDisabled}
                     >
                       <ArrowIOSForwardIcon />
                     </Button>
                   </>
                 )}
-                inline
+                selected={value}
+                showPopperArrow={false}
               />
             </Dropdown.Content>
           </Dropdown.Portal>
         </Dropdown>
       </div>
     );
-  },
+  }
 );
 
 DayPicker.displayName = 'DayPicker';

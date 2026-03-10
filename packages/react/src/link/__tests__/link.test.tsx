@@ -22,9 +22,9 @@ describe('Link', () => {
 
     it('forwards className to the rendered element', () => {
       render(
-        <Link href="#" className="custom-link">
+        <Link className="custom-link" href="#">
           Link
-        </Link>,
+        </Link>
       );
       expect(screen.getByRole('link')).toHaveClass('custom-link');
     });
@@ -35,7 +35,7 @@ describe('Link', () => {
       render(
         <Link asChild>
           <button type="button">Button link</button>
-        </Link>,
+        </Link>
       );
       expect(screen.getByRole('button', { name: 'Button link' })).toBeInTheDocument();
     });
@@ -44,7 +44,7 @@ describe('Link', () => {
       render(
         <Link asChild>
           <button type="button">Button link</button>
-        </Link>,
+        </Link>
       );
       expect(screen.queryByRole('link')).not.toBeInTheDocument();
     });
@@ -60,7 +60,7 @@ describe('Link', () => {
       render(
         <Link href="#" size={size}>
           Link
-        </Link>,
+        </Link>
       );
       const link = screen.getByRole('link');
       expect(link.style.getPropertyValue('--cocso-typography-font-size')).toBe(expectedPx);
@@ -82,7 +82,7 @@ describe('Link', () => {
       render(
         <Link href="#" onClick={onClick}>
           Clickable
-        </Link>,
+        </Link>
       );
       await userEvent.click(screen.getByRole('link', { name: 'Clickable' }));
       expect(onClick).toHaveBeenCalledTimes(1);
@@ -98,7 +98,7 @@ describe('Link', () => {
       render(
         <Link href="#" weight={weight}>
           Link
-        </Link>,
+        </Link>
       );
       const link = screen.getByRole('link');
       expect(link.style.getPropertyValue('--cocso-typography-font-weight')).toBe(expectedValue);

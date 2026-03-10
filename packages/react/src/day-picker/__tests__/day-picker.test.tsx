@@ -9,7 +9,7 @@ describe('DayPicker', () => {
       const { container } = render(
         <DayPicker>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       expect(container.firstChild).toBeInTheDocument();
     });
@@ -18,7 +18,7 @@ describe('DayPicker', () => {
       render(
         <DayPicker>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       expect(screen.getByRole('button', { name: 'Select date' })).toBeInTheDocument();
     });
@@ -27,7 +27,7 @@ describe('DayPicker', () => {
       render(
         <DayPicker>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       expect(screen.queryByLabelText('날짜 선택')).not.toBeInTheDocument();
     });
@@ -38,7 +38,7 @@ describe('DayPicker', () => {
       render(
         <DayPicker>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
       expect(screen.getByLabelText('날짜 선택')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('DayPicker', () => {
       render(
         <DayPicker>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
       // react-datepicker renders a calendar table
@@ -63,8 +63,8 @@ describe('DayPicker', () => {
         render(
           <DayPicker value={date}>
             <button>Select date</button>
-          </DayPicker>,
-        ),
+          </DayPicker>
+        )
       ).not.toThrow();
     });
   });
@@ -75,13 +75,13 @@ describe('DayPicker', () => {
       render(
         <DayPicker onValueChange={onValueChange}>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select date' }));
 
       // Click any enabled day cell in the calendar
       const dayCell = document.querySelector(
-        '.react-datepicker__day:not(.react-datepicker__day--disabled)',
+        '.react-datepicker__day:not(.react-datepicker__day--disabled)'
       ) as HTMLElement | null;
 
       expect(dayCell).not.toBeNull();
@@ -96,8 +96,8 @@ describe('DayPicker', () => {
         render(
           <DayPicker disabled>
             <button>Select date</button>
-          </DayPicker>,
-        ),
+          </DayPicker>
+        )
       ).not.toThrow();
     });
 
@@ -105,7 +105,7 @@ describe('DayPicker', () => {
       render(
         <DayPicker disabled>
           <button>Select date</button>
-        </DayPicker>,
+        </DayPicker>
       );
       expect(screen.getByRole('button', { name: 'Select date' })).toBeInTheDocument();
     });
@@ -117,10 +117,10 @@ describe('DayPicker', () => {
       const max = new Date(2024, 11, 31);
       expect(() =>
         render(
-          <DayPicker minDate={min} maxDate={max}>
+          <DayPicker maxDate={max} minDate={min}>
             <button>Select date</button>
-          </DayPicker>,
-        ),
+          </DayPicker>
+        )
       ).not.toThrow();
     });
   });

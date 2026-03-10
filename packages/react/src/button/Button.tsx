@@ -22,15 +22,15 @@ export type ButtonShape = 'square' | 'circle' | 'rounded';
 
 export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'prefix'> {
   asChild?: boolean;
-  size?: ButtonSize;
-  variant?: ButtonVariant;
-  weight?: FontWeight;
-  shape?: ButtonShape;
-  prefix?: ReactNode;
-  suffix?: ReactNode;
-  svgOnly?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  prefix?: ReactNode;
+  shape?: ButtonShape;
+  size?: ButtonSize;
+  suffix?: ReactNode;
+  svgOnly?: boolean;
+  variant?: ButtonVariant;
+  weight?: FontWeight;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       ...props
     },
-    ref,
+    ref
   ) => {
     const style = {
       ..._style,
@@ -70,12 +70,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       styles.button,
       isDisabled && styles.disabled,
       svgOnly && styles.svgOnly,
-      className,
+      className
     );
 
     const renderButtonContent = (ctx: ReactNode) => (
       <>
-        {loading && <Spinner size="sm" color="white" />}
+        {loading && <Spinner color="white" size="sm" />}
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <span className={styles.content}>{ctx}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}
@@ -88,9 +88,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       }
 
       interface ChildElementProps {
+        children?: ReactNode;
         className?: string;
         style?: CSSProperties;
-        children?: ReactNode;
         [key: string]: unknown;
       }
 
@@ -108,11 +108,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Primitive.button ref={ref} className={cn} disabled={isDisabled} style={style} {...props}>
+      <Primitive.button className={cn} disabled={isDisabled} ref={ref} style={style} {...props}>
         {renderButtonContent(children)}
       </Primitive.button>
     );
-  },
+  }
 );
 
 const getSizeStyles = (size: ButtonSize) => {

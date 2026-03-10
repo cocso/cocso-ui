@@ -52,7 +52,7 @@ describe('Button', () => {
       render(
         <Button disabled onClick={onClick}>
           Button
-        </Button>,
+        </Button>
       );
       await userEvent.click(screen.getByRole('button'));
       expect(onClick).not.toHaveBeenCalled();
@@ -73,7 +73,7 @@ describe('Button', () => {
       render(
         <Button asChild>
           <a href="/test">Link Button</a>
-        </Button>,
+        </Button>
       );
       expect(screen.getByRole('link', { name: 'Link Button' })).toBeInTheDocument();
     });

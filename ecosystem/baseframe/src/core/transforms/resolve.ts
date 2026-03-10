@@ -1,4 +1,4 @@
-import type { Value, TokenRef, ShadowLayer, ColorValue, SizeValue, TokenDecl } from '../types';
+import type { ColorValue, ShadowLayer, SizeValue, TokenDecl, TokenRef, Value } from '../types';
 
 export interface TokenResolver {
   resolve(value: Value): Value;
@@ -9,7 +9,7 @@ export interface TokenResolver {
 export function createTokenResolver(
   allTokens: TokenDecl[],
   mode: string,
-  cssVarNamer: (tokenName: string) => string,
+  cssVarNamer: (tokenName: string) => string
 ): TokenResolver {
   return {
     resolve(value: Value): Value {
@@ -17,7 +17,7 @@ export function createTokenResolver(
     },
     resolveTokenRef(tokenRef: TokenRef): string {
       const fullName = `$${tokenRef.collection}.${tokenRef.token}`;
-      const found = allTokens.find((t) => t.token.name === fullName);
+      const found = allTokens.find(t => t.token.name === fullName);
 
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
@@ -33,12 +33,12 @@ function resolveValue(
   value: Value,
   allTokens: TokenDecl[],
   mode: string,
-  cssVarNamer: (tokenName: string) => string,
+  cssVarNamer: (tokenName: string) => string
 ): Value {
   switch (value.kind) {
     case 'TokenRef': {
       const fullName = `$${value.collection}.${value.token}`;
-      const found = allTokens.find((t) => t.token.name === fullName);
+      const found = allTokens.find(t => t.token.name === fullName);
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
       }
@@ -60,7 +60,7 @@ function resolveValue(
       return {
         kind: 'Shadow',
         layers: value.layers.map(
-          (layer) => resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer,
+          layer => resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer
         ),
       };
 

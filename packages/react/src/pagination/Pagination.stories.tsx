@@ -66,14 +66,14 @@ export const AllVariants: Story = {
           <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
             Few Pages (5 total)
           </h4>
-          <Pagination page={page1} totalPages={5} onChange={setPage1} />
+          <Pagination onChange={setPage1} page={page1} totalPages={5} />
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
             Many Pages (100 total)
           </h4>
-          <Pagination page={page2} totalPages={100} onChange={setPage2} />
+          <Pagination onChange={setPage2} page={page2} totalPages={100} />
         </div>
       </div>
     );
@@ -83,7 +83,7 @@ export const AllVariants: Story = {
 export const Playground: Story = {
   render: args => {
     const [page, setPage] = useState(args.page || 1);
-    return <Pagination {...args} page={page} onChange={setPage} />;
+    return <Pagination {...args} onChange={setPage} page={page} />;
   },
   args: {
     page: 1,

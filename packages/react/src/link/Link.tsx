@@ -10,10 +10,10 @@ export type LinkSize = 'lg' | 'md' | 'sm' | 'xs';
 
 export interface LinkProps extends ComponentPropsWithoutRef<'a'> {
   asChild?: boolean;
+  indicator?: boolean;
+  lineHeight?: LineHeight;
   size?: LinkSize;
   weight?: FontWeight;
-  lineHeight?: LineHeight;
-  indicator?: boolean;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -21,13 +21,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const Comp = asChild ? Slot : Primitive.a;
 
     return (
-      <Typography type="body" size={size} weight={weight} lineHeight={lineHeight} asChild>
+      <Typography asChild lineHeight={lineHeight} size={size} type="body" weight={weight}>
         <Comp
-          ref={ref}
           className={cx(styles.link, indicator && styles.indicator, className)}
+          ref={ref}
           {...props}
         />
       </Typography>
     );
-  },
+  }
 );

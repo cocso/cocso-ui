@@ -6,17 +6,17 @@ import { Checkbox } from '../checkbox';
 describe('Checkbox', () => {
   describe('rendering', () => {
     it('renders a checkbox', () => {
-      render(<Checkbox status="off" onChange={vi.fn()} />);
+      render(<Checkbox onChange={vi.fn()} status="off" />);
       expect(screen.getByRole('checkbox')).toBeInTheDocument();
     });
 
     it('renders label when provided', () => {
-      render(<Checkbox status="off" onChange={vi.fn()} label="I agree" />);
+      render(<Checkbox label="I agree" onChange={vi.fn()} status="off" />);
       expect(screen.getByText('I agree')).toBeInTheDocument();
     });
 
     it('associates label with checkbox via htmlFor', () => {
-      render(<Checkbox status="off" onChange={vi.fn()} label="I agree" />);
+      render(<Checkbox label="I agree" onChange={vi.fn()} status="off" />);
       const checkbox = screen.getByRole('checkbox');
       const label = screen.getByText('I agree');
       expect(label.closest('label')).toHaveAttribute('for', checkbox.id);
@@ -25,17 +25,17 @@ describe('Checkbox', () => {
 
   describe('status', () => {
     it('is checked when status="on"', () => {
-      render(<Checkbox status="on" onChange={vi.fn()} />);
+      render(<Checkbox onChange={vi.fn()} status="on" />);
       expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     it('is unchecked when status="off"', () => {
-      render(<Checkbox status="off" onChange={vi.fn()} />);
+      render(<Checkbox onChange={vi.fn()} status="off" />);
       expect(screen.getByRole('checkbox')).not.toBeChecked();
     });
 
     it('is indeterminate when status="intermediate"', () => {
-      render(<Checkbox status="intermediate" onChange={vi.fn()} />);
+      render(<Checkbox onChange={vi.fn()} status="intermediate" />);
       expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'mixed');
     });
   });
@@ -43,14 +43,14 @@ describe('Checkbox', () => {
   describe('onChange', () => {
     it('calls onChange with "on" when clicked from unchecked state', async () => {
       const onChange = vi.fn();
-      render(<Checkbox status="off" onChange={onChange} />);
+      render(<Checkbox onChange={onChange} status="off" />);
       await userEvent.click(screen.getByRole('checkbox'));
       expect(onChange).toHaveBeenCalledWith('on');
     });
 
     it('calls onChange with "off" when clicked from checked state', async () => {
       const onChange = vi.fn();
-      render(<Checkbox status="on" onChange={onChange} />);
+      render(<Checkbox onChange={onChange} status="on" />);
       await userEvent.click(screen.getByRole('checkbox'));
       expect(onChange).toHaveBeenCalledWith('off');
     });
@@ -58,21 +58,21 @@ describe('Checkbox', () => {
 
   describe('disabled', () => {
     it('disables the checkbox when disabled=true', () => {
-      render(<Checkbox status="off" onChange={vi.fn()} disabled />);
+      render(<Checkbox disabled onChange={vi.fn()} status="off" />);
       expect(screen.getByRole('checkbox')).toBeDisabled();
     });
 
     it('does not call onChange when disabled and clicked', async () => {
       const onChange = vi.fn();
-      render(<Checkbox status="off" onChange={onChange} disabled />);
+      render(<Checkbox disabled onChange={onChange} status="off" />);
       await userEvent.click(screen.getByRole('checkbox'));
       expect(onChange).not.toHaveBeenCalled();
     });
   });
 
   describe('size CSS variables', () => {
-    it.each(['lg', 'md', 'sm'] as const)('sets size CSS variable for size="%s"', (size) => {
-      const { container } = render(<Checkbox status="off" onChange={vi.fn()} size={size} />);
+    it.each(['lg', 'md', 'sm'] as const)('sets size CSS variable for size="%s"', size => {
+      const { container } = render(<Checkbox onChange={vi.fn()} size={size} status="off" />);
       const wrapper = container.firstChild as HTMLElement;
       expect(wrapper.style.getPropertyValue('--cocso-checkbox-size')).toBeTruthy();
     });

@@ -5,16 +5,16 @@ export const DocumentScannerIcon = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        height="24"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path d="M4 8v-2a2 2 0 0 1 2 -2h2" />
         <path d="M4 16v2a2 2 0 0 0 2 2h2" />

@@ -35,7 +35,7 @@ describe('Typography', () => {
       render(
         <Typography asChild>
           <span>Span text</span>
-        </Typography>,
+        </Typography>
       );
       expect(screen.getByText('Span text').tagName).toBe('SPAN');
     });
@@ -44,7 +44,7 @@ describe('Typography', () => {
       render(
         <Typography asChild>
           <a href="/test">Link text</a>
-        </Typography>,
+        </Typography>
       );
       expect(screen.getByRole('link', { name: 'Link text' })).toBeInTheDocument();
     });
@@ -96,9 +96,9 @@ describe('Typography', () => {
       ['xs', '12px'],
     ] as const)('sets font size for body size="%s"', (size, expectedPx) => {
       const { container } = render(
-        <Typography type="body" size={size}>
+        <Typography size={size} type="body">
           Text
-        </Typography>,
+        </Typography>
       );
       const el = container.firstChild as HTMLElement;
       expect(el.style.getPropertyValue('--cocso-typography-font-size')).toBe(expectedPx);
@@ -112,9 +112,9 @@ describe('Typography', () => {
 
     it('sets responsive font-size CSS variables for type="display"', () => {
       const { container } = render(
-        <Typography type="display" size="lg">
+        <Typography size="lg" type="display">
           Display
-        </Typography>,
+        </Typography>
       );
       const el = container.firstChild as HTMLElement;
       expect(el.style.getPropertyValue('--cocso-typography-font-size')).toBe('44px');

@@ -1,5 +1,5 @@
 :root {
-  --ds-color-white: #FFFFFF;
+  --ds-color-white: #ffffff;
   --ds-color-white-alpha-5: rgba(255, 255, 255, 0.05);
   --ds-color-white-alpha-10: rgba(255, 255, 255, 0.1);
   --ds-color-white-alpha-20: rgba(255, 255, 255, 0.2);
@@ -23,65 +23,65 @@
   --ds-color-black-alpha-80: rgba(0, 0, 0, 0.8);
   --ds-color-black-alpha-90: rgba(0, 0, 0, 0.9);
 
-  --ds-color-neutral-50: #F4F5F6;
-  --ds-color-neutral-100: #E6E8EA;
-  --ds-color-neutral-200: #CDD1D5;
-  --ds-color-neutral-300: #B1B8BE;
-  --ds-color-neutral-400: #8A949E;
-  --ds-color-neutral-500: #6D7882;
-  --ds-color-neutral-600: #58616A;
-  --ds-color-neutral-700: #464C53;
-  --ds-color-neutral-800: #33363D;
-  --ds-color-neutral-900: #1E2124;
+  --ds-color-neutral-50: #f4f5f6;
+  --ds-color-neutral-100: #e6e8ea;
+  --ds-color-neutral-200: #cdd1d5;
+  --ds-color-neutral-300: #b1b8be;
+  --ds-color-neutral-400: #8a949e;
+  --ds-color-neutral-500: #6d7882;
+  --ds-color-neutral-600: #58616a;
+  --ds-color-neutral-700: #464c53;
+  --ds-color-neutral-800: #33363d;
+  --ds-color-neutral-900: #1e2124;
   --ds-color-neutral-950: #131416;
 
-  --ds-color-primary-50: #ECF2FE;
-  --ds-color-primary-100: #D8E5FD;
-  --ds-color-primary-200: #B1CEFB;
-  --ds-color-primary-300: #86AFF9;
-  --ds-color-primary-400: #4C87F6;
-  --ds-color-primary-500: #256EF4;
-  --ds-color-primary-600: #0B50D0;
+  --ds-color-primary-50: #ecf2fe;
+  --ds-color-primary-100: #d8e5fd;
+  --ds-color-primary-200: #b1cefb;
+  --ds-color-primary-300: #86aff9;
+  --ds-color-primary-400: #4c87f6;
+  --ds-color-primary-500: #256ef4;
+  --ds-color-primary-600: #0b50d0;
   --ds-color-primary-700: #083891;
   --ds-color-primary-800: #052561;
-  --ds-color-primary-900: #03163A;
-  --ds-color-primary-950: #020F27;
+  --ds-color-primary-900: #03163a;
+  --ds-color-primary-950: #020f27;
 
-  --ds-color-danger-50: #FDEFEC;
-  --ds-color-danger-100: #FCDFD9;
-  --ds-color-danger-200: #F7AFA1;
-  --ds-color-danger-300: #F48771;
-  --ds-color-danger-400: #F05F42;
-  --ds-color-danger-500: #DE3412;
-  --ds-color-danger-600: #BD2C0F;
-  --ds-color-danger-700: #8A240F;
-  --ds-color-danger-800: #5C180A;
-  --ds-color-danger-900: #390D05;
+  --ds-color-danger-50: #fdefec;
+  --ds-color-danger-100: #fcdfd9;
+  --ds-color-danger-200: #f7afa1;
+  --ds-color-danger-300: #f48771;
+  --ds-color-danger-400: #f05f42;
+  --ds-color-danger-500: #de3412;
+  --ds-color-danger-600: #bd2c0f;
+  --ds-color-danger-700: #8a240f;
+  --ds-color-danger-800: #5c180a;
+  --ds-color-danger-900: #390d05;
   --ds-color-danger-950: #260903;
 
-  --ds-color-warning-50: #FFF3DB;
-  --ds-color-warning-100: #FFE0A3;
-  --ds-color-warning-200: #FFC95C;
-  --ds-color-warning-300: #FFB114;
-  --ds-color-warning-400: #C78500;
-  --ds-color-warning-500: #9E6A00;
-  --ds-color-warning-600: #8A5C00;
+  --ds-color-warning-50: #fff3db;
+  --ds-color-warning-100: #ffe0a3;
+  --ds-color-warning-200: #ffc95c;
+  --ds-color-warning-300: #ffb114;
+  --ds-color-warning-400: #c78500;
+  --ds-color-warning-500: #9e6a00;
+  --ds-color-warning-600: #8a5c00;
   --ds-color-warning-700: #614100;
-  --ds-color-warning-800: #422C00;
-  --ds-color-warning-900: #2E1F00;
+  --ds-color-warning-800: #422c00;
+  --ds-color-warning-900: #2e1f00;
   --ds-color-warning-950: #241800;
 
-  --ds-color-success-50: #EAF6EC;
-  --ds-color-success-100: #D8EEDD;
-  --ds-color-success-200: #A9DAB4;
-  --ds-color-success-300: #7EC88E;
-  --ds-color-success-400: #3FA654;
+  --ds-color-success-50: #eaf6ec;
+  --ds-color-success-100: #d8eedd;
+  --ds-color-success-200: #a9dab4;
+  --ds-color-success-300: #7ec88e;
+  --ds-color-success-400: #3fa654;
   --ds-color-success-500: #228738;
   --ds-color-success-600: #267337;
-  --ds-color-success-700: #285D33;
-  --ds-color-success-800: #1F4727;
-  --ds-color-success-900: #122B18;
-  --ds-color-success-950: #0E2012;
+  --ds-color-success-700: #285d33;
+  --ds-color-success-800: #1f4727;
+  --ds-color-success-900: #122b18;
+  --ds-color-success-950: #0e2012;
 
   --ds-color-alpha-shadow1: rgba(0, 0, 0, 0.05);
   --ds-color-alpha-shadow2: rgba(0, 0, 0, 0.08);
@@ -105,10 +105,20 @@
   --ds-shadow-y-4: 16px;
   --ds-shadow-blur-3: 16px;
   --ds-shadow-blur-4: 24px;
-  --ds-shadow-1: 0px 1px 2px 0px var(--ds-color-alpha-shadow1), 0px 0px 2px 0px var(--ds-color-alpha-shadow1);
-  --ds-shadow-2: 0px 0px 2px 0px var(--ds-color-alpha-shadow1), 0px 4px 8px 0px var(--ds-color-alpha-shadow2);
-  --ds-shadow-3: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-3) var(--ds-shadow-blur-3) 0px var(--ds-color-alpha-shadow3);
-  --ds-shadow-4: 0px 0px 2px 0px var(--ds-color-alpha-shadow2), 0px var(--ds-shadow-y-4) var(--ds-shadow-blur-4) 0px var(--ds-color-alpha-shadow3);
+  --ds-shadow-1:
+    0px 1px 2px 0px var(--ds-color-alpha-shadow1),
+    0px 0px 2px 0px var(--ds-color-alpha-shadow1);
+  --ds-shadow-2:
+    0px 0px 2px 0px var(--ds-color-alpha-shadow1),
+    0px 4px 8px 0px var(--ds-color-alpha-shadow2);
+  --ds-shadow-3:
+    0px 0px 2px 0px var(--ds-color-alpha-shadow2),
+    0px var(--ds-shadow-y-3) var(--ds-shadow-blur-3) 0px
+    var(--ds-color-alpha-shadow3);
+  --ds-shadow-4:
+    0px 0px 2px 0px var(--ds-color-alpha-shadow2),
+    0px var(--ds-shadow-y-4) var(--ds-shadow-blur-4) 0px
+    var(--ds-color-alpha-shadow3);
 
   --ds-z-index-behind: -1;
   --ds-z-index-base: 0;

@@ -14,7 +14,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       expect(screen.getByRole('button', { name: /Section 1/i })).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 2</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       expect(screen.getByRole('button', { name: /Section 1/i })).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       // chevron is rendered as an SVG inside the trigger
@@ -68,7 +68,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       const trigger = screen.getByRole('button', { name: 'Section 1' });
@@ -86,7 +86,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       const trigger = screen.getByRole('button', { name: /Section 1/i });
@@ -96,14 +96,14 @@ describe('Accordion', () => {
 
     it('collapses item content when trigger is clicked again', async () => {
       render(
-        <Accordion type="single" collapsible defaultValue="item-1">
+        <Accordion collapsible defaultValue="item-1" type="single">
           <Accordion.Item value="item-1">
             <Accordion.Header>
               <Accordion.Trigger>Section 1</Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       const trigger = screen.getByRole('button', { name: /Section 1/i });
@@ -121,7 +121,7 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 1</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       const trigger = screen.getByRole('button', { name: /Section 1/i });
@@ -145,14 +145,20 @@ describe('Accordion', () => {
             </Accordion.Header>
             <Accordion.Content>Content 2</Accordion.Content>
           </Accordion.Item>
-        </Accordion>,
+        </Accordion>
       );
 
       await userEvent.click(screen.getByRole('button', { name: /Section 1/i }));
       await userEvent.click(screen.getByRole('button', { name: /Section 2/i }));
 
-      expect(screen.getByRole('button', { name: /Section 1/i })).toHaveAttribute('aria-expanded', 'false');
-      expect(screen.getByRole('button', { name: /Section 2/i })).toHaveAttribute('aria-expanded', 'true');
+      expect(screen.getByRole('button', { name: /Section 1/i })).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+      expect(screen.getByRole('button', { name: /Section 2/i })).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
     });
   });
 });

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <ViewTransitions>
-      <html lang="ko" dir="ltr" suppressHydrationWarning>
+      <html dir="ltr" lang="ko" suppressHydrationWarning>
         <body className={Pretendard.className}>
           <RootProvider search={{ SearchDialog }}>
             <Layout>{children}</Layout>

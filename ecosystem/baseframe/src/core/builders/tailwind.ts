@@ -3,8 +3,8 @@ import type { Ast, Collections, Token, TokenDecl } from '../types';
 import { resolveTokenValue, toCssValue } from './utils';
 
 export interface TailwindOptions {
-  prefix?: string;
   banner?: string;
+  prefix?: string;
 }
 
 const LEADING_DOLLAR = /^\$/;
@@ -120,7 +120,7 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
 export function generateTailwindCSS(
   tokens: Token[],
   collections: Collections,
-  options: TailwindOptions = {},
+  options: TailwindOptions = {}
 ): string {
   const ast = buildValidatedAst(tokens, collections);
   return generateFromAst(ast, options);

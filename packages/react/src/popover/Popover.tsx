@@ -7,7 +7,7 @@ const PopoverContent = forwardRef<
   ComponentRef<typeof Content>,
   ComponentPropsWithoutRef<typeof Content>
 >(({ className, ...props }, ref) => {
-  return <Content ref={ref} className={cx(styles.content, className)} {...props} />;
+  return <Content className={cx(styles.content, className)} ref={ref} {...props} />;
 });
 
 export const Popover = Object.assign(Root, {

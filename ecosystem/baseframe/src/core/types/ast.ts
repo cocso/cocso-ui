@@ -6,30 +6,30 @@ export interface TokenData {
 }
 
 export interface Token {
+  data: {
+    collection: string;
+    tokens: Record<string, TokenData>;
+  };
   kind: 'Tokens';
   metadata: {
     id: string;
     name: string;
     description: string;
   };
-  data: {
-    collection: string;
-    tokens: Record<string, TokenData>;
-  };
 }
 
 export interface Collection {
-  name: string;
   modes: string[];
+  name: string;
 }
 
 export interface Collections {
+  data: Collection[];
   kind: 'TokenCollections';
   metadata: {
     id: string;
     name: string;
   };
-  data: Collection[];
 }
 
 export interface TokenDecl {
@@ -44,11 +44,11 @@ export interface TokenDecl {
 }
 
 export interface CollectionDecl {
-  name: string;
   modes: string[];
+  name: string;
 }
 
 export interface Ast {
-  tokens: TokenDecl[];
   collections: CollectionDecl[];
+  tokens: TokenDecl[];
 }

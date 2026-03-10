@@ -11,11 +11,11 @@ import { Typography } from '../typography';
 import styles from './month-picker.module.css';
 
 export interface MonthPickerProps extends ComponentPropsWithoutRef<'div'> {
-  value?: Date;
-  onValueChange?: (value: Date | null) => void;
-  minDate?: Date;
-  maxDate?: Date;
   disabled?: boolean;
+  maxDate?: Date;
+  minDate?: Date;
+  onValueChange?: (value: Date | null) => void;
+  value?: Date;
 }
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
@@ -28,20 +28,19 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     };
 
     return (
-      <div ref={ref} className={cx(styles.root, className)} {...props}>
-        <Dropdown open={open} onOpenChange={setOpen}>
+      <div className={cx(styles.root, className)} ref={ref} {...props}>
+        <Dropdown onOpenChange={setOpen} open={open}>
           <Dropdown.Trigger asChild>{children}</Dropdown.Trigger>
           <Dropdown.Portal>
             <Dropdown.Content className={styles.content}>
               <DatePicker
-                selected={value}
-                onChange={handleChange}
-                disabled={disabled}
-                locale={ko}
-                minDate={minDate}
-                maxDate={maxDate}
                 dateFormat="yyyy년 MM월 dd일"
-                showPopperArrow={false}
+                disabled={disabled}
+                inline
+                locale={ko}
+                maxDate={maxDate}
+                minDate={minDate}
+                onChange={handleChange}
                 renderCustomHeader={({
                   date,
                   decreaseYear,
@@ -51,11 +50,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 }) => (
                   <>
                     <Button
+                      disabled={prevYearButtonDisabled}
+                      onClick={decreaseYear}
+                      size="xs"
                       type="button"
                       variant="secondary"
-                      size="xs"
-                      onClick={decreaseYear}
-                      disabled={prevYearButtonDisabled}
                     >
                       <ArrowIOSBackwardIcon />
                     </Button>
@@ -63,25 +62,26 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                       {date.toLocaleDateString('ko-KR', { year: 'numeric' })}
                     </Typography>
                     <Button
+                      disabled={nextYearButtonDisabled}
+                      onClick={increaseYear}
+                      size="xs"
                       type="button"
                       variant="secondary"
-                      size="xs"
-                      onClick={increaseYear}
-                      disabled={nextYearButtonDisabled}
                     >
                       <ArrowIOSForwardIcon />
                     </Button>
                   </>
                 )}
-                inline
+                selected={value}
                 showMonthYearPicker
+                showPopperArrow={false}
               />
             </Dropdown.Content>
           </Dropdown.Portal>
         </Dropdown>
       </div>
     );
-  },
+  }
 );
 
 MonthPicker.displayName = 'MonthPicker';

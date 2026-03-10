@@ -9,7 +9,7 @@ describe('MonthPicker', () => {
       const { container } = render(
         <MonthPicker>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       expect(container.firstChild).toBeInTheDocument();
     });
@@ -18,7 +18,7 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       expect(screen.getByRole('button', { name: 'Select month' })).toBeInTheDocument();
     });
@@ -27,7 +27,7 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       expect(document.querySelector('.react-datepicker')).not.toBeInTheDocument();
     });
@@ -38,7 +38,7 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
       expect(document.querySelector('.react-datepicker')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
       expect(document.querySelector('.react-datepicker__month-wrapper')).toBeInTheDocument();
@@ -62,8 +62,8 @@ describe('MonthPicker', () => {
         render(
           <MonthPicker value={date}>
             <button>Select month</button>
-          </MonthPicker>,
-        ),
+          </MonthPicker>
+        )
       ).not.toThrow();
     });
   });
@@ -74,12 +74,12 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker onValueChange={onValueChange}>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
 
       const monthCell = document.querySelector(
-        '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)',
+        '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)'
       ) as HTMLElement | null;
 
       expect(monthCell).not.toBeNull();
@@ -92,12 +92,12 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker onValueChange={onValueChange}>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Select month' }));
 
       const monthCell = document.querySelector(
-        '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)',
+        '.react-datepicker__month-text:not(.react-datepicker__month-text--disabled)'
       ) as HTMLElement | null;
 
       expect(monthCell).not.toBeNull();
@@ -114,8 +114,8 @@ describe('MonthPicker', () => {
         render(
           <MonthPicker disabled>
             <button>Select month</button>
-          </MonthPicker>,
-        ),
+          </MonthPicker>
+        )
       ).not.toThrow();
     });
 
@@ -123,7 +123,7 @@ describe('MonthPicker', () => {
       render(
         <MonthPicker disabled>
           <button>Select month</button>
-        </MonthPicker>,
+        </MonthPicker>
       );
       expect(screen.getByRole('button', { name: 'Select month' })).toBeInTheDocument();
     });
@@ -135,10 +135,10 @@ describe('MonthPicker', () => {
       const max = new Date(2024, 11, 1);
       expect(() =>
         render(
-          <MonthPicker minDate={min} maxDate={max}>
+          <MonthPicker maxDate={max} minDate={min}>
             <button>Select month</button>
-          </MonthPicker>,
-        ),
+          </MonthPicker>
+        )
       ).not.toThrow();
     });
   });

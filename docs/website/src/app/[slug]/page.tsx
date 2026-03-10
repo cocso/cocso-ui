@@ -22,7 +22,7 @@ const Page = async ({ params }: Props) => {
   return (
     <>
       <Section>
-        <Typography type="heading" size="lg">
+        <Typography size="lg" type="heading">
           {page.data.title}
         </Typography>
         <Typography className="mt-1" color={colors.neutral500} weight="medium">

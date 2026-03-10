@@ -1,18 +1,16 @@
 .stock {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--ds-spacing-2);
-  color: var(--cocso-stock-quantity-status-color);
-
   --cocso-stock-quantity-status-color: inherit;
+  display: inline-flex;
+  gap: var(--ds-spacing-2);
+  align-items: center;
+  color: var(--cocso-stock-quantity-status-color);
 }
 
 .indicator {
+  --cocso-stock-quantity-status-indicator-width: inherit;
+  flex-shrink: 0;
   width: var(--cocso-stock-quantity-status-indicator-width);
   height: auto;
-  flex-shrink: 0;
-
-  --cocso-stock-quantity-status-indicator-width: inherit;
 }
 
 .indicator > svg {

@@ -15,19 +15,19 @@ const renderIndicator = (quantity: QuantityStatus) => {
   if (quantity === '여유') {
     return (
       <svg
-        width="16"
+        aria-hidden="true"
+        fill="none"
         height="16"
         viewBox="0 0 16 16"
-        fill="none"
+        width="16"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path
-          fillRule="evenodd"
           clipRule="evenodd"
           d="M7.06494 13.0754C4.26764 13.0754 1.99999 10.8199 2 8.03765C2.00001 5.25543 4.26766 3 7.06494 3L9.48051 3V6.10011L7.06494 6.10011C5.98906 6.10011 5.11689 6.96758 5.11689 8.03767C5.11688 9.10776 5.98906 9.97524 7.06494 9.97524L9.48051 9.97524V13.0754H7.06494Z"
           fill="#D9D9D9"
           fillOpacity="0.85098"
+          fillRule="evenodd"
         />
         <path
           d="M9.48051 9.97524L9.48051 6.10011L12.0519 6.10026C13.1278 6.10026 14 6.96774 14 8.03783C14 9.10792 13.1278 9.9754 12.0519 9.9754L9.48051 9.97524Z"
@@ -45,19 +45,19 @@ const renderIndicator = (quantity: QuantityStatus) => {
   if (quantity === '보통') {
     return (
       <svg
-        width="16"
+        aria-hidden="true"
+        fill="none"
         height="16"
         viewBox="0 0 16 16"
-        fill="none"
+        width="16"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path
-          fillRule="evenodd"
           clipRule="evenodd"
           d="M7.06494 13.0754C4.26764 13.0754 1.99999 10.8199 2 8.03765C2.00001 5.25543 4.26766 3 7.06494 3L9.48051 3V6.10011L7.06494 6.10011C5.98906 6.10011 5.11689 6.96758 5.11689 8.03767C5.11688 9.10776 5.98906 9.97524 7.06494 9.97524L9.48051 9.97524V13.0754H7.06494Z"
           fill="#D9D9D9"
           fillOpacity="0.85098"
+          fillRule="evenodd"
         />
         <path
           d="M9.48051 9.97524L9.48051 6.10011L12.0519 6.10026C13.1278 6.10026 14 6.96774 14 8.03783C14 9.10792 13.1278 9.9754 12.0519 9.9754L9.48051 9.97524Z"
@@ -74,19 +74,19 @@ const renderIndicator = (quantity: QuantityStatus) => {
 
   return (
     <svg
-      width="16"
+      aria-hidden="true"
+      fill="none"
       height="16"
       viewBox="0 0 16 16"
-      fill="none"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
     >
       <path
-        fillRule="evenodd"
         clipRule="evenodd"
         d="M7.06494 13.0754C4.26764 13.0754 1.99999 10.8199 2 8.03765C2.00001 5.25543 4.26766 3 7.06494 3L9.48051 3V6.10011L7.06494 6.10011C5.98906 6.10011 5.11689 6.96758 5.11689 8.03767C5.11688 9.10776 5.98906 9.97524 7.06494 9.97524L9.48051 9.97524V13.0754H7.06494Z"
         fill="#D9D9D9"
         fillOpacity="0.85098"
+        fillRule="evenodd"
       />
       <path
         d="M9.48051 9.97524L9.48051 6.10011L12.0519 6.10026C13.1278 6.10026 14 6.96774 14 8.03783C14 9.10792 13.1278 9.9754 12.0519 9.9754L9.48051 9.97524Z"
@@ -110,14 +110,14 @@ export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProp
     } as CSSProperties;
 
     return (
-      <div ref={ref} className={cx(styles.stock, className)} style={style} {...props}>
+      <div className={cx(styles.stock, className)} ref={ref} style={style} {...props}>
         <span className={styles.indicator}>{renderIndicator(quantity)}</span>
-        <Typography type="body" size="sm" color="currentColor">
+        <Typography color="currentColor" size="sm" type="body">
           {quantity}
         </Typography>
       </div>
     );
-  },
+  }
 );
 
 export const getColor = (quantity: QuantityStatus) =>

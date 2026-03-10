@@ -63,30 +63,30 @@ export const AllVariants: Story = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>4 Digits</h4>
-          <OneTimePasswordField maxLength={4} value={value4} onValueChange={setValue4}>
+          <OneTimePasswordField maxLength={4} onValueChange={setValue4} value={value4}>
             {Array.from({ length: 4 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-              <OneTimePasswordField.Input key={index} index={index} />
+              <OneTimePasswordField.Input index={index} key={index} />
             ))}
           </OneTimePasswordField>
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>6 Digits</h4>
-          <OneTimePasswordField maxLength={6} value={value6} onValueChange={setValue6}>
+          <OneTimePasswordField maxLength={6} onValueChange={setValue6} value={value6}>
             {Array.from({ length: 6 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-              <OneTimePasswordField.Input key={index} index={index} />
+              <OneTimePasswordField.Input index={index} key={index} />
             ))}
           </OneTimePasswordField>
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>8 Digits</h4>
-          <OneTimePasswordField maxLength={8} value={value8} onValueChange={setValue8}>
+          <OneTimePasswordField maxLength={8} onValueChange={setValue8} value={value8}>
             {Array.from({ length: 8 }, (_, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: OTP inputs are statically positioned
-              <OneTimePasswordField.Input key={index} index={index} />
+              <OneTimePasswordField.Input index={index} key={index} />
             ))}
           </OneTimePasswordField>
         </div>
@@ -101,9 +101,9 @@ export const Playground: Story = {
     const maxLength = args.maxLength || 6;
 
     return (
-      <OneTimePasswordField {...args} value={value} onValueChange={setValue}>
+      <OneTimePasswordField {...args} onValueChange={setValue} value={value}>
         {Array.from({ length: maxLength }, (_, index) => (
-          <OneTimePasswordField.Input key={index} index={index} />
+          <OneTimePasswordField.Input index={index} key={index} />
         ))}
       </OneTimePasswordField>
     );

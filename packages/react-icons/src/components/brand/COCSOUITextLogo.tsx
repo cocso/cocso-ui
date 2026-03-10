@@ -4,12 +4,12 @@ import type { IconProps } from '../../types';
 export const COCSOUITextLogo = (props: IconProps) => (
   <Icon {...props}>
     <svg
-      width="97"
+      aria-hidden="true"
+      fill="none"
       height="16"
       viewBox="0 0 97 16"
-      fill="none"
+      width="97"
       xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
     >
       <path d="M94.1123 15V1H96.7123V15H94.1123Z" fill="currentColor" />
       <path

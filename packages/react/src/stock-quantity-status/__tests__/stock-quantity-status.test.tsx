@@ -1,16 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { StockQuantityStatus, getColor } from '../stock-quantity-status';
+import { getColor, StockQuantityStatus } from '../stock-quantity-status';
 
 describe('StockQuantityStatus', () => {
   describe('rendering', () => {
-    it.each(['여유', '보통', '부족'] as const)(
-      'renders the quantity label "%s"',
-      (quantity) => {
-        render(<StockQuantityStatus quantity={quantity} />);
-        expect(screen.getByText(quantity)).toBeInTheDocument();
-      },
-    );
+    it.each(['여유', '보통', '부족'] as const)('renders the quantity label "%s"', quantity => {
+      render(<StockQuantityStatus quantity={quantity} />);
+      expect(screen.getByText(quantity)).toBeInTheDocument();
+    });
 
     it('renders an SVG indicator', () => {
       const { container } = render(<StockQuantityStatus quantity="여유" />);
@@ -19,13 +16,13 @@ describe('StockQuantityStatus', () => {
 
     it('forwards className to the root div', () => {
       const { container } = render(
-        <StockQuantityStatus quantity="보통" className="custom-class" />,
+        <StockQuantityStatus className="custom-class" quantity="보통" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('forwards data attributes to the root div', () => {
-      render(<StockQuantityStatus quantity="부족" data-testid="stock-status" />);
+      render(<StockQuantityStatus data-testid="stock-status" quantity="부족" />);
       expect(screen.getByTestId('stock-status')).toBeInTheDocument();
     });
   });
@@ -35,16 +32,13 @@ describe('StockQuantityStatus', () => {
       ['여유', 'var(--ds-color-primary-500)'],
       ['보통', 'var(--ds-color-success-400)'],
       ['부족', 'var(--ds-color-danger-500)'],
-    ] as const)(
-      'sets --cocso-stock-quantity-status-color to "%s" for quantity="%s"',
-      (quantity, expectedColor) => {
-        const { container } = render(<StockQuantityStatus quantity={quantity} />);
-        const root = container.firstChild as HTMLElement;
-        expect(root.style.getPropertyValue('--cocso-stock-quantity-status-color')).toBe(
-          expectedColor,
-        );
-      },
-    );
+    ] as const)('sets --cocso-stock-quantity-status-color to "%s" for quantity="%s"', (quantity, expectedColor) => {
+      const { container } = render(<StockQuantityStatus quantity={quantity} />);
+      const root = container.firstChild as HTMLElement;
+      expect(root.style.getPropertyValue('--cocso-stock-quantity-status-color')).toBe(
+        expectedColor
+      );
+    });
   });
 
   describe('getColor helper', () => {

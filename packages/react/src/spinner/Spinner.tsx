@@ -12,8 +12,8 @@ export type SpinnerColor = 'primary' | 'neutral' | 'white';
 
 export interface SpinnerProps extends Omit<ComponentPropsWithoutRef<'div'>, 'size' | 'color'> {
   asChild?: boolean;
-  size?: SpinnerSize;
   color?: SpinnerColor;
+  size?: SpinnerSize;
 }
 
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
@@ -27,8 +27,8 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
       '--cocso-spinner-bg-color': getBackgroundColor(color),
     };
 
-    return <Comp ref={ref} className={cx(styles.spinner, className)} style={style} {...props} />;
-  },
+    return <Comp className={cx(styles.spinner, className)} ref={ref} style={style} {...props} />;
+  }
 );
 
 const getSize = (size: SpinnerSize) =>

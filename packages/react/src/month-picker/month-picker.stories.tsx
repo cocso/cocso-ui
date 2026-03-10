@@ -74,7 +74,7 @@ export const Default: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <MonthPicker value={value} onValueChange={setValue}>
+        <MonthPicker onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -98,21 +98,21 @@ export const ButtonVariants: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <MonthPicker value={value1} onValueChange={setValue1}>
+        <MonthPicker onValueChange={setValue1} value={value1}>
           <Button variant="primary">
             {formatValue(value1)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
         </MonthPicker>
 
-        <MonthPicker value={value2} onValueChange={setValue2}>
+        <MonthPicker onValueChange={setValue2} value={value2}>
           <Button variant="secondary">
             {formatValue(value2)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
         </MonthPicker>
 
-        <MonthPicker value={value3} onValueChange={setValue3}>
+        <MonthPicker onValueChange={setValue3} value={value3}>
           <Button variant="tertiary">
             {formatValue(value3)}
             <KeyboardArrowDownIcon size={16} />
@@ -130,7 +130,7 @@ export const WithSelect: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <MonthPicker value={value} onValueChange={setValue}>
+        <MonthPicker onValueChange={setValue} value={value}>
           <Select style={{ minWidth: '200px' }}>
             <option value="">{formatValue(value)}</option>
           </Select>
@@ -151,8 +151,8 @@ export const Disabled: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <MonthPicker value={value} onValueChange={setValue} disabled>
-          <Button variant="secondary" disabled>
+        <MonthPicker disabled onValueChange={setValue} value={value}>
+          <Button disabled variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
           </Button>
@@ -171,7 +171,7 @@ export const YearRange: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <MonthPicker value={value} onValueChange={setValue} minYear={2020} maxYear={2030}>
+        <MonthPicker maxYear={2030} minYear={2020} onValueChange={setValue} value={value}>
           <Button variant="secondary">
             {formatValue(value)}
             <KeyboardArrowDownIcon size={16} />
@@ -213,10 +213,10 @@ export const FormExample: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label style={{ fontSize: '14px', fontWeight: '500' }}>시작 월</label>
           <MonthPicker
-            value={formData.startMonth}
             onValueChange={value => setFormData(prev => ({ ...prev, startMonth: value }))}
+            value={formData.startMonth}
           >
-            <Button variant="secondary" style={{ justifyContent: 'space-between' }}>
+            <Button style={{ justifyContent: 'space-between' }} variant="secondary">
               {formatValue(formData.startMonth)}
               <KeyboardArrowDownIcon size={16} />
             </Button>
@@ -226,17 +226,17 @@ export const FormExample: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label style={{ fontSize: '14px', fontWeight: '500' }}>종료 월</label>
           <MonthPicker
-            value={formData.endMonth}
             onValueChange={value => setFormData(prev => ({ ...prev, endMonth: value }))}
+            value={formData.endMonth}
           >
-            <Button variant="secondary" style={{ justifyContent: 'space-between' }}>
+            <Button style={{ justifyContent: 'space-between' }} variant="secondary">
               {formatValue(formData.endMonth)}
               <KeyboardArrowDownIcon size={16} />
             </Button>
           </MonthPicker>
         </div>
 
-        <Button type="submit" style={{ marginTop: '8px' }}>
+        <Button style={{ marginTop: '8px' }} type="submit">
           제출
         </Button>
       </form>

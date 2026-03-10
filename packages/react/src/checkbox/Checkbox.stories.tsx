@@ -74,26 +74,26 @@ export const AllVariants: Story = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>States</h4>
-          <Checkbox status={onState} onChange={setOnState} label="Checked (On)" />
-          <Checkbox status={offState} onChange={setOffState} label="Unchecked (Off)" />
+          <Checkbox label="Checked (On)" onChange={setOnState} status={onState} />
+          <Checkbox label="Unchecked (Off)" onChange={setOffState} status={offState} />
           <Checkbox
-            status={intermediateState}
-            onChange={setIntermediateState}
             label="Intermediate"
+            onChange={setIntermediateState}
+            status={intermediateState}
           />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-          <Checkbox size="sm" status="on" onChange={() => {}} label="Small" />
-          <Checkbox size="md" status="on" onChange={() => {}} label="Medium" />
-          <Checkbox size="lg" status="on" onChange={() => {}} label="Large" />
+          <Checkbox label="Small" onChange={() => {}} size="sm" status="on" />
+          <Checkbox label="Medium" onChange={() => {}} size="md" status="on" />
+          <Checkbox label="Large" onChange={() => {}} size="lg" status="on" />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
-          <Checkbox status="on" onChange={() => {}} label="Disabled Checked" disabled />
-          <Checkbox status="off" onChange={() => {}} label="Disabled Unchecked" disabled />
+          <Checkbox disabled label="Disabled Checked" onChange={() => {}} status="on" />
+          <Checkbox disabled label="Disabled Unchecked" onChange={() => {}} status="off" />
         </div>
       </div>
     );
@@ -104,7 +104,7 @@ export const Playground: Story = {
   render: args => {
     const [status, setStatus] = useState<CheckboxStatus>(args.status || 'off');
 
-    return <Checkbox {...args} status={status} onChange={setStatus} />;
+    return <Checkbox {...args} onChange={setStatus} status={status} />;
   },
   args: {
     status: 'off',

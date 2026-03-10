@@ -59,7 +59,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       lineHeight = 'normal',
       ...props
     },
-    ref,
+    ref
   ) => {
     const Comp = match({ asChild, type })
       .with({ asChild: true }, () => Slot)
@@ -75,14 +75,14 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
           .with('md', () => 16 as FontSize)
           .with('sm', () => 14 as FontSize)
           .with('xs', () => 12 as FontSize)
-          .exhaustive(),
+          .exhaustive()
       )
       .with('display', () =>
         match((props as DisplayTypographyProps).size ?? 'md')
           .with('lg', () => ({ base: 44 as FontSize, tablet: 60 as FontSize }))
           .with('md', () => ({ base: 32 as FontSize, tablet: 44 as FontSize }))
           .with('sm', () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
-          .exhaustive(),
+          .exhaustive()
       )
       .with('heading', () =>
         match((props as HeadingTypographyProps).size ?? 'md')
@@ -91,7 +91,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
           .with('md', () => ({ base: 20 as FontSize, tablet: 24 as FontSize }))
           .with('sm', () => 18 as FontSize)
           .with('xs', () => 16 as FontSize)
-          .exhaustive(),
+          .exhaustive()
       )
       .otherwise(() => 16);
 
@@ -130,5 +130,5 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
         {...props}
       />
     );
-  },
+  }
 );

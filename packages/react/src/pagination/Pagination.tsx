@@ -4,10 +4,10 @@ import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import styles from './pagination.module.css';
 
 export interface PaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> {
-  page: number;
-  totalPages: number;
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
+  page: number;
+  totalPages: number;
 }
 
 export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
@@ -16,33 +16,31 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
 
     const renderPageButton = (pageNumber: number) => (
       <button
-        key={pageNumber}
-        type="button"
         className={styles.item}
-        onClick={() => onChange(pageNumber)}
         data-active={page === pageNumber}
+        key={pageNumber}
+        onClick={() => onChange(pageNumber)}
+        type="button"
       >
         {pageNumber}
       </button>
     );
 
     return (
-      <div ref={ref} className={cx(styles.pagination, className)} {...props}>
+      <div className={cx(styles.pagination, className)} ref={ref} {...props}>
         {totalPages > 1 && (
           <button
             className={styles.arrow}
-            type="button"
             disabled={page === 1}
             onClick={() => page > 1 && onChange(page - 1)}
+            type="button"
           >
             <ArrowIOSBackwardIcon />
           </button>
         )}
 
         {totalPages <= maxVisible + 2 ? (
-          new Array(totalPages)
-            .fill(0)
-            .map((_, index) => renderPageButton(index + 1))
+          new Array(totalPages).fill(0).map((_, index) => renderPageButton(index + 1))
         ) : (
           <>
             {renderPageButton(1)}
@@ -51,14 +49,10 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                 <MoreHorizIcon />
               </span>
             )}
-            {new Array(maxVisible)
-              .fill(0)
-              .map((_, index) => {
-                const pageNumber = page - halfVisible + index + 1;
-                return pageNumber > 1 && pageNumber < totalPages
-                  ? renderPageButton(pageNumber)
-                  : '';
-              })}
+            {new Array(maxVisible).fill(0).map((_, index) => {
+              const pageNumber = page - halfVisible + index + 1;
+              return pageNumber > 1 && pageNumber < totalPages ? renderPageButton(pageNumber) : '';
+            })}
             {page < totalPages - halfVisible && (
               <span className={styles.trunc}>
                 <MoreHorizIcon />
@@ -71,14 +65,14 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
         {totalPages > 1 && (
           <button
             className={styles.arrow}
-            type="button"
             disabled={page === totalPages}
             onClick={() => page < totalPages && onChange(page + 1)}
+            type="button"
           >
             <ArrowIOSForwardIcon />
           </button>
         )}
       </div>
     );
-  },
+  }
 );

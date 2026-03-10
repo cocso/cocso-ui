@@ -1,10 +1,14 @@
-import type { Value, TokenDecl, TokenRef } from '../../types';
-import { valueToString, parseValue } from '../../parsers';
+import { parseValue, valueToString } from '../../parsers';
 import { createTokenResolver } from '../../transforms';
+import type { TokenDecl, TokenRef, Value } from '../../types';
 
 export function toCssValue(value: string | number | Value): string {
-  if (typeof value === 'string') { return value; }
-  if (typeof value === 'number') { return value.toString(); }
+  if (typeof value === 'string') {
+    return value;
+  }
+  if (typeof value === 'number') {
+    return value.toString();
+  }
   return valueToString(value);
 }
 
@@ -14,15 +18,15 @@ export function resolveTokenValue(
   value: string | number,
   allTokens: TokenDecl[],
   resolver: Resolver,
-  prefix?: string,
+  prefix?: string
 ): string | number {
   const text = String(value);
 
   if (!text.startsWith('$')) {
     const parsed = parseValue(text);
     if (parsed.isValid && parsed.value) {
-      const tokenResolver = createTokenResolver(allTokens, 'default', (name) =>
-        resolver(name, prefix),
+      const tokenResolver = createTokenResolver(allTokens, 'default', name =>
+        resolver(name, prefix)
       );
       const resolved = tokenResolver.resolve(parsed.value);
       return toCssValue(resolved);
@@ -35,6 +39,6 @@ export function resolveTokenValue(
     throw new Error(`Invalid token reference: ${text}`);
   }
 
-  const tokenResolver = createTokenResolver(allTokens, 'default', (name) => resolver(name, prefix));
+  const tokenResolver = createTokenResolver(allTokens, 'default', name => resolver(name, prefix));
   return tokenResolver.resolveTokenRef(parsed.value as TokenRef);
 }

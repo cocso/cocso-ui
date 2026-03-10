@@ -16,11 +16,11 @@ export const Sidebar = (props: Props) => {
     <nav {...props}>
       {Object.entries(sidebar).map(([key, value]) => {
         return (
-          <div key={key} className="mb-6">
+          <div className="mb-6" key={key}>
             <Typography
               className="mb-3 px-4 uppercase"
-              size={12}
               color={colors.neutral400}
+              size={12}
               weight="medium"
             >
               {value.title}
@@ -30,16 +30,16 @@ export const Sidebar = (props: Props) => {
               {value.items.map(item => {
                 if (item.type === 'page') {
                   return (
-                    <li key={item.url} className="w-full">
+                    <li className="w-full" key={item.url}>
                       <Typography
+                        asChild
                         className={twMerge(
                           'center-y h-10 rounded-lg px-4 opacity-50 transition-all duration-150',
                           pathname !== item.url && 'hover:opacity-70',
-                          pathname === item.url && 'bg-neutral-100 opacity-100',
+                          pathname === item.url && 'bg-neutral-100 opacity-100'
                         )}
                         size={14}
                         weight="medium"
-                        asChild
                       >
                         <Link href={item.url}>{item.name}</Link>
                       </Typography>

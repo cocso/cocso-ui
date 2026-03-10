@@ -120,11 +120,27 @@
   --z-index-modal: var(--ds-z-index-modal);
 }
 
-@utility bg-* { background-color: --value(--color-*); }
-@utility text-* { color: --value(--color-*); }
-@utility border-* { border-color: --value(--color-*); }
-@utility fill-* { fill: --value(--color-*); }
-@utility stroke-* { stroke: --value(--color-*); }
-@utility font-* { font-weight: --value(--font-weight-*); }
-@utility shadow-* { box-shadow: --value(--shadow-*); }
-@utility z-* { z-index: --value(--z-index-*); }
+@utility bg-* {
+  background-color: --value(--color-*);
+}
+@utility text-* {
+  color: --value(--color-*);
+}
+@utility border-* {
+  border-color: --value(--color-*);
+}
+@utility fill-* {
+  fill: --value(--color-*);
+}
+@utility stroke-* {
+  stroke: --value(--color-*);
+}
+@utility font-* {
+  font-weight: --value(--font-weight-*);
+}
+@utility shadow-* {
+  box-shadow: --value(--shadow-*);
+}
+@utility z-* {
+  z-index: --value(--z-index-*);
+}

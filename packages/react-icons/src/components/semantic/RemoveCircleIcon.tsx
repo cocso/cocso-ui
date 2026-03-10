@@ -5,12 +5,12 @@ export const RemoveCircleIcon = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="24"
+        aria-hidden="true"
+        fill="currentColor"
         height="24"
         viewBox="0 0 24 24"
-        fill="currentColor"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path d="M4.929 4.929a10 10 0 1 1 14.141 14.141a10 10 0 0 1 -14.14 -14.14m4.071 6.071a1 1 0 1 0 0 2h6a1 1 0 1 0 0 -2h-6z" />
       </svg>

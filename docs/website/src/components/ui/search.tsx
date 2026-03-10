@@ -17,7 +17,7 @@ export const DefaultSearchDialog = (props: SharedProps) => {
   const { search, setSearch, query } = useDocsSearch({ type: 'fetch' });
 
   return (
-    <SearchDialog search={search} onSearchChange={setSearch} isLoading={query.isLoading} {...props}>
+    <SearchDialog isLoading={query.isLoading} onSearchChange={setSearch} search={search} {...props}>
       <SearchDialogOverlay />
       <SearchDialogContent>
         <SearchDialogHeader>

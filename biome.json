@@ -4,11 +4,7 @@
   "extends": ["ultracite/core", "ultracite/react"],
 
   "files": {
-    "includes": ["**", "!!**/pnpm-lock.yaml", "!!**/bin/**", "!!**/dist/**"]
-  },
-
-  "formatter": {
-    "lineWidth": 100
+    "includes": ["!!**/pnpm-lock.yaml", "!!**/bin", "!!**/dist"]
   },
 
   "javascript": {

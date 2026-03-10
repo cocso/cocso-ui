@@ -77,61 +77,61 @@ export const AllVariants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '600px' }}>
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Display</h4>
-        <Typography type="display" size="lg">
+        <Typography size="lg" type="display">
           Display Large
         </Typography>
-        <Typography type="display" size="md">
+        <Typography size="md" type="display">
           Display Medium
         </Typography>
-        <Typography type="display" size="sm">
+        <Typography size="sm" type="display">
           Display Small
         </Typography>
       </div>
 
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Heading</h4>
-        <Typography type="heading" size="xl">
+        <Typography size="xl" type="heading">
           Heading XL
         </Typography>
-        <Typography type="heading" size="lg">
+        <Typography size="lg" type="heading">
           Heading Large
         </Typography>
-        <Typography type="heading" size="md">
+        <Typography size="md" type="heading">
           Heading Medium
         </Typography>
-        <Typography type="heading" size="sm">
+        <Typography size="sm" type="heading">
           Heading Small
         </Typography>
-        <Typography type="heading" size="xs">
+        <Typography size="xs" type="heading">
           Heading XS
         </Typography>
       </div>
 
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Body</h4>
-        <Typography type="body" size="lg">
+        <Typography size="lg" type="body">
           Body Large
         </Typography>
-        <Typography type="body" size="md">
+        <Typography size="md" type="body">
           Body Medium
         </Typography>
-        <Typography type="body" size="sm">
+        <Typography size="sm" type="body">
           Body Small
         </Typography>
-        <Typography type="body" size="xs">
+        <Typography size="xs" type="body">
           Body XS
         </Typography>
       </div>
 
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Custom</h4>
-        <Typography type="custom" size={24}>
+        <Typography size={24} type="custom">
           Custom 24px
         </Typography>
-        <Typography type="custom" size={18}>
+        <Typography size={18} type="custom">
           Custom 18px
         </Typography>
-        <Typography type="custom" size={14}>
+        <Typography size={14} type="custom">
           Custom 14px
         </Typography>
       </div>

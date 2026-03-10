@@ -16,14 +16,17 @@ describe('Badge', () => {
   });
 
   describe('variant CSS variables', () => {
-    it.each(['default', 'danger', 'primary', 'success', 'warning'] as const)(
-      'sets background color CSS variable for variant="%s"',
-      (variant) => {
-        const { container } = render(<Badge variant={variant}>Badge</Badge>);
-        const badge = container.firstChild as HTMLElement;
-        expect(badge.style.getPropertyValue('--cocso-badge-bg-color')).toBeTruthy();
-      },
-    );
+    it.each([
+      'default',
+      'danger',
+      'primary',
+      'success',
+      'warning',
+    ] as const)('sets background color CSS variable for variant="%s"', variant => {
+      const { container } = render(<Badge variant={variant}>Badge</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge.style.getPropertyValue('--cocso-badge-bg-color')).toBeTruthy();
+    });
 
     it('defaults to variant="default"', () => {
       const { container } = render(<Badge>Badge</Badge>);

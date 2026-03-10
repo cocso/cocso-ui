@@ -47,7 +47,7 @@ describe('Spinner', () => {
 
   describe('color CSS variables', () => {
     it('sets CSS variables for color="primary"', () => {
-      render(<Spinner data-testid="spinner" color="primary" />);
+      render(<Spinner color="primary" data-testid="spinner" />);
       const spinner = screen.getByTestId('spinner');
       const style = spinner.getAttribute('style') ?? '';
       expect(style).toContain('--cocso-spinner-border-color');
@@ -55,7 +55,7 @@ describe('Spinner', () => {
     });
 
     it('sets CSS variables for color="neutral"', () => {
-      render(<Spinner data-testid="spinner" color="neutral" />);
+      render(<Spinner color="neutral" data-testid="spinner" />);
       const spinner = screen.getByTestId('spinner');
       const style = spinner.getAttribute('style') ?? '';
       expect(style).toContain('--cocso-spinner-border-color');
@@ -63,7 +63,7 @@ describe('Spinner', () => {
     });
 
     it('sets CSS variables for color="white"', () => {
-      render(<Spinner data-testid="spinner" color="white" />);
+      render(<Spinner color="white" data-testid="spinner" />);
       const spinner = screen.getByTestId('spinner');
       const style = spinner.getAttribute('style') ?? '';
       expect(style).toContain('--cocso-spinner-border-color');
@@ -76,7 +76,7 @@ describe('Spinner', () => {
       render(
         <Spinner asChild>
           <span data-testid="custom-spinner" />
-        </Spinner>,
+        </Spinner>
       );
       expect(screen.getByTestId('custom-spinner')).toBeInTheDocument();
     });

@@ -14,7 +14,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       expect(screen.getByRole('button', { name: 'Open Popover' })).toBeInTheDocument();
     });
@@ -28,7 +28,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       expect(screen.queryByText('Popover content')).not.toBeInTheDocument();
     });
@@ -44,7 +44,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
       expect(screen.getByText('Popover content')).toBeInTheDocument();
@@ -59,7 +59,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Portal content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
       const content = screen.getByText('Portal content');
@@ -75,7 +75,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       const trigger = screen.getByRole('button', { name: 'Open Popover' });
       await userEvent.click(trigger);
@@ -93,7 +93,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       const trigger = screen.getByRole('button', { name: 'Open Popover' });
       expect(trigger).toHaveAttribute('aria-expanded', 'false');
@@ -113,7 +113,7 @@ describe('Popover', () => {
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
       expect(onOpenChange).toHaveBeenCalledWith(true);
@@ -131,7 +131,7 @@ describe('Popover', () => {
               <button>Action</button>
             </Popover.Content>
           </Popover.Portal>
-        </Popover>,
+        </Popover>
       );
       await userEvent.click(screen.getByRole('button', { name: 'Open Popover' }));
       expect(screen.getByText('Rich content')).toBeInTheDocument();

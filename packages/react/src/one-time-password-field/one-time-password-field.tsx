@@ -7,14 +7,14 @@ const OneTimePasswordFieldRoot = forwardRef<
   ComponentRef<typeof Root>,
   ComponentPropsWithoutRef<typeof Root>
 >(({ className, ...props }, ref) => {
-  return <Root ref={ref} className={cx(styles.otp, className)} {...props} />;
+  return <Root className={cx(styles.otp, className)} ref={ref} {...props} />;
 });
 
 const OneTimePasswordFieldInput = forwardRef<
   ComponentRef<typeof Input>,
   ComponentPropsWithoutRef<typeof Input>
 >(({ className, ...props }, ref) => {
-  return <Input ref={ref} className={cx(styles.input, className)} {...props} />;
+  return <Input className={cx(styles.input, className)} ref={ref} {...props} />;
 });
 
 export const OneTimePasswordField = Object.assign(OneTimePasswordFieldRoot, {

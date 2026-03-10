@@ -10,7 +10,7 @@ describe('Select', () => {
         <Select aria-label="Choose option">
           <option value="a">Option A</option>
           <option value="b">Option B</option>
-        </Select>,
+        </Select>
       );
 
       expect(screen.getByRole('combobox', { name: 'Choose option' })).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('Select', () => {
         <Select aria-label="Choose option">
           <option value="a">Option A</option>
           <option value="b">Option B</option>
-        </Select>,
+        </Select>
       );
 
       expect(screen.getByRole('option', { name: 'Option A' })).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Select', () => {
       render(
         <Select aria-label="Choose option" disabled>
           <option value="a">Option A</option>
-        </Select>,
+        </Select>
       );
 
       expect(screen.getByRole('combobox', { name: 'Choose option' })).toBeDisabled();
@@ -42,7 +42,7 @@ describe('Select', () => {
       render(
         <Select aria-label="Choose option" name="my-select">
           <option value="a">Option A</option>
-        </Select>,
+        </Select>
       );
 
       expect(screen.getByRole('combobox')).toHaveAttribute('name', 'my-select');
@@ -56,7 +56,7 @@ describe('Select', () => {
         <Select aria-label="Choose option" onChange={onChange}>
           <option value="a">Option A</option>
           <option value="b">Option B</option>
-        </Select>,
+        </Select>
       );
 
       await userEvent.selectOptions(screen.getByRole('combobox'), 'b');
@@ -68,7 +68,7 @@ describe('Select', () => {
         <Select aria-label="Choose option" defaultValue="a">
           <option value="a">Option A</option>
           <option value="b">Option B</option>
-        </Select>,
+        </Select>
       );
 
       await userEvent.selectOptions(screen.getByRole('combobox'), 'b');
@@ -78,10 +78,10 @@ describe('Select', () => {
     it('does not change value when disabled', async () => {
       const onChange = vi.fn();
       render(
-        <Select aria-label="Choose option" disabled onChange={onChange} defaultValue="a">
+        <Select aria-label="Choose option" defaultValue="a" disabled onChange={onChange}>
           <option value="a">Option A</option>
           <option value="b">Option B</option>
-        </Select>,
+        </Select>
       );
 
       await userEvent.selectOptions(screen.getByRole('combobox'), 'b');
@@ -101,7 +101,7 @@ describe('Select', () => {
       render(
         <Select aria-label="Choose option" size={size}>
           <option value="a">Option A</option>
-        </Select>,
+        </Select>
       );
 
       const select = screen.getByRole('combobox');
@@ -112,7 +112,7 @@ describe('Select', () => {
       render(
         <Select aria-label="Choose option">
           <option value="a">Option A</option>
-        </Select>,
+        </Select>
       );
 
       const select = screen.getByRole('combobox');

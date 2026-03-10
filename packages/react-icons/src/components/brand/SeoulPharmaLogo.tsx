@@ -5,15 +5,15 @@ export const SeoulPharmaLogo = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="100"
+        aria-hidden="true"
+        fill="none"
         height="100"
         viewBox="0 0 100 100"
-        fill="none"
+        width="100"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
-        <ellipse cx="26.9" cy="49.9" rx="18.9" ry="18.9" fill="#02A149" />
-        <rect x="56.2998" y="32.05" width="35.7" height="35.7" fill="#02A149" />
+        <ellipse cx="26.9" cy="49.9" fill="#02A149" rx="18.9" ry="18.9" />
+        <rect fill="#02A149" height="35.7" width="35.7" x="56.2998" y="32.05" />
       </svg>
     </Icon>
   );

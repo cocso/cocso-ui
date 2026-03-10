@@ -52,7 +52,7 @@ export const AllVariants: Story = {
 
       <Dropdown>
         <Dropdown.Trigger asChild>
-          <Button variant="tertiary" svgOnly>
+          <Button svgOnly variant="tertiary">
             <MoreHorizIcon />
           </Button>
         </Dropdown.Trigger>

@@ -5,16 +5,16 @@ export const SystemUpdateIcon = (props: IconProps) => {
   return (
     <Icon {...props}>
       <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        height="24"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
       >
         <path d="M10 20.777a8.942 8.942 0 0 1 -2.48 -.969" />
         <path d="M14 3.223a9.003 9.003 0 0 1 0 17.554" />

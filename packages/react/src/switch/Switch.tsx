@@ -16,11 +16,11 @@ import styles from './switch.module.css';
 export type SwitchSize = 'sm' | 'md';
 
 export interface SwitchProps extends ComponentPropsWithoutRef<typeof Root> {
-  id?: string;
-  size?: SwitchSize;
   disabled?: boolean;
+  id?: string;
   label?: string;
   position?: 'left' | 'right';
+  size?: SwitchSize;
 }
 
 export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
@@ -35,7 +35,7 @@ export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
       label,
       ...props
     },
-    ref,
+    ref
   ) => {
     const generatedId = useId();
     const id = _id ?? generatedId;
@@ -51,26 +51,26 @@ export const Switch = forwardRef<ComponentRef<typeof Root>, SwitchProps>(
 
     return (
       <Primitive.div
-        className={cx(styles.wrapper, className)}
         aria-disabled={disabled}
+        className={cx(styles.wrapper, className)}
         style={style}
       >
         {position === 'left' && (
-          <Typography type="body" size={size} asChild>
+          <Typography asChild size={size} type="body">
             <label htmlFor={id}>{label}</label>
           </Typography>
         )}
-        <Root ref={ref} className={styles.switch} disabled={disabled} {...props}>
+        <Root className={styles.switch} disabled={disabled} ref={ref} {...props}>
           <Thumb className={styles.thumb} />
         </Root>
         {position === 'right' && (
-          <Typography type="body" size={size} aria-disabled={disabled} asChild>
+          <Typography aria-disabled={disabled} asChild size={size} type="body">
             <label htmlFor={id}>{label}</label>
           </Typography>
         )}
       </Primitive.div>
     );
-  },
+  }
 );
 
 const getSwitchWidth = (size: SwitchSize) =>

@@ -85,8 +85,8 @@ export const AllVariants: Story = {
           style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
         >
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Sizes</h4>
-          <Switch size="md" checked={state1} onCheckedChange={setState1} label="Medium" />
-          <Switch size="lg" checked={state2} onCheckedChange={setState2} label="Large" />
+          <Switch checked={state1} label="Medium" onCheckedChange={setState1} size="md" />
+          <Switch checked={state2} label="Large" onCheckedChange={setState2} size="lg" />
         </div>
 
         <div
@@ -97,14 +97,14 @@ export const AllVariants: Story = {
           </h4>
           <Switch
             checked={state3}
-            onCheckedChange={setState3}
             label="Label on Right"
+            onCheckedChange={setState3}
             position="right"
           />
           <Switch
             checked={state4}
-            onCheckedChange={setState4}
             label="Label on Left"
+            onCheckedChange={setState4}
             position="left"
           />
         </div>
@@ -113,8 +113,8 @@ export const AllVariants: Story = {
           style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}
         >
           <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600' }}>Disabled</h4>
-          <Switch checked onChange={() => {}} label="Disabled On" disabled />
-          <Switch checked={false} onChange={() => {}} label="Disabled Off" disabled />
+          <Switch checked disabled label="Disabled On" onChange={() => {}} />
+          <Switch checked={false} disabled label="Disabled Off" onChange={() => {}} />
         </div>
       </div>
     );

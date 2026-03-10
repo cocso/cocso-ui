@@ -54,7 +54,7 @@ export const AllVariants: Story = {
 
     return (
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-        <Modal open={basicOpen} onOpenChange={setBasicOpen}>
+        <Modal onOpenChange={setBasicOpen} open={basicOpen}>
           <Modal.Trigger asChild>
             <Button>기본 모달</Button>
           </Modal.Trigger>
@@ -72,7 +72,7 @@ export const AllVariants: Story = {
           </Modal.Content>
         </Modal>
 
-        <Modal open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <Modal onOpenChange={setConfirmOpen} open={confirmOpen}>
           <Modal.Trigger asChild>
             <Button variant="error">확인 모달</Button>
           </Modal.Trigger>
@@ -101,7 +101,7 @@ export const Playground: Story = {
     const [open, setOpen] = useState(false);
 
     return (
-      <Modal {...args} open={open} onOpenChange={setOpen}>
+      <Modal {...args} onOpenChange={setOpen} open={open}>
         <Modal.Trigger asChild>
           <Button>모달 열기</Button>
         </Modal.Trigger>

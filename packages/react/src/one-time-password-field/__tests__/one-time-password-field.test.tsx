@@ -9,7 +9,7 @@ describe('OneTimePasswordField', () => {
       render(
         <OneTimePasswordField maxLength={6}>
           <OneTimePasswordField.Input index={0} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       expect(screen.getByRole('group')).toBeInTheDocument();
     });
@@ -23,7 +23,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={3} />
           <OneTimePasswordField.Input index={4} />
           <OneTimePasswordField.Input index={5} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const inputs = screen.getAllByRole('textbox');
       expect(inputs).toHaveLength(6);
@@ -36,7 +36,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const inputs = screen.getAllByRole('textbox');
       expect(inputs).toHaveLength(4);
@@ -49,7 +49,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       expect(screen.getByRole('textbox', { name: 'Character 1 of 4' })).toBeInTheDocument();
       expect(screen.getByRole('textbox', { name: 'Character 2 of 4' })).toBeInTheDocument();
@@ -66,7 +66,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={3} />
           <OneTimePasswordField.Input index={4} />
           <OneTimePasswordField.Input index={5} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const first = screen.getByRole('textbox', { name: 'Character 1 of 6' });
       await userEvent.click(first);
@@ -81,7 +81,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const inputs = screen.getAllByRole('textbox');
       for (const input of inputs) {
@@ -93,12 +93,12 @@ describe('OneTimePasswordField', () => {
   describe('disabled state', () => {
     it('disables all input cells when the root is disabled', () => {
       render(
-        <OneTimePasswordField maxLength={4} disabled>
+        <OneTimePasswordField disabled maxLength={4}>
           <OneTimePasswordField.Input index={0} />
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const inputs = screen.getAllByRole('textbox');
       for (const input of inputs) {
@@ -108,12 +108,12 @@ describe('OneTimePasswordField', () => {
 
     it('does not accept input when disabled', async () => {
       render(
-        <OneTimePasswordField maxLength={4} disabled>
+        <OneTimePasswordField disabled maxLength={4}>
           <OneTimePasswordField.Input index={0} />
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const first = screen.getByRole('textbox', { name: 'Character 1 of 4' });
       await userEvent.click(first);
@@ -131,7 +131,7 @@ describe('OneTimePasswordField', () => {
           <OneTimePasswordField.Input index={1} />
           <OneTimePasswordField.Input index={2} />
           <OneTimePasswordField.Input index={3} />
-        </OneTimePasswordField>,
+        </OneTimePasswordField>
       );
       const first = screen.getByRole('textbox', { name: 'Character 1 of 4' });
       await userEvent.click(first);

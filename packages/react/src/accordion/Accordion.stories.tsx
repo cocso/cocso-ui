@@ -45,7 +45,7 @@ export const AllVariants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px' }}>
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>Single Type</h4>
-        <Accordion type="single" collapsible>
+        <Accordion collapsible type="single">
           <Accordion.Item value="item-1">
             <Accordion.Header>
               <Accordion.Trigger>첫 번째 아이템</Accordion.Trigger>
