@@ -78,7 +78,7 @@ function generateCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 
   const css = cssVars.generateCssVariables(tokens, collections, {
-    prefix,
+    prefix: prefix ?? "cocso",
     banner: "",
     selectors: { global: { default: ":root" } },
   });
