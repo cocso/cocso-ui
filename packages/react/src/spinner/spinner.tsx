@@ -1,9 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors } from "../token";
 import styles from "./spinner.module.css";
 
@@ -12,42 +11,38 @@ export type SpinnerSize = "x-large" | "large" | "medium" | "small";
 export type SpinnerColor = "primary" | "neutral" | "white";
 
 export interface SpinnerProps
-  extends Omit<ComponentPropsWithoutRef<"div">, "size" | "color"> {
+  extends Omit<ComponentProps<"div">, "size" | "color"> {
   color?: SpinnerColor;
   render?: useRender.RenderProp;
   size?: SpinnerSize;
 }
 
-export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
-  (
-    {
-      render: renderProp,
-      className,
-      style: _style,
-      size = "medium",
-      color = "primary",
-      ...props
-    },
-    ref
-  ) => {
-    const style = {
-      ..._style,
-      "--cocso-spinner-size": getSize(size),
-      "--cocso-spinner-border-width": getBorderWidth(size),
-      "--cocso-spinner-border-color": getBorderColor(color),
-      "--cocso-spinner-bg-color": getBackgroundColor(color),
-    };
+export function Spinner({
+  render: renderProp,
+  ref,
+  className,
+  style: _style,
+  size = "medium",
+  color = "primary",
+  ...props
+}: SpinnerProps) {
+  const style = {
+    ..._style,
+    "--cocso-spinner-size": getSize(size),
+    "--cocso-spinner-border-width": getBorderWidth(size),
+    "--cocso-spinner-border-color": getBorderColor(color),
+    "--cocso-spinner-bg-color": getBackgroundColor(color),
+  };
 
-    const mergedClassName = cx(styles.spinner, className);
+  const mergedClassName = cn(styles.spinner, className);
 
-    return useRender({
-      render: renderProp,
-      ref,
-      props: mergeProps<"div">({ className: mergedClassName, style }, props),
-      defaultTagName: "div",
-    });
-  }
-);
+  return useRender({
+    render: renderProp,
+    ref,
+    props: mergeProps<"div">({ className: mergedClassName, style }, props),
+    defaultTagName: "div",
+  });
+}
 
 const getSize = (size: SpinnerSize) =>
   match(size)

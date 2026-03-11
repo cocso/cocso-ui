@@ -1,20 +1,15 @@
 import { Switch as SwitchBase } from "@base-ui/react/switch";
-import { clsx as cx } from "clsx";
-import type {
-  ComponentPropsWithoutRef,
-  ComponentRef,
-  CSSProperties,
-} from "react";
-import { forwardRef, useId } from "react";
+import type { ComponentProps, CSSProperties } from "react";
+import { useId } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
 
 export type SwitchSize = "small" | "medium";
 
-export interface SwitchProps
-  extends ComponentPropsWithoutRef<typeof SwitchBase.Root> {
+export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
   label?: string;
@@ -22,68 +17,62 @@ export interface SwitchProps
   size?: SwitchSize;
 }
 
-export const Switch = forwardRef<
-  ComponentRef<typeof SwitchBase.Root>,
-  SwitchProps
->(
-  (
-    {
-      id: _id,
-      className,
-      style: _style,
-      size = "medium",
-      position = "right",
-      disabled,
-      label,
-      ...props
-    },
-    ref
-  ) => {
-    const generatedId = useId();
-    const id = _id ?? generatedId;
+export function Switch({
+  ref,
+  id: _id,
+  className,
+  style: _style,
+  size = "medium",
+  position = "right",
+  disabled,
+  label,
+  ...props
+}: SwitchProps) {
+  const generatedId = useId();
+  const id = _id ?? generatedId;
 
-    const style = {
-      ..._style,
-      "--cocso-switch-width": getSwitchWidth(size),
-      "--cocso-switch-height": getSwitchHeight(size),
-      "--cocso-switch-thumb-width": getThumbSize(size),
-      "--cocso-switch-thumb-height": getThumbSize(size),
-      "--cocso-switch-bg-color": colors.neutral100,
-    } as CSSProperties;
+  const style = {
+    ..._style,
+    "--cocso-switch-width": getSwitchWidth(size),
+    "--cocso-switch-height": getSwitchHeight(size),
+    "--cocso-switch-thumb-width": getThumbSize(size),
+    "--cocso-switch-thumb-height": getThumbSize(size),
+    "--cocso-switch-bg-color": colors.neutral100,
+  } as CSSProperties;
 
-    return (
-      <div
-        aria-disabled={disabled}
-        className={cx(styles.wrapper, className)}
-        style={style}
+  return (
+    <div
+      aria-disabled={disabled}
+      className={cn(styles.wrapper, className)}
+      style={style}
+    >
+      {position === "left" && (
+        <Typography
+          render={<label htmlFor={id}>{label}</label>}
+          size={size}
+          type="body"
+        />
+      )}
+      <SwitchBase.Root
+        className={styles.switch}
+        disabled={disabled}
+        id={id}
+        ref={ref}
+        {...props}
       >
-        {position === "left" && (
-          <Typography
-            render={<label htmlFor={id}>{label}</label>}
-            size={size}
-            type="body"
-          />
-        )}
-        <SwitchBase.Root
-          className={styles.switch}
-          disabled={disabled}
-          ref={ref}
-          {...props}
-        >
-          <SwitchBase.Thumb className={styles.thumb} />
-        </SwitchBase.Root>
-        {position === "right" && (
-          <Typography
-            aria-disabled={disabled}
-            render={<label htmlFor={id}>{label}</label>}
-            size={size}
-            type="body"
-          />
-        )}
-      </div>
-    );
-  }
-);
+        <SwitchBase.Thumb className={styles.thumb} />
+      </SwitchBase.Root>
+      {position === "right" && (
+        <Typography
+          aria-disabled={disabled}
+          render={<label htmlFor={id}>{label}</label>}
+          size={size}
+          type="body"
+        />
+      )}
+    </div>
+  );
+}
 
 const getSwitchWidth = (size: SwitchSize) =>
   match(size)

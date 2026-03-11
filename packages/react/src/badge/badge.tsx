@@ -1,7 +1,6 @@
-import { clsx } from "clsx";
 import type { ComponentProps, CSSProperties } from "react";
-import { forwardRef } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import type { ResponsiveFontSize } from "../token";
 import { colors } from "../token";
 import { Typography } from "../typography";
@@ -16,46 +15,42 @@ export interface BadgeProps extends ComponentProps<"div"> {
   variant?: BadgeVariant;
 }
 
-export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  (
-    {
-      className,
-      children,
-      size = "medium",
-      variant = "default",
-      style: _style,
-      ...props
-    },
-    ref
-  ) => {
-    const style = {
-      ..._style,
-      "--cocso-badge-padding": getPadding(size),
-      "--cocso-badge-border-radius": "6px",
-      "--cocso-badge-bg-color": getBackgroundColor(variant),
-    } as CSSProperties;
+export function Badge({
+  ref,
+  className,
+  children,
+  size = "medium",
+  variant = "default",
+  style: _style,
+  ...props
+}: BadgeProps) {
+  const style = {
+    ..._style,
+    "--cocso-badge-padding": getPadding(size),
+    "--cocso-badge-border-radius": "6px",
+    "--cocso-badge-bg-color": getBackgroundColor(variant),
+  } as CSSProperties;
 
-    const fontColor = getFontColor(variant);
-    const fontSize = getFontSize(size);
+  const fontColor = getFontColor(variant);
+  const fontSize = getFontSize(size);
 
-    return (
-      <div
-        className={clsx(styles.badge, className)}
-        ref={ref}
-        style={style}
-        {...props}
-      >
-        <Typography
-          color={fontColor}
-          lineHeight="tight"
-          render={<span className={styles.inner}>{children}</span>}
-          size={fontSize as ResponsiveFontSize}
-          weight="medium"
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div
+      className={cn(styles.badge, className)}
+      ref={ref}
+      style={style}
+      {...props}
+    >
+      <Typography
+        color={fontColor}
+        lineHeight="tight"
+        render={<span className={styles.inner}>{children}</span>}
+        size={fontSize as ResponsiveFontSize}
+        weight="medium"
+      />
+    </div>
+  );
+}
 
 const getPadding = (size: BadgeSize) =>
   match(size)

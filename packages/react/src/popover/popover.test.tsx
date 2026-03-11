@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Popover } from "../popover";
+import { Popover } from "./popover";
 
 describe("Popover", () => {
   describe("rendering", () => {

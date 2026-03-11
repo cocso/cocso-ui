@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { getColor, StockQuantityStatus } from "../stock-quantity-status";
+import { getColor, StockQuantityStatus } from "./stock-quantity-status";
 
 describe("StockQuantityStatus", () => {
   describe("rendering", () => {

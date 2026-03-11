@@ -1,23 +1,23 @@
 import { Popover as PopoverBase } from "@base-ui/react/popover";
-import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./popover.module.css";
 
-const PopoverContent = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<typeof PopoverBase.Popup>
->(({ className, ...props }, ref) => (
-  <PopoverBase.Portal>
-    <PopoverBase.Positioner>
-      <PopoverBase.Popup
-        className={cx(styles.content, className)}
-        ref={ref}
-        {...props}
-      />
-    </PopoverBase.Positioner>
-  </PopoverBase.Portal>
-));
+function PopoverContent({
+  className,
+  ...props
+}: ComponentProps<typeof PopoverBase.Popup>) {
+  return (
+    <PopoverBase.Portal>
+      <PopoverBase.Positioner>
+        <PopoverBase.Popup
+          className={cn(styles.content, className)}
+          {...props}
+        />
+      </PopoverBase.Positioner>
+    </PopoverBase.Portal>
+  );
+}
 
 export const Popover = Object.assign(PopoverBase.Root, {
   Trigger: PopoverBase.Trigger,

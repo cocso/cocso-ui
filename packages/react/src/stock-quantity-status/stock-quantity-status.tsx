@@ -1,14 +1,13 @@
-import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef, CSSProperties } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
 
 export type QuantityStatus = "보통" | "여유" | "부족";
 
-export interface QuantityStatusProps extends ComponentPropsWithoutRef<"div"> {
+export interface QuantityStatusProps extends ComponentProps<"div"> {
   quantity: QuantityStatus;
 }
 
@@ -102,10 +101,13 @@ const renderIndicator = (quantity: QuantityStatus) => {
   );
 };
 
-export const StockQuantityStatus = forwardRef<
-  HTMLDivElement,
-  QuantityStatusProps
->(({ className, style: _style, quantity, ...props }, ref) => {
+export function StockQuantityStatus({
+  ref,
+  className,
+  style: _style,
+  quantity,
+  ...props
+}: QuantityStatusProps) {
   const style = {
     ..._style,
     "--cocso-stock-quantity-status-color": getColor(quantity),
@@ -114,7 +116,7 @@ export const StockQuantityStatus = forwardRef<
 
   return (
     <div
-      className={cx(styles.stock, className)}
+      className={cn(styles.stock, className)}
       ref={ref}
       style={style}
       {...props}
@@ -125,7 +127,7 @@ export const StockQuantityStatus = forwardRef<
       </Typography>
     </div>
   );
-});
+}
 
 export const getColor = (quantity: QuantityStatus) =>
   match(quantity)

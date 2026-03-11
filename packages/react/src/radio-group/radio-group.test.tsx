@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { RadioGroup } from "../radio-group";
+import { RadioGroup } from "./radio-group";
 
 describe("RadioGroup", () => {
   describe("rendering", () => {

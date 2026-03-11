@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { Toaster, toast } from "../index";
+import { Toaster, toast } from ".";
 
 describe("toast", () => {
   describe("Toaster", () => {

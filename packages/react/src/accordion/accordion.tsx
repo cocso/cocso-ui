@@ -1,49 +1,45 @@
 import { Accordion as AccordionBase } from "@base-ui/react/accordion";
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./accordion.module.css";
 
-const AccordionItem = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<typeof AccordionBase.Item>
->(({ className, ...props }, ref) => (
-  <AccordionBase.Item
-    className={cx(styles.item, className)}
-    ref={ref}
-    {...props}
-  />
-));
+function AccordionItem({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionBase.Item>) {
+  return (
+    <AccordionBase.Item className={cn(styles.item, className)} {...props} />
+  );
+}
 
 export interface TriggerProps
-  extends ComponentPropsWithoutRef<typeof AccordionBase.Trigger> {
+  extends ComponentProps<typeof AccordionBase.Trigger> {
   chevron?: boolean;
 }
 
-const AccordionTrigger = forwardRef<HTMLButtonElement, TriggerProps>(
-  ({ className, children, chevron = true, ...props }, ref) => (
-    <AccordionBase.Trigger
-      className={cx(styles.trigger, className)}
-      ref={ref}
-      {...props}
-    >
+function AccordionTrigger({
+  className,
+  children,
+  chevron = true,
+  ...props
+}: TriggerProps) {
+  return (
+    <AccordionBase.Trigger className={cn(styles.trigger, className)} {...props}>
       {children}
       {chevron && <KeyboardArrowDownIcon className={styles.chevron} />}
     </AccordionBase.Trigger>
-  )
-);
+  );
+}
 
-const AccordionPanel = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<typeof AccordionBase.Panel>
->(({ className, ...props }, ref) => (
-  <AccordionBase.Panel
-    className={cx(styles.content, className)}
-    ref={ref}
-    {...props}
-  />
-));
+function AccordionPanel({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionBase.Panel>) {
+  return (
+    <AccordionBase.Panel className={cn(styles.content, className)} {...props} />
+  );
+}
 
 export const Accordion = Object.assign(AccordionBase.Root, {
   Item: AccordionItem,

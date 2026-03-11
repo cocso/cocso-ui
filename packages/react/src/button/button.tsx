@@ -1,9 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { Spinner } from "../spinner";
 import type { FontWeight } from "../token";
 import { colors, fontWeight } from "../token";
@@ -22,8 +21,7 @@ export type ButtonVariant =
 
 export type ButtonShape = "square" | "circle" | "rounded";
 
-export interface ButtonProps
-  extends Omit<ComponentPropsWithoutRef<"button">, "prefix"> {
+export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   disabled?: boolean;
   loading?: boolean;
   prefix?: ReactNode;
@@ -36,73 +34,74 @@ export interface ButtonProps
   weight?: FontWeight;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      render: renderProp,
-      className,
-      style: _style,
-      children,
-      size = "medium",
-      variant = "primary",
-      weight = "medium",
-      shape = "square",
-      prefix,
-      suffix,
-      svgOnly = false,
-      disabled = false,
-      loading = false,
-      ...props
-    },
-    ref
-  ) => {
-    const style = {
-      ..._style,
-      ...getSizeStyles(size),
-      "--cocso-button-font-color": getColor(variant),
-      "--cocso-button-font-weight": fontWeight[weight],
-      "--cocso-button-border": getBorder(variant),
-      "--cocso-button-border-radius": getBorderRadius(shape, size),
-      "--cocso-button-bg-color": getBackgroundColor(variant),
-      "--cocso-button-bg-color-hover": getBackgroundColorHover(variant),
-      "--cocso-button-bg-color-active": getBackgroundColorActive(variant),
-    } as CSSProperties;
+export function Button({
+  render: renderProp,
+  ref,
+  className,
+  style: _style,
+  children,
+  size = "medium",
+  variant = "primary",
+  weight = "medium",
+  shape = "square",
+  prefix,
+  suffix,
+  svgOnly = false,
+  disabled = false,
+  loading = false,
+  ...props
+}: ButtonProps) {
+  const style = {
+    ..._style,
+    ...getSizeStyles(size),
+    "--cocso-button-font-color": getColor(variant),
+    "--cocso-button-font-weight": fontWeight[weight],
+    "--cocso-button-border": getBorder(variant),
+    "--cocso-button-border-radius": getBorderRadius(shape, size),
+    "--cocso-button-bg-color": getBackgroundColor(variant),
+    "--cocso-button-bg-color-hover": getBackgroundColorHover(variant),
+    "--cocso-button-bg-color-active": getBackgroundColorActive(variant),
+  } as CSSProperties;
 
-    const isDisabled = disabled || loading;
-    const cn = cx(
-      styles.button,
-      isDisabled && styles.disabled,
-      svgOnly && styles.svgOnly,
-      className
-    );
+  const isDisabled = disabled || loading;
+  const mergedClassName = cn(
+    styles.button,
+    isDisabled && styles.disabled,
+    svgOnly && styles.svgOnly,
+    className
+  );
 
-    const renderButtonContent = (ctx: ReactNode) => (
-      <>
-        {loading && (
-          <span className={styles.spinnerOverlay}>
-            <Spinner color="white" size="small" />
-          </span>
-        )}
-        <span className={cx(styles.buttonInner, loading && styles.invisible)}>
-          {prefix && <span className={styles.prefix}>{prefix}</span>}
-          <span className={styles.content}>{ctx}</span>
-          {suffix && <span className={styles.suffix}>{suffix}</span>}
+  const renderButtonContent = (ctx: ReactNode) => (
+    <>
+      {loading && (
+        <span className={styles.spinnerOverlay}>
+          <Spinner color="white" size="small" />
         </span>
-      </>
-    );
+      )}
+      <span className={cn(styles.buttonInner, loading && styles.invisible)}>
+        {prefix && <span className={styles.prefix}>{prefix}</span>}
+        <span className={styles.content}>{ctx}</span>
+        {suffix && <span className={styles.suffix}>{suffix}</span>}
+      </span>
+    </>
+  );
 
-    return useRender({
-      render: renderProp,
-      ref,
-      props: mergeProps<"button">(
-        { className: cn, style, disabled: isDisabled, type: "button" as const },
-        props,
-        { children: renderButtonContent(children) }
-      ),
-      defaultTagName: "button",
-    });
-  }
-);
+  return useRender({
+    render: renderProp,
+    ref,
+    props: mergeProps<"button">(
+      {
+        className: mergedClassName,
+        style,
+        disabled: isDisabled,
+        type: "button" as const,
+      },
+      props,
+      { children: renderButtonContent(children) }
+    ),
+    defaultTagName: "button",
+  });
+}
 
 const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)

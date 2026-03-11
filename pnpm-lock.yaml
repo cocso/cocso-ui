@@ -24,7 +24,7 @@ importers:
         specifier: ^7.2.5
         version: 7.2.5(oxlint@1.52.0)
 
-  docs/storybook:
+  apps/storybook:
     dependencies:
       '@cocso-ui/css':
         specifier: workspace:^
@@ -61,7 +61,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2)
 
-  docs/website:
+  apps/website:
     dependencies:
       '@cocso-ui/css':
         specifier: workspace:^
@@ -180,6 +180,9 @@ importers:
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
       ts-pattern:
         specifier: ^5.9.0
         version: 5.9.0
