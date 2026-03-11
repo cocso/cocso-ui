@@ -122,7 +122,11 @@ describe("parseValue — additional types", () => {
   it("parses duration in seconds", () => {
     const result = parseValue("0.3s");
     expect(result.isValid).toBe(true);
-    expect(result.value).toEqual({ kind: "DurationValue", value: 0.3, unit: "s" });
+    expect(result.value).toEqual({
+      kind: "DurationValue",
+      value: 0.3,
+      unit: "s",
+    });
   });
 
   it("falls through to StringValue for rgb with out-of-range values", () => {

@@ -44,9 +44,7 @@ describe("validateAllTokens", () => {
   });
 
   it("returns INVALID_COLLECTION error for unknown collection", () => {
-    const tokens = [
-      makeToken("$color.white", "#FFFFFF", "unknown-collection"),
-    ];
+    const tokens = [makeToken("$color.white", "#FFFFFF", "unknown-collection")];
     const definitions = makeDefinitions("global", ["default"]);
     const result = validateAllTokens(tokens, definitions);
     expect(result.isValid).toBe(false);
@@ -79,9 +77,7 @@ describe("validateAllTokens", () => {
     const definitions = makeDefinitions("global", ["default"]);
     const result = validateAllTokens(tokens, definitions);
     expect(result.isValid).toBe(false);
-    const err = result.errors.find(
-      (e) => e.type === "INVALID_PRIMITIVE_TOKEN"
-    );
+    const err = result.errors.find((e) => e.type === "INVALID_PRIMITIVE_TOKEN");
     expect(err).toBeDefined();
     expect(err?.message).toContain("$color.nonexistent");
   });

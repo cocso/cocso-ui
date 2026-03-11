@@ -1,6 +1,6 @@
 import { parseValue, valueToString } from "../../parsers";
-import type { TokenRef, Value } from "../../types";
 import type { TokenResolver } from "../../transforms/resolve";
+import type { TokenRef, Value } from "../../types";
 
 export function toCssValue(value: string | number | Value): string {
   if (typeof value === "string") {

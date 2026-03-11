@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { toCssValue, resolveValueWithResolver } from "../core/builders/utils/css";
+import {
+  resolveValueWithResolver,
+  toCssValue,
+} from "../core/builders/utils/css";
 import type { TokenResolver } from "../core/transforms/resolve";
 
 describe("toCssValue", () => {
@@ -22,9 +25,9 @@ describe("toCssValue", () => {
   });
 
   it("serializes RgbaColor Value", () => {
-    expect(
-      toCssValue({ kind: "RgbaColor", r: 0, g: 0, b: 0, a: 0.5 })
-    ).toBe("rgba(0, 0, 0, 0.5)");
+    expect(toCssValue({ kind: "RgbaColor", r: 0, g: 0, b: 0, a: 0.5 })).toBe(
+      "rgba(0, 0, 0, 0.5)"
+    );
   });
 
   it("serializes SizeValue", () => {
@@ -34,9 +37,9 @@ describe("toCssValue", () => {
   });
 
   it("serializes DurationValue", () => {
-    expect(
-      toCssValue({ kind: "DurationValue", value: 200, unit: "ms" })
-    ).toBe("200ms");
+    expect(toCssValue({ kind: "DurationValue", value: 200, unit: "ms" })).toBe(
+      "200ms"
+    );
   });
 
   it("serializes NumberValue", () => {
