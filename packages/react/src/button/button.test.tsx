@@ -162,7 +162,7 @@ describe("Button variant CSS variables", () => {
     });
   });
 
-  it('sets no border for non-tertiary variant', () => {
+  it("sets no border for non-tertiary variant", () => {
     render(<Button variant="primary">Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
       "--cocso-button-border": "none",
