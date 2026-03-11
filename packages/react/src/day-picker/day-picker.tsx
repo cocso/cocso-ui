@@ -14,7 +14,8 @@ import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./day-picker.module.css";
 
-export interface DayPickerProps extends Omit<ComponentProps<"div">, "children"> {
+export interface DayPickerProps
+  extends Omit<ComponentProps<"div">, "children"> {
   disabled?: boolean;
   maxDate?: Date;
   minDate?: Date;

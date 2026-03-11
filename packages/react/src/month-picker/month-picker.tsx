@@ -14,7 +14,8 @@ import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./month-picker.module.css";
 
-export interface MonthPickerProps extends Omit<ComponentProps<"div">, "children"> {
+export interface MonthPickerProps
+  extends Omit<ComponentProps<"div">, "children"> {
   disabled?: boolean;
   maxDate?: Date;
   minDate?: Date;
