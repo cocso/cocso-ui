@@ -1,13 +1,21 @@
-import { KeyboardArrowDownIcon } from '@cocso-ui/react-icons';
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
-import { match } from 'ts-pattern';
-import { spacing } from '../token';
-import styles from './select.module.css';
+import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
+import { clsx as cx } from "clsx";
+import type { ComponentPropsWithoutRef, CSSProperties } from "react";
+import { forwardRef } from "react";
+import { match } from "ts-pattern";
+import { spacing } from "../token";
+import styles from "./select.module.css";
 
-type SelectSize = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | '2xs';
+type SelectSize =
+  | "x-large"
+  | "large"
+  | "medium"
+  | "small"
+  | "x-small"
+  | "2x-small";
 
-export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
+export interface SelectProps
+  extends Omit<ComponentPropsWithoutRef<"select">, "size"> {
   disabled?: boolean;
   size?: SelectSize;
   stretch?: boolean;
@@ -18,7 +26,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     {
       className,
       style: _style,
-      size = 'md',
+      size = "medium",
       disabled = false,
       stretch = false,
       children,
@@ -40,7 +48,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           className
         )}
       >
-        <select className={styles.select} disabled={disabled} ref={ref} style={style} {...props}>
+        <select
+          className={styles.select}
+          disabled={disabled}
+          ref={ref}
+          style={style}
+          {...props}
+        >
           {children}
         </select>
 
@@ -54,52 +68,52 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
 const getStyles = (size: SelectSize) =>
   match(size)
-    .with('2xs', () => ({
-      '--cocso-select-min-width': spacing.s11,
-      '--cocso-select-height': spacing.s11,
-      '--cocso-select-padding-left': spacing.s5,
-      '--cocso-select-padding-right': `calc(${spacing.s8} + 16px)`,
-      '--cocso-select-font-size': '12px',
-      '--cocso-select-border-radius': spacing.s3,
+    .with("2x-small", () => ({
+      "--cocso-select-min-width": spacing.s11,
+      "--cocso-select-height": spacing.s11,
+      "--cocso-select-padding-left": spacing.s5,
+      "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
+      "--cocso-select-font-size": "12px",
+      "--cocso-select-border-radius": spacing.s3,
     }))
-    .with('xs', () => ({
-      '--cocso-select-min-width': spacing.s12,
-      '--cocso-select-height': spacing.s12,
-      '--cocso-select-padding-left': spacing.s6,
-      '--cocso-select-padding-right': `calc(${spacing.s7} + 16px)`,
-      '--cocso-select-font-size': '14px',
-      '--cocso-select-border-radius': spacing.s3,
+    .with("x-small", () => ({
+      "--cocso-select-min-width": spacing.s12,
+      "--cocso-select-height": spacing.s12,
+      "--cocso-select-padding-left": spacing.s6,
+      "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
+      "--cocso-select-font-size": "14px",
+      "--cocso-select-border-radius": spacing.s3,
     }))
-    .with('sm', () => ({
-      '--cocso-select-min-width': spacing.s14,
-      '--cocso-select-height': spacing.s14,
-      '--cocso-select-padding-left': spacing.s7,
-      '--cocso-select-padding-right': `calc(${spacing.s7} + 16px)`,
-      '--cocso-select-font-size': '14px',
-      '--cocso-select-border-radius': spacing.s3,
+    .with("small", () => ({
+      "--cocso-select-min-width": spacing.s14,
+      "--cocso-select-height": spacing.s14,
+      "--cocso-select-padding-left": spacing.s7,
+      "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
+      "--cocso-select-font-size": "14px",
+      "--cocso-select-border-radius": spacing.s3,
     }))
-    .with('md', () => ({
-      '--cocso-select-min-width': spacing.s16,
-      '--cocso-select-height': spacing.s16,
-      '--cocso-select-padding-left': spacing.s8,
-      '--cocso-select-padding-right': `calc(${spacing.s8} + 16px)`,
-      '--cocso-select-font-size': '16px',
-      '--cocso-select-border-radius': spacing.s4,
+    .with("medium", () => ({
+      "--cocso-select-min-width": spacing.s16,
+      "--cocso-select-height": spacing.s16,
+      "--cocso-select-padding-left": spacing.s8,
+      "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
+      "--cocso-select-font-size": "16px",
+      "--cocso-select-border-radius": spacing.s4,
     }))
-    .with('lg', () => ({
-      '--cocso-select-min-width': spacing.s17,
-      '--cocso-select-height': spacing.s17,
-      '--cocso-select-padding-left': spacing.s9,
-      '--cocso-select-padding-right': `calc(${spacing.s9} + 16px)`,
-      '--cocso-select-font-size': '18px',
-      '--cocso-select-border-radius': spacing.s4,
+    .with("large", () => ({
+      "--cocso-select-min-width": spacing.s17,
+      "--cocso-select-height": spacing.s17,
+      "--cocso-select-padding-left": spacing.s9,
+      "--cocso-select-padding-right": `calc(${spacing.s9} + 16px)`,
+      "--cocso-select-font-size": "18px",
+      "--cocso-select-border-radius": spacing.s4,
     }))
-    .with('xl', () => ({
-      '--cocso-select-min-width': spacing.s18,
-      '--cocso-select-height': spacing.s18,
-      '--cocso-select-padding-left': spacing.s10,
-      '--cocso-select-padding-right': `calc(${spacing.s10} + 16px)`,
-      '--cocso-select-font-size': '18px',
-      '--cocso-select-border-radius': spacing.s4,
+    .with("x-large", () => ({
+      "--cocso-select-min-width": spacing.s18,
+      "--cocso-select-height": spacing.s18,
+      "--cocso-select-padding-left": spacing.s10,
+      "--cocso-select-padding-right": `calc(${spacing.s10} + 16px)`,
+      "--cocso-select-font-size": "18px",
+      "--cocso-select-border-radius": spacing.s4,
     }))
     .exhaustive();

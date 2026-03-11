@@ -1,9 +1,9 @@
-declare module '*.module.css' {
-  const classes: { readonly [key: string]: string };
+declare module "*.module.css" {
+  const classes: Readonly<Record<string, string>>;
   export default classes;
 }
 
-declare module '*.css' {
-  const classes: { readonly [key: string]: string } | string;
+declare module "*.css" {
+  const classes: Readonly<Record<string, string>> | string;
   export default classes;
 }

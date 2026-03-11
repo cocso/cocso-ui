@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const RefreshIcon = (props: IconProps) => {
   return (
@@ -23,4 +23,4 @@ export const RefreshIcon = (props: IconProps) => {
   );
 };
 
-RefreshIcon.displayName = 'RefreshIcon';
+RefreshIcon.displayName = "RefreshIcon";

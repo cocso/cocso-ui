@@ -1,6 +1,6 @@
-import { useId } from 'react';
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import { useId } from "react";
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const NaverOutlineLogo = (props: IconProps) => {
   const id = useId();
@@ -31,4 +31,4 @@ export const NaverOutlineLogo = (props: IconProps) => {
   );
 };
 
-NaverOutlineLogo.displayName = 'NaverOutlineLogo';
+NaverOutlineLogo.displayName = "NaverOutlineLogo";

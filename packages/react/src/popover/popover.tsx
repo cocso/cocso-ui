@@ -1,17 +1,25 @@
-import { Content, Portal, Root, Trigger } from '@radix-ui/react-popover';
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
-import styles from './popover.module.css';
+import { Popover as PopoverBase } from "@base-ui/react/popover";
+import { clsx as cx } from "clsx";
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+import styles from "./popover.module.css";
 
 const PopoverContent = forwardRef<
-  ComponentRef<typeof Content>,
-  ComponentPropsWithoutRef<typeof Content>
->(({ className, ...props }, ref) => {
-  return <Content className={cx(styles.content, className)} ref={ref} {...props} />;
-});
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof PopoverBase.Popup>
+>(({ className, ...props }, ref) => (
+  <PopoverBase.Portal>
+    <PopoverBase.Positioner>
+      <PopoverBase.Popup
+        className={cx(styles.content, className)}
+        ref={ref}
+        {...props}
+      />
+    </PopoverBase.Positioner>
+  </PopoverBase.Portal>
+));
 
-export const Popover = Object.assign(Root, {
-  Trigger,
-  Portal,
+export const Popover = Object.assign(PopoverBase.Root, {
+  Trigger: PopoverBase.Trigger,
   Content: PopoverContent,
 });

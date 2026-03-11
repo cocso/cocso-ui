@@ -1,19 +1,21 @@
-.badge {
-  --cocso-badge-padding: inherit;
-  --cocso-badge-border-radius: inherit;
-  --cocso-badge-bg-color: inherit;
-  display: inline-flex;
-  padding: var(--cocso-badge-padding);
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  background-color: var(--cocso-badge-bg-color);
-  border-radius: var(--cocso-badge-border-radius);
-}
+@layer components {
+  .badge {
+    --cocso-badge-padding: inherit;
+    --cocso-badge-border-radius: inherit;
+    --cocso-badge-bg-color: inherit;
+    display: inline-flex;
+    padding: var(--cocso-badge-padding);
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: var(--cocso-badge-bg-color);
+    border-radius: var(--cocso-badge-border-radius);
+  }
 
-.inner {
-  display: inline-flex;
-  gap: 2px;
-  align-items: center;
+  .inner {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+  }
 }

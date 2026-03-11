@@ -1,36 +1,29 @@
-import { Content, List, Root, Trigger } from '@radix-ui/react-tabs';
-import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
+import { Tabs } from "@base-ui/react/tabs";
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { forwardRef } from "react";
 
-const TabPrimitiveRoot = forwardRef<
-  ComponentRef<typeof Root>,
-  ComponentPropsWithoutRef<typeof Root>
->(({ ...props }, ref) => {
-  return <Root ref={ref} {...props} />;
-});
+const TabRoot = forwardRef<
+  ComponentRef<typeof Tabs.Root>,
+  ComponentPropsWithoutRef<typeof Tabs.Root>
+>(({ ...props }, ref) => <Tabs.Root ref={ref} {...props} />);
 
-const TabPrimitiveList = forwardRef<
-  ComponentRef<typeof List>,
-  ComponentPropsWithoutRef<typeof List>
->(({ ...props }, ref) => {
-  return <List ref={ref} {...props} />;
-});
+const TabList = forwardRef<
+  ComponentRef<typeof Tabs.List>,
+  ComponentPropsWithoutRef<typeof Tabs.List>
+>(({ ...props }, ref) => <Tabs.List ref={ref} {...props} />);
 
-const TabPrimitiveTrigger = forwardRef<
-  ComponentRef<typeof Trigger>,
-  ComponentPropsWithoutRef<typeof Trigger>
->(({ ...props }, ref) => {
-  return <Trigger ref={ref} {...props} />;
-});
+const TabTrigger = forwardRef<
+  ComponentRef<typeof Tabs.Tab>,
+  ComponentPropsWithoutRef<typeof Tabs.Tab>
+>(({ ...props }, ref) => <Tabs.Tab ref={ref} {...props} />);
 
-const TabPrimitiveContent = forwardRef<
-  ComponentRef<typeof Content>,
-  ComponentPropsWithoutRef<typeof Content>
->(({ ...props }, ref) => {
-  return <Content ref={ref} {...props} />;
-});
+const TabContent = forwardRef<
+  ComponentRef<typeof Tabs.Panel>,
+  ComponentPropsWithoutRef<typeof Tabs.Panel>
+>(({ ...props }, ref) => <Tabs.Panel ref={ref} {...props} />);
 
-export const Tab = Object.assign(TabPrimitiveRoot, {
-  List: TabPrimitiveList,
-  Trigger: TabPrimitiveTrigger,
-  Content: TabPrimitiveContent,
+export const Tab = Object.assign(TabRoot, {
+  List: TabList,
+  Trigger: TabTrigger,
+  Content: TabContent,
 });

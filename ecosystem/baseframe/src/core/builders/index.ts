@@ -1,2 +1,2 @@
-export { cssVars } from './css-vars';
-export { tailwind } from './tailwind';
+export { cssVars } from "./css-vars";
+export { tailwind } from "./tailwind";

@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const DocumentScannerIcon = (props: IconProps) => {
   return (
@@ -28,4 +28,4 @@ export const DocumentScannerIcon = (props: IconProps) => {
   );
 };
 
-DocumentScannerIcon.displayName = 'DocumentScannerIcon';
+DocumentScannerIcon.displayName = "DocumentScannerIcon";

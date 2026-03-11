@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const CheckbookIcon = (props: IconProps) => {
   return (
@@ -26,4 +26,4 @@ export const CheckbookIcon = (props: IconProps) => {
   );
 };
 
-CheckbookIcon.displayName = 'CheckbookIcon';
+CheckbookIcon.displayName = "CheckbookIcon";

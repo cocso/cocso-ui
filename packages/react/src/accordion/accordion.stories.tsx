@@ -5,12 +5,10 @@ const meta = {
   title: 'Components/Accordion',
   component: Accordion,
   argTypes: {
-    type: { control: 'radio', options: ['single', 'multiple'] },
-    collapsible: { control: 'boolean' },
+    multiple: { control: 'boolean' },
   },
   args: {
-    type: 'single',
-    collapsible: true,
+    multiple: false,
   },
 } satisfies Meta<typeof Accordion>;
 
@@ -44,7 +42,7 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion style={{ width: 400 }} type="multiple">
+    <Accordion multiple style={{ width: 400 }}>
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger>첫 번째 항목</Accordion.Trigger>
@@ -63,7 +61,7 @@ export const Multiple: Story = {
 
 export const NoChevron: Story = {
   render: () => (
-    <Accordion collapsible style={{ width: 400 }} type="single">
+    <Accordion style={{ width: 400 }}>
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger chevron={false}>chevron 없음</Accordion.Trigger>

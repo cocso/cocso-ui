@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const HMPLogo = (props: IconProps) => (
   <Icon {...props}>
@@ -111,4 +111,4 @@ export const HMPLogo = (props: IconProps) => (
   </Icon>
 );
 
-HMPLogo.displayName = 'HMPLogo';
+HMPLogo.displayName = "HMPLogo";

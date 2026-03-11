@@ -1,11 +1,14 @@
-'use client';
+"use client";
 
-import { ErrorBoundary, Suspense } from '@suspensive/react';
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import type { ReactNode } from 'react';
-import { ComponentPreview } from './component-preview';
+import { ErrorBoundary, Suspense } from "@suspensive/react";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import type { ReactNode } from "react";
+import { ComponentPreview } from "./component-preview";
 
-type Props = { name: string; children?: ReactNode };
+interface Props {
+  children?: ReactNode;
+  name: string;
+}
 
 export const ComponentExample = ({ name, children }: Props) => {
   const preview = (
@@ -21,7 +24,7 @@ export const ComponentExample = ({ name, children }: Props) => {
   }
 
   return (
-    <Tabs items={['Preview', 'Code']}>
+    <Tabs items={["Preview", "Code"]}>
       <Tab value="Preview">{preview}</Tab>
       <Tab value="Code">{children}</Tab>
     </Tabs>

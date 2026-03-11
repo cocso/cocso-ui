@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Switch',
   component: Switch,
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md'] },
+    size: { control: 'select', options: ['small', 'medium'] },
     position: { control: 'radio', options: ['left', 'right'] },
     disabled: { control: 'boolean' },
   },
@@ -35,8 +35,8 @@ export const Sizes: Story = {
     const [s2, setS2] = useState(false);
     return (
       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <Switch checked={s1} label="Small" onCheckedChange={setS1} size="sm" />
-        <Switch checked={s2} label="Medium" onCheckedChange={setS2} size="md" />
+        <Switch checked={s1} label="Small" onCheckedChange={setS1} size="small" />
+        <Switch checked={s2} label="Medium" onCheckedChange={setS2} size="medium" />
       </div>
     );
   },

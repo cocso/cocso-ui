@@ -1,58 +1,56 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
-import { Toaster, toast } from '../index';
+import { render } from "@testing-library/react";
 
-describe('Toast', () => {
-  describe('Toaster', () => {
-    it('renders the Toaster component without errors', () => {
+import { Toaster, toast } from "../index";
+
+describe("toast", () => {
+  describe("Toaster", () => {
+    it("renders the Toaster component without errors", () => {
       render(<Toaster />);
-      // Toaster renders an ol element to host toasts
       expect(document.body).toBeInTheDocument();
     });
 
-    it('renders Toaster as a region landmark', () => {
+    it("renders Toaster as a region landmark", () => {
       render(<Toaster />);
-      // sonner Toaster may use ol or section; verify it mounts into the DOM
-      expect(document.body.innerHTML).not.toBe('');
+      expect(document.body.innerHTML).not.toBe("");
     });
 
-    it('accepts position prop without throwing', () => {
+    it("accepts position prop without throwing", () => {
       expect(() => render(<Toaster position="top-right" />)).not.toThrow();
     });
 
-    it('accepts theme prop without throwing', () => {
+    it("accepts theme prop without throwing", () => {
       expect(() => render(<Toaster theme="dark" />)).not.toThrow();
     });
   });
 
-  describe('toast function', () => {
-    it('is a function', () => {
-      expect(typeof toast).toBe('function');
+  describe("toast function", () => {
+    it("is a function", () => {
+      expectTypeOf(toast).toBeFunction();
     });
 
-    it('has a success method', () => {
-      expect(typeof toast.success).toBe('function');
+    it("has a success method", () => {
+      expectTypeOf(toast.success).toBeFunction();
     });
 
-    it('has an error method', () => {
-      expect(typeof toast.error).toBe('function');
+    it("has an error method", () => {
+      expectTypeOf(toast.error).toBeFunction();
     });
 
-    it('has a warning method', () => {
-      expect(typeof toast.warning).toBe('function');
+    it("has a warning method", () => {
+      expectTypeOf(toast.warning).toBeFunction();
     });
 
-    it('has an info method', () => {
-      expect(typeof toast.info).toBe('function');
+    it("has an info method", () => {
+      expectTypeOf(toast.info).toBeFunction();
     });
 
-    it('has a dismiss method', () => {
-      expect(typeof toast.dismiss).toBe('function');
+    it("has a dismiss method", () => {
+      expectTypeOf(toast.dismiss).toBeFunction();
     });
 
-    it('calling toast returns a toast id', () => {
+    it("calling toast returns a toast id", () => {
       render(<Toaster />);
-      const id = toast('Hello world');
+      const id = toast("Hello world");
       expect(id).toBeDefined();
     });
   });

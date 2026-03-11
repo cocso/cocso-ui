@@ -1,6 +1,6 @@
-import { useId } from 'react';
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import { useId } from "react";
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const HuonsLogo = (props: IconProps) => {
   const id1 = useId();
@@ -85,4 +85,4 @@ export const HuonsLogo = (props: IconProps) => {
   );
 };
 
-HuonsLogo.displayName = 'HuonsLogo';
+HuonsLogo.displayName = "HuonsLogo";

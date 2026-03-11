@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const PersonEditIcon = (props: IconProps) => {
   return (
@@ -24,4 +24,4 @@ export const PersonEditIcon = (props: IconProps) => {
   );
 };
 
-PersonEditIcon.displayName = 'PersonEditIcon';
+PersonEditIcon.displayName = "PersonEditIcon";

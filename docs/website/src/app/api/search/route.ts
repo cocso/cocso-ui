@@ -1,12 +1,12 @@
-import { createSearchAPI } from 'fumadocs-core/search/server';
+import { createSearchAPI } from "fumadocs-core/search/server";
 
-import { source } from '~/libs/source';
+import { source } from "~/libs/source";
 
-export const { GET } = createSearchAPI('advanced', {
-  indexes: source.getPages().map(page => ({
+export const { GET } = createSearchAPI("advanced", {
+  indexes: source.getPages().map((page) => ({
     id: page.url,
     url: page.url,
-    title: page.data.title ?? '',
+    title: page.data.title ?? "",
     description: page.data.description,
     structuredData: page.data.structuredData,
   })),

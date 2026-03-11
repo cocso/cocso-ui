@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const SideNavigationIcon = (props: IconProps) => {
   return (
@@ -18,4 +18,4 @@ export const SideNavigationIcon = (props: IconProps) => {
   );
 };
 
-SideNavigationIcon.displayName = 'SideNavigationIcon';
+SideNavigationIcon.displayName = "SideNavigationIcon";

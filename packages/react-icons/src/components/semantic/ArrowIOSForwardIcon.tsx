@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const ArrowIOSForwardIcon = (props: IconProps) => {
   return (
@@ -22,4 +22,4 @@ export const ArrowIOSForwardIcon = (props: IconProps) => {
   );
 };
 
-ArrowIOSForwardIcon.displayName = 'ArrowIOSForwardIcon';
+ArrowIOSForwardIcon.displayName = "ArrowIOSForwardIcon";

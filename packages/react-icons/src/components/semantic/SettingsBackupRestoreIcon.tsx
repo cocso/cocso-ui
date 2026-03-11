@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const SettingsBackupRestoreIcon = (props: IconProps) => {
   return (
@@ -24,4 +24,4 @@ export const SettingsBackupRestoreIcon = (props: IconProps) => {
   );
 };
 
-SettingsBackupRestoreIcon.displayName = 'SettingsBackupRestoreIcon';
+SettingsBackupRestoreIcon.displayName = "SettingsBackupRestoreIcon";

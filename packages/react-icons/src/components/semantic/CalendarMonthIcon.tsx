@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const CalendarMonthIcon = (props: IconProps) => {
   return (
@@ -28,4 +28,4 @@ export const CalendarMonthIcon = (props: IconProps) => {
   );
 };
 
-CalendarMonthIcon.displayName = 'CalendarMonthIcon';
+CalendarMonthIcon.displayName = "CalendarMonthIcon";

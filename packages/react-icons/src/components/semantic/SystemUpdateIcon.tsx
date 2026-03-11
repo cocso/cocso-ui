@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const SystemUpdateIcon = (props: IconProps) => {
   return (
@@ -28,4 +28,4 @@ export const SystemUpdateIcon = (props: IconProps) => {
   );
 };
 
-SystemUpdateIcon.displayName = 'SystemUpdateIcon';
+SystemUpdateIcon.displayName = "SystemUpdateIcon";

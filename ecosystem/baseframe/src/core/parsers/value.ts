@@ -1,9 +1,19 @@
-import type { ParseResult, RgbaColor, ShadowLayer, SizeValue, TokenRef, Value } from '../types';
+import type {
+  ParseResult,
+  RgbaColor,
+  ShadowLayer,
+  SizeValue,
+  TokenRef,
+  Value,
+} from "../types";
 
-const HEX_REGEX = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
+const HEX_REGEX =
+  /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 const RGB_REGEX = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
-const RGBA_REGEX = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*([01]?\.?\d*)\s*\)$/;
-const TOKEN_REF_REGEX = /^\$[a-zA-Z0-9][a-zA-Z0-9_-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9_-]*)+$/;
+const RGBA_REGEX =
+  /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*([01]?\.?\d*)\s*\)$/;
+const TOKEN_REF_REGEX =
+  /^\$[a-zA-Z0-9][a-zA-Z0-9_-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9_-]*)+$/;
 const SIZE_REGEX = /^([+-]?\d*\.?\d+)(px|rem|em|vw|vh|%)$/;
 const DURATION_REGEX = /^([+-]?\d*\.?\d+)(ms|s)$/;
 const WHITESPACE_REGEX = /\s+/;
@@ -11,8 +21,8 @@ const WHITESPACE_REGEX = /\s+/;
 export function parseValue(value: string | number): ParseResult {
   const str = String(value).trim();
 
-  if (typeof value === 'number') {
-    return { isValid: true, value: { kind: 'NumberValue', value } };
+  if (typeof value === "number") {
+    return { isValid: true, value: { kind: "NumberValue", value } };
   }
 
   const hex = parseHex(str);
@@ -50,28 +60,28 @@ export function parseValue(value: string | number): ParseResult {
     return duration;
   }
 
-  return { isValid: true, value: { kind: 'StringValue', value: str } };
+  return { isValid: true, value: { kind: "StringValue", value: str } };
 }
 
 export function valueToString(value: Value): string {
   switch (value.kind) {
-    case 'HexColor':
+    case "HexColor":
       return value.value;
-    case 'RgbColor':
+    case "RgbColor":
       return `rgb(${value.r}, ${value.g}, ${value.b})`;
-    case 'RgbaColor':
+    case "RgbaColor":
       return `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`;
-    case 'TokenRef':
+    case "TokenRef":
       return `$${value.collection}.${value.token}`;
-    case 'SizeValue':
+    case "SizeValue":
       return `${value.value}${value.unit}`;
-    case 'DurationValue':
+    case "DurationValue":
       return `${value.value}${value.unit}`;
-    case 'NumberValue':
+    case "NumberValue":
       return value.value.toString();
-    case 'StringValue':
+    case "StringValue":
       return value.value;
-    case 'ShadowLayer': {
+    case "ShadowLayer": {
       const x = valueToString(value.offsetX);
       const y = valueToString(value.offsetY);
       const blur = valueToString(value.blur);
@@ -79,8 +89,8 @@ export function valueToString(value: Value): string {
       const color = valueToString(value.color);
       return `${x} ${y} ${blur} ${spread} ${color}`;
     }
-    case 'Shadow':
-      return value.layers.map(layer => valueToString(layer)).join(', ');
+    case "Shadow":
+      return value.layers.map((layer) => valueToString(layer)).join(", ");
     default:
       return String(value);
   }
@@ -91,7 +101,10 @@ function parseHex(value: string): ParseResult {
     return { isValid: false, error: `Invalid hex color: ${value}` };
   }
 
-  return { isValid: true, value: { kind: 'HexColor', value: value as `#${string}` } };
+  return {
+    isValid: true,
+    value: { kind: "HexColor", value: value as `#${string}` },
+  };
 }
 
 function parseRgb(value: string): ParseResult {
@@ -106,11 +119,21 @@ function parseRgb(value: string): ParseResult {
   const green = Number.parseInt(g, 10);
   const blue = Number.parseInt(b, 10);
 
-  if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+  if (
+    red < 0 ||
+    red > 255 ||
+    green < 0 ||
+    green > 255 ||
+    blue < 0 ||
+    blue > 255
+  ) {
     return { isValid: false, error: `Invalid RGB values: ${value}` };
   }
 
-  return { isValid: true, value: { kind: 'RgbColor', r: red, g: green, b: blue } };
+  return {
+    isValid: true,
+    value: { kind: "RgbColor", r: red, g: green, b: blue },
+  };
 }
 
 function parseRgba(value: string): ParseResult {
@@ -126,7 +149,14 @@ function parseRgba(value: string): ParseResult {
   const blue = Number.parseInt(b, 10);
   const alpha = Number.parseFloat(a);
 
-  if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+  if (
+    red < 0 ||
+    red > 255 ||
+    green < 0 ||
+    green > 255 ||
+    blue < 0 ||
+    blue > 255
+  ) {
     return { isValid: false, error: `Invalid RGB values: ${value}` };
   }
 
@@ -134,7 +164,10 @@ function parseRgba(value: string): ParseResult {
     return { isValid: false, error: `Invalid alpha value: ${value}` };
   }
 
-  return { isValid: true, value: { kind: 'RgbaColor', r: red, g: green, b: blue, a: alpha } };
+  return {
+    isValid: true,
+    value: { kind: "RgbaColor", r: red, g: green, b: blue, a: alpha },
+  };
 }
 
 function parseTokenRef(value: string): ParseResult {
@@ -143,16 +176,20 @@ function parseTokenRef(value: string): ParseResult {
   }
 
   const clean = value.substring(1);
-  const parts = clean.split('.');
+  const parts = clean.split(".");
 
   if (parts.length < 2) {
     return { isValid: false, error: `Invalid token format: ${value}` };
   }
 
-  const token = parts.at(-1)!;
-  const collection = parts.slice(0, -1).join('.');
+  const token = parts.at(-1);
+  const collection = parts.slice(0, -1).join(".");
 
-  return { isValid: true, value: { kind: 'TokenRef', collection, token } };
+  if (!token) {
+    return { isValid: false, error: `Invalid token format: ${value}` };
+  }
+
+  return { isValid: true, value: { kind: "TokenRef", collection, token } };
 }
 
 function parseSize(value: string): ParseResult {
@@ -171,7 +208,11 @@ function parseSize(value: string): ParseResult {
 
   return {
     isValid: true,
-    value: { kind: 'SizeValue', value: num, unit: unit as 'px' | 'rem' | 'em' | 'vw' | 'vh' | '%' },
+    value: {
+      kind: "SizeValue",
+      value: num,
+      unit: unit as "px" | "rem" | "em" | "vw" | "vh" | "%",
+    },
   };
 }
 
@@ -191,21 +232,21 @@ function parseDuration(value: string): ParseResult {
 
   return {
     isValid: true,
-    value: { kind: 'DurationValue', value: num, unit: unit as 'ms' | 's' },
+    value: { kind: "DurationValue", value: num, unit: unit as "ms" | "s" },
   };
 }
 
 function parseColor(value: string): ParseResult {
   if (!value) {
-    return { isValid: false, error: 'Missing color value' };
+    return { isValid: false, error: "Missing color value" };
   }
 
-  if (value.startsWith('$')) {
+  if (value.startsWith("$")) {
     return parseTokenRef(value);
   }
 
-  if (value.startsWith('var(')) {
-    return { isValid: true, value: { kind: 'StringValue', value } };
+  if (value.startsWith("var(")) {
+    return { isValid: true, value: { kind: "StringValue", value } };
   }
 
   const hex = parseHex(value);
@@ -227,12 +268,12 @@ function parseColor(value: string): ParseResult {
 }
 
 function parseShadow(value: string): ParseResult {
-  if (!(value.includes('px') || value.includes('$'))) {
+  if (!(value.includes("px") || value.includes("$"))) {
     return { isValid: false, error: `Invalid shadow format: ${value}` };
   }
 
   try {
-    const layerStrings = value.split(',').map(s => s.trim());
+    const layerStrings = value.split(",").map((s) => s.trim());
     const layers: ShadowLayer[] = [];
 
     for (const layerStr of layerStrings) {
@@ -243,7 +284,7 @@ function parseShadow(value: string): ParseResult {
       layers.push(layer.value as ShadowLayer);
     }
 
-    return { isValid: true, value: { kind: 'Shadow', layers } };
+    return { isValid: true, value: { kind: "Shadow", layers } };
   } catch {
     return { isValid: false, error: `Invalid shadow format: ${value}` };
   }
@@ -266,7 +307,7 @@ function parseShadowLayer(value: string): ParseResult {
       return { isValid: false, error: `Invalid shadow dimensions: ${value}` };
     }
 
-    const colorPart = parts.slice(4).join(' ').trim();
+    const colorPart = parts.slice(4).join(" ").trim();
     const color = parseColor(colorPart);
 
     if (!color.isValid) {
@@ -276,7 +317,7 @@ function parseShadowLayer(value: string): ParseResult {
     return {
       isValid: true,
       value: {
-        kind: 'ShadowLayer',
+        kind: "ShadowLayer",
         color: color.value as RgbaColor,
         offsetX: x.value as SizeValue | TokenRef,
         offsetY: y.value as SizeValue | TokenRef,
@@ -290,7 +331,7 @@ function parseShadowLayer(value: string): ParseResult {
 }
 
 function parseSizeOrTokenRef(value: string): ParseResult {
-  if (value.startsWith('$')) {
+  if (value.startsWith("$")) {
     return parseTokenRef(value);
   }
   return parseSize(value);

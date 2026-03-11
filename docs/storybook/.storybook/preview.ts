@@ -1,16 +1,16 @@
-import '../globals.css';
-import '@cocso-ui/css/token.css';
-import '@cocso-ui/react/styles.css';
+import "../globals.css";
+import "@cocso-ui/css/token.css";
+import "@cocso-ui/react/styles.css";
 
-import type { Preview } from '@storybook/react-vite';
+import type { Preview } from "@storybook/react-vite";
 
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'light',
+      default: "light",
       values: [
-        { name: 'dark', value: '#0a0a0a' },
-        { name: 'light', value: '#ffffff' },
+        { name: "dark", value: "#0a0a0a" },
+        { name: "light", value: "#ffffff" },
       ],
     },
     controls: {

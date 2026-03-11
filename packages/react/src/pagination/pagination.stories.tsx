@@ -5,6 +5,11 @@ import { Pagination } from './pagination';
 const meta = {
   title: 'Components/Pagination',
   component: Pagination,
+  args: {
+    onChange: () => {},
+    page: 1,
+    totalPages: 10,
+  },
   argTypes: {
     totalPages: { control: { type: 'number', min: 1, max: 100 } },
     maxVisible: { control: { type: 'number', min: 3, max: 10 } },

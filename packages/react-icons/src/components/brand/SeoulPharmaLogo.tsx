@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const SeoulPharmaLogo = (props: IconProps) => {
   return (
@@ -19,4 +19,4 @@ export const SeoulPharmaLogo = (props: IconProps) => {
   );
 };
 
-SeoulPharmaLogo.displayName = 'SeoulPharmaLogo';
+SeoulPharmaLogo.displayName = "SeoulPharmaLogo";

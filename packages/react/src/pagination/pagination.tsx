@@ -1,9 +1,15 @@
-import { ArrowIOSBackwardIcon, ArrowIOSForwardIcon, MoreHorizIcon } from '@cocso-ui/react-icons';
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
-import styles from './pagination.module.css';
+import {
+  ArrowIOSBackwardIcon,
+  ArrowIOSForwardIcon,
+  MoreHorizIcon,
+} from "@cocso-ui/react-icons";
+import { clsx as cx } from "clsx";
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+import styles from "./pagination.module.css";
 
-export interface PaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> {
+export interface PaginationProps
+  extends Omit<ComponentPropsWithoutRef<"div">, "onChange"> {
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
   page: number;
@@ -11,7 +17,10 @@ export interface PaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, '
 }
 
 export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
-  ({ className, page, totalPages, maxVisible = 5, onChange, ...props }, ref) => {
+  (
+    { className, page, totalPages, maxVisible = 5, onChange, ...props },
+    ref
+  ) => {
     const halfVisible = Math.ceil(maxVisible / 2);
 
     const renderPageButton = (pageNumber: number) => (
@@ -40,7 +49,9 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
         )}
 
         {totalPages <= maxVisible + 2 ? (
-          new Array(totalPages).fill(0).map((_, index) => renderPageButton(index + 1))
+          Array.from({ length: totalPages }, (_, index) =>
+            renderPageButton(index + 1)
+          )
         ) : (
           <>
             {renderPageButton(1)}
@@ -49,9 +60,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                 <MoreHorizIcon />
               </span>
             )}
-            {new Array(maxVisible).fill(0).map((_, index) => {
+            {Array.from({ length: maxVisible }, (_, index) => {
               const pageNumber = page - halfVisible + index + 1;
-              return pageNumber > 1 && pageNumber < totalPages ? renderPageButton(pageNumber) : '';
+              return pageNumber > 1 && pageNumber < totalPages
+                ? renderPageButton(pageNumber)
+                : "";
             })}
             {page < totalPages - halfVisible && (
               <span className={styles.trunc}>

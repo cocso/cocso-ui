@@ -13,14 +13,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Popover>
-      <Popover.Trigger asChild>
-        <Button variant="secondary">팝오버 열기</Button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content>
-          <p style={{ margin: 0 }}>팝오버 내용입니다.</p>
-        </Popover.Content>
-      </Popover.Portal>
+      <Popover.Trigger render={<Button variant="secondary">팝오버 열기</Button>} />
+      <Popover.Content>
+        <p style={{ margin: 0 }}>팝오버 내용입니다.</p>
+      </Popover.Content>
     </Popover>
   ),
 };

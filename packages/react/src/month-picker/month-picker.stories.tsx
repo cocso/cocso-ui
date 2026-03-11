@@ -18,13 +18,15 @@ export const Default: Story = {
   render: () => {
     const [date, setDate] = useState<Date | undefined>(undefined);
     return (
-      <MonthPicker onValueChange={d => setDate(d ?? undefined)} value={date}>
-        <Button variant="secondary">
-          {date
-            ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-            : '월 선택'}
-        </Button>
-      </MonthPicker>
+      <MonthPicker
+        onValueChange={d => setDate(d ?? undefined)}
+        trigger={
+          <Button variant="secondary">
+            {date ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' }) : '월 선택'}
+          </Button>
+        }
+        value={date}
+      />
     );
   },
 };
@@ -33,13 +35,16 @@ export const Disabled: Story = {
   render: () => {
     const [date] = useState<Date | undefined>(new Date());
     return (
-      <MonthPicker disabled onValueChange={() => {}} value={date}>
-        <Button disabled variant="secondary">
-          {date
-            ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-            : '월 선택'}
-        </Button>
-      </MonthPicker>
+      <MonthPicker
+        disabled
+        onValueChange={() => {}}
+        trigger={
+          <Button disabled variant="secondary">
+            {date ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' }) : '월 선택'}
+          </Button>
+        }
+        value={date}
+      />
     );
   },
 };

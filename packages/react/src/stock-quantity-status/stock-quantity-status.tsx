@@ -1,18 +1,19 @@
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type CSSProperties, forwardRef } from 'react';
-import { match } from 'ts-pattern';
-import { colors, spacing } from '../token';
-import { Typography } from '../typography';
-import styles from './stock-quantity-status.module.css';
+import { clsx as cx } from "clsx";
+import type { ComponentPropsWithoutRef, CSSProperties } from "react";
+import { forwardRef } from "react";
+import { match } from "ts-pattern";
+import { colors, spacing } from "../token";
+import { Typography } from "../typography";
+import styles from "./stock-quantity-status.module.css";
 
-export type QuantityStatus = '보통' | '여유' | '부족';
+export type QuantityStatus = "보통" | "여유" | "부족";
 
-export interface QuantityStatusProps extends ComponentPropsWithoutRef<'div'> {
+export interface QuantityStatusProps extends ComponentPropsWithoutRef<"div"> {
   quantity: QuantityStatus;
 }
 
 const renderIndicator = (quantity: QuantityStatus) => {
-  if (quantity === '여유') {
+  if (quantity === "여유") {
     return (
       <svg
         aria-hidden="true"
@@ -42,7 +43,7 @@ const renderIndicator = (quantity: QuantityStatus) => {
     );
   }
 
-  if (quantity === '보통') {
+  if (quantity === "보통") {
     return (
       <svg
         aria-hidden="true"
@@ -101,28 +102,34 @@ const renderIndicator = (quantity: QuantityStatus) => {
   );
 };
 
-export const StockQuantityStatus = forwardRef<HTMLDivElement, QuantityStatusProps>(
-  ({ className, style: _style, quantity, ...props }, ref) => {
-    const style = {
-      ..._style,
-      '--cocso-stock-quantity-status-color': getColor(quantity),
-      '--cocso-stock-quantity-status-indicator-width': spacing.s9,
-    } as CSSProperties;
+export const StockQuantityStatus = forwardRef<
+  HTMLDivElement,
+  QuantityStatusProps
+>(({ className, style: _style, quantity, ...props }, ref) => {
+  const style = {
+    ..._style,
+    "--cocso-stock-quantity-status-color": getColor(quantity),
+    "--cocso-stock-quantity-status-indicator-width": spacing.s9,
+  } as CSSProperties;
 
-    return (
-      <div className={cx(styles.stock, className)} ref={ref} style={style} {...props}>
-        <span className={styles.indicator}>{renderIndicator(quantity)}</span>
-        <Typography color="currentColor" size="sm" type="body">
-          {quantity}
-        </Typography>
-      </div>
-    );
-  }
-);
+  return (
+    <div
+      className={cx(styles.stock, className)}
+      ref={ref}
+      style={style}
+      {...props}
+    >
+      <span className={styles.indicator}>{renderIndicator(quantity)}</span>
+      <Typography color="currentColor" size="small" type="body">
+        {quantity}
+      </Typography>
+    </div>
+  );
+});
 
 export const getColor = (quantity: QuantityStatus) =>
   match(quantity)
-    .with('여유', () => colors.primary500)
-    .with('보통', () => colors.success400)
-    .with('부족', () => colors.danger500)
+    .with("여유", () => colors.primary500)
+    .with("보통", () => colors.success400)
+    .with("부족", () => colors.danger500)
     .exhaustive();

@@ -5,7 +5,7 @@ const meta = {
   title: 'Components/Spinner',
   component: Spinner,
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg', 'xl'] },
+    size: { control: 'select', options: ['small', 'medium', 'large', 'x-large'] },
     color: { control: 'select', options: ['primary', 'neutral', 'white'] },
   },
 } satisfies Meta<typeof Spinner>;
@@ -18,10 +18,10 @@ export const Default: Story = {};
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Spinner size="sm" />
-      <Spinner size="md" />
-      <Spinner size="lg" />
-      <Spinner size="xl" />
+      <Spinner size="small" />
+      <Spinner size="medium" />
+      <Spinner size="large" />
+      <Spinner size="x-large" />
     </div>
   ),
 };

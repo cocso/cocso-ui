@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const CheckIndeterminateSmallIcon = (props: IconProps) => {
   return (
@@ -22,4 +22,4 @@ export const CheckIndeterminateSmallIcon = (props: IconProps) => {
   );
 };
 
-CheckIndeterminateSmallIcon.displayName = 'CheckIndeterminateSmallIcon';
+CheckIndeterminateSmallIcon.displayName = "CheckIndeterminateSmallIcon";

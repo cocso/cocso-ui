@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const SatelliteAltIcon = (props: IconProps) => {
   return (
@@ -27,4 +27,4 @@ export const SatelliteAltIcon = (props: IconProps) => {
   );
 };
 
-SatelliteAltIcon.displayName = 'SatelliteAltIcon';
+SatelliteAltIcon.displayName = "SatelliteAltIcon";

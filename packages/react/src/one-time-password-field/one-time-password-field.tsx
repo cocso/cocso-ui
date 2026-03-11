@@ -1,22 +1,46 @@
-import { Input, Root } from '@radix-ui/react-one-time-password-field';
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from 'react';
-import styles from './one-time-password-field.module.css';
+import { clsx as cx } from "clsx";
+import type { OTPInputProps, SlotProps } from "input-otp";
+import { OTPInput } from "input-otp";
+import { forwardRef } from "react";
+import styles from "./one-time-password-field.module.css";
 
-const OneTimePasswordFieldRoot = forwardRef<
-  ComponentRef<typeof Root>,
-  ComponentPropsWithoutRef<typeof Root>
->(({ className, ...props }, ref) => {
-  return <Root className={cx(styles.otp, className)} ref={ref} {...props} />;
-});
+export interface OneTimePasswordFieldProps
+  extends Omit<OTPInputProps, "onChange" | "render" | "children"> {
+  className?: string;
+  onValueChange?: (value: string) => void;
+  slotClassName?: string;
+}
 
-const OneTimePasswordFieldInput = forwardRef<
-  ComponentRef<typeof Input>,
-  ComponentPropsWithoutRef<typeof Input>
->(({ className, ...props }, ref) => {
-  return <Input className={cx(styles.input, className)} ref={ref} {...props} />;
-});
+const Slot = ({
+  char,
+  hasFakeCaret,
+  isActive,
+  placeholderChar,
+}: SlotProps & { className?: string }) => (
+  <div
+    className={cx(styles.slot, isActive && styles.slotActive)}
+    data-active={isActive || undefined}
+  >
+    {char ?? placeholderChar}
+    {hasFakeCaret && <div className={styles.caret} />}
+  </div>
+);
 
-export const OneTimePasswordField = Object.assign(OneTimePasswordFieldRoot, {
-  Input: OneTimePasswordFieldInput,
-});
+export const OneTimePasswordField = forwardRef<
+  HTMLInputElement,
+  OneTimePasswordFieldProps
+>(({ className, slotClassName, onValueChange, ...props }, ref) => (
+  <OTPInput
+    containerClassName={cx(styles.otp, className)}
+    onChange={onValueChange}
+    ref={ref}
+    render={({ slots }) => (
+      <>
+        {[...slots.entries()].map(([i, slot]) => (
+          <Slot key={`otp-slot-${i}`} {...slot} className={slotClassName} />
+        ))}
+      </>
+    )}
+    {...props}
+  />
+));

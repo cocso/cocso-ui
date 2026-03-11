@@ -1,46 +1,48 @@
-.root {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-.root[data-disabled] {
-  pointer-events: none;
-  opacity: 0.5;
-}
+  .root[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
-.item {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  background-color: white;
-  border: 2px solid var(--ds-color-text-primary);
-  border-radius: 100%;
-}
+  .item {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid var(--ds-color-text-primary);
+    border-radius: 100%;
+  }
 
-.item[data-state="checked"] {
-  border-color: var(--ds-color-primary-500);
-}
+  .item[data-checked] {
+    border-color: var(--ds-color-primary-500);
+  }
 
-.item[data-disabled] {
-  pointer-events: none;
-  opacity: 0.5;
-}
+  .item[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
-.indicator {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
+  .indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 
-.indicator:after {
-  display: block;
-  width: 8px;
-  height: 8px;
-  content: "";
-  background-color: var(--ds-color-primary-500);
-  border-radius: 50%;
+  .indicator:after {
+    display: block;
+    width: 8px;
+    height: 8px;
+    content: "";
+    background-color: var(--ds-color-primary-500);
+    border-radius: 50%;
+  }
 }

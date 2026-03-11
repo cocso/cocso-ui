@@ -22,10 +22,10 @@ export const Default: Story = {};
 export const Body: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="lg" type="body">Body Large</Typography>
-      <Typography size="md" type="body">Body Medium</Typography>
-      <Typography size="sm" type="body">Body Small</Typography>
-      <Typography size="xs" type="body">Body XS</Typography>
+      <Typography size="large" type="body">Body Large</Typography>
+      <Typography size="medium" type="body">Body Medium</Typography>
+      <Typography size="small" type="body">Body Small</Typography>
+      <Typography size="x-small" type="body">Body XS</Typography>
     </div>
   ),
 };
@@ -33,11 +33,11 @@ export const Body: Story = {
 export const Heading: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="xl" type="heading">Heading XL</Typography>
-      <Typography size="lg" type="heading">Heading Large</Typography>
-      <Typography size="md" type="heading">Heading Medium</Typography>
-      <Typography size="sm" type="heading">Heading Small</Typography>
-      <Typography size="xs" type="heading">Heading XS</Typography>
+      <Typography size="x-large" type="heading">Heading XL</Typography>
+      <Typography size="large" type="heading">Heading Large</Typography>
+      <Typography size="medium" type="heading">Heading Medium</Typography>
+      <Typography size="small" type="heading">Heading Small</Typography>
+      <Typography size="x-small" type="heading">Heading XS</Typography>
     </div>
   ),
 };
@@ -45,9 +45,9 @@ export const Heading: Story = {
 export const Display: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="lg" type="display">Display Large</Typography>
-      <Typography size="md" type="display">Display Medium</Typography>
-      <Typography size="sm" type="display">Display Small</Typography>
+      <Typography size="large" type="display">Display Large</Typography>
+      <Typography size="medium" type="display">Display Medium</Typography>
+      <Typography size="small" type="display">Display Small</Typography>
     </div>
   ),
 };

@@ -1,24 +1,26 @@
-import { CheckIcon } from '@cocso-ui/react-icons';
-import { type CheckedState, Indicator, Root } from '@radix-ui/react-checkbox';
-import { clsx as cx } from 'clsx';
-import {
-  type ComponentPropsWithoutRef,
-  type ComponentRef,
-  type CSSProperties,
-  forwardRef,
-  useId,
-} from 'react';
-import { match } from 'ts-pattern';
-import { colors, spacing } from '../token';
-import { Typography } from '../typography';
-import styles from './checkbox.module.css';
+import { Checkbox as CheckboxBase } from "@base-ui/react/checkbox";
+import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
+import { clsx as cx } from "clsx";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  CSSProperties,
+} from "react";
+import { forwardRef, useId } from "react";
+import { match } from "ts-pattern";
+import { colors, spacing } from "../token";
+import { Typography } from "../typography";
+import styles from "./checkbox.module.css";
 
-export type CheckboxSize = 'lg' | 'md' | 'sm';
+export type CheckboxSize = "large" | "medium" | "small";
 
-export type CheckboxStatus = 'on' | 'off' | 'intermediate';
+export type CheckboxStatus = "on" | "off" | "intermediate";
 
 export interface CheckboxProps
-  extends Omit<ComponentPropsWithoutRef<typeof Root>, 'checked' | 'onCheckedChange' | 'onChange'> {
+  extends Omit<
+    ComponentPropsWithoutRef<typeof CheckboxBase.Root>,
+    "checked" | "onCheckedChange" | "onChange" | "indeterminate"
+  > {
   disabled?: boolean;
   id?: string;
   label?: string;
@@ -27,105 +29,110 @@ export interface CheckboxProps
   status: CheckboxStatus;
 }
 
-export const Checkbox = forwardRef<ComponentRef<typeof Root>, CheckboxProps>(
+export const Checkbox = forwardRef<
+  ComponentRef<typeof CheckboxBase.Root>,
+  CheckboxProps
+>(
   (
-    { id: _id, className, style: _style, size = 'md', status, onChange, label, disabled, ...props },
+    {
+      id: _id,
+      className,
+      style: _style,
+      size = "medium",
+      status,
+      onChange,
+      label,
+      disabled,
+      ...props
+    },
     ref
   ) => {
     const generatedId = useId();
     const id = _id ?? generatedId;
 
-    const handleCheckedChange = (checked: CheckedState) => {
+    const handleCheckedChange = (checked: boolean) => {
       if (!disabled) {
-        const nextStatus = match(checked)
-          .with(true, () => 'on' as const)
-          .with('indeterminate', () => 'intermediate' as const)
-          .with(false, () => 'off' as const)
-          .exhaustive();
+        const nextStatus = checked ? ("on" as const) : ("off" as const);
         onChange(nextStatus);
       }
     };
 
-    const getCheckedState = (): CheckedState => {
-      return match(status)
-        .with('on', () => true)
-        .with('intermediate', () => 'indeterminate' as const)
-        .with('off', () => false)
+    const getCheckedState = (): { checked: boolean; indeterminate: boolean } =>
+      match(status)
+        .with("on", () => ({ checked: true, indeterminate: false }))
+        .with("intermediate", () => ({ checked: false, indeterminate: true }))
+        .with("off", () => ({ checked: false, indeterminate: false }))
         .exhaustive();
-    };
 
     const style = {
       ..._style,
-      '--cocso-checkbox-size': getSize(size),
-      '--cocso-checkbox-color': colors.white,
-      '--cocso-checkbox-border-color': getBorderColor(status),
-      '--cocso-checkbox-bg-color': getBackgroundColor(status),
+      "--cocso-checkbox-size": getSize(size),
+      "--cocso-checkbox-color": colors.white,
+      "--cocso-checkbox-border-color": getBorderColor(status),
+      "--cocso-checkbox-bg-color": getBackgroundColor(status),
     } as CSSProperties;
+
+    const checkedState = getCheckedState();
 
     return (
       <div className={cx(styles.wrapper, className)} style={style}>
-        <Root
-          checked={getCheckedState()}
+        <CheckboxBase.Root
+          checked={checkedState.checked}
           className={styles.checkbox}
           disabled={disabled}
           id={id}
+          indeterminate={checkedState.indeterminate}
           onCheckedChange={handleCheckedChange}
           ref={ref}
           {...props}
         >
-          <Indicator
-            aria-hidden="true"
+          <CheckboxBase.Indicator
             className={styles.indicator}
-            style={{ opacity: status === 'on' ? 1 : 0 }}
+            style={{ opacity: status === "on" ? 1 : 0 }}
           >
             <CheckIcon className={styles.icon} size={24} />
-          </Indicator>
+          </CheckboxBase.Indicator>
 
           <div
             aria-hidden="true"
             className={styles.indicator}
-            style={{ opacity: status === 'intermediate' ? 1 : 0 }}
+            style={{ opacity: status === "intermediate" ? 1 : 0 }}
           >
-            <CheckIcon className={styles.icon} size={24} />
+            <CheckIndeterminateSmallIcon className={styles.icon} size={24} />
           </div>
-        </Root>
+        </CheckboxBase.Root>
 
         {label && (
           <Typography
             aria-disabled={disabled}
-            asChild
             className={styles.label}
+            render={<label htmlFor={id}>{label}</label>}
             size={size}
             type="body"
-          >
-            <label htmlFor={id}>{label}</label>
-          </Typography>
+          />
         )}
       </div>
     );
   }
 );
 
-const getSize = (size: CheckboxSize) => {
-  return match(size)
-    .with('lg', () => spacing.s10)
-    .with('md', () => spacing.s9)
-    .with('sm', () => spacing.s8)
+const getSize = (size: CheckboxSize) =>
+  match(size)
+    .with("large", () => spacing.s10)
+    .with("medium", () => spacing.s9)
+    .with("small", () => spacing.s8)
     .exhaustive();
-};
 
-const getBorderColor = (status: CheckboxStatus) => {
-  return match(status)
-    .with('on', () => colors.primary500)
-    .with('intermediate', () => colors.primary500)
-    .with('off', () => colors.neutral100)
+const getBorderColor = (status: CheckboxStatus) =>
+  match(status)
+    .with("on", () => colors.primary500)
+    .with("intermediate", () => colors.primary500)
+    .with("off", () => colors.neutral100)
     .exhaustive();
-};
 
-const getBackgroundColor = (status: CheckboxStatus) => {
-  return match(status)
-    .with('on', () => colors.primary500)
-    .with('intermediate', () => colors.primary500)
-    .with('off', () => colors.white)
+const getBackgroundColor = (status: CheckboxStatus) =>
+  match(status)
+    .with("on", () => colors.primary500)
+    .with("intermediate", () => colors.primary500)
+    .with("off", () => colors.white)
     .exhaustive();
-};

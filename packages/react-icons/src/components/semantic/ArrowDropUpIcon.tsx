@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const ArrowDropUpIcon = (props: IconProps) => {
   return (
@@ -18,4 +18,4 @@ export const ArrowDropUpIcon = (props: IconProps) => {
   );
 };
 
-ArrowDropUpIcon.displayName = 'ArrowDropUpIcon';
+ArrowDropUpIcon.displayName = "ArrowDropUpIcon";
