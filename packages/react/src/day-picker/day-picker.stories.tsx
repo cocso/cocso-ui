@@ -18,11 +18,11 @@ export const Default: Story = {
   render: () => {
     const [date, setDate] = useState<Date | undefined>(undefined);
     return (
-      <DayPicker onValueChange={d => setDate(d ?? undefined)} value={date}>
-        <Button variant="secondary">
-          {date ? date.toLocaleDateString('ko-KR') : '날짜 선택'}
-        </Button>
-      </DayPicker>
+      <DayPicker
+        onValueChange={d => setDate(d ?? undefined)}
+        trigger={<Button variant="secondary">{date ? date.toLocaleDateString('ko-KR') : '날짜 선택'}</Button>}
+        value={date}
+      />
     );
   },
 };
@@ -38,12 +38,9 @@ export const WithMinMax: Story = {
         maxDate={maxDate}
         minDate={minDate}
         onValueChange={d => setDate(d ?? undefined)}
+        trigger={<Button variant="secondary">{date ? date.toLocaleDateString('ko-KR') : '이번 달만 선택 가능'}</Button>}
         value={date}
-      >
-        <Button variant="secondary">
-          {date ? date.toLocaleDateString('ko-KR') : '이번 달만 선택 가능'}
-        </Button>
-      </DayPicker>
+      />
     );
   },
 };
@@ -52,11 +49,12 @@ export const Disabled: Story = {
   render: () => {
     const [date] = useState<Date | undefined>(new Date());
     return (
-      <DayPicker disabled onValueChange={() => {}} value={date}>
-        <Button disabled variant="secondary">
-          {date ? date.toLocaleDateString('ko-KR') : '날짜 선택'}
-        </Button>
-      </DayPicker>
+      <DayPicker
+        disabled
+        onValueChange={() => {}}
+        trigger={<Button disabled variant="secondary">{date ? date.toLocaleDateString('ko-KR') : '날짜 선택'}</Button>}
+        value={date}
+      />
     );
   },
 };
