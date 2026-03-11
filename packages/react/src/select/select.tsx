@@ -1,7 +1,6 @@
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
 import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef, CSSProperties } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import { spacing } from "../token";
 import styles from "./select.module.css";
@@ -15,56 +14,52 @@ type SelectSize =
   | "2x-small";
 
 export interface SelectProps
-  extends Omit<ComponentPropsWithoutRef<"select">, "size"> {
+  extends Omit<ComponentProps<"select">, "size"> {
   disabled?: boolean;
   size?: SelectSize;
   stretch?: boolean;
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    {
-      className,
-      style: _style,
-      size = "medium",
-      disabled = false,
-      stretch = false,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const style = {
-      ..._style,
-      ...getStyles(size),
-    } as CSSProperties;
+export function Select({
+  ref,
+  className,
+  style: _style,
+  size = "medium",
+  disabled = false,
+  stretch = false,
+  children,
+  ...props
+}: SelectProps) {
+  const style = {
+    ..._style,
+    ...getStyles(size),
+  } as CSSProperties;
 
-    return (
-      <div
-        className={cx(
-          styles.wrapper,
-          stretch && styles.stretch,
-          disabled && styles.disabled,
-          className
-        )}
+  return (
+    <div
+      className={cx(
+        styles.wrapper,
+        stretch && styles.stretch,
+        disabled && styles.disabled,
+        className
+      )}
+    >
+      <select
+        className={styles.select}
+        disabled={disabled}
+        ref={ref}
+        style={style}
+        {...props}
       >
-        <select
-          className={styles.select}
-          disabled={disabled}
-          ref={ref}
-          style={style}
-          {...props}
-        >
-          {children}
-        </select>
+        {children}
+      </select>
 
-        <span className={styles.icon}>
-          <KeyboardArrowDownIcon size={20} />
-        </span>
-      </div>
-    );
-  }
-);
+      <span className={styles.icon}>
+        <KeyboardArrowDownIcon size={20} />
+      </span>
+    </div>
+  );
+}
 
 const getStyles = (size: SelectSize) =>
   match(size)

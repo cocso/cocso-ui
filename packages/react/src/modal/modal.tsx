@@ -1,86 +1,92 @@
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { CloseIcon } from "@cocso-ui/react-icons";
 import { clsx as cx } from "clsx";
-import type { ComponentPropsWithoutRef, ReactElement } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps, ReactElement } from "react";
 import { colors } from "../token";
 import { Typography } from "../typography";
 import styles from "./modal.module.css";
 
-const ModalContent = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<typeof DialogBase.Popup>
->(({ className, children, ...props }, ref) => (
-  <DialogBase.Portal>
-    <DialogBase.Backdrop className={styles.overlay} />
-    <DialogBase.Popup
-      className={cx(styles.content, className)}
-      ref={ref}
-      {...props}
-    >
-      {children}
-    </DialogBase.Popup>
-  </DialogBase.Portal>
-));
+function ModalContent({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof DialogBase.Popup>) {
+  return (
+    <DialogBase.Portal>
+      <DialogBase.Backdrop className={styles.overlay} />
+      <DialogBase.Popup
+        className={cx(styles.content, className)}
+        {...props}
+      >
+        {children}
+      </DialogBase.Popup>
+    </DialogBase.Portal>
+  );
+}
 
 export interface ModalCloseProps
-  extends ComponentPropsWithoutRef<typeof DialogBase.Close> {
+  extends ComponentProps<typeof DialogBase.Close> {
   render?: ReactElement;
 }
 
-const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
-  ({ className, render: renderProp, children, ...props }, ref) => {
-    if (renderProp) {
-      return (
-        <DialogBase.Close
-          className={className}
-          ref={ref}
-          render={renderProp}
-          {...props}
-        />
-      );
-    }
+function ModalClose({
+  className,
+  render: renderProp,
+  children,
+  ...props
+}: ModalCloseProps) {
+  if (renderProp) {
     return (
       <DialogBase.Close
-        className={cx(styles.close, className)}
-        ref={ref}
+        className={className}
+        render={renderProp}
         {...props}
-      >
-        {children ?? <CloseIcon size={24} />}
-      </DialogBase.Close>
+      />
     );
   }
-);
+  return (
+    <DialogBase.Close
+      className={cx(styles.close, className)}
+      {...props}
+    >
+      {children ?? <CloseIcon size={24} />}
+    </DialogBase.Close>
+  );
+}
 
-const ModalTitle = forwardRef<
-  HTMLHeadingElement,
-  ComponentPropsWithoutRef<typeof DialogBase.Title>
->(({ className, children, ...props }, ref) => (
-  <DialogBase.Title
-    className={cx(styles.title, className)}
-    ref={ref}
-    render={<Typography size={20} weight="bold" />}
-    {...props}
-  >
-    {children}
-  </DialogBase.Title>
-));
+function ModalTitle({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof DialogBase.Title>) {
+  return (
+    <DialogBase.Title
+      className={cx(styles.title, className)}
+      render={<Typography size={20} weight="bold" />}
+      {...props}
+    >
+      {children}
+    </DialogBase.Title>
+  );
+}
 
-const ModalDescription = forwardRef<
-  HTMLParagraphElement,
-  ComponentPropsWithoutRef<typeof DialogBase.Description>
->(({ className, children, ...props }, ref) => (
-  <DialogBase.Description
-    className={cx(styles.description, className)}
-    ref={ref}
-    render={
-      <Typography color={colors.textSecondary} size={14} weight="medium" />
-    }
-    {...props}
-  >
-    {children}
-  </DialogBase.Description>
-));
+function ModalDescription({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof DialogBase.Description>) {
+  return (
+    <DialogBase.Description
+      className={cx(styles.description, className)}
+      render={
+        <Typography color={colors.textSecondary} size={14} weight="medium" />
+      }
+      {...props}
+    >
+      {children}
+    </DialogBase.Description>
+  );
+}
 
 export const Modal = Object.assign(DialogBase.Root, {
   Trigger: DialogBase.Trigger,

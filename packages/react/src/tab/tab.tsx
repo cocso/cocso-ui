@@ -1,26 +1,21 @@
 import { Tabs } from "@base-ui/react/tabs";
-import type { ComponentPropsWithoutRef, ComponentRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentProps } from "react";
 
-const TabRoot = forwardRef<
-  ComponentRef<typeof Tabs.Root>,
-  ComponentPropsWithoutRef<typeof Tabs.Root>
->(({ ...props }, ref) => <Tabs.Root ref={ref} {...props} />);
+function TabRoot(props: ComponentProps<typeof Tabs.Root>) {
+  return <Tabs.Root {...props} />;
+}
 
-const TabList = forwardRef<
-  ComponentRef<typeof Tabs.List>,
-  ComponentPropsWithoutRef<typeof Tabs.List>
->(({ ...props }, ref) => <Tabs.List ref={ref} {...props} />);
+function TabList(props: ComponentProps<typeof Tabs.List>) {
+  return <Tabs.List {...props} />;
+}
 
-const TabTrigger = forwardRef<
-  ComponentRef<typeof Tabs.Tab>,
-  ComponentPropsWithoutRef<typeof Tabs.Tab>
->(({ ...props }, ref) => <Tabs.Tab ref={ref} {...props} />);
+function TabTrigger(props: ComponentProps<typeof Tabs.Tab>) {
+  return <Tabs.Tab {...props} />;
+}
 
-const TabContent = forwardRef<
-  ComponentRef<typeof Tabs.Panel>,
-  ComponentPropsWithoutRef<typeof Tabs.Panel>
->(({ ...props }, ref) => <Tabs.Panel ref={ref} {...props} />);
+function TabContent(props: ComponentProps<typeof Tabs.Panel>) {
+  return <Tabs.Panel {...props} />;
+}
 
 export const Tab = Object.assign(TabRoot, {
   List: TabList,
