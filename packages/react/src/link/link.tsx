@@ -1,6 +1,6 @@
-import { useRender } from "@base-ui/react/use-render";
-import { cn } from "../cn";
+import type { useRender } from "@base-ui/react/use-render";
 import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import type { FontWeight, LineHeight } from "../token";
 import { Typography } from "../typography";
 import styles from "./link.module.css";

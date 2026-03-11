@@ -1,11 +1,14 @@
-import { cn } from "../cn";
-import type { OTPInputProps, SlotProps } from "input-otp";
+import type { SlotProps } from "input-otp";
 import { OTPInput } from "input-otp";
 import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./one-time-password-field.module.css";
 
 export interface OneTimePasswordFieldProps
-  extends Omit<ComponentProps<typeof OTPInput>, "onChange" | "render" | "children"> {
+  extends Omit<
+    ComponentProps<typeof OTPInput>,
+    "onChange" | "render" | "children"
+  > {
   className?: string;
   onValueChange?: (value: string) => void;
   slotClassName?: string;
@@ -13,12 +16,13 @@ export interface OneTimePasswordFieldProps
 
 const Slot = ({
   char,
+  className,
   hasFakeCaret,
   isActive,
   placeholderChar,
 }: SlotProps & { className?: string }) => (
   <div
-    className={cn(styles.slot, isActive && styles.slotActive)}
+    className={cn(styles.slot, isActive && styles.slotActive, className)}
     data-active={isActive || undefined}
   >
     {char ?? placeholderChar}

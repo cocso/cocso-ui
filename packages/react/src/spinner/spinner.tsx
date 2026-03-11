@@ -1,8 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors } from "../token";
 import styles from "./spinner.module.css";
 

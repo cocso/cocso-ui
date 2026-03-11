@@ -1,8 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { Spinner } from "../spinner";
 import type { FontWeight } from "../token";
 import { colors, fontWeight } from "../token";
@@ -21,8 +21,7 @@ export type ButtonVariant =
 
 export type ButtonShape = "square" | "circle" | "rounded";
 
-export interface ButtonProps
-  extends Omit<ComponentProps<"button">, "prefix"> {
+export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   disabled?: boolean;
   loading?: boolean;
   prefix?: ReactNode;
@@ -91,7 +90,12 @@ export function Button({
     render: renderProp,
     ref,
     props: mergeProps<"button">(
-      { className: mergedClassName, style, disabled: isDisabled, type: "button" as const },
+      {
+        className: mergedClassName,
+        style,
+        disabled: isDisabled,
+        type: "button" as const,
+      },
       props,
       { children: renderButtonContent(children) }
     ),

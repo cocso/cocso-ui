@@ -1,6 +1,6 @@
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";

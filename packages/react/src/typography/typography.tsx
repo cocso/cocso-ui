@@ -1,8 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { cn } from "../cn";
 import type { ComponentProps, Ref } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import type {
   FontSize,
   FontWeight,
@@ -136,7 +136,13 @@ const getHeadingFontSize = (size: HeadingSize) =>
 const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
   match(type)
     .with("custom", () => (props as CustomTypographyProps).size ?? 16)
-    .with("body", () => getBodyFontSize((props as BodyTypographyProps).size ?? "medium"))
-    .with("display", () => getDisplayFontSize((props as DisplayTypographyProps).size ?? "medium"))
-    .with("heading", () => getHeadingFontSize((props as HeadingTypographyProps).size ?? "medium"))
+    .with("body", () =>
+      getBodyFontSize((props as BodyTypographyProps).size ?? "medium")
+    )
+    .with("display", () =>
+      getDisplayFontSize((props as DisplayTypographyProps).size ?? "medium")
+    )
+    .with("heading", () =>
+      getHeadingFontSize((props as HeadingTypographyProps).size ?? "medium")
+    )
     .otherwise(() => 16);

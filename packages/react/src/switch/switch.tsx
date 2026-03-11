@@ -1,16 +1,15 @@
 import { Switch as SwitchBase } from "@base-ui/react/switch";
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
 
 export type SwitchSize = "small" | "medium";
 
-export interface SwitchProps
-  extends ComponentProps<typeof SwitchBase.Root> {
+export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
   label?: string;

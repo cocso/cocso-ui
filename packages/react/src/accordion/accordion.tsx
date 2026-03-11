@@ -1,7 +1,7 @@
 import { Accordion as AccordionBase } from "@base-ui/react/accordion";
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./accordion.module.css";
 
 function AccordionItem({
@@ -9,10 +9,7 @@ function AccordionItem({
   ...props
 }: ComponentProps<typeof AccordionBase.Item>) {
   return (
-    <AccordionBase.Item
-      className={cn(styles.item, className)}
-      {...props}
-    />
+    <AccordionBase.Item className={cn(styles.item, className)} {...props} />
   );
 }
 
@@ -28,10 +25,7 @@ function AccordionTrigger({
   ...props
 }: TriggerProps) {
   return (
-    <AccordionBase.Trigger
-      className={cn(styles.trigger, className)}
-      {...props}
-    >
+    <AccordionBase.Trigger className={cn(styles.trigger, className)} {...props}>
       {children}
       {chevron && <KeyboardArrowDownIcon className={styles.chevron} />}
     </AccordionBase.Trigger>
@@ -43,10 +37,7 @@ function AccordionPanel({
   ...props
 }: ComponentProps<typeof AccordionBase.Panel>) {
   return (
-    <AccordionBase.Panel
-      className={cn(styles.content, className)}
-      {...props}
-    />
+    <AccordionBase.Panel className={cn(styles.content, className)} {...props} />
   );
 }
 

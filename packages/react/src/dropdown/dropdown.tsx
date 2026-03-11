@@ -1,6 +1,6 @@
 import { Menu as MenuBase } from "@base-ui/react/menu";
-import { cn } from "../cn";
 import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./dropdown.module.css";
 
 function DropdownContent({
@@ -10,10 +10,7 @@ function DropdownContent({
   return (
     <MenuBase.Portal>
       <MenuBase.Positioner>
-        <MenuBase.Popup
-          className={cn(styles.content, className)}
-          {...props}
-        />
+        <MenuBase.Popup className={cn(styles.content, className)} {...props} />
       </MenuBase.Positioner>
     </MenuBase.Portal>
   );
@@ -23,9 +20,7 @@ function DropdownItem({
   className,
   ...props
 }: ComponentProps<typeof MenuBase.Item>) {
-  return (
-    <MenuBase.Item className={cn(styles.item, className)} {...props} />
-  );
+  return <MenuBase.Item className={cn(styles.item, className)} {...props} />;
 }
 
 export const Dropdown = Object.assign(MenuBase.Root, {

@@ -1,6 +1,6 @@
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import type { ResponsiveFontSize } from "../token";
 import { colors } from "../token";
 import { Typography } from "../typography";

@@ -4,17 +4,17 @@ import {
   ArrowIOSBackwardIcon,
   ArrowIOSForwardIcon,
 } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import { ko } from "date-fns/locale";
 import type { ComponentProps, ReactElement } from "react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Button } from "../button";
+import { cn } from "../cn";
 import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./month-picker.module.css";
 
-export interface MonthPickerProps extends ComponentProps<"div"> {
+export interface MonthPickerProps extends Omit<ComponentProps<"div">, "children"> {
   disabled?: boolean;
   maxDate?: Date;
   minDate?: Date;

@@ -1,9 +1,9 @@
 import { Checkbox as CheckboxBase } from "@base-ui/react/checkbox";
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
@@ -98,7 +98,9 @@ export function Checkbox({
   );
 }
 
-const getCheckedState = (status: CheckboxStatus): { checked: boolean; indeterminate: boolean } =>
+const getCheckedState = (
+  status: CheckboxStatus
+): { checked: boolean; indeterminate: boolean } =>
   match(status)
     .with("on", () => ({ checked: true, indeterminate: false }))
     .with("intermediate", () => ({ checked: false, indeterminate: true }))

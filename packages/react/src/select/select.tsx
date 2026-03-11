@@ -1,7 +1,7 @@
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
+import { cn } from "../cn";
 import { spacing } from "../token";
 import styles from "./select.module.css";
 
@@ -13,8 +13,7 @@ type SelectSize =
   | "x-small"
   | "2x-small";
 
-export interface SelectProps
-  extends Omit<ComponentProps<"select">, "size"> {
+export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   disabled?: boolean;
   size?: SelectSize;
   stretch?: boolean;

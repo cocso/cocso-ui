@@ -3,8 +3,8 @@ import {
   ArrowIOSForwardIcon,
   MoreHorizIcon,
 } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import type { ComponentProps } from "react";
+import { cn } from "../cn";
 import styles from "./pagination.module.css";
 
 export interface PaginationProps

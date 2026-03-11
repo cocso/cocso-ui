@@ -1,7 +1,7 @@
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { CloseIcon } from "@cocso-ui/react-icons";
-import { cn } from "../cn";
 import type { ComponentProps, ReactElement } from "react";
+import { cn } from "../cn";
 import { colors } from "../token";
 import { Typography } from "../typography";
 import styles from "./modal.module.css";
@@ -14,10 +14,7 @@ function ModalContent({
   return (
     <DialogBase.Portal>
       <DialogBase.Backdrop className={styles.overlay} />
-      <DialogBase.Popup
-        className={cn(styles.content, className)}
-        {...props}
-      >
+      <DialogBase.Popup className={cn(styles.content, className)} {...props}>
         {children}
       </DialogBase.Popup>
     </DialogBase.Portal>
@@ -37,18 +34,11 @@ function ModalClose({
 }: ModalCloseProps) {
   if (renderProp) {
     return (
-      <DialogBase.Close
-        className={className}
-        render={renderProp}
-        {...props}
-      />
+      <DialogBase.Close className={className} render={renderProp} {...props} />
     );
   }
   return (
-    <DialogBase.Close
-      className={cn(styles.close, className)}
-      {...props}
-    >
+    <DialogBase.Close className={cn(styles.close, className)} {...props}>
       {children ?? <CloseIcon size={24} />}
     </DialogBase.Close>
   );
