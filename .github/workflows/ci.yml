@@ -55,19 +55,58 @@ jobs:
       - name: Test with Coverage
         run: pnpm run test:coverage
 
-      - name: Coverage Report — @cocso-ui/react
+      - name: Generate Coverage Report
         if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          name: '@cocso-ui/react'
-          json-summary-path: packages/react/coverage/coverage-summary.json
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
 
-      - name: Coverage Report — @cocso-ui/baseframe
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
+          function load(path) {
+            try { return JSON.parse(fs.readFileSync(path, 'utf8')).total; }
+            catch { return null; }
+          }
+
+          function badge(pct) {
+            if (pct >= 90) return '🟢';
+            if (pct >= 70) return '🟡';
+            return '🔴';
+          }
+
+          const pkgs = [
+            { name: '@cocso-ui/react',      path: 'packages/react/coverage/coverage-summary.json' },
+            { name: '@cocso-ui/baseframe',  path: 'ecosystem/baseframe/coverage/coverage-summary.json' },
+          ];
+
+          const rows = pkgs.map(({ name, path }) => {
+            const s = load(path);
+            if (!s) return `| \`${name}\` | — | — | — | — |`;
+            const f = v => `${badge(v.pct)} ${v.pct}%`;
+            return `| \`${name}\` | ${f(s.statements)} | ${f(s.branches)} | ${f(s.functions)} | ${f(s.lines)} |`;
+          });
+
+          const body = [
+            '## 📊 Test Coverage',
+            '',
+            '| Package | Statements | Branches | Functions | Lines |',
+            '|---------|:----------:|:--------:|:---------:|:-----:|',
+            ...rows,
+            '',
+            `> Updated: ${new Date().toISOString().replace('T', ' ').slice(0, 16)} UTC`,
+          ].join('\n');
+
+          fs.writeFileSync('coverage-report.md', body);
+          EOF
+
+      - name: Post Coverage Comment
+        if: always() && github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          name: '@cocso-ui/baseframe'
-          json-summary-path: ecosystem/baseframe/coverage/coverage-summary.json
+          header: test-coverage
+          path: coverage-report.md
+
+      - name: Write Coverage to Job Summary
+        if: always()
+        run: cat coverage-report.md >> $GITHUB_STEP_SUMMARY
 
   build:
     name: Build
