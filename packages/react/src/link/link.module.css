@@ -1,7 +1,7 @@
 @layer components {
   .link {
     display: inline-flex;
-    gap: var(--ds-spacing-2);
+    gap: var(--cocso-spacing-2);
     align-items: center;
     justify-content: center;
     width: fit-content;
@@ -12,8 +12,8 @@
 
   .link > svg {
     flex-shrink: 0;
-    width: var(--ds-spacing-8);
-    height: var(--ds-spacing-8);
+    width: var(--cocso-spacing-8);
+    height: var(--cocso-spacing-8);
   }
 
   .indicator {

@@ -29,11 +29,11 @@ describe("css-vars generateFromAst", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
     const result = generateFromAst(ast, {
-      prefix: "ds",
+      prefix: "cocso",
       selectors: { global: { default: ":root" } },
     });
     expect(result).toContain(":root {");
-    expect(result).toContain("--ds-color-white: #ffffff;");
+    expect(result).toContain("--cocso-color-white: #ffffff;");
   });
 
   it("resolves token reference to var()", () => {
@@ -43,11 +43,11 @@ describe("css-vars generateFromAst", () => {
     ];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
     const result = generateFromAst(ast, {
-      prefix: "ds",
+      prefix: "cocso",
       selectors: { global: { default: ":root" } },
     });
     expect(result).toContain(
-      "--ds-color-text-primary: var(--ds-color-neutral-950);"
+      "--cocso-color-text-primary: var(--cocso-color-neutral-950);"
     );
   });
 
@@ -55,7 +55,7 @@ describe("css-vars generateFromAst", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
     const result = generateFromAst(ast, {
-      prefix: "ds",
+      prefix: "cocso",
       selectors: { global: { default: ":root" } },
     });
     expect(result.endsWith("\n")).toBe(true);

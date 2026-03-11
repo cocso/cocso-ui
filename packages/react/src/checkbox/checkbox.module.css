@@ -1,7 +1,7 @@
 @layer components {
   .wrapper {
     display: flex;
-    gap: var(--ds-spacing-5);
+    gap: var(--cocso-spacing-5);
     align-items: center;
   }
 
@@ -50,10 +50,10 @@
 
   .indicator {
     position: absolute;
-    top: var(--ds-spacing-1);
-    right: var(--ds-spacing-1);
-    bottom: var(--ds-spacing-1);
-    left: var(--ds-spacing-1);
+    top: var(--cocso-spacing-1);
+    right: var(--cocso-spacing-1);
+    bottom: var(--cocso-spacing-1);
+    left: var(--cocso-spacing-1);
     transition: opacity 0.15s ease-in-out;
   }
 

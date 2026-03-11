@@ -14,19 +14,19 @@ COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실
 
 ```css
 :root {
-  --ds-color-white: #ffffff;
-  --ds-font-weight-bold: 700;
+  --cocso-color-white: #ffffff;
+  --cocso-font-weight-bold: 700;
 }
 ```
 
-`--ds-*` 네임스페이스로 직접 참조할 수 있어요. `packages/react/` 컴포넌트에서 사용해요.
+`--cocso-*` 네임스페이스로 직접 참조할 수 있어요. `packages/react/` 컴포넌트에서 사용해요.
 
 **Layer 2 — `tailwind4.css` (TailwindCSS namespace mapping)**
 
 ```css
 @theme {
-  --color-white: var(--ds-color-white);
-  --font-weight-bold: var(--ds-font-weight-bold);
+  --color-white: var(--cocso-color-white);
+  --font-weight-bold: var(--cocso-font-weight-bold);
 }
 
 @utility z-* { z-index: --value(--z-index-*); }
@@ -40,8 +40,8 @@ TailwindCSS v4 표준 네임스페이스(`--color-*`, `--font-weight-*`, `--shad
 ### CLI Usage
 
 ```bash
-# CSS custom properties 생성 (--ds-* prefix)
-baseframe css-vars [dir] --prefix ds
+# CSS custom properties 생성 (--cocso-* prefix)
+baseframe css-vars [dir] --prefix cocso
 
 # TailwindCSS v4 테마 생성
 baseframe tailwindcss [dir]

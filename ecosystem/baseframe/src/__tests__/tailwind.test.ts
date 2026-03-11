@@ -25,12 +25,12 @@ function makeToken(
 }
 
 describe("tailwind generateFromAst", () => {
-  it("generates 2-layer @theme (--color-*: var(--ds-color-*))", () => {
+  it("generates 2-layer @theme (--color-*: var(--cocso-color-*))", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "ds" });
+    const result = generateFromAst(ast, { dsPrefix: "cocso" });
     expect(result).toContain("@theme {");
-    expect(result).toContain("--color-white: var(--ds-color-white);");
+    expect(result).toContain("--color-white: var(--cocso-color-white);");
     // Must NOT contain direct value
     expect(result).not.toContain("#ffffff");
   });
@@ -41,7 +41,7 @@ describe("tailwind generateFromAst", () => {
       makeToken("$spacing.4", "6px"),
     ];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "ds" });
+    const result = generateFromAst(ast, { dsPrefix: "cocso" });
     expect(result).toContain("--color-white:");
     expect(result).not.toContain("--spacing-4");
   });
@@ -49,7 +49,7 @@ describe("tailwind generateFromAst", () => {
   it("produces exactly 1 @utility (z-* only)", () => {
     const tokens = [makeToken("$z-index.base", "0")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "ds" });
+    const result = generateFromAst(ast, { dsPrefix: "cocso" });
     const utilityCount = (result.match(/@utility/g) ?? []).length;
     expect(utilityCount).toBe(1);
     expect(result).toContain("@utility z-*");

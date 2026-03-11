@@ -23,7 +23,7 @@ Plain CSS. No build step required.
 
 ## In Scope
 
-- `token.css` — all design tokens as CSS custom properties (`--ds-*` namespace).
+- `token.css` — all design tokens as CSS custom properties (`--cocso-*` namespace).
 - `tailwind4.css` — Tailwind v4 theme configuration referencing token variables.
 - Token categories: color (primitive + semantic), spacing, typography, border radius, shadow.
 
@@ -36,12 +36,12 @@ Plain CSS. No build step required.
 
 ```
 packages/css/
-├── token.css        # All design tokens (--ds-* CSS custom properties)
+├── token.css        # All design tokens (--cocso-* CSS custom properties)
 ├── tailwind4.css    # Tailwind v4 theme layer
 └── package.json     # Exports map
 ```
 
-Token prefix convention: `--ds-<category>-<scale>` (e.g. `--ds-color-neutral-500`, `--ds-color-white`).
+Token prefix convention: `--cocso-<category>-<scale>` (e.g. `--cocso-color-neutral-500`, `--cocso-color-white`).
 
 ## Interfaces
 
@@ -76,7 +76,7 @@ pnpm --filter @cocso-ui/css lint
 
 ## Roadmap
 
-- Add semantic token layer (e.g. `--ds-color-surface-primary`).
+- Add semantic token layer (e.g. `--cocso-color-surface-primary`).
 - Document token inventory in `apps/website`.
 
 ## Open Questions

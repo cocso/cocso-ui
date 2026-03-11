@@ -68,11 +68,11 @@ Token names follow the pattern `$<collection>.<rest>`:
 
 | Pattern | Example | CSS variable |
 |---|---|---|
-| `$color.<name>` | `$color.neutral-950` | `--ds-color-neutral-950` |
-| `$font-weight.<name>` | `$font-weight.bold` | `--ds-font-weight-bold` |
-| `$shadow.<name>` | `$shadow.1` | `--ds-shadow-1` |
-| `$spacing.<name>` | `$spacing.8` | `--ds-spacing-8` |
-| `$z-index.<name>` | `$z-index.modal` | `--ds-z-index-modal` |
+| `$color.<name>` | `$color.neutral-950` | `--cocso-color-neutral-950` |
+| `$font-weight.<name>` | `$font-weight.bold` | `--cocso-font-weight-bold` |
+| `$shadow.<name>` | `$shadow.1` | `--cocso-shadow-1` |
+| `$spacing.<name>` | `$spacing.8` | `--cocso-spacing-8` |
+| `$z-index.<name>` | `$z-index.modal` | `--cocso-z-index-modal` |
 
 Dots in token names become hyphens in CSS variables. Use hyphens (not dots) within name segments: `$color.neutral-950` not `$color.neutral.950`.
 

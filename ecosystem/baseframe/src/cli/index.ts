@@ -94,7 +94,7 @@ function generateTailwindCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 
   const tailwindCss = tailwind.generateTailwindCSS(tokens, collections, {
-    dsPrefix: prefix ?? "ds",
+    dsPrefix: prefix ?? "cocso",
     banner: "",
   });
 

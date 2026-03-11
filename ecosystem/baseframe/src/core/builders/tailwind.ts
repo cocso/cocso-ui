@@ -31,7 +31,7 @@ function createTheme(tokens: TokenDecl[], dsPrefix: string): string {
       continue;
     }
 
-    // 2-layer: --color-white: var(--ds-color-white)
+    // 2-layer: --color-white: var(--cocso-color-white)
     const twVar = createVarName(token.token.name);
     const dsVar = createVarName(token.token.name, dsPrefix);
     vars.push(`  ${twVar}: var(${dsVar});`);
@@ -47,7 +47,7 @@ function createUtilities(): string[] {
 }
 
 export function generateFromAst(ast: Ast, options: TailwindOptions): string {
-  const { banner = "", dsPrefix = "ds" } = options;
+  const { banner = "", dsPrefix = "cocso" } = options;
   const { tokens, collections } = ast;
   const parts: string[] = [];
 

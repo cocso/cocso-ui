@@ -10,19 +10,19 @@
   }
 
   .sunday {
-    color: var(--ds-color-danger-600) !important;
+    color: var(--cocso-color-danger-600) !important;
   }
 
   .saturday {
-    color: var(--ds-color-primary-600) !important;
+    color: var(--cocso-color-primary-600) !important;
   }
 
   :global(.react-datepicker) {
     position: relative;
     display: inline-block;
     font-size: 0.8rem;
-    color: var(--ds-color-text-primary);
-    background-color: var(--ds-color-white);
+    color: var(--cocso-color-text-primary);
+    background-color: var(--cocso-color-white);
   }
 
   :global(.react-datepicker__aria-live) {
@@ -48,7 +48,7 @@
 
   :global(.react-datepicker__month-container) {
     width: 100%;
-    padding-block: var(--ds-spacing-8);
+    padding-block: var(--cocso-spacing-8);
   }
 
   :global(.react-datepicker__header--custom) {
@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding-bottom: var(--ds-spacing-5);
+    padding-bottom: var(--cocso-spacing-5);
   }
 
   :global(.react-datepicker__day-names) {
@@ -74,7 +74,7 @@
     width: 1.7rem;
     margin: 0.166rem;
     line-height: 1.7rem;
-    color: var(--ds-color-text-primary);
+    color: var(--cocso-color-text-primary);
     text-align: center;
   }
 
@@ -84,31 +84,31 @@
     margin: 0.166rem;
     font-weight: 500;
     line-height: 1.7rem;
-    color: var(--ds-color-text-primary);
+    color: var(--cocso-color-text-primary);
     text-align: center;
     cursor: pointer;
     border-radius: 8px;
   }
 
   :global(.react-datepicker__day:hover) {
-    background-color: var(--ds-color-neutral-50);
+    background-color: var(--cocso-color-neutral-50);
   }
 
   :global(.react-datepicker__day--selected) {
-    color: var(--ds-color-white) !important;
-    background-color: var(--ds-color-primary-500);
+    color: var(--cocso-color-white) !important;
+    background-color: var(--cocso-color-primary-500);
   }
 
   :global(.react-datepicker__day--selected:hover) {
-    background-color: var(--ds-color-primary-600) !important;
+    background-color: var(--cocso-color-primary-600) !important;
   }
 
   :global(.react-datepicker__day-name:nth-child(1)) {
-    color: var(--ds-color-danger-600);
+    color: var(--cocso-color-danger-600);
   }
 
   :global(.react-datepicker__day-name:nth-child(7)) {
-    color: var(--ds-color-primary-600);
+    color: var(--cocso-color-primary-600);
   }
 
   :global(.react-datepicker__day--disabled) {

@@ -21,7 +21,7 @@ Node.js >= 22 (TypeScript, compiled to ESM via esbuild).
 ## In Scope
 
 - `baseframe` CLI binary.
-- `css-vars` command — generates CSS custom properties with a configurable prefix (`--ds-*`).
+- `css-vars` command — generates CSS custom properties with a configurable prefix (`--cocso-*`).
 - `tailwindcss` command — generates TailwindCSS v4 `@theme` + `@utility` file using 2-layer pattern.
 - Reads token definitions from `@cocso-ui/baseframe-sources` (installed via workspace link).
 
@@ -36,12 +36,12 @@ Node.js >= 22 (TypeScript, compiled to ESM via esbuild).
 ### 2-Layer Output Pattern
 
 ```
-Layer 1 — token.css      :root { --ds-color-white: #ffffff; }
-Layer 2 — tailwind4.css  @theme { --color-white: var(--ds-color-white); }
+Layer 1 — token.css      :root { --cocso-color-white: #ffffff; }
+Layer 2 — tailwind4.css  @theme { --color-white: var(--cocso-color-white); }
                          @utility z-* { z-index: --value(--z-index-*); }
 ```
 
-`packages/react/` components reference `--ds-*` directly (Layer 1). Tailwind utilities use the standard `--color-*` namespace (Layer 2).
+`packages/react/` components reference `--cocso-*` directly (Layer 1). Tailwind utilities use the standard `--color-*` namespace (Layer 2).
 
 ### Source Structure
 
@@ -67,15 +67,15 @@ ecosystem/baseframe/
 
 | Command | Options | Description |
 |---|---|---|
-| `baseframe css-vars [dir]` | `--prefix <p>` | Generate CSS variables (default prefix: `ds`) |
+| `baseframe css-vars [dir]` | `--prefix <p>` | Generate CSS variables (default prefix: `cocso`) |
 | `baseframe tailwindcss [dir]` | | Generate TailwindCSS v4 theme file |
 
 ### Output Files
 
 | File | Content |
 |---|---|
-| `token.css` | `:root { --ds-<token>: <value>; }` |
-| `tailwind4.css` | `@theme { --<token>: var(--ds-<token>); }` + `@utility z-*` |
+| `token.css` | `:root { --cocso-<token>: <value>; }` |
+| `tailwind4.css` | `@theme { --<token>: var(--cocso-<token>); }` + `@utility z-*` |
 
 ## Storage
 
