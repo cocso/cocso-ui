@@ -49,6 +49,23 @@
 - Use enum-like canonical identifiers in documents where values must remain stable.
 - Package names follow the pattern `@cocso-ui/<name>`.
 
+### PR Review Response Policy
+
+When asked to review comments on a GitHub PR:
+
+1. Evaluate each comment and decide whether to apply the feedback.
+2. Apply the change if it is clearly necessary (correctness, security, documented contract).
+3. Reply to each comment thread with the decision and reasoning:
+  - **Applied**: explain what was changed and why.
+  - **Rejected**: explain why the feedback does not apply or conflicts with intentional design.
+4. Resolve the comment thread after replying.
+
+**GitHub API notes:**
+- Reply: `gh api --method POST repos/{owner}/{repo}/pulls/{pr}/comments/{comment_id}/replies -f body="..."`
+- Get thread node IDs (`PRRT_...`): GraphQL `repository.pullRequest.reviewThreads` → `nodes { id isResolved comments(first:1) { nodes { databaseId } } }`
+- Resolve: GraphQL `mutation { resolveReviewThread(input: {threadId: "PRRT_..."}) { thread { isResolved } } }`
+- Always reply first, then resolve every thread.
+
 ### GitHub Issue Style Contract
 
 - Use issue titles in the format `<domain>: <description>`.
