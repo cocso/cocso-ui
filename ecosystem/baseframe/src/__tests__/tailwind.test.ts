@@ -28,7 +28,7 @@ describe("tailwind generateFromAst", () => {
   it("generates 2-layer @theme (--color-*: var(--cocso-color-*))", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "cocso" });
+    const result = generateFromAst(ast, { prefix: "cocso" });
     expect(result).toContain("@theme {");
     expect(result).toContain("--color-white: var(--cocso-color-white);");
     // Must NOT contain direct value
@@ -41,7 +41,7 @@ describe("tailwind generateFromAst", () => {
       makeToken("$spacing.4", "6px"),
     ];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "cocso" });
+    const result = generateFromAst(ast, { prefix: "cocso" });
     expect(result).toContain("--color-white:");
     expect(result).not.toContain("--spacing-4");
   });
@@ -49,7 +49,7 @@ describe("tailwind generateFromAst", () => {
   it("produces exactly 1 @utility (z-* only)", () => {
     const tokens = [makeToken("$z-index.base", "0")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "cocso" });
+    const result = generateFromAst(ast, { prefix: "cocso" });
     const utilityCount = (result.match(/@utility/g) ?? []).length;
     expect(utilityCount).toBe(1);
     expect(result).toContain("@utility z-*");
@@ -58,7 +58,7 @@ describe("tailwind generateFromAst", () => {
   it("uses dsPrefix option", () => {
     const tokens = [makeToken("$color.primary-500", "#256EF4")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { dsPrefix: "theme" });
+    const result = generateFromAst(ast, { prefix: "theme" });
     expect(result).toContain(
       "--color-primary-500: var(--theme-color-primary-500);"
     );

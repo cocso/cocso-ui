@@ -128,6 +128,9 @@ function validateTokenValues(
   const errors: ValidationError[] = [];
   const warnings: string[] = [];
   const valueResults = validateAllValues(tokens);
+  const tokenMap = new Map<string, TokenDecl>(
+    allTokens.map((t) => [t.token.name, t])
+  );
 
   for (const { tokenName, collection, mode, value, result } of valueResults) {
     if (!result.isValid) {
@@ -147,7 +150,7 @@ function validateTokenValues(
 
       for (const { collection: refCollection, token: refToken } of tokenRefs) {
         const refName = `$${refCollection}.${refToken}`;
-        const foundRef = allTokens.find((t) => t.token.name === refName);
+        const foundRef = tokenMap.get(refName);
 
         if (!foundRef) {
           errors.push({

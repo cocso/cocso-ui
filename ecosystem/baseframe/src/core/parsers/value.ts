@@ -1,6 +1,6 @@
 import type {
+  ColorValue,
   ParseResult,
-  RgbaColor,
   ShadowLayer,
   SizeValue,
   TokenRef,
@@ -318,7 +318,7 @@ function parseShadowLayer(value: string): ParseResult {
       isValid: true,
       value: {
         kind: "ShadowLayer",
-        color: color.value as RgbaColor,
+        color: color.value as ColorValue,
         offsetX: x.value as SizeValue | TokenRef,
         offsetY: y.value as SizeValue | TokenRef,
         blur: blur.value as SizeValue | TokenRef,

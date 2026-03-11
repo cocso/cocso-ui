@@ -1,6 +1,6 @@
-import { buildValidatedAst } from "../transforms";
+import { buildValidatedAst, createTokenResolver } from "../transforms";
 import type { Ast, Collections, Token, TokenDecl } from "../types";
-import { resolveTokenValue, toCssValue } from "./utils";
+import { resolveValueWithResolver, toCssValue } from "./utils";
 import { createVarName } from "./utils/naming";
 
 export interface CssVarsOptions {
@@ -16,7 +16,7 @@ export interface CssVarsOptions {
 function createDeclaration(
   token: TokenDecl,
   mode: string,
-  allTokens: TokenDecl[],
+  resolver: ReturnType<typeof createTokenResolver>,
   prefix?: string
 ): string {
   const value = token.values.find((v) => v.mode === mode);
@@ -26,12 +26,7 @@ function createDeclaration(
     );
   }
 
-  const resolvedValue = resolveTokenValue(
-    value.value,
-    allTokens,
-    createVarName,
-    prefix
-  );
+  const resolvedValue = resolveValueWithResolver(value.value, resolver);
   const varName = createVarName(token.token.name, prefix);
   return `${varName}: ${toCssValue(resolvedValue)};`;
 }
@@ -43,8 +38,11 @@ function createRule(
   allTokens: TokenDecl[],
   prefix?: string
 ): string {
+  const resolver = createTokenResolver(allTokens, mode, (name) =>
+    createVarName(name, prefix)
+  );
   const declarations = tokens
-    .map((token) => `  ${createDeclaration(token, mode, allTokens, prefix)}`)
+    .map((token) => `  ${createDeclaration(token, mode, resolver, prefix)}`)
     .join("\n");
   return `${selector} {\n${declarations}\n}`;
 }

@@ -4,7 +4,7 @@ import { createVarName } from "./utils/naming";
 
 export interface TailwindOptions {
   banner?: string;
-  dsPrefix?: string;
+  prefix?: string;
 }
 
 // Collections whose tokens are excluded from @theme (Tailwind handles spacing natively)
@@ -47,7 +47,7 @@ function createUtilities(): string[] {
 }
 
 export function generateFromAst(ast: Ast, options: TailwindOptions): string {
-  const { banner = "", dsPrefix = "cocso" } = options;
+  const { banner = "", prefix = "cocso" } = options;
   const { tokens, collections } = ast;
   const parts: string[] = [];
 
@@ -60,12 +60,10 @@ export function generateFromAst(ast: Ast, options: TailwindOptions): string {
       (token) => token.token.collection === collection.name
     );
 
-    for (const _mode of collection.modes) {
-      const theme = createTheme(collectionTokens, dsPrefix);
-      if (theme) {
-        parts.push(theme);
-        parts.push("");
-      }
+    const theme = createTheme(collectionTokens, prefix);
+    if (theme) {
+      parts.push(theme);
+      parts.push("");
     }
   }
 

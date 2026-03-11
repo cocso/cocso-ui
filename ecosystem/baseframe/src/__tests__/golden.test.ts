@@ -4,29 +4,12 @@ import fs from "fs-extra";
 import { describe, expect, it } from "vitest";
 import YAML from "yaml";
 import { type Collections, cssVars, type Token, tailwind } from "../core";
+import { findYamlFiles } from "../utils/fs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../../");
 const SOURCES_DIR = path.join(REPO_ROOT, "packages/baseframe");
 const SNAPSHOTS_DIR = path.join(__dirname, "snapshots");
-
-const YAML_FILE_REGEX = /\.ya?ml$/;
-
-function findYamlFiles(dir: string): string[] {
-  const files: string[] = [];
-  function scan(current: string) {
-    for (const item of fs.readdirSync(current)) {
-      const full = path.join(current, item);
-      if (fs.statSync(full).isDirectory()) {
-        scan(full);
-      } else if (YAML_FILE_REGEX.test(item)) {
-        files.push(full);
-      }
-    }
-  }
-  scan(dir);
-  return files;
-}
 
 function loadTokens(): { tokens: Token[]; collections: Collections } {
   const tokens: Token[] = [];
