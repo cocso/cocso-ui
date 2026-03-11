@@ -126,7 +126,7 @@ jobs:
           }).filter(Boolean);
 
           const body = [
-            '## 📊 Test Coverage',
+            '## Test Coverage',
             '',
             '| Package | Statements | Branches | Functions | Lines |',
             '|---------|:----------:|:--------:|:---------:|:-----:|',
