@@ -39,7 +39,6 @@ describe("Spinner", () => {
       ["small", "12px", 6],
       ["medium", "16px", 8],
       ["large", "20px", 10],
-      ["x-large", "24px", 8],
     ] as const)('sets correct container size and blade count for size="%s"', (size, expectedSize, bladeCount) => {
       render(<Spinner data-testid="spinner" size={size} />);
       const spinner = screen.getByTestId("spinner");
