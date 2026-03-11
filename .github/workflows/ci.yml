@@ -60,11 +60,7 @@ jobs:
         run: |
           node << 'EOF'
           const fs = require('fs');
-
-          function load(path) {
-            try { return JSON.parse(fs.readFileSync(path, 'utf8')).total; }
-            catch { return null; }
-          }
+          const cwd = process.cwd();
 
           function badge(pct) {
             if (pct >= 90) return '🟢';
@@ -72,29 +68,77 @@ jobs:
             return '🔴';
           }
 
+          function fmt(v) {
+            return `${badge(v.pct)} ${v.pct}%`;
+          }
+
+          function load(p) {
+            try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
+            catch { return null; }
+          }
+
+          function fileDetails(coverage, pkgDir) {
+            const prefix = `${cwd}/${pkgDir}/`;
+            const files = Object.entries(coverage)
+              .filter(([k]) => k !== 'total' && k.startsWith(prefix))
+              .map(([k, s]) => ({ rel: k.slice(prefix.length), s }))
+              .filter(({ rel }) => !rel.endsWith('index.ts') && !rel.includes('.stories.') && !rel.includes('/test/') && !rel.endsWith('.d.ts'))
+              .sort((a, b) => a.s.lines.pct - b.s.lines.pct);
+
+            if (files.length === 0) return '';
+
+            const rows = files.map(({ rel, s }) =>
+              `| \`${rel}\` | ${fmt(s.statements)} | ${fmt(s.branches)} | ${fmt(s.functions)} | ${fmt(s.lines)} |`
+            );
+
+            return [
+              '| File | Stmts | Branch | Funcs | Lines |',
+              '|------|:-----:|:------:|:-----:|:-----:|',
+              ...rows,
+            ].join('\n');
+          }
+
           const pkgs = [
-            { name: '@cocso-ui/react',      path: 'packages/react/coverage/coverage-summary.json' },
-            { name: '@cocso-ui/baseframe',  path: 'ecosystem/baseframe/coverage/coverage-summary.json' },
+            { name: '@cocso-ui/react',     summary: 'packages/react/coverage/coverage-summary.json',     dir: 'packages/react' },
+            { name: '@cocso-ui/baseframe', summary: 'ecosystem/baseframe/coverage/coverage-summary.json', dir: 'ecosystem/baseframe' },
           ];
 
-          const rows = pkgs.map(({ name, path }) => {
-            const s = load(path);
-            if (!s) return `| \`${name}\` | — | — | — | — |`;
-            const f = v => `${badge(v.pct)} ${v.pct}%`;
-            return `| \`${name}\` | ${f(s.statements)} | ${f(s.branches)} | ${f(s.functions)} | ${f(s.lines)} |`;
+          const summaryRows = pkgs.map(({ name, summary }) => {
+            const c = load(summary);
+            if (!c) return `| \`${name}\` | — | — | — | — |`;
+            const s = c.total;
+            return `| \`${name}\` | ${fmt(s.statements)} | ${fmt(s.branches)} | ${fmt(s.functions)} | ${fmt(s.lines)} |`;
           });
+
+          const detailBlocks = pkgs.map(({ name, summary, dir }) => {
+            const c = load(summary);
+            if (!c) return '';
+            const table = fileDetails(c, dir);
+            if (!table) return '';
+            return [
+              `<details>`,
+              `<summary><b>${name}</b> — File Coverage</summary>`,
+              '',
+              table,
+              '',
+              '</details>',
+            ].join('\n');
+          }).filter(Boolean);
 
           const body = [
             '## 📊 Test Coverage',
             '',
             '| Package | Statements | Branches | Functions | Lines |',
             '|---------|:----------:|:--------:|:---------:|:-----:|',
-            ...rows,
+            ...summaryRows,
+            '',
+            ...detailBlocks,
             '',
             `> Updated: ${new Date().toISOString().replace('T', ' ').slice(0, 16)} UTC`,
           ].join('\n');
 
           fs.writeFileSync('coverage-report.md', body);
+          process.stdout.write(body + '\n');
           EOF
 
       - name: Post Coverage Comment
