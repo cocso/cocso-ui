@@ -4,15 +4,15 @@ import { cn } from "../cn";
 import { colors } from "../token";
 import styles from "./spinner.module.css";
 
-export type SpinnerSize = "x-large" | "large" | "medium" | "small";
+export type SpinnerSize = "large" | "medium" | "small";
 
-export type SpinnerColor = "primary" | "neutral" | "white";
+export type SpinnerVariant = "primary" | "secondary" | "success" | "error" | "warning" | "white";
 
 export interface SpinnerProps
-  extends Omit<ComponentProps<"output">, "size" | "color"> {
-  color?: SpinnerColor;
+  extends Omit<ComponentProps<"output">, "size"> {
   label?: string;
   size?: SpinnerSize;
+  variant?: SpinnerVariant;
 }
 
 type SizeConfig = {
@@ -22,16 +22,18 @@ type SizeConfig = {
 };
 
 const sizeConfig: Record<SpinnerSize, SizeConfig> = {
-  small: { container: 16, bladeCount: 8, blade: { width: 1.5, height: 4.5, radius: 1 } },
-  medium: { container: 24, bladeCount: 10, blade: { width: 2, height: 6, radius: 1 } },
-  large: { container: 32, bladeCount: 12, blade: { width: 2.5, height: 8, radius: 2 } },
-  "x-large": { container: 40, bladeCount: 12, blade: { width: 3, height: 10, radius: 2 } },
+  small: { container: 12, bladeCount: 8, blade: { width: 1.5, height: 4, radius: 0.75 } },
+  medium: { container: 16, bladeCount: 10, blade: { width: 2, height: 5, radius: 1 } },
+  large: { container: 20, bladeCount: 12, blade: { width: 2, height: 6.5, radius: 1 } },
 };
 
-const getBladeColor = (color: SpinnerColor) =>
-  match(color)
+const getVariantColor = (variant: SpinnerVariant) =>
+  match(variant)
     .with("primary", () => colors.primary500)
-    .with("neutral", () => colors.neutral600)
+    .with("secondary", () => colors.neutral500)
+    .with("success", () => colors.success500)
+    .with("error", () => colors.danger500)
+    .with("warning", () => colors.warning500)
     .with("white", () => colors.white)
     .exhaustive();
 
@@ -40,7 +42,7 @@ export function Spinner({
   className,
   style: _style,
   size = "medium",
-  color = "primary",
+  variant = "primary",
   label = "Loading",
   ...props
 }: SpinnerProps) {
@@ -57,7 +59,7 @@ export function Spinner({
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: getBladeColor(color),
+        color: getVariantColor(variant),
         ..._style,
       }}
       {...props}

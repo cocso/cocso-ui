@@ -74,7 +74,7 @@ export function Button({
     <>
       {loading && (
         <span className={styles.spinnerOverlay}>
-          <Spinner color="white" size="small" />
+          <Spinner variant="white" size="medium" />
         </span>
       )}
       <span className={cn(styles.buttonInner, loading && styles.invisible)}>
