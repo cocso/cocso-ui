@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Pagination } from "../pagination";
+import { Pagination } from "./pagination";
 
 describe("Pagination", () => {
   describe("rendering", () => {

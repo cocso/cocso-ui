@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { MonthPicker } from "../month-picker";
+import { MonthPicker } from "./month-picker";
 
 const trigger = <button type="button">Select month</button>;
 

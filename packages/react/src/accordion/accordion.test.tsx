@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Accordion } from "../accordion";
+import { Accordion } from "./accordion";
 
 const SECTION_1_REGEX = /Section 1/i;
 const SECTION_2_REGEX = /Section 2/i;

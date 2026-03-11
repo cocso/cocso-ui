@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { OneTimePasswordField } from "../one-time-password-field";
+import { OneTimePasswordField } from './one-time-password-field';
 
 describe("OneTimePasswordField", () => {
   it("renders a hidden input", () => {
