@@ -32,6 +32,26 @@ export const Default: Story = {
   },
 };
 
+export const Sizes: Story = {
+  render: () => {
+    const [value, setValue] = useState('option-1');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        {(['small', 'medium', 'large'] as const).map((size) => (
+          <div key={size} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <RadioGroup onValueChange={v => setValue(v as string)} value={value}>
+              <RadioGroup.Item id={`size-${size}`} size={size} value="option-1">
+                <RadioGroup.Indicator />
+              </RadioGroup.Item>
+            </RadioGroup>
+            <label htmlFor={`size-${size}`} style={{ fontSize: 14 }}>{size}</label>
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
 export const Disabled: Story = {
   render: () => (
     <RadioGroup disabled value="option-1">

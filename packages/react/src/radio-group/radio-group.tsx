@@ -1,8 +1,16 @@
 import { Radio as RadioBase } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupBase } from "@base-ui/react/radio-group";
-import type { ComponentProps } from "react";
+import type { CSSProperties, ComponentProps } from "react";
 import { cn } from "../cn";
 import styles from "./radio-group.module.css";
+
+type RadioSize = "small" | "medium" | "large";
+
+const sizeVars: Record<RadioSize, CSSProperties> = {
+  small: { "--radio-size": "12px", "--radio-dot-size": "5px" } as CSSProperties,
+  medium: { "--radio-size": "16px", "--radio-dot-size": "7px" } as CSSProperties,
+  large: { "--radio-size": "20px", "--radio-dot-size": "9px" } as CSSProperties,
+};
 
 function RadioGroupRoot({
   className,
@@ -13,9 +21,17 @@ function RadioGroupRoot({
 
 function RadioGroupItem({
   className,
+  size = "medium",
+  style,
   ...props
-}: ComponentProps<typeof RadioBase.Root>) {
-  return <RadioBase.Root className={cn(styles.item, className)} {...props} />;
+}: ComponentProps<typeof RadioBase.Root> & { size?: RadioSize }) {
+  return (
+    <RadioBase.Root
+      className={cn(styles.item, className)}
+      style={{ ...sizeVars[size], ...style }}
+      {...props}
+    />
+  );
 }
 
 function RadioGroupIndicator({
