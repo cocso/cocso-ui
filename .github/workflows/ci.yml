@@ -35,6 +35,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -53,27 +55,19 @@ jobs:
       - name: Test with Coverage
         run: pnpm run test:coverage
 
-      - name: Coverage Summary
+      - name: Coverage Report — @cocso-ui/react
         if: always()
-        run: |
-          echo "## Test Coverage" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          for json in $(find . -path "*/coverage/coverage-summary.json" -not -path "*/node_modules/*" | sort); do
-            pkg=$(echo "$json" | sed 's|\./||' | sed 's|/coverage/coverage-summary.json||')
-            echo "### \`$pkg\`" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            node -e "
-              const s = require('./$pkg/coverage/coverage-summary.json').total;
-              const fmt = (v) => v.pct + '% (' + v.covered + '/' + v.total + ')';
-              console.log('| Metric | Coverage |');
-              console.log('|--------|----------|');
-              console.log('| Statements | ' + fmt(s.statements) + ' |');
-              console.log('| Branches | ' + fmt(s.branches) + ' |');
-              console.log('| Functions | ' + fmt(s.functions) + ' |');
-              console.log('| Lines | ' + fmt(s.lines) + ' |');
-            " >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-          done
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          name: '@cocso-ui/react'
+          json-summary-path: packages/react/coverage/coverage-summary.json
+
+      - name: Coverage Report — @cocso-ui/baseframe
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          name: '@cocso-ui/baseframe'
+          json-summary-path: ecosystem/baseframe/coverage/coverage-summary.json
 
   build:
     name: Build
