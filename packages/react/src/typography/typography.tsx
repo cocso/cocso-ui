@@ -64,56 +64,8 @@ export function Typography({
   lineHeight = "normal",
   ...props
 }: TypographyProps) {
-  const defaultTagName = match(type)
-    .with("display", () => "h1" as const)
-    .with("heading", () => "h2" as const)
-    .otherwise(() => "p" as const);
-
-  const fontSize = match(type)
-    .with("custom", () => (props as CustomTypographyProps).size ?? 16)
-    .with("body", () =>
-      match((props as BodyTypographyProps).size ?? "medium")
-        .with("large", () => 18 as FontSize)
-        .with("medium", () => 16 as FontSize)
-        .with("small", () => 14 as FontSize)
-        .with("x-small", () => 12 as FontSize)
-        .exhaustive()
-    )
-    .with("display", () =>
-      match((props as DisplayTypographyProps).size ?? "medium")
-        .with("large", () => ({
-          base: 44 as FontSize,
-          tablet: 60 as FontSize,
-        }))
-        .with("medium", () => ({
-          base: 32 as FontSize,
-          tablet: 44 as FontSize,
-        }))
-        .with("small", () => ({
-          base: 28 as FontSize,
-          tablet: 36 as FontSize,
-        }))
-        .exhaustive()
-    )
-    .with("heading", () =>
-      match((props as HeadingTypographyProps).size ?? "medium")
-        .with("x-large", () => ({
-          base: 28 as FontSize,
-          tablet: 36 as FontSize,
-        }))
-        .with("large", () => ({
-          base: 24 as FontSize,
-          tablet: 32 as FontSize,
-        }))
-        .with("medium", () => ({
-          base: 20 as FontSize,
-          tablet: 24 as FontSize,
-        }))
-        .with("small", () => 18 as FontSize)
-        .with("x-small", () => 16 as FontSize)
-        .exhaustive()
-    )
-    .otherwise(() => 16);
+  const defaultTagName = getDefaultTagName(type);
+  const fontSize = getFontSize(type, props as TypographyProps);
 
   let base: FontSize;
   let tablet: FontSize | undefined;
@@ -150,3 +102,41 @@ export function Typography({
     defaultTagName,
   });
 }
+
+const getDefaultTagName = (type: TypographyProps["type"]) =>
+  match(type)
+    .with("display", () => "h1" as const)
+    .with("heading", () => "h2" as const)
+    .otherwise(() => "p" as const);
+
+const getBodyFontSize = (size: BodySize) =>
+  match(size)
+    .with("large", () => 18 as FontSize)
+    .with("medium", () => 16 as FontSize)
+    .with("small", () => 14 as FontSize)
+    .with("x-small", () => 12 as FontSize)
+    .exhaustive();
+
+const getDisplayFontSize = (size: DisplaySize) =>
+  match(size)
+    .with("large", () => ({ base: 44 as FontSize, tablet: 60 as FontSize }))
+    .with("medium", () => ({ base: 32 as FontSize, tablet: 44 as FontSize }))
+    .with("small", () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
+    .exhaustive();
+
+const getHeadingFontSize = (size: HeadingSize) =>
+  match(size)
+    .with("x-large", () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
+    .with("large", () => ({ base: 24 as FontSize, tablet: 32 as FontSize }))
+    .with("medium", () => ({ base: 20 as FontSize, tablet: 24 as FontSize }))
+    .with("small", () => 18 as FontSize)
+    .with("x-small", () => 16 as FontSize)
+    .exhaustive();
+
+const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
+  match(type)
+    .with("custom", () => (props as CustomTypographyProps).size ?? 16)
+    .with("body", () => getBodyFontSize((props as BodyTypographyProps).size ?? "medium"))
+    .with("display", () => getDisplayFontSize((props as DisplayTypographyProps).size ?? "medium"))
+    .with("heading", () => getHeadingFontSize((props as HeadingTypographyProps).size ?? "medium"))
+    .otherwise(() => 16);

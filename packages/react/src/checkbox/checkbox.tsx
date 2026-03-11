@@ -47,13 +47,6 @@ export function Checkbox({
     }
   };
 
-  const getCheckedState = (): { checked: boolean; indeterminate: boolean } =>
-    match(status)
-      .with("on", () => ({ checked: true, indeterminate: false }))
-      .with("intermediate", () => ({ checked: false, indeterminate: true }))
-      .with("off", () => ({ checked: false, indeterminate: false }))
-      .exhaustive();
-
   const style = {
     ..._style,
     "--cocso-checkbox-size": getSize(size),
@@ -62,7 +55,7 @@ export function Checkbox({
     "--cocso-checkbox-bg-color": getBackgroundColor(status),
   } as CSSProperties;
 
-  const checkedState = getCheckedState();
+  const checkedState = getCheckedState(status);
 
   return (
     <div className={cn(styles.wrapper, className)} style={style}>
@@ -104,6 +97,13 @@ export function Checkbox({
     </div>
   );
 }
+
+const getCheckedState = (status: CheckboxStatus): { checked: boolean; indeterminate: boolean } =>
+  match(status)
+    .with("on", () => ({ checked: true, indeterminate: false }))
+    .with("intermediate", () => ({ checked: false, indeterminate: true }))
+    .with("off", () => ({ checked: false, indeterminate: false }))
+    .exhaustive();
 
 const getSize = (size: CheckboxSize) =>
   match(size)
