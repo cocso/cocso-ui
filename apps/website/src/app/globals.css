@@ -25,6 +25,7 @@
   body {
     display: flex;
     color: var(--color-text-primary);
+    touch-action: manipulation;
     flex-direction: column;
     font-optical-sizing: auto;
     font-variant-ligatures: common-ligatures contextual;

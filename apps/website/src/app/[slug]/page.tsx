@@ -1,7 +1,7 @@
 import { colors, Typography } from "@cocso-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Section } from "~/components/ui";
+import { Section } from "~/components/ui/section";
 import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 

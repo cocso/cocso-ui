@@ -6,8 +6,8 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
 import type { PropsWithChildren } from "react";
-import { Layout } from "~/components/layout";
-import { SearchDialog } from "~/components/ui";
+import { RootLayout as Layout } from "~/components/layout/root";
+import { DefaultSearchDialog as SearchDialog } from "~/components/ui/search";
 
 const GeistMono = Geist_Mono({
   subsets: ["latin"],
@@ -31,6 +31,9 @@ export const viewport: Viewport = {
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html dir="ltr" lang="ko" suppressHydrationWarning>
+      <head>
+        <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
+      </head>
       <body className={GeistMono.variable}>
         <RootProvider search={{ SearchDialog }}>
           <Layout>{children}</Layout>

@@ -18,7 +18,7 @@ export const ComponentPreview = ({ name }: Props) => {
 
   return (
     <Suspense fallback={null}>
-      <div className="center w-full">
+      <div aria-live="polite" className="center w-full">
         <Component />
       </div>
     </Suspense>

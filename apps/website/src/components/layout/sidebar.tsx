@@ -33,7 +33,7 @@ export const Sidebar = (props: SidebarProps) => {
                     <li className="w-full" key={item.url}>
                       <Typography
                         className={twMerge(
-                          "center-y h-9 rounded-lg px-4 opacity-50 transition-all duration-150",
+                          "center-y h-9 rounded-lg px-4 opacity-50 transition-opacity duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400",
                           pathname !== item.url && "hover:opacity-70",
                           pathname === item.url && "bg-neutral-100 opacity-100"
                         )}

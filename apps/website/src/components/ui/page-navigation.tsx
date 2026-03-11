@@ -27,39 +27,41 @@ export const PageNavigation = () => {
 
   return (
     <div className="mt-4 flex justify-between gap-4">
-      {prevPage && (
+      {prevPage ? (
         <Link
           className={twMerge(
             "corner-squircle flex flex-1 flex-col gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors",
-            "hover:bg-neutral-50 active:bg-neutral-100"
+            "hover:bg-neutral-50 active:bg-neutral-100",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}
           href={prevPage.url}
         >
           <span className="flex items-center gap-0.5 font-medium text-[13px] text-neutral-500 leading-none">
-            <ArrowIOSBackwardIcon size={11} />
+            <ArrowIOSBackwardIcon aria-hidden="true" size={11} />
             Previous
           </span>
           <span className="font-medium text-neutral-950 text-sm">
             {prevPage.name}
           </span>
         </Link>
-      )}
-      {nextPage && (
+      ) : null}
+      {nextPage ? (
         <Link
           className={twMerge(
             "corner-squircle flex flex-1 flex-col items-end gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 transition-colors",
-            "hover:bg-neutral-50 active:bg-neutral-100"
+            "hover:bg-neutral-50 active:bg-neutral-100",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}
           href={nextPage.url}
         >
           <span className="flex items-center gap-0.5 font-medium text-[13px] text-neutral-500 leading-none">
-            Next <ArrowIOSForwardIcon size={11} />
+            Next <ArrowIOSForwardIcon aria-hidden="true" size={11} />
           </span>
           <span className="font-medium text-neutral-950 text-sm">
             {nextPage.name}
           </span>
         </Link>
-      )}
+      ) : null}
     </div>
   );
 };

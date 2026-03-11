@@ -8,7 +8,9 @@ import {
 } from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
-import { ComponentExample, PageNavigation, Section } from "~/components/ui";
+import { ComponentExample } from "~/components/ui/component-example";
+import { PageNavigation } from "~/components/ui/page-navigation";
+import { Section } from "~/components/ui/section";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
