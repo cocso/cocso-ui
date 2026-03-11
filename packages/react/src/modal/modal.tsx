@@ -29,7 +29,7 @@ export interface ModalCloseProps
 }
 
 const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
-  ({ className, render: renderProp, ...props }, ref) => {
+  ({ className, render: renderProp, children, ...props }, ref) => {
     if (renderProp) {
       return (
         <DialogBase.Close
@@ -46,7 +46,7 @@ const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
         ref={ref}
         {...props}
       >
-        <CloseIcon size={24} />
+        {children ?? <CloseIcon size={24} />}
       </DialogBase.Close>
     );
   }
