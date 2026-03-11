@@ -1,54 +1,49 @@
-import { clsx as cx } from 'clsx';
-import { type ComponentPropsWithoutRef, type ReactElement, cloneElement, forwardRef, isValidElement } from 'react';
-import type { FontWeight, LineHeight } from '../token';
-import { Typography } from '../typography';
-import styles from './link.module.css';
+import { clsx as cx } from "clsx";
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+import type { FontWeight, LineHeight } from "../token";
+import { Typography } from "../typography";
+import styles from "./link.module.css";
 
-export type LinkSize = 'lg' | 'md' | 'sm' | 'xs';
+export type LinkSize = "large" | "medium" | "small" | "x-small";
 
-export interface LinkProps extends ComponentPropsWithoutRef<'a'> {
+export interface LinkProps extends ComponentPropsWithoutRef<"a"> {
   indicator?: boolean;
   lineHeight?: LineHeight;
-  render?: ReactElement;
+  render?: ComponentPropsWithoutRef<typeof Typography>["render"];
   size?: LinkSize;
   weight?: FontWeight;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ render: renderProp, className, size, weight, lineHeight, indicator = true, ...props }, ref) => {
-    const mergedClassName = cx(styles.link, indicator && styles.indicator, className);
-
-    if (renderProp && isValidElement(renderProp)) {
-      return (
-        <Typography
-          render={
-            cloneElement(renderProp, {
-              ref,
-              className: cx(mergedClassName, (renderProp.props as Record<string, unknown>).className as string | undefined),
-              ...props,
-            })
-          }
-          lineHeight={lineHeight}
-          size={size}
-          type="body"
-          weight={weight}
-        />
-      );
-    }
+  (
+    {
+      render: renderProp,
+      className,
+      size,
+      weight,
+      lineHeight,
+      indicator = true,
+      ...props
+    },
+    ref
+  ) => {
+    const mergedClassName = cx(
+      styles.link,
+      indicator && styles.indicator,
+      className
+    );
 
     return (
       <Typography
-        render={
-          <a
-            className={mergedClassName}
-            ref={ref}
-            {...props}
-          />
-        }
+        className={mergedClassName}
         lineHeight={lineHeight}
+        ref={ref}
+        render={renderProp ?? ((renderProps) => <a {...renderProps} />)}
         size={size}
         type="body"
         weight={weight}
+        {...(props as ComponentPropsWithoutRef<"p">)}
       />
     );
   }
