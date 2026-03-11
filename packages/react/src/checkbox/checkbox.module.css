@@ -20,7 +20,7 @@
     cursor: pointer;
     background-color: var(--cocso-checkbox-bg-color);
     border: 1px solid var(--cocso-checkbox-border-color);
-    border-radius: var(--cocso-radius-2);
+    border-radius: var(--cocso-checkbox-radius);
     opacity: 1;
     transition:
       color 0.15s ease-in-out,

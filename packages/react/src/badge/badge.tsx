@@ -8,7 +8,7 @@ import styles from "./badge.module.css";
 
 type BadgeSize = "small" | "medium" | "large";
 
-type BadgeVariant = "primary" | "secondary" | "success" | "error" | "warning";
+type BadgeVariant = "primary" | "secondary" | "success" | "error" | "warning" | "outline";
 
 type BadgeShape = "square" | "circle" | "rounded";
 
@@ -32,8 +32,9 @@ export function Badge({
     ..._style,
     "--cocso-badge-padding": getPadding(size),
     "--cocso-badge-padding-y": getPaddingY(size),
-    "--cocso-badge-border-radius": getBorderRadius(shape),
+    "--cocso-badge-border-radius": getBorderRadius(shape, size),
     "--cocso-badge-bg-color": getBackgroundColor(variant),
+    "--cocso-badge-border": getBorder(variant),
   } as CSSProperties;
 
   const fontColor = getFontColor(variant);
@@ -64,9 +65,11 @@ const getPaddingY = (size: BadgeSize) =>
     .with("large", () => "5px")
     .exhaustive();
 
-const getBorderRadius = (shape: BadgeShape) =>
+const getBorderRadius = (shape: BadgeShape, size: BadgeSize) =>
   match(shape)
-    .with("square", () => "var(--cocso-radius-3)")
+    .with("square", () =>
+      size === "small" ? "var(--cocso-radius-3)" : "var(--cocso-radius-4)"
+    )
     .with("circle", () => "100%")
     .with("rounded", () => "var(--cocso-radius-full)")
     .exhaustive();
@@ -92,6 +95,7 @@ const getFontColor = (variant: BadgeVariant) =>
     .with("primary", () => colors.primary600)
     .with("success", () => colors.success600)
     .with("warning", () => colors.warning600)
+    .with("outline", () => colors.neutral950)
     .exhaustive();
 
 const getBackgroundColor = (variant: BadgeVariant) =>
@@ -101,4 +105,10 @@ const getBackgroundColor = (variant: BadgeVariant) =>
     .with("primary", () => colors.primary50)
     .with("success", () => colors.success50)
     .with("warning", () => colors.warning50)
+    .with("outline", () => colors.transparent)
     .exhaustive();
+
+const getBorder = (variant: BadgeVariant) =>
+  match(variant)
+    .with("outline", () => `1px solid ${colors.neutral100}`)
+    .otherwise(() => "none");

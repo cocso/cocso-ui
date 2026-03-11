@@ -13,7 +13,7 @@ export type ButtonSize = "large" | "medium" | "small" | "x-small";
 export type ButtonVariant =
   | "primary"
   | "secondary"
-  | "tertiary"
+  | "ghost"
   | "success"
   | "error"
   | "warning";
@@ -147,7 +147,7 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) =>
 const getColor = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", "success", "error", () => colors.white)
-    .with("secondary", "tertiary", "warning", () => colors.neutral950)
+    .with("secondary", "ghost", "warning", () => colors.neutral950)
     .exhaustive();
 
 const getBorder = (variant: ButtonVariant) =>
@@ -159,7 +159,7 @@ const getBackgroundColor = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary500)
     .with("secondary", () => colors.transparent)
-    .with("tertiary", () => colors.white)
+    .with("ghost", () => colors.white)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
     .with("warning", () => colors.warning300)
@@ -168,7 +168,7 @@ const getBackgroundColor = (variant: ButtonVariant) =>
 const getBackgroundColorHover = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary600)
-    .with("secondary", "tertiary", () => colors.neutral50)
+    .with("secondary", "ghost", () => colors.neutral50)
     .with("success", () => colors.success600)
     .with("error", () => colors.danger600)
     .with("warning", () => colors.warning400)
@@ -177,7 +177,7 @@ const getBackgroundColorHover = (variant: ButtonVariant) =>
 const getBackgroundColorActive = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary700)
-    .with("secondary", "tertiary", () => colors.neutral100)
+    .with("secondary", "ghost", () => colors.neutral100)
     .with("success", () => colors.success700)
     .with("error", () => colors.danger700)
     .with("warning", () => colors.warning500)

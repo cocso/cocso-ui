@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'success', 'error', 'warning'] },
     size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
     loading: { control: 'boolean' },
@@ -31,7 +31,7 @@ export const Variants: Story = {
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
-      <Button variant="tertiary">Tertiary</Button>
+      <Button variant="ghost">Ghost</Button>
       <Button variant="success">Success</Button>
       <Button variant="error">Error</Button>
       <Button variant="warning">Warning</Button>
@@ -65,7 +65,7 @@ export const Loading: Story = {
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
       <Button loading variant="primary">Primary</Button>
       <Button loading variant="secondary">Secondary</Button>
-      <Button loading variant="tertiary">Tertiary</Button>
+      <Button loading variant="ghost">Ghost</Button>
     </div>
   ),
 };
@@ -75,7 +75,7 @@ export const Disabled: Story = {
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
       <Button disabled variant="primary">Primary</Button>
       <Button disabled variant="secondary">Secondary</Button>
-      <Button disabled variant="tertiary">Tertiary</Button>
+      <Button disabled variant="ghost">Ghost</Button>
       <Button disabled variant="error">Error</Button>
     </div>
   ),

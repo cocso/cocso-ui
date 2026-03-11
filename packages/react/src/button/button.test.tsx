@@ -127,7 +127,7 @@ describe("Button variant CSS variables", () => {
   it.each([
     ["primary", colors.primary500],
     ["secondary", colors.transparent],
-    ["tertiary", colors.white],
+    ["ghost", colors.white],
     ["success", colors.success500],
     ["error", colors.danger500],
     ["warning", colors.warning300],
@@ -143,7 +143,7 @@ describe("Button variant CSS variables", () => {
     ["success", colors.white],
     ["error", colors.white],
     ["secondary", colors.neutral950],
-    ["tertiary", colors.neutral950],
+    ["ghost", colors.neutral950],
     ["warning", colors.neutral950],
   ] as const)('sets --cocso-button-font-color for variant="%s"', (variant, expectedColor) => {
     render(<Button variant={variant}>Button</Button>);

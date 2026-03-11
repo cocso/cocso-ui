@@ -3,6 +3,7 @@
     --cocso-badge-padding: inherit;
     --cocso-badge-border-radius: inherit;
     --cocso-badge-bg-color: inherit;
+    --cocso-badge-border: none;
     display: inline-flex;
     padding: var(--cocso-badge-padding);
     -moz-user-select: none;
@@ -10,6 +11,7 @@
     -webkit-user-select: none;
     user-select: none;
     background-color: var(--cocso-badge-bg-color);
+    border: var(--cocso-badge-border);
     border-radius: var(--cocso-badge-border-radius);
   }
 

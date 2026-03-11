@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'success', 'error', 'warning'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'success', 'error', 'warning', 'outline'] },
     size: { control: 'select', options: ['small', 'medium', 'large'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
   },
@@ -32,6 +32,7 @@ export const Variants: Story = {
       <Badge variant="success">Success</Badge>
       <Badge variant="error">Error</Badge>
       <Badge variant="warning">Warning</Badge>
+      <Badge variant="outline">Outline</Badge>
     </div>
   ),
 };
