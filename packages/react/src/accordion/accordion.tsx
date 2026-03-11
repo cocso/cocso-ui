@@ -1,6 +1,6 @@
 import { Accordion as AccordionBase } from "@base-ui/react/accordion";
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import styles from "./accordion.module.css";
 
@@ -10,7 +10,7 @@ function AccordionItem({
 }: ComponentProps<typeof AccordionBase.Item>) {
   return (
     <AccordionBase.Item
-      className={cx(styles.item, className)}
+      className={cn(styles.item, className)}
       {...props}
     />
   );
@@ -29,7 +29,7 @@ function AccordionTrigger({
 }: TriggerProps) {
   return (
     <AccordionBase.Trigger
-      className={cx(styles.trigger, className)}
+      className={cn(styles.trigger, className)}
       {...props}
     >
       {children}
@@ -44,7 +44,7 @@ function AccordionPanel({
 }: ComponentProps<typeof AccordionBase.Panel>) {
   return (
     <AccordionBase.Panel
-      className={cx(styles.content, className)}
+      className={cn(styles.content, className)}
       {...props}
     />
   );

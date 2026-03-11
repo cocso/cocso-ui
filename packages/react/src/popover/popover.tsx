@@ -1,5 +1,5 @@
 import { Popover as PopoverBase } from "@base-ui/react/popover";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import styles from "./popover.module.css";
 
@@ -11,7 +11,7 @@ function PopoverContent({
     <PopoverBase.Portal>
       <PopoverBase.Positioner>
         <PopoverBase.Popup
-          className={cx(styles.content, className)}
+          className={cn(styles.content, className)}
           {...props}
         />
       </PopoverBase.Positioner>

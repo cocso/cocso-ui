@@ -1,4 +1,5 @@
 export * from "./accordion";
+export { cn } from "./cn";
 export * from "./badge";
 export * from "./button";
 export * from "./checkbox";

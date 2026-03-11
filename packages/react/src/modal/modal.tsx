@@ -1,6 +1,6 @@
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { CloseIcon } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, ReactElement } from "react";
 import { colors } from "../token";
 import { Typography } from "../typography";
@@ -15,7 +15,7 @@ function ModalContent({
     <DialogBase.Portal>
       <DialogBase.Backdrop className={styles.overlay} />
       <DialogBase.Popup
-        className={cx(styles.content, className)}
+        className={cn(styles.content, className)}
         {...props}
       >
         {children}
@@ -46,7 +46,7 @@ function ModalClose({
   }
   return (
     <DialogBase.Close
-      className={cx(styles.close, className)}
+      className={cn(styles.close, className)}
       {...props}
     >
       {children ?? <CloseIcon size={24} />}
@@ -61,7 +61,7 @@ function ModalTitle({
 }: ComponentProps<typeof DialogBase.Title>) {
   return (
     <DialogBase.Title
-      className={cx(styles.title, className)}
+      className={cn(styles.title, className)}
       render={<Typography size={20} weight="bold" />}
       {...props}
     >
@@ -77,7 +77,7 @@ function ModalDescription({
 }: ComponentProps<typeof DialogBase.Description>) {
   return (
     <DialogBase.Description
-      className={cx(styles.description, className)}
+      className={cn(styles.description, className)}
       render={
         <Typography color={colors.textSecondary} size={14} weight="medium" />
       }

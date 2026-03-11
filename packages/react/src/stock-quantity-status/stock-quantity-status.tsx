@@ -1,4 +1,4 @@
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import { colors, spacing } from "../token";
@@ -116,7 +116,7 @@ export function StockQuantityStatus({
 
   return (
     <div
-      className={cx(styles.stock, className)}
+      className={cn(styles.stock, className)}
       ref={ref}
       style={style}
       {...props}

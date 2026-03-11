@@ -3,7 +3,7 @@ import {
   ArrowIOSForwardIcon,
   MoreHorizIcon,
 } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import styles from "./pagination.module.css";
 
@@ -39,7 +39,7 @@ export function Pagination({
   );
 
   return (
-    <div className={cx(styles.pagination, className)} ref={ref} {...props}>
+    <div className={cn(styles.pagination, className)} ref={ref} {...props}>
       {totalPages > 1 && (
         <button
           className={styles.arrow}

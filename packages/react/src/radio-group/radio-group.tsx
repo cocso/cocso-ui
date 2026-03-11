@@ -1,6 +1,6 @@
 import { Radio as RadioBase } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupBase } from "@base-ui/react/radio-group";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import styles from "./radio-group.module.css";
 
@@ -9,7 +9,7 @@ function RadioGroupRoot({
   ...props
 }: ComponentProps<typeof RadioGroupBase>) {
   return (
-    <RadioGroupBase className={cx(styles.root, className)} {...props} />
+    <RadioGroupBase className={cn(styles.root, className)} {...props} />
   );
 }
 
@@ -18,7 +18,7 @@ function RadioGroupItem({
   ...props
 }: ComponentProps<typeof RadioBase.Root>) {
   return (
-    <RadioBase.Root className={cx(styles.item, className)} {...props} />
+    <RadioBase.Root className={cn(styles.item, className)} {...props} />
   );
 }
 
@@ -28,7 +28,7 @@ function RadioGroupIndicator({
 }: ComponentProps<typeof RadioBase.Indicator>) {
   return (
     <RadioBase.Indicator
-      className={cx(styles.indicator, className)}
+      className={cn(styles.indicator, className)}
       {...props}
     />
   );

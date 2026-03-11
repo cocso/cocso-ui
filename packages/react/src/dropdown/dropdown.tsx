@@ -1,5 +1,5 @@
 import { Menu as MenuBase } from "@base-ui/react/menu";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import styles from "./dropdown.module.css";
 
@@ -11,7 +11,7 @@ function DropdownContent({
     <MenuBase.Portal>
       <MenuBase.Positioner>
         <MenuBase.Popup
-          className={cx(styles.content, className)}
+          className={cn(styles.content, className)}
           {...props}
         />
       </MenuBase.Positioner>
@@ -24,7 +24,7 @@ function DropdownItem({
   ...props
 }: ComponentProps<typeof MenuBase.Item>) {
   return (
-    <MenuBase.Item className={cx(styles.item, className)} {...props} />
+    <MenuBase.Item className={cn(styles.item, className)} {...props} />
   );
 }
 

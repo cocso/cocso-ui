@@ -4,7 +4,7 @@ import {
   ArrowIOSBackwardIcon,
   ArrowIOSForwardIcon,
 } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import { ko } from "date-fns/locale";
 import type { ComponentProps, ReactElement } from "react";
 import { useState } from "react";
@@ -42,7 +42,7 @@ export function MonthPicker({
   };
 
   return (
-    <div className={cx(styles.root, className)} ref={ref} {...props}>
+    <div className={cn(styles.root, className)} ref={ref} {...props}>
       <Dropdown onOpenChange={setOpen} open={open}>
         <Dropdown.Trigger render={trigger} />
         <Dropdown.Content className={styles.content}>

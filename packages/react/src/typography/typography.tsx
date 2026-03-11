@@ -1,6 +1,6 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentPropsWithoutRef, Ref } from "react";
 import { match } from "ts-pattern";
 import type {
@@ -141,7 +141,7 @@ export function Typography({
     "--cocso-typography-line-height": lineHeightToken[lineHeight],
   };
 
-  const mergedClassName = cx(styles.typography, className);
+  const mergedClassName = cn(styles.typography, className);
 
   return useRender({
     render: renderProp,

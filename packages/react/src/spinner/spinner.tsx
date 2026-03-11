@@ -1,6 +1,6 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps } from "react";
 import { match } from "ts-pattern";
 import { colors } from "../token";
@@ -34,7 +34,7 @@ export function Spinner({
     "--cocso-spinner-bg-color": getBackgroundColor(color),
   };
 
-  const mergedClassName = cx(styles.spinner, className);
+  const mergedClassName = cn(styles.spinner, className);
 
   return useRender({
     render: renderProp,

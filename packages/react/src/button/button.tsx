@@ -1,6 +1,6 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
 import { Spinner } from "../spinner";
@@ -65,7 +65,7 @@ export function Button({
   } as CSSProperties;
 
   const isDisabled = disabled || loading;
-  const mergedClassName = cx(
+  const mergedClassName = cn(
     styles.button,
     isDisabled && styles.disabled,
     svgOnly && styles.svgOnly,
@@ -79,7 +79,7 @@ export function Button({
           <Spinner color="white" size="small" />
         </span>
       )}
-      <span className={cx(styles.buttonInner, loading && styles.invisible)}>
+      <span className={cn(styles.buttonInner, loading && styles.invisible)}>
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <span className={styles.content}>{ctx}</span>
         {suffix && <span className={styles.suffix}>{suffix}</span>}

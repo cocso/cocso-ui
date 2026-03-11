@@ -1,4 +1,4 @@
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { OTPInputProps, SlotProps } from "input-otp";
 import { OTPInput } from "input-otp";
 import type { ComponentProps } from "react";
@@ -18,7 +18,7 @@ const Slot = ({
   placeholderChar,
 }: SlotProps & { className?: string }) => (
   <div
-    className={cx(styles.slot, isActive && styles.slotActive)}
+    className={cn(styles.slot, isActive && styles.slotActive)}
     data-active={isActive || undefined}
   >
     {char ?? placeholderChar}
@@ -35,7 +35,7 @@ export function OneTimePasswordField({
 }: OneTimePasswordFieldProps) {
   return (
     <OTPInput
-      containerClassName={cx(styles.otp, className)}
+      containerClassName={cn(styles.otp, className)}
       onChange={onValueChange}
       ref={ref}
       render={({ slots }) => (

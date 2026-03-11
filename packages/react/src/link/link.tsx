@@ -1,4 +1,4 @@
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import type { FontWeight, LineHeight } from "../token";
 import { Typography } from "../typography";
@@ -24,7 +24,7 @@ export function Link({
   indicator = true,
   ...props
 }: LinkProps) {
-  const mergedClassName = cx(
+  const mergedClassName = cn(
     styles.link,
     indicator && styles.indicator,
     className

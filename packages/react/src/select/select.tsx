@@ -1,5 +1,5 @@
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import { spacing } from "../token";
@@ -37,7 +37,7 @@ export function Select({
 
   return (
     <div
-      className={cx(
+      className={cn(
         styles.wrapper,
         stretch && styles.stretch,
         disabled && styles.disabled,

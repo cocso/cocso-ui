@@ -1,5 +1,5 @@
 import { Switch as SwitchBase } from "@base-ui/react/switch";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
@@ -44,7 +44,7 @@ export function Switch({
   return (
     <div
       aria-disabled={disabled}
-      className={cx(styles.wrapper, className)}
+      className={cn(styles.wrapper, className)}
       style={style}
     >
       {position === "left" && (

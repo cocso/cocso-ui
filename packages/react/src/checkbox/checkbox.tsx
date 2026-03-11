@@ -1,6 +1,6 @@
 import { Checkbox as CheckboxBase } from "@base-ui/react/checkbox";
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
-import { clsx as cx } from "clsx";
+import { cn } from "../cn";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
@@ -65,7 +65,7 @@ export function Checkbox({
   const checkedState = getCheckedState();
 
   return (
-    <div className={cx(styles.wrapper, className)} style={style}>
+    <div className={cn(styles.wrapper, className)} style={style}>
       <CheckboxBase.Root
         checked={checkedState.checked}
         className={styles.checkbox}
