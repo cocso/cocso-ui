@@ -103,7 +103,7 @@ function parseHex(value: string): ParseResult {
 
   return {
     isValid: true,
-    value: { kind: "HexColor", value: value as `#${string}` },
+    value: { kind: "HexColor", value: value.toLowerCase() as `#${string}` },
   };
 }
 

@@ -18,10 +18,10 @@ data:
 
     $color.text.primary:
       values:
-        default: $color.neutral.950
+        default: $color.neutral-950
     $color.text.secondary:
       values:
-        default: $color.neutral.600
+        default: $color.neutral-600
     $color.text.tertiary:
       values:
-        default: $color.neutral.400
+        default: $color.neutral-400

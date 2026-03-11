@@ -13,7 +13,8 @@
   "main": "package.json",
   "files": [
     "*.yaml",
-    "components/*.yaml"
+    "primitive/*.yaml",
+    "semantic/*.yaml"
   ],
   "publishConfig": {
     "access": "public"

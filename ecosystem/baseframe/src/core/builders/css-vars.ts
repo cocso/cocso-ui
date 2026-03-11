@@ -1,6 +1,7 @@
 import { buildValidatedAst } from "../transforms";
 import type { Ast, Collections, Token, TokenDecl } from "../types";
 import { resolveTokenValue, toCssValue } from "./utils";
+import { createVarName } from "./utils/naming";
 
 export interface CssVarsOptions {
   banner?: string;
@@ -10,14 +11,6 @@ export interface CssVarsOptions {
       [mode: string]: string;
     };
   };
-}
-
-const LEADING_DOLLAR = /^\$/;
-const DOT_GLOBAL = /\./g;
-
-function createVarName(name: string, prefix?: string): string {
-  const clean = name.replace(LEADING_DOLLAR, "").replace(DOT_GLOBAL, "-");
-  return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
 function createDeclaration(
@@ -74,7 +67,7 @@ export function generateFromAst(ast: Ast, options: CssVarsOptions): string {
     })
     .join("\n\n");
 
-  return `${banner}${css}`;
+  return `${banner}${css}\n`;
 }
 
 export function generateCssVariables(

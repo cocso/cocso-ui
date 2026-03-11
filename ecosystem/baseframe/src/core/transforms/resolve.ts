@@ -18,13 +18,17 @@ export function createTokenResolver(
   mode: string,
   cssVarNamer: (tokenName: string) => string
 ): TokenResolver {
+  const tokenMap = new Map<string, TokenDecl>(
+    allTokens.map((t) => [t.token.name, t])
+  );
+
   return {
     resolve(value: Value): Value {
-      return resolveValue(value, allTokens, mode, cssVarNamer);
+      return resolveValue(value, tokenMap, mode, cssVarNamer);
     },
     resolveTokenRef(tokenRef: TokenRef): string {
       const fullName = `$${tokenRef.collection}.${tokenRef.token}`;
-      const found = allTokens.find((t) => t.token.name === fullName);
+      const found = tokenMap.get(fullName);
 
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
@@ -38,14 +42,14 @@ export function createTokenResolver(
 
 function resolveValue(
   value: Value,
-  allTokens: TokenDecl[],
+  tokenMap: Map<string, TokenDecl>,
   mode: string,
   cssVarNamer: (tokenName: string) => string
 ): Value {
   switch (value.kind) {
     case "TokenRef": {
       const fullName = `$${value.collection}.${value.token}`;
-      const found = allTokens.find((t) => t.token.name === fullName);
+      const found = tokenMap.get(fullName);
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
       }
@@ -58,20 +62,20 @@ function resolveValue(
         kind: "ShadowLayer",
         color: resolveValue(
           value.color,
-          allTokens,
+          tokenMap,
           mode,
           cssVarNamer
         ) as ColorValue,
-        offsetX: resolveValue(value.offsetX, allTokens, mode, cssVarNamer) as
+        offsetX: resolveValue(value.offsetX, tokenMap, mode, cssVarNamer) as
           | SizeValue
           | TokenRef,
-        offsetY: resolveValue(value.offsetY, allTokens, mode, cssVarNamer) as
+        offsetY: resolveValue(value.offsetY, tokenMap, mode, cssVarNamer) as
           | SizeValue
           | TokenRef,
-        blur: resolveValue(value.blur, allTokens, mode, cssVarNamer) as
+        blur: resolveValue(value.blur, tokenMap, mode, cssVarNamer) as
           | SizeValue
           | TokenRef,
-        spread: resolveValue(value.spread, allTokens, mode, cssVarNamer) as
+        spread: resolveValue(value.spread, tokenMap, mode, cssVarNamer) as
           | SizeValue
           | TokenRef,
       };
@@ -81,7 +85,7 @@ function resolveValue(
         kind: "Shadow",
         layers: value.layers.map(
           (layer) =>
-            resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer
+            resolveValue(layer, tokenMap, mode, cssVarNamer) as ShadowLayer
         ),
       };
 
