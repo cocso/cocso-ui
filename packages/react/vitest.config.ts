@@ -17,6 +17,7 @@ export default defineConfig({
     maxForks: 4,
     coverage: {
       provider: "v8",
+      reporter: ["text", "json-summary"],
       include: ["src/**/*.{ts,tsx}"],
       exclude: ["src/**/*.stories.tsx", "src/test/**", "src/**/index.ts"],
     },
