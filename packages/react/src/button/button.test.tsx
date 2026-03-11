@@ -110,9 +110,8 @@ describe("Button", () => {
 
   describe("size CSS variables", () => {
     it.each([
-      ["x-large", "56px"],
-      ["large", "48px"],
-      ["medium", "40px"],
+      ["large", "40px"],
+      ["medium", "36px"],
       ["small", "32px"],
       ["x-small", "28px"],
     ] as const)('sets height to "%s" when size="%s"', (size, expectedHeight) => {
@@ -127,12 +126,11 @@ describe("Button", () => {
 describe("Button variant CSS variables", () => {
   it.each([
     ["primary", colors.primary500],
-    ["secondary", colors.white],
-    ["tertiary", colors.transparent],
+    ["secondary", colors.transparent],
+    ["tertiary", colors.white],
     ["success", colors.success500],
     ["error", colors.danger500],
     ["warning", colors.warning300],
-    ["neutral", colors.neutral950],
   ] as const)('sets --cocso-button-bg-color for variant="%s"', (variant, expectedBg) => {
     render(<Button variant={variant}>Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
@@ -144,7 +142,6 @@ describe("Button variant CSS variables", () => {
     ["primary", colors.white],
     ["success", colors.white],
     ["error", colors.white],
-    ["neutral", colors.white],
     ["secondary", colors.neutral950],
     ["tertiary", colors.neutral950],
     ["warning", colors.neutral950],
@@ -155,14 +152,14 @@ describe("Button variant CSS variables", () => {
     });
   });
 
-  it('sets border for variant="tertiary"', () => {
-    render(<Button variant="tertiary">Button</Button>);
+  it('sets border for variant="secondary"', () => {
+    render(<Button variant="secondary">Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
       "--cocso-button-border": `1px solid ${colors.neutral100}`,
     });
   });
 
-  it("sets no border for non-tertiary variant", () => {
+  it("sets no border for non-secondary variant", () => {
     render(<Button variant="primary">Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
       "--cocso-button-border": "none",
@@ -172,10 +169,10 @@ describe("Button variant CSS variables", () => {
 
 describe("Button shape CSS variables", () => {
   it.each([
-    ["square", "medium", "6px"],
-    ["square", "x-small", "4px"],
+    ["square", "medium", "var(--cocso-radius-4)"],
+    ["square", "x-small", "var(--cocso-radius-3)"],
     ["circle", "medium", "100%"],
-    ["rounded", "medium", "100px"],
+    ["rounded", "medium", "var(--cocso-radius-full)"],
   ] as const)('sets border-radius for shape="%s" size="%s"', (shape, size, expected) => {
     render(
       <Button shape={shape} size={size}>

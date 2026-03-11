@@ -22,7 +22,7 @@
     color: var(--cocso-pagination-font-color);
     cursor: pointer;
     background-color: var(--cocso-pagination-bg-color);
-    border-radius: var(--cocso-spacing-5);
+    border-radius: var(--cocso-radius-4);
     transition: transform 0.15s ease-in-out;
     will-change: transform;
   }

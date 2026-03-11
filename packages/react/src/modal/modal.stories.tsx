@@ -5,6 +5,8 @@ import { Modal } from './modal';
 const meta = {
   title: 'Components/Modal',
   component: Modal,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -42,6 +44,23 @@ export const Confirm: Story = {
           </Modal.Close>
           <Modal.Close>
             <Button variant="error">삭제</Button>
+          </Modal.Close>
+        </div>
+      </Modal.Content>
+    </Modal>
+  ),
+};
+
+export const WithoutClose: Story = {
+  render: () => (
+    <Modal>
+      <Modal.Trigger render={<Button variant="secondary">열기</Button>} />
+      <Modal.Content>
+        <Modal.Title>닫기 버튼 없음</Modal.Title>
+        <Modal.Description>닫기 버튼이 없는 모달입니다. 버튼으로만 닫을 수 있습니다.</Modal.Description>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
+          <Modal.Close>
+            <Button>닫기</Button>
           </Modal.Close>
         </div>
       </Modal.Content>

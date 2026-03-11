@@ -24,10 +24,7 @@
     border: var(--cocso-button-border);
     border-radius: var(--cocso-button-border-radius);
     opacity: 1;
-    transform: translateZ(0);
-    transition:
-      background-color 0.15s ease-in-out,
-      transform 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out;
   }
 
   .button:not(.disabled):hover {
@@ -38,7 +35,6 @@
   .button:not(.disabled):active {
     --cocso-button-bg-color-active: inherit;
     background-color: var(--cocso-button-bg-color-active);
-    transform: scale(0.98);
   }
 
   .content {

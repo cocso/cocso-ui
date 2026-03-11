@@ -87,7 +87,7 @@
     color: var(--cocso-color-text-primary);
     text-align: center;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--cocso-radius-4);
   }
 
   :global(.react-datepicker__day:hover) {

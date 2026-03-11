@@ -2,7 +2,7 @@ import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
-import { spacing } from "../token";
+import { radius, spacing } from "../token";
 import styles from "./select.module.css";
 
 type SelectSize =
@@ -68,7 +68,7 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s5,
       "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
       "--cocso-select-font-size": "12px",
-      "--cocso-select-border-radius": spacing.s3,
+      "--cocso-select-border-radius": radius.r2,
     }))
     .with("x-small", () => ({
       "--cocso-select-min-width": spacing.s12,
@@ -76,7 +76,7 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s6,
       "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
       "--cocso-select-font-size": "14px",
-      "--cocso-select-border-radius": spacing.s3,
+      "--cocso-select-border-radius": radius.r2,
     }))
     .with("small", () => ({
       "--cocso-select-min-width": spacing.s14,
@@ -84,7 +84,7 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s7,
       "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
       "--cocso-select-font-size": "14px",
-      "--cocso-select-border-radius": spacing.s3,
+      "--cocso-select-border-radius": radius.r2,
     }))
     .with("medium", () => ({
       "--cocso-select-min-width": spacing.s16,
@@ -92,7 +92,7 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s8,
       "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
       "--cocso-select-font-size": "16px",
-      "--cocso-select-border-radius": spacing.s4,
+      "--cocso-select-border-radius": radius.r3,
     }))
     .with("large", () => ({
       "--cocso-select-min-width": spacing.s17,
@@ -100,7 +100,7 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s9,
       "--cocso-select-padding-right": `calc(${spacing.s9} + 16px)`,
       "--cocso-select-font-size": "18px",
-      "--cocso-select-border-radius": spacing.s4,
+      "--cocso-select-border-radius": radius.r3,
     }))
     .with("x-large", () => ({
       "--cocso-select-min-width": spacing.s18,
@@ -108,6 +108,6 @@ const getStyles = (size: SelectSize) =>
       "--cocso-select-padding-left": spacing.s10,
       "--cocso-select-padding-right": `calc(${spacing.s10} + 16px)`,
       "--cocso-select-font-size": "18px",
-      "--cocso-select-border-radius": spacing.s4,
+      "--cocso-select-border-radius": radius.r3,
     }))
     .exhaustive();

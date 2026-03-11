@@ -8,11 +8,14 @@ import styles from "./badge.module.css";
 
 type BadgeSize = "small" | "medium" | "large";
 
-type BadgeVariant = "default" | "danger" | "primary" | "success" | "warning";
+type BadgeVariant = "primary" | "secondary" | "success" | "error" | "warning";
+
+type BadgeShape = "square" | "circle" | "rounded";
 
 export interface BadgeProps extends ComponentProps<"div"> {
   size?: BadgeSize;
   variant?: BadgeVariant;
+  shape?: BadgeShape;
 }
 
 export function Badge({
@@ -20,14 +23,16 @@ export function Badge({
   className,
   children,
   size = "medium",
-  variant = "default",
+  variant = "secondary",
+  shape = "square",
   style: _style,
   ...props
 }: BadgeProps) {
   const style = {
     ..._style,
     "--cocso-badge-padding": getPadding(size),
-    "--cocso-badge-border-radius": "6px",
+    "--cocso-badge-padding-y": getPaddingY(size),
+    "--cocso-badge-border-radius": getBorderRadius(shape),
     "--cocso-badge-bg-color": getBackgroundColor(variant),
   } as CSSProperties;
 
@@ -36,7 +41,7 @@ export function Badge({
 
   return (
     <div
-      className={cn(styles.badge, className)}
+      className={cn(styles.badge, shape === "circle" && styles.circle, className)}
       ref={ref}
       style={style}
       {...props}
@@ -52,24 +57,38 @@ export function Badge({
   );
 }
 
+const getPaddingY = (size: BadgeSize) =>
+  match(size)
+    .with("small", () => "3px")
+    .with("medium", () => "4px")
+    .with("large", () => "5px")
+    .exhaustive();
+
+const getBorderRadius = (shape: BadgeShape) =>
+  match(shape)
+    .with("square", () => "var(--cocso-radius-3)")
+    .with("circle", () => "100%")
+    .with("rounded", () => "var(--cocso-radius-full)")
+    .exhaustive();
+
 const getPadding = (size: BadgeSize) =>
   match(size)
-    .with("small", () => "4px 8px")
-    .with("medium", () => "6px 10px")
-    .with("large", () => "8px 12px")
+    .with("small", () => "3px 6px")
+    .with("medium", () => "4px 8px")
+    .with("large", () => "5px 10px")
     .exhaustive();
 
 const getFontSize = (size: BadgeSize) =>
   match(size)
-    .with("small", () => 12)
-    .with("medium", () => 14)
-    .with("large", () => 16)
+    .with("small", () => 11)
+    .with("medium", () => 12)
+    .with("large", () => 14)
     .exhaustive();
 
 const getFontColor = (variant: BadgeVariant) =>
   match(variant)
-    .with("default", () => colors.neutral600)
-    .with("danger", () => colors.danger600)
+    .with("secondary", () => colors.neutral600)
+    .with("error", () => colors.danger600)
     .with("primary", () => colors.primary600)
     .with("success", () => colors.success600)
     .with("warning", () => colors.warning600)
@@ -77,8 +96,8 @@ const getFontColor = (variant: BadgeVariant) =>
 
 const getBackgroundColor = (variant: BadgeVariant) =>
   match(variant)
-    .with("default", () => colors.neutral50)
-    .with("danger", () => colors.danger50)
+    .with("secondary", () => colors.neutral50)
+    .with("error", () => colors.danger50)
     .with("primary", () => colors.primary50)
     .with("success", () => colors.success50)
     .with("warning", () => colors.warning50)

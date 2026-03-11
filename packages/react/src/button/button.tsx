@@ -8,7 +8,7 @@ import type { FontWeight } from "../token";
 import { colors, fontWeight } from "../token";
 import styles from "./button.module.css";
 
-export type ButtonSize = "x-large" | "large" | "medium" | "small" | "x-small";
+export type ButtonSize = "large" | "medium" | "small" | "x-small";
 
 export type ButtonVariant =
   | "primary"
@@ -16,8 +16,7 @@ export type ButtonVariant =
   | "tertiary"
   | "success"
   | "error"
-  | "warning"
-  | "neutral";
+  | "warning";
 
 export type ButtonShape = "square" | "circle" | "rounded";
 
@@ -105,29 +104,24 @@ export function Button({
 
 const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)
-    .with("x-large", () => 56)
-    .with("large", () => 48)
-    .with("medium", () => 40)
+    .with("large", () => 40)
+    .with("medium", () => 36)
     .with("small", () => 32)
     .with("x-small", () => 28)
     .exhaustive();
   const inlinePadding = match(size)
-    .with("x-large", () => 16)
-    .with("large", () => 14)
+    .with("large", () => 12)
     .with("medium", () => 10)
     .with("small", () => 8)
     .with("x-small", () => 6)
     .exhaustive();
   const contentPadding = match(size)
-    .with("x-large", () => "0 6px")
     .with("large", () => "0 6px")
     .with("medium", () => "0 6px")
     .with("small", () => "0 2px")
     .with("x-small", () => "0")
     .exhaustive();
   const fontSize = match(size)
-    .with("x-large", () => 16)
-    .with("large", () => 16)
     .with("x-small", () => 12)
     .otherwise(() => 14);
 
@@ -143,53 +137,48 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) =>
   match(shape)
     .with("square", () =>
       match(size)
-        .with("x-small", () => "4px")
-        .otherwise(() => "6px")
+        .with("x-small", () => "var(--cocso-radius-3)")
+        .otherwise(() => "var(--cocso-radius-4)")
     )
     .with("circle", () => "100%")
-    .with("rounded", () => "100px")
+    .with("rounded", () => "var(--cocso-radius-full)")
     .exhaustive();
 
 const getColor = (variant: ButtonVariant) =>
   match(variant)
-    .with("primary", "success", "error", "neutral", () => colors.white)
+    .with("primary", "success", "error", () => colors.white)
     .with("secondary", "tertiary", "warning", () => colors.neutral950)
     .exhaustive();
 
 const getBorder = (variant: ButtonVariant) =>
   match(variant)
-    .with("tertiary", () => `1px solid ${colors.neutral100}`)
+    .with("secondary", () => `1px solid ${colors.neutral100}`)
     .otherwise(() => "none");
 
 const getBackgroundColor = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary500)
-    .with("secondary", () => colors.white)
-    .with("tertiary", () => colors.transparent)
+    .with("secondary", () => colors.transparent)
+    .with("tertiary", () => colors.white)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
     .with("warning", () => colors.warning300)
-    .with("neutral", () => colors.neutral950)
     .exhaustive();
 
 const getBackgroundColorHover = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary600)
-    .with("secondary", () => colors.neutral50)
-    .with("tertiary", () => colors.neutral50)
+    .with("secondary", "tertiary", () => colors.neutral50)
     .with("success", () => colors.success600)
     .with("error", () => colors.danger600)
     .with("warning", () => colors.warning400)
-    .with("neutral", () => colors.neutral800)
     .exhaustive();
 
 const getBackgroundColorActive = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary700)
-    .with("secondary", () => colors.neutral100)
-    .with("tertiary", () => colors.neutral100)
+    .with("secondary", "tertiary", () => colors.neutral100)
     .with("success", () => colors.success700)
     .with("error", () => colors.danger700)
     .with("warning", () => colors.warning500)
-    .with("neutral", () => colors.neutral700)
     .exhaustive();

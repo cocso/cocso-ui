@@ -126,6 +126,13 @@
   --cocso-spacing-20: 80px;
   --cocso-spacing-21: 96px;
   --cocso-spacing-max: 1000px;
+  --cocso-radius-1: 2px;
+  --cocso-radius-2: 4px;
+  --cocso-radius-3: 6px;
+  --cocso-radius-4: 8px;
+  --cocso-radius-5: 12px;
+  --cocso-radius-6: 16px;
+  --cocso-radius-full: 1000px;
   --cocso-z-index-behind: -1;
   --cocso-z-index-base: 0;
   --cocso-z-index-above: 1;

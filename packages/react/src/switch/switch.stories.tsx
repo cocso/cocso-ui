@@ -5,10 +5,16 @@ import { Switch } from './switch';
 const meta = {
   title: 'Components/Switch',
   component: Switch,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['small', 'medium'] },
     position: { control: 'radio', options: ['left', 'right'] },
     disabled: { control: 'boolean' },
+  },
+  args: {
+    size: 'medium',
+    position: 'right',
   },
 } satisfies Meta<typeof Switch>;
 
@@ -31,10 +37,10 @@ export const WithLabel: Story = {
 
 export const Sizes: Story = {
   render: () => {
-    const [s1, setS1] = useState(false);
-    const [s2, setS2] = useState(false);
+    const [s1, setS1] = useState(true);
+    const [s2, setS2] = useState(true);
     return (
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
         <Switch checked={s1} label="Small" onCheckedChange={setS1} size="small" />
         <Switch checked={s2} label="Medium" onCheckedChange={setS2} size="medium" />
       </div>
@@ -48,8 +54,8 @@ export const LabelPositions: Story = {
     const [r, setR] = useState(false);
     return (
       <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-        <Switch checked={l} label="왼쪽" onCheckedChange={setL} position="left" />
-        <Switch checked={r} label="오른쪽" onCheckedChange={setR} position="right" />
+        <Switch checked={l} label="레이블 왼쪽" onCheckedChange={setL} position="left" />
+        <Switch checked={r} label="레이블 오른쪽" onCheckedChange={setR} position="right" />
       </div>
     );
   },
@@ -57,9 +63,9 @@ export const LabelPositions: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Switch disabled label="비활성 off" onCheckedChange={() => {}} />
-      <Switch checked disabled label="비활성 on" onCheckedChange={() => {}} />
+    <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+      <Switch disabled label="비활성 (꺼짐)" onCheckedChange={() => {}} />
+      <Switch checked disabled label="비활성 (켜짐)" onCheckedChange={() => {}} />
     </div>
   ),
 };

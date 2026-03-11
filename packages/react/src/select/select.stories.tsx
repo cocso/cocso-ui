@@ -4,10 +4,15 @@ import { Select } from './select';
 const meta = {
   title: 'Components/Select',
   component: Select,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['2x-small', 'x-small', 'small', 'medium', 'large', 'x-large'] },
     disabled: { control: 'boolean' },
     stretch: { control: 'boolean' },
+  },
+  args: {
+    size: 'medium',
   },
 } satisfies Meta<typeof Select>;
 
@@ -27,12 +32,12 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Select size="2x-small"><option>2X-Small</option></Select>
-      <Select size="x-small"><option>X-Small</option></Select>
-      <Select size="small"><option>Small</option></Select>
-      <Select size="medium"><option>Medium</option></Select>
-      <Select size="large"><option>Large</option></Select>
-      <Select size="x-large"><option>X-Large</option></Select>
+      <Select size="2x-small"><option>2x-small</option></Select>
+      <Select size="x-small"><option>x-small</option></Select>
+      <Select size="small"><option>small</option></Select>
+      <Select size="medium"><option>medium</option></Select>
+      <Select size="large"><option>large</option></Select>
+      <Select size="x-large"><option>x-large</option></Select>
     </div>
   ),
 };
@@ -46,8 +51,9 @@ export const Disabled: Story = {
 };
 
 export const Stretch: Story = {
+  parameters: { layout: 'padded' },
   render: () => (
-    <div style={{ width: 300 }}>
+    <div style={{ width: '300px' }}>
       <Select stretch>
         <option value="1">옵션 1</option>
         <option value="2">옵션 2</option>

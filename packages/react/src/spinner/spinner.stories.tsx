@@ -4,9 +4,15 @@ import { Spinner } from './spinner';
 const meta = {
   title: 'Components/Spinner',
   component: Spinner,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['small', 'medium', 'large', 'x-large'] },
     color: { control: 'select', options: ['primary', 'neutral', 'white'] },
+  },
+  args: {
+    size: 'medium',
+    color: 'primary',
   },
 } satisfies Meta<typeof Spinner>;
 
@@ -31,7 +37,7 @@ export const Colors: Story = {
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <Spinner color="primary" />
       <Spinner color="neutral" />
-      <div style={{ backgroundColor: '#333', padding: '8px', borderRadius: '4px' }}>
+      <div style={{ backgroundColor: '#1e2124', padding: '8px', borderRadius: '6px' }}>
         <Spinner color="white" />
       </div>
     </div>

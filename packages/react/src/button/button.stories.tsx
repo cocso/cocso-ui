@@ -4,19 +4,20 @@ import { Button } from './button';
 const meta = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning', 'neutral'],
-    },
-    size: { control: 'select', options: ['x-large', 'large', 'medium', 'small', 'x-small'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning'] },
+    size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    svgOnly: { control: 'boolean' },
   },
   args: {
     children: 'Button',
+    variant: 'primary',
+    size: 'medium',
+    shape: 'square',
   },
 } satisfies Meta<typeof Button>;
 
@@ -34,7 +35,6 @@ export const Variants: Story = {
       <Button variant="success">Success</Button>
       <Button variant="error">Error</Button>
       <Button variant="warning">Warning</Button>
-      <Button variant="neutral">Neutral</Button>
     </div>
   ),
 };
@@ -42,11 +42,10 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-      <Button size="x-small">XS</Button>
-      <Button size="small">SM</Button>
-      <Button size="medium">MD</Button>
-      <Button size="large">LG</Button>
-      <Button size="x-large">XL</Button>
+      <Button size="x-small">x-small</Button>
+      <Button size="small">small</Button>
+      <Button size="medium">medium</Button>
+      <Button size="large">large</Button>
     </div>
   ),
 };
@@ -56,12 +55,19 @@ export const Shapes: Story = {
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
       <Button shape="square">Square</Button>
       <Button shape="rounded">Rounded</Button>
+      <Button shape="circle" svgOnly>◎</Button>
     </div>
   ),
 };
 
 export const Loading: Story = {
-  args: { loading: true },
+  render: () => (
+    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button loading variant="primary">Primary</Button>
+      <Button loading variant="secondary">Secondary</Button>
+      <Button loading variant="tertiary">Tertiary</Button>
+    </div>
+  ),
 };
 
 export const Disabled: Story = {

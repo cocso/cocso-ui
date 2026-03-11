@@ -40,18 +40,36 @@
   @keyframes slide-up {
     from {
       height: var(--accordion-panel-height);
+      opacity: 1;
+      transform: perspective(800px) rotateX(0deg) translateZ(0px);
     }
     to {
       height: 0;
+      opacity: 0;
+      transform: perspective(800px) rotateX(-3deg) translateZ(-10px);
     }
   }
 
   @keyframes slide-down {
     from {
       height: 0;
+      opacity: 0;
+      transform: perspective(800px) rotateX(-3deg) translateZ(-10px);
     }
     to {
       height: var(--accordion-panel-height);
+      opacity: 1;
+      transform: perspective(800px) rotateX(0deg) translateZ(0px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content[data-open] {
+      animation: none;
+    }
+
+    .content:not([data-open]) {
+      animation: none;
     }
   }
 }

@@ -5,6 +5,8 @@ import { Pagination } from './pagination';
 const meta = {
   title: 'Components/Pagination',
   component: Pagination,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   args: {
     onChange: () => {},
     page: 1,

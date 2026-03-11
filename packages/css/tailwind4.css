@@ -93,6 +93,13 @@
   --shadow-2: var(--cocso-shadow-2);
   --shadow-3: var(--cocso-shadow-3);
   --shadow-4: var(--cocso-shadow-4);
+  --radius-1: var(--cocso-radius-1);
+  --radius-2: var(--cocso-radius-2);
+  --radius-3: var(--cocso-radius-3);
+  --radius-4: var(--cocso-radius-4);
+  --radius-5: var(--cocso-radius-5);
+  --radius-6: var(--cocso-radius-6);
+  --radius-full: var(--cocso-radius-full);
   --z-index-behind: var(--cocso-z-index-behind);
   --z-index-base: var(--cocso-z-index-base);
   --z-index-above: var(--cocso-z-index-above);

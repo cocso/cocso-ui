@@ -4,6 +4,8 @@ import { Link } from './link';
 const meta = {
   title: 'Components/Link',
   component: Link,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['x-small', 'small', 'medium', 'large'] },
     indicator: { control: 'boolean' },
@@ -11,6 +13,8 @@ const meta = {
   args: {
     children: '링크 텍스트',
     href: '#',
+    size: 'medium',
+    indicator: true,
   },
 } satisfies Meta<typeof Link>;
 
@@ -19,17 +23,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const NoIndicator: Story = {
+export const WithoutIndicator: Story = {
   args: { indicator: false },
 };
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-      <Link href="#" size="x-small">XS 링크</Link>
-      <Link href="#" size="small">SM 링크</Link>
-      <Link href="#" size="medium">MD 링크</Link>
-      <Link href="#" size="large">LG 링크</Link>
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Link href="#" size="x-small">x-small</Link>
+      <Link href="#" size="small">small</Link>
+      <Link href="#" size="medium">medium</Link>
+      <Link href="#" size="large">large</Link>
     </div>
   ),
 };

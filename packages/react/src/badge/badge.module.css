@@ -13,6 +13,12 @@
     border-radius: var(--cocso-badge-border-radius);
   }
 
+  .circle {
+    aspect-ratio: 1;
+    padding: var(--cocso-badge-padding-y);
+    justify-content: center;
+  }
+
   .inner {
     display: inline-flex;
     gap: 2px;
