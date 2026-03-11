@@ -40,7 +40,7 @@ describe("Button", () => {
     it("renders Spinner when loading=true", () => {
       render(<Button loading>Button</Button>);
       const button = screen.getByRole("button");
-      const spinner = button.querySelector('[style*="--cocso-spinner-size"]');
+      const spinner = button.querySelector('[aria-label="Loading"]');
       expect(spinner).toBeInTheDocument();
     });
   });

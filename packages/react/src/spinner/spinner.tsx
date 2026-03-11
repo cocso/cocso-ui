@@ -15,25 +15,17 @@ export interface SpinnerProps
   size?: SpinnerSize;
 }
 
-const BLADES = Array.from({ length: 12 }, (_, i) => ({
-  rotation: i * 30,
-  delay: (11 - i) / 12,
-}));
-
-type BladeConfig = {
+type SizeConfig = {
   container: number;
-  height: number;
-  left: number;
-  originY: number;
-  radius: number;
-  width: number;
+  bladeCount: number;
+  blade: { width: number; height: number; radius: number };
 };
 
-const sizeConfig: Record<SpinnerSize, BladeConfig> = {
-  small: { container: 16, left: 7, width: 1.5, height: 5, radius: 1, originY: -4 },
-  medium: { container: 24, left: 11, width: 2, height: 7, radius: 2, originY: -6 },
-  large: { container: 32, left: 15, width: 2.5, height: 9, radius: 2, originY: -8 },
-  "x-large": { container: 40, left: 19, width: 3, height: 11, radius: 3, originY: -10 },
+const sizeConfig: Record<SpinnerSize, SizeConfig> = {
+  small: { container: 16, bladeCount: 8, blade: { width: 1.5, height: 4.5, radius: 1 } },
+  medium: { container: 24, bladeCount: 10, blade: { width: 2, height: 6, radius: 1 } },
+  large: { container: 32, bladeCount: 12, blade: { width: 2.5, height: 8, radius: 2 } },
+  "x-large": { container: 40, bladeCount: 12, blade: { width: 3, height: 10, radius: 2 } },
 };
 
 const getBladeColor = (color: SpinnerColor) =>
@@ -52,8 +44,9 @@ export function Spinner({
   label = "Loading",
   ...props
 }: SpinnerProps) {
-  const config = sizeConfig[size];
-  const bladeColor = getBladeColor(color);
+  const { container, bladeCount, blade } = sizeConfig[size];
+  const left = (container - blade.width) / 2;
+  const originY = blade.height - container / 2;
 
   return (
     <output
@@ -62,25 +55,26 @@ export function Spinner({
       className={cn(styles.spinner, className)}
       ref={ref}
       style={{
-        width: `${config.container}px`,
-        height: `${config.container}px`,
+        width: `${container}px`,
+        height: `${container}px`,
+        color: getBladeColor(color),
         ..._style,
       }}
       {...props}
     >
-      {BLADES.map(({ rotation, delay }) => (
+      {Array.from({ length: bladeCount }, (_, i) => (
         <div
           className={styles.blade}
-          key={rotation}
+          key={i}
           style={{
-            left: `${config.left}px`,
-            width: `${config.width}px`,
-            height: `${config.height}px`,
-            borderRadius: `${config.radius}px`,
-            backgroundColor: bladeColor,
-            transformOrigin: `center ${config.originY}px`,
-            animationDelay: `${-delay}s`,
-            transform: `rotate(${rotation}deg)`,
+            left: `${left}px`,
+            width: `${blade.width}px`,
+            height: `${blade.height}px`,
+            borderRadius: `${blade.radius}px`,
+            backgroundColor: "currentColor",
+            transformOrigin: `center ${originY}px`,
+            animationDelay: `${-((bladeCount - 1 - i) * (0.75 / bladeCount))}s`,
+            transform: `rotate(${i * (360 / bladeCount)}deg)`,
           } as CSSProperties}
         />
       ))}

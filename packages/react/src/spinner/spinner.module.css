@@ -17,7 +17,7 @@
   .blade {
     position: absolute;
     bottom: 0;
-    animation: spinner-blade-fade 1s linear infinite;
+    animation: spinner-blade-fade 0.75s linear infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
