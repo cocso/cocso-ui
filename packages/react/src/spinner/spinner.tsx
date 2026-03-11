@@ -59,8 +59,8 @@ export function Spinner({
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: getVariantColor(variant),
         ..._style,
+        color: _style?.color ?? getVariantColor(variant),
       }}
       {...props}
     >

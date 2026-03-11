@@ -66,6 +66,9 @@ export const Loading: Story = {
       <Button loading variant="primary">Primary</Button>
       <Button loading variant="secondary">Secondary</Button>
       <Button loading variant="ghost">Ghost</Button>
+      <Button loading variant="success">Success</Button>
+      <Button loading variant="error">Error</Button>
+      <Button loading variant="warning">Warning</Button>
     </div>
   ),
 };

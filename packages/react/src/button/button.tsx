@@ -4,6 +4,7 @@ import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
 import { Spinner } from "../spinner";
+import type { SpinnerVariant } from "../spinner";
 import type { FontWeight } from "../token";
 import { colors, fontWeight } from "../token";
 import styles from "./button.module.css";
@@ -27,6 +28,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   render?: useRender.RenderProp;
   shape?: ButtonShape;
   size?: ButtonSize;
+  spinnerVariant?: SpinnerVariant;
   suffix?: ReactNode;
   svgOnly?: boolean;
   variant?: ButtonVariant;
@@ -48,6 +50,7 @@ export function Button({
   svgOnly = false,
   disabled = false,
   loading = false,
+  spinnerVariant,
   ...props
 }: ButtonProps) {
   const style = {
@@ -74,7 +77,7 @@ export function Button({
     <>
       {loading && (
         <span className={styles.spinnerOverlay}>
-          <Spinner variant="white" size="medium" />
+          <Spinner variant={spinnerVariant ?? getSpinnerVariant(variant)} size="medium" />
         </span>
       )}
       <span className={cn(styles.buttonInner, loading && styles.invisible)}>
@@ -172,6 +175,12 @@ const getBackgroundColorHover = (variant: ButtonVariant) =>
     .with("success", () => colors.success600)
     .with("error", () => colors.danger600)
     .with("warning", () => colors.warning400)
+    .exhaustive();
+
+const getSpinnerVariant = (variant: ButtonVariant): SpinnerVariant =>
+  match(variant)
+    .with("primary", "success", "error", () => "white" as const)
+    .with("secondary", "ghost", "warning", () => "secondary" as const)
     .exhaustive();
 
 const getBackgroundColorActive = (variant: ButtonVariant) =>
