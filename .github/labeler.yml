@@ -1,0 +1,28 @@
+react:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/react/**'
+
+css:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/css/**'
+
+baseframe:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'packages/baseframe/**'
+          - 'ecosystem/baseframe/**'
+
+icons:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/react-icons/**'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - 'AGENTS.md'
+          - 'CLAUDE.md'

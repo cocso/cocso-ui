@@ -22,12 +22,12 @@
   }
 
   .content {
-    z-index: var(--ds-z-index-overlay);
+    z-index: var(--cocso-z-index-overlay);
     display: flex;
     flex-direction: column;
-    background-color: var(--ds-color-white);
-    border-radius: var(--ds-spacing-3);
-    box-shadow: var(--ds-shadow-2);
+    background-color: var(--cocso-color-white);
+    border-radius: var(--cocso-spacing-3);
+    box-shadow: var(--cocso-shadow-2);
     will-change: transform, opacity;
   }
 

@@ -9,7 +9,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["node", "bun"]
+    "types": ["node"]
   },
   "include": ["src"]
 }

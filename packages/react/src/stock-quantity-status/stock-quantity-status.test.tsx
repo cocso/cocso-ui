@@ -35,9 +35,9 @@ describe("StockQuantityStatus", () => {
 
   describe("color CSS variable", () => {
     it.each([
-      ["여유", "var(--ds-color-primary-500)"],
-      ["보통", "var(--ds-color-success-400)"],
-      ["부족", "var(--ds-color-danger-500)"],
+      ["여유", "var(--cocso-color-primary-500)"],
+      ["보통", "var(--cocso-color-success-400)"],
+      ["부족", "var(--cocso-color-danger-500)"],
     ] as const)('sets --cocso-stock-quantity-status-color to "%s" for quantity="%s"', (quantity, expectedColor) => {
       const { container } = render(<StockQuantityStatus quantity={quantity} />);
       const root = container.firstChild as HTMLElement;
@@ -49,15 +49,15 @@ describe("StockQuantityStatus", () => {
 
   describe("getColor helper", () => {
     it('returns primary500 for "여유"', () => {
-      expect(getColor("여유")).toBe("var(--ds-color-primary-500)");
+      expect(getColor("여유")).toBe("var(--cocso-color-primary-500)");
     });
 
     it('returns success400 for "보통"', () => {
-      expect(getColor("보통")).toBe("var(--ds-color-success-400)");
+      expect(getColor("보통")).toBe("var(--cocso-color-success-400)");
     });
 
     it('returns danger500 for "부족"', () => {
-      expect(getColor("부족")).toBe("var(--ds-color-danger-500)");
+      expect(getColor("부족")).toBe("var(--cocso-color-danger-500)");
     });
   });
 

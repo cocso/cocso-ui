@@ -15,12 +15,12 @@
     height: 18px;
     cursor: pointer;
     background-color: white;
-    border: 2px solid var(--ds-color-text-primary);
+    border: 2px solid var(--cocso-color-text-primary);
     border-radius: 100%;
   }
 
   .item[data-checked] {
-    border-color: var(--ds-color-primary-500);
+    border-color: var(--cocso-color-primary-500);
   }
 
   .item[data-disabled] {
@@ -42,7 +42,7 @@
     width: 8px;
     height: 8px;
     content: "";
-    background-color: var(--ds-color-primary-500);
+    background-color: var(--cocso-color-primary-500);
     border-radius: 50%;
   }
 }

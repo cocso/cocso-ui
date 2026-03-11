@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a CLI tool that reads component definitions from `@cocso-ui/baseframe-sources` and scaffolds component files directly into a consumer project, removing manual copy-paste overhead when adopting cocso UI components.
+Provide a CLI tool that reads YAML design token definitions from `@cocso-ui/baseframe-sources` and generates CSS custom properties (`token.css`) and TailwindCSS v4 theme files (`tailwind4.css`) for use in the cocso UI design system.
 
 ## Path
 
@@ -16,68 +16,83 @@ Node.js >= 22 (TypeScript, compiled to ESM via esbuild).
 
 ## Users
 
-- Frontend engineers in consumer projects who run `npx baseframe` or `bunx baseframe` to install components.
+- Design system maintainers who regenerate `packages/css/token.css` and `packages/css/tailwind4.css` after updating YAML token definitions.
 
 ## In Scope
 
 - `baseframe` CLI binary.
-- Commands to list, add, and manage components from the YAML source registry.
-- Reads component definitions from `@cocso-ui/baseframe-sources`.
-- Writes generated component files into the consumer project.
+- `css-vars` command — generates CSS custom properties with a configurable prefix (`--cocso-*`).
+- `tailwindcss` command — generates TailwindCSS v4 `@theme` + `@utility` file using 2-layer pattern.
+- Reads token definitions from `@cocso-ui/baseframe-sources` (installed via workspace link).
 
 ## Out of Scope
 
-- Component runtime logic — owned by `@cocso-ui/react`.
+- Component scaffolding.
+- Runtime component logic — owned by `@cocso-ui/react`.
 - YAML source authoring — owned by `packages/baseframe` (`@cocso-ui/baseframe-sources`).
 
 ## Architecture
 
+### 2-Layer Output Pattern
+
+```
+Layer 1 — token.css      :root { --cocso-color-white: #ffffff; }
+Layer 2 — tailwind4.css  @theme { --color-white: var(--cocso-color-white); }
+                         @utility z-* { z-index: --value(--z-index-*); }
+```
+
+`packages/react/` components reference `--cocso-*` directly (Layer 1). Tailwind utilities use the standard `--color-*` namespace (Layer 2).
+
+### Source Structure
+
 ```
 ecosystem/baseframe/
 ├── src/
-│   ├── cli/index.ts     # CLI entry point (yargs command definitions)
-│   └── core/index.ts    # Core scaffolding logic
-├── bin/index.js         # Compiled output (published binary)
-├── build.js             # esbuild build script
-└── package.json         # bin: { baseframe: bin/index.js }
+│   ├── cli/index.ts              # CLI entry (yargs commands)
+│   └── core/
+│       ├── builders/
+│       │   ├── utils/naming.ts   # Shared createVarName utility
+│       │   ├── css-vars.ts       # Layer 1 generator
+│       │   └── tailwind.ts       # Layer 2 generator
+│       ├── transforms/           # Token resolution (Map-based)
+│       ├── parsers/              # Value parsing (hex lowercase)
+│       └── types/
+├── bin/index.js                  # Compiled output
+└── build.js                      # esbuild build script
 ```
-
-Build pipeline: TypeScript source → esbuild → `bin/index.js` (single ESM bundle).
 
 ## Interfaces
 
 ### CLI Commands
 
-| Command | Description |
+| Command | Options | Description |
+|---|---|---|
+| `baseframe css-vars [dir]` | `--prefix <p>` | Generate CSS variables (default prefix: `cocso`) |
+| `baseframe tailwindcss [dir]` | | Generate TailwindCSS v4 theme file |
+
+### Output Files
+
+| File | Content |
 |---|---|
-| `baseframe add <component>` | Scaffold a component into the consumer project |
-| `baseframe list` | List all available components |
-
-### Binary
-
-```sh
-baseframe <command> [options]
-```
-
-Published as `@cocso-ui/baseframe` with `bin.baseframe` pointing to `bin/index.js`.
+| `token.css` | `:root { --cocso-<token>: <value>; }` |
+| `tailwind4.css` | `@theme { --<token>: var(--cocso-<token>); }` + `@utility z-*` |
 
 ## Storage
 
 - Reads: `@cocso-ui/baseframe-sources` YAML files from node_modules.
-- Writes: Component files into the consumer project working directory.
-- No persistent state between runs.
+- Writes: CSS files to the specified output directory.
+- No persistent state.
 
 ## Security
 
-- Writes files to the current working directory only.
+- Writes files to the specified output directory only.
 - No network requests at runtime.
-- Validates YAML input before file generation.
+- Validates YAML input before generation.
 
 ## Logging
 
-- CLI output uses ANSI color by default for readability.
-- Opt-out via `NO_COLOR=1` environment variable.
-- Structured log fields: `component`, `action`, `target_path`.
+- CLI output uses ANSI color (banner + status) by default.
+- Opt-out via `NO_COLOR=1`.
 
 ## Build and Test
 
@@ -85,16 +100,17 @@ Published as `@cocso-ui/baseframe` with `bin.baseframe` pointing to `bin/index.j
 # Build (esbuild)
 pnpm --filter @cocso-ui/baseframe build
 
+# Type check
+pnpm --filter @cocso-ui/baseframe check-types
+
+# Tests (vitest, 28+ tests including golden-file snapshots)
+pnpm --filter @cocso-ui/baseframe test
+
 # Lint
 pnpm --filter @cocso-ui/baseframe lint
 ```
 
-CI expects: `build`, `lint` to pass.
-
-## Roadmap
-
-- Add `baseframe update` command to sync existing components to latest version.
-- Add interactive TUI mode for component selection.
+CI expects: `build`, `check-types`, `test`, `lint` to pass.
 
 ## Open Questions
 

@@ -2,7 +2,7 @@
   .stock {
     --cocso-stock-quantity-status-color: inherit;
     display: inline-flex;
-    gap: var(--ds-spacing-2);
+    gap: var(--cocso-spacing-2);
     align-items: center;
     color: var(--cocso-stock-quantity-status-color);
   }

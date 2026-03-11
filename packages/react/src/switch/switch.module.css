@@ -1,7 +1,7 @@
 @layer components {
   .wrapper {
     display: flex;
-    gap: var(--ds-spacing-5);
+    gap: var(--cocso-spacing-5);
     align-items: center;
   }
 
@@ -19,7 +19,7 @@
     height: var(--cocso-switch-height);
     cursor: pointer;
     background-color: var(--cocso-switch-bg-color);
-    border-radius: var(--ds-spacing-max);
+    border-radius: var(--cocso-spacing-max);
     opacity: 1;
   }
 
@@ -30,7 +30,7 @@
   }
 
   .switch[data-checked] {
-    --cocso-switch-bg-color: var(--ds-color-primary-500);
+    --cocso-switch-bg-color: var(--cocso-color-primary-500);
   }
 
   .thumb {
@@ -39,9 +39,9 @@
     display: block;
     width: var(--cocso-switch-thumb-width);
     height: var(--cocso-switch-thumb-width);
-    background-color: var(--ds-color-white);
-    border-radius: var(--ds-spacing-max);
-    transform: translateX(var(--ds-spacing-2));
+    background-color: var(--cocso-color-white);
+    border-radius: var(--cocso-spacing-max);
+    transform: translateX(var(--cocso-spacing-2));
     transition: transform 0.15s ease;
     will-change: transform;
   }
@@ -51,7 +51,7 @@
       calc(
         var(--cocso-switch-width) -
         var(--cocso-switch-thumb-width) -
-        var(--ds-spacing-2)
+        var(--cocso-spacing-2)
       )
     );
   }

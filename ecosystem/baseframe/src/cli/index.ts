@@ -4,8 +4,7 @@ import fs from "fs-extra";
 import YAML from "yaml";
 import yargs from "yargs";
 import { type Collections, cssVars, type Token, tailwind } from "../core";
-
-const YAML_FILE_REGEX = /\.ya?ml$/;
+import { findYamlFiles } from "../utils/fs";
 
 const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve("@cocso-ui/baseframe-sources");
@@ -22,28 +21,6 @@ function showBanner() {
 ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
 `
   );
-}
-
-function findYamlFiles(dir: string): string[] {
-  const files: string[] = [];
-
-  function scanDir(currentDir: string) {
-    const items = fs.readdirSync(currentDir);
-
-    for (const item of items) {
-      const fullPath = path.join(currentDir, item);
-      const stat = fs.statSync(fullPath);
-
-      if (stat.isDirectory()) {
-        scanDir(fullPath);
-      } else if (stat.isFile() && YAML_FILE_REGEX.test(item)) {
-        files.push(fullPath);
-      }
-    }
-  }
-
-  scanDir(dir);
-  return files;
 }
 
 function loadTokens(): { tokens: Token[]; collections: Collections } {
@@ -78,7 +55,7 @@ function generateCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 
   const css = cssVars.generateCssVariables(tokens, collections, {
-    prefix,
+    prefix: prefix ?? "cocso",
     banner: "",
     selectors: { global: { default: ":root" } },
   });
@@ -94,7 +71,7 @@ function generateTailwindCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 
   const tailwindCss = tailwind.generateTailwindCSS(tokens, collections, {
-    prefix,
+    prefix: prefix ?? "cocso",
     banner: "",
   });
 

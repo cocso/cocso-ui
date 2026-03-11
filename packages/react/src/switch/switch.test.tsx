@@ -73,4 +73,38 @@ describe("Switch", () => {
       );
     });
   });
+
+  describe("size CSS variables", () => {
+    it("applies size CSS variables to the wrapper", () => {
+      const { container } = render(<Switch size="medium" />);
+      const wrapper = container.firstChild as HTMLElement;
+      expect(wrapper.style.getPropertyValue("--cocso-switch-width")).not.toBe(
+        ""
+      );
+      expect(wrapper.style.getPropertyValue("--cocso-switch-height")).not.toBe(
+        ""
+      );
+      expect(
+        wrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+      ).not.toBe("");
+    });
+
+    it('applies smaller dimensions for size="small" than size="medium"', () => {
+      const { container: mediumContainer } = render(<Switch size="medium" />);
+      const { container: smallContainer } = render(<Switch size="small" />);
+      const mediumWrapper = mediumContainer.firstChild as HTMLElement;
+      const smallWrapper = smallContainer.firstChild as HTMLElement;
+      expect(
+        mediumWrapper.style.getPropertyValue("--cocso-switch-width")
+      ).not.toBe(smallWrapper.style.getPropertyValue("--cocso-switch-width"));
+      expect(
+        mediumWrapper.style.getPropertyValue("--cocso-switch-height")
+      ).not.toBe(smallWrapper.style.getPropertyValue("--cocso-switch-height"));
+      expect(
+        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+      ).not.toBe(
+        smallWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+      );
+    });
+  });
 });

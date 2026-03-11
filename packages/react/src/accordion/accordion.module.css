@@ -24,8 +24,8 @@
 
   .chevron {
     display: inline-block;
-    width: var(--ds-spacing-10);
-    height: var(--ds-spacing-10);
+    width: var(--cocso-spacing-10);
+    height: var(--cocso-spacing-10);
     transition: transform 0.2s ease-in-out;
   }
 

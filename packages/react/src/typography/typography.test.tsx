@@ -156,3 +156,135 @@ describe("Typography", () => {
     });
   });
 });
+
+describe("Typography heading font sizes", () => {
+  it.each([
+    ["x-large", "28px", "36px"],
+    ["large", "24px", "32px"],
+    ["medium", "20px", "24px"],
+  ] as const)('sets responsive font-size for heading size="%s"', (size, expectedBase, expectedTablet) => {
+    const { container } = render(
+      <Typography size={size} type="heading">
+        Heading
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      expectedBase
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe(expectedTablet);
+  });
+
+  it.each([
+    ["small", "18px"],
+    ["x-small", "16px"],
+  ] as const)('sets flat font-size for heading size="%s"', (size, expectedBase) => {
+    const { container } = render(
+      <Typography size={size} type="heading">
+        Heading
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      expectedBase
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe("");
+  });
+});
+
+describe("Typography display font sizes", () => {
+  it.each([
+    ["medium", "32px", "44px"],
+    ["small", "28px", "36px"],
+  ] as const)('sets responsive font-size for display size="%s"', (size, expectedBase, expectedTablet) => {
+    const { container } = render(
+      <Typography size={size} type="display">
+        Display
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      expectedBase
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe(expectedTablet);
+  });
+});
+
+describe("Typography custom responsive font size", () => {
+  it("supports array-based responsive size [base, tablet]", () => {
+    const { container } = render(
+      <Typography size={[28, 36]} type="custom">
+        Text
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      "28px"
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe("36px");
+    expect(
+      el.style.getPropertyValue("--cocso-desktop-typography-font-size")
+    ).toBe("");
+  });
+
+  it("supports array-based responsive size [base, tablet, desktop]", () => {
+    const { container } = render(
+      <Typography size={[28, 36, 44]} type="custom">
+        Text
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      "28px"
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe("36px");
+    expect(
+      el.style.getPropertyValue("--cocso-desktop-typography-font-size")
+    ).toBe("44px");
+  });
+
+  it("supports object-based responsive size { base, tablet, desktop }", () => {
+    const { container } = render(
+      <Typography size={{ base: 28, tablet: 36, desktop: 44 }} type="custom">
+        Text
+      </Typography>
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
+      "28px"
+    );
+    expect(
+      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
+    ).toBe("36px");
+    expect(
+      el.style.getPropertyValue("--cocso-desktop-typography-font-size")
+    ).toBe("44px");
+  });
+});
+
+describe("Typography line-height CSS variable", () => {
+  it.each([
+    ["none", "1"],
+    ["tight", "1.25"],
+    ["snug", "1.375"],
+    ["normal", "1.5"],
+    ["relaxed", "1.625"],
+    ["loose", "2"],
+  ] as const)('sets --cocso-typography-line-height for lineHeight="%s"', (lh, expected) => {
+    const { container } = render(<Typography lineHeight={lh}>Text</Typography>);
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.getPropertyValue("--cocso-typography-line-height")).toBe(
+      expected
+    );
+  });
+});
