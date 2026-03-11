@@ -1,6 +1,6 @@
-import { buildValidatedAst } from '../transforms';
-import type { Ast, Collections, Token, TokenDecl } from '../types';
-import { resolveTokenValue, toCssValue } from './utils';
+import { buildValidatedAst } from "../transforms";
+import type { Ast, Collections, Token, TokenDecl } from "../types";
+import { resolveTokenValue, toCssValue } from "./utils";
 
 export interface CssVarsOptions {
   banner?: string;
@@ -16,7 +16,7 @@ const LEADING_DOLLAR = /^\$/;
 const DOT_GLOBAL = /\./g;
 
 function createVarName(name: string, prefix?: string): string {
-  const clean = name.replace(LEADING_DOLLAR, '').replace(DOT_GLOBAL, '-');
+  const clean = name.replace(LEADING_DOLLAR, "").replace(DOT_GLOBAL, "-");
   return prefix ? `--${prefix}-${clean}` : `--${clean}`;
 }
 
@@ -26,12 +26,19 @@ function createDeclaration(
   allTokens: TokenDecl[],
   prefix?: string
 ): string {
-  const value = token.values.find(v => v.mode === mode);
+  const value = token.values.find((v) => v.mode === mode);
   if (!value) {
-    throw new Error(`No value found for token '${token.token.name}' in mode '${mode}'`);
+    throw new Error(
+      `No value found for token '${token.token.name}' in mode '${mode}'`
+    );
   }
 
-  const resolvedValue = resolveTokenValue(value.value, allTokens, createVarName, prefix);
+  const resolvedValue = resolveTokenValue(
+    value.value,
+    allTokens,
+    createVarName,
+    prefix
+  );
   const varName = createVarName(token.token.name, prefix);
   return `${varName}: ${toCssValue(resolvedValue)};`;
 }
@@ -44,26 +51,28 @@ function createRule(
   prefix?: string
 ): string {
   const declarations = tokens
-    .map(token => `  ${createDeclaration(token, mode, allTokens, prefix)}`)
-    .join('\n');
+    .map((token) => `  ${createDeclaration(token, mode, allTokens, prefix)}`)
+    .join("\n");
   return `${selector} {\n${declarations}\n}`;
 }
 
 export function generateFromAst(ast: Ast, options: CssVarsOptions): string {
-  const { prefix, banner = '', selectors = {} } = options;
+  const { prefix, banner = "", selectors = {} } = options;
   const { tokens, collections } = ast;
 
   const css = collections
-    .flatMap(collection => {
-      const collectionTokens = tokens.filter(token => token.token.collection === collection.name);
+    .flatMap((collection) => {
+      const collectionTokens = tokens.filter(
+        (token) => token.token.collection === collection.name
+      );
 
-      return collection.modes.map(mode => {
-        const selector = selectors[collection.name]?.[mode] || ':root';
+      return collection.modes.map((mode) => {
+        const selector = selectors[collection.name]?.[mode] || ":root";
 
         return createRule(selector, collectionTokens, mode, tokens, prefix);
       });
     })
-    .join('\n\n');
+    .join("\n\n");
 
   return `${banner}${css}`;
 }

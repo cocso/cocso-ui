@@ -1,65 +1,67 @@
-@keyframes overlay-show {
-  from {
-    opacity: 0;
+@layer components {
+  @keyframes overlay-show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  to {
-    opacity: 1;
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-z-index-overlay);
+    background-color: var(--ds-color-black-alpha-30);
+    animation: overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-}
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: var(--ds-z-index-overlay);
-  background-color: var(--ds-color-black-alpha-30);
-  animation: overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes content-show {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(0.997);
+  @keyframes content-show {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.997);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+
+  .content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: var(--ds-z-index-modal);
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 380px;
+    max-height: 85vh;
+    padding: var(--ds-spacing-9);
+    background-color: var(--ds-color-white);
+    border-radius: 12px;
+    transform: translate(-50%, -50%);
+    animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-}
 
-.content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: var(--ds-z-index-modal);
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-  max-width: 380px;
-  max-height: 85vh;
-  padding: var(--ds-spacing-9);
-  background-color: var(--ds-color-white);
-  border-radius: 12px;
-  transform: translate(-50%, -50%);
-  animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  .close {
+    position: absolute;
+    top: var(--ds-spacing-9);
+    right: var(--ds-spacing-9);
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    justify-content: center;
+    width: var(--ds-spacing-10);
+    height: var(--ds-spacing-10);
+    cursor: pointer;
+  }
 
-.close {
-  position: absolute;
-  top: var(--ds-spacing-9);
-  right: var(--ds-spacing-9);
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  justify-content: center;
-  width: var(--ds-spacing-10);
-  height: var(--ds-spacing-10);
-  cursor: pointer;
-}
+  .title {
+    word-break: keep-all;
+  }
 
-.title {
-  word-break: keep-all;
-}
-
-.description {
-  margin-top: var(--ds-spacing-3);
+  .description {
+    margin-top: var(--ds-spacing-3);
+  }
 }

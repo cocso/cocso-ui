@@ -1,28 +1,24 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   esbuild: {
-    jsx: 'automatic',
+    jsx: "automatic",
   },
   test: {
-    environment: 'jsdom',
+    environment: "jsdom",
     globals: true,
-    setupFiles: ['./src/test/setup.ts'],
+    setupFiles: ["./src/test/setup.ts"],
     css: {
       modules: {
-        classNameStrategy: 'non-scoped',
+        classNameStrategy: "non-scoped",
       },
     },
-    include: ['src/**/*.test.{ts,tsx}'],
-    poolOptions: {
-      forks: {
-        maxForks: 4,
-      },
-    },
+    include: ["src/**/*.test.{ts,tsx}"],
+    maxForks: 4,
     coverage: {
-      provider: 'v8',
-      include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/**/*.stories.tsx', 'src/test/**', 'src/**/index.ts'],
+      provider: "v8",
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/**/*.stories.tsx", "src/test/**", "src/**/index.ts"],
     },
   },
 });

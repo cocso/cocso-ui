@@ -1,6 +1,6 @@
-import { useId } from 'react';
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import { useId } from "react";
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const NaverLogo = (props: IconProps) => {
   const id = useId();
@@ -24,7 +24,12 @@ export const NaverLogo = (props: IconProps) => {
         </g>
         <defs>
           <clipPath id={id}>
-            <rect fill="white" height="10" transform="translate(5 5)" width="10" />
+            <rect
+              fill="white"
+              height="10"
+              transform="translate(5 5)"
+              width="10"
+            />
           </clipPath>
         </defs>
       </svg>
@@ -32,4 +37,4 @@ export const NaverLogo = (props: IconProps) => {
   );
 };
 
-NaverLogo.displayName = 'NaverLogo';
+NaverLogo.displayName = "NaverLogo";

@@ -1,35 +1,38 @@
-import { Switch as SwitchBase } from '@base-ui/react/switch';
-import { clsx as cx } from 'clsx';
-import {
-  type ComponentPropsWithoutRef,
-  type ComponentRef,
-  type CSSProperties,
-  forwardRef,
-  useId,
-} from 'react';
-import { match } from 'ts-pattern';
-import { colors, spacing } from '../token';
-import { Typography } from '../typography';
-import styles from './switch.module.css';
+import { Switch as SwitchBase } from "@base-ui/react/switch";
+import { clsx as cx } from "clsx";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  CSSProperties,
+} from "react";
+import { forwardRef, useId } from "react";
+import { match } from "ts-pattern";
+import { colors, spacing } from "../token";
+import { Typography } from "../typography";
+import styles from "./switch.module.css";
 
-export type SwitchSize = 'sm' | 'md';
+export type SwitchSize = "small" | "medium";
 
-export interface SwitchProps extends ComponentPropsWithoutRef<typeof SwitchBase.Root> {
+export interface SwitchProps
+  extends ComponentPropsWithoutRef<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
   label?: string;
-  position?: 'left' | 'right';
+  position?: "left" | "right";
   size?: SwitchSize;
 }
 
-export const Switch = forwardRef<ComponentRef<typeof SwitchBase.Root>, SwitchProps>(
+export const Switch = forwardRef<
+  ComponentRef<typeof SwitchBase.Root>,
+  SwitchProps
+>(
   (
     {
       id: _id,
       className,
       style: _style,
-      size = 'md',
-      position = 'right',
+      size = "medium",
+      position = "right",
       disabled,
       label,
       ...props
@@ -41,11 +44,11 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchBase.Root>, SwitchPro
 
     const style = {
       ..._style,
-      '--cocso-switch-width': getSwitchWidth(size),
-      '--cocso-switch-height': getSwitchHeight(size),
-      '--cocso-switch-thumb-width': getThumbSize(size),
-      '--cocso-switch-thumb-height': getThumbSize(size),
-      '--cocso-switch-bg-color': colors.neutral100,
+      "--cocso-switch-width": getSwitchWidth(size),
+      "--cocso-switch-height": getSwitchHeight(size),
+      "--cocso-switch-thumb-width": getThumbSize(size),
+      "--cocso-switch-thumb-height": getThumbSize(size),
+      "--cocso-switch-bg-color": colors.neutral100,
     } as CSSProperties;
 
     return (
@@ -54,14 +57,28 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchBase.Root>, SwitchPro
         className={cx(styles.wrapper, className)}
         style={style}
       >
-        {position === 'left' && (
-          <Typography render={<label htmlFor={id}>{label}</label>} size={size} type="body" />
+        {position === "left" && (
+          <Typography
+            render={<label htmlFor={id}>{label}</label>}
+            size={size}
+            type="body"
+          />
         )}
-        <SwitchBase.Root className={styles.switch} disabled={disabled} ref={ref} {...props}>
+        <SwitchBase.Root
+          className={styles.switch}
+          disabled={disabled}
+          ref={ref}
+          {...props}
+        >
           <SwitchBase.Thumb className={styles.thumb} />
         </SwitchBase.Root>
-        {position === 'right' && (
-          <Typography aria-disabled={disabled} render={<label htmlFor={id}>{label}</label>} size={size} type="body" />
+        {position === "right" && (
+          <Typography
+            aria-disabled={disabled}
+            render={<label htmlFor={id}>{label}</label>}
+            size={size}
+            type="body"
+          />
         )}
       </div>
     );
@@ -70,18 +87,18 @@ export const Switch = forwardRef<ComponentRef<typeof SwitchBase.Root>, SwitchPro
 
 const getSwitchWidth = (size: SwitchSize) =>
   match(size)
-    .with('md', () => spacing.s14)
-    .with('sm', () => spacing.s12)
+    .with("medium", () => spacing.s14)
+    .with("small", () => spacing.s12)
     .exhaustive();
 
 const getSwitchHeight = (size: SwitchSize) =>
   match(size)
-    .with('md', () => spacing.s10)
-    .with('sm', () => spacing.s9)
+    .with("medium", () => spacing.s10)
+    .with("small", () => spacing.s9)
     .exhaustive();
 
 const getThumbSize = (size: SwitchSize) =>
   match(size)
-    .with('md', () => spacing.s9)
-    .with('sm', () => spacing.s8)
+    .with("medium", () => spacing.s9)
+    .with("small", () => spacing.s8)
     .exhaustive();

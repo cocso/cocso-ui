@@ -9,7 +9,7 @@ const meta = {
       control: 'select',
       options: ['primary', 'secondary', 'tertiary', 'success', 'error', 'warning', 'neutral'],
     },
-    size: { control: 'select', options: ['xl', 'lg', 'md', 'sm', 'xs'] },
+    size: { control: 'select', options: ['x-large', 'large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -42,11 +42,11 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-      <Button size="xs">XS</Button>
-      <Button size="sm">SM</Button>
-      <Button size="md">MD</Button>
-      <Button size="lg">LG</Button>
-      <Button size="xl">XL</Button>
+      <Button size="x-small">XS</Button>
+      <Button size="small">SM</Button>
+      <Button size="medium">MD</Button>
+      <Button size="large">LG</Button>
+      <Button size="x-large">XL</Button>
     </div>
   ),
 };

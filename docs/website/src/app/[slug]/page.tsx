@@ -1,13 +1,13 @@
-import { colors, Typography } from '@cocso-ui/react';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Section } from '~/components/ui';
-import { source } from '~/libs/source';
-import { getMDXComponents } from '~/mdx-components';
+import { colors, Typography } from "@cocso-ui/react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Section } from "~/components/ui";
+import { source } from "~/libs/source";
+import { getMDXComponents } from "~/mdx-components";
 
-type Props = {
+interface Props {
   params: Promise<{ slug: string }>;
-};
+}
 
 const Page = async ({ params }: Props) => {
   const { slug } = await params;
@@ -22,7 +22,7 @@ const Page = async ({ params }: Props) => {
   return (
     <>
       <Section>
-        <Typography size="lg" type="heading">
+        <Typography size="large" type="heading">
           {page.data.title}
         </Typography>
         <Typography className="mt-1" color={colors.neutral500} weight="medium">
@@ -37,7 +37,9 @@ const Page = async ({ params }: Props) => {
 
 export default Page;
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
   const { slug } = await params;
   const page = source.getPage([slug]);
 

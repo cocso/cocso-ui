@@ -1,4 +1,11 @@
-import type { ColorValue, ShadowLayer, SizeValue, TokenDecl, TokenRef, Value } from '../types';
+import type {
+  ColorValue,
+  ShadowLayer,
+  SizeValue,
+  TokenDecl,
+  TokenRef,
+  Value,
+} from "../types";
 
 export interface TokenResolver {
   resolve(value: Value): Value;
@@ -17,7 +24,7 @@ export function createTokenResolver(
     },
     resolveTokenRef(tokenRef: TokenRef): string {
       const fullName = `$${tokenRef.collection}.${tokenRef.token}`;
-      const found = allTokens.find(t => t.token.name === fullName);
+      const found = allTokens.find((t) => t.token.name === fullName);
 
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
@@ -36,31 +43,45 @@ function resolveValue(
   cssVarNamer: (tokenName: string) => string
 ): Value {
   switch (value.kind) {
-    case 'TokenRef': {
+    case "TokenRef": {
       const fullName = `$${value.collection}.${value.token}`;
-      const found = allTokens.find(t => t.token.name === fullName);
+      const found = allTokens.find((t) => t.token.name === fullName);
       if (!found) {
         throw new Error(`Token not found: ${fullName}`);
       }
       const varName = cssVarNamer(fullName);
-      return { kind: 'StringValue', value: `var(${varName})` };
+      return { kind: "StringValue", value: `var(${varName})` };
     }
 
-    case 'ShadowLayer':
+    case "ShadowLayer":
       return {
-        kind: 'ShadowLayer',
-        color: resolveValue(value.color, allTokens, mode, cssVarNamer) as ColorValue,
-        offsetX: resolveValue(value.offsetX, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        offsetY: resolveValue(value.offsetY, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        blur: resolveValue(value.blur, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
-        spread: resolveValue(value.spread, allTokens, mode, cssVarNamer) as SizeValue | TokenRef,
+        kind: "ShadowLayer",
+        color: resolveValue(
+          value.color,
+          allTokens,
+          mode,
+          cssVarNamer
+        ) as ColorValue,
+        offsetX: resolveValue(value.offsetX, allTokens, mode, cssVarNamer) as
+          | SizeValue
+          | TokenRef,
+        offsetY: resolveValue(value.offsetY, allTokens, mode, cssVarNamer) as
+          | SizeValue
+          | TokenRef,
+        blur: resolveValue(value.blur, allTokens, mode, cssVarNamer) as
+          | SizeValue
+          | TokenRef,
+        spread: resolveValue(value.spread, allTokens, mode, cssVarNamer) as
+          | SizeValue
+          | TokenRef,
       };
 
-    case 'Shadow':
+    case "Shadow":
       return {
-        kind: 'Shadow',
+        kind: "Shadow",
         layers: value.layers.map(
-          layer => resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer
+          (layer) =>
+            resolveValue(layer, allTokens, mode, cssVarNamer) as ShadowLayer
         ),
       };
 

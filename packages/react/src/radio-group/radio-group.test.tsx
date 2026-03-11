@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
-import { RadioGroup } from '../radio-group';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-describe('RadioGroup', () => {
-  describe('rendering', () => {
-    it('renders a radio group', () => {
+import { RadioGroup } from "../radio-group";
+
+describe("RadioGroup", () => {
+  describe("rendering", () => {
+    it("renders a radio group", () => {
       render(
         <RadioGroup aria-label="Options">
           <RadioGroup.Item value="option-1">
@@ -14,10 +14,10 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      expect(screen.getByRole('radiogroup')).toBeInTheDocument();
+      expect(screen.getByRole("radiogroup")).toBeInTheDocument();
     });
 
-    it('renders multiple radio items', () => {
+    it("renders multiple radio items", () => {
       render(
         <RadioGroup aria-label="Options">
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -32,10 +32,10 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      expect(screen.getAllByRole('radio')).toHaveLength(3);
+      expect(screen.getAllByRole("radio")).toHaveLength(3);
     });
 
-    it('renders with a default value selected', () => {
+    it("renders with a default value selected", () => {
       render(
         <RadioGroup aria-label="Options" defaultValue="option-2">
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -47,11 +47,11 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      expect(screen.getByRole('radio', { name: 'Option 2' })).toBeChecked();
-      expect(screen.getByRole('radio', { name: 'Option 1' })).not.toBeChecked();
+      expect(screen.getByRole("radio", { name: "Option 2" })).toBeChecked();
+      expect(screen.getByRole("radio", { name: "Option 1" })).not.toBeChecked();
     });
 
-    it('renders radio items as unchecked by default when no defaultValue is set', () => {
+    it("renders radio items as unchecked by default when no defaultValue is set", () => {
       render(
         <RadioGroup aria-label="Options">
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -60,12 +60,12 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      expect(screen.getByRole('radio', { name: 'Option 1' })).not.toBeChecked();
+      expect(screen.getByRole("radio", { name: "Option 1" })).not.toBeChecked();
     });
   });
 
-  describe('behavior', () => {
-    it('selects a radio item when clicked', async () => {
+  describe("behavior", () => {
+    it("selects a radio item when clicked", async () => {
       render(
         <RadioGroup aria-label="Options">
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -77,11 +77,11 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      await userEvent.click(screen.getByRole('radio', { name: 'Option 1' }));
-      expect(screen.getByRole('radio', { name: 'Option 1' })).toBeChecked();
+      await userEvent.click(screen.getByRole("radio", { name: "Option 1" }));
+      expect(screen.getByRole("radio", { name: "Option 1" })).toBeChecked();
     });
 
-    it('deselects the previously selected item when another is clicked', async () => {
+    it("deselects the previously selected item when another is clicked", async () => {
       render(
         <RadioGroup aria-label="Options" defaultValue="option-1">
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -93,12 +93,12 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      await userEvent.click(screen.getByRole('radio', { name: 'Option 2' }));
-      expect(screen.getByRole('radio', { name: 'Option 1' })).not.toBeChecked();
-      expect(screen.getByRole('radio', { name: 'Option 2' })).toBeChecked();
+      await userEvent.click(screen.getByRole("radio", { name: "Option 2" }));
+      expect(screen.getByRole("radio", { name: "Option 1" })).not.toBeChecked();
+      expect(screen.getByRole("radio", { name: "Option 2" })).toBeChecked();
     });
 
-    it('calls onValueChange when a radio item is selected', async () => {
+    it("calls onValueChange when a radio item is selected", async () => {
       const onValueChange = vi.fn();
       render(
         <RadioGroup aria-label="Options" onValueChange={onValueChange}>
@@ -108,11 +108,11 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      await userEvent.click(screen.getByRole('radio', { name: 'Option 1' }));
-      expect(onValueChange).toHaveBeenCalledWith('option-1', expect.anything());
+      await userEvent.click(screen.getByRole("radio", { name: "Option 1" }));
+      expect(onValueChange).toHaveBeenCalledWith("option-1", expect.anything());
     });
 
-    it('disables all items when the group is disabled', () => {
+    it("disables all items when the group is disabled", () => {
       render(
         <RadioGroup aria-label="Options" disabled>
           <RadioGroup.Item aria-label="Option 1" value="option-1">
@@ -124,9 +124,9 @@ describe('RadioGroup', () => {
         </RadioGroup>
       );
 
-      const radios = screen.getAllByRole('radio');
+      const radios = screen.getAllByRole("radio");
       for (const radio of radios) {
-        expect(radio).toHaveAttribute('aria-disabled', 'true');
+        expect(radio).toHaveAttribute("aria-disabled", "true");
       }
     });
   });

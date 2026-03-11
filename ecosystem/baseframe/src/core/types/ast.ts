@@ -10,7 +10,7 @@ export interface Token {
     collection: string;
     tokens: Record<string, TokenData>;
   };
-  kind: 'Tokens';
+  kind: "Tokens";
   metadata: {
     id: string;
     name: string;
@@ -25,7 +25,7 @@ export interface Collection {
 
 export interface Collections {
   data: Collection[];
-  kind: 'TokenCollections';
+  kind: "TokenCollections";
   metadata: {
     id: string;
     name: string;

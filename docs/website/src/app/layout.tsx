@@ -1,18 +1,18 @@
-import '~/styles/globals.css';
-import '@cocso-ui/css/token.css';
-import '@cocso-ui/react/styles.css';
+import "~/styles/globals.css";
+import "@cocso-ui/css/token.css";
+import "@cocso-ui/react/styles.css";
 
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import type { Metadata } from 'next';
-import { ViewTransitions } from 'next-view-transitions';
-import type { PropsWithChildren } from 'react';
-import { Layout } from '~/components/layout';
-import { SearchDialog } from '~/components/ui';
+import { RootProvider } from "fumadocs-ui/provider/next";
+import type { Metadata } from "next";
+import { ViewTransitions } from "next-view-transitions";
+import type { PropsWithChildren } from "react";
+import { Layout } from "~/components/layout";
+import { SearchDialog } from "~/components/ui";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cocso-ui.com'),
-  title: { default: 'cocso-ui', template: '%s | cocso-ui' },
-  description: 'Documentation for the COCSO UI component library.',
+  metadataBase: new URL("https://cocso-ui.com"),
+  title: { default: "cocso-ui", template: "%s | cocso-ui" },
+  description: "Documentation for the COCSO UI component library.",
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {

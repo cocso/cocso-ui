@@ -5,7 +5,7 @@ const meta = {
   title: 'Components/Select',
   component: Select,
   argTypes: {
-    size: { control: 'select', options: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl'] },
+    size: { control: 'select', options: ['2x-small', 'x-small', 'small', 'medium', 'large', 'x-large'] },
     disabled: { control: 'boolean' },
     stretch: { control: 'boolean' },
   },
@@ -27,12 +27,12 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Select size="2xs"><option>2XS</option></Select>
-      <Select size="xs"><option>XS</option></Select>
-      <Select size="sm"><option>SM</option></Select>
-      <Select size="md"><option>MD</option></Select>
-      <Select size="lg"><option>LG</option></Select>
-      <Select size="xl"><option>XL</option></Select>
+      <Select size="2x-small"><option>2X-Small</option></Select>
+      <Select size="x-small"><option>X-Small</option></Select>
+      <Select size="small"><option>Small</option></Select>
+      <Select size="medium"><option>Medium</option></Select>
+      <Select size="large"><option>Large</option></Select>
+      <Select size="x-large"><option>X-Large</option></Select>
     </div>
   ),
 };

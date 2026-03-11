@@ -1,104 +1,114 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
-import { Dropdown } from '../dropdown';
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-describe('Dropdown', () => {
-  describe('rendering', () => {
-    it('renders the trigger button', () => {
+import { Dropdown } from "./dropdown";
+
+describe("Dropdown", () => {
+  describe("rendering", () => {
+    it("renders the trigger button", () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Item 1</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "Open Menu" })
+      ).toBeInTheDocument();
     });
 
-    it('does not show content before the trigger is clicked', () => {
+    it("does not show content before the trigger is clicked", () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Item 1</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      expect(screen.queryByRole('menuitem', { name: 'Item 1' })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole("menuitem", { name: "Item 1" })
+      ).not.toBeInTheDocument();
     });
   });
 
-  describe('open/close behavior', () => {
-    it('opens the dropdown and shows items when trigger is clicked', async () => {
+  describe("open/close behavior", () => {
+    it("opens the dropdown and shows items when trigger is clicked", async () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Item 1</Dropdown.Item>
             <Dropdown.Item>Item 2</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
-      expect(await screen.findByRole('menuitem', { name: 'Item 1' })).toBeInTheDocument();
-      expect(screen.getByRole('menuitem', { name: 'Item 2' })).toBeInTheDocument();
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      await expect(
+        screen.findByRole("menuitem", { name: "Item 1" })
+      ).resolves.toBeInTheDocument();
+      expect(
+        screen.getByRole("menuitem", { name: "Item 2" })
+      ).toBeInTheDocument();
     });
 
-    it('renders the dropdown menu in document.body via Portal', async () => {
+    it("renders the dropdown menu in document.body via Portal", async () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Portal Item</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
-      const item = await screen.findByRole('menuitem', { name: 'Portal Item' });
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      const item = await screen.findByRole("menuitem", { name: "Portal Item" });
       expect(document.body).toContainElement(item);
     });
   });
 
-  describe('item interactions', () => {
-    it('calls onClick handler when an item is clicked', async () => {
+  describe("item interactions", () => {
+    it("calls onClick handler when an item is clicked", async () => {
       const onClick = vi.fn();
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item onClick={onClick}>Action</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
-      const item = await screen.findByRole('menuitem', { name: 'Action' });
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      const item = await screen.findByRole("menuitem", { name: "Action" });
       await userEvent.click(item);
-      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onClick).toHaveBeenCalledOnce();
     });
 
-    it('closes the dropdown after an item is selected', async () => {
+    it("closes the dropdown after an item is selected", async () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Close Me</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
-      const item = await screen.findByRole('menuitem', { name: 'Close Me' });
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      const item = await screen.findByRole("menuitem", { name: "Close Me" });
       await userEvent.click(item);
       await waitFor(() => {
-        expect(screen.queryByRole('menuitem', { name: 'Close Me' })).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("menuitem", { name: "Close Me" })
+        ).not.toBeInTheDocument();
       });
     });
 
-    it('renders multiple items and each is accessible', async () => {
+    it("renders multiple items and each is accessible", async () => {
       render(
         <Dropdown>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Edit</Dropdown.Item>
             <Dropdown.Item>Delete</Dropdown.Item>
@@ -106,25 +116,31 @@ describe('Dropdown', () => {
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
-      expect(await screen.findByRole('menuitem', { name: 'Edit' })).toBeInTheDocument();
-      expect(screen.getByRole('menuitem', { name: 'Delete' })).toBeInTheDocument();
-      expect(screen.getByRole('menuitem', { name: 'Share' })).toBeInTheDocument();
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      await expect(
+        screen.findByRole("menuitem", { name: "Edit" })
+      ).resolves.toBeInTheDocument();
+      expect(
+        screen.getByRole("menuitem", { name: "Delete" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("menuitem", { name: "Share" })
+      ).toBeInTheDocument();
     });
   });
 
-  describe('controlled state', () => {
-    it('respects onOpenChange callback', async () => {
+  describe("controlled state", () => {
+    it("respects onOpenChange callback", async () => {
       const onOpenChange = vi.fn();
       render(
         <Dropdown onOpenChange={onOpenChange}>
-          <Dropdown.Trigger render={<button>Open Menu</button>} />
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
           <Dropdown.Content>
             <Dropdown.Item>Item</Dropdown.Item>
           </Dropdown.Content>
         </Dropdown>
       );
-      await userEvent.click(screen.getByRole('button', { name: 'Open Menu' }));
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
       await waitFor(() => {
         expect(onOpenChange).toHaveBeenCalledWith(true, expect.anything());
       });

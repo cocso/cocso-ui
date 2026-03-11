@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const COCSOUILogo = (props: IconProps) => (
   <Icon {...props}>
@@ -25,4 +25,4 @@ export const COCSOUILogo = (props: IconProps) => (
   </Icon>
 );
 
-COCSOUILogo.displayName = 'COCSOUILogo';
+COCSOUILogo.displayName = "COCSOUILogo";

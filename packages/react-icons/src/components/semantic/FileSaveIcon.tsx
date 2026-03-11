@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const FileSaveIcon = (props: IconProps) => {
   return (
@@ -25,4 +25,4 @@ export const FileSaveIcon = (props: IconProps) => {
   );
 };
 
-FileSaveIcon.displayName = 'FileSaveIcon';
+FileSaveIcon.displayName = "FileSaveIcon";

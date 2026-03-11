@@ -1,6 +1,6 @@
-import { useId } from 'react';
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import { useId } from "react";
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const KakaoLogo = (props: IconProps) => {
   const id = useId();
@@ -26,7 +26,12 @@ export const KakaoLogo = (props: IconProps) => {
         </g>
         <defs>
           <clipPath id={id}>
-            <rect fill="white" height="12" transform="translate(4 4)" width="12" />
+            <rect
+              fill="white"
+              height="12"
+              transform="translate(4 4)"
+              width="12"
+            />
           </clipPath>
         </defs>
       </svg>
@@ -34,4 +39,4 @@ export const KakaoLogo = (props: IconProps) => {
   );
 };
 
-KakaoLogo.displayName = 'KakaoLogo';
+KakaoLogo.displayName = "KakaoLogo";

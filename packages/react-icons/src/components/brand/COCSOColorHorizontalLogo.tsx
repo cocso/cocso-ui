@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const COCSOColorHorizontalLogo = (props: IconProps) => (
   <Icon {...props}>
@@ -45,4 +45,4 @@ export const COCSOColorHorizontalLogo = (props: IconProps) => (
   </Icon>
 );
 
-COCSOColorHorizontalLogo.displayName = 'COCSOColorHorizontalLogo';
+COCSOColorHorizontalLogo.displayName = "COCSOColorHorizontalLogo";

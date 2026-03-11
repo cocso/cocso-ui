@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const InfoIcon = (props: IconProps) => {
   return (
@@ -24,4 +24,4 @@ export const InfoIcon = (props: IconProps) => {
   );
 };
 
-InfoIcon.displayName = 'InfoIcon';
+InfoIcon.displayName = "InfoIcon";

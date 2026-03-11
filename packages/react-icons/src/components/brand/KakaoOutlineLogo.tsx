@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const KakaoOutlineLogo = (props: IconProps) => (
   <Icon {...props}>
@@ -21,4 +21,4 @@ export const KakaoOutlineLogo = (props: IconProps) => (
   </Icon>
 );
 
-KakaoOutlineLogo.displayName = 'KakaoOutlineLogo';
+KakaoOutlineLogo.displayName = "KakaoOutlineLogo";

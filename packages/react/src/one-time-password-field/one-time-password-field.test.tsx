@@ -1,33 +1,48 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
-import { OneTimePasswordField } from '../one-time-password-field';
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-describe('OneTimePasswordField', () => {
-  it('renders a hidden input', () => {
+import { OneTimePasswordField } from "../one-time-password-field";
+
+describe("OneTimePasswordField", () => {
+  it("renders a hidden input", () => {
     const { container } = render(<OneTimePasswordField maxLength={4} />);
-    const input = container.querySelector('input');
+    const input = container.querySelector("input");
     expect(input).toBeInTheDocument();
   });
 
-  it('renders the correct number of slots', () => {
-    const { container } = render(<OneTimePasswordField maxLength={4} />);
-    const slots = container.querySelectorAll('[data-active], .slot');
-    // input-otp renders maxLength slots
-    expect(container.querySelector('input')).toBeInTheDocument();
+  it("renders maxLength slot elements", () => {
+    const { container } = render(<OneTimePasswordField maxLength={6} />);
+    expect(
+      container.querySelectorAll("div[class]").length
+    ).toBeGreaterThanOrEqual(6);
   });
 
-  it('reflects the value in the hidden input', () => {
+  it("reflects the value in the hidden input", () => {
     const { container } = render(
-      <OneTimePasswordField maxLength={4} value="1234" onValueChange={() => {}} />
+      <OneTimePasswordField
+        maxLength={4}
+        onValueChange={vi.fn()}
+        value="1234"
+      />
     );
-    const input = container.querySelector('input');
-    expect(input).toHaveValue('1234');
+    const input = container.querySelector("input");
+    expect(input).toHaveValue("1234");
   });
 
-  it('applies containerClassName', () => {
+  it("applies containerClassName", () => {
     const { container } = render(
-      <OneTimePasswordField maxLength={4} className="custom-container" />
+      <OneTimePasswordField className="custom-container" maxLength={4} />
     );
-    expect(container.querySelector('.custom-container')).toBeInTheDocument();
+    expect(container.querySelector(".custom-container")).toBeInTheDocument();
+  });
+
+  it("calls onValueChange when a character is typed", async () => {
+    const onValueChange = vi.fn();
+    const { container } = render(
+      <OneTimePasswordField maxLength={4} onValueChange={onValueChange} />
+    );
+    const input = container.querySelector("input") as HTMLInputElement;
+    await userEvent.type(input, "1");
+    expect(onValueChange).toHaveBeenCalledWith("1");
   });
 });

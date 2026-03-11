@@ -6,7 +6,7 @@ const meta = {
   component: Badge,
   argTypes: {
     variant: { control: 'select', options: ['default', 'danger', 'primary', 'success', 'warning'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
   },
   args: {
     children: 'Badge',
@@ -33,9 +33,9 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-      <Badge size="sm">Small</Badge>
-      <Badge size="md">Medium</Badge>
-      <Badge size="lg">Large</Badge>
+      <Badge size="small">Small</Badge>
+      <Badge size="medium">Medium</Badge>
+      <Badge size="large">Large</Badge>
     </div>
   ),
 };

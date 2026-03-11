@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const PieChartIcon = (props: IconProps) => {
   return (
@@ -25,4 +25,4 @@ export const PieChartIcon = (props: IconProps) => {
   );
 };
 
-PieChartIcon.displayName = 'PieChartIcon';
+PieChartIcon.displayName = "PieChartIcon";

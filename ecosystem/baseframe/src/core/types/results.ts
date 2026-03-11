@@ -1,4 +1,4 @@
-import type { Value } from './domain';
+import type { Value } from "./domain";
 
 export interface ParseResult {
   error?: string;
@@ -12,11 +12,11 @@ export interface ValidationError {
   mode?: string;
   tokenName?: string;
   type:
-    | 'INVALID_COLLECTION'
-    | 'MISSING_MODE'
-    | 'INVALID_TOKEN_FORMAT'
-    | 'INVALID_VALUE_FORMAT'
-    | 'INVALID_PRIMITIVE_TOKEN';
+    | "INVALID_COLLECTION"
+    | "MISSING_MODE"
+    | "INVALID_TOKEN_FORMAT"
+    | "INVALID_VALUE_FORMAT"
+    | "INVALID_PRIMITIVE_TOKEN";
   value?: string | number;
 }
 

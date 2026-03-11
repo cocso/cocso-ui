@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const ChangeCircleIcon = (props: IconProps) => {
   return (
@@ -26,4 +26,4 @@ export const ChangeCircleIcon = (props: IconProps) => {
   );
 };
 
-ChangeCircleIcon.displayName = 'ChangeCircleIcon';
+ChangeCircleIcon.displayName = "ChangeCircleIcon";

@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from 'react';
-import { Header } from './header';
-import { Sidebar } from './sidebar';
+import type { PropsWithChildren } from "react";
+import { Header } from "./header";
+import { Sidebar } from "./sidebar";
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -11,7 +11,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 
         <article
           className="w-full overflow-y-auto overflow-x-hidden lg:max-w-[960px]"
-          style={{ viewTransitionName: 'container-move' }}
+          style={{ viewTransitionName: "container-move" }}
         >
           {children}
         </article>

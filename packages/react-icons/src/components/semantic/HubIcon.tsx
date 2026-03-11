@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const HubIcon = (props: IconProps) => {
   return (
@@ -33,4 +33,4 @@ export const HubIcon = (props: IconProps) => {
   );
 };
 
-HubIcon.displayName = 'HubIcon';
+HubIcon.displayName = "HubIcon";

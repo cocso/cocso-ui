@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
-import { lazy, Suspense } from '@suspensive/react';
-import { useRef } from 'react';
+import { lazy, Suspense } from "@suspensive/react";
+import { useRef } from "react";
 
-type Props = { name: string };
+interface Props {
+  name: string;
+}
 
 export const ComponentPreview = ({ name }: Props) => {
   const cache = useRef<Record<string, React.ComponentType<unknown>>>({});

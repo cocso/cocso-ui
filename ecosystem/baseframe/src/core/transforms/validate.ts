@@ -1,4 +1,4 @@
-import { buildAst, parseValue } from '../parsers';
+import { buildAst, parseValue } from "../parsers";
 import type {
   Collection,
   Collections,
@@ -8,7 +8,7 @@ import type {
   ValidationError,
   ValidationResult,
   Value,
-} from '../types';
+} from "../types";
 
 function validateValue(value: string | number): ParseResult {
   return parseValue(value);
@@ -45,18 +45,20 @@ function validateAllValues(tokens: TokenDecl[]): Array<{
   return results;
 }
 
-function getAllTokenRefs(value: Value): { collection: string; token: string }[] {
+function getAllTokenRefs(
+  value: Value
+): { collection: string; token: string }[] {
   const refs: { collection: string; token: string }[] = [];
 
-  if (value.kind === 'TokenRef') {
+  if (value.kind === "TokenRef") {
     refs.push({ collection: value.collection, token: value.token });
-  } else if (value.kind === 'ShadowLayer') {
+  } else if (value.kind === "ShadowLayer") {
     refs.push(...getAllTokenRefs(value.color));
     refs.push(...getAllTokenRefs(value.offsetX));
     refs.push(...getAllTokenRefs(value.offsetY));
     refs.push(...getAllTokenRefs(value.blur));
     refs.push(...getAllTokenRefs(value.spread));
-  } else if (value.kind === 'Shadow') {
+  } else if (value.kind === "Shadow") {
     for (const layer of value.layers) {
       refs.push(...getAllTokenRefs(layer));
     }
@@ -65,7 +67,10 @@ function getAllTokenRefs(value: Value): { collection: string; token: string }[] 
   return refs;
 }
 
-function validateCollection(token: Token, definitions: Map<string, Collection>): ValidationResult {
+function validateCollection(
+  token: Token,
+  definitions: Map<string, Collection>
+): ValidationResult {
   const errors: ValidationError[] = [];
   const warnings: string[] = [];
 
@@ -74,7 +79,7 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
 
   if (!collectionDef) {
     errors.push({
-      type: 'INVALID_COLLECTION',
+      type: "INVALID_COLLECTION",
       message: `Collection '${collectionName}' is not defined`,
       collection: collectionName,
     });
@@ -83,12 +88,14 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
 
   for (const [tokenName, tokenData] of Object.entries(token.data.tokens)) {
     const tokenModes = Object.keys(tokenData.values);
-    const missingModes = collectionDef.modes.filter(mode => !tokenModes.includes(mode));
+    const missingModes = collectionDef.modes.filter(
+      (mode) => !tokenModes.includes(mode)
+    );
 
     if (missingModes.length > 0) {
       errors.push({
-        type: 'MISSING_MODE',
-        message: `Token '${tokenName}' is missing modes: ${missingModes.join(', ')}`,
+        type: "MISSING_MODE",
+        message: `Token '${tokenName}' is missing modes: ${missingModes.join(", ")}`,
         tokenName,
         collection: collectionName,
       });
@@ -98,9 +105,10 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
       const result = parseValue(value);
       if (!result.isValid) {
         errors.push({
-          type: 'INVALID_VALUE_FORMAT',
+          type: "INVALID_VALUE_FORMAT",
           message:
-            result.error || `Invalid value format for token '${tokenName}' in mode '${mode}'`,
+            result.error ||
+            `Invalid value format for token '${tokenName}' in mode '${mode}'`,
           tokenName,
           collection: collectionName,
           mode,
@@ -113,7 +121,10 @@ function validateCollection(token: Token, definitions: Map<string, Collection>):
   return { isValid: errors.length === 0, errors, warnings };
 }
 
-function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): ValidationResult {
+function validateTokenValues(
+  tokens: TokenDecl[],
+  allTokens: TokenDecl[]
+): ValidationResult {
   const errors: ValidationError[] = [];
   const warnings: string[] = [];
   const valueResults = validateAllValues(tokens);
@@ -121,8 +132,8 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
   for (const { tokenName, collection, mode, value, result } of valueResults) {
     if (!result.isValid) {
       errors.push({
-        type: 'INVALID_VALUE_FORMAT',
-        message: result.error || 'Invalid value format',
+        type: "INVALID_VALUE_FORMAT",
+        message: result.error || "Invalid value format",
         tokenName,
         collection,
         mode,
@@ -136,11 +147,11 @@ function validateTokenValues(tokens: TokenDecl[], allTokens: TokenDecl[]): Valid
 
       for (const { collection: refCollection, token: refToken } of tokenRefs) {
         const refName = `$${refCollection}.${refToken}`;
-        const foundRef = allTokens.find(t => t.token.name === refName);
+        const foundRef = allTokens.find((t) => t.token.name === refName);
 
         if (!foundRef) {
           errors.push({
-            type: 'INVALID_PRIMITIVE_TOKEN',
+            type: "INVALID_PRIMITIVE_TOKEN",
             message: `Referenced token '${refName}' not found`,
             tokenName,
             collection,
@@ -169,8 +180,8 @@ export function validateAllTokens(
   }
 
   const collections: Collections = {
-    kind: 'TokenCollections',
-    metadata: { id: 'temp', name: 'temp' },
+    kind: "TokenCollections",
+    metadata: { id: "temp", name: "temp" },
     data: Array.from(definitions.values()),
   };
 

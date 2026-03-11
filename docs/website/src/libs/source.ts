@@ -1,8 +1,8 @@
-import { type InferPageType, loader } from 'fumadocs-core/source';
-import { docs } from '~/.source';
+import { type InferPageType, loader } from "fumadocs-core/source";
+import { docs } from "~/.source";
 
 export const source = loader({
-  baseUrl: '/',
+  baseUrl: "/",
   source: docs.toFumadocsSource(),
 });
 

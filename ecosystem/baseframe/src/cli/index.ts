@@ -1,14 +1,14 @@
-import { createRequire } from 'node:module';
-import path from 'node:path';
-import fs from 'fs-extra';
-import YAML from 'yaml';
-import yargs from 'yargs';
-import { type Collections, cssVars, type Token, tailwind } from '../core';
+import { createRequire } from "node:module";
+import path from "node:path";
+import fs from "fs-extra";
+import YAML from "yaml";
+import yargs from "yargs";
+import { type Collections, cssVars, type Token, tailwind } from "../core";
 
 const YAML_FILE_REGEX = /\.ya?ml$/;
 
 const require = createRequire(import.meta.url);
-const sourcesPath = require.resolve('@cocso-ui/baseframe-sources');
+const sourcesPath = require.resolve("@cocso-ui/baseframe-sources");
 const sourcesDir = path.dirname(sourcesPath);
 
 function showBanner() {
@@ -53,12 +53,12 @@ function loadTokens(): { tokens: Token[]; collections: Collections } {
 
   for (const filePath of yamlFiles) {
     try {
-      const content = fs.readFileSync(filePath, 'utf-8');
+      const content = fs.readFileSync(filePath, "utf-8");
       const parsed = YAML.parse(content);
 
-      if (parsed.kind === 'Tokens') {
+      if (parsed.kind === "Tokens") {
         tokens.push(parsed);
-      } else if (parsed.kind === 'TokenCollections') {
+      } else if (parsed.kind === "TokenCollections") {
         collections = parsed;
       }
     } catch (error) {
@@ -67,7 +67,7 @@ function loadTokens(): { tokens: Token[]; collections: Collections } {
   }
 
   if (!collections) {
-    console.error(' ❎ collections.yaml not found');
+    console.error(" ❎ collections.yaml not found");
     process.exit(1);
   }
 
@@ -79,13 +79,13 @@ function generateCss(outputDir: string, prefix?: string): void {
 
   const css = cssVars.generateCssVariables(tokens, collections, {
     prefix,
-    banner: '',
-    selectors: { global: { default: ':root' } },
+    banner: "",
+    selectors: { global: { default: ":root" } },
   });
 
   fs.ensureDirSync(outputDir);
-  const outputPath = path.join(outputDir, 'token.css');
-  fs.writeFileSync(outputPath, css, 'utf-8');
+  const outputPath = path.join(outputDir, "token.css");
+  fs.writeFileSync(outputPath, css, "utf-8");
 
   console.log(` ✅ Generated CSS variables: ${outputPath}`);
 }
@@ -95,57 +95,60 @@ function generateTailwindCss(outputDir: string, prefix?: string): void {
 
   const tailwindCss = tailwind.generateTailwindCSS(tokens, collections, {
     prefix,
-    banner: '',
+    banner: "",
   });
 
   fs.ensureDirSync(outputDir);
-  const outputPath = path.join(outputDir, 'tailwind4.css');
-  fs.writeFileSync(outputPath, tailwindCss, 'utf-8');
+  const outputPath = path.join(outputDir, "tailwind4.css");
+  fs.writeFileSync(outputPath, tailwindCss, "utf-8");
 
   console.log(` ✅ Generated TailwindCSS 4.0 configuration: ${outputPath}`);
 }
 
 yargs(process.argv.slice(2))
   .command(
-    'css-vars [dir] [prefix]',
-    'Generate CSS variables',
-    yargs => {
+    "css-vars [dir] [prefix]",
+    "Generate CSS variables",
+    (yargs) => {
       return yargs
-        .positional('dir', {
-          describe: 'Output directory',
-          type: 'string',
-          default: './dist/',
+        .positional("dir", {
+          describe: "Output directory",
+          type: "string",
+          default: "./dist/",
         })
-        .option('prefix', {
-          describe: 'CSS variable prefix',
-          type: 'string',
+        .option("prefix", {
+          describe: "CSS variable prefix",
+          type: "string",
         });
     },
-    argv => {
+    (argv) => {
       showBanner();
       generateCss(argv.dir as string, argv.prefix as string | undefined);
     }
   )
   .command(
-    'tailwindcss [dir] [prefix]',
-    'Generate TailwindCSS 4.0 configuration',
-    yargs => {
+    "tailwindcss [dir] [prefix]",
+    "Generate TailwindCSS 4.0 configuration",
+    (yargs) => {
       return yargs
-        .positional('dir', {
-          describe: 'Output directory',
-          type: 'string',
-          default: './dist/',
+        .positional("dir", {
+          describe: "Output directory",
+          type: "string",
+          default: "./dist/",
         })
-        .option('prefix', {
-          describe: 'CSS variable prefix',
-          type: 'string',
+        .option("prefix", {
+          describe: "CSS variable prefix",
+          type: "string",
         });
     },
-    argv => {
+    (argv) => {
       showBanner();
-      generateTailwindCss(argv.dir as string, argv.prefix as string | undefined);
+      generateTailwindCss(
+        argv.dir as string,
+        argv.prefix as string | undefined
+      );
     }
   )
-  .demandCommand(1, 'You need to specify a command.')
+  .demandCommand(1, "You need to specify a command.")
   .showHelpOnFail(true)
   .help().argv;

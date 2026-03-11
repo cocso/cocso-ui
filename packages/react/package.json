@@ -11,8 +11,8 @@
     "build": "rollup -c rollup.config.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "biome lint .",
-    "lint:fix": "biome lint . --fix"
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write"
   },
   "sideEffects": [
     "*.css"

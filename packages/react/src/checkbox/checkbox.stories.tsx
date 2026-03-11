@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
     disabled: { control: 'boolean' },
   },
   args: {
@@ -49,9 +49,9 @@ export const Sizes: Story = {
     const [s3, setS3] = useState<CheckboxStatus>('on');
     return (
       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <Checkbox label="Small" onChange={setS1} size="sm" status={s1} />
-        <Checkbox label="Medium" onChange={setS2} size="md" status={s2} />
-        <Checkbox label="Large" onChange={setS3} size="lg" status={s3} />
+        <Checkbox label="Small" onChange={setS1} size="small" status={s1} />
+        <Checkbox label="Medium" onChange={setS2} size="medium" status={s2} />
+        <Checkbox label="Large" onChange={setS3} size="large" status={s3} />
       </div>
     );
   },

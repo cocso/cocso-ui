@@ -1,5 +1,5 @@
-import Icon from '../../icon';
-import type { IconProps } from '../../types';
+import Icon from "../../icon";
+import type { IconProps } from "../../types";
 
 export const PencilIcon = (props: IconProps) => {
   return (
@@ -23,4 +23,4 @@ export const PencilIcon = (props: IconProps) => {
   );
 };
 
-PencilIcon.displayName = 'PencilIcon';
+PencilIcon.displayName = "PencilIcon";
