@@ -5,6 +5,11 @@ import { OneTimePasswordField } from './one-time-password-field';
 const meta = {
   title: 'Components/OneTimePasswordField',
   component: OneTimePasswordField,
+  args: {
+    maxLength: 6,
+    value: '',
+    onValueChange: () => {},
+  },
 } satisfies Meta<typeof OneTimePasswordField>;
 
 export default meta;

@@ -16,7 +16,7 @@ const AccordionItem = forwardRef<
   />
 ));
 
-interface TriggerProps
+export interface TriggerProps
   extends ComponentPropsWithoutRef<typeof AccordionBase.Trigger> {
   chevron?: boolean;
 }

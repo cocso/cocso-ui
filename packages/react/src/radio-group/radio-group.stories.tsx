@@ -14,7 +14,7 @@ export const Default: Story = {
   render: () => {
     const [value, setValue] = useState('option-1');
     return (
-      <RadioGroup onValueChange={setValue} value={value}>
+      <RadioGroup onValueChange={(value) => setValue(value as string)} value={value}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <RadioGroup.Item id="r1" value="option-1">

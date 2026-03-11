@@ -23,7 +23,7 @@ const ModalContent = forwardRef<
   </DialogBase.Portal>
 ));
 
-interface ModalCloseProps
+export interface ModalCloseProps
   extends ComponentPropsWithoutRef<typeof DialogBase.Close> {
   render?: ReactElement;
 }
