@@ -49,6 +49,21 @@
 - Use enum-like canonical identifiers in documents where values must remain stable.
 - Package names follow the pattern `@cocso-ui/<name>`.
 
+### GitHub Issue Style Contract
+
+- Use issue titles in the format `<domain>: <description>`.
+- `<domain>` must use a stable lowercase identifier (e.g. `storybook`, `website`, `react`, `css`, `baseframe`, `ecosystem`).
+- `<description>` should be concise and specific, starting with a lowercase verb phrase when possible.
+- Do not use bracket-style prefixes like `[react]`.
+- Use the following Markdown section order for issue bodies:
+  - `## Summary`
+  - `## Evidence`
+  - `## Current Gap`
+  - `## Proposed Scope`
+  - `## Acceptance Criteria`
+  - `## Out of Scope`
+- Optional `## Additional Notes` may be appended only when needed.
+
 ### PR Review Response Policy
 
 When asked to review comments on a GitHub PR:
@@ -65,21 +80,6 @@ When asked to review comments on a GitHub PR:
 - Get thread node IDs (`PRRT_...`): GraphQL `repository.pullRequest.reviewThreads` → `nodes { id isResolved comments(first:1) { nodes { databaseId } } }`
 - Resolve: GraphQL `mutation { resolveReviewThread(input: {threadId: "PRRT_..."}) { thread { isResolved } } }`
 - Always reply first, then resolve every thread.
-
-### GitHub Issue Style Contract
-
-- Use issue titles in the format `<domain>: <description>`.
-- `<domain>` must use a stable lowercase identifier (e.g. `storybook`, `website`, `react`, `css`, `baseframe`, `ecosystem`).
-- `<description>` should be concise and specific, starting with a lowercase verb phrase when possible.
-- Do not use bracket-style prefixes like `[react]`.
-- Use the following Markdown section order for issue bodies:
-  - `## Summary`
-  - `## Evidence`
-  - `## Current Gap`
-  - `## Proposed Scope`
-  - `## Acceptance Criteria`
-  - `## Out of Scope`
-- Optional `## Additional Notes` may be appended only when needed.
 
 ### Frontend Design Rules
 
