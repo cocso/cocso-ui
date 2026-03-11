@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    size: { control: 'select', options: ['small', 'medium', 'large', 'x-large'] },
     variant: { control: 'select', options: ['primary', 'secondary', 'success', 'error', 'warning', 'white'] },
   },
   args: {
@@ -27,6 +27,7 @@ export const Sizes: Story = {
       <Spinner size="small" />
       <Spinner size="medium" />
       <Spinner size="large" />
+      <Spinner size="x-large" />
     </div>
   ),
 };

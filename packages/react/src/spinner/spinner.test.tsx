@@ -10,10 +10,10 @@ describe("Spinner", () => {
       expect(spinner.tagName).toBe("OUTPUT");
     });
 
-    it("renders 10 blades for default medium size", () => {
+    it("renders 8 blades for default medium size", () => {
       render(<Spinner data-testid="spinner" />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner.children).toHaveLength(10);
+      expect(spinner.children).toHaveLength(8);
     });
 
     it("has aria-label and aria-live for accessibility", () => {
@@ -36,9 +36,10 @@ describe("Spinner", () => {
 
   describe("size", () => {
     it.each([
-      ["small", "12px", 8],
-      ["medium", "16px", 10],
-      ["large", "20px", 12],
+      ["small", "12px", 6],
+      ["medium", "16px", 8],
+      ["large", "20px", 10],
+      ["x-large", "24px", 12],
     ] as const)('sets correct container size and blade count for size="%s"', (size, expectedSize, bladeCount) => {
       render(<Spinner data-testid="spinner" size={size} />);
       const spinner = screen.getByTestId("spinner");
