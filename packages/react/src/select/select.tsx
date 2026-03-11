@@ -5,13 +5,7 @@ import { cn } from "../cn";
 import { radius, spacing } from "../token";
 import styles from "./select.module.css";
 
-type SelectSize =
-  | "x-large"
-  | "large"
-  | "medium"
-  | "small"
-  | "x-small"
-  | "2x-small";
+export type SelectSize = "large" | "medium" | "small";
 
 export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   disabled?: boolean;
@@ -62,52 +56,28 @@ export function Select({
 
 const getStyles = (size: SelectSize) =>
   match(size)
-    .with("2x-small", () => ({
+    .with("small", () => ({
       "--cocso-select-min-width": spacing.s11,
       "--cocso-select-height": spacing.s11,
       "--cocso-select-padding-left": spacing.s5,
       "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
       "--cocso-select-font-size": "12px",
-      "--cocso-select-border-radius": radius.r2,
+      "--cocso-select-border-radius": radius.r3,
     }))
-    .with("x-small", () => ({
+    .with("medium", () => ({
       "--cocso-select-min-width": spacing.s12,
       "--cocso-select-height": spacing.s12,
       "--cocso-select-padding-left": spacing.s6,
       "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
       "--cocso-select-font-size": "14px",
-      "--cocso-select-border-radius": radius.r2,
+      "--cocso-select-border-radius": radius.r4,
     }))
-    .with("small", () => ({
+    .with("large", () => ({
       "--cocso-select-min-width": spacing.s14,
       "--cocso-select-height": spacing.s14,
       "--cocso-select-padding-left": spacing.s7,
       "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
       "--cocso-select-font-size": "14px",
-      "--cocso-select-border-radius": radius.r2,
-    }))
-    .with("medium", () => ({
-      "--cocso-select-min-width": spacing.s16,
-      "--cocso-select-height": spacing.s16,
-      "--cocso-select-padding-left": spacing.s8,
-      "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
-      "--cocso-select-font-size": "16px",
-      "--cocso-select-border-radius": radius.r3,
-    }))
-    .with("large", () => ({
-      "--cocso-select-min-width": spacing.s17,
-      "--cocso-select-height": spacing.s17,
-      "--cocso-select-padding-left": spacing.s9,
-      "--cocso-select-padding-right": `calc(${spacing.s9} + 16px)`,
-      "--cocso-select-font-size": "18px",
-      "--cocso-select-border-radius": radius.r3,
-    }))
-    .with("x-large", () => ({
-      "--cocso-select-min-width": spacing.s18,
-      "--cocso-select-height": spacing.s18,
-      "--cocso-select-padding-left": spacing.s10,
-      "--cocso-select-padding-right": `calc(${spacing.s10} + 16px)`,
-      "--cocso-select-font-size": "18px",
-      "--cocso-select-border-radius": radius.r3,
+      "--cocso-select-border-radius": radius.r4,
     }))
     .exhaustive();

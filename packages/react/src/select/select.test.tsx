@@ -107,12 +107,9 @@ describe("Select", () => {
 
   describe("size CSS variables", () => {
     it.each([
-      ["x-large", "18px"],
-      ["large", "18px"],
-      ["medium", "16px"],
-      ["small", "14px"],
-      ["x-small", "14px"],
-      ["2x-small", "12px"],
+      ["small", "12px"],
+      ["medium", "14px"],
+      ["large", "14px"],
     ] as const)('sets --cocso-select-font-size for size="%s"', (size, expectedFontSize) => {
       render(
         <Select aria-label="Choose option" size={size}>
@@ -134,7 +131,7 @@ describe("Select", () => {
       );
 
       const select = screen.getByRole("combobox");
-      expect(select).toHaveStyle({ "--cocso-select-font-size": "16px" });
+      expect(select).toHaveStyle({ "--cocso-select-font-size": "14px" });
     });
   });
 });

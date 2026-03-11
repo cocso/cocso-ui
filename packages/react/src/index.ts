@@ -5,6 +5,7 @@ export * from "./checkbox";
 export { cn } from "./cn";
 export * from "./day-picker";
 export * from "./dropdown";
+export * from "./input";
 export * from "./link";
 export * from "./modal";
 export * from "./month-picker";

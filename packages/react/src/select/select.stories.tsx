@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    size: { control: 'select', options: ['2x-small', 'x-small', 'small', 'medium', 'large', 'x-large'] },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
     disabled: { control: 'boolean' },
     stretch: { control: 'boolean' },
   },
@@ -32,12 +32,9 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Select size="2x-small"><option>2x-small</option></Select>
-      <Select size="x-small"><option>x-small</option></Select>
       <Select size="small"><option>small</option></Select>
       <Select size="medium"><option>medium</option></Select>
       <Select size="large"><option>large</option></Select>
-      <Select size="x-large"><option>x-large</option></Select>
     </div>
   ),
 };
