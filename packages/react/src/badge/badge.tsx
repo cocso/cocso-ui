@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { clsx as cx } from "clsx";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import type { ResponsiveFontSize } from "../token";
@@ -36,7 +36,7 @@ export function Badge({
 
   return (
     <div
-      className={clsx(styles.badge, className)}
+      className={cx(styles.badge, className)}
       ref={ref}
       style={style}
       {...props}

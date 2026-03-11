@@ -65,7 +65,7 @@ export function Button({
   } as CSSProperties;
 
   const isDisabled = disabled || loading;
-  const cn = cx(
+  const mergedClassName = cx(
     styles.button,
     isDisabled && styles.disabled,
     svgOnly && styles.svgOnly,
@@ -91,7 +91,7 @@ export function Button({
     render: renderProp,
     ref,
     props: mergeProps<"button">(
-      { className: cn, style, disabled: isDisabled, type: "button" as const },
+      { className: mergedClassName, style, disabled: isDisabled, type: "button" as const },
       props,
       { children: renderButtonContent(children) }
     ),
