@@ -1,7 +1,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../cn";
-import type { ComponentPropsWithoutRef, Ref } from "react";
+import type { ComponentProps, Ref } from "react";
 import { match } from "ts-pattern";
 import type {
   FontSize,
@@ -25,7 +25,7 @@ type TypographyPropsBase = {
   render?: useRender.RenderProp;
   weight?: FontWeight;
   lineHeight?: LineHeight;
-} & ComponentPropsWithoutRef<"p">;
+} & Omit<ComponentProps<"p">, "ref">;
 
 type CustomTypographyProps = TypographyPropsBase & {
   type?: "custom";

@@ -1,5 +1,6 @@
+import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../cn";
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import type { ComponentProps } from "react";
 import type { FontWeight, LineHeight } from "../token";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
@@ -9,7 +10,7 @@ export type LinkSize = "large" | "medium" | "small" | "x-small";
 export interface LinkProps extends ComponentProps<"a"> {
   indicator?: boolean;
   lineHeight?: LineHeight;
-  render?: ComponentPropsWithoutRef<typeof Typography>["render"];
+  render?: useRender.RenderProp;
   size?: LinkSize;
   weight?: FontWeight;
 }
@@ -39,7 +40,7 @@ export function Link({
       size={size}
       type="body"
       weight={weight}
-      {...(props as ComponentPropsWithoutRef<"p">)}
+      {...(props as ComponentProps<"p">)}
     />
   );
 }

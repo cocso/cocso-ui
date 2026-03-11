@@ -57,6 +57,7 @@ export function Switch({
       <SwitchBase.Root
         className={styles.switch}
         disabled={disabled}
+        id={id}
         ref={ref}
         {...props}
       >
