@@ -4,22 +4,28 @@ import { Spinner } from "./spinner";
 
 describe("Spinner", () => {
   describe("rendering", () => {
-    it("renders a div by default", () => {
+    it("renders an output element", () => {
       render(<Spinner data-testid="spinner" />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner.tagName).toBe("DIV");
+      expect(spinner.tagName).toBe("OUTPUT");
     });
 
-    it('renders with default size "medium" CSS variable', () => {
+    it("renders 12 blades", () => {
       render(<Spinner data-testid="spinner" />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner).toHaveStyle({ "--cocso-spinner-size": "24px" });
+      expect(spinner.children).toHaveLength(12);
     });
 
-    it('renders with default color "primary" CSS variable', () => {
+    it("has aria-label and aria-live for accessibility", () => {
       render(<Spinner data-testid="spinner" />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner).toHaveStyle({ "--cocso-spinner-border-width": "3px" });
+      expect(spinner).toHaveAttribute("aria-label", "Loading");
+      expect(spinner).toHaveAttribute("aria-live", "polite");
+    });
+
+    it("accepts custom label", () => {
+      render(<Spinner data-testid="spinner" label="잠시만 기다려주세요" />);
+      expect(screen.getByTestId("spinner")).toHaveAttribute("aria-label", "잠시만 기다려주세요");
     });
 
     it("passes additional props to the underlying element", () => {
@@ -28,52 +34,16 @@ describe("Spinner", () => {
     });
   });
 
-  describe("size CSS variables", () => {
+  describe("size", () => {
     it.each([
-      ["x-large", "40px", "5px"],
-      ["large", "32px", "4px"],
-      ["medium", "24px", "3px"],
-      ["small", "16px", "2px"],
-    ] as const)('sets correct CSS variables for size="%s"', (size, expectedSize, expectedBorderWidth) => {
+      ["small", "16px"],
+      ["medium", "24px"],
+      ["large", "32px"],
+      ["x-large", "40px"],
+    ] as const)('sets correct container size for size="%s"', (size, expectedSize) => {
       render(<Spinner data-testid="spinner" size={size} />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner).toHaveStyle({
-        "--cocso-spinner-size": expectedSize,
-        "--cocso-spinner-border-width": expectedBorderWidth,
-      });
-    });
-  });
-
-  describe("color CSS variables", () => {
-    it('sets CSS variables for color="primary"', () => {
-      render(<Spinner color="primary" data-testid="spinner" />);
-      const spinner = screen.getByTestId("spinner");
-      const style = spinner.getAttribute("style");
-      expect(style).toContain("--cocso-spinner-border-color");
-      expect(style).toContain("--cocso-spinner-bg-color");
-    });
-
-    it('sets CSS variables for color="neutral"', () => {
-      render(<Spinner color="neutral" data-testid="spinner" />);
-      const spinner = screen.getByTestId("spinner");
-      const style = spinner.getAttribute("style");
-      expect(style).toContain("--cocso-spinner-border-color");
-      expect(style).toContain("--cocso-spinner-bg-color");
-    });
-
-    it('sets CSS variables for color="white"', () => {
-      render(<Spinner color="white" data-testid="spinner" />);
-      const spinner = screen.getByTestId("spinner");
-      const style = spinner.getAttribute("style");
-      expect(style).toContain("--cocso-spinner-border-color");
-      expect(style).toContain("--cocso-spinner-bg-color");
-    });
-  });
-
-  describe("render prop", () => {
-    it("renders as the provided element when render is given", () => {
-      render(<Spinner render={<span data-testid="custom-spinner" />} />);
-      expect(screen.getByTestId("custom-spinner")).toBeInTheDocument();
+      expect(spinner).toHaveStyle({ width: expectedSize, height: expectedSize });
     });
   });
 
