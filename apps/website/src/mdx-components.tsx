@@ -1,4 +1,6 @@
 import { Link } from "@cocso-ui/react";
+
+const LinkExternalIcon = Link.ExternalIcon;
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import {
   Tab,
@@ -25,6 +27,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CodeBlock,
 
     Link,
+    LinkExternalIcon,
     Section,
     ComponentExample,
     PageNavigation,
