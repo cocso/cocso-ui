@@ -23,9 +23,9 @@ export type ResponsiveFontSize =
   | [FontSize, FontSize?, FontSize?]
   | { base: FontSize; tablet?: FontSize; desktop?: FontSize };
 
-/*
-  Font weights as defined in the CSS specification.
-  @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+/**
+ * Font weights as defined in the CSS specification.
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
  */
 export const fontWeight = {
   thin: 100,
@@ -41,9 +41,9 @@ export const fontWeight = {
 
 export type FontWeight = keyof typeof fontWeight;
 
-/*
-  Line heights as defined in the tailwindcss documentation.
-  @see https://v3.tailwindcss.com/docs/line-height
+/**
+ * Line heights as defined in the tailwindcss documentation.
+ * @see https://v3.tailwindcss.com/docs/line-height
  */
 export const lineHeight = {
   none: 1,
