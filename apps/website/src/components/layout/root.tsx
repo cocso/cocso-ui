@@ -13,10 +13,11 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
       </a>
       <Header />
       <main
-        className="mx-auto flex w-full max-w-(--size-app-width) bg-white"
+        className="mx-auto flex w-full flex-1 max-w-(--size-app-width) bg-white"
         id="main-content"
       >
-        <Sidebar className="sticky top-12 z-sidebar hidden h-[calc(100vh-3rem)] flex-1 self-start overflow-y-auto border-neutral-200 border-r p-4 lg:block" />
+        <div aria-hidden="true" className="hidden w-(--size-sidebar-width) shrink-0 border-neutral-200 border-r lg:block" />
+        <Sidebar className="fixed top-(--size-header-height) z-sidebar hidden w-(--size-sidebar-width) overflow-y-auto p-4 lg:block max-h-[calc(100svh-var(--size-header-height))]" />
 
         <article className="w-full overflow-x-clip lg:max-w-240">
           {children}

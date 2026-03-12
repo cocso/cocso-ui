@@ -13,8 +13,8 @@ export const Header = () => {
   const { setOpenSearch } = useSearchContext();
 
   return (
-    <header className="sticky top-0 z-header row-between mx-auto h-12 w-full max-w-(--size-app-width) border-neutral-200 border-b bg-white">
-      <div className="row-between h-full w-full">
+    <header className="sticky top-0 z-header row-between mx-auto w-full max-w-(--size-app-width) border-neutral-200 border-b bg-white">
+      <div className="row-between h-(--size-header-height) w-full">
         <Link
           aria-label="cocso-ui 홈"
           className="center-y ml-(--size-app-padding) gap-1"

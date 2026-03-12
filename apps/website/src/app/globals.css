@@ -16,12 +16,20 @@
   --size-app-padding: 24px;
   --padding-app: 24px;
 
+  --size-header-height: 3rem;
+  --size-sidebar-width: 240px;
+
   --z-index-sidebar: 1;
   --z-index-header: 10;
   --z-index-divider: 20;
 }
 
 @layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
   body {
     display: flex;
     color: var(--color-text-primary);
