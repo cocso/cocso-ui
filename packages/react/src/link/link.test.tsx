@@ -58,7 +58,7 @@ describe("Link", () => {
   describe("size CSS variable (font-size)", () => {
     it.each([
       ["large", "18px"],
-      ["medium", "15px"],
+      ["medium", "16px"],
       ["small", "14px"],
       ["x-small", "12px"],
     ] as const)('sets font-size for size="%s"', (size, expectedPx) => {
