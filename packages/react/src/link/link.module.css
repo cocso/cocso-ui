@@ -19,12 +19,6 @@
     opacity: 0.7;
   }
 
-  .link > svg {
-    flex-shrink: 0;
-    width: var(--cocso-spacing-8);
-    height: var(--cocso-spacing-8);
-  }
-
   .indicator {
     text-decoration: underline;
     text-decoration-thickness: 0.0625em;
