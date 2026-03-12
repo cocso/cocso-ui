@@ -77,7 +77,7 @@ const SectionListItem = ({ className, ...props }: SectionListItemProps) => {
   return (
     <li
       className={twMerge(
-        "pl-1 font-normal text-sm text-neutral-800 leading-relaxed",
+        "pl-1 font-normal text-neutral-800 text-sm leading-relaxed",
         className
       )}
       {...props}
