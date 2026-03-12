@@ -7,7 +7,7 @@ const SectionRoot = ({ className, ...props }: SectionRootProps) => {
   return (
     <section
       className={twMerge(
-        "-m-px flex flex-col gap-4 border border-neutral-200 p-app lg:p-8",
+        "-m-px flex flex-col gap-4 border border-neutral-200 p-6 lg:p-8",
         className
       )}
       {...props}
@@ -77,7 +77,7 @@ const SectionListItem = ({ className, ...props }: SectionListItemProps) => {
   return (
     <li
       className={twMerge(
-        "pl-1 font-normal text-md text-neutral-800 leading-relaxed",
+        "pl-1 font-normal text-sm text-neutral-800 leading-relaxed",
         className
       )}
       {...props}

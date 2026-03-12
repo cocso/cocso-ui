@@ -1,5 +1,14 @@
-import { type ReactNode, useId } from "react";
+import { createContext, type ReactNode, useContext, useId } from "react";
 import styles from "./field.module.css";
+
+interface FieldContextValue {
+  descriptionId?: string;
+  errorId?: string;
+}
+
+const FieldContext = createContext<FieldContextValue>({});
+
+export const useField = () => useContext(FieldContext);
 
 export interface FieldProps {
   children: ReactNode;
@@ -22,22 +31,31 @@ export function Field({
   const errorId = useId();
 
   return (
-    <div className={styles.root}>
-      <label className={styles.label} htmlFor={htmlFor}>
-        {label}
-        {required === false && <span className={styles.optional}>(선택)</span>}
-      </label>
-      {children}
-      {error && (
-        <p className={styles.errorMessage} id={errorId}>
-          {error}
-        </p>
-      )}
-      {!error && description && (
-        <p className={styles.description} id={descriptionId}>
-          {description}
-        </p>
-      )}
-    </div>
+    <FieldContext.Provider
+      value={{
+        descriptionId: !error && description ? descriptionId : undefined,
+        errorId: error ? errorId : undefined,
+      }}
+    >
+      <div className={styles.root}>
+        <label className={styles.label} htmlFor={htmlFor}>
+          {label}
+          {required === false && (
+            <span className={styles.optional}>(선택)</span>
+          )}
+        </label>
+        {children}
+        {error && (
+          <p className={styles.errorMessage} id={errorId}>
+            {error}
+          </p>
+        )}
+        {!error && description && (
+          <p className={styles.description} id={descriptionId}>
+            {description}
+          </p>
+        )}
+      </div>
+    </FieldContext.Provider>
   );
 }
