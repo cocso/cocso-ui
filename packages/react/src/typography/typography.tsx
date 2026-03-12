@@ -128,7 +128,7 @@ const getHeadingFontSize = (size: HeadingSize) =>
 
 const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
   match(type)
-    .with("custom", () => (props as CustomTypographyProps).size ?? 15)
+    .with("custom", () => (props as CustomTypographyProps).size ?? 16)
     .with("body", () =>
       getBodyFontSize((props as BodyTypographyProps).size ?? "medium")
     )
