@@ -21,8 +21,10 @@ function ModalContent({
   );
 }
 
+/** Props for the {@link Modal.Close} sub-component. */
 export interface ModalCloseProps
   extends ComponentProps<typeof DialogBase.Close> {
+  /** Custom element to render in place of the default close icon button. */
   render?: ReactElement;
 }
 
@@ -78,6 +80,16 @@ function ModalDescription({
   );
 }
 
+/**
+ * A dialog modal built on Base UI's Dialog primitive.
+ *
+ * Composed sub-components:
+ * - `Modal.Trigger` — element that opens the dialog.
+ * - `Modal.Content` — portal-rendered backdrop and popup container.
+ * - `Modal.Close` — button that closes the dialog; renders a default close icon when no children are provided.
+ * - `Modal.Title` — accessible dialog title styled as bold heading.
+ * - `Modal.Description` — accessible dialog description styled as secondary body text.
+ */
 export const Modal = Object.assign(DialogBase.Root, {
   Trigger: DialogBase.Trigger,
   Content: ModalContent,

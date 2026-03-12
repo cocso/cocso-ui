@@ -8,18 +8,34 @@ import { colors } from "../token";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
 
+/** Size variant of the {@link Link} component. */
 export type LinkSize = "large" | "medium" | "small" | "x-small";
+
+/**
+ * Visual style variant of the {@link Link} component.
+ * - `"inline"`: primary-colored link intended for use within body text.
+ * - `"current"`: inherits the surrounding text color.
+ * - `"plain"`: primary-colored link without an underline indicator.
+ */
 export type LinkVariant = "inline" | "current" | "plain";
 
+/** Props for the {@link Link} component. */
 export interface LinkProps extends ComponentProps<"a"> {
+  /** Whether to show the underline/external indicator. Defaults to `true` for non-plain variants. */
   indicator?: boolean;
+  /** Line height applied to the typography. */
   lineHeight?: LineHeight;
+  /** Custom render prop forwarded to the underlying {@link Typography} element. */
   render?: useRender.RenderProp;
+  /** The size variant controlling font size. */
   size?: LinkSize;
+  /** The visual style variant. Defaults to `"inline"`. */
   variant?: LinkVariant;
+  /** Font weight applied to the typography. */
   weight?: FontWeight;
 }
 
+/** A styled anchor element built on {@link Typography}. Supports external-link icon via `Link.ExternalIcon`. */
 export function Link({
   ref,
   render: renderProp,

@@ -10,6 +10,7 @@ const require = createRequire(import.meta.url);
 const sourcesPath = require.resolve("@cocso-ui/baseframe-sources");
 const sourcesDir = path.dirname(sourcesPath);
 
+/** Prints the Baseframe ASCII art banner to stdout. */
 function showBanner() {
   process.stdout.write(
     `
@@ -23,6 +24,14 @@ function showBanner() {
   );
 }
 
+/**
+ * Discovers and loads all YAML token and collection files from the resolved
+ * `@cocso-ui/baseframe-sources` package directory.
+ *
+ * Files with `kind: "Tokens"` are accumulated into the `tokens` array.
+ * The single file with `kind: "TokenCollections"` is stored as `collections`.
+ * Exits the process with code 1 when no collections file is found.
+ */
 function loadTokens(): { tokens: Token[]; collections: Collections } {
   const yamlFiles = findYamlFiles(sourcesDir);
   const tokens: Token[] = [];
@@ -51,6 +60,12 @@ function loadTokens(): { tokens: Token[]; collections: Collections } {
   return { tokens, collections };
 }
 
+/**
+ * Generates `token.css` (CSS custom properties) and writes it to `outputDir`.
+ *
+ * Uses the `css-vars` builder with the given `prefix` (defaults to `"cocso"`).
+ * Creates the output directory if it does not already exist.
+ */
 function generateCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 
@@ -67,6 +82,13 @@ function generateCss(outputDir: string, prefix?: string): void {
   console.log(` ✅ Generated CSS variables: ${outputPath}`);
 }
 
+/**
+ * Generates `tailwind4.css` (Tailwind CSS 4.0 `@theme` configuration) and
+ * writes it to `outputDir`.
+ *
+ * Uses the `tailwind` builder with the given `prefix` (defaults to `"cocso"`).
+ * Creates the output directory if it does not already exist.
+ */
 function generateTailwindCss(outputDir: string, prefix?: string): void {
   const { tokens, collections } = loadTokens();
 

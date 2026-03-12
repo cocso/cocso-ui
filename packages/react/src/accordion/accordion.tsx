@@ -13,8 +13,10 @@ function AccordionItem({
   );
 }
 
+/** Props for the {@link AccordionTrigger} component. */
 export interface TriggerProps
   extends ComponentProps<typeof AccordionBase.Trigger> {
+  /** Whether to show the animated chevron icon. Defaults to `true`. */
   chevron?: boolean;
 }
 
@@ -41,6 +43,10 @@ function AccordionPanel({
   );
 }
 
+/**
+ * An accordion component built on Base UI's Accordion primitive.
+ * Compose with `Accordion.Item`, `Accordion.Header`, `Accordion.Trigger`, and `Accordion.Content`.
+ */
 export const Accordion = Object.assign(AccordionBase.Root, {
   Item: AccordionItem,
   Header: AccordionBase.Header,

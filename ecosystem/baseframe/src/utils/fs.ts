@@ -3,6 +3,15 @@ import fs from "fs-extra";
 
 const YAML_FILE_REGEX = /\.ya?ml$/;
 
+/**
+ * Recursively finds all YAML files (`.yml` or `.yaml`) under the given directory.
+ *
+ * Performs a depth-first traversal and returns the absolute paths of every
+ * matching file in the order they are encountered.
+ *
+ * @param dir - Root directory to search.
+ * @returns Array of absolute file paths for all discovered YAML files.
+ */
 export function findYamlFiles(dir: string): string[] {
   const files: string[] = [];
   function scan(current: string) {

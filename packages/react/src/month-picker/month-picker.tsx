@@ -14,16 +14,24 @@ import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./month-picker.module.css";
 
+/** Props for the {@link MonthPicker} component. */
 export interface MonthPickerProps
   extends Omit<ComponentProps<"div">, "children"> {
+  /** Whether the picker is disabled. */
   disabled?: boolean;
+  /** The latest selectable date. */
   maxDate?: Date;
+  /** The earliest selectable date. */
   minDate?: Date;
+  /** Callback invoked when the selected month changes. Receives `null` when cleared. */
   onValueChange?: (value: Date | null) => void;
+  /** Custom trigger element rendered inside the dropdown trigger. */
   trigger?: ReactElement;
+  /** The currently selected date. */
   value?: Date;
 }
 
+/** A month-year picker rendered inside a dropdown. Uses a year-navigation header and closes automatically on month selection. */
 export function MonthPicker({
   ref,
   className,
