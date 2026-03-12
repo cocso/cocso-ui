@@ -13,10 +13,11 @@
     font-size: var(--cocso-input-font-size);
     color: var(--cocso-color-neutral-950);
     background-color: var(--cocso-input-bg-color);
-    border: 1px solid var(--cocso-color-neutral-100);
+    border: none;
     border-radius: var(--cocso-input-border-radius);
     outline: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 0 0 1px var(--cocso-color-neutral-100), var(--cocso-shadow-xs);
+    transition: box-shadow 0.15s ease;
   }
 
   .input::placeholder {
@@ -24,16 +25,28 @@
   }
 
   .input:focus-visible {
-    border-color: var(--cocso-color-primary-500);
-    box-shadow: 0 0 0 3px var(--cocso-color-primary-100);
+    box-shadow: 0 0 0 1px var(--cocso-color-neutral-400), var(--cocso-shadow-xs);
   }
 
   .input.stretch {
     width: 100%;
   }
 
-  .input.disabled {
+  .input:disabled {
     cursor: not-allowed;
     opacity: 0.4;
+  }
+
+  .input:read-only {
+    background-color: var(--cocso-color-neutral-50);
+    cursor: default;
+  }
+
+  .input.error {
+    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+  }
+
+  .input.error:focus-visible {
+    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
   }
 }

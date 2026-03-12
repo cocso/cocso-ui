@@ -55,7 +55,7 @@
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-3);
-    box-shadow: var(--cocso-shadow-2);
+    box-shadow: var(--cocso-shadow-sm);
     animation-duration: 0.4s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;

@@ -105,8 +105,41 @@ describe("Select", () => {
     });
   });
 
+  describe("error state", () => {
+    it("sets aria-invalid=true on the select element when error=true", () => {
+      render(
+        <Select aria-label="Choose option" error>
+          <option value="a">Option A</option>
+        </Select>
+      );
+
+      expect(screen.getByRole("combobox")).toHaveAttribute("aria-invalid", "true");
+    });
+
+    it("does not set aria-invalid when error=false (default)", () => {
+      render(
+        <Select aria-label="Choose option">
+          <option value="a">Option A</option>
+        </Select>
+      );
+
+      expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-invalid");
+    });
+
+    it("applies error class to wrapper when error=true", () => {
+      render(
+        <Select aria-label="Choose option" error data-testid="select">
+          <option value="a">Option A</option>
+        </Select>
+      );
+
+      expect(screen.getByTestId("select").closest("div")).toHaveClass("error");
+    });
+  });
+
   describe("size CSS variables", () => {
     it.each([
+      ["x-small", "12px"],
       ["small", "12px"],
       ["medium", "14px"],
       ["large", "14px"],
@@ -117,8 +150,8 @@ describe("Select", () => {
         </Select>
       );
 
-      const select = screen.getByRole("combobox");
-      expect(select).toHaveStyle({
+      const wrapper = screen.getByRole("combobox").closest("div")!;
+      expect(wrapper).toHaveStyle({
         "--cocso-select-font-size": expectedFontSize,
       });
     });
@@ -130,8 +163,26 @@ describe("Select", () => {
         </Select>
       );
 
-      const select = screen.getByRole("combobox");
-      expect(select).toHaveStyle({ "--cocso-select-font-size": "14px" });
+      const wrapper = screen.getByRole("combobox").closest("div")!;
+      expect(wrapper).toHaveStyle({ "--cocso-select-font-size": "14px" });
+    });
+
+    it.each([
+      ["x-small", "28px"],
+      ["small", "32px"],
+      ["medium", "36px"],
+      ["large", "40px"],
+    ] as const)('sets --cocso-select-height for size="%s"', (size, expectedHeight) => {
+      render(
+        <Select aria-label="Choose option" size={size}>
+          <option value="a">Option A</option>
+        </Select>
+      );
+
+      const wrapper = screen.getByRole("combobox").closest("div")!;
+      expect(wrapper).toHaveStyle({
+        "--cocso-select-height": expectedHeight,
+      });
     });
   });
 });

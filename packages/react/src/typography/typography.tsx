@@ -17,7 +17,6 @@ import {
 import styles from "./typography.module.css";
 
 export type BodySize = "large" | "medium" | "small" | "x-small";
-export type DisplaySize = "large" | "medium" | "small";
 export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
 type TypographyPropsBase = {
@@ -37,11 +36,6 @@ type BodyTypographyProps = TypographyPropsBase & {
   size?: BodySize;
 };
 
-type DisplayTypographyProps = TypographyPropsBase & {
-  type: "display";
-  size?: DisplaySize;
-};
-
 type HeadingTypographyProps = TypographyPropsBase & {
   type: "heading";
   size?: HeadingSize;
@@ -50,7 +44,6 @@ type HeadingTypographyProps = TypographyPropsBase & {
 export type TypographyProps =
   | CustomTypographyProps
   | BodyTypographyProps
-  | DisplayTypographyProps
   | HeadingTypographyProps;
 
 export function Typography({
@@ -105,7 +98,6 @@ export function Typography({
 
 const getDefaultTagName = (type: TypographyProps["type"]) =>
   match(type)
-    .with("display", () => "h1" as const)
     .with("heading", () => "h2" as const)
     .otherwise(() => "p" as const);
 
@@ -117,20 +109,13 @@ const getBodyFontSize = (size: BodySize) =>
     .with("x-small", () => 12 as FontSize)
     .exhaustive();
 
-const getDisplayFontSize = (size: DisplaySize) =>
-  match(size)
-    .with("large", () => ({ base: 44 as FontSize, tablet: 60 as FontSize }))
-    .with("medium", () => ({ base: 32 as FontSize, tablet: 44 as FontSize }))
-    .with("small", () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
-    .exhaustive();
-
 const getHeadingFontSize = (size: HeadingSize) =>
   match(size)
     .with("x-large", () => ({ base: 28 as FontSize, tablet: 36 as FontSize }))
     .with("large", () => ({ base: 24 as FontSize, tablet: 32 as FontSize }))
-    .with("medium", () => ({ base: 20 as FontSize, tablet: 24 as FontSize }))
-    .with("small", () => 18 as FontSize)
-    .with("x-small", () => 16 as FontSize)
+    .with("medium", () => ({ base: 20 as FontSize, tablet: 28 as FontSize }))
+    .with("small", () => 16 as FontSize)
+    .with("x-small", () => 14 as FontSize)
     .exhaustive();
 
 const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
@@ -138,9 +123,6 @@ const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
     .with("custom", () => (props as CustomTypographyProps).size ?? 16)
     .with("body", () =>
       getBodyFontSize((props as BodyTypographyProps).size ?? "medium")
-    )
-    .with("display", () =>
-      getDisplayFontSize((props as DisplayTypographyProps).size ?? "medium")
     )
     .with("heading", () =>
       getHeadingFontSize((props as HeadingTypographyProps).size ?? "medium")

@@ -1,14 +1,19 @@
-import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
+import { SelectorIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
+import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
-import { radius, spacing } from "../token";
+import { Field } from "../field";
+import { radius } from "../token";
 import styles from "./select.module.css";
 
-export type SelectSize = "large" | "medium" | "small";
+export type SelectSize = "large" | "medium" | "small" | "x-small";
 
 export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
+  description?: string;
   disabled?: boolean;
+  error?: boolean | string;
+  label?: string;
   size?: SelectSize;
   stretch?: boolean;
 }
@@ -19,64 +24,112 @@ export function Select({
   style: _style,
   size = "medium",
   disabled = false,
+  error = false,
   stretch = false,
+  label,
+  description,
+  id: _id,
   children,
   ...props
 }: SelectProps) {
+  const generatedId = useId();
+  const id = _id ?? generatedId;
+
+  const hasError = !!error;
+  const errorMessage = typeof error === "string" ? error : undefined;
+
   const style = {
     ..._style,
     ...getStyles(size),
   } as CSSProperties;
 
-  return (
+  const select = (
     <div
       className={cn(
         styles.wrapper,
         stretch && styles.stretch,
-        disabled && styles.disabled,
+        hasError && styles.error,
         className
       )}
+      style={style}
     >
       <select
+        aria-invalid={hasError || undefined}
         className={styles.select}
         disabled={disabled}
+        id={id}
         ref={ref}
-        style={style}
         {...props}
       >
         {children}
       </select>
 
       <span className={styles.icon}>
-        <KeyboardArrowDownIcon size={20} />
+        <SelectorIcon size={getIconSize(size)} />
       </span>
     </div>
   );
+
+  if (label) {
+    return (
+      <Field
+        description={description}
+        error={errorMessage}
+        htmlFor={id}
+        label={label}
+        required={props.required}
+      >
+        {select}
+      </Field>
+    );
+  }
+
+  return select;
 }
+
+const getIconSize = (size: SelectSize) =>
+  match(size)
+    .with("x-small", () => 10)
+    .with("small", () => 12)
+    .with("medium", () => 14)
+    .with("large", () => 14)
+    .exhaustive();
 
 const getStyles = (size: SelectSize) =>
   match(size)
+    .with("x-small", () => ({
+      "--cocso-select-min-width": "28px",
+      "--cocso-select-height": "28px",
+      "--cocso-select-padding-left": "8px",
+      "--cocso-select-padding-right": "26px",
+      "--cocso-select-icon-right": "8px",
+      "--cocso-select-font-size": "12px",
+      "--cocso-select-border-radius": radius.r3,
+    }))
     .with("small", () => ({
-      "--cocso-select-min-width": spacing.s11,
-      "--cocso-select-height": spacing.s11,
-      "--cocso-select-padding-left": spacing.s5,
-      "--cocso-select-padding-right": `calc(${spacing.s8} + 16px)`,
+      "--cocso-select-min-width": "32px",
+      "--cocso-select-height": "32px",
+      "--cocso-select-padding-left": "10px",
+      "--cocso-select-padding-right": "32px",
+      "--cocso-select-icon-right": "10px",
       "--cocso-select-font-size": "12px",
       "--cocso-select-border-radius": radius.r3,
     }))
     .with("medium", () => ({
-      "--cocso-select-min-width": spacing.s12,
-      "--cocso-select-height": spacing.s12,
-      "--cocso-select-padding-left": spacing.s6,
-      "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
+      "--cocso-select-min-width": "36px",
+      "--cocso-select-height": "36px",
+      "--cocso-select-padding-left": "12px",
+      "--cocso-select-padding-right": "38px",
+      "--cocso-select-icon-right": "12px",
       "--cocso-select-font-size": "14px",
       "--cocso-select-border-radius": radius.r4,
     }))
     .with("large", () => ({
-      "--cocso-select-min-width": spacing.s14,
-      "--cocso-select-height": spacing.s14,
-      "--cocso-select-padding-left": spacing.s7,
-      "--cocso-select-padding-right": `calc(${spacing.s7} + 16px)`,
+      "--cocso-select-min-width": "40px",
+      "--cocso-select-height": "40px",
+      "--cocso-select-padding-left": "14px",
+      "--cocso-select-padding-right": "42px",
+      "--cocso-select-icon-right": "14px",
       "--cocso-select-font-size": "14px",
       "--cocso-select-border-radius": radius.r4,
     }))

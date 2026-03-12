@@ -27,40 +27,48 @@
     -webkit-appearance: none;
     appearance: none;
     background-color: var(--cocso-select-bg-color);
-    border: 1px solid var(--cocso-color-neutral-100);
+    border: none;
     border-radius: var(--cocso-select-border-radius);
     outline: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 0 0 1px var(--cocso-color-neutral-100), var(--cocso-shadow-xs);
+    transition: box-shadow 0.15s ease;
   }
 
   .select:focus-visible {
-    border-color: var(--cocso-color-primary-500);
-    box-shadow: 0 0 0 3px var(--cocso-color-primary-100);
+    box-shadow: 0 0 0 1px var(--cocso-color-neutral-400), var(--cocso-shadow-xs);
   }
 
   .wrapper.stretch .select {
     width: 100%;
   }
 
-  .wrapper.disabled {
+  .wrapper:has(select:disabled) {
     cursor: not-allowed;
   }
 
-  .wrapper.disabled .select {
+  .select:disabled {
     cursor: not-allowed;
     opacity: 0.4;
+  }
+
+  .wrapper.error .select {
+    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+  }
+
+  .wrapper.error .select:focus-visible {
+    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
   }
 
   .icon {
     position: absolute;
     top: 50%;
-    right: var(--cocso-spacing-5);
+    right: var(--cocso-select-icon-right, var(--cocso-spacing-5));
     color: var(--cocso-color-neutral-500);
     pointer-events: none;
     transform: translateY(-50%);
   }
 
-  .wrapper.disabled .icon {
+  .wrapper:has(select:disabled) .icon {
     opacity: 0.4;
   }
 }

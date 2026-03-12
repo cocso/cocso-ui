@@ -30,29 +30,33 @@
   }
 
   .switch[data-checked] {
-    --cocso-switch-bg-color: var(--cocso-color-primary-500);
+    --cocso-switch-bg-color: var(--cocso-switch-checked-bg-color);
   }
 
   .thumb {
     --cocso-switch-thumb-width: inherit;
     --cocso-switch-thumb-height: inherit;
+    position: absolute;
+    top: 50%;
     display: block;
     width: var(--cocso-switch-thumb-width);
     height: var(--cocso-switch-thumb-width);
     background-color: var(--cocso-color-white);
     border-radius: var(--cocso-spacing-max);
-    transform: translateX(var(--cocso-spacing-2));
+    box-shadow: var(--cocso-shadow-xs);
+    transform: translate(var(--cocso-switch-thumb-offset), -50%);
     transition: transform 0.15s ease;
     will-change: transform;
   }
 
   .thumb[data-checked] {
-    transform: translateX(
+    transform: translate(
       calc(
         var(--cocso-switch-width) -
         var(--cocso-switch-thumb-width) -
-        var(--cocso-spacing-2)
-      )
+        var(--cocso-switch-thumb-offset)
+      ),
+      -50%
     );
   }
 }

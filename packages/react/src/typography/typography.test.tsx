@@ -14,13 +14,6 @@ describe("Typography", () => {
       expect(screen.getByText("Body text").tagName).toBe("P");
     });
 
-    it('renders children as h1 when type="display"', () => {
-      render(<Typography type="display">Display text</Typography>);
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Display text" })
-      ).toBeInTheDocument();
-    });
-
     it('renders children as h2 when type="heading"', () => {
       render(<Typography type="heading">Heading text</Typography>);
       expect(
@@ -128,20 +121,6 @@ describe("Typography", () => {
       );
     });
 
-    it('sets responsive font-size CSS variables for type="display"', () => {
-      const { container } = render(
-        <Typography size="large" type="display">
-          Display
-        </Typography>
-      );
-      const el = container.firstChild as HTMLElement;
-      expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
-        "44px"
-      );
-      expect(
-        el.style.getPropertyValue("--cocso-tablet-typography-font-size")
-      ).toBe("60px");
-    });
   });
 
   describe("additional props", () => {
@@ -161,7 +140,7 @@ describe("Typography heading font sizes", () => {
   it.each([
     ["x-large", "28px", "36px"],
     ["large", "24px", "32px"],
-    ["medium", "20px", "24px"],
+    ["medium", "20px", "28px"],
   ] as const)('sets responsive font-size for heading size="%s"', (size, expectedBase, expectedTablet) => {
     const { container } = render(
       <Typography size={size} type="heading">
@@ -178,8 +157,8 @@ describe("Typography heading font sizes", () => {
   });
 
   it.each([
-    ["small", "18px"],
-    ["x-small", "16px"],
+    ["small", "16px"],
+    ["x-small", "14px"],
   ] as const)('sets flat font-size for heading size="%s"', (size, expectedBase) => {
     const { container } = render(
       <Typography size={size} type="heading">
@@ -193,26 +172,6 @@ describe("Typography heading font sizes", () => {
     expect(
       el.style.getPropertyValue("--cocso-tablet-typography-font-size")
     ).toBe("");
-  });
-});
-
-describe("Typography display font sizes", () => {
-  it.each([
-    ["medium", "32px", "44px"],
-    ["small", "28px", "36px"],
-  ] as const)('sets responsive font-size for display size="%s"', (size, expectedBase, expectedTablet) => {
-    const { container } = render(
-      <Typography size={size} type="display">
-        Display
-      </Typography>
-    );
-    const el = container.firstChild as HTMLElement;
-    expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
-      expectedBase
-    );
-    expect(
-      el.style.getPropertyValue("--cocso-tablet-typography-font-size")
-    ).toBe(expectedTablet);
   });
 });
 

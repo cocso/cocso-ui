@@ -113,10 +113,10 @@ const getSizeStyles = (size: ButtonSize) => {
     .with("x-small", () => 28)
     .exhaustive();
   const inlinePadding = match(size)
-    .with("large", () => 12)
-    .with("medium", () => 10)
-    .with("small", () => 8)
-    .with("x-small", () => 6)
+    .with("large", () => 14)
+    .with("medium", () => 12)
+    .with("small", () => 10)
+    .with("x-small", () => 8)
     .exhaustive();
   const contentPadding = match(size)
     .with("large", () => "0 6px")

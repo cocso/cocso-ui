@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   argTypes: {
-    type: { control: 'select', options: ['custom', 'body', 'heading', 'display'] },
+    type: { control: 'select', options: ['custom', 'body', 'heading'] },
     weight: { control: 'select', options: ['normal', 'medium', 'semibold', 'bold'] },
     color: { control: 'color' },
   },
@@ -41,16 +41,6 @@ export const Heading: Story = {
       <Typography size="medium" type="heading">Heading Medium</Typography>
       <Typography size="small" type="heading">Heading Small</Typography>
       <Typography size="x-small" type="heading">Heading X-Small</Typography>
-    </div>
-  ),
-};
-
-export const Display: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="large" type="display">Display Large</Typography>
-      <Typography size="medium" type="display">Display Medium</Typography>
-      <Typography size="small" type="display">Display Small</Typography>
     </div>
   ),
 };

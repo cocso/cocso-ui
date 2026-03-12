@@ -54,6 +54,7 @@ describe("Input", () => {
 
   describe("size CSS variables", () => {
     it.each([
+      ["x-small", "12px"],
       ["small", "12px"],
       ["medium", "14px"],
       ["large", "14px"],
@@ -68,12 +69,54 @@ describe("Input", () => {
       const input = screen.getByRole("textbox");
       expect(input).toHaveStyle({ "--cocso-input-font-size": "14px" });
     });
+
+    it.each([
+      ["x-small", "28px"],
+      ["small", "32px"],
+      ["medium", "36px"],
+      ["large", "40px"],
+    ] as const)('sets --cocso-input-height for size="%s"', (size, expectedHeight) => {
+      render(<Input aria-label="이름" size={size} />);
+      const input = screen.getByRole("textbox");
+      expect(input).toHaveStyle({ "--cocso-input-height": expectedHeight });
+    });
   });
 
   describe("className override (@layer)", () => {
     it("forwards custom className to the input element", () => {
       render(<Input className="custom" data-testid="input" />);
       expect(screen.getByTestId("input")).toHaveClass("custom");
+    });
+  });
+
+  describe("error state", () => {
+    it("sets aria-invalid=true when error=true", () => {
+      render(<Input aria-label="이름" error />);
+      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute("aria-invalid", "true");
+    });
+
+    it("does not set aria-invalid when error=false (default)", () => {
+      render(<Input aria-label="이름" />);
+      expect(screen.getByRole("textbox", { name: "이름" })).not.toHaveAttribute("aria-invalid");
+    });
+
+    it("applies error class when error=true", () => {
+      render(<Input aria-label="이름" error data-testid="input" />);
+      expect(screen.getByTestId("input")).toHaveClass("error");
+    });
+  });
+
+  describe("readOnly state", () => {
+    it("sets readOnly attribute when readOnly=true", () => {
+      render(<Input aria-label="이름" readOnly />);
+      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute("readonly");
+    });
+
+    it("does not allow typing when readOnly", async () => {
+      render(<Input aria-label="이름" defaultValue="기존값" readOnly />);
+      const input = screen.getByRole("textbox");
+      await userEvent.type(input, "새값");
+      expect(input).toHaveValue("기존값");
     });
   });
 });

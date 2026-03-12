@@ -8,12 +8,14 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium'] },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    variant: { control: 'select', options: ['primary', 'success', 'error', 'warning'] },
     position: { control: 'radio', options: ['left', 'right'] },
     disabled: { control: 'boolean' },
   },
   args: {
     size: 'medium',
+    variant: 'primary',
     position: 'right',
   },
 } satisfies Meta<typeof Switch>;
@@ -39,10 +41,29 @@ export const Sizes: Story = {
   render: () => {
     const [s1, setS1] = useState(true);
     const [s2, setS2] = useState(true);
+    const [s3, setS3] = useState(true);
     return (
       <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
         <Switch checked={s1} label="Small" onCheckedChange={setS1} size="small" />
         <Switch checked={s2} label="Medium" onCheckedChange={setS2} size="medium" />
+        <Switch checked={s3} label="Large" onCheckedChange={setS3} size="large" />
+      </div>
+    );
+  },
+};
+
+export const Variants: Story = {
+  render: () => {
+    const [v1, setV1] = useState(true);
+    const [v2, setV2] = useState(true);
+    const [v3, setV3] = useState(true);
+    const [v4, setV4] = useState(true);
+    return (
+      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+        <Switch checked={v1} label="Primary" onCheckedChange={setV1} variant="primary" />
+        <Switch checked={v2} label="Success" onCheckedChange={setV2} variant="success" />
+        <Switch checked={v3} label="Error" onCheckedChange={setV3} variant="error" />
+        <Switch checked={v4} label="Warning" onCheckedChange={setV4} variant="warning" />
       </div>
     );
   },

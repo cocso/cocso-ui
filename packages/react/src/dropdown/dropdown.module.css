@@ -33,7 +33,7 @@
     flex-direction: column;
     background-color: var(--cocso-color-white);
     border-radius: var(--cocso-radius-2);
-    box-shadow: var(--cocso-shadow-2);
+    box-shadow: var(--cocso-shadow-sm);
     will-change: transform, opacity;
   }
 
