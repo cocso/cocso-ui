@@ -22,6 +22,8 @@ export const PageNavigation = () => {
   );
   const currentIndex = pages.findIndex((page) => page.url === pathname);
 
+  if (currentIndex === -1) return null;
+
   const prevPage = pages[currentIndex - 1];
   const nextPage = pages[currentIndex + 1];
 

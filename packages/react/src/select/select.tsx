@@ -38,10 +38,7 @@ export function Select({
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
 
-  const style = {
-    ..._style,
-    ...getStyles(size),
-  } as CSSProperties;
+  const wrapperStyle = { ...getStyles(size) } as CSSProperties;
 
   const select = (
     <div
@@ -51,7 +48,7 @@ export function Select({
         hasError && styles.error,
         className
       )}
-      style={style}
+      style={wrapperStyle}
     >
       <select
         aria-invalid={hasError || undefined}
@@ -59,6 +56,7 @@ export function Select({
         disabled={disabled}
         id={id}
         ref={ref}
+        style={_style}
         {...props}
       >
         {children}
