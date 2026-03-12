@@ -6,25 +6,42 @@ import styles from "./spinner.module.css";
 
 export type SpinnerSize = "large" | "medium" | "small";
 
-export type SpinnerVariant = "primary" | "secondary" | "success" | "error" | "warning" | "white";
+export type SpinnerVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "warning"
+  | "white";
 
-export interface SpinnerProps
-  extends Omit<ComponentProps<"output">, "size"> {
+export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   label?: string;
   size?: SpinnerSize;
   variant?: SpinnerVariant;
 }
 
-type SizeConfig = {
+interface SizeConfig {
   container: number;
   bladeCount: number;
   blade: { width: number; height: number; radius: number };
-};
+}
 
 const sizeConfig: Record<SpinnerSize, SizeConfig> = {
-  small: { container: 12, bladeCount: 6, blade: { width: 1.5, height: 4, radius: 0.75 } },
-  medium: { container: 16, bladeCount: 8, blade: { width: 2, height: 5, radius: 1 } },
-  large: { container: 20, bladeCount: 10, blade: { width: 2, height: 6, radius: 1 } },
+  small: {
+    container: 12,
+    bladeCount: 6,
+    blade: { width: 1.5, height: 4, radius: 0.75 },
+  },
+  medium: {
+    container: 16,
+    bladeCount: 8,
+    blade: { width: 2, height: 5, radius: 1 },
+  },
+  large: {
+    container: 20,
+    bladeCount: 10,
+    blade: { width: 2, height: 6, radius: 1 },
+  },
 };
 
 const getVariantColor = (variant: SpinnerVariant) =>
@@ -67,17 +84,19 @@ export function Spinner({
       {Array.from({ length: bladeCount }, (_, i) => (
         <div
           className={styles.blade}
-          key={i}
-          style={{
-            left: `${left}px`,
-            width: `${blade.width}px`,
-            height: `${blade.height}px`,
-            borderRadius: `${blade.radius}px`,
-            backgroundColor: "currentColor",
-            transformOrigin: `center ${originY}px`,
-            animationDelay: `${-((bladeCount - 1 - i) * (0.75 / bladeCount))}s`,
-            transform: `rotate(${i * (360 / bladeCount)}deg)`,
-          } as CSSProperties}
+          key={`blade-${i * (360 / bladeCount)}`}
+          style={
+            {
+              left: `${left}px`,
+              width: `${blade.width}px`,
+              height: `${blade.height}px`,
+              borderRadius: `${blade.radius}px`,
+              backgroundColor: "currentColor",
+              transformOrigin: `center ${originY}px`,
+              animationDelay: `${-((bladeCount - 1 - i) * (0.75 / bladeCount))}s`,
+              transform: `rotate(${i * (360 / bladeCount)}deg)`,
+            } as CSSProperties
+          }
         />
       ))}
     </output>

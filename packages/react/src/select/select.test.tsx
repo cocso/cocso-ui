@@ -113,7 +113,10 @@ describe("Select", () => {
         </Select>
       );
 
-      expect(screen.getByRole("combobox")).toHaveAttribute("aria-invalid", "true");
+      expect(screen.getByRole("combobox")).toHaveAttribute(
+        "aria-invalid",
+        "true"
+      );
     });
 
     it("does not set aria-invalid when error=false (default)", () => {
@@ -128,7 +131,7 @@ describe("Select", () => {
 
     it("applies error class to wrapper when error=true", () => {
       render(
-        <Select aria-label="Choose option" error data-testid="select">
+        <Select aria-label="Choose option" data-testid="select" error>
           <option value="a">Option A</option>
         </Select>
       );
@@ -150,7 +153,7 @@ describe("Select", () => {
         </Select>
       );
 
-      const wrapper = screen.getByRole("combobox").closest("div")!;
+      const wrapper = screen.getByRole("combobox").closest("div");
       expect(wrapper).toHaveStyle({
         "--cocso-select-font-size": expectedFontSize,
       });
@@ -163,7 +166,7 @@ describe("Select", () => {
         </Select>
       );
 
-      const wrapper = screen.getByRole("combobox").closest("div")!;
+      const wrapper = screen.getByRole("combobox").closest("div");
       expect(wrapper).toHaveStyle({ "--cocso-select-font-size": "14px" });
     });
 
@@ -179,7 +182,7 @@ describe("Select", () => {
         </Select>
       );
 
-      const wrapper = screen.getByRole("combobox").closest("div")!;
+      const wrapper = screen.getByRole("combobox").closest("div");
       expect(wrapper).toHaveStyle({
         "--cocso-select-height": expectedHeight,
       });

@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import styles from "./field.module.css";
 
 export interface FieldProps {
@@ -25,16 +25,19 @@ export function Field({
     <div className={styles.root}>
       <label className={styles.label} htmlFor={htmlFor}>
         {label}
-        {required === false && (
-          <span className={styles.optional}>(선택)</span>
-        )}
+        {required === false && <span className={styles.optional}>(선택)</span>}
       </label>
       {children}
-      {error ? (
-        <p className={styles.errorMessage} id={errorId}>{error}</p>
-      ) : description ? (
-        <p className={styles.description} id={descriptionId}>{description}</p>
-      ) : null}
+      {error && (
+        <p className={styles.errorMessage} id={errorId}>
+          {error}
+        </p>
+      )}
+      {!error && description && (
+        <p className={styles.description} id={descriptionId}>
+          {description}
+        </p>
+      )}
     </div>
   );
 }

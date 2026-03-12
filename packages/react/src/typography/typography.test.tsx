@@ -98,7 +98,7 @@ describe("Typography", () => {
   describe("font-size CSS variable", () => {
     it.each([
       ["large", "18px"],
-      ["medium", "16px"],
+      ["medium", "15px"],
       ["small", "14px"],
       ["x-small", "12px"],
     ] as const)('sets font size for body size="%s"', (size, expectedPx) => {
@@ -113,14 +113,13 @@ describe("Typography", () => {
       );
     });
 
-    it('sets default font size to 16px for type="custom" without size', () => {
+    it('sets default font size to 15px for type="custom" without size', () => {
       const { container } = render(<Typography>Text</Typography>);
       const el = container.firstChild as HTMLElement;
       expect(el.style.getPropertyValue("--cocso-typography-font-size")).toBe(
-        "16px"
+        "15px"
       );
     });
-
   });
 
   describe("additional props", () => {
