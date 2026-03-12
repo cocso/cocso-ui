@@ -76,6 +76,7 @@
   --color-success-800: var(--cocso-color-success-800);
   --color-success-900: var(--cocso-color-success-900);
   --color-success-950: var(--cocso-color-success-950);
+  --text-base: var(--cocso-text-base);
   --font-weight-thin: var(--cocso-font-weight-thin);
   --font-weight-extralight: var(--cocso-font-weight-extralight);
   --font-weight-light: var(--cocso-font-weight-light);
@@ -85,14 +86,21 @@
   --font-weight-bold: var(--cocso-font-weight-bold);
   --font-weight-extrabold: var(--cocso-font-weight-extrabold);
   --font-weight-black: var(--cocso-font-weight-black);
+  --radius-1: var(--cocso-radius-1);
+  --radius-2: var(--cocso-radius-2);
+  --radius-3: var(--cocso-radius-3);
+  --radius-4: var(--cocso-radius-4);
+  --radius-5: var(--cocso-radius-5);
+  --radius-6: var(--cocso-radius-6);
+  --radius-full: var(--cocso-radius-full);
   --shadow-y-3: var(--cocso-shadow-y-3);
   --shadow-y-4: var(--cocso-shadow-y-4);
   --shadow-blur-3: var(--cocso-shadow-blur-3);
   --shadow-blur-4: var(--cocso-shadow-blur-4);
-  --shadow-1: var(--cocso-shadow-1);
-  --shadow-2: var(--cocso-shadow-2);
-  --shadow-3: var(--cocso-shadow-3);
-  --shadow-4: var(--cocso-shadow-4);
+  --shadow-xs: var(--cocso-shadow-xs);
+  --shadow-sm: var(--cocso-shadow-sm);
+  --shadow-md: var(--cocso-shadow-md);
+  --shadow-lg: var(--cocso-shadow-lg);
   --z-index-behind: var(--cocso-z-index-behind);
   --z-index-base: var(--cocso-z-index-base);
   --z-index-above: var(--cocso-z-index-above);
@@ -108,6 +116,4 @@
   --color-text-tertiary: var(--cocso-color-text-tertiary);
 }
 
-@utility z-* {
-  z-index: --value(--z-index-*);
-}
+@utility z-* { z-index: --value(--z-index-*); }

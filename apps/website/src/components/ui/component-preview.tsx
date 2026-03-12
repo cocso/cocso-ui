@@ -1,14 +1,14 @@
 "use client";
 
 import { lazy, Suspense } from "@suspensive/react";
-import { useRef } from "react";
+import { type ComponentType, useRef } from "react";
 
 interface Props {
   name: string;
 }
 
 export const ComponentPreview = ({ name }: Props) => {
-  const cache = useRef<Record<string, React.ComponentType<unknown>>>({});
+  const cache = useRef<Record<string, ComponentType<unknown>>>({});
 
   if (!cache.current[name]) {
     cache.current[name] = lazy(() => import(`../example/${name}`));
@@ -18,7 +18,7 @@ export const ComponentPreview = ({ name }: Props) => {
 
   return (
     <Suspense fallback={null}>
-      <div className="center w-full">
+      <div aria-live="polite" className="center w-full">
         <Component />
       </div>
     </Suspense>

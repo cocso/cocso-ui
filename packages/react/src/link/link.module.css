@@ -5,18 +5,29 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
+    color: var(--cocso-link-color);
     text-decoration: none;
     cursor: pointer;
     transition: color 0.15s ease-in-out;
   }
 
-  .link > svg {
-    flex-shrink: 0;
-    width: var(--cocso-spacing-8);
-    height: var(--cocso-spacing-8);
+  .link:hover {
+    color: var(--cocso-link-color-hover);
+  }
+
+  .current:hover {
+    opacity: 0.7;
   }
 
   .indicator {
     text-decoration: underline;
+    text-decoration-thickness: 0.0625em;
+    text-underline-offset: 0.15em;
+  }
+
+  .externalIcon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
   }
 }

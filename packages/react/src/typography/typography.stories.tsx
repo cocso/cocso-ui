@@ -4,13 +4,16 @@ import { Typography } from './typography';
 const meta = {
   title: 'Components/Typography',
   component: Typography,
+  tags: ['autodocs'],
+  parameters: { layout: 'padded' },
   argTypes: {
-    type: { control: 'select', options: ['custom', 'body', 'heading', 'display'] },
+    type: { control: 'select', options: ['custom', 'body', 'heading'] },
     weight: { control: 'select', options: ['normal', 'medium', 'semibold', 'bold'] },
     color: { control: 'color' },
   },
   args: {
-    children: '텍스트',
+    children: '텍스트 샘플',
+    type: 'body',
   },
 } satisfies Meta<typeof Typography>;
 
@@ -25,7 +28,7 @@ export const Body: Story = {
       <Typography size="large" type="body">Body Large</Typography>
       <Typography size="medium" type="body">Body Medium</Typography>
       <Typography size="small" type="body">Body Small</Typography>
-      <Typography size="x-small" type="body">Body XS</Typography>
+      <Typography size="x-small" type="body">Body X-Small</Typography>
     </div>
   ),
 };
@@ -33,21 +36,11 @@ export const Body: Story = {
 export const Heading: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="x-large" type="heading">Heading XL</Typography>
+      <Typography size="x-large" type="heading">Heading X-Large</Typography>
       <Typography size="large" type="heading">Heading Large</Typography>
       <Typography size="medium" type="heading">Heading Medium</Typography>
       <Typography size="small" type="heading">Heading Small</Typography>
-      <Typography size="x-small" type="heading">Heading XS</Typography>
-    </div>
-  ),
-};
-
-export const Display: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Typography size="large" type="display">Display Large</Typography>
-      <Typography size="medium" type="display">Display Medium</Typography>
-      <Typography size="small" type="display">Display Small</Typography>
+      <Typography size="x-small" type="heading">Heading X-Small</Typography>
     </div>
   ),
 };

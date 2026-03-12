@@ -19,10 +19,10 @@ describe("Badge", () => {
 
   describe("variant CSS variables", () => {
     it.each([
-      "default",
-      "danger",
       "primary",
+      "secondary",
       "success",
+      "error",
       "warning",
     ] as const)('sets background color CSS variable for variant="%s"', (variant) => {
       const { container } = render(<Badge variant={variant}>Badge</Badge>);
@@ -32,7 +32,7 @@ describe("Badge", () => {
       ).toBeTruthy();
     });
 
-    it('defaults to variant="default"', () => {
+    it('defaults to variant="secondary"', () => {
       const { container } = render(<Badge>Badge</Badge>);
       const badge = container.firstChild as HTMLElement;
       expect(
@@ -43,9 +43,9 @@ describe("Badge", () => {
 
   describe("size CSS variables", () => {
     it.each([
-      ["small", "4px 8px"],
-      ["medium", "6px 10px"],
-      ["large", "8px 12px"],
+      ["small", "3px 6px"],
+      ["medium", "4px 8px"],
+      ["large", "5px 10px"],
     ] as const)('sets padding to "%s" when size="%s"', (size, expectedPadding) => {
       const { container } = render(<Badge size={size}>Badge</Badge>);
       const badge = container.firstChild as HTMLElement;
@@ -58,7 +58,7 @@ describe("Badge", () => {
       const { container } = render(<Badge>Badge</Badge>);
       const badge = container.firstChild as HTMLElement;
       expect(badge.style.getPropertyValue("--cocso-badge-padding")).toBe(
-        "6px 10px"
+        "4px 8px"
       );
     });
   });

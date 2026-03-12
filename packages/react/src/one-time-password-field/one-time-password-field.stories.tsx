@@ -5,6 +5,8 @@ import { OneTimePasswordField } from './one-time-password-field';
 const meta = {
   title: 'Components/OneTimePasswordField',
   component: OneTimePasswordField,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   args: {
     maxLength: 6,
     value: '',

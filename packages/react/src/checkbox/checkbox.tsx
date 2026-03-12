@@ -50,6 +50,7 @@ export function Checkbox({
   const style = {
     ..._style,
     "--cocso-checkbox-size": getSize(size),
+    "--cocso-checkbox-radius": getRadius(size),
     "--cocso-checkbox-color": colors.white,
     "--cocso-checkbox-border-color": getBorderColor(status),
     "--cocso-checkbox-bg-color": getBackgroundColor(status),
@@ -109,9 +110,16 @@ const getCheckedState = (
 
 const getSize = (size: CheckboxSize) =>
   match(size)
-    .with("large", () => spacing.s10)
-    .with("medium", () => spacing.s9)
-    .with("small", () => spacing.s8)
+    .with("large", () => spacing.s9)
+    .with("medium", () => spacing.s8)
+    .with("small", () => spacing.s7)
+    .exhaustive();
+
+const getRadius = (size: CheckboxSize) =>
+  match(size)
+    .with("large", () => "var(--cocso-radius-3)")
+    .with("medium", () => "var(--cocso-radius-2)")
+    .with("small", () => "var(--cocso-radius-1)")
     .exhaustive();
 
 const getBorderColor = (status: CheckboxStatus) =>

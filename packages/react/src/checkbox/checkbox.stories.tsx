@@ -5,6 +5,8 @@ import { Checkbox, type CheckboxStatus } from './checkbox';
 const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['small', 'medium', 'large'] },
     disabled: { control: 'boolean' },

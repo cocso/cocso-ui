@@ -19,11 +19,13 @@
   @keyframes content-show {
     from {
       opacity: 0;
-      transform: translate(-50%, -48%) scale(0.997);
+      transform: translate(-50%, -48%) perspective(1200px) rotateX(-2deg)
+        scale(0.995);
     }
     to {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) perspective(1200px) rotateX(0deg)
+        scale(1);
     }
   }
 
@@ -39,9 +41,19 @@
     max-height: 85vh;
     padding: var(--cocso-spacing-9);
     background-color: var(--cocso-color-white);
-    border-radius: 12px;
+    border-radius: var(--cocso-radius-5);
     transform: translate(-50%, -50%);
     animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content {
+      animation: none;
+    }
+
+    .overlay {
+      animation: none;
+    }
   }
 
   .close {

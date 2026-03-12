@@ -6,6 +6,8 @@ import { MonthPicker } from './month-picker';
 const meta = {
   title: 'Components/MonthPicker',
   component: MonthPicker,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     disabled: { control: 'boolean' },
   },

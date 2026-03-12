@@ -1,0 +1,10 @@
+kind: Tokens
+metadata:
+  id: font-size
+  name: Font Size
+  description: primitive font-size tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $text.base:
+      values: { default: 15px }

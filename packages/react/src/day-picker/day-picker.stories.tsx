@@ -6,6 +6,8 @@ import { DayPicker } from './day-picker';
 const meta = {
   title: 'Components/DayPicker',
   component: DayPicker,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     disabled: { control: 'boolean' },
   },

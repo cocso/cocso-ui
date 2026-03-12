@@ -1,3 +1,4 @@
+import { Link } from "@cocso-ui/react";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import {
   Tab,
@@ -8,7 +9,12 @@ import {
 } from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
-import { ComponentExample, Section } from "~/components/ui";
+import NextLink from "next/link";
+import { ComponentExample } from "~/components/ui/component-example";
+import { PageNavigation } from "~/components/ui/page-navigation";
+import { Section } from "~/components/ui/section";
+
+const LinkExternalIcon = Link.ExternalIcon;
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -21,8 +27,12 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ),
     CodeBlock,
 
+    Link,
+    LinkExternalIcon,
+    NextLink,
     Section,
     ComponentExample,
+    PageNavigation,
 
     Tab,
     Tabs,

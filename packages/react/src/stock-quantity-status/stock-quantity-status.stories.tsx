@@ -4,6 +4,8 @@ import { StockQuantityStatus } from './stock-quantity-status';
 const meta = {
   title: 'Components/StockQuantityStatus',
   component: StockQuantityStatus,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {
     quantity: { control: 'select', options: ['여유', '보통', '부족'] },
   },

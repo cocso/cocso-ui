@@ -1,7 +1,7 @@
 import { colors, Typography } from "@cocso-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Section } from "~/components/ui";
+import { Section } from "~/components/ui/section";
 import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 
@@ -22,10 +22,10 @@ const Page = async ({ params }: Props) => {
   return (
     <>
       <Section>
-        <Typography size="large" type="heading">
+        <Typography size="large" type="heading" weight="semibold">
           {page.data.title}
         </Typography>
-        <Typography className="mt-1" color={colors.neutral500} weight="medium">
+        <Typography className="mt-1" color={colors.textSecondary} weight="medium">
           {page.data.description}
         </Typography>
       </Section>

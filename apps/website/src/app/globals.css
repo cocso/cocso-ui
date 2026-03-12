@@ -2,20 +2,26 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
-@import "./utilities.css";
 
 @theme {
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
     "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-mono: "Geist Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 
   --breakpoint-lg: 1200px;
 
   --size-app-width: 1200px;
   --size-app-padding: 24px;
+  --padding-app: 24px;
 
-  --z-index-above: 1;
+  --size-header-height: 3rem;
+  --size-sidebar-width: 240px;
+
+  --z-index-sidebar: 1;
+  --z-index-header: 10;
+  --z-index-divider: 20;
 }
 
 @layer base {
@@ -26,13 +32,21 @@
 
   body {
     display: flex;
+    color: var(--color-text-primary);
+    touch-action: manipulation;
     flex-direction: column;
-    height: 100%;
-    font-family: var(--font-sans), sans-serif;
+    font-optical-sizing: auto;
+    font-variant-ligatures: common-ligatures contextual;
+    font-variant-numeric: slashed-zero;
+    font-family: var(--font-sans), serif;
+    text-decoration-skip-ink: auto;
+    text-spacing-trim: space-first;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overflow-y: scroll;
     scrollbar-gutter: stable;
     background-color: var(--color-neutral-50);
   }
@@ -42,7 +56,7 @@
     top: 0;
     bottom: 0;
     left: 50%;
-    z-index: var(--z-index-above);
+    z-index: var(--z-index-divider);
     width: 1px;
     content: "";
     background-color: var(--color-neutral-200);
@@ -62,7 +76,7 @@
     top: 0;
     bottom: 0;
     left: 50%;
-    z-index: var(--z-index-above);
+    z-index: var(--z-index-divider);
     width: 1px;
     content: "";
     background-color: var(--color-neutral-200);
@@ -74,5 +88,56 @@
         2
       )
     );
+  }
+
+  code:not(pre code) {
+    padding: 2px 5px;
+    font-size: 13px;
+    font-weight: 400;
+    background: var(--color-fd-muted);
+    border: solid 1px var(--color-fd-border);
+    border-radius: 5px;
+  }
+
+  code {
+    font-family: var(--font-mono), monospace;
+  }
+}
+
+@layer utilities {
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  .center-x {
+    @apply flex justify-center;
+  }
+
+  .center-y {
+    @apply flex items-center;
+  }
+
+  .row-between {
+    @apply flex items-center justify-between;
+  }
+
+  .column {
+    @apply flex flex-col;
+  }
+
+  .column-center {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .column-center-x {
+    @apply flex flex-col items-center;
+  }
+
+  .column-center-y {
+    @apply flex flex-col justify-center;
+  }
+
+  .column-between {
+    @apply flex flex-col items-center justify-between;
   }
 }

@@ -4,6 +4,8 @@ import { Accordion } from './accordion';
 const meta = {
   title: 'Components/Accordion',
   component: Accordion,
+  tags: ['autodocs'],
+  parameters: { layout: 'padded' },
   argTypes: {
     multiple: { control: 'boolean' },
   },
@@ -17,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: args => (
-    <Accordion {...args} style={{ width: 400 }}>
+    <Accordion {...args} style={{ width: '400px' }}>
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger>첫 번째 항목</Accordion.Trigger>
@@ -42,12 +44,12 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion multiple style={{ width: 400 }}>
+    <Accordion multiple style={{ width: '400px' }}>
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger>첫 번째 항목</Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Content>첫 번째 항목의 내용입니다.</Accordion.Content>
+        <Accordion.Content>여러 개를 동시에 열 수 있습니다.</Accordion.Content>
       </Accordion.Item>
       <Accordion.Item value="item-2">
         <Accordion.Header>
@@ -55,18 +57,24 @@ export const Multiple: Story = {
         </Accordion.Header>
         <Accordion.Content>두 번째 항목의 내용입니다.</Accordion.Content>
       </Accordion.Item>
+      <Accordion.Item value="item-3">
+        <Accordion.Header>
+          <Accordion.Trigger>세 번째 항목</Accordion.Trigger>
+        </Accordion.Header>
+        <Accordion.Content>세 번째 항목의 내용입니다.</Accordion.Content>
+      </Accordion.Item>
     </Accordion>
   ),
 };
 
 export const NoChevron: Story = {
   render: () => (
-    <Accordion style={{ width: 400 }}>
+    <Accordion style={{ width: '400px' }}>
       <Accordion.Item value="item-1">
         <Accordion.Header>
-          <Accordion.Trigger chevron={false}>chevron 없음</Accordion.Trigger>
+          <Accordion.Trigger chevron={false}>Chevron 없는 항목</Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Content>chevron 없이 표시되는 내용입니다.</Accordion.Content>
+        <Accordion.Content>Chevron 없이 표시되는 내용입니다.</Accordion.Content>
       </Accordion.Item>
     </Accordion>
   ),
