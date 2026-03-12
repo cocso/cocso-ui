@@ -1,3 +1,11 @@
+/**
+ * Design token map for spacing values.
+ *
+ * Each value is a CSS `var()` reference that resolves to the corresponding
+ * `--cocso-spacing-*` CSS custom property defined in the base-frame token
+ * stylesheet. Keys run from `s0` (0) through `s21`, plus `max` for the
+ * largest defined spacing step.
+ */
 export const spacing = {
   s0: "var(--cocso-spacing-0)",
   s1: "var(--cocso-spacing-1)",

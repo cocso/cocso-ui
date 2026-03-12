@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { generateFromAst } from "../core/builders/css-vars";
+import {
+  generateCssVariables,
+  generateFromAst,
+} from "../core/builders/css-vars";
 import { buildValidatedAst } from "../core/transforms";
 import type { Collections, Token } from "../core/types";
 
@@ -58,6 +61,36 @@ describe("css-vars generateFromAst", () => {
       prefix: "cocso",
       selectors: { global: { default: ":root" } },
     });
+    expect(result.endsWith("\n")).toBe(true);
+  });
+
+  it("falls back to :root when no selector configured", () => {
+    const tokens = [makeToken("$color.white", "#FFFFFF")];
+    const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
+    const result = generateFromAst(ast, { prefix: "cocso" });
+    expect(result).toContain(":root {");
+  });
+
+  it("includes banner at start of output when banner provided", () => {
+    const tokens = [makeToken("$color.white", "#FFFFFF")];
+    const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
+    const banner = "/* generated */\n";
+    const result = generateFromAst(ast, {
+      prefix: "cocso",
+      selectors: { global: { default: ":root" } },
+      banner,
+    });
+    expect(result.startsWith(banner)).toBe(true);
+  });
+
+  it("generateCssVariables wraps generateFromAst correctly", () => {
+    const tokens = [makeToken("$color.white", "#FFFFFF")];
+    const result = generateCssVariables(tokens, MINIMAL_COLLECTIONS, {
+      prefix: "cocso",
+      selectors: { global: { default: ":root" } },
+    });
+    expect(result).toContain(":root {");
+    expect(result).toContain("--cocso-color-white: #ffffff;");
     expect(result.endsWith("\n")).toBe(true);
   });
 });

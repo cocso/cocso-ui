@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
+import { colors } from "../token";
 import { Spinner } from "./spinner";
 
 describe("Spinner", () => {
@@ -50,6 +51,63 @@ describe("Spinner", () => {
         height: expectedSize,
       });
       expect(spinner.children).toHaveLength(bladeCount);
+    });
+  });
+
+  describe("variant color", () => {
+    it.each([
+      ["primary", colors.primary500],
+      ["secondary", colors.neutral500],
+      ["success", colors.success500],
+      ["error", colors.danger500],
+      ["warning", colors.warning500],
+      ["white", colors.white],
+    ] as const)('applies correct color for variant="%s"', (variant, expectedColor) => {
+      render(<Spinner data-testid="spinner" variant={variant} />);
+      expect(screen.getByTestId("spinner")).toHaveStyle({
+        color: expectedColor,
+      });
+    });
+
+    it("each variant produces a distinct color", () => {
+      const variants = [
+        "primary",
+        "secondary",
+        "success",
+        "error",
+        "warning",
+        "white",
+      ] as const;
+      const colorValues = variants.map((variant) => {
+        const { unmount } = render(
+          <Spinner data-testid={`spinner-${variant}`} variant={variant} />
+        );
+        const el = screen.getByTestId(`spinner-${variant}`);
+        const color = el.style.color;
+        unmount();
+        return color;
+      });
+      const uniqueColors = new Set(colorValues);
+      expect(uniqueColors.size).toBe(variants.length);
+    });
+  });
+
+  describe("style override", () => {
+    it("merges custom style prop with generated styles", () => {
+      render(<Spinner data-testid="spinner" style={{ opacity: 0.5 }} />);
+      expect(screen.getByTestId("spinner")).toHaveStyle({ opacity: "0.5" });
+    });
+
+    it("preserves size styles when custom style is provided", () => {
+      render(
+        <Spinner data-testid="spinner" size="large" style={{ opacity: 0.5 }} />
+      );
+      const spinner = screen.getByTestId("spinner");
+      expect(spinner).toHaveStyle({
+        width: "20px",
+        height: "20px",
+        opacity: "0.5",
+      });
     });
   });
 

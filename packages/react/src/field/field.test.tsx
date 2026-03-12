@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Field } from "./field";
+import { Field, useField } from "./field";
 
 describe("Field", () => {
   it("renders label text", () => {
@@ -64,5 +64,56 @@ describe("Field", () => {
     );
     expect(screen.getByText("에러 메시지")).toBeInTheDocument();
     expect(screen.queryByText("설명 텍스트")).not.toBeInTheDocument();
+  });
+});
+
+describe("useField hook", () => {
+  let capturedContext: ReturnType<typeof useField> = {};
+
+  function ContextCapture() {
+    capturedContext = useField();
+    return null;
+  }
+
+  it("errorId matches the error <p> id when error prop is provided", () => {
+    render(
+      <Field error="에러" label="이메일">
+        <ContextCapture />
+      </Field>
+    );
+    const errorEl = screen.getByText("에러");
+    expect(capturedContext.errorId).toBeDefined();
+    expect(capturedContext.errorId).toBe(errorEl.id);
+  });
+
+  it("descriptionId matches the description <p> id when description prop is provided without error", () => {
+    render(
+      <Field description="설명" label="비밀번호">
+        <ContextCapture />
+      </Field>
+    );
+    const descEl = screen.getByText("설명");
+    expect(capturedContext.descriptionId).toBeDefined();
+    expect(capturedContext.descriptionId).toBe(descEl.id);
+  });
+
+  it("returns { descriptionId: undefined, errorId: undefined } when neither error nor description", () => {
+    render(
+      <Field label="이름">
+        <ContextCapture />
+      </Field>
+    );
+    expect(capturedContext.errorId).toBeUndefined();
+    expect(capturedContext.descriptionId).toBeUndefined();
+  });
+
+  it("sets errorId and descriptionId is undefined when both error and description are provided", () => {
+    render(
+      <Field description="설명" error="에러" label="이메일">
+        <ContextCapture />
+      </Field>
+    );
+    expect(capturedContext.errorId).toBeDefined();
+    expect(capturedContext.descriptionId).toBeUndefined();
   });
 });

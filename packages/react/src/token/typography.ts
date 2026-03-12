@@ -1,3 +1,7 @@
+/**
+ * Available font sizes in pixels, drawn from the design scale.
+ * Values are plain numbers intended to be used with a CSS unit (e.g. `px`, `rem`).
+ */
 export const fontSize = {
   10: 10,
   11: 11,
@@ -16,16 +20,25 @@ export const fontSize = {
   60: 60,
 } as const;
 
+/** Union of all valid font-size keys from {@link fontSize}. */
 export type FontSize = keyof typeof fontSize;
 
+/**
+ * A font size that can optionally vary across breakpoints.
+ *
+ * Accepted forms:
+ * - A single {@link FontSize} applied at all breakpoints.
+ * - A tuple `[base, tablet?, desktop?]` for ordered breakpoint overrides.
+ * - An object `{ base, tablet?, desktop? }` for named breakpoint overrides.
+ */
 export type ResponsiveFontSize =
   | FontSize
   | [FontSize, FontSize?, FontSize?]
   | { base: FontSize; tablet?: FontSize; desktop?: FontSize };
 
-/*
-  Font weights as defined in the CSS specification.
-  @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+/**
+ * Font weights as defined in the CSS specification.
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
  */
 export const fontWeight = {
   thin: 100,
@@ -39,11 +52,12 @@ export const fontWeight = {
   black: 900,
 } as const;
 
+/** Union of all valid font-weight keys from {@link fontWeight}. */
 export type FontWeight = keyof typeof fontWeight;
 
-/*
-  Line heights as defined in the tailwindcss documentation.
-  @see https://v3.tailwindcss.com/docs/line-height
+/**
+ * Line heights as defined in the tailwindcss documentation.
+ * @see https://v3.tailwindcss.com/docs/line-height
  */
 export const lineHeight = {
   none: 1,
@@ -54,4 +68,5 @@ export const lineHeight = {
   loose: 2,
 } as const;
 
+/** Union of all valid line-height keys from {@link lineHeight}. */
 export type LineHeight = keyof typeof lineHeight;

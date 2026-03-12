@@ -58,6 +58,7 @@
     left: 50%;
     z-index: var(--z-index-divider);
     width: 1px;
+    pointer-events: none;
     content: "";
     background-color: var(--color-neutral-200);
     transform: translateX(
@@ -78,6 +79,7 @@
     left: 50%;
     z-index: var(--z-index-divider);
     width: 1px;
+    pointer-events: none;
     content: "";
     background-color: var(--color-neutral-200);
     transform: translateX(

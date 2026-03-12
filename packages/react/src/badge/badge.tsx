@@ -6,8 +6,10 @@ import { colors } from "../token";
 import { Typography } from "../typography";
 import styles from "./badge.module.css";
 
+/** Available badge size options. */
 type BadgeSize = "small" | "medium" | "large";
 
+/** Available badge visual style variants. */
 type BadgeVariant =
   | "primary"
   | "secondary"
@@ -16,14 +18,25 @@ type BadgeVariant =
   | "warning"
   | "outline";
 
+/** Available badge shape options. */
 type BadgeShape = "square" | "circle" | "rounded";
 
+/** Props for the {@link Badge} component. */
 export interface BadgeProps extends ComponentProps<"div"> {
+  /** Shape of the badge. Defaults to `"square"`. */
   shape?: BadgeShape;
+  /** Size of the badge. Defaults to `"medium"`. */
   size?: BadgeSize;
+  /** Visual style variant of the badge. Defaults to `"secondary"`. */
   variant?: BadgeVariant;
 }
 
+/**
+ * A compact label component for displaying status, counts, or categorical information.
+ * Supports multiple sizes, variants, and shapes.
+ *
+ * @param props - {@link BadgeProps}
+ */
 export function Badge({
   ref,
   className,

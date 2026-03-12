@@ -7,17 +7,29 @@ import { Field } from "../field";
 import { radius } from "../token";
 import styles from "./select.module.css";
 
+/** Available size variants for the Select component. */
 export type SelectSize = "large" | "medium" | "small" | "x-small";
 
+/** Props for the Select component. */
 export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
+  /** Helper text displayed below the select field. */
   description?: string;
+  /** Whether the select is disabled. */
   disabled?: boolean;
+  /** Error state; pass `true` for a generic error or a string for an error message. */
   error?: boolean | string;
+  /** Label text rendered above the select field via the Field wrapper. */
   label?: string;
+  /** Visual size of the select control. */
   size?: SelectSize;
+  /** Whether the select stretches to fill its container width. */
   stretch?: boolean;
 }
 
+/**
+ * A styled native select element with optional label, description, and error state.
+ * When a label is provided the select is wrapped in a Field component.
+ */
 export function Select({
   ref,
   className,

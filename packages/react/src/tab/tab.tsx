@@ -17,6 +17,18 @@ function TabContent(props: ComponentProps<typeof Tabs.Panel>) {
   return <Tabs.Panel {...props} />;
 }
 
+/**
+ * A tab navigation component composed of a Root, List, Trigger, and Content.
+ * Wraps Base UI's Tabs primitives.
+ *
+ * @example
+ * <Tab defaultValue="a">
+ *   <Tab.List>
+ *     <Tab.Trigger value="a">Tab A</Tab.Trigger>
+ *   </Tab.List>
+ *   <Tab.Content value="a">Panel A</Tab.Content>
+ * </Tab>
+ */
 export const Tab = Object.assign(TabRoot, {
   List: TabList,
   Trigger: TabTrigger,

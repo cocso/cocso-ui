@@ -49,6 +49,16 @@ function RadioGroupIndicator({
   );
 }
 
+/**
+ * A radio group component composed of a Root, Item, and Indicator.
+ * Wraps Base UI's RadioGroup and Radio primitives with size-aware CSS variables.
+ *
+ * @example
+ * <RadioGroup>
+ *   <RadioGroup.Item value="a"><RadioGroup.Indicator /></RadioGroup.Item>
+ *   <RadioGroup.Item value="b"><RadioGroup.Indicator /></RadioGroup.Item>
+ * </RadioGroup>
+ */
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,
