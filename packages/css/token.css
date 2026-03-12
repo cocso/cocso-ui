@@ -76,6 +76,7 @@
   --cocso-color-success-800: #1f4727;
   --cocso-color-success-900: #122b18;
   --cocso-color-success-950: #0e2012;
+  --cocso-text-base: 15px;
   --cocso-font-weight-thin: 100;
   --cocso-font-weight-extralight: 200;
   --cocso-font-weight-light: 300;
@@ -85,24 +86,21 @@
   --cocso-font-weight-bold: 700;
   --cocso-font-weight-extrabold: 800;
   --cocso-font-weight-black: 900;
+  --cocso-radius-1: 2px;
+  --cocso-radius-2: 4px;
+  --cocso-radius-3: 6px;
+  --cocso-radius-4: 8px;
+  --cocso-radius-5: 12px;
+  --cocso-radius-6: 16px;
+  --cocso-radius-full: 1000px;
   --cocso-shadow-y-3: 8px;
   --cocso-shadow-y-4: 16px;
   --cocso-shadow-blur-3: 16px;
   --cocso-shadow-blur-4: 24px;
-  --cocso-shadow-xs:
-    0px 1px 2px 0px var(--cocso-color-alpha-shadow1),
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
-  --cocso-shadow-sm:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow1),
-    0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
-  --cocso-shadow-md:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
-    0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px
-    var(--cocso-color-alpha-shadow3);
-  --cocso-shadow-lg:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
-    0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px
-    var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-xs: 0px 1px 2px 0px var(--cocso-color-alpha-shadow1), 0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
+  --cocso-shadow-sm: 0px 0px 2px 0px var(--cocso-color-alpha-shadow1), 0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
+  --cocso-shadow-md: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-lg: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px var(--cocso-color-alpha-shadow3);
   --cocso-spacing-0: 0px;
   --cocso-spacing-1: 1px;
   --cocso-spacing-2: 2px;
@@ -126,13 +124,6 @@
   --cocso-spacing-20: 80px;
   --cocso-spacing-21: 96px;
   --cocso-spacing-max: 1000px;
-  --cocso-radius-1: 2px;
-  --cocso-radius-2: 4px;
-  --cocso-radius-3: 6px;
-  --cocso-radius-4: 8px;
-  --cocso-radius-5: 12px;
-  --cocso-radius-6: 16px;
-  --cocso-radius-full: 1000px;
   --cocso-z-index-behind: -1;
   --cocso-z-index-base: 0;
   --cocso-z-index-above: 1;

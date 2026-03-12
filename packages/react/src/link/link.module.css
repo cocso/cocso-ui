@@ -5,9 +5,18 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
+    color: var(--cocso-link-color);
     text-decoration: none;
     cursor: pointer;
     transition: color 0.15s ease-in-out;
+  }
+
+  .link:hover {
+    color: var(--cocso-link-color-hover);
+  }
+
+  .current:hover {
+    opacity: 0.7;
   }
 
   .link > svg {
@@ -18,5 +27,13 @@
 
   .indicator {
     text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 0.0625em;
+  }
+
+  .externalIcon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
   }
 }

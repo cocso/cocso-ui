@@ -28,6 +28,7 @@ export * from './DomainIcon';
 export * from './DownloadIcon';
 export * from './EditDocumentIcon';
 export * from './EditNoteIcon';
+export * from './ExternalLinkIcon';
 export * from './FileSaveIcon';
 export * from './HospitalIcon';
 export * from './HubIcon';

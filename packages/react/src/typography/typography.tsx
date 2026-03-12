@@ -104,7 +104,7 @@ const getDefaultTagName = (type: TypographyProps["type"]) =>
 const getBodyFontSize = (size: BodySize) =>
   match(size)
     .with("large", () => 18 as FontSize)
-    .with("medium", () => 16 as FontSize)
+    .with("medium", () => 15 as FontSize)
     .with("small", () => 14 as FontSize)
     .with("x-small", () => 12 as FontSize)
     .exhaustive();
@@ -120,7 +120,7 @@ const getHeadingFontSize = (size: HeadingSize) =>
 
 const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
   match(type)
-    .with("custom", () => (props as CustomTypographyProps).size ?? 16)
+    .with("custom", () => (props as CustomTypographyProps).size ?? 15)
     .with("body", () =>
       getBodyFontSize((props as BodyTypographyProps).size ?? "medium")
     )
