@@ -9,8 +9,11 @@ function makeDecl(name: string): TokenDecl {
   };
 }
 
+const RE_LEADING_DOLLAR = /^\$/;
+const RE_DOT = /\./g;
+
 const cssVarNamer = (tokenName: string) =>
-  `--test-${tokenName.replace(/^\$/, "").replace(/\./g, "-")}`;
+  `--test-${tokenName.replace(RE_LEADING_DOLLAR, "").replace(RE_DOT, "-")}`;
 
 describe("createTokenResolver — resolveTokenRef", () => {
   it("returns var() for a known token ref", () => {
