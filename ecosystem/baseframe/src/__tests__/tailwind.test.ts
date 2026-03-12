@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateFromAst } from "../core/builders/tailwind";
+import { generateFromAst, generateTailwindCSS } from "../core/builders/tailwind";
 import { buildValidatedAst } from "../core/transforms";
 import type { Collections, Token } from "../core/types";
 
@@ -62,5 +62,34 @@ describe("tailwind generateFromAst", () => {
     expect(result).toContain(
       "--color-primary-500: var(--theme-color-primary-500);"
     );
+  });
+
+  it("includes banner when provided", () => {
+    const tokens = [makeToken("$color.white", "#FFFFFF")];
+    const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
+    const result = generateFromAst(ast, { prefix: "cocso", banner: "/* generated */" });
+    expect(result).toContain("/* generated */");
+    expect(result.indexOf("/* generated */")).toBeLessThan(result.indexOf("@theme"));
+  });
+
+  it("generateTailwindCSS wraps generateFromAst correctly", () => {
+    const tokens = [makeToken("$color.white", "#FFFFFF")];
+    const result = generateTailwindCSS(tokens, MINIMAL_COLLECTIONS, { prefix: "cocso" });
+    expect(result).toContain("@theme {");
+    expect(result).toContain("--color-white: var(--cocso-color-white);");
+  });
+
+  it("returns empty string for @theme when all tokens are in skipped collections", () => {
+    const tokens = [makeToken("$spacing.4", "6px")];
+    const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
+    const result = generateFromAst(ast, { prefix: "cocso" });
+    expect(result).not.toContain("@theme");
+  });
+
+  it("skips token names without $ prefix", () => {
+    const tokens = [makeToken("color.white", "#FFFFFF")];
+    const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
+    const result = generateFromAst(ast, { prefix: "cocso" });
+    expect(result).not.toContain("@theme");
   });
 });

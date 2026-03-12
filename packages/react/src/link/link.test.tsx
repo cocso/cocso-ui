@@ -112,4 +112,83 @@ describe("Link", () => {
       ).toBe(expectedValue);
     });
   });
+
+  describe("variant CSS variables", () => {
+    it.each([
+      [
+        "inline",
+        "var(--cocso-color-primary-500)",
+        "var(--cocso-color-primary-700)",
+      ],
+      ["current", "currentColor", "currentColor"],
+      [
+        "plain",
+        "var(--cocso-color-primary-500)",
+        "var(--cocso-color-primary-700)",
+      ],
+    ] as const)('sets --cocso-link-color and --cocso-link-color-hover for variant="%s"', (variant, expectedColor, expectedColorHover) => {
+      render(
+        <Link href="#" variant={variant}>
+          Link
+        </Link>
+      );
+      const link = screen.getByRole("link");
+      expect(link.style.getPropertyValue("--cocso-link-color")).toBe(
+        expectedColor
+      );
+      expect(link.style.getPropertyValue("--cocso-link-color-hover")).toBe(
+        expectedColorHover
+      );
+    });
+  });
+
+  describe("indicator prop explicit", () => {
+    it("removes indicator class when indicator=false on non-plain variant", () => {
+      const { container: withIndicator } = render(
+        <Link href="#" variant="inline">
+          Link
+        </Link>
+      );
+      const { container: withoutIndicator } = render(
+        <Link href="#" indicator={false} variant="inline">
+          Link
+        </Link>
+      );
+      const classWithIndicator = withIndicator.querySelector("a")?.className;
+      const classWithoutIndicator =
+        withoutIndicator.querySelector("a")?.className;
+      expect(classWithIndicator).not.toBe(classWithoutIndicator);
+    });
+
+    it("adds indicator class when indicator=true on variant='plain'", () => {
+      const { container: withIndicator } = render(
+        <Link href="#" indicator={true} variant="plain">
+          Link
+        </Link>
+      );
+      const { container: withoutIndicator } = render(
+        <Link href="#" variant="plain">
+          Link
+        </Link>
+      );
+      const classWithIndicator = withIndicator.querySelector("a")?.className;
+      const classWithoutIndicator =
+        withoutIndicator.querySelector("a")?.className;
+      expect(classWithIndicator).not.toBe(classWithoutIndicator);
+    });
+  });
+
+  describe("Link.ExternalIcon", () => {
+    it("renders the external link icon", () => {
+      const { container } = render(<Link.ExternalIcon />);
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it("forwards className to the icon", () => {
+      const { container } = render(
+        <Link.ExternalIcon className="custom-icon" />
+      );
+      expect(container.firstChild).toHaveClass("custom-icon");
+    });
+  });
 });

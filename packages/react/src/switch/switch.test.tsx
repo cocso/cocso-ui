@@ -107,4 +107,47 @@ describe("Switch", () => {
       );
     });
   });
+
+  describe("size large", () => {
+    it('applies larger dimensions for size="large" than size="medium"', () => {
+      const { container: largeContainer } = render(<Switch size="large" />);
+      const { container: mediumContainer } = render(<Switch size="medium" />);
+      const largeWrapper = largeContainer.firstChild as HTMLElement;
+      const mediumWrapper = mediumContainer.firstChild as HTMLElement;
+      expect(
+        largeWrapper.style.getPropertyValue("--cocso-switch-width")
+      ).not.toBe(mediumWrapper.style.getPropertyValue("--cocso-switch-width"));
+      expect(
+        largeWrapper.style.getPropertyValue("--cocso-switch-height")
+      ).not.toBe(mediumWrapper.style.getPropertyValue("--cocso-switch-height"));
+      expect(
+        largeWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+      ).not.toBe(
+        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+      );
+    });
+  });
+
+  describe("variant CSS variable", () => {
+    it.each([
+      "primary",
+      "success",
+      "error",
+      "warning",
+    ] as const)('sets --cocso-switch-checked-bg-color for variant="%s"', (variant) => {
+      const { container } = render(<Switch variant={variant} />);
+      const wrapper = container.firstChild as HTMLElement;
+      expect(
+        wrapper.style.getPropertyValue("--cocso-switch-checked-bg-color")
+      ).not.toBe("");
+    });
+  });
+
+  describe("custom id", () => {
+    it("wires the label htmlFor to the provided id", () => {
+      render(<Switch id="my-switch" label="My Label" />);
+      const label = screen.getByText("My Label").closest("label");
+      expect(label).toHaveAttribute("for", "my-switch");
+    });
+  });
 });
