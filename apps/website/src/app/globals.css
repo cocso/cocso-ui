@@ -58,8 +58,8 @@
     left: 50%;
     z-index: var(--z-index-divider);
     width: 1px;
-    content: "";
     pointer-events: none;
+    content: "";
     background-color: var(--color-neutral-200);
     transform: translateX(
       calc(
@@ -79,8 +79,8 @@
     left: 50%;
     z-index: var(--z-index-divider);
     width: 1px;
-    content: "";
     pointer-events: none;
+    content: "";
     background-color: var(--color-neutral-200);
     transform: translateX(
       calc(
