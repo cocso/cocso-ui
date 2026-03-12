@@ -26,16 +26,20 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
+    outline: none;
     background-color: var(--cocso-select-bg-color);
     border: none;
     border-radius: var(--cocso-select-border-radius);
-    outline: none;
-    box-shadow: 0 0 0 1px var(--cocso-color-neutral-100), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-100),
+      var(--cocso-shadow-xs);
     transition: box-shadow 0.15s ease;
   }
 
   .select:focus-visible {
-    box-shadow: 0 0 0 1px var(--cocso-color-neutral-400), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-400),
+      var(--cocso-shadow-xs);
   }
 
   .wrapper.stretch .select {
@@ -52,11 +56,15 @@
   }
 
   .wrapper.error .select {
-    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
   }
 
   .wrapper.error .select:focus-visible {
-    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
   }
 
   .icon {

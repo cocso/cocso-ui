@@ -16,9 +16,9 @@
   }
 
   .circle {
+    justify-content: center;
     aspect-ratio: 1;
     padding: var(--cocso-badge-padding-y);
-    justify-content: center;
   }
 
   .inner {

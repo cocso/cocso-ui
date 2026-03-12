@@ -22,8 +22,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .blade {
-      animation: none;
       opacity: 0.5;
+      animation: none;
     }
   }
 }

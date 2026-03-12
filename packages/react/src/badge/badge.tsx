@@ -8,14 +8,20 @@ import styles from "./badge.module.css";
 
 type BadgeSize = "small" | "medium" | "large";
 
-type BadgeVariant = "primary" | "secondary" | "success" | "error" | "warning" | "outline";
+type BadgeVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "warning"
+  | "outline";
 
 type BadgeShape = "square" | "circle" | "rounded";
 
 export interface BadgeProps extends ComponentProps<"div"> {
+  shape?: BadgeShape;
   size?: BadgeSize;
   variant?: BadgeVariant;
-  shape?: BadgeShape;
 }
 
 export function Badge({
@@ -42,7 +48,11 @@ export function Badge({
 
   return (
     <div
-      className={cn(styles.badge, shape === "circle" && styles.circle, className)}
+      className={cn(
+        styles.badge,
+        shape === "circle" && styles.circle,
+        className
+      )}
       ref={ref}
       style={style}
       {...props}

@@ -3,8 +3,8 @@ import { useRender } from "@base-ui/react/use-render";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
-import { Spinner } from "../spinner";
 import type { SpinnerVariant } from "../spinner";
+import { Spinner } from "../spinner";
 import type { FontWeight } from "../token";
 import { colors, fontWeight } from "../token";
 import styles from "./button.module.css";
@@ -77,7 +77,10 @@ export function Button({
     <>
       {loading && (
         <span className={styles.spinnerOverlay}>
-          <Spinner variant={spinnerVariant ?? getSpinnerVariant(variant)} size="medium" />
+          <Spinner
+            size="medium"
+            variant={spinnerVariant ?? getSpinnerVariant(variant)}
+          />
         </span>
       )}
       <span className={cn(styles.buttonInner, loading && styles.invisible)}>

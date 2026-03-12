@@ -19,11 +19,13 @@
   @keyframes content-show {
     from {
       opacity: 0;
-      transform: translate(-50%, -48%) perspective(1200px) rotateX(-2deg) scale(0.995);
+      transform: translate(-50%, -48%) perspective(1200px) rotateX(-2deg)
+        scale(0.995);
     }
     to {
       opacity: 1;
-      transform: translate(-50%, -50%) perspective(1200px) rotateX(0deg) scale(1);
+      transform: translate(-50%, -50%) perspective(1200px) rotateX(0deg)
+        scale(1);
     }
   }
 

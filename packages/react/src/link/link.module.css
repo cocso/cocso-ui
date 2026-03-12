@@ -27,8 +27,8 @@
 
   .indicator {
     text-decoration: underline;
-    text-underline-offset: 0.15em;
     text-decoration-thickness: 0.0625em;
+    text-underline-offset: 0.15em;
   }
 
   .externalIcon {

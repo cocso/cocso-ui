@@ -12,11 +12,13 @@
     padding-inline: var(--cocso-input-padding-x);
     font-size: var(--cocso-input-font-size);
     color: var(--cocso-color-neutral-950);
+    outline: none;
     background-color: var(--cocso-input-bg-color);
     border: none;
     border-radius: var(--cocso-input-border-radius);
-    outline: none;
-    box-shadow: 0 0 0 1px var(--cocso-color-neutral-100), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-100),
+      var(--cocso-shadow-xs);
     transition: box-shadow 0.15s ease;
   }
 
@@ -25,7 +27,9 @@
   }
 
   .input:focus-visible {
-    box-shadow: 0 0 0 1px var(--cocso-color-neutral-400), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-400),
+      var(--cocso-shadow-xs);
   }
 
   .input.stretch {
@@ -38,15 +42,19 @@
   }
 
   .input:read-only {
-    background-color: var(--cocso-color-neutral-50);
     cursor: default;
+    background-color: var(--cocso-color-neutral-50);
   }
 
   .input.error {
-    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
   }
 
   .input.error:focus-visible {
-    box-shadow: 0 0 0 1px var(--cocso-color-danger-500), var(--cocso-shadow-xs);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
   }
 }

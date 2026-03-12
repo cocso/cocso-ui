@@ -25,7 +25,10 @@ describe("Spinner", () => {
 
     it("accepts custom label", () => {
       render(<Spinner data-testid="spinner" label="잠시만 기다려주세요" />);
-      expect(screen.getByTestId("spinner")).toHaveAttribute("aria-label", "잠시만 기다려주세요");
+      expect(screen.getByTestId("spinner")).toHaveAttribute(
+        "aria-label",
+        "잠시만 기다려주세요"
+      );
     });
 
     it("passes additional props to the underlying element", () => {
@@ -42,7 +45,10 @@ describe("Spinner", () => {
     ] as const)('sets correct container size and blade count for size="%s"', (size, expectedSize, bladeCount) => {
       render(<Spinner data-testid="spinner" size={size} />);
       const spinner = screen.getByTestId("spinner");
-      expect(spinner).toHaveStyle({ width: expectedSize, height: expectedSize });
+      expect(spinner).toHaveStyle({
+        width: expectedSize,
+        height: expectedSize,
+      });
       expect(spinner.children).toHaveLength(bladeCount);
     });
   });

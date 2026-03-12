@@ -21,9 +21,9 @@ export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
 }
 
 interface SizeConfig {
-  container: number;
-  bladeCount: number;
   blade: { width: number; height: number; radius: number };
+  bladeCount: number;
+  container: number;
 }
 
 const sizeConfig: Record<SpinnerSize, SizeConfig> = {
@@ -67,6 +67,12 @@ export function Spinner({
   const left = (container - blade.width) / 2;
   const originY = blade.height - container / 2;
 
+  const step = 360 / bladeCount;
+  const blades = Array.from({ length: bladeCount }, (_, i) => ({
+    angle: i * step,
+    delay: -((bladeCount - 1 - i) * (0.75 / bladeCount)),
+  }));
+
   return (
     <output
       aria-label={label}
@@ -81,10 +87,10 @@ export function Spinner({
       }}
       {...props}
     >
-      {Array.from({ length: bladeCount }, (_, i) => (
+      {blades.map(({ angle, delay }) => (
         <div
           className={styles.blade}
-          key={`blade-${i * (360 / bladeCount)}`}
+          key={`blade-${angle}`}
           style={
             {
               left: `${left}px`,
@@ -93,8 +99,8 @@ export function Spinner({
               borderRadius: `${blade.radius}px`,
               backgroundColor: "currentColor",
               transformOrigin: `center ${originY}px`,
-              animationDelay: `${-((bladeCount - 1 - i) * (0.75 / bladeCount))}s`,
-              transform: `rotate(${i * (360 / bladeCount)}deg)`,
+              animationDelay: `${delay}s`,
+              transform: `rotate(${angle}deg)`,
             } as CSSProperties
           }
         />

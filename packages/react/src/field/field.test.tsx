@@ -13,7 +13,7 @@ describe("Field", () => {
 
   it("connects label to input via htmlFor", () => {
     render(
-      <Field label="이름" htmlFor="name">
+      <Field htmlFor="name" label="이름">
         <input id="name" />
       </Field>
     );
@@ -40,7 +40,7 @@ describe("Field", () => {
 
   it("shows error message when error prop is provided", () => {
     render(
-      <Field label="이메일" error="올바른 이메일을 입력하세요">
+      <Field error="올바른 이메일을 입력하세요" label="이메일">
         <input />
       </Field>
     );
@@ -49,7 +49,7 @@ describe("Field", () => {
 
   it("shows description when no error", () => {
     render(
-      <Field label="비밀번호" description="8자 이상 입력하세요">
+      <Field description="8자 이상 입력하세요" label="비밀번호">
         <input />
       </Field>
     );
@@ -58,7 +58,7 @@ describe("Field", () => {
 
   it("shows error over description when both provided", () => {
     render(
-      <Field label="이메일" error="에러 메시지" description="설명 텍스트">
+      <Field description="설명 텍스트" error="에러 메시지" label="이메일">
         <input />
       </Field>
     );

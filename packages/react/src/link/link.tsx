@@ -62,7 +62,10 @@ export function Link({
   );
 }
 
-function ExternalIcon({ className, ...props }: ComponentProps<typeof ExternalLinkIcon>) {
+function ExternalIcon({
+  className,
+  ...props
+}: ComponentProps<typeof ExternalLinkIcon>) {
   return (
     <ExternalLinkIcon
       className={cn(styles.externalIcon, className)}

@@ -61,7 +61,9 @@ describe("Input", () => {
     ] as const)('sets --cocso-input-font-size for size="%s"', (size, expectedFontSize) => {
       render(<Input aria-label="이름" size={size} />);
       const input = screen.getByRole("textbox");
-      expect(input).toHaveStyle({ "--cocso-input-font-size": expectedFontSize });
+      expect(input).toHaveStyle({
+        "--cocso-input-font-size": expectedFontSize,
+      });
     });
 
     it('applies default size "medium" when no size prop is given', () => {
@@ -92,16 +94,21 @@ describe("Input", () => {
   describe("error state", () => {
     it("sets aria-invalid=true when error=true", () => {
       render(<Input aria-label="이름" error />);
-      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute("aria-invalid", "true");
+      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute(
+        "aria-invalid",
+        "true"
+      );
     });
 
     it("does not set aria-invalid when error=false (default)", () => {
       render(<Input aria-label="이름" />);
-      expect(screen.getByRole("textbox", { name: "이름" })).not.toHaveAttribute("aria-invalid");
+      expect(screen.getByRole("textbox", { name: "이름" })).not.toHaveAttribute(
+        "aria-invalid"
+      );
     });
 
     it("applies error class when error=true", () => {
-      render(<Input aria-label="이름" error data-testid="input" />);
+      render(<Input aria-label="이름" data-testid="input" error />);
       expect(screen.getByTestId("input")).toHaveClass("error");
     });
   });
@@ -109,7 +116,9 @@ describe("Input", () => {
   describe("readOnly state", () => {
     it("sets readOnly attribute when readOnly=true", () => {
       render(<Input aria-label="이름" readOnly />);
-      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute("readonly");
+      expect(screen.getByRole("textbox", { name: "이름" })).toHaveAttribute(
+        "readonly"
+      );
     });
 
     it("does not allow typing when readOnly", async () => {
