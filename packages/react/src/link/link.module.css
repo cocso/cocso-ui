@@ -27,7 +27,7 @@
 
   .externalIcon {
     flex-shrink: 0;
-    width: 0.8em;
-    height: 0.8em;
+    width: 1em;
+    height: 1em;
   }
 }
