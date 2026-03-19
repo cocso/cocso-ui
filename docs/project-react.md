@@ -37,13 +37,20 @@ React 19 (TypeScript), bundled via Rollup into CJS and ESM.
 
 ```
 packages/react/src/
-├── <component>/        # One directory per component
-│   ├── index.ts        # Public export
-│   └── *.tsx           # Component implementation
-├── token/              # Token type declarations (typography, color)
-├── cn.ts               # className utility
-└── index.ts            # Barrel export
+├── components/           # Styled components (one directory per component)
+│   └── <component>/
+│       ├── index.ts      # Public export
+│       ├── *.tsx         # Component implementation
+│       └── *.module.css  # CSS Modules styling
+├── primitives/           # Headless library re-exports (@base-ui/react)
+│   ├── accordion.ts      # export { Accordion } from "@base-ui/react/accordion"
+│   └── ...               # One file per primitive module
+├── token/                # Design token type declarations (typography, color, radius, spacing)
+├── cn.ts                 # className utility (clsx + tailwind-merge)
+└── index.ts              # Barrel export
 ```
+
+Components import headless primitives via `../../primitives/*`, never directly from `@base-ui/react`. This indirection isolates the headless library dependency so that switching providers only requires updating the `primitives/` directory.
 
 Build pipeline: Rollup → Babel (React + TypeScript presets) → CJS + ESM bundles + `.d.ts` declarations.
 
@@ -53,8 +60,8 @@ Public entry point: `@cocso-ui/react`
 
 ```ts
 // Named exports
-export { Button } from './button'
-export { Modal } from './modal'
+export { Button } from './components/button'
+export { Modal } from './components/modal'
 // ... all components
 export { cn } from './cn'
 ```
