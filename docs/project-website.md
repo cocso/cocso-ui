@@ -59,7 +59,7 @@ Depends on workspace packages:
 
 | Pattern | Description |
 |---|---|
-| `/` | Homepage |
+| `/` | Redirect route to `/introduction` |
 | `/[slug]` | Documentation pages (MDX) |
 | `/api/search` | Full-text search endpoint (fumadocs) |
 

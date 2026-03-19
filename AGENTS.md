@@ -113,8 +113,8 @@ Repository-wide quality CI runs on every pull request.
 
 Coverage expectations:
 - `lint`: runs `pnpm run lint` — fails if any issue is found.
-- `typecheck`: runs `pnpm check-types` across all packages via Turborepo.
+- `test`: runs `pnpm run test:coverage` and posts a PR coverage summary.
 - `build`: runs `pnpm build` across all packages via Turborepo.
-- `claude-code-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
+- `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
 
 All CI jobs must pass before a PR is merged.
