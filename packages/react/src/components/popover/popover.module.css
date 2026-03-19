@@ -62,18 +62,22 @@
   }
 
   .content[data-open][data-side="top"] {
+    margin-bottom: var(--cocso-spacing-3);
     animation-name: slide-up-and-fade;
   }
 
   .content[data-open][data-side="right"] {
+    margin-left: var(--cocso-spacing-3);
     animation-name: slide-right-and-fade;
   }
 
   .content[data-open][data-side="bottom"] {
+    margin-top: var(--cocso-spacing-3);
     animation-name: slide-down-and-fade;
   }
 
   .content[data-open][data-side="left"] {
+    margin-right: var(--cocso-spacing-3);
     animation-name: slide-left-and-fade;
   }
 }
