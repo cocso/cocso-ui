@@ -43,7 +43,7 @@ apps/website/
 │   │   └── source.ts         # fumadocs source loader
 │   └── constants/
 │       └── variables.ts      # Site-wide constants
-├── content/                  # MDX documentation source files (planned)
+├── content/                  # MDX documentation source files
 ├── source.config.ts          # fumadocs MDX configuration
 └── next.config.ts            # Next.js configuration with fumadocs MDX plugin
 ```
@@ -60,7 +60,7 @@ Depends on workspace packages:
 | Pattern | Description |
 |---|---|
 | `/` | Homepage |
-| `/docs/[...slug]` | Documentation pages (MDX) |
+| `/[slug]` | Documentation pages (MDX) |
 | `/api/search` | Full-text search endpoint (fumadocs) |
 
 ### Environment Variables

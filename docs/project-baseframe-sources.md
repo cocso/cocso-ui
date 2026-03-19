@@ -31,7 +31,7 @@ YAML (no runtime; data package only).
 - Runtime component code — owned by `@cocso-ui/react`.
 - CLI implementation — owned by `@cocso-ui/baseframe` (ecosystem).
 
-## YAML Schema
+### YAML Schema
 
 ### Token File
 
@@ -62,7 +62,7 @@ data:
       - default
 ```
 
-## Token Naming Rules
+### Token Naming Rules
 
 Token names follow the pattern `$<collection>.<rest>`:
 
@@ -103,6 +103,17 @@ packages/baseframe/
     └── color.yaml          # $color.alpha.*, $color.text.*
 ```
 
+## Interfaces
+
+Package interface:
+
+| Surface | Description |
+|---|---|
+| `@cocso-ui/baseframe-sources` | Versioned token source package consumed by `@cocso-ui/baseframe` |
+| `collections.yaml` | Collection/mode registry contract used by parsers |
+| `primitive/*.yaml` | Primitive token definitions |
+| `semantic/*.yaml` | Alias token definitions referencing primitive tokens |
+
 ## Storage
 
 Static YAML files published to npm. No runtime state.
@@ -111,6 +122,10 @@ Static YAML files published to npm. No runtime state.
 
 - No scripts or network access at runtime.
 - YAML content is consumed by the CLI; authors must not include executable code in YAML.
+
+## Logging
+
+Not applicable. This package contains static YAML data and has no runtime process.
 
 ## Build and Test
 
@@ -123,6 +138,11 @@ pnpm --filter @cocso-ui/baseframe-sources lint
 # Verify npm pack includes all YAML files
 npm pack --dry-run
 ```
+
+## Roadmap
+
+- Expand primitive token categories (e.g. motion, opacity) as design system needs grow.
+- Add schema validation tooling to catch contract drift before publish.
 
 ## Open Questions
 
