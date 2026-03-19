@@ -85,10 +85,16 @@ export function Select({
   return select;
 }
 
-function FieldAwareSelect(props: ComponentProps<"select">) {
+function FieldAwareSelect({
+  "aria-describedby": callerDescribedBy,
+  ...props
+}: ComponentProps<"select">) {
   const field = useField();
-  const describedBy = field.errorId ?? field.descriptionId;
-  return <select aria-describedby={describedBy || undefined} {...props} />;
+  const fieldDescribedBy = field.errorId ?? field.descriptionId;
+  const describedBy =
+    [fieldDescribedBy, callerDescribedBy].filter(Boolean).join(" ") ||
+    undefined;
+  return <select aria-describedby={describedBy} {...props} />;
 }
 
 const getIconSize = (size: SelectSize) =>

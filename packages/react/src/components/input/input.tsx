@@ -75,10 +75,16 @@ export function Input({
   return inputEl;
 }
 
-function FieldAwareInput(props: ComponentProps<"input">) {
+function FieldAwareInput({
+  "aria-describedby": callerDescribedBy,
+  ...props
+}: ComponentProps<"input">) {
   const field = useField();
-  const describedBy = field.errorId ?? field.descriptionId;
-  return <input aria-describedby={describedBy || undefined} {...props} />;
+  const fieldDescribedBy = field.errorId ?? field.descriptionId;
+  const describedBy =
+    [fieldDescribedBy, callerDescribedBy].filter(Boolean).join(" ") ||
+    undefined;
+  return <input aria-describedby={describedBy} {...props} />;
 }
 
 const getStyles = (size: InputSize) =>

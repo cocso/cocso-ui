@@ -37,7 +37,6 @@
     flex-direction: column;
     min-width: 128px;
     padding: var(--cocso-spacing-4);
-    margin-top: var(--cocso-spacing-3);
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-4);
@@ -46,10 +45,12 @@
   }
 
   .content[data-side="top"] {
+    margin-bottom: var(--cocso-spacing-3);
     animation: dropdown-slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .content[data-side="bottom"] {
+    margin-top: var(--cocso-spacing-3);
     animation: dropdown-slide-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
