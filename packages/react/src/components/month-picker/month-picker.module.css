@@ -13,7 +13,7 @@
     position: relative;
     display: inline-block;
     padding-inline: var(--cocso-spacing-8);
-    font-size: 0.8rem; /* react-datepicker 라이브러리 오버라이드 */
+    font-size: 0.8rem;
     color: var(--cocso-color-text-primary);
     background-color: var(--cocso-color-white);
   }
