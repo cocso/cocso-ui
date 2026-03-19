@@ -110,7 +110,12 @@ pnpm --filter @cocso-ui/baseframe test
 pnpm --filter @cocso-ui/baseframe lint
 ```
 
-CI expects: `build`, `check-types`, `test`, `lint` to pass.
+Package validation expects: `build`, `check-types`, `test`, `lint` to pass.
+
+## Roadmap
+
+- Add machine-readable schema output for downstream tooling integration.
+- Add optional watch mode for faster local token iteration loops.
 
 ## Open Questions
 

@@ -7,14 +7,15 @@
 - Write all code and comments in English.
 - Prefer enum types over string literals whenever possible.
 - If you modified frontend code, run `pnpm check` from the repository root before finishing your task.
-- Commit your work as frequently as possible using git. Do NOT use the `--no-verify` flag.
-- Run `git commit` only after `git add`; once files are staged, commit without unnecessary delay.
+- Commit when each logical unit of work is complete; do NOT use the `--no-verify` flag.
+- Run `git commit` only after `git add`; keep each commit atomic and independently revertible.
 - If a commit fails because workspace binaries are missing, run `pnpm install` at the repository root and retry.
 - After addressing pull request review comments and pushing updates, mark the corresponding review threads as resolved.
 - When no explicit scope is specified and you are currently working within a pull request scope, interpret instructions within the current pull request scope.
 - Do not guess; search the web instead.
 - When accessing `github.com`, use the GitHub CLI (`gh`) instead of browser-based workflows when possible.
 - Prefer React Query for frontend server-state management.
+- Rules using MUST/NEVER are mandatory. Rules using prefer/whenever possible are guidance.
 
 ### Monorepo Structure Map
 
@@ -111,9 +112,9 @@ When asked to review comments on a GitHub PR:
 Repository-wide quality CI runs on every pull request.
 
 Coverage expectations:
-- `biome-check`: runs `pnpm check` (lint + format) — fails if any issue is found.
-- `typecheck`: runs `pnpm check-types` across all packages via Turborepo.
+- `lint`: runs `pnpm run lint` — fails if any issue is found.
+- `test`: runs `pnpm run test:coverage` and posts a PR coverage summary.
 - `build`: runs `pnpm build` across all packages via Turborepo.
-- `claude-code-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
+- `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
 
 All CI jobs must pass before a PR is merged.
