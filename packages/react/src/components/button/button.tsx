@@ -68,7 +68,6 @@ export function Button({
   const isDisabled = disabled || loading;
   const mergedClassName = cn(
     styles.button,
-    isDisabled && styles.disabled,
     svgOnly && styles.svgOnly,
     className
   );

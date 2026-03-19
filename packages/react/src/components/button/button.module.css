@@ -27,12 +27,12 @@
     transition: background-color 0.15s ease-in-out;
   }
 
-  .button:not(.disabled):hover {
+  .button:not([disabled]):hover {
     --cocso-button-bg-color-hover: inherit;
     background-color: var(--cocso-button-bg-color-hover);
   }
 
-  .button:not(.disabled):active {
+  .button:not([disabled]):active {
     --cocso-button-bg-color-active: inherit;
     background-color: var(--cocso-button-bg-color-active);
   }
@@ -57,7 +57,7 @@
     margin-left: 2px;
   }
 
-  .disabled {
+  .button[disabled] {
     cursor: not-allowed;
     opacity: 0.4;
   }

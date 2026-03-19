@@ -5,7 +5,7 @@
     align-items: center;
   }
 
-  .wrapper[aria-disabled="true"] {
+  .wrapper[data-disabled] {
     cursor: not-allowed;
     opacity: 0.4;
   }
@@ -23,7 +23,6 @@
     opacity: 1;
   }
 
-  .switch[disabled],
   .switch[data-disabled] {
     cursor: not-allowed;
     opacity: 0.4;
