@@ -1,7 +1,7 @@
-import { Radio as RadioBase } from "@base-ui/react/radio";
-import { RadioGroup as RadioGroupBase } from "@base-ui/react/radio-group";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../cn";
+import { Radio as RadioBase } from "../primitives/radio";
+import { RadioGroup as RadioGroupBase } from "../primitives/radio-group";
 import styles from "./radio-group.module.css";
 
 type RadioSize = "small" | "medium" | "large";

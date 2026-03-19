@@ -1,8 +1,8 @@
-import { mergeProps } from "@base-ui/react/merge-props";
-import { useRender } from "@base-ui/react/use-render";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
+import { mergeProps } from "../primitives/merge-props";
+import { useRender } from "../primitives/use-render";
 import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
 import type { FontWeight } from "../token";

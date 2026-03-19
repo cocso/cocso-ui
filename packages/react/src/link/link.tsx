@@ -1,8 +1,8 @@
-import type { useRender } from "@base-ui/react/use-render";
 import { ExternalLinkIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
+import type { useRender } from "../primitives/use-render";
 import type { FontWeight, LineHeight } from "../token";
 import { colors } from "../token";
 import { Typography } from "../typography";

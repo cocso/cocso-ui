@@ -1,9 +1,9 @@
-import { Checkbox as CheckboxBase } from "@base-ui/react/checkbox";
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
+import { Checkbox as CheckboxBase } from "../primitives/checkbox";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";

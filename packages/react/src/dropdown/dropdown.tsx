@@ -1,6 +1,6 @@
-import { Menu as MenuBase } from "@base-ui/react/menu";
 import type { ComponentProps } from "react";
 import { cn } from "../cn";
+import { Menu as MenuBase } from "../primitives/menu";
 import styles from "./dropdown.module.css";
 
 function DropdownContent({

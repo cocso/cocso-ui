@@ -1,6 +1,6 @@
-import { Popover as PopoverBase } from "@base-ui/react/popover";
 import type { ComponentProps } from "react";
 import { cn } from "../cn";
+import { Popover as PopoverBase } from "../primitives/popover";
 import styles from "./popover.module.css";
 
 function PopoverContent({

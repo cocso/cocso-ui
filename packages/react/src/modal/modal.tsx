@@ -1,7 +1,7 @@
-import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { CloseIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, ReactElement } from "react";
 import { cn } from "../cn";
+import { Dialog as DialogBase } from "../primitives/dialog";
 import { colors } from "../token";
 import { Typography } from "../typography";
 import styles from "./modal.module.css";

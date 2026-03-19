@@ -1,7 +1,7 @@
-import { Accordion as AccordionBase } from "@base-ui/react/accordion";
 import { KeyboardArrowDownIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps } from "react";
 import { cn } from "../cn";
+import { Accordion as AccordionBase } from "../primitives/accordion";
 import styles from "./accordion.module.css";
 
 function AccordionItem({

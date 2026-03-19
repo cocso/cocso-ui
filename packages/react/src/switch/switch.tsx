@@ -1,8 +1,8 @@
-import { Switch as SwitchBase } from "@base-ui/react/switch";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../cn";
+import { Switch as SwitchBase } from "../primitives/switch";
 import { colors, spacing } from "../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
