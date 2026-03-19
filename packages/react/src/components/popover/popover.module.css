@@ -50,8 +50,10 @@
   }
 
   .content {
-    padding-block: var(--cocso-spacing-6);
-    padding-inline: var(--cocso-spacing-8);
+    padding-block: var(--cocso-spacing-4);
+    padding-inline: var(--cocso-spacing-5);
+    font-size: var(--cocso-text-sm);
+    line-height: 1.5;
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-3);

@@ -8,7 +8,7 @@ data:
   tokens:
     $color.alpha.shadow1:
       values:
-        default: rgba(0, 0, 0, 0.05)
+        default: rgba(0, 0, 0, 0.04)
     $color.alpha.shadow2:
       values:
         default: rgba(0, 0, 0, 0.08)
