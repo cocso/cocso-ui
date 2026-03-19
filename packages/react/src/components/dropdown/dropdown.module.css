@@ -46,12 +46,12 @@
 
   .content[data-side="top"] {
     margin-bottom: var(--cocso-spacing-3);
-    animation: dropdown-slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: dropdown-slide-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .content[data-side="bottom"] {
     margin-top: var(--cocso-spacing-3);
-    animation: dropdown-slide-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: dropdown-slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .item {
