@@ -47,8 +47,8 @@ export function Switch({
 
   return (
     <div
-      aria-disabled={disabled}
       className={cn(styles.wrapper, className)}
+      data-disabled={disabled || undefined}
       style={style}
     >
       {position === "left" && (

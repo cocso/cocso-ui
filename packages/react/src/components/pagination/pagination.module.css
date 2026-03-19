@@ -32,11 +32,11 @@
     opacity: 0.4;
   }
 
-  .arrow:not([disabled]):hover {
+  .arrow:not(:disabled):hover {
     --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
   }
 
-  .arrow:not([disabled]):active {
+  .arrow:not(:disabled):active {
     --cocso-pagination-bg-color: var(--cocso-color-neutral-100);
   }
 
