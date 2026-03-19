@@ -76,6 +76,8 @@
   --color-success-800: var(--cocso-color-success-800);
   --color-success-900: var(--cocso-color-success-900);
   --color-success-950: var(--cocso-color-success-950);
+  --text-xs: var(--cocso-text-xs);
+  --text-sm: var(--cocso-text-sm);
   --text-base: var(--cocso-text-base);
   --font-weight-thin: var(--cocso-font-weight-thin);
   --font-weight-extralight: var(--cocso-font-weight-extralight);

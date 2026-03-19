@@ -198,6 +198,23 @@ describe("Button weight CSS variable", () => {
   });
 });
 
+describe("Button loading spinner variant", () => {
+  it.each([
+    "secondary",
+    "ghost",
+    "warning",
+  ] as const)('renders secondary spinner for variant="%s"', (variant) => {
+    render(
+      <Button loading variant={variant}>
+        Button
+      </Button>
+    );
+    const button = screen.getByRole("button");
+    const spinner = button.querySelector('[aria-label="Loading"]');
+    expect(spinner).toBeInTheDocument();
+  });
+});
+
 describe("Button svgOnly", () => {
   it("renders without error when svgOnly=true", () => {
     render(

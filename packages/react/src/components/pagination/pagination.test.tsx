@@ -7,8 +7,12 @@ describe("Pagination", () => {
   describe("rendering", () => {
     it("renders page buttons up to totalPages", () => {
       render(<Pagination onChange={vi.fn()} page={1} totalPages={5} />);
-      expect(screen.getByRole("button", { name: "1" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "5" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "5 페이지" })
+      ).toBeInTheDocument();
     });
 
     it("does not render arrow buttons when totalPages=1", () => {
@@ -52,7 +56,7 @@ describe("Pagination", () => {
     it("calls onChange with the clicked page number", async () => {
       const onChange = vi.fn();
       render(<Pagination onChange={onChange} page={1} totalPages={5} />);
-      await userEvent.click(screen.getByRole("button", { name: "3" }));
+      await userEvent.click(screen.getByRole("button", { name: "3 페이지" }));
       expect(onChange).toHaveBeenCalledWith(3);
     });
   });
@@ -60,15 +64,19 @@ describe("Pagination", () => {
   describe("truncation", () => {
     it("always renders first and last page buttons when totalPages > maxVisible + 2", () => {
       render(<Pagination onChange={vi.fn()} page={5} totalPages={10} />);
-      expect(screen.getByRole("button", { name: "1" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "10" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "10 페이지" })
+      ).toBeInTheDocument();
     });
 
     it("renders all page buttons when totalPages <= maxVisible + 2", () => {
       render(<Pagination onChange={vi.fn()} page={1} totalPages={7} />);
       for (let i = 1; i <= 7; i++) {
         expect(
-          screen.getByRole("button", { name: String(i) })
+          screen.getByRole("button", { name: `${i} 페이지` })
         ).toBeInTheDocument();
       }
     });
@@ -77,14 +85,36 @@ describe("Pagination", () => {
       render(
         <Pagination maxVisible={3} onChange={vi.fn()} page={1} totalPages={4} />
       );
-      expect(screen.getByRole("button", { name: "4" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "4 페이지" })
+      ).toBeInTheDocument();
+    });
+
+    it("does not render page buttons outside valid range during truncation", () => {
+      render(
+        <Pagination
+          maxVisible={3}
+          onChange={vi.fn()}
+          page={2}
+          totalPages={20}
+        />
+      );
+      expect(
+        screen.queryByRole("button", { name: "0 페이지" })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "20 페이지" })
+      ).toBeInTheDocument();
     });
   });
 
   describe("active page indicator", () => {
     it("sets data-active=true on the current page button", () => {
       render(<Pagination onChange={vi.fn()} page={3} totalPages={5} />);
-      expect(screen.getByRole("button", { name: "3" })).toHaveAttribute(
+      expect(screen.getByRole("button", { name: "3 페이지" })).toHaveAttribute(
         "data-active",
         "true"
       );
@@ -92,10 +122,25 @@ describe("Pagination", () => {
 
     it("sets data-active=false on non-current page buttons", () => {
       render(<Pagination onChange={vi.fn()} page={3} totalPages={5} />);
-      expect(screen.getByRole("button", { name: "1" })).toHaveAttribute(
+      expect(screen.getByRole("button", { name: "1 페이지" })).toHaveAttribute(
         "data-active",
         "false"
       );
+    });
+
+    it("sets aria-current=page on the active page button", () => {
+      render(<Pagination onChange={vi.fn()} page={3} totalPages={5} />);
+      expect(screen.getByRole("button", { name: "3 페이지" })).toHaveAttribute(
+        "aria-current",
+        "page"
+      );
+    });
+
+    it("does not set aria-current on non-active page buttons", () => {
+      render(<Pagination onChange={vi.fn()} page={3} totalPages={5} />);
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).not.toHaveAttribute("aria-current");
     });
   });
 });

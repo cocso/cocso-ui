@@ -171,6 +171,9 @@ importers:
       '@base-ui/react':
         specifier: ^1.2.0
         version: 1.2.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@cocso-ui/css':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@cocso-ui/react-icons':
         specifier: workspace:^
         version: link:../react-icons
@@ -631,6 +634,9 @@ packages:
 
   '@clack/prompts@1.1.0':
     resolution: {integrity: sha512-pkqbPGtohJAvm4Dphs2M8xE29ggupihHdy1x84HNojZuMtFsHiUlRvqD24tM2+XmI+61LlfNceM3Wr7U5QES5g==}
+
+  '@cocso-ui/css@0.1.2':
+    resolution: {integrity: sha512-OeOnyEbfK7PPLt6CIlv5dvAUIWxbyB6y6t8UZhbjkiNJyShWxui/7Rlmy/GfPsNGteWFInHlA9sCfSaxSWGDuA==}
 
   '@csstools/color-helpers@6.0.2':
     resolution: {integrity: sha512-LMGQLS9EuADloEFkcTBR3BwV/CGHV7zyDxVRtVDTwdI2Ca4it0CCVTT9wCkxSgokjE5Ho41hEPgb8OEUwoXr6Q==}
@@ -5176,6 +5182,8 @@ snapshots:
     dependencies:
       '@clack/core': 1.1.0
       sisteransi: 1.0.5
+
+  '@cocso-ui/css@0.1.2': {}
 
   '@csstools/color-helpers@6.0.2': {}
 

@@ -4,7 +4,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { radius } from "../../token";
-import { Field } from "../field";
+import { Field, useField } from "../field";
 import styles from "./select.module.css";
 
 export type SelectSize = "large" | "medium" | "small" | "x-small";
@@ -50,7 +50,7 @@ export function Select({
       )}
       style={wrapperStyle}
     >
-      <select
+      <FieldAwareSelect
         aria-invalid={hasError || undefined}
         className={styles.select}
         disabled={disabled}
@@ -60,7 +60,7 @@ export function Select({
         {...props}
       >
         {children}
-      </select>
+      </FieldAwareSelect>
 
       <span className={styles.icon}>
         <SelectorIcon size={getIconSize(size)} />
@@ -83,6 +83,18 @@ export function Select({
   }
 
   return select;
+}
+
+function FieldAwareSelect({
+  "aria-describedby": callerDescribedBy,
+  ...props
+}: ComponentProps<"select">) {
+  const field = useField();
+  const fieldDescribedBy = field.errorId ?? field.descriptionId;
+  const describedBy =
+    [fieldDescribedBy, callerDescribedBy].filter(Boolean).join(" ") ||
+    undefined;
+  return <select aria-describedby={describedBy} {...props} />;
 }
 
 const getIconSize = (size: SelectSize) =>

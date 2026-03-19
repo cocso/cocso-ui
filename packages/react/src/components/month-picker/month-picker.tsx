@@ -46,7 +46,7 @@ export function MonthPicker({
     <div className={cn(styles.root, className)} ref={ref} {...props}>
       <Dropdown onOpenChange={setOpen} open={open}>
         <Dropdown.Trigger render={trigger} />
-        <Dropdown.Content className={styles.content}>
+        <Dropdown.Content aria-label="월 선택" className={styles.content}>
           <DatePicker
             dateFormat="yyyy년 MM월 dd일"
             disabled={disabled}
@@ -63,30 +63,38 @@ export function MonthPicker({
               nextYearButtonDisabled,
             }) => (
               <>
-                <Button
-                  disabled={prevYearButtonDisabled}
-                  onClick={decreaseYear}
-                  size="x-small"
-                  type="button"
-                  variant="secondary"
-                >
-                  <ArrowIOSBackwardIcon />
-                </Button>
-                <Typography type="body" weight="semibold">
+                <Typography size="small" type="body" weight="semibold">
                   {date.toLocaleDateString("ko-KR", { year: "numeric" })}
                 </Typography>
-                <Button
-                  disabled={nextYearButtonDisabled}
-                  onClick={increaseYear}
-                  size="x-small"
-                  type="button"
-                  variant="secondary"
-                >
-                  <ArrowIOSForwardIcon />
-                </Button>
+
+                <div className={styles.menu}>
+                  <Button
+                    className={styles.arrow}
+                    disabled={prevYearButtonDisabled}
+                    onClick={decreaseYear}
+                    size="x-small"
+                    svgOnly
+                    type="button"
+                    variant="secondary"
+                  >
+                    <ArrowIOSBackwardIcon />
+                  </Button>
+                  <Button
+                    className={styles.arrow}
+                    disabled={nextYearButtonDisabled}
+                    onClick={increaseYear}
+                    size="x-small"
+                    svgOnly
+                    type="button"
+                    variant="secondary"
+                  >
+                    <ArrowIOSForwardIcon />
+                  </Button>
+                </div>
               </>
             )}
             selected={value}
+            showFourColumnMonthYearPicker
             showMonthYearPicker
             showPopperArrow={false}
           />

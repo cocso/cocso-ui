@@ -1,23 +1,23 @@
 @layer components {
   @keyframes dropdown-slide-up {
     from {
-      opacity: 0;
-      transform: translateY(4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateY(2px);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 
   @keyframes dropdown-slide-down {
     from {
-      opacity: 0;
-      transform: translateY(-4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 
@@ -25,28 +25,70 @@
     .content {
       animation: none;
     }
+
+    .item {
+      transition: none;
+    }
   }
 
   .content {
     z-index: var(--cocso-z-index-overlay);
     display: flex;
     flex-direction: column;
+    min-width: 128px;
+    padding: var(--cocso-spacing-4);
     background-color: var(--cocso-color-white);
-    border-radius: var(--cocso-radius-2);
+    border: 1px solid var(--cocso-color-neutral-100);
+    border-radius: var(--cocso-radius-3);
     box-shadow: var(--cocso-shadow-sm);
+    animation-duration: 0.2s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
 
   .content[data-side="top"] {
-    animation: dropdown-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: var(--cocso-spacing-3);
+    animation-name: dropdown-slide-up;
   }
 
   .content[data-side="bottom"] {
-    animation: dropdown-slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: var(--cocso-spacing-3);
+    animation-name: dropdown-slide-down;
   }
 
   .item {
     display: flex;
     flex-direction: column;
+    height: fit-content;
+    padding-block: var(--cocso-spacing-4);
+    padding-inline: var(--cocso-spacing-5);
+    font-size: var(--cocso-text-sm);
+    line-height: 1.5;
+    cursor: pointer;
+    border-radius: var(--cocso-radius-3);
+    transition:
+      background-color 0.15s ease,
+      scale 0.15s ease;
+  }
+
+  .item:hover {
+    background-color: var(--cocso-color-neutral-50);
+  }
+
+  .item:active {
+    scale: 0.98;
+  }
+
+  .item[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .item[data-disabled]:hover {
+    background-color: transparent;
+  }
+
+  .item[data-disabled]:active {
+    scale: 1;
   }
 }

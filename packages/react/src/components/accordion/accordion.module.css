@@ -22,6 +22,11 @@
     cursor: pointer;
   }
 
+  .trigger:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-500);
+    outline-offset: 2px;
+  }
+
   .chevron {
     display: inline-block;
     width: var(--cocso-spacing-10);

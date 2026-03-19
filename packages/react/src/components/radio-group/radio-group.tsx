@@ -8,16 +8,16 @@ export type RadioSize = "large" | "medium" | "small";
 
 const sizeVars: Record<RadioSize, CSSProperties> = {
   small: {
-    "--cocso-radio-size": "12px",
-    "--cocso-radio-dot-size": "5px",
+    "--cocso-radio-size": "14px",
+    "--cocso-radio-dot-size": "6px",
   } as CSSProperties,
   medium: {
     "--cocso-radio-size": "16px",
     "--cocso-radio-dot-size": "7px",
   } as CSSProperties,
   large: {
-    "--cocso-radio-size": "20px",
-    "--cocso-radio-dot-size": "9px",
+    "--cocso-radio-size": "18px",
+    "--cocso-radio-dot-size": "8px",
   } as CSSProperties,
 };
 

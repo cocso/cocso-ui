@@ -1,45 +1,45 @@
 @layer components {
   @keyframes slide-up-and-fade {
     from {
-      opacity: 0;
-      transform: translateY(4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateY(2px);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 
   @keyframes slide-right-and-fade {
     from {
-      opacity: 0;
-      transform: translateX(-4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateX(-2px);
     }
     to {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
     }
   }
 
   @keyframes slide-down-and-fade {
     from {
-      opacity: 0;
-      transform: translateY(-4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 
   @keyframes slide-left-and-fade {
     from {
-      opacity: 0;
-      transform: translateX(4px) scale(0.97);
+      opacity: 0.9;
+      transform: translateX(2px);
     }
     to {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
     }
   }
 
@@ -50,30 +50,36 @@
   }
 
   .content {
-    padding-block: var(--cocso-spacing-6);
-    padding-inline: var(--cocso-spacing-8);
+    padding-block: var(--cocso-spacing-4);
+    padding-inline: var(--cocso-spacing-5);
+    font-size: var(--cocso-text-sm);
+    line-height: 1.5;
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-3);
     box-shadow: var(--cocso-shadow-sm);
-    animation-duration: 0.4s;
+    animation-duration: 0.2s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
 
   .content[data-open][data-side="top"] {
-    animation-name: slide-down-and-fade;
-  }
-
-  .content[data-open][data-side="right"] {
-    animation-name: slide-left-and-fade;
-  }
-
-  .content[data-open][data-side="bottom"] {
+    margin-bottom: var(--cocso-spacing-3);
     animation-name: slide-up-and-fade;
   }
 
-  .content[data-open][data-side="left"] {
+  .content[data-open][data-side="right"] {
+    margin-left: var(--cocso-spacing-3);
     animation-name: slide-right-and-fade;
+  }
+
+  .content[data-open][data-side="bottom"] {
+    margin-top: var(--cocso-spacing-3);
+    animation-name: slide-down-and-fade;
+  }
+
+  .content[data-open][data-side="left"] {
+    margin-right: var(--cocso-spacing-3);
+    animation-name: slide-left-and-fade;
   }
 }

@@ -73,30 +73,37 @@ export function DayPicker({
               nextMonthButtonDisabled,
             }) => (
               <>
-                <Button
-                  disabled={prevMonthButtonDisabled}
-                  onClick={decreaseMonth}
-                  size="x-small"
-                  type="button"
-                  variant="secondary"
-                >
-                  <ArrowIOSBackwardIcon />
-                </Button>
-                <Typography type="body" weight="semibold">
+                <Typography size="small" type="body" weight="semibold">
                   {date.toLocaleDateString("ko-KR", {
                     year: "numeric",
                     month: "long",
                   })}
                 </Typography>
-                <Button
-                  disabled={nextMonthButtonDisabled}
-                  onClick={increaseMonth}
-                  size="x-small"
-                  type="button"
-                  variant="secondary"
-                >
-                  <ArrowIOSForwardIcon />
-                </Button>
+
+                <div className={styles.menu}>
+                  <Button
+                    className={styles.arrow}
+                    disabled={prevMonthButtonDisabled}
+                    onClick={decreaseMonth}
+                    size="x-small"
+                    svgOnly
+                    type="button"
+                    variant="secondary"
+                  >
+                    <ArrowIOSBackwardIcon />
+                  </Button>
+                  <Button
+                    className={styles.arrow}
+                    disabled={nextMonthButtonDisabled}
+                    onClick={increaseMonth}
+                    size="x-small"
+                    svgOnly
+                    type="button"
+                    variant="secondary"
+                  >
+                    <ArrowIOSForwardIcon />
+                  </Button>
+                </div>
               </>
             )}
             selected={value}

@@ -3,7 +3,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { radius } from "../../token";
-import { Field } from "../field";
+import { Field, useField } from "../field";
 import styles from "./input.module.css";
 
 export type InputSize = "large" | "medium" | "small" | "x-small";
@@ -41,8 +41,8 @@ export function Input({
     ...getStyles(size),
   } as CSSProperties;
 
-  const input = (
-    <input
+  const inputEl = (
+    <FieldAwareInput
       aria-invalid={hasError || undefined}
       className={cn(
         styles.input,
@@ -67,12 +67,24 @@ export function Input({
         label={label}
         required={props.required}
       >
-        {input}
+        {inputEl}
       </Field>
     );
   }
 
-  return input;
+  return inputEl;
+}
+
+function FieldAwareInput({
+  "aria-describedby": callerDescribedBy,
+  ...props
+}: ComponentProps<"input">) {
+  const field = useField();
+  const fieldDescribedBy = field.errorId ?? field.descriptionId;
+  const describedBy =
+    [fieldDescribedBy, callerDescribedBy].filter(Boolean).join(" ") ||
+    undefined;
+  return <input aria-describedby={describedBy} {...props} />;
 }
 
 const getStyles = (size: InputSize) =>

@@ -3,7 +3,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { Switch as SwitchBase } from "../../primitives/switch";
-import { colors, spacing } from "../../token";
+import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
 
@@ -81,23 +81,23 @@ export function Switch({
 
 const getSwitchWidth = (size: SwitchSize) =>
   match(size)
-    .with("large", () => spacing.s15)
-    .with("medium", () => spacing.s13)
-    .with("small", () => spacing.s11)
+    .with("large", () => "40px")
+    .with("medium", () => "36px")
+    .with("small", () => "32px")
     .exhaustive();
 
 const getSwitchHeight = (size: SwitchSize) =>
   match(size)
-    .with("large", () => spacing.s10)
-    .with("medium", () => spacing.s9)
-    .with("small", () => spacing.s8)
+    .with("large", () => "22px")
+    .with("medium", () => "20px")
+    .with("small", () => "18px")
     .exhaustive();
 
 const getThumbSize = (size: SwitchSize) =>
   match(size)
-    .with("large", () => spacing.s9)
-    .with("medium", () => spacing.s8)
-    .with("small", () => spacing.s7)
+    .with("large", () => "18px")
+    .with("medium", () => "16px")
+    .with("small", () => "14px")
     .exhaustive();
 
 const getThumbOffset = (_size: SwitchSize) => "2px";

@@ -4,7 +4,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
-import { colors, spacing } from "../../token";
+import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
 
@@ -109,9 +109,9 @@ const getCheckedState = (
 
 const getSize = (size: CheckboxSize) =>
   match(size)
-    .with("large", () => spacing.s9)
-    .with("medium", () => spacing.s8)
-    .with("small", () => spacing.s7)
+    .with("large", () => "18px")
+    .with("medium", () => "16px")
+    .with("small", () => "14px")
     .exhaustive();
 
 const getRadius = (size: CheckboxSize) =>

@@ -36,6 +36,11 @@
     transition: stroke 0.15s ease-in-out;
   }
 
+  .checkbox:focus-within {
+    outline: 2px solid var(--cocso-color-primary-500);
+    outline-offset: 2px;
+  }
+
   .checkbox input[type="checkbox"] {
     position: absolute;
     width: 1px;

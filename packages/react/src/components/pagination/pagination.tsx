@@ -8,7 +8,7 @@ import { cn } from "../../cn";
 import styles from "./pagination.module.css";
 
 export interface PaginationProps
-  extends Omit<ComponentProps<"div">, "onChange"> {
+  extends Omit<ComponentProps<"nav">, "onChange"> {
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
   page: number;
@@ -28,6 +28,8 @@ export function Pagination({
 
   const renderPageButton = (pageNumber: number) => (
     <button
+      aria-current={page === pageNumber ? "page" : undefined}
+      aria-label={`${pageNumber} 페이지`}
       className={styles.item}
       data-active={page === pageNumber}
       key={pageNumber}
@@ -39,9 +41,15 @@ export function Pagination({
   );
 
   return (
-    <div className={cn(styles.pagination, className)} ref={ref} {...props}>
+    <nav
+      aria-label="페이지 탐색"
+      className={cn(styles.pagination, className)}
+      ref={ref}
+      {...props}
+    >
       {totalPages > 1 && (
         <button
+          aria-label="이전 페이지"
           className={styles.arrow}
           disabled={page === 1}
           onClick={() => page > 1 && onChange(page - 1)}
@@ -80,6 +88,7 @@ export function Pagination({
 
       {totalPages > 1 && (
         <button
+          aria-label="다음 페이지"
           className={styles.arrow}
           disabled={page === totalPages}
           onClick={() => page < totalPages && onChange(page + 1)}
@@ -88,6 +97,6 @@ export function Pagination({
           <ArrowIOSForwardIcon />
         </button>
       )}
-    </div>
+    </nav>
   );
 }

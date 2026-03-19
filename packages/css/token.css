@@ -76,6 +76,8 @@
   --cocso-color-success-800: #1f4727;
   --cocso-color-success-900: #122b18;
   --cocso-color-success-950: #0e2012;
+  --cocso-text-xs: 12px;
+  --cocso-text-sm: 14px;
   --cocso-text-base: 16px;
   --cocso-font-weight-thin: 100;
   --cocso-font-weight-extralight: 200;
@@ -97,10 +99,20 @@
   --cocso-shadow-y-4: 16px;
   --cocso-shadow-blur-3: 16px;
   --cocso-shadow-blur-4: 24px;
-  --cocso-shadow-xs: 0px 1px 2px 0px var(--cocso-color-alpha-shadow1), 0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
-  --cocso-shadow-sm: 0px 0px 2px 0px var(--cocso-color-alpha-shadow1), 0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
-  --cocso-shadow-md: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px var(--cocso-color-alpha-shadow3);
-  --cocso-shadow-lg: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-xs:
+    0px 1px 2px 0px var(--cocso-color-alpha-shadow1),
+    0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
+  --cocso-shadow-sm:
+    0px 0px 2px 0px var(--cocso-color-alpha-shadow1),
+    0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
+  --cocso-shadow-md:
+    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
+    0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px
+    var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-lg:
+    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
+    0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px
+    var(--cocso-color-alpha-shadow3);
   --cocso-spacing-0: 0px;
   --cocso-spacing-1: 1px;
   --cocso-spacing-2: 2px;
@@ -131,7 +143,7 @@
   --cocso-z-index-overlay: 100;
   --cocso-z-index-modal: 200;
   --cocso-z-index-modal-content: 250;
-  --cocso-color-alpha-shadow1: rgba(0, 0, 0, 0.05);
+  --cocso-color-alpha-shadow1: rgba(0, 0, 0, 0.04);
   --cocso-color-alpha-shadow2: rgba(0, 0, 0, 0.08);
   --cocso-color-alpha-shadow3: rgba(0, 0, 0, 0.12);
   --cocso-color-text-primary: var(--cocso-color-neutral-950);
