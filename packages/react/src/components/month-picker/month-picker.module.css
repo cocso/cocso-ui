@@ -1,11 +1,13 @@
 @layer components {
   .root {
+    --cocso-month-picker-font-size: 14px;
     display: inline-block;
     transform: translateZ(0);
   }
 
   .content {
-    min-width: 260px;
+    --cocso-month-picker-min-width: 260px;
+    min-width: var(--cocso-month-picker-min-width);
     overflow: hidden;
   }
 
@@ -70,9 +72,9 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    font-size: 14px;
-    font-weight: 500;
+    height: var(--cocso-spacing-14);
+    font-size: var(--cocso-month-picker-font-size);
+    font-weight: var(--cocso-font-weight-medium);
     color: var(--cocso-color-text-primary);
     cursor: pointer;
     border-radius: var(--cocso-radius-4);
@@ -83,7 +85,7 @@
   }
 
   :global(.react-datepicker__month-text--selected) {
-    font-weight: 600;
+    font-weight: var(--cocso-font-weight-semibold);
     color: var(--cocso-color-white);
     background-color: var(--cocso-color-primary-500);
   }

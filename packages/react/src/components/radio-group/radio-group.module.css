@@ -2,7 +2,7 @@
   .root {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--cocso-spacing-4);
   }
 
   .root[data-disabled] {
@@ -15,7 +15,7 @@
     height: var(--cocso-radio-size, 16px);
     cursor: pointer;
     background-color: var(--cocso-color-white);
-    border: 2px solid var(--cocso-color-text-primary);
+    border: var(--cocso-spacing-2) solid var(--cocso-color-text-primary);
     border-radius: 100%;
   }
 

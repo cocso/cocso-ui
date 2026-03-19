@@ -23,7 +23,7 @@
 
   .inner {
     display: inline-flex;
-    gap: 2px;
+    gap: var(--cocso-spacing-2);
     align-items: center;
   }
 }

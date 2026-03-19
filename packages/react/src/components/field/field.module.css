@@ -1,13 +1,15 @@
 @layer components {
   .root {
+    --cocso-field-label-font-size: 14px;
+    --cocso-field-description-font-size: 12px;
     display: flex;
     flex-direction: column;
     gap: var(--cocso-spacing-5);
   }
 
   .label {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--cocso-field-label-font-size);
+    font-weight: var(--cocso-font-weight-medium);
     color: var(--cocso-color-neutral-900);
     cursor: pointer;
     user-select: none;
@@ -15,20 +17,20 @@
 
   .optional {
     margin-left: var(--cocso-spacing-4);
-    font-size: 12px;
-    font-weight: 400;
+    font-size: var(--cocso-field-description-font-size);
+    font-weight: var(--cocso-font-weight-regular);
     color: var(--cocso-color-neutral-400);
   }
 
   .description {
     margin: 0;
-    font-size: 12px;
+    font-size: var(--cocso-field-description-font-size);
     color: var(--cocso-color-neutral-500);
   }
 
   .errorMessage {
     margin: 0;
-    font-size: 12px;
+    font-size: var(--cocso-field-description-font-size);
     color: var(--cocso-color-danger-500);
   }
 }

@@ -46,7 +46,7 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    margin-right: 2px;
+    margin-right: var(--cocso-spacing-2);
   }
 
   .suffix {
@@ -54,7 +54,7 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    margin-left: 2px;
+    margin-left: var(--cocso-spacing-2);
   }
 
   .button[disabled] {
