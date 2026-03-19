@@ -33,6 +33,7 @@
   @media (prefers-reduced-motion: reduce) {
     .blade {
       animation: spinner-reduced-pulse 2s ease-in-out infinite;
+      animation-delay: 0s !important;
     }
   }
 }

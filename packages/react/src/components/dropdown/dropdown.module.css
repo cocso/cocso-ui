@@ -76,4 +76,17 @@
   .item:active {
     scale: 0.99;
   }
+
+  .item[data-disabled] {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .item[data-disabled]:hover {
+    background-color: transparent;
+  }
+
+  .item[data-disabled]:active {
+    scale: 1;
+  }
 }
