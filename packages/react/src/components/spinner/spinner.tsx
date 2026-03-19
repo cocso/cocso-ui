@@ -3,11 +3,7 @@ import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { colors } from "../../token";
 import styles from "./spinner.module.css";
-
-/** Available size variants for the Spinner component. */
 export type SpinnerSize = "large" | "medium" | "small";
-
-/** Available color variants for the Spinner component. */
 export type SpinnerVariant =
   | "primary"
   | "secondary"
@@ -15,14 +11,9 @@ export type SpinnerVariant =
   | "error"
   | "warning"
   | "white";
-
-/** Props for the Spinner component. */
 export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
-  /** Accessible label announced to screen readers (defaults to "Loading"). */
   label?: string;
-  /** Visual size of the spinner. */
   size?: SpinnerSize;
-  /** Color variant of the spinner blades. */
   variant?: SpinnerVariant;
 }
 
@@ -59,10 +50,6 @@ const getVariantColor = (variant: SpinnerVariant) =>
     .with("warning", () => colors.warning500)
     .with("white", () => colors.white)
     .exhaustive();
-
-/**
- * A loading spinner rendered as rotating blades with configurable size and color variant.
- */
 export function Spinner({
   ref,
   className,

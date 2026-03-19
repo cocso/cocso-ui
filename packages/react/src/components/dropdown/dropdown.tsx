@@ -22,11 +22,6 @@ function DropdownItem({
 }: ComponentProps<typeof MenuBase.Item>) {
   return <MenuBase.Item className={cn(styles.item, className)} {...props} />;
 }
-
-/**
- * A dropdown menu component built on Base UI's Menu primitive.
- * Compose with `Dropdown.Trigger`, `Dropdown.Content`, and `Dropdown.Item`.
- */
 export const Dropdown = Object.assign(MenuBase.Root, {
   Trigger: MenuBase.Trigger,
   Content: DropdownContent,

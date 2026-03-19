@@ -13,30 +13,15 @@ import { Button } from "../button";
 import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./day-picker.module.css";
-
-/** Props for the {@link DayPicker} component. */
 export interface DayPickerProps
   extends Omit<ComponentProps<"div">, "children"> {
-  /** Whether the date picker is disabled. */
   disabled?: boolean;
-  /** The latest selectable date. */
   maxDate?: Date;
-  /** The earliest selectable date. */
   minDate?: Date;
-  /** Callback fired when the selected date changes. */
   onValueChange?: (value: Date | null) => void;
-  /** Custom trigger element that opens the calendar dropdown. */
   trigger?: ReactElement;
-  /** The currently selected date. */
   value?: Date;
 }
-
-/**
- * A date picker component that renders a calendar inside a dropdown.
- * Supports date range constraints, a custom trigger element, and Korean locale formatting.
- *
- * @param props - {@link DayPickerProps}
- */
 export function DayPicker({
   ref,
   className,

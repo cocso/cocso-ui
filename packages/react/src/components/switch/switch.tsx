@@ -6,32 +6,16 @@ import { Switch as SwitchBase } from "../../primitives/switch";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
-
-/** Available size variants for the Switch component. */
 export type SwitchSize = "small" | "medium" | "large";
-
-/** Available color variants for the Switch checked state. */
 export type SwitchVariant = "primary" | "success" | "error" | "warning";
-
-/** Props for the Switch component. */
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
-  /** Whether the switch is disabled. */
   disabled?: boolean;
-  /** HTML id applied to the switch input; auto-generated if omitted. */
   id?: string;
-  /** Optional label text rendered beside the switch. */
   label?: string;
-  /** Side on which the label is rendered relative to the switch. */
   position?: "left" | "right";
-  /** Visual size of the switch. */
   size?: SwitchSize;
-  /** Color variant applied when the switch is checked. */
   variant?: SwitchVariant;
 }
-
-/**
- * A toggle switch with an optional label that can be positioned on either side.
- */
 export function Switch({
   ref,
   id: _id,

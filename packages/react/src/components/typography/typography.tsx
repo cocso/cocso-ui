@@ -15,11 +15,7 @@ import {
   lineHeight as lineHeightToken,
 } from "../../token";
 import styles from "./typography.module.css";
-
-/** Available size variants for body text. */
 export type BodySize = "large" | "medium" | "small" | "x-small";
-
-/** Available size variants for heading text. */
 export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
 type TypographyPropsBase = {
@@ -43,17 +39,10 @@ type HeadingTypographyProps = TypographyPropsBase & {
   type: "heading";
   size?: HeadingSize;
 };
-
-/** Union of all valid prop shapes for the Typography component. */
 export type TypographyProps =
   | CustomTypographyProps
   | BodyTypographyProps
   | HeadingTypographyProps;
-
-/**
- * A polymorphic text component supporting body, heading, and custom type variants
- * with responsive font size, weight, and line-height control via CSS variables.
- */
 export function Typography({
   ref,
   render: renderProp,

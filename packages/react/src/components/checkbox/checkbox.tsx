@@ -7,39 +7,20 @@ import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
-
-/** Available checkbox size options. */
 export type CheckboxSize = "large" | "medium" | "small";
-
-/** Represents the checked state of a checkbox, including the indeterminate state. */
 export type CheckboxStatus = "on" | "off" | "intermediate";
-
-/** Props for the {@link Checkbox} component. */
 export interface CheckboxProps
   extends Omit<
     ComponentProps<typeof CheckboxBase.Root>,
     "checked" | "onCheckedChange" | "onChange" | "indeterminate"
   > {
-  /** Whether the checkbox is disabled. */
   disabled?: boolean;
-  /** The `id` attribute for the underlying input element. Auto-generated if omitted. */
   id?: string;
-  /** Optional label text rendered beside the checkbox. */
   label?: string;
-  /** Callback fired when the checked state changes. */
   onChange: (status: CheckboxStatus) => void;
-  /** Size of the checkbox. Defaults to `"medium"`. */
   size?: CheckboxSize;
-  /** The current checked state of the checkbox. */
   status: CheckboxStatus;
 }
-
-/**
- * A controlled checkbox component supporting checked, unchecked, and indeterminate states.
- * Renders an optional label and manages its own `id` when one is not provided.
- *
- * @param props - {@link CheckboxProps}
- */
 export function Checkbox({
   ref,
   id: _id,

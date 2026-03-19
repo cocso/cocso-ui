@@ -8,11 +8,7 @@ import { colors, fontWeight } from "../../token";
 import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
 import styles from "./button.module.css";
-
-/** Available button size options. */
 export type ButtonSize = "large" | "medium" | "small" | "x-small";
-
-/** Available button visual style variants. */
 export type ButtonVariant =
   | "primary"
   | "secondary"
@@ -20,42 +16,20 @@ export type ButtonVariant =
   | "success"
   | "error"
   | "warning";
-
-/** Available button shape options. */
 export type ButtonShape = "square" | "circle" | "rounded";
-
-/** Props for the {@link Button} component. */
 export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
-  /** Whether the button is disabled. Defaults to `false`. */
   disabled?: boolean;
-  /** Whether the button is in a loading state, showing a spinner and disabling interaction. Defaults to `false`. */
   loading?: boolean;
-  /** Content rendered before the button label. */
   prefix?: ReactNode;
-  /** Custom render prop for changing the underlying element. */
   render?: useRender.RenderProp;
-  /** Shape of the button. Defaults to `"square"`. */
   shape?: ButtonShape;
-  /** Size of the button. Defaults to `"medium"`. */
   size?: ButtonSize;
-  /** Variant of the spinner shown during loading state. */
   spinnerVariant?: SpinnerVariant;
-  /** Content rendered after the button label. */
   suffix?: ReactNode;
-  /** When `true`, removes padding and sizing suited for icon-only buttons. Defaults to `false`. */
   svgOnly?: boolean;
-  /** Visual style variant of the button. Defaults to `"primary"`. */
   variant?: ButtonVariant;
-  /** Font weight of the button label. Defaults to `"medium"`. */
   weight?: FontWeight;
 }
-
-/**
- * A versatile button component with multiple variants, sizes, and shapes.
- * Supports loading states, prefix/suffix icons, and custom rendering via a render prop.
- *
- * @param props - {@link ButtonProps}
- */
 export function Button({
   render: renderProp,
   ref,

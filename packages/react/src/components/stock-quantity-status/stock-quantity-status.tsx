@@ -4,13 +4,8 @@ import { cn } from "../../cn";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
-
-/** Stock quantity level indicator values. */
 export type QuantityStatus = "보통" | "여유" | "부족";
-
-/** Props for the StockQuantityStatus component. */
 export interface QuantityStatusProps extends ComponentProps<"div"> {
-  /** Current stock quantity level to display. */
   quantity: QuantityStatus;
 }
 
@@ -103,10 +98,6 @@ const renderIndicator = (quantity: QuantityStatus) => {
     </svg>
   );
 };
-
-/**
- * Displays a stock quantity status badge with a color-coded icon and label.
- */
 export function StockQuantityStatus({
   ref,
   className,
@@ -134,8 +125,6 @@ export function StockQuantityStatus({
     </div>
   );
 }
-
-/** Returns the display color token for a given quantity status. */
 export const getColor = (quantity: QuantityStatus) =>
   match(quantity)
     .with("여유", () => colors.primary500)

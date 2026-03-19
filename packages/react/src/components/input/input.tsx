@@ -5,27 +5,15 @@ import { cn } from "../../cn";
 import { radius } from "../../token";
 import { Field } from "../field";
 import styles from "./input.module.css";
-
-/** Size variant of the {@link Input} component. */
 export type InputSize = "large" | "medium" | "small" | "x-small";
-
-/** Props for the {@link Input} component. */
 export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
-  /** Helper text rendered below the input via a {@link Field} wrapper. Only used when `label` is set. */
   description?: string;
-  /** Whether the input is disabled. */
   disabled?: boolean;
-  /** Error state. Pass `true` to style the input as invalid, or a string to also show an error message. */
   error?: boolean | string;
-  /** When provided, the input is wrapped in a {@link Field} component with this label. */
   label?: string;
-  /** The size variant controlling height, padding, font size, and border radius. */
   size?: InputSize;
-  /** When `true`, the input expands to fill its container width. */
   stretch?: boolean;
 }
-
-/** A text input field. When `label` is provided, it is wrapped in a {@link Field} with label, description, and error support. */
 export function Input({
   ref,
   className,

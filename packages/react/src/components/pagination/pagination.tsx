@@ -6,24 +6,13 @@ import {
 import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./pagination.module.css";
-
-/** Props for the Pagination component. */
 export interface PaginationProps
   extends Omit<ComponentProps<"div">, "onChange"> {
-  /** Maximum number of page buttons visible at once (excluding first/last and ellipsis). */
   maxVisible?: number;
-  /** Callback invoked when the user selects a page. */
   onChange: (pageNumber: number) => void;
-  /** Currently active page number (1-based). */
   page: number;
-  /** Total number of pages. */
   totalPages: number;
 }
-
-/**
- * A pagination control that renders numbered page buttons with previous/next arrows
- * and ellipsis truncation for large page ranges.
- */
 export function Pagination({
   ref,
   className,
