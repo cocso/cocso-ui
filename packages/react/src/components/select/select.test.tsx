@@ -105,6 +105,38 @@ describe("Select", () => {
     });
   });
 
+  describe("label integration", () => {
+    it("wraps select in Field when label is provided", () => {
+      render(
+        <Select label="옵션">
+          <option value="a">Option A</option>
+        </Select>
+      );
+      expect(screen.getByText("옵션")).toBeInTheDocument();
+      expect(screen.getByRole("combobox")).toBeInTheDocument();
+    });
+
+    it("renders bare select without Field when label is omitted", () => {
+      const { container } = render(
+        <Select aria-label="Choose option">
+          <option value="a">Option A</option>
+        </Select>
+      );
+      expect(container.querySelector("label")).not.toBeInTheDocument();
+    });
+
+    it("applies stretch class when stretch=true", () => {
+      render(
+        <Select aria-label="Choose option" data-testid="select" stretch>
+          <option value="a">Option A</option>
+        </Select>
+      );
+      expect(screen.getByTestId("select").closest("div")).toHaveClass(
+        "stretch"
+      );
+    });
+  });
+
   describe("error state", () => {
     it("sets aria-invalid=true on the select element when error=true", () => {
       render(
@@ -137,6 +169,15 @@ describe("Select", () => {
       );
 
       expect(screen.getByTestId("select").closest("div")).toHaveClass("error");
+    });
+
+    it("renders error message in Field when error is a string", () => {
+      render(
+        <Select error="필수 선택입니다" label="옵션">
+          <option value="a">Option A</option>
+        </Select>
+      );
+      expect(screen.getByText("필수 선택입니다")).toBeInTheDocument();
     });
   });
 

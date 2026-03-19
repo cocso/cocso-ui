@@ -24,12 +24,21 @@ describe("Badge", () => {
       "success",
       "error",
       "warning",
+      "outline",
     ] as const)('sets background color CSS variable for variant="%s"', (variant) => {
       const { container } = render(<Badge variant={variant}>Badge</Badge>);
       const badge = container.firstChild as HTMLElement;
       expect(
         badge.style.getPropertyValue("--cocso-badge-bg-color")
       ).toBeTruthy();
+    });
+
+    it('sets border for variant="outline"', () => {
+      const { container } = render(<Badge variant="outline">Badge</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge.style.getPropertyValue("--cocso-badge-border")).toContain(
+        "1px solid"
+      );
     });
 
     it('defaults to variant="secondary"', () => {
@@ -59,6 +68,24 @@ describe("Badge", () => {
       const badge = container.firstChild as HTMLElement;
       expect(badge.style.getPropertyValue("--cocso-badge-padding")).toBe(
         "4px 8px"
+      );
+    });
+  });
+
+  describe("shape CSS variables", () => {
+    it('sets border-radius to 100% for shape="circle"', () => {
+      const { container } = render(<Badge shape="circle">Badge</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge.style.getPropertyValue("--cocso-badge-border-radius")).toBe(
+        "100%"
+      );
+    });
+
+    it('sets border-radius to radius-full for shape="rounded"', () => {
+      const { container } = render(<Badge shape="rounded">Badge</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge.style.getPropertyValue("--cocso-badge-border-radius")).toBe(
+        "var(--cocso-radius-full)"
       );
     });
   });

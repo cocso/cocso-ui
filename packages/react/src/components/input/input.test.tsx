@@ -111,6 +111,31 @@ describe("Input", () => {
       render(<Input aria-label="이름" data-testid="input" error />);
       expect(screen.getByTestId("input")).toHaveClass("error");
     });
+
+    it("renders error message in Field when error is a string", () => {
+      render(<Input error="필수 입력입니다" label="이름" />);
+      expect(screen.getByText("필수 입력입니다")).toBeInTheDocument();
+    });
+  });
+
+  describe("label integration", () => {
+    it("wraps input in Field when label is provided", () => {
+      render(<Input label="이름" />);
+      expect(screen.getByText("이름")).toBeInTheDocument();
+      expect(screen.getByRole("textbox")).toBeInTheDocument();
+    });
+
+    it("renders bare input without Field when label is omitted", () => {
+      const { container } = render(<Input aria-label="이름" />);
+      expect(container.querySelector("label")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("stretch", () => {
+    it("applies stretch class when stretch=true", () => {
+      render(<Input aria-label="이름" data-testid="input" stretch />);
+      expect(screen.getByTestId("input")).toHaveClass("stretch");
+    });
   });
 
   describe("readOnly state", () => {

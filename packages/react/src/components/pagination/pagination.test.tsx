@@ -89,6 +89,26 @@ describe("Pagination", () => {
         screen.getByRole("button", { name: "4 페이지" })
       ).toBeInTheDocument();
     });
+
+    it("does not render page buttons outside valid range during truncation", () => {
+      render(
+        <Pagination
+          maxVisible={3}
+          onChange={vi.fn()}
+          page={2}
+          totalPages={20}
+        />
+      );
+      expect(
+        screen.queryByRole("button", { name: "0 페이지" })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "20 페이지" })
+      ).toBeInTheDocument();
+    });
   });
 
   describe("active page indicator", () => {
