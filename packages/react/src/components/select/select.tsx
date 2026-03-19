@@ -37,8 +37,6 @@ export function Select({
 
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
-  const field = useField();
-  const describedBy = field.errorId ?? field.descriptionId;
 
   const wrapperStyle = { ...getStyles(size) } as CSSProperties;
 
@@ -52,8 +50,7 @@ export function Select({
       )}
       style={wrapperStyle}
     >
-      <select
-        aria-describedby={describedBy}
+      <FieldAwareSelect
         aria-invalid={hasError || undefined}
         className={styles.select}
         disabled={disabled}
@@ -63,7 +60,7 @@ export function Select({
         {...props}
       >
         {children}
-      </select>
+      </FieldAwareSelect>
 
       <span className={styles.icon}>
         <SelectorIcon size={getIconSize(size)} />
@@ -86,6 +83,12 @@ export function Select({
   }
 
   return select;
+}
+
+function FieldAwareSelect(props: ComponentProps<"select">) {
+  const field = useField();
+  const describedBy = field.errorId ?? field.descriptionId;
+  return <select aria-describedby={describedBy || undefined} {...props} />;
 }
 
 const getIconSize = (size: SelectSize) =>

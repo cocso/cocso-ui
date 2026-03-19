@@ -98,6 +98,7 @@ export function Button({
         className: mergedClassName,
         style,
         disabled: isDisabled,
+        "aria-busy": loading || undefined,
         type: "button" as const,
       },
       props,

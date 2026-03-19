@@ -35,17 +35,14 @@ export function Input({
 
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
-  const field = useField();
-  const describedBy = field.errorId ?? field.descriptionId;
 
   const style = {
     ..._style,
     ...getStyles(size),
   } as CSSProperties;
 
-  const input = (
-    <input
-      aria-describedby={describedBy}
+  const inputEl = (
+    <FieldAwareInput
       aria-invalid={hasError || undefined}
       className={cn(
         styles.input,
@@ -70,12 +67,18 @@ export function Input({
         label={label}
         required={props.required}
       >
-        {input}
+        {inputEl}
       </Field>
     );
   }
 
-  return input;
+  return inputEl;
+}
+
+function FieldAwareInput(props: ComponentProps<"input">) {
+  const field = useField();
+  const describedBy = field.errorId ?? field.descriptionId;
+  return <input aria-describedby={describedBy || undefined} {...props} />;
 }
 
 const getStyles = (size: InputSize) =>
