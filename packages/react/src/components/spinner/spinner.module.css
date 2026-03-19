@@ -1,13 +1,13 @@
-@keyframes spinner-blade-fade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.15;
-  }
-}
-
 @layer components {
+  @keyframes spinner-blade-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.15;
+    }
+  }
+
   .spinner {
     position: relative;
     display: inline-block;
