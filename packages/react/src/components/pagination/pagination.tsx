@@ -41,7 +41,12 @@ export function Pagination({
   );
 
   return (
-    <nav aria-label="페이지 탐색" className={cn(styles.pagination, className)} ref={ref} {...props}>
+    <nav
+      aria-label="페이지 탐색"
+      className={cn(styles.pagination, className)}
+      ref={ref}
+      {...props}
+    >
       {totalPages > 1 && (
         <button
           aria-label="이전 페이지"

@@ -7,8 +7,12 @@ describe("Pagination", () => {
   describe("rendering", () => {
     it("renders page buttons up to totalPages", () => {
       render(<Pagination onChange={vi.fn()} page={1} totalPages={5} />);
-      expect(screen.getByRole("button", { name: "1 페이지" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "5 페이지" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "5 페이지" })
+      ).toBeInTheDocument();
     });
 
     it("does not render arrow buttons when totalPages=1", () => {
@@ -60,8 +64,12 @@ describe("Pagination", () => {
   describe("truncation", () => {
     it("always renders first and last page buttons when totalPages > maxVisible + 2", () => {
       render(<Pagination onChange={vi.fn()} page={5} totalPages={10} />);
-      expect(screen.getByRole("button", { name: "1 페이지" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "10 페이지" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "1 페이지" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "10 페이지" })
+      ).toBeInTheDocument();
     });
 
     it("renders all page buttons when totalPages <= maxVisible + 2", () => {
@@ -77,7 +85,9 @@ describe("Pagination", () => {
       render(
         <Pagination maxVisible={3} onChange={vi.fn()} page={1} totalPages={4} />
       );
-      expect(screen.getByRole("button", { name: "4 페이지" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "4 페이지" })
+      ).toBeInTheDocument();
     });
   });
 
