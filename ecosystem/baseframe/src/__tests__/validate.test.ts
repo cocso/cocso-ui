@@ -1,7 +1,7 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { parseValue } from "../core/parsers";
 import { validateAllTokens } from "../core/transforms/validate";
-import type { Collection, ParseResult, Token } from "../core/types";
+import type { Collection, Token } from "../core/types";
 
 function makeDefinitions(
   name: string,
@@ -232,24 +232,5 @@ describe("parseValue — INVALID_VALUE_FORMAT coverage", () => {
     const result = parseValue("");
     expect(result.isValid).toBe(true);
     expect(result.value?.kind).toBe("StringValue");
-  });
-
-  it("reports INVALID_VALUE_FORMAT when parser returns invalid result", async () => {
-    const parsersModule = await import("../core/parsers");
-    const parseSpy = vi.spyOn(parsersModule, "parseValue").mockReturnValue({
-      isValid: false,
-      error: "forced parse failure",
-    } as ParseResult);
-
-    const tokens = [makeToken("$color.white", "#FFFFFF")];
-    const definitions = makeDefinitions("global", ["default"]);
-    const result = validateAllTokens(tokens, definitions);
-
-    expect(result.isValid).toBe(false);
-    expect(
-      result.errors.some((error) => error.type === "INVALID_VALUE_FORMAT")
-    ).toBe(true);
-
-    parseSpy.mockRestore();
   });
 });

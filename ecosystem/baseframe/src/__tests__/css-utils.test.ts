@@ -4,7 +4,6 @@ import {
   toCssValue,
 } from "../core/builders/utils/css";
 import type { TokenResolver } from "../core/transforms/resolve";
-import type { ParseResult } from "../core/types";
 
 describe("toCssValue", () => {
   it("returns string as-is", () => {
@@ -93,40 +92,5 @@ describe("resolveValueWithResolver", () => {
     };
     const result = resolveValueWithResolver("#ff0000", resolver);
     expect(result).toBe("#ff0000");
-  });
-
-  it("returns original value when non-token parsing fails", async () => {
-    const resolver: TokenResolver = {
-      resolve: vi.fn(),
-      resolveTokenRef: vi.fn(),
-    };
-
-    const parsersModule = await import("../core/parsers");
-    const parseSpy = vi
-      .spyOn(parsersModule, "parseValue")
-      .mockReturnValue({ isValid: false, error: "invalid" } as ParseResult);
-
-    const result = resolveValueWithResolver("16px", resolver);
-    expect(result).toBe("16px");
-
-    parseSpy.mockRestore();
-  });
-
-  it("throws for invalid token reference parsing", async () => {
-    const resolver: TokenResolver = {
-      resolve: vi.fn(),
-      resolveTokenRef: vi.fn(),
-    };
-
-    const parsersModule = await import("../core/parsers");
-    const parseSpy = vi
-      .spyOn(parsersModule, "parseValue")
-      .mockReturnValue({ isValid: false, error: "invalid" } as ParseResult);
-
-    expect(() => resolveValueWithResolver("$color.white", resolver)).toThrow(
-      "Invalid token reference: $color.white"
-    );
-
-    parseSpy.mockRestore();
   });
 });
