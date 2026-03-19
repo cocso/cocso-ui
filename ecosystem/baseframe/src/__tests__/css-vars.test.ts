@@ -93,4 +93,20 @@ describe("css-vars generateFromAst", () => {
     expect(result).toContain("--cocso-color-white: #ffffff;");
     expect(result.endsWith("\n")).toBe(true);
   });
+
+  it("throws when a required mode value is missing", () => {
+    const ast = {
+      collections: [{ name: "global", modes: ["default", "dark"] }],
+      tokens: [
+        {
+          token: { name: "$color.white", collection: "global" },
+          values: [{ mode: "default", value: "#FFFFFF" }],
+        },
+      ],
+    };
+
+    expect(() => generateFromAst(ast, { prefix: "cocso" })).toThrow(
+      "No value found for token '$color.white' in mode 'dark'"
+    );
+  });
 });
