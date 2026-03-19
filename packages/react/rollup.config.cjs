@@ -23,11 +23,19 @@ function external(pkg) {
   });
 }
 
+function onwarn(warning, warn) {
+  if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+    return;
+  }
+  warn(warning);
+}
+
 function buildJS(format, input, output) {
   const isESM = format === "esm";
   return {
     input,
     external,
+    onwarn,
     output: [
       {
         format,
@@ -62,6 +70,8 @@ function buildDTS(format, input, output) {
   const isESM = format === "esm";
   return {
     input,
+    external,
+    onwarn,
     output: [
       {
         format,
