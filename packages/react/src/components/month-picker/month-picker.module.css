@@ -1,6 +1,6 @@
 @layer components {
   .root {
-    --cocso-month-picker-font-size: 14px;
+    --cocso-month-picker-font-size: var(--cocso-text-sm);
     display: inline-block;
     transform: translateZ(0);
   }

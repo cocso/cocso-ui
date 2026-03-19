@@ -4,7 +4,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { radius } from "../../token";
-import { Field } from "../field";
+import { Field, useField } from "../field";
 import styles from "./select.module.css";
 
 export type SelectSize = "large" | "medium" | "small" | "x-small";
@@ -37,6 +37,8 @@ export function Select({
 
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
+  const field = useField();
+  const describedBy = field.errorId ?? field.descriptionId;
 
   const wrapperStyle = { ...getStyles(size) } as CSSProperties;
 
@@ -51,6 +53,7 @@ export function Select({
       style={wrapperStyle}
     >
       <select
+        aria-describedby={describedBy}
         aria-invalid={hasError || undefined}
         className={styles.select}
         disabled={disabled}

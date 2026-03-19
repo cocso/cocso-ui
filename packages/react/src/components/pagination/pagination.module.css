@@ -9,7 +9,7 @@
 
   .arrow,
   .item {
-    --cocso-pagination-font-size: 14px;
+    --cocso-pagination-font-size: var(--cocso-text-sm);
     --cocso-pagination-font-color: var(--cocso-color-text-primary);
     --cocso-pagination-font-weight: inherit;
     --cocso-pagination-bg-color: inherit;
@@ -26,6 +26,12 @@
     border-radius: var(--cocso-radius-4);
     transition: transform 0.15s ease-in-out;
     will-change: transform;
+  }
+
+  .arrow:focus-visible,
+  .item:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-500);
+    outline-offset: 2px;
   }
 
   .arrow:disabled {

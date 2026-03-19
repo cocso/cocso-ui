@@ -6,5 +6,9 @@ metadata:
 data:
   collection: global
   tokens:
+    $text.xs:
+      values: { default: 12px }
+    $text.sm:
+      values: { default: 14px }
     $text.base:
       values: { default: 16px }

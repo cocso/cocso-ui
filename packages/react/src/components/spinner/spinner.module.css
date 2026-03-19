@@ -20,10 +20,19 @@
     animation: spinner-blade-fade 0.75s linear infinite;
   }
 
+  @keyframes spinner-reduced-pulse {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .blade {
-      opacity: 0.5;
-      animation: none;
+      animation: spinner-reduced-pulse 2s ease-in-out infinite;
     }
   }
 }

@@ -3,7 +3,7 @@ import { useId } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { radius } from "../../token";
-import { Field } from "../field";
+import { Field, useField } from "../field";
 import styles from "./input.module.css";
 
 export type InputSize = "large" | "medium" | "small" | "x-small";
@@ -35,6 +35,8 @@ export function Input({
 
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
+  const field = useField();
+  const describedBy = field.errorId ?? field.descriptionId;
 
   const style = {
     ..._style,
@@ -43,6 +45,7 @@ export function Input({
 
   const input = (
     <input
+      aria-describedby={describedBy}
       aria-invalid={hasError || undefined}
       className={cn(
         styles.input,

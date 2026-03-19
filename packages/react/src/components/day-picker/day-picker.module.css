@@ -9,12 +9,12 @@
     overflow: hidden;
   }
 
-  .sunday {
-    color: var(--cocso-color-danger-600) !important;
+  :global(.react-datepicker__day).sunday {
+    color: var(--cocso-color-danger-600);
   }
 
-  .saturday {
-    color: var(--cocso-color-primary-600) !important;
+  :global(.react-datepicker__day).saturday {
+    color: var(--cocso-color-primary-600);
   }
 
   :global(.react-datepicker) {
@@ -94,13 +94,13 @@
     background-color: var(--cocso-color-neutral-50);
   }
 
-  :global(.react-datepicker__day--selected) {
-    color: var(--cocso-color-white) !important;
+  :global(.react-datepicker__day.react-datepicker__day--selected) {
+    color: var(--cocso-color-white);
     background-color: var(--cocso-color-primary-500);
   }
 
-  :global(.react-datepicker__day--selected:hover) {
-    background-color: var(--cocso-color-primary-600) !important;
+  :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
+    background-color: var(--cocso-color-primary-600);
   }
 
   :global(.react-datepicker__day-name:nth-child(1)) {

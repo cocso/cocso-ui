@@ -19,8 +19,13 @@
     height: var(--cocso-switch-height);
     cursor: pointer;
     background-color: var(--cocso-switch-bg-color);
-    border-radius: var(--cocso-spacing-max);
+    border-radius: var(--cocso-radius-full);
     opacity: 1;
+  }
+
+  .switch:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-500);
+    outline-offset: 2px;
   }
 
   .switch[data-disabled] {
@@ -41,7 +46,7 @@
     width: var(--cocso-switch-thumb-width);
     height: var(--cocso-switch-thumb-width);
     background-color: var(--cocso-color-white);
-    border-radius: var(--cocso-spacing-max);
+    border-radius: var(--cocso-radius-full);
     box-shadow: var(--cocso-shadow-xs);
     transform: translate(var(--cocso-switch-thumb-offset), -50%);
     transition: transform 0.15s ease;

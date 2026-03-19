@@ -1,7 +1,7 @@
 @layer components {
   .root {
-    --cocso-field-label-font-size: 14px;
-    --cocso-field-description-font-size: 12px;
+    --cocso-field-label-font-size: var(--cocso-text-sm);
+    --cocso-field-description-font-size: var(--cocso-text-xs);
     display: flex;
     flex-direction: column;
     gap: var(--cocso-spacing-5);
