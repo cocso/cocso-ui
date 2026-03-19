@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'success', 'error', 'warning'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'success', 'error', 'warning', 'info'] },
     size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
     loading: { control: 'boolean' },
@@ -35,6 +35,7 @@ export const Variants: Story = {
       <Button variant="success">Success</Button>
       <Button variant="error">Error</Button>
       <Button variant="warning">Warning</Button>
+      <Button variant="info">Info</Button>
     </div>
   ),
 };
@@ -69,6 +70,7 @@ export const Loading: Story = {
       <Button loading variant="success">Success</Button>
       <Button loading variant="error">Error</Button>
       <Button loading variant="warning">Warning</Button>
+      <Button loading variant="info">Info</Button>
     </div>
   ),
 };

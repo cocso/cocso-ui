@@ -115,17 +115,9 @@ describe("Link", () => {
 
   describe("variant CSS variables", () => {
     it.each([
-      [
-        "inline",
-        "var(--cocso-color-primary-500)",
-        "var(--cocso-color-primary-700)",
-      ],
+      ["inline", "var(--cocso-color-info-500)", "var(--cocso-color-info-700)"],
       ["current", "currentColor", "currentColor"],
-      [
-        "plain",
-        "var(--cocso-color-primary-500)",
-        "var(--cocso-color-primary-700)",
-      ],
+      ["plain", "var(--cocso-color-info-500)", "var(--cocso-color-info-700)"],
     ] as const)('sets --cocso-link-color and --cocso-link-color-hover for variant="%s"', (variant, expectedColor, expectedColorHover) => {
       render(
         <Link href="#" variant={variant}>

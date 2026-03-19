@@ -56,11 +56,12 @@ describe("Spinner", () => {
 
   describe("variant color", () => {
     it.each([
-      ["primary", colors.primary500],
+      ["primary", colors.primary950],
       ["secondary", colors.neutral500],
       ["success", colors.success500],
       ["error", colors.danger500],
       ["warning", colors.warning500],
+      ["info", colors.info500],
       ["white", colors.white],
     ] as const)('applies correct color for variant="%s"', (variant, expectedColor) => {
       render(<Spinner data-testid="spinner" variant={variant} />);

@@ -32,17 +32,28 @@
   --cocso-color-neutral-800: #33363d;
   --cocso-color-neutral-900: #1e2124;
   --cocso-color-neutral-950: #131416;
-  --cocso-color-primary-50: #ecf2fe;
-  --cocso-color-primary-100: #d8e5fd;
-  --cocso-color-primary-200: #b1cefb;
-  --cocso-color-primary-300: #86aff9;
-  --cocso-color-primary-400: #4c87f6;
-  --cocso-color-primary-500: #256ef4;
-  --cocso-color-primary-600: #0b50d0;
-  --cocso-color-primary-700: #083891;
-  --cocso-color-primary-800: #052561;
-  --cocso-color-primary-900: #03163a;
-  --cocso-color-primary-950: #020f27;
+  --cocso-color-primary-50: var(--cocso-color-neutral-50);
+  --cocso-color-primary-100: var(--cocso-color-neutral-100);
+  --cocso-color-primary-200: var(--cocso-color-neutral-200);
+  --cocso-color-primary-300: var(--cocso-color-neutral-300);
+  --cocso-color-primary-400: var(--cocso-color-neutral-400);
+  --cocso-color-primary-500: var(--cocso-color-neutral-500);
+  --cocso-color-primary-600: var(--cocso-color-neutral-600);
+  --cocso-color-primary-700: var(--cocso-color-neutral-700);
+  --cocso-color-primary-800: var(--cocso-color-neutral-800);
+  --cocso-color-primary-900: var(--cocso-color-neutral-900);
+  --cocso-color-primary-950: var(--cocso-color-neutral-950);
+  --cocso-color-info-50: #ecf2fe;
+  --cocso-color-info-100: #d8e5fd;
+  --cocso-color-info-200: #b1cefb;
+  --cocso-color-info-300: #86aff9;
+  --cocso-color-info-400: #4c87f6;
+  --cocso-color-info-500: #256ef4;
+  --cocso-color-info-600: #0b50d0;
+  --cocso-color-info-700: #083891;
+  --cocso-color-info-800: #052561;
+  --cocso-color-info-900: #03163a;
+  --cocso-color-info-950: #020f27;
   --cocso-color-danger-50: #fdefec;
   --cocso-color-danger-100: #fcdfd9;
   --cocso-color-danger-200: #f7afa1;
@@ -99,20 +110,10 @@
   --cocso-shadow-y-4: 16px;
   --cocso-shadow-blur-3: 16px;
   --cocso-shadow-blur-4: 24px;
-  --cocso-shadow-xs:
-    0px 1px 2px 0px var(--cocso-color-alpha-shadow1),
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
-  --cocso-shadow-sm:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow1),
-    0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
-  --cocso-shadow-md:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
-    0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px
-    var(--cocso-color-alpha-shadow3);
-  --cocso-shadow-lg:
-    0px 0px 2px 0px var(--cocso-color-alpha-shadow2),
-    0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px
-    var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-xs: 0px 1px 2px 0px var(--cocso-color-alpha-shadow1), 0px 0px 2px 0px var(--cocso-color-alpha-shadow1);
+  --cocso-shadow-sm: 0px 0px 2px 0px var(--cocso-color-alpha-shadow1), 0px 4px 8px 0px var(--cocso-color-alpha-shadow2);
+  --cocso-shadow-md: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-3) var(--cocso-shadow-blur-3) 0px var(--cocso-color-alpha-shadow3);
+  --cocso-shadow-lg: 0px 0px 2px 0px var(--cocso-color-alpha-shadow2), 0px var(--cocso-shadow-y-4) var(--cocso-shadow-blur-4) 0px var(--cocso-color-alpha-shadow3);
   --cocso-spacing-0: 0px;
   --cocso-spacing-1: 1px;
   --cocso-spacing-2: 2px;

@@ -125,12 +125,13 @@ describe("Button", () => {
 
 describe("Button variant CSS variables", () => {
   it.each([
-    ["primary", colors.primary500],
+    ["primary", colors.primary950],
     ["secondary", colors.transparent],
     ["ghost", colors.white],
     ["success", colors.success500],
     ["error", colors.danger500],
     ["warning", colors.warning300],
+    ["info", colors.info500],
   ] as const)('sets --cocso-button-bg-color for variant="%s"', (variant, expectedBg) => {
     render(<Button variant={variant}>Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({

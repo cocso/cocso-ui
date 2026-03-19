@@ -78,14 +78,14 @@ export const Link = Object.assign(LinkComponent, { ExternalIcon });
 
 const getColor = (variant: LinkVariant) =>
   match(variant)
-    .with("inline", () => colors.primary500)
+    .with("inline", () => colors.info500)
     .with("current", () => "currentColor")
-    .with("plain", () => colors.primary500)
+    .with("plain", () => colors.info500)
     .exhaustive();
 
 const getColorHover = (variant: LinkVariant) =>
   match(variant)
-    .with("inline", () => colors.primary700)
+    .with("inline", () => colors.info700)
     .with("current", () => "currentColor")
-    .with("plain", () => colors.primary700)
+    .with("plain", () => colors.info700)
     .exhaustive();

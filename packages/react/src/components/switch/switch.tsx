@@ -9,7 +9,12 @@ import styles from "./switch.module.css";
 
 export type SwitchSize = "small" | "medium" | "large";
 
-export type SwitchVariant = "primary" | "success" | "error" | "warning";
+export type SwitchVariant =
+  | "primary"
+  | "success"
+  | "error"
+  | "warning"
+  | "info";
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
@@ -104,8 +109,9 @@ const getThumbOffset = (_size: SwitchSize) => "2px";
 
 const getCheckedColor = (variant: SwitchVariant) =>
   match(variant)
-    .with("primary", () => colors.primary500)
+    .with("primary", () => colors.primary950)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
     .with("warning", () => colors.warning500)
+    .with("info", () => colors.info500)
     .exhaustive();

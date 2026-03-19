@@ -20,12 +20,12 @@
   }
 
   .item:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-500);
+    outline: 2px solid var(--cocso-color-primary-950);
     outline-offset: 2px;
   }
 
   .item[data-checked] {
-    border-color: var(--cocso-color-primary-500);
+    border-color: var(--cocso-color-primary-950);
   }
 
   .item[data-disabled] {
@@ -47,7 +47,7 @@
     width: var(--cocso-radio-dot-size, 7px);
     height: var(--cocso-radio-dot-size, 7px);
     content: "";
-    background-color: var(--cocso-color-primary-500);
+    background-color: var(--cocso-color-primary-950);
     border-radius: 50%;
   }
 }

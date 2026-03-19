@@ -16,7 +16,7 @@
   }
 
   .link:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-500);
+    outline: 2px solid var(--cocso-color-primary-950);
     outline-offset: 2px;
     border-radius: var(--cocso-radius-1);
   }

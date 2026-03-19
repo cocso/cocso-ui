@@ -9,7 +9,7 @@ const meta = {
   parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['small', 'medium', 'large'] },
-    variant: { control: 'select', options: ['primary', 'success', 'error', 'warning'] },
+    variant: { control: 'select', options: ['primary', 'success', 'error', 'warning', 'info'] },
     position: { control: 'radio', options: ['left', 'right'] },
     disabled: { control: 'boolean' },
   },
@@ -58,12 +58,14 @@ export const Variants: Story = {
     const [v2, setV2] = useState(true);
     const [v3, setV3] = useState(true);
     const [v4, setV4] = useState(true);
+    const [v5, setV5] = useState(true);
     return (
       <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
         <Switch checked={v1} label="Primary" onCheckedChange={setV1} variant="primary" />
         <Switch checked={v2} label="Success" onCheckedChange={setV2} variant="success" />
         <Switch checked={v3} label="Error" onCheckedChange={setV3} variant="error" />
         <Switch checked={v4} label="Warning" onCheckedChange={setV4} variant="warning" />
+        <Switch checked={v5} label="Info" onCheckedChange={setV5} variant="info" />
       </div>
     );
   },
