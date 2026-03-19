@@ -1,11 +1,13 @@
 @layer components {
   .root {
+    --cocso-month-picker-font-size: 14px;
     display: inline-block;
     transform: translateZ(0);
   }
 
   .content {
-    min-width: var(--cocso-month-picker-min-width, 260px);
+    --cocso-month-picker-min-width: 260px;
+    min-width: var(--cocso-month-picker-min-width);
     overflow: hidden;
   }
 
@@ -71,7 +73,7 @@
     align-items: center;
     justify-content: center;
     height: var(--cocso-spacing-14);
-    font-size: var(--cocso-month-picker-font-size, 14px);
+    font-size: var(--cocso-month-picker-font-size);
     font-weight: var(--cocso-font-weight-medium);
     color: var(--cocso-color-text-primary);
     cursor: pointer;
