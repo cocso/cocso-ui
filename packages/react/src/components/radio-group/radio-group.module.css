@@ -1,0 +1,48 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .root[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .item {
+    width: var(--cocso-radio-size, 16px);
+    height: var(--cocso-radio-size, 16px);
+    cursor: pointer;
+    background-color: var(--cocso-color-white);
+    border: 2px solid var(--cocso-color-text-primary);
+    border-radius: 100%;
+  }
+
+  .item[data-checked] {
+    border-color: var(--cocso-color-primary-500);
+  }
+
+  .item[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .indicator::after {
+    display: block;
+    width: var(--cocso-radio-dot-size, 7px);
+    height: var(--cocso-radio-dot-size, 7px);
+    content: "";
+    background-color: var(--cocso-color-primary-500);
+    border-radius: 50%;
+  }
+}

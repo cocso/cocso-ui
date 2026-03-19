@@ -1,0 +1,29 @@
+@layer components {
+  @keyframes spinner-blade-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  .spinner {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .blade {
+    position: absolute;
+    bottom: 0;
+    animation: spinner-blade-fade 0.75s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blade {
+      opacity: 0.5;
+      animation: none;
+    }
+  }
+}

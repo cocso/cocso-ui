@@ -1,0 +1,62 @@
+name: Feature Request
+description: Propose a new feature or improvement
+labels: ["enhancement"]
+body:
+  - type: input
+    id: title-domain
+    attributes:
+      label: Domain
+      description: "Lowercase identifier (e.g. react, css, baseframe, storybook, website)"
+      placeholder: "react"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Concise description of the proposed feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Context, user feedback, or data supporting this request.
+    validations:
+      required: false
+
+  - type: textarea
+    id: current-gap
+    attributes:
+      label: Current Gap
+      description: What is missing or insufficient today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-scope
+    attributes:
+      label: Proposed Scope
+      description: What should be built or changed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What must be true for this feature to be considered complete?
+      placeholder: |
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of Scope
+      description: Anything explicitly excluded from this feature.
+    validations:
+      required: false
