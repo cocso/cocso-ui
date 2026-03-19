@@ -74,12 +74,12 @@
   }
 
   .item:active {
-    scale: 0.99;
+    scale: 0.98;
   }
 
   .item[data-disabled] {
-    cursor: default;
-    opacity: 0.5;
+    cursor: not-allowed;
+    opacity: 0.4;
   }
 
   .item[data-disabled]:hover {
