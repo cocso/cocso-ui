@@ -81,23 +81,23 @@ export function Switch({
 
 const getSwitchWidth = (size: SwitchSize) =>
   match(size)
-    .with("large", () => "34px")
-    .with("medium", () => "30px")
-    .with("small", () => "26px")
+    .with("large", () => "40px")
+    .with("medium", () => "36px")
+    .with("small", () => "32px")
     .exhaustive();
 
 const getSwitchHeight = (size: SwitchSize) =>
   match(size)
-    .with("large", () => "18px")
-    .with("medium", () => "16px")
-    .with("small", () => "14px")
+    .with("large", () => "22px")
+    .with("medium", () => "20px")
+    .with("small", () => "18px")
     .exhaustive();
 
 const getThumbSize = (size: SwitchSize) =>
   match(size)
-    .with("large", () => "14px")
-    .with("medium", () => "12px")
-    .with("small", () => "10px")
+    .with("large", () => "18px")
+    .with("medium", () => "16px")
+    .with("small", () => "14px")
     .exhaustive();
 
 const getThumbOffset = (_size: SwitchSize) => "2px";
