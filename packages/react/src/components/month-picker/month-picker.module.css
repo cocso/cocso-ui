@@ -5,7 +5,7 @@
   }
 
   .content {
-    min-width: 260px;
+    min-width: var(--cocso-month-picker-min-width, 260px);
     overflow: hidden;
   }
 
@@ -13,7 +13,7 @@
     position: relative;
     display: inline-block;
     padding-inline: var(--cocso-spacing-8);
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* react-datepicker 라이브러리 오버라이드 */
     color: var(--cocso-color-text-primary);
     background-color: var(--cocso-color-white);
   }
@@ -70,9 +70,9 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    font-size: 14px;
-    font-weight: 500;
+    height: var(--cocso-spacing-14);
+    font-size: var(--cocso-month-picker-font-size, 14px);
+    font-weight: var(--cocso-font-weight-medium);
     color: var(--cocso-color-text-primary);
     cursor: pointer;
     border-radius: var(--cocso-radius-4);
@@ -83,7 +83,7 @@
   }
 
   :global(.react-datepicker__month-text--selected) {
-    font-weight: 600;
+    font-weight: var(--cocso-font-weight-semibold);
     color: var(--cocso-color-white);
     background-color: var(--cocso-color-primary-500);
   }

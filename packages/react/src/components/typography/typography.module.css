@@ -15,6 +15,7 @@
     opacity: 0.4;
   }
 
+  /* breakpoint 토큰 미도입 상태로 하드코딩 유지 */
   @media (min-width: 768px) {
     .typography {
       font-size: var(
@@ -24,6 +25,7 @@
     }
   }
 
+  /* breakpoint 토큰 미도입 상태로 하드코딩 유지 */
   @media (min-width: 1024px) {
     .typography {
       font-size: var(

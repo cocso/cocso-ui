@@ -9,6 +9,7 @@
 
   .arrow,
   .item {
+    --cocso-pagination-font-size: 14px;
     --cocso-pagination-font-color: var(--cocso-color-text-primary);
     --cocso-pagination-font-weight: inherit;
     --cocso-pagination-bg-color: inherit;
@@ -17,7 +18,7 @@
     justify-content: center;
     width: var(--cocso-spacing-12);
     height: var(--cocso-spacing-12);
-    font-size: 14px;
+    font-size: var(--cocso-pagination-font-size);
     font-weight: var(--cocso-pagination-font-weight);
     color: var(--cocso-pagination-font-color);
     cursor: pointer;
@@ -54,7 +55,7 @@
   .item[data-active="true"] {
     --cocso-pagination-font-color: var(--cocso-color-white);
     --cocso-pagination-bg-color: var(--cocso-color-primary-500);
-    --cocso-pagination-font-weight: 600;
+    --cocso-pagination-font-weight: var(--cocso-font-weight-semibold);
   }
 
   .item[data-active="false"]:hover {
@@ -71,7 +72,7 @@
     justify-content: center;
     width: var(--cocso-spacing-13);
     height: var(--cocso-spacing-13);
-    font-size: 16px;
+    font-size: var(--cocso-text-base);
     color: var(--cocso-color-text-primary);
   }
 }
