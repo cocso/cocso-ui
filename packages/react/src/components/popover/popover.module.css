@@ -62,18 +62,18 @@
   }
 
   .content[data-open][data-side="top"] {
-    animation-name: slide-down-and-fade;
-  }
-
-  .content[data-open][data-side="right"] {
-    animation-name: slide-left-and-fade;
-  }
-
-  .content[data-open][data-side="bottom"] {
     animation-name: slide-up-and-fade;
   }
 
-  .content[data-open][data-side="left"] {
+  .content[data-open][data-side="right"] {
     animation-name: slide-right-and-fade;
+  }
+
+  .content[data-open][data-side="bottom"] {
+    animation-name: slide-down-and-fade;
+  }
+
+  .content[data-open][data-side="left"] {
+    animation-name: slide-left-and-fade;
   }
 }
