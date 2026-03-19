@@ -4,15 +4,15 @@ import { Radio as RadioBase } from "../../primitives/radio";
 import { RadioGroup as RadioGroupBase } from "../../primitives/radio-group";
 import styles from "./radio-group.module.css";
 
-type RadioSize = "small" | "medium" | "large";
+export type RadioSize = "large" | "medium" | "small";
 
 const sizeVars: Record<RadioSize, CSSProperties> = {
-  small: { "--radio-size": "12px", "--radio-dot-size": "5px" } as CSSProperties,
+  small: { "--cocso-radio-size": "12px", "--cocso-radio-dot-size": "5px" } as CSSProperties,
   medium: {
-    "--radio-size": "16px",
-    "--radio-dot-size": "7px",
+    "--cocso-radio-size": "16px",
+    "--cocso-radio-dot-size": "7px",
   } as CSSProperties,
-  large: { "--radio-size": "20px", "--radio-dot-size": "9px" } as CSSProperties,
+  large: { "--cocso-radio-size": "20px", "--cocso-radio-dot-size": "9px" } as CSSProperties,
 };
 
 function RadioGroupRoot({

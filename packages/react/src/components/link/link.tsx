@@ -17,7 +17,7 @@ export interface LinkProps extends ComponentProps<"a"> {
   variant?: LinkVariant;
   weight?: FontWeight;
 }
-export function Link({
+function LinkComponent({
   ref,
   render: renderProp,
   className,
@@ -71,7 +71,7 @@ function ExternalIcon({
   );
 }
 
-Link.ExternalIcon = ExternalIcon;
+export const Link = Object.assign(LinkComponent, { ExternalIcon });
 
 const getColor = (variant: LinkVariant) =>
   match(variant)

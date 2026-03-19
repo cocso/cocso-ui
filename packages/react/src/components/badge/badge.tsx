@@ -5,7 +5,7 @@ import type { ResponsiveFontSize } from "../../token";
 import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./badge.module.css";
-type BadgeSize = "small" | "medium" | "large";
+export type BadgeSize = "large" | "medium" | "small";
 type BadgeVariant =
   | "primary"
   | "secondary"

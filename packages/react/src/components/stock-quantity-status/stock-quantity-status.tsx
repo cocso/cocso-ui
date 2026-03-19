@@ -5,7 +5,7 @@ import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
 export type QuantityStatus = "보통" | "여유" | "부족";
-export interface QuantityStatusProps extends ComponentProps<"div"> {
+export interface StockQuantityStatusProps extends ComponentProps<"div"> {
   quantity: QuantityStatus;
 }
 
@@ -104,7 +104,7 @@ export function StockQuantityStatus({
   style: _style,
   quantity,
   ...props
-}: QuantityStatusProps) {
+}: StockQuantityStatusProps) {
   const style = {
     ..._style,
     "--cocso-stock-quantity-status-color": getColor(quantity),

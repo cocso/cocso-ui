@@ -12,7 +12,7 @@ function AccordionItem({
     <AccordionBase.Item className={cn(styles.item, className)} {...props} />
   );
 }
-export interface TriggerProps
+export interface AccordionTriggerProps
   extends ComponentProps<typeof AccordionBase.Trigger> {
   chevron?: boolean;
 }
@@ -22,7 +22,7 @@ function AccordionTrigger({
   children,
   chevron = true,
   ...props
-}: TriggerProps) {
+}: AccordionTriggerProps) {
   return (
     <AccordionBase.Trigger className={cn(styles.trigger, className)} {...props}>
       {children}
@@ -39,6 +39,7 @@ function AccordionPanel({
     <AccordionBase.Panel className={cn(styles.content, className)} {...props} />
   );
 }
+
 export const Accordion = Object.assign(AccordionBase.Root, {
   Item: AccordionItem,
   Header: AccordionBase.Header,

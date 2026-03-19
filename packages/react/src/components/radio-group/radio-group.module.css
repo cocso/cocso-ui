@@ -11,8 +11,8 @@
   }
 
   .item {
-    width: var(--radio-size, 16px);
-    height: var(--radio-size, 16px);
+    width: var(--cocso-radio-size, 16px);
+    height: var(--cocso-radio-size, 16px);
     cursor: pointer;
     background-color: white;
     border: 2px solid var(--cocso-color-text-primary);
@@ -39,8 +39,8 @@
 
   .indicator:after {
     display: block;
-    width: var(--radio-dot-size, 7px);
-    height: var(--radio-dot-size, 7px);
+    width: var(--cocso-radio-dot-size, 7px);
+    height: var(--cocso-radio-dot-size, 7px);
     content: "";
     background-color: var(--cocso-color-primary-500);
     border-radius: 50%;
