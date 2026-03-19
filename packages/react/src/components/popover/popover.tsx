@@ -18,6 +18,7 @@ function PopoverContent({
     </PopoverBase.Portal>
   );
 }
+
 export const Popover = Object.assign(PopoverBase.Root, {
   Trigger: PopoverBase.Trigger,
   Content: PopoverContent,

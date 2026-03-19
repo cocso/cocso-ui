@@ -5,7 +5,9 @@ import type { ResponsiveFontSize } from "../../token";
 import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./badge.module.css";
+
 export type BadgeSize = "large" | "medium" | "small";
+
 type BadgeVariant =
   | "primary"
   | "secondary"
@@ -13,12 +15,14 @@ type BadgeVariant =
   | "error"
   | "warning"
   | "outline";
+
 type BadgeShape = "square" | "circle" | "rounded";
 export interface BadgeProps extends ComponentProps<"div"> {
   shape?: BadgeShape;
   size?: BadgeSize;
   variant?: BadgeVariant;
 }
+
 export function Badge({
   ref,
   className,

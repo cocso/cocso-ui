@@ -13,6 +13,7 @@ import { Button } from "../button";
 import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./day-picker.module.css";
+
 export interface DayPickerProps
   extends Omit<ComponentProps<"div">, "children"> {
   disabled?: boolean;
@@ -22,6 +23,7 @@ export interface DayPickerProps
   trigger?: ReactElement;
   value?: Date;
 }
+
 export function DayPicker({
   ref,
   className,

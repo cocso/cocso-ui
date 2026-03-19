@@ -3,6 +3,7 @@ import { OTPInput } from "input-otp";
 import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./one-time-password-field.module.css";
+
 export interface OneTimePasswordFieldProps
   extends Omit<
     ComponentProps<typeof OTPInput>,

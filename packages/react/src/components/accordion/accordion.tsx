@@ -12,6 +12,7 @@ function AccordionItem({
     <AccordionBase.Item className={cn(styles.item, className)} {...props} />
   );
 }
+
 export interface AccordionTriggerProps
   extends ComponentProps<typeof AccordionBase.Trigger> {
   chevron?: boolean;

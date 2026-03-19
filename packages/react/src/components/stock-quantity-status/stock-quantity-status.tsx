@@ -4,7 +4,9 @@ import { cn } from "../../cn";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
+
 export type QuantityStatus = "보통" | "여유" | "부족";
+
 export interface StockQuantityStatusProps extends ComponentProps<"div"> {
   quantity: QuantityStatus;
 }
@@ -125,6 +127,7 @@ export function StockQuantityStatus({
     </div>
   );
 }
+
 export const getColor = (quantity: QuantityStatus) =>
   match(quantity)
     .with("여유", () => colors.primary500)

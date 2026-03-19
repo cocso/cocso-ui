@@ -8,7 +8,9 @@ import { colors, fontWeight } from "../../token";
 import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
 import styles from "./button.module.css";
+
 export type ButtonSize = "large" | "medium" | "small" | "x-small";
+
 export type ButtonVariant =
   | "primary"
   | "secondary"
@@ -16,7 +18,9 @@ export type ButtonVariant =
   | "success"
   | "error"
   | "warning";
+
 export type ButtonShape = "square" | "circle" | "rounded";
+
 export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   disabled?: boolean;
   loading?: boolean;
@@ -30,6 +34,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   variant?: ButtonVariant;
   weight?: FontWeight;
 }
+
 export function Button({
   render: renderProp,
   ref,

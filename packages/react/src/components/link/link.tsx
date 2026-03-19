@@ -7,7 +7,9 @@ import type { FontWeight, LineHeight } from "../../token";
 import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
+
 export type LinkSize = "large" | "medium" | "small" | "x-small";
+
 export type LinkVariant = "inline" | "current" | "plain";
 export interface LinkProps extends ComponentProps<"a"> {
   indicator?: boolean;
@@ -17,6 +19,7 @@ export interface LinkProps extends ComponentProps<"a"> {
   variant?: LinkVariant;
   weight?: FontWeight;
 }
+
 function LinkComponent({
   ref,
   render: renderProp,

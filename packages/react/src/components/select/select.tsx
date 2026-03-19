@@ -6,7 +6,9 @@ import { cn } from "../../cn";
 import { radius } from "../../token";
 import { Field } from "../field";
 import styles from "./select.module.css";
+
 export type SelectSize = "large" | "medium" | "small" | "x-small";
+
 export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   description?: string;
   disabled?: boolean;
@@ -15,6 +17,7 @@ export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   size?: SelectSize;
   stretch?: boolean;
 }
+
 export function Select({
   ref,
   className,

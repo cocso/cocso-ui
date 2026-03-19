@@ -3,7 +3,9 @@ import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { colors } from "../../token";
 import styles from "./spinner.module.css";
+
 export type SpinnerSize = "large" | "medium" | "small";
+
 export type SpinnerVariant =
   | "primary"
   | "secondary"
@@ -11,6 +13,7 @@ export type SpinnerVariant =
   | "error"
   | "warning"
   | "white";
+
 export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   label?: string;
   size?: SpinnerSize;

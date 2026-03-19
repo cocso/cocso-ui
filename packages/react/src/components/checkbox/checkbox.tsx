@@ -7,7 +7,9 @@ import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
+
 export type CheckboxSize = "large" | "medium" | "small";
+
 export type CheckboxStatus = "on" | "off" | "intermediate";
 export interface CheckboxProps
   extends Omit<
@@ -21,6 +23,7 @@ export interface CheckboxProps
   size?: CheckboxSize;
   status: CheckboxStatus;
 }
+
 export function Checkbox({
   ref,
   id: _id,

@@ -5,7 +5,9 @@ import { cn } from "../../cn";
 import { radius } from "../../token";
 import { Field } from "../field";
 import styles from "./input.module.css";
+
 export type InputSize = "large" | "medium" | "small" | "x-small";
+
 export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   description?: string;
   disabled?: boolean;
@@ -14,6 +16,7 @@ export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   size?: InputSize;
   stretch?: boolean;
 }
+
 export function Input({
   ref,
   className,

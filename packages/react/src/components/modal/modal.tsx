@@ -20,6 +20,7 @@ function ModalContent({
     </DialogBase.Portal>
   );
 }
+
 export interface ModalCloseProps
   extends ComponentProps<typeof DialogBase.Close> {
   render?: ReactElement;
@@ -76,6 +77,7 @@ function ModalDescription({
     </DialogBase.Description>
   );
 }
+
 export const Modal = Object.assign(DialogBase.Root, {
   Trigger: DialogBase.Trigger,
   Content: ModalContent,

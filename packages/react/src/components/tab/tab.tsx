@@ -16,6 +16,7 @@ function TabTrigger(props: ComponentProps<typeof Tabs.Tab>) {
 function TabContent(props: ComponentProps<typeof Tabs.Panel>) {
   return <Tabs.Panel {...props} />;
 }
+
 export const Tab = Object.assign(TabRoot, {
   List: TabList,
   Trigger: TabTrigger,

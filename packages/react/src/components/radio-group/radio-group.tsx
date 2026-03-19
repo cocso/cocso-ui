@@ -7,12 +7,18 @@ import styles from "./radio-group.module.css";
 export type RadioSize = "large" | "medium" | "small";
 
 const sizeVars: Record<RadioSize, CSSProperties> = {
-  small: { "--cocso-radio-size": "12px", "--cocso-radio-dot-size": "5px" } as CSSProperties,
+  small: {
+    "--cocso-radio-size": "12px",
+    "--cocso-radio-dot-size": "5px",
+  } as CSSProperties,
   medium: {
     "--cocso-radio-size": "16px",
     "--cocso-radio-dot-size": "7px",
   } as CSSProperties,
-  large: { "--cocso-radio-size": "20px", "--cocso-radio-dot-size": "9px" } as CSSProperties,
+  large: {
+    "--cocso-radio-size": "20px",
+    "--cocso-radio-dot-size": "9px",
+  } as CSSProperties,
 };
 
 function RadioGroupRoot({
@@ -48,6 +54,7 @@ function RadioGroupIndicator({
     />
   );
 }
+
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,

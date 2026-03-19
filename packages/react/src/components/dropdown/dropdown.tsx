@@ -22,6 +22,7 @@ function DropdownItem({
 }: ComponentProps<typeof MenuBase.Item>) {
   return <MenuBase.Item className={cn(styles.item, className)} {...props} />;
 }
+
 export const Dropdown = Object.assign(MenuBase.Root, {
   Trigger: MenuBase.Trigger,
   Content: DropdownContent,

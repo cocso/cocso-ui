@@ -6,6 +6,7 @@ import {
 import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./pagination.module.css";
+
 export interface PaginationProps
   extends Omit<ComponentProps<"div">, "onChange"> {
   maxVisible?: number;
@@ -13,6 +14,7 @@ export interface PaginationProps
   page: number;
   totalPages: number;
 }
+
 export function Pagination({
   ref,
   className,

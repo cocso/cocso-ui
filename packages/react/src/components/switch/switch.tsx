@@ -6,7 +6,9 @@ import { Switch as SwitchBase } from "../../primitives/switch";
 import { colors, spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
+
 export type SwitchSize = "small" | "medium" | "large";
+
 export type SwitchVariant = "primary" | "success" | "error" | "warning";
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
@@ -16,6 +18,7 @@ export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   size?: SwitchSize;
   variant?: SwitchVariant;
 }
+
 export function Switch({
   ref,
   id: _id,

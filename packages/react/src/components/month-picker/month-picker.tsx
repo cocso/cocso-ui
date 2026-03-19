@@ -13,6 +13,7 @@ import { Button } from "../button";
 import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
 import styles from "./month-picker.module.css";
+
 export interface MonthPickerProps
   extends Omit<ComponentProps<"div">, "children"> {
   disabled?: boolean;
@@ -22,6 +23,7 @@ export interface MonthPickerProps
   trigger?: ReactElement;
   value?: Date;
 }
+
 export function MonthPicker({
   ref,
   className,

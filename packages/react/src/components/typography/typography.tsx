@@ -15,7 +15,9 @@ import {
   lineHeight as lineHeightToken,
 } from "../../token";
 import styles from "./typography.module.css";
+
 export type BodySize = "large" | "medium" | "small" | "x-small";
+
 export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
 type TypographyPropsBase = {
