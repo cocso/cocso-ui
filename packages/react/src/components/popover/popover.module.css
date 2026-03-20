@@ -66,31 +66,41 @@
   }
 
   .content[data-open][data-side="top"] {
-    margin-bottom: var(--cocso-spacing-7);
+    margin-bottom: var(--cocso-spacing-3);
     animation-name: slide-up-and-fade;
   }
 
   .content[data-open][data-side="right"] {
-    margin-left: var(--cocso-spacing-7);
+    margin-left: var(--cocso-spacing-3);
     animation-name: slide-right-and-fade;
   }
 
   .content[data-open][data-side="bottom"] {
-    margin-top: var(--cocso-spacing-7);
+    margin-top: var(--cocso-spacing-3);
     animation-name: slide-down-and-fade;
   }
 
   .content[data-open][data-side="left"] {
-    margin-right: var(--cocso-spacing-7);
+    margin-right: var(--cocso-spacing-3);
     animation-name: slide-left-and-fade;
   }
 
-  /*
-   * Arrow: 10×10 square rotated 45deg → diamond
-   * translateY/X(-50%) = −5px shifts center to popup edge
-   * → tip protrudes 5√2 ≈ 7.07px outside popup
-   * Margin (spacing-7 = 12px) − protrusion (~7px) ≈ 5px gap to trigger
-   */
+  .content[data-open][data-side="top"]:has(.arrow) {
+    margin-bottom: var(--cocso-spacing-6);
+  }
+
+  .content[data-open][data-side="right"]:has(.arrow) {
+    margin-left: var(--cocso-spacing-6);
+  }
+
+  .content[data-open][data-side="bottom"]:has(.arrow) {
+    margin-top: var(--cocso-spacing-6);
+  }
+
+  .content[data-open][data-side="left"]:has(.arrow) {
+    margin-right: var(--cocso-spacing-6);
+  }
+
   .arrow {
     width: 10px;
     height: 10px;

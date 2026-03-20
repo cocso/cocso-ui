@@ -65,58 +65,46 @@
   }
 
   .content[data-open][data-side="top"] {
-    margin-bottom: var(--cocso-spacing-7);
+    margin-bottom: var(--cocso-spacing-5);
     animation-name: slide-up-and-fade;
   }
 
   .content[data-open][data-side="right"] {
-    margin-left: var(--cocso-spacing-7);
+    margin-left: var(--cocso-spacing-5);
     animation-name: slide-right-and-fade;
   }
 
   .content[data-open][data-side="bottom"] {
-    margin-top: var(--cocso-spacing-7);
+    margin-top: var(--cocso-spacing-5);
     animation-name: slide-down-and-fade;
   }
 
   .content[data-open][data-side="left"] {
-    margin-right: var(--cocso-spacing-7);
+    margin-right: var(--cocso-spacing-5);
     animation-name: slide-left-and-fade;
   }
 
-  /*
-   * Arrow: 8×8 square rotated 45deg → diamond
-   * Diamond tip protrusion: 4√2 ≈ 5.66px
-   * translate(-50%) = −4px shifts center to popup edge
-   * → tip protrudes ~5.66px outside popup
-   *
-   * Margin (spacing-7 = 12px) − protrusion (~6px) ≈ 6px gap to trigger
-   */
   .arrow {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background-color: var(--cocso-color-neutral-900);
   }
 
-  /* popup below trigger — arrow at top edge, pointing up */
   .arrow[data-side="bottom"] {
     top: 0;
     transform: translateY(-50%) rotate(45deg);
   }
 
-  /* popup above trigger — arrow at bottom edge, pointing down */
   .arrow[data-side="top"] {
     bottom: 0;
     transform: translateY(50%) rotate(45deg);
   }
 
-  /* popup right of trigger — arrow at left edge, pointing left */
   .arrow[data-side="right"] {
     left: 0;
     transform: translateX(-50%) rotate(45deg);
   }
 
-  /* popup left of trigger — arrow at right edge, pointing right */
   .arrow[data-side="left"] {
     right: 0;
     transform: translateX(50%) rotate(45deg);
