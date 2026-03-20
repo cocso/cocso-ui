@@ -1,1 +1,1 @@
-See [AGENTS.md](./AGENTS.md) for repository-wide rules, structure, and policies that apply to all agents and contributors working in this repository.
+**STRICT REQUIREMENT — YOU MUST READ [AGENTS.md](./AGENTS.md) BEFORE performing ANY task in this repository.** AGENTS.md contains repository-wide rules, structure, and policies that apply to all agents and contributors. Failure to read and follow AGENTS.md may result in incorrect outputs. Do NOT skip this step.
