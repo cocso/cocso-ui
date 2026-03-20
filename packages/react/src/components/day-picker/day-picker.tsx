@@ -88,7 +88,7 @@ export function DayPicker({
                     size="x-small"
                     svgOnly
                     type="button"
-                    variant="secondary"
+                    variant="outline"
                   >
                     <ArrowIOSBackwardIcon />
                   </Button>
@@ -99,7 +99,7 @@ export function DayPicker({
                     size="x-small"
                     svgOnly
                     type="button"
-                    variant="secondary"
+                    variant="outline"
                   >
                     <ArrowIOSForwardIcon />
                   </Button>

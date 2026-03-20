@@ -22,7 +22,7 @@ export const Default: Story = {
         <Modal.Description>모달 설명 텍스트입니다.</Modal.Description>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}>
           <Modal.Close>
-            <Button variant="secondary">취소</Button>
+            <Button variant="outline">취소</Button>
           </Modal.Close>
           <Button>확인</Button>
         </div>
@@ -40,7 +40,7 @@ export const Confirm: Story = {
         <Modal.Description>정말로 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</Modal.Description>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}>
           <Modal.Close>
-            <Button variant="secondary">취소</Button>
+            <Button variant="outline">취소</Button>
           </Modal.Close>
           <Modal.Close>
             <Button variant="error">삭제</Button>
@@ -54,7 +54,7 @@ export const Confirm: Story = {
 export const WithoutClose: Story = {
   render: () => (
     <Modal>
-      <Modal.Trigger render={<Button variant="secondary">열기</Button>} />
+      <Modal.Trigger render={<Button variant="outline">열기</Button>} />
       <Modal.Content>
         <Modal.Title>닫기 버튼 없음</Modal.Title>
         <Modal.Description>닫기 버튼이 없는 모달입니다. 버튼으로만 닫을 수 있습니다.</Modal.Description>

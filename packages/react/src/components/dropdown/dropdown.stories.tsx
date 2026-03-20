@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Dropdown>
-      <Dropdown.Trigger render={<Button variant="secondary">메뉴 열기</Button>} />
+      <Dropdown.Trigger render={<Button variant="outline">메뉴 열기</Button>} />
       <Dropdown.Content>
         <Dropdown.Item>편집</Dropdown.Item>
         <Dropdown.Item>복사</Dropdown.Item>
@@ -33,7 +33,7 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: () => (
     <Dropdown>
-      <Dropdown.Trigger render={<Button variant="secondary">더보기</Button>} />
+      <Dropdown.Trigger render={<Button variant="outline">더보기</Button>} />
       <Dropdown.Content>
         <Dropdown.Item>프로필 편집</Dropdown.Item>
         <Dropdown.Item>설정</Dropdown.Item>

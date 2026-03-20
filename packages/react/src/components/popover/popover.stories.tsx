@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Popover>
-      <Popover.Trigger render={<Button variant="secondary">팝오버 열기</Button>} />
+      <Popover.Trigger render={<Button variant="outline">팝오버 열기</Button>} />
       <Popover.Content>
         <Popover.Arrow />
         <p style={{ margin: 0 }}>팝오버 내용입니다.</p>
@@ -27,7 +27,7 @@ export const Default: Story = {
 export const SideBottom: Story = {
   render: () => (
     <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="secondary">아래 (Bottom)</Button>} />
+      <Popover.Trigger render={<Button variant="outline">아래 (Bottom)</Button>} />
       <Popover.Content side="bottom">
         <Popover.Arrow />
         <p style={{ margin: 0 }}>아래쪽 팝오버</p>
@@ -39,7 +39,7 @@ export const SideBottom: Story = {
 export const SideTop: Story = {
   render: () => (
     <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="secondary">위 (Top)</Button>} />
+      <Popover.Trigger render={<Button variant="outline">위 (Top)</Button>} />
       <Popover.Content side="top">
         <Popover.Arrow />
         <p style={{ margin: 0 }}>위쪽 팝오버</p>
@@ -51,7 +51,7 @@ export const SideTop: Story = {
 export const SideLeft: Story = {
   render: () => (
     <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="secondary">왼쪽 (Left)</Button>} />
+      <Popover.Trigger render={<Button variant="outline">왼쪽 (Left)</Button>} />
       <Popover.Content side="left">
         <Popover.Arrow />
         <p style={{ margin: 0 }}>왼쪽 팝오버</p>
@@ -63,7 +63,7 @@ export const SideLeft: Story = {
 export const SideRight: Story = {
   render: () => (
     <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="secondary">오른쪽 (Right)</Button>} />
+      <Popover.Trigger render={<Button variant="outline">오른쪽 (Right)</Button>} />
       <Popover.Content side="right">
         <Popover.Arrow />
         <p style={{ margin: 0 }}>오른쪽 팝오버</p>
@@ -75,7 +75,7 @@ export const SideRight: Story = {
 export const WithForm: Story = {
   render: () => (
     <Popover>
-      <Popover.Trigger render={<Button variant="secondary">설정 열기</Button>} />
+      <Popover.Trigger render={<Button variant="outline">설정 열기</Button>} />
       <Popover.Content>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: '200px' }}>
           <p style={{ margin: 0, fontWeight: 600 }}>설정</p>

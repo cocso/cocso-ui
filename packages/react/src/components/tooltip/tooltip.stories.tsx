@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Tooltip>
-      <Tooltip.Trigger render={<Button variant="secondary">마우스를 올려보세요</Button>} />
+      <Tooltip.Trigger render={<Button variant="outline">마우스를 올려보세요</Button>} />
       <Tooltip.Content>
         <Tooltip.Arrow />
         툴팁 내용입니다.
@@ -27,7 +27,7 @@ export const Default: Story = {
 export const SideBottom: Story = {
   render: () => (
     <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="secondary">아래 (Bottom)</Button>} />
+      <Tooltip.Trigger render={<Button variant="outline">아래 (Bottom)</Button>} />
       <Tooltip.Content side="bottom">
         <Tooltip.Arrow />
         아래쪽 툴팁
@@ -39,7 +39,7 @@ export const SideBottom: Story = {
 export const SideTop: Story = {
   render: () => (
     <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="secondary">위 (Top)</Button>} />
+      <Tooltip.Trigger render={<Button variant="outline">위 (Top)</Button>} />
       <Tooltip.Content side="top">
         <Tooltip.Arrow />
         위쪽 툴팁
@@ -51,7 +51,7 @@ export const SideTop: Story = {
 export const SideLeft: Story = {
   render: () => (
     <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="secondary">왼쪽 (Left)</Button>} />
+      <Tooltip.Trigger render={<Button variant="outline">왼쪽 (Left)</Button>} />
       <Tooltip.Content side="left">
         <Tooltip.Arrow />
         왼쪽 툴팁
@@ -63,7 +63,7 @@ export const SideLeft: Story = {
 export const SideRight: Story = {
   render: () => (
     <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="secondary">오른쪽 (Right)</Button>} />
+      <Tooltip.Trigger render={<Button variant="outline">오른쪽 (Right)</Button>} />
       <Tooltip.Content side="right">
         <Tooltip.Arrow />
         오른쪽 툴팁

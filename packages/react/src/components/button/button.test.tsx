@@ -126,7 +126,8 @@ describe("Button", () => {
 describe("Button variant CSS variables", () => {
   it.each([
     ["primary", colors.primary950],
-    ["secondary", colors.transparent],
+    ["secondary", colors.neutral50],
+    ["outline", colors.transparent],
     ["ghost", colors.white],
     ["success", colors.success500],
     ["error", colors.danger500],
@@ -143,7 +144,8 @@ describe("Button variant CSS variables", () => {
     ["primary", colors.white],
     ["success", colors.white],
     ["error", colors.white],
-    ["secondary", colors.neutral950],
+    ["secondary", colors.neutral600],
+    ["outline", colors.neutral950],
     ["ghost", colors.neutral950],
     ["warning", colors.neutral950],
   ] as const)('sets --cocso-button-font-color for variant="%s"', (variant, expectedColor) => {
@@ -153,14 +155,14 @@ describe("Button variant CSS variables", () => {
     });
   });
 
-  it('sets border for variant="secondary"', () => {
-    render(<Button variant="secondary">Button</Button>);
+  it('sets border for variant="outline"', () => {
+    render(<Button variant="outline">Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
       "--cocso-button-border": `1px solid ${colors.neutral100}`,
     });
   });
 
-  it("sets no border for non-secondary variant", () => {
+  it("sets no border for non-outline variant", () => {
     render(<Button variant="primary">Button</Button>);
     expect(screen.getByRole("button")).toHaveStyle({
       "--cocso-button-border": "none",
@@ -202,6 +204,7 @@ describe("Button weight CSS variable", () => {
 describe("Button loading spinner variant", () => {
   it.each([
     "secondary",
+    "outline",
     "ghost",
     "warning",
   ] as const)('renders secondary spinner for variant="%s"', (variant) => {
