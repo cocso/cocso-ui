@@ -163,6 +163,18 @@ describe("parseValue — additional types", () => {
       expect(result.value.layers).toHaveLength(2);
     }
   });
+
+  it("falls through to StringValue for shadow with invalid dimensions", () => {
+    const result = parseValue("foo 1px 2px 0px #000000");
+    expect(result.isValid).toBe(true);
+    expect(result.value?.kind).toBe("StringValue");
+  });
+
+  it("falls through to StringValue for shadow with invalid color", () => {
+    const result = parseValue("0px 1px 2px 0px not-a-color");
+    expect(result.isValid).toBe(true);
+    expect(result.value?.kind).toBe("StringValue");
+  });
 });
 
 describe("valueToString", () => {

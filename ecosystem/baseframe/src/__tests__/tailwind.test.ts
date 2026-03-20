@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { generateFromAst, generateTailwindCSS } from "../core/builders/tailwind";
+import {
+  generateFromAst,
+  generateTailwindCSS,
+} from "../core/builders/tailwind";
 import { buildValidatedAst } from "../core/transforms";
 import type { Collections, Token } from "../core/types";
 
@@ -67,14 +70,21 @@ describe("tailwind generateFromAst", () => {
   it("includes banner when provided", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
-    const result = generateFromAst(ast, { prefix: "cocso", banner: "/* generated */" });
+    const result = generateFromAst(ast, {
+      prefix: "cocso",
+      banner: "/* generated */",
+    });
     expect(result).toContain("/* generated */");
-    expect(result.indexOf("/* generated */")).toBeLessThan(result.indexOf("@theme"));
+    expect(result.indexOf("/* generated */")).toBeLessThan(
+      result.indexOf("@theme")
+    );
   });
 
   it("generateTailwindCSS wraps generateFromAst correctly", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
-    const result = generateTailwindCSS(tokens, MINIMAL_COLLECTIONS, { prefix: "cocso" });
+    const result = generateTailwindCSS(tokens, MINIMAL_COLLECTIONS, {
+      prefix: "cocso",
+    });
     expect(result).toContain("@theme {");
     expect(result).toContain("--color-white: var(--cocso-color-white);");
   });
@@ -91,5 +101,25 @@ describe("tailwind generateFromAst", () => {
     const ast = buildValidatedAst(tokens, MINIMAL_COLLECTIONS);
     const result = generateFromAst(ast, { prefix: "cocso" });
     expect(result).not.toContain("@theme");
+  });
+
+  it("does not duplicate theme variables for duplicated token declarations", () => {
+    const ast = {
+      collections: [{ name: "global", modes: ["default"] }],
+      tokens: [
+        {
+          token: { name: "$color.white", collection: "global" },
+          values: [{ mode: "default", value: "#FFFFFF" }],
+        },
+        {
+          token: { name: "$color.white", collection: "global" },
+          values: [{ mode: "default", value: "#FFFFFF" }],
+        },
+      ],
+    };
+
+    const result = generateFromAst(ast, { prefix: "cocso" });
+    const colorWhiteCount = (result.match(/--color-white/g) ?? []).length;
+    expect(colorWhiteCount).toBe(1);
   });
 });

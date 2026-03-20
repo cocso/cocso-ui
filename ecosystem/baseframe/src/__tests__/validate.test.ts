@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { parseValue } from "../core/parsers";
 import { validateAllTokens } from "../core/transforms/validate";
 import type { Collection, Token } from "../core/types";
-import { parseValue } from "../core/parsers/value";
 
 function makeDefinitions(
   name: string,
