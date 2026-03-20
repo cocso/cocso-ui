@@ -29,8 +29,7 @@
     }
   }
 
-  .content {
-    --cocso-modal-max-width: 380px;
+  .panel {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -38,7 +37,6 @@
     display: flex;
     flex-direction: column;
     width: 90vw;
-    max-width: var(--cocso-modal-max-width);
     max-height: 85vh;
     padding: var(--cocso-spacing-9);
     background-color: var(--cocso-color-white);
@@ -47,8 +45,20 @@
     animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .small {
+    max-width: 380px;
+  }
+
+  .medium {
+    max-width: 520px;
+  }
+
+  .large {
+    max-width: 680px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .content {
+    .panel {
       animation: none;
     }
 
