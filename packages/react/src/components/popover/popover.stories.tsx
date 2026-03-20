@@ -24,49 +24,47 @@ export const Default: Story = {
   ),
 };
 
-export const SideBottom: Story = {
+export const Sides: Story = {
   render: () => (
-    <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="outline">아래 (Bottom)</Button>} />
-      <Popover.Content side="bottom">
-        <Popover.Arrow />
-        <p style={{ margin: 0 }}>아래쪽 팝오버</p>
-      </Popover.Content>
-    </Popover>
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Popover>
+        <Popover.Trigger render={<Button variant="outline">위</Button>} />
+        <Popover.Content side="top">
+          <Popover.Arrow />
+          <p style={{ margin: 0 }}>위쪽 팝오버</p>
+        </Popover.Content>
+      </Popover>
+      <Popover>
+        <Popover.Trigger render={<Button variant="outline">아래</Button>} />
+        <Popover.Content side="bottom">
+          <Popover.Arrow />
+          <p style={{ margin: 0 }}>아래쪽 팝오버</p>
+        </Popover.Content>
+      </Popover>
+      <Popover>
+        <Popover.Trigger render={<Button variant="outline">왼쪽</Button>} />
+        <Popover.Content side="left">
+          <Popover.Arrow />
+          <p style={{ margin: 0 }}>왼쪽 팝오버</p>
+        </Popover.Content>
+      </Popover>
+      <Popover>
+        <Popover.Trigger render={<Button variant="outline">오른쪽</Button>} />
+        <Popover.Content side="right">
+          <Popover.Arrow />
+          <p style={{ margin: 0 }}>오른쪽 팝오버</p>
+        </Popover.Content>
+      </Popover>
+    </div>
   ),
 };
 
-export const SideTop: Story = {
+export const WithoutArrow: Story = {
   render: () => (
-    <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="outline">위 (Top)</Button>} />
-      <Popover.Content side="top">
-        <Popover.Arrow />
-        <p style={{ margin: 0 }}>위쪽 팝오버</p>
-      </Popover.Content>
-    </Popover>
-  ),
-};
-
-export const SideLeft: Story = {
-  render: () => (
-    <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="outline">왼쪽 (Left)</Button>} />
-      <Popover.Content side="left">
-        <Popover.Arrow />
-        <p style={{ margin: 0 }}>왼쪽 팝오버</p>
-      </Popover.Content>
-    </Popover>
-  ),
-};
-
-export const SideRight: Story = {
-  render: () => (
-    <Popover defaultOpen>
-      <Popover.Trigger render={<Button variant="outline">오른쪽 (Right)</Button>} />
-      <Popover.Content side="right">
-        <Popover.Arrow />
-        <p style={{ margin: 0 }}>오른쪽 팝오버</p>
+    <Popover>
+      <Popover.Trigger render={<Button variant="outline">팝오버 (arrow 없음)</Button>} />
+      <Popover.Content>
+        <p style={{ margin: 0 }}>Arrow 없이도 사용할 수 있습니다.</p>
       </Popover.Content>
     </Popover>
   ),
@@ -77,6 +75,7 @@ export const WithForm: Story = {
     <Popover>
       <Popover.Trigger render={<Button variant="outline">설정 열기</Button>} />
       <Popover.Content>
+        <Popover.Arrow />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: '200px' }}>
           <p style={{ margin: 0, fontWeight: 600 }}>설정</p>
           <p style={{ margin: 0, fontSize: '14px', color: '#6d7882' }}>팝오버 안에 폼 요소를 배치할 수 있습니다.</p>

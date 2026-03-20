@@ -24,50 +24,37 @@ export const Default: Story = {
   ),
 };
 
-export const SideBottom: Story = {
+export const Sides: Story = {
   render: () => (
-    <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="outline">아래 (Bottom)</Button>} />
-      <Tooltip.Content side="bottom">
-        <Tooltip.Arrow />
-        아래쪽 툴팁
-      </Tooltip.Content>
-    </Tooltip>
-  ),
-};
-
-export const SideTop: Story = {
-  render: () => (
-    <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="outline">위 (Top)</Button>} />
-      <Tooltip.Content side="top">
-        <Tooltip.Arrow />
-        위쪽 툴팁
-      </Tooltip.Content>
-    </Tooltip>
-  ),
-};
-
-export const SideLeft: Story = {
-  render: () => (
-    <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="outline">왼쪽 (Left)</Button>} />
-      <Tooltip.Content side="left">
-        <Tooltip.Arrow />
-        왼쪽 툴팁
-      </Tooltip.Content>
-    </Tooltip>
-  ),
-};
-
-export const SideRight: Story = {
-  render: () => (
-    <Tooltip defaultOpen>
-      <Tooltip.Trigger render={<Button variant="outline">오른쪽 (Right)</Button>} />
-      <Tooltip.Content side="right">
-        <Tooltip.Arrow />
-        오른쪽 툴팁
-      </Tooltip.Content>
-    </Tooltip>
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Tooltip>
+        <Tooltip.Trigger render={<Button variant="outline">위</Button>} />
+        <Tooltip.Content side="top">
+          <Tooltip.Arrow />
+          위쪽 툴팁
+        </Tooltip.Content>
+      </Tooltip>
+      <Tooltip>
+        <Tooltip.Trigger render={<Button variant="outline">아래</Button>} />
+        <Tooltip.Content side="bottom">
+          <Tooltip.Arrow />
+          아래쪽 툴팁
+        </Tooltip.Content>
+      </Tooltip>
+      <Tooltip>
+        <Tooltip.Trigger render={<Button variant="outline">왼쪽</Button>} />
+        <Tooltip.Content side="left">
+          <Tooltip.Arrow />
+          왼쪽 툴팁
+        </Tooltip.Content>
+      </Tooltip>
+      <Tooltip>
+        <Tooltip.Trigger render={<Button variant="outline">오른쪽</Button>} />
+        <Tooltip.Content side="right">
+          <Tooltip.Arrow />
+          오른쪽 툴팁
+        </Tooltip.Content>
+      </Tooltip>
+    </div>
   ),
 };

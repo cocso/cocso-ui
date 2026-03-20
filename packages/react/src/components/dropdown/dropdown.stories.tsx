@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ContentCopyIcon, DeleteIcon, PencilIcon, PersonIcon, SettingsIcon } from '@cocso-ui/react-icons';
 import { Button } from '../button';
 import { Dropdown } from './dropdown';
 
@@ -7,9 +8,6 @@ const meta = {
   component: Dropdown,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-  argTypes: {
-    modal: { control: 'boolean' },
-  },
 } satisfies Meta<typeof Dropdown>;
 
 export default meta;
@@ -35,9 +33,11 @@ export const WithIcons: Story = {
     <Dropdown>
       <Dropdown.Trigger render={<Button variant="outline">더보기</Button>} />
       <Dropdown.Content>
-        <Dropdown.Item>프로필 편집</Dropdown.Item>
-        <Dropdown.Item>설정</Dropdown.Item>
-        <Dropdown.Item>로그아웃</Dropdown.Item>
+        <Dropdown.Item prefix={<PencilIcon />}>편집</Dropdown.Item>
+        <Dropdown.Item prefix={<ContentCopyIcon />}>복사</Dropdown.Item>
+        <Dropdown.Item prefix={<PersonIcon />}>프로필</Dropdown.Item>
+        <Dropdown.Item prefix={<SettingsIcon />}>설정</Dropdown.Item>
+        <Dropdown.Item prefix={<DeleteIcon />}>삭제</Dropdown.Item>
       </Dropdown.Content>
     </Dropdown>
   ),

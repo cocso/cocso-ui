@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { cn } from "../../cn";
 import { Menu as MenuBase } from "../../primitives/menu";
 import styles from "./dropdown.module.css";
@@ -18,9 +18,16 @@ function DropdownContent({
 
 function DropdownItem({
   className,
+  prefix,
+  children,
   ...props
-}: ComponentProps<typeof MenuBase.Item>) {
-  return <MenuBase.Item className={cn(styles.item, className)} {...props} />;
+}: Omit<ComponentProps<typeof MenuBase.Item>, "prefix"> & { prefix?: ReactNode }) {
+  return (
+    <MenuBase.Item className={cn(styles.item, className)} {...props}>
+      {prefix && <span className={styles.prefix}>{prefix}</span>}
+      {children}
+    </MenuBase.Item>
+  );
 }
 
 export const Dropdown = Object.assign(MenuBase.Root, {
