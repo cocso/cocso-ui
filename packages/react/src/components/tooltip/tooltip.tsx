@@ -7,7 +7,9 @@ function TooltipArrow({
   className,
   ...props
 }: ComponentProps<typeof TooltipBase.Arrow>) {
-  return <TooltipBase.Arrow className={cn(styles.arrow, className)} {...props} />;
+  return (
+    <TooltipBase.Arrow className={cn(styles.arrow, className)} {...props} />
+  );
 }
 
 function TooltipContent({
@@ -26,11 +28,11 @@ function TooltipContent({
   return (
     <TooltipBase.Portal>
       <TooltipBase.Positioner
-        side={side}
-        sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
+        side={side}
+        sideOffset={sideOffset}
       >
         <TooltipBase.Popup
           className={cn(styles.content, className)}

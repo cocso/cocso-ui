@@ -53,13 +53,13 @@
     position: relative;
     padding-block: var(--cocso-spacing-4);
     padding-inline: var(--cocso-spacing-5);
+    overflow: visible;
     font-size: var(--cocso-text-sm);
     line-height: 1.5;
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-3);
     box-shadow: var(--cocso-shadow-sm);
-    overflow: visible;
     animation-duration: 0.2s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
@@ -110,29 +110,29 @@
 
   .arrow[data-side="bottom"] {
     top: 0;
-    transform: translateY(-50%) rotate(45deg);
-    border-bottom: none;
     border-right: none;
+    border-bottom: none;
+    transform: translateY(-50%) rotate(45deg);
   }
 
   .arrow[data-side="top"] {
     bottom: 0;
-    transform: translateY(50%) rotate(45deg);
     border-top: none;
     border-left: none;
+    transform: translateY(50%) rotate(45deg);
   }
 
   .arrow[data-side="right"] {
     left: 0;
-    transform: translateX(-50%) rotate(45deg);
-    border-right: none;
     border-top: none;
+    border-right: none;
+    transform: translateX(-50%) rotate(45deg);
   }
 
   .arrow[data-side="left"] {
     right: 0;
-    transform: translateX(50%) rotate(45deg);
-    border-left: none;
     border-bottom: none;
+    border-left: none;
+    transform: translateX(50%) rotate(45deg);
   }
 }

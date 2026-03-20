@@ -53,12 +53,12 @@
     position: relative;
     padding-block: var(--cocso-spacing-3);
     padding-inline: var(--cocso-spacing-5);
+    overflow: visible;
     font-size: var(--cocso-text-xs);
     line-height: 1.5;
     color: var(--cocso-color-white);
     background-color: var(--cocso-color-neutral-900);
     border-radius: var(--cocso-radius-2);
-    overflow: visible;
     animation-duration: 0.15s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;

@@ -58,8 +58,8 @@
 
   .item {
     display: flex;
-    align-items: center;
     gap: var(--cocso-spacing-4);
+    align-items: center;
     height: fit-content;
     padding-block: var(--cocso-spacing-4);
     padding-inline: var(--cocso-spacing-5);

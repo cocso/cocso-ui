@@ -190,7 +190,13 @@ const getBackgroundColorHover = (variant: ButtonVariant) =>
 const getSpinnerVariant = (variant: ButtonVariant): SpinnerVariant =>
   match(variant)
     .with("primary", "success", "error", "info", () => "white" as const)
-    .with("secondary", "outline", "ghost", "warning", () => "secondary" as const)
+    .with(
+      "secondary",
+      "outline",
+      "ghost",
+      "warning",
+      () => "secondary" as const
+    )
     .exhaustive();
 
 const getBackgroundColorActive = (variant: ButtonVariant) =>

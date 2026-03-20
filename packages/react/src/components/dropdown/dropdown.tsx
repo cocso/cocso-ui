@@ -21,7 +21,9 @@ function DropdownItem({
   prefix,
   children,
   ...props
-}: Omit<ComponentProps<typeof MenuBase.Item>, "prefix"> & { prefix?: ReactNode }) {
+}: Omit<ComponentProps<typeof MenuBase.Item>, "prefix"> & {
+  prefix?: ReactNode;
+}) {
   return (
     <MenuBase.Item className={cn(styles.item, className)} {...props}>
       {prefix && <span className={styles.prefix}>{prefix}</span>}

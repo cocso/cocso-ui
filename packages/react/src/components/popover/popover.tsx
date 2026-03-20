@@ -7,7 +7,9 @@ function PopoverArrow({
   className,
   ...props
 }: ComponentProps<typeof PopoverBase.Arrow>) {
-  return <PopoverBase.Arrow className={cn(styles.arrow, className)} {...props} />;
+  return (
+    <PopoverBase.Arrow className={cn(styles.arrow, className)} {...props} />
+  );
 }
 
 function PopoverContent({
@@ -26,11 +28,11 @@ function PopoverContent({
   return (
     <PopoverBase.Portal>
       <PopoverBase.Positioner
-        side={side}
-        sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
+        side={side}
+        sideOffset={sideOffset}
       >
         <PopoverBase.Popup
           className={cn(styles.content, className)}
