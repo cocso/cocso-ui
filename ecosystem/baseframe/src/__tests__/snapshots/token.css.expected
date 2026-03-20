@@ -142,8 +142,8 @@
   --cocso-z-index-above: 1;
   --cocso-z-index-header: 50;
   --cocso-z-index-overlay: 100;
-  --cocso-z-index-modal: 200;
-  --cocso-z-index-modal-content: 250;
+  --cocso-z-index-dialog: 200;
+  --cocso-z-index-dialog-content: 250;
   --cocso-color-alpha-shadow1: rgba(0, 0, 0, 0.04);
   --cocso-color-alpha-shadow2: rgba(0, 0, 0, 0.08);
   --cocso-color-alpha-shadow3: rgba(0, 0, 0, 0.12);

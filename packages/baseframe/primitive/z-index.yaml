@@ -21,10 +21,10 @@ data:
     $z-index.overlay:
       values:
         default: "100"
-    $z-index.modal:
+    $z-index.dialog:
       values:
         default: "200"
-    $z-index.modal-content:
+    $z-index.dialog-content:
       values:
         default: "250"
 

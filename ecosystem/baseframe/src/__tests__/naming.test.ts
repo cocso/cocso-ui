@@ -30,8 +30,8 @@ describe("createVarName", () => {
   });
 
   it("handles z-index tokens", () => {
-    expect(createVarName("$z-index.modal-content", "cocso")).toBe(
-      "--cocso-z-index-modal-content"
+    expect(createVarName("$z-index.dialog-content", "cocso")).toBe(
+      "--cocso-z-index-dialog-content"
     );
   });
 });

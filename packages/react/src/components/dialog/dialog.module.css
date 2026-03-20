@@ -33,7 +33,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    z-index: var(--cocso-z-index-modal);
+    z-index: var(--cocso-z-index-dialog);
     display: flex;
     flex-direction: column;
     width: 90vw;
