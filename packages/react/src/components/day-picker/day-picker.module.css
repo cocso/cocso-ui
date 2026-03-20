@@ -28,7 +28,7 @@
   }
 
   :global(.react-datepicker__day).saturday {
-    color: var(--cocso-color-primary-800);
+    color: var(--cocso-color-info-600);
   }
 
   :global(.react-datepicker) {
@@ -144,7 +144,7 @@
   }
 
   :global(.react-datepicker__day-name:nth-child(7)) {
-    color: var(--cocso-color-primary-800);
+    color: var(--cocso-color-info-600);
   }
 
   :global(.react-datepicker__day--outside-month) {
