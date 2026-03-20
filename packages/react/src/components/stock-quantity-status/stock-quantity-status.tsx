@@ -130,7 +130,7 @@ export function StockQuantityStatus({
 
 export const getColor = (quantity: QuantityStatus) =>
   match(quantity)
-    .with("여유", () => colors.primary500)
+    .with("여유", () => colors.info500)
     .with("보통", () => colors.success400)
     .with("부족", () => colors.danger500)
     .exhaustive();

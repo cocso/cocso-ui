@@ -30,7 +30,7 @@
 
   .arrow:focus-visible,
   .item:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-500);
+    outline: 2px solid var(--cocso-color-primary-950);
     outline-offset: 2px;
   }
 
@@ -60,7 +60,7 @@
 
   .item[data-active="true"] {
     --cocso-pagination-font-color: var(--cocso-color-white);
-    --cocso-pagination-bg-color: var(--cocso-color-primary-500);
+    --cocso-pagination-bg-color: var(--cocso-color-primary-950);
     --cocso-pagination-font-weight: var(--cocso-font-weight-semibold);
   }
 

@@ -17,7 +17,8 @@ export type ButtonVariant =
   | "ghost"
   | "success"
   | "error"
-  | "warning";
+  | "warning"
+  | "info";
 
 export type ButtonShape = "square" | "circle" | "rounded";
 
@@ -152,7 +153,7 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) =>
 
 const getColor = (variant: ButtonVariant) =>
   match(variant)
-    .with("primary", "success", "error", () => colors.white)
+    .with("primary", "success", "error", "info", () => colors.white)
     .with("secondary", "ghost", "warning", () => colors.neutral950)
     .exhaustive();
 
@@ -163,26 +164,28 @@ const getBorder = (variant: ButtonVariant) =>
 
 const getBackgroundColor = (variant: ButtonVariant) =>
   match(variant)
-    .with("primary", () => colors.primary500)
+    .with("primary", () => colors.primary950)
     .with("secondary", () => colors.transparent)
     .with("ghost", () => colors.white)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
     .with("warning", () => colors.warning300)
+    .with("info", () => colors.info500)
     .exhaustive();
 
 const getBackgroundColorHover = (variant: ButtonVariant) =>
   match(variant)
-    .with("primary", () => colors.primary600)
+    .with("primary", () => colors.primary800)
     .with("secondary", "ghost", () => colors.neutral50)
     .with("success", () => colors.success600)
     .with("error", () => colors.danger600)
     .with("warning", () => colors.warning400)
+    .with("info", () => colors.info600)
     .exhaustive();
 
 const getSpinnerVariant = (variant: ButtonVariant): SpinnerVariant =>
   match(variant)
-    .with("primary", "success", "error", () => "white" as const)
+    .with("primary", "success", "error", "info", () => "white" as const)
     .with("secondary", "ghost", "warning", () => "secondary" as const)
     .exhaustive();
 
@@ -193,4 +196,5 @@ const getBackgroundColorActive = (variant: ButtonVariant) =>
     .with("success", () => colors.success700)
     .with("error", () => colors.danger700)
     .with("warning", () => colors.warning500)
+    .with("info", () => colors.info700)
     .exhaustive();

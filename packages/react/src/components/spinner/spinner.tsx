@@ -12,6 +12,7 @@ export type SpinnerVariant =
   | "success"
   | "error"
   | "warning"
+  | "info"
   | "white";
 
 export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
@@ -46,11 +47,12 @@ const sizeConfig: Record<SpinnerSize, SizeConfig> = {
 
 const getVariantColor = (variant: SpinnerVariant) =>
   match(variant)
-    .with("primary", () => colors.primary500)
+    .with("primary", () => colors.primary950)
     .with("secondary", () => colors.neutral500)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
     .with("warning", () => colors.warning500)
+    .with("info", () => colors.info500)
     .with("white", () => colors.white)
     .exhaustive();
 export function Spinner({

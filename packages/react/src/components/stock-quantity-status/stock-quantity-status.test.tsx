@@ -35,7 +35,7 @@ describe("StockQuantityStatus", () => {
 
   describe("color CSS variable", () => {
     it.each([
-      ["여유", "var(--cocso-color-primary-500)"],
+      ["여유", "var(--cocso-color-info-500)"],
       ["보통", "var(--cocso-color-success-400)"],
       ["부족", "var(--cocso-color-danger-500)"],
     ] as const)('sets --cocso-stock-quantity-status-color to "%s" for quantity="%s"', (quantity, expectedColor) => {
@@ -48,8 +48,8 @@ describe("StockQuantityStatus", () => {
   });
 
   describe("getColor helper", () => {
-    it('returns primary500 for "여유"', () => {
-      expect(getColor("여유")).toBe("var(--cocso-color-primary-500)");
+    it('returns info500 for "여유"', () => {
+      expect(getColor("여유")).toBe("var(--cocso-color-info-500)");
     });
 
     it('returns success400 for "보통"', () => {

@@ -123,14 +123,14 @@ const getRadius = (size: CheckboxSize) =>
 
 const getBorderColor = (status: CheckboxStatus) =>
   match(status)
-    .with("on", () => colors.primary500)
-    .with("intermediate", () => colors.primary500)
+    .with("on", () => colors.primary950)
+    .with("intermediate", () => colors.primary950)
     .with("off", () => colors.neutral100)
     .exhaustive();
 
 const getBackgroundColor = (status: CheckboxStatus) =>
   match(status)
-    .with("on", () => colors.primary500)
-    .with("intermediate", () => colors.primary500)
+    .with("on", () => colors.primary950)
+    .with("intermediate", () => colors.primary950)
     .with("off", () => colors.white)
     .exhaustive();

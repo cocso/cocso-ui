@@ -107,35 +107,68 @@ data:
         default: '#131416'
     $color.primary-50:
       values:
-        default: '#ECF2FE'
+        default: $color.neutral-50
     $color.primary-100:
       values:
-        default: '#D8E5FD'
+        default: $color.neutral-100
     $color.primary-200:
       values:
-        default: '#B1CEFB'
+        default: $color.neutral-200
     $color.primary-300:
       values:
-        default: '#86AFF9'
+        default: $color.neutral-300
     $color.primary-400:
       values:
-        default: '#4C87F6'
+        default: $color.neutral-400
     $color.primary-500:
       values:
-        default: '#256EF4'
+        default: $color.neutral-500
     $color.primary-600:
       values:
-        default: '#0B50D0'
+        default: $color.neutral-600
     $color.primary-700:
       values:
-        default: '#083891'
+        default: $color.neutral-700
     $color.primary-800:
       values:
-        default: '#052561'
+        default: $color.neutral-800
     $color.primary-900:
       values:
-        default: '#03163A'
+        default: $color.neutral-900
     $color.primary-950:
+      values:
+        default: $color.neutral-950
+    $color.info-50:
+      values:
+        default: '#ECF2FE'
+    $color.info-100:
+      values:
+        default: '#D8E5FD'
+    $color.info-200:
+      values:
+        default: '#B1CEFB'
+    $color.info-300:
+      values:
+        default: '#86AFF9'
+    $color.info-400:
+      values:
+        default: '#4C87F6'
+    $color.info-500:
+      values:
+        default: '#256EF4'
+    $color.info-600:
+      values:
+        default: '#0B50D0'
+    $color.info-700:
+      values:
+        default: '#083891'
+    $color.info-800:
+      values:
+        default: '#052561'
+    $color.info-900:
+      values:
+        default: '#03163A'
+    $color.info-950:
       values:
         default: '#020F27'
     $color.danger-50:

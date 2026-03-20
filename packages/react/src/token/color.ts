@@ -93,6 +93,18 @@ export const colors = {
   success900: "var(--cocso-color-success-900)",
   success950: "var(--cocso-color-success-950)",
 
+  info50: "var(--cocso-color-info-50)",
+  info100: "var(--cocso-color-info-100)",
+  info200: "var(--cocso-color-info-200)",
+  info300: "var(--cocso-color-info-300)",
+  info400: "var(--cocso-color-info-400)",
+  info500: "var(--cocso-color-info-500)",
+  info600: "var(--cocso-color-info-600)",
+  info700: "var(--cocso-color-info-700)",
+  info800: "var(--cocso-color-info-800)",
+  info900: "var(--cocso-color-info-900)",
+  info950: "var(--cocso-color-info-950)",
+
   textPrimary: "var(--cocso-color-text-primary)",
   textSecondary: "var(--cocso-color-text-secondary)",
   textTertiary: "var(--cocso-color-text-tertiary)",

@@ -101,10 +101,10 @@
   :global(.react-datepicker__month-text--selected) {
     font-weight: var(--cocso-font-weight-semibold);
     color: var(--cocso-color-white);
-    background-color: var(--cocso-color-primary-500);
+    background-color: var(--cocso-color-primary-950);
   }
 
   :global(.react-datepicker__month-text--selected:hover) {
-    background-color: var(--cocso-color-primary-600);
+    background-color: var(--cocso-color-primary-800);
   }
 }

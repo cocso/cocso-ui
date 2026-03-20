@@ -14,6 +14,7 @@ type BadgeVariant =
   | "success"
   | "error"
   | "warning"
+  | "info"
   | "outline";
 
 type BadgeShape = "square" | "circle" | "rounded";
@@ -101,9 +102,10 @@ const getFontColor = (variant: BadgeVariant) =>
   match(variant)
     .with("secondary", () => colors.neutral600)
     .with("error", () => colors.danger600)
-    .with("primary", () => colors.primary600)
+    .with("primary", () => colors.white)
     .with("success", () => colors.success600)
     .with("warning", () => colors.warning600)
+    .with("info", () => colors.info600)
     .with("outline", () => colors.neutral950)
     .exhaustive();
 
@@ -111,9 +113,10 @@ const getBackgroundColor = (variant: BadgeVariant) =>
   match(variant)
     .with("secondary", () => colors.neutral50)
     .with("error", () => colors.danger50)
-    .with("primary", () => colors.primary50)
+    .with("primary", () => colors.primary950)
     .with("success", () => colors.success50)
     .with("warning", () => colors.warning50)
+    .with("info", () => colors.info50)
     .with("outline", () => colors.transparent)
     .exhaustive();
 
