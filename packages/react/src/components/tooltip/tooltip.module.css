@@ -1,7 +1,7 @@
 @layer components {
   @keyframes slide-up-and-fade {
     from {
-      opacity: 0.9;
+      opacity: 0;
       transform: translateY(2px);
     }
     to {
@@ -12,7 +12,7 @@
 
   @keyframes slide-right-and-fade {
     from {
-      opacity: 0.9;
+      opacity: 0;
       transform: translateX(-2px);
     }
     to {
@@ -23,7 +23,7 @@
 
   @keyframes slide-down-and-fade {
     from {
-      opacity: 0.9;
+      opacity: 0;
       transform: translateY(-2px);
     }
     to {
@@ -34,7 +34,7 @@
 
   @keyframes slide-left-and-fade {
     from {
-      opacity: 0.9;
+      opacity: 0;
       transform: translateX(2px);
     }
     to {
@@ -51,16 +51,15 @@
 
   .content {
     position: relative;
-    padding-block: var(--cocso-spacing-4);
+    padding-block: var(--cocso-spacing-3);
     padding-inline: var(--cocso-spacing-5);
-    font-size: var(--cocso-text-sm);
+    font-size: var(--cocso-text-xs);
     line-height: 1.5;
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
-    border-radius: var(--cocso-radius-3);
-    box-shadow: var(--cocso-shadow-sm);
+    color: var(--cocso-color-white);
+    background-color: var(--cocso-color-neutral-900);
+    border-radius: var(--cocso-radius-2);
     overflow: visible;
-    animation-duration: 0.2s;
+    animation-duration: 0.15s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
@@ -86,43 +85,40 @@
   }
 
   /*
-   * Arrow: 10×10 square rotated 45deg → diamond
-   * translateY/X(-50%) = −5px shifts center to popup edge
-   * → tip protrudes 5√2 ≈ 7.07px outside popup
-   * Margin (spacing-7 = 12px) − protrusion (~7px) ≈ 5px gap to trigger
+   * Arrow: 8×8 square rotated 45deg → diamond
+   * Diamond tip protrusion: 4√2 ≈ 5.66px
+   * translate(-50%) = −4px shifts center to popup edge
+   * → tip protrudes ~5.66px outside popup
+   *
+   * Margin (spacing-7 = 12px) − protrusion (~6px) ≈ 6px gap to trigger
    */
   .arrow {
-    width: 10px;
-    height: 10px;
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
+    width: 8px;
+    height: 8px;
+    background-color: var(--cocso-color-neutral-900);
   }
 
+  /* popup below trigger — arrow at top edge, pointing up */
   .arrow[data-side="bottom"] {
     top: 0;
     transform: translateY(-50%) rotate(45deg);
-    border-bottom: none;
-    border-right: none;
   }
 
+  /* popup above trigger — arrow at bottom edge, pointing down */
   .arrow[data-side="top"] {
     bottom: 0;
     transform: translateY(50%) rotate(45deg);
-    border-top: none;
-    border-left: none;
   }
 
+  /* popup right of trigger — arrow at left edge, pointing left */
   .arrow[data-side="right"] {
     left: 0;
     transform: translateX(-50%) rotate(45deg);
-    border-right: none;
-    border-top: none;
   }
 
+  /* popup left of trigger — arrow at right edge, pointing right */
   .arrow[data-side="left"] {
     right: 0;
     transform: translateX(50%) rotate(45deg);
-    border-left: none;
-    border-bottom: none;
   }
 }

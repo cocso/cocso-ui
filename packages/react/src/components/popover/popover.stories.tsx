@@ -17,7 +17,56 @@ export const Default: Story = {
     <Popover>
       <Popover.Trigger render={<Button variant="secondary">팝오버 열기</Button>} />
       <Popover.Content>
+        <Popover.Arrow />
         <p style={{ margin: 0 }}>팝오버 내용입니다.</p>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
+export const SideBottom: Story = {
+  render: () => (
+    <Popover defaultOpen>
+      <Popover.Trigger render={<Button variant="secondary">아래 (Bottom)</Button>} />
+      <Popover.Content side="bottom">
+        <Popover.Arrow />
+        <p style={{ margin: 0 }}>아래쪽 팝오버</p>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
+export const SideTop: Story = {
+  render: () => (
+    <Popover defaultOpen>
+      <Popover.Trigger render={<Button variant="secondary">위 (Top)</Button>} />
+      <Popover.Content side="top">
+        <Popover.Arrow />
+        <p style={{ margin: 0 }}>위쪽 팝오버</p>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
+export const SideLeft: Story = {
+  render: () => (
+    <Popover defaultOpen>
+      <Popover.Trigger render={<Button variant="secondary">왼쪽 (Left)</Button>} />
+      <Popover.Content side="left">
+        <Popover.Arrow />
+        <p style={{ margin: 0 }}>왼쪽 팝오버</p>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
+export const SideRight: Story = {
+  render: () => (
+    <Popover defaultOpen>
+      <Popover.Trigger render={<Button variant="secondary">오른쪽 (Right)</Button>} />
+      <Popover.Content side="right">
+        <Popover.Arrow />
+        <p style={{ margin: 0 }}>오른쪽 팝오버</p>
       </Popover.Content>
     </Popover>
   ),

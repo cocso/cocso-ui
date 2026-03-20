@@ -10,4 +10,5 @@ export { Radio } from "./radio";
 export { RadioGroup } from "./radio-group";
 export { Switch } from "./switch";
 export { Tabs } from "./tabs";
+export { Tooltip } from "./tooltip";
 export { useRender } from "./use-render";
