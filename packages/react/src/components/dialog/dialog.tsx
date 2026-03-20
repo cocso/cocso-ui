@@ -46,6 +46,7 @@ function DialogClose({
   }
   return (
     <DialogBase.Close
+      aria-label="Close"
       className={cn(styles.close, className)}
       render={
         <Button size="x-small" svgOnly variant="outline">

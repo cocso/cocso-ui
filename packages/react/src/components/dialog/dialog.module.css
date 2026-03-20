@@ -13,7 +13,7 @@
     inset: 0;
     z-index: var(--cocso-z-index-overlay);
     background-color: var(--cocso-color-black-alpha-30);
-    animation: overlay-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: overlay-show 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @keyframes content-show {
@@ -42,7 +42,7 @@
     background-color: var(--cocso-color-white);
     border-radius: var(--cocso-radius-5);
     transform: translate(-50%, -50%);
-    animation: content-show 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: content-show 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .small {
