@@ -3,48 +3,64 @@ import type { ComponentProps, ReactElement } from "react";
 import { cn } from "../../cn";
 import { Dialog as DialogBase } from "../../primitives/dialog";
 import { colors } from "../../token";
+import { Button } from "../button";
 import { Typography } from "../typography";
-import styles from "./modal.module.css";
+import styles from "./dialog.module.css";
 
-function ModalContent({
+export type DialogSize = "small" | "medium" | "large";
+
+function DialogContent({
   className,
+  size = "medium",
   children,
   ...props
-}: ComponentProps<typeof DialogBase.Popup>) {
+}: ComponentProps<typeof DialogBase.Popup> & { size?: DialogSize }) {
   return (
     <DialogBase.Portal>
       <DialogBase.Backdrop className={styles.overlay} />
-      <DialogBase.Popup className={cn(styles.content, className)} {...props}>
+      <DialogBase.Popup
+        className={cn(styles.panel, styles[size], className)}
+        {...props}
+      >
         {children}
       </DialogBase.Popup>
     </DialogBase.Portal>
   );
 }
 
-export interface ModalCloseProps
+export interface DialogCloseProps
   extends ComponentProps<typeof DialogBase.Close> {
   render?: ReactElement;
 }
 
-function ModalClose({
+function DialogClose({
   className,
   render: renderProp,
   children,
   ...props
-}: ModalCloseProps) {
+}: DialogCloseProps) {
   if (renderProp) {
     return (
       <DialogBase.Close className={className} render={renderProp} {...props} />
     );
   }
   return (
-    <DialogBase.Close className={cn(styles.close, className)} {...props}>
-      {children ?? <CloseIcon size={24} />}
+    <DialogBase.Close
+      aria-label="Close"
+      className={cn(styles.close, className)}
+      render={
+        <Button size="x-small" svgOnly variant="outline">
+          <CloseIcon size={14} />
+        </Button>
+      }
+      {...props}
+    >
+      {children}
     </DialogBase.Close>
   );
 }
 
-function ModalTitle({
+function DialogTitle({
   className,
   children,
   ...props
@@ -60,7 +76,7 @@ function ModalTitle({
   );
 }
 
-function ModalDescription({
+function DialogDescription({
   className,
   children,
   ...props
@@ -78,10 +94,10 @@ function ModalDescription({
   );
 }
 
-export const Modal = Object.assign(DialogBase.Root, {
+export const Dialog = Object.assign(DialogBase.Root, {
   Trigger: DialogBase.Trigger,
-  Content: ModalContent,
-  Close: ModalClose,
-  Title: ModalTitle,
-  Description: ModalDescription,
+  Content: DialogContent,
+  Close: DialogClose,
+  Title: DialogTitle,
+  Description: DialogDescription,
 });

@@ -75,7 +75,7 @@ export function MonthPicker({
                     size="x-small"
                     svgOnly
                     type="button"
-                    variant="secondary"
+                    variant="outline"
                   >
                     <ArrowIOSBackwardIcon />
                   </Button>
@@ -86,7 +86,7 @@ export function MonthPicker({
                     size="x-small"
                     svgOnly
                     type="button"
-                    variant="secondary"
+                    variant="outline"
                   >
                     <ArrowIOSForwardIcon />
                   </Button>

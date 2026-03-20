@@ -14,6 +14,7 @@ export type ButtonSize = "large" | "medium" | "small" | "x-small";
 export type ButtonVariant =
   | "primary"
   | "secondary"
+  | "outline"
   | "ghost"
   | "success"
   | "error"
@@ -154,18 +155,20 @@ const getBorderRadius = (shape: ButtonShape, size: ButtonSize) =>
 const getColor = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", "success", "error", "info", () => colors.white)
-    .with("secondary", "ghost", "warning", () => colors.neutral950)
+    .with("secondary", () => colors.neutral600)
+    .with("outline", "ghost", "warning", () => colors.neutral950)
     .exhaustive();
 
 const getBorder = (variant: ButtonVariant) =>
   match(variant)
-    .with("secondary", () => `1px solid ${colors.neutral100}`)
+    .with("outline", () => `1px solid ${colors.neutral100}`)
     .otherwise(() => "none");
 
 const getBackgroundColor = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary950)
-    .with("secondary", () => colors.transparent)
+    .with("secondary", () => colors.neutral50)
+    .with("outline", () => colors.transparent)
     .with("ghost", () => colors.white)
     .with("success", () => colors.success500)
     .with("error", () => colors.danger500)
@@ -176,7 +179,8 @@ const getBackgroundColor = (variant: ButtonVariant) =>
 const getBackgroundColorHover = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary800)
-    .with("secondary", "ghost", () => colors.neutral50)
+    .with("secondary", () => colors.neutral100)
+    .with("outline", "ghost", () => colors.neutral50)
     .with("success", () => colors.success600)
     .with("error", () => colors.danger600)
     .with("warning", () => colors.warning400)
@@ -186,13 +190,20 @@ const getBackgroundColorHover = (variant: ButtonVariant) =>
 const getSpinnerVariant = (variant: ButtonVariant): SpinnerVariant =>
   match(variant)
     .with("primary", "success", "error", "info", () => "white" as const)
-    .with("secondary", "ghost", "warning", () => "secondary" as const)
+    .with(
+      "secondary",
+      "outline",
+      "ghost",
+      "warning",
+      () => "secondary" as const
+    )
     .exhaustive();
 
 const getBackgroundColorActive = (variant: ButtonVariant) =>
   match(variant)
     .with("primary", () => colors.primary700)
-    .with("secondary", "ghost", () => colors.neutral100)
+    .with("secondary", () => colors.neutral200)
+    .with("outline", "ghost", () => colors.neutral100)
     .with("success", () => colors.success700)
     .with("error", () => colors.danger700)
     .with("warning", () => colors.warning500)

@@ -27,6 +27,7 @@
   }
 
   .input:focus-visible {
+    outline: 2px solid transparent;
     box-shadow:
       0 0 0 1px var(--cocso-color-neutral-400),
       var(--cocso-shadow-xs);
@@ -53,6 +54,7 @@
   }
 
   .input.error:focus-visible {
+    outline: 2px solid transparent;
     box-shadow:
       0 0 0 1px var(--cocso-color-danger-500),
       var(--cocso-shadow-xs);

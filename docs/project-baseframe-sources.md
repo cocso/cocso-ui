@@ -72,7 +72,7 @@ Token names follow the pattern `$<collection>.<rest>`:
 | `$font-weight.<name>` | `$font-weight.bold` | `--cocso-font-weight-bold` |
 | `$shadow.<name>` | `$shadow.1` | `--cocso-shadow-1` |
 | `$spacing.<name>` | `$spacing.8` | `--cocso-spacing-8` |
-| `$z-index.<name>` | `$z-index.modal` | `--cocso-z-index-modal` |
+| `$z-index.<name>` | `$z-index.dialog` | `--cocso-z-index-dialog` |
 
 Dots in token names become hyphens in CSS variables. Use hyphens (not dots) within name segments: `$color.neutral-950` not `$color.neutral.950`.
 
@@ -98,7 +98,7 @@ packages/baseframe/
 │   ├── font-weight.yaml    # $font-weight.thin through $font-weight.black
 │   ├── shadow.yaml         # $shadow.1 through $shadow.4, shadow dimensions
 │   ├── spacing.yaml        # $spacing.0 through $spacing.max
-│   └── z-index.yaml        # $z-index.behind through $z-index.modal-content
+│   └── z-index.yaml        # $z-index.behind through $z-index.dialog-content
 └── semantic/               # Alias tokens
     └── color.yaml          # $color.alpha.*, $color.text.*
 ```

@@ -8,11 +8,11 @@
   }
 
   .content[data-open] {
-    animation: slide-down 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+    animation: slide-down 0.25s cubic-bezier(0.87, 0, 0.13, 1);
   }
 
   .content:not([data-open]) {
-    animation: slide-up 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+    animation: slide-up 0.25s cubic-bezier(0.87, 0, 0.13, 1);
   }
 
   .trigger {

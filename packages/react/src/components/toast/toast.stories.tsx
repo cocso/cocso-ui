@@ -41,7 +41,7 @@ export const Variants: Story = {
         <Button variant="success" onClick={() => toast.success('성공!')}>성공</Button>
         <Button variant="error" onClick={() => toast.error('오류!')}>오류</Button>
         <Button variant="warning" onClick={() => toast.warning('주의!')}>경고</Button>
-        <Button variant="secondary" onClick={() => toast.info('정보!')}>정보</Button>
+        <Button variant="outline" onClick={() => toast.info('정보!')}>정보</Button>
       </div>
     </div>
   ),

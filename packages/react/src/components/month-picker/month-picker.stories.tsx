@@ -23,7 +23,7 @@ export const Default: Story = {
       <MonthPicker
         onValueChange={d => setDate(d ?? undefined)}
         trigger={
-          <Button variant="secondary">
+          <Button variant="outline">
             {date ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' }) : '월 선택'}
           </Button>
         }
@@ -41,7 +41,7 @@ export const Disabled: Story = {
         disabled
         onValueChange={() => {}}
         trigger={
-          <Button disabled variant="secondary">
+          <Button disabled variant="outline">
             {date ? date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' }) : '월 선택'}
           </Button>
         }

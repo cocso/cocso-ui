@@ -3,13 +3,37 @@ import { cn } from "../../cn";
 import { Popover as PopoverBase } from "../../primitives/popover";
 import styles from "./popover.module.css";
 
-function PopoverContent({
+function PopoverArrow({
   className,
   ...props
-}: ComponentProps<typeof PopoverBase.Popup>) {
+}: ComponentProps<typeof PopoverBase.Arrow>) {
+  return (
+    <PopoverBase.Arrow className={cn(styles.arrow, className)} {...props} />
+  );
+}
+
+function PopoverContent({
+  className,
+  side,
+  sideOffset,
+  align,
+  alignOffset,
+  arrowPadding,
+  ...props
+}: ComponentProps<typeof PopoverBase.Popup> &
+  Pick<
+    ComponentProps<typeof PopoverBase.Positioner>,
+    "side" | "sideOffset" | "align" | "alignOffset" | "arrowPadding"
+  >) {
   return (
     <PopoverBase.Portal>
-      <PopoverBase.Positioner>
+      <PopoverBase.Positioner
+        align={align}
+        alignOffset={alignOffset}
+        arrowPadding={arrowPadding}
+        side={side}
+        sideOffset={sideOffset}
+      >
         <PopoverBase.Popup
           className={cn(styles.content, className)}
           {...props}
@@ -22,4 +46,5 @@ function PopoverContent({
 export const Popover = Object.assign(PopoverBase.Root, {
   Trigger: PopoverBase.Trigger,
   Content: PopoverContent,
+  Arrow: PopoverArrow,
 });
