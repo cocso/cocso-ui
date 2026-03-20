@@ -33,11 +33,11 @@ export const WithIcons: Story = {
     <Dropdown>
       <Dropdown.Trigger render={<Button variant="outline">더보기</Button>} />
       <Dropdown.Content>
-        <Dropdown.Item prefix={<PencilIcon />}>편집</Dropdown.Item>
-        <Dropdown.Item prefix={<ContentCopyIcon />}>복사</Dropdown.Item>
-        <Dropdown.Item prefix={<PersonIcon />}>프로필</Dropdown.Item>
-        <Dropdown.Item prefix={<SettingsIcon />}>설정</Dropdown.Item>
-        <Dropdown.Item prefix={<DeleteIcon />}>삭제</Dropdown.Item>
+        <Dropdown.Item prefix={<PencilIcon size={14} />}>편집</Dropdown.Item>
+        <Dropdown.Item prefix={<ContentCopyIcon size={14} />}>복사</Dropdown.Item>
+        <Dropdown.Item prefix={<PersonIcon size={14} />}>프로필</Dropdown.Item>
+        <Dropdown.Item prefix={<SettingsIcon size={14} />}>설정</Dropdown.Item>
+        <Dropdown.Item prefix={<DeleteIcon size={14} />}>삭제</Dropdown.Item>
       </Dropdown.Content>
     </Dropdown>
   ),
