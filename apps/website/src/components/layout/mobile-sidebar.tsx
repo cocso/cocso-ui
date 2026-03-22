@@ -80,7 +80,7 @@ export const MobileSidebar = () => {
                                 "bg-neutral-100 opacity-100"
                             )}
                             render={<Link href={item.url} />}
-                            size={14}
+                            size={13}
                             type="custom"
                             weight="medium"
                           >
