@@ -1,0 +1,107 @@
+---
+title: Typography Component
+description: custom, body, heading 모드를 지원하는 유연한 텍스트 렌더링 컴포넌트입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Typography 컴포넌트는 type prop으로 제어되는 세 가지 모드로 동작합니다: custom은 임의의 숫자 폰트 크기, body는 이름 있는 크기 단계를 가진 시맨틱 본문 텍스트, heading은 반응형 크기 단계를 가진 시맨틱 제목입니다. 모든 모드는 weight, lineHeight, 기본 요소를 교체하는 render prop을 지원합니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>제목</Section.Title>
+  <Section.Text>heading 모드는 기본적으로 h2 요소를 렌더링합니다. x-large와 large 크기는 반응형으로, 태블릿 브레이크포인트에서 크기가 증가합니다.</Section.Text>
+  <ComponentExample name="typography-heading">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyHeading() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="heading" size="x-large">X-Large Heading</Typography>
+          <Typography type="heading" size="large">Large Heading</Typography>
+          <Typography type="heading" size="medium">Medium Heading</Typography>
+          <Typography type="heading" size="small">Small Heading</Typography>
+          <Typography type="heading" size="x-small">X-Small Heading</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>본문</Section.Title>
+  <Section.Text>body 모드는 p 요소를 렌더링합니다. 모든 표준 산문 및 UI 텍스트에 사용하세요.</Section.Text>
+  <ComponentExample name="typography-body">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyBody() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="body" size="large">Large body text for prominent content.</Typography>
+          <Typography type="body" size="medium">Medium body text for standard content.</Typography>
+          <Typography type="body" size="small">Small body text for secondary content.</Typography>
+          <Typography type="body" size="x-small">X-Small body text for captions.</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>커스텀</Section.Title>
+  <Section.Text>custom 모드(기본값)는 디자인 토큰 스케일의 임의 숫자 폰트 크기, 또는 base, tablet, desktop 키를 가진 반응형 객체를 받습니다.</Section.Text>
+  <ComponentExample name="typography-custom">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyCustom() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography size={24} weight="bold">Custom size 24, bold</Typography>
+          <Typography size={16} weight="medium">Custom size 16, medium</Typography>
+          <Typography size={12} weight="normal" lineHeight="relaxed">Custom size 12, relaxed line height</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>반응형 크기</Section.Title>
+  <Section.Text>heading 크기 x-large와 large는 태블릿 브레이크포인트에서 자동으로 크기가 증가합니다. custom 모드에서는 반응형 객체나 배열을 전달하여 각 브레이크포인트별 크기를 독립적으로 제어할 수 있습니다.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "heading x-large", token: "base → tablet", value: "28px → 36px" },
+      { name: "heading large", token: "base → tablet", value: "24px → 32px" },
+      { name: "heading medium", token: "base", value: "20px" },
+      { name: "heading small", token: "base", value: "16px" },
+      { name: "heading x-small", token: "base", value: "14px" },
+      { name: "body large", token: "base", value: "18px" },
+      { name: "body medium", token: "base", value: "16px" },
+      { name: "body small", token: "base", value: "14px" },
+      { name: "body x-small", token: "base", value: "12px" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"custom"', description: "렌더링 모드를 선택합니다. custom은 숫자 크기, body와 heading은 이름 있는 크기 단계를 사용합니다." },
+    { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "숫자 폰트 크기 토큰, 또는 base, tablet, desktop 키를 가진 반응형 객체/배열입니다. type이 custom일 때만 적용됩니다." },
+    { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "이름 있는 body 크기 단계입니다. type이 body일 때만 적용됩니다." },
+    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "이름 있는 heading 크기 단계입니다. x-large와 large는 반응형입니다. type이 heading일 때만 적용됩니다." },
+    { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "폰트 굵기를 지정합니다." },
+    { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "줄 높이를 지정합니다." },
+    { name: "render", type: "RenderProp", description: "기본 요소를 대체하는 render prop입니다. custom/body에서는 p, heading에서는 h2가 기본값입니다." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

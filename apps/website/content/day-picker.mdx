@@ -1,0 +1,49 @@
+---
+title: Day Picker
+description: 단일 날짜 선택을 위한 달력 팝오버를 여는 날짜 선택기입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>DayPicker는 인라인 달력이 포함된 Dropdown을 여는 트리거 요소를 렌더링합니다. 제어 컴포넌트로, value와 onValueChange를 전달하여 선택된 날짜를 관리합니다. 달력은 기본적으로 한국어로 현지화됩니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>value와 onValueChange props로 선택된 날짜를 제어하세요. 커스텀 트리거가 제공되지 않으면 기본 버튼으로 렌더링됩니다.</Section.Text>
+  <ComponentExample name="day-picker-default">
+    ```tsx
+    "use client";
+
+    import { DayPicker } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function DayPickerDefault() {
+      const [value, setValue] = useState<Date | null>(null);
+
+      return (
+        <div className="p-4">
+          <DayPicker onValueChange={setValue} value={value ?? undefined} />
+          {value && <p className="mt-2 text-sm text-neutral-500">Selected: {value.toLocaleDateString()}</p>}
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "value", type: "Date", description: "현재 선택된 날짜 값입니다." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "사용자가 날짜를 선택하거나 지울 때 실행되는 콜백입니다." },
+    { name: "disabled", type: "boolean", description: "날짜 선택기 트리거를 비활성화하고 상호작용을 방지합니다." },
+    { name: "minDate", type: "Date", description: "선택 가능한 가장 이른 날짜입니다. 이 날짜 이전은 달력에서 비활성화됩니다." },
+    { name: "maxDate", type: "Date", description: "선택 가능한 가장 늦은 날짜입니다. 이 날짜 이후는 달력에서 비활성화됩니다." },
+    { name: "trigger", type: "ReactElement", description: "달력 팝오버를 여는 커스텀 트리거 요소입니다." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

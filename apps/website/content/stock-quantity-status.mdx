@@ -1,0 +1,40 @@
+---
+title: Stock Quantity Status
+description: 의약품 재고 수준을 표시하는 도메인 특화 인디케이터입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>StockQuantityStatus는 색상으로 구분된 재고 수준 인디케이터와 한국어 레이블을 함께 표시하는 도메인 특화 컴포넌트입니다. 의약품 재고 관리 맥락에서 재고가 충분한지(여유), 보통인지(보통), 부족한지(부족)를 전달하는 데 사용됩니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>세 가지 수량 값 중 하나를 전달하여 해당하는 색상 코드 인디케이터와 레이블을 렌더링하세요.</Section.Text>
+  <ComponentExample name="stock-quantity-status-default">
+    ```tsx
+    import { StockQuantityStatus } from "@cocso-ui/react";
+
+    export default function StockQuantityStatusDefault() {
+      return (
+        <div className="flex flex-wrap items-center gap-4 p-4">
+          <StockQuantityStatus quantity="여유" />
+          <StockQuantityStatus quantity="보통" />
+          <StockQuantityStatus quantity="부족" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "quantity", type: '"보통" | "여유" | "부족"', required: true, description: '재고 수준 값입니다. "여유"는 파란색(info), "보통"은 초록색(success), "부족"은 빨간색(danger)으로 렌더링됩니다.' },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
