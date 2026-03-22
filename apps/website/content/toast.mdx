@@ -1,0 +1,88 @@
+---
+title: Toast
+description: 화면 가장자리에 나타나는 간결하고 비방해적인 알림입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Toast는 COCSO UI 스타일이 적용된 <a href="https://sonner.emilkowal.ski/" target="_blank" rel="noopener noreferrer">Sonner</a>의 재내보내기입니다. 애플리케이션 어디서든 알림을 트리거할 수 있는 명령형 <code>toast()</code> 함수와, 토스트 뷰포트를 마운트하는 <code>Toaster</code> 컴포넌트를 제공합니다.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>명령형 API: 어떤 이벤트 핸들러에서든 <code>toast()</code>, <code>toast.success()</code>, <code>toast.error()</code> 등을 호출할 수 있습니다.</Section.ListItem>
+    <Section.ListItem>루트 레이아웃에 <code>&lt;Toaster /&gt;</code>를 한 번 배치하면 토스트 렌더링이 활성화됩니다.</Section.ListItem>
+    <Section.ListItem>토스트는 쌓이며 설정 가능한 지속 시간 후 자동으로 닫힙니다.</Section.ListItem>
+    <Section.ListItem><code>success</code>, <code>error</code>, <code>info</code>, <code>warning</code> 시맨틱 변형을 지원합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>사용법</Section.Title>
+  <Section.Text><code>@cocso-ui/react</code>에서 <code>toast</code>와 <code>Toaster</code>를 가져옵니다. 루트 레이아웃에 <code>&lt;Toaster /&gt;</code>를 추가한 후, 알림을 표시할 곳에서 <code>toast()</code>를 호출하세요.</Section.Text>
+  <ComponentExample name="toast-default">
+```tsx
+"use client";
+
+import { Button, Toaster, toast } from "@cocso-ui/react";
+
+export default function ToastDefault() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      <Button onClick={() => toast("This is a toast message")} variant="primary">
+        Show Toast
+      </Button>
+      <Button onClick={() => toast.success("Operation successful!")} variant="success">
+        Success
+      </Button>
+      <Button onClick={() => toast.error("Something went wrong.")} variant="error">
+        Error
+      </Button>
+      <Toaster />
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>변형</Section.Title>
+  <Section.Text>시맨틱 변형 메서드를 사용해 알림의 의도를 한눈에 전달하세요.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem><code>toast(message)</code> — 기본 중립 알림입니다.</Section.ListItem>
+    <Section.ListItem><code>toast.success(message)</code> — 완료된 액션을 확인합니다.</Section.ListItem>
+    <Section.ListItem><code>toast.error(message)</code> — 실패 또는 오류를 알립니다.</Section.ListItem>
+    <Section.ListItem><code>toast.info(message)</code> — 정보성 컨텍스트를 제공합니다.</Section.ListItem>
+    <Section.ListItem><code>toast.warning(message)</code> — 잠재적으로 원하지 않는 결과에 대해 경고합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <Section.Text>**toast function**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "toast(message)", type: "function", description: "주어진 메시지로 기본 중립 토스트를 표시합니다." },
+      { name: "toast.success(message)", type: "function", description: "성공 토스트를 표시합니다." },
+      { name: "toast.error(message)", type: "function", description: "에러 토스트를 표시합니다." },
+      { name: "toast.info(message)", type: "function", description: "정보 토스트를 표시합니다." },
+      { name: "toast.warning(message)", type: "function", description: "경고 토스트를 표시합니다." },
+      { name: "toast.dismiss(id?)", type: "function", description: "id로 특정 토스트를 닫거나, 인수 없이 호출하면 모든 토스트를 닫습니다." },
+    ]}
+  />
+
+  <Section.Text>**Toaster**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "토스트가 렌더링되는 화면 위치입니다." },
+      { name: "duration", type: "number", default: "4000", description: "자동 닫힘 지속 시간(밀리초)입니다." },
+      { name: "richColors", type: "boolean", default: "false", description: "true이면 변형에 더 풍부한 시맨틱 색상 스타일을 적용합니다." },
+      { name: "expand", type: "boolean", default: "false", description: "true이면 토스트가 쌓이지 않고 항상 펼쳐진 상태로 표시됩니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

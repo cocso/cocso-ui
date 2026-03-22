@@ -1,0 +1,133 @@
+---
+title: Dialog
+description: 중요한 콘텐츠로 사용자의 흐름을 중단하고 응답을 요구하는 모달 다이얼로그입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Dialog는 Base UI의 Dialog 프리미티브 기반으로 구성된 복합 컴포넌트입니다. 사용자가 닫을 때까지 포커스를 가두고 페이지의 나머지 부분과의 상호작용을 차단하는 모달 오버레이를 렌더링합니다. 확인, 폼, 또는 사용자의 명시적인 결정이 필요한 콘텐츠에 Dialog를 사용하세요.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>복합 API: <code>Dialog</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code>, <code>Dialog.Title</code>, <code>Dialog.Description</code>, <code>Dialog.Close</code></Section.ListItem>
+    <Section.ListItem>다이얼로그가 열려 있는 동안 포커스가 내부에 갇힙니다.</Section.ListItem>
+    <Section.ListItem>기본적으로 <code>Escape</code> 키를 누르면 다이얼로그가 닫힙니다.</Section.ListItem>
+    <Section.ListItem>세 가지 콘텐츠 크기: <code>small</code>, <code>medium</code>, <code>large</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>제목, 설명, 액션 버튼이 있는 다이얼로그입니다.</Section.Text>
+  <ComponentExample name="dialog-default">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogDefault() {
+  return (
+    <div className="p-4">
+      <Dialog>
+        <Dialog.Trigger render={<Button />}>Open Dialog</Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title>Confirm Action</Dialog.Title>
+          <Dialog.Description>
+            Are you sure you want to proceed? This action cannot be undone.
+          </Dialog.Description>
+          <div className="mt-4 flex justify-end gap-2">
+            <Dialog.Close render={<Button variant="secondary" />}>Cancel</Dialog.Close>
+            <Dialog.Close render={<Button variant="primary" />}>Confirm</Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text><code>Dialog.Content</code>의 <code>size</code> prop은 다이얼로그 패널의 최대 너비를 제어합니다.</Section.Text>
+  <ComponentExample name="dialog-sizes">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogSizes() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Dialog key={size}>
+          <Dialog.Trigger render={<Button variant="secondary" />}>{size}</Dialog.Trigger>
+          <Dialog.Content size={size}>
+            <Dialog.Title>Dialog — {size}</Dialog.Title>
+            <Dialog.Description>This is a {size} dialog.</Dialog.Description>
+            <div className="mt-4 flex justify-end">
+              <Dialog.Close render={<Button variant="primary" />}>Close</Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <Section.Text>**Dialog** (루트 컨테이너)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "다이얼로그의 제어형 열림 상태입니다." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "열림 상태가 변경될 때 호출되는 콜백입니다." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다." },
+      { name: "modal", type: "boolean", default: "true", description: "true이면 다이얼로그 외부와의 상호작용이 차단됩니다." },
+    ]}
+  />
+
+  <Section.Text>**Dialog.Trigger** (트리거 요소)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "트리거로 사용할 요소입니다. prop 병합을 통해 열기/닫기 핸들러를 전달받습니다.", required: true },
+    ]}
+  />
+
+  <Section.Text>**Dialog.Content** (콘텐츠 영역)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "다이얼로그 패널의 최대 너비를 제어합니다." },
+    ]}
+  />
+
+  <Section.Text>**Dialog.Close** (닫기 버튼)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "닫기 트리거로 렌더링할 요소입니다.", required: true },
+    ]}
+  />
+
+  <Section.Text>**Dialog.Title**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "다이얼로그 상단에 표시되는 제목 텍스트입니다.", required: true },
+    ]}
+  />
+
+  <Section.Text>**Dialog.Description**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "다이얼로그 액션에 대한 컨텍스트를 제공하는 설명 텍스트입니다.", required: true },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

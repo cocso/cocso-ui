@@ -1,0 +1,119 @@
+---
+title: Popover
+description: 트리거 요소에 고정된 플로팅 패널로, Base UI Popover 프리미티브 기반입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Popover는 Base UI의 Popover 프리미티브 기반으로 구성된 복합 컴포넌트입니다. Dialog와 달리, Popover는 페이지의 나머지 부분과의 상호작용을 차단하지 않는 비모달 방식입니다. 보조 정보, 인라인 폼, 또는 지속적인 노출이 유리한 풍부한 툴팁에 Popover를 사용하세요.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>복합 API: <code>Popover</code>, <code>Popover.Trigger</code>, <code>Popover.Content</code>, <code>Popover.Arrow</code></Section.ListItem>
+    <Section.ListItem>비모달: 외부를 클릭하면 상호작용을 차단하지 않고 팝오버가 닫힙니다.</Section.ListItem>
+    <Section.ListItem><code>side</code> 및 <code>align</code> 위치 지정 props를 지원합니다.</Section.ListItem>
+    <Section.ListItem><code>Popover.Arrow</code>는 트리거를 향하는 방향성 캐럿을 렌더링합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>제목, 설명 텍스트, 화살표 인디케이터가 있는 팝오버입니다.</Section.Text>
+  <ComponentExample name="popover-default">
+```tsx
+"use client";
+
+import { Button, Popover, Typography } from "@cocso-ui/react";
+
+export default function PopoverDefault() {
+  return (
+    <div className="p-4">
+      <Popover>
+        <Popover.Trigger render={<Button variant="secondary" />}>Open Popover</Popover.Trigger>
+        <Popover.Content>
+          <div className="flex flex-col gap-2 p-3">
+            <Typography size={14} weight="semibold">Popover Title</Typography>
+            <Typography size={13}>This is the popover content. It can contain any elements.</Typography>
+          </div>
+          <Popover.Arrow />
+        </Popover.Content>
+      </Popover>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>위치</Section.Title>
+  <Section.Text><code>Popover.Content</code>의 <code>side</code> prop을 사용해 팝오버가 트리거의 어느 방향에 표시될지 제어합니다.</Section.Text>
+  <ComponentExample name="popover-positions">
+```tsx
+"use client";
+
+import { Button, Popover, Typography } from "@cocso-ui/react";
+
+export default function PopoverPositions() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["top", "bottom", "left", "right"] as const).map((side) => (
+        <Popover key={side}>
+          <Popover.Trigger render={<Button variant="outline" />}>{side}</Popover.Trigger>
+          <Popover.Content side={side}>
+            <div className="p-3">
+              <Typography size={13}>Popover on {side}</Typography>
+            </div>
+            <Popover.Arrow />
+          </Popover.Content>
+        </Popover>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <Section.Text>**Popover** (루트 컨테이너)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "팝오버의 제어형 열림 상태입니다." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "열림 상태가 변경될 때 호출되는 콜백입니다." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다." },
+    ]}
+  />
+
+  <Section.Text>**Popover.Trigger** (트리거 요소)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "팝오버 트리거로 사용할 요소입니다.", required: true },
+    ]}
+  />
+
+  <Section.Text>**Popover.Content** (콘텐츠 영역)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "팝오버를 렌더링할 트리거의 선호 방향입니다." },
+      { name: "sideOffset", type: "number", default: "4", description: "트리거와 팝오버 사이의 거리(px)입니다." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "트리거 기준 팝오버의 정렬 방향입니다." },
+      { name: "alignOffset", type: "number", default: "0", description: "정렬 축 방향의 오프셋(px)입니다." },
+      { name: "arrowPadding", type: "number", default: "4", description: "화살표와 팝오버 가장자리 사이의 최소 거리입니다." },
+    ]}
+  />
+
+  <Section.Text>**Popover.Arrow**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "width", type: "number", default: "10", description: "화살표의 너비(px)입니다." },
+      { name: "height", type: "number", default: "5", description: "화살표의 높이(px)입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,128 @@
+---
+title: Tooltip
+description: 요소에 호버하거나 포커스할 때 보조 정보를 제공하는 플로팅 레이블입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Tooltip은 Base UI의 Tooltip 프리미티브 기반으로 구성된 복합 컴포넌트입니다. 사용자가 트리거 요소에 호버하거나 포커스할 때 짧은 텍스트 레이블을 렌더링합니다. 여러 툴팁을 공유된 <code>Tooltip.Provider</code>로 감싸면 지연 및 열기 동작을 일괄 조정할 수 있습니다.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>복합 API: <code>Tooltip.Provider</code>, <code>Tooltip</code>, <code>Tooltip.Trigger</code>, <code>Tooltip.Content</code>, <code>Tooltip.Arrow</code></Section.ListItem>
+    <Section.ListItem>툴팁 그룹을 <code>Tooltip.Provider</code>로 감싸면 호버 지연 설정을 공유할 수 있습니다.</Section.ListItem>
+    <Section.ListItem><code>Tooltip.Content</code>에서 <code>side</code> 및 <code>align</code> 위치 지정 props를 지원합니다.</Section.ListItem>
+    <Section.ListItem><code>Tooltip.Arrow</code>는 트리거를 향하는 방향성 캐럿을 렌더링합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>트리거 버튼에 호버할 때 나타나는 툴팁입니다.</Section.Text>
+  <ComponentExample name="tooltip-default">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipDefault() {
+  return (
+    <div className="p-4">
+      <Tooltip.Provider>
+        <Tooltip>
+          <Tooltip.Trigger render={<Button variant="secondary" />}>
+            Hover me
+          </Tooltip.Trigger>
+          <Tooltip.Content>
+            This is a tooltip
+            <Tooltip.Arrow />
+          </Tooltip.Content>
+        </Tooltip>
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>위치</Section.Title>
+  <Section.Text><code>Tooltip.Content</code>의 <code>side</code> prop을 사용해 툴팁이 트리거의 어느 방향에 표시될지 제어합니다.</Section.Text>
+  <ComponentExample name="tooltip-positions">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipPositions() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      <Tooltip.Provider>
+        {(["top", "bottom", "left", "right"] as const).map((side) => (
+          <Tooltip key={side}>
+            <Tooltip.Trigger render={<Button variant="outline" />}>{side}</Tooltip.Trigger>
+            <Tooltip.Content side={side}>
+              Tooltip on {side}
+              <Tooltip.Arrow />
+            </Tooltip.Content>
+          </Tooltip>
+        ))}
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <Section.Text>**Tooltip.Provider**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "delayDuration", type: "number", default: "700", description: "호버 시 툴팁이 열리기까지의 지연 시간(밀리초)입니다." },
+      { name: "skipDelayDuration", type: "number", default: "300", description: "트리거 간 이동 시 지연을 건너뛰는 지속 시간(밀리초)입니다." },
+    ]}
+  />
+
+  <Section.Text>**Tooltip** (루트 컨테이너)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "툴팁의 제어형 열림 상태입니다." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "열림 상태가 변경될 때 호출되는 콜백입니다." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다." },
+    ]}
+  />
+
+  <Section.Text>**Tooltip.Trigger** (트리거 요소)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "툴팁 트리거로 사용할 요소입니다.", required: true },
+    ]}
+  />
+
+  <Section.Text>**Tooltip.Content** (콘텐츠 영역)</Section.Text>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: "툴팁을 렌더링할 트리거의 선호 방향입니다." },
+      { name: "sideOffset", type: "number", default: "4", description: "트리거와 툴팁 사이의 거리(px)입니다." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "트리거 기준 툴팁의 정렬 방향입니다." },
+      { name: "alignOffset", type: "number", default: "0", description: "정렬 축 방향의 오프셋(px)입니다." },
+      { name: "arrowPadding", type: "number", default: "4", description: "화살표와 툴팁 가장자리 사이의 최소 거리입니다." },
+    ]}
+  />
+
+  <Section.Text>**Tooltip.Arrow**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "width", type: "number", default: "10", description: "화살표의 너비(px)입니다." },
+      { name: "height", type: "number", default: "5", description: "화살표의 높이(px)입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
