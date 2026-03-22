@@ -1,0 +1,224 @@
+---
+title: Button
+description: A clickable element that triggers an action or event.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Button component triggers actions or navigation. It supports a variety of visual variants, sizes, shapes, and states including loading and disabled. Use it as a primary call-to-action, a secondary control, or an icon-only affordance.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>
+    Use variants to communicate the intent of an action. `primary` is the default high-emphasis style; use `secondary`, `outline`, or `ghost` for lower emphasis. State variants (`success`, `error`, `warning`, `info`) convey semantic meaning.
+  </Section.Text>
+  <ComponentExample name="button-variants">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonVariants() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="error">Error</Button>
+          <Button variant="warning">Warning</Button>
+          <Button variant="info">Info</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Four sizes are available. Choose based on context and surrounding content density.
+  </Section.Text>
+  <ComponentExample name="button-sizes">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonSizes() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button size="large">Large</Button>
+          <Button size="medium">Medium</Button>
+          <Button size="small">Small</Button>
+          <Button size="x-small">X-Small</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Shape</Section.Title>
+  <Section.Text>
+    Use <code>square</code> for standard rectangular buttons, <code>rounded</code> for a pill style, and combine <code>circle</code> with <code>svgOnly</code> for icon-only circular buttons.
+  </Section.Text>
+  <ComponentExample name="button-shapes">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+    import { PlusIcon } from "@cocso-ui/react-icons";
+
+    export default function ButtonShapes() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button shape="square">Square</Button>
+          <Button shape="rounded">Rounded</Button>
+          <Button shape="circle" svgOnly><PlusIcon size={18} /></Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Loading</Section.Title>
+  <Section.Text>
+    Set <code>loading</code> to display a spinner and disable interaction while an async operation is in progress.
+  </Section.Text>
+  <ComponentExample name="button-loading">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonLoading() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button loading variant="primary">Loading</Button>
+          <Button loading variant="secondary">Loading</Button>
+          <Button loading variant="outline">Loading</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Prefix & Suffix</Section.Title>
+  <Section.Text>
+    Use <code>prefix</code> and <code>suffix</code> to place an icon or element before or after the button label.
+  </Section.Text>
+  <ComponentExample name="button-prefix-suffix">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+    import { ArrowForwardIcon, PlusIcon } from "@cocso-ui/react-icons";
+
+    export default function ButtonPrefixSuffix() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button prefix={<PlusIcon size={16} />}>Add item</Button>
+          <Button suffix={<ArrowForwardIcon size={16} />}>Continue</Button>
+          <Button prefix={<PlusIcon size={16} />} suffix={<ArrowForwardIcon size={16} />}>Both</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Disabled</Section.Title>
+  <Section.Text>
+    Set <code>disabled</code> to prevent interaction. Disabled buttons appear visually dimmed and cannot be focused.
+  </Section.Text>
+  <ComponentExample name="button-variants">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonDisabled() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button disabled variant="primary">Disabled Primary</Button>
+          <Button disabled variant="outline">Disabled Outline</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "variant",
+        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info"',
+        default: '"primary"',
+        description: "Sets the visual style.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "Sets the size.",
+      },
+      {
+        name: "shape",
+        type: '"square" | "circle" | "rounded"',
+        default: '"square"',
+        description: "Sets the shape.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Whether the button is disabled.",
+      },
+      {
+        name: "loading",
+        type: "boolean",
+        default: "false",
+        description: "Displays a spinner and disables interaction.",
+      },
+      {
+        name: "prefix",
+        type: "ReactNode",
+        description: "Element rendered before the label.",
+      },
+      {
+        name: "suffix",
+        type: "ReactNode",
+        description: "Element rendered after the label.",
+      },
+      {
+        name: "svgOnly",
+        type: "boolean",
+        default: "false",
+        description: "When true, renders as an icon-only button.",
+      },
+      {
+        name: "weight",
+        type: "FontWeight",
+        default: '"medium"',
+        description: "Sets the font weight of the label.",
+      },
+      {
+        name: "spinnerVariant",
+        type: "SpinnerVariant",
+        description: "Overrides the spinner style during loading.",
+      },
+      {
+        name: "render",
+        type: "RenderProp",
+        description: "Custom render prop for polymorphic rendering.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

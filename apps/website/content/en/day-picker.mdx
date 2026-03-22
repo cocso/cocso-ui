@@ -1,0 +1,49 @@
+---
+title: Day Picker
+description: A date picker that opens a calendar popover for selecting a single date.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>DayPicker renders a trigger element that opens a Dropdown containing an inline calendar. It is a controlled component; pass value and onValueChange to manage the selected date. The calendar is localized to English by default.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Control the selected date with the value and onValueChange props. When no custom trigger is provided, it renders as a default button.</Section.Text>
+  <ComponentExample name="day-picker-default">
+    ```tsx
+    "use client";
+
+    import { DayPicker } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function DayPickerDefault() {
+      const [value, setValue] = useState<Date | null>(null);
+
+      return (
+        <div className="p-4">
+          <DayPicker onValueChange={setValue} value={value ?? undefined} />
+          {value && <p className="mt-2 text-sm text-neutral-500">Selected: {value.toLocaleDateString()}</p>}
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "value", type: "Date", description: "The currently selected date value." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects or clears a date." },
+    { name: "disabled", type: "boolean", description: "Disables the date picker trigger and prevents interaction." },
+    { name: "minDate", type: "Date", description: "The earliest selectable date. Dates before this are disabled in the calendar." },
+    { name: "maxDate", type: "Date", description: "The latest selectable date. Dates after this are disabled in the calendar." },
+    { name: "trigger", type: "ReactElement", description: "Custom trigger element that opens the calendar popover." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

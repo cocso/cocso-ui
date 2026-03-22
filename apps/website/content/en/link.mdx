@@ -1,0 +1,88 @@
+---
+title: Link
+description: A styled anchor element supporting variants, sizes, and external link indicators.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Link renders a styled anchor element built on top of Typography. It supports three visual variants for different contexts, four size options, and an optional external link indicator icon.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>Three variants control color and underline behavior. `inline` is a standard hyperlink, `current` inherits the surrounding text color, and `plain` is a link without underline.</Section.Text>
+  <ComponentExample name="link-default">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkDefault() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="#" variant="inline">Inline link</Link>
+          <Link href="#" variant="current">Current link</Link>
+          <Link href="#" variant="plain">Plain link</Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>The size prop maps to the Typography body size scale: large (18px), medium (16px), small (14px), x-small (12px).</Section.Text>
+  <ComponentExample name="link-sizes">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkSizes() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="#" size="large">Large link</Link>
+          <Link href="#" size="medium">Medium link</Link>
+          <Link href="#" size="small">Small link</Link>
+          <Link href="#" size="x-small">X-Small link</Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>External</Section.Title>
+  <Section.Text>Place Link.ExternalIcon inside the link content to display an external link icon. The indicator prop lets you explicitly control the underline indicator.</Section.Text>
+  <ComponentExample name="link-external">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkExternal() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="https://example.com" indicator target="_blank" rel="noopener noreferrer">
+            External link <Link.ExternalIcon />
+          </Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "variant", type: '"inline" | "current" | "plain"', default: '"inline"', description: "Sets the link color and underline indicator style." },
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the Typography rendering mode." },
+    { name: "size", type: '"large" | "medium" | "small" | "x-small"', description: "Font size of the link, mapped to the Typography body size scale." },
+    { name: "weight", type: "FontWeight", description: "Overrides the font weight." },
+    { name: "lineHeight", type: "LineHeight", description: "Overrides the line height." },
+    { name: "indicator", type: "boolean", description: "Explicitly sets whether the underline indicator is shown. Defaults to true for inline and current variants." },
+    { name: "render", type: "RenderProp", description: "Render prop that replaces the default anchor element." },
+    { name: "href", type: "string", description: "URL the link points to. Passed through to the underlying anchor element." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

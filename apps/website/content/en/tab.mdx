@@ -1,0 +1,54 @@
+---
+title: Tab
+description: A tab interface for switching between related content panels.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Tab is a compound component built on Base UI's Tabs primitive. It provides a keyboard-accessible tab interface following the WAI-ARIA pattern. Content panels are linked to their corresponding triggers via a shared `value` prop.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>The default tab renders a list of triggers and linked content panels. Use `defaultValue` for uncontrolled usage and `value` with `onValueChange` for controlled usage.</Section.Text>
+  <ComponentExample name="tab-default" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Tab (Root)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string", description: "Value of the tab selected by default (uncontrolled)." },
+      { name: "value", type: "string", description: "Controlled selected tab value. Use together with onValueChange." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the selected tab changes." },
+    ]}
+  />
+
+  <SubHeading>Tab.List</SubHeading>
+
+  Container for tab triggers. Accepts Base UI Tabs.List props.
+
+  <SubHeading>Tab.Trigger</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "Unique value identifying the content panel linked to this trigger." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables the tab from being selected." },
+    ]}
+  />
+
+  <SubHeading>Tab.Content</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "Value that must match a Tab.Trigger value to be shown." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

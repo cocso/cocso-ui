@@ -6,11 +6,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { sidebar } from "~/constants/sidebar";
+import { getSidebarForLocale } from "~/constants/sidebar";
+import { useLocale } from "~/hooks/use-locale";
 
 export const MobileSidebar = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale();
+  const sidebarData = getSidebarForLocale(locale);
+  const prefix = locale === "en" ? "" : `/${locale}`;
 
   const prevPathname = useRef(pathname);
   useEffect(() => {
@@ -56,7 +60,7 @@ export const MobileSidebar = () => {
             aria-label="Close menu"
           />
           <nav className="fixed inset-x-0 top-[calc(var(--size-header-height)-1px)] z-50 max-h-[calc(100svh-var(--size-header-height)+1px)] overflow-y-auto border-neutral-200 border-t bg-white px-2 py-3 shadow-lg lg:hidden">
-            {Object.entries(sidebar).map(([key, value]) => (
+            {Object.entries(sidebarData).map(([key, value]) => (
               <div className="mb-6" key={key}>
                 <Typography
                   className="mb-3 px-4 uppercase"
@@ -70,16 +74,17 @@ export const MobileSidebar = () => {
                 <ul>
                   {value.items.map((item) => {
                     if (item.type === "page") {
+                      const href = `${prefix}${item.url}`;
                       return (
                         <li className="w-full" key={item.url}>
                           <Typography
                             className={twMerge(
                               "center-y h-9 rounded-lg px-4 opacity-50 transition-opacity duration-150",
-                              pathname !== item.url && "hover:opacity-70",
-                              pathname === item.url &&
+                              pathname !== href && "hover:opacity-70",
+                              pathname === href &&
                                 "bg-neutral-100 opacity-100"
                             )}
-                            render={<Link href={item.url} />}
+                            render={<Link href={href} />}
                             size={13}
                             type="custom"
                             weight="medium"

@@ -1,0 +1,129 @@
+---
+title: Input
+description: A text field for collecting user input.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Input component is a single-line text field. It supports labels, descriptions, error messages, and multiple sizes. Use it in forms, search fields, and any scenario requiring free-form text input.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>
+    A basic input field with a label and placeholder.
+  </Section.Text>
+  <ComponentExample name="input-default">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputDefault() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="Email" placeholder="Enter your email" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Four sizes are available to match surrounding content density.
+  </Section.Text>
+  <ComponentExample name="input-sizes">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputSizes() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="Large" placeholder="Large input" size="large" />
+          <Input label="Medium" placeholder="Medium input" size="medium" />
+          <Input label="Small" placeholder="Small input" size="small" />
+          <Input label="X-Small" placeholder="X-Small input" size="x-small" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>States</Section.Title>
+  <Section.Text>
+    Use <code>description</code> for help text, <code>error</code> for validation messages, and <code>disabled</code> to prevent interaction.
+  </Section.Text>
+  <ComponentExample name="input-states">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputStates() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="With description" description="We'll never share your email." placeholder="Email" />
+          <Input error="This field is required." label="With error" placeholder="Required field" />
+          <Input disabled label="Disabled" placeholder="Cannot edit" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Stretch</Section.Title>
+  <Section.Text>
+    Set <code>stretch</code> to make the input fill the full width of its container.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "label",
+        type: "string",
+        description: "Label text displayed above the input field.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "Sets the size.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Whether the input is disabled.",
+      },
+      {
+        name: "error",
+        type: "boolean | string",
+        default: "false",
+        description: "When a string, displays an error message below the input. When true, applies error styling only.",
+      },
+      {
+        name: "description",
+        type: "string",
+        description: "Help text displayed below the input field.",
+      },
+      {
+        name: "stretch",
+        type: "boolean",
+        default: "false",
+        description: "When true, the input expands to fill the container width.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

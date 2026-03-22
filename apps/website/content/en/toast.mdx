@@ -1,0 +1,88 @@
+---
+title: Toast
+description: A concise non-modal notification that appears at the edge of the screen.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Toast is a notification component based on <a href="https://sonner.emilkowal.ski/" target="_blank" rel="noopener noreferrer">Sonner</a> with COCSO UI styling applied. It provides an imperative <code>toast()</code> function callable from anywhere in the application, and a <code>Toaster</code> component that mounts the toast viewport.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Imperative API: call <code>toast()</code>, <code>toast.success()</code>, <code>toast.error()</code>, etc. from any event handler.</Section.ListItem>
+    <Section.ListItem>Place <code>&lt;Toaster /&gt;</code> once in your root layout to enable toast rendering.</Section.ListItem>
+    <Section.ListItem>Toasts stack and auto-dismiss after a configurable duration.</Section.ListItem>
+    <Section.ListItem>Supports <code>success</code>, <code>error</code>, <code>info</code>, and <code>warning</code> semantic variants.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Usage</Section.Title>
+  <Section.Text>Import <code>toast</code> and <code>Toaster</code> from <code>@cocso-ui/react</code>. Add <code>&lt;Toaster /&gt;</code> to your root layout, then call <code>toast()</code> wherever you want to show a notification.</Section.Text>
+  <ComponentExample name="toast-default">
+```tsx
+"use client";
+
+import { Button, Toaster, toast } from "@cocso-ui/react";
+
+export default function ToastDefault() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      <Button onClick={() => toast("This is a toast message")} variant="primary">
+        Show Toast
+      </Button>
+      <Button onClick={() => toast.success("Operation successful!")} variant="success">
+        Success
+      </Button>
+      <Button onClick={() => toast.error("Something went wrong.")} variant="error">
+        Error
+      </Button>
+      <Toaster />
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>Use semantic variant methods to communicate the intent of a notification at a glance.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem><code>toast(message)</code> — Default neutral notification.</Section.ListItem>
+    <Section.ListItem><code>toast.success(message)</code> — Confirms a completed action.</Section.ListItem>
+    <Section.ListItem><code>toast.error(message)</code> — Signals a failure or error.</Section.ListItem>
+    <Section.ListItem><code>toast.info(message)</code> — Provides informational context.</Section.ListItem>
+    <Section.ListItem><code>toast.warning(message)</code> — Warns about a potentially unwanted outcome.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <Section.Text>**toast function**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "toast(message)", type: "function", description: "Displays a default neutral toast with the given message." },
+      { name: "toast.success(message)", type: "function", description: "Displays a success toast." },
+      { name: "toast.error(message)", type: "function", description: "Displays an error toast." },
+      { name: "toast.info(message)", type: "function", description: "Displays an info toast." },
+      { name: "toast.warning(message)", type: "function", description: "Displays a warning toast." },
+      { name: "toast.dismiss(id?)", type: "function", description: "Dismisses a specific toast by id, or all toasts when called without arguments." },
+    ]}
+  />
+
+  <Section.Text>**Toaster**</Section.Text>
+  <PropsTable
+    data={[
+      { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "Screen position where toasts are rendered." },
+      { name: "duration", type: "number", default: "4000", description: "Auto-dismiss duration in milliseconds." },
+      { name: "richColors", type: "boolean", default: "false", description: "When true, applies richer semantic color styles to variants." },
+      { name: "expand", type: "boolean", default: "false", description: "When true, toasts are always shown expanded instead of stacked." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

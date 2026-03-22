@@ -1,0 +1,54 @@
+---
+title: Radio Group
+description: A set of mutually exclusive radio buttons for selecting a single option.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>RadioGroup is a compound component built on Base UI's RadioGroup primitive. It enforces single-selection semantics and follows the WAI-ARIA radio group pattern including roving tabindex keyboard navigation.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Each `RadioGroup.Item` is paired with a `RadioGroup.Indicator` that renders the selected state. Use `defaultValue` for uncontrolled usage.</Section.Text>
+  <ComponentExample name="radio-group-default" />
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>Three sizes are available on `RadioGroup.Item`: `large`, `medium`, and `small`. The default is `medium`.</Section.Text>
+  <ComponentExample name="radio-group-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>RadioGroup (Root)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string", description: "Value selected by default (uncontrolled)." },
+      { name: "value", type: "string", description: "Controlled selected value. Use together with onValueChange." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the selected value changes." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables all items in the group." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Item</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "The value represented by this radio item." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Sets the size of the radio button." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables the individual radio item." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Indicator</SubHeading>
+
+  Renders the visual indicator dot inside `RadioGroup.Item`. Accepts standard HTML span props.
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

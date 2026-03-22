@@ -1,0 +1,108 @@
+---
+title: Typography Component
+description: A flexible text rendering component supporting custom, body, and heading modes.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>The Typography component operates in three modes controlled by the type prop. `custom` accepts arbitrary numeric font sizes, `body` is semantic body text with named size steps, and `heading` is semantic headings with responsive size steps. All modes support weight, lineHeight, and render props.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Heading</Section.Title>
+  <Section.Text>Heading mode renders an h2 element by default. The x-large and large sizes are responsive, increasing in size at the tablet breakpoint.</Section.Text>
+  <ComponentExample name="typography-heading">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyHeading() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="heading" size="x-large">X-Large Heading</Typography>
+          <Typography type="heading" size="large">Large Heading</Typography>
+          <Typography type="heading" size="medium">Medium Heading</Typography>
+          <Typography type="heading" size="small">Small Heading</Typography>
+          <Typography type="heading" size="x-small">X-Small Heading</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Body</Section.Title>
+  <Section.Text>Body mode renders a p element. Use it for all standard prose and UI text.</Section.Text>
+  <ComponentExample name="typography-body">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyBody() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="body" size="large">Large body text for prominent content.</Typography>
+          <Typography type="body" size="medium">Medium body text for standard content.</Typography>
+          <Typography type="body" size="small">Small body text for secondary content.</Typography>
+          <Typography type="body" size="x-small">X-Small body text for captions.</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Custom</Section.Title>
+  <Section.Text>Custom mode (the default) accepts an arbitrary numeric font size from the design token scale, or a responsive object with base, tablet, and desktop keys.</Section.Text>
+  <ComponentExample name="typography-custom">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyCustom() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography size={24} weight="bold">Custom size 24, bold</Typography>
+          <Typography size={16} weight="medium">Custom size 16, medium</Typography>
+          <Typography size={12} weight="normal" lineHeight="relaxed">Custom size 12, relaxed line height</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Responsive</Section.Title>
+  <Section.Text>Heading sizes x-large and large automatically increase at the tablet breakpoint. In custom mode, pass a responsive object or array to control the size independently at each breakpoint.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "heading x-large", token: "base → tablet", value: "28px → 36px" },
+      { name: "heading large", token: "base → tablet", value: "24px → 32px" },
+      { name: "heading medium", token: "base", value: "20px" },
+      { name: "heading small", token: "base", value: "16px" },
+      { name: "heading x-small", token: "base", value: "14px" },
+      { name: "body large", token: "base", value: "18px" },
+      { name: "body medium", token: "base", value: "16px" },
+      { name: "body small", token: "base", value: "14px" },
+      { name: "body x-small", token: "base", value: "12px" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the rendering mode. custom uses numeric sizes; body and heading use named size steps." },
+    { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "Numeric font size token, or a responsive object/array with base, tablet, desktop keys. Only applies when type is custom." },
+    { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named body size step. Only applies when type is body." },
+    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named heading size step. x-large and large are responsive. Only applies when type is heading." },
+    { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "Sets the font weight." },
+    { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "Sets the line height." },
+    { name: "render", type: "RenderProp", description: "Render prop replacing the default element. Defaults to p for custom/body and h2 for heading." },
+    { name: "color", type: "string", description: "Sets the text color. Accepts a CSS color value or token." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <html dir="ltr" lang="ko" suppressHydrationWarning>
+    <html dir="ltr" lang="en" suppressHydrationWarning>
       <head>
         <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
       </head>

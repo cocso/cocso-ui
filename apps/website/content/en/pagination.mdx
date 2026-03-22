@@ -1,0 +1,40 @@
+---
+title: Pagination
+description: Navigation controls for browsing paginated content.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Pagination renders a row of page number buttons with previous/next controls. It is a controlled component; the parent manages the current page via `page` and `onChange`. The number of visible page buttons can be configured with `maxVisible`.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Pass `page`, `totalPages`, and `onChange` to render a basic paginator. By default, up to 5 page buttons are shown at a time.</Section.Text>
+  <ComponentExample name="pagination-default" />
+</Section>
+
+<Section>
+  <Section.Title>Max Visible</Section.Title>
+  <Section.Text>Set `maxVisible` to adjust the number of page buttons shown at once. Ellipses (…) are inserted automatically when the total exceeds the visible range.</Section.Text>
+  <ComponentExample name="pagination-max-visible" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  **Pagination**
+
+  <PropsTable
+    data={[
+      { name: "page", type: "number", required: true, description: "The current active page number (1-based)." },
+      { name: "totalPages", type: "number", required: true, description: "Total number of pages." },
+      { name: "onChange", type: "(pageNumber: number) => void", required: true, description: "Callback invoked when the user selects a page." },
+      { name: "maxVisible", type: "number", default: "5", description: "Maximum number of page buttons shown before ellipses are inserted." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

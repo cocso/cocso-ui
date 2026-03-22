@@ -1,0 +1,93 @@
+---
+title: Dropdown
+description: A context menu that appears on trigger activation, built on Base UI's Menu primitive.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Dropdown is a compound component built on Base UI's Menu primitive. It renders a floating list of actions anchored to a trigger element. Use it for contextual actions such as edit, duplicate, and delete, or for a list of commands associated with a specific item.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Dropdown</code>, <code>Dropdown.Trigger</code>, <code>Dropdown.Content</code>, <code>Dropdown.Item</code></Section.ListItem>
+    <Section.ListItem>Keyboard navigation with arrow keys; <code>Escape</code> closes the menu.</Section.ListItem>
+    <Section.ListItem>Items support a <code>prefix</code> slot for a leading icon.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A dropdown menu triggered by an icon button, containing labeled action items.</Section.Text>
+  <ComponentExample name="dropdown-default">
+```tsx
+"use client";
+
+import { Button, Dropdown } from "@cocso-ui/react";
+import { ContentCopyIcon, DeleteIcon, MoreHorizIcon, PencilIcon } from "@cocso-ui/react-icons";
+
+export default function DropdownDefault() {
+  return (
+    <div className="p-4">
+      <Dropdown>
+        <Dropdown.Trigger render={<Button variant="secondary" svgOnly />}>
+          <MoreHorizIcon size={18} />
+        </Dropdown.Trigger>
+        <Dropdown.Content>
+          <Dropdown.Item prefix={<PencilIcon size={16} />}>Edit</Dropdown.Item>
+          <Dropdown.Item prefix={<ContentCopyIcon size={16} />}>Duplicate</Dropdown.Item>
+          <Dropdown.Item prefix={<DeleteIcon size={16} />}>Delete</Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Prefix Icon</Section.Title>
+  <Section.Text>Pass an icon node to the <code>prefix</code> prop of <code>Dropdown.Item</code> to render a leading icon before the label.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Dropdown (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state of the menu." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the open state changes." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "Element to use as the menu trigger.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Preferred side of the trigger where the menu is placed." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"start"', description: "Alignment of the menu relative to the trigger." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in px between the trigger and the menu." },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Item</SubHeading>
+  <PropsTable
+    data={[
+      { name: "prefix", type: "ReactNode", description: "Element rendered before the item label. Typically an icon." },
+      { name: "onClick", type: "() => void", description: "Callback invoked when the item is selected." },
+      { name: "disabled", type: "boolean", default: "false", description: "When true, the item is disabled." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

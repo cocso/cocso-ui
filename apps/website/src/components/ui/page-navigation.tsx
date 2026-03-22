@@ -7,7 +7,8 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { sidebar } from "~/constants/sidebar";
+import { getSidebarForLocale } from "~/constants/sidebar";
+import { useLocale } from "~/hooks/use-locale";
 
 interface Page {
   readonly name: string;
@@ -17,10 +18,15 @@ interface Page {
 
 export const PageNavigation = () => {
   const pathname = usePathname();
-  const pages = Object.values(sidebar).flatMap(
+  const locale = useLocale();
+  const sidebarData = getSidebarForLocale(locale);
+  const prefix = locale === "en" ? "" : `/${locale}`;
+  const pages = Object.values(sidebarData).flatMap(
     (section): readonly Page[] => section.items
   );
-  const currentIndex = pages.findIndex((page) => page.url === pathname);
+  const currentIndex = pages.findIndex(
+    (page) => `${prefix}${page.url}` === pathname
+  );
 
   if (currentIndex === -1) {
     return null;
@@ -38,7 +44,7 @@ export const PageNavigation = () => {
             "hover:bg-neutral-50 active:bg-neutral-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}
-          href={prevPage.url}
+          href={`${prefix}${prevPage.url}`}
         >
           <span className="flex items-center gap-0.5 font-medium text-[13px] text-neutral-500 leading-none">
             <ArrowIOSBackwardIcon aria-hidden="true" size={11} />
@@ -56,7 +62,7 @@ export const PageNavigation = () => {
             "hover:bg-neutral-50 active:bg-neutral-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}
-          href={nextPage.url}
+          href={`${prefix}${nextPage.url}`}
         >
           <span className="flex items-center gap-0.5 font-medium text-[13px] text-neutral-500 leading-none">
             Next <ArrowIOSForwardIcon aria-hidden="true" size={11} />

@@ -1,0 +1,119 @@
+---
+title: Popover
+description: A floating panel anchored to a trigger element, built on Base UI's Popover primitive.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Popover is a compound component built on Base UI's Popover primitive. Unlike Dialog, it operates in a non-modal manner and does not block interaction with the rest of the page. Use it for supplementary information, inline forms, or rich tooltips.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Popover</code>, <code>Popover.Trigger</code>, <code>Popover.Content</code>, <code>Popover.Arrow</code></Section.ListItem>
+    <Section.ListItem>Operates non-modally; clicking outside closes the popover without blocking interaction.</Section.ListItem>
+    <Section.ListItem>Supports <code>side</code> and <code>align</code> positioning props.</Section.ListItem>
+    <Section.ListItem><code>Popover.Arrow</code> renders an arrow caret pointing toward the trigger.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A popover with a title, description text, and an arrow indicator.</Section.Text>
+  <ComponentExample name="popover-default">
+```tsx
+"use client";
+
+import { Button, Popover, Typography } from "@cocso-ui/react";
+
+export default function PopoverDefault() {
+  return (
+    <div className="p-4">
+      <Popover>
+        <Popover.Trigger render={<Button variant="secondary" />}>Open Popover</Popover.Trigger>
+        <Popover.Content>
+          <div className="flex flex-col gap-2 p-3">
+            <Typography size={14} weight="semibold">Popover Title</Typography>
+            <Typography size={13}>This is the popover content. It can contain any elements.</Typography>
+          </div>
+          <Popover.Arrow />
+        </Popover.Content>
+      </Popover>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Positions</Section.Title>
+  <Section.Text>Use the <code>side</code> prop on <code>Popover.Content</code> to control which side of the trigger the popover appears on.</Section.Text>
+  <ComponentExample name="popover-positions">
+```tsx
+"use client";
+
+import { Button, Popover, Typography } from "@cocso-ui/react";
+
+export default function PopoverPositions() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["top", "bottom", "left", "right"] as const).map((side) => (
+        <Popover key={side}>
+          <Popover.Trigger render={<Button variant="outline" />}>{side}</Popover.Trigger>
+          <Popover.Content side={side}>
+            <div className="p-3">
+              <Typography size={13}>Popover on {side}</Typography>
+            </div>
+            <Popover.Arrow />
+          </Popover.Content>
+        </Popover>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Popover (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state of the popover." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the open state changes." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
+    ]}
+  />
+
+  <SubHeading>Popover.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "Element to use as the popover trigger.", required: true },
+    ]}
+  />
+
+  <SubHeading>Popover.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Preferred side of the trigger where the popover is rendered." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in px between the trigger and the popover." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the popover relative to the trigger." },
+      { name: "alignOffset", type: "number", default: "0", description: "Offset in px along the alignment axis." },
+      { name: "arrowPadding", type: "number", default: "4", description: "Minimum distance between the arrow and the popover edge." },
+    ]}
+  />
+
+  <SubHeading>Popover.Arrow</SubHeading>
+  <PropsTable
+    data={[
+      { name: "width", type: "number", default: "10", description: "Width of the arrow in px." },
+      { name: "height", type: "number", default: "5", description: "Height of the arrow in px." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

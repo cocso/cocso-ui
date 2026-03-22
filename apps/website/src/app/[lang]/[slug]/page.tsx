@@ -2,16 +2,17 @@ import { colors, Typography } from "@cocso-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "~/components/ui/section";
+import type { Locale } from "~/libs/i18n";
 import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: Locale; slug: string }>;
 }
 
 const Page = async ({ params }: Props) => {
-  const { slug } = await params;
-  const page = source.getPage([slug]);
+  const { lang, slug } = await params;
+  const page = source.getPage([slug], lang);
 
   if (!page) {
     notFound();
@@ -37,11 +38,17 @@ const Page = async ({ params }: Props) => {
 
 export default Page;
 
+export const generateStaticParams = () =>
+  source.generateParams().map((params) => ({
+    ...params,
+    slug: (params.slug as string[]).join("/"),
+  }));
+
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const { slug } = await params;
-  const page = source.getPage([slug]);
+  const { lang, slug } = await params;
+  const page = source.getPage([slug], lang);
 
   if (!page) {
     notFound();

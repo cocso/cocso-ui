@@ -1,0 +1,64 @@
+---
+title: Accordion
+description: Vertically stacked interactive headings that expand or hide related content.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Accordion is a compound component built on Base UI's Accordion primitive. It follows the WAI-ARIA disclosure widget pattern and supports keyboard navigation by default. Each item can be expanded or collapsed independently.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>The default accordion renders each item with a chevron indicator that rotates when opened.</Section.Text>
+  <ComponentExample name="accordion-default" />
+</Section>
+
+<Section>
+  <Section.Title>Hide Chevron</Section.Title>
+  <Section.Text>Set `chevron={false}` on `Accordion.Trigger` to hide the chevron icon.</Section.Text>
+  <ComponentExample name="accordion-no-chevron" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Accordion (Root Container)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string | string[]", description: "Value of the item(s) open by default (uncontrolled)." },
+      { name: "value", type: "string | string[]", description: "Controlled open value. Use together with onValueChange." },
+      { name: "onValueChange", type: "(value: string | string[]) => void", description: "Callback invoked when the open state changes." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Item</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "Unique identifier for this accordion item." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables opening and closing of the item." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Header</SubHeading>
+
+  Renders an `<h3>` element wrapping the trigger. Accepts standard HTML heading props.
+
+  <SubHeading>Accordion.Trigger</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "chevron", type: "boolean", default: "true", description: "Whether to show the chevron icon." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Content</SubHeading>
+
+  An animated panel that reveals content. Accepts Base UI Accordion.Panel props.
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

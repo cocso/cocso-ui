@@ -1,0 +1,133 @@
+---
+title: Dialog
+description: A modal dialog that interrupts the user's flow with important content and requires a response.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Dialog is a compound component built on Base UI's Dialog primitive. It renders a modal overlay that traps focus and blocks interaction with the rest of the page until the user dismisses it. Use Dialog for confirmations, forms, or content that requires an explicit user decision.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Dialog</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code>, <code>Dialog.Title</code>, <code>Dialog.Description</code>, <code>Dialog.Close</code></Section.ListItem>
+    <Section.ListItem>Focus is trapped inside while the dialog is open.</Section.ListItem>
+    <Section.ListItem>Pressing the <code>Escape</code> key closes the dialog by default.</Section.ListItem>
+    <Section.ListItem>Three content sizes are supported: <code>small</code>, <code>medium</code>, <code>large</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A dialog with a title, description, and action buttons.</Section.Text>
+  <ComponentExample name="dialog-default">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogDefault() {
+  return (
+    <div className="p-4">
+      <Dialog>
+        <Dialog.Trigger render={<Button />}>Open Dialog</Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title>Confirm Action</Dialog.Title>
+          <Dialog.Description>
+            Are you sure you want to proceed? This action cannot be undone.
+          </Dialog.Description>
+          <div className="mt-4 flex justify-end gap-2">
+            <Dialog.Close render={<Button variant="secondary" />}>Cancel</Dialog.Close>
+            <Dialog.Close render={<Button variant="primary" />}>Confirm</Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>The <code>size</code> prop on <code>Dialog.Content</code> controls the maximum width of the dialog panel.</Section.Text>
+  <ComponentExample name="dialog-sizes">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogSizes() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Dialog key={size}>
+          <Dialog.Trigger render={<Button variant="secondary" />}>{size}</Dialog.Trigger>
+          <Dialog.Content size={size}>
+            <Dialog.Title>Dialog — {size}</Dialog.Title>
+            <Dialog.Description>This is a {size} dialog.</Dialog.Description>
+            <div className="mt-4 flex justify-end">
+              <Dialog.Close render={<Button variant="primary" />}>Close</Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Dialog (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state of the dialog." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the open state changes." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
+      { name: "modal", type: "boolean", default: "true", description: "When true, interaction outside the dialog is blocked." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "Element to use as the trigger. Receives open/close handlers via prop merging.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "Controls the maximum width of the dialog panel." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Close</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "Element to render as the close trigger." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Title</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "Title text displayed at the top of the dialog.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Description</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "Description text providing context for the dialog action.", required: true },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

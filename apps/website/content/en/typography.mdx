@@ -1,0 +1,40 @@
+---
+title: Typography
+description: A typography scale and font system for readable, hierarchical content.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>COCSO UI uses Pretendard Variable as the default sans-serif font and Geist Mono for code. The typography system is based on a fixed numeric scale that maps directly to CSS custom properties with the `--cocso-*` prefix.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Font Size</Section.Title>
+  <Section.Text>The size scale consists of 15 steps from 10px to 60px. Each step is shown below rendered at its actual size.</Section.Text>
+  <ComponentExample name="typography-scale" />
+</Section>
+
+<Section>
+  <Section.Title>Font Weight</Section.Title>
+  <Section.Text>Nine weight variants span the full range from thin (100) to black (900), giving precise control over visual hierarchy and emphasis.</Section.Text>
+  <ComponentExample name="typography-weight" />
+</Section>
+
+<Section>
+  <Section.Title>Line Height</Section.Title>
+  <Section.Text>Line heights follow a named scale that maps to standard multipliers. Use tighter values for headings and wider values for body text.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "none", token: "--cocso-leading-none", value: "1" },
+      { name: "tight", token: "--cocso-leading-tight", value: "1.25" },
+      { name: "snug", token: "--cocso-leading-snug", value: "1.375" },
+      { name: "normal", token: "--cocso-leading-normal", value: "1.5" },
+      { name: "relaxed", token: "--cocso-leading-relaxed", value: "1.625" },
+      { name: "loose", token: "--cocso-leading-loose", value: "2" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

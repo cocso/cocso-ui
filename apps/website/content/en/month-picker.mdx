@@ -1,0 +1,49 @@
+---
+title: Month Picker
+description: A date picker that opens a calendar popover for selecting a month and year.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>MonthPicker renders a trigger element that opens a Dropdown containing a month-year grid. It is a controlled component; pass value and onValueChange to manage the selected month. Navigation arrows move by year rather than by month. The calendar is localized to English by default.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Control the selected month with the value and onValueChange props. The returned Date represents the first day of the selected month.</Section.Text>
+  <ComponentExample name="month-picker-default">
+    ```tsx
+    "use client";
+
+    import { MonthPicker } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function MonthPickerDefault() {
+      const [value, setValue] = useState<Date | null>(null);
+
+      return (
+        <div className="p-4">
+          <MonthPicker onValueChange={setValue} value={value ?? undefined} />
+          {value && <p className="mt-2 text-sm text-neutral-500">Selected: {value.toLocaleDateString("en-US", { year: "numeric", month: "long" })}</p>}
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "value", type: "Date", description: "The currently selected month value, represented as a Date." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects or clears a month." },
+    { name: "disabled", type: "boolean", description: "Disables the month picker trigger and prevents interaction." },
+    { name: "minDate", type: "Date", description: "The earliest selectable month. Months before this are disabled." },
+    { name: "maxDate", type: "Date", description: "The latest selectable month. Months after this are disabled." },
+    { name: "trigger", type: "ReactElement", description: "Custom trigger element that opens the month picker popover." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
