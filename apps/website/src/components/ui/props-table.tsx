@@ -19,7 +19,7 @@ export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
       className={twMerge("w-full overflow-x-auto", className)}
       {...props}
     >
-      <table className="min-w-[640px] table-fixed border-collapse text-[12px]">
+      <table className="min-w-[640px] table-fixed border-collapse text-[11px]">
         <colgroup>
           <col className="w-[140px]" />
           <col className="w-[220px]" />
@@ -49,7 +49,7 @@ export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
               key={prop.name}
             >
               <td className="px-3 py-2.5 align-top">
-                <code className="rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[12px] text-neutral-900">
+                <code className="rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[11px] text-neutral-900">
                   {prop.name}
                   {prop.required && (
                     <span className="ml-0.5 text-danger-500">*</span>
@@ -57,13 +57,13 @@ export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
                 </code>
               </td>
               <td className="break-all px-3 py-2.5 align-top">
-                <code className="font-mono text-[12px] text-info-600">
+                <code className="font-mono text-[11px] text-info-600">
                   {prop.type}
                 </code>
               </td>
               <td className="px-3 py-2.5 align-top">
                 {prop.default ? (
-                  <code className="font-mono text-[12px] text-neutral-600">
+                  <code className="font-mono text-[11px] text-neutral-600">
                     {prop.default}
                   </code>
                 ) : (
