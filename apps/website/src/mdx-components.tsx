@@ -10,9 +10,12 @@ import {
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import NextLink from "next/link";
+import { ColorScale, ColorSwatch } from "~/components/ui/color-palette";
 import { ComponentExample } from "~/components/ui/component-example";
 import { PageNavigation } from "~/components/ui/page-navigation";
+import { PropsTable } from "~/components/ui/props-table";
 import { Section } from "~/components/ui/section";
+import { TokenTable } from "~/components/ui/token-table";
 
 const LinkExternalIcon = Link.ExternalIcon;
 
@@ -33,6 +36,10 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Section,
     ComponentExample,
     PageNavigation,
+    PropsTable,
+    ColorScale,
+    ColorSwatch,
+    TokenTable,
 
     Tab,
     Tabs,
