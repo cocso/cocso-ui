@@ -21,6 +21,7 @@ export const Sidebar = (props: SidebarProps) => {
               className="mb-3 px-4 uppercase"
               color={colors.neutral400}
               size={12}
+              type="custom"
               weight="medium"
             >
               {value.title}
@@ -39,6 +40,7 @@ export const Sidebar = (props: SidebarProps) => {
                         )}
                         render={<Link href={item.url} />}
                         size={14}
+                        type="custom"
                         weight="medium"
                       >
                         {item.name}

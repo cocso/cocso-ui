@@ -28,12 +28,12 @@ type TypographyPropsBase = {
 } & Omit<ComponentProps<"p">, "ref">;
 
 type CustomTypographyProps = TypographyPropsBase & {
-  type?: "custom";
+  type: "custom";
   size?: ResponsiveFontSize;
 };
 
 type BodyTypographyProps = TypographyPropsBase & {
-  type: "body";
+  type?: "body";
   size?: BodySize;
 };
 
@@ -51,7 +51,7 @@ export function Typography({
   className,
   style: _style,
   color,
-  type = "custom",
+  type = "body",
   weight = type === "heading" ? "bold" : "normal",
   lineHeight = "normal",
   ...props

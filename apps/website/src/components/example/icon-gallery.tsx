@@ -181,7 +181,7 @@ export default function IconGallery() {
                   type="button"
                 >
                   <Component size={24} />
-                  <Typography className="w-full truncate text-center text-neutral-500" size={10}>
+                  <Typography type="custom" className="w-full truncate text-center text-neutral-500" size={10}>
                     {name}
                   </Typography>
                 </button>
@@ -205,7 +205,7 @@ export default function IconGallery() {
         ))}
       </div>
       {filtered.length === 0 && (
-        <Typography className="py-8 text-center text-neutral-400" size={14}>
+        <Typography type="custom" className="py-8 text-center text-neutral-400" size={14}>
           No icons found matching "{search}"
         </Typography>
       )}

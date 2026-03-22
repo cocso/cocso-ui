@@ -9,8 +9,8 @@ export default function PopoverDefault() {
         <Popover.Trigger render={<Button variant="secondary">Open Popover</Button>} />
         <Popover.Content>
           <div className="flex flex-col gap-2 p-3">
-            <Typography size={14} weight="semibold">Popover Title</Typography>
-            <Typography size={13}>This is the popover content. It can contain any elements.</Typography>
+            <Typography type="custom" size={14} weight="semibold">Popover Title</Typography>
+            <Typography type="custom" size={13}>This is the popover content. It can contain any elements.</Typography>
           </div>
           <Popover.Arrow />
         </Popover.Content>

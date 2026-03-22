@@ -5,6 +5,7 @@ import { cn } from "../../cn";
 import type { useRender } from "../../primitives/use-render";
 import type { FontWeight, LineHeight } from "../../token";
 import { colors } from "../../token";
+import type { TypographyProps } from "../typography";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
 
@@ -15,7 +16,8 @@ export interface LinkProps extends ComponentProps<"a"> {
   indicator?: boolean;
   lineHeight?: LineHeight;
   render?: useRender.RenderProp;
-  size?: LinkSize;
+  size?: TypographyProps["size"];
+  type?: TypographyProps["type"];
   variant?: LinkVariant;
   weight?: FontWeight;
 }
@@ -26,6 +28,7 @@ function LinkComponent({
   className,
   style: _style,
   size,
+  type = "body",
   weight,
   lineHeight,
   variant = "inline",
@@ -53,9 +56,9 @@ function LinkComponent({
       lineHeight={lineHeight}
       ref={ref}
       render={renderProp ?? ((renderProps) => <a {...renderProps} />)}
-      size={size}
+      size={size as never}
       style={style}
-      type="body"
+      type={type}
       weight={weight}
       {...(props as ComponentProps<"p">)}
     />
