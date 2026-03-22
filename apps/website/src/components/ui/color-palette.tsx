@@ -1,8 +1,8 @@
 "use client";
 
-import { Dropdown, Typography } from "@cocso-ui/react";
+import { Dropdown, toast, Typography } from "@cocso-ui/react";
 import { ContentCopyIcon } from "@cocso-ui/react-icons";
-import { type ComponentProps, useCallback, useState } from "react";
+import { type ComponentProps, useCallback } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ColorSwatchProps {
@@ -12,12 +12,9 @@ interface ColorSwatchProps {
 }
 
 const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
-  const [copied, setCopied] = useState(false);
-
   const handleCopy = useCallback((text: string) => {
     navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    toast("Copied to clipboard");
   }, []);
 
   return (
@@ -34,7 +31,7 @@ const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
             />
             <div className="flex flex-col gap-0.5">
               <Typography className="text-neutral-900" size={13} weight="medium">
-                {copied ? "Copied!" : name}
+                {name}
               </Typography>
               <Typography className="font-mono text-neutral-500" size={11}>
                 {token}

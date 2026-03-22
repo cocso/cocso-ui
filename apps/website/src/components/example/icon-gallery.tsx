@@ -70,7 +70,7 @@ import {
   TrendingUpIcon,
   VerifiedIcon,
 } from "@cocso-ui/react-icons";
-import { Dropdown, Typography } from "@cocso-ui/react";
+import { Dropdown, toast, Typography } from "@cocso-ui/react";
 import { ContentCopyIcon as CopyIcon } from "@cocso-ui/react-icons";
 import type { ComponentType } from "react";
 import { useCallback, useState } from "react";
@@ -153,15 +153,13 @@ const allIcons: IconEntry[] = [
 
 export default function IconGallery() {
   const [search, setSearch] = useState("");
-  const [copied, setCopied] = useState<string | null>(null);
   const filtered = allIcons.filter(({ name }) =>
     name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleCopy = useCallback((text: string, name: string) => {
+  const handleCopy = useCallback((text: string) => {
     navigator.clipboard.writeText(text);
-    setCopied(name);
-    setTimeout(() => setCopied(null), 1500);
+    toast("Copied to clipboard");
   }, []);
 
   return (
@@ -184,20 +182,20 @@ export default function IconGallery() {
                 >
                   <Component size={24} />
                   <Typography className="w-full truncate text-center text-neutral-500" size={10}>
-                    {copied === name ? "Copied!" : name}
+                    {name}
                   </Typography>
                 </button>
               }
             />
             <Dropdown.Content>
               <Dropdown.Item
-                onClick={() => handleCopy(`import { ${name}Icon } from "@cocso-ui/react-icons";`, name)}
+                onClick={() => handleCopy(`import { ${name}Icon } from "@cocso-ui/react-icons";`)}
                 prefix={<CopyIcon size={14} />}
               >
                 Import
               </Dropdown.Item>
               <Dropdown.Item
-                onClick={() => handleCopy(`${name}Icon`, name)}
+                onClick={() => handleCopy(`${name}Icon`)}
                 prefix={<CopyIcon size={14} />}
               >
                 Name
