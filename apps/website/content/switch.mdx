@@ -99,6 +99,9 @@ description: 이진 켜기/끄기 설정을 위한 토글 컨트롤입니다.
   <Section.Title>API 레퍼런스</Section.Title>
   <PropsTable
     data={[
+      { name: "checked", type: "boolean", description: "제어형 체크 상태입니다. onCheckedChange와 함께 사용하세요." },
+      { name: "defaultChecked", type: "boolean", description: "비제어 방식일 때의 초기 체크 상태입니다." },
+      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "체크 상태 변경 시 호출되는 콜백입니다." },
       {
         name: "label",
         type: "string",
