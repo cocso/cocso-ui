@@ -29,7 +29,7 @@ type TypographyPropsBase = {
 
 type CustomTypographyProps = TypographyPropsBase & {
   type: "custom";
-  size?: ResponsiveFontSize;
+  size?: ResponsiveFontSize | "current";
 };
 
 type BodyTypographyProps = TypographyPropsBase & {
@@ -57,30 +57,42 @@ export function Typography({
   ...props
 }: TypographyProps) {
   const defaultTagName = getDefaultTagName(type);
-  const fontSize = getFontSize(type, props as TypographyProps);
+  const rawSize = (props as { size?: unknown }).size;
+  const isCurrent = rawSize === "current";
 
-  let base: FontSize;
-  let tablet: FontSize | undefined;
-  let desktop: FontSize | undefined;
+  const fontSizeStyles: Record<string, string> = {};
 
-  if (Array.isArray(fontSize)) {
-    [base, tablet, desktop] = fontSize;
-  } else if (typeof fontSize === "object") {
-    ({ base, tablet, desktop } = fontSize);
-  } else {
-    base = fontSize as FontSize;
+  if (!isCurrent) {
+    const fontSize = getFontSize(type, props as TypographyProps);
+
+    let base: FontSize;
+    let tablet: FontSize | undefined;
+    let desktop: FontSize | undefined;
+
+    if (Array.isArray(fontSize)) {
+      [base, tablet, desktop] = fontSize;
+    } else if (typeof fontSize === "object") {
+      ({ base, tablet, desktop } = fontSize);
+    } else {
+      base = fontSize as FontSize;
+    }
+
+    fontSizeStyles["--cocso-typography-font-size"] =
+      `${fontSizeToken[base]}px`;
+    if (tablet !== undefined) {
+      fontSizeStyles["--cocso-tablet-typography-font-size"] =
+        `${fontSizeToken[tablet]}px`;
+    }
+    if (desktop !== undefined) {
+      fontSizeStyles["--cocso-desktop-typography-font-size"] =
+        `${fontSizeToken[desktop]}px`;
+    }
   }
 
   const style = {
     ..._style,
     "--cocso-typography-font-color": color,
-    "--cocso-typography-font-size": `${fontSizeToken[base]}px`,
-    ...(tablet !== undefined && {
-      "--cocso-tablet-typography-font-size": `${fontSizeToken[tablet]}px`,
-    }),
-    ...(desktop !== undefined && {
-      "--cocso-desktop-typography-font-size": `${fontSizeToken[desktop]}px`,
-    }),
+    ...fontSizeStyles,
     "--cocso-typography-font-weight": fontWeightToken[weight],
     "--cocso-typography-line-height": lineHeightToken[lineHeight],
   };
@@ -121,9 +133,13 @@ const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
   match(type)
     .with("custom", () => (props as CustomTypographyProps).size ?? 16)
     .with("body", () =>
-      getBodyFontSize((props as BodyTypographyProps).size ?? "medium")
+      getBodyFontSize(
+        ((props as BodyTypographyProps).size ?? "medium") as BodySize
+      )
     )
     .with("heading", () =>
-      getHeadingFontSize((props as HeadingTypographyProps).size ?? "medium")
+      getHeadingFontSize(
+        ((props as HeadingTypographyProps).size ?? "medium") as HeadingSize
+      )
     )
     .otherwise(() => 16);
