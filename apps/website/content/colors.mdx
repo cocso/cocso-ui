@@ -5,12 +5,12 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>개요</Section.Title>
-  <Section.Text>COCSO UI는 `--cocso-*` 접두사를 가진 CSS 커스텀 속성을 기반으로 하는 토큰 기반 색상 시스템을 사용합니다. 색상은 컴포넌트 전반에 걸쳐 일관된 사용을 위해 시맨틱 스케일로 구성됩니다.</Section.Text>
+  <Section.Text>COCSO UI는 `--cocso-*` 접두사의 CSS 커스텀 속성 기반 토큰 색상 시스템을 사용합니다. 색상은 컴포넌트 전반에서 일관되게 활용할 수 있도록 시맨틱 스케일로 구성됩니다.</Section.Text>
 </Section>
 
 <Section>
   <Section.Title>Neutral</Section.Title>
-  <Section.Text>중립 스케일은 UI의 기반을 형성합니다. 텍스트, 배경, 테두리, 섬세한 요소에 사용됩니다.</Section.Text>
+  <Section.Text>중립 스케일은 UI의 기반을 형성합니다. 텍스트, 배경, 테두리, 보조 요소에 사용됩니다.</Section.Text>
   <ColorScale
     name="Neutral"
     colors={[
@@ -73,7 +73,7 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>Warning</Section.Title>
-  <Section.Text>Warning 스케일은 주의와 정보성 알림을 신호하며, 주의가 필요하지만 심각한 실패는 아닙니다. 권고 메시지와 보류 상태 표시에 사용합니다.</Section.Text>
+  <Section.Text>Warning 스케일은 심각한 오류는 아니지만 주의가 필요한 상황을 나타냅니다. 권고 메시지와 보류 상태 표시에 사용합니다.</Section.Text>
   <ColorScale
     name="Warning"
     colors={[
@@ -94,7 +94,7 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>Success</Section.Title>
-  <Section.Text>Success 스케일은 완료된 액션, 긍정적인 피드백, 정상 상태를 확인합니다. 성공 토스트, 완료된 단계, 가용성 표시에 사용합니다.</Section.Text>
+  <Section.Text>Success 스케일은 완료된 액션, 긍정적 피드백, 정상 상태를 나타냅니다. 성공 토스트, 완료 단계, 가용성 표시에 사용합니다.</Section.Text>
   <ColorScale
     name="Success"
     colors={[
@@ -136,7 +136,7 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>White & Black</Section.Title>
-  <Section.Text>오버레이, 그림자, 투명도 효과를 위한 알파 변형이 있는 순수 흰색과 검정색입니다. 알파 값은 5%에서 90% 불투명도 범위입니다.</Section.Text>
+  <Section.Text>오버레이, 그림자, 투명도 효과에 사용하는 알파 변형 흰색과 검정색입니다. 불투명도는 5%~90% 범위입니다.</Section.Text>
   <ColorScale
     name="White with Alpha"
     colors={[
@@ -171,7 +171,7 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>Text Role Colors</Section.Title>
-  <Section.Text>시맨틱 텍스트 색상 역할은 일관된 전경 대비 수준을 제공합니다. 테마 일관성을 보장하려면 원시 스케일 값 대신 이 역할들을 사용하세요.</Section.Text>
+  <Section.Text>시맨틱 텍스트 색상 토큰은 일관된 전경 대비를 제공합니다. 테마 일관성을 위해 원시 스케일 값 대신 이 토큰을 사용하세요.</Section.Text>
   <ColorScale
     name="Text Roles"
     colors={[

@@ -6,7 +6,7 @@ description: 트리거 활성화 시 나타나는 컨텍스트 메뉴로, Base U
 <Section>
   <Section.Title>개요</Section.Title>
   <Section.Text>
-    Dropdown은 Base UI의 Menu 프리미티브 기반으로 구성된 복합 컴포넌트입니다. 트리거 요소에 고정된 플로팅 액션 목록을 렌더링합니다. 편집, 복제, 삭제 같은 컨텍스트 액션이나 특정 아이템에 범위가 지정된 명령 집합에 Dropdown을 사용하세요.
+    Dropdown은 Base UI의 Menu 프리미티브 기반으로 구성된 복합 컴포넌트입니다. 트리거 요소에 고정된 플로팅 액션 목록을 렌더링합니다. 편집, 복제, 삭제 같은 컨텍스트 액션이나 특정 항목에 대한 명령 목록에 사용하세요.
   </Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>복합 API로 구성됩니다. <code>Dropdown</code>, <code>Dropdown.Trigger</code>, <code>Dropdown.Content</code>, <code>Dropdown.Item</code></Section.ListItem>
@@ -83,7 +83,7 @@ export default function DropdownDefault() {
     data={[
       { name: "prefix", type: "ReactNode", description: "아이템 레이블 앞에 렌더링되는 요소입니다. 일반적으로 아이콘을 사용합니다." },
       { name: "onClick", type: "() => void", description: "아이템이 선택될 때 호출되는 콜백입니다." },
-      { name: "disabled", type: "boolean", default: "false", description: "true이면 아이템이 비상호작용 상태가 됩니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "true이면 아이템이 비활성화됩니다." },
     ]}
   />
 </Section>
