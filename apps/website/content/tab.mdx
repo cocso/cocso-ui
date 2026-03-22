@@ -1,0 +1,54 @@
+---
+title: Tab
+description: 관련 콘텐츠 패널 간 전환을 위한 탭 인터페이스입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Tab은 Base UI의 Tabs 프리미티브를 기반으로 만들어진 복합 컴포넌트입니다. WAI-ARIA 패턴을 따르는 키보드 접근 가능한 탭 인터페이스를 제공합니다. 콘텐츠 패널은 공유된 `value` prop을 통해 해당 트리거와 연결됩니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 탭은 트리거 목록과 연결된 콘텐츠 패널을 렌더링합니다. 비제어 사용에는 `defaultValue`를, 제어 사용에는 `value`와 `onValueChange`를 함께 사용하세요.</Section.Text>
+  <ComponentExample name="tab-default" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  **Tab** (Root)
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string", description: "기본으로 선택되는 탭의 값입니다 (비제어)." },
+      { name: "value", type: "string", description: "제어된 선택 탭 값입니다. onValueChange와 함께 사용하세요." },
+      { name: "onValueChange", type: "(value: string) => void", description: "선택된 탭이 변경될 때 실행되는 콜백입니다." },
+    ]}
+  />
+
+  **Tab.List**
+
+  탭 트리거를 위한 컨테이너입니다. Base UI Tabs.List props를 받습니다.
+
+  **Tab.Trigger**
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "이 트리거와 연결된 콘텐츠 패널을 식별하는 고유 값입니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "탭이 선택되지 않도록 비활성화합니다." },
+    ]}
+  />
+
+  **Tab.Content**
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "표시되기 위해 Tab.Trigger 값과 일치해야 하는 값입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

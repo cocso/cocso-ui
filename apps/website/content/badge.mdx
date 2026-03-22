@@ -1,0 +1,46 @@
+---
+title: Badge
+description: 상태, 카테고리, 수량을 강조하는 소형 레이블입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Badge는 상태, 카테고리, 또는 숫자 수량을 전달하는 작은 인라인 요소입니다. 시맨틱 색상 변형, 세 가지 크기, 세 가지 모양 옵션을 지원하여 가장 일반적인 레이블링 패턴을 커버합니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>변형</Section.Title>
+  <Section.Text>일곱 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 중립적인 레이블링에는 `primary`와 `secondary`를, 상태 전달에는 시맨틱 변형을 사용하세요.</Section.Text>
+  <ComponentExample name="badge-variants" />
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>세 가지 크기를 사용할 수 있습니다: `large`, `medium`, `small`. 기본값은 `medium`입니다.</Section.Text>
+  <ComponentExample name="badge-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>모양</Section.Title>
+  <Section.Text>세 가지 모양 옵션으로 border-radius를 조정합니다. 숫자 수량 배지에는 `circle`을 사용하세요.</Section.Text>
+  <ComponentExample name="badge-shapes" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  **Badge**
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "시맨틱 의미를 전달하는 색상 변형을 지정합니다." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "배지의 패딩과 폰트 크기를 지정합니다." },
+      { name: "shape", type: '"square" | "circle" | "rounded"', default: '"square"', description: "border-radius를 지정합니다. 숫자 수량 배지에는 circle을 사용하세요." },
+      { name: "children", type: "ReactNode", required: true, description: "배지 내부에 렌더링되는 콘텐츠입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

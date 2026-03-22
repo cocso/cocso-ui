@@ -1,0 +1,64 @@
+---
+title: Accordion
+description: 관련 콘텐츠를 펼치거나 숨기는 인터랙티브 헤딩이 수직으로 쌓인 컴포넌트입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Accordion은 Base UI의 Accordion 프리미티브 기반으로 구성된 복합 컴포넌트입니다. 공개 위젯에 대한 WAI-ARIA 패턴을 따르며 기본적으로 키보드 탐색을 지원합니다. 각 아이템은 독립적으로 펼치거나 접을 수 있습니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 아코디언은 열릴 때 회전하는 쉐브론 인디케이터와 함께 각 아이템을 렌더링합니다.</Section.Text>
+  <ComponentExample name="accordion-default" />
+</Section>
+
+<Section>
+  <Section.Title>쉐브론 없음</Section.Title>
+  <Section.Text>`Accordion.Trigger`에 `chevron={false}`를 설정하면 쉐브론 아이콘을 숨깁니다.</Section.Text>
+  <ComponentExample name="accordion-no-chevron" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  **Accordion** (루트 컨테이너)
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string | string[]", description: "기본적으로 열려 있는 아이템의 값입니다 (비제어 방식)." },
+      { name: "value", type: "string | string[]", description: "제어형 열림 값입니다. onValueChange와 함께 사용합니다." },
+      { name: "onValueChange", type: "(value: string | string[]) => void", description: "열림 상태가 변경될 때 호출되는 콜백입니다." },
+    ]}
+  />
+
+  **Accordion.Item**
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "이 아코디언 아이템의 고유 식별자입니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "아이템이 열리거나 닫히지 않도록 방지합니다." },
+    ]}
+  />
+
+  **Accordion.Header**
+
+  트리거를 감싸는 `<h3>` 요소를 렌더링합니다. 표준 HTML 헤딩 props를 허용합니다.
+
+  **Accordion.Trigger**
+
+  <PropsTable
+    data={[
+      { name: "chevron", type: "boolean", default: "true", description: "쉐브론 아이콘 표시 여부입니다." },
+    ]}
+  />
+
+  **Accordion.Content**
+
+  콘텐츠를 드러내는 애니메이션 패널입니다. Base UI Accordion.Panel props를 허용합니다.
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

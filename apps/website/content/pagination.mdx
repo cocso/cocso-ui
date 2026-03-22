@@ -1,0 +1,40 @@
+---
+title: Pagination
+description: 페이지네이션된 콘텐츠를 탐색하기 위한 네비게이션 컨트롤입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Pagination은 이전/다음 컨트롤과 함께 페이지 번호 버튼 행을 렌더링합니다. 제어 컴포넌트로, 부모가 `page`와 `onChange`를 통해 현재 페이지를 관리합니다. 표시되는 페이지 버튼 수는 `maxVisible`로 설정할 수 있습니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 페이지네이터를 렌더링하려면 `page`, `totalPages`, `onChange`를 전달하세요. 기본적으로 한 번에 최대 5개의 페이지 버튼이 표시됩니다.</Section.Text>
+  <ComponentExample name="pagination-default" />
+</Section>
+
+<Section>
+  <Section.Title>최대 표시 개수</Section.Title>
+  <Section.Text>`maxVisible`을 설정하여 한 번에 표시되는 페이지 버튼 수를 조정하세요. 전체가 표시 범위를 초과하면 줄임표(…)가 자동으로 삽입됩니다.</Section.Text>
+  <ComponentExample name="pagination-max-visible" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  **Pagination**
+
+  <PropsTable
+    data={[
+      { name: "page", type: "number", required: true, description: "현재 활성 페이지 번호입니다 (1부터 시작)." },
+      { name: "totalPages", type: "number", required: true, description: "전체 페이지 수입니다." },
+      { name: "onChange", type: "(pageNumber: number) => void", required: true, description: "사용자가 페이지를 선택할 때 실행되는 콜백입니다." },
+      { name: "maxVisible", type: "number", default: "5", description: "줄임표 삽입 전 표시되는 최대 페이지 버튼 수입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
