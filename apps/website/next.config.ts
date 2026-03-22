@@ -4,11 +4,19 @@ import type { NextConfig } from "next";
 const withMDX = createMDX();
 
 const nextConfig: NextConfig = {
-  async rewrites() {
+  rewrites() {
     return {
       beforeFiles: [
         {
-          source: "/:slug((?!ko|en|api|_next|favicon|llms\\.txt|.*\\.md$).*)",
+          source: "/ko/:slug.md",
+          destination: "/api/md/:slug",
+        },
+        {
+          source: "/:slug.md",
+          destination: "/api/md/:slug",
+        },
+        {
+          source: "/:slug((?!ko|en|api|_next|favicon|llms\\.txt).*)",
           destination: "/en/:slug",
         },
       ],

@@ -8,6 +8,7 @@ import {
 } from "@cocso-ui/react-icons";
 import { useSearchContext } from "fumadocs-ui/contexts/search";
 import Link from "next/link";
+import { LanguageSwitcher } from "./language-switcher";
 import { MobileSidebar } from "./mobile-sidebar";
 
 export const Header = () => {
@@ -28,6 +29,8 @@ export const Header = () => {
         </div>
 
         <div className="center-y h-full">
+          <div aria-hidden="true" className="h-full w-px bg-neutral-200" />
+          <LanguageSwitcher />
           <div aria-hidden="true" className="h-full w-px bg-neutral-200" />
           <Button
             aria-label="검색"
