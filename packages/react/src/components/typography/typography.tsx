@@ -77,8 +77,7 @@ export function Typography({
       base = fontSize as FontSize;
     }
 
-    fontSizeStyles["--cocso-typography-font-size"] =
-      `${fontSizeToken[base]}px`;
+    fontSizeStyles["--cocso-typography-font-size"] = `${fontSizeToken[base]}px`;
     if (tablet !== undefined) {
       fontSizeStyles["--cocso-tablet-typography-font-size"] =
         `${fontSizeToken[tablet]}px`;

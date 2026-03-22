@@ -85,7 +85,12 @@ function DialogDescription({
     <DialogBase.Description
       className={cn(styles.description, className)}
       render={
-        <Typography color={colors.textSecondary} size={14} type="custom" weight="medium" />
+        <Typography
+          color={colors.textSecondary}
+          size={14}
+          type="custom"
+          weight="medium"
+        />
       }
       {...props}
     >
