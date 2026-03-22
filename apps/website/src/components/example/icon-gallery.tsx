@@ -72,7 +72,7 @@ import {
 } from "@cocso-ui/react-icons";
 import { Typography } from "@cocso-ui/react";
 import type { ComponentType } from "react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface IconEntry {
   name: string;
@@ -152,14 +152,22 @@ const allIcons: IconEntry[] = [
 
 export default function IconGallery() {
   const [search, setSearch] = useState("");
+  const [copied, setCopied] = useState<string | null>(null);
   const filtered = allIcons.filter(({ name }) =>
     name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleCopy = useCallback((name: string) => {
+    const importName = `${name}Icon`;
+    navigator.clipboard.writeText(importName);
+    setCopied(name);
+    setTimeout(() => setCopied(null), 1500);
+  }, []);
+
   return (
     <div className="flex w-full flex-col gap-4">
       <input
-        className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
+        className="w-full cursor-text rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search icons..."
         type="text"
@@ -167,15 +175,17 @@ export default function IconGallery() {
       />
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
         {filtered.map(({ name, Component }) => (
-          <div
-            className="flex flex-col items-center gap-2 rounded-lg border border-neutral-100 p-3 transition-colors hover:bg-neutral-50"
+          <button
+            className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border border-neutral-100 bg-transparent p-3 transition-colors hover:bg-neutral-50 active:bg-neutral-100"
             key={name}
+            onClick={() => handleCopy(name)}
+            type="button"
           >
             <Component size={24} />
             <Typography className="w-full truncate text-center text-neutral-500" size={10}>
-              {name}
+              {copied === name ? "Copied!" : name}
             </Typography>
-          </div>
+          </button>
         ))}
       </div>
       {filtered.length === 0 && (
