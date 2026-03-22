@@ -79,7 +79,7 @@ export default function TooltipPositions() {
 <Section>
   <Section.Title>API 레퍼런스</Section.Title>
 
-  <Section.Text>**Tooltip.Provider**</Section.Text>
+  <SubHeading>Tooltip.Provider</SubHeading>
   <PropsTable
     data={[
       { name: "delayDuration", type: "number", default: "700", description: "호버 시 툴팁이 열리기까지의 지연 시간(밀리초)입니다." },
@@ -87,7 +87,7 @@ export default function TooltipPositions() {
     ]}
   />
 
-  <Section.Text>**Tooltip** (루트 컨테이너)</Section.Text>
+  <SubHeading>Tooltip (루트 컨테이너)</SubHeading>
   <PropsTable
     data={[
       { name: "open", type: "boolean", description: "툴팁의 제어형 열림 상태입니다." },
@@ -96,14 +96,14 @@ export default function TooltipPositions() {
     ]}
   />
 
-  <Section.Text>**Tooltip.Trigger** (트리거 요소)</Section.Text>
+  <SubHeading>Tooltip.Trigger (트리거 요소)</SubHeading>
   <PropsTable
     data={[
       { name: "render", type: "ReactElement", description: "툴팁 트리거로 사용할 요소입니다.", required: true },
     ]}
   />
 
-  <Section.Text>**Tooltip.Content** (콘텐츠 영역)</Section.Text>
+  <SubHeading>Tooltip.Content (콘텐츠 영역)</SubHeading>
   <PropsTable
     data={[
       { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: "툴팁을 렌더링할 트리거의 선호 방향입니다." },
@@ -114,7 +114,7 @@ export default function TooltipPositions() {
     ]}
   />
 
-  <Section.Text>**Tooltip.Arrow**</Section.Text>
+  <SubHeading>Tooltip.Arrow</SubHeading>
   <PropsTable
     data={[
       { name: "width", type: "number", default: "10", description: "화살표의 너비(px)입니다." },

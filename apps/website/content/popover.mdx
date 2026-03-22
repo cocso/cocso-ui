@@ -78,7 +78,7 @@ export default function PopoverPositions() {
 <Section>
   <Section.Title>API 레퍼런스</Section.Title>
 
-  <Section.Text>**Popover** (루트 컨테이너)</Section.Text>
+  <SubHeading>Popover (루트 컨테이너)</SubHeading>
   <PropsTable
     data={[
       { name: "open", type: "boolean", description: "팝오버의 제어형 열림 상태입니다." },
@@ -87,14 +87,14 @@ export default function PopoverPositions() {
     ]}
   />
 
-  <Section.Text>**Popover.Trigger** (트리거 요소)</Section.Text>
+  <SubHeading>Popover.Trigger (트리거 요소)</SubHeading>
   <PropsTable
     data={[
       { name: "render", type: "ReactElement", description: "팝오버 트리거로 사용할 요소입니다.", required: true },
     ]}
   />
 
-  <Section.Text>**Popover.Content** (콘텐츠 영역)</Section.Text>
+  <SubHeading>Popover.Content (콘텐츠 영역)</SubHeading>
   <PropsTable
     data={[
       { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "팝오버를 렌더링할 트리거의 선호 방향입니다." },
@@ -105,7 +105,7 @@ export default function PopoverPositions() {
     ]}
   />
 
-  <Section.Text>**Popover.Arrow**</Section.Text>
+  <SubHeading>Popover.Arrow</SubHeading>
   <PropsTable
     data={[
       { name: "width", type: "number", default: "10", description: "화살표의 너비(px)입니다." },

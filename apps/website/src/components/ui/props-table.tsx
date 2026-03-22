@@ -70,7 +70,7 @@ export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
                   <span className="text-neutral-400">-</span>
                 )}
               </td>
-              <td className="px-3 py-2.5 align-top text-[14px] text-neutral-700">
+              <td className="px-3 py-2.5 align-top text-[13px] text-neutral-700">
                 {prop.description}
               </td>
             </tr>

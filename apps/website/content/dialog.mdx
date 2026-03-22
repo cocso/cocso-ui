@@ -82,7 +82,7 @@ export default function DialogSizes() {
 <Section>
   <Section.Title>API 레퍼런스</Section.Title>
 
-  <Section.Text>**Dialog** (루트 컨테이너)</Section.Text>
+  <SubHeading>Dialog (루트 컨테이너)</SubHeading>
   <PropsTable
     data={[
       { name: "open", type: "boolean", description: "다이얼로그의 제어형 열림 상태입니다." },
@@ -92,35 +92,35 @@ export default function DialogSizes() {
     ]}
   />
 
-  <Section.Text>**Dialog.Trigger** (트리거 요소)</Section.Text>
+  <SubHeading>Dialog.Trigger (트리거 요소)</SubHeading>
   <PropsTable
     data={[
       { name: "render", type: "ReactElement", description: "트리거로 사용할 요소입니다. prop 병합을 통해 열기/닫기 핸들러를 전달받습니다.", required: true },
     ]}
   />
 
-  <Section.Text>**Dialog.Content** (콘텐츠 영역)</Section.Text>
+  <SubHeading>Dialog.Content (콘텐츠 영역)</SubHeading>
   <PropsTable
     data={[
       { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "다이얼로그 패널의 최대 너비를 제어합니다." },
     ]}
   />
 
-  <Section.Text>**Dialog.Close** (닫기 버튼)</Section.Text>
+  <SubHeading>Dialog.Close (닫기 버튼)</SubHeading>
   <PropsTable
     data={[
       { name: "render", type: "ReactElement", description: "닫기 트리거로 렌더링할 요소입니다.", required: true },
     ]}
   />
 
-  <Section.Text>**Dialog.Title**</Section.Text>
+  <SubHeading>Dialog.Title</SubHeading>
   <PropsTable
     data={[
       { name: "children", type: "ReactNode", description: "다이얼로그 상단에 표시되는 제목 텍스트입니다.", required: true },
     ]}
   />
 
-  <Section.Text>**Dialog.Description**</Section.Text>
+  <SubHeading>Dialog.Description</SubHeading>
   <PropsTable
     data={[
       { name: "children", type: "ReactNode", description: "다이얼로그 액션에 대한 컨텍스트를 제공하는 설명 텍스트입니다.", required: true },

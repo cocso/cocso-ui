@@ -19,6 +19,13 @@ import { TokenTable } from "~/components/ui/token-table";
 
 const LinkExternalIcon = Link.ExternalIcon;
 
+const SubHeading = (props: React.ComponentProps<"h4">) => (
+  <h4
+    className="mt-8 mb-2 font-semibold text-[15px] first-of-type:mt-0"
+    {...props}
+  />
+);
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -40,6 +47,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ColorScale,
     ColorSwatch,
     TokenTable,
+    SubHeading,
 
     Tab,
     Tabs,
