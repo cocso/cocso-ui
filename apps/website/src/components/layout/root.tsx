@@ -12,6 +12,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
         메인 콘텐츠로 이동
       </a>
       <Header />
+      <div className="h-(--size-header-height) shrink-0" />
       <main
         className="mx-auto flex w-full max-w-(--size-app-width) flex-1 bg-white"
         id="main-content"

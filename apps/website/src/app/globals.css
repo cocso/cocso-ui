@@ -51,45 +51,47 @@
     background-color: var(--color-neutral-50);
   }
 
-  body::before {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    z-index: var(--z-index-divider);
-    width: 1px;
-    pointer-events: none;
-    content: "";
-    background-color: var(--color-neutral-200);
-    transform: translateX(
-      calc(
-        -1 *
-        var(--size-app-width) /
-        2 -
-        var(--removed-body-scroll-bar-size, 0px) /
-        2
-      )
-    );
-  }
+  @media (min-width: 1200px) {
+    body::before {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: var(--z-index-divider);
+      width: 1px;
+      pointer-events: none;
+      content: "";
+      background-color: var(--color-neutral-200);
+      transform: translateX(
+        calc(
+          -1 *
+          var(--size-app-width) /
+          2 -
+          var(--removed-body-scroll-bar-size, 0px) /
+          2
+        )
+      );
+    }
 
-  body::after {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    z-index: var(--z-index-divider);
-    width: 1px;
-    pointer-events: none;
-    content: "";
-    background-color: var(--color-neutral-200);
-    transform: translateX(
-      calc(
-        var(--size-app-width) /
-        2 -
-        var(--removed-body-scroll-bar-size, 0px) /
-        2
-      )
-    );
+    body::after {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: var(--z-index-divider);
+      width: 1px;
+      pointer-events: none;
+      content: "";
+      background-color: var(--color-neutral-200);
+      transform: translateX(
+        calc(
+          var(--size-app-width) /
+          2 -
+          var(--removed-body-scroll-bar-size, 0px) /
+          2
+        )
+      );
+    }
   }
 
   code:not(pre code) {

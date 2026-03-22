@@ -35,7 +35,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
         <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
       </head>
       <body className={GeistMono.variable}>
-        <RootProvider search={{ SearchDialog }}>
+        <RootProvider search={{ SearchDialog }} theme={{ forcedTheme: "light" }}>
           <Layout>{children}</Layout>
         </RootProvider>
       </body>
