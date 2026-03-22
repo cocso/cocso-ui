@@ -32,6 +32,7 @@
 
   body {
     display: flex;
+    font-size: 15px;
     color: var(--color-text-primary);
     touch-action: manipulation;
     flex-direction: column;
@@ -101,7 +102,7 @@
 
   code:not(pre code) {
     padding: 2px 5px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     background: var(--color-fd-muted);
     border: solid 1px var(--color-fd-border);
