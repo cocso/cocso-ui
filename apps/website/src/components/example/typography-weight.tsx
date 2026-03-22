@@ -1,0 +1,16 @@
+import { Typography } from "@cocso-ui/react";
+
+const weights = ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black"] as const;
+
+export default function TypographyWeight() {
+  return (
+    <div className="flex w-full flex-col gap-3 p-4">
+      {weights.map((w) => (
+        <div className="flex items-baseline gap-4" key={w}>
+          <span className="w-20 shrink-0 text-right font-mono text-neutral-400 text-xs">{w}</span>
+          <Typography size={18} weight={w}>The quick brown fox jumps over the lazy dog</Typography>
+        </div>
+      ))}
+    </div>
+  );
+}
