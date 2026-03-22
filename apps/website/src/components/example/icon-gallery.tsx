@@ -158,8 +158,8 @@ export default function IconGallery() {
   );
 
   const handleCopy = useCallback((name: string) => {
-    const importName = `${name}Icon`;
-    navigator.clipboard.writeText(importName);
+    const importStatement = `import { ${name}Icon } from "@cocso-ui/react-icons";`;
+    navigator.clipboard.writeText(importStatement);
     setCopied(name);
     setTimeout(() => setCopied(null), 1500);
   }, []);
