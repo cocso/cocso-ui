@@ -70,7 +70,8 @@ import {
   TrendingUpIcon,
   VerifiedIcon,
 } from "@cocso-ui/react-icons";
-import { Typography } from "@cocso-ui/react";
+import { Dropdown, Typography } from "@cocso-ui/react";
+import { ContentCopyIcon as CopyIcon } from "@cocso-ui/react-icons";
 import type { ComponentType } from "react";
 import { useCallback, useState } from "react";
 
@@ -157,9 +158,8 @@ export default function IconGallery() {
     name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleCopy = useCallback((name: string) => {
-    const importStatement = `import { ${name}Icon } from "@cocso-ui/react-icons";`;
-    navigator.clipboard.writeText(importStatement);
+  const handleCopy = useCallback((text: string, name: string) => {
+    navigator.clipboard.writeText(text);
     setCopied(name);
     setTimeout(() => setCopied(null), 1500);
   }, []);
@@ -175,17 +175,35 @@ export default function IconGallery() {
       />
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
         {filtered.map(({ name, Component }) => (
-          <button
-            className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border border-neutral-100 bg-transparent p-3 transition-colors hover:bg-neutral-50 active:bg-neutral-100"
-            key={name}
-            onClick={() => handleCopy(name)}
-            type="button"
-          >
-            <Component size={24} />
-            <Typography className="w-full truncate text-center text-neutral-500" size={10}>
-              {copied === name ? "Copied!" : name}
-            </Typography>
-          </button>
+          <Dropdown key={name}>
+            <Dropdown.Trigger
+              render={
+                <button
+                  className="flex w-full cursor-pointer flex-col items-center gap-2 rounded-lg border border-neutral-100 bg-transparent p-3 transition-colors hover:bg-neutral-50 active:bg-neutral-100"
+                  type="button"
+                >
+                  <Component size={24} />
+                  <Typography className="w-full truncate text-center text-neutral-500" size={10}>
+                    {copied === name ? "Copied!" : name}
+                  </Typography>
+                </button>
+              }
+            />
+            <Dropdown.Content>
+              <Dropdown.Item
+                onClick={() => handleCopy(`import { ${name}Icon } from "@cocso-ui/react-icons";`, name)}
+                prefix={<CopyIcon size={14} />}
+              >
+                Import
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => handleCopy(`${name}Icon`, name)}
+                prefix={<CopyIcon size={14} />}
+              >
+                Name
+              </Dropdown.Item>
+            </Dropdown.Content>
+          </Dropdown>
         ))}
       </div>
       {filtered.length === 0 && (

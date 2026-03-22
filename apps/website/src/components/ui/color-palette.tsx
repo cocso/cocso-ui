@@ -1,6 +1,7 @@
 "use client";
 
-import { Typography } from "@cocso-ui/react";
+import { Dropdown, Typography } from "@cocso-ui/react";
+import { ContentCopyIcon } from "@cocso-ui/react-icons";
 import { type ComponentProps, useCallback, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -13,34 +14,53 @@ interface ColorSwatchProps {
 const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(token);
+  const handleCopy = useCallback((text: string) => {
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
-  }, [token]);
+  }, []);
 
   return (
-    <button
-      className="flex cursor-pointer flex-col gap-1.5 rounded-lg border border-transparent bg-transparent p-1 text-left transition-colors hover:border-neutral-200 hover:bg-neutral-50 active:bg-neutral-100"
-      onClick={handleCopy}
-      type="button"
-    >
-      <div
-        className="h-10 w-full rounded-lg border border-neutral-200"
-        style={{ backgroundColor: value }}
+    <Dropdown>
+      <Dropdown.Trigger
+        render={
+          <button
+            className="flex w-full cursor-pointer flex-col gap-1.5 rounded-lg border border-transparent bg-transparent p-1 text-left transition-colors hover:border-neutral-200 hover:bg-neutral-50 active:bg-neutral-100"
+            type="button"
+          >
+            <div
+              className="h-10 w-full rounded-lg border border-neutral-200"
+              style={{ backgroundColor: value }}
+            />
+            <div className="flex flex-col gap-0.5">
+              <Typography className="text-neutral-900" size={13} weight="medium">
+                {copied ? "Copied!" : name}
+              </Typography>
+              <Typography className="font-mono text-neutral-500" size={11}>
+                {token}
+              </Typography>
+              <Typography className="font-mono text-neutral-400" size={11}>
+                {value}
+              </Typography>
+            </div>
+          </button>
+        }
       />
-      <div className="flex flex-col gap-0.5">
-        <Typography className="text-neutral-900" size={13} weight="medium">
-          {copied ? "Copied!" : name}
-        </Typography>
-        <Typography className="font-mono text-neutral-500" size={11}>
-          {token}
-        </Typography>
-        <Typography className="font-mono text-neutral-400" size={11}>
-          {value}
-        </Typography>
-      </div>
-    </button>
+      <Dropdown.Content>
+        <Dropdown.Item
+          onClick={() => handleCopy(token)}
+          prefix={<ContentCopyIcon size={14} />}
+        >
+          Token
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => handleCopy(value)}
+          prefix={<ContentCopyIcon size={14} />}
+        >
+          Value
+        </Dropdown.Item>
+      </Dropdown.Content>
+    </Dropdown>
   );
 };
 
