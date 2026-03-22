@@ -1,0 +1,131 @@
+---
+title: Checkbox
+description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는 컨트롤입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Checkbox 컴포넌트는 사용자가 옵션을 선택하거나 선택 해제할 수 있게 합니다. on, off, intermediate(indeterminate) 세 가지 상태를 지원합니다. 폼, 필터 패널, 다중 선택 시나리오에 사용하세요.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>
+    로컬 상태에 바인딩된 제어 체크박스입니다.
+  </Section.Text>
+  <ComponentExample name="checkbox-default">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function CheckboxDefault() {
+      const [status, setStatus] = useState<"on" | "off" | "intermediate">("off");
+
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Accept terms and conditions" onChange={setStatus} status={status} />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>
+    세 가지 크기를 사용할 수 있습니다. 주변 레이아웃 밀도에 따라 선택하세요.
+  </Section.Text>
+  <ComponentExample name="checkbox-sizes">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxSizes() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Large checkbox" onChange={() => {}} size="large" status="on" />
+          <Checkbox label="Medium checkbox" onChange={() => {}} size="medium" status="on" />
+          <Checkbox label="Small checkbox" onChange={() => {}} size="small" status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>상태</Section.Title>
+  <Section.Text>
+    체크박스는 <code>on</code>, <code>off</code>, <code>intermediate</code> 상태를 지원합니다. 상호작용을 방지하려면 <code>disabled</code>를 사용합니다.
+  </Section.Text>
+  <ComponentExample name="checkbox-states">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxStates() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Checked" onChange={() => {}} status="on" />
+          <Checkbox label="Unchecked" onChange={() => {}} status="off" />
+          <Checkbox label="Intermediate" onChange={() => {}} status="intermediate" />
+          <Checkbox disabled label="Disabled" onChange={() => {}} status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "status",
+        type: '"on" | "off" | "intermediate"',
+        required: true,
+        description: "체크박스의 현재 상태입니다.",
+      },
+      {
+        name: "onChange",
+        type: '(status: "on" | "off" | "intermediate") => void',
+        required: true,
+        description: "체크박스 상태 변경 시 호출되는 콜백입니다.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "체크박스 옆에 표시되는 레이블 텍스트입니다.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small"',
+        default: '"medium"',
+        description: "크기를 지정합니다.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "비활성화 여부를 지정합니다.",
+      },
+      {
+        name: "id",
+        type: "string",
+        description: "하위 input 요소의 HTML id 속성입니다.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

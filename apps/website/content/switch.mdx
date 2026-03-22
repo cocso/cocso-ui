@@ -1,0 +1,142 @@
+---
+title: Switch
+description: 이진 켜기/끄기 설정을 위한 토글 컨트롤입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Switch 컴포넌트는 설정을 활성화하거나 비활성화하는 시각적 토글을 제공합니다. 헤드리스 접근성 기반으로 구축되었으며, 다양한 크기, 시맨틱 색상 변형, 그리고 레이블 위치 설정을 지원합니다.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>
+    로컬 상태에 바인딩된 제어형 스위치입니다.
+  </Section.Text>
+  <ComponentExample name="switch-default">
+    ```tsx
+    "use client";
+
+    import { Switch } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function SwitchDefault() {
+      const [checked, setChecked] = useState(false);
+
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch checked={checked} label="Enable notifications" onCheckedChange={setChecked} />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>
+    세 가지 크기를 사용할 수 있습니다. 주변 레이아웃 밀도에 따라 선택하세요.
+  </Section.Text>
+  <ComponentExample name="switch-sizes">
+    ```tsx
+    import { Switch } from "@cocso-ui/react";
+
+    export default function SwitchSizes() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch defaultChecked label="Large" size="large" />
+          <Switch defaultChecked label="Medium" size="medium" />
+          <Switch defaultChecked label="Small" size="small" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>변형</Section.Title>
+  <Section.Text>
+    색상 변형은 토글의 시맨틱 의미를 전달합니다. 일반 설정에는 <code>primary</code>를, 특정 결과가 있는 액션에는 상태 변형을 사용하세요.
+  </Section.Text>
+  <ComponentExample name="switch-variants">
+    ```tsx
+    import { Switch } from "@cocso-ui/react";
+
+    export default function SwitchVariants() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch defaultChecked label="Primary" variant="primary" />
+          <Switch defaultChecked label="Success" variant="success" />
+          <Switch defaultChecked label="Error" variant="error" />
+          <Switch defaultChecked label="Warning" variant="warning" />
+          <Switch defaultChecked label="Info" variant="info" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>레이블 위치</Section.Title>
+  <Section.Text>
+    <code>position</code> prop을 사용해 레이블이 스위치의 왼쪽 또는 오른쪽에 표시될지 제어합니다. 기본값은 <code>right</code>입니다.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>비활성화</Section.Title>
+  <Section.Text>
+    <code>disabled</code>를 설정하면 사용자가 스위치를 토글하지 못하도록 합니다.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "label",
+        type: "string",
+        description: "스위치 옆에 표시되는 레이블 텍스트입니다.",
+      },
+      {
+        name: "size",
+        type: '"small" | "medium" | "large"',
+        default: '"medium"',
+        description: "크기를 지정합니다.",
+      },
+      {
+        name: "variant",
+        type: '"primary" | "success" | "error" | "warning" | "info"',
+        default: '"primary"',
+        description: "체크 상태일 때의 색상 변형을 지정합니다.",
+      },
+      {
+        name: "position",
+        type: '"left" | "right"',
+        default: '"right"',
+        description: "스위치 기준 레이블 위치입니다.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "비활성화 여부를 지정합니다.",
+      },
+      {
+        name: "id",
+        type: "string",
+        description: "HTML id 속성입니다.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
