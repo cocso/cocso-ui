@@ -1,17 +1,31 @@
 import { source } from "~/libs/source";
 
+const LEADING_SLASHES_RE = /^\/+/;
+const TRAILING_SLASHES_RE = /\/+$/;
+
 export function GET() {
   const pages = source.getPages("en");
 
-  const gettingStarted = pages.filter((p) => p.slugs[0] === "getting-started");
-  const foundations = pages.filter((p) => p.slugs[0] === "foundations");
-  const components = pages.filter((p) => p.slugs[0] === "components");
+  const toCanonicalPath = (url: string) =>
+    url.replace(LEADING_SLASHES_RE, "").replace(TRAILING_SLASHES_RE, "");
+  const topLevelSection = (url: string) =>
+    toCanonicalPath(url).split("/")[0] ?? "";
+
+  const gettingStarted = pages.filter(
+    (page) => topLevelSection(page.url) === "getting-started"
+  );
+  const foundations = pages.filter(
+    (page) => topLevelSection(page.url) === "foundations"
+  );
+  const components = pages.filter(
+    (page) => topLevelSection(page.url) === "components"
+  );
 
   const formatLinks = (items: typeof pages) =>
     items
       .map(
-        (p) =>
-          `- [${p.data.title}](https://cocso-ui.com/${p.slugs.join("/")}.md): ${p.data.description ?? ""}`
+        (page) =>
+          `- [${page.data.title}](https://cocso-ui.com/${toCanonicalPath(page.url)}.md): ${page.data.description ?? ""}`
       )
       .join("\n");
 

@@ -15,6 +15,10 @@ import { MobileSidebar } from "./mobile-sidebar";
 export const Header = () => {
   const { setOpenSearch } = useSearchContext();
   const locale = useLocale();
+  const labels =
+    locale === "en"
+      ? { home: "cocso-ui home", search: "Search" }
+      : { home: "cocso-ui 홈", search: "검색" };
   const homeHref =
     locale === "en"
       ? "/getting-started/introduction"
@@ -25,7 +29,7 @@ export const Header = () => {
       <div className="row-between h-full w-full">
         <div className="center-y h-full">
           <Link
-            aria-label="cocso-ui 홈"
+            aria-label={labels.home}
             className="center-y ml-(--size-app-padding) gap-1"
             href={homeHref}
           >
@@ -39,7 +43,7 @@ export const Header = () => {
           <LanguageSwitcher />
           <div aria-hidden="true" className="h-full w-px bg-neutral-200" />
           <Button
-            aria-label="검색"
+            aria-label={labels.search}
             className="h-full rounded-none"
             onClick={() => setOpenSearch(true)}
             svgOnly
