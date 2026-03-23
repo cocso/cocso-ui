@@ -12,7 +12,7 @@ interface Props {
 
 const Page = async ({ params }: Props) => {
   const { lang, slug } = await params;
-  const page = source.getPage([slug], lang);
+  const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
 
   if (!page) {
     notFound();
@@ -26,7 +26,11 @@ const Page = async ({ params }: Props) => {
         <Typography size="large" type="heading" weight="semibold">
           {page.data.title}
         </Typography>
-        <Typography className="mt-1" color={colors.textSecondary} weight="medium">
+        <Typography
+          className="mt-1"
+          color={colors.textSecondary}
+          weight="medium"
+        >
           {page.data.description}
         </Typography>
       </Section>
@@ -39,16 +43,24 @@ const Page = async ({ params }: Props) => {
 export default Page;
 
 export const generateStaticParams = () =>
-  source.generateParams().map((params) => ({
-    ...params,
-    slug: (params.slug as string[]).join("/"),
-  }));
+  source.getLanguages().flatMap(({ language, pages }) =>
+    pages.map((page) => {
+      const slug = page.slugs.join("/");
+
+      return {
+        lang: language,
+        slug: slug.startsWith(`${language}/`)
+          ? slug.slice(language.length + 1)
+          : slug,
+      };
+    })
+  );
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const { lang, slug } = await params;
-  const page = source.getPage([slug], lang);
+  const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
 
   if (!page) {
     notFound();

@@ -8,11 +8,15 @@ import {
 } from "@cocso-ui/react-icons";
 import { useSearchContext } from "fumadocs-ui/contexts/search";
 import Link from "next/link";
+import { useLocale } from "~/hooks/use-locale";
 import { LanguageSwitcher } from "./language-switcher";
 import { MobileSidebar } from "./mobile-sidebar";
 
 export const Header = () => {
   const { setOpenSearch } = useSearchContext();
+  const locale = useLocale();
+  const homeHref =
+    locale === "en" ? "/introduction" : `/${locale}/introduction`;
 
   return (
     <header className="fixed top-0 right-0 left-0 z-header row-between mx-auto h-(--size-header-height) w-full max-w-(--size-app-width) border-neutral-200 border-b bg-white">
@@ -21,7 +25,7 @@ export const Header = () => {
           <Link
             aria-label="cocso-ui 홈"
             className="center-y ml-(--size-app-padding) gap-1"
-            href="/introduction"
+            href={homeHref}
           >
             <COCSOUILogo aria-hidden="true" className="shrink-0" size={22} />
             <COCSOUITextLogo aria-hidden="true" height={16} width="100%" />
@@ -42,7 +46,10 @@ export const Header = () => {
           >
             <SearchIcon aria-hidden="true" size={20} />
           </Button>
-          <div aria-hidden="true" className="h-full w-px bg-neutral-200 lg:hidden" />
+          <div
+            aria-hidden="true"
+            className="h-full w-px bg-neutral-200 lg:hidden"
+          />
           <MobileSidebar />
         </div>
       </div>

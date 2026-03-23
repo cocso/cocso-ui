@@ -38,8 +38,13 @@ Next.js 16 (TypeScript), React 19. MDX content powered by fumadocs.
 apps/website/
 ├── src/
 │   ├── app/                  # Next.js App Router pages and layouts
-│   │   └── api/search/       # Full-text search API route (fumadocs)
+│   │   ├── [lang]/[slug]/    # Locale-prefixed documentation routes
+│   │   ├── api/search/       # Full-text search API route (fumadocs)
+│   │   ├── api/md/[slug]/    # AI-readable markdown endpoint
+│   │   └── llms.txt/         # LLM index endpoint
+│   ├── proxy.ts              # i18n URL rewriting (hide default locale)
 │   ├── libs/
+│   │   ├── i18n.ts           # i18n contract (en default, ko secondary)
 │   │   └── source.ts         # fumadocs source loader
 │   └── constants/
 │       └── variables.ts      # Site-wide constants
@@ -60,8 +65,13 @@ Depends on workspace packages:
 | Pattern | Description |
 |---|---|
 | `/` | Redirect route to `/introduction` |
-| `/[slug]` | Documentation pages (MDX) |
+| `/[slug]` | Default locale (`en`) documentation pages (via i18n proxy rewrite) |
+| `/[lang]/[slug]` | Locale-prefixed documentation pages (`ko`, `en`) |
+| `/[slug].md` | English AI-readable markdown export |
+| `/ko/[slug].md` | Rewritten to `/[slug].md` (English export) |
+| `/llms.txt` | LLM-oriented documentation index (English only) |
 | `/api/search` | Full-text search endpoint (fumadocs) |
+| `/api/md/[slug]` | Markdown payload route used by `.md` rewrites |
 
 ### Environment Variables
 

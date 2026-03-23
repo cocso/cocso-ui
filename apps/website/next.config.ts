@@ -9,15 +9,11 @@ const nextConfig: NextConfig = {
       beforeFiles: [
         {
           source: "/ko/:slug.md",
-          destination: "/api/md/:slug",
+          destination: "/:slug.md",
         },
         {
           source: "/:slug.md",
           destination: "/api/md/:slug",
-        },
-        {
-          source: "/:slug((?!ko|en|api|_next|favicon|llms\\.txt).*)",
-          destination: "/en/:slug",
         },
       ],
       afterFiles: [],

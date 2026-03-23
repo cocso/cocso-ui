@@ -1,5 +1,7 @@
 import { source } from "~/libs/source";
 
+const EN_PREFIX_PATTERN = /^en\//;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -38,9 +40,7 @@ export async function GET(_request: Request, { params }: Props) {
 }
 
 export function generateStaticParams() {
-  return source
-    .getPages("en")
-    .map((page) => ({
-      slug: page.slugs.join("/"),
-    }));
+  return source.getPages("en").map((page) => ({
+    slug: page.slugs.join("/").replace(EN_PREFIX_PATTERN, ""),
+  }));
 }
