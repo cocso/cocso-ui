@@ -8,7 +8,7 @@ export default function TypographyWeight() {
       {weights.map((w) => (
         <div className="flex items-baseline gap-4" key={w}>
           <span className="w-20 shrink-0 text-right font-mono text-neutral-400 text-xs">{w}</span>
-          <Typography type="custom" size={18} weight={w}>다람쥐 헌 쳇바퀴에 타고파</Typography>
+          <Typography type="custom" size={18} weight={w}>의약 CSO의 새로운 기준을 만듭니다.</Typography>
         </div>
       ))}
     </div>

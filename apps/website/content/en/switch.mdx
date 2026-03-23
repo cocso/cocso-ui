@@ -8,6 +8,26 @@ description: A toggle control for binary on/off settings.
   <Section.Text>
     The Switch component provides a visual toggle for activating or deactivating a setting. Built on a headless accessibility foundation, it supports multiple sizes, semantic color variants, and label position configuration.
   </Section.Text>
+  <Section.Text>
+    Switch represents an instant toggle — use it for settings that take effect immediately without a form submission (e.g., "Enable notifications", "Dark mode"). For changes that require a save action, use Checkbox instead.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="switch"</code> and <code>aria-checked</code> for assistive technologies.</Section.ListItem>
+    <Section.ListItem><code>Space</code> toggles the switch. <code>Tab</code> moves focus to the next focusable element.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, it is automatically associated with the switch via the <code>id</code> attribute.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the switch is visually dimmed and excluded from keyboard navigation.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Switch } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -99,37 +119,37 @@ description: A toggle control for binary on/off settings.
   <Section.Title>API Reference</Section.Title>
   <PropsTable
     data={[
-      { name: "checked", type: "boolean", description: "Controlled checked state. Use together with onCheckedChange." },
-      { name: "defaultChecked", type: "boolean", description: "Initial checked state for uncontrolled usage." },
-      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Callback invoked when the checked state changes." },
+      { name: "checked", type: "boolean", description: "Controlled checked state. Use together with `onCheckedChange` for full control over toggle behavior." },
+      { name: "defaultChecked", type: "boolean", description: "Initial checked state for uncontrolled usage. The component manages its own state internally." },
+      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Callback invoked when the user toggles the switch. Receives the new boolean value." },
       {
         name: "label",
         type: "string",
-        description: "Label text displayed next to the switch.",
+        description: "Label text displayed next to the switch, automatically associated for screen reader accessibility.",
       },
       {
         name: "size",
         type: '"small" | "medium" | "large"',
         default: '"medium"',
-        description: "Sets the size.",
+        description: "Controls the track and thumb dimensions. Use `large` for prominent settings panels and `small` for compact layouts.",
       },
       {
         name: "variant",
         type: '"primary" | "success" | "error" | "warning" | "info"',
         default: '"primary"',
-        description: "Sets the color variant when checked.",
+        description: "Controls the track color when checked. Use semantic variants to convey the meaning of the toggle (e.g., `error` for a destructive setting).",
       },
       {
         name: "position",
         type: '"left" | "right"',
         default: '"right"',
-        description: "Label position relative to the switch.",
+        description: "Positions the label relative to the switch. Use `left` in settings panels with labels on the left and `right` for inline toggles.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "Whether the switch is disabled.",
+        description: "Prevents interaction and visually dims the switch. Disabled switches are excluded from keyboard navigation.",
       },
       {
         name: "id",

@@ -5,7 +5,30 @@ description: A tab interface for switching between related content panels.
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>Tab is a compound component built on Base UI's Tabs primitive. It provides a keyboard-accessible tab interface following the WAI-ARIA pattern. Content panels are linked to their corresponding triggers via a shared `value` prop.</Section.Text>
+  <Section.Text>Tab is a compound component that provides a keyboard-accessible tab interface following the WAI-ARIA pattern. Content panels are linked to their corresponding triggers via a shared `value` prop.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Tab for switching between related content views within the same page context — for example, different settings categories or different data views.</Section.ListItem>
+    <Section.ListItem>For step-by-step workflows, use a stepper pattern instead.</Section.ListItem>
+    <Section.ListItem>Avoid nesting tabs within tabs.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Follows the WAI-ARIA Tabs pattern with <code>role="tablist"</code>, <code>role="tab"</code>, and <code>role="tabpanel"</code>.</Section.ListItem>
+    <Section.ListItem><code>Arrow Left</code> / <code>Arrow Right</code> navigates between tab triggers.</Section.ListItem>
+    <Section.ListItem><code>Home</code> moves focus to the first tab. <code>End</code> moves to the last tab.</Section.ListItem>
+    <Section.ListItem>Tab panels are linked to their triggers via <code>aria-labelledby</code>, providing context for screen readers.</Section.ListItem>
+    <Section.ListItem>Only the active tab panel is rendered in the accessibility tree; inactive panels are hidden.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Tab } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -21,9 +44,9 @@ description: A tab interface for switching between related content panels.
 
   <PropsTable
     data={[
-      { name: "defaultValue", type: "string", description: "Value of the tab selected by default (uncontrolled)." },
-      { name: "value", type: "string", description: "Controlled selected tab value. Use together with onValueChange." },
-      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the selected tab changes." },
+      { name: "defaultValue", type: "string", description: "Value of the tab selected by default. Use for uncontrolled scenarios where the component manages selection internally." },
+      { name: "value", type: "string", description: "Controlled selected tab value. Use together with `onValueChange` for programmatic tab switching." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the user selects a different tab. Receives the new value string." },
     ]}
   />
 
@@ -35,8 +58,8 @@ description: A tab interface for switching between related content panels.
 
   <PropsTable
     data={[
-      { name: "value", type: "string", required: true, description: "Unique value identifying the content panel linked to this trigger." },
-      { name: "disabled", type: "boolean", default: "false", description: "Disables the tab from being selected." },
+      { name: "value", type: "string", required: true, description: "Unique string that links this trigger to its corresponding `Tab.Content` panel." },
+      { name: "disabled", type: "boolean", default: "false", description: "Prevents this tab from being selected. The trigger remains visible but non-interactive and is skipped during keyboard navigation." },
     ]}
   />
 
@@ -44,7 +67,7 @@ description: A tab interface for switching between related content panels.
 
   <PropsTable
     data={[
-      { name: "value", type: "string", required: true, description: "Value that must match a Tab.Trigger value to be shown." },
+      { name: "value", type: "string", required: true, description: "Value that must match a `Tab.Trigger` value. The panel is shown only when its trigger is active." },
     ]}
   />
 </Section>

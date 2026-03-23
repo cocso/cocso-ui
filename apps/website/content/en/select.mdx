@@ -8,6 +8,28 @@ description: A native dropdown for selecting a value from a list of options.
   <Section.Text>
     The Select component wraps the native HTML select element with consistent styling, label support, and validation states. Use it when a user needs to choose a single value from a predefined list.
   </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Select uses the native HTML <code>&lt;select&gt;</code> element, ensuring consistent behavior across devices including mobile.</Section.ListItem>
+    <Section.ListItem>For lists with fewer than 4 options, consider RadioGroup for better visibility.</Section.ListItem>
+    <Section.ListItem>For searchable or multi-select scenarios, a custom combobox may be more appropriate.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders a native <code>&lt;select&gt;</code> element with full browser and mobile keyboard support.</Section.ListItem>
+    <Section.ListItem>Arrow keys navigate between options; <code>Enter</code> or <code>Space</code> opens and confirms the selection.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, the select is wrapped in a <code>Field</code> component with an associated <code>&lt;label&gt;</code> element.</Section.ListItem>
+    <Section.ListItem><code>error</code> and <code>description</code> messages are linked via <code>aria-describedby</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Select } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -94,36 +116,36 @@ description: A native dropdown for selecting a value from a list of options.
       {
         name: "label",
         type: "string",
-        description: "Label text displayed above the select.",
+        description: "Label text displayed above the select. When provided, the select is wrapped in a Field component with an associated `<label>` element.",
       },
       {
         name: "size",
         type: '"large" | "medium" | "small" | "x-small"',
         default: '"medium"',
-        description: "Sets the size.",
+        description: "Controls the height, padding, and font size. Choose based on surrounding content density.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "Whether the select is disabled.",
+        description: "Prevents interaction and visually dims the select. Disabled selects are excluded from form submission.",
       },
       {
         name: "error",
         type: "boolean | string",
         default: "false",
-        description: "When a string, displays an error message below the select. When true, applies error styling only.",
+        description: "When a string, displays a red error message below the select linked via `aria-describedby`. When `true`, applies error border styling without a message.",
       },
       {
         name: "description",
         type: "string",
-        description: "Help text displayed below the select.",
+        description: "Help text displayed below the select in a muted style, linked via `aria-describedby`. Hidden when `error` is set.",
       },
       {
         name: "stretch",
         type: "boolean",
         default: "false",
-        description: "When true, the select expands to fill the container width.",
+        description: "Expands the select to fill the full width of its container. Use in form layouts where the select should match the grid column width.",
       },
     ]}
   />

@@ -8,6 +8,26 @@ description: 이진 켜기/끄기 설정을 위한 토글 컨트롤입니다.
   <Section.Text>
     Switch 컴포넌트는 설정을 활성화하거나 비활성화하는 시각적 토글을 제공합니다. 헤드리스 접근성 기반으로 구축되었으며, 다양한 크기, 시맨틱 색상 변형, 그리고 레이블 위치 설정을 지원합니다.
   </Section.Text>
+  <Section.Text>
+    Switch는 즉각적인 토글을 나타냅니다. 폼 제출 없이 즉시 적용되는 설정에 사용하세요 (예: "알림 활성화", "다크 모드"). 저장 액션이 필요한 변경에는 Checkbox를 사용하세요.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>보조 기술을 위해 <code>role="switch"</code>와 <code>aria-checked</code>를 지원합니다.</Section.ListItem>
+    <Section.ListItem><code>Space</code>로 스위치를 토글합니다. <code>Tab</code>으로 다음 포커스 가능한 요소로 이동합니다.</Section.ListItem>
+    <Section.ListItem><code>label</code>이 제공되면 <code>id</code> 속성을 통해 스위치와 자동으로 연결됩니다.</Section.ListItem>
+    <Section.ListItem><code>disabled</code> 상태에서는 스위치가 시각적으로 흐리게 표시되고 키보드 탐색에서 제외됩니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Switch } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -99,37 +119,37 @@ description: 이진 켜기/끄기 설정을 위한 토글 컨트롤입니다.
   <Section.Title>API 레퍼런스</Section.Title>
   <PropsTable
     data={[
-      { name: "checked", type: "boolean", description: "제어형 체크 상태입니다. onCheckedChange와 함께 사용하세요." },
-      { name: "defaultChecked", type: "boolean", description: "비제어 방식일 때의 초기 체크 상태입니다." },
-      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "체크 상태 변경 시 호출되는 콜백입니다." },
+      { name: "checked", type: "boolean", description: "제어형 체크 상태입니다. 토글 동작을 완전히 제어하려면 `onCheckedChange`와 함께 사용하세요." },
+      { name: "defaultChecked", type: "boolean", description: "비제어 방식일 때의 초기 체크 상태입니다. 컴포넌트가 내부적으로 자체 상태를 관리합니다." },
+      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "사용자가 스위치를 토글할 때 호출되는 콜백입니다. 새로운 boolean 값을 받습니다." },
       {
         name: "label",
         type: "string",
-        description: "스위치 옆에 표시되는 레이블 텍스트입니다.",
+        description: "스위치 옆에 표시되는 레이블 텍스트로, 스크린 리더 접근성을 위해 자동으로 연결됩니다.",
       },
       {
         name: "size",
         type: '"small" | "medium" | "large"',
         default: '"medium"',
-        description: "크기를 지정합니다.",
+        description: "트랙과 썸 크기를 제어합니다. 두드러진 설정 패널에는 `large`를, 콤팩트한 레이아웃에는 `small`을 사용하세요.",
       },
       {
         name: "variant",
         type: '"primary" | "success" | "error" | "warning" | "info"',
         default: '"primary"',
-        description: "체크 상태일 때의 색상 변형을 지정합니다.",
+        description: "체크 상태일 때의 트랙 색상을 제어합니다. 토글의 의미를 전달하기 위해 시맨틱 변형을 사용하세요 (예: 파괴적인 설정에는 `error`).",
       },
       {
         name: "position",
         type: '"left" | "right"',
         default: '"right"',
-        description: "스위치 기준 레이블 위치입니다.",
+        description: "스위치 기준 레이블 위치입니다. 레이블이 왼쪽에 있는 설정 패널에는 `left`를, 인라인 토글에는 `right`를 사용하세요.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "비활성화 여부를 지정합니다.",
+        description: "상호작용을 방지하고 시각적으로 흐리게 표시합니다. 비활성화된 스위치는 키보드 탐색에서 제외됩니다.",
       },
       {
         name: "id",

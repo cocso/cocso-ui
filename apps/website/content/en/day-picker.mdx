@@ -5,7 +5,24 @@ description: A date picker that opens a calendar popover for selecting a single 
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>DayPicker renders a trigger element that opens a Dropdown containing an inline calendar. It is a controlled component; pass value and onValueChange to manage the selected date. The calendar is localized to English by default.</Section.Text>
+  <Section.Text>DayPicker renders a trigger element that opens a Dropdown containing an inline calendar. It is a controlled component; pass value and onValueChange to manage the selected date. The calendar is localized to English by default. Use DayPicker for selecting a specific calendar date. Use `minDate` and `maxDate` to constrain the selectable range. For month-level selection, use MonthPicker instead. Provide a custom `trigger` element for better visual integration with form layouts.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>The calendar grid supports arrow key navigation between days.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the dropdown and returns focus to the trigger.</Section.ListItem>
+    <Section.ListItem>Dates outside the <code>minDate</code>–<code>maxDate</code> range are marked with <code>aria-disabled</code>.</Section.ListItem>
+    <Section.ListItem>Month navigation buttons allow moving forward and backward through months.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { DayPicker } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -35,12 +52,12 @@ description: A date picker that opens a calendar popover for selecting a single 
 <Section>
   <Section.Title>API Reference</Section.Title>
   <PropsTable data={[
-    { name: "value", type: "Date", description: "The currently selected date value." },
-    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects or clears a date." },
-    { name: "disabled", type: "boolean", description: "Disables the date picker trigger and prevents interaction." },
-    { name: "minDate", type: "Date", description: "The earliest selectable date. Dates before this are disabled in the calendar." },
-    { name: "maxDate", type: "Date", description: "The latest selectable date. Dates after this are disabled in the calendar." },
-    { name: "trigger", type: "ReactElement", description: "Custom trigger element that opens the calendar popover." },
+    { name: "value", type: "Date", description: "The currently selected date. Pass `undefined` for no selection." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects a date or clears the selection. Receives a `Date` object or `null`." },
+    { name: "disabled", type: "boolean", description: "Disables the trigger button and prevents the calendar from opening." },
+    { name: "minDate", type: "Date", description: "The earliest selectable date. Days before this date are visually dimmed and cannot be selected." },
+    { name: "maxDate", type: "Date", description: "The latest selectable date. Days after this date are visually dimmed and cannot be selected." },
+    { name: "trigger", type: "ReactElement", description: "Custom trigger element replacing the default button. Use to integrate with form input fields or custom UI." },
   ]} />
 </Section>
 

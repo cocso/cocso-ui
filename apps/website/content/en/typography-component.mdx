@@ -6,6 +6,27 @@ description: A flexible text rendering component supporting custom, body, and he
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>The Typography component operates in three modes controlled by the type prop. `custom` accepts arbitrary numeric font sizes, `body` is semantic body text with named size steps, and `heading` is semantic headings with responsive size steps. All modes support weight, lineHeight, and render props.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>heading</code> type for page and section titles — <code>x-large</code> and <code>large</code> automatically scale up at the tablet breakpoint for responsive design.</Section.ListItem>
+    <Section.ListItem>Use <code>body</code> for all standard prose and UI text.</Section.ListItem>
+    <Section.ListItem>Use <code>custom</code> when a design specification requires a specific numeric size not available in the named scales.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem><code>heading</code> type renders as <code>&lt;h2&gt;</code> by default. Use the <code>render</code> prop to set the correct heading level for your document outline (e.g., <code>render={`<h1 />`}</code>).</Section.ListItem>
+    <Section.ListItem><code>body</code> and <code>custom</code> types render as <code>&lt;p&gt;</code> by default. Change the element with <code>render</code> when wrapping inline content (e.g., <code>render={`<span />`}</code>).</Section.ListItem>
+    <Section.ListItem>Maintain a logical heading hierarchy (h1 → h2 → h3) regardless of visual size. A smaller heading can still be a higher level.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Typography } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -92,14 +113,14 @@ description: A flexible text rendering component supporting custom, body, and he
 <Section>
   <Section.Title>API Reference</Section.Title>
   <PropsTable data={[
-    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the rendering mode. custom uses numeric sizes; body and heading use named size steps." },
-    { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "Numeric font size token, or a responsive object/array with base, tablet, desktop keys. Only applies when type is custom." },
-    { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named body size step. Only applies when type is body." },
-    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named heading size step. x-large and large are responsive. Only applies when type is heading." },
-    { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "Sets the font weight." },
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the rendering mode and available size steps. `heading` renders responsive headings, `body` renders paragraph text, and `custom` accepts arbitrary numeric sizes." },
+    { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "A numeric font size from the design token scale (e.g., 12, 16, 24), or a responsive object/array with `base`, `tablet`, `desktop` keys for different breakpoints." },
+    { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named body size step: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
+    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named heading size step. `x-large` and `large` are responsive, increasing at the tablet breakpoint. `medium` (20px), `small` (16px), `x-small` (14px) are fixed." },
+    { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "Font weight. Defaults to `\"bold\"` for headings and `\"normal\"` for body/custom text." },
     { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "Sets the line height." },
-    { name: "render", type: "RenderProp", description: "Render prop replacing the default element. Defaults to p for custom/body and h2 for heading." },
-    { name: "color", type: "string", description: "Sets the text color. Accepts a CSS color value or token." },
+    { name: "render", type: "RenderProp", description: "Replaces the default HTML element. Heading defaults to `<h2>`, body/custom to `<p>`. Use this to set the correct semantic level." },
+    { name: "color", type: "string", description: "Sets the text color directly. Accepts any CSS color value or design token reference." },
   ]} />
 </Section>
 

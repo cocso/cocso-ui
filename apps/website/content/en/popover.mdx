@@ -6,7 +6,7 @@ description: A floating panel anchored to a trigger element, built on Base UI's 
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>
-    Popover is a compound component built on Base UI's Popover primitive. Unlike Dialog, it operates in a non-modal manner and does not block interaction with the rest of the page. Use it for supplementary information, inline forms, or rich tooltips.
+    Popover is a compound component that operates in a non-modal manner, unlike Dialog, and does not block interaction with the rest of the page. Use it for supplementary information, inline forms, or rich tooltips.
   </Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>Composed with a compound API: <code>Popover</code>, <code>Popover.Trigger</code>, <code>Popover.Content</code>, <code>Popover.Arrow</code></Section.ListItem>
@@ -14,6 +14,28 @@ description: A floating panel anchored to a trigger element, built on Base UI's 
     <Section.ListItem>Supports <code>side</code> and <code>align</code> positioning props.</Section.ListItem>
     <Section.ListItem><code>Popover.Arrow</code> renders an arrow caret pointing toward the trigger.</Section.ListItem>
   </Section.UnorderedList>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Popover for supplementary information, inline forms, or rich interactive content anchored to a trigger.</Section.ListItem>
+    <Section.ListItem>For short text-only hints, use Tooltip instead (lighter weight, hover-only).</Section.ListItem>
+    <Section.ListItem>For content that demands user attention, use Dialog (modal, focus-trapping).</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Non-modal by default — does not trap focus or block interaction with the rest of the page.</Section.ListItem>
+    <Section.ListItem>Clicking outside or pressing <code>Escape</code> closes the popover.</Section.ListItem>
+    <Section.ListItem>The trigger element receives <code>aria-expanded</code> to communicate the popover's open state.</Section.ListItem>
+    <Section.ListItem>Focus management follows natural tab order within the popover content. Use with interactive elements like forms and buttons.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Popover } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -81,8 +103,8 @@ export default function PopoverPositions() {
   <SubHeading>Popover (Root Container)</SubHeading>
   <PropsTable
     data={[
-      { name: "open", type: "boolean", description: "Controlled open state of the popover." },
-      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the open state changes." },
+      { name: "open", type: "boolean", description: "Controlled open state. Use together with `onOpenChange` for programmatic popover control." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the popover should open or close. Receives the new boolean state." },
       { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
     ]}
   />
@@ -90,26 +112,26 @@ export default function PopoverPositions() {
   <SubHeading>Popover.Trigger</SubHeading>
   <PropsTable
     data={[
-      { name: "render", type: "ReactElement", description: "Element to use as the popover trigger.", required: true },
+      { name: "render", type: "ReactElement", description: "The element to render as the popover trigger. Receives click handler and `aria-expanded` via prop merging.", required: true },
     ]}
   />
 
   <SubHeading>Popover.Content</SubHeading>
   <PropsTable
     data={[
-      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Preferred side of the trigger where the popover is rendered." },
-      { name: "sideOffset", type: "number", default: "4", description: "Distance in px between the trigger and the popover." },
-      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the popover relative to the trigger." },
-      { name: "alignOffset", type: "number", default: "0", description: "Offset in px along the alignment axis." },
-      { name: "arrowPadding", type: "number", default: "4", description: "Minimum distance between the arrow and the popover edge." },
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Preferred placement side relative to the trigger. Auto-flips if there is insufficient space on the preferred side." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in pixels between the trigger and the popover panel." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the popover along the trigger edge. `start` aligns to the leading edge, `end` to the trailing edge." },
+      { name: "alignOffset", type: "number", default: "0", description: "Offset in pixels along the alignment axis for fine-tuning position." },
+      { name: "arrowPadding", type: "number", default: "4", description: "Minimum distance in pixels between the arrow and the popover edge, preventing the arrow from overflowing corners." },
     ]}
   />
 
   <SubHeading>Popover.Arrow</SubHeading>
   <PropsTable
     data={[
-      { name: "width", type: "number", default: "10", description: "Width of the arrow in px." },
-      { name: "height", type: "number", default: "5", description: "Height of the arrow in px." },
+      { name: "width", type: "number", default: "10", description: "Width of the arrow caret in pixels." },
+      { name: "height", type: "number", default: "5", description: "Height of the arrow caret in pixels." },
     ]}
   />
 </Section>

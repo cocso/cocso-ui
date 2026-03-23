@@ -5,7 +5,24 @@ description: A set of mutually exclusive radio buttons for selecting a single op
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>RadioGroup is a compound component built on Base UI's RadioGroup primitive. It enforces single-selection semantics and follows the WAI-ARIA radio group pattern including roving tabindex keyboard navigation.</Section.Text>
+  <Section.Text>RadioGroup is a compound component that enforces single-selection semantics and follows the WAI-ARIA radio group pattern including roving tabindex keyboard navigation. Use RadioGroup for mutually exclusive choices between 2–7 options. For more options, consider Select for a compact layout. For binary choices, Switch or Checkbox may be more appropriate.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Follows the WAI-ARIA Radio Group pattern with roving tabindex navigation.</Section.ListItem>
+    <Section.ListItem><code>Arrow Down</code> / <code>Arrow Right</code> moves focus to the next radio item. <code>Arrow Up</code> / <code>Arrow Left</code> moves to the previous.</Section.ListItem>
+    <Section.ListItem><code>Tab</code> moves focus into and out of the radio group as a single unit.</Section.ListItem>
+    <Section.ListItem>Each <code>RadioGroup.Item</code> has <code>role="radio"</code> with <code>aria-checked</code> reflecting the selected state.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { RadioGroup } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -27,10 +44,10 @@ description: A set of mutually exclusive radio buttons for selecting a single op
 
   <PropsTable
     data={[
-      { name: "defaultValue", type: "string", description: "Value selected by default (uncontrolled)." },
-      { name: "value", type: "string", description: "Controlled selected value. Use together with onValueChange." },
-      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the selected value changes." },
-      { name: "disabled", type: "boolean", default: "false", description: "Disables all items in the group." },
+      { name: "defaultValue", type: "string", description: "Value of the item selected by default. Use for uncontrolled scenarios where the component manages its own state." },
+      { name: "value", type: "string", description: "The currently selected value. Use together with `onValueChange` for controlled selection." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the user selects a different radio item. Receives the new value string." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables all items in the group, preventing selection changes and dimming the visual appearance." },
     ]}
   />
 
@@ -38,9 +55,9 @@ description: A set of mutually exclusive radio buttons for selecting a single op
 
   <PropsTable
     data={[
-      { name: "value", type: "string", required: true, description: "The value represented by this radio item." },
-      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Sets the size of the radio button." },
-      { name: "disabled", type: "boolean", default: "false", description: "Disables the individual radio item." },
+      { name: "value", type: "string", required: true, description: "Unique value identifying this radio item. Must match the group's `value` or `defaultValue` to appear selected." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the radio button dimensions and associated label size." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables this individual radio item independently of the group's disabled state." },
     ]}
   />
 

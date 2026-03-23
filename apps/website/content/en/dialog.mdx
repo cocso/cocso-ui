@@ -6,7 +6,7 @@ description: A modal dialog that interrupts the user's flow with important conte
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>
-    Dialog is a compound component built on Base UI's Dialog primitive. It renders a modal overlay that traps focus and blocks interaction with the rest of the page until the user dismisses it. Use Dialog for confirmations, forms, or content that requires an explicit user decision.
+    Dialog is a compound component that renders a modal overlay that traps focus and blocks interaction with the rest of the page until the user dismisses it. Use Dialog for confirmations, forms, or content that requires an explicit user decision.
   </Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>Composed with a compound API: <code>Dialog</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code>, <code>Dialog.Title</code>, <code>Dialog.Description</code>, <code>Dialog.Close</code></Section.ListItem>
@@ -14,6 +14,30 @@ description: A modal dialog that interrupts the user's flow with important conte
     <Section.ListItem>Pressing the <code>Escape</code> key closes the dialog by default.</Section.ListItem>
     <Section.ListItem>Three content sizes are supported: <code>small</code>, <code>medium</code>, <code>large</code>.</Section.ListItem>
   </Section.UnorderedList>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Dialog for actions requiring explicit user confirmation — deleting records, discarding unsaved changes, or submitting irreversible operations.</Section.ListItem>
+    <Section.ListItem>For non-blocking supplementary content, use Popover instead.</Section.ListItem>
+    <Section.ListItem>Always include at least one <code>Dialog.Close</code> action so users can dismiss the dialog.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Focus is trapped inside the dialog while open. On close, focus returns to the trigger element.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the dialog by default.</Section.ListItem>
+    <Section.ListItem>Opening the dialog moves focus to the first focusable element inside the content area.</Section.ListItem>
+    <Section.ListItem><code>Dialog.Title</code> is linked via <code>aria-labelledby</code> and <code>Dialog.Description</code> via <code>aria-describedby</code>, providing context for screen readers.</Section.ListItem>
+    <Section.ListItem>Background content receives <code>aria-hidden="true"</code> while the dialog is open, preventing screen readers from accessing it.</Section.ListItem>
+    <Section.ListItem>When <code>modal</code> is <code>false</code>, the dialog becomes non-modal — focus is not trapped and background interaction is allowed.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Dialog } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -85,45 +109,45 @@ export default function DialogSizes() {
   <SubHeading>Dialog (Root Container)</SubHeading>
   <PropsTable
     data={[
-      { name: "open", type: "boolean", description: "Controlled open state of the dialog." },
-      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the open state changes." },
-      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
-      { name: "modal", type: "boolean", default: "true", description: "When true, interaction outside the dialog is blocked." },
+      { name: "open", type: "boolean", description: "Controlled open state. Use together with `onOpenChange` for full control over visibility." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the dialog should open or close. Receives the new boolean state." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage. The component manages open/close internally." },
+      { name: "modal", type: "boolean", default: "true", description: "When `true`, traps focus inside the dialog and blocks background interaction with an overlay. Set to `false` for non-modal usage." },
     ]}
   />
 
   <SubHeading>Dialog.Trigger</SubHeading>
   <PropsTable
     data={[
-      { name: "render", type: "ReactElement", description: "Element to use as the trigger. Receives open/close handlers via prop merging.", required: true },
+      { name: "render", type: "ReactElement", description: "The element to render as the trigger button. Receives `onClick` handler and `aria-expanded` via prop merging.", required: true },
     ]}
   />
 
   <SubHeading>Dialog.Content</SubHeading>
   <PropsTable
     data={[
-      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "Controls the maximum width of the dialog panel." },
+      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "Controls the maximum width of the dialog panel. `small` (400px) for confirmations, `medium` (560px) for forms, `large` (720px) for complex content." },
     ]}
   />
 
   <SubHeading>Dialog.Close</SubHeading>
   <PropsTable
     data={[
-      { name: "render", type: "ReactElement", description: "Element to render as the close trigger." },
+      { name: "render", type: "ReactElement", description: "The element to render as the close action. Receives `onClick` handler to close the dialog via prop merging." },
     ]}
   />
 
   <SubHeading>Dialog.Title</SubHeading>
   <PropsTable
     data={[
-      { name: "children", type: "ReactNode", description: "Title text displayed at the top of the dialog.", required: true },
+      { name: "children", type: "ReactNode", description: "Title text displayed at the top of the dialog. Linked to the dialog via `aria-labelledby` for screen readers.", required: true },
     ]}
   />
 
   <SubHeading>Dialog.Description</SubHeading>
   <PropsTable
     data={[
-      { name: "children", type: "ReactNode", description: "Description text providing context for the dialog action.", required: true },
+      { name: "children", type: "ReactNode", description: "Description text providing context for the dialog action. Linked via `aria-describedby` for screen readers.", required: true },
     ]}
   />
 </Section>

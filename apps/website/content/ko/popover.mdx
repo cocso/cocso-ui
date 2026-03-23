@@ -6,7 +6,7 @@ description: 트리거 요소에 고정된 플로팅 패널로, Base UI Popover 
 <Section>
   <Section.Title>개요</Section.Title>
   <Section.Text>
-    Popover는 Base UI의 Popover 프리미티브 기반으로 구성된 복합 컴포넌트입니다. Dialog와 달리 비모달 방식으로 동작하여 페이지의 나머지 부분과의 상호작용을 차단하지 않습니다. 보조 정보, 인라인 폼, 또는 내용이 풍부한 툴팁이 필요할 때 사용하세요.
+    Popover는 Dialog와 달리 비모달 방식으로 동작하여 페이지의 나머지 부분과의 상호작용을 차단하지 않는 복합 컴포넌트입니다. 보조 정보, 인라인 폼, 또는 내용이 풍부한 툴팁이 필요할 때 사용하세요.
   </Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>복합 API로 구성됩니다. <code>Popover</code>, <code>Popover.Trigger</code>, <code>Popover.Content</code>, <code>Popover.Arrow</code></Section.ListItem>
@@ -14,6 +14,28 @@ description: 트리거 요소에 고정된 플로팅 패널로, Base UI Popover 
     <Section.ListItem><code>side</code> 및 <code>align</code> 위치 지정 props를 지원합니다.</Section.ListItem>
     <Section.ListItem><code>Popover.Arrow</code>는 트리거를 향하는 화살표 캐럿을 렌더링합니다.</Section.ListItem>
   </Section.UnorderedList>
+  <Section.UnorderedList>
+    <Section.ListItem>트리거에 고정된 보조 정보, 인라인 폼, 또는 풍부한 인터랙티브 콘텐츠에 Popover를 사용합니다.</Section.ListItem>
+    <Section.ListItem>짧은 텍스트 전용 힌트에는 Tooltip을 사용합니다 (더 가볍고 hover 전용입니다).</Section.ListItem>
+    <Section.ListItem>사용자의 주의가 반드시 필요한 콘텐츠에는 Dialog를 사용합니다 (모달, 포커스 트래핑).</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>기본적으로 비모달 방식입니다. 포커스를 가두거나 페이지의 나머지 부분과의 상호작용을 차단하지 않습니다.</Section.ListItem>
+    <Section.ListItem>외부를 클릭하거나 <code>Escape</code>를 누르면 팝오버가 닫힙니다.</Section.ListItem>
+    <Section.ListItem>트리거 요소에 <code>aria-expanded</code>가 적용되어 팝오버의 열림 상태를 전달합니다.</Section.ListItem>
+    <Section.ListItem>팝오버 콘텐츠 내에서 자연스러운 탭 순서에 따라 포커스가 관리됩니다. 폼과 버튼 같은 인터랙티브 요소와 함께 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Popover } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -81,8 +103,8 @@ export default function PopoverPositions() {
   <SubHeading>Popover (루트 컨테이너)</SubHeading>
   <PropsTable
     data={[
-      { name: "open", type: "boolean", description: "팝오버의 제어형 열림 상태입니다." },
-      { name: "onOpenChange", type: "(open: boolean) => void", description: "열림 상태가 변경될 때 호출되는 콜백입니다." },
+      { name: "open", type: "boolean", description: "팝오버의 제어형 열림 상태입니다. 프로그래매틱 팝오버 제어를 위해 `onOpenChange`와 함께 사용하세요." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "팝오버를 열거나 닫아야 할 때 호출되는 콜백입니다. 새로운 boolean 상태를 전달받습니다." },
       { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다." },
     ]}
   />
@@ -90,18 +112,18 @@ export default function PopoverPositions() {
   <SubHeading>Popover.Trigger (트리거 요소)</SubHeading>
   <PropsTable
     data={[
-      { name: "render", type: "ReactElement", description: "팝오버 트리거로 사용할 요소입니다.", required: true },
+      { name: "render", type: "ReactElement", description: "팝오버 트리거로 렌더링할 요소입니다. prop 병합을 통해 클릭 핸들러와 `aria-expanded`를 전달받습니다.", required: true },
     ]}
   />
 
   <SubHeading>Popover.Content (콘텐츠 영역)</SubHeading>
   <PropsTable
     data={[
-      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "팝오버를 렌더링할 트리거의 선호 방향입니다." },
-      { name: "sideOffset", type: "number", default: "4", description: "트리거와 팝오버 사이의 거리(px)입니다." },
-      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "트리거 기준 팝오버의 정렬 방향입니다." },
-      { name: "alignOffset", type: "number", default: "0", description: "정렬 축 방향의 오프셋(px)입니다." },
-      { name: "arrowPadding", type: "number", default: "4", description: "화살표와 팝오버 가장자리 사이의 최소 거리입니다." },
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "트리거 기준 팝오버의 선호 배치 방향입니다. 공간이 부족하면 자동으로 반대쪽에 배치됩니다." },
+      { name: "sideOffset", type: "number", default: "4", description: "트리거와 팝오버 패널 사이의 거리(px)입니다." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "트리거 기준 팝오버의 정렬 방향입니다. `start`는 앞쪽 가장자리에, `end`는 뒤쪽 가장자리에 정렬됩니다." },
+      { name: "alignOffset", type: "number", default: "0", description: "위치를 세밀하게 조정하기 위한 정렬 축 방향의 오프셋(px)입니다." },
+      { name: "arrowPadding", type: "number", default: "4", description: "화살표와 팝오버 가장자리 사이의 최소 거리(px)로, 화살표가 모서리를 넘어가지 않도록 합니다." },
     ]}
   />
 

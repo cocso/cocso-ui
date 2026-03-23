@@ -8,6 +8,29 @@ description: A clickable element that triggers an action or event.
   <Section.Text>
     The Button component triggers actions or navigation. It supports a variety of visual variants, sizes, shapes, and states including loading and disabled. Use it as a primary call-to-action, a secondary control, or an icon-only affordance.
   </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>primary</code> for the main call-to-action on a page — limit to one per section for visual clarity.</Section.ListItem>
+    <Section.ListItem>Use <code>secondary</code> or <code>outline</code> for supporting actions, and <code>ghost</code> for inline or tertiary controls.</Section.ListItem>
+    <Section.ListItem>Reserve semantic variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) for actions with explicit status outcomes.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders as a native <code>&lt;button&gt;</code> element with built-in keyboard support.</Section.ListItem>
+    <Section.ListItem><code>Space</code> or <code>Enter</code> activates the button.</Section.ListItem>
+    <Section.ListItem>When <code>loading</code> is set, the button shows a spinner overlay with <code>role="status"</code> and becomes non-interactive.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the button is removed from the tab order and cannot receive focus.</Section.ListItem>
+    <Section.ListItem>Use the <code>render</code> prop to render as a link (<code>&lt;a&gt;</code>) when the button navigates to a URL, preserving semantic meaning.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Button } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -157,31 +180,31 @@ description: A clickable element that triggers an action or event.
         name: "variant",
         type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info"',
         default: '"primary"',
-        description: "Sets the visual style.",
+        description: "Controls the background and text color to communicate the intent of the action. Use `primary` for the main call-to-action and `ghost` for minimal visual weight.",
       },
       {
         name: "size",
         type: '"large" | "medium" | "small" | "x-small"',
         default: '"medium"',
-        description: "Sets the size.",
+        description: "Controls the height, padding, and font size. Use `large` for primary page actions and `x-small` for compact toolbars.",
       },
       {
         name: "shape",
         type: '"square" | "circle" | "rounded"',
         default: '"square"',
-        description: "Sets the shape.",
+        description: "Controls the border-radius. Use `square` for standard actions, `rounded` for pill-shaped labels, and `circle` with `svgOnly` for icon-only buttons.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "Whether the button is disabled.",
+        description: "Prevents interaction and visually dims the button. Disabled buttons are excluded from the tab order.",
       },
       {
         name: "loading",
         type: "boolean",
         default: "false",
-        description: "Displays a spinner and disables interaction.",
+        description: "Overlays a spinner and prevents interaction. Use during async operations like form submission or API calls.",
       },
       {
         name: "prefix",
@@ -197,23 +220,23 @@ description: A clickable element that triggers an action or event.
         name: "svgOnly",
         type: "boolean",
         default: "false",
-        description: "When true, renders as an icon-only button.",
+        description: "Removes text padding and renders the button as a square icon container. Combine with `circle` shape for round icon buttons.",
       },
       {
         name: "weight",
         type: "FontWeight",
         default: '"medium"',
-        description: "Sets the font weight of the label.",
+        description: "Overrides the default font weight of the label text.",
       },
       {
         name: "spinnerVariant",
         type: "SpinnerVariant",
-        description: "Overrides the spinner style during loading.",
+        description: "Overrides the spinner color when loading. Useful when the default spinner does not contrast well against a custom background.",
       },
       {
         name: "render",
         type: "RenderProp",
-        description: "Custom render prop for polymorphic rendering.",
+        description: "Replaces the default `<button>` element for polymorphic rendering. For example, pass `<a>` to render a link that looks like a button.",
       },
     ]}
   />

@@ -8,6 +8,27 @@ description: A control that lets users toggle a boolean or intermediate state.
   <Section.Text>
     The Checkbox component allows users to select or deselect an option. It supports three states: on, off, and intermediate (indeterminate). Use it in forms, filter panels, and multi-selection scenarios.
   </Section.Text>
+  <Section.Text>
+    Checkbox is a controlled component — manage its state via `status` and `onChange`. Use the `intermediate` state for "select all" patterns where only some children are selected. For mutually exclusive choices, use RadioGroup instead.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="checkbox"</code> and <code>aria-checked</code> states for assistive technologies.</Section.ListItem>
+    <Section.ListItem><code>Space</code> toggles the checkbox. <code>Tab</code> moves focus between checkboxes.</Section.ListItem>
+    <Section.ListItem>The <code>intermediate</code> state maps to <code>aria-checked="mixed"</code>, communicating a partial selection to assistive technologies.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, it is automatically associated with the checkbox for screen readers.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the checkbox is visually dimmed and excluded from keyboard navigation.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Checkbox } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -92,35 +113,35 @@ description: A control that lets users toggle a boolean or intermediate state.
         name: "status",
         type: '"on" | "off" | "intermediate"',
         required: true,
-        description: "The current state of the checkbox.",
+        description: "The current checked state. `\"on\"` shows a checkmark, `\"off\"` shows an empty box, and `\"intermediate\"` shows a dash for partial selection.",
       },
       {
         name: "onChange",
         type: '(status: "on" | "off" | "intermediate") => void',
         required: true,
-        description: "Callback invoked when the checkbox state changes.",
+        description: "Callback invoked when the user toggles the checkbox. Receives the new status value.",
       },
       {
         name: "label",
         type: "string",
-        description: "Label text displayed next to the checkbox.",
+        description: "Label text displayed next to the checkbox, automatically associated for screen reader accessibility.",
       },
       {
         name: "size",
         type: '"large" | "medium" | "small"',
         default: '"medium"',
-        description: "Sets the size.",
+        description: "Controls the checkbox dimensions and label font size. Use `large` for touch-friendly interfaces and `small` for compact layouts.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "Whether the checkbox is disabled.",
+        description: "Prevents interaction and visually dims the checkbox. Disabled checkboxes are excluded from keyboard navigation.",
       },
       {
         name: "id",
         type: "string",
-        description: "The HTML id attribute of the underlying input element.",
+        description: "The HTML `id` attribute. Auto-generated when not provided, maintaining the label-checkbox association.",
       },
     ]}
   />

@@ -8,6 +8,26 @@ description: A text field for collecting user input.
   <Section.Text>
     The Input component is a single-line text field. It supports labels, descriptions, error messages, and multiple sizes. Use it in forms, search fields, and any scenario requiring free-form text input.
   </Section.Text>
+  <Section.Text>
+    Always provide a `label` for accessibility — it associates a visible `<label>` element with the input via the Field wrapper. Use `description` for persistent help text such as format requirements, and `error` only for validation feedback after interaction.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>When <code>label</code> is provided, the input is automatically wrapped in a <code>Field</code> component that associates a <code>&lt;label&gt;</code> element with the input.</Section.ListItem>
+    <Section.ListItem><code>error</code> and <code>description</code> messages are linked to the input via <code>aria-describedby</code>, ensuring screen readers announce them.</Section.ListItem>
+    <Section.ListItem>An auto-generated <code>id</code> is used when none is provided, maintaining the label-input association.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the input cannot be focused or edited and is excluded from form submission.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Input } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -89,36 +109,36 @@ description: A text field for collecting user input.
       {
         name: "label",
         type: "string",
-        description: "Label text displayed above the input field.",
+        description: "Label text displayed above the input. When provided, the input is wrapped in a Field component with an associated `<label>` element.",
       },
       {
         name: "size",
         type: '"large" | "medium" | "small" | "x-small"',
         default: '"medium"',
-        description: "Sets the size.",
+        description: "Controls the height, padding, and font size. Choose based on surrounding content density — use `large` for standalone forms and `x-small` for compact data entry.",
       },
       {
         name: "disabled",
         type: "boolean",
         default: "false",
-        description: "Whether the input is disabled.",
+        description: "Prevents interaction and visually dims the input. Disabled inputs are excluded from form submission.",
       },
       {
         name: "error",
         type: "boolean | string",
         default: "false",
-        description: "When a string, displays an error message below the input. When true, applies error styling only.",
+        description: "When a string, displays a red error message below the input linked via `aria-describedby`. When `true`, applies error border styling without a message.",
       },
       {
         name: "description",
         type: "string",
-        description: "Help text displayed below the input field.",
+        description: "Help text displayed below the input in a muted style, linked via `aria-describedby`. Hidden when `error` is set.",
       },
       {
         name: "stretch",
         type: "boolean",
         default: "false",
-        description: "When true, the input expands to fill the container width.",
+        description: "Expands the input to fill the full width of its container. Use in form layouts where the input should match the grid column width.",
       },
     ]}
   />

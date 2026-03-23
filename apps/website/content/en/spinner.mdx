@@ -6,6 +6,23 @@ description: An animated loading indicator that communicates an in-progress stat
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>Spinner renders an accessible animated loading indicator. It announces a label to screen readers via `aria-label` and supports semantic color variants to match the surrounding context.</Section.Text>
+  <Section.Text>Use Spinner as a standalone loading indicator or pair it with Button's built-in `loading` prop. Always provide a meaningful `label` when the loading context is ambiguous — screen readers rely on this text to communicate what is happening.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="status"</code> and <code>aria-label</code> so screen readers announce the loading state.</Section.ListItem>
+    <Section.ListItem>The default label is <code>"Loading"</code>. Override it with a context-specific message (e.g., <code>"Saving changes"</code>, <code>"Fetching results"</code>) for better screen reader experience.</Section.ListItem>
+    <Section.ListItem>The spinner animation respects the <code>prefers-reduced-motion</code> media query.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Spinner } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -27,9 +44,9 @@ description: An animated loading indicator that communicates an in-progress stat
 
   <PropsTable
     data={[
-      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Sets the size of the spinner." },
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white"', default: '"primary"', description: "Sets the color variant. Use white on dark backgrounds." },
-      { name: "label", type: "string", default: '"Loading"', description: "Accessibility label passed to screen readers via aria-label." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the diameter of the spinner. Use `small` for inline indicators (e.g., inside buttons) and `large` for full-section loading states." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white"', default: '"primary"', description: "Controls the spinner blade color. Use `white` when displaying on a dark background for sufficient contrast." },
+      { name: "label", type: "string", default: '"Loading"', description: "Text passed to screen readers via `aria-label`. Defaults to `\"Loading\"`. Provide a specific message when the loading context is not obvious from surrounding content." },
     ]}
   />
 </Section>

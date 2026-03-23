@@ -6,6 +6,29 @@ description: A styled anchor element supporting variants, sizes, and external li
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>Link renders a styled anchor element built on top of Typography. It supports three visual variants for different contexts, four size options, and an optional external link indicator icon.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>inline</code> for standard hyperlinks within body text.</Section.ListItem>
+    <Section.ListItem>Use <code>current</code> to indicate the active page in a navigation context (it inherits the surrounding text color).</Section.ListItem>
+    <Section.ListItem>Use <code>plain</code> for interactive text that should not appear as a traditional link.</Section.ListItem>
+    <Section.ListItem>For external links, always include <code>Link.ExternalIcon</code> and set <code>target="_blank"</code> with <code>rel="noopener noreferrer"</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders as a native <code>&lt;a&gt;</code> element with built-in keyboard support. <code>Enter</code> activates the link.</Section.ListItem>
+    <Section.ListItem>For links that open in a new tab, combine <code>target="_blank"</code> with <code>rel="noopener noreferrer"</code> to prevent security issues.</Section.ListItem>
+    <Section.ListItem><code>Link.ExternalIcon</code> provides a visual indicator for external links. Consider also adding a screen-reader-only label like <code>"(opens in a new tab)"</code> for clarity.</Section.ListItem>
+    <Section.ListItem>Use the <code>render</code> prop to integrate with client-side routing (e.g., Next.js <code>Link</code>) while preserving the styled appearance.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Link } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -72,14 +95,14 @@ description: A styled anchor element supporting variants, sizes, and external li
 <Section>
   <Section.Title>API Reference</Section.Title>
   <PropsTable data={[
-    { name: "variant", type: '"inline" | "current" | "plain"', default: '"inline"', description: "Sets the link color and underline indicator style." },
-    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the Typography rendering mode." },
-    { name: "size", type: '"large" | "medium" | "small" | "x-small"', description: "Font size of the link, mapped to the Typography body size scale." },
+    { name: "variant", type: '"inline" | "current" | "plain"', default: '"inline"', description: "Controls the color and underline behavior. `inline` renders a colored underlined link, `current` inherits the parent text color, and `plain` removes the underline." },
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Selects the Typography rendering mode. Use `body` for inline text links and `heading` for larger navigational links." },
+    { name: "size", type: '"large" | "medium" | "small" | "x-small"', description: "Font size mapped to the Typography body scale: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
     { name: "weight", type: "FontWeight", description: "Overrides the font weight." },
     { name: "lineHeight", type: "LineHeight", description: "Overrides the line height." },
-    { name: "indicator", type: "boolean", description: "Explicitly sets whether the underline indicator is shown. Defaults to true for inline and current variants." },
-    { name: "render", type: "RenderProp", description: "Render prop that replaces the default anchor element." },
-    { name: "href", type: "string", description: "URL the link points to. Passed through to the underlying anchor element." },
+    { name: "indicator", type: "boolean", description: "Controls whether the underline indicator is shown. Defaults to `true` for `inline` and `current` variants." },
+    { name: "render", type: "RenderProp", description: "Replaces the default `<a>` element. Use this to integrate with framework-specific routing components like Next.js Link." },
+    { name: "href", type: "string", description: "The destination URL. Passed through to the underlying anchor element." },
   ]} />
 </Section>
 

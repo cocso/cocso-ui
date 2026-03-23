@@ -6,6 +6,28 @@ description: Navigation controls for browsing paginated content.
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>Pagination renders a row of page number buttons with previous/next controls. It is a controlled component; the parent manages the current page via `page` and `onChange`. The number of visible page buttons can be configured with `maxVisible`.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Pagination for navigating large data sets split across pages.</Section.ListItem>
+    <Section.ListItem>The default <code>maxVisible</code> of 5 is suitable for most layouts — reduce it for narrow containers or mobile views.</Section.ListItem>
+    <Section.ListItem>Combine with data tables or list components for a complete paginated interface.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders inside a <code>&lt;nav&gt;</code> element for landmark navigation.</Section.ListItem>
+    <Section.ListItem>The current page button has <code>aria-current="page"</code>, communicating the active page to screen readers.</Section.ListItem>
+    <Section.ListItem>Previous and Next buttons are automatically disabled at the first and last pages respectively.</Section.ListItem>
+    <Section.ListItem>Each page button is keyboard-focusable with <code>Tab</code> and activatable with <code>Enter</code> or <code>Space</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Pagination } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -27,10 +49,10 @@ description: Navigation controls for browsing paginated content.
 
   <PropsTable
     data={[
-      { name: "page", type: "number", required: true, description: "The current active page number (1-based)." },
-      { name: "totalPages", type: "number", required: true, description: "Total number of pages." },
-      { name: "onChange", type: "(pageNumber: number) => void", required: true, description: "Callback invoked when the user selects a page." },
-      { name: "maxVisible", type: "number", default: "5", description: "Maximum number of page buttons shown before ellipses are inserted." },
+      { name: "page", type: "number", required: true, description: "The current active page number (1-based). This is a controlled value — update it in the `onChange` callback." },
+      { name: "totalPages", type: "number", required: true, description: "Total number of pages. Determines the range of page buttons and ellipsis behavior." },
+      { name: "onChange", type: "(pageNumber: number) => void", required: true, description: "Callback invoked when the user clicks a page number or the previous/next buttons. Receives the target page number." },
+      { name: "maxVisible", type: "number", default: "5", description: "Maximum number of page buttons shown before ellipses are inserted. Reduce for narrow containers; increase for wide layouts." },
     ]}
   />
 </Section>

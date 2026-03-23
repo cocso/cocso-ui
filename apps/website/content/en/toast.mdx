@@ -14,6 +14,28 @@ description: A concise non-modal notification that appears at the edge of the sc
     <Section.ListItem>Toasts stack and auto-dismiss after a configurable duration.</Section.ListItem>
     <Section.ListItem>Supports <code>success</code>, <code>error</code>, <code>info</code>, and <code>warning</code> semantic variants.</Section.ListItem>
   </Section.UnorderedList>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Toast for transient, non-blocking feedback about completed actions — "Saved successfully", "Link copied", "Item deleted".</Section.ListItem>
+    <Section.ListItem>For errors that require user action or decisions, use Dialog instead.</Section.ListItem>
+    <Section.ListItem>Keep toast messages concise (under 100 characters) so they can be read at a glance.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Toasts render in an <code>aria-live="polite"</code> region, so screen readers announce them without interrupting the current task.</Section.ListItem>
+    <Section.ListItem>Semantic variants (<code>success</code>, <code>error</code>, etc.) provide both visual and announced context.</Section.ListItem>
+    <Section.ListItem>Users can dismiss toasts manually before auto-dismiss, supporting users who process information at different speeds.</Section.ListItem>
+    <Section.ListItem>Avoid using toasts for critical information that requires user action — the auto-dismiss timer may cause users to miss the message.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Toaster, toast } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -63,22 +85,22 @@ export default function ToastDefault() {
   <Section.Text>**toast function**</Section.Text>
   <PropsTable
     data={[
-      { name: "toast(message)", type: "function", description: "Displays a default neutral toast with the given message." },
-      { name: "toast.success(message)", type: "function", description: "Displays a success toast." },
-      { name: "toast.error(message)", type: "function", description: "Displays an error toast." },
-      { name: "toast.info(message)", type: "function", description: "Displays an info toast." },
-      { name: "toast.warning(message)", type: "function", description: "Displays a warning toast." },
-      { name: "toast.dismiss(id?)", type: "function", description: "Dismisses a specific toast by id, or all toasts when called without arguments." },
+      { name: "toast(message)", type: "function", description: "Displays a default neutral toast notification with the given message string." },
+      { name: "toast.success(message)", type: "function", description: "Displays a green success toast confirming a completed action." },
+      { name: "toast.error(message)", type: "function", description: "Displays a red error toast signaling a failure. For errors requiring user action, consider Dialog instead." },
+      { name: "toast.info(message)", type: "function", description: "Displays a blue informational toast providing context or status updates." },
+      { name: "toast.warning(message)", type: "function", description: "Displays a yellow warning toast alerting about a potentially unwanted outcome." },
+      { name: "toast.dismiss(id?)", type: "function", description: "Dismisses a specific toast by its ID, or dismisses all toasts when called without arguments." },
     ]}
   />
 
   <Section.Text>**Toaster**</Section.Text>
   <PropsTable
     data={[
-      { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "Screen position where toasts are rendered." },
-      { name: "duration", type: "number", default: "4000", description: "Auto-dismiss duration in milliseconds." },
-      { name: "richColors", type: "boolean", default: "false", description: "When true, applies richer semantic color styles to variants." },
-      { name: "expand", type: "boolean", default: "false", description: "When true, toasts are always shown expanded instead of stacked." },
+      { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "Screen corner where toasts stack. Choose based on your layout — avoid overlapping primary navigation or action buttons." },
+      { name: "duration", type: "number", default: "4000", description: "Auto-dismiss duration in milliseconds. Increase for longer messages; set to `Infinity` for persistent toasts." },
+      { name: "richColors", type: "boolean", default: "false", description: "When `true`, applies richer, more saturated background colors to semantic variants for stronger visual emphasis." },
+      { name: "expand", type: "boolean", default: "false", description: "When `true`, toasts are always shown in their expanded form. When `false`, toasts stack compactly and expand on hover." },
     ]}
   />
 </Section>

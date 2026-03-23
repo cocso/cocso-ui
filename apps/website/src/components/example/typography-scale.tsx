@@ -8,7 +8,7 @@ export default function TypographyScale() {
       {sizes.map((size) => (
         <div className="flex items-baseline gap-4" key={size}>
           <span className="w-8 shrink-0 text-right font-mono text-neutral-400 text-xs">{size}</span>
-          <Typography type="custom" size={size}>다람쥐 헌 쳇바퀴에 타고파</Typography>
+          <Typography type="custom" size={size}>의약 CSO의 새로운 기준을 만듭니다.</Typography>
         </div>
       ))}
     </div>

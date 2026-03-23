@@ -6,6 +6,28 @@ description: A small label that highlights status, category, or quantity.
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>Badge is a small inline element that communicates status, category, or numeric quantity. It supports semantic color variants, three sizes, and three shape options, covering the most common labeling patterns.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>primary</code> and <code>secondary</code> for neutral category labels or tags.</Section.ListItem>
+    <Section.ListItem>Semantic variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) are ideal for status indicators.</Section.ListItem>
+    <Section.ListItem>The <code>outline</code> variant works well for subtle, low-emphasis labels.</Section.ListItem>
+    <Section.ListItem>Badge is a non-interactive display element — for clickable labels, use Button with an appropriate variant instead.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Badge renders as a <code>&lt;div&gt;</code> with no interactive role. Screen readers read the text content naturally.</Section.ListItem>
+    <Section.ListItem>When the badge content updates dynamically (e.g., a notification count), consider adding <code>role="status"</code> to announce changes to assistive technologies.</Section.ListItem>
+    <Section.ListItem>Ensure sufficient color contrast between the badge text and background, especially for the <code>outline</code> variant.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Badge } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -33,10 +55,10 @@ description: A small label that highlights status, category, or quantity.
 
   <PropsTable
     data={[
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "Sets the color variant conveying semantic meaning." },
-      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Sets the badge padding and font size." },
-      { name: "shape", type: '"square" | "circle" | "rounded"', default: '"square"', description: "Sets the border-radius. Use circle for numeric quantity badges." },
-      { name: "children", type: "ReactNode", required: true, description: "Content rendered inside the badge." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "Controls the background and text color to communicate semantic meaning. Use `secondary` for neutral labels and semantic variants for status indicators." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the padding and font size. Use `small` for inline status indicators and `large` for prominent category labels." },
+      { name: "shape", type: '"square" | "circle" | "rounded"', default: '"square"', description: "Controls the border-radius. Use `circle` for numeric counts (e.g., notification badges) and `rounded` for pill-shaped tags." },
+      { name: "children", type: "ReactNode", required: true, description: "The label text or elements rendered inside the badge." },
     ]}
   />
 </Section>

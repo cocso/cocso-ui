@@ -5,7 +5,24 @@ description: A form field wrapper that associates a label, description, and erro
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>Field wraps a form control with an accessible label and optional help text. It provides a description for additional guidance and an error message for validation feedback. Only one of description or error is shown at a time; error takes precedence.</Section.Text>
+  <Section.Text>Field wraps a form control with an accessible label and optional help text. It provides a description for additional guidance and an error message for validation feedback. Only one of description or error is shown at a time; error takes precedence. Note that Input and Select already integrate Field internally when a `label` prop is provided. Use Field directly when wrapping custom form controls or when you need a standalone label/error/description wrapper.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Associates a <code>&lt;label&gt;</code> element with the child control via <code>htmlFor</code>/<code>id</code> for screen reader accessibility.</Section.ListItem>
+    <Section.ListItem><code>error</code> and <code>description</code> text are linked to the child control via <code>aria-describedby</code>.</Section.ListItem>
+    <Section.ListItem>Only one of <code>error</code> or <code>description</code> is rendered at a time — <code>error</code> takes precedence when both are provided.</Section.ListItem>
+    <Section.ListItem>When <code>required</code> is <code>false</code>, an "(선택)" optional indicator appears next to the label.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Field } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -34,12 +51,12 @@ description: A form field wrapper that associates a label, description, and erro
 <Section>
   <Section.Title>API Reference</Section.Title>
   <PropsTable data={[
-    { name: "label", type: "string", required: true, description: "Label text rendered above the form control." },
-    { name: "children", type: "ReactNode", required: true, description: "The form control element (e.g. Input, Select)." },
-    { name: "description", type: "string", description: "Help text displayed below the control when there is no error." },
-    { name: "error", type: "string", description: "Error message displayed below the control. When set, replaces description." },
-    { name: "htmlFor", type: "string", description: "The id of the form control used for the label's for attribute. Improves accessibility when the child is not automatically associated." },
-    { name: "required", type: "boolean", description: "When false, an optional indicator appears next to the label." },
+    { name: "label", type: "string", required: true, description: "Label text rendered as a `<label>` element above the form control. Required for accessibility." },
+    { name: "children", type: "ReactNode", required: true, description: "The form control element (e.g., Input, Select, or any custom input). Receives `aria-describedby` via the Field context." },
+    { name: "description", type: "string", description: "Help text displayed below the control in a muted style. Hidden when `error` is set." },
+    { name: "error", type: "string", description: "Validation error message displayed below the control in red. Takes precedence over `description` when both are set." },
+    { name: "htmlFor", type: "string", description: "The `id` of the form control, used for the label's `for` attribute. Provide when the child control's `id` is not auto-detected." },
+    { name: "required", type: "boolean", description: "When `false`, displays an \"(선택)\" optional indicator next to the label, signaling the field is not mandatory." },
   ]} />
 </Section>
 

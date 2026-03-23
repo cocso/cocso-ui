@@ -6,6 +6,22 @@ description: A domain-specific indicator for displaying pharmaceutical stock lev
 <Section>
   <Section.Title>Overview</Section.Title>
   <Section.Text>StockQuantityStatus is a domain-specific component that displays a color-coded stock level indicator alongside a label. It is used in pharmaceutical inventory management contexts to communicate whether stock is plentiful (여유), moderate (보통), or low (부족).</Section.Text>
+  <Section.Text>This component is specific to pharmaceutical inventory management. Pair it with inventory tables or product detail views to provide an at-a-glance stock level assessment.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>The label text (<code>"여유"</code>, <code>"보통"</code>, <code>"부족"</code>) is read by screen readers, providing a text equivalent of the color indicator.</Section.ListItem>
+    <Section.ListItem>Color is not the sole indicator — the text label always accompanies the color-coded icon, ensuring accessibility for color-blind users.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { StockQuantityStatus } from "@cocso-ui/react";
+  ```
 </Section>
 
 <Section>
@@ -31,7 +47,7 @@ description: A domain-specific indicator for displaying pharmaceutical stock lev
 <Section>
   <Section.Title>API Reference</Section.Title>
   <PropsTable data={[
-    { name: "quantity", type: '"보통" | "여유" | "부족"', required: true, description: 'The stock level value. "여유" renders blue (info), "보통" renders green (success), "부족" renders red (danger).' },
+    { name: "quantity", type: '"보통" | "여유" | "부족"', required: true, description: 'The stock level status. `"여유"` (plenty) renders in blue, `"보통"` (moderate) renders in green, and `"부족"` (low) renders in red. The label is displayed alongside a color-coded SVG icon.' },
   ]} />
 </Section>
 
