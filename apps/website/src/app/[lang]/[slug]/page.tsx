@@ -2,7 +2,7 @@ import { colors, Typography } from "@cocso-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "~/components/ui/section";
-import type { Locale } from "~/libs/i18n";
+import { type Locale, i18n } from "~/libs/i18n";
 import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 
@@ -10,8 +10,16 @@ interface Props {
   params: Promise<{ lang: Locale; slug: string }>;
 }
 
+const isValidLocale = (lang: string): lang is Locale =>
+  (i18n.languages as readonly string[]).includes(lang);
+
 const Page = async ({ params }: Props) => {
   const { lang, slug } = await params;
+
+  if (!isValidLocale(lang)) {
+    notFound();
+  }
+
   const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
 
   if (!page) {
@@ -60,6 +68,11 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const { lang, slug } = await params;
+
+  if (!isValidLocale(lang)) {
+    notFound();
+  }
+
   const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
 
   if (!page) {
