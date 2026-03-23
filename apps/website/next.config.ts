@@ -36,13 +36,6 @@ const nextConfig: NextConfig = {
         destination: "/ko/components/accordion",
         permanent: false,
       },
-      // Legacy top-level routes → new category-prefixed locations
-      { source: "/introduction", destination: "/getting-started/introduction", permanent: true },
-      { source: "/installation", destination: "/getting-started/installation", permanent: true },
-      { source: "/colors", destination: "/foundations/colors", permanent: true },
-      { source: "/icons", destination: "/foundations/icons", permanent: true },
-      { source: "/typography", destination: "/components/typography", permanent: true },
-      { source: "/button", destination: "/components/button", permanent: true },
     ];
   },
   rewrites() {
