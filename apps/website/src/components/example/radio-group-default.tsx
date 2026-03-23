@@ -3,21 +3,29 @@
 import { RadioGroup } from "@cocso-ui/react";
 
 export default function RadioGroupDefault() {
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" },
+  ] as const;
+
   return (
     <div className="p-4">
       <RadioGroup defaultValue="option1">
-        <RadioGroup.Item value="option1">
-          <RadioGroup.Indicator />
-          Option 1
-        </RadioGroup.Item>
-        <RadioGroup.Item value="option2">
-          <RadioGroup.Indicator />
-          Option 2
-        </RadioGroup.Item>
-        <RadioGroup.Item value="option3">
-          <RadioGroup.Indicator />
-          Option 3
-        </RadioGroup.Item>
+        {options.map((option) => {
+          const id = `radio-group-default-${option.value}`;
+
+          return (
+            <div className="flex items-center gap-2" key={option.value}>
+              <RadioGroup.Item id={id} value={option.value}>
+                <RadioGroup.Indicator />
+              </RadioGroup.Item>
+              <label className="cursor-pointer" htmlFor={id}>
+                {option.label}
+              </label>
+            </div>
+          );
+        })}
       </RadioGroup>
     </div>
   );

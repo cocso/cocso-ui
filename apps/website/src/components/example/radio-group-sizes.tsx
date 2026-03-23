@@ -3,20 +3,38 @@
 import { RadioGroup, Typography } from "@cocso-ui/react";
 
 export default function RadioGroupSizes() {
+  const options = [
+    { label: "Option A", value: "a" },
+    { label: "Option B", value: "b" },
+  ] as const;
+
   return (
     <div className="flex flex-col gap-6 p-4">
       {(["large", "medium", "small"] as const).map((size) => (
         <div key={size}>
-          <Typography type="custom" className="mb-2 text-neutral-500" size={12} weight="medium">{size}</Typography>
+          <Typography
+            className="mb-2 text-neutral-500"
+            size={12}
+            type="custom"
+            weight="medium"
+          >
+            {size}
+          </Typography>
           <RadioGroup defaultValue="a">
-            <RadioGroup.Item size={size} value="a">
-              <RadioGroup.Indicator />
-              Option A
-            </RadioGroup.Item>
-            <RadioGroup.Item size={size} value="b">
-              <RadioGroup.Indicator />
-              Option B
-            </RadioGroup.Item>
+            {options.map((option) => {
+              const id = `radio-group-size-${size}-${option.value}`;
+
+              return (
+                <div className="flex items-center gap-2" key={option.value}>
+                  <RadioGroup.Item id={id} size={size} value={option.value}>
+                    <RadioGroup.Indicator />
+                  </RadioGroup.Item>
+                  <label className="cursor-pointer" htmlFor={id}>
+                    {option.label}
+                  </label>
+                </div>
+              );
+            })}
           </RadioGroup>
         </div>
       ))}
