@@ -7,8 +7,12 @@ export default function SwitchDefault() {
   const [checked, setChecked] = useState(false);
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <Switch checked={checked} label="Enable notifications" onCheckedChange={setChecked} />
+    <div className="flex w-full max-w-80 flex-col gap-4 p-4 [&_label]:whitespace-nowrap">
+      <Switch
+        checked={checked}
+        label="Enable alerts"
+        onCheckedChange={setChecked}
+      />
     </div>
   );
 }
