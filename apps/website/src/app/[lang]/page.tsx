@@ -12,7 +12,7 @@ const Page = async ({ params }: Props) => {
     notFound();
   }
 
-  redirect(`/${lang === "en" ? "" : `${lang}/`}introduction`);
+  redirect(`/${lang === "en" ? "" : `${lang}/`}getting-started/introduction`);
 };
 
 export default Page;

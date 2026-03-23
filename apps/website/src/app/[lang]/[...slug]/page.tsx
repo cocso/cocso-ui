@@ -7,7 +7,7 @@ import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 
 interface Props {
-  params: Promise<{ lang: Locale; slug: string }>;
+  params: Promise<{ lang: Locale; slug: string[] }>;
 }
 
 const isValidLocale = (lang: string): lang is Locale =>
@@ -20,7 +20,7 @@ const Page = async ({ params }: Props) => {
     notFound();
   }
 
-  const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
+  const page = source.getPage(slug, lang) ?? source.getPage(slug, "en");
 
   if (!page) {
     notFound();
@@ -53,13 +53,11 @@ export default Page;
 export const generateStaticParams = () =>
   source.getLanguages().flatMap(({ language, pages }) =>
     pages.map((page) => {
-      const slug = page.slugs.join("/");
+      const slugs = page.slugs.map((s) => s);
 
       return {
         lang: language,
-        slug: slug.startsWith(`${language}/`)
-          ? slug.slice(language.length + 1)
-          : slug,
+        slug: slugs[0] === language ? slugs.slice(1) : slugs,
       };
     })
   );
@@ -73,7 +71,7 @@ export const generateMetadata = async ({
     notFound();
   }
 
-  const page = source.getPage([slug], lang) ?? source.getPage([slug], "en");
+  const page = source.getPage(slug, lang) ?? source.getPage(slug, "en");
 
   if (!page) {
     notFound();

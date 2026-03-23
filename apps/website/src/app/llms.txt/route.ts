@@ -3,24 +3,15 @@ import { source } from "~/libs/source";
 export function GET() {
   const pages = source.getPages("en");
 
-  const gettingStarted = pages.filter((p) =>
-    ["introduction", "installation"].includes(p.slugs[0])
-  );
-  const foundations = pages.filter((p) =>
-    ["colors", "typography", "icons"].includes(p.slugs[0])
-  );
-  const components = pages.filter(
-    (p) =>
-      !["introduction", "installation", "colors", "typography", "icons"].includes(
-        p.slugs[0]
-      )
-  );
+  const gettingStarted = pages.filter((p) => p.slugs[0] === "getting-started");
+  const foundations = pages.filter((p) => p.slugs[0] === "foundations");
+  const components = pages.filter((p) => p.slugs[0] === "components");
 
   const formatLinks = (items: typeof pages) =>
     items
       .map(
         (p) =>
-          `- [${p.data.title}](https://cocso-ui.com/${p.slugs[0]}.md): ${p.data.description ?? ""}`
+          `- [${p.data.title}](https://cocso-ui.com/${p.slugs.join("/")}.md): ${p.data.description ?? ""}`
       )
       .join("\n");
 

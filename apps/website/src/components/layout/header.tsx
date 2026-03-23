@@ -16,7 +16,9 @@ export const Header = () => {
   const { setOpenSearch } = useSearchContext();
   const locale = useLocale();
   const homeHref =
-    locale === "en" ? "/introduction" : `/${locale}/introduction`;
+    locale === "en"
+      ? "/getting-started/introduction"
+      : `/${locale}/getting-started/introduction`;
 
   return (
     <header className="fixed top-0 right-0 left-0 z-header row-between mx-auto h-(--size-header-height) w-full max-w-(--size-app-width) border-neutral-200 border-b bg-white">

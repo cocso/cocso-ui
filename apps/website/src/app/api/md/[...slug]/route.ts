@@ -27,23 +27,23 @@ const PIPE_RE = /\|/g;
 const SECTION_SPLIT_RE = /^## /gm;
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export async function GET(_request: Request, { params }: Props) {
   const { slug } = await params;
 
-  const page = source.getPage([slug], "en");
+  const page = source.getPage(slug, "en");
   if (!page) {
     return new Response("Not found", { status: 404 });
   }
 
-  const title = page.data.title ?? slug;
+  const title = page.data.title ?? slug.join("/");
   const description = page.data.description ?? "";
 
   let body: string;
   try {
-    const rawMdx = await readFile(join(CONTENT_DIR, `${slug}.mdx`), "utf-8");
+    const rawMdx = await readFile(join(CONTENT_DIR, `${slug.join("/")}.mdx`), "utf-8");
     const converted = await mdxToMarkdown(rawMdx);
     body = converted.includes("## API Reference")
       ? restructureComponentDoc(converted)
@@ -254,6 +254,6 @@ function extractField(objStr: string, field: string): string | undefined {
 
 export function generateStaticParams() {
   return source.getPages("en").map((page) => ({
-    slug: page.slugs.join("/").replace(EN_PREFIX_PATTERN, ""),
+    slug: page.slugs.filter((s) => s !== "en"),
   }));
 }
