@@ -24,6 +24,8 @@ const EXCESSIVE_NEWLINES_RE = /\n{3,}/g;
 const PROPS_ENTRY_RE = /\{[^{}]*\}/g;
 const PIPE_RE = /\|/g;
 const SECTION_SPLIT_RE = /^## /gm;
+const MARKDOWN_CODE_FENCE_RE = /```([^\n`]*)\n([\s\S]*?)\n```/g;
+const MARKDOWN_INLINE_CODE_RE = /`([^`\n]+)`/g;
 
 const OVERVIEW_SECTION_TITLES = new Set(["overview"]);
 const API_REFERENCE_SECTION_TITLES = new Set(["api reference"]);
@@ -134,6 +136,8 @@ async function mdxToMarkdown(raw: string): Promise<string> {
   md = md.replace(EXAMPLE_PLACEHOLDER_RE, (_, name: string) =>
     examples.has(name) ? `\`\`\`tsx\n${examples.get(name)}\n\`\`\`` : ""
   );
+
+  md = decodeMarkdownCodeEntities(md);
 
   // Clean up excessive blank lines
   md = md.replace(EXCESSIVE_NEWLINES_RE, "\n\n");
@@ -275,6 +279,40 @@ function propsTableToMarkdown(dataStr: string): string {
     "| --- | --- | --- | --- |",
     ...rows,
   ].join("\n");
+}
+
+const HTML_ENTITY_MAP: Record<string, string> = {
+  "&lt;": "<",
+  "&gt;": ">",
+  "&amp;": "&",
+  "&quot;": '"',
+  "&#39;": "'",
+};
+const HTML_ENTITY_RE = /&(?:lt|gt|amp|quot|#39);/g;
+
+function decodeHtmlEntities(text: string): string {
+  return text.replace(
+    HTML_ENTITY_RE,
+    (entity) => HTML_ENTITY_MAP[entity] ?? entity
+  );
+}
+
+function decodeMarkdownCodeEntities(markdown: string): string {
+  const decodedFences = markdown.replace(
+    MARKDOWN_CODE_FENCE_RE,
+    (_fullMatch, infoString: string, code: string) => {
+      const decodedCode = decodeHtmlEntities(code);
+      return `\`\`\`${infoString}\n${decodedCode}\n\`\`\``;
+    }
+  );
+
+  return decodedFences.replace(
+    MARKDOWN_INLINE_CODE_RE,
+    (_fullMatch, code: string) => {
+      const decodedCode = decodeHtmlEntities(code);
+      return `\`${decodedCode}\``;
+    }
+  );
 }
 
 function extractField(objStr: string, field: string): string | undefined {
