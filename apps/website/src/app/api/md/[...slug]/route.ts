@@ -116,6 +116,9 @@ async function mdxToMarkdown(raw: string): Promise<string> {
   md = md.replace(COMPONENT_EXAMPLE_CLOSE_RE, "");
   md = md.replace(PAGE_NAV_RE, "");
 
+  // Strip any remaining custom JSX component tags (PascalCase)
+  md = md.replace(/<\/?[A-Z][A-Za-z.]*(?:\s[^>]*)?\/?>/g, "");
+
   // Remove JSX nesting indentation (2–4 spaces)
   md = md.replace(JSX_INDENT_RE, "");
 

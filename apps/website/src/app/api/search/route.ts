@@ -1,8 +1,8 @@
-import { createSearchAPI } from "fumadocs-core/search/server";
+import { createI18nSearchAPI } from "fumadocs-core/search/server";
 
 import { source } from "~/libs/source";
 
-export const { GET } = createSearchAPI("advanced", {
+export const { GET } = createI18nSearchAPI("advanced", {
   indexes: source.getLanguages().flatMap(({ language, pages }) =>
     pages.map((page) => ({
       id: page.url,

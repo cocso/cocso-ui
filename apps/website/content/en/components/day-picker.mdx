@@ -38,7 +38,8 @@ description: A date picker that opens a calendar popover for selecting a single 
     ```tsx
     "use client";
 
-    import { DayPicker } from "@cocso-ui/react";
+    import { Button, DayPicker } from "@cocso-ui/react";
+    import { CalendarMonthIcon } from "@cocso-ui/react-icons";
     import { useState } from "react";
 
     export default function DayPickerDefault() {
@@ -46,8 +47,15 @@ description: A date picker that opens a calendar popover for selecting a single 
 
       return (
         <div className="p-4">
-          <DayPicker onValueChange={setValue} value={value ?? undefined} />
-          {value && <p className="mt-2 text-sm text-neutral-500">Selected: {value.toLocaleDateString()}</p>}
+          <DayPicker
+            onValueChange={setValue}
+            trigger={
+              <Button prefix={<CalendarMonthIcon size={16} />} variant="outline">
+                {value ? value.toLocaleDateString("ko-KR") : "Select date"}
+              </Button>
+            }
+            value={value ?? undefined}
+          />
         </div>
       );
     }
