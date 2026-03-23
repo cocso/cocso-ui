@@ -17,6 +17,7 @@
     "@cocso-ui/react": "workspace:^",
     "@cocso-ui/react-icons": "workspace:^",
     "@suspensive/react": "^3.19.2",
+    "flexsearch": "^0.8.212",
     "fumadocs-core": "^16.6.16",
     "fumadocs-mdx": "^14.2.9",
     "fumadocs-ui": "^16.6.16",
