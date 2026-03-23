@@ -25,6 +25,11 @@ const PROPS_ENTRY_RE = /\{[^{}]*\}/g;
 const PIPE_RE = /\|/g;
 const SECTION_SPLIT_RE = /^## /gm;
 
+const OVERVIEW_SECTION_TITLES = new Set(["overview"]);
+const API_REFERENCE_SECTION_TITLES = new Set(["api reference"]);
+const ACCESSIBILITY_SECTION_TITLES = new Set(["accessibility", "접근성"]);
+const IMPORT_SECTION_TITLES = new Set(["import", "가져오기"]);
+
 interface Props {
   params: Promise<{ slug: string[] }>;
 }
@@ -42,7 +47,10 @@ export async function GET(_request: Request, { params }: Props) {
 
   let body: string;
   try {
-    const rawMdx = await readFile(join(CONTENT_DIR, `${slug.join("/")}.mdx`), "utf-8");
+    const rawMdx = await readFile(
+      join(CONTENT_DIR, `${slug.join("/")}.mdx`),
+      "utf-8"
+    );
     const converted = await mdxToMarkdown(rawMdx);
     body = converted.includes("## API Reference")
       ? restructureComponentDoc(converted)
@@ -164,10 +172,29 @@ function splitIntoSections(md: string): MdSection[] {
 function restructureComponentDoc(md: string): string {
   const sections = splitIntoSections(md);
 
-  const overview = sections.find((s) => s.title === "Overview");
-  const apiRef = sections.find((s) => s.title === "API Reference");
-  const exampleSections = sections.filter(
-    (s) => s.title !== "Overview" && s.title !== "API Reference"
+  const isOverviewSection = (title: string) =>
+    OVERVIEW_SECTION_TITLES.has(normalizeSectionTitle(title));
+  const isApiReferenceSection = (title: string) =>
+    API_REFERENCE_SECTION_TITLES.has(normalizeSectionTitle(title));
+  const isAccessibilitySection = (title: string) =>
+    ACCESSIBILITY_SECTION_TITLES.has(normalizeSectionTitle(title));
+  const isImportSection = (title: string) =>
+    IMPORT_SECTION_TITLES.has(normalizeSectionTitle(title));
+
+  const overview = sections.find((s) => isOverviewSection(s.title));
+  const apiRef = sections.find((s) => isApiReferenceSection(s.title));
+
+  const contentSections = sections.filter(
+    (s) => !(isOverviewSection(s.title) || isApiReferenceSection(s.title))
+  );
+  const accessibility = contentSections.find((s) =>
+    isAccessibilitySection(s.title)
+  );
+  const usage =
+    contentSections.find((s) => isImportSection(s.title)) ??
+    contentSections.find((s) => !isAccessibilitySection(s.title));
+  const examples = contentSections.filter(
+    (s) => s !== accessibility && s !== usage
   );
 
   const parts: string[] = [];
@@ -175,6 +202,10 @@ function restructureComponentDoc(md: string): string {
   // Overview text as intro paragraph
   if (overview?.content) {
     parts.push(overview.content, "");
+  }
+
+  if (accessibility?.content) {
+    parts.push("## Accessibility", "", accessibility.content, "");
   }
 
   // Installation
@@ -187,14 +218,14 @@ function restructureComponentDoc(md: string): string {
   );
 
   // Usage — first example section
-  if (exampleSections.length > 0) {
-    parts.push("", "## Usage", "", exampleSections[0].content);
+  if (usage?.content) {
+    parts.push("", "## Usage", "", usage.content);
   }
 
   // Examples — remaining sections demoted to ###
-  if (exampleSections.length > 1) {
+  if (examples.length > 0) {
     parts.push("", "## Examples");
-    for (const section of exampleSections.slice(1)) {
+    for (const section of examples) {
       parts.push("", `### ${section.title}`, "", section.content);
     }
   }
@@ -205,6 +236,10 @@ function restructureComponentDoc(md: string): string {
   }
 
   return parts.join("\n");
+}
+
+function normalizeSectionTitle(title: string): string {
+  return title.trim().toLowerCase();
 }
 
 // ---------------------------------------------------------------------------
