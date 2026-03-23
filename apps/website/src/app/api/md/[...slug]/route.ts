@@ -26,6 +26,8 @@ const PIPE_RE = /\|/g;
 const SECTION_SPLIT_RE = /^## /gm;
 const MARKDOWN_CODE_FENCE_RE = /```([^\n`]*)\n([\s\S]*?)\n```/g;
 const MARKDOWN_INLINE_CODE_RE = /`([^`\n]+)`/g;
+const INDENTED_CODE_FENCE_RE = /^([ \t]*)```([^\n`]*)\n([\s\S]*?)\n\1```/gm;
+const CODE_FENCE_PLACEHOLDER_RE = /<!--CODE_FENCE:(\d+)-->/g;
 
 const OVERVIEW_SECTION_TITLES = new Set(["overview"]);
 const API_REFERENCE_SECTION_TITLES = new Set(["api reference"]);
@@ -104,6 +106,19 @@ async function mdxToMarkdown(raw: string): Promise<string> {
     })
   );
 
+  // Protect code fences from JSX transformations
+  const codeFences: string[] = [];
+  md = md.replace(
+    INDENTED_CODE_FENCE_RE,
+    (_, indent: string, infoString: string, code: string) => {
+      const indentRe = new RegExp(`^${indent}`, "gm");
+      const strippedCode = code.replace(indentRe, "");
+      const index = codeFences.length;
+      codeFences.push(`\`\`\`${infoString}\n${strippedCode}\n\`\`\``);
+      return `<!--CODE_FENCE:${index}-->`;
+    }
+  );
+
   // Inline HTML → markdown
   md = md.replace(CODE_TAG_RE, "`$1`");
 
@@ -131,6 +146,12 @@ async function mdxToMarkdown(raw: string): Promise<string> {
 
   // Remove JSX nesting indentation (2–4 spaces)
   md = md.replace(JSX_INDENT_RE, "");
+
+  // Restore protected code fences
+  md = md.replace(
+    CODE_FENCE_PLACEHOLDER_RE,
+    (_, idx: string) => codeFences[Number(idx)]
+  );
 
   // Resolve example placeholders into code blocks (after indent strip)
   md = md.replace(EXAMPLE_PLACEHOLDER_RE, (_, name: string) =>
