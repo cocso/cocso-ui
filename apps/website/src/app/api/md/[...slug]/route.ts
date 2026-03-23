@@ -135,6 +135,9 @@ async function mdxToMarkdown(raw: string): Promise<string> {
     examples.has(name) ? `\`\`\`tsx\n${examples.get(name)}\n\`\`\`` : ""
   );
 
+  // Decode HTML entities (safe after all JSX tags are stripped)
+  md = decodeHtmlEntities(md);
+
   // Clean up excessive blank lines
   md = md.replace(EXCESSIVE_NEWLINES_RE, "\n\n");
 
@@ -275,6 +278,19 @@ function propsTableToMarkdown(dataStr: string): string {
     "| --- | --- | --- | --- |",
     ...rows,
   ].join("\n");
+}
+
+const HTML_ENTITY_MAP: Record<string, string> = {
+  "&lt;": "<",
+  "&gt;": ">",
+  "&amp;": "&",
+  "&quot;": '"',
+  "&#39;": "'",
+};
+const HTML_ENTITY_RE = /&(?:lt|gt|amp|quot|#39);/g;
+
+function decodeHtmlEntities(text: string): string {
+  return text.replace(HTML_ENTITY_RE, (entity) => HTML_ENTITY_MAP[entity] ?? entity);
 }
 
 function extractField(objStr: string, field: string): string | undefined {
