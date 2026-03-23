@@ -124,8 +124,8 @@ description: A control that lets users toggle a boolean or intermediate state.
       },
       {
         name: "onChange",
-        type: '(status: "on" | "off" | "intermediate") => void',
-        description: "Callback invoked when the user toggles the checkbox. Receives the new status value. Works in both controlled and uncontrolled modes.",
+        type: '(status: "on" | "off") => void',
+        description: "Callback invoked when the user toggles the checkbox. Receives `\"on\"` or `\"off\"` — the `\"intermediate\"` state is only settable via the `status` prop. Works in both controlled and uncontrolled modes.",
       },
       {
         name: "label",

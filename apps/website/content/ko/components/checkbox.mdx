@@ -124,8 +124,8 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
       },
       {
         name: "onChange",
-        type: '(status: "on" | "off" | "intermediate") => void',
-        description: "사용자가 체크박스를 토글할 때 호출되는 콜백입니다. 새로운 status 값을 받습니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
+        type: '(status: "on" | "off") => void',
+        description: "사용자가 체크박스를 토글할 때 호출되는 콜백입니다. `\"on\"` 또는 `\"off\"`를 전달받습니다. `\"intermediate\"` 상태는 `status` prop으로만 설정할 수 있습니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
       },
       {
         name: "label",
