@@ -9,7 +9,7 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
     Checkbox 컴포넌트는 사용자가 옵션을 선택하거나 선택 해제할 수 있게 합니다. on, off, intermediate(indeterminate) 세 가지 상태를 지원합니다. 폼, 필터 패널, 다중 선택 시나리오에 사용하세요.
   </Section.Text>
   <Section.UnorderedList>
-    <Section.ListItem>Checkbox는 제어형 컴포넌트입니다. <code>status</code>와 <code>onChange</code>를 통해 상태를 관리합니다.</Section.ListItem>
+    <Section.ListItem>Checkbox는 제어형(<code>status</code> + <code>onChange</code>)과 비제어형(<code>defaultStatus</code>) 모드를 모두 지원합니다.</Section.ListItem>
     <Section.ListItem>일부 자식 항목만 선택된 "전체 선택" 패턴에는 <code>intermediate</code> 상태를 사용합니다.</Section.ListItem>
     <Section.ListItem>상호 배타적인 선택에는 RadioGroup을 사용합니다.</Section.ListItem>
   </Section.UnorderedList>
@@ -36,7 +36,7 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
 <Section>
   <Section.Title>기본</Section.Title>
   <Section.Text>
-    로컬 상태로 제어되는 기본 체크박스입니다.
+    로컬 상태로 제어되는 기본 체크박스입니다. 비제어형으로 사용하려면 <code>defaultStatus</code>를 사용합니다.
   </Section.Text>
   <ComponentExample name="checkbox-default">
     ```tsx
@@ -72,9 +72,9 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
     export default function CheckboxSizes() {
       return (
         <div className="flex flex-col gap-4 p-4">
-          <Checkbox label="Large checkbox" onChange={() => {}} size="large" status="on" />
-          <Checkbox label="Medium checkbox" onChange={() => {}} size="medium" status="on" />
-          <Checkbox label="Small checkbox" onChange={() => {}} size="small" status="on" />
+          <Checkbox label="Large checkbox" size="large" status="on" />
+          <Checkbox label="Medium checkbox" size="medium" status="on" />
+          <Checkbox label="Small checkbox" size="small" status="on" />
         </div>
       );
     }
@@ -96,10 +96,10 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
     export default function CheckboxStates() {
       return (
         <div className="flex flex-col gap-4 p-4">
-          <Checkbox label="Checked" onChange={() => {}} status="on" />
-          <Checkbox label="Unchecked" onChange={() => {}} status="off" />
-          <Checkbox label="Intermediate" onChange={() => {}} status="intermediate" />
-          <Checkbox disabled label="Disabled" onChange={() => {}} status="on" />
+          <Checkbox label="Checked" status="on" />
+          <Checkbox label="Unchecked" status="off" />
+          <Checkbox label="Intermediate" status="intermediate" />
+          <Checkbox disabled label="Disabled" status="on" />
         </div>
       );
     }
@@ -114,14 +114,18 @@ description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는
       {
         name: "status",
         type: '"on" | "off" | "intermediate"',
-        required: true,
-        description: "현재 체크 상태입니다. `\"on\"`은 체크마크를 표시하고, `\"off\"`는 빈 박스를, `\"intermediate\"`는 부분 선택을 나타내는 대시를 표시합니다.",
+        description: "현재 체크 상태입니다 (제어형 모드). `\"on\"`은 체크마크를 표시하고, `\"off\"`는 빈 박스를, `\"intermediate\"`는 부분 선택을 나타내는 대시를 표시합니다.",
+      },
+      {
+        name: "defaultStatus",
+        type: '"on" | "off" | "intermediate"',
+        default: '"off"',
+        description: "초기 체크 상태입니다 (비제어형 모드). 마운트 후 컴포넌트가 내부적으로 상태를 관리합니다.",
       },
       {
         name: "onChange",
         type: '(status: "on" | "off" | "intermediate") => void',
-        required: true,
-        description: "사용자가 체크박스를 토글할 때 호출되는 콜백입니다. 새로운 status 값을 받습니다.",
+        description: "사용자가 체크박스를 토글할 때 호출되는 콜백입니다. 새로운 status 값을 받습니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
       },
       {
         name: "label",

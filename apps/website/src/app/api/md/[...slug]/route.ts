@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { source } from "~/libs/source";
 
-const EN_PREFIX_PATTERN = /^en\//;
 const CONTENT_DIR = join(process.cwd(), "content", "en");
 const EXAMPLE_DIR = join(process.cwd(), "src", "components", "example");
 

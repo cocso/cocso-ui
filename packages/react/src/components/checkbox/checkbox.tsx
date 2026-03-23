@@ -1,6 +1,6 @@
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
-import { useId } from "react";
+import { useId, useRef, useState } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
@@ -14,14 +14,19 @@ export type CheckboxStatus = "on" | "off" | "intermediate";
 export interface CheckboxProps
   extends Omit<
     ComponentProps<typeof CheckboxBase.Root>,
-    "checked" | "onCheckedChange" | "onChange" | "indeterminate"
+    | "checked"
+    | "onCheckedChange"
+    | "onChange"
+    | "indeterminate"
+    | "defaultChecked"
   > {
+  defaultStatus?: CheckboxStatus;
   disabled?: boolean;
   id?: string;
   label?: string;
-  onChange: (status: CheckboxStatus) => void;
+  onChange?: (status: "on" | "off") => void;
   size?: CheckboxSize;
-  status: CheckboxStatus;
+  status?: CheckboxStatus;
 }
 
 export function Checkbox({
@@ -30,7 +35,8 @@ export function Checkbox({
   className,
   style: _style,
   size = "medium",
-  status,
+  status: statusProp,
+  defaultStatus,
   onChange,
   label,
   disabled,
@@ -39,10 +45,38 @@ export function Checkbox({
   const generatedId = useId();
   const id = _id ?? generatedId;
 
+  const isControlledRef = useRef(statusProp !== undefined);
+  const isControlled = isControlledRef.current;
+
+  if (process.env.NODE_ENV !== "production") {
+    if (isControlled !== (statusProp !== undefined)) {
+      console.error(
+        "Checkbox: switching between controlled and uncontrolled mode is not supported. " +
+          "Use `status` (controlled) or `defaultStatus` (uncontrolled) for the component lifetime."
+      );
+    }
+    if (statusProp !== undefined && defaultStatus !== undefined) {
+      console.error(
+        "Checkbox: `status` and `defaultStatus` are mutually exclusive. " +
+          "Use `status` for controlled mode or `defaultStatus` for uncontrolled mode."
+      );
+    }
+  }
+
+  const [internalStatus, setInternalStatus] = useState<CheckboxStatus>(
+    defaultStatus ?? "off"
+  );
+  const status: CheckboxStatus = isControlled
+    ? (statusProp as CheckboxStatus)
+    : internalStatus;
+
   const handleCheckedChange = (checked: boolean) => {
     if (!disabled) {
       const nextStatus = checked ? ("on" as const) : ("off" as const);
-      onChange(nextStatus);
+      if (!isControlled) {
+        setInternalStatus(nextStatus);
+      }
+      onChange?.(nextStatus);
     }
   };
 

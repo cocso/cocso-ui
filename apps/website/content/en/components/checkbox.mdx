@@ -9,7 +9,7 @@ description: A control that lets users toggle a boolean or intermediate state.
     The Checkbox component allows users to select or deselect an option. It supports three states: on, off, and intermediate (indeterminate). Use it in forms, filter panels, and multi-selection scenarios.
   </Section.Text>
   <Section.UnorderedList>
-    <Section.ListItem>Checkbox is a controlled component. Manage its state via <code>status</code> and <code>onChange</code>.</Section.ListItem>
+    <Section.ListItem>Checkbox supports both controlled (<code>status</code> + <code>onChange</code>) and uncontrolled (<code>defaultStatus</code>) modes.</Section.ListItem>
     <Section.ListItem>Use the <code>intermediate</code> state for "select all" patterns where only some children are selected.</Section.ListItem>
     <Section.ListItem>For mutually exclusive choices, use RadioGroup instead.</Section.ListItem>
   </Section.UnorderedList>
@@ -36,7 +36,7 @@ description: A control that lets users toggle a boolean or intermediate state.
 <Section>
   <Section.Title>Default</Section.Title>
   <Section.Text>
-    A basic checkbox controlled with local state.
+    A basic checkbox controlled with local state. Use <code>defaultStatus</code> for uncontrolled usage.
   </Section.Text>
   <ComponentExample name="checkbox-default">
     ```tsx
@@ -72,9 +72,9 @@ description: A control that lets users toggle a boolean or intermediate state.
     export default function CheckboxSizes() {
       return (
         <div className="flex flex-col gap-4 p-4">
-          <Checkbox label="Large checkbox" onChange={() => {}} size="large" status="on" />
-          <Checkbox label="Medium checkbox" onChange={() => {}} size="medium" status="on" />
-          <Checkbox label="Small checkbox" onChange={() => {}} size="small" status="on" />
+          <Checkbox label="Large checkbox" size="large" status="on" />
+          <Checkbox label="Medium checkbox" size="medium" status="on" />
+          <Checkbox label="Small checkbox" size="small" status="on" />
         </div>
       );
     }
@@ -96,10 +96,10 @@ description: A control that lets users toggle a boolean or intermediate state.
     export default function CheckboxStates() {
       return (
         <div className="flex flex-col gap-4 p-4">
-          <Checkbox label="Checked" onChange={() => {}} status="on" />
-          <Checkbox label="Unchecked" onChange={() => {}} status="off" />
-          <Checkbox label="Intermediate" onChange={() => {}} status="intermediate" />
-          <Checkbox disabled label="Disabled" onChange={() => {}} status="on" />
+          <Checkbox label="Checked" status="on" />
+          <Checkbox label="Unchecked" status="off" />
+          <Checkbox label="Intermediate" status="intermediate" />
+          <Checkbox disabled label="Disabled" status="on" />
         </div>
       );
     }
@@ -114,14 +114,18 @@ description: A control that lets users toggle a boolean or intermediate state.
       {
         name: "status",
         type: '"on" | "off" | "intermediate"',
-        required: true,
-        description: "The current checked state. `\"on\"` shows a checkmark, `\"off\"` shows an empty box, and `\"intermediate\"` shows a dash for partial selection.",
+        description: "The current checked state (controlled mode). `\"on\"` shows a checkmark, `\"off\"` shows an empty box, and `\"intermediate\"` shows a dash for partial selection.",
+      },
+      {
+        name: "defaultStatus",
+        type: '"on" | "off" | "intermediate"',
+        default: '"off"',
+        description: "The initial checked state (uncontrolled mode). The component manages its own state internally after mount.",
       },
       {
         name: "onChange",
         type: '(status: "on" | "off" | "intermediate") => void',
-        required: true,
-        description: "Callback invoked when the user toggles the checkbox. Receives the new status value.",
+        description: "Callback invoked when the user toggles the checkbox. Receives the new status value. Works in both controlled and uncontrolled modes.",
       },
       {
         name: "label",

@@ -114,6 +114,21 @@ description: A native dropdown for selecting a value from a list of options.
   <PropsTable
     data={[
       {
+        name: "value",
+        type: "string",
+        description: "Controlled value. Use together with `onChange` to manage the select state externally.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "Initial value for uncontrolled usage. The select manages its own state internally after mount.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLSelectElement>) => void",
+        description: "Callback invoked when the selected value changes. Works in both controlled and uncontrolled modes.",
+      },
+      {
         name: "label",
         type: "string",
         description: "Label text displayed above the select. When provided, the select is wrapped in a Field component with an associated `<label>` element.",

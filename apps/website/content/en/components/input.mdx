@@ -109,6 +109,21 @@ description: A text field for collecting user input.
   <PropsTable
     data={[
       {
+        name: "value",
+        type: "string",
+        description: "Controlled value. Use together with `onChange` to manage the input state externally.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "Initial value for uncontrolled usage. The input manages its own state internally after mount.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLInputElement>) => void",
+        description: "Callback invoked when the input value changes. Works in both controlled and uncontrolled modes.",
+      },
+      {
         name: "label",
         type: "string",
         description: "Label text displayed above the input. When provided, the input is wrapped in a Field component with an associated `<label>` element.",

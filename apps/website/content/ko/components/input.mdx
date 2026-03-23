@@ -109,6 +109,21 @@ description: 사용자 입력을 수집하기 위한 텍스트 필드입니다.
   <PropsTable
     data={[
       {
+        name: "value",
+        type: "string",
+        description: "제어형 값입니다. 외부에서 입력 상태를 관리하려면 `onChange`와 함께 사용합니다.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "비제어형 사용을 위한 초기값입니다. 마운트 후 입력 필드가 내부적으로 상태를 관리합니다.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLInputElement>) => void",
+        description: "입력 값이 변경될 때 호출되는 콜백입니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
+      },
+      {
         name: "label",
         type: "string",
         description: "입력 필드 위에 표시되는 레이블 텍스트입니다. 제공되면 입력 필드가 연결된 `<label>` 요소를 가진 Field 컴포넌트로 감싸집니다.",

@@ -65,6 +65,15 @@ describe("Checkbox", () => {
     });
   });
 
+  describe("controlled state retention", () => {
+    it("does not toggle when controlled and onChange does not update status", async () => {
+      render(<Checkbox onChange={vi.fn()} status="off" />);
+      const checkbox = screen.getByRole("checkbox");
+      await userEvent.click(checkbox);
+      expect(checkbox).not.toBeChecked();
+    });
+  });
+
   describe("disabled", () => {
     it("disables the checkbox when disabled=true", () => {
       render(<Checkbox disabled onChange={vi.fn()} status="off" />);
@@ -95,6 +104,62 @@ describe("Checkbox", () => {
       expect(
         wrapper.style.getPropertyValue("--cocso-checkbox-size")
       ).toBeTruthy();
+    });
+  });
+
+  describe("uncontrolled", () => {
+    it("renders with defaultStatus", () => {
+      render(<Checkbox defaultStatus="on" />);
+      expect(screen.getByRole("checkbox")).toBeChecked();
+    });
+
+    it("defaults to off when no status or defaultStatus is provided", () => {
+      render(<Checkbox />);
+      expect(screen.getByRole("checkbox")).not.toBeChecked();
+    });
+
+    it("toggles internally without onChange", async () => {
+      render(<Checkbox defaultStatus="off" />);
+      const checkbox = screen.getByRole("checkbox");
+      expect(checkbox).not.toBeChecked();
+      await userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+    });
+
+    it("toggles back to off on second click", async () => {
+      render(<Checkbox defaultStatus="off" />);
+      const checkbox = screen.getByRole("checkbox");
+      await userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+      await userEvent.click(checkbox);
+      expect(checkbox).not.toBeChecked();
+    });
+
+    it("calls onChange when provided in uncontrolled mode", async () => {
+      const onChange = vi.fn();
+      render(<Checkbox defaultStatus="off" onChange={onChange} />);
+      await userEvent.click(screen.getByRole("checkbox"));
+      expect(onChange).toHaveBeenCalledWith("on");
+    });
+
+    it("does not toggle when disabled in uncontrolled mode", async () => {
+      render(<Checkbox defaultStatus="off" disabled />);
+      const checkbox = screen.getByRole("checkbox");
+      await userEvent.click(checkbox);
+      expect(checkbox).not.toBeChecked();
+    });
+
+    it("renders defaultStatus intermediate as aria-checked mixed", () => {
+      render(<Checkbox defaultStatus="intermediate" />);
+      expect(screen.getByRole("checkbox")).toHaveAttribute(
+        "aria-checked",
+        "mixed"
+      );
+    });
+
+    it("renders label in uncontrolled mode", () => {
+      render(<Checkbox defaultStatus="off" label="Terms" />);
+      expect(screen.getByText("Terms")).toBeInTheDocument();
     });
   });
 
