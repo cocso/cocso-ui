@@ -5,7 +5,7 @@ description: Navigation controls for browsing paginated content.
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>Pagination renders a row of page number buttons with previous/next controls. It is a controlled component; the parent manages the current page via `page` and `onChange`. The number of visible page buttons can be configured with `maxVisible`.</Section.Text>
+  <Section.Text>Pagination renders a row of page number buttons with previous/next controls. It is a controlled component; the parent manages the current page via <code>page</code> and <code>onChange</code>. The number of visible page buttons can be configured with <code>maxVisible</code>.</Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>Use Pagination for navigating large data sets split across pages.</Section.ListItem>
     <Section.ListItem>The default <code>maxVisible</code> of 5 is suitable for most layouts — reduce it for narrow containers or mobile views.</Section.ListItem>
@@ -32,20 +32,20 @@ description: Navigation controls for browsing paginated content.
 
 <Section>
   <Section.Title>Default</Section.Title>
-  <Section.Text>Pass `page`, `totalPages`, and `onChange` to render a basic paginator. By default, up to 5 page buttons are shown at a time.</Section.Text>
+  <Section.Text>Pass <code>page</code>, <code>totalPages</code>, and <code>onChange</code> to render a basic paginator. By default, up to 5 page buttons are shown at a time.</Section.Text>
   <ComponentExample name="pagination-default" />
 </Section>
 
 <Section>
   <Section.Title>Max Visible</Section.Title>
-  <Section.Text>Set `maxVisible` to adjust the number of page buttons shown at once. Ellipses (…) are inserted automatically when the total exceeds the visible range.</Section.Text>
+  <Section.Text>Set <code>maxVisible</code> to adjust the number of page buttons shown at once. Ellipses (…) are inserted automatically when the total exceeds the visible range.</Section.Text>
   <ComponentExample name="pagination-max-visible" />
 </Section>
 
 <Section>
   <Section.Title>API Reference</Section.Title>
 
-  **Pagination**
+  <SubHeading>Pagination</SubHeading>
 
   <PropsTable
     data={[

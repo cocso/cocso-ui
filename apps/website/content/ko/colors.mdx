@@ -10,7 +10,7 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 
 <Section>
   <Section.Title>Neutral</Section.Title>
-  <Section.Text>중립 스케일은 UI의 기반을 형성합니다. 텍스트, 배경, 테두리, 보조 요소에 사용됩니다.</Section.Text>
+  <Section.Text>중립 스케일은 UI의 기반을 형성합니다. 텍스트, 배경, 테두리, 보조 요소에 사용됩니다. Primary 스케일은 Neutral 스케일에서 파생되며 동일한 색상 값을 공유합니다. 버튼, 링크, 포커스 링 등 인터랙티브 요소를 위한 별칭(alias)으로 사용됩니다.</Section.Text>
   <ColorScale
     name="Neutral"
     colors={[
@@ -25,27 +25,6 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
       { step: "800", token: "--cocso-color-neutral-800", value: "#33363D" },
       { step: "900", token: "--cocso-color-neutral-900", value: "#1E2124" },
       { step: "950", token: "--cocso-color-neutral-950", value: "#131416" },
-    ]}
-  />
-</Section>
-
-<Section>
-  <Section.Title>Primary</Section.Title>
-  <Section.Text>Primary 스케일은 neutral 스케일에서 파생됩니다. 일관된 브랜드 톤을 유지하기 위해 버튼, 링크, 포커스 링과 같은 인터랙티브 요소에 사용됩니다.</Section.Text>
-  <ColorScale
-    name="Primary"
-    colors={[
-      { step: "50", token: "--cocso-color-primary-50", value: "#F4F5F6" },
-      { step: "100", token: "--cocso-color-primary-100", value: "#E6E8EA" },
-      { step: "200", token: "--cocso-color-primary-200", value: "#CDD1D5" },
-      { step: "300", token: "--cocso-color-primary-300", value: "#B1B8BE" },
-      { step: "400", token: "--cocso-color-primary-400", value: "#8A949E" },
-      { step: "500", token: "--cocso-color-primary-500", value: "#6D7882" },
-      { step: "600", token: "--cocso-color-primary-600", value: "#58616A" },
-      { step: "700", token: "--cocso-color-primary-700", value: "#464C53" },
-      { step: "800", token: "--cocso-color-primary-800", value: "#33363D" },
-      { step: "900", token: "--cocso-color-primary-900", value: "#1E2124" },
-      { step: "950", token: "--cocso-color-primary-950", value: "#131416" },
     ]}
   />
 </Section>

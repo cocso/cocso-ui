@@ -5,7 +5,7 @@ description: A tab interface for switching between related content panels.
 
 <Section>
   <Section.Title>Overview</Section.Title>
-  <Section.Text>Tab is a compound component that provides a keyboard-accessible tab interface following the WAI-ARIA pattern. Content panels are linked to their corresponding triggers via a shared `value` prop.</Section.Text>
+  <Section.Text>Tab is a compound component that provides a keyboard-accessible tab interface following the WAI-ARIA pattern. Content panels are linked to their corresponding triggers via a shared `value` prop. It supports both controlled (<code>value</code> + <code>onValueChange</code>) and uncontrolled (<code>defaultValue</code>) usage.</Section.Text>
   <Section.UnorderedList>
     <Section.ListItem>Use Tab for switching between related content views within the same page context — for example, different settings categories or different data views.</Section.ListItem>
     <Section.ListItem>For step-by-step workflows, use a stepper pattern instead.</Section.ListItem>
@@ -52,7 +52,7 @@ description: A tab interface for switching between related content panels.
 
   <SubHeading>Tab.List</SubHeading>
 
-  Container for tab triggers. Accepts Base UI Tabs.List props.
+  <Section.Text>Container for tab triggers. Accepts Base UI Tabs.List props.</Section.Text>
 
   <SubHeading>Tab.Trigger</SubHeading>
 

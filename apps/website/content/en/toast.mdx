@@ -83,7 +83,7 @@ export default function ToastDefault() {
 <Section>
   <Section.Title>API Reference</Section.Title>
 
-  <Section.Text>**toast function**</Section.Text>
+  <SubHeading>toast function</SubHeading>
   <PropsTable
     data={[
       { name: "toast(message)", type: "function", description: "Displays a default neutral toast notification with the given message string." },
@@ -95,7 +95,7 @@ export default function ToastDefault() {
     ]}
   />
 
-  <Section.Text>**Toaster**</Section.Text>
+  <SubHeading>Toaster</SubHeading>
   <PropsTable
     data={[
       { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "Screen corner where toasts stack. Choose based on your layout — avoid overlapping primary navigation or action buttons." },
