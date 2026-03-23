@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Toaster, toast } from "@cocso-ui/react";
+import { Button, toast } from "@cocso-ui/react";
 
 export default function ToastDefault() {
   return (
@@ -14,7 +14,6 @@ export default function ToastDefault() {
       <Button onClick={() => toast.error("Something went wrong.")} variant="error">
         Error
       </Button>
-      <Toaster />
     </div>
   );
 }
