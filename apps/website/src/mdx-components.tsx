@@ -10,7 +10,7 @@ import {
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import NextLink from "next/link";
-import { ColorScale, ColorSwatch } from "~/components/ui/color-palette";
+import { ColorScale } from "~/components/ui/color-palette";
 import { ComponentExample } from "~/components/ui/component-example";
 import { PageNavigation } from "~/components/ui/page-navigation";
 import { PropsTable } from "~/components/ui/props-table";
@@ -45,7 +45,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PageNavigation,
     PropsTable,
     ColorScale,
-    ColorSwatch,
     TokenTable,
     SubHeading,
 
