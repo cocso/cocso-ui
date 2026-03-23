@@ -1,0 +1,111 @@
+---
+title: Link
+description: 변형, 크기, 외부 링크를 지원하는 스타일이 적용된 앵커 요소입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Link는 Typography를 기반으로 만들어진 스타일이 적용된 앵커 요소를 렌더링합니다. 다양한 맥락에 맞는 세 가지 시각적 변형, 네 가지 크기 옵션, 선택적 외부 링크 표시기 아이콘을 지원합니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>본문 텍스트 내 표준 하이퍼링크에는 <code>inline</code>을 사용합니다.</Section.ListItem>
+    <Section.ListItem>내비게이션 컨텍스트에서 활성 페이지를 나타낼 때는 <code>current</code>를 사용합니다(주변 텍스트 색상을 상속합니다).</Section.ListItem>
+    <Section.ListItem>전통적인 링크처럼 보이지 않아야 하는 상호작용 텍스트에는 <code>plain</code>을 사용합니다.</Section.ListItem>
+    <Section.ListItem>외부 링크에는 항상 <code>Link.ExternalIcon</code>을 포함하고 <code>target="_blank"</code>와 <code>rel="noopener noreferrer"</code>를 설정합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>기본 키보드 지원이 있는 네이티브 <code>&lt;a&gt;</code> 요소로 렌더링됩니다. <code>Enter</code> 키로 링크를 활성화합니다.</Section.ListItem>
+    <Section.ListItem>새 탭에서 열리는 링크에는 보안 문제를 방지하기 위해 <code>target="_blank"</code>와 <code>rel="noopener noreferrer"</code>를 함께 사용하세요.</Section.ListItem>
+    <Section.ListItem><code>Link.ExternalIcon</code>은 외부 링크에 대한 시각적 표시기를 제공합니다. 명확성을 위해 스크린 리더 전용 레이블(예: <code>"(새 탭에서 열림)"</code>)을 추가하는 것도 고려하세요.</Section.ListItem>
+    <Section.ListItem>스타일을 유지하면서 클라이언트 사이드 라우팅(예: Next.js <code>Link</code>)과 통합하려면 <code>render</code> prop을 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Link } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>세 가지 변형이 색상과 밑줄 동작을 제어합니다. <code>inline</code>은 표준 하이퍼링크, <code>current</code>는 주변 텍스트 색상을 상속, <code>plain</code>은 밑줄 없는 링크입니다.</Section.Text>
+  <ComponentExample name="link-default">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkDefault() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="#" variant="inline">Inline link</Link>
+          <Link href="#" variant="current">Current link</Link>
+          <Link href="#" variant="plain">Plain link</Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>size prop은 Typography body 크기 스케일에 매핑됩니다. <code>large</code> (18px), <code>medium</code> (16px), <code>small</code> (14px), <code>x-small</code> (12px)으로 구성됩니다.</Section.Text>
+  <ComponentExample name="link-sizes">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkSizes() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="#" size="large">Large link</Link>
+          <Link href="#" size="medium">Medium link</Link>
+          <Link href="#" size="small">Small link</Link>
+          <Link href="#" size="x-small">X-Small link</Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>외부 링크</Section.Title>
+  <Section.Text>Link.ExternalIcon을 링크 콘텐츠 안에 배치하여 외부 링크 아이콘을 표시하세요. indicator prop으로 밑줄 표시기를 명시적으로 제어할 수 있습니다.</Section.Text>
+  <ComponentExample name="link-external">
+    ```tsx
+    import { Link } from "@cocso-ui/react";
+
+    export default function LinkExternal() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Link href="https://example.com" indicator target="_blank" rel="noopener noreferrer">
+            External link <Link.ExternalIcon />
+          </Link>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "variant", type: '"inline" | "current" | "plain"', default: '"inline"', description: "색상과 밑줄 동작을 제어합니다. `inline`은 색상이 있는 밑줄 링크를 렌더링하고, `current`는 부모 텍스트 색상을 상속하며, `plain`은 밑줄을 제거합니다." },
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "Typography 렌더링 모드를 선택합니다. 인라인 텍스트 링크에는 `body`를, 큰 내비게이션 링크에는 `heading`을 사용하세요." },
+    { name: "size", type: '"large" | "medium" | "small" | "x-small"', description: "Typography body 스케일에 매핑되는 폰트 크기: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
+    { name: "weight", type: "FontWeight", description: "폰트 굵기를 재정의합니다." },
+    { name: "lineHeight", type: "LineHeight", description: "줄 높이를 재정의합니다." },
+    { name: "indicator", type: "boolean", description: "밑줄 표시기의 표시 여부를 제어합니다. `inline`과 `current` 변형에서는 기본적으로 `true`입니다." },
+    { name: "render", type: "RenderProp", description: "기본 `<a>` 요소를 대체합니다. Next.js Link와 같은 프레임워크별 라우팅 컴포넌트와 통합할 때 사용하세요." },
+    { name: "href", type: "string", description: "목적지 URL입니다. 기본 앵커 요소로 전달됩니다." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,152 @@
+---
+title: Tooltip
+description: A floating label that provides supplementary information when an element is hovered or focused.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Tooltip is a compound component that renders a short text label when the user hovers or focuses a trigger element. Wrapping multiple tooltips with a shared <code>Tooltip.Provider</code> lets you coordinate delay and open behavior across them.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Tooltip.Provider</code>, <code>Tooltip</code>, <code>Tooltip.Trigger</code>, <code>Tooltip.Content</code>, <code>Tooltip.Arrow</code></Section.ListItem>
+    <Section.ListItem>Wrapping a group of tooltips with <code>Tooltip.Provider</code> shares hover delay settings.</Section.ListItem>
+    <Section.ListItem>Supports <code>side</code> and <code>align</code> positioning props on <code>Tooltip.Content</code>.</Section.ListItem>
+    <Section.ListItem><code>Tooltip.Arrow</code> renders an arrow caret pointing toward the trigger.</Section.ListItem>
+  </Section.UnorderedList>
+  <Section.Text className="font-semibold">Guidelines</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Tooltip for short, supplementary text labels — 1–2 sentences maximum.</Section.ListItem>
+    <Section.ListItem>Tooltip content should not be essential for understanding the UI; it supplements the trigger label.</Section.ListItem>
+    <Section.ListItem>For interactive content (links, buttons, forms), use Popover instead.</Section.ListItem>
+    <Section.ListItem>Always wrap multiple nearby tooltips in a shared <code>Tooltip.Provider</code> to coordinate hover delays.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Tooltip content is exposed via <code>role="tooltip"</code> with the trigger linked via <code>aria-describedby</code>.</Section.ListItem>
+    <Section.ListItem>Appears on both hover and focus, ensuring keyboard users can access the tooltip content.</Section.ListItem>
+    <Section.ListItem>Disappears when the trigger loses hover or focus, or when <code>Escape</code> is pressed.</Section.ListItem>
+    <Section.ListItem>Tooltip content should be supplementary — do not place critical information only in a tooltip, as some users may not discover it.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Tooltip } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A tooltip that appears when hovering the trigger button.</Section.Text>
+  <ComponentExample name="tooltip-default">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipDefault() {
+  return (
+    <div className="p-4">
+      <Tooltip.Provider>
+        <Tooltip>
+          <Tooltip.Trigger render={<Button variant="secondary" />}>
+            Hover me
+          </Tooltip.Trigger>
+          <Tooltip.Content>
+            This is a tooltip
+            <Tooltip.Arrow />
+          </Tooltip.Content>
+        </Tooltip>
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Positions</Section.Title>
+  <Section.Text>Use the <code>side</code> prop on <code>Tooltip.Content</code> to control which side of the trigger the tooltip appears on.</Section.Text>
+  <ComponentExample name="tooltip-positions">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipPositions() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      <Tooltip.Provider>
+        {(["top", "bottom", "left", "right"] as const).map((side) => (
+          <Tooltip key={side}>
+            <Tooltip.Trigger render={<Button variant="outline" />}>{side}</Tooltip.Trigger>
+            <Tooltip.Content side={side}>
+              Tooltip on {side}
+              <Tooltip.Arrow />
+            </Tooltip.Content>
+          </Tooltip>
+        ))}
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Tooltip.Provider</SubHeading>
+  <PropsTable
+    data={[
+      { name: "delayDuration", type: "number", default: "700", description: "Delay in milliseconds before the tooltip opens on hover. A shorter delay makes tooltips feel more responsive; a longer delay reduces visual noise." },
+      { name: "skipDelayDuration", type: "number", default: "300", description: "Duration in milliseconds to skip the open delay when moving between nearby triggers. Enables fluid scanning of multiple tooltips." },
+    ]}
+  />
+
+  <SubHeading>Tooltip (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state. Use together with `onOpenChange` for programmatic tooltip control." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the tooltip should open or close. Receives the new boolean state." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage. Rarely needed — tooltips are typically hover/focus-driven." },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "The element to render as the tooltip trigger. Receives hover/focus handlers and `aria-describedby` via prop merging.", required: true },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: "Preferred placement side relative to the trigger. Auto-flips if there is insufficient space on the preferred side." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in pixels between the trigger and the tooltip." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment of the tooltip along the trigger edge." },
+      { name: "alignOffset", type: "number", default: "0", description: "Offset in pixels along the alignment axis for fine-tuning position." },
+      { name: "arrowPadding", type: "number", default: "4", description: "Minimum distance in pixels between the arrow and the tooltip edge, preventing the arrow from overflowing corners." },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Arrow</SubHeading>
+  <PropsTable
+    data={[
+      { name: "width", type: "number", default: "10", description: "Width of the arrow caret in pixels." },
+      { name: "height", type: "number", default: "5", description: "Height of the arrow caret in pixels." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

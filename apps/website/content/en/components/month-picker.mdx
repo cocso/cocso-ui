@@ -1,0 +1,66 @@
+---
+title: Month Picker
+description: A date picker that opens a calendar popover for selecting a month and year.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>MonthPicker renders a trigger element that opens a Dropdown containing a month-year grid. It is a controlled component; pass value and onValueChange to manage the selected month. Navigation arrows move by year rather than by month. The calendar is localized to English by default. Use MonthPicker when the use case requires month-level granularity rather than a specific day — for example, billing periods, report ranges, or subscription cycles. For day-level selection, use DayPicker instead.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>The month grid supports keyboard navigation between months.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the dropdown and returns focus to the trigger.</Section.ListItem>
+    <Section.ListItem>Year navigation arrows allow moving forward and backward through years.</Section.ListItem>
+    <Section.ListItem>Months outside the <code>minDate</code>–<code>maxDate</code> range are visually dimmed and non-selectable.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { MonthPicker } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Control the selected month with the value and onValueChange props. The returned Date represents the first day of the selected month.</Section.Text>
+  <ComponentExample name="month-picker-default">
+    ```tsx
+    "use client";
+
+    import { MonthPicker } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function MonthPickerDefault() {
+      const [value, setValue] = useState<Date | null>(null);
+
+      return (
+        <div className="p-4">
+          <MonthPicker onValueChange={setValue} value={value ?? undefined} />
+          {value && <p className="mt-2 text-sm text-neutral-500">Selected: {value.toLocaleDateString("en-US", { year: "numeric", month: "long" })}</p>}
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "value", type: "Date", description: "The currently selected month, represented as a `Date` (first day of the month). Pass `undefined` for no selection." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects a month. Receives a `Date` representing the first day of the selected month, or `null`." },
+    { name: "disabled", type: "boolean", description: "Disables the trigger button and prevents the month picker from opening." },
+    { name: "minDate", type: "Date", description: "The earliest selectable month. Months before this date are visually dimmed and cannot be selected." },
+    { name: "maxDate", type: "Date", description: "The latest selectable month. Months after this date are visually dimmed and cannot be selected." },
+    { name: "trigger", type: "ReactElement", description: "Custom trigger element replacing the default button. Use to integrate with form input fields or custom UI." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

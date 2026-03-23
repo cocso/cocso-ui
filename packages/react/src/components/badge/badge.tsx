@@ -62,6 +62,7 @@ export function Badge({
         lineHeight="tight"
         render={<span className={styles.inner}>{children}</span>}
         size={fontSize as ResponsiveFontSize}
+        type="custom"
         weight="medium"
       />
     </div>

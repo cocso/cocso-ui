@@ -1,0 +1,158 @@
+---
+title: Checkbox
+description: 사용자가 불리언 또는 중간 상태를 토글할 수 있는 컨트롤입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Checkbox 컴포넌트는 사용자가 옵션을 선택하거나 선택 해제할 수 있게 합니다. on, off, intermediate(indeterminate) 세 가지 상태를 지원합니다. 폼, 필터 패널, 다중 선택 시나리오에 사용하세요.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Checkbox는 제어형(<code>status</code> + <code>onChange</code>)과 비제어형(<code>defaultStatus</code>) 모드를 모두 지원합니다.</Section.ListItem>
+    <Section.ListItem>일부 자식 항목만 선택된 "전체 선택" 패턴에는 <code>intermediate</code> 상태를 사용합니다.</Section.ListItem>
+    <Section.ListItem>상호 배타적인 선택에는 RadioGroup을 사용합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>보조 기술을 위해 <code>role="checkbox"</code>와 <code>aria-checked</code> 상태를 지원합니다.</Section.ListItem>
+    <Section.ListItem><code>Space</code>로 체크박스를 토글합니다. <code>Tab</code>으로 체크박스 간에 포커스를 이동합니다.</Section.ListItem>
+    <Section.ListItem><code>intermediate</code> 상태는 <code>aria-checked="mixed"</code>에 매핑되어 보조 기술에 부분 선택을 알립니다.</Section.ListItem>
+    <Section.ListItem><code>label</code>이 제공되면 스크린 리더 접근성을 위해 체크박스와 자동으로 연결됩니다.</Section.ListItem>
+    <Section.ListItem><code>disabled</code> 상태에서는 체크박스가 시각적으로 흐리게 표시되고 키보드 탐색에서 제외됩니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Checkbox } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>
+    로컬 상태로 제어되는 기본 체크박스입니다. 비제어형으로 사용하려면 <code>defaultStatus</code>를 사용합니다.
+  </Section.Text>
+  <ComponentExample name="checkbox-default">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function CheckboxDefault() {
+      const [status, setStatus] = useState<"on" | "off" | "intermediate">("off");
+
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Accept terms and conditions" onChange={setStatus} status={status} />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>
+    세 가지 크기를 사용할 수 있습니다. 주변 레이아웃 밀도에 따라 선택하세요.
+  </Section.Text>
+  <ComponentExample name="checkbox-sizes">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxSizes() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Large checkbox" size="large" status="on" />
+          <Checkbox label="Medium checkbox" size="medium" status="on" />
+          <Checkbox label="Small checkbox" size="small" status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>상태</Section.Title>
+  <Section.Text>
+    체크박스는 <code>on</code>, <code>off</code>, <code>intermediate</code> 상태를 지원합니다. 상호작용을 방지하려면 <code>disabled</code>를 사용합니다.
+  </Section.Text>
+  <ComponentExample name="checkbox-states">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxStates() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Checked" status="on" />
+          <Checkbox label="Unchecked" status="off" />
+          <Checkbox label="Intermediate" status="intermediate" />
+          <Checkbox disabled label="Disabled" status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "status",
+        type: '"on" | "off" | "intermediate"',
+        description: "현재 체크 상태입니다 (제어형 모드). `\"on\"`은 체크마크를 표시하고, `\"off\"`는 빈 박스를, `\"intermediate\"`는 부분 선택을 나타내는 대시를 표시합니다.",
+      },
+      {
+        name: "defaultStatus",
+        type: '"on" | "off" | "intermediate"',
+        default: '"off"',
+        description: "초기 체크 상태입니다 (비제어형 모드). 마운트 후 컴포넌트가 내부적으로 상태를 관리합니다.",
+      },
+      {
+        name: "onChange",
+        type: '(status: "on" | "off") => void',
+        description: "사용자가 체크박스를 토글할 때 호출되는 콜백입니다. `\"on\"` 또는 `\"off\"`를 전달받습니다. `\"intermediate\"` 상태는 `status` prop으로만 설정할 수 있습니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "체크박스 옆에 표시되는 레이블 텍스트로, 스크린 리더 접근성을 위해 자동으로 연결됩니다.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small"',
+        default: '"medium"',
+        description: "체크박스 크기와 레이블 폰트 크기를 제어합니다. 터치 친화적인 인터페이스에는 `large`를, 콤팩트한 레이아웃에는 `small`을 사용하세요.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "상호작용을 방지하고 시각적으로 흐리게 표시합니다. 비활성화된 체크박스는 키보드 탐색에서 제외됩니다.",
+      },
+      {
+        name: "id",
+        type: "string",
+        description: "HTML `id` 속성입니다. 제공되지 않으면 자동 생성되어 레이블-체크박스 연결이 유지됩니다.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

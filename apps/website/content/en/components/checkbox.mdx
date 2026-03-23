@@ -1,0 +1,158 @@
+---
+title: Checkbox
+description: A control that lets users toggle a boolean or intermediate state.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Checkbox component allows users to select or deselect an option. It supports three states: on, off, and intermediate (indeterminate). Use it in forms, filter panels, and multi-selection scenarios.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Checkbox supports both controlled (<code>status</code> + <code>onChange</code>) and uncontrolled (<code>defaultStatus</code>) modes.</Section.ListItem>
+    <Section.ListItem>Use the <code>intermediate</code> state for "select all" patterns where only some children are selected.</Section.ListItem>
+    <Section.ListItem>For mutually exclusive choices, use RadioGroup instead.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="checkbox"</code> and <code>aria-checked</code> states for assistive technologies.</Section.ListItem>
+    <Section.ListItem><code>Space</code> toggles the checkbox. <code>Tab</code> moves focus between checkboxes.</Section.ListItem>
+    <Section.ListItem>The <code>intermediate</code> state maps to <code>aria-checked="mixed"</code>, communicating a partial selection to assistive technologies.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, it is automatically associated with the checkbox for screen readers.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the checkbox is visually dimmed and excluded from keyboard navigation.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Checkbox } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>
+    A basic checkbox controlled with local state. Use <code>defaultStatus</code> for uncontrolled usage.
+  </Section.Text>
+  <ComponentExample name="checkbox-default">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function CheckboxDefault() {
+      const [status, setStatus] = useState<"on" | "off" | "intermediate">("off");
+
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Accept terms and conditions" onChange={setStatus} status={status} />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Three sizes are available. Choose based on surrounding layout density.
+  </Section.Text>
+  <ComponentExample name="checkbox-sizes">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxSizes() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Large checkbox" size="large" status="on" />
+          <Checkbox label="Medium checkbox" size="medium" status="on" />
+          <Checkbox label="Small checkbox" size="small" status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>States</Section.Title>
+  <Section.Text>
+    The checkbox supports <code>on</code>, <code>off</code>, and <code>intermediate</code> states. Use <code>disabled</code> to prevent interaction.
+  </Section.Text>
+  <ComponentExample name="checkbox-states">
+    ```tsx
+    "use client";
+
+    import { Checkbox } from "@cocso-ui/react";
+
+    export default function CheckboxStates() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Checkbox label="Checked" status="on" />
+          <Checkbox label="Unchecked" status="off" />
+          <Checkbox label="Intermediate" status="intermediate" />
+          <Checkbox disabled label="Disabled" status="on" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "status",
+        type: '"on" | "off" | "intermediate"',
+        description: "The current checked state (controlled mode). `\"on\"` shows a checkmark, `\"off\"` shows an empty box, and `\"intermediate\"` shows a dash for partial selection.",
+      },
+      {
+        name: "defaultStatus",
+        type: '"on" | "off" | "intermediate"',
+        default: '"off"',
+        description: "The initial checked state (uncontrolled mode). The component manages its own state internally after mount.",
+      },
+      {
+        name: "onChange",
+        type: '(status: "on" | "off") => void',
+        description: "Callback invoked when the user toggles the checkbox. Receives `\"on\"` or `\"off\"` — the `\"intermediate\"` state is only settable via the `status` prop. Works in both controlled and uncontrolled modes.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "Label text displayed next to the checkbox, automatically associated for screen reader accessibility.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small"',
+        default: '"medium"',
+        description: "Controls the checkbox dimensions and label font size. Use `large` for touch-friendly interfaces and `small` for compact layouts.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Prevents interaction and visually dims the checkbox. Disabled checkboxes are excluded from keyboard navigation.",
+      },
+      {
+        name: "id",
+        type: "string",
+        description: "The HTML `id` attribute. Auto-generated when not provided, maintaining the label-checkbox association.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

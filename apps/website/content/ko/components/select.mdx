@@ -1,0 +1,171 @@
+---
+title: Select
+description: 옵션 목록에서 값을 선택하기 위한 네이티브 드롭다운입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Select 컴포넌트는 네이티브 HTML select 요소를 일관된 스타일링, 레이블 지원, 유효성 검사 상태로 감쌉니다. 사용자가 미리 정의된 목록에서 단일 값을 선택해야 할 때 사용하세요. 네이티브 HTML select 래퍼로서 제어형(<code>value</code> + <code>onChange</code>)과 비제어형(<code>defaultValue</code>) 사용을 모두 지원합니다.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Select는 네이티브 HTML <code>&lt;select&gt;</code> 요소를 사용하여 모바일을 포함한 모든 기기에서 일관된 동작을 보장합니다.</Section.ListItem>
+    <Section.ListItem>옵션이 4개 미만인 목록에는 더 나은 가시성을 위해 RadioGroup을 고려합니다.</Section.ListItem>
+    <Section.ListItem>검색 가능하거나 다중 선택이 필요한 시나리오에는 커스텀 combobox가 더 적합할 수 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>완전한 브라우저 및 모바일 키보드 지원이 있는 네이티브 <code>&lt;select&gt;</code> 요소를 렌더링합니다.</Section.ListItem>
+    <Section.ListItem>화살표 키로 옵션 간에 탐색하고, <code>Enter</code> 또는 <code>Space</code>로 열고 선택을 확정합니다.</Section.ListItem>
+    <Section.ListItem><code>label</code>이 제공되면 select가 연결된 <code>&lt;label&gt;</code> 요소를 가진 <code>Field</code> 컴포넌트로 감싸집니다.</Section.ListItem>
+    <Section.ListItem><code>error</code>와 <code>description</code> 메시지는 <code>aria-describedby</code>를 통해 연결됩니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Select } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>
+    레이블과 옵션이 있는 기본 select입니다.
+  </Section.Text>
+  <ComponentExample name="select-default">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectDefault() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select label="Country">
+            <option value="">Select a country</option>
+            <option value="kr">South Korea</option>
+            <option value="us">United States</option>
+            <option value="jp">Japan</option>
+          </Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>
+    주변 콘텐츠 밀도에 맞게 네 가지 크기를 사용할 수 있습니다.
+  </Section.Text>
+  <ComponentExample name="select-sizes">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectSizes() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select label="Large" size="large"><option>Option</option></Select>
+          <Select label="Medium" size="medium"><option>Option</option></Select>
+          <Select label="Small" size="small"><option>Option</option></Select>
+          <Select label="X-Small" size="x-small"><option>Option</option></Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>상태</Section.Title>
+  <Section.Text>
+    도움말 텍스트에는 <code>description</code>, 유효성 검사 메시지에는 <code>error</code>, 상호작용 방지에는 <code>disabled</code>를 사용합니다.
+  </Section.Text>
+  <ComponentExample name="select-states">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectStates() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select description="Choose your preferred option." label="With description">
+            <option>Option A</option>
+            <option>Option B</option>
+          </Select>
+          <Select error="Please select an option." label="With error">
+            <option value="">Select...</option>
+          </Select>
+          <Select disabled label="Disabled">
+            <option>Cannot change</option>
+          </Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "value",
+        type: "string",
+        description: "제어형 값입니다. 외부에서 select 상태를 관리하려면 `onChange`와 함께 사용합니다.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "비제어형 사용을 위한 초기값입니다. 마운트 후 select가 내부적으로 상태를 관리합니다.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLSelectElement>) => void",
+        description: "선택된 값이 변경될 때 호출되는 콜백입니다. 제어형과 비제어형 모드에서 모두 사용할 수 있습니다.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "select 위에 표시되는 레이블 텍스트입니다. 제공되면 select가 연결된 `<label>` 요소를 가진 Field 컴포넌트로 감싸집니다.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "높이, 패딩, 폰트 크기를 제어합니다. 주변 콘텐츠 밀도에 따라 선택하세요.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "상호작용을 방지하고 시각적으로 흐리게 표시합니다. 비활성화된 select는 폼 제출에서 제외됩니다.",
+      },
+      {
+        name: "error",
+        type: "boolean | string",
+        default: "false",
+        description: "문자열인 경우 `aria-describedby`를 통해 연결된 빨간색 에러 메시지를 select 아래에 표시합니다. `true`인 경우 메시지 없이 에러 테두리 스타일만 적용합니다.",
+      },
+      {
+        name: "description",
+        type: "string",
+        description: "select 아래에 흐린 스타일로 표시되는 도움말 텍스트로, `aria-describedby`를 통해 연결됩니다. `error`가 설정되면 숨겨집니다.",
+      },
+      {
+        name: "stretch",
+        type: "boolean",
+        default: "false",
+        description: "select가 컨테이너의 전체 너비를 채우도록 확장합니다. select가 그리드 컬럼 너비에 맞아야 하는 폼 레이아웃에서 사용하세요.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -87,8 +87,8 @@ export const LabelPositions: Story = {
 export const Disabled: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-      <Switch disabled label="비활성 (꺼짐)" onCheckedChange={() => {}} />
-      <Switch checked disabled label="비활성 (켜짐)" onCheckedChange={() => {}} />
+      <Switch disabled label="비활성 (꺼짐)" />
+      <Switch checked disabled label="비활성 (켜짐)" />
     </div>
   ),
 };

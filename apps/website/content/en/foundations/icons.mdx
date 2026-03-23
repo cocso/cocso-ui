@@ -1,0 +1,45 @@
+---
+title: Icons
+description: A semantic icon set for consistent visual communication across COCSO UI.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>COCSO UI provides 83 icons across two categories. It consists of 68 semantic icons based on <Link href="https://tabler.io/icons" target="_blank" rel="noopener noreferrer" type="custom" size="current">Tabler Icons<LinkExternalIcon /></Link> and 15 brand icons. All icons are distributed as React components from the `@cocso-ui/react-icons` package and rendered as inline SVG.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Usage</Section.Title>
+  <Section.Text>Import the desired icon by name from the package. Each icon is a named export ending with `Icon`.</Section.Text>
+
+```tsx
+import { SearchIcon } from "@cocso-ui/react-icons";
+
+export default function Example() {
+  return <SearchIcon size={20} />;
+}
+```
+</Section>
+
+<Section>
+  <Section.Title>Props</Section.Title>
+  <Section.Text>Icon components accept all standard SVG element attributes in addition to the following props.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "size", token: "number", value: "16 (default)" },
+      { name: "width", token: "number", value: "Falls back to size" },
+      { name: "height", token: "number", value: "Falls back to size" },
+    ]}
+  />
+  <Section.Text>Icons are automatically marked with `aria-hidden="true"` so they are hidden from assistive technologies by default. When an icon conveys meaning on its own, provide an accessible label at the point of use.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Gallery</Section.Title>
+  <Section.Text>Use the search field to filter icons by name. Click an icon name to copy its import statement.</Section.Text>
+  <ComponentExample name="icon-gallery" />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

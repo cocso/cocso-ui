@@ -1,0 +1,56 @@
+---
+title: Spinner
+description: 진행 중인 상태를 전달하는 애니메이션 로딩 인디케이터입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Spinner는 접근 가능한 애니메이션 로딩 인디케이터를 렌더링합니다. `aria-label`을 통해 스크린 리더에 레이블을 알리며, 주변 컨텍스트에 맞게 시맨틱 색상 변형을 지원합니다.</Section.Text>
+  <Section.Text>Spinner를 독립형 로딩 인디케이터로 사용하거나 Button의 내장 `loading` prop과 함께 사용하세요. 로딩 컨텍스트가 불명확할 때는 항상 의미 있는 `label`을 제공하세요. 스크린 리더는 이 텍스트를 통해 현재 상태를 전달합니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>스크린 리더가 로딩 상태를 알릴 수 있도록 <code>role="status"</code>와 <code>aria-label</code>로 렌더링됩니다.</Section.ListItem>
+    <Section.ListItem>기본 레이블은 <code>"Loading"</code>입니다. 더 나은 스크린 리더 경험을 위해 컨텍스트에 맞는 메시지(예: <code>"Saving changes"</code>, <code>"Fetching results"</code>)로 재정의하세요.</Section.ListItem>
+    <Section.ListItem>스피너 애니메이션은 <code>prefers-reduced-motion</code> 미디어 쿼리를 준수합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Spinner } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>세 가지 크기를 사용할 수 있습니다. `large`, `medium`, `small`이며 기본값은 `medium`입니다.</Section.Text>
+  <ComponentExample name="spinner-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>일곱 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 어두운 배경에 스피너를 표시할 때는 `white`를 사용하세요.</Section.Text>
+  <ComponentExample name="spinner-variants" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Spinner</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "스피너의 지름을 제어합니다. 인라인 인디케이터(예: 버튼 내부)에는 `small`을, 전체 섹션 로딩 상태에는 `large`를 사용하세요." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white"', default: '"primary"', description: "스피너 블레이드 색상을 제어합니다. 어두운 배경에서 충분한 대비를 위해 `white`를 사용하세요." },
+      { name: "label", type: "string", default: '"Loading"', description: "`aria-label`을 통해 스크린 리더에 전달되는 텍스트입니다. 기본값은 `\"Loading\"`입니다. 주변 콘텐츠만으로 로딩 컨텍스트가 명확하지 않을 때는 구체적인 메시지를 제공하세요." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

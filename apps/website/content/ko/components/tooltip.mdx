@@ -1,0 +1,152 @@
+---
+title: Tooltip
+description: 요소에 호버하거나 포커스할 때 보조 정보를 제공하는 플로팅 레이블입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Tooltip은 사용자가 트리거 요소에 호버하거나 포커스할 때 짧은 텍스트 레이블을 렌더링하는 복합 컴포넌트입니다. 여러 툴팁을 공유된 <code>Tooltip.Provider</code>로 감싸면 지연 및 열기 동작을 일괄 조정할 수 있습니다.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>복합 API로 구성됩니다. <code>Tooltip.Provider</code>, <code>Tooltip</code>, <code>Tooltip.Trigger</code>, <code>Tooltip.Content</code>, <code>Tooltip.Arrow</code></Section.ListItem>
+    <Section.ListItem>툴팁 그룹을 <code>Tooltip.Provider</code>로 감싸면 호버 지연 설정을 공유할 수 있습니다.</Section.ListItem>
+    <Section.ListItem><code>Tooltip.Content</code>에서 <code>side</code> 및 <code>align</code> 위치 지정 props를 지원합니다.</Section.ListItem>
+    <Section.ListItem><code>Tooltip.Arrow</code>는 트리거를 향하는 화살표 캐럿을 렌더링합니다.</Section.ListItem>
+  </Section.UnorderedList>
+  <Section.Text className="font-semibold">가이드라인</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>최대 1~2문장의 짧은 보조 텍스트 레이블에 Tooltip을 사용합니다.</Section.ListItem>
+    <Section.ListItem>툴팁 콘텐츠는 UI를 이해하는 데 필수적이지 않아야 하며 트리거 레이블을 보완하는 용도로 사용합니다.</Section.ListItem>
+    <Section.ListItem>링크, 버튼, 폼 같은 인터랙티브 콘텐츠에는 Popover를 사용합니다.</Section.ListItem>
+    <Section.ListItem>인근의 여러 툴팁은 반드시 공유된 <code>Tooltip.Provider</code>로 감싸 호버 지연을 일괄 조정합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>툴팁 콘텐츠는 <code>role="tooltip"</code>으로 노출되며, 트리거는 <code>aria-describedby</code>로 연결됩니다.</Section.ListItem>
+    <Section.ListItem>hover와 focus 모두에서 표시되어 키보드 사용자도 툴팁 콘텐츠에 접근할 수 있습니다.</Section.ListItem>
+    <Section.ListItem>트리거의 hover 또는 focus가 해제되거나 <code>Escape</code>를 누르면 사라집니다.</Section.ListItem>
+    <Section.ListItem>툴팁 콘텐츠는 보조적이어야 합니다. 중요한 정보를 툴팁에만 배치하지 마세요. 일부 사용자는 발견하지 못할 수 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Tooltip } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>트리거 버튼에 호버할 때 나타나는 툴팁입니다.</Section.Text>
+  <ComponentExample name="tooltip-default">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipDefault() {
+  return (
+    <div className="p-4">
+      <Tooltip.Provider>
+        <Tooltip>
+          <Tooltip.Trigger render={<Button variant="secondary" />}>
+            Hover me
+          </Tooltip.Trigger>
+          <Tooltip.Content>
+            This is a tooltip
+            <Tooltip.Arrow />
+          </Tooltip.Content>
+        </Tooltip>
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>위치</Section.Title>
+  <Section.Text><code>Tooltip.Content</code>의 <code>side</code> prop을 사용해 툴팁이 트리거의 어느 방향에 표시될지 제어합니다.</Section.Text>
+  <ComponentExample name="tooltip-positions">
+```tsx
+"use client";
+
+import { Button, Tooltip } from "@cocso-ui/react";
+
+export default function TooltipPositions() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      <Tooltip.Provider>
+        {(["top", "bottom", "left", "right"] as const).map((side) => (
+          <Tooltip key={side}>
+            <Tooltip.Trigger render={<Button variant="outline" />}>{side}</Tooltip.Trigger>
+            <Tooltip.Content side={side}>
+              Tooltip on {side}
+              <Tooltip.Arrow />
+            </Tooltip.Content>
+          </Tooltip>
+        ))}
+      </Tooltip.Provider>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Tooltip.Provider</SubHeading>
+  <PropsTable
+    data={[
+      { name: "delayDuration", type: "number", default: "700", description: "호버 시 툴팁이 열리기까지의 지연 시간(밀리초)입니다. 지연이 짧을수록 반응이 빠르게 느껴지고, 길수록 시각적 노이즈가 줄어듭니다." },
+      { name: "skipDelayDuration", type: "number", default: "300", description: "인근 트리거 간 이동 시 열기 지연을 건너뛰는 지속 시간(밀리초)입니다. 여러 툴팁을 부드럽게 탐색할 수 있습니다." },
+    ]}
+  />
+
+  <SubHeading>Tooltip (루트 컨테이너)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "툴팁의 제어형 열림 상태입니다. 프로그래매틱 툴팁 제어를 위해 `onOpenChange`와 함께 사용하세요." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "툴팁을 열거나 닫아야 할 때 호출되는 콜백입니다. 새로운 boolean 상태를 전달받습니다." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다. 툴팁은 일반적으로 hover/focus로 동작하므로 거의 사용되지 않습니다." },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Trigger (트리거 요소)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "툴팁 트리거로 렌더링할 요소입니다. prop 병합을 통해 hover/focus 핸들러와 `aria-describedby`를 전달받습니다.", required: true },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Content (콘텐츠 영역)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: "트리거 기준 툴팁의 선호 배치 방향입니다. 공간이 부족하면 자동으로 반대쪽에 배치됩니다." },
+      { name: "sideOffset", type: "number", default: "4", description: "트리거와 툴팁 사이의 거리(px)입니다." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "트리거 기준 툴팁의 정렬 방향입니다." },
+      { name: "alignOffset", type: "number", default: "0", description: "위치를 세밀하게 조정하기 위한 정렬 축 방향의 오프셋(px)입니다." },
+      { name: "arrowPadding", type: "number", default: "4", description: "화살표와 툴팁 가장자리 사이의 최소 거리(px)로, 화살표가 모서리를 넘어가지 않도록 합니다." },
+    ]}
+  />
+
+  <SubHeading>Tooltip.Arrow</SubHeading>
+  <PropsTable
+    data={[
+      { name: "width", type: "number", default: "10", description: "화살표의 너비(px)입니다." },
+      { name: "height", type: "number", default: "5", description: "화살표의 높이(px)입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

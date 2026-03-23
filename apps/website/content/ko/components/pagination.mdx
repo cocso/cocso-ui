@@ -1,0 +1,62 @@
+---
+title: Pagination
+description: 페이지네이션된 콘텐츠를 탐색하기 위한 네비게이션 컨트롤입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Pagination은 이전/다음 컨트롤과 함께 페이지 번호 버튼 행을 렌더링합니다. 제어 컴포넌트로, 부모가 <code>page</code>와 <code>onChange</code>를 통해 현재 페이지를 관리합니다. 표시되는 페이지 버튼 수는 <code>maxVisible</code>로 설정할 수 있습니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>대규모 데이터셋의 페이지 이동에 사용합니다.</Section.ListItem>
+    <Section.ListItem>기본 <code>maxVisible</code> 값인 5는 대부분의 레이아웃에 적합합니다. 좁은 컨테이너나 모바일 뷰에서는 줄입니다.</Section.ListItem>
+    <Section.ListItem>완전한 페이지네이션 인터페이스를 위해 데이터 테이블이나 리스트 컴포넌트와 함께 사용합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>랜드마크 네비게이션을 위해 <code>&lt;nav&gt;</code> 요소 안에 렌더링됩니다.</Section.ListItem>
+    <Section.ListItem>현재 페이지 버튼에는 <code>aria-current="page"</code>가 있어 스크린 리더에 활성 페이지를 전달합니다.</Section.ListItem>
+    <Section.ListItem>이전 및 다음 버튼은 첫 번째 및 마지막 페이지에서 각각 자동으로 비활성화됩니다.</Section.ListItem>
+    <Section.ListItem>각 페이지 버튼은 <code>Tab</code>으로 키보드 포커스가 가능하며 <code>Enter</code> 또는 <code>Space</code>로 활성화할 수 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Pagination } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 페이지네이터를 렌더링하려면 <code>page</code>, <code>totalPages</code>, <code>onChange</code>를 전달하세요. 기본적으로 한 번에 최대 5개의 페이지 버튼이 표시됩니다.</Section.Text>
+  <ComponentExample name="pagination-default" />
+</Section>
+
+<Section>
+  <Section.Title>Max Visible</Section.Title>
+  <Section.Text><code>maxVisible</code>을 설정하여 한 번에 표시되는 페이지 버튼 수를 조정하세요. 전체가 표시 범위를 초과하면 줄임표(…)가 자동으로 삽입됩니다.</Section.Text>
+  <ComponentExample name="pagination-max-visible" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Pagination</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "page", type: "number", required: true, description: "현재 활성 페이지 번호입니다 (1부터 시작). 제어 값으로, `onChange` 콜백에서 업데이트하세요." },
+      { name: "totalPages", type: "number", required: true, description: "전체 페이지 수입니다. 페이지 버튼 범위와 줄임표 동작을 결정합니다." },
+      { name: "onChange", type: "(pageNumber: number) => void", required: true, description: "사용자가 페이지 번호 또는 이전/다음 버튼을 클릭할 때 호출되는 콜백입니다. 목표 페이지 번호를 받습니다." },
+      { name: "maxVisible", type: "number", default: "5", description: "줄임표 삽입 전 표시되는 최대 페이지 버튼 수입니다. 좁은 컨테이너에서는 줄이고 넓은 레이아웃에서는 늘리세요." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,65 @@
+---
+title: Field
+description: 레이블, 설명, 에러 메시지를 폼 컨트롤과 연결하는 폼 필드 래퍼입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Field는 접근 가능한 레이블과 선택적 도움말 텍스트로 폼 컨트롤을 감쌉니다. 추가 안내를 위한 description과 유효성 검사 피드백을 위한 error 메시지를 제공합니다. description과 error 중 하나만 표시되며, error가 우선합니다. Input과 Select는 <code>label</code> prop이 제공되면 이미 내부적으로 Field를 통합합니다. 커스텀 폼 컨트롤을 감싸거나 독립적인 레이블/에러/설명 래퍼가 필요할 때 Field를 직접 사용하세요.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>스크린 리더 접근성을 위해 <code>htmlFor</code>/<code>id</code>를 통해 <code>&lt;label&gt;</code> 요소를 자식 컨트롤과 연결합니다.</Section.ListItem>
+    <Section.ListItem><code>error</code>와 <code>description</code> 텍스트는 <code>aria-describedby</code>를 통해 자식 컨트롤에 연결됩니다.</Section.ListItem>
+    <Section.ListItem><code>error</code>와 <code>description</code> 중 하나만 렌더링됩니다. 둘 다 제공된 경우 <code>error</code>가 우선합니다.</Section.ListItem>
+    <Section.ListItem><code>required</code>가 <code>false</code>이면 레이블 옆에 "(선택)" 표시가 나타납니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Field } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>자식으로 폼 컨트롤을 전달하세요. <code>label</code> prop은 필수입니다. 도움말 텍스트에는 <code>description</code>을, 유효성 검사 에러에는 <code>error</code>를 사용하세요.</Section.Text>
+  <ComponentExample name="field-default">
+    ```tsx
+    import { Field, Input } from "@cocso-ui/react";
+
+    export default function FieldDefault() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Field label="Email" description="We'll never share your email.">
+            <Input placeholder="Enter your email" />
+          </Field>
+          <Field label="Password" required error="Password must be at least 8 characters.">
+            <Input placeholder="Enter password" type="password" />
+          </Field>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "label", type: "string", required: true, description: "폼 컨트롤 위에 `<label>` 요소로 렌더링되는 레이블 텍스트입니다. 접근성을 위해 필수입니다." },
+    { name: "children", type: "ReactNode", required: true, description: "폼 컨트롤 요소입니다 (예: Input, Select, 또는 커스텀 input). Field 컨텍스트를 통해 `aria-describedby`를 받습니다." },
+    { name: "description", type: "string", description: "컨트롤 아래에 흐린 스타일로 표시되는 도움말 텍스트입니다. `error`가 설정되면 숨겨집니다." },
+    { name: "error", type: "string", description: "컨트롤 아래에 빨간색으로 표시되는 유효성 검사 에러 메시지입니다. 둘 다 설정된 경우 `description`보다 우선합니다." },
+    { name: "htmlFor", type: "string", description: "레이블의 `for` 속성에 사용되는 폼 컨트롤의 `id`입니다. 자식 컨트롤의 `id`가 자동으로 감지되지 않을 때 제공하세요." },
+    { name: "required", type: "boolean", description: "`false`이면 레이블 옆에 \"(선택)\" optional 표시가 나타나 필드가 필수가 아님을 알립니다." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

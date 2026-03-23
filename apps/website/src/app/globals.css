@@ -10,6 +10,8 @@
     "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-mono: "Geist Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 
+  --text-base: 15px;
+
   --breakpoint-lg: 1200px;
 
   --size-app-width: 1200px;
@@ -32,6 +34,7 @@
 
   body {
     display: flex;
+    font-size: var(--text-base);
     color: var(--color-text-primary);
     touch-action: manipulation;
     flex-direction: column;
@@ -51,50 +54,57 @@
     background-color: var(--color-neutral-50);
   }
 
-  body::before {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    z-index: var(--z-index-divider);
-    width: 1px;
-    pointer-events: none;
-    content: "";
-    background-color: var(--color-neutral-200);
-    transform: translateX(
-      calc(
-        -1 *
-        var(--size-app-width) /
-        2 -
-        var(--removed-body-scroll-bar-size, 0px) /
-        2
-      )
-    );
+  @media (min-width: 1200px) {
+    body::before {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: var(--z-index-divider);
+      width: 1px;
+      pointer-events: none;
+      content: "";
+      background-color: var(--color-neutral-200);
+      transform: translateX(
+        calc(
+          -1 *
+          var(--size-app-width) /
+          2 -
+          var(--removed-body-scroll-bar-size, 0px) /
+          2
+        )
+      );
+    }
+
+    body::after {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: var(--z-index-divider);
+      width: 1px;
+      pointer-events: none;
+      content: "";
+      background-color: var(--color-neutral-200);
+      transform: translateX(
+        calc(
+          var(--size-app-width) /
+          2 -
+          var(--removed-body-scroll-bar-size, 0px) /
+          2
+        )
+      );
+    }
   }
 
-  body::after {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    z-index: var(--z-index-divider);
-    width: 1px;
-    pointer-events: none;
-    content: "";
-    background-color: var(--color-neutral-200);
-    transform: translateX(
-      calc(
-        var(--size-app-width) /
-        2 -
-        var(--removed-body-scroll-bar-size, 0px) /
-        2
-      )
-    );
+  button,
+  [role="button"] {
+    cursor: pointer;
   }
 
   code:not(pre code) {
     padding: 2px 5px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     background: var(--color-fd-muted);
     border: solid 1px var(--color-fd-border);

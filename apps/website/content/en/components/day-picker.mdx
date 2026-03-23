@@ -1,0 +1,80 @@
+---
+title: Day Picker
+description: A date picker that opens a calendar popover for selecting a single date.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>DayPicker renders a trigger element that opens a Dropdown containing an inline calendar. It is a controlled component; pass value and onValueChange to manage the selected date. The calendar is localized to English by default.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use DayPicker for selecting a specific calendar date.</Section.ListItem>
+    <Section.ListItem>Use <code>minDate</code> and <code>maxDate</code> to constrain the selectable range.</Section.ListItem>
+    <Section.ListItem>For month-level selection, use MonthPicker instead.</Section.ListItem>
+    <Section.ListItem>Provide a custom <code>trigger</code> element for better visual integration with form layouts.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>The calendar grid supports arrow key navigation between days.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the dropdown and returns focus to the trigger.</Section.ListItem>
+    <Section.ListItem>Dates outside the <code>minDate</code>–<code>maxDate</code> range are marked with <code>aria-disabled</code>.</Section.ListItem>
+    <Section.ListItem>Month navigation buttons allow moving forward and backward through months.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { DayPicker } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Control the selected date with the value and onValueChange props. When no custom trigger is provided, it renders as a default button.</Section.Text>
+  <ComponentExample name="day-picker-default">
+    ```tsx
+    "use client";
+
+    import { Button, DayPicker } from "@cocso-ui/react";
+    import { CalendarMonthIcon } from "@cocso-ui/react-icons";
+    import { useState } from "react";
+
+    export default function DayPickerDefault() {
+      const [value, setValue] = useState<Date | null>(null);
+
+      return (
+        <div className="p-4">
+          <DayPicker
+            onValueChange={setValue}
+            trigger={
+              <Button prefix={<CalendarMonthIcon size={16} />} variant="outline">
+                {value ? value.toLocaleDateString("ko-KR") : "Select date"}
+              </Button>
+            }
+            value={value ?? undefined}
+          />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable data={[
+    { name: "value", type: "Date", description: "The currently selected date. Pass `undefined` for no selection." },
+    { name: "onValueChange", type: "(value: Date | null) => void", description: "Callback invoked when the user selects a date or clears the selection. Receives a `Date` object or `null`." },
+    { name: "disabled", type: "boolean", description: "Disables the trigger button and prevents the calendar from opening." },
+    { name: "minDate", type: "Date", description: "The earliest selectable date. Days before this date are visually dimmed and cannot be selected." },
+    { name: "maxDate", type: "Date", description: "The latest selectable date. Days after this date are visually dimmed and cannot be selected." },
+    { name: "trigger", type: "ReactElement", description: "Custom trigger element replacing the default button. Use to integrate with form input fields or custom UI." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

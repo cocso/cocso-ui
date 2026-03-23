@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "update": "bun update",
+    "update": "pnpm update",
     "dev": "next dev --hostname 0.0.0.0 --port 6005",
     "prebuild": "node -e \"import('./node_modules/fumadocs-mdx/dist/next/index.js').then(m => m.postInstall({ configPath: 'source.config.ts', outDir: '.source' })).catch(e => { console.error(e); process.exit(1); })\"",
     "build": "next build",
@@ -17,6 +17,7 @@
     "@cocso-ui/react": "workspace:^",
     "@cocso-ui/react-icons": "workspace:^",
     "@suspensive/react": "^3.19.2",
+    "flexsearch": "^0.8.212",
     "fumadocs-core": "^16.6.16",
     "fumadocs-mdx": "^14.2.9",
     "fumadocs-ui": "^16.6.16",
@@ -24,7 +25,6 @@
     "posthog-js": "^1.360.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "shiki": "^4.0.2",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

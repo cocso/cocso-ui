@@ -12,9 +12,14 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
+import { useLocale } from "~/hooks/use-locale";
 
 export const DefaultSearchDialog = (props: SharedProps) => {
-  const { search, setSearch, query } = useDocsSearch({ type: "fetch" });
+  const locale = useLocale();
+  const { search, setSearch, query } = useDocsSearch({
+    type: "fetch",
+    locale,
+  });
 
   return (
     <SearchDialog

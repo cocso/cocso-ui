@@ -1,0 +1,40 @@
+---
+title: Typography
+description: 읽기 쉽고 계층적인 콘텐츠를 위한 타이포그래피 스케일 및 폰트 시스템입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>COCSO UI는 기본 sans-serif 폰트로 Pretendard Variable을, 코드용으로 Geist Mono를 사용합니다. 타이포그래피 시스템은 `--cocso-*` 접두사를 가진 CSS 커스텀 속성에 직접 매핑되는 고정 숫자 스케일을 기반으로 합니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Font Size</Section.Title>
+  <Section.Text>크기 스케일은 10px에서 60px까지 15단계로 구성됩니다. 각 단계는 아래에 실제 렌더링된 크기로 표시됩니다.</Section.Text>
+  <ComponentExample name="typography-scale" />
+</Section>
+
+<Section>
+  <Section.Title>Font Weight</Section.Title>
+  <Section.Text>9가지 굵기 변형이 thin(100)부터 black(900)까지 전체 범위를 아우르며, 시각적 계층 구조와 강조를 정밀하게 제어할 수 있습니다.</Section.Text>
+  <ComponentExample name="typography-weight" />
+</Section>
+
+<Section>
+  <Section.Title>Line Height</Section.Title>
+  <Section.Text>줄 높이는 표준 배수에 매핑되는 명명 스케일을 따릅니다. 제목에는 좁은 값을, 본문에는 넓은 값을 사용하세요.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "none", token: "--cocso-leading-none", value: "1" },
+      { name: "tight", token: "--cocso-leading-tight", value: "1.25" },
+      { name: "snug", token: "--cocso-leading-snug", value: "1.375" },
+      { name: "normal", token: "--cocso-leading-normal", value: "1.5" },
+      { name: "relaxed", token: "--cocso-leading-relaxed", value: "1.625" },
+      { name: "loose", token: "--cocso-leading-loose", value: "2" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

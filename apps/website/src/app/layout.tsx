@@ -6,6 +6,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
 import type { PropsWithChildren } from "react";
+import { Toaster } from "@cocso-ui/react";
 import { RootLayout as Layout } from "~/components/layout/root";
 import { DefaultSearchDialog as SearchDialog } from "~/components/ui/search";
 
@@ -30,13 +31,14 @@ export const viewport: Viewport = {
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <html dir="ltr" lang="ko" suppressHydrationWarning>
+    <html dir="ltr" lang="en" suppressHydrationWarning>
       <head>
         <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
       </head>
       <body className={GeistMono.variable}>
-        <RootProvider search={{ SearchDialog }}>
+        <RootProvider search={{ SearchDialog }} theme={{ forcedTheme: "light" }}>
           <Layout>{children}</Layout>
+          <Toaster position="top-center" />
         </RootProvider>
       </body>
     </html>

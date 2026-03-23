@@ -1,0 +1,159 @@
+---
+title: Dialog
+description: 중요한 콘텐츠로 사용자의 흐름을 중단하고 응답을 요구하는 모달 다이얼로그입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Dialog는 사용자가 닫을 때까지 포커스를 가두고 페이지의 나머지 부분과의 상호작용을 차단하는 모달 오버레이를 렌더링하는 복합 컴포넌트입니다. 확인, 폼, 또는 사용자의 명시적인 결정이 필요한 콘텐츠에 Dialog를 사용하세요.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>복합 API로 구성됩니다. <code>Dialog</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code>, <code>Dialog.Title</code>, <code>Dialog.Description</code>, <code>Dialog.Close</code></Section.ListItem>
+    <Section.ListItem>다이얼로그가 열려 있는 동안 포커스가 내부에 갇힙니다.</Section.ListItem>
+    <Section.ListItem>기본적으로 <code>Escape</code> 키를 누르면 다이얼로그가 닫힙니다.</Section.ListItem>
+    <Section.ListItem>세 가지 콘텐츠 크기를 지원합니다. <code>small</code>, <code>medium</code>, <code>large</code>.</Section.ListItem>
+    <Section.ListItem>제어형(<code>open</code> + <code>onOpenChange</code>)과 비제어형(<code>defaultOpen</code>) 사용을 모두 지원합니다.</Section.ListItem>
+  </Section.UnorderedList>
+  <Section.Text className="font-semibold">가이드라인</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>레코드 삭제, 저장되지 않은 변경 사항 취소, 되돌릴 수 없는 작업 제출 등 사용자의 명시적인 확인이 필요한 액션에 Dialog를 사용합니다.</Section.ListItem>
+    <Section.ListItem>비차단 방식의 보조 콘텐츠에는 Popover를 사용합니다.</Section.ListItem>
+    <Section.ListItem>사용자가 다이얼로그를 닫을 수 있도록 항상 <code>Dialog.Close</code> 액션을 하나 이상 포함합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>다이얼로그가 열려 있는 동안 포커스가 내부에 갇힙니다. 닫히면 포커스가 트리거 요소로 돌아갑니다.</Section.ListItem>
+    <Section.ListItem>기본적으로 <code>Escape</code> 키를 누르면 다이얼로그가 닫힙니다.</Section.ListItem>
+    <Section.ListItem>다이얼로그가 열리면 콘텐츠 영역 내 첫 번째 포커스 가능한 요소로 포커스가 이동합니다.</Section.ListItem>
+    <Section.ListItem><code>Dialog.Title</code>은 <code>aria-labelledby</code>로, <code>Dialog.Description</code>은 <code>aria-describedby</code>로 연결되어 스크린 리더에 컨텍스트를 제공합니다.</Section.ListItem>
+    <Section.ListItem>다이얼로그가 열려 있는 동안 배경 콘텐츠에 <code>aria-hidden="true"</code>가 적용되어 스크린 리더가 접근할 수 없습니다.</Section.ListItem>
+    <Section.ListItem><code>modal</code>이 <code>false</code>이면 비모달 방식으로 동작하여 포커스가 갇히지 않고 배경 상호작용이 허용됩니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Dialog } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>제목, 설명, 액션 버튼이 있는 다이얼로그입니다.</Section.Text>
+  <ComponentExample name="dialog-default">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogDefault() {
+  return (
+    <div className="p-4">
+      <Dialog>
+        <Dialog.Trigger render={<Button />}>Open Dialog</Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title>Confirm Action</Dialog.Title>
+          <Dialog.Description>
+            Are you sure you want to proceed? This action cannot be undone.
+          </Dialog.Description>
+          <div className="mt-4 flex justify-end gap-2">
+            <Dialog.Close render={<Button variant="secondary" />}>Cancel</Dialog.Close>
+            <Dialog.Close render={<Button variant="primary" />}>Confirm</Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text><code>Dialog.Content</code>의 <code>size</code> prop은 다이얼로그 패널의 최대 너비를 제어합니다.</Section.Text>
+  <ComponentExample name="dialog-sizes">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogSizes() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Dialog key={size}>
+          <Dialog.Trigger render={<Button variant="secondary" />}>{size}</Dialog.Trigger>
+          <Dialog.Content size={size}>
+            <Dialog.Title>Dialog — {size}</Dialog.Title>
+            <Dialog.Description>This is a {size} dialog.</Dialog.Description>
+            <div className="mt-4 flex justify-end">
+              <Dialog.Close render={<Button variant="primary" />}>Close</Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Dialog (루트 컨테이너)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "다이얼로그의 제어형 열림 상태입니다. 가시성을 완전히 제어하려면 `onOpenChange`와 함께 사용하세요." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "다이얼로그를 열거나 닫아야 할 때 호출되는 콜백입니다. 새로운 boolean 상태를 전달받습니다." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "비제어 방식일 때의 초기 열림 상태입니다. 컴포넌트가 내부적으로 열기/닫기를 관리합니다." },
+      { name: "modal", type: "boolean", default: "true", description: "`true`이면 포커스를 다이얼로그 내부에 가두고 오버레이로 배경 상호작용을 차단합니다. 비모달 방식으로 사용하려면 `false`로 설정하세요." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Trigger (트리거 요소)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "트리거 버튼으로 렌더링할 요소입니다. prop 병합을 통해 `onClick` 핸들러와 `aria-expanded`를 전달받습니다.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Content (콘텐츠 영역)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "다이얼로그 패널의 최대 너비를 제어합니다. 확인 대화상자에는 `small` (400px), 폼에는 `medium` (560px), 복잡한 콘텐츠에는 `large` (720px)를 사용하세요." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Close (닫기 버튼)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "닫기 액션으로 렌더링할 요소입니다. prop 병합을 통해 다이얼로그를 닫는 `onClick` 핸들러를 전달받습니다." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Title</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "다이얼로그 상단에 표시되는 제목 텍스트입니다. 스크린 리더를 위해 `aria-labelledby`로 다이얼로그에 연결됩니다.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Description</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "다이얼로그 액션에 대한 컨텍스트를 제공하는 설명 텍스트입니다. 스크린 리더를 위해 `aria-describedby`로 연결됩니다.", required: true },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

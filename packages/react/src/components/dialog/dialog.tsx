@@ -68,7 +68,7 @@ function DialogTitle({
   return (
     <DialogBase.Title
       className={cn(styles.title, className)}
-      render={<Typography size={20} weight="bold" />}
+      render={<Typography size={20} type="custom" weight="bold" />}
       {...props}
     >
       {children}
@@ -85,7 +85,12 @@ function DialogDescription({
     <DialogBase.Description
       className={cn(styles.description, className)}
       render={
-        <Typography color={colors.textSecondary} size={14} weight="medium" />
+        <Typography
+          color={colors.textSecondary}
+          size={14}
+          type="custom"
+          weight="medium"
+        />
       }
       {...props}
     >

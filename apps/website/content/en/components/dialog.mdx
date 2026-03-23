@@ -1,0 +1,159 @@
+---
+title: Dialog
+description: A modal dialog that interrupts the user's flow with important content and requires a response.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Dialog is a compound component that renders a modal overlay that traps focus and blocks interaction with the rest of the page until the user dismisses it. Use Dialog for confirmations, forms, or content that requires an explicit user decision.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Dialog</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code>, <code>Dialog.Title</code>, <code>Dialog.Description</code>, <code>Dialog.Close</code></Section.ListItem>
+    <Section.ListItem>Focus is trapped inside while the dialog is open.</Section.ListItem>
+    <Section.ListItem>Pressing the <code>Escape</code> key closes the dialog by default.</Section.ListItem>
+    <Section.ListItem>Three content sizes are supported: <code>small</code>, <code>medium</code>, <code>large</code>.</Section.ListItem>
+    <Section.ListItem>Supports both controlled (<code>open</code> + <code>onOpenChange</code>) and uncontrolled (<code>defaultOpen</code>) usage.</Section.ListItem>
+  </Section.UnorderedList>
+  <Section.Text className="font-semibold">Guidelines</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Dialog for actions requiring explicit user confirmation — deleting records, discarding unsaved changes, or submitting irreversible operations.</Section.ListItem>
+    <Section.ListItem>For non-blocking supplementary content, use Popover instead.</Section.ListItem>
+    <Section.ListItem>Always include at least one <code>Dialog.Close</code> action so users can dismiss the dialog.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Focus is trapped inside the dialog while open. On close, focus returns to the trigger element.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the dialog by default.</Section.ListItem>
+    <Section.ListItem>Opening the dialog moves focus to the first focusable element inside the content area.</Section.ListItem>
+    <Section.ListItem><code>Dialog.Title</code> is linked via <code>aria-labelledby</code> and <code>Dialog.Description</code> via <code>aria-describedby</code>, providing context for screen readers.</Section.ListItem>
+    <Section.ListItem>Background content receives <code>aria-hidden="true"</code> while the dialog is open, preventing screen readers from accessing it.</Section.ListItem>
+    <Section.ListItem>When <code>modal</code> is <code>false</code>, the dialog becomes non-modal — focus is not trapped and background interaction is allowed.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Dialog } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A dialog with a title, description, and action buttons.</Section.Text>
+  <ComponentExample name="dialog-default">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogDefault() {
+  return (
+    <div className="p-4">
+      <Dialog>
+        <Dialog.Trigger render={<Button />}>Open Dialog</Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title>Confirm Action</Dialog.Title>
+          <Dialog.Description>
+            Are you sure you want to proceed? This action cannot be undone.
+          </Dialog.Description>
+          <div className="mt-4 flex justify-end gap-2">
+            <Dialog.Close render={<Button variant="secondary" />}>Cancel</Dialog.Close>
+            <Dialog.Close render={<Button variant="primary" />}>Confirm</Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>The <code>size</code> prop on <code>Dialog.Content</code> controls the maximum width of the dialog panel.</Section.Text>
+  <ComponentExample name="dialog-sizes">
+```tsx
+"use client";
+
+import { Button, Dialog } from "@cocso-ui/react";
+
+export default function DialogSizes() {
+  return (
+    <div className="flex flex-wrap gap-3 p-4">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Dialog key={size}>
+          <Dialog.Trigger render={<Button variant="secondary" />}>{size}</Dialog.Trigger>
+          <Dialog.Content size={size}>
+            <Dialog.Title>Dialog — {size}</Dialog.Title>
+            <Dialog.Description>This is a {size} dialog.</Dialog.Description>
+            <div className="mt-4 flex justify-end">
+              <Dialog.Close render={<Button variant="primary" />}>Close</Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog>
+      ))}
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Dialog (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state. Use together with `onOpenChange` for full control over visibility." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the dialog should open or close. Receives the new boolean state." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage. The component manages open/close internally." },
+      { name: "modal", type: "boolean", default: "true", description: "When `true`, traps focus inside the dialog and blocks background interaction with an overlay. Set to `false` for non-modal usage." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "The element to render as the trigger button. Receives `onClick` handler and `aria-expanded` via prop merging.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "size", type: '"small" | "medium" | "large"', default: '"medium"', description: "Controls the maximum width of the dialog panel. `small` (400px) for confirmations, `medium` (560px) for forms, `large` (720px) for complex content." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Close</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "The element to render as the close action. Receives `onClick` handler to close the dialog via prop merging." },
+    ]}
+  />
+
+  <SubHeading>Dialog.Title</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "Title text displayed at the top of the dialog. Linked to the dialog via `aria-labelledby` for screen readers.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dialog.Description</SubHeading>
+  <PropsTable
+    data={[
+      { name: "children", type: "ReactNode", description: "Description text providing context for the dialog action. Linked via `aria-describedby` for screen readers.", required: true },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
