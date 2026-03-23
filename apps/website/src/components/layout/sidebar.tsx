@@ -18,9 +18,9 @@ export const Sidebar = (props: SidebarProps) => {
 
   return (
     <nav {...props}>
-      {Object.entries(sidebarData).map(([key, value]) => {
+      {Object.entries(sidebarData).map(([key, value], index, arr) => {
         return (
-          <div className="mb-6" key={key}>
+          <div className={index < arr.length - 1 ? "mb-6" : undefined} key={key}>
             <Typography
               className="mb-3 px-4 uppercase"
               color={colors.neutral400}
