@@ -53,13 +53,13 @@ export const MobileSidebar = () => {
       {open && (
         <>
           <button
+            aria-label="Close menu"
             className="fixed inset-0 top-(--size-header-height) z-40 cursor-default border-none bg-black/20 lg:hidden"
             onClick={() => setOpen(false)}
             onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
             type="button"
-            aria-label="Close menu"
           />
-          <nav className="fixed inset-x-0 top-[calc(var(--size-header-height)-1px)] z-50 max-h-[calc(100svh-var(--size-header-height)+1px)] overflow-y-auto border-neutral-200 border-t bg-white px-2 py-3 shadow-lg lg:hidden">
+          <nav className="fixed inset-x-0 top-[calc(var(--size-header-height)-1px)] z-50 h-[calc(100svh-var(--size-header-height)+1px)] overflow-y-auto border-neutral-200 border-t bg-white px-2 py-3 shadow-lg lg:hidden">
             {Object.entries(sidebarData).map(([key, value]) => (
               <div className="mb-6" key={key}>
                 <Typography
@@ -81,8 +81,7 @@ export const MobileSidebar = () => {
                             className={twMerge(
                               "center-y h-9 rounded-lg px-4 opacity-50 transition-opacity duration-150",
                               pathname !== href && "hover:opacity-70",
-                              pathname === href &&
-                                "bg-neutral-100 opacity-100"
+                              pathname === href && "bg-neutral-100 opacity-100"
                             )}
                             render={<Link href={href} />}
                             size={13}
