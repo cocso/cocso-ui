@@ -4,8 +4,8 @@ import { i18n } from "~/libs/i18n";
 
 const i18nMiddleware = createI18nMiddleware(i18n);
 
-export default function middleware(request: NextRequest) {
-  const response = i18nMiddleware(request);
+export default function middleware(request: NextRequest, _evt: unknown) {
+  const response = i18nMiddleware(request, _evt);
   
   // Extract locale from URL path for x-locale header
   const { pathname } = request.nextUrl;
