@@ -7,6 +7,10 @@ const i18nMiddleware = createI18nMiddleware(i18n);
 export default function middleware(request: NextRequest, evt: NextFetchEvent) {
   const response = i18nMiddleware(request, evt);
   
+  if (!response) {
+    return NextResponse.next();
+  }
+  
   // Extract locale from URL path for x-locale header
   const { pathname } = request.nextUrl;
   const firstSegment = pathname.split("/")[1];
