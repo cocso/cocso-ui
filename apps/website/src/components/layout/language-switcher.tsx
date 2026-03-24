@@ -22,7 +22,8 @@ export const LanguageSwitcher = () => {
     const slug =
       locale === "en" ? pathname : pathname.replace(`/${locale}`, "") || "/";
 
-    const newPath = targetLocale === "en" ? slug : `/${targetLocale}${slug}`;
+    const newPath =
+      targetLocale === "en" ? `/en${slug}` : `/${targetLocale}${slug}`;
     router.push(newPath);
   };
 
