@@ -4,8 +4,8 @@ import { i18n } from "~/libs/i18n";
 
 const i18nMiddleware = createI18nMiddleware(i18n);
 
-export default function middleware(request: NextRequest, evt: NextFetchEvent) {
-  const response = i18nMiddleware(request, evt);
+export default async function middleware(request: NextRequest, evt: NextFetchEvent) {
+  const response = await i18nMiddleware(request, evt);
   
   if (!response) {
     return NextResponse.next();
