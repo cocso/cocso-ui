@@ -1,17 +1,16 @@
-import "./globals.css";
+import "../globals.css";
 import "@cocso-ui/css/token.css";
 import "@cocso-ui/react/styles.css";
 
+import { Toaster } from "@cocso-ui/react";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
-import { headers } from "next/headers";
+import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
-import { Toaster } from "@cocso-ui/react";
-import type { Locale } from "~/libs/i18n";
-import { i18n } from "~/libs/i18n";
 import { RootLayout as Layout } from "~/components/layout/root";
 import { DefaultSearchDialog as SearchDialog } from "~/components/ui/search";
+import { i18n } from "~/libs/i18n";
 
 const GeistMono = Geist_Mono({
   subsets: ["latin"],
@@ -32,17 +31,31 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
-const RootLayout = async ({ children }: PropsWithChildren) => {
-  const headersList = await headers();
-  const lang = (headersList.get("x-locale") ?? i18n.defaultLanguage) as Locale;
+interface LayoutProps extends PropsWithChildren {
+  params: Promise<{ lang: string }>;
+}
+
+const RootLayout = async ({ children, params }: LayoutProps) => {
+  const { lang } = await params;
+
+  if (!(i18n.languages as readonly string[]).includes(lang)) {
+    notFound();
+  }
 
   return (
     <html dir="ltr" lang={lang} suppressHydrationWarning>
       <head>
-        <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
+        <link
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net"
+          rel="preconnect"
+        />
       </head>
       <body className={GeistMono.variable}>
-        <RootProvider search={{ SearchDialog }} theme={{ forcedTheme: "light" }}>
+        <RootProvider
+          search={{ SearchDialog }}
+          theme={{ forcedTheme: "light" }}
+        >
           <Layout>{children}</Layout>
           <Toaster position="top-center" />
         </RootProvider>
