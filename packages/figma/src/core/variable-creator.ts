@@ -9,7 +9,7 @@ function getOrCreateCollection(name: string): {
 } {
   const existing = figma.variables
     .getLocalVariableCollections()
-    .find((c) => c.name === name);
+    .find((c: VariableCollection) => c.name === name);
 
   const collection = existing ?? figma.variables.createVariableCollection(name);
 
@@ -34,7 +34,10 @@ function findExistingVariable(
 ): Variable | undefined {
   return figma.variables
     .getLocalVariables(resolvedType)
-    .find((v) => v.name === name && v.variableCollectionId === collectionId);
+    .find(
+      (v: Variable) =>
+        v.name === name && v.variableCollectionId === collectionId
+    );
 }
 
 function setVariableValue(
@@ -80,6 +83,10 @@ function upsertVariable(param: VariableUpsertParams, result: SyncResult): void {
   }
 }
 
+/**
+ * Sync all tokens from pre-built data to Figma Variables.
+ * Uses non-destructive upsert: creates new variables, updates existing, never deletes.
+ */
 export function syncTokens(data: FigmaTokenData): SyncResult {
   const result: SyncResult = {
     created: 0,

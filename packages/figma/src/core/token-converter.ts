@@ -1,6 +1,7 @@
 import type { VariableUpsertParams } from "../types/figma";
 import type { FigmaColorValue, FigmaTokenDef } from "../types/token-schema";
 
+/** Group a flat token list by collection name. */
 export function groupByCollection(
   tokens: FigmaTokenDef[]
 ): Map<string, FigmaTokenDef[]> {
@@ -16,6 +17,12 @@ export function groupByCollection(
   return groups;
 }
 
+/**
+ * Convert token definitions into Figma Variable upsert parameters.
+ * @param tokens - Token definitions belonging to a single collection.
+ * @param collectionId - Figma runtime collection ID.
+ * @param modeIdMap - Map of mode name to Figma runtime mode ID.
+ */
 export function toUpsertParams(
   tokens: FigmaTokenDef[],
   collectionId: string,

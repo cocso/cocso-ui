@@ -1,9 +1,8 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
-
-const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 
 import type {
   FigmaColorValue,
@@ -12,9 +11,15 @@ import type {
   FigmaTokenDef,
 } from "../src/types/token-schema";
 
+const require = createRequire(import.meta.url);
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+
 const sourcesDir = dirname(
   require.resolve("@cocso-ui/baseframe-sources/package.json")
 );
+
+/** Assumed root font size in px for rem-to-px conversion. */
+const BASE_FONT_SIZE_PX = 16;
 
 function findYamlFiles(dir: string): string[] {
   const results: string[] = [];
@@ -37,6 +42,7 @@ const SHADOW_COMPOSITE_RE = /,.*\d+px/;
 const DOLLAR_PREFIX_RE = /^\$/;
 const DOT_RE = /\./g;
 
+/** Parse a HEX color string (#RGB, #RRGGBB, #RRGGBBAA) to 0–1 RGBA. */
 export function parseHex(hex: string): FigmaColorValue {
   const m = hex.match(HEX_RE);
   if (!m) {
@@ -58,6 +64,7 @@ export function parseHex(hex: string): FigmaColorValue {
   return { r, g, b, a };
 }
 
+/** Parse an rgb() or rgba() string to 0–1 RGBA. */
 export function parseRgba(str: string): FigmaColorValue {
   const m = str.match(RGBA_RE);
   if (!m) {
@@ -71,23 +78,27 @@ export function parseRgba(str: string): FigmaColorValue {
   };
 }
 
+/** Parse a CSS size string ("16px", "1.5rem") to a unitless number. */
 export function parseSize(str: string): number {
   const m = str.match(SIZE_RE);
   if (!m) {
     throw new Error(`Invalid size: ${str}`);
   }
   const value = Number(m[1]);
-  return m[2] === "rem" ? value * 16 : value;
+  return m[2] === "rem" ? value * BASE_FONT_SIZE_PX : value;
 }
 
+/** Check if a raw value is a token reference (starts with "$"). */
 export function isTokenRef(value: string): boolean {
   return TOKEN_REF_RE.test(value);
 }
 
+/** Check if a raw value is a composite shadow (multi-layer with px). */
 export function isShadowComposite(value: string): boolean {
   return SHADOW_COMPOSITE_RE.test(value);
 }
 
+/** Convert a baseframe token name to a Figma Variable name. */
 export function toFigmaName(tokenName: string): string {
   return tokenName.replace(DOLLAR_PREFIX_RE, "").replace(DOT_RE, "/");
 }
@@ -143,6 +154,10 @@ function loadRawTokens(): {
   return { tokens: allTokens, modes };
 }
 
+/**
+ * Recursively resolve a token reference to its final raw value.
+ * @throws If the reference is circular or the target token does not exist.
+ */
 export function resolveTokenRef(
   tokenName: string,
   tokenMap: Map<string, string | number>,
@@ -170,6 +185,10 @@ export function resolveTokenRef(
   return resolveTokenRef(rawValue, tokenMap, visited);
 }
 
+/**
+ * Parse a resolved (non-ref) token value into a Figma-ready typed value.
+ * @returns An object with `type` ("COLOR" | "FLOAT") and the parsed `value`.
+ */
 export function parseResolvedValue(
   value: string | number
 ):
@@ -199,6 +218,10 @@ export function parseResolvedValue(
   throw new Error(`Unable to parse token value: ${value}`);
 }
 
+/**
+ * Read all baseframe YAML sources and produce a {@link FigmaTokenData} object.
+ * TokenRefs are resolved to final values; composite shadows are skipped.
+ */
 export function generateTokenData(): FigmaTokenData {
   const { tokens: rawTokens, modes } = loadRawTokens();
 

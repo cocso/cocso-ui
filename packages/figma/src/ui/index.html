@@ -134,7 +134,7 @@
     <h1>cocso-ui Design Tokens</h1>
     <p class="subtitle">Sync baseframe tokens to Figma Variables</p>
 
-    <button type="button" id="sync-btn" onclick="onSync()">Sync Tokens</button>
+    <button type="button" id="sync-btn">Sync Tokens</button>
 
     <div id="status" class="status"><span id="status-text"></span></div>
 
@@ -170,10 +170,10 @@
 
     <script>
     "use strict";
-    var syncBtn = document.getElementById("sync-btn");
-    var statusEl = document.getElementById("status");
-    var statusText = document.getElementById("status-text");
-    var resultEl = document.getElementById("result");
+    const syncBtn = document.getElementById("sync-btn");
+    const statusEl = document.getElementById("status");
+    const statusText = document.getElementById("status-text");
+    const resultEl = document.getElementById("result");
 
     function onSync() {
       syncBtn.disabled = true;
@@ -183,8 +183,46 @@
       parent.postMessage({ pluginMessage: { type: "sync-tokens" } }, "*");
     }
 
-    window.onmessage = (event) => {
-      var msg = event.data.pluginMessage;
+    syncBtn.addEventListener("click", onSync);
+
+    function renderSkippedTokens(skippedTokens) {
+      const section = document.getElementById("skipped-section");
+      const list = document.getElementById("skipped-list");
+      if (skippedTokens && skippedTokens.length > 0) {
+        section.style.display = "block";
+        list.innerHTML = "";
+        for (const token of skippedTokens) {
+          const li = document.createElement("li");
+          li.textContent = `${token.name} `;
+          const span = document.createElement("span");
+          span.className = "reason";
+          span.textContent = `\u2014 ${token.reason}`;
+          li.appendChild(span);
+          list.appendChild(li);
+        }
+      } else {
+        section.style.display = "none";
+      }
+    }
+
+    function renderErrors(errors) {
+      const section = document.getElementById("errors-section");
+      const list = document.getElementById("errors-list");
+      if (errors && errors.length > 0) {
+        section.style.display = "block";
+        list.innerHTML = "";
+        for (const error of errors) {
+          const li = document.createElement("li");
+          li.textContent = error;
+          list.appendChild(li);
+        }
+      } else {
+        section.style.display = "none";
+      }
+    }
+
+    window.addEventListener("message", (event) => {
+      const msg = event.data.pluginMessage;
       if (!msg) {
         return;
       }
@@ -195,7 +233,7 @@
       }
 
       if (msg.type === "sync-complete") {
-        var r = msg.result;
+        const r = msg.result;
         syncBtn.disabled = false;
         statusEl.className = "status visible success";
         statusText.textContent = "Sync complete!";
@@ -205,45 +243,16 @@
         document.getElementById("updated-count").textContent = r.updated;
         document.getElementById("skipped-count").textContent = r.skipped;
 
-        var skippedSection = document.getElementById("skipped-section");
-        var skippedList = document.getElementById("skipped-list");
-        if (r.skippedTokens && r.skippedTokens.length > 0) {
-          skippedSection.style.display = "block";
-          skippedList.innerHTML = "";
-          for (var i = 0; i < r.skippedTokens.length; i++) {
-            var li = document.createElement("li");
-            li.innerHTML =
-              r.skippedTokens[i].name +
-              ' <span class="reason">— ' +
-              r.skippedTokens[i].reason +
-              "</span>";
-            skippedList.appendChild(li);
-          }
-        } else {
-          skippedSection.style.display = "none";
-        }
-
-        var errorsSection = document.getElementById("errors-section");
-        var errorsList = document.getElementById("errors-list");
-        if (r.errors && r.errors.length > 0) {
-          errorsSection.style.display = "block";
-          errorsList.innerHTML = "";
-          for (var j = 0; j < r.errors.length; j++) {
-            var eLi = document.createElement("li");
-            eLi.textContent = r.errors[j];
-            errorsList.appendChild(eLi);
-          }
-        } else {
-          errorsSection.style.display = "none";
-        }
+        renderSkippedTokens(r.skippedTokens);
+        renderErrors(r.errors);
       }
 
       if (msg.type === "sync-error") {
         syncBtn.disabled = false;
         statusEl.className = "status visible error";
-        statusText.textContent = "Error: " + msg.error;
+        statusText.textContent = `Error: ${msg.error}`;
       }
-    };
+    });
     </script>
   </body>
 </html>

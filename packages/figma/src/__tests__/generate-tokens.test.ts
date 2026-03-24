@@ -10,6 +10,7 @@ import {
   resolveTokenRef,
   toFigmaName,
 } from "../../scripts/generate-tokens";
+import type { FigmaColorValue } from "../types/token-schema";
 
 describe("parseHex", () => {
   it("parses 6-digit hex to 0-1 RGBA", () => {
@@ -284,12 +285,7 @@ describe("generateTokenData (integration)", () => {
     const primary50 = data.tokens.find((t) => t.name === "color/primary-50");
     expect(primary50).toBeDefined();
     expect(primary50?.resolvedType).toBe("COLOR");
-    const p50Val = primary50?.values.default as {
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    };
+    const p50Val = primary50?.values.default as FigmaColorValue;
     // #F4F5F6 = rgb(244, 245, 246)
     expect(p50Val.r).toBeCloseTo(244 / 255, 2);
     expect(p50Val.g).toBeCloseTo(245 / 255, 2);
@@ -297,12 +293,7 @@ describe("generateTokenData (integration)", () => {
 
     // All COLOR tokens should have valid 0-1 range
     for (const token of data.tokens.filter((t) => t.resolvedType === "COLOR")) {
-      const v = token.values.default as {
-        r: number;
-        g: number;
-        b: number;
-        a: number;
-      };
+      const v = token.values.default as FigmaColorValue;
       expect(v.r).toBeGreaterThanOrEqual(0);
       expect(v.r).toBeLessThanOrEqual(1);
       expect(v.g).toBeGreaterThanOrEqual(0);

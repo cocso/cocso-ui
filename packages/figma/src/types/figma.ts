@@ -1,17 +1,14 @@
+import type { FigmaColorValue } from "./token-schema";
+
+/** Parameters for creating or updating a Figma Variable. */
 export interface VariableUpsertParams {
   collectionId: string;
   name: string;
   resolvedType: "COLOR" | "FLOAT";
-  values: Record<string, RGBA | number>;
+  values: Record<string, FigmaColorValue | number>;
 }
 
-export interface RGBA {
-  a: number;
-  b: number;
-  g: number;
-  r: number;
-}
-
+/** Result of a sync operation. */
 export interface SyncResult {
   created: number;
   errors: string[];

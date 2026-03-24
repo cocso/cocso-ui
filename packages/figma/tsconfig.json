@@ -11,11 +11,8 @@
     "declaration": false,
     "outDir": "dist",
     "rootDir": ".",
-    "typeRoots": [
-      "./node_modules/@figma/plugin-typings",
-      "./node_modules/@types"
-    ]
+    "types": ["@figma/plugin-typings", "node"]
   },
   "include": ["src/**/*.ts", "scripts/**/*.ts"],
-  "exclude": ["node_modules", "dist", "src/__tests__"]
+  "exclude": ["node_modules", "dist"]
 }
