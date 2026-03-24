@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Dropdown } from "@cocso-ui/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "~/hooks/use-locale";
 
 const locales = [
@@ -12,6 +12,7 @@ const locales = [
 export const LanguageSwitcher = () => {
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleSwitch = (targetLocale: string) => {
     if (targetLocale === locale) {
@@ -22,7 +23,7 @@ export const LanguageSwitcher = () => {
       locale === "en" ? pathname : pathname.replace(`/${locale}`, "") || "/";
 
     const newPath = targetLocale === "en" ? slug : `/${targetLocale}${slug}`;
-    window.location.assign(newPath);
+    router.push(newPath);
   };
 
   const currentLabel = locales.find((l) => l.code === locale)?.label ?? "EN";
