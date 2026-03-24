@@ -1,0 +1,27 @@
+{
+  "name": "@cocso-ui/figma",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "generate": "tsx scripts/generate-tokens.ts",
+    "prebuild": "pnpm generate",
+    "build": "node build.js",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@cocso-ui/baseframe-sources": "workspace:*",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.121.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "esbuild": "^0.27.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

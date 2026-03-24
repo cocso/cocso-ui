@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core", "ultracite/biome/react"],
   "files": {
-    "includes": ["!!**/*.stories.*", "!!**/dist", "!!ecosystem/baseframe/bin"]
+    "includes": ["!!**/*.stories.*", "!!**/dist", "!!ecosystem/baseframe/bin", "!!packages/figma/src/ui/**"]
   },
   "css": {
     "parser": {
@@ -41,6 +41,12 @@
           "suite",
           "expectTypeOf"
         ]
+      }
+    },
+    {
+      "includes": ["packages/figma/src/plugin/**", "packages/figma/src/core/variable-creator.ts"],
+      "javascript": {
+        "globals": ["figma", "__html__"]
       }
     }
   ]
