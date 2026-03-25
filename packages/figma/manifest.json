@@ -2,8 +2,8 @@
   "name": "cocso-ui Design Tokens",
   "id": "cocso-ui-figma-plugin",
   "api": "1.0.0",
-  "main": "dist/controller.js",
-  "ui": "dist/ui.html",
+  "main": "controller.js",
+  "ui": "ui.html",
   "editorType": ["figma"],
   "documentAccess": "dynamic-page"
 }
