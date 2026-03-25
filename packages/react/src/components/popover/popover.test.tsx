@@ -30,6 +30,21 @@ describe("Popover", () => {
       );
       expect(screen.queryByText("Popover content")).not.toBeInTheDocument();
     });
+
+    it("renders the trigger without a custom render prop", () => {
+      render(
+        <Popover>
+          <Popover.Trigger data-testid="popover-trigger">
+            Open Popover
+          </Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      );
+
+      expect(screen.getByTestId("popover-trigger")).toHaveTextContent(
+        "Open Popover"
+      );
+    });
   });
 
   describe("open/close behavior", () => {
@@ -132,6 +147,66 @@ describe("Popover", () => {
       expect(
         screen.getByRole("button", { name: "Action" })
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("wrapper prop forwarding", () => {
+    it("forwards popup props and positioning props through Popover.Content", async () => {
+      render(
+        <Popover>
+          <Popover.Trigger
+            render={<button type="button">Open Popover</button>}
+          />
+          <Popover.Content
+            align="start"
+            className="custom-content"
+            data-testid="popover-content"
+            id="popover-content-id"
+            side="right"
+            sideOffset={12}
+          >
+            Positioned content
+          </Popover.Content>
+        </Popover>
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Open Popover" })
+      );
+
+      const content = screen.getByTestId("popover-content");
+
+      expect(content).toHaveTextContent("Positioned content");
+      expect(content).toHaveClass("custom-content");
+      expect(content).toHaveAttribute("id", "popover-content-id");
+      expect(content).toHaveAttribute("data-side", "right");
+      expect(content).toHaveAttribute("data-align", "start");
+    });
+
+    it("renders Popover.Arrow and forwards arrow props", async () => {
+      render(
+        <Popover>
+          <Popover.Trigger
+            render={<button type="button">Open Popover</button>}
+          />
+          <Popover.Content side="bottom">
+            Arrow content
+            <Popover.Arrow
+              className="custom-arrow"
+              data-testid="popover-arrow"
+            />
+          </Popover.Content>
+        </Popover>
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Open Popover" })
+      );
+
+      const arrow = screen.getByTestId("popover-arrow");
+
+      expect(arrow).toHaveClass("custom-arrow");
+      expect(arrow).toHaveAttribute("data-side", "bottom");
     });
   });
 });
