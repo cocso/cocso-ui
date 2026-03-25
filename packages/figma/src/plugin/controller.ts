@@ -3,7 +3,15 @@ import tokenData from "../generated/tokens.json";
 import {
   generateBadgeComponents,
   generateButtonComponents,
+  generateCheckboxComponents,
   generateInputComponents,
+  generateLinkComponents,
+  generateRadioComponents,
+  generateSelectComponents,
+  generateSpinnerComponents,
+  generateSwitchComponents,
+  generateTooltipComponents,
+  generateTypographyComponents,
 } from "../generators";
 import type { FigmaTokenData } from "../types/token-schema";
 
@@ -54,6 +62,7 @@ figma.ui.onmessage = async (msg: { type: string }) => {
       await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
       await figma.loadFontAsync({ family: "Inter", style: "Bold" });
       await figma.loadFontAsync({ family: "Inter", style: "Light" });
+      await figma.loadFontAsync({ family: "Inter", style: "Extra Bold" });
 
       let page = figma.root.children.find(
         (p) => p.name === COMPONENT_PAGE_NAME
@@ -68,15 +77,25 @@ figma.ui.onmessage = async (msg: { type: string }) => {
       }
 
       let yOffset = 0;
+      yOffset = generateTypographyComponents(page, yOffset);
       yOffset = generateButtonComponents(page, yOffset);
       yOffset = generateBadgeComponents(page, yOffset);
       yOffset = generateInputComponents(page, yOffset);
+      yOffset = generateSelectComponents(page, yOffset);
+      yOffset = generateCheckboxComponents(page, yOffset);
+      yOffset = generateSwitchComponents(page, yOffset);
+      yOffset = generateRadioComponents(page, yOffset);
+      yOffset = generateSpinnerComponents(page, yOffset);
+      yOffset = generateLinkComponents(page, yOffset);
+      yOffset = generateTooltipComponents(page, yOffset);
 
       figma.ui.postMessage({
         type: "generate-complete",
-        result: { components: 3, page: COMPONENT_PAGE_NAME },
+        result: { components: 11, page: COMPONENT_PAGE_NAME },
       });
-      figma.notify(`Components generated on "${COMPONENT_PAGE_NAME}" page`);
+      figma.notify(
+        `11 component sets generated on "${COMPONENT_PAGE_NAME}" page`
+      );
     } catch (err) {
       figma.ui.postMessage({
         type: "generate-error",
