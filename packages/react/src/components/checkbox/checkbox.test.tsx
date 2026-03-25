@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 import { Checkbox } from "./checkbox";
 
@@ -160,6 +161,123 @@ describe("Checkbox", () => {
     it("renders label in uncontrolled mode", () => {
       render(<Checkbox defaultStatus="off" label="Terms" />);
       expect(screen.getByText("Terms")).toBeInTheDocument();
+    });
+  });
+
+  describe("development warnings", () => {
+    it("warns when switching between controlled and uncontrolled mode", () => {
+      const consoleError = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => undefined);
+
+      const { rerender } = render(<Checkbox />);
+
+      rerender(<Checkbox status="off" />);
+
+      expect(consoleError).toHaveBeenCalledWith(
+        "Checkbox: switching between controlled and uncontrolled mode is not supported. " +
+          "Use `status` (controlled) or `defaultStatus` (uncontrolled) for the component lifetime."
+      );
+
+      consoleError.mockRestore();
+    });
+
+    it("warns when status and defaultStatus are both provided", () => {
+      const consoleError = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => undefined);
+
+      render(<Checkbox defaultStatus="off" status="on" />);
+
+      expect(consoleError).toHaveBeenCalledWith(
+        "Checkbox: `status` and `defaultStatus` are mutually exclusive. " +
+          "Use `status` for controlled mode or `defaultStatus` for uncontrolled mode."
+      );
+
+      consoleError.mockRestore();
+    });
+
+    it("skips development warnings when NODE_ENV is production", () => {
+      const originalNodeEnv = process.env.NODE_ENV;
+      const consoleError = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => undefined);
+
+      process.env.NODE_ENV = "production";
+
+      render(<Checkbox defaultStatus="off" status="on" />);
+
+      expect(consoleError).not.toHaveBeenCalled();
+
+      process.env.NODE_ENV = originalNodeEnv;
+      consoleError.mockRestore();
+    });
+  });
+
+  describe("defensive branches", () => {
+    it("ignores primitive change callbacks when disabled", async () => {
+      const user = userEvent.setup();
+
+      vi.resetModules();
+      vi.doMock("../../primitives/checkbox", () => ({
+        Checkbox: {
+          Root: ({
+            checked,
+            children,
+            disabled,
+            id,
+            indeterminate,
+            onCheckedChange,
+          }: ComponentPropsWithoutRef<"input"> & {
+            checked?: boolean;
+            children?: ReactNode;
+            disabled?: boolean;
+            id?: string;
+            indeterminate?: boolean;
+            onCheckedChange?: (checked: boolean) => void;
+          }) => {
+            let ariaChecked: "false" | "mixed" | "true" = "false";
+
+            if (indeterminate) {
+              ariaChecked = "mixed";
+            } else if (checked) {
+              ariaChecked = "true";
+            }
+
+            return (
+              <div>
+                <input
+                  aria-checked={ariaChecked}
+                  aria-disabled={disabled ? "true" : undefined}
+                  checked={checked}
+                  disabled={disabled}
+                  id={id}
+                  onChange={() => onCheckedChange?.(true)}
+                  type="checkbox"
+                />
+                {children}
+              </div>
+            );
+          },
+          Indicator: ({ children }: { children?: ReactNode }) => (
+            <span>{children}</span>
+          ),
+        },
+      }));
+
+      try {
+        const { Checkbox: MockedCheckbox } = await import("./checkbox");
+        const onChange = vi.fn();
+
+        render(<MockedCheckbox disabled onChange={onChange} status="off" />);
+
+        await user.click(screen.getByRole("checkbox"));
+
+        expect(onChange).not.toHaveBeenCalled();
+      } finally {
+        vi.doUnmock("../../primitives/checkbox");
+        vi.resetModules();
+      }
     });
   });
 
