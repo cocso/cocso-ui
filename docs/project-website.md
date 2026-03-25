@@ -40,7 +40,7 @@ apps/website/
 ├── src/
 │   ├── app/                  # Next.js App Router pages and layouts
 │   │   ├── [lang]/[slug]/    # Locale-prefixed documentation routes
-│   │   ├── api/[transport]/  # MCP route handler (currently serves /api/mcp)
+│   │   ├── api/mcp/          # MCP route handler
 │   │   ├── api/search/       # Full-text search API route (fumadocs)
 │   │   ├── api/md/[slug]/    # AI-readable markdown endpoint
 │   │   └── llms.txt/         # LLM index endpoint
@@ -86,6 +86,7 @@ External runtime dependency:
 |---|---|
 | `NEXT_PUBLIC_POSTHOG_KEY` | PostHog analytics project API key |
 | `NEXT_PUBLIC_POSTHOG_HOST` | PostHog instance host URL |
+| `MCP_VERBOSE` | Enable verbose hosted MCP server logs when set to `"true"` |
 
 All API base URLs must be stored in environment variables — never hardcoded.
 
