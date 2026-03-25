@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+    /* cocso-ui design tokens (inlined from @cocso-ui/css/token.css) */
+    :root {
+      --color-white: #ffffff;
+      --color-neutral-50: #f4f5f6;
+      --color-neutral-100: #e6e8ea;
+      --color-neutral-400: #8a949e;
+      --color-neutral-600: #58616a;
+      --color-neutral-800: #33363d;
+      --color-neutral-900: #1e2124;
+      --color-neutral-950: #131416;
+      --color-info-50: #ecf2fe;
+      --color-info-600: #0b50d0;
+      --color-success-50: #eaf6ec;
+      --color-success-600: #267337;
+      --color-danger-50: #fdefec;
+      --color-danger-600: #bd2c0f;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --radius-3: 6px;
+      --radius-4: 8px;
+      --spacing-2: 2px;
+      --spacing-3: 4px;
+      --spacing-5: 8px;
+      --spacing-7: 12px;
+      --spacing-8: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      padding: var(--spacing-8);
+      font-family:
+        Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-regular);
+      line-height: 1.5;
+      color: var(--color-neutral-950);
+      background: var(--color-white);
+    }
+
+    h1 {
+      margin-bottom: var(--spacing-2);
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-950);
+    }
+
+    .subtitle {
+      margin-bottom: var(--spacing-8);
+      font-size: var(--text-xs);
+      color: var(--color-neutral-600);
+    }
+
+    button {
+      width: 100%;
+      height: 36px;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-white);
+      cursor: pointer;
+      background: var(--color-neutral-900);
+      border: none;
+      border-radius: var(--radius-3);
+      transition: background 0.15s;
+    }
+
+    button:hover {
+      background: var(--color-neutral-800);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      background: var(--color-neutral-400);
+    }
+
+    .status {
+      display: none;
+      padding: var(--spacing-5);
+      margin-top: var(--spacing-7);
+      font-size: var(--text-xs);
+      background: var(--color-neutral-50);
+      border-radius: var(--radius-3);
+    }
+
+    .status.visible {
+      display: block;
+    }
+
+    .status.syncing {
+      color: var(--color-info-600);
+      background: var(--color-info-50);
+    }
+
+    .status.success {
+      color: var(--color-success-600);
+      background: var(--color-success-50);
+    }
+
+    .status.error {
+      color: var(--color-danger-600);
+      background: var(--color-danger-50);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-5);
+      margin-top: var(--spacing-5);
+    }
+
+    .result-item {
+      padding: var(--spacing-5);
+      text-align: center;
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-100);
+      border-radius: var(--radius-4);
+    }
+
+    .result-item .count {
+      font-size: 20px;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-neutral-950);
+    }
+
+    .result-item .label {
+      margin-top: var(--spacing-2);
+      font-size: 10px;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+    }
+
+    .skipped-list {
+      margin-top: var(--spacing-7);
+    }
+
+    .skipped-list summary {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+      cursor: pointer;
+    }
+
+    .skipped-list ul {
+      padding-left: var(--spacing-8);
+      margin-top: var(--spacing-3);
+    }
+
+    .skipped-list li {
+      margin-bottom: var(--spacing-2);
+      font-size: var(--text-xs);
+      color: var(--color-neutral-600);
+    }
+
+    .skipped-list li .reason {
+      color: var(--color-neutral-400);
+    }
+
+    .errors-section {
+      margin-top: var(--spacing-5);
+      font-size: var(--text-xs);
+      color: var(--color-danger-600);
+    }
+
+    .errors-section ul {
+      padding-left: var(--spacing-8);
+      margin-top: var(--spacing-3);
+    }
+    </style>
+  </head>
+  <body>
+    <h1>cocso-ui Design Tokens</h1>
+    <p class="subtitle">Sync baseframe tokens to Figma Variables</p>
+
+    <button type="button" id="sync-btn">Sync Tokens</button>
+
+    <div id="status" class="status"><span id="status-text"></span></div>
+
+    <div id="result" style="display:none">
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="count" id="created-count">0</div>
+          <div class="label">Created</div>
+        </div>
+        <div class="result-item">
+          <div class="count" id="updated-count">0</div>
+          <div class="label">Updated</div>
+        </div>
+        <div class="result-item">
+          <div class="count" id="skipped-count">0</div>
+          <div class="label">Skipped</div>
+        </div>
+      </div>
+      <div id="skipped-section" class="skipped-list" style="display:none">
+        <details>
+          <summary>Skipped tokens</summary>
+          <ul id="skipped-list"></ul>
+        </details>
+      </div>
+      <div id="errors-section" class="errors-section" style="display:none">
+        <strong>Errors:</strong>
+        <ul id="errors-list"></ul>
+      </div>
+    </div>
+
+    <script>
+    "use strict";
+    const syncBtn = document.getElementById("sync-btn");
+    const statusEl = document.getElementById("status");
+    const statusText = document.getElementById("status-text");
+    const resultEl = document.getElementById("result");
+
+    function onSync() {
+      syncBtn.disabled = true;
+      statusEl.className = "status visible syncing";
+      statusText.textContent = "Syncing tokens...";
+      resultEl.style.display = "none";
+      parent.postMessage({ pluginMessage: { type: "sync-tokens" } }, "*");
+    }
+
+    syncBtn.addEventListener("click", onSync);
+
+    function renderSkippedTokens(skippedTokens) {
+      const section = document.getElementById("skipped-section");
+      const list = document.getElementById("skipped-list");
+      if (skippedTokens && skippedTokens.length > 0) {
+        section.style.display = "block";
+        list.innerHTML = "";
+        for (const token of skippedTokens) {
+          const li = document.createElement("li");
+          li.textContent = `${token.name} `;
+          const span = document.createElement("span");
+          span.className = "reason";
+          span.textContent = `\u2014 ${token.reason}`;
+          li.appendChild(span);
+          list.appendChild(li);
+        }
+      } else {
+        section.style.display = "none";
+      }
+    }
+
+    function renderErrors(errors) {
+      const section = document.getElementById("errors-section");
+      const list = document.getElementById("errors-list");
+      if (errors && errors.length > 0) {
+        section.style.display = "block";
+        list.innerHTML = "";
+        for (const error of errors) {
+          const li = document.createElement("li");
+          li.textContent = error;
+          list.appendChild(li);
+        }
+      } else {
+        section.style.display = "none";
+      }
+    }
+
+    window.addEventListener("message", (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) {
+        return;
+      }
+
+      if (msg.type === "sync-start") {
+        statusEl.className = "status visible syncing";
+        statusText.textContent = "Syncing tokens...";
+      }
+
+      if (msg.type === "sync-complete") {
+        const r = msg.result;
+        syncBtn.disabled = false;
+        statusEl.className = "status visible success";
+        statusText.textContent = "Sync complete!";
+        resultEl.style.display = "block";
+
+        document.getElementById("created-count").textContent = r.created;
+        document.getElementById("updated-count").textContent = r.updated;
+        document.getElementById("skipped-count").textContent = r.skipped;
+
+        renderSkippedTokens(r.skippedTokens);
+        renderErrors(r.errors);
+      }
+
+      if (msg.type === "sync-error") {
+        syncBtn.disabled = false;
+        statusEl.className = "status visible error";
+        statusText.textContent = `Error: ${msg.error}`;
+      }
+    });
+    </script>
+  </body>
+</html>

@@ -42,10 +42,14 @@ yarn-error.log*
 *.pem
 .omc/
 .omx/
+.superset/
 
 .npmrc
 *storybook.log
 storybook-static
+
+# Figma plugin generated tokens
+packages/figma/src/generated/tokens.json
 
 # Changeset
 !.changeset/README.md

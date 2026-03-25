@@ -30,6 +30,7 @@
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
   - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set.
   - `packages/baseframe/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
+  - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables.
 - `ecosystem/`: Tooling that wraps or consumes packages for developer workflows.
   - `ecosystem/baseframe/`: `@cocso-ui/baseframe` — CLI for scaffolding components from YAML.
 - `AGENTS.md`: This file — repository-wide rules.

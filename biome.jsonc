@@ -42,6 +42,12 @@
           "expectTypeOf"
         ]
       }
+    },
+    {
+      "includes": ["packages/figma/src/plugin/**", "packages/figma/src/core/variable-creator.ts"],
+      "javascript": {
+        "globals": ["figma", "__html__"]
+      }
     }
   ]
 }
