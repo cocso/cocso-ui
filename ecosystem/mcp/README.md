@@ -9,11 +9,11 @@ This server enforces a search-first workflow using the existing `llms.txt` + mar
 
 ### Tools
 
-- `cocso_list_components`
-- `cocso_search_components`
-- `cocso_get_component_spec`
-- `cocso_get_usage_guardrails`
-- `cocso_plan_page_components`
+- `cocso_ui_mcp_list_components`
+- `cocso_ui_mcp_search_components`
+- `cocso_ui_mcp_get_component_spec`
+- `cocso_ui_mcp_get_usage_guardrails`
+- `cocso_ui_mcp_plan_page_components`
 
 ### Usage
 

@@ -34,6 +34,14 @@ const planPageComponentsSchema = z.object({
   maxResults: z.number().int().min(1).max(20).default(DEFAULT_MAX_RESULTS),
 });
 
+const ToolContractId = {
+  LIST_COMPONENTS: "cocso_ui_mcp_list_components",
+  SEARCH_COMPONENTS: "cocso_ui_mcp_search_components",
+  GET_COMPONENT_SPEC: "cocso_ui_mcp_get_component_spec",
+  GET_USAGE_GUARDRAILS: "cocso_ui_mcp_get_usage_guardrails",
+  PLAN_PAGE_COMPONENTS: "cocso_ui_mcp_plan_page_components",
+} as const;
+
 function asTextResult(
   text: string,
   structuredContent?: Record<string, unknown>
@@ -62,7 +70,7 @@ function matchComponentName(
 
 export function registerTools(server: McpServer): void {
   server.registerTool(
-    "cocso_list_components",
+    ToolContractId.LIST_COMPONENTS,
     {
       title: "List cocso-ui components",
       description:
@@ -80,7 +88,7 @@ export function registerTools(server: McpServer): void {
 
       log({
         event: "tool_completed",
-        tool: "cocso_list_components",
+        tool: ToolContractId.LIST_COMPONENTS,
         status: LogStatus.SUCCESS,
         durationMs: Date.now() - startedAt,
         details: { platform, count: components.length },
@@ -100,7 +108,7 @@ export function registerTools(server: McpServer): void {
   );
 
   server.registerTool(
-    "cocso_search_components",
+    ToolContractId.SEARCH_COMPONENTS,
     {
       title: "Search cocso-ui components",
       description:
@@ -118,7 +126,7 @@ export function registerTools(server: McpServer): void {
 
       log({
         event: "tool_completed",
-        tool: "cocso_search_components",
+        tool: ToolContractId.SEARCH_COMPONENTS,
         status: LogStatus.SUCCESS,
         durationMs: Date.now() - startedAt,
         details: { platform, query, count: matches.length },
@@ -139,7 +147,7 @@ export function registerTools(server: McpServer): void {
   );
 
   server.registerTool(
-    "cocso_get_component_spec",
+    ToolContractId.GET_COMPONENT_SPEC,
     {
       title: "Get cocso-ui component spec",
       description:
@@ -156,14 +164,14 @@ export function registerTools(server: McpServer): void {
       if (!target) {
         log({
           event: "tool_completed",
-          tool: "cocso_get_component_spec",
+          tool: ToolContractId.GET_COMPONENT_SPEC,
           status: LogStatus.WARNING,
           durationMs: Date.now() - startedAt,
           details: { component, platform },
         });
 
         return asTextResult(
-          `Component not found: ${component}. Run cocso_list_components or cocso_search_components first.`,
+          `Component not found: ${component}. Run ${ToolContractId.LIST_COMPONENTS} or ${ToolContractId.SEARCH_COMPONENTS} first.`,
           {
             platform,
             component,
@@ -178,7 +186,7 @@ export function registerTools(server: McpServer): void {
       } catch (error) {
         log({
           event: "tool_completed",
-          tool: "cocso_get_component_spec",
+          tool: ToolContractId.GET_COMPONENT_SPEC,
           status: LogStatus.ERROR,
           durationMs: Date.now() - startedAt,
           details: {
@@ -200,7 +208,7 @@ export function registerTools(server: McpServer): void {
 
       log({
         event: "tool_completed",
-        tool: "cocso_get_component_spec",
+        tool: ToolContractId.GET_COMPONENT_SPEC,
         status: LogStatus.SUCCESS,
         durationMs: Date.now() - startedAt,
         details: { component: target.slug, platform },
@@ -215,7 +223,7 @@ export function registerTools(server: McpServer): void {
   );
 
   server.registerTool(
-    "cocso_get_usage_guardrails",
+    ToolContractId.GET_USAGE_GUARDRAILS,
     {
       title: "Get cocso-ui usage guardrails",
       description:
@@ -228,7 +236,7 @@ export function registerTools(server: McpServer): void {
 
       log({
         event: "tool_completed",
-        tool: "cocso_get_usage_guardrails",
+        tool: ToolContractId.GET_USAGE_GUARDRAILS,
         status: LogStatus.SUCCESS,
         durationMs: Date.now() - startedAt,
         details: { platform, ruleCount: rules.length },
@@ -246,7 +254,7 @@ export function registerTools(server: McpServer): void {
   );
 
   server.registerTool(
-    "cocso_plan_page_components",
+    ToolContractId.PLAN_PAGE_COMPONENTS,
     {
       title: "Plan cocso-ui components for page request",
       description:
@@ -269,7 +277,7 @@ export function registerTools(server: McpServer): void {
 
       log({
         event: "tool_completed",
-        tool: "cocso_plan_page_components",
+        tool: ToolContractId.PLAN_PAGE_COMPONENTS,
         status: LogStatus.SUCCESS,
         durationMs: Date.now() - startedAt,
         details: { platform, pickCount: picks.length },
@@ -278,7 +286,7 @@ export function registerTools(server: McpServer): void {
       return asTextResult(
         lines.length > 0
           ? lines.join("\n")
-          : "No direct matches found. Use cocso_search_components with narrower keywords before proposing a new component.",
+          : `No direct matches found. Use ${ToolContractId.SEARCH_COMPONENTS} with narrower keywords before proposing a new component.`,
         {
           platform,
           pageRequest,

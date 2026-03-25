@@ -63,11 +63,11 @@ ecosystem/mcp/
 
 ### Tool Contracts
 
-- `cocso_list_components`: return all components with canonical import package.
-- `cocso_search_components`: return ranked components by query text.
-- `cocso_get_component_spec`: return markdown spec for one component.
-- `cocso_get_usage_guardrails`: return stable anti-duplication rules.
-- `cocso_plan_page_components`: suggest reusable `@cocso-ui` components from a page request.
+- `cocso_ui_mcp_list_components`: return all components with canonical import package.
+- `cocso_ui_mcp_search_components`: return ranked components by query text.
+- `cocso_ui_mcp_get_component_spec`: return markdown spec for one component.
+- `cocso_ui_mcp_get_usage_guardrails`: return stable anti-duplication rules.
+- `cocso_ui_mcp_plan_page_components`: suggest reusable `@cocso-ui` components from a page request.
 
 ### Integration Contracts
 
