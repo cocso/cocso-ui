@@ -4,6 +4,14 @@
   "description": "MCP server for design-system-aware cocso-ui component discovery",
   "type": "module",
   "private": false,
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    }
+  },
   "bin": {
     "cocso-ui-mcp": "dist/index.js"
   },
@@ -16,7 +24,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.21.1",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "zod": "^4.1.11"
   },
   "devDependencies": {

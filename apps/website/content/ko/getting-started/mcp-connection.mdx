@@ -1,0 +1,50 @@
+---
+title: MCP Connection
+description: AI 클라이언트를 COCSO MCP 엔드포인트에 연결해 @cocso-ui 컴포넌트를 재사용하는 방법입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>문서 사이트는 hosted MCP 엔드포인트를 제공하며, AI 클라이언트가 커스텀 UI를 새로 만들기 전에 기존 `@cocso-ui` 컴포넌트를 먼저 탐색하도록 돕습니다.</Section.Text>
+  <Section.Text>엔드포인트 URL: <Link href="https://www.cocso-ui.com/api/mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">https://www.cocso-ui.com/api/mcp<LinkExternalIcon /></Link></Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>클라이언트 설정 (Streamable HTTP 지원)</Section.Title>
+  <Section.Text>MCP 클라이언트가 Streamable HTTP를 지원하면 아래처럼 엔드포인트를 직접 설정하세요.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "url": "https://www.cocso-ui.com/api/mcp"
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>클라이언트 설정 (stdio-only 클라이언트)</Section.Title>
+  <Section.Text>stdio만 지원하는 클라이언트는 <Link href="https://www.npmjs.com/package/mcp-remote" target="_blank" rel="noopener noreferrer" type="custom" size="current">mcp-remote<LinkExternalIcon /></Link>로 hosted 엔드포인트에 브리지 연결하세요.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.cocso-ui.com/api/mcp"]
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>권장 사용 순서</Section.Title>
+  <Section.OrderedList>
+    <Section.ListItem>페이지 요구사항을 먼저 `cocso_ui_mcp_search_components`로 검색하세요.</Section.ListItem>
+    <Section.ListItem>선택한 컴포넌트는 `cocso_ui_mcp_get_component_spec`로 스펙을 확인하세요.</Section.ListItem>
+    <Section.ListItem>중복 컴포넌트 생성 대신 `@cocso-ui/react`에서 import해 재사용하세요.</Section.ListItem>
+  </Section.OrderedList>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,50 @@
+---
+title: MCP Connection
+description: Connect AI clients to the hosted COCSO MCP endpoint and reuse @cocso-ui components.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>The documentation site exposes a hosted MCP endpoint so AI clients can discover and reuse existing `@cocso-ui` components before generating custom UI.</Section.Text>
+  <Section.Text>Endpoint URL: <Link href="https://www.cocso-ui.com/api/mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">https://www.cocso-ui.com/api/mcp<LinkExternalIcon /></Link></Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Client Configuration (Streamable HTTP)</Section.Title>
+  <Section.Text>If your MCP client supports Streamable HTTP, configure the endpoint directly.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "url": "https://www.cocso-ui.com/api/mcp"
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Client Configuration (stdio-only clients)</Section.Title>
+  <Section.Text>For clients that only support stdio transport, bridge to the hosted endpoint with <Link href="https://www.npmjs.com/package/mcp-remote" target="_blank" rel="noopener noreferrer" type="custom" size="current">mcp-remote<LinkExternalIcon /></Link>.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.cocso-ui.com/api/mcp"]
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Recommended Workflow</Section.Title>
+  <Section.OrderedList>
+    <Section.ListItem>Call `cocso_ui_mcp_search_components` first with your page intent.</Section.ListItem>
+    <Section.ListItem>Use `cocso_ui_mcp_get_component_spec` for selected components before coding.</Section.ListItem>
+    <Section.ListItem>Import reusable UI from `@cocso-ui/react` instead of generating duplicate local components.</Section.ListItem>
+  </Section.OrderedList>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

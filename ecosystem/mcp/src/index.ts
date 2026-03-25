@@ -1,18 +1,12 @@
 #!/usr/bin/env node
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { SERVER_NAME, SERVER_VERSION } from "./config.js";
 import { LogStatus, log } from "./logger.js";
-import { registerTools } from "./tools.js";
+import { createCocsoMcpServer } from "./server.js";
 
 async function main(): Promise<void> {
-  const server = new McpServer({
-    name: SERVER_NAME,
-    version: SERVER_VERSION,
-  });
-
-  registerTools(server);
+  const server = createCocsoMcpServer();
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
