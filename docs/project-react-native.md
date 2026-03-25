@@ -23,7 +23,8 @@ React Native + Expo (TypeScript).
 
 - Token-driven React Native exports (`colors`, `spacing`, `radius`, `typography`, `shadow`, `zIndex`) derived from cocso token source.
 - Foundational primitives for RN design systems: `Box`, `Text`, `Stack`.
-- Core interactive components: `Button`, `Modal`, `GlassView`.
+- Core interactive components implemented in this scope: `Button`, `Modal`, `GlassView`, `Input`.
+- Feedback component implemented in this scope: `Badge`.
 - React Native `Modal`-compatible presentation controls with explicit component-level semantics.
 - Translucent glass surface with optional blur-component injection for apps that provide native blur.
 
@@ -38,9 +39,11 @@ React Native + Expo (TypeScript).
 ```text
 packages/react-native/src/
 ├── components/
+│   ├── badge/
 │   ├── box/
 │   ├── button/
 │   ├── glass-view/
+│   ├── input/
 │   ├── modal/
 │   ├── stack/
 │   └── text/
@@ -64,7 +67,7 @@ Public package name: `@cocso-ui/react-native`
 Public exports:
 
 - `theme` tokens: `colors`, `spacing`, `radius`, `fontSize`, `fontWeight`, `lineHeight`, `shadows`, `zIndex`
-- Components: `Box`, `Text`, `Stack`, `Button`, `Modal`, `GlassView`
+- Components: `Badge`, `Box`, `Button`, `GlassView`, `Input`, `Modal`, `Stack`, `Text`
 
 Modal interfaces:
 
@@ -111,6 +114,12 @@ pnpm build
 ## Roadmap
 
 - Add higher-level RN components mapped from proven web component semantics.
+- Planned component groups for follow-up migration:
+  - Form controls: `Select`, `Dropdown`, `Checkbox`, `Switch`, `RadioGroup`, `Field`
+  - Feedback and overlays: `Popover`, `Tooltip`, `Toast`, `Dialog`, `Spinner`
+  - Navigation and structure: `Tab`, `Accordion`, `Link`, `Pagination`
+  - Domain components: `OneTimePasswordField`, `StockQuantityStatus`
+  - Date-related components: `DayPicker`, `MonthPicker`
 - Add dark-mode semantic token aliases.
 - Add visual regression examples in Storybook or Expo preview integration.
 
