@@ -102,6 +102,9 @@ pnpm --filter @cocso-ui/react-native lint
 
 # Type check package
 pnpm --filter @cocso-ui/react-native check-types
+
+# Package tests (token behavior + export contracts)
+pnpm --filter @cocso-ui/react-native test
 ```
 
 Repository validation should include:

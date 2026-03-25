@@ -11,6 +11,8 @@
     "prebuild": "node ./scripts/generate-icons.mjs && biome check . --write",
     "build": "tsc -p tsconfig.build.json",
     "check-types": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "lint": "biome check .",
     "lint:fix": "biome check . --write"
   },
@@ -29,10 +31,13 @@
     "react-native-svg": "^15.15.0"
   },
   "devDependencies": {
+    "@types/node": "^24.9.1",
+    "@vitest/coverage-v8": "^4.0.18",
     "@types/react": "^19.2.14",
     "react": "^19.2.4",
     "react-native-svg": "^15.15.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "publishConfig": {
     "access": "public"

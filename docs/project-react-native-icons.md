@@ -25,6 +25,7 @@ React Native + TypeScript (`react-native-svg`).
 - RN icon rendering through generated `react-native-svg` component trees.
 - Grouped exports by `semantic` and `brand`, plus top-level barrel export.
 - Automated source sync script from `packages/react-icons/src/components/**/*.tsx`.
+- Test-level generation contracts for source parity and barrel export parity.
 
 ## Out of Scope
 
@@ -73,6 +74,7 @@ packages/react-native-icons/
 ```sh
 pnpm --filter @cocso-ui/react-native-icons lint
 pnpm --filter @cocso-ui/react-native-icons check-types
+pnpm --filter @cocso-ui/react-native-icons test
 pnpm --filter @cocso-ui/react-native-icons build
 ```
 
