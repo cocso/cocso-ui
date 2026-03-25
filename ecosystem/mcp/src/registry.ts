@@ -19,8 +19,9 @@ import {
 const cache = new TtlCache();
 const REGISTRY_CACHE_KEY = "registry:snapshot";
 
-const SECTION_HEADING_RE = /^##\s+(.+)$/gm;
-const LINK_LINE_RE = /^-\s+\[(.+?)\]\((https?:\/\/[^)]+)\):\s*(.*)$/gm;
+const SECTION_HEADING_RE = /##\s+([A-Za-z][A-Za-z ]*[A-Za-z])/g;
+const LINK_LINE_RE =
+  /-\s+\[([^\]]+)\]\((https?:\/\/[^)\s]+)\):\s*(.*?)(?=\s+-\s+\[[^\]]+\]\(https?:\/\/|\s+##\s+[A-Za-z]|$)/gs;
 const TRAILING_SLASHES_RE = /\/+$/;
 const MARKDOWN_EXTENSION_RE = /\.md$/;
 const TOKEN_SPLIT_RE = /[^a-z0-9]+/;

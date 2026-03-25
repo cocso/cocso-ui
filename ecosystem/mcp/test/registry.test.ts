@@ -41,6 +41,17 @@ describe("parseLlmsIndex", () => {
     expect(links).toHaveLength(1);
     expect(links[0]?.title).toBe("Button");
   });
+
+  it("parses compact llms format without line breaks", () => {
+    const compact =
+      "## Getting Started - [Installation](https://cocso-ui.com/getting-started/installation.md): install guide ## Components - [Button](https://cocso-ui.com/components/button.md): trigger action - [Dialog](https://cocso-ui.com/components/dialog.md): modal interaction";
+
+    const links = parseLlmsIndex(compact);
+    expect(links).toHaveLength(3);
+    expect(links[0]?.section).toBe(DocumentationSectionId.GETTING_STARTED);
+    expect(links[1]?.section).toBe(DocumentationSectionId.COMPONENTS);
+    expect(links[2]?.title).toBe("Dialog");
+  });
 });
 
 describe("getRegistrySnapshot", () => {
