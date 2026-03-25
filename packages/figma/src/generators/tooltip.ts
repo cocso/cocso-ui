@@ -1,5 +1,5 @@
+import { TOOLTIP_SPEC } from "./component-registry";
 import {
-  COLORS,
   createSectionHeader,
   createTextNode,
   createVariantRow,
@@ -25,14 +25,19 @@ export function generateTooltipComponents(
   component.layoutMode = "HORIZONTAL";
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "AUTO";
-  component.paddingLeft = 12;
-  component.paddingRight = 12;
-  component.paddingTop = 8;
-  component.paddingBottom = 8;
-  component.cornerRadius = 6;
-  setFill(component, COLORS.neutral900);
+  component.paddingLeft = TOOLTIP_SPEC.paddingInline;
+  component.paddingRight = TOOLTIP_SPEC.paddingInline;
+  component.paddingTop = TOOLTIP_SPEC.paddingBlock;
+  component.paddingBottom = TOOLTIP_SPEC.paddingBlock;
+  component.cornerRadius = TOOLTIP_SPEC.borderRadius;
+  setFill(component, TOOLTIP_SPEC.background);
 
-  const text = createTextNode("Tooltip text", 12, 400, COLORS.white);
+  const text = createTextNode(
+    "Tooltip text",
+    TOOLTIP_SPEC.fontSize,
+    400,
+    TOOLTIP_SPEC.textColor
+  );
   component.appendChild(text);
 
   row.appendChild(component);

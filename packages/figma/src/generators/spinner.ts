@@ -1,55 +1,25 @@
-import { COLORS, createSectionHeader, createVariantRow } from "./shared";
-
-type SpinnerSize = "large" | "medium" | "small";
-type SpinnerVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "error"
-  | "warning"
-  | "info"
-  | "white";
-
-const SIZE_SPECS: Record<SpinnerSize, number> = {
-  large: 20,
-  medium: 16,
-  small: 12,
-};
-
-const VARIANT_COLORS: Record<SpinnerVariant, RGB> = {
-  primary: COLORS.primary950,
-  secondary: COLORS.neutral500,
-  success: COLORS.success500,
-  error: COLORS.danger500,
-  warning: COLORS.warning500,
-  info: COLORS.info500,
-  white: COLORS.white,
-};
-
-const SIZES: SpinnerSize[] = ["large", "medium", "small"];
-const VARIANTS: SpinnerVariant[] = [
-  "primary",
-  "secondary",
-  "success",
-  "error",
-  "warning",
-  "info",
-  "white",
-];
+import {
+  SPINNER_SIZE_SPECS,
+  SPINNER_SIZES,
+  SPINNER_VARIANT_COLORS,
+  SPINNER_VARIANTS,
+  type SpinnerSize,
+  type SpinnerVariant,
+} from "./component-registry";
+import { createSectionHeader, createVariantRow } from "./shared";
 
 function createSpinnerInstance(
   size: SpinnerSize,
   variant: SpinnerVariant
 ): ComponentNode {
-  const containerSize = SIZE_SPECS[size];
-  const color = VARIANT_COLORS[variant];
+  const containerSize = SPINNER_SIZE_SPECS[size];
+  const color = SPINNER_VARIANT_COLORS[variant];
 
   const component = figma.createComponent();
   component.name = `size=${size}, variant=${variant}`;
   component.resize(containerSize, containerSize);
   component.fills = [];
 
-  // Simplified spinner representation: circle with a gap
   const circle = figma.createEllipse();
   circle.name = "spinner-track";
   circle.resize(containerSize, containerSize);
@@ -77,12 +47,12 @@ export function generateSpinnerComponents(
 
   let currentY = yOffset + 80;
 
-  for (const variant of VARIANTS) {
+  for (const variant of SPINNER_VARIANTS) {
     const row = createVariantRow(variant);
     row.y = currentY;
     page.appendChild(row);
 
-    for (const size of SIZES) {
+    for (const size of SPINNER_SIZES) {
       const spinner = createSpinnerInstance(size, variant);
       row.appendChild(spinner);
     }

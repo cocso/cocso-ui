@@ -1,10 +1,10 @@
-/**
- * Figma component generator for Input.
- * Creates a ComponentSet with size variants.
- */
-
 import {
-  COLORS,
+  INPUT_COLORS,
+  INPUT_SIZE_SPECS,
+  INPUT_SIZES,
+  type InputSize,
+} from "./component-registry";
+import {
   createSectionHeader,
   createTextNode,
   createVariantRow,
@@ -12,29 +12,11 @@ import {
   setStroke,
 } from "./shared";
 
-type InputSize = "large" | "medium" | "small" | "x-small";
-
-interface InputSpec {
-  borderRadius: number;
-  fontSize: number;
-  height: number;
-  paddingX: number;
-}
-
-const SIZE_SPECS: Record<InputSize, InputSpec> = {
-  large: { height: 40, paddingX: 14, fontSize: 14, borderRadius: 8 },
-  medium: { height: 36, paddingX: 12, fontSize: 14, borderRadius: 8 },
-  small: { height: 32, paddingX: 10, fontSize: 12, borderRadius: 6 },
-  "x-small": { height: 28, paddingX: 8, fontSize: 12, borderRadius: 6 },
-};
-
-const SIZES: InputSize[] = ["large", "medium", "small", "x-small"];
-
 function createInputInstance(
   size: InputSize,
   state: "default" | "error"
 ): ComponentNode {
-  const spec = SIZE_SPECS[size];
+  const spec = INPUT_SIZE_SPECS[size];
 
   const component = figma.createComponent();
   component.name = `size=${size}, state=${state}`;
@@ -47,23 +29,23 @@ function createInputInstance(
   component.paddingRight = spec.paddingX;
   component.cornerRadius = spec.borderRadius;
 
-  setFill(component, COLORS.white);
+  setFill(component, INPUT_COLORS.background);
 
-  const borderColor = state === "error" ? COLORS.danger500 : COLORS.neutral200;
+  const borderColor =
+    state === "error" ? INPUT_COLORS.borderError : INPUT_COLORS.borderDefault;
   setStroke(component, borderColor);
 
   const placeholder = createTextNode(
     "Placeholder",
     spec.fontSize,
     400,
-    COLORS.neutral400
+    INPUT_COLORS.placeholder
   );
   component.appendChild(placeholder);
 
   return component;
 }
 
-/** Generate the Input component set on the given page. */
 export function generateInputComponents(
   page: PageNode,
   yOffset: number
@@ -79,7 +61,7 @@ export function generateInputComponents(
     row.y = currentY;
     page.appendChild(row);
 
-    for (const size of SIZES) {
+    for (const size of INPUT_SIZES) {
       const input = createInputInstance(size, state);
       row.appendChild(input);
     }

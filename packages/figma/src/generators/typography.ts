@@ -1,31 +1,10 @@
+import { BODY_SIZES, FONT_WEIGHTS, HEADING_SIZES } from "./component-registry";
 import {
   COLORS,
   createSectionHeader,
   createTextNode,
   createVariantRow,
 } from "./shared";
-
-const BODY_SIZES = [
-  { name: "large", fontSize: 18 },
-  { name: "medium", fontSize: 16 },
-  { name: "small", fontSize: 14 },
-  { name: "x-small", fontSize: 12 },
-] as const;
-
-const HEADING_SIZES = [
-  { name: "x-large", fontSize: 28 },
-  { name: "large", fontSize: 24 },
-  { name: "medium", fontSize: 20 },
-  { name: "small", fontSize: 16 },
-  { name: "x-small", fontSize: 14 },
-] as const;
-
-const FONT_WEIGHTS = [
-  { name: "regular", weight: 400 },
-  { name: "medium", weight: 500 },
-  { name: "semibold", weight: 600 },
-  { name: "bold", weight: 700 },
-] as const;
 
 export function generateTypographyComponents(
   page: PageNode,
@@ -37,7 +16,6 @@ export function generateTypographyComponents(
 
   let currentY = yOffset + 80;
 
-  // Heading scale
   const headingLabel = createTextNode("Heading", 12, 600, COLORS.neutral600);
   headingLabel.y = currentY;
   page.appendChild(headingLabel);
@@ -61,7 +39,6 @@ export function generateTypographyComponents(
 
   currentY += 16;
 
-  // Body scale
   const bodyLabel = createTextNode("Body", 12, 600, COLORS.neutral600);
   bodyLabel.y = currentY;
   page.appendChild(bodyLabel);
@@ -72,7 +49,7 @@ export function generateTypographyComponents(
     row.y = currentY;
     page.appendChild(row);
 
-    for (const { name: weightName, weight } of FONT_WEIGHTS) {
+    for (const { name: weightName, value: weight } of FONT_WEIGHTS) {
       const text = createTextNode(
         `${weightName} (${weight})`,
         fontSize,

@@ -1,26 +1,13 @@
 import {
-  COLORS,
+  LINK_SIZES,
+  LINK_VARIANT_COLORS,
+  LINK_VARIANTS,
+} from "./component-registry";
+import {
   createSectionHeader,
   createTextNode,
   createVariantRow,
 } from "./shared";
-
-type LinkVariant = "inline" | "current" | "plain";
-
-const VARIANT_COLORS: Record<LinkVariant, RGB> = {
-  inline: COLORS.info500,
-  current: COLORS.neutral950,
-  plain: COLORS.info500,
-};
-
-const SIZES = [
-  { name: "large", fontSize: 18 },
-  { name: "medium", fontSize: 16 },
-  { name: "small", fontSize: 14 },
-  { name: "x-small", fontSize: 12 },
-] as const;
-
-const VARIANTS: LinkVariant[] = ["inline", "current", "plain"];
 
 export function generateLinkComponents(
   page: PageNode,
@@ -32,23 +19,25 @@ export function generateLinkComponents(
 
   let currentY = yOffset + 80;
 
-  for (const variant of VARIANTS) {
+  for (const variant of LINK_VARIANTS) {
     const row = createVariantRow(variant);
     row.y = currentY;
     page.appendChild(row);
 
-    for (const { name, fontSize } of SIZES) {
+    for (const { name, fontSize } of LINK_SIZES) {
       const component = figma.createComponent();
       component.name = `size=${name}, variant=${variant}`;
       component.layoutMode = "HORIZONTAL";
       component.primaryAxisSizingMode = "AUTO";
       component.counterAxisSizingMode = "AUTO";
+      component.itemSpacing = 2;
+      component.counterAxisAlignItems = "CENTER";
 
       const text = createTextNode(
         "Link text",
         fontSize,
         400,
-        VARIANT_COLORS[variant]
+        LINK_VARIANT_COLORS[variant]
       );
       text.textDecoration = variant === "inline" ? "UNDERLINE" : "NONE";
       component.appendChild(text);

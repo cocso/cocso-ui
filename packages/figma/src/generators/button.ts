@@ -1,10 +1,12 @@
-/**
- * Figma component generator for Button.
- * Creates a ComponentSet with size x variant matrix.
- */
-
 import {
-  COLORS,
+  BUTTON_SIZE_SPECS,
+  BUTTON_SIZES,
+  BUTTON_VARIANT_SPECS,
+  BUTTON_VARIANTS,
+  type ButtonSize,
+  type ButtonVariant,
+} from "./component-registry";
+import {
   createSectionHeader,
   createTextNode,
   createVariantRow,
@@ -12,68 +14,13 @@ import {
   setStroke,
 } from "./shared";
 
-type ButtonSize = "large" | "medium" | "small" | "x-small";
-type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "success"
-  | "error"
-  | "warning"
-  | "info";
-
-interface ButtonSpec {
-  borderRadius: number;
-  fontSize: number;
-  height: number;
-  paddingX: number;
-}
-
-const SIZE_SPECS: Record<ButtonSize, ButtonSpec> = {
-  large: { height: 40, paddingX: 14, fontSize: 14, borderRadius: 8 },
-  medium: { height: 36, paddingX: 12, fontSize: 14, borderRadius: 8 },
-  small: { height: 32, paddingX: 10, fontSize: 12, borderRadius: 6 },
-  "x-small": { height: 28, paddingX: 8, fontSize: 12, borderRadius: 6 },
-};
-
-const VARIANT_COLORS: Record<
-  ButtonVariant,
-  { bg: RGB; text: RGB; border?: RGB }
-> = {
-  primary: { bg: COLORS.primary950, text: COLORS.white },
-  secondary: { bg: COLORS.neutral50, text: COLORS.neutral600 },
-  outline: {
-    bg: { r: 0, g: 0, b: 0 },
-    text: COLORS.neutral950,
-    border: COLORS.neutral100,
-  },
-  ghost: { bg: COLORS.white, text: COLORS.neutral950 },
-  success: { bg: COLORS.success500, text: COLORS.white },
-  error: { bg: COLORS.danger500, text: COLORS.white },
-  warning: { bg: COLORS.warning300, text: COLORS.neutral950 },
-  info: { bg: COLORS.info500, text: COLORS.white },
-};
-
-const SIZES: ButtonSize[] = ["large", "medium", "small", "x-small"];
-const VARIANTS: ButtonVariant[] = [
-  "primary",
-  "secondary",
-  "outline",
-  "ghost",
-  "success",
-  "error",
-  "warning",
-  "info",
-];
-
 function createButtonInstance(
   size: ButtonSize,
   variant: ButtonVariant,
   label: string
 ): ComponentNode {
-  const spec = SIZE_SPECS[size];
-  const colors = VARIANT_COLORS[variant];
+  const spec = BUTTON_SIZE_SPECS[size];
+  const colors = BUTTON_VARIANT_SPECS[variant];
 
   const component = figma.createComponent();
   component.name = `size=${size}, variant=${variant}`;
@@ -83,24 +30,23 @@ function createButtonInstance(
   component.resize(component.width, spec.height);
   component.counterAxisAlignItems = "CENTER";
   component.primaryAxisAlignItems = "CENTER";
-  component.paddingLeft = spec.paddingX;
-  component.paddingRight = spec.paddingX;
+  component.paddingLeft = spec.paddingInline;
+  component.paddingRight = spec.paddingInline;
   component.cornerRadius = spec.borderRadius;
 
-  if (variant === "outline") {
-    component.fills = [];
-    setStroke(component, colors.border ?? COLORS.neutral100);
+  if (colors.borderColor) {
+    setFill(component, colors.bgColor, colors.bgOpacity ?? 1);
+    setStroke(component, colors.borderColor);
   } else {
-    setFill(component, colors.bg);
+    setFill(component, colors.bgColor);
   }
 
-  const text = createTextNode(label, spec.fontSize, 500, colors.text);
+  const text = createTextNode(label, spec.fontSize, 500, colors.textColor);
   component.appendChild(text);
 
   return component;
 }
 
-/** Generate the Button component set on the given page. */
 export function generateButtonComponents(
   page: PageNode,
   yOffset: number
@@ -111,12 +57,12 @@ export function generateButtonComponents(
 
   let currentY = yOffset + 80;
 
-  for (const variant of VARIANTS) {
+  for (const variant of BUTTON_VARIANTS) {
     const row = createVariantRow(variant);
     row.y = currentY;
     page.appendChild(row);
 
-    for (const size of SIZES) {
+    for (const size of BUTTON_SIZES) {
       const btn = createButtonInstance(size, variant, "Button");
       row.appendChild(btn);
     }
