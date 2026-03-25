@@ -33,6 +33,7 @@
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables.
 - `ecosystem/`: Tooling that wraps or consumes packages for developer workflows.
   - `ecosystem/baseframe/`: `@cocso-ui/baseframe` — CLI for scaffolding components from YAML.
+  - `ecosystem/mcp/`: `@cocso-ui/mcp` — MCP server for design-system-aware component discovery and guidance.
 - `AGENTS.md`: This file — repository-wide rules.
 - `biome.jsonc`: Lint and format configuration (Biome).
 - `turbo.json`: Turborepo pipeline configuration.
