@@ -12,10 +12,10 @@ function createFieldInstance(
 ): ComponentNode {
   const component = figma.createComponent();
   component.name = `state=${state}`;
+  component.resize(280, 100);
   component.layoutMode = "VERTICAL";
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "FIXED";
-  component.resize(280, 1);
   component.itemSpacing = 8;
   component.fills = [];
 

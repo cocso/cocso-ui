@@ -23,10 +23,10 @@ function createDialogInstance(size: DialogSize): ComponentNode {
 
   const component = figma.createComponent();
   component.name = `size=${size}`;
+  component.resize(width, 100);
   component.layoutMode = "VERTICAL";
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "FIXED";
-  component.resize(width, 1);
   component.paddingTop = 16;
   component.paddingBottom = 16;
   component.paddingLeft = 16;
@@ -36,9 +36,9 @@ function createDialogInstance(size: DialogSize): ComponentNode {
   setFill(component, COLORS.white);
 
   const titleRow = createAutoLayoutFrame("title-row");
+  titleRow.resize(width - 32, 24);
   titleRow.primaryAxisSizingMode = "FIXED";
   titleRow.counterAxisSizingMode = "AUTO";
-  titleRow.resize(width - 32, 1);
   titleRow.primaryAxisAlignItems = "SPACE_BETWEEN";
   titleRow.counterAxisAlignItems = "CENTER";
   titleRow.fills = [];

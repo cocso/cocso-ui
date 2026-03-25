@@ -11,18 +11,18 @@ import {
 function createAccordionInstance(expanded: boolean): ComponentNode {
   const component = figma.createComponent();
   component.name = `state=${expanded ? "expanded" : "collapsed"}`;
+  component.resize(320, 100);
   component.layoutMode = "VERTICAL";
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "FIXED";
-  component.resize(320, 1);
   component.fills = [];
 
   const trigger = figma.createFrame();
   trigger.name = "trigger";
+  trigger.resize(320, 40);
   trigger.layoutMode = "HORIZONTAL";
   trigger.primaryAxisSizingMode = "FIXED";
   trigger.counterAxisSizingMode = "AUTO";
-  trigger.resize(320, 1);
   trigger.primaryAxisAlignItems = "SPACE_BETWEEN";
   trigger.counterAxisAlignItems = "CENTER";
   trigger.paddingTop = 12;

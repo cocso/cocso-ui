@@ -39,10 +39,10 @@ function createToastInstance(variant: ToastVariant): ComponentNode {
 
   const component = figma.createComponent();
   component.name = `variant=${variant}`;
+  component.resize(356, 40);
   component.layoutMode = "HORIZONTAL";
   component.primaryAxisSizingMode = "FIXED";
   component.counterAxisSizingMode = "AUTO";
-  component.resize(356, 1);
   component.paddingTop = 12;
   component.paddingBottom = 12;
   component.paddingLeft = 16;

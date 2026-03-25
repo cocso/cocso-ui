@@ -41,11 +41,10 @@ function createSpinnerInstance(
   component.resize(containerSize, containerSize);
   component.fills = [];
 
-  const step = 360 / blade.bladeCount;
   const cx = containerSize / 2;
 
   for (let i = 0; i < blade.bladeCount; i++) {
-    const angle = i * step;
+    const angleDeg = (i * 360) / blade.bladeCount;
     const opacity = 1 - (i / blade.bladeCount) * 0.85;
 
     const rect = figma.createRectangle();
@@ -56,7 +55,7 @@ function createSpinnerInstance(
 
     rect.x = cx - blade.bladeWidth / 2;
     rect.y = 0;
-    rect.rotation = -angle;
+    rect.rotation = -angleDeg;
 
     component.appendChild(rect);
   }
