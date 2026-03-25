@@ -1,34 +1,52 @@
 /**
  * Shared utilities for Figma component generators.
- * Provides helpers for creating Auto Layout frames, text nodes, and binding variables.
+ * Color values are derived from the pre-built tokens.json to stay
+ * in sync with the baseframe YAML source of truth.
  */
 
-/** cocso-ui color palette resolved values for direct use in generators. */
+import tokenData from "../generated/tokens.json";
+import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
+
+const data = tokenData as FigmaTokenData;
+
+/**
+ * Look up a color token by its Figma variable name (e.g. "color/white").
+ * Falls back to opaque black if the token is not found.
+ */
+function colorToken(name: string): RGB {
+  const token = data.tokens.find((t) => t.name === name);
+  if (token && typeof token.values.default === "object") {
+    const c = token.values.default as FigmaColorValue;
+    return { r: c.r, g: c.g, b: c.b };
+  }
+  return { r: 0, g: 0, b: 0 };
+}
+
+/** cocso-ui color palette resolved from tokens.json at bundle time. */
 export const COLORS = {
-  white: { r: 1, g: 1, b: 1 },
-  transparent: { r: 0, g: 0, b: 0, a: 0 },
-  neutral50: { r: 0.957, g: 0.961, b: 0.965 },
-  neutral100: { r: 0.902, g: 0.91, b: 0.918 },
-  neutral200: { r: 0.804, g: 0.82, b: 0.835 },
-  neutral400: { r: 0.541, g: 0.58, b: 0.62 },
-  neutral600: { r: 0.345, g: 0.38, b: 0.416 },
-  neutral800: { r: 0.2, g: 0.212, b: 0.239 },
-  neutral900: { r: 0.118, g: 0.129, b: 0.141 },
-  neutral950: { r: 0.075, g: 0.078, b: 0.086 },
-  primary950: { r: 0.075, g: 0.078, b: 0.086 },
-  danger50: { r: 0.992, g: 0.937, b: 0.925 },
-  danger500: { r: 0.871, g: 0.204, b: 0.071 },
-  danger600: { r: 0.741, g: 0.173, b: 0.059 },
-  success50: { r: 0.918, g: 0.965, b: 0.925 },
-  success500: { r: 0.133, g: 0.529, b: 0.22 },
-  success600: { r: 0.149, g: 0.451, b: 0.216 },
-  warning50: { r: 1, g: 0.953, b: 0.859 },
-  warning300: { r: 1, g: 0.694, b: 0.078 },
-  warning600: { r: 0.541, g: 0.361, b: 0 },
-  info50: { r: 0.925, g: 0.949, b: 0.996 },
-  info500: { r: 0.145, g: 0.431, b: 0.957 },
-  info600: { r: 0.043, g: 0.314, b: 0.816 },
-} as const;
+  white: colorToken("color/white"),
+  neutral50: colorToken("color/neutral-50"),
+  neutral100: colorToken("color/neutral-100"),
+  neutral200: colorToken("color/neutral-200"),
+  neutral400: colorToken("color/neutral-400"),
+  neutral600: colorToken("color/neutral-600"),
+  neutral800: colorToken("color/neutral-800"),
+  neutral900: colorToken("color/neutral-900"),
+  neutral950: colorToken("color/neutral-950"),
+  primary950: colorToken("color/primary-950"),
+  danger50: colorToken("color/danger-50"),
+  danger500: colorToken("color/danger-500"),
+  danger600: colorToken("color/danger-600"),
+  success50: colorToken("color/success-50"),
+  success500: colorToken("color/success-500"),
+  success600: colorToken("color/success-600"),
+  warning50: colorToken("color/warning-50"),
+  warning300: colorToken("color/warning-300"),
+  warning600: colorToken("color/warning-600"),
+  info50: colorToken("color/info-50"),
+  info500: colorToken("color/info-500"),
+  info600: colorToken("color/info-600"),
+};
 
 /** Create an Auto Layout frame with common defaults. */
 export function createAutoLayoutFrame(
@@ -59,7 +77,6 @@ export function createTextNode(
   return text;
 }
 
-/** Map numeric font weight to Inter font style name. */
 function getFontStyle(weight: number): string {
   if (weight <= 300) {
     return "Light";
