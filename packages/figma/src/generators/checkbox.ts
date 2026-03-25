@@ -28,23 +28,29 @@ function createCheckboxInstance(
   component.counterAxisAlignItems = "CENTER";
   component.itemSpacing = 8;
 
+  // Checkbox box: centered content via auto-layout
   const box = figma.createFrame();
   box.name = "checkbox-box";
   box.resize(spec.size, spec.size);
   box.cornerRadius = spec.borderRadius;
+  box.layoutMode = "HORIZONTAL";
+  box.primaryAxisSizingMode = "FIXED";
+  box.counterAxisSizingMode = "FIXED";
+  box.primaryAxisAlignItems = "CENTER";
+  box.counterAxisAlignItems = "CENTER";
 
   if (status === "on" || status === "intermediate") {
     setFill(box, CHECKBOX_COLORS.bgChecked);
     setStroke(box, CHECKBOX_COLORS.borderChecked);
+
+    // Use a simple visual indicator
+    const iconSize = Math.round(spec.size * 0.65);
     const icon = createTextNode(
       status === "on" ? "\u2713" : "\u2014",
-      Math.round(spec.size * 0.6),
+      iconSize,
       700,
       CHECKBOX_COLORS.iconColor
     );
-    box.layoutMode = "HORIZONTAL";
-    box.primaryAxisAlignItems = "CENTER";
-    box.counterAxisAlignItems = "CENTER";
     box.appendChild(icon);
   } else {
     setFill(box, CHECKBOX_COLORS.bgUnchecked);

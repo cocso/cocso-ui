@@ -8,6 +8,7 @@ import {
   type SwitchVariant,
 } from "./component-registry";
 import {
+  COLORS,
   createSectionHeader,
   createTextNode,
   createVariantRow,
@@ -29,10 +30,14 @@ function createSwitchInstance(
   component.counterAxisAlignItems = "CENTER";
   component.itemSpacing = 8;
 
+  // Track with layoutMode so thumb can use absolute positioning
   const track = figma.createFrame();
   track.name = "track";
   track.resize(spec.width, spec.height);
   track.cornerRadius = 1000;
+  track.layoutMode = "HORIZONTAL";
+  track.primaryAxisSizingMode = "FIXED";
+  track.counterAxisSizingMode = "FIXED";
   setFill(
     track,
     checked ? SWITCH_VARIANT_COLORS[variant] : SWITCH_COLORS.trackUnchecked
@@ -51,8 +56,7 @@ function createSwitchInstance(
 
   component.appendChild(track);
 
-  const label = createTextNode("Label", 14, 400, SWITCH_COLORS.thumbBg);
-  label.fills = [{ type: "SOLID", color: { r: 0.075, g: 0.078, b: 0.086 } }];
+  const label = createTextNode("Label", 14, 400, COLORS.neutral950);
   component.appendChild(label);
 
   return component;

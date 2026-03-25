@@ -26,11 +26,18 @@ function createRadioInstance(
   component.counterAxisAlignItems = "CENTER";
   component.itemSpacing = 8;
 
+  // Use a frame with auto-layout to center the dot inside the outer ring
   const wrapper = figma.createFrame();
   wrapper.name = "radio-wrapper";
   wrapper.resize(spec.outerSize, spec.outerSize);
   wrapper.fills = [];
+  wrapper.layoutMode = "HORIZONTAL";
+  wrapper.primaryAxisSizingMode = "FIXED";
+  wrapper.counterAxisSizingMode = "FIXED";
+  wrapper.primaryAxisAlignItems = "CENTER";
+  wrapper.counterAxisAlignItems = "CENTER";
 
+  // Outer ring is absolute-positioned to fill the wrapper
   const outer = figma.createEllipse();
   outer.name = "outer";
   outer.resize(spec.outerSize, spec.outerSize);
@@ -42,15 +49,13 @@ function createRadioInstance(
   outer.x = 0;
   outer.y = 0;
 
+  // Dot is auto-layout centered (only visible when selected)
   if (selected) {
     const dot = figma.createEllipse();
     dot.name = "dot";
     dot.resize(spec.dotSize, spec.dotSize);
     setFill(dot, RADIO_COLORS.dotColor);
     wrapper.appendChild(dot);
-    dot.layoutPositioning = "ABSOLUTE";
-    dot.x = (spec.outerSize - spec.dotSize) / 2;
-    dot.y = (spec.outerSize - spec.dotSize) / 2;
   }
 
   component.appendChild(wrapper);
