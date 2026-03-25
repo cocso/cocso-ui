@@ -26,6 +26,7 @@ Node.js 22+ (TypeScript, ESM).
 - Component discovery tools (`list`, `search`, `spec`).
 - Documentation retrieval from existing `llms.txt` and component markdown endpoints.
 - Guardrail guidance that enforces `@cocso-ui/react` usage before custom implementation.
+- Reusable server/tool registration exports for hosted adapters (for example website `/api/mcp`).
 - Extensible platform model for React now and React Native later.
 
 ## Out of Scope
@@ -45,6 +46,7 @@ ecosystem/mcp/
 │   ├── docs.ts                # Markdown document fetch helpers
 │   ├── guardrails.ts          # Usage and anti-duplication guidance
 │   ├── tools.ts               # MCP tool registration
+│   ├── server.ts              # Reusable MCP server factory
 │   └── index.ts               # MCP server bootstrap (stdio transport)
 ├── package.json
 └── tsconfig.json
@@ -75,6 +77,7 @@ ecosystem/mcp/
 - Component spec source: `https://cocso-ui.com/components/<slug>.md`
 - Primary package contract: `@cocso-ui/react`
 - Planned package contract: `@cocso-ui/react-native`
+- Exported integration helpers: `createCocsoMcpServer()`, `registerTools()`, `SERVER_NAME`, `SERVER_VERSION`
 
 ## Storage
 
