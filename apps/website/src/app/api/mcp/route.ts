@@ -1,11 +1,12 @@
 import { registerTools, SERVER_NAME, SERVER_VERSION } from "@cocso-ui/mcp";
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createMcpHandler } from "mcp-handler";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const handler = createMcpHandler(
-  (server) => {
+  (server: McpServer) => {
     registerTools(server);
   },
   {

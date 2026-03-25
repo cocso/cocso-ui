@@ -75,6 +75,9 @@ importers:
       '@cocso-ui/react-icons':
         specifier: workspace:^
         version: link:../../packages/react-icons
+      '@modelcontextprotocol/sdk':
+        specifier: 1.26.0
+        version: 1.26.0(zod@4.3.6)
       '@suspensive/react':
         specifier: ^3.19.2
         version: 3.19.2(react@19.2.4)
