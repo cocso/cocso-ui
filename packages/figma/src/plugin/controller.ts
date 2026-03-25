@@ -77,25 +77,31 @@ figma.ui.onmessage = async (msg: { type: string }) => {
         page.name = COMPONENT_PAGE_NAME;
       }
 
+      const generators = [
+        generateTypographyComponents,
+        generateButtonComponents,
+        generateBadgeComponents,
+        generateInputComponents,
+        generateSelectComponents,
+        generateCheckboxComponents,
+        generateSwitchComponents,
+        generateRadioComponents,
+        generateSpinnerComponents,
+        generateLinkComponents,
+        generateTooltipComponents,
+      ];
+
       let yOffset = 0;
-      yOffset = generateTypographyComponents(page, yOffset);
-      yOffset = generateButtonComponents(page, yOffset);
-      yOffset = generateBadgeComponents(page, yOffset);
-      yOffset = generateInputComponents(page, yOffset);
-      yOffset = generateSelectComponents(page, yOffset);
-      yOffset = generateCheckboxComponents(page, yOffset);
-      yOffset = generateSwitchComponents(page, yOffset);
-      yOffset = generateRadioComponents(page, yOffset);
-      yOffset = generateSpinnerComponents(page, yOffset);
-      yOffset = generateLinkComponents(page, yOffset);
-      yOffset = generateTooltipComponents(page, yOffset);
+      for (const generate of generators) {
+        yOffset = generate(page, yOffset);
+      }
 
       figma.ui.postMessage({
         type: "generate-complete",
-        result: { components: 11, page: COMPONENT_PAGE_NAME },
+        result: { components: generators.length, page: COMPONENT_PAGE_NAME },
       });
       figma.notify(
-        `11 component sets generated on "${COMPONENT_PAGE_NAME}" page`
+        `${generators.length} component sets generated on "${COMPONENT_PAGE_NAME}" page`
       );
     } catch (err) {
       figma.ui.postMessage({

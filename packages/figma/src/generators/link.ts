@@ -5,10 +5,11 @@ import {
   createVariantRow,
 } from "./shared";
 
-type LinkVariant = "inline" | "plain";
+type LinkVariant = "inline" | "current" | "plain";
 
 const VARIANT_COLORS: Record<LinkVariant, RGB> = {
   inline: COLORS.info500,
+  current: COLORS.neutral950,
   plain: COLORS.info500,
 };
 
@@ -19,7 +20,7 @@ const SIZES = [
   { name: "x-small", fontSize: 12 },
 ] as const;
 
-const VARIANTS: LinkVariant[] = ["inline", "plain"];
+const VARIANTS: LinkVariant[] = ["inline", "current", "plain"];
 
 export function generateLinkComponents(
   page: PageNode,

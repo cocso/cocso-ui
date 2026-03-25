@@ -19,6 +19,9 @@ function colorToken(name: string): RGB {
     const c = token.values.default as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };
   }
+  console.warn(
+    `[cocso-ui] Color token not found: ${name}, falling back to black`
+  );
   return { r: 0, g: 0, b: 0 };
 }
 
@@ -29,6 +32,7 @@ export const COLORS = {
   neutral100: colorToken("color/neutral-100"),
   neutral200: colorToken("color/neutral-200"),
   neutral400: colorToken("color/neutral-400"),
+  neutral500: colorToken("color/neutral-500"),
   neutral600: colorToken("color/neutral-600"),
   neutral800: colorToken("color/neutral-800"),
   neutral900: colorToken("color/neutral-900"),
@@ -42,6 +46,8 @@ export const COLORS = {
   success600: colorToken("color/success-600"),
   warning50: colorToken("color/warning-50"),
   warning300: colorToken("color/warning-300"),
+  warning400: colorToken("color/warning-400"),
+  warning500: colorToken("color/warning-500"),
   warning600: colorToken("color/warning-600"),
   info50: colorToken("color/info-50"),
   info500: colorToken("color/info-500"),

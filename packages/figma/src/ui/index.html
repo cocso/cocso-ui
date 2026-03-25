@@ -277,7 +277,7 @@
       const list = document.getElementById("skipped-list");
       if (skippedTokens && skippedTokens.length > 0) {
         section.style.display = "block";
-        list.innerHTML = "";
+        list.replaceChildren();
         for (const token of skippedTokens) {
           const li = document.createElement("li");
           li.textContent = `${token.name} `;
@@ -297,7 +297,7 @@
       const list = document.getElementById("errors-list");
       if (errors && errors.length > 0) {
         section.style.display = "block";
-        list.innerHTML = "";
+        list.replaceChildren();
         for (const error of errors) {
           const li = document.createElement("li");
           li.textContent = error;

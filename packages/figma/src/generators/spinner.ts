@@ -7,7 +7,8 @@ type SpinnerVariant =
   | "success"
   | "error"
   | "warning"
-  | "info";
+  | "info"
+  | "white";
 
 const SIZE_SPECS: Record<SpinnerSize, number> = {
   large: 20,
@@ -17,11 +18,12 @@ const SIZE_SPECS: Record<SpinnerSize, number> = {
 
 const VARIANT_COLORS: Record<SpinnerVariant, RGB> = {
   primary: COLORS.primary950,
-  secondary: COLORS.neutral400,
+  secondary: COLORS.neutral500,
   success: COLORS.success500,
   error: COLORS.danger500,
-  warning: COLORS.warning300,
+  warning: COLORS.warning500,
   info: COLORS.info500,
+  white: COLORS.white,
 };
 
 const SIZES: SpinnerSize[] = ["large", "medium", "small"];
@@ -32,6 +34,7 @@ const VARIANTS: SpinnerVariant[] = [
   "error",
   "warning",
   "info",
+  "white",
 ];
 
 function createSpinnerInstance(

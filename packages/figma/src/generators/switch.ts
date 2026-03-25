@@ -22,7 +22,7 @@ const VARIANT_COLORS: Record<SwitchVariant, RGB> = {
   primary: COLORS.primary950,
   success: COLORS.success500,
   error: COLORS.danger500,
-  warning: COLORS.warning300,
+  warning: COLORS.warning500,
   info: COLORS.info500,
 };
 
