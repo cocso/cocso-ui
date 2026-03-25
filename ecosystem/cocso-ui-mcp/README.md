@@ -1,4 +1,4 @@
-## `@cocso-ui/cocso-mcp`
+## `@cocso-ui/cocso-ui-mcp`
 
 MCP server that helps AI assistants discover and reuse existing `@cocso-ui` components before generating new UI code.
 
@@ -18,9 +18,9 @@ This server enforces a search-first workflow using the existing `llms.txt` + mar
 ### Usage
 
 ```bash
-pnpm --filter @cocso-ui/cocso-mcp build
-pnpm --filter @cocso-ui/cocso-mcp test
+pnpm --filter @cocso-ui/cocso-ui-mcp build
+pnpm --filter @cocso-ui/cocso-ui-mcp test
 
 # stdio MCP server entrypoint
-pnpm --filter @cocso-ui/cocso-mcp exec cocso-mcp
+pnpm --filter @cocso-ui/cocso-ui-mcp exec cocso-ui-mcp
 ```

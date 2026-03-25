@@ -1,4 +1,4 @@
-# project-cocso-mcp
+# project-cocso-ui-mcp
 
 ## Goal
 
@@ -7,7 +7,7 @@ Provide an MCP server dedicated to `@cocso-ui` so AI coding assistants can disco
 ## Path
 
 ```
-ecosystem/cocso-mcp/
+ecosystem/cocso-ui-mcp/
 ```
 
 ## Runtime and Language
@@ -38,7 +38,7 @@ Node.js 22+ (TypeScript, ESM).
 ## Architecture
 
 ```
-ecosystem/cocso-mcp/
+ecosystem/cocso-ui-mcp/
 ├── src/
 │   ├── config.ts              # Stable endpoint and package constants
 │   ├── registry.ts            # llms.txt parser and component registry cache
@@ -98,10 +98,10 @@ ecosystem/cocso-mcp/
 ## Build and Test
 
 ```sh
-pnpm --filter @cocso-ui/cocso-mcp lint
-pnpm --filter @cocso-ui/cocso-mcp check-types
-pnpm --filter @cocso-ui/cocso-mcp build
-pnpm --filter @cocso-ui/cocso-mcp test
+pnpm --filter @cocso-ui/cocso-ui-mcp lint
+pnpm --filter @cocso-ui/cocso-ui-mcp check-types
+pnpm --filter @cocso-ui/cocso-ui-mcp build
+pnpm --filter @cocso-ui/cocso-ui-mcp test
 ```
 
 Repository-level validation:

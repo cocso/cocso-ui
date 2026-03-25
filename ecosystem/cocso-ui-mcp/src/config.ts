@@ -1,6 +1,6 @@
 import { PlatformId } from "./types.js";
 
-export const SERVER_NAME = "@cocso-ui/cocso-mcp";
+export const SERVER_NAME = "@cocso-ui/cocso-ui-mcp";
 export const SERVER_VERSION = "0.0.1";
 
 export const COCSO_DOCS_CANONICAL_ORIGIN = "https://cocso-ui.com";

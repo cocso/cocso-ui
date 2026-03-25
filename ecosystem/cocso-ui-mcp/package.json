@@ -1,11 +1,11 @@
 {
-  "name": "@cocso-ui/cocso-mcp",
+  "name": "@cocso-ui/cocso-ui-mcp",
   "version": "0.0.1",
   "description": "MCP server for design-system-aware cocso-ui component discovery",
   "type": "module",
   "private": false,
   "bin": {
-    "cocso-mcp": "dist/index.js"
+    "cocso-ui-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
