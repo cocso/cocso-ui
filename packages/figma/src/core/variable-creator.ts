@@ -3,13 +3,12 @@ import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 import { clampColor, isValidColor } from "./color-converter";
 import { groupByCollection, toUpsertParams } from "./token-converter";
 
-function getOrCreateCollection(name: string): {
+async function getOrCreateCollection(name: string): Promise<{
   collection: VariableCollection;
   modeIdMap: Record<string, string>;
-} {
-  const existing = figma.variables
-    .getLocalVariableCollections()
-    .find((c: VariableCollection) => c.name === name);
+}> {
+  const collections = await figma.variables.getLocalVariableCollectionsAsync();
+  const existing = collections.find((c: VariableCollection) => c.name === name);
 
   const collection = existing ?? figma.variables.createVariableCollection(name);
 
@@ -27,17 +26,15 @@ function getOrCreateCollection(name: string): {
   return { collection, modeIdMap };
 }
 
-function findExistingVariable(
+async function findExistingVariable(
   name: string,
   collectionId: string,
   resolvedType: VariableResolvedDataType
-): Variable | undefined {
-  return figma.variables
-    .getLocalVariables(resolvedType)
-    .find(
-      (v: Variable) =>
-        v.name === name && v.variableCollectionId === collectionId
-    );
+): Promise<Variable | undefined> {
+  const variables = await figma.variables.getLocalVariablesAsync(resolvedType);
+  return variables.find(
+    (v: Variable) => v.name === name && v.variableCollectionId === collectionId
+  );
 }
 
 function setVariableValue(
@@ -62,8 +59,11 @@ function applyValues(
   }
 }
 
-function upsertVariable(param: VariableUpsertParams, result: SyncResult): void {
-  const existing = findExistingVariable(
+async function upsertVariable(
+  param: VariableUpsertParams,
+  result: SyncResult
+): Promise<void> {
+  const existing = await findExistingVariable(
     param.name,
     param.collectionId,
     param.resolvedType
@@ -87,7 +87,7 @@ function upsertVariable(param: VariableUpsertParams, result: SyncResult): void {
  * Sync all tokens from pre-built data to Figma Variables.
  * Uses non-destructive upsert: creates new variables, updates existing, never deletes.
  */
-export function syncTokens(data: FigmaTokenData): SyncResult {
+export async function syncTokens(data: FigmaTokenData): Promise<SyncResult> {
   const result: SyncResult = {
     created: 0,
     errors: [],
@@ -103,12 +103,13 @@ export function syncTokens(data: FigmaTokenData): SyncResult {
 
   for (const [collectionName, tokens] of groups) {
     try {
-      const { collection, modeIdMap } = getOrCreateCollection(collectionName);
+      const { collection, modeIdMap } =
+        await getOrCreateCollection(collectionName);
       const params = toUpsertParams(tokens, collection.id, modeIdMap);
 
       for (const param of params) {
         try {
-          upsertVariable(param, result);
+          await upsertVariable(param, result);
         } catch (err) {
           result.errors.push(
             `Failed to sync ${param.name}: ${err instanceof Error ? err.message : String(err)}`

@@ -6,7 +6,7 @@ const SUPPORTED_SCHEMA_VERSION = 1;
 
 figma.showUI(__html__, { width: 360, height: 420 });
 
-figma.ui.onmessage = (msg: { type: string }) => {
+figma.ui.onmessage = async (msg: { type: string }) => {
   if (msg.type === "sync-tokens") {
     const data = tokenData as FigmaTokenData;
 
@@ -21,7 +21,7 @@ figma.ui.onmessage = (msg: { type: string }) => {
     figma.ui.postMessage({ type: "sync-start" });
 
     try {
-      const result = syncTokens(data);
+      const result = await syncTokens(data);
 
       figma.ui.postMessage({ type: "sync-complete", result });
 
