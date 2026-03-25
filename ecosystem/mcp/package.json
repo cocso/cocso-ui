@@ -1,5 +1,5 @@
 {
-  "name": "@cocso-ui/cocso-ui-mcp",
+  "name": "@cocso-ui/mcp",
   "version": "0.0.1",
   "description": "MCP server for design-system-aware cocso-ui component discovery",
   "type": "module",

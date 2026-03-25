@@ -172,7 +172,31 @@ export function registerTools(server: McpServer): void {
         );
       }
 
-      const markdown = await getComponentMarkdown(target);
+      let markdown: string;
+      try {
+        markdown = await getComponentMarkdown(target);
+      } catch (error) {
+        log({
+          event: "tool_completed",
+          tool: "cocso_get_component_spec",
+          status: LogStatus.ERROR,
+          durationMs: Date.now() - startedAt,
+          details: {
+            component: target.slug,
+            platform,
+            reason: error instanceof Error ? error.message : String(error),
+          },
+        });
+
+        return asTextResult(
+          `Failed to load component spec for ${target.slug}. Please retry or check documentation availability.`,
+          {
+            found: false,
+            platform,
+            component: target,
+          }
+        );
+      }
 
       log({
         event: "tool_completed",

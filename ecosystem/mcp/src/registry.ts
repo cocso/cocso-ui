@@ -52,6 +52,22 @@ function toCanonicalDocUrl(url: string): string {
   return parsed.toString();
 }
 
+function tryCanonicalDocUrl(url: string): string | null {
+  try {
+    return toCanonicalDocUrl(url);
+  } catch (error) {
+    log({
+      event: "llms_link_skipped",
+      status: LogStatus.WARNING,
+      details: {
+        url,
+        reason: error instanceof Error ? error.message : String(error),
+      },
+    });
+    return null;
+  }
+}
+
 function tokenizeQuery(query: string): string[] {
   return query
     .toLowerCase()
@@ -113,9 +129,15 @@ export function parseLlmsIndex(markdown: string): DocLink[] {
 
     const section = nearest?.id ?? DocumentationSectionId.COMPONENTS;
 
+    const canonicalUrl = tryCanonicalDocUrl(url.trim());
+    if (!canonicalUrl) {
+      linkMatch = LINK_LINE_RE.exec(markdown);
+      continue;
+    }
+
     results.push({
       title: title.trim(),
-      url: toCanonicalDocUrl(url.trim()),
+      url: canonicalUrl,
       description: description.trim(),
       section,
     });

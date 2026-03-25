@@ -28,6 +28,15 @@ describe("parseLlmsIndex", () => {
     );
     expect(links[0]?.url).toBe("https://cocso-ui.com/components/button.md");
   });
+
+  it("skips invalid links without failing the parser", () => {
+    const links = parseLlmsIndex(
+      "## Components\n\n- [Broken](not-a-valid-url): broken\n- [Button](https://cocso-ui.com/components/button.md): ok\n"
+    );
+
+    expect(links).toHaveLength(1);
+    expect(links[0]?.title).toBe("Button");
+  });
 });
 
 describe("rankComponentsForPrompt", () => {
