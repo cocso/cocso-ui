@@ -176,12 +176,7 @@ export function setupPageLayout(page: PageNode): FrameNode {
   container.fills = [{ type: "SOLID", color: COLORS.neutral50 }];
   page.appendChild(container);
 
-  const title = createTextNode(
-    "cocso-ui Design System",
-    28,
-    700,
-    COLORS.neutral950
-  );
+  const title = createTextNode("@cocso-ui/figma", 28, 700, COLORS.neutral950);
   container.appendChild(title);
 
   const subtitle = createTextNode(

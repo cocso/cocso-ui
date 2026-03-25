@@ -13,6 +13,7 @@ async function main() {
 
   cpSync("src/ui/index.html", "dist/ui.html");
   cpSync("manifest.json", "dist/manifest.json");
+  cpSync("icon.svg", "dist/icon.svg");
 }
 
 main().catch((err) => {
