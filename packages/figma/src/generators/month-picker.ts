@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -94,19 +94,12 @@ function createMonthPickerInstance(): ComponentNode {
   return component;
 }
 
-export function generateMonthPickerComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("MonthPicker");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generateMonthPickerComponents(container: FrameNode): void {
+  const section = createComponentSection("MonthPicker");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createMonthPickerInstance());
+  section.appendChild(row);
 
-  return currentY + 220;
+  container.appendChild(section);
 }

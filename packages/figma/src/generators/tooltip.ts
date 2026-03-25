@@ -1,24 +1,15 @@
 import { TOOLTIP_SPEC } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
 } from "./shared";
 
-export function generateTooltipComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Tooltip");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  const currentY = yOffset + 80;
+export function generateTooltipComponents(container: FrameNode): void {
+  const section = createComponentSection("Tooltip");
 
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
 
   const component = figma.createComponent();
   component.name = "variant=default";
@@ -41,6 +32,7 @@ export function generateTooltipComponents(
   component.appendChild(text);
 
   row.appendChild(component);
+  section.appendChild(row);
 
-  return currentY + 72;
+  container.appendChild(section);
 }

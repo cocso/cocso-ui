@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -27,19 +27,12 @@ function createPopoverInstance(): ComponentNode {
   return component;
 }
 
-export function generatePopoverComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Popover");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generatePopoverComponents(container: FrameNode): void {
+  const section = createComponentSection("Popover");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createPopoverInstance());
+  section.appendChild(row);
 
-  return currentY + 72;
+  container.appendChild(section);
 }

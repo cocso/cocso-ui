@@ -5,7 +5,7 @@ import {
   type RadioSize,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -66,28 +66,19 @@ function createRadioInstance(
   return component;
 }
 
-export function generateRadioComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Radio");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateRadioComponents(container: FrameNode): void {
+  const section = createComponentSection("Radio");
 
   for (const selected of [false, true]) {
     const row = createVariantRow(selected ? "selected" : "unselected");
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of RADIO_SIZES) {
       const radio = createRadioInstance(size, selected);
       row.appendChild(radio);
     }
 
-    currentY += 48;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

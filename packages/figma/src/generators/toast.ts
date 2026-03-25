@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -58,15 +58,8 @@ function createToastInstance(variant: ToastVariant): ComponentNode {
   return component;
 }
 
-export function generateToastComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Toast");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateToastComponents(container: FrameNode): void {
+  const section = createComponentSection("Toast");
 
   for (const variant of [
     "default",
@@ -76,11 +69,9 @@ export function generateToastComponents(
     "info",
   ] as ToastVariant[]) {
     const row = createVariantRow(variant);
-    row.y = currentY;
-    page.appendChild(row);
     row.appendChild(createToastInstance(variant));
-    currentY += 56;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

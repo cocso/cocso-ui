@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
 } from "./shared";
@@ -61,21 +61,13 @@ function createAccordionInstance(expanded: boolean): ComponentNode {
   return component;
 }
 
-export function generateAccordionComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Accordion");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generateAccordionComponents(container: FrameNode): void {
+  const section = createComponentSection("Accordion");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("states");
-  row.y = currentY;
-  page.appendChild(row);
-
   row.appendChild(createAccordionInstance(false));
   row.appendChild(createAccordionInstance(true));
+  section.appendChild(row);
 
-  return currentY + 100;
+  container.appendChild(section);
 }

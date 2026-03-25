@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -64,19 +64,12 @@ function createPaginationInstance(): ComponentNode {
   return component;
 }
 
-export function generatePaginationComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Pagination");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generatePaginationComponents(container: FrameNode): void {
+  const section = createComponentSection("Pagination");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createPaginationInstance());
+  section.appendChild(row);
 
-  return currentY + 72;
+  container.appendChild(section);
 }

@@ -7,7 +7,7 @@ import {
   type ButtonVariant,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -47,28 +47,19 @@ function createButtonInstance(
   return component;
 }
 
-export function generateButtonComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Button");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateButtonComponents(container: FrameNode): void {
+  const section = createComponentSection("Button");
 
   for (const variant of BUTTON_VARIANTS) {
     const row = createVariantRow(variant);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of BUTTON_SIZES) {
       const btn = createButtonInstance(size, variant, "Button");
       row.appendChild(btn);
     }
 
-    currentY += 56;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

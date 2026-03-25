@@ -9,7 +9,7 @@ import {
 } from "./component-registry";
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -62,30 +62,21 @@ function createSwitchInstance(
   return component;
 }
 
-export function generateSwitchComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Switch");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateSwitchComponents(container: FrameNode): void {
+  const section = createComponentSection("Switch");
 
   for (const variant of SWITCH_VARIANTS) {
     for (const checked of [false, true]) {
       const row = createVariantRow(`${variant}/${checked ? "on" : "off"}`);
-      row.y = currentY;
-      page.appendChild(row);
 
       for (const size of SWITCH_SIZES) {
         const sw = createSwitchInstance(size, variant, checked);
         row.appendChild(sw);
       }
 
-      currentY += 44;
+      section.appendChild(row);
     }
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

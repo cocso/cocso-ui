@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -51,15 +51,8 @@ function createOtpInstance(filled: number): ComponentNode {
   return component;
 }
 
-export function generateOtpFieldComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("OTP Field");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateOtpFieldComponents(container: FrameNode): void {
+  const section = createComponentSection("OTP Field");
 
   for (const filled of [0, 3, 6]) {
     let label = "partial";
@@ -69,11 +62,9 @@ export function generateOtpFieldComponents(
       label = "filled";
     }
     const row = createVariantRow(label);
-    row.y = currentY;
-    page.appendChild(row);
     row.appendChild(createOtpInstance(filled));
-    currentY += 68;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

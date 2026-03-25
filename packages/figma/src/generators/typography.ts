@@ -1,30 +1,19 @@
 import { BODY_SIZES, FONT_WEIGHTS, HEADING_SIZES } from "./component-registry";
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
 } from "./shared";
 
-export function generateTypographyComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Typography");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateTypographyComponents(container: FrameNode): void {
+  const section = createComponentSection("Typography");
 
   const headingLabel = createTextNode("Heading", 12, 600, COLORS.neutral600);
-  headingLabel.y = currentY;
-  page.appendChild(headingLabel);
-  currentY += 24;
+  section.appendChild(headingLabel);
 
   for (const { name, fontSize } of HEADING_SIZES) {
     const row = createVariantRow(name);
-    row.y = currentY;
-    page.appendChild(row);
 
     const text = createTextNode(
       `Heading ${name} (${fontSize}px)`,
@@ -34,20 +23,14 @@ export function generateTypographyComponents(
     );
     row.appendChild(text);
 
-    currentY += Math.max(fontSize + 16, 40);
+    section.appendChild(row);
   }
 
-  currentY += 16;
-
   const bodyLabel = createTextNode("Body", 12, 600, COLORS.neutral600);
-  bodyLabel.y = currentY;
-  page.appendChild(bodyLabel);
-  currentY += 24;
+  section.appendChild(bodyLabel);
 
   for (const { name, fontSize } of BODY_SIZES) {
     const row = createVariantRow(name);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const { name: weightName, value: weight } of FONT_WEIGHTS) {
       const text = createTextNode(
@@ -59,8 +42,8 @@ export function generateTypographyComponents(
       row.appendChild(text);
     }
 
-    currentY += Math.max(fontSize + 16, 36);
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

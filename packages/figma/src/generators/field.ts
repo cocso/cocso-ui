@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -75,23 +75,14 @@ function createFieldInstance(
   return component;
 }
 
-export function generateFieldComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Field");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateFieldComponents(container: FrameNode): void {
+  const section = createComponentSection("Field");
 
   for (const state of ["default", "error", "optional"] as const) {
     const row = createVariantRow(state);
-    row.y = currentY;
-    page.appendChild(row);
     row.appendChild(createFieldInstance(state));
-    currentY += 100;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

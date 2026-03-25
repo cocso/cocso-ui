@@ -4,25 +4,16 @@ import {
   LINK_VARIANTS,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
 } from "./shared";
 
-export function generateLinkComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Link");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateLinkComponents(container: FrameNode): void {
+  const section = createComponentSection("Link");
 
   for (const variant of LINK_VARIANTS) {
     const row = createVariantRow(variant);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const { name, fontSize } of LINK_SIZES) {
       const component = figma.createComponent();
@@ -45,8 +36,8 @@ export function generateLinkComponents(
       row.appendChild(component);
     }
 
-    currentY += 40;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

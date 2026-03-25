@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -52,16 +52,12 @@ function createTabInstance(): ComponentNode {
   return component;
 }
 
-export function generateTabComponents(page: PageNode, yOffset: number): number {
-  const section = createSectionHeader("Tab");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generateTabComponents(container: FrameNode): void {
+  const section = createComponentSection("Tab");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createTabInstance());
+  section.appendChild(row);
 
-  return currentY + 72;
+  container.appendChild(section);
 }

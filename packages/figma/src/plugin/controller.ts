@@ -25,6 +25,7 @@ import {
   generateTooltipComponents,
   generateTypographyComponents,
 } from "../generators";
+import { setupPageLayout } from "../generators/shared";
 import type { FigmaTokenData } from "../types/token-schema";
 
 const SUPPORTED_SCHEMA_VERSION = 1;
@@ -89,6 +90,8 @@ figma.ui.onmessage = async (msg: { type: string }) => {
         page.name = COMPONENT_PAGE_NAME;
       }
 
+      const container = setupPageLayout(page);
+
       const generators = [
         generateTypographyComponents,
         generateButtonComponents,
@@ -115,9 +118,8 @@ figma.ui.onmessage = async (msg: { type: string }) => {
         generateStockQuantityStatusComponents,
       ];
 
-      let yOffset = 0;
       for (const generate of generators) {
-        yOffset = generate(page, yOffset);
+        generate(container);
       }
 
       figma.ui.postMessage({

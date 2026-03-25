@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
 } from "./shared";
@@ -70,21 +70,16 @@ function createStatusInstance(status: StockStatus): ComponentNode {
 }
 
 export function generateStockQuantityStatusComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("StockQuantityStatus");
-  section.y = yOffset;
-  page.appendChild(section);
+  container: FrameNode
+): void {
+  const section = createComponentSection("StockQuantityStatus");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("variants");
-  row.y = currentY;
-  page.appendChild(row);
 
   for (const status of ["plenty", "normal", "short"] as StockStatus[]) {
     row.appendChild(createStatusInstance(status));
   }
 
-  return currentY + 56;
+  section.appendChild(row);
+  container.appendChild(section);
 }

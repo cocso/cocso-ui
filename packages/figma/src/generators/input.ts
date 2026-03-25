@@ -5,7 +5,7 @@ import {
   type InputSize,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -46,28 +46,19 @@ function createInputInstance(
   return component;
 }
 
-export function generateInputComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Input");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateInputComponents(container: FrameNode): void {
+  const section = createComponentSection("Input");
 
   for (const state of ["default", "error"] as const) {
     const row = createVariantRow(state);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of INPUT_SIZES) {
       const input = createInputInstance(size, state);
       row.appendChild(input);
     }
 
-    currentY += 56;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

@@ -5,7 +5,7 @@ import {
   type SelectSize,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -49,24 +49,16 @@ function createSelectInstance(size: SelectSize): ComponentNode {
   return component;
 }
 
-export function generateSelectComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Select");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  const currentY = yOffset + 80;
+export function generateSelectComponents(container: FrameNode): void {
+  const section = createComponentSection("Select");
 
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
 
   for (const size of SELECT_SIZES) {
     const select = createSelectInstance(size);
     row.appendChild(select);
   }
 
-  return currentY + 72;
+  section.appendChild(row);
+  container.appendChild(section);
 }

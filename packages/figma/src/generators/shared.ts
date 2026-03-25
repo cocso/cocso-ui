@@ -121,17 +121,30 @@ export function setStroke(
   node.strokeWeight = weight;
 }
 
-/** Create a section header for the component page. */
-export function createSectionHeader(title: string): FrameNode {
-  const frame = createAutoLayoutFrame(`Section: ${title}`, "VERTICAL");
-  frame.itemSpacing = 16;
-  frame.paddingTop = 32;
-  frame.paddingBottom = 16;
+/**
+ * Create a component section card with white background.
+ * All variant rows should be appended to the returned frame.
+ */
+export function createComponentSection(title: string): FrameNode {
+  const section = figma.createFrame();
+  section.name = title;
+  section.layoutMode = "VERTICAL";
+  section.primaryAxisSizingMode = "AUTO";
+  section.counterAxisSizingMode = "AUTO";
+  section.paddingTop = 24;
+  section.paddingBottom = 24;
+  section.paddingLeft = 32;
+  section.paddingRight = 32;
+  section.itemSpacing = 16;
+  section.cornerRadius = 12;
+  section.fills = [{ type: "SOLID", color: COLORS.white }];
+  section.strokes = [{ type: "SOLID", color: COLORS.neutral100 }];
+  section.strokeWeight = 1;
 
-  const text = createTextNode(title, 20, 600, COLORS.neutral950);
-  frame.appendChild(text);
+  const header = createTextNode(title, 18, 600, COLORS.neutral950);
+  section.appendChild(header);
 
-  return frame;
+  return section;
 }
 
 /** Create a labeled row for variant display. */
@@ -146,4 +159,38 @@ export function createVariantRow(label: string): FrameNode {
   row.appendChild(labelNode);
 
   return row;
+}
+
+/** Set up the component page with a gray background and vertical auto-layout. */
+export function setupPageLayout(page: PageNode): FrameNode {
+  const container = figma.createFrame();
+  container.name = "cocso-ui Components";
+  container.layoutMode = "VERTICAL";
+  container.primaryAxisSizingMode = "AUTO";
+  container.counterAxisSizingMode = "AUTO";
+  container.paddingTop = 48;
+  container.paddingBottom = 48;
+  container.paddingLeft = 48;
+  container.paddingRight = 48;
+  container.itemSpacing = 32;
+  container.fills = [{ type: "SOLID", color: COLORS.neutral50 }];
+  page.appendChild(container);
+
+  const title = createTextNode(
+    "cocso-ui Design System",
+    28,
+    700,
+    COLORS.neutral950
+  );
+  container.appendChild(title);
+
+  const subtitle = createTextNode(
+    "Auto-generated component library from @cocso-ui/react",
+    14,
+    400,
+    COLORS.neutral600
+  );
+  container.appendChild(subtitle);
+
+  return container;
 }

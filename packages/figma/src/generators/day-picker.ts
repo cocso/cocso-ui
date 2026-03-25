@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -175,19 +175,12 @@ function createCalendarInstance(): ComponentNode {
   return component;
 }
 
-export function generateDayPickerComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("DayPicker");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generateDayPickerComponents(container: FrameNode): void {
+  const section = createComponentSection("DayPicker");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createCalendarInstance());
+  section.appendChild(row);
 
-  return currentY + 280;
+  container.appendChild(section);
 }

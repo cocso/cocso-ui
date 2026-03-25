@@ -7,7 +7,7 @@ import {
   type BadgeVariant,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -49,28 +49,19 @@ function createBadgeInstance(
   return component;
 }
 
-export function generateBadgeComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Badge");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateBadgeComponents(container: FrameNode): void {
+  const section = createComponentSection("Badge");
 
   for (const variant of BADGE_VARIANTS) {
     const row = createVariantRow(variant);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of BADGE_SIZES) {
       const badge = createBadgeInstance(size, variant, "Badge");
       row.appendChild(badge);
     }
 
-    currentY += 48;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

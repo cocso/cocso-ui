@@ -6,7 +6,7 @@ import {
   type SpinnerSize,
   type SpinnerVariant,
 } from "./component-registry";
-import { createSectionHeader, createVariantRow } from "./shared";
+import { createComponentSection, createVariantRow } from "./shared";
 
 /**
  * Blade specs matching the React Spinner sizeConfig:
@@ -64,28 +64,19 @@ function createSpinnerInstance(
   return component;
 }
 
-export function generateSpinnerComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Spinner");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateSpinnerComponents(container: FrameNode): void {
+  const section = createComponentSection("Spinner");
 
   for (const variant of SPINNER_VARIANTS) {
     const row = createVariantRow(variant);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of SPINNER_SIZES) {
       const spinner = createSpinnerInstance(size, variant);
       row.appendChild(spinner);
     }
 
-    currentY += 40;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

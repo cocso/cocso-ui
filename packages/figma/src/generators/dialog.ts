@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -45,23 +45,14 @@ function createDialogInstance(size: DialogSize): ComponentNode {
   return component;
 }
 
-export function generateDialogComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Dialog");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateDialogComponents(container: FrameNode): void {
+  const section = createComponentSection("Dialog");
 
   for (const size of ["small", "medium", "large"] as DialogSize[]) {
     const row = createVariantRow(size);
-    row.y = currentY;
-    page.appendChild(row);
     row.appendChild(createDialogInstance(size));
-    currentY += 120;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }

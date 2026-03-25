@@ -1,6 +1,6 @@
 import {
   COLORS,
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -62,19 +62,12 @@ function createDropdownInstance(): ComponentNode {
   return component;
 }
 
-export function generateDropdownComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Dropdown");
-  section.y = yOffset;
-  page.appendChild(section);
+export function generateDropdownComponents(container: FrameNode): void {
+  const section = createComponentSection("Dropdown");
 
-  const currentY = yOffset + 80;
   const row = createVariantRow("default");
-  row.y = currentY;
-  page.appendChild(row);
   row.appendChild(createDropdownInstance());
+  section.appendChild(row);
 
-  return currentY + 160;
+  container.appendChild(section);
 }

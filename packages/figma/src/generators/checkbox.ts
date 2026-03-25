@@ -7,7 +7,7 @@ import {
   type CheckboxStatus,
 } from "./component-registry";
 import {
-  createSectionHeader,
+  createComponentSection,
   createTextNode,
   createVariantRow,
   setFill,
@@ -70,28 +70,19 @@ function createCheckboxInstance(
   return component;
 }
 
-export function generateCheckboxComponents(
-  page: PageNode,
-  yOffset: number
-): number {
-  const section = createSectionHeader("Checkbox");
-  section.y = yOffset;
-  page.appendChild(section);
-
-  let currentY = yOffset + 80;
+export function generateCheckboxComponents(container: FrameNode): void {
+  const section = createComponentSection("Checkbox");
 
   for (const status of CHECKBOX_STATUSES) {
     const row = createVariantRow(status);
-    row.y = currentY;
-    page.appendChild(row);
 
     for (const size of CHECKBOX_SIZES) {
       const checkbox = createCheckboxInstance(size, status);
       row.appendChild(checkbox);
     }
 
-    currentY += 48;
+    section.appendChild(row);
   }
 
-  return currentY + 24;
+  container.appendChild(section);
 }
