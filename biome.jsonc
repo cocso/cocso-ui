@@ -44,7 +44,7 @@
       }
     },
     {
-      "includes": ["packages/figma/src/plugin/**", "packages/figma/src/core/variable-creator.ts"],
+      "includes": ["packages/figma/src/plugin/**", "packages/figma/src/core/variable-creator.ts", "packages/figma/src/generators/**"],
       "javascript": {
         "globals": ["figma", "__html__"]
       }
