@@ -76,9 +76,9 @@ export function createTextNode(
   color: RGB
 ): TextNode {
   const text = figma.createText();
+  text.fontName = { family: "Inter", style: getFontStyle(fontWeight) };
   text.characters = content;
   text.fontSize = fontSize;
-  text.fontName = { family: "Inter", style: getFontStyle(fontWeight) };
   text.fills = [{ type: "SOLID", color }];
   return text;
 }

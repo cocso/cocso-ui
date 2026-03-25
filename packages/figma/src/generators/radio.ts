@@ -54,9 +54,10 @@ function createRadioInstance(
     dot.name = "dot";
     dot.resize(spec.dot, spec.dot);
     setFill(dot, COLORS.primary950);
+    wrapper.appendChild(dot);
+    dot.layoutPositioning = "ABSOLUTE";
     dot.x = (spec.outer - spec.dot) / 2;
     dot.y = (spec.outer - spec.dot) / 2;
-    wrapper.appendChild(dot);
   }
 
   component.appendChild(wrapper);
