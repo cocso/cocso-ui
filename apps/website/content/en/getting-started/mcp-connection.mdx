@@ -28,49 +28,49 @@ description: Connect AI clients to the hosted COCSO MCP endpoint and reuse @cocs
 </Section>
 
 <Section>
-  <Section.Title>Claude Code</Section.Title>
-  <Section.Text>Claude Code supports direct MCP remote servers over HTTP. Add this to project `.mcp.json` or user `~/.claude.json`.</Section.Text>
+  <Section.Title>Client Setup by Tool</Section.Title>
+  <Tabs items={["Claude Code", "Codex", "OpenCode"]}>
+    <Tab value="Claude Code">
+      <Section.Text>Claude Code supports direct MCP remote servers over HTTP. Add this to project `.mcp.json` or user `~/.claude.json`.</Section.Text>
 
-  ```json
-  {
-    "mcpServers": {
-      "cocso-ui": {
-        "type": "http",
-        "url": "https://www.cocso-ui.com/api/mcp"
+      ```json
+      {
+        "mcpServers": {
+          "cocso-ui": {
+            "type": "http",
+            "url": "https://www.cocso-ui.com/api/mcp"
+          }
+        }
       }
-    }
-  }
-  ```
+      ```
 
-  <Section.Text>Note: Claude Desktop uses `claude_desktop_config.json` with stdio-style server entries. Remote MCP in Desktop is handled through its extension flow, so direct HTTP setup differs from Claude Code.</Section.Text>
-</Section>
+      <Section.Text>Note: Claude Desktop uses `claude_desktop_config.json` with stdio-style server entries. Remote MCP in Desktop is handled through its extension flow, so direct HTTP setup differs from Claude Code.</Section.Text>
+    </Tab>
+    <Tab value="Codex">
+      <Section.Text>Codex uses TOML config. Add this to `~/.codex/config.toml` (or `.codex/config.toml` for project scope).</Section.Text>
 
-<Section>
-  <Section.Title>Codex</Section.Title>
-  <Section.Text>Codex uses TOML config. Add this to `~/.codex/config.toml` (or `.codex/config.toml` for project scope).</Section.Text>
+      ```toml
+      [mcp_servers.cocso_ui]
+      url = "https://www.cocso-ui.com/api/mcp"
+      ```
+    </Tab>
+    <Tab value="OpenCode">
+      <Section.Text>OpenCode supports remote MCP directly. Add this to `~/.config/opencode/opencode.json` (or `opencode.json` in your project).</Section.Text>
 
-  ```toml
-  [mcp_servers.cocso_ui]
-  url = "https://www.cocso-ui.com/api/mcp"
-  ```
-</Section>
-
-<Section>
-  <Section.Title>OpenCode</Section.Title>
-  <Section.Text>OpenCode supports remote MCP directly. Add this to `~/.config/opencode/opencode.json` (or `opencode.json` in your project).</Section.Text>
-
-  ```json
-  {
-    "$schema": "https://opencode.ai/config.json",
-    "mcp": {
-      "cocso-ui": {
-        "type": "remote",
-        "url": "https://www.cocso-ui.com/api/mcp",
-        "enabled": true
+      ```json
+      {
+        "$schema": "https://opencode.ai/config.json",
+        "mcp": {
+          "cocso-ui": {
+            "type": "remote",
+            "url": "https://www.cocso-ui.com/api/mcp",
+            "enabled": true
+          }
+        }
       }
-    }
-  }
-  ```
+      ```
+    </Tab>
+  </Tabs>
 </Section>
 
 <Section>

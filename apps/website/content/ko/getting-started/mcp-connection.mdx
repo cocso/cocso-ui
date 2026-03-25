@@ -28,49 +28,49 @@ description: AI 클라이언트를 COCSO MCP 엔드포인트에 연결해 @cocso
 </Section>
 
 <Section>
-  <Section.Title>Claude Code</Section.Title>
-  <Section.Text>Claude Code는 HTTP 기반 MCP remote server를 직접 지원합니다. 프로젝트 `.mcp.json` 또는 사용자 `~/.claude.json`에 다음 설정을 추가하세요.</Section.Text>
+  <Section.Title>도구별 클라이언트 설정</Section.Title>
+  <Tabs items={["Claude Code", "Codex", "OpenCode"]}>
+    <Tab value="Claude Code">
+      <Section.Text>Claude Code는 HTTP 기반 MCP remote server를 직접 지원합니다. 프로젝트 `.mcp.json` 또는 사용자 `~/.claude.json`에 다음 설정을 추가하세요.</Section.Text>
 
-  ```json
-  {
-    "mcpServers": {
-      "cocso-ui": {
-        "type": "http",
-        "url": "https://www.cocso-ui.com/api/mcp"
+      ```json
+      {
+        "mcpServers": {
+          "cocso-ui": {
+            "type": "http",
+            "url": "https://www.cocso-ui.com/api/mcp"
+          }
+        }
       }
-    }
-  }
-  ```
+      ```
 
-  <Section.Text>참고: Claude Desktop은 `claude_desktop_config.json`의 stdio 스타일 서버 설정을 사용합니다. Desktop의 remote MCP는 확장(Extension) 흐름을 통해 연결되므로 Claude Code와 설정 방식이 다릅니다.</Section.Text>
-</Section>
+      <Section.Text>참고: Claude Desktop은 `claude_desktop_config.json`의 stdio 스타일 서버 설정을 사용합니다. Desktop의 remote MCP는 확장(Extension) 흐름을 통해 연결되므로 Claude Code와 설정 방식이 다릅니다.</Section.Text>
+    </Tab>
+    <Tab value="Codex">
+      <Section.Text>Codex는 TOML 설정을 사용합니다. `~/.codex/config.toml`(또는 프로젝트 `.codex/config.toml`)에 아래 항목을 추가하세요.</Section.Text>
 
-<Section>
-  <Section.Title>Codex</Section.Title>
-  <Section.Text>Codex는 TOML 설정을 사용합니다. `~/.codex/config.toml`(또는 프로젝트 `.codex/config.toml`)에 아래 항목을 추가하세요.</Section.Text>
+      ```toml
+      [mcp_servers.cocso_ui]
+      url = "https://www.cocso-ui.com/api/mcp"
+      ```
+    </Tab>
+    <Tab value="OpenCode">
+      <Section.Text>OpenCode는 remote MCP를 직접 지원합니다. `~/.config/opencode/opencode.json`(또는 프로젝트 `opencode.json`)에 아래처럼 추가하세요.</Section.Text>
 
-  ```toml
-  [mcp_servers.cocso_ui]
-  url = "https://www.cocso-ui.com/api/mcp"
-  ```
-</Section>
-
-<Section>
-  <Section.Title>OpenCode</Section.Title>
-  <Section.Text>OpenCode는 remote MCP를 직접 지원합니다. `~/.config/opencode/opencode.json`(또는 프로젝트 `opencode.json`)에 아래처럼 추가하세요.</Section.Text>
-
-  ```json
-  {
-    "$schema": "https://opencode.ai/config.json",
-    "mcp": {
-      "cocso-ui": {
-        "type": "remote",
-        "url": "https://www.cocso-ui.com/api/mcp",
-        "enabled": true
+      ```json
+      {
+        "$schema": "https://opencode.ai/config.json",
+        "mcp": {
+          "cocso-ui": {
+            "type": "remote",
+            "url": "https://www.cocso-ui.com/api/mcp",
+            "enabled": true
+          }
+        }
       }
-    }
-  }
-  ```
+      ```
+    </Tab>
+  </Tabs>
 </Section>
 
 <Section>
