@@ -18,7 +18,9 @@ const handler = createMcpHandler(
     basePath: "/api",
     disableSse: true,
     maxDuration,
-    verboseLogs: true,
+    verboseLogs:
+      process.env.NODE_ENV === "development" ||
+      process.env.MCP_VERBOSE === "true",
   }
 );
 
