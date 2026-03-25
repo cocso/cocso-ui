@@ -13,4 +13,5 @@ export function createCocsoMcpServer(): McpServer {
   return server;
 }
 
+export { SERVER_NAME, SERVER_VERSION } from "./config.js";
 export { registerTools } from "./tools.js";

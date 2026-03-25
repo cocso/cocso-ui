@@ -25,7 +25,7 @@ Next.js 16 (TypeScript), React 19. MDX content powered by fumadocs.
 - Component API reference pages.
 - Design token reference pages.
 - Full-text search via fumadocs search API.
-- Hosted MCP endpoint via Streamable HTTP/SSE for AI clients.
+- Hosted MCP endpoint via Streamable HTTP for AI clients.
 - Analytics via PostHog.
 
 ## Out of Scope
@@ -40,7 +40,7 @@ apps/website/
 ├── src/
 │   ├── app/                  # Next.js App Router pages and layouts
 │   │   ├── [lang]/[slug]/    # Locale-prefixed documentation routes
-│   │   ├── api/[transport]/  # MCP transport endpoints (/api/mcp, /api/sse)
+│   │   ├── api/[transport]/  # MCP route handler (currently serves /api/mcp)
 │   │   ├── api/search/       # Full-text search API route (fumadocs)
 │   │   ├── api/md/[slug]/    # AI-readable markdown endpoint
 │   │   └── llms.txt/         # LLM index endpoint
@@ -79,7 +79,6 @@ External runtime dependency:
 | `/api/search` | Full-text search endpoint (fumadocs) |
 | `/api/md/[slug]` | Markdown payload route used by `.md` rewrites |
 | `/api/mcp` | Streamable HTTP MCP endpoint for AI clients |
-| `/api/sse` | SSE MCP endpoint for resumable streaming clients |
 
 ### Environment Variables
 
@@ -101,6 +100,7 @@ All API base URLs must be stored in environment variables — never hardcoded.
 - No user authentication.
 - PostHog key is public (client-side analytics only).
 - No sensitive data collected or stored.
+- Hosted MCP transport intentionally disables SSE, so Redis-backed resumability is not part of this app contract.
 
 ## Logging
 
