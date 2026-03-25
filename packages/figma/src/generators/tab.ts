@@ -29,7 +29,8 @@ function createTabItem(label: string, active: boolean): FrameNode {
   if (active) {
     const indicator = figma.createRectangle();
     indicator.name = "indicator";
-    indicator.resize(tab.width || 40, 2);
+    indicator.resize(40, 2);
+    indicator.layoutAlign = "STRETCH";
     setFill(indicator, COLORS.neutral950);
     tab.appendChild(indicator);
   }

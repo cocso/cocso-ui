@@ -8,8 +8,11 @@ import {
 } from "./component-registry";
 import {
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
   setStroke,
 } from "./shared";
@@ -43,13 +46,11 @@ function createCheckboxInstance(
     setFill(box, CHECKBOX_COLORS.bgChecked);
     setStroke(box, CHECKBOX_COLORS.borderChecked);
 
-    // Use a simple visual indicator
-    const iconSize = Math.round(spec.size * 0.65);
-    const icon = createTextNode(
-      status === "on" ? "\u2713" : "\u2014",
+    const iconSize = Math.round(spec.size * 0.7);
+    const icon = createIcon(
+      status === "on" ? ICON_SVGS.check : ICON_SVGS.indeterminate,
       iconSize,
-      700,
-      CHECKBOX_COLORS.iconColor
+      rgbToHex(CHECKBOX_COLORS.iconColor)
     );
     box.appendChild(icon);
   } else {

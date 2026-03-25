@@ -1,8 +1,11 @@
 import {
   COLORS,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
 } from "./shared";
 
@@ -78,9 +81,13 @@ function createCalendarHeader(): FrameNode {
   header.paddingBottom = 8;
   header.fills = [];
 
-  header.appendChild(createTextNode("\u2039", 16, 400, COLORS.neutral600));
+  header.appendChild(
+    createIcon(ICON_SVGS.chevronLeft, 16, rgbToHex(COLORS.neutral600))
+  );
   header.appendChild(createTextNode("March 2026", 14, 600, COLORS.neutral950));
-  header.appendChild(createTextNode("\u203A", 16, 400, COLORS.neutral600));
+  header.appendChild(
+    createIcon(ICON_SVGS.chevronRight, 16, rgbToHex(COLORS.neutral600))
+  );
 
   return header;
 }

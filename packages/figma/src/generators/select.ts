@@ -6,8 +6,11 @@ import {
 } from "./component-registry";
 import {
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
   setStroke,
 } from "./shared";
@@ -38,11 +41,10 @@ function createSelectInstance(size: SelectSize): ComponentNode {
   text.layoutGrow = 1;
   component.appendChild(text);
 
-  const arrow = createTextNode(
-    "\u25BE",
-    spec.fontSize,
-    400,
-    SELECT_COLORS.iconColor
+  const arrow = createIcon(
+    ICON_SVGS.selector,
+    14,
+    rgbToHex(SELECT_COLORS.iconColor)
   );
   component.appendChild(arrow);
 

@@ -1,8 +1,12 @@
 import {
   COLORS,
+  createAutoLayoutFrame,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
 } from "./shared";
 
@@ -31,8 +35,21 @@ function createDialogInstance(size: DialogSize): ComponentNode {
   component.itemSpacing = 4;
   setFill(component, COLORS.white);
 
+  const titleRow = createAutoLayoutFrame("title-row");
+  titleRow.primaryAxisSizingMode = "FIXED";
+  titleRow.counterAxisSizingMode = "AUTO";
+  titleRow.resize(width - 32, 1);
+  titleRow.primaryAxisAlignItems = "SPACE_BETWEEN";
+  titleRow.counterAxisAlignItems = "CENTER";
+  titleRow.fills = [];
+
   const title = createTextNode("Dialog Title", 20, 700, COLORS.neutral950);
-  component.appendChild(title);
+  titleRow.appendChild(title);
+
+  const closeBtn = createIcon(ICON_SVGS.close, 14, rgbToHex(COLORS.neutral600));
+  titleRow.appendChild(closeBtn);
+
+  component.appendChild(titleRow);
 
   const desc = createTextNode(
     "This is a description for the dialog content.",

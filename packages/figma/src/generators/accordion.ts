@@ -1,8 +1,11 @@
 import {
   COLORS,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
 } from "./shared";
 
 function createAccordionInstance(expanded: boolean): ComponentNode {
@@ -29,11 +32,10 @@ function createAccordionInstance(expanded: boolean): ComponentNode {
   const label = createTextNode("Accordion Item", 14, 500, COLORS.neutral950);
   trigger.appendChild(label);
 
-  const chevron = createTextNode(
-    expanded ? "\u25B2" : "\u25BC",
-    12,
-    400,
-    COLORS.neutral400
+  const chevron = createIcon(
+    expanded ? ICON_SVGS.chevronUp : ICON_SVGS.chevronDown,
+    16,
+    rgbToHex(COLORS.neutral400)
   );
   trigger.appendChild(chevron);
 

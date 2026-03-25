@@ -1,8 +1,11 @@
 import {
   COLORS,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
 } from "./shared";
 
@@ -41,6 +44,34 @@ function createPageButton(
   return btn;
 }
 
+function createArrowButton(
+  direction: "left" | "right",
+  disabled: boolean
+): FrameNode {
+  const btn = figma.createFrame();
+  btn.name = `page-${direction}-arrow`;
+  btn.layoutMode = "HORIZONTAL";
+  btn.primaryAxisSizingMode = "FIXED";
+  btn.counterAxisSizingMode = "FIXED";
+  btn.resize(32, 32);
+  btn.primaryAxisAlignItems = "CENTER";
+  btn.counterAxisAlignItems = "CENTER";
+  btn.cornerRadius = 8;
+  btn.fills = [];
+
+  const icon = createIcon(
+    direction === "left" ? ICON_SVGS.chevronLeft : ICON_SVGS.chevronRight,
+    14,
+    rgbToHex(COLORS.neutral950)
+  );
+  if (disabled) {
+    icon.opacity = 0.4;
+  }
+  btn.appendChild(icon);
+
+  return btn;
+}
+
 function createPaginationInstance(): ComponentNode {
   const component = figma.createComponent();
   component.name = "variant=default";
@@ -51,7 +82,7 @@ function createPaginationInstance(): ComponentNode {
   component.itemSpacing = 2;
   component.fills = [];
 
-  component.appendChild(createPageButton("\u2039", false, true));
+  component.appendChild(createArrowButton("left", true));
   component.appendChild(createPageButton("1", false, false));
   component.appendChild(createPageButton("\u2026", false, false));
   component.appendChild(createPageButton("4", false, false));
@@ -59,7 +90,7 @@ function createPaginationInstance(): ComponentNode {
   component.appendChild(createPageButton("6", false, false));
   component.appendChild(createPageButton("\u2026", false, false));
   component.appendChild(createPageButton("10", false, false));
-  component.appendChild(createPageButton("\u203A", false, false));
+  component.appendChild(createArrowButton("right", false));
 
   return component;
 }

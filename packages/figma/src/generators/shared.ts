@@ -102,6 +102,54 @@ function getFontStyle(weight: number): string {
   return "Extra Bold";
 }
 
+/**
+ * SVG icon paths extracted from @cocso-ui/react-icons.
+ * All icons use stroke="currentColor" with viewBox="0 0 24 24".
+ */
+export const ICON_SVGS = {
+  check:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l5 5l10-10" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  indeterminate:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12l10 0" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  close:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6l-12 12" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6l12 12" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  selector:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 9l4-4l4 4" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15l-4 4l-4-4" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chevronDown:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6l6-6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chevronUp:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6l6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chevronLeft:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6l6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chevronRight:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6l-6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  arrowLeft:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6-6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  arrowRight:
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18l6-6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 6l6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+};
+
+/** Create an SVG icon node from ICON_SVGS templates. */
+export function createIcon(
+  svgTemplate: string,
+  size: number,
+  hexColor: string
+): FrameNode {
+  const svg = svgTemplate.replace(/\{color\}/g, hexColor);
+  const node = figma.createNodeFromSvg(svg);
+  node.resize(size, size);
+  node.name = "icon";
+  return node;
+}
+
+/** Convert RGB (0-1) to hex string for SVG templates. */
+export function rgbToHex(color: RGB): string {
+  const r = Math.round(color.r * 255);
+  const g = Math.round(color.g * 255);
+  const b = Math.round(color.b * 255);
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+}
+
 /** Set solid fill color on a node. */
 export function setFill(
   node: MinimalFillsMixin,
