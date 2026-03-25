@@ -77,7 +77,7 @@ ecosystem/mcp/
 - Component spec source: `https://cocso-ui.com/components/<slug>.md`
 - Primary package contract: `@cocso-ui/react`
 - Planned package contract: `@cocso-ui/react-native`
-- Exported integration helpers: `createCocsoMcpServer()`, `registerTools()`, `SERVER_NAME`, `SERVER_VERSION`
+- Exported integration helpers: `createCocsoMcpServer()`, `registerTools()`
 
 ## Storage
 
