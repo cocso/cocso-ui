@@ -1,4 +1,4 @@
-import { registerTools } from "@cocso-ui/mcp";
+import { registerTools, SERVER_NAME, SERVER_VERSION } from "@cocso-ui/mcp";
 import { createMcpHandler } from "mcp-handler";
 
 export const runtime = "nodejs";
@@ -8,9 +8,15 @@ const handler = createMcpHandler(
   (server) => {
     registerTools(server);
   },
-  {},
+  {
+    serverInfo: {
+      name: SERVER_NAME,
+      version: SERVER_VERSION,
+    },
+  },
   {
     basePath: "/api",
+    disableSse: true,
     maxDuration,
     verboseLogs: true,
   }
