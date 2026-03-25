@@ -44,7 +44,7 @@ function createAccordionInstance(expanded: boolean): ComponentNode {
     content.name = "content";
     content.layoutMode = "VERTICAL";
     content.primaryAxisSizingMode = "AUTO";
-    content.counterAxisSizingMode = "FILL";
+    content.counterAxisSizingMode = "AUTO";
     content.paddingBottom = 12;
     content.fills = [];
 

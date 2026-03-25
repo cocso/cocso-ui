@@ -14,7 +14,7 @@ function createDropdownItem(
   const item = figma.createFrame();
   item.name = `item-${state}`;
   item.layoutMode = "HORIZONTAL";
-  item.primaryAxisSizingMode = "FILL";
+  item.primaryAxisSizingMode = "AUTO";
   item.counterAxisSizingMode = "AUTO";
   item.counterAxisAlignItems = "CENTER";
   item.paddingTop = 6;

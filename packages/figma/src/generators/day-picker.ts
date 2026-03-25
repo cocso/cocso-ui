@@ -71,7 +71,7 @@ function createCalendarHeader(): FrameNode {
   const header = figma.createFrame();
   header.name = "header";
   header.layoutMode = "HORIZONTAL";
-  header.primaryAxisSizingMode = "FILL";
+  header.primaryAxisSizingMode = "AUTO";
   header.counterAxisSizingMode = "AUTO";
   header.primaryAxisAlignItems = "SPACE_BETWEEN";
   header.counterAxisAlignItems = "CENTER";

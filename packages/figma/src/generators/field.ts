@@ -45,7 +45,7 @@ function createFieldInstance(
   const input = figma.createFrame();
   input.name = "input-placeholder";
   input.layoutMode = "HORIZONTAL";
-  input.primaryAxisSizingMode = "FILL";
+  input.primaryAxisSizingMode = "FIXED";
   input.counterAxisSizingMode = "FIXED";
   input.resize(280, 36);
   input.paddingLeft = 12;
