@@ -1,7 +1,11 @@
-import type { SyncResult, VariableUpsertParams } from "../types/figma";
-import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
+import type { SyncResult } from "../types/figma";
+import type {
+  FigmaColorValue,
+  FigmaTokenData,
+  FigmaTokenDef,
+} from "../types/token-schema";
 import { clampColor, isValidColor } from "./color-converter";
-import { groupByCollection, toUpsertParams } from "./token-converter";
+import { groupByCollection } from "./token-converter";
 
 async function getOrCreateCollection(name: string): Promise<{
   collection: VariableCollection;
@@ -50,35 +54,41 @@ function setVariableValue(
   }
 }
 
-function applyValues(
+function applyTokenValues(
   variable: Variable,
-  values: Record<string, FigmaColorValue | number>
+  token: FigmaTokenDef,
+  modeIdMap: Record<string, string>
 ): void {
-  for (const [modeId, value] of Object.entries(values)) {
-    setVariableValue(variable, modeId, value);
+  for (const [modeName, value] of Object.entries(token.values)) {
+    const modeId = modeIdMap[modeName];
+    if (modeId) {
+      setVariableValue(variable, modeId, value);
+    }
   }
 }
 
-async function upsertVariable(
-  param: VariableUpsertParams,
+async function upsertToken(
+  token: FigmaTokenDef,
+  collection: VariableCollection,
+  modeIdMap: Record<string, string>,
   result: SyncResult
 ): Promise<void> {
   const existing = await findExistingVariable(
-    param.name,
-    param.collectionId,
-    param.resolvedType
+    token.name,
+    collection.id,
+    token.resolvedType
   );
 
   if (existing) {
-    applyValues(existing, param.values);
+    applyTokenValues(existing, token, modeIdMap);
     result.updated++;
   } else {
     const variable = figma.variables.createVariable(
-      param.name,
-      param.collectionId,
-      param.resolvedType
+      token.name,
+      collection,
+      token.resolvedType
     );
-    applyValues(variable, param.values);
+    applyTokenValues(variable, token, modeIdMap);
     result.created++;
   }
 }
@@ -105,14 +115,13 @@ export async function syncTokens(data: FigmaTokenData): Promise<SyncResult> {
     try {
       const { collection, modeIdMap } =
         await getOrCreateCollection(collectionName);
-      const params = toUpsertParams(tokens, collection.id, modeIdMap);
 
-      for (const param of params) {
+      for (const token of tokens) {
         try {
-          await upsertVariable(param, result);
+          await upsertToken(token, collection, modeIdMap, result);
         } catch (err) {
           result.errors.push(
-            `Failed to sync ${param.name}: ${err instanceof Error ? err.message : String(err)}`
+            `Failed to sync ${token.name}: ${err instanceof Error ? err.message : String(err)}`
           );
         }
       }
