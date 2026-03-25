@@ -68,6 +68,7 @@ figma.ui.onmessage = async (msg: { type: string }) => {
         (p) => p.name === COMPONENT_PAGE_NAME
       );
       if (page) {
+        await page.loadAsync();
         for (const child of [...page.children]) {
           child.remove();
         }
