@@ -181,6 +181,11 @@ export async function getRegistrySnapshot(): Promise<RegistrySnapshot> {
 
   const markdown = await response.text();
   const links = parseLlmsIndex(markdown);
+  if (links.length === 0) {
+    throw new Error(
+      "Parsed llms index contains no links; rejecting empty registry snapshot"
+    );
+  }
 
   const snapshot: RegistrySnapshot = {
     fetchedAtIso: new Date().toISOString(),

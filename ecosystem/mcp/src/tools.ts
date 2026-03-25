@@ -44,9 +44,11 @@ const ToolContractId = {
 
 function asTextResult(
   text: string,
-  structuredContent?: Record<string, unknown>
+  structuredContent?: Record<string, unknown>,
+  isError = false
 ) {
   return {
+    isError,
     content: [{ type: "text" as const, text }],
     structuredContent,
   };
@@ -202,7 +204,8 @@ export function registerTools(server: McpServer): void {
             found: false,
             platform,
             component: target,
-          }
+          },
+          true
         );
       }
 

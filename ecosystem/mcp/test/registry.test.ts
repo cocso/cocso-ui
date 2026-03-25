@@ -1,5 +1,9 @@
-import { describe, expect, it } from "vitest";
-import { parseLlmsIndex, rankComponentsForPrompt } from "../src/registry.js";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  getRegistrySnapshot,
+  parseLlmsIndex,
+  rankComponentsForPrompt,
+} from "../src/registry.js";
 import { DocumentationSectionId } from "../src/types.js";
 
 const SAMPLE_LLMS = `# COCSO UI
@@ -36,6 +40,27 @@ describe("parseLlmsIndex", () => {
 
     expect(links).toHaveLength(1);
     expect(links[0]?.title).toBe("Button");
+  });
+});
+
+describe("getRegistrySnapshot", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("rejects empty link snapshots", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({
+        ok: true,
+        status: 200,
+        text: async () => "# unexpected html shell",
+      }))
+    );
+
+    await expect(getRegistrySnapshot()).rejects.toThrow(
+      "rejecting empty registry snapshot"
+    );
   });
 });
 
