@@ -254,7 +254,6 @@ describe("Checkbox", () => {
                   checked={checked}
                   id={id}
                   onChange={() => onCheckedChange?.(true)}
-                  role="checkbox"
                   type="checkbox"
                 />
                 {children}
