@@ -12,6 +12,7 @@
     "check-types": "tsc --noEmit",
     "pretest": "pnpm generate",
     "test": "vitest run",
+    "pretest:coverage": "pnpm generate",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
