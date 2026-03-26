@@ -36,7 +36,10 @@ type Specs = Record<string, VariantEntry[]>;
 const specs = componentSpecs as Specs;
 const tokens = tokenData as FigmaTokenData;
 
-function findVariant(component: string, key: string): NodeSpec | null | undefined {
+function findVariant(
+  component: string,
+  key: string
+): NodeSpec | null | undefined {
   return specs[component]?.find((v) => v.variantKey === key)?.spec;
 }
 

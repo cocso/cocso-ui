@@ -269,7 +269,12 @@ function applyCompoundVariants<
     return;
   }
   for (const cv of recipe.compoundVariants) {
-    if (compoundConditionMatches(cv.conditions as Record<string, string | string[] | undefined>, merged)) {
+    if (
+      compoundConditionMatches(
+        cv.conditions as Record<string, string | string[] | undefined>,
+        merged
+      )
+    ) {
       for (const slot of recipe.slots) {
         const slotStyles = cv.styles[slot];
         if (slotStyles) {

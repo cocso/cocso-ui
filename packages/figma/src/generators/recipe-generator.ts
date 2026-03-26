@@ -717,9 +717,11 @@ export function generateFromRecipes(container: FrameNode): number {
     () => generateGenericSection(container, buttonRecipe, "Button", "Button"),
     () => generateGenericSection(container, badgeRecipe, "Badge", "Badge"),
     () => generateInputSection(container, inputRecipe, "Input", "Placeholder"),
-    () => generateInputSection(container, selectRecipe, "Select", "Select option"),
+    () =>
+      generateInputSection(container, selectRecipe, "Select", "Select option"),
     () => generateLinkSection(container, linkRecipe),
-    () => generateStockQuantityStatusSection(container, stockQuantityStatusRecipe),
+    () =>
+      generateStockQuantityStatusSection(container, stockQuantityStatusRecipe),
     () => generateCheckboxSection(container, checkboxRecipe),
     () => generateSwitchSection(container, switchRecipe),
     () => generateRadioSection(container, radioGroupRecipe),
