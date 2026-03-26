@@ -99,6 +99,10 @@ function DialogDescription({
   );
 }
 
+/**
+ * Modal dialog. Compose with `Dialog.Trigger`, `Dialog.Content`, `Dialog.Title`,
+ * `Dialog.Description`, and `Dialog.Close`.
+ */
 export const Dialog = Object.assign(DialogBase.Root, {
   Trigger: DialogBase.Trigger,
   Content: DialogContent,

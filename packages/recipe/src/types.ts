@@ -1,8 +1,4 @@
-// ---------------------------------------------------------------------------
-// Token Reference Types
-// ---------------------------------------------------------------------------
-
-/** Color token names matching baseframe YAML / CSS custom properties. */
+/** Design token reference for color values (e.g., `"primary-500"`, `"neutral-100"`). */
 export type ColorTokenRef =
   | "transparent"
   | "white"
@@ -13,7 +9,7 @@ export type ColorTokenRef =
   | "text-secondary"
   | "text-tertiary";
 
-/** Border radius token names. */
+/** Design token reference for border radius values (e.g., `"radius-2"`, `"radius-full"`). */
 export type RadiusTokenRef =
   | "radius-1"
   | "radius-2"
@@ -23,10 +19,10 @@ export type RadiusTokenRef =
   | "radius-6"
   | "radius-full";
 
-/** Spacing token names. */
+/** Design token reference for spacing values (e.g., `"spacing-4"`, `"spacing-max"`). */
 export type SpacingTokenRef = `spacing-${number}` | "spacing-max";
 
-/** Font weight names mapping to numeric values. */
+/** Design token reference for font weight values (e.g., `"semibold"`, `"bold"`). */
 export type FontWeightRef =
   | "thin"
   | "extralight"
@@ -38,11 +34,7 @@ export type FontWeightRef =
   | "extrabold"
   | "black";
 
-// ---------------------------------------------------------------------------
-// Literal and Compound Values
-// ---------------------------------------------------------------------------
-
-/** CSS literal values that pass through resolvers unchanged. */
+/** Raw CSS value string that passes through the resolver unchanged (e.g., `"1px"`, `"none"`, `"inherit"`). */
 export type CSSLiteral =
   | "none"
   | "transparent"
@@ -56,7 +48,10 @@ export type CSSLiteral =
   | `${number} ${number}px`
   | `${number}px ${number}px`;
 
-/** Compound border value (e.g., "1px solid neutral-100"). */
+/**
+ * Compound border style combining a color token, CSS border style, and pixel width.
+ * Use `_type: "border"` to distinguish this object from other style values.
+ */
 export interface CompoundBorder {
   readonly _type: "border";
   color: ColorTokenRef;
@@ -64,16 +59,12 @@ export interface CompoundBorder {
   width: number;
 }
 
-/** Cross-component variant reference (e.g., Button → Spinner variant). */
 export interface ComponentRef<T extends string = string> {
   component: string;
   variant: T;
 }
 
-// ---------------------------------------------------------------------------
-// StyleValue — the full union of possible recipe style values
-// ---------------------------------------------------------------------------
-
+/** Union of all valid style values accepted by a recipe slot — token refs, CSS literals, numbers, borders, and component refs. */
 export type StyleValue =
   | ColorTokenRef
   | RadiusTokenRef
@@ -84,14 +75,9 @@ export type StyleValue =
   | CompoundBorder
   | ComponentRef;
 
-/** Style properties for a single slot. Keys are CSS custom property suffixes. */
+/** Map of CSS custom property names to their assigned style token values for a single slot. */
 export type SlotStyles = Record<string, StyleValue>;
 
-// ---------------------------------------------------------------------------
-// Recipe Definition
-// ---------------------------------------------------------------------------
-
-/** A single compound variant: applies styles when all conditions match. */
 export interface CompoundVariant<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -102,7 +88,10 @@ export interface CompoundVariant<
   styles: Partial<Record<S, SlotStyles>>;
 }
 
-/** Full recipe definition. */
+/**
+ * Complete recipe definition describing a component's slots, variants, compound variants,
+ * default variant selections, base styles, and interactive state overrides.
+ */
 export interface RecipeDefinition<
   V extends Record<
     string,
@@ -110,25 +99,11 @@ export interface RecipeDefinition<
   > = Record<string, Record<string, Partial<Record<string, SlotStyles>>>>,
   S extends string = string,
 > {
-  /** Base styles always applied to each slot. */
   base?: Partial<Record<S, SlotStyles>>;
-
-  /** Styles applied when multiple variant conditions match simultaneously. */
   compoundVariants?: CompoundVariant<V, S>[];
-
-  /** Default variant values. */
   defaultVariants?: { [K in keyof V]?: keyof V[K] };
-
-  /** Component name (used as CSS custom property prefix). */
   name: string;
-
-  /** Named sub-elements of the component. */
   slots: readonly S[];
-
-  /**
-   * State overrides (hover, active, disabled, focus, error).
-   * Dimension-aware: state → dimension → variant value → slot styles.
-   */
   states?: Record<
     string,
     Partial<{
@@ -137,11 +112,5 @@ export interface RecipeDefinition<
       >;
     }>
   >;
-
-  /** Variant dimensions. Each dimension maps variant values to slot styles. */
   variants: V;
 }
-
-// ---------------------------------------------------------------------------
-// Token Catalog — maps canonical token names to CSS var references
-// ---------------------------------------------------------------------------

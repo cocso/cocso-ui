@@ -31,9 +31,35 @@ YAML (no runtime; data package only).
 - Runtime component code — owned by `@cocso-ui/react`.
 - CLI implementation — owned by `@cocso-ui/baseframe` (ecosystem).
 
+## Architecture
+
+```
+packages/baseframe/
+├── collections.yaml        # Token collection registry (global / default mode)
+├── primitive/              # Raw value tokens
+│   ├── color.yaml          # $color.white, $color.neutral-*, $color.primary-*, ...
+│   ├── font-weight.yaml    # $font-weight.thin through $font-weight.black
+│   ├── shadow.yaml         # $shadow.1 through $shadow.4, shadow dimensions
+│   ├── spacing.yaml        # $spacing.0 through $spacing.max
+│   └── z-index.yaml        # $z-index.behind through $z-index.dialog-content
+└── semantic/               # Alias tokens
+    └── color.yaml          # $color.alpha.*, $color.text.*
+```
+
+## Interfaces
+
+Package interface:
+
+| Surface | Description |
+|---|---|
+| `@cocso-ui/baseframe-sources` | Versioned token source package consumed by `@cocso-ui/baseframe` |
+| `collections.yaml` | Collection/mode registry contract used by parsers |
+| `primitive/*.yaml` | Primitive token definitions |
+| `semantic/*.yaml` | Alias token definitions referencing primitive tokens |
+
 ### YAML Schema
 
-### Token File
+#### Token File
 
 ```yaml
 kind: Tokens
@@ -49,7 +75,7 @@ data:
         default: <value>    # Literal value or token reference
 ```
 
-### Collections File
+#### Collections File
 
 ```yaml
 kind: TokenCollections
@@ -87,32 +113,6 @@ $color.text.primary:
 ```
 
 The referenced token name must exactly match an existing token key. Use hyphens for multi-word names within a segment.
-
-## Architecture
-
-```
-packages/baseframe/
-├── collections.yaml        # Token collection registry (global / default mode)
-├── primitive/              # Raw value tokens
-│   ├── color.yaml          # $color.white, $color.neutral-*, $color.primary-*, ...
-│   ├── font-weight.yaml    # $font-weight.thin through $font-weight.black
-│   ├── shadow.yaml         # $shadow.1 through $shadow.4, shadow dimensions
-│   ├── spacing.yaml        # $spacing.0 through $spacing.max
-│   └── z-index.yaml        # $z-index.behind through $z-index.dialog-content
-└── semantic/               # Alias tokens
-    └── color.yaml          # $color.alpha.*, $color.text.*
-```
-
-## Interfaces
-
-Package interface:
-
-| Surface | Description |
-|---|---|
-| `@cocso-ui/baseframe-sources` | Versioned token source package consumed by `@cocso-ui/baseframe` |
-| `collections.yaml` | Collection/mode registry contract used by parsers |
-| `primitive/*.yaml` | Primitive token definitions |
-| `semantic/*.yaml` | Alias token definitions referencing primitive tokens |
 
 ## Storage
 

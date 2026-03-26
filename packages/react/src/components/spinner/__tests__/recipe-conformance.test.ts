@@ -1,8 +1,3 @@
-/**
- * Spinner recipe conformance test.
- * Recipe is authoritative — update React to match the recipe.
- */
-
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
 import { describe, expect, it } from "vitest";
@@ -41,7 +36,6 @@ describe("Spinner recipe conformance", () => {
 
   describe("size → geometry", () => {
     for (const size of SIZES) {
-      // Cast to record — recipe values are runtime-checked, not type-checked here
       const getRecipeRoot = (s: SpinnerSize) =>
         spinnerRecipe.variants.size[s].root as unknown as Record<
           string,

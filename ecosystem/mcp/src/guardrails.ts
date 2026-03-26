@@ -7,6 +7,10 @@ export interface GuardrailRule {
   rule: string;
 }
 
+/**
+ * Returns usage guardrails and best practices for the given platform.
+ * Rules enforce design-system-first patterns and prevent local component duplication.
+ */
 export function getUsageGuardrails(platform: PlatformId): GuardrailRule[] {
   const targetPackage = IMPORT_PACKAGE_BY_PLATFORM[platform];
 

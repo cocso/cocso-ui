@@ -42,6 +42,9 @@ function RadioGroupIndicator({
   );
 }
 
+/**
+ * Single-selection radio group. Compose with `RadioGroup.Item` and `RadioGroup.Indicator`.
+ */
 export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,

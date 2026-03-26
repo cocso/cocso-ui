@@ -29,16 +29,6 @@ function loadTokens(): { tokens: Token[]; collections: Collections } {
 }
 
 describe("golden file tests", () => {
-  // Differences recorded between old generator output and current check-in CSS:
-  // 1. Hex case: YAML '#FFFFFF' → was uppercase, now normalized to lowercase
-  // 2. Shadow formatting: single-line vs multi-line in old check-in
-  // 3. Token ordering: generator order (primitive → semantic) vs manual order
-  // 4. font-weight tokens: now sourced from primitive/font-weight.yaml
-  // 5. tailwind4.css: 2-layer pattern (--color-*: var(--cocso-color-*)) vs old direct values
-  // 6. tailwind4.css: @utility count reduced to 1 (z-* only)
-  // 7. tailwind4.css: $number.1 dead code removed
-  // 8. tailwind4.css: semantic color tokens included in @theme
-
   it("token.css matches snapshot", () => {
     const { tokens, collections } = loadTokens();
     const generated = cssVars.generateCssVariables(tokens, collections, {

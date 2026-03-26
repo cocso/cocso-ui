@@ -1,12 +1,3 @@
-/**
- * extract-components.ts
- *
- * Renders the component catalog in a real browser via Playwright,
- * extracts computed styles from the DOM, and writes a JSON spec file
- * that the Figma plugin uses to generate accurate Figma components.
- *
- * Usage:  pnpm extract
- */
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,7 +11,6 @@ const BROWSER_SCRIPT = resolve(scriptDir, "browser-extract.js");
 async function main() {
   console.log("Extracting component specs from rendered DOM...\n");
 
-  // Dynamically import Playwright
   let chromium: typeof import("playwright").chromium;
   try {
     const pw = await import("playwright");
@@ -33,7 +23,6 @@ async function main() {
     process.exit(1);
   }
 
-  // Start the catalog Vite dev server
   const { createServer } = await import("vite");
   const server = await createServer({
     configFile: resolve(scriptDir, "../catalog/vite.config.ts"),
@@ -50,7 +39,6 @@ async function main() {
 
     await page.goto(CATALOG_URL, { waitUntil: "networkidle" });
 
-    // Wait for Pretendard webfont to load and rendering to settle
     await page
       .waitForFunction(() => document.fonts.check("16px Pretendard Variable"), {
         timeout: 10_000,
@@ -62,17 +50,14 @@ async function main() {
       });
     await page.waitForTimeout(500);
 
-    // Inject the extraction script (plain JS, avoids esbuild __name issues)
     await page.addScriptTag({ path: BROWSER_SCRIPT });
 
-    // Run extraction
     const specs = await page.evaluate(() => {
       return (
         window as unknown as { __extractComponents: () => unknown }
       ).__extractComponents();
     });
 
-    // Ensure output directory exists
     const outDir = resolve(OUT_PATH, "..");
     if (!existsSync(outDir)) {
       mkdirSync(outDir, { recursive: true });

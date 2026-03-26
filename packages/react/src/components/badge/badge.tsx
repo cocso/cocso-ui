@@ -31,6 +31,7 @@ export interface BadgeProps extends ComponentProps<"div"> {
   variant?: BadgeVariant;
 }
 
+/** Inline badge/tag component with color and variant options. */
 export function Badge({
   ref,
   className,
@@ -75,5 +76,3 @@ export function Badge({
     </div>
   );
 }
-
-// Style functions are in ./badge.styles.ts (internal, not in public barrel)

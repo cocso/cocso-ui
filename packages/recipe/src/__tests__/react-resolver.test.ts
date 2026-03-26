@@ -2,10 +2,6 @@ import { describe, expect, it } from "vitest";
 import { defineRecipe } from "../define-recipe";
 import { resolveForReact, resolveStyleValue } from "../resolvers/react";
 
-// ---------------------------------------------------------------------------
-// resolveStyleValue unit tests
-// ---------------------------------------------------------------------------
-
 describe("resolveStyleValue", () => {
   it("resolves numeric values to px strings", () => {
     expect(resolveStyleValue(40)).toBe("40px");
@@ -70,10 +66,6 @@ describe("resolveStyleValue", () => {
     );
   });
 });
-
-// ---------------------------------------------------------------------------
-// resolveForReact integration tests
-// ---------------------------------------------------------------------------
 
 const testRecipe = defineRecipe({
   name: "button",
@@ -210,7 +202,6 @@ describe("resolveForReact", () => {
     expect(result["--cocso-button-bgColor"]).toBe(
       "var(--cocso-color-primary-800)"
     );
-    // Non-overridden properties still present from base resolution
     expect(result["--cocso-button-height"]).toBe("36px");
   });
 

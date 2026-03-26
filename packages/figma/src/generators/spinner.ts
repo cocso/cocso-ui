@@ -19,12 +19,6 @@ import {
   createVariantRow,
 } from "./shared";
 
-/**
- * Blade specs matching the React Spinner sizeConfig:
- * - small: 6 blades, 1.5x4px, radius 0.75
- * - medium: 8 blades, 2x5px, radius 1
- * - large: 10 blades, 2x6px, radius 1
- */
 const BLADE_SPECS: Record<
   SpinnerSize,
   {
@@ -70,7 +64,6 @@ function createSpinnerInstance(
     rect.cornerRadius = blade.bladeRadius;
     rect.fills = [createBoundPaint(color, opacity)];
 
-    // Position blade at bottom-center of wrapper (matching React CSS: bottom: 0)
     rect.x = (containerSize - blade.bladeWidth) / 2;
     rect.y = containerSize - blade.bladeHeight;
 

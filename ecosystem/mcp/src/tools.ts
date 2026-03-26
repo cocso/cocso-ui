@@ -70,6 +70,10 @@ function matchComponentName(
   );
 }
 
+/**
+ * Registers all Cocso UI MCP tools on the given server instance.
+ * Includes list, search, spec retrieval, guardrails, and page planning tools.
+ */
 export function registerTools(server: McpServer): void {
   server.registerTool(
     ToolContractId.LIST_COMPONENTS,

@@ -12,13 +12,6 @@ import {
   isCompoundBorder,
 } from "../utils/token-classification";
 
-// ---------------------------------------------------------------------------
-// Single value resolution
-// ---------------------------------------------------------------------------
-
-/**
- * Resolve a single StyleValue to a CSS string.
- */
 export function resolveStyleValue(value: StyleValue): string {
   if (typeof value === "number") {
     return `${value}px`;
@@ -48,10 +41,6 @@ function resolveStringValue(value: string): string {
   return value;
 }
 
-// ---------------------------------------------------------------------------
-// Internal helpers for applying styles
-// ---------------------------------------------------------------------------
-
 function applySlotStyles(
   result: Record<string, string>,
   prefix: string,
@@ -68,10 +57,6 @@ function applySlotStyles(
     }
   }
 }
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
 
 interface ResolveOptions {
   state?: string;
@@ -94,18 +79,13 @@ export function resolveForReact<
     [K in keyof V]: keyof V[K];
   };
 
-  // 1. Base styles
   if (recipe.base) {
     applySlotStyles(result, prefix, recipe.slots, recipe.base);
   }
 
-  // 2. Variant styles
   applyVariantStyles(result, prefix, recipe, merged);
-
-  // 3. Compound variants
   applyCompoundVariants(result, prefix, recipe, merged);
 
-  // 4. State overrides
   if (options?.state) {
     applyStateOverrides(result, prefix, recipe, merged, options.state);
   }

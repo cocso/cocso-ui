@@ -1,14 +1,4 @@
-/**
- * Component registry: specs for hand-coded generators only.
- * Most components are now extraction-driven (from-extracted.ts).
- * Only Spinner remains hand-coded due to SVG rotation geometry.
- */
-
 import { COLORS } from "./shared";
-
-// ---------------------------------------------------------------------------
-// Spinner
-// ---------------------------------------------------------------------------
 
 export const SPINNER_SIZES = ["large", "medium", "small"] as const;
 export type SpinnerSize = (typeof SPINNER_SIZES)[number];

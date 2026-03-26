@@ -1,7 +1,3 @@
-/**
- * StockQuantityStatus recipe conformance test.
- * Recipe is authoritative — update React to match the recipe.
- */
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
 import { describe, expect, it } from "vitest";

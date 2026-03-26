@@ -1,11 +1,4 @@
-/**
- * Design token map for the full color palette.
- *
- * Each value is a CSS `var()` reference that resolves to the corresponding
- * `--cocso-*` CSS custom property defined in the base-frame token stylesheet.
- * Covers neutral, primary, semantic (danger / warning / success), alpha, and
- * text-role colors.
- */
+/** Cocso design system color token map keyed by semantic name. */
 export const colors = {
   transparent: "var(--cocso-color-transparent)",
 

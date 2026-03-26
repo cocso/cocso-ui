@@ -50,8 +50,6 @@ describe("Switch recipe/React conformance", () => {
     for (const variant of VARIANTS) {
       it(`variant="${variant}" — checkedBgColor matches`, () => {
         const resolved = resolveForReact(switchRecipe, { variant });
-        // resolveForReact resolves "primary-950" → "var(--cocso-color-primary-950)"
-        // getCheckedColor returns colors.primary950 = "var(--cocso-color-primary-950)"
         expect(resolved["--cocso-switch-checkedBgColor"]).toBe(
           getCheckedColor(variant)
         );

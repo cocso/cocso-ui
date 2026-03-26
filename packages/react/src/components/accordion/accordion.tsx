@@ -41,6 +41,10 @@ function AccordionPanel({
   );
 }
 
+/**
+ * Collapsible content sections. Compose with `Accordion.Item`, `Accordion.Header`,
+ * `Accordion.Trigger`, and `Accordion.Content`.
+ */
 export const Accordion = Object.assign(AccordionBase.Root, {
   Item: AccordionItem,
   Header: AccordionBase.Header,

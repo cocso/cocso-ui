@@ -1,32 +1,16 @@
-/**
- * Shared utilities for Figma component generators.
- * Color values are derived from the pre-built tokens.json to stay
- * in sync with the baseframe YAML source of truth.
- */
-
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
 const data = tokenData as FigmaTokenData;
 
-// ---------------------------------------------------------------------------
-// Figma Variable binding — Reshaped-like token-driven approach
-// ---------------------------------------------------------------------------
-
-/** Map from RGB key string to token variable name for automatic binding. */
 const rgbToTokenName = new Map<string, string>();
 
 function rgbKey(c: RGB): string {
   return `${c.r},${c.g},${c.b}`;
 }
 
-/** Cache of local Figma color Variables, populated by loadColorVariables(). */
 let variableCache: Map<string, Variable> | null = null;
 
-/**
- * Pre-load all local color Variables so generators can bind fills/strokes
- * to Figma Variables instead of raw RGB values. Call once before generation.
- */
 export async function loadColorVariables(): Promise<void> {
   try {
     const vars = await figma.variables.getLocalVariablesAsync("COLOR");
@@ -40,10 +24,6 @@ export async function loadColorVariables(): Promise<void> {
   }
 }
 
-/**
- * Create a SolidPaint that is bound to a Figma Variable when available.
- * Falls back to a plain SolidPaint with the given RGB color.
- */
 export function createBoundPaint(color: RGB, opacity = 1): SolidPaint {
   const tokenName = rgbToTokenName.get(rgbKey(color));
   const paint: SolidPaint = { type: "SOLID" as const, color, opacity };
@@ -56,11 +36,6 @@ export function createBoundPaint(color: RGB, opacity = 1): SolidPaint {
   return paint;
 }
 
-/**
- * Look up a color token by its Figma variable name (e.g. "color/white").
- * Falls back to opaque black if the token is not found.
- * Also registers the RGB→tokenName mapping for automatic Variable binding.
- */
 const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
 function colorToken(name: string): RGB {
@@ -77,7 +52,6 @@ function colorToken(name: string): RGB {
   return { r: 0, g: 0, b: 0 };
 }
 
-/** cocso-ui color palette resolved from tokens.json at bundle time. */
 export const COLORS = {
   white: colorToken("color/white"),
   neutral50: colorToken("color/neutral-50"),
@@ -107,7 +81,6 @@ export const COLORS = {
   info600: colorToken("color/info-600"),
 };
 
-/** Create an Auto Layout frame with common defaults. */
 export function createAutoLayoutFrame(
   name: string,
   direction: "HORIZONTAL" | "VERTICAL" = "HORIZONTAL"
@@ -121,7 +94,6 @@ export function createAutoLayoutFrame(
   return frame;
 }
 
-/** Create a text node with specified properties, bound to Figma Variable. */
 export function createTextNode(
   content: string,
   fontSize: number,
@@ -155,10 +127,6 @@ export function getFontStyle(weight: number): string {
   return "ExtraBold";
 }
 
-/**
- * SVG icon paths extracted from @cocso-ui/react-icons.
- * All icons use stroke="currentColor" with viewBox="0 0 24 24".
- */
 export const ICON_SVGS = {
   check:
     '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l5 5l10-10" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -182,7 +150,6 @@ export const ICON_SVGS = {
     '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18l6-6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 6l6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-/** Create an SVG icon node from ICON_SVGS templates. */
 export function createIcon(
   svgTemplate: string,
   size: number,
@@ -195,7 +162,6 @@ export function createIcon(
   return node;
 }
 
-/** Convert RGB (0-1) to hex string for SVG templates. */
 export function rgbToHex(color: RGB): string {
   const r = Math.round(color.r * 255);
   const g = Math.round(color.g * 255);
@@ -203,15 +169,10 @@ export function rgbToHex(color: RGB): string {
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 }
 
-// ---------------------------------------------------------------------------
-// Shadow effects matching CSS --cocso-shadow-* tokens
-// ---------------------------------------------------------------------------
-
 const SHADOW_ALPHA_1: RGBA = { r: 0, g: 0, b: 0, a: 0.04 };
 const SHADOW_ALPHA_2: RGBA = { r: 0, g: 0, b: 0, a: 0.08 };
 const SHADOW_ALPHA_3: RGBA = { r: 0, g: 0, b: 0, a: 0.12 };
 
-/** --cocso-shadow-xs: subtle depth shadow */
 export const SHADOW_XS: Effect[] = [
   {
     type: "DROP_SHADOW",
@@ -233,7 +194,6 @@ export const SHADOW_XS: Effect[] = [
   },
 ];
 
-/** --cocso-shadow-sm: small elevation shadow */
 export const SHADOW_SM: Effect[] = [
   {
     type: "DROP_SHADOW",
@@ -255,7 +215,6 @@ export const SHADOW_SM: Effect[] = [
   },
 ];
 
-/** --cocso-shadow-lg: large elevation shadow (e.g. dialog) */
 export const SHADOW_LG: Effect[] = [
   {
     type: "DROP_SHADOW",
@@ -293,10 +252,6 @@ export function createBorderShadow(color: RGB): Effect {
   };
 }
 
-/**
- * Apply Input/Select-style effects: 1px border shadow + shadow-xs.
- * Replaces setStroke() for components that use box-shadow for borders.
- */
 export function applyInputEffects(
   node: SceneNode & BlendMixin,
   borderColor: RGB
@@ -304,7 +259,6 @@ export function applyInputEffects(
   node.effects = [createBorderShadow(borderColor), ...SHADOW_XS];
 }
 
-/** Set solid fill color on a node, bound to Figma Variable when available. */
 export function setFill(
   node: MinimalFillsMixin,
   color: RGB,
@@ -313,7 +267,6 @@ export function setFill(
   node.fills = [createBoundPaint(color, opacity)];
 }
 
-/** Set stroke on a node, bound to Figma Variable when available. */
 export function setStroke(
   node: MinimalStrokesMixin & GeometryMixin,
   color: RGB,
@@ -323,10 +276,6 @@ export function setStroke(
   node.strokeWeight = weight;
 }
 
-/**
- * Create a component section card with white background.
- * All variant rows should be appended to the returned frame.
- */
 export function createComponentSection(title: string): FrameNode {
   const section = figma.createFrame();
   section.name = title;
@@ -349,7 +298,6 @@ export function createComponentSection(title: string): FrameNode {
   return section;
 }
 
-/** Create a labeled row for variant display. */
 export function createVariantRow(label: string): FrameNode {
   const row = createAutoLayoutFrame(`Row: ${label}`);
   row.itemSpacing = 12;
@@ -363,7 +311,6 @@ export function createVariantRow(label: string): FrameNode {
   return row;
 }
 
-/** Set up the component page with a gray background and vertical auto-layout. */
 export function setupPageLayout(page: PageNode): FrameNode {
   const container = figma.createFrame();
   container.name = "cocso-ui Components";

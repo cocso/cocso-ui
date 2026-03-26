@@ -23,6 +23,7 @@ export interface PaginationProps
   totalPages: number;
 }
 
+/** Page navigation component with previous/next controls and truncated page range. */
 export function Pagination({
   ref,
   className,

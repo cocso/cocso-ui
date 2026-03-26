@@ -102,6 +102,7 @@ const renderIndicator = (quantity: QuantityStatus) => {
     </svg>
   );
 };
+/** Displays a stock quantity status indicator with icon and label. */
 export function StockQuantityStatus({
   ref,
   className,

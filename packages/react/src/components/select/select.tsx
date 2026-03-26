@@ -19,6 +19,7 @@ export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   stretch?: boolean;
 }
 
+/** Dropdown select component wrapping native select. */
 export function Select({
   ref,
   className,
@@ -97,5 +98,3 @@ function FieldAwareSelect({
     undefined;
   return <select aria-describedby={describedBy} {...props} />;
 }
-
-// Style functions are in ./select.styles.ts (internal, not in public barrel)

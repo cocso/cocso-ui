@@ -7,38 +7,17 @@ import type {
   Value,
 } from "../types";
 
-/** Matches 3-, 4-, 6-, and 8-digit CSS hex color strings. */
 const HEX_REGEX =
   /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
-/** Matches `rgb(r, g, b)` color strings. */
 const RGB_REGEX = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
-/** Matches `rgba(r, g, b, a)` color strings. */
 const RGBA_REGEX =
   /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*([01]?\.?\d*)\s*\)$/;
-/**
- * Matches token references of the form `$collection.token`
- * where each segment starts with an alphanumeric character.
- */
 const TOKEN_REF_REGEX =
   /^\$[a-zA-Z0-9][a-zA-Z0-9_-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9_-]*)+$/;
-/** Matches numeric values with a CSS size unit (px, rem, em, vw, vh, %). */
 const SIZE_REGEX = /^([+-]?\d*\.?\d+)(px|rem|em|vw|vh|%)$/;
-/** Matches numeric values with a CSS time unit (ms or s). */
 const DURATION_REGEX = /^([+-]?\d*\.?\d+)(ms|s)$/;
-/** Splits a string on any run of whitespace characters. */
 const WHITESPACE_REGEX = /\s+/;
 
-/**
- * Parses a raw token value into a structured {@link Value} variant.
- *
- * The parser attempts each format in order:
- * number → hex → rgb → rgba → token reference → shadow → size → duration → string.
- * The result is always `isValid: true`; unrecognised strings fall back to
- * {@link StringValue} rather than returning an error.
- *
- * @param value - The raw scalar value read from a YAML token file.
- * @returns A {@link ParseResult} whose `value` field holds the structured result.
- */
 export function parseValue(value: string | number): ParseResult {
   const str = String(value).trim();
 
@@ -84,19 +63,6 @@ export function parseValue(value: string | number): ParseResult {
   return { isValid: true, value: { kind: "StringValue", value: str } };
 }
 
-/**
- * Serializes a structured {@link Value} back into its canonical string form.
- *
- * - Colors: `#rrggbb`, `rgb(r, g, b)`, or `rgba(r, g, b, a)`
- * - Token references: `$collection.token`
- * - Sizes / durations: `<number><unit>`
- * - Shadows: comma-separated layers, each formatted as `x y blur spread color`
- * - Numbers: plain decimal string
- * - Strings: returned as-is
- *
- * @param value - The structured value to serialize.
- * @returns The canonical string representation of the value.
- */
 export function valueToString(value: Value): string {
   switch (value.kind) {
     case "HexColor":
@@ -130,13 +96,6 @@ export function valueToString(value: Value): string {
   }
 }
 
-/**
- * Parses a CSS hex color string into a {@link HexColor}.
- * Accepts 3-, 4-, 6-, and 8-digit forms. The stored value is lowercased.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with a `HexColor`, or a failure.
- */
 function parseHex(value: string): ParseResult {
   if (!HEX_REGEX.test(value)) {
     return { isValid: false, error: `Invalid hex color: ${value}` };
@@ -148,13 +107,6 @@ function parseHex(value: string): ParseResult {
   };
 }
 
-/**
- * Parses a `rgb(r, g, b)` string into an {@link RgbColor}.
- * Each channel must be in the range 0–255.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with an `RgbColor`, or a failure.
- */
 function parseRgb(value: string): ParseResult {
   const match = value.match(RGB_REGEX);
 
@@ -184,13 +136,6 @@ function parseRgb(value: string): ParseResult {
   };
 }
 
-/**
- * Parses an `rgba(r, g, b, a)` string into an {@link RgbaColor}.
- * RGB channels must be in 0–255; alpha must be in 0–1.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with an `RgbaColor`, or a failure.
- */
 function parseRgba(value: string): ParseResult {
   const match = value.match(RGBA_REGEX);
 
@@ -225,14 +170,6 @@ function parseRgba(value: string): ParseResult {
   };
 }
 
-/**
- * Parses a token reference string of the form `$collection.token` into a
- * {@link TokenRef}. The leading `$` is stripped; the last dot-separated
- * segment becomes the token name and the rest form the collection path.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with a `TokenRef`, or a failure.
- */
 function parseTokenRef(value: string): ParseResult {
   if (!TOKEN_REF_REGEX.test(value)) {
     return { isValid: false, error: `Invalid token reference: ${value}` };
@@ -255,13 +192,6 @@ function parseTokenRef(value: string): ParseResult {
   return { isValid: true, value: { kind: "TokenRef", collection, token } };
 }
 
-/**
- * Parses a CSS size string (e.g. `16px`, `1.5rem`, `50%`) into a
- * {@link SizeValue}.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with a `SizeValue`, or a failure.
- */
 function parseSize(value: string): ParseResult {
   const match = value.match(SIZE_REGEX);
 
@@ -286,13 +216,6 @@ function parseSize(value: string): ParseResult {
   };
 }
 
-/**
- * Parses a CSS duration string (e.g. `200ms`, `0.3s`) into a
- * {@link DurationValue}.
- *
- * @param value - The candidate string to parse.
- * @returns A successful {@link ParseResult} with a `DurationValue`, or a failure.
- */
 function parseDuration(value: string): ParseResult {
   const match = value.match(DURATION_REGEX);
 
@@ -313,13 +236,6 @@ function parseDuration(value: string): ParseResult {
   };
 }
 
-/**
- * Parses a color value that may be a hex string, `rgb(...)`, `rgba(...)`,
- * a token reference (`$collection.token`), or a CSS `var(...)` expression.
- *
- * @param value - The candidate color string.
- * @returns A successful {@link ParseResult} with a {@link ColorValue}, or a failure.
- */
 function parseColor(value: string): ParseResult {
   if (!value) {
     return { isValid: false, error: "Missing color value" };
@@ -351,15 +267,6 @@ function parseColor(value: string): ParseResult {
   return { isValid: false, error: `Invalid color: ${value}` };
 }
 
-/**
- * Parses a multi-layer shadow string (comma-separated layers) into a
- * {@link Shadow}. Each layer is delegated to {@link parseShadowLayer}.
- * The string must contain at least one `px` value or `$` token reference
- * to be considered a candidate shadow.
- *
- * @param value - The candidate shadow string.
- * @returns A successful {@link ParseResult} with a `Shadow`, or a failure.
- */
 function parseShadow(value: string): ParseResult {
   if (!(value.includes("px") || value.includes("$"))) {
     return { isValid: false, error: `Invalid shadow format: ${value}` };
@@ -383,14 +290,6 @@ function parseShadow(value: string): ParseResult {
   }
 }
 
-/**
- * Parses a single shadow layer string of the form
- * `<offsetX> <offsetY> <blur> <spread> <color>` into a {@link ShadowLayer}.
- * Each positional value may be a size (e.g. `4px`) or a token reference.
- *
- * @param value - A single whitespace-delimited shadow layer string.
- * @returns A successful {@link ParseResult} with a `ShadowLayer`, or a failure.
- */
 function parseShadowLayer(value: string): ParseResult {
   const parts = value.trim().split(WHITESPACE_REGEX);
 
@@ -431,13 +330,6 @@ function parseShadowLayer(value: string): ParseResult {
   }
 }
 
-/**
- * Parses a string as either a token reference (`$...`) or a CSS size value.
- * Used for individual positional components of a shadow layer.
- *
- * @param value - The candidate string.
- * @returns A {@link ParseResult} delegated to {@link parseTokenRef} or {@link parseSize}.
- */
 function parseSizeOrTokenRef(value: string): ParseResult {
   if (value.startsWith("$")) {
     return parseTokenRef(value);

@@ -46,6 +46,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   weight?: FontWeight;
 }
 
+/** Polymorphic button component with variant, color, and size options. */
 export function Button({
   render: renderProp,
   ref,
@@ -118,5 +119,3 @@ export function Button({
     defaultTagName: "button",
   });
 }
-
-// Style functions are in ./button.styles.ts (internal, not in public barrel)

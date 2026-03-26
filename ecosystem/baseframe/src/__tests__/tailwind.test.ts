@@ -34,7 +34,6 @@ describe("tailwind generateFromAst", () => {
     const result = generateFromAst(ast, { prefix: "cocso" });
     expect(result).toContain("@theme {");
     expect(result).toContain("--color-white: var(--cocso-color-white);");
-    // Must NOT contain direct value
     expect(result).not.toContain("#ffffff");
   });
 
