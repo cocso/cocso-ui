@@ -6,7 +6,11 @@ import {
   type SpinnerSize,
   type SpinnerVariant,
 } from "./component-registry";
-import { createComponentSection, createVariantRow } from "./shared";
+import {
+  createBoundPaint,
+  createComponentSection,
+  createVariantRow,
+} from "./shared";
 
 /**
  * Blade specs matching the React Spinner sizeConfig:
@@ -41,23 +45,31 @@ function createSpinnerInstance(
   component.resize(containerSize, containerSize);
   component.fills = [];
 
-  const cx = containerSize / 2;
-
   for (let i = 0; i < blade.bladeCount; i++) {
     const angleDeg = (i * 360) / blade.bladeCount;
     const opacity = 1 - (i / blade.bladeCount) * 0.85;
 
+    // Wrap each blade in a container-sized frame so that Figma's rotation
+    // (which pivots around the node center) rotates around the spinner center,
+    // matching React's transformOrigin behavior.
+    const wrapper = figma.createFrame();
+    wrapper.name = `blade-${i}`;
+    wrapper.resize(containerSize, containerSize);
+    wrapper.fills = [];
+
     const rect = figma.createRectangle();
-    rect.name = `blade-${i}`;
+    rect.name = "blade";
     rect.resize(blade.bladeWidth, blade.bladeHeight);
     rect.cornerRadius = blade.bladeRadius;
-    rect.fills = [{ type: "SOLID", color, opacity }];
+    rect.fills = [createBoundPaint(color, opacity)];
 
-    rect.x = cx - blade.bladeWidth / 2;
-    rect.y = 0;
-    rect.rotation = -angleDeg;
+    // Position blade at bottom-center of wrapper (matching React CSS: bottom: 0)
+    rect.x = (containerSize - blade.bladeWidth) / 2;
+    rect.y = containerSize - blade.bladeHeight;
 
-    component.appendChild(rect);
+    wrapper.appendChild(rect);
+    wrapper.rotation = -angleDeg;
+    component.appendChild(wrapper);
   }
 
   return component;

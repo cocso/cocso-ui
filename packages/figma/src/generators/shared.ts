@@ -9,15 +9,65 @@ import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
 const data = tokenData as FigmaTokenData;
 
+// ---------------------------------------------------------------------------
+// Figma Variable binding — Reshaped-like token-driven approach
+// ---------------------------------------------------------------------------
+
+/** Map from RGB key string to token variable name for automatic binding. */
+const rgbToTokenName = new Map<string, string>();
+
+function rgbKey(c: RGB): string {
+  return `${c.r},${c.g},${c.b}`;
+}
+
+/** Cache of local Figma color Variables, populated by loadColorVariables(). */
+let variableCache: Map<string, Variable> | null = null;
+
+/**
+ * Pre-load all local color Variables so generators can bind fills/strokes
+ * to Figma Variables instead of raw RGB values. Call once before generation.
+ */
+export async function loadColorVariables(): Promise<void> {
+  try {
+    const vars = await figma.variables.getLocalVariablesAsync("COLOR");
+    variableCache = new Map<string, Variable>();
+    for (const v of vars) {
+      variableCache.set(v.name, v);
+    }
+  } catch {
+    // Variables API not available or no variables synced yet — skip binding
+    variableCache = null;
+  }
+}
+
+/**
+ * Create a SolidPaint that is bound to a Figma Variable when available.
+ * Falls back to a plain SolidPaint with the given RGB color.
+ */
+export function createBoundPaint(color: RGB, opacity = 1): SolidPaint {
+  const tokenName = rgbToTokenName.get(rgbKey(color));
+  const paint: SolidPaint = { type: "SOLID" as const, color, opacity };
+  if (tokenName && variableCache) {
+    const variable = variableCache.get(tokenName);
+    if (variable) {
+      return figma.variables.setBoundVariableForPaint(paint, "color", variable);
+    }
+  }
+  return paint;
+}
+
 /**
  * Look up a color token by its Figma variable name (e.g. "color/white").
  * Falls back to opaque black if the token is not found.
+ * Also registers the RGB→tokenName mapping for automatic Variable binding.
  */
 function colorToken(name: string): RGB {
   const token = data.tokens.find((t) => t.name === name);
   if (token && typeof token.values.default === "object") {
     const c = token.values.default as FigmaColorValue;
-    return { r: c.r, g: c.g, b: c.b };
+    const rgb = { r: c.r, g: c.g, b: c.b };
+    rgbToTokenName.set(rgbKey(rgb), name);
+    return rgb;
   }
   console.warn(
     `[cocso-ui] Color token not found: ${name}, falling back to black`
@@ -42,6 +92,7 @@ export const COLORS = {
   danger500: colorToken("color/danger-500"),
   danger600: colorToken("color/danger-600"),
   success50: colorToken("color/success-50"),
+  success400: colorToken("color/success-400"),
   success500: colorToken("color/success-500"),
   success600: colorToken("color/success-600"),
   warning50: colorToken("color/warning-50"),
@@ -68,7 +119,7 @@ export function createAutoLayoutFrame(
   return frame;
 }
 
-/** Create a text node with specified properties. */
+/** Create a text node with specified properties, bound to Figma Variable. */
 export function createTextNode(
   content: string,
   fontSize: number,
@@ -76,10 +127,10 @@ export function createTextNode(
   color: RGB
 ): TextNode {
   const text = figma.createText();
-  text.fontName = { family: "Inter", style: getFontStyle(fontWeight) };
+  text.fontName = { family: "Pretendard", style: getFontStyle(fontWeight) };
   text.characters = content;
   text.fontSize = fontSize;
-  text.fills = [{ type: "SOLID", color }];
+  text.fills = [createBoundPaint(color)];
   return text;
 }
 
@@ -94,12 +145,12 @@ function getFontStyle(weight: number): string {
     return "Medium";
   }
   if (weight <= 600) {
-    return "Semi Bold";
+    return "SemiBold";
   }
   if (weight <= 700) {
     return "Bold";
   }
-  return "Extra Bold";
+  return "ExtraBold";
 }
 
 /**
@@ -150,22 +201,123 @@ export function rgbToHex(color: RGB): string {
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 }
 
-/** Set solid fill color on a node. */
+// ---------------------------------------------------------------------------
+// Shadow effects matching CSS --cocso-shadow-* tokens
+// ---------------------------------------------------------------------------
+
+const SHADOW_ALPHA_1: RGBA = { r: 0, g: 0, b: 0, a: 0.04 };
+const SHADOW_ALPHA_2: RGBA = { r: 0, g: 0, b: 0, a: 0.08 };
+const SHADOW_ALPHA_3: RGBA = { r: 0, g: 0, b: 0, a: 0.12 };
+
+/** --cocso-shadow-xs: subtle depth shadow */
+export const SHADOW_XS: Effect[] = [
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_1,
+    offset: { x: 0, y: 1 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_1,
+    offset: { x: 0, y: 0 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+];
+
+/** --cocso-shadow-sm: small elevation shadow */
+export const SHADOW_SM: Effect[] = [
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_1,
+    offset: { x: 0, y: 0 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_2,
+    offset: { x: 0, y: 4 },
+    radius: 8,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+];
+
+/** --cocso-shadow-lg: large elevation shadow (e.g. dialog) */
+export const SHADOW_LG: Effect[] = [
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_2,
+    offset: { x: 0, y: 0 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_3,
+    offset: { x: 0, y: 16 },
+    radius: 24,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+];
+
+/**
+ * Create a border-like shadow effect (box-shadow: 0 0 0 1px color).
+ * Used by Input/Select which use box-shadow instead of CSS border.
+ */
+export function createBorderShadow(color: RGB): Effect {
+  return {
+    type: "DROP_SHADOW",
+    color: { r: color.r, g: color.g, b: color.b, a: 1 },
+    offset: { x: 0, y: 0 },
+    radius: 0,
+    spread: 1,
+    visible: true,
+    blendMode: "NORMAL",
+  };
+}
+
+/**
+ * Apply Input/Select-style effects: 1px border shadow + shadow-xs.
+ * Replaces setStroke() for components that use box-shadow for borders.
+ */
+export function applyInputEffects(
+  node: SceneNode & BlendMixin,
+  borderColor: RGB
+): void {
+  node.effects = [createBorderShadow(borderColor), ...SHADOW_XS];
+}
+
+/** Set solid fill color on a node, bound to Figma Variable when available. */
 export function setFill(
   node: MinimalFillsMixin,
   color: RGB,
   opacity = 1
 ): void {
-  node.fills = [{ type: "SOLID", color, opacity }];
+  node.fills = [createBoundPaint(color, opacity)];
 }
 
-/** Set stroke on a node. */
+/** Set stroke on a node, bound to Figma Variable when available. */
 export function setStroke(
   node: MinimalStrokesMixin & GeometryMixin,
   color: RGB,
   weight = 1
 ): void {
-  node.strokes = [{ type: "SOLID", color }];
+  node.strokes = [createBoundPaint(color)];
   node.strokeWeight = weight;
 }
 
@@ -185,8 +337,8 @@ export function createComponentSection(title: string): FrameNode {
   section.paddingRight = 32;
   section.itemSpacing = 16;
   section.cornerRadius = 12;
-  section.fills = [{ type: "SOLID", color: COLORS.white }];
-  section.strokes = [{ type: "SOLID", color: COLORS.neutral100 }];
+  section.fills = [createBoundPaint(COLORS.white)];
+  section.strokes = [createBoundPaint(COLORS.neutral100)];
   section.strokeWeight = 1;
 
   const header = createTextNode(title, 18, 600, COLORS.neutral950);
@@ -221,7 +373,7 @@ export function setupPageLayout(page: PageNode): FrameNode {
   container.paddingLeft = 48;
   container.paddingRight = 48;
   container.itemSpacing = 32;
-  container.fills = [{ type: "SOLID", color: COLORS.neutral50 }];
+  container.fills = [createBoundPaint(COLORS.neutral50)];
   page.appendChild(container);
 
   const title = createTextNode("@cocso-ui/figma", 28, 700, COLORS.neutral950);

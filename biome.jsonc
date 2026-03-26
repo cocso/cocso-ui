@@ -48,6 +48,15 @@
       "javascript": {
         "globals": ["figma", "__html__"]
       }
+    },
+    {
+      "includes": ["packages/figma/catalog/**", "packages/figma/scripts/browser-extract.js"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
     }
   ]
 }
