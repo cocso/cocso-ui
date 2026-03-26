@@ -61,7 +61,7 @@ Public entry point: `@cocso-ui/react`
 ```ts
 // Named exports
 export { Button } from './components/button'
-export { Modal } from './components/modal'
+export { Dialog } from './components/dialog'
 // ... all components
 export { cn } from './cn'
 ```

@@ -6,7 +6,9 @@ Sync cocso-ui design tokens from baseframe YAML definitions to Figma Variables v
 
 ## Path
 
-- `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables.
+```
+packages/figma/
+```
 
 ## Runtime and Language
 

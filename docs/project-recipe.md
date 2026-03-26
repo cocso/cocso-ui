@@ -1,4 +1,4 @@
-# Project: @cocso-ui/recipe
+# project-recipe
 
 ## Goal
 
@@ -6,7 +6,9 @@ Provide a single, CI-enforced declarative mirror for component visual specs (var
 
 ## Path
 
-- `packages/recipe/`
+```
+packages/recipe/
+```
 
 ## Runtime and Language
 
@@ -68,6 +70,14 @@ When a conformance test fails (recipe ↔ React mismatch):
 2. Was the recipe intentionally updated? → Update React to match.
 3. Was React intentionally updated? → Update recipe first, then conformance test passes.
 
+### CSS Property Naming Convention
+
+Recipe property keys and React CSS custom properties use different naming conventions:
+
+- **Recipe data model**: property keys use camelCase (e.g., `bgColor`, `fontColor`, `paddingInline`, `borderRadius`). These names are the canonical identifiers in the recipe definition and are platform-agnostic.
+- **React resolver output**: the resolver preserves recipe camelCase in CSS custom property names (e.g., `--cocso-button-bgColor`, `--cocso-button-fontColor`). The React `.styles.ts` files independently define kebab-case CSS custom properties (e.g., `--cocso-button-bg-color`). These are two separate naming spaces — the resolver output is used by conformance tests, while `.styles.ts` functions produce the actual runtime CSS variables.
+- **Conformance tests**: compare resolved *values* (not property names). A conformance test verifies that the recipe-resolved value for a given variant matches the React style function output, ensuring both produce the same design token regardless of property name format.
+
 ## Interfaces
 
 ### `defineRecipe<V, S>(recipe: RecipeDefinition<V, S>)`
@@ -117,14 +127,6 @@ pnpm --filter @cocso-ui/react test      # includes ~35 recipe conformance tests
 - **Phase 2 (planned)**: Typography recipe with responsive sizing support.
 - **Phase 3 (planned)**: Auto-generate `TokenCatalog` from baseframe YAML to prevent token name drift.
 - **Phase 4 (potential)**: Recipe-driven Storybook arg generation.
-
-## CSS Property Naming Convention
-
-Recipe property keys and React CSS custom properties use different naming conventions:
-
-- **Recipe data model**: property keys use camelCase (e.g., `bgColor`, `fontColor`, `paddingInline`, `borderRadius`). These names are the canonical identifiers in the recipe definition and are platform-agnostic.
-- **React resolver output**: the resolver preserves recipe camelCase in CSS custom property names (e.g., `--cocso-button-bgColor`, `--cocso-button-fontColor`). The React `.styles.ts` files independently define kebab-case CSS custom properties (e.g., `--cocso-button-bg-color`). These are two separate naming spaces — the resolver output is used by conformance tests, while `.styles.ts` functions produce the actual runtime CSS variables.
-- **Conformance tests**: compare resolved *values* (not property names). A conformance test verifies that the recipe-resolved value for a given variant matches the React style function output, ensuring both produce the same design token regardless of property name format.
 
 ## Open Questions
 
