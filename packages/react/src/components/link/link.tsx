@@ -57,7 +57,9 @@ function LinkComponent({
     className: mergedClassName,
     lineHeight,
     ref,
-    render: renderProp ?? ((renderProps: ComponentProps<"a">) => <a {...renderProps} />),
+    render:
+      renderProp ??
+      ((renderProps: ComponentProps<"a">) => <a {...renderProps} />),
     size,
     style,
     type,

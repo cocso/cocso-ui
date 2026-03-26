@@ -50,7 +50,9 @@ export function Field({
         <label className={styles.label} htmlFor={htmlFor}>
           {label}
           {required === false && (
-            <span className={styles.optional}>{optionalLabel ?? "(Optional)"}</span>
+            <span className={styles.optional}>
+              {optionalLabel ?? "(Optional)"}
+            </span>
           )}
         </label>
         {children}
