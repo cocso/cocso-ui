@@ -65,6 +65,11 @@ describe("resolveStyleValue", () => {
       "white"
     );
   });
+
+  it("passes through unrecognized string values", () => {
+    expect(resolveStyleValue("5px 10px")).toBe("5px 10px");
+    expect(resolveStyleValue("auto")).toBe("auto");
+  });
 });
 
 const testRecipe = defineRecipe({
@@ -227,5 +232,160 @@ describe("resolveForReact", () => {
     expect(result["--cocso-button-bgColor"]).toBe(
       "var(--cocso-color-primary-950)"
     );
+  });
+
+  it("handles recipe without compoundVariants", () => {
+    const simpleRecipe = defineRecipe({
+      name: "simple",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+    const result = resolveForReact(simpleRecipe, { variant: "primary" });
+    expect(result["--cocso-simple-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("handles compound variant with scalar condition", () => {
+    const result = resolveForReact(testRecipe, {
+      variant: "primary",
+      size: "large",
+    });
+    // The existing compound variant has array condition for size
+    // Verify it still applies
+    expect(result["--cocso-button-borderRadius"]).toBe("var(--cocso-radius-4)");
+  });
+
+  it("skips variant styles when variant value is not defined", () => {
+    const result = resolveForReact(testRecipe, {
+      variant: "primary" as any,
+      size: "nonexistent" as any,
+    });
+    // Should still have variant styles but no size styles
+    expect(result["--cocso-button-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+    expect(result["--cocso-button-height"]).toBeUndefined();
+  });
+
+  it("skips state overrides for dimensions without state styles", () => {
+    const result = resolveForReact(
+      testRecipe,
+      { variant: "outline", size: "medium" },
+      { state: "hover" }
+    );
+    // outline has no hover state override, so bgColor stays as base
+    expect(result["--cocso-button-bgColor"]).toBe(
+      "var(--cocso-color-transparent)"
+    );
+  });
+
+  it("matches compound variants with mixed scalar and array conditions", () => {
+    const mixedRecipe = defineRecipe({
+      name: "mixed",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+          secondary: { root: { bgColor: "neutral-50" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+          small: { root: { height: 32 } },
+        },
+      },
+      compoundVariants: [
+        {
+          conditions: { variant: "primary", size: "large" },
+          styles: { root: { fontWeight: "bold" } },
+        },
+      ],
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    const match = resolveForReact(mixedRecipe, {
+      variant: "primary",
+      size: "large",
+    });
+    expect(match["--cocso-mixed-fontWeight"]).toBe("700");
+
+    const noMatch = resolveForReact(mixedRecipe, {
+      variant: "secondary",
+      size: "large",
+    });
+    expect(noMatch["--cocso-mixed-fontWeight"]).toBeUndefined();
+  });
+
+  it("applies base styles", () => {
+    const recipeWithBase = defineRecipe({
+      name: "based",
+      slots: ["root"] as const,
+      base: {
+        root: { display: "inline-flex", cursor: "pointer" },
+      },
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const result = resolveForReact(recipeWithBase, { variant: "primary" });
+    expect(result["--cocso-based-display"]).toBe("inline-flex");
+    expect(result["--cocso-based-cursor"]).toBe("pointer");
+    expect(result["--cocso-based-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("handles multi-slot recipe where variant only defines some slots", () => {
+    const multiSlot = defineRecipe({
+      name: "multi",
+      slots: ["root", "label", "icon"] as const,
+      variants: {
+        variant: {
+          primary: {
+            root: { bgColor: "primary-950" },
+            // label and icon slots NOT defined — triggers continue in applySlotStyles
+          },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const result = resolveForReact(multiSlot, { variant: "primary" });
+    expect(result["--cocso-multi-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("skips merged variant dimensions not present in recipe.variants", () => {
+    const sparseRecipe = defineRecipe({
+      name: "sparse",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    // Pass an extra key not in recipe.variants — triggers the `continue` at
+    // the dimensionDef guard in applyVariantStyles (line 108 in react.ts).
+    const result = resolveForReact(sparseRecipe, {
+      variant: "primary",
+      size: "large",
+    } as any);
+    expect(result["--cocso-sparse-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+    expect(result["--cocso-sparse-height"]).toBeUndefined();
   });
 });

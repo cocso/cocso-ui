@@ -1,3 +1,4 @@
+import { defineRecipe } from "@cocso-ui/recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { describe, expect, it } from "vitest";
@@ -71,6 +72,10 @@ describe("resolveRadiusToken", () => {
 
   it("returns 0 for unknown radius", () => {
     expect(resolveRadiusToken("radius-99")).toBe(0);
+  });
+
+  it("returns 0 for non-matching radius string", () => {
+    expect(resolveRadiusToken("not-a-radius")).toBe(0);
   });
 });
 
@@ -328,5 +333,338 @@ describe("resolveForFigma — spinner geometry", () => {
     });
     const expected = resolveColorToken("neutral-500");
     expect(spec.bladeColor).toEqual(expected);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Edge cases — coverage for private helpers exercised through resolveForFigma
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — edge cases", () => {
+  it("resolves transparent and CSS literal values to no-op", () => {
+    const recipe = defineRecipe({
+      name: "test-transparent",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          ghost: {
+            root: { bgColor: "transparent", fontColor: "currentColor" },
+          },
+          none: { root: { bgColor: "none", fontColor: "inherit" } },
+        },
+      },
+      defaultVariants: { variant: "ghost" },
+    });
+
+    const ghost = resolveForFigma(recipe, { variant: "ghost" });
+    expect(ghost.bgColor).toBeUndefined();
+    expect(ghost.fontColor).toBeUndefined();
+
+    const none = resolveForFigma(recipe, { variant: "none" });
+    expect(none.bgColor).toBeUndefined();
+    expect(none.fontColor).toBeUndefined();
+  });
+
+  it("resolves 100% borderRadius to 1000", () => {
+    const recipe = defineRecipe({
+      name: "test-radius",
+      slots: ["root"] as const,
+      variants: {
+        shape: {
+          circle: { root: { borderRadius: "100%" } },
+          rounded: { root: { borderRadius: "radius-full" } },
+        },
+      },
+      defaultVariants: { shape: "circle" },
+    });
+
+    const circle = resolveForFigma(recipe, { shape: "circle" });
+    expect(circle.borderRadius).toBe(1000);
+
+    const rounded = resolveForFigma(recipe, { shape: "rounded" });
+    expect(rounded.borderRadius).toBe(1000);
+  });
+
+  it("resolves color tokens on dynamic color keys", () => {
+    const recipe = defineRecipe({
+      name: "test-dynamic-color",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: {
+            root: {
+              checkedBgColor: "primary-950",
+              switchBgColor: "neutral-200",
+            },
+          },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "primary" });
+    // checkedBgColor and switchBgColor contain "color" in lowercase, so isColorKey returns true
+    expect(spec.checkedBgColor).toEqual(
+      expect.objectContaining({ r: expect.any(Number) })
+    );
+    expect(spec.switchBgColor).toEqual(
+      expect.objectContaining({ r: expect.any(Number) })
+    );
+  });
+
+  it("parses CSS padding shorthand into individual values", () => {
+    const recipe = defineRecipe({
+      name: "test-padding",
+      slots: ["root"] as const,
+      variants: {
+        size: {
+          large: { root: { padding: "5px 10px" } },
+          small: { root: { padding: "3px" } },
+        },
+      },
+      defaultVariants: { size: "large" },
+    });
+
+    const large = resolveForFigma(recipe, { size: "large" });
+    expect(large.paddingTop).toBe(5);
+    expect(large.paddingBottom).toBe(5);
+    expect(large.paddingLeft).toBe(10);
+    expect(large.paddingRight).toBe(10);
+    expect(large.padding).toBeUndefined();
+
+    const small = resolveForFigma(recipe, { size: "small" });
+    expect(small.paddingTop).toBe(3);
+    expect(small.paddingBottom).toBe(3);
+    expect(small.paddingLeft).toBe(3);
+    expect(small.paddingRight).toBe(3);
+  });
+
+  it("normalizes paddingX to paddingLeft and paddingRight", () => {
+    const recipe = defineRecipe({
+      name: "test-paddingx",
+      slots: ["root"] as const,
+      variants: {
+        size: {
+          medium: { root: { paddingX: 12 } },
+          custom: { root: { paddingLeft: 8, paddingX: 12 } },
+        },
+      },
+      defaultVariants: { size: "medium" },
+    });
+
+    const medium = resolveForFigma(recipe, { size: "medium" });
+    expect(medium.paddingLeft).toBe(12);
+    expect(medium.paddingRight).toBe(12);
+    expect(medium.paddingX).toBeUndefined();
+
+    // paddingLeft already set should not be overridden by paddingX
+    const custom = resolveForFigma(recipe, { size: "custom" });
+    expect(custom.paddingLeft).toBe(8);
+    expect(custom.paddingRight).toBe(12);
+  });
+
+  it("skips undefined variant values gracefully", () => {
+    const recipe = defineRecipe({
+      name: "test-undef",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+        },
+      },
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    // Pass a variant value that doesn't exist in the dimension
+    const spec = resolveForFigma(recipe, {
+      variant: "primary",
+      size: "nonexistent" as any,
+    });
+    expect(spec.bgColor).toBeDefined();
+    expect(spec.height).toBeUndefined();
+  });
+
+  it("applies base styles from recipe", () => {
+    const recipe = defineRecipe({
+      name: "test-base",
+      slots: ["root", "label"] as const,
+      base: {
+        root: { bgColor: "white", fontSize: 14 },
+      },
+      variants: {
+        variant: {
+          primary: { root: { fontColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "primary" });
+    expect(spec.fontSize).toBe(14);
+    expect(spec.fontColor).toBeDefined();
+  });
+
+  it("skips unknown variant dimensions gracefully", () => {
+    const recipe = defineRecipe({
+      name: "test-skip",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    // Pass an extra unknown dimension — should not crash
+    const spec = resolveForFigma(recipe, {
+      variant: "primary",
+      unknown: "value",
+    } as any);
+    expect(spec.bgColor).toEqual(
+      expect.objectContaining({ r: expect.any(Number) })
+    );
+  });
+
+  it("resolves compound border to strokeColor and strokeWeight", () => {
+    const recipe = defineRecipe({
+      name: "test-border",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          outline: {
+            root: {
+              border: {
+                _type: "border" as const,
+                width: 2,
+                style: "solid" as const,
+                color: "danger-500" as const,
+              },
+            },
+          },
+        },
+      },
+      defaultVariants: { variant: "outline" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "outline" });
+    expect(spec.strokeWeight).toBe(2);
+    expect(spec.strokeColor).toEqual(
+      expect.objectContaining({ r: expect.any(Number) })
+    );
+  });
+
+  it("handles recipe with no base styles", () => {
+    const recipe = defineRecipe({
+      name: "test-nobase",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "primary" });
+    expect(spec.bgColor).toEqual(
+      expect.objectContaining({ r: expect.any(Number) })
+    );
+  });
+
+  it("applies compound variants with array conditions", () => {
+    const recipe = defineRecipe({
+      name: "test-compound",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+          secondary: { root: { bgColor: "neutral-50" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+          small: { root: { height: 32 } },
+        },
+      },
+      compoundVariants: [
+        {
+          conditions: { size: ["large", "small"] },
+          styles: { root: { borderRadius: "radius-4" } },
+        },
+      ],
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    const large = resolveForFigma(recipe, {
+      variant: "primary",
+      size: "large",
+    });
+    expect(large.borderRadius).toBe(8);
+
+    const small = resolveForFigma(recipe, {
+      variant: "secondary",
+      size: "small",
+    });
+    expect(small.borderRadius).toBe(8);
+  });
+
+  it("handles non-matching compound variant conditions", () => {
+    const recipe = defineRecipe({
+      name: "test-nomatch",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+          secondary: { root: { bgColor: "neutral-50" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+          small: { root: { height: 32 } },
+        },
+      },
+      compoundVariants: [
+        {
+          conditions: { variant: "primary", size: "large" },
+          styles: { root: { fontWeight: 700 } },
+        },
+      ],
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    const match = resolveForFigma(recipe, {
+      variant: "primary",
+      size: "large",
+    });
+    expect(match.fontWeight).toBe(700);
+
+    const noMatch = resolveForFigma(recipe, {
+      variant: "secondary",
+      size: "small",
+    });
+    expect(noMatch.fontWeight).toBeUndefined();
+  });
+
+  it("passes through non-token string values", () => {
+    const recipe = defineRecipe({
+      name: "test-passthrough",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          dashed: {
+            root: {
+              borderStyle:
+                "dashed" as unknown as import("@cocso-ui/recipe").StyleValue,
+            },
+          },
+        },
+      },
+      defaultVariants: { variant: "dashed" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "dashed" });
+    expect(spec.borderStyle).toBe("dashed");
   });
 });

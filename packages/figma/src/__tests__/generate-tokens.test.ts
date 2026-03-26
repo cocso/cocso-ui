@@ -36,6 +36,15 @@ describe("parseHex", () => {
     expect(result).toEqual({ r: 1, g: 1, b: 1, a: 1 });
   });
 
+  it("parses 4-digit shorthand hex with alpha", () => {
+    // #F0FA expands to #FF00FFAA
+    const result = parseHex("#F0FA");
+    expect(result.r).toBe(1);
+    expect(result.g).toBe(0);
+    expect(result.b).toBe(1);
+    expect(result.a).toBeCloseTo(170 / 255, 3);
+  });
+
   it("parses 8-digit hex with alpha", () => {
     const result = parseHex("#00000080");
     expect(result.r).toBe(0);
@@ -226,6 +235,25 @@ describe("parseResolvedValue", () => {
 
   it("throws on unparseable value", () => {
     expect(() => parseResolvedValue("unknown-format")).toThrow(
+      "Unable to parse token value"
+    );
+  });
+});
+
+describe("parseResolvedValue — catch path via resolveTokenRef", () => {
+  it("resolveTokenRef throws for an unresolved reference, matching the catch reason in generateTokenData", () => {
+    const tokenMap = new Map<string, string | number>([
+      ["$color.known", "#FFFFFF"],
+    ]);
+    // Simulates the error that would be caught in generateTokenData's catch block
+    expect(() => resolveTokenRef("$color.missing", tokenMap)).toThrow(
+      "Unresolved token reference"
+    );
+  });
+
+  it("parseResolvedValue throws for shadow-like unparseable value, matching the catch reason in generateTokenData", () => {
+    // A value that passes isShadowComposite=false but is still unparseable
+    expect(() => parseResolvedValue("not-a-valid-format")).toThrow(
       "Unable to parse token value"
     );
   });
