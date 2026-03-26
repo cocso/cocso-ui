@@ -100,6 +100,10 @@ function scoreComponent(entry: ComponentEntry, tokens: string[]): number {
   }, 0);
 }
 
+/**
+ * Parses llms.txt index format into structured documentation link entries.
+ * Extracts section headings and link lines, resolving each URL to the canonical docs origin.
+ */
 export function parseLlmsIndex(markdown: string): DocLink[] {
   const sectionRanges: Array<{
     id: DocumentationSectionId;
@@ -235,6 +239,10 @@ export async function searchComponents(
     .map((item) => item.component);
 }
 
+/**
+ * Ranks a pre-fetched list of components by relevance to a search query.
+ * Returns up to `maxResults` entries sorted by descending match score.
+ */
 export function rankComponentsForPrompt(
   prompt: string,
   components: ComponentEntry[],

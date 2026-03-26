@@ -28,6 +28,7 @@ export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   variant?: SwitchVariant;
 }
 
+/** Toggle switch component with optional label and size options. */
 export function Switch({
   ref,
   id: _id,

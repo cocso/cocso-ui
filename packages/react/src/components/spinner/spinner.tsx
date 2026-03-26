@@ -17,6 +17,7 @@ export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   variant?: SpinnerVariant;
 }
 
+/** Loading indicator rendered as an accessible output element. */
 export function Spinner({
   ref,
   className,

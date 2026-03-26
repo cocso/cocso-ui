@@ -9,6 +9,10 @@ function docCacheKey(componentSlug: string): string {
   return `component-doc:${componentSlug}`;
 }
 
+/**
+ * Fetches and returns the markdown documentation for a component.
+ * Results are cached by component slug for the configured TTL.
+ */
 export async function getComponentMarkdown(
   component: ComponentEntry
 ): Promise<string> {

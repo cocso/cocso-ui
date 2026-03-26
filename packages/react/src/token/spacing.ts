@@ -1,3 +1,4 @@
+/** Spacing token scale from s0 (0) to max (80px). */
 export const spacing = {
   s0: "var(--cocso-spacing-0)",
   s1: "var(--cocso-spacing-1)",

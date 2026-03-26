@@ -46,6 +46,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   weight?: FontWeight;
 }
 
+/** Polymorphic button component with variant, color, and size options. */
 export function Button({
   render: renderProp,
   ref,

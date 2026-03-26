@@ -1,3 +1,4 @@
+/** Cocso design system color token map keyed by semantic name. */
 export const colors = {
   transparent: "var(--cocso-color-transparent)",
 

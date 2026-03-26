@@ -19,6 +19,7 @@ export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   stretch?: boolean;
 }
 
+/** Dropdown select component wrapping native select. */
 export function Select({
   ref,
   className,

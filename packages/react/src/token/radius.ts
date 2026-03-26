@@ -1,3 +1,4 @@
+/** Border radius token scale from none to full. */
 export const radius = {
   r1: "var(--cocso-radius-1)",
   r2: "var(--cocso-radius-2)",

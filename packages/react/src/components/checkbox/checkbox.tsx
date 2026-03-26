@@ -37,6 +37,7 @@ export interface CheckboxProps
   status?: CheckboxStatus;
 }
 
+/** Check/uncheck toggle with support for an indeterminate state. */
 export function Checkbox({
   ref,
   id: _id,

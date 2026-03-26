@@ -20,6 +20,7 @@ export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   stretch?: boolean;
 }
 
+/** Text input component with size and variant options. */
 export function Input({
   ref,
   className,

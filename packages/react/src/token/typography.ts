@@ -1,3 +1,4 @@
+/** Font size scale from 10 to 60. */
 export const fontSize = {
   10: 10,
   11: 11,
