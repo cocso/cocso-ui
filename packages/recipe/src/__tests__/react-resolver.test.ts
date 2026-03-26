@@ -41,7 +41,6 @@ describe("resolveStyleValue", () => {
 
   it("passes CSS literals through unchanged", () => {
     expect(resolveStyleValue("none")).toBe("none");
-    expect(resolveStyleValue("transparent")).toBe("transparent");
     expect(resolveStyleValue("currentColor")).toBe("currentColor");
     expect(resolveStyleValue("100%")).toBe("100%");
     expect(resolveStyleValue("inherit")).toBe("inherit");
@@ -154,7 +153,7 @@ describe("resolveForReact", () => {
     expect(result["--cocso-button-border"]).toBe(
       "1px solid var(--cocso-color-neutral-100)"
     );
-    expect(result["--cocso-button-bgColor"]).toBe("transparent");
+    expect(result["--cocso-button-bgColor"]).toBe("var(--cocso-color-transparent)");
   });
 
   it("applies compound variants", () => {
