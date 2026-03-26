@@ -25,13 +25,13 @@ TypeScript (pure data — zero runtime dependencies)
 - `defineRecipe()` API with type-safe variant/slot/state/compoundVariant definitions.
 - `StyleValue` type system: `ColorTokenRef`, `RadiusTokenRef`, `SpacingTokenRef`, `FontWeightRef`, `CSSLiteral`, `NumericValue`, `CompoundBorder`, `ComponentRef`.
 - `resolveForReact()`: recipe + variants → CSS custom property map.
-- Component recipes for: Button, Badge, Input, Select, Link, StockQuantityStatus, Checkbox, Switch, Spinner, RadioGroup.
+- Component recipes for: Button, Badge, Input, Select, Link, StockQuantityStatus, Checkbox, Switch, Spinner, RadioGroup, Dialog, Typography, Pagination.
 
 ## Out of Scope
 
 - CSS generation or class name generation (unlike seed-design/Panda CSS).
-- Recipes for structural-only components (Accordion, Tab, Tooltip, Dialog, Popover, Dropdown, Toast, Field).
-- Recipes for third-party wrappers (DayPicker, MonthPicker, OTPField).
+- Recipes for structural-only components (Accordion, Tab, Tooltip, Popover, Dropdown, Toast, Field, OTPField). These components use spec-based Figma generation via `generateFromExtractedSpecs` instead.
+- Recipes for third-party wrappers (DayPicker, MonthPicker). Deferred pending evaluation of calendar grid extraction quality.
 - Figma resolver (`resolveForFigma` lives in `packages/figma/`, not here).
 
 ## Architecture
@@ -124,7 +124,7 @@ pnpm --filter @cocso-ui/react test      # includes ~35 recipe conformance tests
 ## Roadmap
 
 - **Phase 1 (done)**: 10 component recipes + React resolver + Figma resolver + conformance tests.
-- **Phase 2 (planned)**: Typography recipe with responsive sizing support.
+- **Phase 2 (planned)**: Typography recipe responsive sizing support (base-size-only currently; responsive breakpoints deferred).
 - **Phase 3 (planned)**: Auto-generate `TokenCatalog` from baseframe YAML to prevent token name drift.
 - **Phase 4 (potential)**: Recipe-driven Storybook arg generation.
 

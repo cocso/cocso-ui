@@ -44,7 +44,7 @@ interface CornerRadii {
   topRight: number;
 }
 
-interface NodeSpec {
+export interface NodeSpec {
   children?: NodeSpec[];
   cornerRadii?: CornerRadii;
   cornerRadius?: number;
@@ -72,7 +72,7 @@ interface NodeSpec {
   y?: number;
 }
 
-interface VariantEntry {
+export interface VariantEntry {
   spec: NodeSpec;
   variantKey: string;
 }

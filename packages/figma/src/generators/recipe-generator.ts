@@ -2,13 +2,16 @@ import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
+import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import { type FigmaNodeSpec, resolveForFigma } from "./recipe-resolver";
 import {
   COLORS,
@@ -661,6 +664,172 @@ function generateSpinnerSection<
   container.appendChild(section);
 }
 
+function generateDialogSection<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
+  const section = createComponentSection("Dialog");
+  const combinations = getAllVariantCombinations(recipe);
+  const row = createVariantRow("size");
+
+  for (const combo of combinations) {
+    const spec = resolveForFigma(
+      recipe,
+      combo as { [K in keyof V]?: keyof V[K] }
+    );
+    const nameParts = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+
+    const component = figma.createComponent();
+    component.name = nameParts;
+    const w = spec.width ?? 520;
+    const h = spec.height ?? 260;
+    component.resize(w, h);
+    component.layoutMode = "VERTICAL";
+    component.primaryAxisSizingMode = "FIXED";
+    component.counterAxisSizingMode = "FIXED";
+    component.primaryAxisAlignItems = "MIN";
+    component.counterAxisAlignItems = "MIN";
+
+    const radius = spec.cornerRadius ?? spec.borderRadius;
+    if (radius) {
+      component.cornerRadius = radius;
+    }
+
+    if (spec.paddingTop) {
+      component.paddingTop = spec.paddingTop;
+    }
+    if (spec.paddingBottom) {
+      component.paddingBottom = spec.paddingBottom;
+    }
+    if (spec.paddingLeft) {
+      component.paddingLeft = spec.paddingLeft;
+    }
+    if (spec.paddingRight) {
+      component.paddingRight = spec.paddingRight;
+    }
+
+    const bgColor = spec.bgColor ?? COLORS.white;
+    setFill(component, bgColor);
+
+    component.itemSpacing = 12;
+
+    const title = createTextNode("Dialog Title", 20, 700, COLORS.neutral950);
+    const desc = createTextNode(
+      "Dialog description goes here.",
+      14,
+      400,
+      COLORS.neutral600
+    );
+    component.appendChild(title);
+    component.appendChild(desc);
+
+    row.appendChild(component);
+  }
+
+  section.appendChild(row);
+  container.appendChild(section);
+}
+
+function generateTypographySection<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
+  const section = createComponentSection("Typography");
+  const combinations = getAllVariantCombinations(recipe);
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
+
+  for (const [groupKey, items] of groups) {
+    const row = createVariantRow(groupKey);
+    for (const { name, spec } of items) {
+      const component = figma.createComponent();
+      component.name = name;
+      component.layoutMode = "HORIZONTAL";
+      component.primaryAxisSizingMode = "AUTO";
+      component.counterAxisSizingMode = "AUTO";
+      component.fills = [];
+
+      const fontSize = spec.fontSize ?? 16;
+      const fontWeight = spec.fontWeight ?? 400;
+      const textColor = spec.fontColor ?? COLORS.neutral950;
+      const sampleText = `${groupKey} ${name.split("size=")[1] ?? ""} (${fontSize}px)`;
+      const text = createTextNode(sampleText, fontSize, fontWeight, textColor);
+      component.appendChild(text);
+
+      row.appendChild(component);
+    }
+    section.appendChild(row);
+  }
+
+  container.appendChild(section);
+}
+
+function generatePaginationSection<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
+  const section = createComponentSection("Pagination");
+  const combinations = getAllVariantCombinations(recipe);
+  const row = createVariantRow("state");
+
+  for (const combo of combinations) {
+    const spec = resolveForFigma(
+      recipe,
+      combo as { [K in keyof V]?: keyof V[K] }
+    );
+    const nameParts = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+
+    const component = figma.createComponent();
+    component.name = nameParts;
+    const w = spec.width ?? 48;
+    const h = spec.height ?? 48;
+    component.resize(w, h);
+    component.layoutMode = "HORIZONTAL";
+    component.primaryAxisSizingMode = "FIXED";
+    component.counterAxisSizingMode = "FIXED";
+    component.primaryAxisAlignItems = "CENTER";
+    component.counterAxisAlignItems = "CENTER";
+
+    const radius = spec.cornerRadius ?? spec.borderRadius;
+    if (radius) {
+      component.cornerRadius = radius;
+    }
+
+    const bgColor = spec.bgColor;
+    if (bgColor) {
+      setFill(component, bgColor);
+    } else {
+      component.fills = [];
+    }
+
+    const textColor = spec.fontColor ?? COLORS.neutral900;
+    const fontSize = spec.fontSize ?? 14;
+    const fontWeight = spec.fontWeight ?? 400;
+
+    const stateValue = combo.state ?? "inactive";
+    let label = "2";
+    if (stateValue === "active") {
+      label = "1";
+    } else if (stateValue === "disabled") {
+      label = "...";
+    }
+    const text = createTextNode(label, fontSize, fontWeight, textColor);
+    component.appendChild(text);
+
+    if (stateValue === "disabled") {
+      component.opacity = 0.4;
+    }
+
+    row.appendChild(component);
+  }
+
+  section.appendChild(row);
+  container.appendChild(section);
+}
+
 export function generateFromRecipes(container: FrameNode): number {
   const sections = [
     () => generateGenericSection(container, buttonRecipe, "Button", "Button"),
@@ -675,6 +844,9 @@ export function generateFromRecipes(container: FrameNode): number {
     () => generateSwitchSection(container, switchRecipe),
     () => generateRadioSection(container, radioGroupRecipe),
     () => generateSpinnerSection(container, spinnerRecipe),
+    () => generateDialogSection(container, dialogRecipe),
+    () => generateTypographySection(container, typographyRecipe),
+    () => generatePaginationSection(container, paginationRecipe),
   ];
 
   for (const generate of sections) {

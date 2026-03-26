@@ -1,6 +1,6 @@
 import { syncTokens } from "../core/variable-creator";
 import tokenData from "../generated/tokens.json";
-import { generateFromRecipes } from "../generators";
+import { generateFromRecipes, generateFromSpecs } from "../generators";
 import { loadColorVariables, setupPageLayout } from "../generators/shared";
 import type { FigmaTokenData } from "../types/token-schema";
 
@@ -71,13 +71,17 @@ async function handleGenerateComponents() {
 
     await loadColorVariables();
 
-    const count = generateFromRecipes(container);
+    const recipeCount = generateFromRecipes(container);
+    const specCount = generateFromSpecs(container);
+    const count = recipeCount + specCount;
 
     figma.ui.postMessage({
       type: "generate-complete",
       result: { components: count, page: COMPONENT_PAGE_NAME },
     });
-    figma.notify(`${count} component sets generated from recipes`);
+    figma.notify(
+      `${count} component sets generated (${recipeCount} from recipes, ${specCount} from specs)`
+    );
   } catch (err) {
     figma.ui.postMessage({
       type: "generate-error",
