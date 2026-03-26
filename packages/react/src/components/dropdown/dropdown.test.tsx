@@ -70,6 +70,30 @@ describe("Dropdown", () => {
   });
 
   describe("item interactions", () => {
+    it("renders a prefixed item inside the menuitem", async () => {
+      render(
+        <Dropdown>
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
+          <Dropdown.Content>
+            <Dropdown.Item
+              prefix={
+                <span aria-hidden="true" data-testid="item-prefix">
+                  ★
+                </span>
+              }
+            >
+              Prefixed Action
+            </Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown>
+      );
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      const item = await screen.findByRole("menuitem", {
+        name: "Prefixed Action",
+      });
+      expect(item).toContainElement(screen.getByTestId("item-prefix"));
+    });
+
     it("calls onClick handler when an item is clicked", async () => {
       const onClick = vi.fn();
       render(
@@ -84,6 +108,37 @@ describe("Dropdown", () => {
       const item = await screen.findByRole("menuitem", { name: "Action" });
       await userEvent.click(item);
       expect(onClick).toHaveBeenCalledOnce();
+    });
+
+    it("does not call onClick or close the menu when an item is disabled", async () => {
+      const onClick = vi.fn();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
+          <Dropdown.Content>
+            <Dropdown.Item disabled onClick={onClick}>
+              Disabled Action
+            </Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown>
+      );
+
+      await userEvent.click(screen.getByRole("button", { name: "Open Menu" }));
+      const item = await screen.findByRole("menuitem", {
+        name: "Disabled Action",
+      });
+
+      expect(item).toHaveAttribute("aria-disabled", "true");
+
+      await userEvent.click(item);
+
+      expect(onClick).not.toHaveBeenCalled();
+      await waitFor(() => {
+        expect(
+          screen.getByRole("menuitem", { name: "Disabled Action" })
+        ).toBeInTheDocument();
+      });
     });
 
     it("closes the dropdown after an item is selected", async () => {
