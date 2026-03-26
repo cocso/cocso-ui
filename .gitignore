@@ -43,6 +43,9 @@ yarn-error.log*
 .omc/
 .omx/
 .superset/
+.claude/
+.mcp.json
+.opencode.json
 
 .npmrc
 *storybook.log

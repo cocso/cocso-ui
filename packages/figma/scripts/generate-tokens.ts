@@ -33,7 +33,8 @@ function findYamlFiles(dir: string): string[] {
   return results;
 }
 
-const HEX_RE = /^#([0-9a-fA-F]{3,8})$/;
+const HEX_RE =
+  /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 const RGBA_RE =
   /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/;
 const SIZE_RE = /^(-?[\d.]+)(px|rem)$/;

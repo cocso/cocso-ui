@@ -1,13 +1,12 @@
 import { ExternalLinkIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
-import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import type { useRender } from "../../primitives/use-render";
 import type { FontWeight, LineHeight } from "../../token";
-import { colors } from "../../token";
 import type { TypographyProps } from "../typography";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
+import { getColor, getColorHover } from "./link.styles";
 
 export type LinkSize = "large" | "medium" | "small" | "x-small";
 
@@ -78,17 +77,4 @@ function ExternalIcon({
 }
 
 export const Link = Object.assign(LinkComponent, { ExternalIcon });
-
-const getColor = (variant: LinkVariant) =>
-  match(variant)
-    .with("inline", () => colors.info500)
-    .with("current", () => "currentColor")
-    .with("plain", () => colors.info500)
-    .exhaustive();
-
-const getColorHover = (variant: LinkVariant) =>
-  match(variant)
-    .with("inline", () => colors.info700)
-    .with("current", () => "currentColor")
-    .with("plain", () => colors.info700)
-    .exhaustive();
+Link.displayName = "Link";

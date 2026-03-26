@@ -47,3 +47,4 @@ export const Accordion = Object.assign(AccordionBase.Root, {
   Trigger: AccordionTrigger,
   Content: AccordionPanel,
 });
+Accordion.displayName = "Accordion";

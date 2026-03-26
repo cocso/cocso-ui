@@ -30,7 +30,8 @@
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
   - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set.
   - `packages/baseframe/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
-  - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables.
+  - `packages/recipe/`: `@cocso-ui/recipe` — component visual spec recipes (single source of truth for variant→token mappings, consumed by React conformance tests and Figma generation).
+  - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables and generating components from recipes.
 - `ecosystem/`: Tooling that wraps or consumes packages for developer workflows.
   - `ecosystem/baseframe/`: `@cocso-ui/baseframe` — CLI for scaffolding components from YAML.
   - `ecosystem/mcp/`: `@cocso-ui/mcp` — MCP server for design-system-aware component discovery and guidance.

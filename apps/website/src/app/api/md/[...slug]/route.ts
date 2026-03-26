@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { source } from "~/libs/source";
 
 const CONTENT_DIR = join(process.cwd(), "content", "en");
@@ -51,10 +51,11 @@ export async function GET(_request: Request, { params }: Props) {
 
   let body: string;
   try {
-    const rawMdx = await readFile(
-      join(CONTENT_DIR, `${slug.join("/")}.mdx`),
-      "utf-8"
-    );
+    const mdxPath = resolve(CONTENT_DIR, `${slug.join("/")}.mdx`);
+    if (!mdxPath.startsWith(CONTENT_DIR)) {
+      return new Response("Forbidden", { status: 403 });
+    }
+    const rawMdx = await readFile(mdxPath, "utf-8");
     const converted = await mdxToMarkdown(rawMdx);
     body = converted.includes("## API Reference")
       ? restructureComponentDoc(converted)

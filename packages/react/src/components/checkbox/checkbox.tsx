@@ -7,6 +7,12 @@ import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
 import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
+import {
+  getBackgroundColor,
+  getBorderColor,
+  getRadius,
+  getSize,
+} from "./checkbox.styles";
 
 export type CheckboxSize = "large" | "medium" | "small";
 
@@ -139,32 +145,4 @@ const getCheckedState = (
     .with("on", () => ({ checked: true, indeterminate: false }))
     .with("intermediate", () => ({ checked: false, indeterminate: true }))
     .with("off", () => ({ checked: false, indeterminate: false }))
-    .exhaustive();
-
-const getSize = (size: CheckboxSize) =>
-  match(size)
-    .with("large", () => "18px")
-    .with("medium", () => "16px")
-    .with("small", () => "14px")
-    .exhaustive();
-
-const getRadius = (size: CheckboxSize) =>
-  match(size)
-    .with("large", () => "var(--cocso-radius-3)")
-    .with("medium", () => "var(--cocso-radius-2)")
-    .with("small", () => "var(--cocso-radius-1)")
-    .exhaustive();
-
-const getBorderColor = (status: CheckboxStatus) =>
-  match(status)
-    .with("on", () => colors.primary950)
-    .with("intermediate", () => colors.primary950)
-    .with("off", () => colors.neutral100)
-    .exhaustive();
-
-const getBackgroundColor = (status: CheckboxStatus) =>
-  match(status)
-    .with("on", () => colors.primary950)
-    .with("intermediate", () => colors.primary950)
-    .with("off", () => colors.white)
     .exhaustive();

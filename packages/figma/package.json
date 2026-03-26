@@ -4,25 +4,38 @@
   "private": true,
   "scripts": {
     "generate": "tsx scripts/generate-tokens.ts",
+    "extract": "tsx scripts/extract-components.ts",
     "prebuild": "pnpm generate",
     "build": "node build.js",
     "lint": "biome check .",
     "lint:fix": "biome check . --write",
     "check-types": "tsc --noEmit",
+    "pretest": "pnpm generate",
     "test": "vitest run",
+    "pretest:coverage": "pnpm generate",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@cocso-ui/baseframe-sources": "workspace:*",
+    "@cocso-ui/recipe": "workspace:*",
     "yaml": "^2.8.0"
   },
   "devDependencies": {
+    "@cocso-ui/css": "workspace:*",
+    "@cocso-ui/react": "workspace:*",
     "@figma/plugin-typings": "^1.121.0",
     "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.5.2",
     "@vitest/coverage-v8": "^4.0.18",
     "esbuild": "^0.27.3",
+    "playwright": "^1.52.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsx": "^4.19.0",
     "typescript": "^5.9.3",
+    "vite": "^7.0.0",
     "vitest": "^4.0.18"
   }
 }

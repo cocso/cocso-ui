@@ -20,6 +20,22 @@ ci:
   - changed-files:
       - any-glob-to-any-file: '.github/**'
 
+recipe:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/recipe/**'
+
+figma:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/figma/**'
+
+storybook:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/storybook/**'
+
+website:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/website/**'
+
 documentation:
   - changed-files:
       - any-glob-to-any-file:

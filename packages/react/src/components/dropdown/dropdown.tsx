@@ -37,3 +37,4 @@ export const Dropdown = Object.assign(MenuBase.Root, {
   Content: DropdownContent,
   Item: DropdownItem,
 });
+Dropdown.displayName = "Dropdown";

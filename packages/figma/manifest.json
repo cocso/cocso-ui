@@ -1,5 +1,5 @@
 {
-  "name": "cocso-ui Design Tokens",
+  "name": "@cocso-ui/figma",
   "id": "cocso-ui-figma-plugin",
   "api": "1.0.0",
   "main": "controller.js",

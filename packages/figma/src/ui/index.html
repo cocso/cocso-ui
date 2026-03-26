@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <style>
-    /* cocso-ui design tokens (inlined from @cocso-ui/css/token.css) */
     :root {
       --color-white: #ffffff;
       --color-neutral-50: #f4f5f6;
@@ -21,7 +20,6 @@
       --color-danger-600: #bd2c0f;
       --text-xs: 12px;
       --text-sm: 14px;
-      --text-base: 16px;
       --font-weight-regular: 400;
       --font-weight-medium: 500;
       --font-weight-semibold: 600;
@@ -65,6 +63,12 @@
       color: var(--color-neutral-600);
     }
 
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-5);
+    }
+
     button {
       width: 100%;
       height: 36px;
@@ -85,6 +89,21 @@
     button:disabled {
       cursor: not-allowed;
       background: var(--color-neutral-400);
+    }
+
+    .btn-secondary {
+      color: var(--color-neutral-950);
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-100);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-neutral-50);
+    }
+
+    .btn-secondary:disabled {
+      color: var(--color-neutral-400);
+      background: var(--color-white);
     }
 
     .status {
@@ -182,10 +201,15 @@
     </style>
   </head>
   <body>
-    <h1>cocso-ui Design Tokens</h1>
-    <p class="subtitle">Sync baseframe tokens to Figma Variables</p>
+    <h1>@cocso-ui/figma</h1>
+    <p class="subtitle">Sync tokens and generate components for Figma</p>
 
-    <button type="button" id="sync-btn">Sync Tokens</button>
+    <div class="actions">
+      <button type="button" id="sync-btn">Sync Tokens</button>
+      <button type="button" id="generate-btn" class="btn-secondary">
+        Generate Components
+      </button>
+    </div>
 
     <div id="status" class="status"><span id="status-text"></span></div>
 
@@ -219,26 +243,41 @@
     <script>
     "use strict";
     const syncBtn = document.getElementById("sync-btn");
+    const generateBtn = document.getElementById("generate-btn");
     const statusEl = document.getElementById("status");
     const statusText = document.getElementById("status-text");
     const resultEl = document.getElementById("result");
 
-    function onSync() {
-      syncBtn.disabled = true;
+    function setLoading(loading) {
+      syncBtn.disabled = loading;
+      generateBtn.disabled = loading;
+    }
+
+    syncBtn.addEventListener("click", () => {
+      setLoading(true);
       statusEl.className = "status visible syncing";
       statusText.textContent = "Syncing tokens...";
       resultEl.style.display = "none";
       parent.postMessage({ pluginMessage: { type: "sync-tokens" } }, "*");
-    }
+    });
 
-    syncBtn.addEventListener("click", onSync);
+    generateBtn.addEventListener("click", () => {
+      setLoading(true);
+      statusEl.className = "status visible syncing";
+      statusText.textContent = "Generating components...";
+      resultEl.style.display = "none";
+      parent.postMessage(
+        { pluginMessage: { type: "generate-components" } },
+        "*"
+      );
+    });
 
     function renderSkippedTokens(skippedTokens) {
       const section = document.getElementById("skipped-section");
       const list = document.getElementById("skipped-list");
       if (skippedTokens && skippedTokens.length > 0) {
         section.style.display = "block";
-        list.innerHTML = "";
+        list.replaceChildren();
         for (const token of skippedTokens) {
           const li = document.createElement("li");
           li.textContent = `${token.name} `;
@@ -258,7 +297,7 @@
       const list = document.getElementById("errors-list");
       if (errors && errors.length > 0) {
         section.style.display = "block";
-        list.innerHTML = "";
+        list.replaceChildren();
         for (const error of errors) {
           const li = document.createElement("li");
           li.textContent = error;
@@ -282,21 +321,37 @@
 
       if (msg.type === "sync-complete") {
         const r = msg.result;
-        syncBtn.disabled = false;
+        setLoading(false);
         statusEl.className = "status visible success";
         statusText.textContent = "Sync complete!";
         resultEl.style.display = "block";
-
         document.getElementById("created-count").textContent = r.created;
         document.getElementById("updated-count").textContent = r.updated;
         document.getElementById("skipped-count").textContent = r.skipped;
-
         renderSkippedTokens(r.skippedTokens);
         renderErrors(r.errors);
       }
 
       if (msg.type === "sync-error") {
-        syncBtn.disabled = false;
+        setLoading(false);
+        statusEl.className = "status visible error";
+        statusText.textContent = `Error: ${msg.error}`;
+      }
+
+      if (msg.type === "generate-start") {
+        statusEl.className = "status visible syncing";
+        statusText.textContent = "Generating components...";
+      }
+
+      if (msg.type === "generate-complete") {
+        setLoading(false);
+        statusEl.className = "status visible success";
+        statusText.textContent = `Components generated on "${msg.result.page}" page`;
+        resultEl.style.display = "none";
+      }
+
+      if (msg.type === "generate-error") {
+        setLoading(false);
         statusEl.className = "status visible error";
         statusText.textContent = `Error: ${msg.error}`;
       }

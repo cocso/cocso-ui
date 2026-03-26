@@ -1,9 +1,11 @@
 import type { ComponentProps, CSSProperties } from "react";
-import { match } from "ts-pattern";
 import { cn } from "../../cn";
-import { colors, spacing } from "../../token";
+import { spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
+import { getColor } from "./stock-quantity-status.styles";
+
+export { getColor } from "./stock-quantity-status.styles";
 
 export type QuantityStatus = "보통" | "여유" | "부족";
 
@@ -127,10 +129,3 @@ export function StockQuantityStatus({
     </div>
   );
 }
-
-export const getColor = (quantity: QuantityStatus) =>
-  match(quantity)
-    .with("여유", () => colors.info500)
-    .with("보통", () => colors.success400)
-    .with("부족", () => colors.danger500)
-    .exhaustive();

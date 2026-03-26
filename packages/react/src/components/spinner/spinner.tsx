@@ -1,19 +1,15 @@
 import type { ComponentProps, CSSProperties } from "react";
-import { match } from "ts-pattern";
 import { cn } from "../../cn";
-import { colors } from "../../token";
 import styles from "./spinner.module.css";
 
-export type SpinnerSize = "large" | "medium" | "small";
+export type { SpinnerSize, SpinnerVariant } from "./spinner.styles";
 
-export type SpinnerVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "error"
-  | "warning"
-  | "info"
-  | "white";
+import {
+  getBladeColor,
+  getSizeConfig,
+  type SpinnerSize,
+  type SpinnerVariant,
+} from "./spinner.styles";
 
 export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   label?: string;
@@ -21,40 +17,6 @@ export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   variant?: SpinnerVariant;
 }
 
-interface SizeConfig {
-  blade: { width: number; height: number; radius: number };
-  bladeCount: number;
-  container: number;
-}
-
-const sizeConfig: Record<SpinnerSize, SizeConfig> = {
-  small: {
-    container: 12,
-    bladeCount: 6,
-    blade: { width: 1.5, height: 4, radius: 0.75 },
-  },
-  medium: {
-    container: 16,
-    bladeCount: 8,
-    blade: { width: 2, height: 5, radius: 1 },
-  },
-  large: {
-    container: 20,
-    bladeCount: 10,
-    blade: { width: 2, height: 6, radius: 1 },
-  },
-};
-
-const getVariantColor = (variant: SpinnerVariant) =>
-  match(variant)
-    .with("primary", () => colors.primary950)
-    .with("secondary", () => colors.neutral500)
-    .with("success", () => colors.success500)
-    .with("error", () => colors.danger500)
-    .with("warning", () => colors.warning500)
-    .with("info", () => colors.info500)
-    .with("white", () => colors.white)
-    .exhaustive();
 export function Spinner({
   ref,
   className,
@@ -64,9 +26,16 @@ export function Spinner({
   label = "Loading",
   ...props
 }: SpinnerProps) {
-  const { container, bladeCount, blade } = sizeConfig[size];
-  const left = (container - blade.width) / 2;
-  const originY = blade.height - container / 2;
+  const {
+    output,
+    blades: bladeCount,
+    width,
+    height,
+    radius,
+  } = getSizeConfig(size);
+  const container = output;
+  const left = (container - width) / 2;
+  const originY = height - container / 2;
 
   const step = 360 / bladeCount;
   const blades = Array.from({ length: bladeCount }, (_, i) => ({
@@ -83,7 +52,7 @@ export function Spinner({
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: getVariantColor(variant),
+        color: getBladeColor(variant),
         ..._style,
       }}
       {...props}
@@ -95,9 +64,9 @@ export function Spinner({
           style={
             {
               left: `${left}px`,
-              width: `${blade.width}px`,
-              height: `${blade.height}px`,
-              borderRadius: `${blade.radius}px`,
+              width: `${width}px`,
+              height: `${height}px`,
+              borderRadius: `${radius}px`,
               backgroundColor: "currentColor",
               transformOrigin: `center ${originY}px`,
               animationDelay: `${delay}s`,

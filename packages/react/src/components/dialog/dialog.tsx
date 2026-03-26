@@ -106,3 +106,4 @@ export const Dialog = Object.assign(DialogBase.Root, {
   Title: DialogTitle,
   Description: DialogDescription,
 });
+Dialog.displayName = "Dialog";
