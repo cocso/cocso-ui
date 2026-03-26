@@ -51,44 +51,40 @@ function createComponentFromSpec(
 
   // Padding
   if (spec.paddingInline) {
-    component.paddingLeft = spec.paddingInline as number;
-    component.paddingRight = spec.paddingInline as number;
+    component.paddingLeft = spec.paddingInline;
+    component.paddingRight = spec.paddingInline;
   }
   if (spec.paddingLeft) {
-    component.paddingLeft = spec.paddingLeft as number;
+    component.paddingLeft = spec.paddingLeft;
   }
   if (spec.paddingRight) {
-    component.paddingRight = spec.paddingRight as number;
+    component.paddingRight = spec.paddingRight;
   }
 
   // Corner radius
   const radius = spec.cornerRadius ?? spec.borderRadius;
   if (radius) {
-    component.cornerRadius = radius as number;
+    component.cornerRadius = radius;
   }
 
   // Fill
   const bgColor = spec.bgColor ?? spec.fills;
-  if (bgColor && typeof bgColor === "object") {
-    setFill(component, bgColor as RGB);
+  if (bgColor) {
+    setFill(component, bgColor);
   } else {
     component.fills = [];
   }
 
   // Stroke
   if (spec.strokeColor && spec.strokeWeight) {
-    component.strokes = [createBoundPaint(spec.strokeColor as RGB)];
-    component.strokeWeight = spec.strokeWeight as number;
+    component.strokes = [createBoundPaint(spec.strokeColor)];
+    component.strokeWeight = spec.strokeWeight;
   }
 
   // Text label
-  const textColor =
-    spec.fontColor && typeof spec.fontColor === "object"
-      ? (spec.fontColor as RGB)
-      : COLORS.neutral900;
-  const fontSize = typeof spec.fontSize === "number" ? spec.fontSize : 14;
-  const fontWeight =
-    typeof spec.fontWeight === "number" ? spec.fontWeight : 500;
+  const textColor = spec.fontColor ?? COLORS.neutral900;
+  const fontSize = spec.fontSize ?? 14;
+  const fontWeight = spec.fontWeight ?? 500;
   const text = createTextNode(label, fontSize, fontWeight, textColor);
   component.appendChild(text);
 
@@ -114,24 +110,24 @@ function createWideComponentFromSpec(
   component.primaryAxisAlignItems = "MIN";
 
   const height = spec.height ?? 36;
-  component.resize(width, height as number);
+  component.resize(width, height);
 
   // Padding
   if (spec.paddingLeft) {
-    component.paddingLeft = spec.paddingLeft as number;
+    component.paddingLeft = spec.paddingLeft;
   } else if (spec.paddingInline) {
-    component.paddingLeft = spec.paddingInline as number;
+    component.paddingLeft = spec.paddingInline;
   }
   if (spec.paddingRight) {
-    component.paddingRight = spec.paddingRight as number;
+    component.paddingRight = spec.paddingRight;
   } else if (spec.paddingInline) {
-    component.paddingRight = spec.paddingInline as number;
+    component.paddingRight = spec.paddingInline;
   }
 
   // Corner radius
   const radius = spec.cornerRadius ?? spec.borderRadius;
   if (radius) {
-    component.cornerRadius = radius as number;
+    component.cornerRadius = radius;
   }
 
   // Fill
@@ -141,8 +137,8 @@ function createWideComponentFromSpec(
   component.strokes = [createBoundPaint(COLORS.neutral200)];
   component.strokeWeight = 1;
 
-  // Text
-  const fontSize = typeof spec.fontSize === "number" ? spec.fontSize : 14;
+  // Text (placeholder)
+  const fontSize = spec.fontSize ?? 14;
   const text = createTextNode(label, fontSize, 400, COLORS.neutral400);
   component.appendChild(text);
 
@@ -157,17 +153,12 @@ function createSpinnerFromSpec(
   name: string,
   spec: FigmaNodeSpec
 ): ComponentNode {
-  const bladeCount = typeof spec.blades === "number" ? spec.blades : 8;
-  const bladeWidth = typeof spec.bladeWidth === "number" ? spec.bladeWidth : 2;
-  const bladeHeight =
-    typeof spec.bladeHeight === "number" ? spec.bladeHeight : 5;
-  const bladeRadius =
-    typeof spec.bladeRadius === "number" ? spec.bladeRadius : 1;
-  const containerSize = typeof spec.output === "number" ? spec.output : 16;
-  const bladeColor =
-    spec.bladeColor && typeof spec.bladeColor === "object"
-      ? (spec.bladeColor as RGB)
-      : COLORS.neutral900;
+  const bladeCount = spec.blades ?? 8;
+  const bw = spec.bladeWidth ?? 2;
+  const bh = spec.bladeHeight ?? 5;
+  const br = spec.bladeRadius ?? 1;
+  const containerSize = spec.output ?? 16;
+  const bladeColor = spec.bladeColor ?? COLORS.neutral900;
 
   const component = figma.createComponent();
   component.name = name;
@@ -185,12 +176,12 @@ function createSpinnerFromSpec(
 
     const rect = figma.createRectangle();
     rect.name = "blade";
-    rect.resize(bladeWidth, bladeHeight);
-    rect.cornerRadius = bladeRadius;
+    rect.resize(bw, bh);
+    rect.cornerRadius = br;
     rect.fills = [createBoundPaint(bladeColor, opacity)];
 
-    rect.x = (containerSize - bladeWidth) / 2;
-    rect.y = containerSize - bladeHeight;
+    rect.x = (containerSize - bw) / 2;
+    rect.y = containerSize - bh;
 
     wrapper.appendChild(rect);
     wrapper.rotation = -angleDeg;
@@ -208,21 +199,10 @@ function createCheckboxFromSpec(
   name: string,
   spec: FigmaNodeSpec
 ): ComponentNode {
-  const boxSize = typeof spec.size === "number" ? spec.size : 16;
-  let radius = 4;
-  if (spec.radius !== undefined) {
-    radius = spec.radius as number;
-  } else if (spec.borderRadius !== undefined) {
-    radius = spec.borderRadius as number;
-  }
-  const bgColor =
-    spec.bgColor && typeof spec.bgColor === "object"
-      ? (spec.bgColor as RGB)
-      : COLORS.white;
-  const borderColor =
-    spec.borderColor && typeof spec.borderColor === "object"
-      ? (spec.borderColor as RGB)
-      : COLORS.neutral200;
+  const boxSize = spec.size ?? 16;
+  const radius = spec.radius ?? spec.borderRadius ?? 4;
+  const bgColor = spec.bgColor ?? COLORS.white;
+  const borderColor = spec.borderColor ?? COLORS.neutral200;
 
   const component = figma.createComponent();
   component.name = name;
@@ -239,7 +219,7 @@ function createCheckboxFromSpec(
   setFill(box, bgColor);
   box.strokes = [createBoundPaint(borderColor)];
   box.strokeWeight = 1;
-  box.cornerRadius = radius as number;
+  box.cornerRadius = radius;
 
   const labelText = createTextNode("Label", 14, 400, COLORS.neutral900);
 
@@ -258,16 +238,13 @@ function createSwitchFromSpec(
   spec: FigmaNodeSpec,
   isChecked: boolean
 ): ComponentNode {
-  const trackWidth = typeof spec.width === "number" ? spec.width : 36;
-  const trackHeight = typeof spec.height === "number" ? spec.height : 20;
-  const thumbSize = typeof spec.thumbSize === "number" ? spec.thumbSize : 16;
-  const thumbOffset =
-    typeof spec.thumbOffset === "number" ? spec.thumbOffset : 2;
+  const trackWidth = spec.width ?? 36;
+  const trackHeight = spec.height ?? 20;
+  const thumbSize = spec.thumbSize ?? 16;
+  const thumbOffset = spec.thumbOffset ?? 2;
 
   const trackColor =
-    isChecked && spec.checkedBgColor && typeof spec.checkedBgColor === "object"
-      ? (spec.checkedBgColor as RGB)
-      : COLORS.neutral200;
+    isChecked && spec.checkedBgColor ? spec.checkedBgColor : COLORS.neutral200;
 
   const component = figma.createComponent();
   component.name = name;
@@ -300,8 +277,8 @@ function createRadioFromSpec(
   spec: FigmaNodeSpec,
   isSelected: boolean
 ): ComponentNode {
-  const outerSize = typeof spec.size === "number" ? spec.size : 16;
-  const dotSize = typeof spec.dotSize === "number" ? spec.dotSize : 7;
+  const outerSize = spec.size ?? 16;
+  const dotSize = spec.dotSize ?? 7;
 
   const component = figma.createComponent();
   component.name = name;
@@ -364,6 +341,40 @@ function getAllVariantCombinations<
   return combinations;
 }
 
+/**
+ * Group all variant combinations by the first dimension value, resolving
+ * each combination to a FigmaNodeSpec. This pattern is shared across
+ * most section generators.
+ */
+function groupVariantsByFirstDimension<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(
+  recipe: RecipeDefinition<V, S>,
+  combinations: Record<string, string>[]
+): Map<string, Array<{ name: string; spec: FigmaNodeSpec }>> {
+  const dimensions = Object.keys(recipe.variants);
+  const firstDim = dimensions[0];
+  const groups = new Map<
+    string,
+    Array<{ name: string; spec: FigmaNodeSpec }>
+  >();
+
+  for (const combo of combinations) {
+    const groupKey = combo[firstDim] ?? "default";
+    const spec = resolveForFigma(recipe, combo as Record<string, string>);
+    const nameParts = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+    if (!groups.has(groupKey)) {
+      groups.set(groupKey, []);
+    }
+    groups.get(groupKey)?.push({ name: nameParts, spec });
+  }
+
+  return groups;
+}
+
 function generateGenericSection<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -374,29 +385,8 @@ function generateGenericSection<
   textLabel: string
 ): void {
   const section = createComponentSection(sectionLabel);
-  const dimensions = Object.keys(recipe.variants) as string[];
-  const firstDim = dimensions[0] ?? "default";
   const combinations = getAllVariantCombinations(recipe);
-
-  // Group by first dimension value
-  const groups = new Map<
-    string,
-    Array<{ name: string; spec: FigmaNodeSpec }>
-  >();
-  for (const combo of combinations) {
-    const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(
-      recipe,
-      combo as { [K in keyof V]?: keyof V[K] }
-    );
-    const nameParts = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    if (!groups.has(groupKey)) {
-      groups.set(groupKey, []);
-    }
-    groups.get(groupKey)?.push({ name: nameParts, spec });
-  }
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
@@ -469,10 +459,7 @@ function generateLinkSection<
     component.fills = [];
 
     // Link color from "color" key (not fontColor/bgColor)
-    const linkColor =
-      spec.color && typeof spec.color === "object"
-        ? (spec.color as RGB)
-        : COLORS.info500;
+    const linkColor = spec.color ?? COLORS.info500;
     const text = createTextNode("Link text", 14, 400, linkColor);
     if (variantValue === "inline") {
       text.textDecoration = "UNDERLINE";
@@ -490,28 +477,8 @@ function generateStockQuantityStatusSection<
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("StockQuantityStatus");
-  const dimensions = Object.keys(recipe.variants) as string[];
-  const firstDim = dimensions[0] ?? "quantity";
   const combinations = getAllVariantCombinations(recipe);
-
-  const groups = new Map<
-    string,
-    Array<{ name: string; spec: FigmaNodeSpec }>
-  >();
-  for (const combo of combinations) {
-    const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(
-      recipe,
-      combo as { [K in keyof V]?: keyof V[K] }
-    );
-    const nameParts = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    if (!groups.has(groupKey)) {
-      groups.set(groupKey, []);
-    }
-    groups.get(groupKey)?.push({ name: nameParts, spec });
-  }
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
@@ -524,10 +491,7 @@ function generateStockQuantityStatusSection<
       component.fills = [];
 
       // Stock status uses "color" key (not bgColor/fontColor)
-      const textColor =
-        spec.color && typeof spec.color === "object"
-          ? (spec.color as RGB)
-          : COLORS.neutral900;
+      const textColor = spec.color ?? COLORS.neutral900;
       const text = createTextNode(groupKey, 14, 500, textColor);
       component.appendChild(text);
       row.appendChild(component);
@@ -543,28 +507,8 @@ function generateCheckboxSection<
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Checkbox");
-  const dimensions = Object.keys(recipe.variants) as string[];
-  const firstDim = dimensions[0] ?? "size";
   const combinations = getAllVariantCombinations(recipe);
-
-  const groups = new Map<
-    string,
-    Array<{ name: string; spec: FigmaNodeSpec }>
-  >();
-  for (const combo of combinations) {
-    const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(
-      recipe,
-      combo as { [K in keyof V]?: keyof V[K] }
-    );
-    const nameParts = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    if (!groups.has(groupKey)) {
-      groups.set(groupKey, []);
-    }
-    groups.get(groupKey)?.push({ name: nameParts, spec });
-  }
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
@@ -583,28 +527,8 @@ function generateSwitchSection<
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Switch");
-  const dimensions = Object.keys(recipe.variants) as string[];
-  const firstDim = dimensions[0] ?? "variant";
   const combinations = getAllVariantCombinations(recipe);
-
-  const groups = new Map<
-    string,
-    Array<{ name: string; spec: FigmaNodeSpec; combo: Record<string, string> }>
-  >();
-  for (const combo of combinations) {
-    const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(
-      recipe,
-      combo as { [K in keyof V]?: keyof V[K] }
-    );
-    const nameParts = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    if (!groups.has(groupKey)) {
-      groups.set(groupKey, []);
-    }
-    groups.get(groupKey)?.push({ name: nameParts, spec, combo });
-  }
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
@@ -669,28 +593,8 @@ function generateSpinnerSection<
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Spinner");
-  const dimensions = Object.keys(recipe.variants) as string[];
-  const firstDim = dimensions[0] ?? "variant";
   const combinations = getAllVariantCombinations(recipe);
-
-  const groups = new Map<
-    string,
-    Array<{ name: string; spec: FigmaNodeSpec }>
-  >();
-  for (const combo of combinations) {
-    const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(
-      recipe,
-      combo as { [K in keyof V]?: keyof V[K] }
-    );
-    const nameParts = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    if (!groups.has(groupKey)) {
-      groups.set(groupKey, []);
-    }
-    groups.get(groupKey)?.push({ name: nameParts, spec });
-  }
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);

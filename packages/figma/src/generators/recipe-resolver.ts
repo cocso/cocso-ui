@@ -24,28 +24,57 @@ const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
 /** Figma-compatible node specification produced by resolveForFigma(). */
 export interface FigmaNodeSpec {
+  // Color properties (resolved to RGB)
+  bgColor?: RGB;
   bladeColor?: RGB;
+
+  // Dimension properties (pixels)
   bladeHeight?: number;
   bladeRadius?: number;
   blades?: number;
   bladeWidth?: number;
+  borderColor?: RGB;
   borderRadius?: number;
+
+  // String properties
+  borderStyle?: string;
+  borderWidth?: number;
+  checkedBgColor?: RGB;
+  checkedThumbColor?: RGB;
+  color?: RGB;
+  contentPadding?: string;
   cornerRadius?: number;
+  dotSize?: number;
+  fillColor?: RGB;
   fills?: RGB;
+  fontColor?: RGB;
   fontSize?: number;
   fontWeight?: number;
   height?: number;
+  minWidth?: number;
   output?: number;
+  padding?: number;
   paddingBottom?: number;
   paddingInline?: number;
   paddingLeft?: number;
   paddingRight?: number;
   paddingTop?: number;
+  paddingX?: number;
+  radius?: number;
+  size?: number;
   strokeColor?: RGB;
   strokeWeight?: number;
+  switchBgColor?: RGB;
+  thumbOffset?: number;
+  thumbSize?: number;
   width?: number;
-  [key: string]: unknown;
 }
+
+/**
+ * Internal mutable view of FigmaNodeSpec for dynamic property assignment
+ * inside the resolver. External consumers use the strongly-typed interface.
+ */
+type MutableSpec = Record<string, unknown>;
 
 // ---------------------------------------------------------------------------
 // Token classification helpers (mirrors react.ts logic)
@@ -149,7 +178,7 @@ function isRadiusKey(key: string): boolean {
  * Skips CSS-only values that have no Figma equivalent.
  */
 function applyStyleValue(
-  spec: FigmaNodeSpec,
+  spec: MutableSpec,
   key: string,
   value: StyleValue
 ): void {
@@ -169,11 +198,7 @@ function applyStyleValue(
   }
 }
 
-function applyStringValue(
-  spec: FigmaNodeSpec,
-  key: string,
-  value: string
-): void {
+function applyStringValue(spec: MutableSpec, key: string, value: string): void {
   if (
     value === "transparent" ||
     value === "currentColor" ||
@@ -197,11 +222,7 @@ function applyStringValue(
   spec[key] = value;
 }
 
-function applyRadiusValue(
-  spec: FigmaNodeSpec,
-  key: string,
-  value: string
-): void {
+function applyRadiusValue(spec: MutableSpec, key: string, value: string): void {
   if (value === "100%") {
     spec[key] = 1000;
   } else if (value.startsWith("radius-")) {
@@ -213,7 +234,7 @@ function applyRadiusValue(
 // Slot application helpers
 // ---------------------------------------------------------------------------
 
-function applySlotStyles(spec: FigmaNodeSpec, slotStyles: SlotStyles): void {
+function applySlotStyles(spec: MutableSpec, slotStyles: SlotStyles): void {
   for (const [key, value] of Object.entries(slotStyles)) {
     applyStyleValue(spec, key, value);
   }
@@ -223,7 +244,7 @@ function applyVariantStyles<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
-  spec: FigmaNodeSpec,
+  spec: MutableSpec,
   recipe: RecipeDefinition<V, S>,
   merged: Record<string, unknown>
 ): void {
@@ -262,7 +283,7 @@ function applyCompoundVariants<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
-  spec: FigmaNodeSpec,
+  spec: MutableSpec,
   recipe: RecipeDefinition<V, S>,
   merged: Record<string, unknown>
 ): void {
@@ -289,7 +310,7 @@ function applyCompoundVariants<
 function applyBaseStyles<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
->(spec: FigmaNodeSpec, recipe: RecipeDefinition<V, S>): void {
+>(spec: MutableSpec, recipe: RecipeDefinition<V, S>): void {
   if (!recipe.base) {
     return;
   }
@@ -318,7 +339,7 @@ export function resolveForFigma<
   recipe: RecipeDefinition<V, S>,
   variants: { [K in keyof V]?: keyof V[K] }
 ): FigmaNodeSpec {
-  const spec: FigmaNodeSpec = {};
+  const spec: MutableSpec = {};
   const merged = { ...recipe.defaultVariants, ...variants } as Record<
     string,
     unknown
@@ -328,5 +349,5 @@ export function resolveForFigma<
   applyVariantStyles(spec, recipe, merged);
   applyCompoundVariants(spec, recipe, merged);
 
-  return spec;
+  return spec as FigmaNodeSpec;
 }

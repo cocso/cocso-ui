@@ -1,3 +1,10 @@
+/**
+ * @deprecated Legacy hand-coded spinner generator. The canonical recipe-based
+ * implementation lives in `recipe-generator.ts` (`createSpinnerFromSpec`).
+ * This file is kept for backward compatibility but should not be used for
+ * new work.
+ */
+
 import {
   SPINNER_SIZE_SPECS,
   SPINNER_SIZES,
