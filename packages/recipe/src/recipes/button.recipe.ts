@@ -27,16 +27,36 @@ export const buttonRecipe = defineRecipe({
     },
     size: {
       large: {
-        root: { height: 40, paddingInline: 14, contentPadding: "0 6px", fontSize: 14 },
+        root: {
+          height: 40,
+          paddingInline: 14,
+          contentPadding: "0 6px",
+          fontSize: 14,
+        },
       },
       medium: {
-        root: { height: 36, paddingInline: 12, contentPadding: "0 6px", fontSize: 14 },
+        root: {
+          height: 36,
+          paddingInline: 12,
+          contentPadding: "0 6px",
+          fontSize: 14,
+        },
       },
       small: {
-        root: { height: 32, paddingInline: 10, contentPadding: "0 2px", fontSize: 14 },
+        root: {
+          height: 32,
+          paddingInline: 10,
+          contentPadding: "0 2px",
+          fontSize: 14,
+        },
       },
       "x-small": {
-        root: { height: 28, paddingInline: 8, contentPadding: "0", fontSize: 12 },
+        root: {
+          height: 28,
+          paddingInline: 8,
+          contentPadding: "0",
+          fontSize: 12,
+        },
       },
     },
     shape: {

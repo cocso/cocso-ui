@@ -1,25 +1,11 @@
-import type { ComponentProps, CSSProperties } from "react";
+import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import { Radio as RadioBase } from "../../primitives/radio";
 import { RadioGroup as RadioGroupBase } from "../../primitives/radio-group";
 import styles from "./radio-group.module.css";
+import { sizeVars } from "./radio-group.styles";
 
-export type RadioSize = "large" | "medium" | "small";
-
-const sizeVars: Record<RadioSize, CSSProperties> = {
-  small: {
-    "--cocso-radio-size": "14px",
-    "--cocso-radio-dot-size": "6px",
-  } as CSSProperties,
-  medium: {
-    "--cocso-radio-size": "16px",
-    "--cocso-radio-dot-size": "7px",
-  } as CSSProperties,
-  large: {
-    "--cocso-radio-size": "18px",
-    "--cocso-radio-dot-size": "8px",
-  } as CSSProperties,
-};
+export type { RadioSize } from "./radio-group.styles";
 
 function RadioGroupRoot({
   className,

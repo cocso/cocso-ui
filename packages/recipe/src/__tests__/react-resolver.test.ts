@@ -153,7 +153,9 @@ describe("resolveForReact", () => {
     expect(result["--cocso-button-border"]).toBe(
       "1px solid var(--cocso-color-neutral-100)"
     );
-    expect(result["--cocso-button-bgColor"]).toBe("var(--cocso-color-transparent)");
+    expect(result["--cocso-button-bgColor"]).toBe(
+      "var(--cocso-color-transparent)"
+    );
   });
 
   it("applies compound variants", () => {

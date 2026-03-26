@@ -1,20 +1,22 @@
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
-import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { Switch as SwitchBase } from "../../primitives/switch";
-import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
+import {
+  getCheckedColor,
+  getSwitchHeight,
+  getSwitchWidth,
+  getThumbOffset,
+  getThumbSize,
+  type SwitchSize,
+  type SwitchVariant,
+  UNCHECKED_BG,
+} from "./switch.styles";
 
-export type SwitchSize = "small" | "medium" | "large";
+export type { SwitchSize, SwitchVariant } from "./switch.styles";
 
-export type SwitchVariant =
-  | "primary"
-  | "success"
-  | "error"
-  | "warning"
-  | "info";
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
@@ -46,7 +48,7 @@ export function Switch({
     "--cocso-switch-thumb-width": getThumbSize(size),
     "--cocso-switch-thumb-height": getThumbSize(size),
     "--cocso-switch-thumb-offset": getThumbOffset(size),
-    "--cocso-switch-bg-color": colors.neutral100,
+    "--cocso-switch-bg-color": UNCHECKED_BG,
     "--cocso-switch-checked-bg-color": getCheckedColor(variant),
   } as CSSProperties;
 
@@ -83,35 +85,3 @@ export function Switch({
     </div>
   );
 }
-
-const getSwitchWidth = (size: SwitchSize) =>
-  match(size)
-    .with("large", () => "40px")
-    .with("medium", () => "36px")
-    .with("small", () => "32px")
-    .exhaustive();
-
-const getSwitchHeight = (size: SwitchSize) =>
-  match(size)
-    .with("large", () => "22px")
-    .with("medium", () => "20px")
-    .with("small", () => "18px")
-    .exhaustive();
-
-const getThumbSize = (size: SwitchSize) =>
-  match(size)
-    .with("large", () => "18px")
-    .with("medium", () => "16px")
-    .with("small", () => "14px")
-    .exhaustive();
-
-const getThumbOffset = (_size: SwitchSize) => "2px";
-
-const getCheckedColor = (variant: SwitchVariant) =>
-  match(variant)
-    .with("primary", () => colors.primary950)
-    .with("success", () => colors.success500)
-    .with("error", () => colors.danger500)
-    .with("warning", () => colors.warning500)
-    .with("info", () => colors.info500)
-    .exhaustive();
