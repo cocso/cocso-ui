@@ -1,19 +1,11 @@
 import { syncTokens } from "../core/variable-creator";
-import componentSpecs from "../generated/component-specs.json";
 import tokenData from "../generated/tokens.json";
-import {
-  type ComponentSpecs,
-  generateFromExtractedSpecs,
-  generateSpinnerComponents,
-} from "../generators";
+import { generateFromRecipes } from "../generators";
 import { loadColorVariables, setupPageLayout } from "../generators/shared";
 import type { FigmaTokenData } from "../types/token-schema";
 
 const SUPPORTED_SCHEMA_VERSION = 1;
 const COMPONENT_PAGE_NAME = "cocso-ui Components";
-
-/** Components that use hand-coded generators (SVG geometry, etc.). */
-const HAND_CODED_COMPONENTS = new Set(["Spinner"]);
 
 figma.showUI(__html__, { width: 360, height: 480 });
 
@@ -80,36 +72,13 @@ async function handleGenerateComponents() {
     // Pre-load Figma color Variables for token-driven binding (Reshaped-like)
     await loadColorVariables();
 
-    // Hybrid dispatch: extraction for most components, hand-coded for Spinner
-    const allSpecs = componentSpecs as ComponentSpecs;
-    const extractedSpecs: ComponentSpecs = {};
-    const handCodedNames: string[] = [];
-
-    for (const [name, variants] of Object.entries(allSpecs)) {
-      if (HAND_CODED_COMPONENTS.has(name)) {
-        handCodedNames.push(name);
-      } else {
-        extractedSpecs[name] = variants;
-      }
-    }
-
-    // Generate extraction-based components
-    generateFromExtractedSpecs(container, extractedSpecs);
-
-    // Generate hand-coded components
-    generateSpinnerComponents(container);
-
-    const extractedCount = Object.keys(extractedSpecs).length;
-    const handCodedCount = handCodedNames.length;
-    const totalCount = extractedCount + handCodedCount;
+    const count = generateFromRecipes(container);
 
     figma.ui.postMessage({
       type: "generate-complete",
-      result: { components: totalCount, page: COMPONENT_PAGE_NAME },
+      result: { components: count, page: COMPONENT_PAGE_NAME },
     });
-    figma.notify(
-      `${totalCount} component sets generated (${extractedCount} extracted, ${handCodedCount} hand-coded)`
-    );
+    figma.notify(`${count} component sets generated from recipes`);
   } catch (err) {
     figma.ui.postMessage({
       type: "generate-error",
