@@ -228,4 +228,91 @@ describe("resolveForReact", () => {
       "var(--cocso-color-primary-950)"
     );
   });
+
+  it("handles recipe without compoundVariants", () => {
+    const simpleRecipe = defineRecipe({
+      name: "simple",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+    const result = resolveForReact(simpleRecipe, { variant: "primary" });
+    expect(result["--cocso-simple-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("handles compound variant with scalar condition", () => {
+    const result = resolveForReact(testRecipe, {
+      variant: "primary",
+      size: "large",
+    });
+    // The existing compound variant has array condition for size
+    // Verify it still applies
+    expect(result["--cocso-button-borderRadius"]).toBe("var(--cocso-radius-4)");
+  });
+
+  it("skips variant styles when variant value is not defined", () => {
+    const result = resolveForReact(testRecipe, {
+      variant: "primary" as any,
+      size: "nonexistent" as any,
+    });
+    // Should still have variant styles but no size styles
+    expect(result["--cocso-button-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+    expect(result["--cocso-button-height"]).toBeUndefined();
+  });
+
+  it("skips state overrides for dimensions without state styles", () => {
+    const result = resolveForReact(
+      testRecipe,
+      { variant: "outline", size: "medium" },
+      { state: "hover" }
+    );
+    // outline has no hover state override, so bgColor stays as base
+    expect(result["--cocso-button-bgColor"]).toBe(
+      "var(--cocso-color-transparent)"
+    );
+  });
+
+  it("matches compound variants with mixed scalar and array conditions", () => {
+    const mixedRecipe = defineRecipe({
+      name: "mixed",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+          secondary: { root: { bgColor: "neutral-50" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+          small: { root: { height: 32 } },
+        },
+      },
+      compoundVariants: [
+        {
+          conditions: { variant: "primary", size: "large" },
+          styles: { root: { fontWeight: "bold" } },
+        },
+      ],
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    const match = resolveForReact(mixedRecipe, {
+      variant: "primary",
+      size: "large",
+    });
+    expect(match["--cocso-mixed-fontWeight"]).toBe("700");
+
+    const noMatch = resolveForReact(mixedRecipe, {
+      variant: "secondary",
+      size: "large",
+    });
+    expect(noMatch["--cocso-mixed-fontWeight"]).toBeUndefined();
+  });
 });

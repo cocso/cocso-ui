@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { defineRecipe } from "../define-recipe";
 
 describe("defineRecipe", () => {
@@ -100,5 +100,25 @@ describe("defineRecipe", () => {
 
   it("preserves base styles", () => {
     expect(testRecipe.base?.root?.display).toBe("inline-flex");
+  });
+
+  it("warns when variant value names collide across dimensions", () => {
+    const spy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    defineRecipe({
+      name: "collision-test",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          shared: { root: { bgColor: "primary-950" } },
+        },
+        size: {
+          shared: { root: { height: 40 } },
+        },
+      },
+      defaultVariants: { variant: "shared", size: "shared" },
+    });
+    expect(spy).toHaveBeenCalledOnce();
+    expect(spy.mock.calls[0][0]).toContain("shared");
+    spy.mockRestore();
   });
 });
