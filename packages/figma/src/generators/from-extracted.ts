@@ -9,6 +9,7 @@ import {
   createBoundPaint,
   createComponentSection,
   createVariantRow,
+  getFontStyle,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -95,25 +96,6 @@ export type ComponentSpecs = Record<string, VariantEntry[]>;
 // Figma node construction from spec
 // ---------------------------------------------------------------------------
 
-function getFontStyle(weight: number): string {
-  if (weight <= 300) {
-    return "Light";
-  }
-  if (weight <= 400) {
-    return "Regular";
-  }
-  if (weight <= 500) {
-    return "Medium";
-  }
-  if (weight <= 600) {
-    return "SemiBold";
-  }
-  if (weight <= 700) {
-    return "Bold";
-  }
-  return "ExtraBold";
-}
-
 function applyFills(node: MinimalFillsMixin, fills?: FillSpec[]): void {
   if (!fills || fills.length === 0) {
     node.fills = [];
@@ -176,7 +158,7 @@ function createFigmaNode(spec: NodeSpec): SceneNode {
   return createFrameFromSpec(spec);
 }
 
-/** Always use Inter in Figma — browser may resolve to system fonts like Arial. */
+/** Always use Pretendard in Figma — browser may resolve to system fonts like Arial. */
 const FIGMA_FONT_FAMILY = "Pretendard";
 
 function createTextFromSpec(spec: NodeSpec): TextNode {

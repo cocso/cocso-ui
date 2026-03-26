@@ -60,6 +60,7 @@ export function Switch({
     >
       {position === "left" && (
         <Typography
+          aria-disabled={disabled}
           render={<label htmlFor={id}>{label}</label>}
           size={size}
           type="body"

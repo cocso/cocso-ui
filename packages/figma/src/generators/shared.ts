@@ -61,8 +61,10 @@ export function createBoundPaint(color: RGB, opacity = 1): SolidPaint {
  * Falls back to opaque black if the token is not found.
  * Also registers the RGB→tokenName mapping for automatic Variable binding.
  */
+const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
+
 function colorToken(name: string): RGB {
-  const token = data.tokens.find((t) => t.name === name);
+  const token = tokenMap.get(name);
   if (token && typeof token.values.default === "object") {
     const c = token.values.default as FigmaColorValue;
     const rgb = { r: c.r, g: c.g, b: c.b };
@@ -134,7 +136,7 @@ export function createTextNode(
   return text;
 }
 
-function getFontStyle(weight: number): string {
+export function getFontStyle(weight: number): string {
   if (weight <= 300) {
     return "Light";
   }

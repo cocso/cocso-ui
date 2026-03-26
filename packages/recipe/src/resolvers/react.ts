@@ -60,9 +60,8 @@ function isCompoundBorder(value: unknown): value is CompoundBorder {
   return (
     typeof value === "object" &&
     value !== null &&
-    "width" in value &&
-    "style" in value &&
-    "color" in value
+    "_type" in value &&
+    (value as CompoundBorder)._type === "border"
   );
 }
 
@@ -144,7 +143,7 @@ interface ResolveOptions {
  * Resolve a recipe + variant selection into a CSS custom property map.
  */
 export function resolveForReact<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   recipe: RecipeDefinition<V, S>,
@@ -177,7 +176,7 @@ export function resolveForReact<
 }
 
 function applyVariantStyles<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   result: Record<string, string>,
@@ -204,7 +203,7 @@ function applyVariantStyles<
 }
 
 function applyCompoundVariants<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   result: Record<string, string>,
@@ -230,7 +229,7 @@ function applyCompoundVariants<
 }
 
 function applyStateOverrides<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   result: Record<string, string>,
@@ -243,8 +242,11 @@ function applyStateOverrides<
   if (!stateMap) {
     return;
   }
+  // NOTE: State lookup is keyed by variant value name, not dimension-aware.
+  // If two dimensions share a variant value name (e.g., both have "medium"),
+  // only the last match applies. Currently no recipe has overlapping values.
   for (const [_dimension, variantValue] of Object.entries(merged)) {
-    const stateStyles = stateMap[variantValue as keyof V[keyof V]];
+    const stateStyles = stateMap[variantValue as string];
     if (!stateStyles) {
       continue;
     }

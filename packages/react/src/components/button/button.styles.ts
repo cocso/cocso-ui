@@ -5,6 +5,7 @@
 import { match } from "ts-pattern";
 import { colors } from "../../token";
 import type { SpinnerVariant } from "../spinner";
+import type { ButtonShape, ButtonSize, ButtonVariant } from "./button";
 
 export { fontWeight as fontWeightToken } from "../../token";
 export type { ButtonShape, ButtonSize, ButtonVariant } from "./button";

@@ -4,6 +4,7 @@
  */
 import { match } from "ts-pattern";
 import { colors } from "../../token";
+import type { LinkVariant } from "./link";
 
 export type { LinkVariant } from "./link";
 

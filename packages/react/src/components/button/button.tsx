@@ -4,6 +4,7 @@ import { mergeProps } from "../../primitives/merge-props";
 import { useRender } from "../../primitives/use-render";
 import type { FontWeight } from "../../token";
 import { Spinner } from "../spinner";
+import type { SpinnerVariant } from "../spinner";
 import styles from "./button.module.css";
 import {
   fontWeightToken,

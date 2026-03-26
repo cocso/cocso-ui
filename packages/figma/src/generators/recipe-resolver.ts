@@ -74,9 +74,8 @@ function isCompoundBorder(value: unknown): value is CompoundBorder {
   return (
     typeof value === "object" &&
     value !== null &&
-    "width" in value &&
-    "style" in value &&
-    "color" in value
+    "_type" in value &&
+    (value as CompoundBorder)._type === "border"
   );
 }
 
@@ -220,7 +219,7 @@ function applySlotStyles(spec: FigmaNodeSpec, slotStyles: SlotStyles): void {
 }
 
 function applyVariantStyles<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   spec: FigmaNodeSpec,
@@ -245,10 +244,8 @@ function applyVariantStyles<
   }
 }
 
-function compoundConditionMatches<
-  V extends Record<string, Record<string, SlotStyles>>,
->(
-  conditions: { [K in keyof V]?: keyof V[K] | (keyof V[K])[] },
+function compoundConditionMatches(
+  conditions: Record<string, string | string[] | undefined>,
   merged: Record<string, unknown>
 ): boolean {
   return Object.entries(conditions).every(([key, condition]) => {
@@ -261,7 +258,7 @@ function compoundConditionMatches<
 }
 
 function applyCompoundVariants<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   spec: FigmaNodeSpec,
@@ -272,7 +269,7 @@ function applyCompoundVariants<
     return;
   }
   for (const cv of recipe.compoundVariants) {
-    if (compoundConditionMatches(cv.conditions, merged)) {
+    if (compoundConditionMatches(cv.conditions as Record<string, string | string[] | undefined>, merged)) {
       for (const slot of recipe.slots) {
         const slotStyles = cv.styles[slot];
         if (slotStyles) {
@@ -284,7 +281,7 @@ function applyCompoundVariants<
 }
 
 function applyBaseStyles<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(spec: FigmaNodeSpec, recipe: RecipeDefinition<V, S>): void {
   if (!recipe.base) {
@@ -309,7 +306,7 @@ function applyBaseStyles<
  * Compound variants win on conflict (matching the React resolver behavior).
  */
 export function resolveForFigma<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   recipe: RecipeDefinition<V, S>,

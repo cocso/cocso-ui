@@ -55,7 +55,12 @@ describe("resolveStyleValue", () => {
 
   it("resolves compound border values", () => {
     expect(
-      resolveStyleValue({ width: 1, style: "solid", color: "neutral-100" })
+      resolveStyleValue({
+        _type: "border",
+        width: 1,
+        style: "solid",
+        color: "neutral-100",
+      })
     ).toBe("1px solid var(--cocso-color-neutral-100)");
   });
 
@@ -83,6 +88,7 @@ const testRecipe = defineRecipe({
           bgColor: "transparent",
           textColor: "neutral-950",
           border: {
+            _type: "border" as const,
             width: 1,
             style: "solid" as const,
             color: "neutral-100" as const,

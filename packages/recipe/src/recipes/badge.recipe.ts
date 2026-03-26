@@ -17,6 +17,7 @@ export const badgeRecipe = defineRecipe({
           bgColor: "transparent",
           fontColor: "neutral-950",
           border: {
+            _type: "border" as const,
             width: 1,
             style: "solid" as const,
             color: "neutral-100" as const,

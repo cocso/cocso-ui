@@ -28,7 +28,7 @@ interface NodeSpec {
 }
 
 interface VariantEntry {
-  spec: NodeSpec;
+  spec: NodeSpec | null;
   variantKey: string;
 }
 type Specs = Record<string, VariantEntry[]>;
@@ -36,7 +36,7 @@ type Specs = Record<string, VariantEntry[]>;
 const specs = componentSpecs as Specs;
 const tokens = tokenData as FigmaTokenData;
 
-function findVariant(component: string, key: string): NodeSpec | undefined {
+function findVariant(component: string, key: string): NodeSpec | null | undefined {
   return specs[component]?.find((v) => v.variantKey === key)?.spec;
 }
 

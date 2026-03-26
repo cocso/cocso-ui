@@ -41,32 +41,36 @@ describe("Spinner recipe conformance", () => {
 
   describe("size → geometry", () => {
     for (const size of SIZES) {
+      // Cast to record — recipe values are runtime-checked, not type-checked here
+      const getRecipeRoot = (s: SpinnerSize) =>
+        spinnerRecipe.variants.size[s].root as unknown as Record<string, unknown>;
+
       it(`${size} blades matches`, () => {
-        const recipeSize = spinnerRecipe.variants.size[size].root;
+        const recipeSize = getRecipeRoot(size);
         const reactSize = getSizeConfig(size);
         expect(recipeSize.blades).toBe(reactSize.blades);
       });
 
       it(`${size} bladeWidth matches`, () => {
-        const recipeSize = spinnerRecipe.variants.size[size].root;
+        const recipeSize = getRecipeRoot(size);
         const reactSize = getSizeConfig(size);
         expect(recipeSize.bladeWidth).toBe(reactSize.width);
       });
 
       it(`${size} bladeHeight matches`, () => {
-        const recipeSize = spinnerRecipe.variants.size[size].root;
+        const recipeSize = getRecipeRoot(size);
         const reactSize = getSizeConfig(size);
         expect(recipeSize.bladeHeight).toBe(reactSize.height);
       });
 
       it(`${size} bladeRadius matches`, () => {
-        const recipeSize = spinnerRecipe.variants.size[size].root;
+        const recipeSize = getRecipeRoot(size);
         const reactSize = getSizeConfig(size);
         expect(recipeSize.bladeRadius).toBe(reactSize.radius);
       });
 
       it(`${size} output matches`, () => {
-        const recipeSize = spinnerRecipe.variants.size[size].root;
+        const recipeSize = getRecipeRoot(size);
         const reactSize = getSizeConfig(size);
         expect(recipeSize.output).toBe(reactSize.output);
       });

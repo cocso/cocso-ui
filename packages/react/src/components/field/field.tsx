@@ -15,6 +15,11 @@ export interface FieldProps {
   error?: string;
   htmlFor?: string;
   label: string;
+  /**
+   * `true` = required field (no indicator shown).
+   * `false` = explicitly optional — shows "(선택)" indicator.
+   * `undefined` = no indicator shown.
+   */
   required?: boolean;
 }
 

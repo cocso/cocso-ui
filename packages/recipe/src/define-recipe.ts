@@ -23,7 +23,7 @@ import type { RecipeDefinition, SlotStyles } from "./types";
  * ```
  */
 export function defineRecipe<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   const S extends string,
 >(recipe: RecipeDefinition<V, S>): RecipeDefinition<V, S> {
   return recipe;

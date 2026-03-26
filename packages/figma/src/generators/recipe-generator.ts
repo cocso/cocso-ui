@@ -338,7 +338,7 @@ function createRadioFromSpec(
  * Iterates cartesian product of all variant dimension values.
  */
 function getAllVariantCombinations<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(recipe: RecipeDefinition<V, S>): Record<string, string>[] {
   const dimensions = Object.keys(recipe.variants) as (keyof V & string)[];
@@ -365,7 +365,7 @@ function getAllVariantCombinations<
 }
 
 function generateGenericSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   container: FrameNode,
@@ -415,7 +415,7 @@ function generateGenericSection<
 // ---------------------------------------------------------------------------
 
 function generateInputSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   container: FrameNode,
@@ -444,7 +444,7 @@ function generateInputSection<
 }
 
 function generateLinkSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Link");
@@ -486,7 +486,7 @@ function generateLinkSection<
 }
 
 function generateStockQuantityStatusSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("StockQuantityStatus");
@@ -539,7 +539,7 @@ function generateStockQuantityStatusSection<
 }
 
 function generateCheckboxSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Checkbox");
@@ -579,7 +579,7 @@ function generateCheckboxSection<
 }
 
 function generateSwitchSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Switch");
@@ -631,7 +631,7 @@ function generateSwitchSection<
 }
 
 function generateRadioSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("RadioGroup");
@@ -665,7 +665,7 @@ function generateRadioSection<
 }
 
 function generateSpinnerSection<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Spinner");
@@ -713,16 +713,22 @@ function generateSpinnerSection<
  * Returns the number of component sets generated.
  */
 export function generateFromRecipes(container: FrameNode): number {
-  generateGenericSection(container, buttonRecipe, "Button", "Button");
-  generateGenericSection(container, badgeRecipe, "Badge", "Badge");
-  generateInputSection(container, inputRecipe, "Input", "Placeholder");
-  generateInputSection(container, selectRecipe, "Select", "Select option");
-  generateLinkSection(container, linkRecipe);
-  generateStockQuantityStatusSection(container, stockQuantityStatusRecipe);
-  generateCheckboxSection(container, checkboxRecipe);
-  generateSwitchSection(container, switchRecipe);
-  generateRadioSection(container, radioGroupRecipe);
-  generateSpinnerSection(container, spinnerRecipe);
+  const sections = [
+    () => generateGenericSection(container, buttonRecipe, "Button", "Button"),
+    () => generateGenericSection(container, badgeRecipe, "Badge", "Badge"),
+    () => generateInputSection(container, inputRecipe, "Input", "Placeholder"),
+    () => generateInputSection(container, selectRecipe, "Select", "Select option"),
+    () => generateLinkSection(container, linkRecipe),
+    () => generateStockQuantityStatusSection(container, stockQuantityStatusRecipe),
+    () => generateCheckboxSection(container, checkboxRecipe),
+    () => generateSwitchSection(container, switchRecipe),
+    () => generateRadioSection(container, radioGroupRecipe),
+    () => generateSpinnerSection(container, spinnerRecipe),
+  ];
 
-  return 10;
+  for (const generate of sections) {
+    generate();
+  }
+
+  return sections.length;
 }

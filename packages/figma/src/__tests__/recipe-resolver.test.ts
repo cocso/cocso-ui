@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buttonRecipe } from "../../../recipe/src/recipes/button.recipe";
-import { spinnerRecipe } from "../../../recipe/src/recipes/spinner.recipe";
+import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import {
   resolveColorToken,
   resolveForFigma,

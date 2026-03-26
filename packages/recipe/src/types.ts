@@ -48,10 +48,17 @@ export type CSSLiteral =
   | "transparent"
   | "currentColor"
   | "100%"
-  | "inherit";
+  | "inherit"
+  | "0"
+  | "inline-flex"
+  | "flex"
+  | `${number}px`
+  | `${number} ${number}px`
+  | `${number}px ${number}px`;
 
 /** Compound border value (e.g., "1px solid neutral-100"). */
 export interface CompoundBorder {
+  readonly _type: "border";
   color: ColorTokenRef;
   style: "solid";
   width: number;
@@ -86,7 +93,7 @@ export type SlotStyles = Record<string, StyleValue>;
 
 /** A single compound variant: applies styles when all conditions match. */
 export interface CompoundVariant<
-  V extends Record<string, Record<string, SlotStyles>>,
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 > {
   conditions: {
@@ -97,10 +104,10 @@ export interface CompoundVariant<
 
 /** Full recipe definition. */
 export interface RecipeDefinition<
-  V extends Record<string, Record<string, SlotStyles>> = Record<
+  V extends Record<
     string,
-    Record<string, SlotStyles>
-  >,
+    Record<string, Partial<Record<S, SlotStyles>>>
+  > = Record<string, Record<string, Partial<Record<string, SlotStyles>>>>,
   S extends string = string,
 > {
   /** Base styles always applied to each slot. */
@@ -118,10 +125,14 @@ export interface RecipeDefinition<
   /** Named sub-elements of the component. */
   slots: readonly S[];
 
-  /** State overrides (hover, active, disabled, focus, error). */
+  /**
+   * State overrides (hover, active, disabled, focus, error).
+   * Keys are variant value names from any dimension — not dimension-aware.
+   * If two dimensions share a variant value name, only the last match applies.
+   */
   states?: Record<
     string,
-    Partial<Record<keyof V[keyof V], Partial<Record<S, SlotStyles>>>>
+    Partial<Record<string, Partial<Record<S, SlotStyles>>>>
   >;
 
   /** Variant dimensions. Each dimension maps variant values to slot styles. */
