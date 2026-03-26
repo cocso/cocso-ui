@@ -7,10 +7,11 @@
  *
  * Recipe is authoritative — update React to match the recipe.
  */
-import { describe, expect, it } from "vitest";
+
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
-import { type InputSize, getStyles } from "../input.styles";
+import { describe, expect, it } from "vitest";
+import { getStyles, type InputSize } from "../input.styles";
 
 const SIZES: InputSize[] = ["x-small", "small", "medium", "large"];
 

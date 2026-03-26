@@ -7,9 +7,10 @@
  *
  * Recipe is authoritative — update React to match the recipe.
  */
-import { describe, expect, it } from "vitest";
+
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
+import { describe, expect, it } from "vitest";
 import {
   type ButtonShape,
   type ButtonSize,

@@ -2,9 +2,10 @@
  * Badge recipe conformance test.
  * Recipe is authoritative — update React to match the recipe.
  */
-import { describe, expect, it } from "vitest";
+
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
+import { describe, expect, it } from "vitest";
 import {
   type BadgeShape,
   type BadgeSize,
@@ -53,9 +54,7 @@ describe("Badge recipe conformance", () => {
           size: "medium",
           shape: "square",
         });
-        expect(resolved["--cocso-badge-fontColor"]).toBe(
-          getFontColor(variant)
-        );
+        expect(resolved["--cocso-badge-fontColor"]).toBe(getFontColor(variant));
       });
     }
   });

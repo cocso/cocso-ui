@@ -7,10 +7,11 @@
  *
  * Recipe is authoritative — update React to match the recipe.
  */
-import { describe, expect, it } from "vitest";
+
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
-import { type SelectSize, getStyles } from "../select.styles";
+import { describe, expect, it } from "vitest";
+import { getStyles, type SelectSize } from "../select.styles";
 
 const SIZES: SelectSize[] = ["large", "medium", "small", "x-small"];
 

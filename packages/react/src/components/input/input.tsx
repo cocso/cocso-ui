@@ -2,10 +2,11 @@ import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
 import { Field, useField } from "../field";
-import { getStyles } from "./input.styles";
 import styles from "./input.module.css";
+import { getStyles } from "./input.styles";
 
 export type { InputSize } from "./input.styles";
+
 import type { InputSize } from "./input.styles";
 
 export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
