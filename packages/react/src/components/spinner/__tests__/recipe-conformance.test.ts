@@ -41,7 +41,6 @@ describe("Spinner recipe conformance", () => {
 
   describe("size → geometry", () => {
     for (const size of SIZES) {
-      // Cast to record — recipe values are runtime-checked, not type-checked here
       const getRecipeRoot = (s: SpinnerSize) =>
         spinnerRecipe.variants.size[s].root as unknown as Record<
           string,

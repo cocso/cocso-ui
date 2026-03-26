@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "lint": "biome check .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "exports": {
     ".": {
@@ -35,6 +36,7 @@
     "src"
   ],
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.18",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   }

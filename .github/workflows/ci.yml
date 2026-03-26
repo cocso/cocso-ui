@@ -101,6 +101,8 @@ jobs:
 
           const pkgs = [
             { name: '@cocso-ui/react',     summary: 'packages/react/coverage/coverage-summary.json',     dir: 'packages/react' },
+            { name: '@cocso-ui/recipe',    summary: 'packages/recipe/coverage/coverage-summary.json',    dir: 'packages/recipe' },
+            { name: '@cocso-ui/figma',     summary: 'packages/figma/coverage/coverage-summary.json',     dir: 'packages/figma' },
             { name: '@cocso-ui/baseframe', summary: 'ecosystem/baseframe/coverage/coverage-summary.json', dir: 'ecosystem/baseframe' },
           ];
 
