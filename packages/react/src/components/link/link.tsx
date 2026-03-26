@@ -49,10 +49,6 @@ function LinkComponent({
     className
   );
 
-  // Typography uses a discriminated union (type determines valid size).
-  // Since Link forwards both props independently, TypeScript cannot verify
-  // the type/size relationship at this call site. Consolidating into a
-  // single TypographyProps cast is the cleanest workaround.
   const typographyProps = {
     className: mergedClassName,
     lineHeight,

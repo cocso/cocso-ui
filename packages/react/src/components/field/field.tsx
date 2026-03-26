@@ -17,7 +17,6 @@ export interface FieldProps {
   error?: string;
   htmlFor?: string;
   label: string;
-  /** Label text shown when required === false. Default: "(Optional)" */
   optionalLabel?: string;
   /**
    * `true` = required field (no indicator shown).
