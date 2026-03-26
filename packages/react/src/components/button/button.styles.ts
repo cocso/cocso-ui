@@ -3,11 +3,11 @@
  * NOT exported via the package barrel (index.ts). Internal only.
  */
 import { match } from "ts-pattern";
-import { colors, fontWeight as fontWeightToken } from "../../token";
+import { colors } from "../../token";
 import type { SpinnerVariant } from "../spinner";
-import type { ButtonShape, ButtonSize, ButtonVariant } from "./button";
 
-export type { ButtonShape, ButtonSize, ButtonVariant };
+export { fontWeight as fontWeightToken } from "../../token";
+export type { ButtonShape, ButtonSize, ButtonVariant } from "./button";
 
 export const getSizeStyles = (size: ButtonSize) => {
   const height = match(size)
@@ -108,5 +108,3 @@ export const getBackgroundColorActive = (variant: ButtonVariant) =>
     .with("warning", () => colors.warning500)
     .with("info", () => colors.info700)
     .exhaustive();
-
-export { fontWeightToken };

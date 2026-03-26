@@ -4,9 +4,8 @@
  */
 import { match } from "ts-pattern";
 import { colors } from "../../token";
-import type { CheckboxSize, CheckboxStatus } from "./checkbox";
 
-export type { CheckboxSize, CheckboxStatus };
+export type { CheckboxSize, CheckboxStatus } from "./checkbox";
 
 export const getSize = (size: CheckboxSize): string =>
   match(size)
