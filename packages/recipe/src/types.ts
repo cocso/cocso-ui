@@ -127,12 +127,15 @@ export interface RecipeDefinition<
 
   /**
    * State overrides (hover, active, disabled, focus, error).
-   * Keys are variant value names from any dimension — not dimension-aware.
-   * If two dimensions share a variant value name, only the last match applies.
+   * Dimension-aware: state → dimension → variant value → slot styles.
    */
   states?: Record<
     string,
-    Partial<Record<string, Partial<Record<S, SlotStyles>>>>
+    Partial<{
+      [K in keyof V]?: Partial<
+        Record<string & keyof V[K], Partial<Record<S, SlotStyles>>>
+      >;
+    }>
   >;
 
   /** Variant dimensions. Each dimension maps variant values to slot styles. */

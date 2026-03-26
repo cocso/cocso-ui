@@ -118,8 +118,10 @@ const testRecipe = defineRecipe({
 
   states: {
     hover: {
-      primary: { root: { bgColor: "primary-800" } },
-      secondary: { root: { bgColor: "neutral-100" } },
+      variant: {
+        primary: { root: { bgColor: "primary-800" } },
+        secondary: { root: { bgColor: "neutral-100" } },
+      },
     },
   },
 

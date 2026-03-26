@@ -24,6 +24,10 @@
     "./recipes/*": {
       "types": "./dist/recipes/*.d.ts",
       "import": "./src/recipes/*.ts"
+    },
+    "./utils": {
+      "types": "./dist/utils/token-classification.d.ts",
+      "import": "./src/utils/token-classification.ts"
     }
   },
   "files": [

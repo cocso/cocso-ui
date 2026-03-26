@@ -12,9 +12,11 @@ export const linkRecipe = defineRecipe({
   },
   states: {
     hover: {
-      inline: { root: { color: "info-700" } },
-      current: { root: { color: "currentColor" } },
-      plain: { root: { color: "info-700" } },
+      variant: {
+        inline: { root: { color: "info-700" } },
+        current: { root: { color: "currentColor" } },
+        plain: { root: { color: "info-700" } },
+      },
     },
   },
   defaultVariants: { variant: "inline" },
