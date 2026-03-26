@@ -203,14 +203,16 @@ describe("Checkbox", () => {
         .spyOn(console, "error")
         .mockImplementation(() => undefined);
 
-      process.env.NODE_ENV = "production";
+      try {
+        process.env.NODE_ENV = "production";
 
-      render(<Checkbox defaultStatus="off" status="on" />);
+        render(<Checkbox defaultStatus="off" status="on" />);
 
-      expect(consoleError).not.toHaveBeenCalled();
-
-      process.env.NODE_ENV = originalNodeEnv;
-      consoleError.mockRestore();
+        expect(consoleError).not.toHaveBeenCalled();
+      } finally {
+        process.env.NODE_ENV = originalNodeEnv;
+        consoleError.mockRestore();
+      }
     });
   });
 
@@ -250,9 +252,9 @@ describe("Checkbox", () => {
                   aria-checked={ariaChecked}
                   aria-disabled={disabled ? "true" : undefined}
                   checked={checked}
-                  disabled={disabled}
                   id={id}
                   onChange={() => onCheckedChange?.(true)}
+                  role="checkbox"
                   type="checkbox"
                 />
                 {children}
