@@ -7,11 +7,11 @@
  */
 
 import type {
-  CompoundBorder,
   RecipeDefinition,
   SlotStyles,
   StyleValue,
 } from "@cocso-ui/recipe";
+import { isColorToken, isCompoundBorder } from "@cocso-ui/recipe/utils";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
@@ -45,39 +45,6 @@ export interface FigmaNodeSpec {
   strokeWeight?: number;
   width?: number;
   [key: string]: unknown;
-}
-
-// ---------------------------------------------------------------------------
-// Token classification helpers (mirrors react.ts logic)
-// ---------------------------------------------------------------------------
-
-const COLOR_PREFIXES = new Set([
-  "neutral",
-  "primary",
-  "danger",
-  "warning",
-  "success",
-  "info",
-  "white",
-  "black",
-  "text",
-]);
-
-function isColorToken(value: string): boolean {
-  if (value === "white" || value === "black" || value === "transparent") {
-    return true;
-  }
-  const prefix = value.split("-")[0];
-  return COLOR_PREFIXES.has(prefix ?? "");
-}
-
-function isCompoundBorder(value: unknown): value is CompoundBorder {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "_type" in value &&
-    (value as CompoundBorder)._type === "border"
-  );
 }
 
 // ---------------------------------------------------------------------------

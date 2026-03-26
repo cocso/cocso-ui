@@ -1,78 +1,16 @@
 import type {
-  ComponentRef,
-  CompoundBorder,
   FontWeightRef,
   RecipeDefinition,
   SlotStyles,
   StyleValue,
 } from "../types";
-
-// ---------------------------------------------------------------------------
-// Font weight lookup
-// ---------------------------------------------------------------------------
-
-const FONT_WEIGHT_MAP: Record<FontWeightRef, number> = {
-  black: 900,
-  bold: 700,
-  extrabold: 800,
-  extralight: 200,
-  light: 300,
-  medium: 500,
-  normal: 400,
-  semibold: 600,
-  thin: 100,
-};
-
-// ---------------------------------------------------------------------------
-// Token classification helpers
-// ---------------------------------------------------------------------------
-
-const COLOR_PREFIXES = new Set([
-  "neutral",
-  "primary",
-  "danger",
-  "warning",
-  "success",
-  "info",
-  "white",
-  "black",
-  "text",
-]);
-
-const CSS_LITERALS = new Set([
-  "none",
-  "currentColor",
-  "100%",
-  "inherit",
-  // Note: "transparent" is NOT here — it resolves as a color token
-  // via var(--cocso-color-transparent) to match React's colors.transparent
-]);
-
-function isColorToken(value: string): boolean {
-  if (value === "white" || value === "black" || value === "transparent") {
-    return true;
-  }
-  const prefix = value.split("-")[0];
-  return COLOR_PREFIXES.has(prefix);
-}
-
-function isCompoundBorder(value: unknown): value is CompoundBorder {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "_type" in value &&
-    (value as CompoundBorder)._type === "border"
-  );
-}
-
-function isComponentRef(value: unknown): value is ComponentRef {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "component" in value &&
-    "variant" in value
-  );
-}
+import {
+  CSS_LITERALS,
+  FONT_WEIGHT_MAP,
+  isColorToken,
+  isComponentRef,
+  isCompoundBorder,
+} from "../utils/token-classification";
 
 // ---------------------------------------------------------------------------
 // Single value resolution
@@ -242,11 +180,17 @@ function applyStateOverrides<
   if (!stateMap) {
     return;
   }
-  // NOTE: State lookup is keyed by variant value name, not dimension-aware.
-  // If two dimensions share a variant value name (e.g., both have "medium"),
-  // only the last match applies. Currently no recipe has overlapping values.
-  for (const [_dimension, variantValue] of Object.entries(merged)) {
-    const stateStyles = stateMap[variantValue as string];
+  for (const [dimension, variantValue] of Object.entries(merged)) {
+    const dimensionMap = (
+      stateMap as Record<
+        string,
+        Record<string, Partial<Record<string, SlotStyles>>> | undefined
+      >
+    )[dimension];
+    if (!dimensionMap) {
+      continue;
+    }
+    const stateStyles = dimensionMap[variantValue as string];
     if (!stateStyles) {
       continue;
     }
