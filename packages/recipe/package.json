@@ -20,6 +20,10 @@
     "./resolvers/react": {
       "types": "./dist/resolvers/react.d.ts",
       "import": "./src/resolvers/react.ts"
+    },
+    "./recipes/*": {
+      "types": "./dist/recipes/*.d.ts",
+      "import": "./src/recipes/*.ts"
     }
   },
   "files": [

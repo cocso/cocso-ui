@@ -41,10 +41,11 @@ const COLOR_PREFIXES = new Set([
 
 const CSS_LITERALS = new Set([
   "none",
-  "transparent",
   "currentColor",
   "100%",
   "inherit",
+  // Note: "transparent" is NOT here — it resolves as a color token
+  // via var(--cocso-color-transparent) to match React's colors.transparent
 ]);
 
 function isColorToken(value: string): boolean {
