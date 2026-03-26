@@ -5,6 +5,28 @@ import {
 } from "../core/builders/utils/css";
 import type { TokenResolver } from "../core/transforms/resolve";
 
+async function importCssUtilsWithParserMocks(parseResult: {
+  isValid: boolean;
+  value?: unknown;
+}) {
+  const parseValue = vi.fn().mockReturnValue(parseResult);
+  const valueToString = vi.fn((value: unknown) => String(value));
+
+  vi.resetModules();
+  vi.doMock("../core/parsers", () => ({
+    parseValue,
+    valueToString,
+  }));
+
+  const cssUtils = await import("../core/builders/utils/css");
+
+  return {
+    ...cssUtils,
+    parseValue,
+    valueToString,
+  };
+}
+
 describe("toCssValue", () => {
   it("returns string as-is", () => {
     expect(toCssValue("16px")).toBe("16px");
@@ -92,5 +114,42 @@ describe("resolveValueWithResolver", () => {
     };
     const result = resolveValueWithResolver("#ff0000", resolver);
     expect(result).toBe("#ff0000");
+  });
+
+  it("returns the original non-token value when parsing fails", async () => {
+    const { resolveValueWithResolver, parseValue, valueToString } =
+      await importCssUtilsWithParserMocks({ isValid: false });
+    const resolver: TokenResolver = {
+      resolve: vi.fn(),
+      resolveTokenRef: vi.fn(),
+    };
+
+    expect(resolveValueWithResolver("not-parseable", resolver)).toBe(
+      "not-parseable"
+    );
+    expect(parseValue).toHaveBeenCalledWith("not-parseable");
+    expect(resolver.resolve).not.toHaveBeenCalled();
+    expect(valueToString).not.toHaveBeenCalled();
+
+    vi.doUnmock("../core/parsers");
+    vi.resetModules();
+  });
+
+  it("throws for an invalid token reference parse result", async () => {
+    const { resolveValueWithResolver, parseValue } =
+      await importCssUtilsWithParserMocks({ isValid: false });
+    const resolver: TokenResolver = {
+      resolve: vi.fn(),
+      resolveTokenRef: vi.fn(),
+    };
+
+    expect(() => resolveValueWithResolver("$broken", resolver)).toThrowError(
+      "Invalid token reference: $broken"
+    );
+    expect(parseValue).toHaveBeenCalledWith("$broken");
+    expect(resolver.resolveTokenRef).not.toHaveBeenCalled();
+
+    vi.doUnmock("../core/parsers");
+    vi.resetModules();
   });
 });

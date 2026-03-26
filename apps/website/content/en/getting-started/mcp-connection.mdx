@@ -1,0 +1,101 @@
+---
+title: MCP Connection
+description: Connect AI clients to the hosted COCSO MCP endpoint and reuse @cocso-ui components.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>The documentation site exposes a hosted MCP endpoint so AI clients can discover and reuse existing `@cocso-ui` components before generating custom UI.</Section.Text>
+  <Section.Text>Endpoint URL: <Link href="https://www.cocso-ui.com/api/mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">https://www.cocso-ui.com/api/mcp<LinkExternalIcon /></Link></Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Official Client Guides</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>
+      <Link href="https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">Claude Code MCP docs<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://support.anthropic.com/en/articles/10949351-getting-started-with-model-context-protocol-mcp-on-claude-for-desktop" target="_blank" rel="noopener noreferrer" type="custom" size="current">Claude Desktop MCP docs<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://developers.openai.com/codex/config-reference/" target="_blank" rel="noopener noreferrer" type="custom" size="current">Codex config reference<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://open-code.ai/docs/en/mcp-servers" target="_blank" rel="noopener noreferrer" type="custom" size="current">OpenCode MCP docs<LinkExternalIcon /></Link>
+    </Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Client Setup by Tool</Section.Title>
+  <Tabs items={["Claude Code", "Codex", "OpenCode"]}>
+    <Tab value="Claude Code">
+      <Section.Text>Claude Code supports direct MCP remote servers over HTTP. Add this to project `.mcp.json` or user `~/.claude.json`.</Section.Text>
+
+      ```json
+      {
+        "mcpServers": {
+          "cocso-ui": {
+            "type": "http",
+            "url": "https://www.cocso-ui.com/api/mcp"
+          }
+        }
+      }
+      ```
+
+      <Section.Text>Note: Claude Desktop uses `claude_desktop_config.json` with stdio-style server entries. Remote MCP in Desktop is handled through its extension flow, so direct HTTP setup differs from Claude Code.</Section.Text>
+    </Tab>
+    <Tab value="Codex">
+      <Section.Text>Codex uses TOML config. Add this to `~/.codex/config.toml` (or `.codex/config.toml` for project scope).</Section.Text>
+
+      ```toml
+      [mcp_servers.cocso_ui]
+      url = "https://www.cocso-ui.com/api/mcp"
+      ```
+    </Tab>
+    <Tab value="OpenCode">
+      <Section.Text>OpenCode supports remote MCP directly. Add this to `~/.config/opencode/opencode.json` (or `opencode.json` in your project).</Section.Text>
+
+      ```json
+      {
+        "$schema": "https://opencode.ai/config.json",
+        "mcp": {
+          "cocso-ui": {
+            "type": "remote",
+            "url": "https://www.cocso-ui.com/api/mcp",
+            "enabled": true
+          }
+        }
+      }
+      ```
+    </Tab>
+  </Tabs>
+</Section>
+
+<Section>
+  <Section.Title>stdio-only clients</Section.Title>
+  <Section.Text>If a client only supports stdio transport, bridge to the hosted endpoint with <Link href="https://www.npmjs.com/package/mcp-remote" target="_blank" rel="noopener noreferrer" type="custom" size="current">mcp-remote<LinkExternalIcon /></Link>.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.cocso-ui.com/api/mcp"]
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Recommended Workflow</Section.Title>
+  <Section.OrderedList>
+    <Section.ListItem>Call `cocso_ui_mcp_search_components` first with your page intent.</Section.ListItem>
+    <Section.ListItem>Use `cocso_ui_mcp_get_component_spec` for selected components before coding.</Section.ListItem>
+    <Section.ListItem>Import reusable UI from `@cocso-ui/react` instead of generating duplicate local components.</Section.ListItem>
+  </Section.OrderedList>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,39 @@
+{
+  "name": "@cocso-ui/mcp",
+  "version": "0.0.1",
+  "description": "MCP server for design-system-aware cocso-ui component discovery",
+  "type": "module",
+  "private": false,
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    }
+  },
+  "bin": {
+    "cocso-ui-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --fix",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.26.0",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@vitest/coverage-v8": "^4.0.8",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
