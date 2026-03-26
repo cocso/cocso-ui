@@ -49,3 +49,4 @@ export const Tooltip = Object.assign(TooltipBase.Root, {
   Arrow: TooltipArrow,
   Provider: TooltipBase.Provider,
 });
+Tooltip.displayName = "Tooltip";

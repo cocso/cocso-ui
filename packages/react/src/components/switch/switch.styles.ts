@@ -1,7 +1,7 @@
 import { match } from "ts-pattern";
 import { colors } from "../../token";
 
-export type SwitchSize = "small" | "medium" | "large";
+export type SwitchSize = "large" | "medium" | "small";
 
 export type SwitchVariant =
   | "primary"

@@ -16,6 +16,7 @@ import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
 const data = tokenData as FigmaTokenData;
+const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
 // ---------------------------------------------------------------------------
 // Output types
@@ -86,7 +87,7 @@ function isCompoundBorder(value: unknown): value is CompoundBorder {
 /** Resolve a color token name like "primary-950" to an RGB value (0–1 range). */
 export function resolveColorToken(name: string): RGB {
   const fullName = name.startsWith("color/") ? name : `color/${name}`;
-  const token = data.tokens.find((t) => t.name === fullName);
+  const token = tokenMap.get(fullName);
   if (token && typeof token.values.default === "object") {
     const c = token.values.default as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };

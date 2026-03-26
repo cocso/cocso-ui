@@ -46,3 +46,4 @@ export const RadioGroup = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,
 });
+RadioGroup.displayName = "RadioGroup";

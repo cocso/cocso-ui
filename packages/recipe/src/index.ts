@@ -11,5 +11,4 @@ export type {
   SlotStyles,
   SpacingTokenRef,
   StyleValue,
-  TokenCatalog,
 } from "./types";

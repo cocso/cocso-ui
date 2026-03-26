@@ -22,3 +22,4 @@ export const Tab = Object.assign(TabRoot, {
   Trigger: TabTrigger,
   Content: TabContent,
 });
+Tab.displayName = "Tab";

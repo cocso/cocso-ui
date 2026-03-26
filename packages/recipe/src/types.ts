@@ -142,11 +142,3 @@ export interface RecipeDefinition<
 // ---------------------------------------------------------------------------
 // Token Catalog — maps canonical token names to CSS var references
 // ---------------------------------------------------------------------------
-
-/** Maps token names to their CSS custom property references. */
-export interface TokenCatalog {
-  resolveColor(name: ColorTokenRef): string;
-  resolveFontWeight(name: FontWeightRef): number;
-  resolveRadius(name: RadiusTokenRef): string;
-  resolveSpacing(name: SpacingTokenRef): string;
-}

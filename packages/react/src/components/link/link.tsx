@@ -77,3 +77,4 @@ function ExternalIcon({
 }
 
 export const Link = Object.assign(LinkComponent, { ExternalIcon });
+Link.displayName = "Link";

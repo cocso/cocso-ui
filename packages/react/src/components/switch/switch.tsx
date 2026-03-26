@@ -58,7 +58,7 @@ export function Switch({
       data-disabled={disabled || undefined}
       style={style}
     >
-      {position === "left" && (
+      {position === "left" && label && (
         <Typography
           aria-disabled={disabled}
           render={<label htmlFor={id}>{label}</label>}
@@ -75,7 +75,7 @@ export function Switch({
       >
         <SwitchBase.Thumb className={styles.thumb} />
       </SwitchBase.Root>
-      {position === "right" && (
+      {position === "right" && label && (
         <Typography
           aria-disabled={disabled}
           render={<label htmlFor={id}>{label}</label>}

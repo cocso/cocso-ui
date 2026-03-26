@@ -48,3 +48,4 @@ export const Popover = Object.assign(PopoverBase.Root, {
   Content: PopoverContent,
   Arrow: PopoverArrow,
 });
+Popover.displayName = "Popover";
