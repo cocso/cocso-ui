@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, type ReactNode, useContext, useId } from "react";
 import styles from "./field.module.css";
 
@@ -15,9 +17,10 @@ export interface FieldProps {
   error?: string;
   htmlFor?: string;
   label: string;
+  optionalLabel?: string;
   /**
    * `true` = required field (no indicator shown).
-   * `false` = explicitly optional — shows "(선택)" indicator.
+   * `false` = explicitly optional — shows "(Optional)" indicator.
    * `undefined` = no indicator shown.
    */
   required?: boolean;
@@ -28,6 +31,7 @@ export function Field({
   label,
   htmlFor,
   required,
+  optionalLabel,
   error,
   description,
 }: FieldProps) {
@@ -45,7 +49,9 @@ export function Field({
         <label className={styles.label} htmlFor={htmlFor}>
           {label}
           {required === false && (
-            <span className={styles.optional}>(선택)</span>
+            <span className={styles.optional}>
+              {optionalLabel ?? "(Optional)"}
+            </span>
           )}
         </label>
         {children}

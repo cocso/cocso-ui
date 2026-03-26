@@ -49,19 +49,21 @@ function LinkComponent({
     className
   );
 
-  return (
-    <Typography
-      className={mergedClassName}
-      lineHeight={lineHeight}
-      ref={ref}
-      render={renderProp ?? ((renderProps) => <a {...renderProps} />)}
-      size={size as never}
-      style={style}
-      type={type}
-      weight={weight}
-      {...(props as ComponentProps<"p">)}
-    />
-  );
+  const typographyProps = {
+    className: mergedClassName,
+    lineHeight,
+    ref,
+    render:
+      renderProp ??
+      ((renderProps: ComponentProps<"a">) => <a {...renderProps} />),
+    size,
+    style,
+    type,
+    weight,
+    ...props,
+  } as TypographyProps;
+
+  return <Typography {...typographyProps} />;
 }
 
 function ExternalIcon({

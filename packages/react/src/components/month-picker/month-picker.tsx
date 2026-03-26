@@ -46,7 +46,7 @@ export function MonthPicker({
     <div className={cn(styles.root, className)} ref={ref} {...props}>
       <Dropdown onOpenChange={setOpen} open={open}>
         <Dropdown.Trigger render={trigger} />
-        <Dropdown.Content aria-label="월 선택" className={styles.content}>
+        <Dropdown.Content aria-label="Select month" className={styles.content}>
           <DatePicker
             dateFormat="yyyy년 MM월 dd일"
             disabled={disabled}
