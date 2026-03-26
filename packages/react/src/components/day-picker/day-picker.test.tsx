@@ -21,7 +21,7 @@ describe("DayPicker", () => {
 
     it("does not show the calendar before the trigger is clicked", () => {
       render(<DayPicker trigger={trigger} />);
-      expect(screen.queryByLabelText("날짜 선택")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Select date")).not.toBeInTheDocument();
     });
   });
 
@@ -32,7 +32,7 @@ describe("DayPicker", () => {
         screen.getByRole("button", { name: "Select date" })
       );
       await waitFor(() => {
-        expect(screen.getByLabelText("날짜 선택")).toBeInTheDocument();
+        expect(screen.getByLabelText("Select date")).toBeInTheDocument();
       });
     });
 

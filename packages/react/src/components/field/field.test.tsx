@@ -20,13 +20,13 @@ describe("Field", () => {
     expect(screen.getByLabelText("이름")).toBeInTheDocument();
   });
 
-  it('shows "(선택)" when required=false', () => {
+  it('shows "(Optional)" when required=false', () => {
     render(
       <Field label="닉네임" required={false}>
         <input />
       </Field>
     );
-    expect(screen.getByText("(선택)")).toBeInTheDocument();
+    expect(screen.getByText("(Optional)")).toBeInTheDocument();
   });
 
   it("does not show optional indicator when required is undefined", () => {
@@ -35,7 +35,7 @@ describe("Field", () => {
         <input />
       </Field>
     );
-    expect(screen.queryByText("(선택)")).not.toBeInTheDocument();
+    expect(screen.queryByText("(Optional)")).not.toBeInTheDocument();
   });
 
   it("shows error message when error prop is provided", () => {

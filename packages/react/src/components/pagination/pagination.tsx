@@ -35,10 +35,10 @@ export function Pagination({
 }: PaginationProps) {
   const halfVisible = Math.ceil(maxVisible / 2);
 
-  const navigationLabel = labels?.navigation ?? "페이지 탐색";
-  const previousLabel = labels?.previous ?? "이전 페이지";
-  const nextLabel = labels?.next ?? "다음 페이지";
-  const pageLabel = labels?.page ?? ((n: number) => `${n} 페이지`);
+  const navigationLabel = labels?.navigation ?? "Page navigation";
+  const previousLabel = labels?.previous ?? "Previous page";
+  const nextLabel = labels?.next ?? "Next page";
+  const pageLabel = labels?.page ?? ((n: number) => `Page ${n}`);
 
   const renderPageButton = (pageNumber: number) => (
     <button

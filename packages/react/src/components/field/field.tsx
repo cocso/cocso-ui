@@ -17,11 +17,11 @@ export interface FieldProps {
   error?: string;
   htmlFor?: string;
   label: string;
-  /** Label text shown when required === false. Default: "(선택)" */
+  /** Label text shown when required === false. Default: "(Optional)" */
   optionalLabel?: string;
   /**
    * `true` = required field (no indicator shown).
-   * `false` = explicitly optional — shows "(선택)" indicator.
+   * `false` = explicitly optional — shows "(Optional)" indicator.
    * `undefined` = no indicator shown.
    */
   required?: boolean;
@@ -50,7 +50,7 @@ export function Field({
         <label className={styles.label} htmlFor={htmlFor}>
           {label}
           {required === false && (
-            <span className={styles.optional}>{optionalLabel ?? "(선택)"}</span>
+            <span className={styles.optional}>{optionalLabel ?? "(Optional)"}</span>
           )}
         </label>
         {children}
