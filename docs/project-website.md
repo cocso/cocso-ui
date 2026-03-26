@@ -62,6 +62,7 @@ Depends on workspace packages:
 - `@cocso-ui/mcp`
 
 External runtime dependency:
+- `@modelcontextprotocol/sdk`
 - `mcp-handler`
 
 ## Interfaces

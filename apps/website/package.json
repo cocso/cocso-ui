@@ -17,6 +17,7 @@
     "@cocso-ui/mcp": "workspace:^",
     "@cocso-ui/react": "workspace:^",
     "@cocso-ui/react-icons": "workspace:^",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "@suspensive/react": "^3.19.2",
     "flexsearch": "^0.8.212",
     "fumadocs-core": "^16.6.16",
