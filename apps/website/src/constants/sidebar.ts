@@ -1,12 +1,12 @@
 interface SidebarItem {
-  readonly type: "page";
   readonly name: string;
+  readonly type: "page";
   readonly url: string;
 }
 
 interface SidebarSection {
-  readonly title: string;
   readonly items: readonly SidebarItem[];
+  readonly title: string;
 }
 
 type Sidebar = Record<string, SidebarSection>;
@@ -23,13 +23,21 @@ const componentItems: readonly SidebarItem[] = [
   { type: "page", name: "Input", url: "/components/input" },
   { type: "page", name: "Link", url: "/components/link" },
   { type: "page", name: "Month Picker", url: "/components/month-picker" },
-  { type: "page", name: "OTP Field", url: "/components/one-time-password-field" },
+  {
+    type: "page",
+    name: "OTP Field",
+    url: "/components/one-time-password-field",
+  },
   { type: "page", name: "Pagination", url: "/components/pagination" },
   { type: "page", name: "Popover", url: "/components/popover" },
   { type: "page", name: "Radio Group", url: "/components/radio-group" },
   { type: "page", name: "Select", url: "/components/select" },
   { type: "page", name: "Spinner", url: "/components/spinner" },
-  { type: "page", name: "Stock Status", url: "/components/stock-quantity-status" },
+  {
+    type: "page",
+    name: "Stock Status",
+    url: "/components/stock-quantity-status",
+  },
   { type: "page", name: "Switch", url: "/components/switch" },
   { type: "page", name: "Tab", url: "/components/tab" },
   { type: "page", name: "Toast", url: "/components/toast" },
@@ -41,8 +49,21 @@ const en: Sidebar = {
   "getting-started": {
     title: "Getting Started",
     items: [
-      { type: "page", name: "Introduction", url: "/getting-started/introduction" },
-      { type: "page", name: "Installation", url: "/getting-started/installation" },
+      {
+        type: "page",
+        name: "Introduction",
+        url: "/getting-started/introduction",
+      },
+      {
+        type: "page",
+        name: "Installation",
+        url: "/getting-started/installation",
+      },
+      {
+        type: "page",
+        name: "MCP Connection",
+        url: "/getting-started/mcp-connection",
+      },
     ],
   },
   foundations: {
@@ -65,6 +86,11 @@ const ko: Sidebar = {
     items: [
       { type: "page", name: "소개", url: "/getting-started/introduction" },
       { type: "page", name: "설치", url: "/getting-started/installation" },
+      {
+        type: "page",
+        name: "MCP 연결",
+        url: "/getting-started/mcp-connection",
+      },
     ],
   },
   foundations: {

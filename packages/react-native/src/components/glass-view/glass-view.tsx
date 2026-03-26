@@ -29,11 +29,13 @@ const GLASS_LAYER: Record<
 
 export type GlassViewProps = ViewProps & {
   intensity?: GlassIntensity;
-  BlurComponent?: ComponentType<{
-    children: ReactNode;
-    intensity: number;
-    style?: StyleProp<ViewStyle>;
-  }>;
+  BlurComponent?: ComponentType<
+    ViewProps & {
+      children: ReactNode;
+      intensity: number;
+      style?: StyleProp<ViewStyle>;
+    }
+  >;
 };
 
 export function GlassView({
@@ -66,6 +68,7 @@ export function GlassView({
           },
           style,
         ]}
+        {...props}
       >
         {children}
       </BlurComponent>

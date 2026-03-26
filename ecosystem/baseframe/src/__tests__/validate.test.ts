@@ -26,6 +26,15 @@ function makeToken(
 }
 
 describe("validateAllTokens", () => {
+  it("returns isValid=true for empty token input", () => {
+    const definitions = makeDefinitions("global", ["default"]);
+    const result = validateAllTokens([], definitions);
+
+    expect(result.isValid).toBe(true);
+    expect(result.errors).toHaveLength(0);
+    expect(result.warnings).toHaveLength(0);
+  });
+
   it("returns isValid=true for valid single-mode tokens", () => {
     const tokens = [makeToken("$color.white", "#FFFFFF")];
     const definitions = makeDefinitions("global", ["default"]);
@@ -71,6 +80,117 @@ describe("validateAllTokens", () => {
     const err = result.errors.find((e) => e.type === "MISSING_MODE");
     expect(err).toBeDefined();
     expect(err?.message).toContain("dark");
+  });
+
+  it("aggregates structural and reference errors from both validation passes", () => {
+    const token: Token = {
+      kind: "Tokens",
+      metadata: { id: "test", name: "test", description: "" },
+      data: {
+        collection: "global",
+        tokens: {
+          "$color.text.primary": {
+            values: { default: "$color.neutral.missing" },
+          },
+        },
+      },
+    };
+
+    const definitions = makeDefinitions("global", ["default", "dark"]);
+    const result = validateAllTokens([token], definitions);
+
+    expect(result.isValid).toBe(false);
+    expect(result.errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: "MISSING_MODE",
+          tokenName: "$color.text.primary",
+          collection: "global",
+        }),
+        expect.objectContaining({
+          type: "INVALID_PRIMITIVE_TOKEN",
+          tokenName: "$color.text.primary",
+          collection: "global",
+          mode: "default",
+        }),
+      ])
+    );
+  });
+
+  it("returns INVALID_PRIMITIVE_TOKEN for dangling refs in a non-default mode", () => {
+    const token: Token = {
+      kind: "Tokens",
+      metadata: { id: "test", name: "test", description: "" },
+      data: {
+        collection: "global",
+        tokens: {
+          "$color.text.primary": {
+            values: {
+              default: "#FFFFFF",
+              dark: "$color.neutral.missing",
+            },
+          },
+        },
+      },
+    };
+
+    const definitions = makeDefinitions("global", ["default", "dark"]);
+    const result = validateAllTokens([token], definitions);
+
+    expect(result.isValid).toBe(false);
+    expect(
+      result.errors.find((e) => e.type === "MISSING_MODE")
+    ).toBeUndefined();
+    expect(result.errors).toContainEqual(
+      expect.objectContaining({
+        type: "INVALID_PRIMITIVE_TOKEN",
+        tokenName: "$color.text.primary",
+        collection: "global",
+        mode: "dark",
+      })
+    );
+  });
+
+  it("returns isValid=true for multi-mode tokens with resolved refs in every mode", () => {
+    const tokens: Token[] = [
+      {
+        kind: "Tokens",
+        metadata: { id: "test", name: "test", description: "" },
+        data: {
+          collection: "global",
+          tokens: {
+            "$color.neutral.base": {
+              values: {
+                default: "#FFFFFF",
+                dark: "#000000",
+              },
+            },
+          },
+        },
+      },
+      {
+        kind: "Tokens",
+        metadata: { id: "test", name: "test", description: "" },
+        data: {
+          collection: "global",
+          tokens: {
+            "$color.text.primary": {
+              values: {
+                default: "$color.neutral.base",
+                dark: "$color.neutral.base",
+              },
+            },
+          },
+        },
+      },
+    ];
+
+    const definitions = makeDefinitions("global", ["default", "dark"]);
+    const result = validateAllTokens(tokens, definitions);
+
+    expect(result.isValid).toBe(true);
+    expect(result.errors).toHaveLength(0);
+    expect(result.warnings).toHaveLength(0);
   });
 
   it("returns INVALID_PRIMITIVE_TOKEN error for dangling token reference", () => {
@@ -217,9 +337,10 @@ describe("validateAllTokens", () => {
 });
 
 describe("parseValue — INVALID_VALUE_FORMAT coverage", () => {
-  // parseValue always returns isValid=true (unknown strings fall through to StringValue),
-  // so the INVALID_VALUE_FORMAT branch in validateTokenValues is not reachable via the
-  // public Token API. These tests document the parser behaviour that underlies that fact.
+  // parseValue always returns isValid=true for the public validateAllTokens input types
+  // (string | number). Unknown strings fall through to StringValue, and numbers become
+  // NumberValue, so the INVALID_VALUE_FORMAT branches in both validateCollection and
+  // validateTokenValues are not reachable via the public Token API.
 
   it("parseValue never returns isValid=false for arbitrary strings", () => {
     // Any string that doesn't match a known format becomes a StringValue — never invalid
@@ -232,5 +353,11 @@ describe("parseValue — INVALID_VALUE_FORMAT coverage", () => {
     const result = parseValue("");
     expect(result.isValid).toBe(true);
     expect(result.value?.kind).toBe("StringValue");
+  });
+
+  it("parseValue never returns isValid=false for numeric token values", () => {
+    const result = parseValue(42);
+    expect(result.isValid).toBe(true);
+    expect(result.value?.kind).toBe("NumberValue");
   });
 });

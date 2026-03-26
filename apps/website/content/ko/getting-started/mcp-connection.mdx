@@ -1,0 +1,101 @@
+---
+title: MCP Connection
+description: AI 클라이언트를 COCSO MCP 엔드포인트에 연결해 @cocso-ui 컴포넌트를 재사용하는 방법입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>문서 사이트는 hosted MCP 엔드포인트를 제공하며, AI 클라이언트가 커스텀 UI를 새로 만들기 전에 기존 `@cocso-ui` 컴포넌트를 먼저 탐색하도록 돕습니다.</Section.Text>
+  <Section.Text>엔드포인트 URL: <Link href="https://www.cocso-ui.com/api/mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">https://www.cocso-ui.com/api/mcp<LinkExternalIcon /></Link></Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>공식 클라이언트 문서</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>
+      <Link href="https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-mcp" target="_blank" rel="noopener noreferrer" type="custom" size="current">Claude Code MCP 문서<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://support.anthropic.com/en/articles/10949351-getting-started-with-model-context-protocol-mcp-on-claude-for-desktop" target="_blank" rel="noopener noreferrer" type="custom" size="current">Claude Desktop MCP 문서<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://developers.openai.com/codex/config-reference/" target="_blank" rel="noopener noreferrer" type="custom" size="current">Codex 설정 문서<LinkExternalIcon /></Link>
+    </Section.ListItem>
+    <Section.ListItem>
+      <Link href="https://open-code.ai/docs/en/mcp-servers" target="_blank" rel="noopener noreferrer" type="custom" size="current">OpenCode MCP 문서<LinkExternalIcon /></Link>
+    </Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>도구별 클라이언트 설정</Section.Title>
+  <Tabs items={["Claude Code", "Codex", "OpenCode"]}>
+    <Tab value="Claude Code">
+      <Section.Text>Claude Code는 HTTP 기반 MCP remote server를 직접 지원합니다. 프로젝트 `.mcp.json` 또는 사용자 `~/.claude.json`에 다음 설정을 추가하세요.</Section.Text>
+
+      ```json
+      {
+        "mcpServers": {
+          "cocso-ui": {
+            "type": "http",
+            "url": "https://www.cocso-ui.com/api/mcp"
+          }
+        }
+      }
+      ```
+
+      <Section.Text>참고: Claude Desktop은 `claude_desktop_config.json`의 stdio 스타일 서버 설정을 사용합니다. Desktop의 remote MCP는 확장(Extension) 흐름을 통해 연결되므로 Claude Code와 설정 방식이 다릅니다.</Section.Text>
+    </Tab>
+    <Tab value="Codex">
+      <Section.Text>Codex는 TOML 설정을 사용합니다. `~/.codex/config.toml`(또는 프로젝트 `.codex/config.toml`)에 아래 항목을 추가하세요.</Section.Text>
+
+      ```toml
+      [mcp_servers.cocso_ui]
+      url = "https://www.cocso-ui.com/api/mcp"
+      ```
+    </Tab>
+    <Tab value="OpenCode">
+      <Section.Text>OpenCode는 remote MCP를 직접 지원합니다. `~/.config/opencode/opencode.json`(또는 프로젝트 `opencode.json`)에 아래처럼 추가하세요.</Section.Text>
+
+      ```json
+      {
+        "$schema": "https://opencode.ai/config.json",
+        "mcp": {
+          "cocso-ui": {
+            "type": "remote",
+            "url": "https://www.cocso-ui.com/api/mcp",
+            "enabled": true
+          }
+        }
+      }
+      ```
+    </Tab>
+  </Tabs>
+</Section>
+
+<Section>
+  <Section.Title>stdio-only 클라이언트</Section.Title>
+  <Section.Text>stdio만 지원하는 클라이언트는 <Link href="https://www.npmjs.com/package/mcp-remote" target="_blank" rel="noopener noreferrer" type="custom" size="current">mcp-remote<LinkExternalIcon /></Link>로 hosted 엔드포인트에 브리지 연결하세요.</Section.Text>
+
+  ```json
+  {
+    "cocso-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.cocso-ui.com/api/mcp"]
+    }
+  }
+  ```
+</Section>
+
+<Section>
+  <Section.Title>권장 사용 순서</Section.Title>
+  <Section.OrderedList>
+    <Section.ListItem>페이지 요구사항을 먼저 `cocso_ui_mcp_search_components`로 검색하세요.</Section.ListItem>
+    <Section.ListItem>선택한 컴포넌트는 `cocso_ui_mcp_get_component_spec`로 스펙을 확인하세요.</Section.ListItem>
+    <Section.ListItem>중복 컴포넌트 생성 대신 `@cocso-ui/react`에서 import해 재사용하세요.</Section.ListItem>
+  </Section.OrderedList>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
