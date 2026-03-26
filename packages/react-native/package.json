@@ -1,0 +1,45 @@
+{
+  "name": "@cocso-ui/react-native",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/react-native"
+  },
+  "type": "module",
+  "scripts": {
+    "prebuild": "node ./scripts/generate-tokens.mjs",
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-native": ">=0.79.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "react-native": "^0.82.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

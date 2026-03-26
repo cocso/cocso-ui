@@ -28,7 +28,9 @@
 - `packages/`: Shared, publishable packages consumed across apps and external projects.
   - `packages/react/`: `@cocso-ui/react` — React component library.
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
+  - `packages/react-native/`: `@cocso-ui/react-native` — React Native + Expo component package.
   - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set.
+  - `packages/react-native-icons/`: `@cocso-ui/react-native-icons` — React Native icon package.
   - `packages/baseframe/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables.
 - `ecosystem/`: Tooling that wraps or consumes packages for developer workflows.
