@@ -3,8 +3,8 @@ import { cn } from "../../cn";
 import { Radio as RadioBase } from "../../primitives/radio";
 import { RadioGroup as RadioGroupBase } from "../../primitives/radio-group";
 import styles from "./radio-group.module.css";
-import { sizeVars } from "./radio-group.styles";
 import type { RadioSize } from "./radio-group.styles";
+import { sizeVars } from "./radio-group.styles";
 
 export type { RadioSize } from "./radio-group.styles";
 

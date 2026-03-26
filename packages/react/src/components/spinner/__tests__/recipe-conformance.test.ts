@@ -43,7 +43,10 @@ describe("Spinner recipe conformance", () => {
     for (const size of SIZES) {
       // Cast to record — recipe values are runtime-checked, not type-checked here
       const getRecipeRoot = (s: SpinnerSize) =>
-        spinnerRecipe.variants.size[s].root as unknown as Record<string, unknown>;
+        spinnerRecipe.variants.size[s].root as unknown as Record<
+          string,
+          unknown
+        >;
 
       it(`${size} blades matches`, () => {
         const recipeSize = getRecipeRoot(size);
