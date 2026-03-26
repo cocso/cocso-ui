@@ -97,5 +97,3 @@ function FieldAwareSelect({
     undefined;
   return <select aria-describedby={describedBy} {...props} />;
 }
-
-// Style functions are in ./select.styles.ts (internal, not in public barrel)

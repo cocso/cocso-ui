@@ -108,7 +108,7 @@ pnpm --filter @cocso-ui/recipe lint     # biome check
 
 Conformance tests run in `@cocso-ui/react`:
 ```bash
-pnpm --filter @cocso-ui/react test      # includes 166 recipe conformance tests
+pnpm --filter @cocso-ui/react test      # includes ~35 recipe conformance tests
 ```
 
 ## Roadmap

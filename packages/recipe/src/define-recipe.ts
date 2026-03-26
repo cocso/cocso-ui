@@ -29,7 +29,6 @@ export function defineRecipe<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   const S extends string,
 >(recipe: RecipeDefinition<V, S>): RecipeDefinition<V, S> {
-  // Runtime assertion: detect overlapping variant value names across dimensions.
   const seen = new Map<string, string>();
   for (const [dimension, values] of Object.entries(recipe.variants)) {
     for (const valueName of Object.keys(values as Record<string, unknown>)) {

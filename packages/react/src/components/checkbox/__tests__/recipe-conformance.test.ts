@@ -1,8 +1,3 @@
-/**
- * Checkbox recipe conformance test.
- * Recipe is authoritative — update React to match the recipe.
- */
-
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
 import { describe, expect, it } from "vitest";

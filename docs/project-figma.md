@@ -1,3 +1,5 @@
+# project-figma
+
 ## Goal
 
 Sync cocso-ui design tokens from baseframe YAML definitions to Figma Variables via a Figma Plugin, enabling designers to use the design system's token palette directly inside Figma without manual entry.

@@ -5,7 +5,6 @@
  * Plain JS — NOT processed by esbuild/tsx to avoid __name decorator issues.
  */
 
-/** Parse a CSS color string to { r, g, b, a } with 0-1 range. */
 function parseColor(raw) {
   if (!raw || raw === "transparent" || raw === "rgba(0, 0, 0, 0)") {
     return null;
@@ -60,7 +59,6 @@ function parseBoxShadow(raw) {
     var blur = nums[2] || 0;
     var spread = nums[3] || 0;
 
-    // Detect border-like shadow: 0 0 0 Npx (no offset, no blur, spread only)
     if (
       !isInset &&
       offsetX === 0 &&
@@ -82,7 +80,6 @@ function parseBoxShadow(raw) {
   return { effects: effects, borderStroke: borderStroke };
 }
 
-/** Check if a node has any visual properties (fills, strokes, effects, radius). */
 function hasVisualProperties(node) {
   return (
     (node.fills && node.fills.length > 0) ||
@@ -103,20 +100,16 @@ function flattenNode(node) {
     return node;
   }
 
-  // Recursively flatten children first
   node.children = node.children.map(flattenNode);
 
-  // If single child with no visual properties on wrapper, promote child
   if (node.children.length === 1 && !hasVisualProperties(node)) {
     var child = node.children[0];
-    // Preserve wrapper dimensions if child doesn't define its own
     if (child.width === undefined || child.width === 0) {
       child.width = node.width;
     }
     if (child.height === undefined || child.height === 0) {
       child.height = node.height;
     }
-    // Merge padding from wrapper to child if child has no padding
     if (node.padding && !child.padding) {
       child.padding = node.padding;
     }
@@ -126,7 +119,6 @@ function flattenNode(node) {
   return node;
 }
 
-/** Recursively extract a DOM element into a Figma-compatible spec. */
 function extractNode(el) {
   var s = window.getComputedStyle(el);
   var rect = el.getBoundingClientRect();
@@ -144,13 +136,11 @@ function extractNode(el) {
     height: Math.round(rect.height * 100) / 100,
   };
 
-  // Fills
   var bg = parseColor(s.backgroundColor);
   if (bg && bg.a > 0) {
     node.fills = [{ type: "SOLID", color: bg }];
   }
 
-  // Strokes / CSS borders
   var bw = Number.parseFloat(s.borderWidth);
   if (bw > 0) {
     var bc = parseColor(s.borderColor);
@@ -159,17 +149,14 @@ function extractNode(el) {
     }
   }
 
-  // Box shadow → effects + border strokes
   var shadowResult = parseBoxShadow(s.boxShadow);
   if (shadowResult.effects.length > 0) {
     node.effects = shadowResult.effects;
   }
-  // Border-like shadow (0 0 0 Npx) → treat as stroke if no CSS border
   if (shadowResult.borderStroke && !node.strokes) {
     node.strokes = shadowResult.borderStroke;
   }
 
-  // Border radius
   var br = [
     Number.parseFloat(s.borderTopLeftRadius),
     Number.parseFloat(s.borderTopRightRadius),
@@ -189,13 +176,11 @@ function extractNode(el) {
     }
   }
 
-  // Opacity
   var opacity = Number.parseFloat(s.opacity);
   if (opacity < 1) {
     node.opacity = opacity;
   }
 
-  // Layout (flex)
   if (s.display.includes("flex")) {
     node.layoutMode = s.flexDirection === "column" ? "VERTICAL" : "HORIZONTAL";
     var gap = Number.parseFloat(s.gap);
@@ -218,7 +203,6 @@ function extractNode(el) {
           : "MIN";
   }
 
-  // Padding
   var pt = Number.parseFloat(s.paddingTop);
   var pr = Number.parseFloat(s.paddingRight);
   var pb = Number.parseFloat(s.paddingBottom);
@@ -227,7 +211,6 @@ function extractNode(el) {
     node.padding = { top: pt, right: pr, bottom: pb, left: pl };
   }
 
-  // Text properties
   if (isText) {
     node.type = "TEXT";
     node.text = (el.textContent || "").trim();
@@ -266,7 +249,6 @@ function extractNode(el) {
   return node;
 }
 
-/** Main extraction: finds all data-component items and extracts specs. */
 window.__extractComponents = () => {
   var items = document.querySelectorAll("[data-component]");
   var result = {};
@@ -281,7 +263,6 @@ window.__extractComponents = () => {
     }
 
     var spec = extractNode(target);
-    // Flatten unnecessary single-child wrapper nesting
     if (spec) {
       spec = flattenNode(spec);
     }

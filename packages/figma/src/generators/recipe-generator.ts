@@ -1,11 +1,3 @@
-/**
- * recipe-generator.ts
- *
- * Generates Figma ComponentNodes from recipe definitions.
- * Each recipe section groups variants by the first dimension (e.g. "variant")
- * and creates a row per group, with one ComponentNode per variant combination.
- */
-
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
@@ -27,10 +19,6 @@ import {
   setFill,
 } from "./shared";
 
-// ---------------------------------------------------------------------------
-// Generic component builder
-// ---------------------------------------------------------------------------
-
 function createComponentFromSpec(
   name: string,
   spec: FigmaNodeSpec,
@@ -44,12 +32,10 @@ function createComponentFromSpec(
   component.counterAxisAlignItems = "CENTER";
   component.primaryAxisAlignItems = "CENTER";
 
-  // Height
   if (spec.height) {
     component.resize(component.width, spec.height);
   }
 
-  // Padding
   if (spec.paddingInline) {
     component.paddingLeft = spec.paddingInline;
     component.paddingRight = spec.paddingInline;
@@ -61,13 +47,11 @@ function createComponentFromSpec(
     component.paddingRight = spec.paddingRight;
   }
 
-  // Corner radius
   const radius = spec.cornerRadius ?? spec.borderRadius;
   if (radius) {
     component.cornerRadius = radius;
   }
 
-  // Fill
   const bgColor = spec.bgColor ?? spec.fills;
   if (bgColor) {
     setFill(component, bgColor);
@@ -75,13 +59,11 @@ function createComponentFromSpec(
     component.fills = [];
   }
 
-  // Stroke
   if (spec.strokeColor && spec.strokeWeight) {
     component.strokes = [createBoundPaint(spec.strokeColor)];
     component.strokeWeight = spec.strokeWeight;
   }
 
-  // Text label
   const textColor = spec.fontColor ?? COLORS.neutral900;
   const fontSize = spec.fontSize ?? 14;
   const fontWeight = spec.fontWeight ?? 500;
@@ -90,10 +72,6 @@ function createComponentFromSpec(
 
   return component;
 }
-
-// ---------------------------------------------------------------------------
-// Wide component builder (Input / Select need fixed width)
-// ---------------------------------------------------------------------------
 
 function createWideComponentFromSpec(
   name: string,
@@ -112,7 +90,6 @@ function createWideComponentFromSpec(
   const height = spec.height ?? 36;
   component.resize(width, height);
 
-  // Padding
   if (spec.paddingLeft) {
     component.paddingLeft = spec.paddingLeft;
   } else if (spec.paddingInline) {
@@ -124,30 +101,22 @@ function createWideComponentFromSpec(
     component.paddingRight = spec.paddingInline;
   }
 
-  // Corner radius
   const radius = spec.cornerRadius ?? spec.borderRadius;
   if (radius) {
     component.cornerRadius = radius;
   }
 
-  // Fill
   setFill(component, COLORS.white);
 
-  // Border via stroke
   component.strokes = [createBoundPaint(COLORS.neutral200)];
   component.strokeWeight = 1;
 
-  // Text (placeholder)
   const fontSize = spec.fontSize ?? 14;
   const text = createTextNode(label, fontSize, 400, COLORS.neutral400);
   component.appendChild(text);
 
   return component;
 }
-
-// ---------------------------------------------------------------------------
-// Spinner blade renderer (geometry from recipe)
-// ---------------------------------------------------------------------------
 
 function createSpinnerFromSpec(
   name: string,
@@ -191,10 +160,6 @@ function createSpinnerFromSpec(
   return component;
 }
 
-// ---------------------------------------------------------------------------
-// Checkbox renderer
-// ---------------------------------------------------------------------------
-
 function createCheckboxFromSpec(
   name: string,
   spec: FigmaNodeSpec
@@ -228,10 +193,6 @@ function createCheckboxFromSpec(
 
   return component;
 }
-
-// ---------------------------------------------------------------------------
-// Switch renderer
-// ---------------------------------------------------------------------------
 
 function createSwitchFromSpec(
   name: string,
@@ -268,10 +229,6 @@ function createSwitchFromSpec(
   return component;
 }
 
-// ---------------------------------------------------------------------------
-// Radio renderer
-// ---------------------------------------------------------------------------
-
 function createRadioFromSpec(
   name: string,
   spec: FigmaNodeSpec,
@@ -306,14 +263,6 @@ function createRadioFromSpec(
   return component;
 }
 
-// ---------------------------------------------------------------------------
-// Generic recipe section generator
-// ---------------------------------------------------------------------------
-
-/**
- * Get all variant combinations for a recipe as an array of variant maps.
- * Iterates cartesian product of all variant dimension values.
- */
 function getAllVariantCombinations<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -341,11 +290,6 @@ function getAllVariantCombinations<
   return combinations;
 }
 
-/**
- * Group all variant combinations by the first dimension value, resolving
- * each combination to a FigmaNodeSpec. This pattern is shared across
- * most section generators.
- */
 function groupVariantsByFirstDimension<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -399,10 +343,6 @@ function generateGenericSection<
 
   container.appendChild(section);
 }
-
-// ---------------------------------------------------------------------------
-// Specialized section generators
-// ---------------------------------------------------------------------------
 
 function generateInputSection<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
@@ -458,7 +398,6 @@ function generateLinkSection<
     component.counterAxisSizingMode = "AUTO";
     component.fills = [];
 
-    // Link color from "color" key (not fontColor/bgColor)
     const linkColor = spec.color ?? COLORS.info500;
     const text = createTextNode("Link text", 14, 400, linkColor);
     if (variantValue === "inline") {
@@ -490,7 +429,6 @@ function generateStockQuantityStatusSection<
       component.counterAxisSizingMode = "AUTO";
       component.fills = [];
 
-      // Stock status uses "color" key (not bgColor/fontColor)
       const textColor = spec.color ?? COLORS.neutral900;
       const text = createTextNode(groupKey, 14, 500, textColor);
       component.appendChild(text);
@@ -533,14 +471,12 @@ function generateSwitchSection<
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
     for (const { name, spec } of items) {
-      // Show checked state
       const component = createSwitchFromSpec(
         `${name}, checked=true`,
         spec,
         true
       );
       row.appendChild(component);
-      // Show unchecked state
       const componentOff = createSwitchFromSpec(
         `${name}, checked=false`,
         spec,
@@ -607,10 +543,6 @@ function generateSpinnerSection<
 
   container.appendChild(section);
 }
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
 
 /**
  * Generate all recipe-based component sections into the given container frame.

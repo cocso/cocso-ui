@@ -1,8 +1,3 @@
-// ---------------------------------------------------------------------------
-// Token Reference Types
-// ---------------------------------------------------------------------------
-
-/** Color token names matching baseframe YAML / CSS custom properties. */
 export type ColorTokenRef =
   | "transparent"
   | "white"
@@ -13,7 +8,6 @@ export type ColorTokenRef =
   | "text-secondary"
   | "text-tertiary";
 
-/** Border radius token names. */
 export type RadiusTokenRef =
   | "radius-1"
   | "radius-2"
@@ -23,10 +17,8 @@ export type RadiusTokenRef =
   | "radius-6"
   | "radius-full";
 
-/** Spacing token names. */
 export type SpacingTokenRef = `spacing-${number}` | "spacing-max";
 
-/** Font weight names mapping to numeric values. */
 export type FontWeightRef =
   | "thin"
   | "extralight"
@@ -38,11 +30,6 @@ export type FontWeightRef =
   | "extrabold"
   | "black";
 
-// ---------------------------------------------------------------------------
-// Literal and Compound Values
-// ---------------------------------------------------------------------------
-
-/** CSS literal values that pass through resolvers unchanged. */
 export type CSSLiteral =
   | "none"
   | "transparent"
@@ -56,7 +43,6 @@ export type CSSLiteral =
   | `${number} ${number}px`
   | `${number}px ${number}px`;
 
-/** Compound border value (e.g., "1px solid neutral-100"). */
 export interface CompoundBorder {
   readonly _type: "border";
   color: ColorTokenRef;
@@ -64,15 +50,10 @@ export interface CompoundBorder {
   width: number;
 }
 
-/** Cross-component variant reference (e.g., Button → Spinner variant). */
 export interface ComponentRef<T extends string = string> {
   component: string;
   variant: T;
 }
-
-// ---------------------------------------------------------------------------
-// StyleValue — the full union of possible recipe style values
-// ---------------------------------------------------------------------------
 
 export type StyleValue =
   | ColorTokenRef
@@ -84,14 +65,8 @@ export type StyleValue =
   | CompoundBorder
   | ComponentRef;
 
-/** Style properties for a single slot. Keys are CSS custom property suffixes. */
 export type SlotStyles = Record<string, StyleValue>;
 
-// ---------------------------------------------------------------------------
-// Recipe Definition
-// ---------------------------------------------------------------------------
-
-/** A single compound variant: applies styles when all conditions match. */
 export interface CompoundVariant<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -102,7 +77,6 @@ export interface CompoundVariant<
   styles: Partial<Record<S, SlotStyles>>;
 }
 
-/** Full recipe definition. */
 export interface RecipeDefinition<
   V extends Record<
     string,
@@ -110,25 +84,11 @@ export interface RecipeDefinition<
   > = Record<string, Record<string, Partial<Record<string, SlotStyles>>>>,
   S extends string = string,
 > {
-  /** Base styles always applied to each slot. */
   base?: Partial<Record<S, SlotStyles>>;
-
-  /** Styles applied when multiple variant conditions match simultaneously. */
   compoundVariants?: CompoundVariant<V, S>[];
-
-  /** Default variant values. */
   defaultVariants?: { [K in keyof V]?: keyof V[K] };
-
-  /** Component name (used as CSS custom property prefix). */
   name: string;
-
-  /** Named sub-elements of the component. */
   slots: readonly S[];
-
-  /**
-   * State overrides (hover, active, disabled, focus, error).
-   * Dimension-aware: state → dimension → variant value → slot styles.
-   */
   states?: Record<
     string,
     Partial<{
@@ -137,11 +97,5 @@ export interface RecipeDefinition<
       >;
     }>
   >;
-
-  /** Variant dimensions. Each dimension maps variant values to slot styles. */
   variants: V;
 }
-
-// ---------------------------------------------------------------------------
-// Token Catalog — maps canonical token names to CSS var references
-// ---------------------------------------------------------------------------

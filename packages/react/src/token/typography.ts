@@ -1,7 +1,3 @@
-/**
- * Available font sizes in pixels, drawn from the design scale.
- * Values are plain numbers intended to be used with a CSS unit (e.g. `px`, `rem`).
- */
 export const fontSize = {
   10: 10,
   11: 11,
@@ -20,7 +16,6 @@ export const fontSize = {
   60: 60,
 } as const;
 
-/** Union of all valid font-size keys from {@link fontSize}. */
 export type FontSize = keyof typeof fontSize;
 
 /**
@@ -52,7 +47,6 @@ export const fontWeight = {
   black: 900,
 } as const;
 
-/** Union of all valid font-weight keys from {@link fontWeight}. */
 export type FontWeight = keyof typeof fontWeight;
 
 /**
@@ -68,5 +62,4 @@ export const lineHeight = {
   loose: 2,
 } as const;
 
-/** Union of all valid line-height keys from {@link lineHeight}. */
 export type LineHeight = keyof typeof lineHeight;

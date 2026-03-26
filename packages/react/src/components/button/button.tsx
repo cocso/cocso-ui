@@ -118,5 +118,3 @@ export function Button({
     defaultTagName: "button",
   });
 }
-
-// Style functions are in ./button.styles.ts (internal, not in public barrel)

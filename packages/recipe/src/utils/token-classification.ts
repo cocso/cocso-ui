@@ -1,9 +1,5 @@
 import type { ComponentRef, CompoundBorder, FontWeightRef } from "../types";
 
-// ---------------------------------------------------------------------------
-// Color token classification
-// ---------------------------------------------------------------------------
-
 export const COLOR_PREFIXES = new Set([
   "neutral",
   "primary",
@@ -16,22 +12,14 @@ export const COLOR_PREFIXES = new Set([
   "text",
 ]);
 
-// ---------------------------------------------------------------------------
-// CSS literal passthrough values
-// ---------------------------------------------------------------------------
-
 export const CSS_LITERALS = new Set([
   "none",
   "currentColor",
   "100%",
   "inherit",
-  // Note: "transparent" is NOT here — it resolves as a color token
+  // "transparent" is NOT here — it resolves as a color token
   // via var(--cocso-color-transparent) to match React's colors.transparent
 ]);
-
-// ---------------------------------------------------------------------------
-// Font weight lookup
-// ---------------------------------------------------------------------------
 
 export const FONT_WEIGHT_MAP: Record<FontWeightRef, number> = {
   black: 900,
@@ -44,10 +32,6 @@ export const FONT_WEIGHT_MAP: Record<FontWeightRef, number> = {
   semibold: 600,
   thin: 100,
 };
-
-// ---------------------------------------------------------------------------
-// Type guard helpers
-// ---------------------------------------------------------------------------
 
 export function isColorToken(value: string): boolean {
   if (value === "white" || value === "black" || value === "transparent") {

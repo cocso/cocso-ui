@@ -1,7 +1,6 @@
 import type { VariableUpsertParams } from "../types/figma";
 import type { FigmaColorValue, FigmaTokenDef } from "../types/token-schema";
 
-/** Group a flat token list by collection name. */
 export function groupByCollection(
   tokens: FigmaTokenDef[]
 ): Map<string, FigmaTokenDef[]> {

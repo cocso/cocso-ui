@@ -1,11 +1,3 @@
-/**
- * Figma resolver — maps a recipe + variant selection to Figma-compatible
- * node properties (RGB fills, pixel dimensions, corner radii, stroke weights).
- *
- * Lives in packages/figma/ (not packages/recipe/) because it depends on
- * tokens.json for color → RGB resolution and on Figma plugin type conventions.
- */
-
 import type {
   RecipeDefinition,
   SlotStyles,
@@ -18,25 +10,15 @@ import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 const data = tokenData as FigmaTokenData;
 const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
-// ---------------------------------------------------------------------------
-// Output types
-// ---------------------------------------------------------------------------
-
-/** Figma-compatible node specification produced by resolveForFigma(). */
 export interface FigmaNodeSpec {
-  // Color properties (resolved to RGB)
   bgColor?: RGB;
   bladeColor?: RGB;
-
-  // Dimension properties (pixels)
   bladeHeight?: number;
   bladeRadius?: number;
   blades?: number;
   bladeWidth?: number;
   borderColor?: RGB;
   borderRadius?: number;
-
-  // String properties
   borderStyle?: string;
   borderWidth?: number;
   checkedBgColor?: RGB;
@@ -70,17 +52,8 @@ export interface FigmaNodeSpec {
   width?: number;
 }
 
-/**
- * Internal mutable view of FigmaNodeSpec for dynamic property assignment
- * inside the resolver. External consumers use the strongly-typed interface.
- */
 type MutableSpec = Record<string, unknown>;
 
-// ---------------------------------------------------------------------------
-// Token resolution
-// ---------------------------------------------------------------------------
-
-/** Resolve a color token name like "primary-950" to an RGB value (0–1 range). */
 export function resolveColorToken(name: string): RGB {
   const fullName = name.startsWith("color/") ? name : `color/${name}`;
   const token = tokenMap.get(fullName);
@@ -91,10 +64,6 @@ export function resolveColorToken(name: string): RGB {
   return { r: 0, g: 0, b: 0 };
 }
 
-/**
- * Radius token map: "radius-N" → pixel value.
- * Matches the CSS custom property values defined in the baseframe YAML.
- */
 const RADIUS_MAP: Record<string, number> = {
   "1": 2,
   "2": 4,
@@ -104,10 +73,8 @@ const RADIUS_MAP: Record<string, number> = {
   "6": 16,
 };
 
-/** Pattern for numbered radius tokens e.g. "radius-4". */
 const RADIUS_TOKEN_RE = /^radius-(\d+)$/;
 
-/** Resolve a border-radius token name like "radius-4" to a pixel value. */
 export function resolveRadiusToken(name: string): number {
   if (name === "radius-full") {
     return 1000;
@@ -119,11 +86,6 @@ export function resolveRadiusToken(name: string): number {
   return 0;
 }
 
-// ---------------------------------------------------------------------------
-// Style value dispatch
-// ---------------------------------------------------------------------------
-
-/** Keys whose string values are color tokens. */
 const COLOR_KEYS = new Set([
   "bgColor",
   "fontColor",
@@ -140,10 +102,6 @@ function isRadiusKey(key: string): boolean {
   return key === "borderRadius" || key.toLowerCase().includes("radius");
 }
 
-/**
- * Apply a single StyleValue entry from a slot to the accumulator spec.
- * Skips CSS-only values that have no Figma equivalent.
- */
 function applyStyleValue(
   spec: MutableSpec,
   key: string,
@@ -185,7 +143,6 @@ function applyStringValue(spec: MutableSpec, key: string, value: string): void {
     return;
   }
 
-  // Pass through non-color, non-radius string values as-is
   spec[key] = value;
 }
 
@@ -196,10 +153,6 @@ function applyRadiusValue(spec: MutableSpec, key: string, value: string): void {
     spec[key] = resolveRadiusToken(value);
   }
 }
-
-// ---------------------------------------------------------------------------
-// Slot application helpers
-// ---------------------------------------------------------------------------
 
 function applySlotStyles(spec: MutableSpec, slotStyles: SlotStyles): void {
   for (const [key, value] of Object.entries(slotStyles)) {
@@ -288,10 +241,6 @@ function applyBaseStyles<
     }
   }
 }
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
 
 /**
  * Resolve a recipe + variant selection into a flat Figma node spec.

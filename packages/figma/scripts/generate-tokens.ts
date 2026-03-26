@@ -18,7 +18,6 @@ const sourcesDir = dirname(
   require.resolve("@cocso-ui/baseframe-sources/package.json")
 );
 
-/** Assumed root font size in px for rem-to-px conversion. */
 const BASE_FONT_SIZE_PX = 16;
 
 function findYamlFiles(dir: string): string[] {
@@ -43,7 +42,6 @@ const SHADOW_COMPOSITE_RE = /,.*\d+px/;
 const DOLLAR_PREFIX_RE = /^\$/;
 const DOT_RE = /\./g;
 
-/** Parse a HEX color string (#RGB, #RRGGBB, #RRGGBBAA) to 0–1 RGBA. */
 export function parseHex(hex: string): FigmaColorValue {
   const m = hex.match(HEX_RE);
   if (!m) {
@@ -65,7 +63,6 @@ export function parseHex(hex: string): FigmaColorValue {
   return { r, g, b, a };
 }
 
-/** Parse an rgb() or rgba() string to 0–1 RGBA. */
 export function parseRgba(str: string): FigmaColorValue {
   const m = str.match(RGBA_RE);
   if (!m) {
@@ -79,7 +76,6 @@ export function parseRgba(str: string): FigmaColorValue {
   };
 }
 
-/** Parse a CSS size string ("16px", "1.5rem") to a unitless number. */
 export function parseSize(str: string): number {
   const m = str.match(SIZE_RE);
   if (!m) {
@@ -89,17 +85,14 @@ export function parseSize(str: string): number {
   return m[2] === "rem" ? value * BASE_FONT_SIZE_PX : value;
 }
 
-/** Check if a raw value is a token reference (starts with "$"). */
 export function isTokenRef(value: string): boolean {
   return TOKEN_REF_RE.test(value);
 }
 
-/** Check if a raw value is a composite shadow (multi-layer with px). */
 export function isShadowComposite(value: string): boolean {
   return SHADOW_COMPOSITE_RE.test(value);
 }
 
-/** Convert a baseframe token name to a Figma Variable name. */
 export function toFigmaName(tokenName: string): string {
   return tokenName.replace(DOLLAR_PREFIX_RE, "").replace(DOT_RE, "/");
 }

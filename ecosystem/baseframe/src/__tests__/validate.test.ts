@@ -217,8 +217,6 @@ describe("validateAllTokens", () => {
   });
 
   it("returns INVALID_PRIMITIVE_TOKEN for dangling ref inside a ShadowLayer", () => {
-    // "0px 1px 2px 0px $color.alpha.shadow1" parses as Shadow { layers: [ShadowLayer] }
-    // getAllTokenRefs traverses the ShadowLayer branch and finds the TokenRef for color
     const token: Token = {
       kind: "Tokens",
       metadata: { id: "test", name: "test", description: "" },
@@ -240,7 +238,6 @@ describe("validateAllTokens", () => {
   });
 
   it("returns isValid=true when shadow color ref resolves to a defined token", () => {
-    // ShadowLayer branch: color TokenRef must point to an existing token
     const tokens: Token[] = [
       {
         kind: "Tokens",
@@ -272,8 +269,6 @@ describe("validateAllTokens", () => {
   });
 
   it("returns INVALID_PRIMITIVE_TOKEN for dangling ref inside a multi-layer Shadow", () => {
-    // Multi-layer shadow: getAllTokenRefs traverses the Shadow branch (layers array)
-    // and each ShadowLayer's color ref is checked
     const token: Token = {
       kind: "Tokens",
       metadata: { id: "test", name: "test", description: "" },
@@ -295,12 +290,10 @@ describe("validateAllTokens", () => {
     const ptErrors = result.errors.filter(
       (e) => e.type === "INVALID_PRIMITIVE_TOKEN"
     );
-    // Both layers' color refs are dangling
     expect(ptErrors.length).toBeGreaterThanOrEqual(2);
   });
 
   it("returns isValid=true for multi-layer Shadow when all color refs resolve", () => {
-    // Shadow branch: all layers' TokenRefs must resolve
     const tokens: Token[] = [
       {
         kind: "Tokens",
@@ -337,13 +330,7 @@ describe("validateAllTokens", () => {
 });
 
 describe("parseValue — INVALID_VALUE_FORMAT coverage", () => {
-  // parseValue always returns isValid=true for the public validateAllTokens input types
-  // (string | number). Unknown strings fall through to StringValue, and numbers become
-  // NumberValue, so the INVALID_VALUE_FORMAT branches in both validateCollection and
-  // validateTokenValues are not reachable via the public Token API.
-
   it("parseValue never returns isValid=false for arbitrary strings", () => {
-    // Any string that doesn't match a known format becomes a StringValue — never invalid
     const result = parseValue("not-a-valid-anything!!!");
     expect(result.isValid).toBe(true);
     expect(result.value?.kind).toBe("StringValue");

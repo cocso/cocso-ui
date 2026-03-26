@@ -1,5 +1,3 @@
-// Internal re-export layer. Not part of the public API.
-// Components import from individual modules (e.g., "../primitives/accordion").
 export { Accordion } from "./accordion";
 export { Checkbox } from "./checkbox";
 export { Dialog } from "./dialog";

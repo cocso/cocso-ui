@@ -77,7 +77,6 @@ describe("parseValue", () => {
   });
 
   it("parses shadow with token-ref color", () => {
-    // Real shadow values use token references for colors, not inline rgba
     const result = parseValue(
       "0px 1px 2px 0px $color.alpha.shadow1, 0px 0px 2px 0px $color.alpha.shadow1"
     );
@@ -130,7 +129,6 @@ describe("parseValue — additional types", () => {
   });
 
   it("falls through to StringValue for rgb with out-of-range values", () => {
-    // parseRgb rejects 256 > 255, but parseValue falls through to StringValue
     const result = parseValue("rgb(256, 0, 0)");
     expect(result.isValid).toBe(true);
     expect(result.value?.kind).toBe("StringValue");

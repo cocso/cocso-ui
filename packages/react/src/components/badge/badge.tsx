@@ -75,5 +75,3 @@ export function Badge({
     </div>
   );
 }
-
-// Style functions are in ./badge.styles.ts (internal, not in public barrel)

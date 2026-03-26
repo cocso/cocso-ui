@@ -1,13 +1,3 @@
-/**
- * RadioGroup recipe conformance test.
- *
- * Verifies that the React component's sizeVars produce output
- * consistent with the recipe's resolved values. If this test fails,
- * either the recipe or the React sizeVars need to be updated.
- *
- * Recipe is authoritative — update React to match the recipe.
- */
-
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
 import { describe, expect, it } from "vitest";

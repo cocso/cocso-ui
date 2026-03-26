@@ -69,7 +69,6 @@ async function handleGenerateComponents() {
   try {
     const container = await prepareComponentPage();
 
-    // Pre-load Figma color Variables for token-driven binding (Reshaped-like)
     await loadColorVariables();
 
     const count = generateFromRecipes(container);

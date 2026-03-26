@@ -1,20 +1,9 @@
-/**
- * from-extracted.ts
- *
- * Creates Figma components from the JSON specs extracted by the
- * extract-components script. This replaces hand-coded generators with
- * an approach that reproduces the exact computed styles from React.
- */
 import {
   createBoundPaint,
   createComponentSection,
   createVariantRow,
   getFontStyle,
 } from "./shared";
-
-// ---------------------------------------------------------------------------
-// Types matching the extraction output
-// ---------------------------------------------------------------------------
 
 interface ColorValue {
   a: number;
@@ -56,7 +45,6 @@ interface CornerRadii {
 }
 
 interface NodeSpec {
-  // Children
   children?: NodeSpec[];
   cornerRadii?: CornerRadii;
   cornerRadius?: number;
@@ -75,7 +63,6 @@ interface NodeSpec {
   primaryAxisAlignItems?: string;
   strokes?: StrokeSpec;
   tag?: string;
-  // Text-specific
   text?: string;
   textColor?: ColorValue;
   textDecoration?: "UNDERLINE";
@@ -91,10 +78,6 @@ interface VariantEntry {
 }
 
 export type ComponentSpecs = Record<string, VariantEntry[]>;
-
-// ---------------------------------------------------------------------------
-// Figma node construction from spec
-// ---------------------------------------------------------------------------
 
 function applyFills(node: MinimalFillsMixin, fills?: FillSpec[]): void {
   if (!fills || fills.length === 0) {
@@ -158,7 +141,7 @@ function createFigmaNode(spec: NodeSpec): SceneNode {
   return createFrameFromSpec(spec);
 }
 
-/** Always use Pretendard in Figma — browser may resolve to system fonts like Arial. */
+// Always use Pretendard in Figma — browser may resolve to system fonts like Arial.
 const FIGMA_FONT_FAMILY = "Pretendard";
 
 function createTextFromSpec(spec: NodeSpec): TextNode {
@@ -210,7 +193,6 @@ function createFrameFromSpec(spec: NodeSpec): FrameNode {
     frame.opacity = spec.opacity;
   }
 
-  // Layout
   if (spec.layoutMode) {
     frame.layoutMode = spec.layoutMode;
     frame.primaryAxisSizingMode = "AUTO";
@@ -233,7 +215,6 @@ function createFrameFromSpec(spec: NodeSpec): FrameNode {
     }
   }
 
-  // Padding
   if (spec.padding) {
     frame.paddingTop = spec.padding.top;
     frame.paddingRight = spec.padding.right;
@@ -241,7 +222,6 @@ function createFrameFromSpec(spec: NodeSpec): FrameNode {
     frame.paddingLeft = spec.padding.left;
   }
 
-  // Children
   if (spec.children) {
     for (const childSpec of spec.children) {
       const childNode = createFigmaNode(childSpec);
@@ -258,11 +238,6 @@ function createFrameFromSpec(spec: NodeSpec): FrameNode {
   return frame;
 }
 
-// ---------------------------------------------------------------------------
-// Public API: generate all components from extracted specs
-// ---------------------------------------------------------------------------
-
-/** Create a Figma ComponentNode from an extracted spec. */
 function createComponentFromSpec(
   variantKey: string,
   spec: NodeSpec
@@ -281,11 +256,9 @@ function createComponentFromSpec(
     return component;
   }
 
-  // Move children from inner frame to component
   while (inner.children.length > 0) {
     component.appendChild(inner.children[0]);
   }
-  // Copy visual properties
   component.fills = inner.fills;
   component.strokes = inner.strokes;
   component.strokeWeight = inner.strokeWeight;
@@ -338,17 +311,12 @@ export function generateFromExtractedSpecs(
   }
 }
 
-/**
- * Group variants by their primary key for row display.
- * e.g., "variant=primary,size=large" groups by "primary"
- */
 function groupVariants(
   variants: VariantEntry[]
 ): Record<string, VariantEntry[]> {
   const groups: Record<string, VariantEntry[]> = {};
 
   for (const v of variants) {
-    // Parse the first key=value pair as the group label
     const firstPair = v.variantKey.split(",")[0] ?? "default";
     const label = firstPair.includes("=") ? firstPair.split("=")[1] : firstPair;
 
