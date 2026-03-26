@@ -14,8 +14,11 @@ import {
   COLORS,
   createBoundPaint,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   setFill,
 } from "./shared";
 
@@ -28,7 +31,7 @@ function createComponentFromSpec(
   component.name = name;
   component.layoutMode = "HORIZONTAL";
   component.primaryAxisSizingMode = "AUTO";
-  component.counterAxisSizingMode = "FIXED";
+  component.counterAxisSizingMode = spec.height ? "FIXED" : "AUTO";
   component.counterAxisAlignItems = "CENTER";
   component.primaryAxisAlignItems = "CENTER";
 
@@ -45,6 +48,12 @@ function createComponentFromSpec(
   }
   if (spec.paddingRight) {
     component.paddingRight = spec.paddingRight;
+  }
+  if (spec.paddingTop) {
+    component.paddingTop = spec.paddingTop;
+  }
+  if (spec.paddingBottom) {
+    component.paddingBottom = spec.paddingBottom;
   }
 
   const radius = spec.cornerRadius ?? spec.borderRadius;
@@ -118,6 +127,56 @@ function createWideComponentFromSpec(
   return component;
 }
 
+function createSelectComponentFromSpec(
+  name: string,
+  spec: FigmaNodeSpec,
+  label: string,
+  width = 200
+): ComponentNode {
+  const component = figma.createComponent();
+  component.name = name;
+  component.layoutMode = "HORIZONTAL";
+  component.primaryAxisSizingMode = "FIXED";
+  component.counterAxisSizingMode = "FIXED";
+  component.counterAxisAlignItems = "CENTER";
+  component.primaryAxisAlignItems = "MIN";
+
+  const height = spec.height ?? 36;
+  component.resize(width, height);
+
+  if (spec.paddingLeft) {
+    component.paddingLeft = spec.paddingLeft;
+  } else if (spec.paddingInline) {
+    component.paddingLeft = spec.paddingInline;
+  }
+
+  component.paddingRight = spec.iconRight ?? 12;
+
+  const radius = spec.cornerRadius ?? spec.borderRadius;
+  if (radius) {
+    component.cornerRadius = radius;
+  }
+
+  setFill(component, COLORS.white);
+  component.strokes = [createBoundPaint(COLORS.neutral200)];
+  component.strokeWeight = 1;
+
+  const fontSize = spec.fontSize ?? 14;
+  const text = createTextNode(label, fontSize, 400, COLORS.neutral400);
+  text.layoutGrow = 1;
+  component.appendChild(text);
+
+  const iconSize = Math.min(16, Math.round(height * 0.44));
+  const icon = createIcon(
+    ICON_SVGS.chevronDown,
+    iconSize,
+    rgbToHex(COLORS.neutral400)
+  );
+  component.appendChild(icon);
+
+  return component;
+}
+
 function createSpinnerFromSpec(
   name: string,
   spec: FigmaNodeSpec
@@ -128,41 +187,43 @@ function createSpinnerFromSpec(
   const br = spec.bladeRadius ?? 1;
   const containerSize = spec.output ?? 16;
   const bladeColor = spec.bladeColor ?? COLORS.neutral900;
+  const hexColor = rgbToHex(bladeColor);
+
+  const cx = containerSize / 2;
+  const cy = containerSize / 2;
+  const bx = (containerSize - bw) / 2;
+  const by = containerSize - bh;
+
+  let rects = "";
+  for (let i = 0; i < bladeCount; i++) {
+    const angleDeg = (i * 360) / bladeCount;
+    const opacity = 1 - (i / bladeCount) * 0.85;
+    rects += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="${br}" fill="${hexColor}" opacity="${opacity.toFixed(3)}" transform="rotate(${angleDeg} ${cx} ${cy})"/>`;
+  }
+
+  const svg = `<svg viewBox="0 0 ${containerSize} ${containerSize}" width="${containerSize}" height="${containerSize}" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+  const svgNode = figma.createNodeFromSvg(svg);
 
   const component = figma.createComponent();
   component.name = name;
   component.resize(containerSize, containerSize);
   component.fills = [];
+  component.clipsContent = true;
 
-  for (let i = 0; i < bladeCount; i++) {
-    const angleDeg = (i * 360) / bladeCount;
-    const opacity = 1 - (i / bladeCount) * 0.85;
-
-    const wrapper = figma.createFrame();
-    wrapper.name = `blade-${i}`;
-    wrapper.resize(containerSize, containerSize);
-    wrapper.fills = [];
-
-    const rect = figma.createRectangle();
-    rect.name = "blade";
-    rect.resize(bw, bh);
-    rect.cornerRadius = br;
-    rect.fills = [createBoundPaint(bladeColor, opacity)];
-
-    rect.x = (containerSize - bw) / 2;
-    rect.y = containerSize - bh;
-
-    wrapper.appendChild(rect);
-    wrapper.rotation = -angleDeg;
-    component.appendChild(wrapper);
+  while (svgNode.children.length > 0) {
+    component.appendChild(svgNode.children[0]);
   }
+  svgNode.remove();
+
+  component.resize(containerSize, containerSize);
 
   return component;
 }
 
 function createCheckboxFromSpec(
   name: string,
-  spec: FigmaNodeSpec
+  spec: FigmaNodeSpec,
+  status: "on" | "off" | "intermediate"
 ): ComponentNode {
   const boxSize = spec.size ?? 16;
   const radius = spec.radius ?? spec.borderRadius ?? 4;
@@ -185,6 +246,18 @@ function createCheckboxFromSpec(
   box.strokes = [createBoundPaint(borderColor)];
   box.strokeWeight = 1;
   box.cornerRadius = radius;
+
+  if (status === "on" || status === "intermediate") {
+    box.layoutMode = "HORIZONTAL";
+    box.primaryAxisAlignItems = "CENTER";
+    box.counterAxisAlignItems = "CENTER";
+    box.clipsContent = true;
+
+    const iconSvg = status === "on" ? ICON_SVGS.check : ICON_SVGS.indeterminate;
+    const iconSize = Math.round(boxSize * 0.75);
+    const icon = createIcon(iconSvg, iconSize, rgbToHex(COLORS.white));
+    box.appendChild(icon);
+  }
 
   const labelText = createTextNode("Label", 14, 400, COLORS.neutral900);
 
@@ -373,6 +446,35 @@ function generateInputSection<
   container.appendChild(section);
 }
 
+function generateSelectSection<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(
+  container: FrameNode,
+  recipe: RecipeDefinition<V, S>,
+  sectionLabel: string,
+  textLabel: string
+): void {
+  const section = createComponentSection(sectionLabel);
+  const combinations = getAllVariantCombinations(recipe);
+
+  const row = createVariantRow("size");
+  for (const combo of combinations) {
+    const spec = resolveForFigma(
+      recipe,
+      combo as { [K in keyof V]?: keyof V[K] }
+    );
+    const nameParts = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+    const component = createSelectComponentFromSpec(nameParts, spec, textLabel);
+    row.appendChild(component);
+  }
+
+  section.appendChild(row);
+  container.appendChild(section);
+}
+
 function generateLinkSection<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -427,9 +529,18 @@ function generateStockQuantityStatusSection<
       component.layoutMode = "HORIZONTAL";
       component.primaryAxisSizingMode = "AUTO";
       component.counterAxisSizingMode = "AUTO";
+      component.counterAxisAlignItems = "CENTER";
+      component.itemSpacing = 6;
       component.fills = [];
 
       const textColor = spec.color ?? COLORS.neutral900;
+
+      const indicator = figma.createEllipse();
+      indicator.name = "indicator";
+      indicator.resize(8, 8);
+      setFill(indicator, textColor);
+      component.appendChild(indicator);
+
       const text = createTextNode(groupKey, 14, 500, textColor);
       component.appendChild(text);
       row.appendChild(component);
@@ -451,7 +562,13 @@ function generateCheckboxSection<
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);
     for (const { name, spec } of items) {
-      const component = createCheckboxFromSpec(name, spec);
+      let status: "on" | "off" | "intermediate" = "off";
+      if (name.includes("status=on")) {
+        status = "on";
+      } else if (name.includes("status=intermediate")) {
+        status = "intermediate";
+      }
+      const component = createCheckboxFromSpec(name, spec, status);
       row.appendChild(component);
     }
     section.appendChild(row);
@@ -544,17 +661,13 @@ function generateSpinnerSection<
   container.appendChild(section);
 }
 
-/**
- * Generate all recipe-based component sections into the given container frame.
- * Returns the number of component sets generated.
- */
 export function generateFromRecipes(container: FrameNode): number {
   const sections = [
     () => generateGenericSection(container, buttonRecipe, "Button", "Button"),
     () => generateGenericSection(container, badgeRecipe, "Badge", "Badge"),
     () => generateInputSection(container, inputRecipe, "Input", "Placeholder"),
     () =>
-      generateInputSection(container, selectRecipe, "Select", "Select option"),
+      generateSelectSection(container, selectRecipe, "Select", "Select option"),
     () => generateLinkSection(container, linkRecipe),
     () =>
       generateStockQuantityStatusSection(container, stockQuantityStatusRecipe),

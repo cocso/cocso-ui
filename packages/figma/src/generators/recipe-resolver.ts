@@ -33,6 +33,7 @@ export interface FigmaNodeSpec {
   fontSize?: number;
   fontWeight?: number;
   height?: number;
+  iconRight?: number;
   minWidth?: number;
   output?: number;
   padding?: number;
@@ -242,6 +243,37 @@ function applyBaseStyles<
   }
 }
 
+function normalizeLayoutProps(spec: MutableSpec): void {
+  if (typeof spec.padding === "string") {
+    const parts = (spec.padding as string).match(/(\d+(?:\.\d+)?)/g);
+    if (parts) {
+      const values = parts.map(Number);
+      if (values.length >= 2) {
+        spec.paddingTop = values[0];
+        spec.paddingBottom = values[0];
+        spec.paddingLeft = values[1];
+        spec.paddingRight = values[1];
+      } else if (values.length === 1) {
+        spec.paddingTop = values[0];
+        spec.paddingBottom = values[0];
+        spec.paddingLeft = values[0];
+        spec.paddingRight = values[0];
+      }
+    }
+    spec.padding = undefined;
+  }
+
+  if (typeof spec.paddingX === "number") {
+    if (spec.paddingLeft == null) {
+      spec.paddingLeft = spec.paddingX;
+    }
+    if (spec.paddingRight == null) {
+      spec.paddingRight = spec.paddingX;
+    }
+    spec.paddingX = undefined;
+  }
+}
+
 /**
  * Resolve a recipe + variant selection into a flat Figma node spec.
  *
@@ -264,6 +296,7 @@ export function resolveForFigma<
   applyBaseStyles(spec, recipe);
   applyVariantStyles(spec, recipe, merged);
   applyCompoundVariants(spec, recipe, merged);
+  normalizeLayoutProps(spec);
 
   return spec as FigmaNodeSpec;
 }
