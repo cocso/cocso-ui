@@ -3,7 +3,7 @@ import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { useRender } from "../../primitives/use-render";
 import type { FontWeight, LineHeight } from "../../token";
-import type { TypographyProps } from "../typography";
+import type { BodySize } from "../typography";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
 import { getColor, getColorHover } from "./link.styles";
@@ -11,12 +11,11 @@ import { getColor, getColorHover } from "./link.styles";
 export type LinkSize = "large" | "medium" | "small" | "x-small";
 
 export type LinkVariant = "inline" | "current" | "plain";
-export interface LinkProps extends ComponentProps<"a"> {
+export interface LinkProps extends Omit<ComponentProps<"a">, "type"> {
   indicator?: boolean;
   lineHeight?: LineHeight;
   render?: useRender.RenderProp;
-  size?: TypographyProps["size"];
-  type?: TypographyProps["type"];
+  size?: BodySize;
   variant?: LinkVariant;
   weight?: FontWeight;
 }
@@ -27,7 +26,6 @@ function LinkComponent({
   className,
   style: _style,
   size,
-  type = "body",
   weight,
   lineHeight,
   variant = "inline",
@@ -55,11 +53,11 @@ function LinkComponent({
       lineHeight={lineHeight}
       ref={ref}
       render={renderProp ?? ((renderProps) => <a {...renderProps} />)}
-      size={size as never}
+      size={size}
       style={style}
-      type={type}
+      type="body"
       weight={weight}
-      {...(props as ComponentProps<"p">)}
+      {...props}
     />
   );
 }

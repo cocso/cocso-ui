@@ -1,3 +1,5 @@
+"use client";
+
 import { SelectorIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";

@@ -7,8 +7,16 @@ import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./pagination.module.css";
 
+export interface PaginationLabels {
+  navigation?: string;
+  next?: string;
+  page?: (n: number) => string;
+  previous?: string;
+}
+
 export interface PaginationProps
   extends Omit<ComponentProps<"nav">, "onChange"> {
+  labels?: PaginationLabels;
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
   page: number;
@@ -22,14 +30,20 @@ export function Pagination({
   totalPages,
   maxVisible = 5,
   onChange,
+  labels,
   ...props
 }: PaginationProps) {
   const halfVisible = Math.ceil(maxVisible / 2);
 
+  const navigationLabel = labels?.navigation ?? "페이지 탐색";
+  const previousLabel = labels?.previous ?? "이전 페이지";
+  const nextLabel = labels?.next ?? "다음 페이지";
+  const pageLabel = labels?.page ?? ((n: number) => `${n} 페이지`);
+
   const renderPageButton = (pageNumber: number) => (
     <button
       aria-current={page === pageNumber ? "page" : undefined}
-      aria-label={`${pageNumber} 페이지`}
+      aria-label={pageLabel(pageNumber)}
       className={styles.item}
       data-active={page === pageNumber}
       key={pageNumber}
@@ -42,14 +56,14 @@ export function Pagination({
 
   return (
     <nav
-      aria-label="페이지 탐색"
+      aria-label={navigationLabel}
       className={cn(styles.pagination, className)}
       ref={ref}
       {...props}
     >
       {totalPages > 1 && (
         <button
-          aria-label="이전 페이지"
+          aria-label={previousLabel}
           className={styles.arrow}
           disabled={page === 1}
           onClick={() => page > 1 && onChange(page - 1)}
@@ -88,7 +102,7 @@ export function Pagination({
 
       {totalPages > 1 && (
         <button
-          aria-label="다음 페이지"
+          aria-label={nextLabel}
           className={styles.arrow}
           disabled={page === totalPages}
           onClick={() => page < totalPages && onChange(page + 1)}

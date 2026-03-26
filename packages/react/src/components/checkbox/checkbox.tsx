@@ -1,3 +1,5 @@
+"use client";
+
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId, useRef, useState } from "react";
