@@ -123,8 +123,8 @@ pnpm --filter @cocso-ui/react test      # includes 166 recipe conformance tests
 Recipe property keys and React CSS custom properties use different naming conventions:
 
 - **Recipe data model**: property keys use camelCase (e.g., `bgColor`, `fontColor`, `paddingInline`, `borderRadius`). These names are the canonical identifiers in the recipe definition and are platform-agnostic.
-- **React CSS custom properties**: the React resolver emits CSS custom properties in kebab-case with a component prefix (e.g., `--cocso-button-bg-color`, `--cocso-button-font-color`). This follows the CSS custom property convention where names are lowercase and hyphen-separated.
-- **Conformance tests**: bridge the two conventions by comparing resolved values (not property names). A conformance test verifies that `resolveForReact(recipe, variants)["--cocso-button-bgColor"]` matches the React style function output for the same variant, ensuring both produce the same token-resolved value regardless of how the property name is formatted.
+- **React resolver output**: the resolver preserves recipe camelCase in CSS custom property names (e.g., `--cocso-button-bgColor`, `--cocso-button-fontColor`). The React `.styles.ts` files independently define kebab-case CSS custom properties (e.g., `--cocso-button-bg-color`). These are two separate naming spaces — the resolver output is used by conformance tests, while `.styles.ts` functions produce the actual runtime CSS variables.
+- **Conformance tests**: compare resolved *values* (not property names). A conformance test verifies that the recipe-resolved value for a given variant matches the React style function output, ensuring both produce the same design token regardless of property name format.
 
 ## Open Questions
 
