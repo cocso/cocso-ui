@@ -65,6 +65,11 @@ describe("resolveStyleValue", () => {
       "white"
     );
   });
+
+  it("passes through unrecognized string values", () => {
+    expect(resolveStyleValue("5px 10px")).toBe("5px 10px");
+    expect(resolveStyleValue("auto")).toBe("auto");
+  });
 });
 
 const testRecipe = defineRecipe({
@@ -314,5 +319,73 @@ describe("resolveForReact", () => {
       size: "large",
     });
     expect(noMatch["--cocso-mixed-fontWeight"]).toBeUndefined();
+  });
+
+  it("applies base styles", () => {
+    const recipeWithBase = defineRecipe({
+      name: "based",
+      slots: ["root"] as const,
+      base: {
+        root: { display: "inline-flex", cursor: "pointer" },
+      },
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const result = resolveForReact(recipeWithBase, { variant: "primary" });
+    expect(result["--cocso-based-display"]).toBe("inline-flex");
+    expect(result["--cocso-based-cursor"]).toBe("pointer");
+    expect(result["--cocso-based-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("handles multi-slot recipe where variant only defines some slots", () => {
+    const multiSlot = defineRecipe({
+      name: "multi",
+      slots: ["root", "label", "icon"] as const,
+      variants: {
+        variant: {
+          primary: {
+            root: { bgColor: "primary-950" },
+            // label and icon slots NOT defined — triggers continue in applySlotStyles
+          },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const result = resolveForReact(multiSlot, { variant: "primary" });
+    expect(result["--cocso-multi-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+  });
+
+  it("skips merged variant dimensions not present in recipe.variants", () => {
+    const sparseRecipe = defineRecipe({
+      name: "sparse",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    // Pass an extra key not in recipe.variants — triggers the `continue` at
+    // the dimensionDef guard in applyVariantStyles (line 108 in react.ts).
+    const result = resolveForReact(sparseRecipe, {
+      variant: "primary",
+      size: "large",
+    } as any);
+    expect(result["--cocso-sparse-bgColor"]).toBe(
+      "var(--cocso-color-primary-950)"
+    );
+    expect(result["--cocso-sparse-height"]).toBeUndefined();
   });
 });

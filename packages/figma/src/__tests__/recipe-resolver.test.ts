@@ -73,6 +73,10 @@ describe("resolveRadiusToken", () => {
   it("returns 0 for unknown radius", () => {
     expect(resolveRadiusToken("radius-99")).toBe(0);
   });
+
+  it("returns 0 for non-matching radius string", () => {
+    expect(resolveRadiusToken("not-a-radius")).toBe(0);
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -457,6 +461,50 @@ describe("resolveForFigma — edge cases", () => {
     const custom = resolveForFigma(recipe, { size: "custom" });
     expect(custom.paddingLeft).toBe(8);
     expect(custom.paddingRight).toBe(12);
+  });
+
+  it("skips undefined variant values gracefully", () => {
+    const recipe = defineRecipe({
+      name: "test-undef",
+      slots: ["root"] as const,
+      variants: {
+        variant: {
+          primary: { root: { bgColor: "primary-950" } },
+        },
+        size: {
+          large: { root: { height: 40 } },
+        },
+      },
+      defaultVariants: { variant: "primary", size: "large" },
+    });
+
+    // Pass a variant value that doesn't exist in the dimension
+    const spec = resolveForFigma(recipe, {
+      variant: "primary",
+      size: "nonexistent" as any,
+    });
+    expect(spec.bgColor).toBeDefined();
+    expect(spec.height).toBeUndefined();
+  });
+
+  it("applies base styles from recipe", () => {
+    const recipe = defineRecipe({
+      name: "test-base",
+      slots: ["root", "label"] as const,
+      base: {
+        root: { bgColor: "white", fontSize: 14 },
+      },
+      variants: {
+        variant: {
+          primary: { root: { fontColor: "primary-950" } },
+        },
+      },
+      defaultVariants: { variant: "primary" },
+    });
+
+    const spec = resolveForFigma(recipe, { variant: "primary" });
+    expect(spec.fontSize).toBe(14);
+    expect(spec.fontColor).toBeDefined();
   });
 
   it("skips unknown variant dimensions gracefully", () => {
