@@ -1,7 +1,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { detectColorStrategy, kebabToPascal, type Registry } from "./types";
+import {
+  detectColorStrategy,
+  kebabToPascal,
+  type Registry,
+  validateComponentName,
+} from "./types";
 
 const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg", "semantic");
@@ -107,6 +112,14 @@ async function processIcon(
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.log(`${c.red("✗")} invalid SVG: ${msg}`);
+    return "failed";
+  }
+
+  try {
+    validateComponentName(name);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.log(`${c.red("✗")} ${msg}`);
     return "failed";
   }
 

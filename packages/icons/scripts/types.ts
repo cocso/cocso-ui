@@ -30,6 +30,16 @@ export function kebabToPascal(str: string): string {
     .join("");
 }
 
+const LEADING_DIGIT = /^\d/;
+
+export function validateComponentName(name: string): void {
+  if (LEADING_DIGIT.test(name)) {
+    throw new Error(
+      `Icon name "${name}" starts with a digit and would produce an invalid TypeScript identifier. Use a name that starts with a letter (e.g., "icon-${name}").`
+    );
+  }
+}
+
 export function detectColorStrategy(content: string): ColorStrategy {
   const hasStroke = content.includes('stroke="currentColor"');
   const hasFillCurrent = content.includes('fill="currentColor"');

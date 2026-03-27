@@ -7,6 +7,7 @@ import {
   kebabToPascal,
   type Registry,
   type RegistryIcon,
+  validateComponentName,
 } from "./types";
 
 const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -140,6 +141,10 @@ function main() {
       `\x1b[31m✗\x1b[0m Icon "${opts.name}" already exists in registry.`
     );
     process.exit(1);
+  }
+
+  if (!opts.componentName) {
+    validateComponentName(opts.name);
   }
 
   const pascal = kebabToPascal(opts.name);
