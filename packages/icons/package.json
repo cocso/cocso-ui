@@ -20,6 +20,8 @@
     "validate": "tsx scripts/validate.ts",
     "validate:compat": "tsx scripts/validate-compat.ts",
     "build": "tsx scripts/optimize.ts && tsx scripts/generate-react.ts && tsx scripts/generate-figma.ts",
+    "add-icon": "tsx scripts/add-icon.ts",
+    "fetch:tabler": "tsx scripts/fetch-tabler.ts",
     "lint": "biome check ."
   },
   "peerDependencies": {
