@@ -70,7 +70,6 @@ export function generateDialogSection(container: FrameNode): void {
     const header = createAutoLayoutFrame("header");
     header.primaryAxisAlignItems = "SPACE_BETWEEN";
     header.counterAxisAlignItems = "CENTER";
-    header.layoutSizingHorizontal = "FILL";
 
     const title = createTextNode("Dialog Title", 20, 700, COLORS.neutral950);
     header.appendChild(title);
@@ -92,6 +91,7 @@ export function generateDialogSection(container: FrameNode): void {
     header.appendChild(closeBtn);
 
     component.appendChild(header);
+    header.layoutSizingHorizontal = "FILL";
 
     const desc = createTextNode(
       "Dialog description goes here.",
