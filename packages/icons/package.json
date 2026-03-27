@@ -1,0 +1,21 @@
+{
+  "name": "@cocso-ui/icons",
+  "version": "0.0.1",
+  "description": "Canonical SVG icon sources and build pipeline for the cocso design system",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/icons"
+  },
+  "scripts": {
+    "optimize": "tsx scripts/optimize.ts",
+    "build": "tsx scripts/optimize.ts",
+    "lint": "biome check ."
+  },
+  "devDependencies": {
+    "svgo": "^3.3.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.9.3"
+  }
+}
