@@ -40,9 +40,7 @@ function createButtonWithIcon(
   if (mode === "svgOnly" && spec.height) {
     component.resize(spec.height, spec.height);
     component.itemSpacing = 0;
-  }
-
-  if (spec.paddingInline !== undefined) {
+  } else if (spec.paddingInline !== undefined) {
     component.paddingLeft = spec.paddingInline;
     component.paddingRight = spec.paddingInline;
   }

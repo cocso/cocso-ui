@@ -67,7 +67,7 @@ export function generateDialogSection(container: FrameNode): void {
     const desc = createTextNode(
       "Dialog description goes here.",
       14,
-      400,
+      500,
       COLORS.neutral600
     );
     component.appendChild(title);
