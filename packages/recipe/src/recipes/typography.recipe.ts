@@ -6,7 +6,7 @@ export const typographyRecipe = defineRecipe({
   variants: {
     type: {
       body: { root: {} },
-      heading: { root: { fontWeight: "bold" } },
+      heading: { root: { fontWeight: 700 } },
     },
     size: {
       "x-large": { root: { fontSize: 28 } },

@@ -1,6 +1,17 @@
 import { defineRecipe } from "@cocso-ui/recipe";
+import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
+import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
+import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
+import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
+import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
+import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
+import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
+import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import { describe, expect, it } from "vitest";
 import {
   resolveColorToken,
@@ -666,5 +677,375 @@ describe("resolveForFigma — edge cases", () => {
 
     const spec = resolveForFigma(recipe, { variant: "dashed" });
     expect(spec.borderStyle).toBe("dashed");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Dialog recipe — border, shadow, sizes
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — dialog recipe", () => {
+  it("base resolves border to strokeColor (neutral-100) and strokeWeight (1)", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "medium" });
+    const expected = resolveColorToken("neutral-100");
+    expect(spec.strokeColor).toEqual(expected);
+    expect(spec.strokeWeight).toBe(1);
+  });
+
+  it("base resolves borderRadius to 12 (radius-5)", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "medium" });
+    expect(spec.borderRadius).toBe(12);
+  });
+
+  it("base resolves bgColor to white", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "medium" });
+    expect(spec.bgColor).toEqual({ r: 1, g: 1, b: 1 });
+  });
+
+  it("base resolves padding to 20 on all sides (spacing-9)", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "medium" });
+    expect(spec.paddingTop).toBe(20);
+    expect(spec.paddingBottom).toBe(20);
+    expect(spec.paddingLeft).toBe(20);
+    expect(spec.paddingRight).toBe(20);
+  });
+
+  it("small size resolves width=380, height=200", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "small" });
+    expect(spec.width).toBe(380);
+    expect(spec.height).toBe(200);
+  });
+
+  it("medium size resolves width=520, height=260", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "medium" });
+    expect(spec.width).toBe(520);
+    expect(spec.height).toBe(260);
+  });
+
+  it("large size resolves width=680, height=340", () => {
+    const spec = resolveForFigma(dialogRecipe, { size: "large" });
+    expect(spec.width).toBe(680);
+    expect(spec.height).toBe(340);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Badge recipe — variants, border, padding
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — badge recipe", () => {
+  it("secondary variant resolves bgColor to neutral-50", () => {
+    const spec = resolveForFigma(badgeRecipe, {
+      variant: "secondary",
+      size: "medium",
+      shape: "square",
+    });
+    expect(spec.bgColor).toEqual(resolveColorToken("neutral-50"));
+    expect(spec.fontColor).toEqual(resolveColorToken("neutral-600"));
+  });
+
+  it("outline variant resolves border to strokeColor + strokeWeight", () => {
+    const spec = resolveForFigma(badgeRecipe, {
+      variant: "outline",
+      size: "medium",
+      shape: "square",
+    });
+    expect(spec.strokeColor).toEqual(resolveColorToken("neutral-100"));
+    expect(spec.strokeWeight).toBe(1);
+  });
+
+  it("large size parses padding shorthand '5px 10px'", () => {
+    const spec = resolveForFigma(badgeRecipe, {
+      variant: "secondary",
+      size: "large",
+      shape: "square",
+    });
+    expect(spec.paddingTop).toBe(5);
+    expect(spec.paddingBottom).toBe(5);
+    expect(spec.paddingLeft).toBe(10);
+    expect(spec.paddingRight).toBe(10);
+    expect(spec.fontSize).toBe(14);
+  });
+
+  it("square/medium resolves borderRadius to 8 (radius-4)", () => {
+    const spec = resolveForFigma(badgeRecipe, {
+      variant: "secondary",
+      size: "medium",
+      shape: "square",
+    });
+    expect(spec.borderRadius).toBe(8);
+  });
+
+  it("square/small resolves borderRadius to 6 (radius-3)", () => {
+    const spec = resolveForFigma(badgeRecipe, {
+      variant: "secondary",
+      size: "small",
+      shape: "square",
+    });
+    expect(spec.borderRadius).toBe(6);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Input recipe — sizes
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — input recipe", () => {
+  it("medium size resolves height=36, paddingLeft=12, paddingRight=12, fontSize=14, borderRadius=8", () => {
+    const spec = resolveForFigma(inputRecipe, { size: "medium" });
+    expect(spec.height).toBe(36);
+    expect(spec.paddingLeft).toBe(12);
+    expect(spec.paddingRight).toBe(12);
+    expect(spec.fontSize).toBe(14);
+    expect(spec.borderRadius).toBe(8);
+  });
+
+  it("x-small size resolves height=28, paddingLeft=8, paddingRight=8, fontSize=12, borderRadius=6", () => {
+    const spec = resolveForFigma(inputRecipe, { size: "x-small" });
+    expect(spec.height).toBe(28);
+    expect(spec.paddingLeft).toBe(8);
+    expect(spec.paddingRight).toBe(8);
+    expect(spec.fontSize).toBe(12);
+    expect(spec.borderRadius).toBe(6);
+  });
+
+  it("large size resolves height=40, borderRadius=8", () => {
+    const spec = resolveForFigma(inputRecipe, { size: "large" });
+    expect(spec.height).toBe(40);
+    expect(spec.borderRadius).toBe(8);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Select recipe — sizes and iconRight
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — select recipe", () => {
+  it("medium size resolves height=36, paddingLeft=12, iconRight=12, fontSize=14, borderRadius=8", () => {
+    const spec = resolveForFigma(selectRecipe, { size: "medium" });
+    expect(spec.height).toBe(36);
+    expect(spec.paddingLeft).toBe(12);
+    expect(spec.iconRight).toBe(12);
+    expect(spec.fontSize).toBe(14);
+    expect(spec.borderRadius).toBe(8);
+  });
+
+  it("x-small size resolves height=28, paddingLeft=8, iconRight=8, borderRadius=6", () => {
+    const spec = resolveForFigma(selectRecipe, { size: "x-small" });
+    expect(spec.height).toBe(28);
+    expect(spec.paddingLeft).toBe(8);
+    expect(spec.iconRight).toBe(8);
+    expect(spec.borderRadius).toBe(6);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Link recipe — color variants
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — link recipe", () => {
+  it("inline variant resolves color to info-500", () => {
+    const spec = resolveForFigma(linkRecipe, { variant: "inline" });
+    expect(spec.color).toEqual(resolveColorToken("info-500"));
+  });
+
+  it("current variant resolves color to undefined (currentColor filtered)", () => {
+    const spec = resolveForFigma(linkRecipe, { variant: "current" });
+    expect(spec.color).toBeUndefined();
+  });
+
+  it("plain variant resolves color to info-500", () => {
+    const spec = resolveForFigma(linkRecipe, { variant: "plain" });
+    expect(spec.color).toEqual(resolveColorToken("info-500"));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Checkbox recipe — size, status
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — checkbox recipe", () => {
+  it("medium/on resolves size=16, radius=4 (radius-2), bgColor=primary-950, borderColor=primary-950", () => {
+    const spec = resolveForFigma(checkboxRecipe, {
+      size: "medium",
+      status: "on",
+    });
+    expect(spec.size).toBe(16);
+    expect(spec.radius).toBe(4);
+    expect(spec.bgColor).toEqual(resolveColorToken("primary-950"));
+    expect(spec.borderColor).toEqual(resolveColorToken("primary-950"));
+  });
+
+  it("medium/off resolves bgColor=white, borderColor=neutral-100", () => {
+    const spec = resolveForFigma(checkboxRecipe, {
+      size: "medium",
+      status: "off",
+    });
+    expect(spec.bgColor).toEqual({ r: 1, g: 1, b: 1 });
+    expect(spec.borderColor).toEqual(resolveColorToken("neutral-100"));
+  });
+
+  it("large/on resolves size=18, radius=6 (radius-3)", () => {
+    const spec = resolveForFigma(checkboxRecipe, {
+      size: "large",
+      status: "on",
+    });
+    expect(spec.size).toBe(18);
+    expect(spec.radius).toBe(6);
+  });
+
+  it("small/intermediate resolves size=14, radius=2 (radius-1), bgColor=primary-950", () => {
+    const spec = resolveForFigma(checkboxRecipe, {
+      size: "small",
+      status: "intermediate",
+    });
+    expect(spec.size).toBe(14);
+    expect(spec.radius).toBe(2);
+    expect(spec.bgColor).toEqual(resolveColorToken("primary-950"));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Switch recipe — variant, size
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — switch recipe", () => {
+  it("primary/medium resolves checkedBgColor=primary-950, width=36, height=20, thumbSize=16, thumbOffset=2", () => {
+    const spec = resolveForFigma(switchRecipe, {
+      variant: "primary",
+      size: "medium",
+    });
+    expect(spec.checkedBgColor).toEqual(resolveColorToken("primary-950"));
+    expect(spec.width).toBe(36);
+    expect(spec.height).toBe(20);
+    expect(spec.thumbSize).toBe(16);
+    expect(spec.thumbOffset).toBe(2);
+  });
+
+  it("success/large resolves checkedBgColor=success-500, width=40, height=22", () => {
+    const spec = resolveForFigma(switchRecipe, {
+      variant: "success",
+      size: "large",
+    });
+    expect(spec.checkedBgColor).toEqual(resolveColorToken("success-500"));
+    expect(spec.width).toBe(40);
+    expect(spec.height).toBe(22);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// RadioGroup recipe — sizes
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — radio recipe", () => {
+  it("medium resolves size=16, dotSize=7", () => {
+    const spec = resolveForFigma(radioGroupRecipe, { size: "medium" });
+    expect(spec.size).toBe(16);
+    expect(spec.dotSize).toBe(7);
+  });
+
+  it("large resolves size=18, dotSize=8", () => {
+    const spec = resolveForFigma(radioGroupRecipe, { size: "large" });
+    expect(spec.size).toBe(18);
+    expect(spec.dotSize).toBe(8);
+  });
+
+  it("small resolves size=14, dotSize=6", () => {
+    const spec = resolveForFigma(radioGroupRecipe, { size: "small" });
+    expect(spec.size).toBe(14);
+    expect(spec.dotSize).toBe(6);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Typography recipe — compound variants
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — typography recipe", () => {
+  it("body/medium resolves fontSize=16 (compound override)", () => {
+    const spec = resolveForFigma(typographyRecipe, {
+      type: "body",
+      size: "medium",
+    });
+    expect(spec.fontSize).toBe(16);
+  });
+
+  it("body/x-small resolves fontSize=12 (compound override)", () => {
+    const spec = resolveForFigma(typographyRecipe, {
+      type: "body",
+      size: "x-small",
+    });
+    expect(spec.fontSize).toBe(12);
+  });
+
+  it("heading/large resolves fontSize=24, fontWeight=700", () => {
+    const spec = resolveForFigma(typographyRecipe, {
+      type: "heading",
+      size: "large",
+    });
+    expect(spec.fontSize).toBe(24);
+    expect(spec.fontWeight).toBe(700);
+  });
+
+  it("heading/x-large resolves fontSize=28", () => {
+    const spec = resolveForFigma(typographyRecipe, {
+      type: "heading",
+      size: "x-large",
+    });
+    expect(spec.fontSize).toBe(28);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Pagination recipe — states and base
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — pagination recipe", () => {
+  it("active state resolves bgColor=primary-950, fontColor=white, fontWeight=600", () => {
+    const spec = resolveForFigma(paginationRecipe, { state: "active" });
+    expect(spec.bgColor).toEqual(resolveColorToken("primary-950"));
+    expect(spec.fontColor).toEqual({ r: 1, g: 1, b: 1 });
+    expect(spec.fontWeight).toBe(600);
+  });
+
+  it("inactive state resolves fontColor=neutral-900, no bgColor", () => {
+    const spec = resolveForFigma(paginationRecipe, { state: "inactive" });
+    expect(spec.fontColor).toEqual(resolveColorToken("neutral-900"));
+    expect(spec.bgColor).toBeUndefined();
+  });
+
+  it("base resolves height=32, width=32, borderRadius=8 (radius-4), fontSize=14", () => {
+    const spec = resolveForFigma(paginationRecipe, { state: "active" });
+    expect(spec.height).toBe(32);
+    expect(spec.width).toBe(32);
+    expect(spec.borderRadius).toBe(8);
+    expect(spec.fontSize).toBe(14);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// StockQuantityStatus recipe — color variants
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma — stock-quantity-status recipe", () => {
+  it("여유 resolves color to info-500", () => {
+    const spec = resolveForFigma(stockQuantityStatusRecipe, {
+      quantity: "여유",
+    });
+    expect(spec.color).toEqual(resolveColorToken("info-500"));
+  });
+
+  it("보통 resolves color to success-400", () => {
+    const spec = resolveForFigma(stockQuantityStatusRecipe, {
+      quantity: "보통",
+    });
+    expect(spec.color).toEqual(resolveColorToken("success-400"));
+  });
+
+  it("부족 resolves color to danger-500", () => {
+    const spec = resolveForFigma(stockQuantityStatusRecipe, {
+      quantity: "부족",
+    });
+    expect(spec.color).toEqual(resolveColorToken("danger-500"));
   });
 });

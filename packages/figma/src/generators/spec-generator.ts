@@ -24,9 +24,9 @@ function createInputPlaceholder(): FrameNode {
   frame.counterAxisAlignItems = "CENTER";
   frame.paddingLeft = 12;
   frame.paddingRight = 12;
-  frame.cornerRadius = 4;
+  frame.cornerRadius = 8;
   setFill(frame, COLORS.white);
-  setStroke(frame, COLORS.neutral200, 1);
+  setStroke(frame, COLORS.neutral100, 1);
 
   const placeholder = createTextNode("Placeholder", 14, 400, COLORS.neutral400);
   frame.appendChild(placeholder);
@@ -39,17 +39,6 @@ function generateFieldSection(container: FrameNode): void {
 
   // Default variant
   const defaultRow = createVariantRow("default");
-  const defaultVariant = createAutoLayoutFrame("Field/default", "VERTICAL");
-  defaultVariant.itemSpacing = 8;
-
-  const label = createTextNode("Label", 14, 500, COLORS.neutral900);
-  const inputFrame = createInputPlaceholder();
-  const description = createTextNode("Description", 12, 400, COLORS.neutral500);
-
-  defaultVariant.appendChild(label);
-  defaultVariant.appendChild(inputFrame);
-  defaultVariant.appendChild(description);
-
   const defaultComponent = figma.createComponent();
   defaultComponent.name = "variant=default";
   defaultComponent.layoutMode = "VERTICAL";
@@ -105,10 +94,10 @@ function generateFieldSection(container: FrameNode): void {
 
   // Label row with optional suffix
   const labelRow = createAutoLayoutFrame("label-row", "HORIZONTAL");
-  labelRow.itemSpacing = 4;
+  labelRow.itemSpacing = 6;
   labelRow.counterAxisAlignItems = "CENTER";
   const optLabel = createTextNode("Label", 14, 500, COLORS.neutral900);
-  const optSuffix = createTextNode("(Optional)", 14, 500, COLORS.neutral400);
+  const optSuffix = createTextNode("(Optional)", 12, 400, COLORS.neutral400);
   labelRow.appendChild(optLabel);
   labelRow.appendChild(optSuffix);
 
@@ -147,7 +136,7 @@ function createAccordionTrigger(iconSvg: string): FrameNode {
 
   const text = createTextNode("Accordion Item", 14, 500, COLORS.neutral900);
   text.layoutGrow = 1;
-  const icon = createIcon(iconSvg, 16, rgbToHex(COLORS.neutral900));
+  const icon = createIcon(iconSvg, 24, rgbToHex(COLORS.neutral900));
 
   trigger.appendChild(text);
   trigger.appendChild(icon);
@@ -217,10 +206,10 @@ function generateTooltipSection(container: FrameNode): void {
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "AUTO";
   component.counterAxisAlignItems = "CENTER";
-  component.paddingTop = 6;
-  component.paddingBottom = 6;
-  component.paddingLeft = 10;
-  component.paddingRight = 10;
+  component.paddingTop = 4;
+  component.paddingBottom = 4;
+  component.paddingLeft = 8;
+  component.paddingRight = 8;
   component.cornerRadius = 4;
   setFill(component, COLORS.neutral900);
 
@@ -244,10 +233,10 @@ function generatePopoverSection(container: FrameNode): void {
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "AUTO";
   component.counterAxisAlignItems = "CENTER";
-  component.paddingTop = 8;
-  component.paddingBottom = 8;
-  component.paddingLeft = 10;
-  component.paddingRight = 10;
+  component.paddingTop = 6;
+  component.paddingBottom = 6;
+  component.paddingLeft = 8;
+  component.paddingRight = 8;
   component.cornerRadius = 6;
   component.effects = SHADOW_SM;
   setFill(component, COLORS.white);
@@ -270,10 +259,11 @@ function createDropdownItem(label: string, withHover: boolean): FrameNode {
   item.primaryAxisSizingMode = "AUTO";
   item.counterAxisSizingMode = "AUTO";
   item.counterAxisAlignItems = "CENTER";
-  item.paddingTop = 8;
-  item.paddingBottom = 8;
-  item.paddingLeft = 10;
-  item.paddingRight = 10;
+  item.paddingTop = 6;
+  item.paddingBottom = 6;
+  item.paddingLeft = 8;
+  item.paddingRight = 8;
+  item.cornerRadius = 6;
 
   if (withHover) {
     setFill(item, COLORS.neutral50);
@@ -299,8 +289,8 @@ function generateDropdownSection(container: FrameNode): void {
   contentComponent.counterAxisSizingMode = "FIXED";
   contentComponent.resize(160, contentComponent.height);
   contentComponent.itemSpacing = 0;
-  contentComponent.paddingTop = 8;
-  contentComponent.paddingBottom = 8;
+  contentComponent.paddingTop = 6;
+  contentComponent.paddingBottom = 6;
   contentComponent.cornerRadius = 6;
   contentComponent.effects = SHADOW_SM;
   setFill(contentComponent, COLORS.white);
@@ -321,10 +311,11 @@ function generateDropdownSection(container: FrameNode): void {
   itemComponent.primaryAxisSizingMode = "AUTO";
   itemComponent.counterAxisSizingMode = "AUTO";
   itemComponent.counterAxisAlignItems = "CENTER";
-  itemComponent.paddingTop = 8;
-  itemComponent.paddingBottom = 8;
-  itemComponent.paddingLeft = 10;
-  itemComponent.paddingRight = 10;
+  itemComponent.paddingTop = 6;
+  itemComponent.paddingBottom = 6;
+  itemComponent.paddingLeft = 8;
+  itemComponent.paddingRight = 8;
+  itemComponent.cornerRadius = 6;
   setFill(itemComponent, COLORS.neutral50);
 
   const itemText = createTextNode("Menu item", 14, 400, COLORS.neutral900);
@@ -347,7 +338,7 @@ function generateOTPSection(container: FrameNode): void {
   component.layoutMode = "HORIZONTAL";
   component.primaryAxisSizingMode = "AUTO";
   component.counterAxisSizingMode = "AUTO";
-  component.itemSpacing = 10;
+  component.itemSpacing = 8;
   component.fills = [];
 
   const slotCount = 6;

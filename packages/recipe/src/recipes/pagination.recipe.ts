@@ -26,8 +26,8 @@ export const paginationRecipe = defineRecipe({
   },
   base: {
     root: {
-      height: 48,
-      width: 48,
+      height: 32,
+      width: 32,
       borderRadius: "radius-4",
       fontSize: 14,
     },

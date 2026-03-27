@@ -90,6 +90,7 @@ export function createAutoLayoutFrame(
   frame.layoutMode = direction;
   frame.primaryAxisSizingMode = "AUTO";
   frame.counterAxisSizingMode = "AUTO";
+  frame.clipsContent = false;
   frame.fills = [];
   return frame;
 }
@@ -291,6 +292,8 @@ export function createComponentSection(title: string): FrameNode {
   section.fills = [createBoundPaint(COLORS.white)];
   section.strokes = [createBoundPaint(COLORS.neutral100)];
   section.strokeWeight = 1;
+
+  section.clipsContent = false;
 
   const header = createTextNode(title, 18, 600, COLORS.neutral950);
   section.appendChild(header);

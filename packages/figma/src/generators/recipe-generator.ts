@@ -22,6 +22,7 @@ import {
   createVariantRow,
   ICON_SVGS,
   rgbToHex,
+  SHADOW_LG,
   setFill,
 } from "./shared";
 
@@ -171,7 +172,7 @@ function createSelectComponentFromSpec(
 
   const iconSize = Math.min(16, Math.round(height * 0.44));
   const icon = createIcon(
-    ICON_SVGS.chevronDown,
+    ICON_SVGS.selector,
     iconSize,
     rgbToHex(COLORS.neutral400)
   );
@@ -252,6 +253,8 @@ function createCheckboxFromSpec(
 
   if (status === "on" || status === "intermediate") {
     box.layoutMode = "HORIZONTAL";
+    box.primaryAxisSizingMode = "FIXED";
+    box.counterAxisSizingMode = "FIXED";
     box.primaryAxisAlignItems = "CENTER";
     box.counterAxisAlignItems = "CENTER";
     box.clipsContent = true;
@@ -281,7 +284,7 @@ function createSwitchFromSpec(
   const thumbOffset = spec.thumbOffset ?? 2;
 
   const trackColor =
-    isChecked && spec.checkedBgColor ? spec.checkedBgColor : COLORS.neutral200;
+    isChecked && spec.checkedBgColor ? spec.checkedBgColor : COLORS.neutral100;
 
   const component = figma.createComponent();
   component.name = name;
@@ -321,8 +324,8 @@ function createRadioFromSpec(
     setFill(component, COLORS.primary950);
   } else {
     setFill(component, COLORS.white);
-    component.strokes = [createBoundPaint(COLORS.neutral200)];
-    component.strokeWeight = 1;
+    component.strokes = [createBoundPaint(COLORS.neutral950)];
+    component.strokeWeight = 2;
   }
   component.cornerRadius = outerSize / 2;
 
@@ -533,18 +536,29 @@ function generateStockQuantityStatusSection<
       component.primaryAxisSizingMode = "AUTO";
       component.counterAxisSizingMode = "AUTO";
       component.counterAxisAlignItems = "CENTER";
-      component.itemSpacing = 6;
+      component.itemSpacing = 2;
       component.fills = [];
 
       const textColor = spec.color ?? COLORS.neutral900;
 
-      const indicator = figma.createEllipse();
-      indicator.name = "indicator";
-      indicator.resize(8, 8);
-      setFill(indicator, textColor);
-      component.appendChild(indicator);
+      const indicatorFrame = figma.createFrame();
+      indicatorFrame.name = "indicator";
+      indicatorFrame.resize(20, 16);
+      indicatorFrame.layoutMode = "HORIZONTAL";
+      indicatorFrame.primaryAxisSizingMode = "FIXED";
+      indicatorFrame.counterAxisSizingMode = "FIXED";
+      indicatorFrame.primaryAxisAlignItems = "CENTER";
+      indicatorFrame.counterAxisAlignItems = "CENTER";
+      indicatorFrame.fills = [];
 
-      const text = createTextNode(groupKey, 14, 500, textColor);
+      const indicator = figma.createEllipse();
+      indicator.name = "dot";
+      indicator.resize(12, 12);
+      setFill(indicator, textColor);
+      indicatorFrame.appendChild(indicator);
+      component.appendChild(indicatorFrame);
+
+      const text = createTextNode(groupKey, 14, 400, textColor);
       component.appendChild(text);
       row.appendChild(component);
     }
@@ -713,6 +727,13 @@ function generateDialogSection<
     const bgColor = spec.bgColor ?? COLORS.white;
     setFill(component, bgColor);
 
+    if (spec.strokeColor && spec.strokeWeight) {
+      component.strokes = [createBoundPaint(spec.strokeColor)];
+      component.strokeWeight = spec.strokeWeight;
+    }
+
+    component.effects = SHADOW_LG;
+
     component.itemSpacing = 12;
 
     const title = createTextNode("Dialog Title", 20, 700, COLORS.neutral950);
@@ -765,14 +786,79 @@ function generateTypographySection<
   container.appendChild(section);
 }
 
+function createPaginationItem(
+  name: string,
+  size: number,
+  radius: number,
+  label: string,
+  textColor: RGB,
+  bgColor: RGB | null,
+  fontSize: number,
+  fontWeight: number
+): ComponentNode {
+  const component = figma.createComponent();
+  component.name = name;
+  component.resize(size, size);
+  component.layoutMode = "HORIZONTAL";
+  component.primaryAxisSizingMode = "FIXED";
+  component.counterAxisSizingMode = "FIXED";
+  component.primaryAxisAlignItems = "CENTER";
+  component.counterAxisAlignItems = "CENTER";
+  component.cornerRadius = radius;
+
+  if (bgColor) {
+    setFill(component, bgColor);
+  } else {
+    component.fills = [];
+  }
+
+  const text = createTextNode(label, fontSize, fontWeight, textColor);
+  component.appendChild(text);
+
+  return component;
+}
+
+function createPaginationArrow(
+  name: string,
+  size: number,
+  radius: number,
+  iconSvg: string,
+  isDisabled: boolean
+): ComponentNode {
+  const component = figma.createComponent();
+  component.name = name;
+  component.resize(size, size);
+  component.layoutMode = "HORIZONTAL";
+  component.primaryAxisSizingMode = "FIXED";
+  component.counterAxisSizingMode = "FIXED";
+  component.primaryAxisAlignItems = "CENTER";
+  component.counterAxisAlignItems = "CENTER";
+  component.cornerRadius = radius;
+  component.fills = [];
+
+  const icon = createIcon(iconSvg, 16, rgbToHex(COLORS.neutral900));
+  component.appendChild(icon);
+
+  if (isDisabled) {
+    component.opacity = 0.4;
+  }
+
+  return component;
+}
+
 function generatePaginationSection<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
   const section = createComponentSection("Pagination");
   const combinations = getAllVariantCombinations(recipe);
-  const row = createVariantRow("state");
 
+  const itemSize = 32;
+  const radius = 8;
+  const fontSize = 14;
+
+  // State variants row
+  const stateRow = createVariantRow("state");
   for (const combo of combinations) {
     const spec = resolveForFigma(
       recipe,
@@ -782,51 +868,181 @@ function generatePaginationSection<
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
 
-    const component = figma.createComponent();
-    component.name = nameParts;
-    const w = spec.width ?? 48;
-    const h = spec.height ?? 48;
-    component.resize(w, h);
-    component.layoutMode = "HORIZONTAL";
-    component.primaryAxisSizingMode = "FIXED";
-    component.counterAxisSizingMode = "FIXED";
-    component.primaryAxisAlignItems = "CENTER";
-    component.counterAxisAlignItems = "CENTER";
-
-    const radius = spec.cornerRadius ?? spec.borderRadius;
-    if (radius) {
-      component.cornerRadius = radius;
-    }
-
-    const bgColor = spec.bgColor;
-    if (bgColor) {
-      setFill(component, bgColor);
-    } else {
-      component.fills = [];
-    }
-
-    const textColor = spec.fontColor ?? COLORS.neutral900;
-    const fontSize = spec.fontSize ?? 14;
-    const fontWeight = spec.fontWeight ?? 400;
-
     const stateValue = combo.state ?? "inactive";
+    const textColor = spec.fontColor ?? COLORS.neutral900;
+    const fontW = spec.fontWeight ?? 400;
+    const bgColor = spec.bgColor ?? null;
+
     let label = "2";
     if (stateValue === "active") {
       label = "1";
     } else if (stateValue === "disabled") {
       label = "...";
     }
-    const text = createTextNode(label, fontSize, fontWeight, textColor);
-    component.appendChild(text);
+
+    const item = createPaginationItem(
+      nameParts,
+      itemSize,
+      radius,
+      label,
+      textColor,
+      bgColor,
+      fontSize,
+      fontW
+    );
 
     if (stateValue === "disabled") {
-      component.opacity = 0.4;
+      item.opacity = 0.4;
     }
 
-    row.appendChild(component);
+    stateRow.appendChild(item);
+  }
+  section.appendChild(stateRow);
+
+  // Arrow variants row
+  const arrowRow = createVariantRow("arrow");
+  arrowRow.appendChild(
+    createPaginationArrow(
+      "arrow=prev",
+      itemSize,
+      radius,
+      ICON_SVGS.chevronLeft,
+      false
+    )
+  );
+  arrowRow.appendChild(
+    createPaginationArrow(
+      "arrow=next",
+      itemSize,
+      radius,
+      ICON_SVGS.chevronRight,
+      false
+    )
+  );
+  arrowRow.appendChild(
+    createPaginationArrow(
+      "arrow=prev-disabled",
+      itemSize,
+      radius,
+      ICON_SVGS.chevronLeft,
+      true
+    )
+  );
+  section.appendChild(arrowRow);
+
+  // Truncation row
+  const truncRow = createVariantRow("truncation");
+  const truncSize = 36;
+  const truncComponent = figma.createComponent();
+  truncComponent.name = "truncation";
+  truncComponent.resize(truncSize, truncSize);
+  truncComponent.layoutMode = "HORIZONTAL";
+  truncComponent.primaryAxisSizingMode = "FIXED";
+  truncComponent.counterAxisSizingMode = "FIXED";
+  truncComponent.primaryAxisAlignItems = "CENTER";
+  truncComponent.counterAxisAlignItems = "CENTER";
+  truncComponent.fills = [];
+  const truncText = createTextNode("\u2026", 16, 400, COLORS.neutral900);
+  truncComponent.appendChild(truncText);
+  truncRow.appendChild(truncComponent);
+  section.appendChild(truncRow);
+
+  // Composed example row
+  const composedRow = createVariantRow("composed");
+  const composedFrame = figma.createFrame();
+  composedFrame.name = "pagination-composed";
+  composedFrame.layoutMode = "HORIZONTAL";
+  composedFrame.primaryAxisSizingMode = "AUTO";
+  composedFrame.counterAxisSizingMode = "AUTO";
+  composedFrame.primaryAxisAlignItems = "CENTER";
+  composedFrame.counterAxisAlignItems = "CENTER";
+  composedFrame.clipsContent = false;
+  composedFrame.itemSpacing = 2;
+  composedFrame.fills = [];
+
+  // prev arrow (disabled)
+  const prevArrow = createPaginationArrow(
+    "prev",
+    itemSize,
+    radius,
+    ICON_SVGS.chevronLeft,
+    true
+  );
+  composedFrame.appendChild(prevArrow);
+
+  // page 1 (active)
+  composedFrame.appendChild(
+    createPaginationItem(
+      "page-1",
+      itemSize,
+      radius,
+      "1",
+      COLORS.white,
+      COLORS.primary950,
+      fontSize,
+      600
+    )
+  );
+
+  // pages 2, 3
+  for (const n of [2, 3]) {
+    composedFrame.appendChild(
+      createPaginationItem(
+        `page-${n}`,
+        itemSize,
+        radius,
+        String(n),
+        COLORS.neutral900,
+        null,
+        fontSize,
+        400
+      )
+    );
   }
 
-  section.appendChild(row);
+  // truncation
+  const truncInComposed = figma.createFrame();
+  truncInComposed.name = "trunc";
+  truncInComposed.resize(truncSize, truncSize);
+  truncInComposed.layoutMode = "HORIZONTAL";
+  truncInComposed.primaryAxisSizingMode = "FIXED";
+  truncInComposed.counterAxisSizingMode = "FIXED";
+  truncInComposed.primaryAxisAlignItems = "CENTER";
+  truncInComposed.counterAxisAlignItems = "CENTER";
+  truncInComposed.fills = [];
+  truncInComposed.appendChild(
+    createTextNode("\u2026", 16, 400, COLORS.neutral900)
+  );
+  composedFrame.appendChild(truncInComposed);
+
+  // page 10
+  composedFrame.appendChild(
+    createPaginationItem(
+      "page-10",
+      itemSize,
+      radius,
+      "10",
+      COLORS.neutral900,
+      null,
+      fontSize,
+      400
+    )
+  );
+
+  // next arrow
+  composedFrame.appendChild(
+    createPaginationArrow(
+      "next",
+      itemSize,
+      radius,
+      ICON_SVGS.chevronRight,
+      false
+    )
+  );
+
+  composedRow.appendChild(composedFrame);
+  section.appendChild(composedRow);
+
   container.appendChild(section);
 }
 
