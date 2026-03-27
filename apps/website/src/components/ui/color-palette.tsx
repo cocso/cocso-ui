@@ -1,6 +1,6 @@
 "use client";
 
-import { Dropdown, toast, Typography } from "@cocso-ui/react";
+import { Dropdown, Typography, toast } from "@cocso-ui/react";
 import { ContentCopyIcon } from "@cocso-ui/react-icons";
 import { type ComponentProps, useCallback } from "react";
 import { twMerge } from "tailwind-merge";
@@ -30,13 +30,26 @@ const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
               style={{ backgroundColor: value }}
             />
             <div className="flex flex-col gap-0.5">
-              <Typography type="custom" className="text-neutral-900" size={13} weight="medium">
+              <Typography
+                className="text-neutral-900"
+                size={13}
+                type="custom"
+                weight="medium"
+              >
                 {name}
               </Typography>
-              <Typography type="custom" className="font-mono text-neutral-500" size={11}>
+              <Typography
+                className="font-mono text-neutral-500"
+                size={11}
+                type="custom"
+              >
                 {token}
               </Typography>
-              <Typography type="custom" className="font-mono text-neutral-400" size={11}>
+              <Typography
+                className="font-mono text-neutral-400"
+                size={11}
+                type="custom"
+              >
                 {value}
               </Typography>
             </div>
@@ -62,19 +75,19 @@ const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
 };
 
 interface ColorScaleProps extends ComponentProps<"div"> {
-  name: string;
   colors: Array<{ step: string; token: string; value: string }>;
+  name: string;
 }
 
-const ColorScale = ({
-  name,
-  colors,
-  className,
-  ...props
-}: ColorScaleProps) => {
+const ColorScale = ({ name, colors, className, ...props }: ColorScaleProps) => {
   return (
     <div className={twMerge("flex flex-col gap-3", className)} {...props}>
-      <Typography type="custom" className="text-neutral-950" size={14} weight="semibold">
+      <Typography
+        className="text-neutral-950"
+        size={14}
+        type="custom"
+        weight="semibold"
+      >
         {name}
       </Typography>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11">

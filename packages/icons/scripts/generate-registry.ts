@@ -1,10 +1,7 @@
-/**
- * Generates registry.json by reading TSX components from @cocso-ui/react-icons
- * and SVG files from @cocso-ui/icons, classifying each icon's metadata.
- */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pascalToKebab, type RegistryIcon } from "./types";
 
 const ICONS_PKG = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REACT_ICONS_DIR = join(ICONS_PKG, "../react-icons/src/components");
@@ -19,16 +16,8 @@ const STATIC_ID_ICONS = new Set([
   "HuonsLogo",
 ]);
 
-// Top-level regex constants (biome: lint/performance/useTopLevelRegex)
 const HEX_FILL_REGEX = /fill="#[0-9a-fA-F]/;
 const VIEW_BOX_REGEX = /viewBox="([^"]+)"/;
-
-function pascalToKebab(str: string): string {
-  return str
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
-}
 
 function componentNameToIconName(
   componentName: string,
@@ -69,17 +58,15 @@ function extractViewBox(svgContent: string): string {
   return match ? match[1] : "0 0 24 24";
 }
 
-interface RegistryEntry {
-  aliases: string[];
+type RegistryEntry = Omit<
+  RegistryIcon,
+  "category" | "colorStrategy" | "source" | "useStaticIds"
+> & {
   category: "semantic" | "brand";
   colorStrategy: ColorStrategy;
-  componentName: string;
-  name: string;
   source: "tabler" | "custom";
-  tags: string[];
   useStaticIds?: true;
-  viewBox: string;
-}
+};
 
 function processCategory(category: "semantic" | "brand"): RegistryEntry[] {
   const tsxDir = join(REACT_ICONS_DIR, category);
@@ -131,7 +118,6 @@ function processCategory(category: "semantic" | "brand"): RegistryEntry[] {
   return entries;
 }
 
-// Main
 console.log("\n\x1b[1mGenerating icon registry\x1b[0m\n");
 
 console.log("\x1b[36mSemantic icons:\x1b[0m");

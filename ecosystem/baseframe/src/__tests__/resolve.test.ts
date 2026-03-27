@@ -86,10 +86,22 @@ describe("createTokenResolver — resolve (ShadowLayer case)", () => {
         kind: "StringValue",
         value: "var(--test-color-alpha-shadow)",
       });
-      expect(result.offsetX).toEqual({ kind: "SizeValue", value: 0, unit: "px" });
-      expect(result.offsetY).toEqual({ kind: "SizeValue", value: 1, unit: "px" });
+      expect(result.offsetX).toEqual({
+        kind: "SizeValue",
+        value: 0,
+        unit: "px",
+      });
+      expect(result.offsetY).toEqual({
+        kind: "SizeValue",
+        value: 1,
+        unit: "px",
+      });
       expect(result.blur).toEqual({ kind: "SizeValue", value: 2, unit: "px" });
-      expect(result.spread).toEqual({ kind: "SizeValue", value: 0, unit: "px" });
+      expect(result.spread).toEqual({
+        kind: "SizeValue",
+        value: 0,
+        unit: "px",
+      });
     }
   });
 
@@ -119,7 +131,11 @@ describe("createTokenResolver — resolve (Shadow case)", () => {
 
     const layer = {
       kind: "ShadowLayer" as const,
-      color: { kind: "TokenRef" as const, collection: "color", token: "shadow" },
+      color: {
+        kind: "TokenRef" as const,
+        collection: "color",
+        token: "shadow",
+      },
       offsetX: { kind: "SizeValue" as const, value: 0, unit: "px" as const },
       offsetY: { kind: "SizeValue" as const, value: 1, unit: "px" as const },
       blur: { kind: "SizeValue" as const, value: 2, unit: "px" as const },
@@ -156,7 +172,11 @@ describe("createTokenResolver — resolve (default case)", () => {
 
   it("returns SizeValue unchanged", () => {
     const resolver = createTokenResolver([], "default", cssVarNamer);
-    const input = { kind: "SizeValue" as const, value: 16, unit: "px" as const };
+    const input = {
+      kind: "SizeValue" as const,
+      value: 16,
+      unit: "px" as const,
+    };
     expect(resolver.resolve(input)).toEqual(input);
   });
 

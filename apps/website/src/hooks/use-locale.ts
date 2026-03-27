@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { type Locale, i18n } from "~/libs/i18n";
+import { i18n, type Locale } from "~/libs/i18n";
 
 export const useLocale = (): Locale => {
   const pathname = usePathname();

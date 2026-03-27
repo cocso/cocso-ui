@@ -8,7 +8,11 @@ export default function CheckboxDefault() {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <Checkbox label="Accept terms and conditions" onChange={setStatus} status={status} />
+      <Checkbox
+        label="Accept terms and conditions"
+        onChange={setStatus}
+        status={status}
+      />
     </div>
   );
 }

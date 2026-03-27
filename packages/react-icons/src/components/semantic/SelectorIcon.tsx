@@ -16,7 +16,7 @@ export const SelectorIcon = (props: IconProps) => {
         width="24"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M0 0h24v24H0z" fill="none" stroke="none" />
         <path d="M8 9l4 -4l4 4" />
         <path d="M16 15l-4 4l-4 -4" />
       </svg>

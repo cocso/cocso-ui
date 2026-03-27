@@ -8,7 +8,9 @@ export default function TooltipPositions() {
       <Tooltip.Provider>
         {(["top", "bottom", "left", "right"] as const).map((side) => (
           <Tooltip key={side}>
-            <Tooltip.Trigger render={<Button variant="outline">{side}</Button>} />
+            <Tooltip.Trigger
+              render={<Button variant="outline">{side}</Button>}
+            />
             <Tooltip.Content side={side}>
               Tooltip on {side}
               <Tooltip.Arrow />

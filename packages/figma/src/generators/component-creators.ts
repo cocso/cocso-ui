@@ -153,7 +153,13 @@ export function createSelectComponentFromSpec(
   text.layoutGrow = 1;
   component.appendChild(text);
 
-  const iconSize = Math.min(16, Math.round(height * 0.44));
+  const selectIconSizes: Record<number, number> = {
+    28: 10,
+    32: 12,
+    36: 14,
+    40: 14,
+  };
+  const iconSize = selectIconSizes[height] ?? 14;
   const icon = createIcon(
     ICON_SVGS.selector,
     iconSize,

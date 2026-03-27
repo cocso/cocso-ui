@@ -10,7 +10,9 @@ export default function PopoverPositions() {
           <Popover.Trigger render={<Button variant="outline">{side}</Button>} />
           <Popover.Content side={side}>
             <div className="p-3">
-              <Typography type="custom" size={13}>Popover on {side}</Typography>
+              <Typography size={13} type="custom">
+                Popover on {side}
+              </Typography>
             </div>
             <Popover.Arrow />
           </Popover.Content>

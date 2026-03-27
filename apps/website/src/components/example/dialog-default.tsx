@@ -13,7 +13,9 @@ export default function DialogDefault() {
             Are you sure you want to proceed? This action cannot be undone.
           </Dialog.Description>
           <div className="mt-4 flex justify-end gap-2">
-            <Dialog.Close render={<Button variant="secondary">Cancel</Button>} />
+            <Dialog.Close
+              render={<Button variant="secondary">Cancel</Button>}
+            />
             <Dialog.Close render={<Button variant="primary">Confirm</Button>} />
           </div>
         </Dialog.Content>

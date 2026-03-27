@@ -8,7 +8,12 @@ export default function PaginationMaxVisible() {
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
-      <Pagination maxVisible={3} onChange={setPage} page={page} totalPages={10} />
+      <Pagination
+        maxVisible={3}
+        onChange={setPage}
+        page={page}
+        totalPages={10}
+      />
       <span className="text-neutral-500 text-sm">Page {page} of 10</span>
     </div>
   );

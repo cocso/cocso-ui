@@ -44,13 +44,20 @@
       }
     },
     {
-      "includes": ["packages/figma/src/plugin/**", "packages/figma/src/core/variable-creator.ts", "packages/figma/src/generators/**"],
+      "includes": [
+        "packages/figma/src/plugin/**",
+        "packages/figma/src/core/variable-creator.ts",
+        "packages/figma/src/generators/**"
+      ],
       "javascript": {
         "globals": ["figma", "__html__"]
       }
     },
     {
-      "includes": ["packages/figma/catalog/**", "packages/figma/scripts/browser-extract.js"],
+      "includes": [
+        "packages/figma/catalog/**",
+        "packages/figma/scripts/browser-extract.js"
+      ],
       "linter": {
         "enabled": false
       },

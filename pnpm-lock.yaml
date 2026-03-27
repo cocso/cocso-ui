@@ -199,6 +199,9 @@ importers:
       '@cocso-ui/baseframe-sources':
         specifier: workspace:*
         version: link:../baseframe
+      '@cocso-ui/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@cocso-ui/recipe':
         specifier: workspace:*
         version: link:../recipe
@@ -257,6 +260,9 @@ importers:
 
   packages/icons:
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.15
       svgo:
         specifier: ^3.3.2
         version: 3.3.3

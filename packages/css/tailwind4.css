@@ -129,4 +129,6 @@
   --color-text-tertiary: var(--cocso-color-text-tertiary);
 }
 
-@utility z-* { z-index: --value(--z-index-*); }
+@utility z-* {
+  z-index: --value(--z-index-*);
+}

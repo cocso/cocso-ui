@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
-import { useLocale } from "~/hooks/use-locale";
 import { getSidebarForLocale } from "~/constants/sidebar";
+import { useLocale } from "~/hooks/use-locale";
 
 interface SidebarProps extends ComponentProps<"nav"> {}
 
@@ -20,7 +20,10 @@ export const Sidebar = (props: SidebarProps) => {
     <nav {...props}>
       {Object.entries(sidebarData).map(([key, value], index, arr) => {
         return (
-          <div className={index < arr.length - 1 ? "mb-6" : undefined} key={key}>
+          <div
+            className={index < arr.length - 1 ? "mb-6" : undefined}
+            key={key}
+          >
             <Typography
               className="mb-3 px-4 uppercase"
               color={colors.neutral400}

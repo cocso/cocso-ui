@@ -1,15 +1,9 @@
-/**
- * Extracts canonical SVG files from @cocso-ui/react-icons TSX components.
- *
- * Reads each TSX file, extracts the <svg>...</svg> block, converts JSX
- * attributes to standard SVG attributes, and replaces useId() dynamic IDs
- * with deterministic static IDs.
- */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { pascalToKebab } from "./types";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
-const ICONS_PKG = join(__dirname, "..");
+const ICONS_PKG = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REACT_ICONS_DIR = join(ICONS_PKG, "../react-icons/src/components");
 const OUTPUT_DIR = join(ICONS_PKG, "svg");
 
@@ -46,13 +40,6 @@ const SVG_BLOCK_RE = /<svg[\s\S]*?<\/svg>/;
 const INDENT_RE = /^(\s*)/;
 const USE_ID_DECL_RE = /const\s+(\w+)\s*=\s*useId\(\)/g;
 
-function pascalToKebab(str: string): string {
-  return str
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
-}
-
 function componentNameToFileName(name: string): string {
   // Strip "Icon" suffix for semantic icons (brand icons keep "Logo")
   const stripped = name.endsWith("Icon") ? name.slice(0, -4) : name;
@@ -79,12 +66,6 @@ function extractSvgFromTsx(content: string, iconName: string): string {
 
   // Remove aria-hidden (added by Icon wrapper at runtime, not canonical)
   svg = svg.replace(/\s*aria-hidden="true"\n?\s*/g, "\n        ");
-
-  // Remove width="..." and height="..." from root <svg> (Icon wrapper handles sizing)
-  // Keep them only if they match viewBox dimensions (informational)
-  // Actually, for canonical SVG source we should keep them for standalone rendering
-  // No, per plan: Icon wrapper handles sizing. Keep viewBox, remove explicit w/h
-  // Actually let's keep width/height for SVG file validity - they can be overridden
 
   // Handle useId() replacements
   svg = replaceUseIdExpressions(svg, content, iconName);
@@ -219,7 +200,6 @@ function processCategory(
   return results;
 }
 
-// Main
 console.log(
   "\n\x1b[1mExtracting SVG icons from @cocso-ui/react-icons\x1b[0m\n"
 );

@@ -194,6 +194,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "ChevronUpIcon",
+      "name": "chevron-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "CloseIcon",
       "name": "close",
       "source": "tabler",

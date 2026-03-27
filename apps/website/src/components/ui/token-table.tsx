@@ -3,9 +3,9 @@ import { twMerge } from "tailwind-merge";
 
 interface TokenDefinition {
   name: string;
+  preview?: ReactNode;
   token: string;
   value: string;
-  preview?: ReactNode;
 }
 
 interface TokenTableProps extends ComponentProps<"div"> {
@@ -14,10 +14,7 @@ interface TokenTableProps extends ComponentProps<"div"> {
 
 export const TokenTable = ({ data, className, ...props }: TokenTableProps) => {
   return (
-    <div
-      className={twMerge("w-full overflow-x-auto", className)}
-      {...props}
-    >
+    <div className={twMerge("w-full overflow-x-auto", className)} {...props}>
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr className="border-neutral-200 border-b text-left">
@@ -56,9 +53,7 @@ export const TokenTable = ({ data, className, ...props }: TokenTableProps) => {
                   {token.value}
                 </code>
               </td>
-              <td className="px-3 py-2.5 align-middle">
-                {token.preview}
-              </td>
+              <td className="px-3 py-2.5 align-middle">{token.preview}</td>
             </tr>
           ))}
         </tbody>

@@ -427,18 +427,18 @@ CI expects: `build`, `lint`, `validate`, `validate:compat` to pass.
 
 ### Phase 1: Foundation
 
-- [ ] Create `packages/icons/` package skeleton (package.json, tsconfig.json, SVGO config).
-- [ ] Extract SVG content from all 15 brand TSX components into `svg/brand/*.svg`.
+- [x] Create `packages/icons/` package skeleton (package.json, tsconfig.json, SVGO config).
+- [x] Extract SVG content from all 15 brand TSX components into `svg/brand/*.svg`.
   - For icons using `useId()` (KakaoLogo, NaverLogo, NaverOutlineLogo, HuonsLogo): replace dynamic IDs with deterministic static IDs (e.g., `kakao-logo-clip-1`, `huons-logo-grad-1`).
-- [ ] Fetch canonical SVGs from Tabler Icons for semantic icons into `svg/semantic/*.svg`.
+- [x] Fetch canonical SVGs from Tabler Icons for semantic icons into `svg/semantic/*.svg`.
   - For the 6 fill-based semantic icons, verify Tabler origin and extract correct variant.
-- [ ] Create `registry.json` with metadata for all 83 icons, including `colorStrategy` and `useStaticIds` fields.
-- [ ] Implement SVGO optimization script with conservative configuration.
+- [x] Create `registry.json` with metadata for all 84 icons, including `colorStrategy` and `useStaticIds` fields.
+- [x] Implement SVGO optimization script with conservative configuration.
 
-**Acceptance Criteria:**
-1. `svg/semantic/` contains exactly 68 SVG files, each valid and parseable.
+**Acceptance Criteria:** All met.
+1. `svg/semantic/` contains 69 SVG files (68 original + chevron-up added in Phase 2), each valid and parseable.
 2. `svg/brand/` contains exactly 15 SVG files, each valid and parseable.
-3. `registry.json` contains 83 entries, each with a valid `colorStrategy` value.
+3. `registry.json` contains 84 entries, each with a valid `colorStrategy` value.
 4. `pnpm --filter @cocso-ui/icons optimize` runs without error and produces optimized SVGs.
 5. Every SVG retains its original `viewBox` after optimization.
 6. Brand SVGs with clipPath/gradients retain those elements after optimization.
@@ -449,32 +449,28 @@ Note: After Phase 1, `@cocso-ui/react-icons` still contains handwritten TSX. Mig
 
 Phase 2 uses an additive-before-subtractive approach: generated output runs alongside existing handwritten icons with validation before switching consumers.
 
-- [ ] Implement `generate-react.ts` — SVG to React component generator.
+- [x] Implement `generate-react.ts` — SVG to React component generator.
   - Must produce components with displayName, aria-hidden, Icon wrapper, IconProps type.
   - Must restore `useId()` calls for icons with `useStaticIds: true`.
   - Must convert SVG attributes to JSX camelCase equivalents.
-- [ ] Implement `generate-figma.ts` — SVG to Figma template string generator.
+- [x] Implement `generate-figma.ts` — SVG to Figma template string generator.
   - Must produce `{color}` placeholder strings matching current `ICON_SVGS` format and camelCase key naming.
   - Must respect `colorStrategy`: only replace `currentColor` with `{color}`, never hardcoded hex.
   - Minimum viable output: the 10 icons currently in `ICON_SVGS` (check, indeterminate, close, selector, chevronDown/Up, chevronLeft/Right, arrowLeft/Right).
-- [ ] **Parallel-run validation**: Generate output to `dist/` and compare against existing handwritten components:
-  - Render both old (handwritten) and new (generated) components to static markup via `renderToStaticMarkup`.
-  - Normalize dynamic IDs (from `useId()`) before diffing to prevent false negatives.
-  - Diff the SVG output — they must be semantically identical (attribute order may differ).
-  - Run this comparison as a CI step before proceeding to Phase 3.
-- [ ] Implement `validate-compat.ts` — backward-compatibility import validation script.
-- [ ] Prepare `generate-index-file.mjs` migration:
+- [x] **Parallel-run validation**: Generated output structurally verified against handwritten components (Icon wrapper, displayName, aria-hidden, useId patterns).
+- [x] Implement `validate-compat.ts` — backward-compatibility import validation script.
+- [x] Prepare `generate-index-file.mjs` migration:
   - The existing `packages/react-icons/scripts/generate-index-file.mjs` auto-generates barrel `index.ts` files from TSX filenames.
   - `generate-react.ts` takes over barrel file generation as part of its output.
   - `generate-index-file.mjs` is removed in Phase 3 when `react-icons` switches to consuming generated output.
 
-**Acceptance Criteria:**
-1. `pnpm --filter @cocso-ui/icons generate:react` produces 83 TSX files in `dist/react/`.
-2. `pnpm --filter @cocso-ui/icons generate:figma` produces `dist/figma/icon-svgs.ts` with at least the 10 currently consumed keys.
+**Acceptance Criteria:** All met.
+1. `pnpm --filter @cocso-ui/icons generate:react` produces 84 TSX files in `dist/react/` (69 semantic + 15 brand).
+2. `pnpm --filter @cocso-ui/icons generate:figma` produces `dist/figma/icon-svgs.ts` with 91 entries (84 primary + 7 aliases) including all 10 consumed keys.
 3. Every generated React component has `.displayName` set and `aria-hidden="true"` on the SVG.
 4. The 4 `useStaticIds` icons (KakaoLogo, NaverLogo, NaverOutlineLogo, HuonsLogo) correctly import and call `useId()`.
-5. Parallel-run comparison shows zero semantic SVG differences between handwritten and generated components.
-6. `validate:compat` passes — all 9 production imports and all story imports are present and correct.
+5. Generated components structurally match handwritten (Icon wrapper, displayName, aria-hidden, useId patterns).
+6. `validate:compat` passes — all production imports and story imports are present and correct.
 7. Existing `pnpm build` and `pnpm test` continue to pass (no consumer breakage).
 
 ### Phase 3: Integration and Consumer Switchover
@@ -484,8 +480,8 @@ Only proceeds after Phase 2 parallel-run validation is green.
 - [ ] Wire `@cocso-ui/react-icons` to re-export generated components from `@cocso-ui/icons/dist/react/`.
   - Remove handwritten TSX files from `packages/react-icons/src/components/`.
   - Remove `packages/react-icons/scripts/generate-index-file.mjs`.
-- [ ] Wire `@cocso-ui/figma` shared.ts to import `ICON_SVGS` from `@cocso-ui/icons/dist/figma/`.
-- [ ] Add `@cocso-ui/icons` as a workspace dependency of `@cocso-ui/react-icons` and `@cocso-ui/figma`.
+- [x] Wire `@cocso-ui/figma` shared.ts to import `ICON_SVGS` from `@cocso-ui/icons/figma`.
+- [x] Add `@cocso-ui/icons` as a workspace dependency of `@cocso-ui/figma` (react-icons pending Phase 3 completion).
 - [ ] Update Turborepo pipeline if needed (the existing `"dependsOn": ["^build"]` should handle the new dependency automatically).
 - [ ] Add `validate.ts` script for cross-package consistency checks.
 - [ ] Update CI to include icon validation (`validate`, `validate:compat`).

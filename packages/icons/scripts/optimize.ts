@@ -1,19 +1,11 @@
-/**
- * Optimizes all SVG files using SVGO with a conservative configuration.
- *
- * Reads SVGs from svg/semantic/ and svg/brand/, optimizes them in-place,
- * and reports size savings. Uses the conservative SVGO config from svgo.config.js
- * to preserve viewBox, clipPath, gradients, and IDs.
- */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { optimize } from "svgo";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
-const PKG_ROOT = join(__dirname, "..");
+const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 
-// Load SVGO config — use dynamic import for ESM config
 async function loadConfig() {
   const configPath = join(PKG_ROOT, "svgo.config.js");
   const mod = await import(configPath);
@@ -98,7 +90,6 @@ async function main() {
     `\x1b[1mTotal:\x1b[0m ${totalFiles} files, ${totalBefore}B → ${totalAfter}B (-${totalPct}%)\n`
   );
 
-  // Validate viewBox preservation
   console.log("\x1b[1mValidating viewBox preservation...\x1b[0m");
   const errors = [...validateViewBox("semantic"), ...validateViewBox("brand")];
 
