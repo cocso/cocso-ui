@@ -17,35 +17,39 @@ React 19 (TypeScript), bundled via Rollup into CJS and ESM.
 ## Users
 
 - Frontend engineers consuming `@cocso-ui/react-icons` in product apps.
-- `@cocso-ui/react` — may import icons internally.
-- `apps/storybook` — renders icon components for visual testing.
+- `@cocso-ui/react` — imports icons internally for component implementations.
+- `apps/storybook` — renders icon catalog for visual testing.
+- `apps/website` — renders icon gallery with search.
 
 ## In Scope
 
-- SVG icon components as named React exports.
-- Auto-generated barrel index from SVG sources via `scripts/generate-index-file.mjs`.
+- Re-export of all generated React icon components from `@cocso-ui/icons/react`.
 - Dual package output: CJS (`dist/cjs/`) and ESM (`dist/esm/`).
 - Full tree-shaking support (`sideEffects: false`).
+- Storybook stories for icon catalog (`src/icons.stories.tsx`).
 
 ## Out of Scope
 
-- Icon design or SVG authoring — managed externally.
+- Icon SVG sources, metadata, or code generation — owned by `@cocso-ui/icons`.
+- Icon design or SVG authoring.
 - Non-React icon formats (sprite sheets, font icons).
 
 ## Architecture
 
 ```
 packages/react-icons/
-├── src/               # SVG → React component sources
-├── scripts/
-│   └── generate-index-file.mjs  # Generates src/index.ts from SVG sources
+├── src/
+│   ├── index.ts              # Re-exports from @cocso-ui/icons/react
+│   └── icons.stories.tsx     # Storybook icon catalog
 ├── dist/
-│   ├── cjs/           # CommonJS bundle
-│   └── esm/           # ESM bundle
-└── rollup.config.cjs  # Build configuration
+│   ├── cjs/                  # CommonJS bundle (single file)
+│   └── esm/                  # ESM bundle (single file)
+└── rollup.config.cjs         # Build configuration
 ```
 
-Build pipeline: generate index → Rollup → Babel → CJS + ESM bundles + `.d.ts`.
+Build pipeline: `src/index.ts` re-exports `@cocso-ui/icons/react` → Rollup resolves and bundles all generated TSX components from `@cocso-ui/icons/dist/react/` → CJS + ESM + `.d.ts` output.
+
+`@cocso-ui/icons` is a `devDependency` so Rollup bundles the components inline rather than marking them as external. Consumers of the published package do not need `@cocso-ui/icons` installed.
 
 ## Interfaces
 
@@ -54,7 +58,17 @@ Public entry point: `@cocso-ui/react-icons`
 All icons exported as named React components:
 
 ```ts
-import { SomeIcon } from '@cocso-ui/react-icons'
+import { SearchIcon, CheckIcon, COCSOLogo } from '@cocso-ui/react-icons';
+```
+
+Each component accepts `IconProps`:
+
+```ts
+type IconProps = {
+  size?: number | string;
+  width?: number | string;
+  height?: number | string;
+} & SVGAttributes<SVGElement>;
 ```
 
 ## Storage
@@ -65,7 +79,7 @@ No runtime storage. Build output written to `dist/`.
 
 - No network calls.
 - No secrets or credentials handled.
-- Peer dependency on React 19 and react-dom 19.
+- Peer dependency on React 19.
 
 ## Logging
 
@@ -74,7 +88,7 @@ Not applicable.
 ## Build and Test
 
 ```sh
-# Build (generates index then runs Rollup)
+# Build (CJS + ESM)
 pnpm --filter @cocso-ui/react-icons build
 
 # Lint

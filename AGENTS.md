@@ -118,6 +118,7 @@ Repository-wide quality CI runs on every pull request.
 Coverage expectations:
 - `lint`: runs `pnpm run lint` — fails if any issue is found.
 - `test`: runs `pnpm run test:coverage` and posts a PR coverage summary. Coverage is reported for `@cocso-ui/react`, `@cocso-ui/recipe`, `@cocso-ui/figma`, and `@cocso-ui/baseframe`.
+- `icons`: builds `@cocso-ui/icons`, runs `validate` (registry ↔ SVG ↔ generated output consistency) and `validate:compat` (backward-compatibility import check).
 - `build`: runs `pnpm build` across all packages via Turborepo.
 - `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
 
