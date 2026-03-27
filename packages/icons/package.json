@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Canonical SVG icon sources and build pipeline for the cocso design system",
   "private": true,
+  "exports": {
+    "./figma": "./dist/figma/icon-svgs.ts",
+    "./registry.json": "./registry.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -10,7 +14,10 @@
   },
   "scripts": {
     "optimize": "tsx scripts/optimize.ts",
-    "build": "tsx scripts/optimize.ts",
+    "generate:react": "tsx scripts/generate-react.ts",
+    "generate:figma": "tsx scripts/generate-figma.ts",
+    "validate:compat": "tsx scripts/validate-compat.ts",
+    "build": "tsx scripts/optimize.ts && tsx scripts/generate-react.ts && tsx scripts/generate-figma.ts",
     "lint": "biome check ."
   },
   "devDependencies": {
