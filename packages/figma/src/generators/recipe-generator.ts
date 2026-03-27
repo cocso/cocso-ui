@@ -858,11 +858,12 @@ function generateSwitchSection<
   } as Record<string, string>);
 
   for (const checked of [true, false]) {
-    const wrapper = figma.createComponent();
+    const wrapper = figma.createFrame();
     wrapper.name = `with-label, checked=${checked}`;
     wrapper.layoutMode = "HORIZONTAL";
     wrapper.primaryAxisSizingMode = "AUTO";
     wrapper.counterAxisSizingMode = "AUTO";
+    wrapper.clipsContent = false;
     wrapper.counterAxisAlignItems = "CENTER";
     wrapper.itemSpacing = 8;
     wrapper.fills = [];
