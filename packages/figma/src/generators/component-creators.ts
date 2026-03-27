@@ -26,20 +26,20 @@ export function createComponentFromSpec(
     component.resize(component.width, spec.height);
   }
 
-  if (spec.paddingInline) {
+  if (spec.paddingInline !== undefined) {
     component.paddingLeft = spec.paddingInline;
     component.paddingRight = spec.paddingInline;
   }
-  if (spec.paddingLeft) {
+  if (spec.paddingLeft !== undefined) {
     component.paddingLeft = spec.paddingLeft;
   }
-  if (spec.paddingRight) {
+  if (spec.paddingRight !== undefined) {
     component.paddingRight = spec.paddingRight;
   }
-  if (spec.paddingTop) {
+  if (spec.paddingTop !== undefined) {
     component.paddingTop = spec.paddingTop;
   }
-  if (spec.paddingBottom) {
+  if (spec.paddingBottom !== undefined) {
     component.paddingBottom = spec.paddingBottom;
   }
 
@@ -86,14 +86,14 @@ export function createWideComponentFromSpec(
   const height = spec.height ?? 36;
   component.resize(width, height);
 
-  if (spec.paddingLeft) {
+  if (spec.paddingLeft !== undefined) {
     component.paddingLeft = spec.paddingLeft;
-  } else if (spec.paddingInline) {
+  } else if (spec.paddingInline !== undefined) {
     component.paddingLeft = spec.paddingInline;
   }
-  if (spec.paddingRight) {
+  if (spec.paddingRight !== undefined) {
     component.paddingRight = spec.paddingRight;
-  } else if (spec.paddingInline) {
+  } else if (spec.paddingInline !== undefined) {
     component.paddingRight = spec.paddingInline;
   }
 
@@ -131,9 +131,9 @@ export function createSelectComponentFromSpec(
   const height = spec.height ?? 36;
   component.resize(width, height);
 
-  if (spec.paddingLeft) {
+  if (spec.paddingLeft !== undefined) {
     component.paddingLeft = spec.paddingLeft;
-  } else if (spec.paddingInline) {
+  } else if (spec.paddingInline !== undefined) {
     component.paddingLeft = spec.paddingInline;
   }
 

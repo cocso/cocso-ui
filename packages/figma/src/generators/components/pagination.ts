@@ -149,6 +149,7 @@ export function generatePaginationSection(container: FrameNode): void {
   section.appendChild(arrowRow);
 
   const truncRow = createVariantRow("truncation");
+  // Wider than page items (32) to give the ellipsis visual breathing room
   const truncSize = 36;
   const truncComponent = figma.createComponent();
   truncComponent.name = "truncation";

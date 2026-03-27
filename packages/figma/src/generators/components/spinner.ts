@@ -26,6 +26,7 @@ function createSpinnerFromSpec(
   const cx = containerSize / 2;
   const cy = containerSize / 2;
   const bx = (containerSize - bw) / 2;
+  // Position blade at bottom edge; each blade is rotated around center
   const by = containerSize - bh;
 
   let rects = "";

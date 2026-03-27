@@ -42,7 +42,7 @@ function createButtonWithIcon(
     component.itemSpacing = 0;
   }
 
-  if (spec.paddingInline) {
+  if (spec.paddingInline !== undefined) {
     component.paddingLeft = spec.paddingInline;
     component.paddingRight = spec.paddingInline;
   }

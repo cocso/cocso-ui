@@ -38,16 +38,16 @@ export function generateDialogSection(container: FrameNode): void {
       component.cornerRadius = radius;
     }
 
-    if (spec.paddingTop) {
+    if (spec.paddingTop !== undefined) {
       component.paddingTop = spec.paddingTop;
     }
-    if (spec.paddingBottom) {
+    if (spec.paddingBottom !== undefined) {
       component.paddingBottom = spec.paddingBottom;
     }
-    if (spec.paddingLeft) {
+    if (spec.paddingLeft !== undefined) {
       component.paddingLeft = spec.paddingLeft;
     }
-    if (spec.paddingRight) {
+    if (spec.paddingRight !== undefined) {
       component.paddingRight = spec.paddingRight;
     }
 

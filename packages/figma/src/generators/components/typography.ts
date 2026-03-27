@@ -28,7 +28,8 @@ export function generateTypographySection(container: FrameNode): void {
       const fontSize = spec.fontSize ?? 16;
       const fontWeight = spec.fontWeight ?? 400;
       const textColor = spec.fontColor ?? COLORS.neutral950;
-      const sampleText = `${groupKey} ${name.split("size=")[1] ?? ""} (${fontSize}px)`;
+      const sizeValue = name.match(/size=([^,]*)/)?.[1] ?? "";
+      const sampleText = `${groupKey} ${sizeValue} (${fontSize}px)`;
       const text = createTextNode(sampleText, fontSize, fontWeight, textColor);
       component.appendChild(text);
 
