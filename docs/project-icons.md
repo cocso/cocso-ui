@@ -477,14 +477,14 @@ Phase 2 uses an additive-before-subtractive approach: generated output runs alon
 
 Only proceeds after Phase 2 parallel-run validation is green.
 
-- [ ] Wire `@cocso-ui/react-icons` to re-export generated components from `@cocso-ui/icons/dist/react/`.
+- [x] Wire `@cocso-ui/react-icons` to re-export generated components from `@cocso-ui/icons/dist/react/`.
   - Remove handwritten TSX files from `packages/react-icons/src/components/`.
   - Remove `packages/react-icons/scripts/generate-index-file.mjs`.
 - [x] Wire `@cocso-ui/figma` shared.ts to import `ICON_SVGS` from `@cocso-ui/icons/figma`.
 - [x] Add `@cocso-ui/icons` as a workspace dependency of `@cocso-ui/figma` (react-icons pending Phase 3 completion).
-- [ ] Update Turborepo pipeline if needed (the existing `"dependsOn": ["^build"]` should handle the new dependency automatically).
-- [ ] Add `validate.ts` script for cross-package consistency checks.
-- [ ] Update CI to include icon validation (`validate`, `validate:compat`).
+- [x] Update Turborepo pipeline if needed (the existing `"dependsOn": ["^build"]` handles the new dependency automatically).
+- [x] Add `validate.ts` script for cross-package consistency checks.
+- [x] Update CI to include icon validation (`validate`, `validate:compat`).
 
 **Acceptance Criteria:**
 1. `@cocso-ui/react-icons` re-exports all icons from `@cocso-ui/icons` with zero handwritten TSX remaining.
