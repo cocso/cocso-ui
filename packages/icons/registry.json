@@ -1,0 +1,838 @@
+{
+  "icons": [
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "AdminMedsIcon",
+      "name": "admin-meds",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "AllInboxIcon",
+      "name": "all-inbox",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowBackwardIcon",
+      "name": "arrow-backward",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowDownIcon",
+      "name": "arrow-down",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "ArrowDropDownIcon",
+      "name": "arrow-drop-down",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "ArrowDropUpIcon",
+      "name": "arrow-drop-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowForwardIcon",
+      "name": "arrow-forward",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowIOSBackwardIcon",
+      "name": "arrow-ios-backward",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowIOSForwardIcon",
+      "name": "arrow-ios-forward",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowUpIcon",
+      "name": "arrow-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "AutoRenewIcon",
+      "name": "auto-renew",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "BusinessMessagesIcon",
+      "name": "business-messages",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CalculateIcon",
+      "name": "calculate",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CalendarMonthIcon",
+      "name": "calendar-month",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ChangeCircleIcon",
+      "name": "change-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "CheckCircleIcon",
+      "name": "check-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CheckIcon",
+      "name": "check",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CheckIndeterminateSmallIcon",
+      "name": "check-indeterminate-small",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CheckbookIcon",
+      "name": "checkbook",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CloseIcon",
+      "name": "close",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ContentCopyIcon",
+      "name": "content-copy",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DeleteIcon",
+      "name": "delete",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DirectionsRunIcon",
+      "name": "directions-run",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DockToRightIcon",
+      "name": "dock-to-right",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DocumentScannerIcon",
+      "name": "document-scanner",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DollarIcon",
+      "name": "dollar",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DomainIcon",
+      "name": "domain",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DownloadIcon",
+      "name": "download",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "EditDocumentIcon",
+      "name": "edit-document",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "EditNoteIcon",
+      "name": "edit-note",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ExternalLinkIcon",
+      "name": "external-link",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FileSaveIcon",
+      "name": "file-save",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "HospitalIcon",
+      "name": "hospital",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "HubIcon",
+      "name": "hub",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "InfoIcon",
+      "name": "info",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "KeyboardArrowDownIcon",
+      "name": "keyboard-arrow-down",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "LinkIcon",
+      "name": "link",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MedicationIcon",
+      "name": "medication",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MenuIcon",
+      "name": "menu",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MoreHorizIcon",
+      "name": "more-horiz",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "NetworkNodeIcon",
+      "name": "network-node",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "OpenInNewIcon",
+      "name": "open-in-new",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "OutpatientMedIcon",
+      "name": "outpatient-med",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PencilIcon",
+      "name": "pencil",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PercentIcon",
+      "name": "percent",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PersonEditIcon",
+      "name": "person-edit",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PersonIcon",
+      "name": "person",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PieChartIcon",
+      "name": "pie-chart",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PlugConnectIcon",
+      "name": "plug-connect",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PlusIcon",
+      "name": "plus",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "RefreshIcon",
+      "name": "refresh",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ReleaseAlertIcon",
+      "name": "release-alert",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "RemoveCircleIcon",
+      "name": "remove-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SatelliteAltIcon",
+      "name": "satellite-alt",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SearchIcon",
+      "name": "search",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SelectorIcon",
+      "name": "selector",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SettingsBackupRestoreIcon",
+      "name": "settings-backup-restore",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SettingsIcon",
+      "name": "settings",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "SideNavigationIcon",
+      "name": "side-navigation",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SpaceDashboardIcon",
+      "name": "space-dashboard",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "Stat1Icon",
+      "name": "stat1",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "StatMinus1Icon",
+      "name": "stat-minus1",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SupervisedUserCircleIcon",
+      "name": "supervised-user-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SystemUpdateIcon",
+      "name": "system-update",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "TextSelectJumpToEndIcon",
+      "name": "text-select-jump-to-end",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ThumbUpIcon",
+      "name": "thumb-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "TrendingUpIcon",
+      "name": "trending-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "VerifiedIcon",
+      "name": "verified",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "mixed",
+      "componentName": "COCSOColorHorizontalLogo",
+      "name": "cocso-color-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 493 96"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "COCSOColorLogo",
+      "name": "cocso-color-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 38 32"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOHorizontalLogo",
+      "name": "cocso-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 493 96"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOLogo",
+      "name": "cocso-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 280 280"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOTextLogo",
+      "name": "cocso-text-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 220 47"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOUILogo",
+      "name": "cocsoui-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 24 20"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOUITextLogo",
+      "name": "cocsoui-text-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 97 16"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "DrugInfoHorizontalLogo",
+      "name": "drug-info-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 187 42"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "HMPLogo",
+      "name": "hmp-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 141 108"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "HuonsLogo",
+      "name": "huons-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 339 300",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "KakaoLogo",
+      "name": "kakao-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "KakaoOutlineLogo",
+      "name": "kakao-outline-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 36 34"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "NaverLogo",
+      "name": "naver-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "NaverOutlineLogo",
+      "name": "naver-outline-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "SeoulPharmaLogo",
+      "name": "seoul-pharma-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 100 100"
+    }
+  ]
+}

@@ -28,7 +28,8 @@
 - `packages/`: Shared, publishable packages consumed across apps and external projects.
   - `packages/react/`: `@cocso-ui/react` — React component library.
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
-  - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set.
+  - `packages/icons/`: `@cocso-ui/icons` — canonical SVG icon sources and build pipeline (planned).
+  - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set (to be generated from `@cocso-ui/icons`).
   - `packages/baseframe/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
   - `packages/recipe/`: `@cocso-ui/recipe` — component visual spec recipes (single source of truth for variant→token mappings, consumed by React conformance tests and Figma generation).
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables and generating components from recipes.
