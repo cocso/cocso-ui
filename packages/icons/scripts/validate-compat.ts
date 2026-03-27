@@ -4,11 +4,11 @@
  * name exists in the icon registry.
  */
 import { readdirSync, readFileSync } from "node:fs";
-import { join, relative } from "node:path";
+import { dirname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Registry } from "./types";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode
-const PKG_ROOT = join(__dirname, "..");
+const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REPO_ROOT = join(PKG_ROOT, "..", "..");
 
 const REGISTRY_FILE = join(PKG_ROOT, "registry.json");

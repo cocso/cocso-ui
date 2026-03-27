@@ -6,11 +6,11 @@
  * to preserve viewBox, clipPath, gradients, and IDs.
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { optimize } from "svgo";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
-const PKG_ROOT = join(__dirname, "..");
+const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 
 // Load SVGO config — use dynamic import for ESM config

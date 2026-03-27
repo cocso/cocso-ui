@@ -6,10 +6,10 @@
  * with deterministic static IDs.
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
-const ICONS_PKG = join(__dirname, "..");
+const ICONS_PKG = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REACT_ICONS_DIR = join(ICONS_PKG, "../react-icons/src/components");
 const OUTPUT_DIR = join(ICONS_PKG, "svg");
 

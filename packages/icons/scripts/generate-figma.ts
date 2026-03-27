@@ -16,11 +16,11 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Registry } from "./types";
 
-// biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
-const PKG_ROOT = join(__dirname, "..");
+const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 const FIGMA_DIST = join(PKG_ROOT, "dist", "figma");
 
