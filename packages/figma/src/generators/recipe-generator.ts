@@ -414,6 +414,194 @@ function groupVariantsByFirstDimension<
   return groups;
 }
 
+function createButtonWithIcon(
+  name: string,
+  spec: FigmaNodeSpec,
+  label: string,
+  mode: "prefix" | "suffix" | "svgOnly"
+): ComponentNode {
+  const component = figma.createComponent();
+  component.name = name;
+  component.layoutMode = "HORIZONTAL";
+  component.primaryAxisSizingMode = "AUTO";
+  component.counterAxisSizingMode = spec.height ? "FIXED" : "AUTO";
+  component.counterAxisAlignItems = "CENTER";
+  component.primaryAxisAlignItems = "CENTER";
+  component.itemSpacing = 4;
+
+  if (spec.height) {
+    component.resize(component.width, spec.height);
+  }
+
+  if (mode === "svgOnly" && spec.height) {
+    component.resize(spec.height, spec.height);
+    component.itemSpacing = 0;
+  }
+
+  if (spec.paddingInline) {
+    component.paddingLeft = spec.paddingInline;
+    component.paddingRight = spec.paddingInline;
+  }
+
+  const radius = spec.cornerRadius ?? spec.borderRadius;
+  if (radius) {
+    component.cornerRadius = radius;
+  }
+
+  const bgColor = spec.bgColor ?? spec.fills;
+  if (bgColor) {
+    setFill(component, bgColor);
+  } else {
+    component.fills = [];
+  }
+
+  if (spec.strokeColor && spec.strokeWeight) {
+    component.strokes = [createBoundPaint(spec.strokeColor)];
+    component.strokeWeight = spec.strokeWeight;
+  }
+
+  const textColor = spec.fontColor ?? COLORS.neutral900;
+  const fontSize = spec.fontSize ?? 14;
+  const fontWeight = spec.fontWeight ?? 500;
+  const iconSize = Math.round(fontSize * 1.15);
+  const hexColor = rgbToHex(textColor);
+
+  if (mode === "svgOnly") {
+    const icon = createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
+    component.appendChild(icon);
+  } else if (mode === "prefix") {
+    const icon = createIcon(ICON_SVGS.arrowLeft, iconSize, hexColor);
+    component.appendChild(icon);
+    component.appendChild(
+      createTextNode(label, fontSize, fontWeight, textColor)
+    );
+  } else {
+    component.appendChild(
+      createTextNode(label, fontSize, fontWeight, textColor)
+    );
+    const icon = createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
+    component.appendChild(icon);
+  }
+
+  return component;
+}
+
+function generateButtonSection<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(container: FrameNode, recipe: RecipeDefinition<V, S>): void {
+  const section = createComponentSection("Button");
+  const combinations = getAllVariantCombinations(recipe);
+  const groups = groupVariantsByFirstDimension(recipe, combinations);
+
+  // Standard variant rows (text only)
+  for (const [groupKey, items] of groups) {
+    const row = createVariantRow(groupKey);
+    for (const { name, spec } of items) {
+      const component = createComponentFromSpec(name, spec, "Button");
+      row.appendChild(component);
+    }
+    section.appendChild(row);
+  }
+
+  // Prefix icon row (primary medium square as example)
+  const prefixRow = createVariantRow("prefix icon");
+  const prefixSpec = resolveForFigma(recipe, {
+    variant: "primary",
+    size: "medium",
+    shape: "square",
+  } as Record<string, string>);
+  prefixRow.appendChild(
+    createButtonWithIcon(
+      "prefix, variant=primary",
+      prefixSpec,
+      "Button",
+      "prefix"
+    )
+  );
+  const outlinePrefixSpec = resolveForFigma(recipe, {
+    variant: "outline",
+    size: "medium",
+    shape: "square",
+  } as Record<string, string>);
+  prefixRow.appendChild(
+    createButtonWithIcon(
+      "prefix, variant=outline",
+      outlinePrefixSpec,
+      "Button",
+      "prefix"
+    )
+  );
+  section.appendChild(prefixRow);
+
+  // Suffix icon row
+  const suffixRow = createVariantRow("suffix icon");
+  suffixRow.appendChild(
+    createButtonWithIcon(
+      "suffix, variant=primary",
+      prefixSpec,
+      "Button",
+      "suffix"
+    )
+  );
+  suffixRow.appendChild(
+    createButtonWithIcon(
+      "suffix, variant=outline",
+      outlinePrefixSpec,
+      "Button",
+      "suffix"
+    )
+  );
+  section.appendChild(suffixRow);
+
+  // svgOnly row (multiple sizes)
+  const svgOnlyRow = createVariantRow("svgOnly");
+  for (const sz of ["large", "medium", "small", "x-small"] as const) {
+    const spec = resolveForFigma(recipe, {
+      variant: "primary",
+      size: sz,
+      shape: "square",
+    } as Record<string, string>);
+    svgOnlyRow.appendChild(
+      createButtonWithIcon(`svgOnly, size=${sz}`, spec, "", "svgOnly")
+    );
+  }
+  const svgOnlyOutline = resolveForFigma(recipe, {
+    variant: "outline",
+    size: "medium",
+    shape: "square",
+  } as Record<string, string>);
+  svgOnlyRow.appendChild(
+    createButtonWithIcon(
+      "svgOnly, variant=outline",
+      svgOnlyOutline,
+      "",
+      "svgOnly"
+    )
+  );
+  section.appendChild(svgOnlyRow);
+
+  // Disabled row
+  const disabledRow = createVariantRow("disabled");
+  for (const v of ["primary", "secondary", "outline"] as const) {
+    const spec = resolveForFigma(recipe, {
+      variant: v,
+      size: "medium",
+      shape: "square",
+    } as Record<string, string>);
+    const comp = createComponentFromSpec(
+      `disabled, variant=${v}`,
+      spec,
+      "Button"
+    );
+    comp.opacity = 0.4;
+    disabledRow.appendChild(comp);
+  }
+  section.appendChild(disabledRow);
+
+  container.appendChild(section);
+}
+
 function generateGenericSection<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -532,6 +720,31 @@ function generateLinkSection<
   }
 
   section.appendChild(row);
+
+  // External link with icon row
+  const externalRow = createVariantRow("external");
+  const externalSpec = resolveForFigma(recipe, {
+    variant: "inline",
+  } as Record<string, string>);
+  const extColor = externalSpec.color ?? COLORS.info500;
+
+  const extComponent = figma.createComponent();
+  extComponent.name = "variant=inline, external=true";
+  extComponent.layoutMode = "HORIZONTAL";
+  extComponent.primaryAxisSizingMode = "AUTO";
+  extComponent.counterAxisSizingMode = "AUTO";
+  extComponent.counterAxisAlignItems = "CENTER";
+  extComponent.itemSpacing = 2;
+  extComponent.fills = [];
+
+  const extText = createTextNode("External link", 14, 400, extColor);
+  extText.textDecoration = "UNDERLINE";
+  extComponent.appendChild(extText);
+  const extIcon = createIcon(ICON_SVGS.arrowRight, 14, rgbToHex(extColor));
+  extComponent.appendChild(extIcon);
+  externalRow.appendChild(extComponent);
+  section.appendChild(externalRow);
+
   container.appendChild(section);
 }
 
@@ -636,6 +849,44 @@ function generateSwitchSection<
     }
     section.appendChild(row);
   }
+
+  // With label row
+  const labelRow = createVariantRow("with label");
+  const defaultSpec = resolveForFigma(recipe, {
+    variant: "primary",
+    size: "medium",
+  } as Record<string, string>);
+
+  for (const checked of [true, false]) {
+    const wrapper = figma.createComponent();
+    wrapper.name = `with-label, checked=${checked}`;
+    wrapper.layoutMode = "HORIZONTAL";
+    wrapper.primaryAxisSizingMode = "AUTO";
+    wrapper.counterAxisSizingMode = "AUTO";
+    wrapper.counterAxisAlignItems = "CENTER";
+    wrapper.itemSpacing = 8;
+    wrapper.fills = [];
+
+    const sw = createSwitchFromSpec(
+      checked ? "on" : "off",
+      defaultSpec,
+      checked
+    );
+    wrapper.appendChild(sw);
+    wrapper.appendChild(createTextNode("Label", 14, 400, COLORS.neutral900));
+    labelRow.appendChild(wrapper);
+  }
+  section.appendChild(labelRow);
+
+  // Disabled row
+  const disabledRow = createVariantRow("disabled");
+  const disabledOn = createSwitchFromSpec("disabled-on", defaultSpec, true);
+  disabledOn.opacity = 0.4;
+  disabledRow.appendChild(disabledOn);
+  const disabledOff = createSwitchFromSpec("disabled-off", defaultSpec, false);
+  disabledOff.opacity = 0.4;
+  disabledRow.appendChild(disabledOff);
+  section.appendChild(disabledRow);
 
   container.appendChild(section);
 }
@@ -1064,7 +1315,7 @@ function generatePaginationSection<
 
 export function generateFromRecipes(container: FrameNode): number {
   const sections = [
-    () => generateGenericSection(container, buttonRecipe, "Button", "Button"),
+    () => generateButtonSection(container, buttonRecipe),
     () => generateGenericSection(container, badgeRecipe, "Badge", "Badge"),
     () => generateInputSection(container, inputRecipe, "Input", "Placeholder"),
     () =>
