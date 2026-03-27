@@ -142,7 +142,7 @@ const brand = processCategory("brand");
 
 const all = [...semantic, ...brand];
 
-writeFileSync(OUTPUT_FILE, `${JSON.stringify(all, null, 2)}\n`);
+writeFileSync(OUTPUT_FILE, `${JSON.stringify({ icons: all }, null, 2)}\n`);
 
 // Summary
 const strategyCounts = all.reduce(
