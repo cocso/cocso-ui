@@ -6,8 +6,7 @@
  * icons, leaving hardcoded icons as-is), strips width/height attributes from
  * the <svg> tag, and writes dist/figma/icon-svgs.ts exporting ICON_SVGS.
  *
- * Also emits backward-compatible aliases for the 10 keys consumed by existing
- * callers, plus a hardcoded chevronUp (no source SVG exists).
+ * Also emits backward-compatible aliases for keys consumed by existing callers.
  */
 import {
   existsSync,

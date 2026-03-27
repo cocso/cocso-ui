@@ -244,13 +244,11 @@ function main() {
   // Copy supporting files from react-icons/src
   for (const file of ["icon.tsx", "child.tsx", "types.ts"]) {
     const src = join(REACT_ICONS_SRC, file);
-    if (existsSync(src)) {
-      cpSync(src, join(REACT_DIST, file));
-      console.log(`  \x1b[34mcopy\x1b[0m ${file}`);
-    } else {
-      console.error(`  \x1b[31m✗\x1b[0m missing ${src}`);
-      process.exit(1);
+    if (!existsSync(src)) {
+      throw new Error(`Missing required file: ${src}`);
     }
+    cpSync(src, join(REACT_DIST, file));
+    console.log(`  \x1b[34mcopy\x1b[0m ${file}`);
   }
 
   const semantic: Array<{ componentName: string; fileName: string }> = [];
@@ -260,8 +258,7 @@ function main() {
   for (const icon of registry.icons) {
     const svgPath = join(SVG_DIR, icon.category, `${icon.name}.svg`);
     if (!existsSync(svgPath)) {
-      console.error(`  \x1b[31m✗\x1b[0m missing SVG: ${svgPath}`);
-      process.exit(1);
+      throw new Error(`Missing SVG: ${svgPath}`);
     }
 
     const raw = readFileSync(svgPath, "utf-8").trim();
