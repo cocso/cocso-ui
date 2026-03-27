@@ -1,8 +1,3 @@
-/**
- * Validates backward compatibility by scanning consumer packages for
- * @cocso-ui/react-icons imports and verifying every imported component
- * name exists in the icon registry.
- */
 import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -113,18 +108,14 @@ function scanForImports(files: string[]): ImportOccurrence[] {
   return occurrences;
 }
 
-// ---------- main ----------
-
 console.log(
   "\n\x1b[1mValidating @cocso-ui/react-icons backward compatibility\x1b[0m\n"
 );
 
-// 1. Load registry
 const registry: Registry = JSON.parse(readFileSync(REGISTRY_FILE, "utf-8"));
 const validNames = new Set(registry.icons.map((icon) => icon.componentName));
 console.log(`\x1b[36mRegistry:\x1b[0m ${validNames.size} components loaded\n`);
 
-// 2. Collect files
 const allFiles: string[] = [];
 for (const dir of SCAN_DIRS) {
   const files = collectFiles(dir);
@@ -134,10 +125,8 @@ console.log(
   `\x1b[36mScanning:\x1b[0m ${allFiles.length} files across ${SCAN_DIRS.length} directories\n`
 );
 
-// 3. Scan for imports
 const occurrences = scanForImports(allFiles);
 
-// 4. Report findings and collect missing names
 const missing: Array<{ file: string; name: string }> = [];
 
 if (occurrences.length === 0) {
@@ -162,7 +151,6 @@ if (occurrences.length === 0) {
   console.log();
 }
 
-// 5. Summary
 if (missing.length === 0) {
   console.log("\x1b[32m\x1b[1mAll imports are valid.\x1b[0m\n");
   process.exit(0);

@@ -1,10 +1,3 @@
-/**
- * Extracts canonical SVG files from @cocso-ui/react-icons TSX components.
- *
- * Reads each TSX file, extracts the <svg>...</svg> block, converts JSX
- * attributes to standard SVG attributes, and replaces useId() dynamic IDs
- * with deterministic static IDs.
- */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -79,12 +72,6 @@ function extractSvgFromTsx(content: string, iconName: string): string {
 
   // Remove aria-hidden (added by Icon wrapper at runtime, not canonical)
   svg = svg.replace(/\s*aria-hidden="true"\n?\s*/g, "\n        ");
-
-  // Remove width="..." and height="..." from root <svg> (Icon wrapper handles sizing)
-  // Keep them only if they match viewBox dimensions (informational)
-  // Actually, for canonical SVG source we should keep them for standalone rendering
-  // No, per plan: Icon wrapper handles sizing. Keep viewBox, remove explicit w/h
-  // Actually let's keep width/height for SVG file validity - they can be overridden
 
   // Handle useId() replacements
   svg = replaceUseIdExpressions(svg, content, iconName);

@@ -1,10 +1,3 @@
-/**
- * Generates React icon components from canonical SVG source files.
- *
- * Reads SVGs from svg/semantic/ and svg/brand/, converts them to React
- * components matching the @cocso-ui/react-icons pattern (Icon wrapper,
- * displayName, aria-hidden, useId for static-ID icons).
- */
 import {
   cpSync,
   existsSync,
@@ -23,7 +16,6 @@ const DIST_DIR = join(PKG_ROOT, "dist");
 const REACT_DIST = join(DIST_DIR, "react");
 const REACT_ICONS_SRC = join(PKG_ROOT, "..", "react-icons", "src");
 
-/** SVG kebab-case attributes that need camelCase conversion in JSX */
 const SVG_ATTR_MAP: Record<string, string> = {
   "alignment-baseline": "alignmentBaseline",
   "baseline-shift": "baselineShift",
@@ -61,15 +53,12 @@ const SVG_ATTR_MAP: Record<string, string> = {
   "word-spacing": "wordSpacing",
 };
 
-// Pre-compiled regexes for SVG→JSX attribute conversion
 const SVG_ATTR_REGEXES = Object.entries(SVG_ATTR_MAP).map(
   ([svgAttr, jsxAttr]) => ({
     regex: new RegExp(`(?<=\\s)${svgAttr.replace(/-/g, "\\-")}=`, "g"),
     replacement: `${jsxAttr}=`,
   })
 );
-
-// ---------- helpers ----------
 
 function convertAttrsToJsx(content: string): string {
   let result = content;
@@ -153,12 +142,9 @@ function formatInner(content: string, base: string): string {
   return out.join("\n");
 }
 
-// ---------- component generator ----------
-
 function generate(icon: RegistryIcon, svgRaw: string): string {
   const { attrs, inner } = parseSvg(svgRaw);
 
-  // --- SVG element attributes ---
   const rawPairs = parseAttrPairs(attrs);
   const jsxPairs: [string, string][] = [["aria-hidden", "true"]];
   for (const [name, value] of rawPairs) {
@@ -167,7 +153,6 @@ function generate(icon: RegistryIcon, svgRaw: string): string {
   jsxPairs.sort((a, b) => a[0].localeCompare(b[0]));
   const attrLines = jsxPairs.map(([n, v]) => `        ${n}="${v}"`).join("\n");
 
-  // --- inner content ---
   const isUseId = icon.useStaticIds === true;
   const sids = isUseId ? extractStaticIds(svgRaw) : [];
   const vars = sids.length === 1 ? ["id"] : sids.map((_, i) => `id${i + 1}`);
@@ -178,7 +163,6 @@ function generate(icon: RegistryIcon, svgRaw: string): string {
   }
   const body = formatInner(jsx, "        ");
 
-  // --- imports ---
   const imports: string[] = [];
   if (isUseId && sids.length > 0) {
     imports.push('import { useId } from "react";');
@@ -186,7 +170,6 @@ function generate(icon: RegistryIcon, svgRaw: string): string {
   imports.push('import Icon from "../icon";');
   imports.push('import type { IconProps } from "../types";');
 
-  // --- assemble ---
   const cn = icon.componentName;
   const useIdBlock =
     isUseId && sids.length > 0
@@ -220,8 +203,6 @@ function barrel(
     .join("\n")}\n`;
 }
 
-// ---------- main ----------
-
 function main() {
   console.log("\n\x1b[1mGenerating React icon components\x1b[0m\n");
 
@@ -229,7 +210,6 @@ function main() {
     readFileSync(join(PKG_ROOT, "registry.json"), "utf-8")
   );
 
-  // Clean and create output dirs
   if (existsSync(REACT_DIST)) {
     rmSync(REACT_DIST, { recursive: true });
   }
@@ -241,7 +221,6 @@ function main() {
     mkdirSync(d, { recursive: true });
   }
 
-  // Copy supporting files from react-icons/src
   for (const file of ["icon.tsx", "child.tsx", "types.ts"]) {
     const src = join(REACT_ICONS_SRC, file);
     if (!existsSync(src)) {
@@ -274,7 +253,6 @@ function main() {
     console.log(`  \x1b[32m✓\x1b[0m ${icon.category}/${fn}.tsx`);
   }
 
-  // Barrel files
   writeFileSync(join(REACT_DIST, "semantic", "index.ts"), barrel(semantic));
   writeFileSync(join(REACT_DIST, "brand", "index.ts"), barrel(brand));
   writeFileSync(

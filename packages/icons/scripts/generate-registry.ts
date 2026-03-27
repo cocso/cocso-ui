@@ -1,7 +1,3 @@
-/**
- * Generates registry.json by reading TSX components from @cocso-ui/react-icons
- * and SVG files from @cocso-ui/icons, classifying each icon's metadata.
- */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
