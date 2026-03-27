@@ -318,26 +318,42 @@ function createRadioFromSpec(
 
   const component = figma.createComponent();
   component.name = name;
-  component.resize(outerSize, outerSize);
+  component.layoutMode = "HORIZONTAL";
+  component.primaryAxisSizingMode = "AUTO";
+  component.counterAxisSizingMode = "AUTO";
+  component.counterAxisAlignItems = "CENTER";
+  component.itemSpacing = 8;
+  component.fills = [];
+
+  const circle = figma.createFrame();
+  circle.name = "radio";
+  circle.resize(outerSize, outerSize);
+  circle.cornerRadius = outerSize / 2;
 
   if (isSelected) {
-    setFill(component, COLORS.primary950);
-  } else {
-    setFill(component, COLORS.white);
-    component.strokes = [createBoundPaint(COLORS.neutral950)];
-    component.strokeWeight = 2;
-  }
-  component.cornerRadius = outerSize / 2;
+    setFill(circle, COLORS.primary950);
 
-  if (isSelected) {
+    circle.layoutMode = "HORIZONTAL";
+    circle.primaryAxisSizingMode = "FIXED";
+    circle.counterAxisSizingMode = "FIXED";
+    circle.primaryAxisAlignItems = "CENTER";
+    circle.counterAxisAlignItems = "CENTER";
+
     const dot = figma.createEllipse();
     dot.name = "dot";
     dot.resize(dotSize, dotSize);
     dot.fills = [createBoundPaint(COLORS.white)];
-    dot.x = (outerSize - dotSize) / 2;
-    dot.y = (outerSize - dotSize) / 2;
-    component.appendChild(dot);
+    circle.appendChild(dot);
+  } else {
+    setFill(circle, COLORS.white);
+    circle.strokes = [createBoundPaint(COLORS.neutral950)];
+    circle.strokeWeight = 2;
   }
+
+  component.appendChild(circle);
+
+  const labelText = createTextNode("Label", 14, 400, COLORS.neutral900);
+  component.appendChild(labelText);
 
   return component;
 }
