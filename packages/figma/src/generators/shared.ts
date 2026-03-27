@@ -216,6 +216,27 @@ export const SHADOW_SM: Effect[] = [
   },
 ];
 
+export const SHADOW_MD: Effect[] = [
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_2,
+    offset: { x: 0, y: 0 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_3,
+    offset: { x: 0, y: 8 },
+    radius: 16,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+];
+
 export const SHADOW_LG: Effect[] = [
   {
     type: "DROP_SHADOW",

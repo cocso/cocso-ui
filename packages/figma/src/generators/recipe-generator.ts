@@ -22,7 +22,7 @@ import {
   createVariantRow,
   ICON_SVGS,
   rgbToHex,
-  SHADOW_LG,
+  SHADOW_MD,
   setFill,
 } from "./shared";
 
@@ -732,7 +732,7 @@ function generateDialogSection<
       component.strokeWeight = spec.strokeWeight;
     }
 
-    component.effects = SHADOW_LG;
+    component.effects = SHADOW_MD;
 
     component.itemSpacing = 12;
 
