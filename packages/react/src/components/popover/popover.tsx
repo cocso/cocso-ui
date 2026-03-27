@@ -44,8 +44,8 @@ function PopoverContent({
 }
 
 export const Popover = Object.assign(PopoverBase.Root, {
+  displayName: "Popover" as const,
   Trigger: PopoverBase.Trigger,
   Content: PopoverContent,
   Arrow: PopoverArrow,
 });
-Popover.displayName = "Popover";

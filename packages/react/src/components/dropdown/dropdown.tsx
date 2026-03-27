@@ -33,8 +33,8 @@ function DropdownItem({
 }
 
 export const Dropdown = Object.assign(MenuBase.Root, {
+  displayName: "Dropdown" as const,
   Trigger: MenuBase.Trigger,
   Content: DropdownContent,
   Item: DropdownItem,
 });
-Dropdown.displayName = "Dropdown";

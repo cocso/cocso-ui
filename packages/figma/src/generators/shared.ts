@@ -90,6 +90,7 @@ export function createAutoLayoutFrame(
   frame.layoutMode = direction;
   frame.primaryAxisSizingMode = "AUTO";
   frame.counterAxisSizingMode = "AUTO";
+  frame.clipsContent = false;
   frame.fills = [];
   return frame;
 }
@@ -215,6 +216,27 @@ export const SHADOW_SM: Effect[] = [
   },
 ];
 
+export const SHADOW_MD: Effect[] = [
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_2,
+    offset: { x: 0, y: 0 },
+    radius: 2,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+  {
+    type: "DROP_SHADOW",
+    color: SHADOW_ALPHA_3,
+    offset: { x: 0, y: 8 },
+    radius: 16,
+    spread: 0,
+    visible: true,
+    blendMode: "NORMAL",
+  },
+];
+
 export const SHADOW_LG: Effect[] = [
   {
     type: "DROP_SHADOW",
@@ -291,6 +313,8 @@ export function createComponentSection(title: string): FrameNode {
   section.fills = [createBoundPaint(COLORS.white)];
   section.strokes = [createBoundPaint(COLORS.neutral100)];
   section.strokeWeight = 1;
+
+  section.clipsContent = false;
 
   const header = createTextNode(title, 18, 600, COLORS.neutral950);
   section.appendChild(header);

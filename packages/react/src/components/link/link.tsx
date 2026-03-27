@@ -79,5 +79,7 @@ function ExternalIcon({
 }
 
 /** Styled anchor/link component with inline, current, and plain variants. */
-export const Link = Object.assign(LinkComponent, { ExternalIcon });
-Link.displayName = "Link";
+export const Link = Object.assign(LinkComponent, {
+  displayName: "Link" as const,
+  ExternalIcon,
+});

@@ -40,7 +40,9 @@
     max-height: 85vh;
     padding: var(--cocso-spacing-9);
     background-color: var(--cocso-color-white);
+    border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-5);
+    box-shadow: var(--cocso-shadow-md);
     transform: translate(-50%, -50%);
     animation: content-show 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }

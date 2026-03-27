@@ -44,9 +44,9 @@ function TooltipContent({
 }
 
 export const Tooltip = Object.assign(TooltipBase.Root, {
+  displayName: "Tooltip" as const,
   Trigger: TooltipBase.Trigger,
   Content: TooltipContent,
   Arrow: TooltipArrow,
   Provider: TooltipBase.Provider,
 });
-Tooltip.displayName = "Tooltip";

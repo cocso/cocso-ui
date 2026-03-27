@@ -104,10 +104,10 @@ function DialogDescription({
  * `Dialog.Description`, and `Dialog.Close`.
  */
 export const Dialog = Object.assign(DialogBase.Root, {
+  displayName: "Dialog" as const,
   Trigger: DialogBase.Trigger,
   Content: DialogContent,
   Close: DialogClose,
   Title: DialogTitle,
   Description: DialogDescription,
 });
-Dialog.displayName = "Dialog";
