@@ -44,8 +44,8 @@ Node.js (TypeScript). Build-time only — no runtime dependency.
 
 ```
 @cocso-ui/react-icons
-├── src/components/semantic/*.tsx   # 56 icons — SVG hardcoded in JSX
-├── src/components/brand/*.tsx      # 12 icons — SVG hardcoded in JSX
+├── src/components/semantic/*.tsx   # 68 icons — SVG hardcoded in JSX
+├── src/components/brand/*.tsx      # 15 icons — SVG hardcoded in JSX
 └── (no raw SVG source files)
 
 @cocso-ui/figma
@@ -73,11 +73,11 @@ packages/icons/                          # NEW — Single Source of Truth
 │   │   ├── chevron-down.svg
 │   │   ├── close.svg
 │   │   ├── search.svg
-│   │   └── ... (56+ icons)
+│   │   └── ... (68+ icons)
 │   └── brand/                           # Fill-based brand logos
 │       ├── cocso-logo.svg
 │       ├── kakao-logo.svg
-│       └── ... (12+ icons)
+│       └── ... (15+ icons)
 ├── registry.json                        # Icon metadata registry
 ├── scripts/
 │   ├── optimize.ts                      # SVGO optimization
@@ -143,7 +143,7 @@ packages/icons/                          # NEW — Single Source of Truth
 | Metadata | registry.json | Queryable, supports tooling; avoids SVG comment parsing |
 | Optimization | SVGO | Industry standard; configurable preset |
 | React generation | Custom script | Matches existing Icon/Child wrapper pattern |
-| Figma generation | Custom script | Produces `{color}` template strings matching current format |
+| Figma generation | Custom script | Produces `{color}` template strings matching current format; maps kebab-case filenames to camelCase keys (e.g., `chevron-down.svg` → `chevronDown`) |
 | Naming | kebab-case SVG files, PascalCase components | Consistent with repo conventions |
 
 ### Research: External Design Systems
@@ -187,7 +187,8 @@ import registry from '@cocso-ui/icons/registry.json';
       "source": "tabler",
       "tablerName": "search",
       "tags": ["find", "magnify", "lookup"],
-      "viewBox": "0 0 24 24"
+      "viewBox": "0 0 24 24",
+      "aliases": []
     },
     {
       "name": "cocso-logo",
@@ -195,7 +196,8 @@ import registry from '@cocso-ui/icons/registry.json';
       "componentName": "COCSOLogo",
       "source": "custom",
       "tags": ["logo", "brand"],
-      "viewBox": "0 0 280 280"
+      "viewBox": "0 0 280 280",
+      "aliases": []
     }
   ]
 }
@@ -246,10 +248,12 @@ CI expects: `build`, `lint`, `validate` to pass.
 
 ### Phase 1: Foundation (Current PR)
 - [ ] Create `packages/icons/` package skeleton.
-- [ ] Extract SVGs from existing `react-icons` TSX components.
-- [ ] Fetch canonical SVGs from Tabler Icons for semantic icons.
+- [ ] Extract SVG paths from brand TSX components into `svg/brand/*.svg`.
+- [ ] Fetch canonical SVGs from Tabler Icons for semantic icons into `svg/semantic/*.svg`.
 - [ ] Create `registry.json` with metadata for all icons.
 - [ ] Implement SVGO optimization script.
+
+Note: After Phase 1, `@cocso-ui/react-icons` still contains hardcoded TSX. Migration happens in Phase 2.
 
 ### Phase 2: Code Generation
 - [ ] Implement `generate-react.ts` — SVG to React component generator.
@@ -259,7 +263,7 @@ CI expects: `build`, `lint`, `validate` to pass.
 
 ### Phase 3: Integration & Validation
 - [ ] Add `validate.ts` script for cross-package consistency checks.
-- [ ] Update Turborepo pipeline for icon build dependencies.
+- [ ] Update Turborepo pipeline: add `@cocso-ui/icons` as `dependsOn` for `@cocso-ui/react-icons` and `@cocso-ui/figma` in `turbo.json`.
 - [ ] Add Storybook icon catalog page.
 - [ ] Update CI to include icon validation.
 
@@ -276,3 +280,7 @@ CI expects: `build`, `lint`, `validate` to pass.
   - **Recommendation:** Keep original viewBox; the Icon wrapper component handles sizing.
 - Should we support icon variants (outline/filled) in the future?
   - **Recommendation:** Not in initial scope. Add when design team requests filled variants.
+- How should custom brand icons updated in Figma be synced back to `svg/brand/`?
+  - **Recommendation:** Manual export for now. Consider a Figma export script in Phase 4 if brand icon churn is high.
+- If committing `generated/` output, how to handle merge conflicts on icon changes?
+  - **Recommendation:** Use `.gitattributes` with `merge=ours` for generated files, and regenerate on conflict.
