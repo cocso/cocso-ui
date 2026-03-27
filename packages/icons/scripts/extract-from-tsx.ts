@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pascalToKebab } from "./types";
 
 const ICONS_PKG = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REACT_ICONS_DIR = join(ICONS_PKG, "../react-icons/src/components");
@@ -38,13 +39,6 @@ const JSX_TO_SVG_ATTRS: Record<string, string> = {
 const SVG_BLOCK_RE = /<svg[\s\S]*?<\/svg>/;
 const INDENT_RE = /^(\s*)/;
 const USE_ID_DECL_RE = /const\s+(\w+)\s*=\s*useId\(\)/g;
-
-function pascalToKebab(str: string): string {
-  return str
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
-}
 
 function componentNameToFileName(name: string): string {
   // Strip "Icon" suffix for semantic icons (brand icons keep "Logo")
@@ -206,7 +200,6 @@ function processCategory(
   return results;
 }
 
-// Main
 console.log(
   "\n\x1b[1mExtracting SVG icons from @cocso-ui/react-icons\x1b[0m\n"
 );
