@@ -1,38 +1,19 @@
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { Registry, RegistryIcon } from "./types";
+import {
+  type ColorStrategy,
+  detectColorStrategy,
+  kebabToPascal,
+  type Registry,
+  type RegistryIcon,
+} from "./types";
 
 const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 const REGISTRY_FILE = join(PKG_ROOT, "registry.json");
 
 const VIEW_BOX_REGEX = /viewBox="([^"]+)"/;
-
-type ColorStrategy = "stroke" | "fill" | "mixed" | "hardcoded";
-
-function kebabToPascal(str: string): string {
-  return str
-    .split("-")
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join("");
-}
-
-function detectColorStrategy(content: string): ColorStrategy {
-  const hasStroke = content.includes('stroke="currentColor"');
-  const hasFillCurrent = content.includes('fill="currentColor"');
-
-  if (hasStroke && hasFillCurrent) {
-    return "mixed";
-  }
-  if (hasStroke) {
-    return "stroke";
-  }
-  if (hasFillCurrent) {
-    return "fill";
-  }
-  return "hardcoded";
-}
 
 function extractViewBox(svgContent: string): string {
   const match = VIEW_BOX_REGEX.exec(svgContent);
@@ -48,7 +29,6 @@ interface RawArgs {
   tags: string[];
 }
 
-/** Build a flag→value map from a flat argv array. */
 function extractFlags(args: string[]): RawArgs {
   const result: RawArgs = { tags: [] };
   const pairs: Record<string, (v: string) => void> = {
@@ -90,7 +70,6 @@ function extractFlags(args: string[]): RawArgs {
   return result;
 }
 
-/** Validate parsed flags and exit with a message on failure. */
 function validateArgs(raw: RawArgs): {
   file: string;
   name: string;
@@ -141,74 +120,75 @@ function parseArgs(argv: string[]) {
   return validateArgs(extractFlags(argv.slice(2)));
 }
 
-const opts = parseArgs(process.argv);
+function main() {
+  const opts = parseArgs(process.argv);
 
-console.log("\n\x1b[1mAdding icon to registry\x1b[0m\n");
+  console.log("\n\x1b[1mAdding icon to registry\x1b[0m\n");
 
-// Resolve and validate source SVG
-const srcPath = resolve(opts.file);
-if (!existsSync(srcPath)) {
-  console.error(`\x1b[31m✗\x1b[0m SVG file not found: ${srcPath}`);
-  process.exit(1);
-}
+  const srcPath = resolve(opts.file);
+  if (!existsSync(srcPath)) {
+    console.error(`\x1b[31m✗\x1b[0m SVG file not found: ${srcPath}`);
+    process.exit(1);
+  }
 
-const svgContent = readFileSync(srcPath, "utf-8");
+  const svgContent = readFileSync(srcPath, "utf-8");
 
-// Load registry
-const registry: Registry = JSON.parse(readFileSync(REGISTRY_FILE, "utf-8"));
+  const registry: Registry = JSON.parse(readFileSync(REGISTRY_FILE, "utf-8"));
 
-// Check for duplicate
-if (registry.icons.some((icon) => icon.name === opts.name)) {
-  console.error(
-    `\x1b[31m✗\x1b[0m Icon "${opts.name}" already exists in registry.`
+  if (registry.icons.some((icon) => icon.name === opts.name)) {
+    console.error(
+      `\x1b[31m✗\x1b[0m Icon "${opts.name}" already exists in registry.`
+    );
+    process.exit(1);
+  }
+
+  const pascal = kebabToPascal(opts.name);
+  const suffix = opts.category === "brand" ? "Logo" : "Icon";
+  const componentName = opts.componentName ?? `${pascal}${suffix}`;
+  const colorStrategy = opts.colorStrategy ?? detectColorStrategy(svgContent);
+  const viewBox = extractViewBox(svgContent);
+
+  const destPath = join(SVG_DIR, opts.category, `${opts.name}.svg`);
+  copyFileSync(srcPath, destPath);
+  console.log(
+    `  \x1b[32m✓\x1b[0m Copied SVG → svg/${opts.category}/${opts.name}.svg`
   );
+
+  const entry: RegistryIcon = {
+    aliases: [],
+    category: opts.category,
+    colorStrategy,
+    componentName,
+    name: opts.name,
+    source: "custom",
+    tags: opts.tags,
+    viewBox,
+  };
+
+  const icons = [...registry.icons, entry].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  writeFileSync(REGISTRY_FILE, `${JSON.stringify({ icons }, null, 2)}\n`);
+  console.log("  \x1b[32m✓\x1b[0m Added entry to registry.json");
+
+  console.log("\n\x1b[1mSummary\x1b[0m");
+  console.log(`  name:          \x1b[36m${opts.name}\x1b[0m`);
+  console.log(`  componentName: \x1b[36m${componentName}\x1b[0m`);
+  console.log(`  category:      \x1b[36m${opts.category}\x1b[0m`);
+  console.log(`  colorStrategy: \x1b[36m${colorStrategy}\x1b[0m`);
+  console.log(`  viewBox:       \x1b[36m${viewBox}\x1b[0m`);
+  if (opts.tags.length > 0) {
+    console.log(`  tags:          \x1b[36m${opts.tags.join(", ")}\x1b[0m`);
+  }
+  console.log(
+    "\n\x1b[32m\x1b[1mDone.\x1b[0m Run \x1b[1mpnpm build\x1b[0m in packages/icons to regenerate components.\n"
+  );
+}
+
+try {
+  main();
+} catch (err) {
+  console.error(err);
   process.exit(1);
 }
-
-// Derive fields
-const pascal = kebabToPascal(opts.name);
-const suffix = opts.category === "brand" ? "Logo" : "Icon";
-const componentName = opts.componentName ?? `${pascal}${suffix}`;
-const colorStrategy = opts.colorStrategy ?? detectColorStrategy(svgContent);
-const viewBox = extractViewBox(svgContent);
-
-// Copy SVG to destination
-const destPath = join(SVG_DIR, opts.category, `${opts.name}.svg`);
-copyFileSync(srcPath, destPath);
-console.log(
-  `  \x1b[32m✓\x1b[0m Copied SVG → svg/${opts.category}/${opts.name}.svg`
-);
-
-// Build registry entry
-const entry: RegistryIcon = {
-  aliases: [],
-  category: opts.category,
-  colorStrategy,
-  componentName,
-  name: opts.name,
-  source: "custom",
-  tags: opts.tags,
-  viewBox,
-};
-
-// Insert and sort alphabetically by name
-const icons = [...registry.icons, entry].sort((a, b) =>
-  a.name.localeCompare(b.name)
-);
-
-writeFileSync(REGISTRY_FILE, `${JSON.stringify({ icons }, null, 2)}\n`);
-console.log("  \x1b[32m✓\x1b[0m Added entry to registry.json");
-
-// Summary
-console.log("\n\x1b[1mSummary\x1b[0m");
-console.log(`  name:          \x1b[36m${opts.name}\x1b[0m`);
-console.log(`  componentName: \x1b[36m${componentName}\x1b[0m`);
-console.log(`  category:      \x1b[36m${opts.category}\x1b[0m`);
-console.log(`  colorStrategy: \x1b[36m${colorStrategy}\x1b[0m`);
-console.log(`  viewBox:       \x1b[36m${viewBox}\x1b[0m`);
-if (opts.tags.length > 0) {
-  console.log(`  tags:          \x1b[36m${opts.tags.join(", ")}\x1b[0m`);
-}
-console.log(
-  "\n\x1b[32m\x1b[1mDone.\x1b[0m Run \x1b[1mpnpm build\x1b[0m in packages/icons to regenerate components.\n"
-);

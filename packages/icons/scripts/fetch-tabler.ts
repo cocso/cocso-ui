@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { Registry } from "./types";
+import { detectColorStrategy, kebabToPascal, type Registry } from "./types";
 
 const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg", "semantic");
@@ -54,20 +54,6 @@ function parseArgs(): { names: string[]; variant: "outline" | "filled" } {
   }
 
   return { names, variant };
-}
-
-function kebabToPascal(str: string): string {
-  return str
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join("");
-}
-
-function detectColorStrategy(svgContent: string): "stroke" | "fill" {
-  if (svgContent.includes('stroke="currentColor"')) {
-    return "stroke";
-  }
-  return "fill";
 }
 
 function extractViewBox(svgContent: string): string {
