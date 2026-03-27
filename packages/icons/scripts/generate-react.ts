@@ -14,7 +14,7 @@ const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 const DIST_DIR = join(PKG_ROOT, "dist");
 const REACT_DIST = join(DIST_DIR, "react");
-const REACT_ICONS_SRC = join(PKG_ROOT, "..", "react-icons", "src");
+const TEMPLATES_DIR = join(PKG_ROOT, "templates", "react");
 
 const SVG_ATTR_MAP: Record<string, string> = {
   "alignment-baseline": "alignmentBaseline",
@@ -222,9 +222,9 @@ function main() {
   }
 
   for (const file of ["icon.tsx", "child.tsx", "types.ts"]) {
-    const src = join(REACT_ICONS_SRC, file);
+    const src = join(TEMPLATES_DIR, file);
     if (!existsSync(src)) {
-      throw new Error(`Missing required file: ${src}`);
+      throw new Error(`Missing required template: ${src}`);
     }
     cpSync(src, join(REACT_DIST, file));
     console.log(`  \x1b[34mcopy\x1b[0m ${file}`);

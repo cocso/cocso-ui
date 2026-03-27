@@ -155,6 +155,33 @@ jobs:
         if: always()
         run: cat coverage-report.md >> $GITHUB_STEP_SUMMARY
 
+  icons:
+    name: Icon Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Icons
+        run: pnpm --filter @cocso-ui/icons build
+
+      - name: Validate Icons
+        run: pnpm --filter @cocso-ui/icons validate
+
+      - name: Validate Backward Compatibility
+        run: pnpm --filter @cocso-ui/icons validate:compat
+
   build:
     name: Build
     runs-on: ubuntu-latest
