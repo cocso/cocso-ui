@@ -14,6 +14,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
+import type { Registry, RegistryIcon } from "./types";
 
 // biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
 const PKG_ROOT = join(__dirname, "..");
@@ -21,18 +22,6 @@ const SVG_DIR = join(PKG_ROOT, "svg");
 const DIST_DIR = join(PKG_ROOT, "dist");
 const REACT_DIST = join(DIST_DIR, "react");
 const REACT_ICONS_SRC = join(PKG_ROOT, "..", "react-icons", "src");
-
-interface RegistryIcon {
-  aliases: string[];
-  category: string;
-  colorStrategy: string;
-  componentName: string;
-  name: string;
-  source: string;
-  tags: string[];
-  useStaticIds?: boolean;
-  viewBox: string;
-}
 
 /** SVG kebab-case attributes that need camelCase conversion in JSX */
 const SVG_ATTR_MAP: Record<string, string> = {
@@ -72,16 +61,20 @@ const SVG_ATTR_MAP: Record<string, string> = {
   "word-spacing": "wordSpacing",
 };
 
+// Pre-compiled regexes for SVG→JSX attribute conversion
+const SVG_ATTR_REGEXES = Object.entries(SVG_ATTR_MAP).map(
+  ([svgAttr, jsxAttr]) => ({
+    regex: new RegExp(`(?<=\\s)${svgAttr.replace(/-/g, "\\-")}=`, "g"),
+    replacement: `${jsxAttr}=`,
+  })
+);
+
 // ---------- helpers ----------
 
 function convertAttrsToJsx(content: string): string {
   let result = content;
-  for (const [svgAttr, jsxAttr] of Object.entries(SVG_ATTR_MAP)) {
-    const escaped = svgAttr.replace(/-/g, "\\-");
-    result = result.replace(
-      new RegExp(`(?<=\\s)${escaped}=`, "g"),
-      `${jsxAttr}=`
-    );
+  for (const { regex, replacement } of SVG_ATTR_REGEXES) {
+    result = result.replace(regex, replacement);
   }
   return result;
 }
@@ -107,9 +100,11 @@ function parseAttrPairs(s: string): [string, string][] {
 }
 
 function extractStaticIds(svg: string): string[] {
+  const seen = new Set<string>();
   const ids: string[] = [];
   for (const m of svg.matchAll(ID_RE)) {
-    if (!ids.includes(m[1])) {
+    if (!seen.has(m[1])) {
+      seen.add(m[1]);
       ids.push(m[1]);
     }
   }
@@ -230,7 +225,7 @@ function barrel(
 function main() {
   console.log("\n\x1b[1mGenerating React icon components\x1b[0m\n");
 
-  const registry: { icons: RegistryIcon[] } = JSON.parse(
+  const registry: Registry = JSON.parse(
     readFileSync(join(PKG_ROOT, "registry.json"), "utf-8")
   );
 

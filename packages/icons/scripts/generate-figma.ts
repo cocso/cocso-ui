@@ -17,23 +17,12 @@ import {
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
+import type { Registry } from "./types";
 
 // biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode, import.meta.dirname is undefined
 const PKG_ROOT = join(__dirname, "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 const FIGMA_DIST = join(PKG_ROOT, "dist", "figma");
-
-interface RegistryIcon {
-  aliases: string[];
-  category: string;
-  colorStrategy: string;
-  componentName: string;
-  name: string;
-  source: string;
-  tags: string[];
-  useStaticIds?: boolean;
-  viewBox: string;
-}
 
 // ---------- helpers ----------
 
@@ -77,22 +66,19 @@ function transformSvg(raw: string, colorStrategy: string): string {
 const ALIASES: Record<string, string> = {
   indeterminate: "checkIndeterminateSmall", // check-indeterminate-small.svg
   chevronDown: "keyboardArrowDown", // keyboard-arrow-down.svg
+  chevronUp: "chevronUp", // chevron-up.svg
   chevronLeft: "arrowIosBackward", // arrow-ios-backward.svg
   chevronRight: "arrowIosForward", // arrow-ios-forward.svg
   arrowLeft: "arrowBackward", // arrow-backward.svg
   arrowRight: "arrowForward", // arrow-forward.svg
 };
 
-/** chevronUp has no source SVG — hardcode the template string. */
-const CHEVRON_UP_SVG =
-  '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m6 15 6-6 6 6" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
 // ---------- main ----------
 
 function main() {
   console.log("\n\x1b[1mGenerating Figma SVG templates\x1b[0m\n");
 
-  const registry: { icons: RegistryIcon[] } = JSON.parse(
+  const registry: Registry = JSON.parse(
     readFileSync(join(PKG_ROOT, "registry.json"), "utf-8")
   );
 
@@ -109,8 +95,7 @@ function main() {
   for (const icon of registry.icons) {
     const svgPath = join(SVG_DIR, icon.category, `${icon.name}.svg`);
     if (!existsSync(svgPath)) {
-      console.error(`  \x1b[31m✗\x1b[0m missing SVG: ${svgPath}`);
-      process.exit(1);
+      throw new Error(`Missing SVG: ${svgPath}`);
     }
 
     const raw = readFileSync(svgPath, "utf-8").trim();
@@ -135,10 +120,9 @@ function main() {
   for (const [aliasKey, sourceKey] of Object.entries(ALIASES)) {
     const svg = svgByKey.get(sourceKey);
     if (!svg) {
-      console.error(
-        `  \x1b[31m✗\x1b[0m alias "${aliasKey}" references missing key "${sourceKey}"`
+      throw new Error(
+        `Alias "${aliasKey}" references missing key "${sourceKey}"`
       );
-      process.exit(1);
     }
     aliasEntries.push({
       key: aliasKey,
@@ -147,14 +131,6 @@ function main() {
     });
     console.log(`  \x1b[34malias\x1b[0m ${aliasKey} → ${sourceKey}`);
   }
-
-  // Add hardcoded chevronUp
-  aliasEntries.push({
-    key: "chevronUp",
-    svg: CHEVRON_UP_SVG,
-    comment: "hardcoded (no source SVG)",
-  });
-  console.log("  \x1b[34malias\x1b[0m chevronUp → hardcoded");
 
   // Sort alias entries alphabetically
   aliasEntries.sort((a, b) => a.key.localeCompare(b.key));
@@ -171,12 +147,12 @@ function main() {
     )
     .join("\n");
 
-  const output = `export const ICON_SVGS: Record<string, string> = {
+  const output = `export const ICON_SVGS = {
   // Generated from SVG sources
 ${primaryLines}
   // Backward-compatible aliases
 ${aliasLines}
-};
+} as const satisfies Record<string, string>;
 `;
 
   const outPath = join(FIGMA_DIST, "icon-svgs.ts");

@@ -5,6 +5,7 @@
  */
 import { readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
+import type { Registry } from "./types";
 
 // biome-ignore lint/correctness/noGlobalDirnameFilename: tsx runs in CJS mode
 const PKG_ROOT = join(__dirname, "..");
@@ -20,16 +21,9 @@ const SCAN_DIRS = [
 
 const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".mdx"]);
 
-// Top-level regex constants (biome: lint/performance/useTopLevelRegex)
-// Matches: import [type] { ... } from "@cocso-ui/react-icons" or "@cocso-ui/react-icons/..."
-// Also matches: export { ... } from "@cocso-ui/react-icons" or "@cocso-ui/react-icons/..."
 const IMPORT_BLOCK_REGEX =
   /(?:import(?:\s+type)?\s*\{([^}]*)\}|export\s*\{([^}]*)\})\s*from\s*["']@cocso-ui\/react-icons(?:\/[^"']*)?["']/gs;
 const TYPE_IMPORT_REGEX = /^import\s+type\b/;
-
-interface RegistryIcon {
-  componentName: string;
-}
 
 interface ImportOccurrence {
   file: string;
@@ -51,7 +45,7 @@ function collectFiles(dir: string): string[] {
   }
 
   for (const entry of entries) {
-    if (entry.includes("node_modules")) {
+    if (entry.includes("/node_modules/") || entry.startsWith("node_modules/")) {
       continue;
     }
     const ext = entry.slice(entry.lastIndexOf("."));
@@ -126,9 +120,7 @@ console.log(
 );
 
 // 1. Load registry
-const registry: { icons: RegistryIcon[] } = JSON.parse(
-  readFileSync(REGISTRY_FILE, "utf-8")
-);
+const registry: Registry = JSON.parse(readFileSync(REGISTRY_FILE, "utf-8"));
 const validNames = new Set(registry.icons.map((icon) => icon.componentName));
 console.log(`\x1b[36mRegistry:\x1b[0m ${validNames.size} components loaded\n`);
 
