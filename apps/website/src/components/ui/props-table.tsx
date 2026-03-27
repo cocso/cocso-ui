@@ -2,11 +2,11 @@ import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface PropDefinition {
-  name: string;
-  type: string;
   default?: string;
   description: string;
+  name: string;
   required?: boolean;
+  type: string;
 }
 
 interface PropsTableProps extends ComponentProps<"div"> {
@@ -15,10 +15,7 @@ interface PropsTableProps extends ComponentProps<"div"> {
 
 export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
   return (
-    <div
-      className={twMerge("w-full overflow-x-auto", className)}
-      {...props}
-    >
+    <div className={twMerge("w-full overflow-x-auto", className)} {...props}>
       <table className="min-w-[640px] table-fixed border-collapse text-[11px]">
         <colgroup>
           <col className="w-[140px]" />
@@ -28,12 +25,8 @@ export const PropsTable = ({ data, className, ...props }: PropsTableProps) => {
         </colgroup>
         <thead>
           <tr className="border-neutral-200 border-b text-left">
-            <th className="px-3 py-2 font-semibold text-neutral-950">
-              Prop
-            </th>
-            <th className="px-3 py-2 font-semibold text-neutral-950">
-              Type
-            </th>
+            <th className="px-3 py-2 font-semibold text-neutral-950">Prop</th>
+            <th className="px-3 py-2 font-semibold text-neutral-950">Type</th>
             <th className="px-3 py-2 font-semibold text-neutral-950">
               Default
             </th>

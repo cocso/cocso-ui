@@ -7,7 +7,9 @@ export default function TooltipDefault() {
     <div className="p-4">
       <Tooltip.Provider>
         <Tooltip>
-          <Tooltip.Trigger render={<Button variant="secondary">Hover me</Button>} />
+          <Tooltip.Trigger
+            render={<Button variant="secondary">Hover me</Button>}
+          />
           <Tooltip.Content>
             This is a tooltip
             <Tooltip.Arrow />

@@ -11,7 +11,8 @@ export default function AccordionDefault() {
             <Accordion.Trigger>What is COCSO UI?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            COCSO UI is a React component library built on Base UI with CSS Modules and design tokens.
+            COCSO UI is a React component library built on Base UI with CSS
+            Modules and design tokens.
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item>
@@ -19,7 +20,8 @@ export default function AccordionDefault() {
             <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            Yes. Built on Base UI, all components follow WAI-ARIA patterns for keyboard navigation and screen reader support.
+            Yes. Built on Base UI, all components follow WAI-ARIA patterns for
+            keyboard navigation and screen reader support.
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item>
@@ -27,7 +29,8 @@ export default function AccordionDefault() {
             <Accordion.Trigger>Can I customize styles?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            Absolutely. Components use CSS custom properties that can be overridden for theming.
+            Absolutely. Components use CSS custom properties that can be
+            overridden for theming.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>

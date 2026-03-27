@@ -14,7 +14,10 @@ export default function MonthPickerDefault() {
         trigger={
           <Button prefix={<CalendarMonthIcon size={16} />} variant="outline">
             {value
-              ? value.toLocaleDateString("ko-KR", { year: "numeric", month: "long" })
+              ? value.toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "long",
+                })
               : "Select month"}
           </Button>
         }

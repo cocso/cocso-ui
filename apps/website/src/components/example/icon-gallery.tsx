@@ -1,5 +1,6 @@
 "use client";
 
+import { Dropdown, Typography, toast } from "@cocso-ui/react";
 import {
   AdminMedsIcon,
   AllInboxIcon,
@@ -16,12 +17,13 @@ import {
   CalculateIcon,
   CalendarMonthIcon,
   ChangeCircleIcon,
+  CheckbookIcon,
   CheckCircleIcon,
   CheckIcon,
   CheckIndeterminateSmallIcon,
-  CheckbookIcon,
   CloseIcon,
   ContentCopyIcon,
+  ContentCopyIcon as CopyIcon,
   DeleteIcon,
   DirectionsRunIcon,
   DockToRightIcon,
@@ -70,14 +72,12 @@ import {
   TrendingUpIcon,
   VerifiedIcon,
 } from "@cocso-ui/react-icons";
-import { Dropdown, toast, Typography } from "@cocso-ui/react";
-import { ContentCopyIcon as CopyIcon } from "@cocso-ui/react-icons";
 import type { ComponentType } from "react";
 import { useCallback, useState } from "react";
 
 interface IconEntry {
-  name: string;
   Component: ComponentType<{ size?: number }>;
+  name: string;
 }
 
 const allIcons: IconEntry[] = [
@@ -181,7 +181,11 @@ export default function IconGallery() {
                   type="button"
                 >
                   <Component size={24} />
-                  <Typography type="custom" className="w-full truncate text-center text-neutral-500" size={10}>
+                  <Typography
+                    className="w-full truncate text-center text-neutral-500"
+                    size={10}
+                    type="custom"
+                  >
                     {name}
                   </Typography>
                 </button>
@@ -189,7 +193,11 @@ export default function IconGallery() {
             />
             <Dropdown.Content>
               <Dropdown.Item
-                onClick={() => handleCopy(`import { ${name}Icon } from "@cocso-ui/react-icons";`)}
+                onClick={() =>
+                  handleCopy(
+                    `import { ${name}Icon } from "@cocso-ui/react-icons";`
+                  )
+                }
                 prefix={<CopyIcon size={14} />}
               >
                 Import
@@ -205,7 +213,11 @@ export default function IconGallery() {
         ))}
       </div>
       {filtered.length === 0 && (
-        <Typography type="custom" className="py-8 text-center text-neutral-400" size={14}>
+        <Typography
+          className="py-8 text-center text-neutral-400"
+          size={14}
+          type="custom"
+        >
           No icons found matching "{search}"
         </Typography>
       )}

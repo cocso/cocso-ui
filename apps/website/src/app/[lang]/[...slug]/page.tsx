@@ -2,7 +2,7 @@ import { colors, Typography } from "@cocso-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "~/components/ui/section";
-import { type Locale, i18n } from "~/libs/i18n";
+import { i18n, type Locale } from "~/libs/i18n";
 import { source } from "~/libs/source";
 import { getMDXComponents } from "~/mdx-components";
 
