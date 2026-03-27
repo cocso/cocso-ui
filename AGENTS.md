@@ -29,7 +29,7 @@
   - `packages/react/`: `@cocso-ui/react` — React component library.
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
   - `packages/icons/`: `@cocso-ui/icons` — canonical SVG icon sources, SVGO optimization, and code generation (SVG → React TSX, SVG → Figma template strings).
-  - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set (Phase 3 will switch to re-exporting from `@cocso-ui/icons`).
+  - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set (re-exports generated components from `@cocso-ui/icons`).
   - `packages/baseframe/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
   - `packages/recipe/`: `@cocso-ui/recipe` — component visual spec recipes (single source of truth for variant→token mappings, consumed by React conformance tests and Figma generation).
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables and generating components from recipes.
@@ -118,7 +118,16 @@ Repository-wide quality CI runs on every pull request.
 Coverage expectations:
 - `lint`: runs `pnpm run lint` — fails if any issue is found.
 - `test`: runs `pnpm run test:coverage` and posts a PR coverage summary. Coverage is reported for `@cocso-ui/react`, `@cocso-ui/recipe`, `@cocso-ui/figma`, and `@cocso-ui/baseframe`.
+- `icons`: builds `@cocso-ui/icons`, runs `validate` (registry ↔ SVG ↔ generated output consistency) and `validate:compat` (backward-compatibility import check).
 - `build`: runs `pnpm build` across all packages via Turborepo.
 - `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
 
 All CI jobs must pass before a PR is merged.
+
+### gstack
+Use /browse from gstack for all web browsing. Never use mcp__claude-in-chrome__* tools.
+Available skills: /office-hours, /plan-ceo-review, /plan-eng-review, /plan-design-review,
+/design-consultation, /review, /ship, /land-and-deploy, /canary, /benchmark, /browse,
+/qa, /qa-only, /design-review, /setup-browser-cookies, /setup-deploy, /retro,
+/investigate, /document-release, /codex, /cso, /autoplan, /careful, /freeze, /guard,
+/unfreeze, /gstack-upgrade.

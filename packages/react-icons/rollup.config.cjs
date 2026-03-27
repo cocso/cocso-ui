@@ -29,10 +29,7 @@ function buildJS(format, input, output) {
     output: [
       {
         format,
-        dir: output,
-        entryFileNames: `[name].${isESM ? "mjs" : "js"}`,
-        preserveModules: true,
-        preserveModulesRoot: "src",
+        file: `${output}/index.${isESM ? "mjs" : "js"}`,
       },
     ],
     plugins: [
@@ -57,13 +54,10 @@ function buildDTS(format, input, output) {
     output: [
       {
         format,
-        dir: output,
-        entryFileNames: `[name].${isESM ? "d.mts" : "d.ts"}`,
-        preserveModules: true,
-        preserveModulesRoot: "src",
+        file: `${output}/index.${isESM ? "d.mts" : "d.ts"}`,
       },
     ],
-    plugins: [dts()],
+    plugins: [resolve({ extensions }), dts()],
   };
 }
 

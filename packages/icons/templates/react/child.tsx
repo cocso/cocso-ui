@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, type ReactNode } from "react";
+import React, { Children, cloneElement, isValidElement, type ReactNode } from "react";
 
 interface ChildProps {
   children: ReactNode;

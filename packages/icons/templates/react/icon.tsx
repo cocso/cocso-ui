@@ -1,3 +1,4 @@
+import React from "react";
 import Child from "./child";
 import type { IconProps } from "./types";
 
