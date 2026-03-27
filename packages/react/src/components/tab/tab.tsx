@@ -18,8 +18,8 @@ function TabContent(props: ComponentProps<typeof Tabs.Panel>) {
 }
 
 export const Tab = Object.assign(TabRoot, {
+  displayName: "Tab" as const,
   List: TabList,
   Trigger: TabTrigger,
   Content: TabContent,
 });
-Tab.displayName = "Tab";
