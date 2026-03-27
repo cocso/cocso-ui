@@ -130,12 +130,20 @@ export function getFontStyle(weight: number): string {
 
 export { ICON_SVGS } from "@cocso-ui/icons/figma";
 
+const SVG_TAG_RE = /^<svg /;
+
 export function createIcon(
   svgTemplate: string,
   size: number,
   hexColor: string
 ): FrameNode {
-  const svg = svgTemplate.replace(/\{color\}/g, hexColor);
+  // Inject width/height so Figma scales strokes proportionally via viewBox
+  // transform instead of just resizing the frame container.
+  const sized = svgTemplate.replace(
+    SVG_TAG_RE,
+    `<svg width="${size}" height="${size}" `
+  );
+  const svg = sized.replace(/\{color\}/g, hexColor);
   const node = figma.createNodeFromSvg(svg);
   node.resize(size, size);
   node.name = "icon";
