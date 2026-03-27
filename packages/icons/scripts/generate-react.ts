@@ -165,7 +165,9 @@ function generate(icon: RegistryIcon, svgRaw: string): string {
 
   const imports: string[] = [];
   if (isUseId && sids.length > 0) {
-    imports.push('import { useId } from "react";');
+    imports.push('import React, { useId } from "react";');
+  } else {
+    imports.push('import React from "react";');
   }
   imports.push('import Icon from "../icon";');
   imports.push('import type { IconProps } from "../types";');

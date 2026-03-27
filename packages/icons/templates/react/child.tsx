@@ -1,4 +1,10 @@
-import { Children, cloneElement, isValidElement, type ReactNode } from "react";
+// biome-ignore lint/correctness/noUnusedImports: React is required for classic JSX runtime in Storybook
+import React, {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactNode,
+} from "react";
 
 interface ChildProps {
   children: ReactNode;

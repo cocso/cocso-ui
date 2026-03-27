@@ -1,3 +1,5 @@
+// biome-ignore lint/correctness/noUnusedImports: React is required for classic JSX runtime in Storybook
+import React from "react";
 import Child from "./child";
 import type { IconProps } from "./types";
 
