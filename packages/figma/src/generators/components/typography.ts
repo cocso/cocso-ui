@@ -10,6 +10,8 @@ import {
   createVariantRow,
 } from "../shared";
 
+const SIZE_VALUE_RE = /size=([^,]*)/;
+
 export function generateTypographySection(container: FrameNode): void {
   const section = createComponentSection("Typography");
   const combinations = getAllVariantCombinations(typographyRecipe);
@@ -28,7 +30,7 @@ export function generateTypographySection(container: FrameNode): void {
       const fontSize = spec.fontSize ?? 16;
       const fontWeight = spec.fontWeight ?? 400;
       const textColor = spec.fontColor ?? COLORS.neutral950;
-      const sizeValue = name.match(/size=([^,]*)/)?.[1] ?? "";
+      const sizeValue = name.match(SIZE_VALUE_RE)?.[1] ?? "";
       const sampleText = `${groupKey} ${sizeValue} (${fontSize}px)`;
       const text = createTextNode(sampleText, fontSize, fontWeight, textColor);
       component.appendChild(text);
