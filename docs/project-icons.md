@@ -497,10 +497,10 @@ Only proceeds after Phase 2 parallel-run validation is green.
 
 ### Phase 4: Tooling and DX
 
-- [ ] Implement `fetch-tabler.ts` CLI for adding new Tabler icons (fetch SVG, add to `svg/semantic/`, update `registry.json`).
-- [ ] Add script to add custom SVG icons with metadata prompts.
-- [ ] Add Storybook icon catalog page (visual gallery with search).
-- [ ] Icon search/discovery in documentation site.
+- [x] Implement `fetch-tabler.ts` CLI for adding new Tabler icons (fetch SVG, add to `svg/semantic/`, update `registry.json`).
+- [x] Add script to add custom SVG icons with metadata prompts.
+- [x] Add Storybook icon catalog page (visual gallery with search).
+- [x] Icon search/discovery in documentation site.
 
 **Acceptance Criteria:**
 1. `pnpm --filter @cocso-ui/icons fetch:tabler -- --name search` fetches and adds the icon.
