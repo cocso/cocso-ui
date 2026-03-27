@@ -199,6 +199,9 @@ importers:
       '@cocso-ui/baseframe-sources':
         specifier: workspace:*
         version: link:../baseframe
+      '@cocso-ui/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@cocso-ui/recipe':
         specifier: workspace:*
         version: link:../recipe

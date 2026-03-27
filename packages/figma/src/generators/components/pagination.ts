@@ -160,8 +160,12 @@ export function generatePaginationSection(container: FrameNode): void {
   truncComponent.primaryAxisAlignItems = "CENTER";
   truncComponent.counterAxisAlignItems = "CENTER";
   truncComponent.fills = [];
-  const truncText = createTextNode("\u2026", 16, 400, COLORS.neutral900);
-  truncComponent.appendChild(truncText);
+  const truncIcon = createIcon(
+    ICON_SVGS.moreHoriz,
+    16,
+    rgbToHex(COLORS.neutral900)
+  );
+  truncComponent.appendChild(truncIcon);
   truncRow.appendChild(truncComponent);
   section.appendChild(truncRow);
 
@@ -217,7 +221,7 @@ export function generatePaginationSection(container: FrameNode): void {
   truncInComposed.counterAxisAlignItems = "CENTER";
   truncInComposed.fills = [];
   truncInComposed.appendChild(
-    createTextNode("\u2026", 16, 400, COLORS.neutral900)
+    createIcon(ICON_SVGS.moreHoriz, 16, rgbToHex(COLORS.neutral900))
   );
   composedFrame.appendChild(truncInComposed);
 

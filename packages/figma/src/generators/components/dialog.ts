@@ -3,10 +3,14 @@ import { resolveForFigma } from "../recipe-resolver";
 import { getAllVariantCombinations } from "../recipe-utils";
 import {
   COLORS,
+  createAutoLayoutFrame,
   createBoundPaint,
   createComponentSection,
+  createIcon,
   createTextNode,
   createVariantRow,
+  ICON_SVGS,
+  rgbToHex,
   SHADOW_MD,
   setFill,
 } from "../shared";
@@ -63,14 +67,38 @@ export function generateDialogSection(container: FrameNode): void {
 
     component.itemSpacing = 12;
 
+    const header = createAutoLayoutFrame("header");
+    header.primaryAxisAlignItems = "SPACE_BETWEEN";
+    header.counterAxisAlignItems = "CENTER";
+    header.layoutSizingHorizontal = "FILL";
+
     const title = createTextNode("Dialog Title", 20, 700, COLORS.neutral950);
+    header.appendChild(title);
+
+    const closeBtn = createAutoLayoutFrame("close-button");
+    closeBtn.primaryAxisAlignItems = "CENTER";
+    closeBtn.counterAxisAlignItems = "CENTER";
+    closeBtn.resize(24, 24);
+    closeBtn.cornerRadius = 6;
+    setFill(closeBtn, COLORS.white);
+    closeBtn.strokes = [createBoundPaint(COLORS.neutral200)];
+    closeBtn.strokeWeight = 1;
+    const closeIcon = createIcon(
+      ICON_SVGS.close,
+      14,
+      rgbToHex(COLORS.neutral900)
+    );
+    closeBtn.appendChild(closeIcon);
+    header.appendChild(closeBtn);
+
+    component.appendChild(header);
+
     const desc = createTextNode(
       "Dialog description goes here.",
       14,
       500,
       COLORS.neutral600
     );
-    component.appendChild(title);
     component.appendChild(desc);
 
     row.appendChild(component);

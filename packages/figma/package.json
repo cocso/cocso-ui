@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@cocso-ui/baseframe-sources": "workspace:*",
+    "@cocso-ui/icons": "workspace:*",
     "@cocso-ui/recipe": "workspace:*",
     "yaml": "^2.8.0"
   },
