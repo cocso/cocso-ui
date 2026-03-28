@@ -1049,3 +1049,157 @@ describe("resolveForFigma — stock-quantity-status recipe", () => {
     expect(spec.color).toEqual(resolveColorToken("danger-500"));
   });
 });
+
+// ---------------------------------------------------------------------------
+// State overrides (Phase 2)
+// ---------------------------------------------------------------------------
+
+describe("resolveForFigma with state option", () => {
+  it("applies hover state override to button bgColor", () => {
+    const base = resolveForFigma(buttonRecipe, { variant: "primary" });
+    const hover = resolveForFigma(
+      buttonRecipe,
+      { variant: "primary" },
+      { state: "hover" }
+    );
+    expect(base.bgColor).toEqual(resolveColorToken("primary-950"));
+    expect(hover.bgColor).toEqual(resolveColorToken("primary-800"));
+  });
+
+  it("applies active state override to button bgColor", () => {
+    const active = resolveForFigma(
+      buttonRecipe,
+      { variant: "primary" },
+      { state: "active" }
+    );
+    expect(active.bgColor).toEqual(resolveColorToken("primary-700"));
+  });
+
+  it("hover does not affect non-overridden properties", () => {
+    const base = resolveForFigma(buttonRecipe, {
+      variant: "primary",
+      size: "medium",
+    });
+    const hover = resolveForFigma(
+      buttonRecipe,
+      { variant: "primary", size: "medium" },
+      { state: "hover" }
+    );
+    expect(hover.height).toBe(base.height);
+    expect(hover.fontSize).toBe(base.fontSize);
+    expect(hover.fontColor).toEqual(base.fontColor);
+    expect(hover.borderRadius).toBe(base.borderRadius);
+  });
+
+  it("applies hover to all button variants", () => {
+    const variants = [
+      { variant: "secondary", hover: "neutral-100" },
+      { variant: "outline", hover: "neutral-50" },
+      { variant: "ghost", hover: "neutral-50" },
+      { variant: "success", hover: "success-600" },
+      { variant: "error", hover: "danger-600" },
+      { variant: "warning", hover: "warning-400" },
+      { variant: "info", hover: "info-600" },
+    ] as const;
+
+    for (const { variant, hover } of variants) {
+      const spec = resolveForFigma(
+        buttonRecipe,
+        { variant },
+        { state: "hover" }
+      );
+      expect(spec.bgColor).toEqual(resolveColorToken(hover));
+    }
+  });
+
+  it("ignores unknown state", () => {
+    const base = resolveForFigma(buttonRecipe, { variant: "primary" });
+    const unknown = resolveForFigma(
+      buttonRecipe,
+      { variant: "primary" },
+      { state: "focus" }
+    );
+    expect(unknown.bgColor).toEqual(base.bgColor);
+  });
+
+  it("does not add state for recipe without states", () => {
+    const base = resolveForFigma(badgeRecipe, { variant: "primary" });
+    const hover = resolveForFigma(
+      badgeRecipe,
+      { variant: "primary" },
+      { state: "hover" }
+    );
+    expect(hover.bgColor).toEqual(base.bgColor);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Token references (_tokenRefs) (Phase 2)
+// ---------------------------------------------------------------------------
+
+describe("_tokenRefs", () => {
+  it("tracks color token references", () => {
+    const spec = resolveForFigma(buttonRecipe, { variant: "primary" });
+    expect(spec._tokenRefs).toBeDefined();
+    expect(spec._tokenRefs?.bgColor).toBe("primary-950");
+    expect(spec._tokenRefs?.fontColor).toBe("white");
+  });
+
+  it("tracks radius token references", () => {
+    const spec = resolveForFigma(buttonRecipe, {
+      variant: "primary",
+      size: "medium",
+      shape: "square",
+    });
+    expect(spec._tokenRefs?.borderRadius).toBe("radius-4");
+  });
+
+  it("tracks compound border color reference as strokeColor", () => {
+    const spec = resolveForFigma(buttonRecipe, { variant: "outline" });
+    expect(spec._tokenRefs?.strokeColor).toBe("neutral-100");
+  });
+
+  it("updates token refs on state override", () => {
+    const base = resolveForFigma(buttonRecipe, { variant: "primary" });
+    const hover = resolveForFigma(
+      buttonRecipe,
+      { variant: "primary" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("primary-950");
+    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+  });
+
+  it("does not include _tokenRefs when no tokens are resolved", () => {
+    const recipe = defineRecipe({
+      name: "plain",
+      slots: ["root"] as const,
+      variants: {
+        size: {
+          small: { root: { height: 20, width: 40 } },
+        },
+      },
+      defaultVariants: { size: "small" },
+    });
+    const spec = resolveForFigma(recipe, {});
+    expect(spec._tokenRefs).toBeUndefined();
+  });
+
+  it("does not track CSS literal radius (100%)", () => {
+    const spec = resolveForFigma(buttonRecipe, {
+      variant: "primary",
+      shape: "circle",
+    });
+    expect(spec.borderRadius).toBe(1000);
+    expect(spec._tokenRefs?.borderRadius).toBeUndefined();
+  });
+
+  it("tracks radius-full token", () => {
+    const spec = resolveForFigma(buttonRecipe, {
+      variant: "primary",
+      shape: "rounded",
+    });
+    expect(spec.borderRadius).toBe(1000);
+    expect(spec._tokenRefs?.borderRadius).toBe("radius-full");
+  });
+});
