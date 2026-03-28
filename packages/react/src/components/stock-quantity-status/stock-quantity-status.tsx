@@ -1,11 +1,10 @@
+import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import { spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
-import { getColor } from "./stock-quantity-status.styles";
-
-export { getColor } from "./stock-quantity-status.styles";
 
 export type QuantityStatus = "보통" | "여유" | "부족";
 
@@ -110,9 +109,10 @@ export function StockQuantityStatus({
   quantity,
   ...props
 }: StockQuantityStatusProps) {
+  const resolved = resolveStyleMap(stockQuantityStatusRecipe, { quantity });
   const style = {
     ..._style,
-    "--cocso-stock-quantity-status-color": getColor(quantity),
+    ...resolved,
     "--cocso-stock-quantity-status-indicator-width": spacing.s9,
   } as CSSProperties;
 

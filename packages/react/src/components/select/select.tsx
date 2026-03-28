@@ -1,14 +1,22 @@
 "use client";
 
 import { SelectorIcon } from "@cocso-ui/react-icons";
+import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
 import { Field, useField } from "../field";
 import styles from "./select.module.css";
-import { getIconSize, getStyles } from "./select.styles";
 
 export type SelectSize = "large" | "medium" | "small" | "x-small";
+
+const ICON_SIZES: Record<SelectSize, number> = {
+  "x-small": 10,
+  small: 12,
+  medium: 14,
+  large: 14,
+};
 
 export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   description?: string;
@@ -40,7 +48,9 @@ export function Select({
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
 
-  const wrapperStyle = { ...getStyles(size) } as CSSProperties;
+  const wrapperStyle = {
+    ...resolveStyleMap(selectRecipe, { size }),
+  } as CSSProperties;
 
   const select = (
     <div
@@ -65,7 +75,7 @@ export function Select({
       </FieldAwareSelect>
 
       <span className={styles.icon}>
-        <SelectorIcon size={getIconSize(size)} />
+        <SelectorIcon size={ICON_SIZES[size]} />
       </span>
     </div>
   );

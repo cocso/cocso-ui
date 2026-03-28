@@ -1,23 +1,42 @@
 "use client";
 
+import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
 import { Switch as SwitchBase } from "../../primitives/switch";
+import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
-import {
-  getCheckedColor,
-  getSwitchHeight,
-  getSwitchWidth,
-  getThumbOffset,
-  getThumbSize,
-  type SwitchSize,
-  type SwitchVariant,
-  UNCHECKED_BG,
-} from "./switch.styles";
 
-export type { SwitchSize, SwitchVariant } from "./switch.styles";
+export type SwitchSize = "large" | "medium" | "small";
+export type SwitchVariant =
+  | "primary"
+  | "success"
+  | "error"
+  | "warning"
+  | "info";
+
+const UNCHECKED_BG = colors.neutral100;
+
+const SWITCH_WIDTH: Record<SwitchSize, string> = {
+  large: "40px",
+  medium: "36px",
+  small: "32px",
+};
+
+const SWITCH_HEIGHT: Record<SwitchSize, string> = {
+  large: "22px",
+  medium: "20px",
+  small: "18px",
+};
+
+const THUMB_SIZE: Record<SwitchSize, string> = {
+  large: "18px",
+  medium: "16px",
+  small: "14px",
+};
 
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
@@ -44,15 +63,17 @@ export function Switch({
   const generatedId = useId();
   const id = _id ?? generatedId;
 
+  const resolved = resolveStyleMap(switchRecipe, { variant });
   const style = {
     ..._style,
-    "--cocso-switch-width": getSwitchWidth(size),
-    "--cocso-switch-height": getSwitchHeight(size),
-    "--cocso-switch-thumb-width": getThumbSize(size),
-    "--cocso-switch-thumb-height": getThumbSize(size),
-    "--cocso-switch-thumb-offset": getThumbOffset(size),
+    "--cocso-switch-width": SWITCH_WIDTH[size],
+    "--cocso-switch-height": SWITCH_HEIGHT[size],
+    "--cocso-switch-thumb-width": THUMB_SIZE[size],
+    "--cocso-switch-thumb-height": THUMB_SIZE[size],
+    "--cocso-switch-thumb-offset": "2px",
     "--cocso-switch-bg-color": UNCHECKED_BG,
-    "--cocso-switch-checked-bg-color": getCheckedColor(variant),
+    "--cocso-switch-checked-bg-color":
+      resolved["--cocso-switch-checked-bg-color"],
   } as CSSProperties;
 
   return (

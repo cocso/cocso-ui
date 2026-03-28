@@ -1,15 +1,11 @@
+import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import styles from "./spinner.module.css";
 
-export type { SpinnerSize, SpinnerVariant } from "./spinner.styles";
-
-import {
-  getBladeColor,
-  getSizeConfig,
-  type SpinnerSize,
-  type SpinnerVariant,
-} from "./spinner.styles";
+export type SpinnerSize = keyof typeof spinnerRecipe.variants.size;
+export type SpinnerVariant = keyof typeof spinnerRecipe.variants.variant;
 
 export interface SpinnerProps extends Omit<ComponentProps<"output">, "size"> {
   label?: string;
@@ -27,13 +23,20 @@ export function Spinner({
   label = "Loading",
   ...props
 }: SpinnerProps) {
-  const {
-    output,
-    blades: bladeCount,
-    width,
-    height,
-    radius,
-  } = getSizeConfig(size);
+  const sizeData = spinnerRecipe.variants.size[size].root as unknown as {
+    blades: number;
+    bladeWidth: number;
+    bladeHeight: number;
+    bladeRadius: number;
+    output: number;
+  };
+  const resolved = resolveStyleMap(spinnerRecipe, { variant, size });
+  const bladeCount = sizeData.blades;
+  const width = sizeData.bladeWidth;
+  const height = sizeData.bladeHeight;
+  const radius = sizeData.bladeRadius;
+  const output = sizeData.output;
+  const bladeColor = resolved["--cocso-spinner-blade-color"];
   const container = output;
   const left = (container - width) / 2;
   const originY = height - container / 2;
@@ -53,7 +56,7 @@ export function Spinner({
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: getBladeColor(variant),
+        color: bladeColor,
         ..._style,
       }}
       {...props}

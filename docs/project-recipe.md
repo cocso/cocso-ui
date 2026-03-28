@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a single, CI-enforced declarative mirror for component visual specs (variant-to-token mappings). Both React conformance tests and Figma generation consume recipes, preventing silent drift between platforms.
+Provide a single source of truth for component visual specs (variant-to-token mappings). React components consume recipes directly via `resolveStyleMap()`, eliminating the need for manual `.styles.ts` mirrors. Figma generation consumes recipes via `resolveForFigma()`.
 
 ## Path
 
@@ -16,7 +16,7 @@ TypeScript (pure data — zero runtime dependencies)
 
 ## Users
 
-- **React developers**: conformance tests verify React style functions match recipes.
+- **React developers**: components consume recipes directly via `resolveStyleMap()`. No separate `.styles.ts` files or conformance tests needed.
 - **Figma plugin**: generates Figma components from recipe data via `resolveForFigma()`.
 - **Design system maintainers**: recipes are the authoritative spec for variant→token mappings.
 
@@ -43,7 +43,8 @@ TypeScript (pure data — zero runtime dependencies)
 │   ├── types.ts                 — StyleValue, RecipeDefinition, TokenCatalog
 │   ├── index.ts                 — barrel exports
 │   ├── resolvers/
-│   │   └── react.ts             — resolveForReact()
+│   │   ├── react.ts             — resolveForReact() (camelCase keys, used by figma and internally)
+│   │   └── react-styles.ts      — resolveStyleMap() (kebab-case keys + state suffixes, used by React components)
 │   └── recipes/
 │       ├── button.recipe.ts
 │       ├── badge.recipe.ts
@@ -60,23 +61,20 @@ TypeScript (pure data — zero runtime dependencies)
 ### Dependency Direction
 
 - `@cocso-ui/recipe` → zero dependencies (pure TypeScript data)
-- `@cocso-ui/react` → devDependency on recipe (for conformance tests only)
+- `@cocso-ui/react` → runtime dependency on recipe (direct consumption via `resolveStyleMap()`)
 - `@cocso-ui/figma` → dependency on recipe (for component generation)
 
 ### Conflict Resolution Protocol
 
-When a conformance test fails (recipe ↔ React mismatch):
-1. **Recipe is authoritative** for design intent.
-2. Was the recipe intentionally updated? → Update React to match.
-3. Was React intentionally updated? → Update recipe first, then conformance test passes.
+Recipe is the single source of truth. When component styles need to change:
+1. Update the recipe definition.
+2. `resolveStyleMap()` propagates the change to the React component automatically — no manual `.styles.ts` sync required.
 
 ### CSS Property Naming Convention
 
-Recipe property keys and React CSS custom properties use different naming conventions:
-
-- **Recipe data model**: property keys use camelCase (e.g., `bgColor`, `fontColor`, `paddingInline`, `borderRadius`). These names are the canonical identifiers in the recipe definition and are platform-agnostic.
-- **React resolver output**: the resolver preserves recipe camelCase in CSS custom property names (e.g., `--cocso-button-bgColor`, `--cocso-button-fontColor`). The React `.styles.ts` files independently define kebab-case CSS custom properties (e.g., `--cocso-button-bg-color`). These are two separate naming spaces — the resolver output is used by conformance tests, while `.styles.ts` functions produce the actual runtime CSS variables.
-- **Conformance tests**: compare resolved *values* (not property names). A conformance test verifies that the recipe-resolved value for a given variant matches the React style function output, ensuring both produce the same design token regardless of property name format.
+- **Recipe data model**: property keys use camelCase (e.g., `bgColor`, `fontColor`, `paddingInline`, `borderRadius`). These names are platform-agnostic canonical identifiers.
+- **`resolveForReact()` output**: preserves camelCase in CSS custom property names (e.g., `--cocso-button-bgColor`). Used internally and by Figma resolver.
+- **`resolveStyleMap()` output**: converts camelCase to kebab-case (e.g., `--cocso-button-bg-color`). Used directly by React components as inline CSS custom properties. Also produces state-suffixed keys (e.g., `--cocso-button-bg-color-hover`) for explicitly overridden state properties.
 
 ## Interfaces
 
@@ -86,14 +84,19 @@ Identity function providing type inference. Returns the recipe unchanged.
 
 ### `resolveForReact(recipe, variants, options?)`
 
-Returns `Record<string, string>` — CSS custom property map.
+Returns `Record<string, string>` — CSS custom property map with camelCase keys (e.g., `--cocso-button-bgColor`). Used internally and by Figma resolver.
+
+### `resolveStyleMap(recipe, variants, options?)`
+
+Returns `Record<string, string>` — CSS custom property map with kebab-case keys (e.g., `--cocso-button-bg-color`). Supports `options.states` for state-suffixed keys. Used directly by React components.
 
 ### Recipe exports pattern
 
 ```
-@cocso-ui/recipe                    — defineRecipe, types
-@cocso-ui/recipe/resolvers/react    — resolveForReact
-@cocso-ui/recipe/recipes/*          — individual component recipes
+@cocso-ui/recipe                          — defineRecipe, types
+@cocso-ui/recipe/resolvers/react          — resolveForReact
+@cocso-ui/recipe/resolvers/react-styles   — resolveStyleMap
+@cocso-ui/recipe/recipes/*                — individual component recipes
 ```
 
 ## Storage
@@ -112,13 +115,13 @@ Not applicable.
 
 ```bash
 pnpm --filter @cocso-ui/recipe build    # tsc --project tsconfig.build.json
-pnpm --filter @cocso-ui/recipe test     # vitest run (25 tests)
+pnpm --filter @cocso-ui/recipe test     # vitest run (104 tests, includes react-styles snapshot tests)
 pnpm --filter @cocso-ui/recipe lint     # biome check
 ```
 
-Conformance tests run in `@cocso-ui/react`:
+Component integration verified in `@cocso-ui/react`:
 ```bash
-pnpm --filter @cocso-ui/react test      # includes ~35 recipe conformance tests
+pnpm --filter @cocso-ui/react test      # 365 tests (component behavior tests; conformance tests removed)
 ```
 
 ## Roadmap
@@ -132,4 +135,4 @@ pnpm --filter @cocso-ui/react test      # includes ~35 recipe conformance tests
 
 - Should Typography responsive sizing (base/tablet/desktop) warrant a dedicated recipe format extension?
 - Should recipes be published to npm for external consumers, or remain workspace-internal?
-- Should conformance tests be auto-generated from recipe variant enumerations?
+- ~~Should conformance tests be auto-generated from recipe variant enumerations?~~ Resolved: conformance tests are no longer needed. Components consume recipes directly via `resolveStyleMap()`, and `react-styles.test.ts` snapshot tests cover resolver correctness.

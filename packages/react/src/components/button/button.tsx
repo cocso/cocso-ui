@@ -1,22 +1,13 @@
+import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { cn } from "../../cn";
 import { mergeProps } from "../../primitives/merge-props";
 import { useRender } from "../../primitives/use-render";
-import type { FontWeight } from "../../token";
+import { type FontWeight, fontWeight as fontWeightToken } from "../../token";
 import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
 import styles from "./button.module.css";
-import {
-  fontWeightToken,
-  getBackgroundColor,
-  getBackgroundColorActive,
-  getBackgroundColorHover,
-  getBorder,
-  getBorderRadius,
-  getColor,
-  getSizeStyles,
-  getSpinnerVariant,
-} from "./button.styles";
 
 export type ButtonSize = "large" | "medium" | "small" | "x-small";
 
@@ -46,6 +37,12 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   weight?: FontWeight;
 }
 
+function getButtonSpinnerVariant(variant: ButtonVariant): SpinnerVariant {
+  return ["primary", "success", "error", "info"].includes(variant)
+    ? "white"
+    : "secondary";
+}
+
 /** Polymorphic button component with variant, color, and size options. */
 export function Button({
   render: renderProp,
@@ -65,16 +62,16 @@ export function Button({
   spinnerVariant,
   ...props
 }: ButtonProps) {
+  const resolved = resolveStyleMap(
+    buttonRecipe,
+    { variant, size, shape },
+    { states: ["hover", "active"] }
+  );
   const style = {
     ..._style,
-    ...getSizeStyles(size),
-    "--cocso-button-font-color": getColor(variant),
+    "--cocso-button-border": "none",
+    ...resolved,
     "--cocso-button-font-weight": fontWeightToken[weight],
-    "--cocso-button-border": getBorder(variant),
-    "--cocso-button-border-radius": getBorderRadius(shape, size),
-    "--cocso-button-bg-color": getBackgroundColor(variant),
-    "--cocso-button-bg-color-hover": getBackgroundColorHover(variant),
-    "--cocso-button-bg-color-active": getBackgroundColorActive(variant),
   } as CSSProperties;
 
   const isDisabled = disabled || loading;
@@ -90,7 +87,7 @@ export function Button({
         <span className={styles.spinnerOverlay}>
           <Spinner
             size="medium"
-            variant={spinnerVariant ?? getSpinnerVariant(variant)}
+            variant={spinnerVariant ?? getButtonSpinnerVariant(variant)}
           />
         </span>
       )}

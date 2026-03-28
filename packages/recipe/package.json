@@ -16,19 +16,23 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./src/index.ts"
+      "import": "./dist/index.js"
     },
     "./resolvers/react": {
       "types": "./dist/resolvers/react.d.ts",
-      "import": "./src/resolvers/react.ts"
+      "import": "./dist/resolvers/react.js"
+    },
+    "./resolvers/react-styles": {
+      "types": "./dist/resolvers/react-styles.d.ts",
+      "import": "./dist/resolvers/react-styles.js"
     },
     "./recipes/*": {
       "types": "./dist/recipes/*.d.ts",
-      "import": "./src/recipes/*.ts"
+      "import": "./dist/recipes/*.js"
     },
     "./utils": {
       "types": "./dist/utils/token-classification.d.ts",
-      "import": "./src/utils/token-classification.ts"
+      "import": "./dist/utils/token-classification.js"
     }
   },
   "files": [

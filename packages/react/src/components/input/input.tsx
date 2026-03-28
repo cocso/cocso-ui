@@ -1,15 +1,14 @@
 "use client";
 
+import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
 import { Field, useField } from "../field";
 import styles from "./input.module.css";
-import { getStyles } from "./input.styles";
 
-export type { InputSize } from "./input.styles";
-
-import type { InputSize } from "./input.styles";
+export type InputSize = "large" | "medium" | "small" | "x-small";
 
 export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   description?: string;
@@ -42,7 +41,7 @@ export function Input({
 
   const style = {
     ..._style,
-    ...getStyles(size),
+    ...resolveStyleMap(inputRecipe, { size }),
   } as CSSProperties;
 
   const inputEl = (
