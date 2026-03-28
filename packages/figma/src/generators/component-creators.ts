@@ -50,20 +50,29 @@ export function createComponentFromSpec(
 
   const bgColor = spec.bgColor ?? spec.fills;
   if (bgColor) {
-    setFill(component, bgColor);
+    const bgRef = spec._tokenRefs?.bgColor ?? spec._tokenRefs?.fills;
+    setFill(component, bgColor, 1, bgRef);
   } else {
     component.fills = [];
   }
 
   if (spec.strokeColor && spec.strokeWeight) {
-    component.strokes = [createBoundPaint(spec.strokeColor)];
+    component.strokes = [
+      createBoundPaint(spec.strokeColor, 1, spec._tokenRefs?.strokeColor),
+    ];
     component.strokeWeight = spec.strokeWeight;
   }
 
   const textColor = spec.fontColor ?? COLORS.neutral900;
   const fontSize = spec.fontSize ?? 14;
   const fontWeight = spec.fontWeight ?? 500;
-  const text = createTextNode(label, fontSize, fontWeight, textColor);
+  const text = createTextNode(
+    label,
+    fontSize,
+    fontWeight,
+    textColor,
+    spec._tokenRefs?.fontColor
+  );
   component.appendChild(text);
 
   return component;

@@ -38,8 +38,10 @@ function createCheckboxFromSpec(
   const box = figma.createFrame();
   box.name = "box";
   box.resize(boxSize, boxSize);
-  setFill(box, bgColor);
-  box.strokes = [createBoundPaint(borderColor)];
+  setFill(box, bgColor, 1, spec._tokenRefs?.bgColor);
+  box.strokes = [
+    createBoundPaint(borderColor, 1, spec._tokenRefs?.borderColor),
+  ];
   box.strokeWeight = 1;
   box.cornerRadius = radius;
 

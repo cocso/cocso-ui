@@ -52,13 +52,16 @@ function createButtonWithIcon(
 
   const bgColor = spec.bgColor ?? spec.fills;
   if (bgColor) {
-    setFill(component, bgColor);
+    const bgRef = spec._tokenRefs?.bgColor ?? spec._tokenRefs?.fills;
+    setFill(component, bgColor, 1, bgRef);
   } else {
     component.fills = [];
   }
 
   if (spec.strokeColor && spec.strokeWeight) {
-    component.strokes = [createBoundPaint(spec.strokeColor)];
+    component.strokes = [
+      createBoundPaint(spec.strokeColor, 1, spec._tokenRefs?.strokeColor),
+    ];
     component.strokeWeight = spec.strokeWeight;
   }
 
@@ -75,11 +78,23 @@ function createButtonWithIcon(
     const icon = createIcon(ICON_SVGS.arrowLeft, iconSize, hexColor);
     component.appendChild(icon);
     component.appendChild(
-      createTextNode(label, fontSize, fontWeight, textColor)
+      createTextNode(
+        label,
+        fontSize,
+        fontWeight,
+        textColor,
+        spec._tokenRefs?.fontColor
+      )
     );
   } else {
     component.appendChild(
-      createTextNode(label, fontSize, fontWeight, textColor)
+      createTextNode(
+        label,
+        fontSize,
+        fontWeight,
+        textColor,
+        spec._tokenRefs?.fontColor
+      )
     );
     const icon = createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
     component.appendChild(icon);

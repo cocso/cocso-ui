@@ -31,7 +31,13 @@ export function generateLinkSection(container: FrameNode): void {
     component.fills = [];
 
     const linkColor = spec.color ?? COLORS.info500;
-    const text = createTextNode("Link text", 14, 400, linkColor);
+    const text = createTextNode(
+      "Link text",
+      14,
+      400,
+      linkColor,
+      spec._tokenRefs?.color
+    );
     if (variantValue === "inline") {
       text.textDecoration = "UNDERLINE";
     }
@@ -54,7 +60,13 @@ export function generateLinkSection(container: FrameNode): void {
   extComponent.itemSpacing = 2;
   extComponent.fills = [];
 
-  const extText = createTextNode("External link", 14, 400, extColor);
+  const extText = createTextNode(
+    "External link",
+    14,
+    400,
+    extColor,
+    externalSpec._tokenRefs?.color
+  );
   extText.textDecoration = "UNDERLINE";
   extComponent.appendChild(extText);
   const extIcon = createIcon(ICON_SVGS.externalLink, 14, rgbToHex(extColor));

@@ -24,9 +24,27 @@ export async function loadColorVariables(): Promise<void> {
   }
 }
 
-export function createBoundPaint(color: RGB, opacity = 1): SolidPaint {
-  const tokenName = rgbToTokenName.get(rgbKey(color));
+export function createBoundPaint(
+  color: RGB,
+  opacity = 1,
+  tokenRef?: string
+): SolidPaint {
   const paint: SolidPaint = { type: "SOLID" as const, color, opacity };
+
+  if (tokenRef && variableCache) {
+    const fullName = tokenRef.startsWith("color/")
+      ? tokenRef
+      : `color/${tokenRef}`;
+    const variable = variableCache.get(fullName);
+    if (variable) {
+      return figma.variables.setBoundVariableForPaint(paint, "color", variable);
+    }
+    console.warn(
+      `[cocso-ui] Variable not found for tokenRef: ${tokenRef} (${fullName})`
+    );
+  }
+
+  const tokenName = rgbToTokenName.get(rgbKey(color));
   if (tokenName && variableCache) {
     const variable = variableCache.get(tokenName);
     if (variable) {
@@ -99,13 +117,14 @@ export function createTextNode(
   content: string,
   fontSize: number,
   fontWeight: number,
-  color: RGB
+  color: RGB,
+  tokenRef?: string
 ): TextNode {
   const text = figma.createText();
   text.fontName = { family: "Pretendard", style: getFontStyle(fontWeight) };
   text.characters = content;
   text.fontSize = fontSize;
-  text.fills = [createBoundPaint(color)];
+  text.fills = [createBoundPaint(color, 1, tokenRef)];
   return text;
 }
 
@@ -271,17 +290,19 @@ export function applyInputEffects(
 export function setFill(
   node: MinimalFillsMixin,
   color: RGB,
-  opacity = 1
+  opacity = 1,
+  tokenRef?: string
 ): void {
-  node.fills = [createBoundPaint(color, opacity)];
+  node.fills = [createBoundPaint(color, opacity, tokenRef)];
 }
 
 export function setStroke(
   node: MinimalStrokesMixin & GeometryMixin,
   color: RGB,
-  weight = 1
+  weight = 1,
+  tokenRef?: string
 ): void {
-  node.strokes = [createBoundPaint(color)];
+  node.strokes = [createBoundPaint(color, 1, tokenRef)];
   node.strokeWeight = weight;
 }
 

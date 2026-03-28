@@ -46,11 +46,17 @@ export function generateStockQuantityStatusSection(container: FrameNode): void {
       const indicator = figma.createEllipse();
       indicator.name = "dot";
       indicator.resize(12, 12);
-      setFill(indicator, textColor);
+      setFill(indicator, textColor, 1, spec._tokenRefs?.color);
       indicatorFrame.appendChild(indicator);
       component.appendChild(indicatorFrame);
 
-      const text = createTextNode(groupKey, 14, 400, textColor);
+      const text = createTextNode(
+        groupKey,
+        14,
+        400,
+        textColor,
+        spec._tokenRefs?.color
+      );
       component.appendChild(text);
       row.appendChild(component);
     }
