@@ -49,6 +49,7 @@ Layer 2 — tailwind4.css  @theme { --color-white: var(--cocso-color-white); }
 ecosystem/baseframe/
 ├── src/
 │   ├── cli/index.ts              # CLI entry (yargs commands)
+│   ├── utils/                    # Shared utility functions
 │   └── core/
 │       ├── builders/
 │       │   ├── utils/naming.ts   # Shared createVarName utility
