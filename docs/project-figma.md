@@ -27,18 +27,74 @@ Figma Plugin (TypeScript). Build output targets ES2017 IIFE for the Figma sandbo
 - Non-destructive upsert: create new variables, update existing, never delete.
 - Token categories: color (HEX/RGBA), spacing, radius, font-size, font-weight, z-index, shadow primitives.
 - Composite shadow detection and skip reporting.
+- Component generation: recipe-driven and spec-driven Figma component generation for all React components (Badge, Button, Checkbox, Dialog, Input, Link, Pagination, Radio, Select, Spinner, StockQuantityStatus, Switch, Typography).
+- Component spec extraction: browser-based extraction of component specs from Storybook for spec-driven generation.
+- Component preview catalog: Vite-based preview app (`catalog/`) for visual verification of generated components.
 - Unit tests for pure function layer (97%+ coverage).
 
 ## Out of Scope
 
 - Figma Variable Alias (semantic → primitive reference preservation) — planned for Phase 2.
 - Composite shadow tokens as Figma Effect Styles — planned for Phase 2.
-- Component generation in Figma — planned for Phase 2.
 - Dark mode / multi-mode support — planned for Phase 2 when collections.yaml adds modes.
 - Figma REST API integration (Enterprise-only for Variables write).
 - npm publishing (package is `private: true`).
 
 ## Architecture
+
+### Source Structure
+
+```
+packages/figma/
+├── scripts/
+│   ├── generate-tokens.ts       # YAML → FigmaTokenData JSON
+│   ├── extract-components.ts    # Browser-based component spec extraction
+│   └── browser-extract.js       # Puppeteer extraction helper
+├── src/
+│   ├── core/                    # Pure function layer (token sync)
+│   │   ├── token-converter.ts   # JSON → Figma params
+│   │   ├── color-converter.ts   # Color validation
+│   │   └── variable-creator.ts  # Figma Variable upsert
+│   ├── generators/              # Component generation
+│   │   ├── index.ts             # Generator barrel export
+│   │   ├── component-registry.ts # Component registry
+│   │   ├── component-creators.ts # Component creation helpers
+│   │   ├── recipe-generator.ts  # Recipe-driven generation
+│   │   ├── recipe-resolver.ts   # Recipe → Figma property resolution
+│   │   ├── recipe-utils.ts      # Recipe utility functions
+│   │   ├── spec-generator.ts    # Spec-driven generation
+│   │   ├── from-extracted.ts    # Generation from extracted specs
+│   │   ├── shared.ts            # Shared generator utilities
+│   │   ├── spinner.ts           # Spinner-specific generator
+│   │   └── components/          # Per-component generators
+│   │       ├── badge.ts
+│   │       ├── button.ts
+│   │       ├── checkbox.ts
+│   │       ├── dialog.ts
+│   │       ├── input.ts
+│   │       ├── link.ts
+│   │       ├── pagination.ts
+│   │       ├── radio.ts
+│   │       ├── select.ts
+│   │       ├── spinner.ts
+│   │       ├── stock-quantity-status.ts
+│   │       ├── switch.ts
+│   │       └── typography.ts
+│   ├── generated/               # Pre-build outputs (gitignored)
+│   │   ├── tokens.json          # FigmaTokenData
+│   │   └── component-specs.json # Extracted component specs
+│   ├── types/                   # Type definitions
+│   ├── plugin/                  # Figma Plugin controller
+│   ├── ui/                      # Figma Plugin UI
+│   └── __tests__/               # Unit tests
+├── catalog/                     # Vite preview app for component verification
+│   ├── components.tsx
+│   ├── index.html
+│   ├── main.tsx
+│   ├── globals.css
+│   └── vite.config.ts
+└── package.json
+```
 
 ### Pre-build Boundary
 
@@ -58,14 +114,22 @@ Figma Variables
 - **Plugin runtime** (`src/plugin/controller.ts`): Loads inlined JSON, converts to Figma Variable creation parameters, performs non-destructive upsert via Figma Plugin API.
 - **Plugin UI** (`src/ui/index.html`): Plain HTML/CSS/JS. Displays sync button, progress, results, and skipped token report.
 
+### Component Generation
+
+Two generation strategies:
+- **Recipe-driven** (`recipe-generator.ts`): Components with recipes (Badge, Button, Checkbox, Input, Link, Pagination, Radio, Select, Spinner, StockQuantityStatus, Switch, Typography) use `resolveForFigma()` from `@cocso-ui/recipe`.
+- **Spec-driven** (`from-extracted.ts`, `spec-generator.ts`): Components without recipes (Accordion, Dialog, Tab, Tooltip, etc.) use specs extracted from Storybook via `scripts/extract-components.ts`.
+
 ### Module Responsibilities
 
 | Module | Responsibility | Figma API dependency |
 |--------|---------------|---------------------|
 | `scripts/generate-tokens.ts` | YAML → JSON conversion | None |
+| `scripts/extract-components.ts` | Component spec extraction from Storybook | None |
 | `src/core/token-converter.ts` | JSON → Figma params (pure function) | None |
 | `src/core/color-converter.ts` | Color validation (pure function) | None |
 | `src/core/variable-creator.ts` | Figma Variable upsert | Yes |
+| `src/generators/` | Component Figma node generation | Yes |
 | `src/plugin/controller.ts` | Message handling, orchestration | Yes |
 
 ## Interfaces
@@ -128,7 +192,7 @@ The pre-build output conforms to `src/types/token-schema.ts`:
 
 ## Roadmap
 
-### Phase 1 (current)
+### Phase 1 (done)
 
 - [x] Package scaffolding and monorepo integration
 - [x] Pre-build token generator with independent parser
@@ -137,11 +201,16 @@ The pre-build output conforms to `src/types/token-schema.ts`:
 - [x] Unit tests (97%+ coverage on pure function layer)
 - [x] Documentation
 
-### Phase 2 (planned)
+### Phase 2 (done)
+
+- [x] Component generation for all React components (recipe-driven + spec-driven)
+- [x] Component spec extraction from Storybook
+- [x] Component preview catalog
+
+### Phase 3 (planned)
 
 - [ ] Figma Variable Alias for semantic → primitive token references
 - [ ] Composite shadow tokens as Figma Effect Styles
-- [ ] Component generation (Button, Badge, Input, Typography, etc.)
 - [ ] Dark mode support (multi-mode collections)
 
 ## Open Questions

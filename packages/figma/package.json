@@ -5,6 +5,7 @@
   "scripts": {
     "generate": "tsx scripts/generate-tokens.ts",
     "extract": "tsx scripts/extract-components.ts",
+    "golden-matrix": "pnpm generate && tsx scripts/golden-matrix.ts",
     "prebuild": "pnpm generate",
     "build": "node build.js",
     "lint": "biome check .",

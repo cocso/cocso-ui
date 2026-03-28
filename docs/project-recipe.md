@@ -25,6 +25,7 @@ TypeScript (pure data — zero runtime dependencies)
 - `defineRecipe()` API with type-safe variant/slot/state/compoundVariant definitions.
 - `StyleValue` type system: `ColorTokenRef`, `RadiusTokenRef`, `SpacingTokenRef`, `FontWeightRef`, `CSSLiteral`, `NumericValue`, `CompoundBorder`, `ComponentRef`.
 - `resolveForReact()`: recipe + variants → CSS custom property map.
+- `PropertyCategory` type system + `categoryOf()`: centralized property key → semantic category mapping for resolvers.
 - Component recipes for: Button, Badge, Input, Select, Link, StockQuantityStatus, Checkbox, Switch, Spinner, RadioGroup, Dialog, Typography, Pagination.
 
 ## Out of Scope
@@ -40,22 +41,28 @@ TypeScript (pure data — zero runtime dependencies)
 @cocso-ui/recipe (upstream, zero deps)
 ├── src/
 │   ├── define-recipe.ts         — defineRecipe() identity function
-│   ├── types.ts                 — StyleValue, RecipeDefinition, TokenCatalog
+│   ├── types.ts                 — StyleValue, RecipeDefinition, PropertyCategory
 │   ├── index.ts                 — barrel exports
+│   ├── utils/
+│   │   ├── token-classification.ts  — isColorToken, isCompoundBorder, FONT_WEIGHT_MAP
+│   │   └── property-categories.ts   — categoryOf() property key → semantic category mapping
 │   ├── resolvers/
 │   │   ├── react.ts             — resolveForReact() (camelCase keys, used by figma and internally)
 │   │   └── react-styles.ts      — resolveStyleMap() (kebab-case keys + state suffixes, used by React components)
 │   └── recipes/
-│       ├── button.recipe.ts
 │       ├── badge.recipe.ts
-│       ├── input.recipe.ts
-│       ├── select.recipe.ts
-│       ├── link.recipe.ts
-│       ├── stock-quantity-status.recipe.ts
+│       ├── button.recipe.ts
 │       ├── checkbox.recipe.ts
-│       ├── switch.recipe.ts
+│       ├── dialog.recipe.ts
+│       ├── input.recipe.ts
+│       ├── link.recipe.ts
+│       ├── pagination.recipe.ts
+│       ├── radio-group.recipe.ts
+│       ├── select.recipe.ts
 │       ├── spinner.recipe.ts
-│       └── radio-group.recipe.ts
+│       ├── stock-quantity-status.recipe.ts
+│       ├── switch.recipe.ts
+│       └── typography.recipe.ts
 ```
 
 ### Dependency Direction
@@ -93,11 +100,25 @@ Returns `Record<string, string>` — CSS custom property map with kebab-case key
 ### Recipe exports pattern
 
 ```
-@cocso-ui/recipe                          — defineRecipe, types
-@cocso-ui/recipe/resolvers/react          — resolveForReact
-@cocso-ui/recipe/resolvers/react-styles   — resolveStyleMap
-@cocso-ui/recipe/recipes/*                — individual component recipes
+@cocso-ui/recipe                              — defineRecipe, types (incl. PropertyCategory)
+@cocso-ui/recipe/resolvers/react              — resolveForReact
+@cocso-ui/recipe/resolvers/react-styles       — resolveStyleMap
+@cocso-ui/recipe/utils                        — isColorToken, isCompoundBorder, FONT_WEIGHT_MAP
+@cocso-ui/recipe/utils/property-categories    — categoryOf
+@cocso-ui/recipe/recipes/*                    — individual component recipes
 ```
+
+### PropertyCategory — Property Key Classification
+
+`categoryOf(key)` determines how resolvers interpret a property's value. Resolution order:
+
+1. **Explicit map** — `PROPERTY_CATEGORIES` in `property-categories.ts`. Currently registered:
+   - `color`: bgColor, fontColor, bladeColor, borderColor, fillColor, checkedBgColor, checkedThumbColor, switchBgColor
+   - `radius`: borderRadius, bladeRadius
+2. **Heuristic** — key contains "color" (case-insensitive) → `color`; key contains "radius" → `radius`
+3. **Fallback** → `unknown` (value passed through as-is)
+
+**When to register a new property**: only when the name does NOT contain "color" or "radius" but the value should be resolved as a token of that type. The heuristic covers most cases automatically.
 
 ## Storage
 
@@ -115,7 +136,7 @@ Not applicable.
 
 ```bash
 pnpm --filter @cocso-ui/recipe build    # tsc --project tsconfig.build.json
-pnpm --filter @cocso-ui/recipe test     # vitest run (104 tests, includes react-styles snapshot tests)
+pnpm --filter @cocso-ui/recipe test     # vitest run (131 tests, includes react-styles snapshots + property-categories)
 pnpm --filter @cocso-ui/recipe lint     # biome check
 ```
 
@@ -130,6 +151,44 @@ pnpm --filter @cocso-ui/react test      # 365 tests (component behavior tests; c
 - **Phase 2 (planned)**: Typography recipe responsive sizing support (base-size-only currently; responsive breakpoints deferred).
 - **Phase 3 (planned)**: Auto-generate `TokenCatalog` from baseframe YAML to prevent token name drift.
 - **Phase 4 (potential)**: Recipe-driven Storybook arg generation.
+
+## Figma Parity — Golden Matrix Results
+
+Golden matrix diagnostic compares `resolveForReact` vs `resolveForFigma` outputs across all variant combinations for every recipe. Run with `pnpm --filter @cocso-ui/figma golden-matrix`.
+
+### Summary (13 recipes, 237 combinations, 1629 property comparisons)
+
+| Recipe | Phase | Combos | VALUE_MISMATCH | Result |
+|--------|-------|-------:|---------------:|--------|
+| button | target | 96 | 0 | PASS |
+| badge | target | 63 | 0 | PASS |
+| input | target | 4 | 0 | PASS |
+| select | extended | 4 | 0 | PASS |
+| link | extended | 3 | 0 | PASS |
+| checkbox | extended | 9 | 0 | PASS |
+| switch | extended | 15 | 0 | PASS |
+| radio-group | extended | 3 | 0 | PASS |
+| spinner | extended | 21 | 0 | PASS |
+| typography | extended | 10 | 0 | PASS |
+| dialog | extended | 3 | 0 | PASS |
+| pagination | extended | 3 | 0 | PASS |
+| stock-quantity-status | extended | 3 | 0 | PASS |
+
+### Known Difference Patterns
+
+- **SILENT_DROP** (bgColor `transparent`): outline/similar variants — Figma drops transparent, which is semantically correct (no fill).
+- **COMPOUND_SPLIT** (border): CompoundBorder decomposes into strokeColor + strokeWeight. borderStyle not preserved in Figma.
+- **STATE_UNSUPPORTED**: `resolveForFigma` now supports `state` option (Phase 2). Recipes with states: button (hover, active), link (hover, active).
+
+### Designer Verification Checklist
+
+Phase 3 success gate requires designer sign-off on the 3 target recipes (Button, Badge, Input):
+
+- [ ] Button: all 8 variants, 4 sizes, 3 shapes match React rendering in Figma
+- [ ] Badge: all 7 variants, 3 sizes, 3 shapes match React rendering in Figma
+- [ ] Input: all 4 sizes match React rendering in Figma
+- [ ] Figma hover/active states (Button) correctly reflect state-specific bgColor overrides
+- [ ] Token names preserved in `_tokenRefs` are accessible in Figma plugin output
 
 ## Open Questions
 

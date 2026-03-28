@@ -35,9 +35,13 @@ Storybook 10 + Vite 7 (TypeScript), React 19.
 ```
 apps/storybook/
 ├── .storybook/          # Storybook configuration (main.ts, preview.ts)
-├── src/stories/         # Story files per component
+├── globals.css          # Global styles for Storybook preview
 └── storybook-static/    # Static build output (gitignored)
 ```
+
+Story files are colocated with their components, not in this app:
+- `packages/react/src/components/<name>/<name>.stories.tsx` — component stories.
+- `packages/react-icons/src/icons.stories.tsx` — icon catalog story.
 
 Depends on workspace packages:
 - `@cocso-ui/react`

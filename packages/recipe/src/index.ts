@@ -6,6 +6,7 @@ export type {
   CompoundVariant,
   CSSLiteral,
   FontWeightRef,
+  PropertyCategory,
   RadiusTokenRef,
   RecipeDefinition,
   SlotStyles,

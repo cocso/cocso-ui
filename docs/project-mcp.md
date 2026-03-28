@@ -43,9 +43,12 @@ ecosystem/mcp/
 ├── src/
 │   ├── config.ts              # Stable endpoint and package constants
 │   ├── registry.ts            # llms.txt parser and component registry cache
+│   ├── cache.ts               # LRU-like cache with TTL
 │   ├── docs.ts                # Markdown document fetch helpers
 │   ├── guardrails.ts          # Usage and anti-duplication guidance
+│   ├── logger.ts              # Structured logging to stderr
 │   ├── tools.ts               # MCP tool registration
+│   ├── types.ts               # Shared type definitions
 │   ├── server.ts              # Reusable MCP server factory
 │   └── index.ts               # MCP server bootstrap (stdio transport)
 ├── package.json

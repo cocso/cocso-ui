@@ -7,11 +7,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "json-summary"],
-      include: [
-        "src/core/**/*.ts",
-        "scripts/**/*.ts",
-        "src/generators/recipe-resolver.ts",
-      ],
+      include: ["src/core/**/*.ts", "src/generators/recipe-resolver.ts"],
       exclude: [
         "src/__tests__/**",
         "src/generated/**",

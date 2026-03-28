@@ -4,6 +4,7 @@ import type {
   StyleValue,
 } from "@cocso-ui/recipe";
 import { isColorToken, isCompoundBorder } from "@cocso-ui/recipe/utils";
+import { categoryOf } from "@cocso-ui/recipe/utils/property-categories";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
@@ -11,6 +12,7 @@ const data = tokenData as FigmaTokenData;
 const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
 export interface FigmaNodeSpec {
+  _tokenRefs?: Record<string, string>;
   bgColor?: RGB;
   bladeColor?: RGB;
   bladeHeight?: number;
@@ -53,6 +55,10 @@ export interface FigmaNodeSpec {
   width?: number;
 }
 
+export interface FigmaResolveOptions {
+  state?: string;
+}
+
 type MutableSpec = Record<string, unknown>;
 
 export function resolveColorToken(name: string): RGB {
@@ -87,44 +93,64 @@ export function resolveRadiusToken(name: string): number {
   return 0;
 }
 
-const COLOR_KEYS = new Set([
-  "bgColor",
-  "fontColor",
-  "bladeColor",
-  "borderColor",
-  "fillColor",
-]);
-
-function isColorKey(key: string): boolean {
-  return COLOR_KEYS.has(key) || key.toLowerCase().includes("color");
-}
-
-function isRadiusKey(key: string): boolean {
-  return key === "borderRadius" || key.toLowerCase().includes("radius");
-}
-
 function applyStyleValue(
   spec: MutableSpec,
   key: string,
-  value: StyleValue
+  value: StyleValue,
+  tokenRefs: Record<string, string>
 ): void {
   if (isCompoundBorder(value)) {
     spec.strokeColor = resolveColorToken(value.color);
     spec.strokeWeight = value.width;
+    tokenRefs.strokeColor = value.color;
+    Reflect.deleteProperty(tokenRefs, "strokeWeight");
     return;
   }
 
   if (typeof value === "number") {
     spec[key] = value;
+    Reflect.deleteProperty(tokenRefs, key);
     return;
   }
 
   if (typeof value === "string") {
-    applyStringValue(spec, key, value);
+    applyStringValue(spec, key, value, tokenRefs);
   }
 }
 
-function applyStringValue(spec: MutableSpec, key: string, value: string): void {
+function applyStringValue(
+  spec: MutableSpec,
+  key: string,
+  value: string,
+  tokenRefs: Record<string, string>
+): void {
+  const category = categoryOf(key);
+
+  if (category === "radius") {
+    applyRadiusValue(spec, key, value, tokenRefs);
+    return;
+  }
+
+  if (category === "color") {
+    if (
+      value === "transparent" ||
+      value === "currentColor" ||
+      value === "none" ||
+      value === "inherit"
+    ) {
+      Reflect.deleteProperty(tokenRefs, key);
+      return;
+    }
+    if (isColorToken(value)) {
+      spec[key] = resolveColorToken(value);
+      tokenRefs[key] = value;
+      return;
+    }
+    spec[key] = value;
+    Reflect.deleteProperty(tokenRefs, key);
+    return;
+  }
+
   if (
     value === "transparent" ||
     value === "currentColor" ||
@@ -134,30 +160,31 @@ function applyStringValue(spec: MutableSpec, key: string, value: string): void {
     return;
   }
 
-  if (isRadiusKey(key)) {
-    applyRadiusValue(spec, key, value);
-    return;
-  }
-
-  if (isColorKey(key) && isColorToken(value)) {
-    spec[key] = resolveColorToken(value);
-    return;
-  }
-
   spec[key] = value;
 }
 
-function applyRadiusValue(spec: MutableSpec, key: string, value: string): void {
+function applyRadiusValue(
+  spec: MutableSpec,
+  key: string,
+  value: string,
+  tokenRefs: Record<string, string>
+): void {
   if (value === "100%") {
     spec[key] = 1000;
+    Reflect.deleteProperty(tokenRefs, key);
   } else if (value.startsWith("radius-")) {
     spec[key] = resolveRadiusToken(value);
+    tokenRefs[key] = value;
   }
 }
 
-function applySlotStyles(spec: MutableSpec, slotStyles: SlotStyles): void {
+function applySlotStyles(
+  spec: MutableSpec,
+  slotStyles: SlotStyles,
+  tokenRefs: Record<string, string>
+): void {
   for (const [key, value] of Object.entries(slotStyles)) {
-    applyStyleValue(spec, key, value);
+    applyStyleValue(spec, key, value, tokenRefs);
   }
 }
 
@@ -167,7 +194,8 @@ function applyVariantStyles<
 >(
   spec: MutableSpec,
   recipe: RecipeDefinition<V, S>,
-  merged: Record<string, unknown>
+  merged: Record<string, unknown>,
+  tokenRefs: Record<string, string>
 ): void {
   for (const [dimension, variantValue] of Object.entries(merged)) {
     const dimensionDef = recipe.variants[dimension as keyof V];
@@ -181,7 +209,7 @@ function applyVariantStyles<
     for (const slot of recipe.slots) {
       const slotStyles = (variantStyles as Record<string, SlotStyles>)[slot];
       if (slotStyles) {
-        applySlotStyles(spec, slotStyles);
+        applySlotStyles(spec, slotStyles, tokenRefs);
       }
     }
   }
@@ -206,7 +234,8 @@ function applyCompoundVariants<
 >(
   spec: MutableSpec,
   recipe: RecipeDefinition<V, S>,
-  merged: Record<string, unknown>
+  merged: Record<string, unknown>,
+  tokenRefs: Record<string, string>
 ): void {
   if (!recipe.compoundVariants) {
     return;
@@ -221,7 +250,7 @@ function applyCompoundVariants<
       for (const slot of recipe.slots) {
         const slotStyles = cv.styles[slot];
         if (slotStyles) {
-          applySlotStyles(spec, slotStyles);
+          applySlotStyles(spec, slotStyles, tokenRefs);
         }
       }
     }
@@ -231,14 +260,55 @@ function applyCompoundVariants<
 function applyBaseStyles<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
->(spec: MutableSpec, recipe: RecipeDefinition<V, S>): void {
+>(
+  spec: MutableSpec,
+  recipe: RecipeDefinition<V, S>,
+  tokenRefs: Record<string, string>
+): void {
   if (!recipe.base) {
     return;
   }
   for (const slot of recipe.slots) {
     const slotStyles = recipe.base[slot];
     if (slotStyles) {
-      applySlotStyles(spec, slotStyles);
+      applySlotStyles(spec, slotStyles, tokenRefs);
+    }
+  }
+}
+
+function applyStateOverrides<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(
+  spec: MutableSpec,
+  recipe: RecipeDefinition<V, S>,
+  merged: Record<string, unknown>,
+  state: string,
+  tokenRefs: Record<string, string>
+): void {
+  const stateMap = recipe.states?.[state];
+  if (!stateMap) {
+    return;
+  }
+  for (const [dimension, variantValue] of Object.entries(merged)) {
+    const dimensionMap = (
+      stateMap as Record<
+        string,
+        Record<string, Partial<Record<string, SlotStyles>>> | undefined
+      >
+    )[dimension];
+    if (!dimensionMap) {
+      continue;
+    }
+    const stateStyles = dimensionMap[variantValue as string];
+    if (!stateStyles) {
+      continue;
+    }
+    for (const slot of recipe.slots) {
+      const slotStyles = (stateStyles as Record<string, SlotStyles>)[slot];
+      if (slotStyles) {
+        applySlotStyles(spec, slotStyles, tokenRefs);
+      }
     }
   }
 }
@@ -277,26 +347,41 @@ function normalizeLayoutProps(spec: MutableSpec): void {
 /**
  * Resolve a recipe + variant selection into a flat Figma node spec.
  *
- * Applies styles in priority order: base → variant styles → compound variants.
+ * Applies styles in priority order: base → variant styles → compound variants → state overrides.
  * Compound variants win on conflict (matching the React resolver behavior).
+ * When `options.state` is set, state-specific overrides are applied on top.
+ *
+ * The returned spec includes `_tokenRefs` mapping each resolved property key
+ * to its original design token name (e.g., `{ bgColor: "primary-950" }`).
  */
 export function resolveForFigma<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   recipe: RecipeDefinition<V, S>,
-  variants: { [K in keyof V]?: keyof V[K] }
+  variants: { [K in keyof V]?: keyof V[K] },
+  options?: FigmaResolveOptions
 ): FigmaNodeSpec {
   const spec: MutableSpec = {};
+  const tokenRefs: Record<string, string> = {};
   const merged = { ...recipe.defaultVariants, ...variants } as Record<
     string,
     unknown
   >;
 
-  applyBaseStyles(spec, recipe);
-  applyVariantStyles(spec, recipe, merged);
-  applyCompoundVariants(spec, recipe, merged);
+  applyBaseStyles(spec, recipe, tokenRefs);
+  applyVariantStyles(spec, recipe, merged, tokenRefs);
+  applyCompoundVariants(spec, recipe, merged, tokenRefs);
+
+  if (options?.state) {
+    applyStateOverrides(spec, recipe, merged, options.state, tokenRefs);
+  }
+
   normalizeLayoutProps(spec);
+
+  if (Object.keys(tokenRefs).length > 0) {
+    spec._tokenRefs = Object.freeze(tokenRefs);
+  }
 
   return spec as FigmaNodeSpec;
 }

@@ -78,6 +78,14 @@ export type StyleValue =
 /** Map of CSS custom property names to their assigned style token values for a single slot. */
 export type SlotStyles = Record<string, StyleValue>;
 
+/** Semantic category for a recipe style property key, used by resolvers to determine value interpretation. */
+export type PropertyCategory =
+  | "color"
+  | "radius"
+  | "dimension"
+  | "string"
+  | "unknown";
+
 export interface CompoundVariant<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
