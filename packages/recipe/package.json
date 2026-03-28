@@ -39,6 +39,11 @@
       "types": "./dist/utils/token-classification.d.ts",
       "import": "./dist/utils/token-classification.js",
       "default": "./dist/utils/token-classification.js"
+    },
+    "./utils/property-categories": {
+      "types": "./dist/utils/property-categories.d.ts",
+      "import": "./dist/utils/property-categories.js",
+      "default": "./dist/utils/property-categories.js"
     }
   },
   "files": [
