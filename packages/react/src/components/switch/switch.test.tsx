@@ -85,7 +85,7 @@ describe("Switch", () => {
         ""
       );
       expect(
-        wrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+        wrapper.style.getPropertyValue("--cocso-switch-thumb-size")
       ).not.toBe("");
     });
 
@@ -101,9 +101,9 @@ describe("Switch", () => {
         mediumWrapper.style.getPropertyValue("--cocso-switch-height")
       ).not.toBe(smallWrapper.style.getPropertyValue("--cocso-switch-height"));
       expect(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
       ).not.toBe(
-        smallWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+        smallWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
       );
     });
   });
@@ -121,9 +121,9 @@ describe("Switch", () => {
         largeWrapper.style.getPropertyValue("--cocso-switch-height")
       ).not.toBe(mediumWrapper.style.getPropertyValue("--cocso-switch-height"));
       expect(
-        largeWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+        largeWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
       ).not.toBe(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-width")
+        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
       );
     });
   });

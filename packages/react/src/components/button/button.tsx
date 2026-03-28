@@ -69,8 +69,8 @@ export function Button({
   );
   const style = {
     ..._style,
-    "--cocso-button-border": "none",
     ...resolved,
+    "--cocso-button-border": resolved["--cocso-button-border"] ?? "none",
     "--cocso-button-font-weight": fontWeightToken[weight],
   } as CSSProperties;
 

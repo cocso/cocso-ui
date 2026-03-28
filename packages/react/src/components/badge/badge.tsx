@@ -3,7 +3,6 @@ import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { ResponsiveFontSize } from "../../token";
-import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./badge.module.css";
 
@@ -24,16 +23,6 @@ export interface BadgeProps extends ComponentProps<"div"> {
   size?: BadgeSize;
   variant?: BadgeVariant;
 }
-
-const BADGE_FONT_COLORS: Record<BadgeVariant, string> = {
-  primary: colors.white,
-  secondary: colors.neutral600,
-  success: colors.success600,
-  error: colors.danger600,
-  warning: colors.warning600,
-  info: colors.info600,
-  outline: colors.neutral950,
-};
 
 const BADGE_FONT_SIZES: Record<BadgeSize, number> = {
   large: 14,
@@ -65,7 +54,7 @@ export function Badge({
     ...resolved,
   } as CSSProperties;
 
-  const fontColor = BADGE_FONT_COLORS[variant];
+  const fontColor = resolved["--cocso-badge-font-color"];
   const fontSize = BADGE_FONT_SIZES[size];
 
   return (

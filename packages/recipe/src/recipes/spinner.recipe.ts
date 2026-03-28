@@ -50,3 +50,15 @@ export const spinnerRecipe = defineRecipe({
 
 export type SpinnerVariant = keyof typeof spinnerRecipe.variants.variant;
 export type SpinnerSize = keyof typeof spinnerRecipe.variants.size;
+
+export interface SpinnerGeometry {
+  bladeHeight: number;
+  bladeRadius: number;
+  blades: number;
+  bladeWidth: number;
+  output: number;
+}
+
+export function getSpinnerGeometry(size: SpinnerSize): SpinnerGeometry {
+  return spinnerRecipe.variants.size[size].root as unknown as SpinnerGeometry;
+}

@@ -20,24 +20,6 @@ export type SwitchVariant =
 
 const UNCHECKED_BG = colors.neutral100;
 
-const SWITCH_WIDTH: Record<SwitchSize, string> = {
-  large: "40px",
-  medium: "36px",
-  small: "32px",
-};
-
-const SWITCH_HEIGHT: Record<SwitchSize, string> = {
-  large: "22px",
-  medium: "20px",
-  small: "18px",
-};
-
-const THUMB_SIZE: Record<SwitchSize, string> = {
-  large: "18px",
-  medium: "16px",
-  small: "14px",
-};
-
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
   id?: string;
@@ -63,17 +45,11 @@ export function Switch({
   const generatedId = useId();
   const id = _id ?? generatedId;
 
-  const resolved = resolveStyleMap(switchRecipe, { variant });
+  const resolved = resolveStyleMap(switchRecipe, { variant, size });
   const style = {
     ..._style,
-    "--cocso-switch-width": SWITCH_WIDTH[size],
-    "--cocso-switch-height": SWITCH_HEIGHT[size],
-    "--cocso-switch-thumb-width": THUMB_SIZE[size],
-    "--cocso-switch-thumb-height": THUMB_SIZE[size],
-    "--cocso-switch-thumb-offset": "2px",
     "--cocso-switch-bg-color": UNCHECKED_BG,
-    "--cocso-switch-checked-bg-color":
-      resolved["--cocso-switch-checked-bg-color"],
+    ...resolved,
   } as CSSProperties;
 
   return (
