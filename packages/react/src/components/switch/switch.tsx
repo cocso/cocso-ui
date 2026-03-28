@@ -1,23 +1,24 @@
 "use client";
 
+import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
 import { Switch as SwitchBase } from "../../primitives/switch";
+import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./switch.module.css";
-import {
-  getCheckedColor,
-  getSwitchHeight,
-  getSwitchWidth,
-  getThumbOffset,
-  getThumbSize,
-  type SwitchSize,
-  type SwitchVariant,
-  UNCHECKED_BG,
-} from "./switch.styles";
 
-export type { SwitchSize, SwitchVariant } from "./switch.styles";
+export type SwitchSize = "large" | "medium" | "small";
+export type SwitchVariant =
+  | "primary"
+  | "success"
+  | "error"
+  | "warning"
+  | "info";
+
+const UNCHECKED_BG = colors.neutral100;
 
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
@@ -44,15 +45,11 @@ export function Switch({
   const generatedId = useId();
   const id = _id ?? generatedId;
 
+  const resolved = resolveStyleMap(switchRecipe, { variant, size });
   const style = {
     ..._style,
-    "--cocso-switch-width": getSwitchWidth(size),
-    "--cocso-switch-height": getSwitchHeight(size),
-    "--cocso-switch-thumb-width": getThumbSize(size),
-    "--cocso-switch-thumb-height": getThumbSize(size),
-    "--cocso-switch-thumb-offset": getThumbOffset(size),
     "--cocso-switch-bg-color": UNCHECKED_BG,
-    "--cocso-switch-checked-bg-color": getCheckedColor(variant),
+    ...resolved,
   } as CSSProperties;
 
   return (

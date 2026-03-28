@@ -1,4 +1,6 @@
 import { ExternalLinkIcon } from "@cocso-ui/react-icons";
+import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { useRender } from "../../primitives/use-render";
@@ -6,7 +8,6 @@ import type { FontWeight, LineHeight } from "../../token";
 import type { TypographyProps } from "../typography";
 import { Typography } from "../typography";
 import styles from "./link.module.css";
-import { getColor, getColorHover } from "./link.styles";
 
 export type LinkSize = "large" | "medium" | "small" | "x-small";
 
@@ -38,8 +39,7 @@ function LinkComponent({
 
   const style = {
     ..._style,
-    "--cocso-link-color": getColor(variant),
-    "--cocso-link-color-hover": getColorHover(variant),
+    ...resolveStyleMap(linkRecipe, { variant }, { states: ["hover"] }),
   } as CSSProperties;
 
   const mergedClassName = cn(

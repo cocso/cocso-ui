@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { getColor, StockQuantityStatus } from "./stock-quantity-status";
+import { StockQuantityStatus } from "./stock-quantity-status";
 
 describe("StockQuantityStatus", () => {
   describe("rendering", () => {
@@ -44,20 +44,6 @@ describe("StockQuantityStatus", () => {
       expect(
         root.style.getPropertyValue("--cocso-stock-quantity-status-color")
       ).toBe(expectedColor);
-    });
-  });
-
-  describe("getColor helper", () => {
-    it('returns info500 for "여유"', () => {
-      expect(getColor("여유")).toBe("var(--cocso-color-info-500)");
-    });
-
-    it('returns success400 for "보통"', () => {
-      expect(getColor("보통")).toBe("var(--cocso-color-success-400)");
-    });
-
-    it('returns danger500 for "부족"', () => {
-      expect(getColor("부족")).toBe("var(--cocso-color-danger-500)");
     });
   });
 

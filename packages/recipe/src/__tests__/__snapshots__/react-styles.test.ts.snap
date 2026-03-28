@@ -1,0 +1,123 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > badgeRecipe default variants 1`] = `
+{
+  "--cocso-badge-bg-color": "var(--cocso-color-neutral-50)",
+  "--cocso-badge-border-radius": "var(--cocso-radius-4)",
+  "--cocso-badge-font-color": "var(--cocso-color-neutral-600)",
+  "--cocso-badge-font-size": "12px",
+  "--cocso-badge-padding": "4px 8px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > buttonRecipe default variants 1`] = `
+{
+  "--cocso-button-bg-color": "var(--cocso-color-primary-950)",
+  "--cocso-button-border-radius": "var(--cocso-radius-4)",
+  "--cocso-button-content-padding": "0 6px",
+  "--cocso-button-font-color": "var(--cocso-color-white)",
+  "--cocso-button-font-size": "14px",
+  "--cocso-button-height": "36px",
+  "--cocso-button-padding-inline": "12px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > checkboxRecipe default variants 1`] = `
+{
+  "--cocso-checkbox-bg-color": "var(--cocso-color-white)",
+  "--cocso-checkbox-border-color": "var(--cocso-color-neutral-100)",
+  "--cocso-checkbox-radius": "var(--cocso-radius-2)",
+  "--cocso-checkbox-size": "16px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > dialogRecipe default variants 1`] = `
+{
+  "--cocso-dialog-bg-color": "var(--cocso-color-white)",
+  "--cocso-dialog-border": "1px solid var(--cocso-color-neutral-100)",
+  "--cocso-dialog-border-radius": "var(--cocso-radius-5)",
+  "--cocso-dialog-height": "260px",
+  "--cocso-dialog-padding-bottom": "20px",
+  "--cocso-dialog-padding-left": "20px",
+  "--cocso-dialog-padding-right": "20px",
+  "--cocso-dialog-padding-top": "20px",
+  "--cocso-dialog-width": "520px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > inputRecipe default variants 1`] = `
+{
+  "--cocso-input-border-radius": "var(--cocso-radius-4)",
+  "--cocso-input-font-size": "14px",
+  "--cocso-input-height": "36px",
+  "--cocso-input-padding-x": "12px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > linkRecipe default variants 1`] = `
+{
+  "--cocso-link-color": "var(--cocso-color-info-500)",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > paginationRecipe default variants 1`] = `
+{
+  "--cocso-pagination-border-radius": "var(--cocso-radius-4)",
+  "--cocso-pagination-font-color": "var(--cocso-color-neutral-900)",
+  "--cocso-pagination-font-size": "14px",
+  "--cocso-pagination-height": "32px",
+  "--cocso-pagination-width": "32px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupRecipe default variants 1`] = `
+{
+  "--cocso-radio-dot-size": "7px",
+  "--cocso-radio-size": "16px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > selectRecipe default variants 1`] = `
+{
+  "--cocso-select-border-radius": "var(--cocso-radius-4)",
+  "--cocso-select-font-size": "14px",
+  "--cocso-select-height": "36px",
+  "--cocso-select-icon-right": "12px",
+  "--cocso-select-min-width": "36px",
+  "--cocso-select-padding-left": "12px",
+  "--cocso-select-padding-right": "38px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe default variants 1`] = `
+{
+  "--cocso-spinner-blade-color": "var(--cocso-color-primary-950)",
+  "--cocso-spinner-blade-height": "5px",
+  "--cocso-spinner-blade-radius": "1px",
+  "--cocso-spinner-blade-width": "2px",
+  "--cocso-spinner-blades": "8px",
+  "--cocso-spinner-output": "16px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > stockQuantityStatusRecipe default variants 1`] = `
+{
+  "--cocso-stock-quantity-status-color": "var(--cocso-color-info-500)",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe default variants 1`] = `
+{
+  "--cocso-switch-checked-bg-color": "var(--cocso-color-primary-950)",
+  "--cocso-switch-height": "20px",
+  "--cocso-switch-thumb-offset": "2px",
+  "--cocso-switch-thumb-size": "16px",
+  "--cocso-switch-width": "36px",
+}
+`;
+
+exports[`resolveStyleMap snapshots for all recipe-aware recipes > typographyRecipe default variants 1`] = `
+{
+  "--cocso-typography-font-size": "16px",
+}
+`;

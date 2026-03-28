@@ -1,17 +1,10 @@
+import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { ResponsiveFontSize } from "../../token";
 import { Typography } from "../typography";
 import styles from "./badge.module.css";
-import {
-  getBackgroundColor,
-  getBorder,
-  getBorderRadius,
-  getFontColor,
-  getFontSize,
-  getPadding,
-  getPaddingY,
-} from "./badge.styles";
 
 export type BadgeSize = "large" | "medium" | "small";
 
@@ -31,6 +24,18 @@ export interface BadgeProps extends ComponentProps<"div"> {
   variant?: BadgeVariant;
 }
 
+const BADGE_FONT_SIZES: Record<BadgeSize, number> = {
+  large: 14,
+  medium: 12,
+  small: 11,
+};
+
+const BADGE_PADDING_Y: Record<BadgeSize, string> = {
+  large: "5px",
+  medium: "4px",
+  small: "3px",
+};
+
 /** Inline badge/tag component with color and variant options. */
 export function Badge({
   ref,
@@ -42,17 +47,15 @@ export function Badge({
   style: _style,
   ...props
 }: BadgeProps) {
+  const resolved = resolveStyleMap(badgeRecipe, { variant, size, shape });
   const style = {
     ..._style,
-    "--cocso-badge-padding": getPadding(size),
-    "--cocso-badge-padding-y": getPaddingY(size),
-    "--cocso-badge-border-radius": getBorderRadius(shape, size),
-    "--cocso-badge-bg-color": getBackgroundColor(variant),
-    "--cocso-badge-border": getBorder(variant),
+    "--cocso-badge-padding-y": BADGE_PADDING_Y[size],
+    ...resolved,
   } as CSSProperties;
 
-  const fontColor = getFontColor(variant);
-  const fontSize = getFontSize(size);
+  const fontColor = resolved["--cocso-badge-font-color"];
+  const fontSize = BADGE_FONT_SIZES[size];
 
   return (
     <div

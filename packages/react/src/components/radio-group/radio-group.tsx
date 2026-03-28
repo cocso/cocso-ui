@@ -1,12 +1,12 @@
+import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import { Radio as RadioBase } from "../../primitives/radio";
 import { RadioGroup as RadioGroupBase } from "../../primitives/radio-group";
 import styles from "./radio-group.module.css";
-import type { RadioSize } from "./radio-group.styles";
-import { sizeVars } from "./radio-group.styles";
 
-export type { RadioSize } from "./radio-group.styles";
+export type RadioSize = keyof typeof radioGroupRecipe.variants.size;
 
 function RadioGroupRoot({
   className,
@@ -24,7 +24,7 @@ function RadioGroupItem({
   return (
     <RadioBase.Root
       className={cn(styles.item, className)}
-      style={{ ...sizeVars[size], ...style }}
+      style={{ ...resolveStyleMap(radioGroupRecipe, { size }), ...style }}
       {...props}
     />
   );

@@ -290,6 +290,9 @@ importers:
       '@cocso-ui/react-icons':
         specifier: workspace:^
         version: link:../react-icons
+      '@cocso-ui/recipe':
+        specifier: workspace:*
+        version: link:../recipe
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -318,9 +321,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.29.0)
-      '@cocso-ui/recipe':
-        specifier: workspace:*
-        version: link:../recipe
       '@rollup/plugin-babel':
         specifier: ^7.0.0
         version: 7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)

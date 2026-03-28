@@ -1,6 +1,8 @@
 "use client";
 
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
+import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId, useRef, useState } from "react";
 import { match } from "ts-pattern";
@@ -9,12 +11,6 @@ import { Checkbox as CheckboxBase } from "../../primitives/checkbox";
 import { colors } from "../../token";
 import { Typography } from "../typography";
 import styles from "./checkbox.module.css";
-import {
-  getBackgroundColor,
-  getBorderColor,
-  getRadius,
-  getSize,
-} from "./checkbox.styles";
 
 export type CheckboxSize = "large" | "medium" | "small";
 
@@ -89,13 +85,11 @@ export function Checkbox({
     }
   };
 
+  const resolved = resolveStyleMap(checkboxRecipe, { size, status });
   const style = {
     ..._style,
-    "--cocso-checkbox-size": getSize(size),
-    "--cocso-checkbox-radius": getRadius(size),
     "--cocso-checkbox-color": colors.white,
-    "--cocso-checkbox-border-color": getBorderColor(status),
-    "--cocso-checkbox-bg-color": getBackgroundColor(status),
+    ...resolved,
   } as CSSProperties;
 
   const checkedState = getCheckedState(status);

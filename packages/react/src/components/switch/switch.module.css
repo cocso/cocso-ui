@@ -38,13 +38,12 @@
   }
 
   .thumb {
-    --cocso-switch-thumb-width: inherit;
-    --cocso-switch-thumb-height: inherit;
+    --cocso-switch-thumb-size: inherit;
     position: absolute;
     top: 50%;
     display: block;
-    width: var(--cocso-switch-thumb-width);
-    height: var(--cocso-switch-thumb-width);
+    width: var(--cocso-switch-thumb-size);
+    height: var(--cocso-switch-thumb-size);
     background-color: var(--cocso-color-white);
     border-radius: var(--cocso-radius-full);
     box-shadow: var(--cocso-shadow-xs);
@@ -57,7 +56,7 @@
     transform: translate(
       calc(
         var(--cocso-switch-width) -
-        var(--cocso-switch-thumb-width) -
+        var(--cocso-switch-thumb-size) -
         var(--cocso-switch-thumb-offset)
       ),
       -50%
