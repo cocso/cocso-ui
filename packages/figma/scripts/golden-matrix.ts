@@ -436,6 +436,44 @@ function compareOutputs(
 // Per-recipe analysis
 // ---------------------------------------------------------------------------
 
+function analyzeStateParity(
+  recipe: AnyRecipe,
+  state: string,
+  defaultCombo: Record<string, string>,
+  baseReact: Record<string, string>
+): PropertyDiff[] {
+  const diffs: PropertyDiff[] = [];
+  const prefix = `--cocso-${recipe.name}-`;
+  const stateReact = resolveForReact(recipe, defaultCombo, { state });
+  const stateFigma = resolveForFigma(recipe, defaultCombo, { state });
+
+  const stateFigmaCombo = compareOutputs(recipe.name, stateReact, stateFigma, {
+    ...defaultCombo,
+    state,
+  });
+  for (const d of stateFigmaCombo.diffs) {
+    if (d.category !== "EQUIVALENT" && d.category !== "PASSTHROUGH") {
+      diffs.push(d);
+    }
+  }
+
+  for (const [key, stateValue] of Object.entries(stateReact)) {
+    if (baseReact[key] !== stateValue) {
+      const stripped = key.startsWith(prefix) ? key.slice(prefix.length) : key;
+      const figmaStateSpec = stateFigma as Record<string, unknown>;
+      const figmaHasIt = figmaStateSpec[stripped] !== undefined;
+      diffs.push({
+        property: stripped,
+        reactValue: stateValue,
+        figmaValue: figmaHasIt ? figmaStateSpec[stripped] : undefined,
+        category: figmaHasIt ? "EQUIVALENT" : "STATE_UNSUPPORTED",
+        note: `${state}: ${baseReact[key]} → ${stateValue}`,
+      });
+    }
+  }
+  return diffs;
+}
+
 function analyzeRecipe(
   name: string,
   recipe: AnyRecipe,
@@ -460,24 +498,10 @@ function analyzeRecipe(
       ? { ...recipe.defaultVariants }
       : combos[0];
     const baseReact = resolveForReact(recipe, defaultCombo);
-    const prefix = `--cocso-${recipe.name}-`;
-
     for (const state of stateNames) {
-      const stateReact = resolveForReact(recipe, defaultCombo, { state });
-      for (const [key, stateValue] of Object.entries(stateReact)) {
-        if (baseReact[key] !== stateValue) {
-          const stripped = key.startsWith(prefix)
-            ? key.slice(prefix.length)
-            : key;
-          stateDiffs.push({
-            property: stripped,
-            reactValue: stateValue,
-            figmaValue: undefined,
-            category: "STATE_UNSUPPORTED",
-            note: `${state}: ${baseReact[key]} → ${stateValue}`,
-          });
-        }
-      }
+      stateDiffs.push(
+        ...analyzeStateParity(recipe, state, defaultCombo, baseReact)
+      );
     }
   }
 

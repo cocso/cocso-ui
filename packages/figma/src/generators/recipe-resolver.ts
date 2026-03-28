@@ -146,6 +146,7 @@ function applyStringValue(
       return;
     }
     spec[key] = value;
+    Reflect.deleteProperty(tokenRefs, key);
     return;
   }
 
