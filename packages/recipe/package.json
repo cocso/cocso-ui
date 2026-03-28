@@ -7,6 +7,7 @@
     "url": "git+https://github.com/cocso/cocso-ui.git",
     "directory": "packages/recipe"
   },
+  "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "lint": "biome check .",
@@ -16,23 +17,28 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./resolvers/react": {
       "types": "./dist/resolvers/react.d.ts",
-      "import": "./dist/resolvers/react.js"
+      "import": "./dist/resolvers/react.js",
+      "default": "./dist/resolvers/react.js"
     },
     "./resolvers/react-styles": {
       "types": "./dist/resolvers/react-styles.d.ts",
-      "import": "./dist/resolvers/react-styles.js"
+      "import": "./dist/resolvers/react-styles.js",
+      "default": "./dist/resolvers/react-styles.js"
     },
     "./recipes/*": {
       "types": "./dist/recipes/*.d.ts",
-      "import": "./dist/recipes/*.js"
+      "import": "./dist/recipes/*.js",
+      "default": "./dist/recipes/*.js"
     },
     "./utils": {
       "types": "./dist/utils/token-classification.d.ts",
-      "import": "./dist/utils/token-classification.js"
+      "import": "./dist/utils/token-classification.js",
+      "default": "./dist/utils/token-classification.js"
     }
   },
   "files": [
