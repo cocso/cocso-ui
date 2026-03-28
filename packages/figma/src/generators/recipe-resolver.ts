@@ -138,6 +138,7 @@ function applyStringValue(
       value === "none" ||
       value === "inherit"
     ) {
+      Reflect.deleteProperty(tokenRefs, key);
       return;
     }
     if (isColorToken(value)) {
@@ -170,6 +171,7 @@ function applyRadiusValue(
 ): void {
   if (value === "100%") {
     spec[key] = 1000;
+    Reflect.deleteProperty(tokenRefs, key);
   } else if (value.startsWith("radius-")) {
     spec[key] = resolveRadiusToken(value);
     tokenRefs[key] = value;
