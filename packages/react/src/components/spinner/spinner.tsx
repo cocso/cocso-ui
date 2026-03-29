@@ -1,11 +1,9 @@
 import { spinner } from "@cocso-ui/codegen/generated/spinner";
+import { getSpinnerGeometry } from "@cocso-ui/codegen/generated/spinner-geometry";
 import "@cocso-ui/codegen/generated/spinner.css";
-import { getSpinnerGeometry } from "@cocso-ui/recipe/recipes/spinner.recipe";
 
-export type {
-  SpinnerSize,
-  SpinnerVariant,
-} from "@cocso-ui/recipe/recipes/spinner.recipe";
+export type { SpinnerVariant } from "@cocso-ui/codegen/generated/spinner";
+export type { SpinnerSize } from "@cocso-ui/codegen/generated/spinner-geometry";
 
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";

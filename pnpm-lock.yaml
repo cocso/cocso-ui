@@ -311,9 +311,6 @@ importers:
       '@cocso-ui/react-icons':
         specifier: workspace:^
         version: link:../react-icons
-      '@cocso-ui/recipe':
-        specifier: workspace:*
-        version: link:../recipe
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
