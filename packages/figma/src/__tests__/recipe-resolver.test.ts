@@ -1131,6 +1131,71 @@ describe("resolveForFigma with state option", () => {
     );
     expect(hover.bgColor).toEqual(base.bgColor);
   });
+
+  // Checkbox state tests
+  it("applies hover state to checkbox status=on", () => {
+    const base = resolveForFigma(checkboxRecipe, { status: "on" });
+    const hover = resolveForFigma(
+      checkboxRecipe,
+      { status: "on" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("primary-950");
+    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+  });
+
+  it("applies hover state to checkbox status=off", () => {
+    const base = resolveForFigma(checkboxRecipe, { status: "off" });
+    const hover = resolveForFigma(
+      checkboxRecipe,
+      { status: "off" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("white");
+    expect(hover._tokenRefs?.bgColor).toBe("neutral-200");
+  });
+
+  // Input state tests
+  it("applies hover state to input borderColor", () => {
+    const base = resolveForFigma(inputRecipe, { size: "medium" });
+    const hover = resolveForFigma(
+      inputRecipe,
+      { size: "medium" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
+    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+  });
+
+  it("applies focus state to input borderColor", () => {
+    const focus = resolveForFigma(
+      inputRecipe,
+      { size: "medium" },
+      { state: "focus" }
+    );
+    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+  });
+
+  // Select state tests
+  it("applies hover state to select borderColor", () => {
+    const base = resolveForFigma(selectRecipe, { size: "medium" });
+    const hover = resolveForFigma(
+      selectRecipe,
+      { size: "medium" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
+    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+  });
+
+  it("applies focus state to select borderColor", () => {
+    const focus = resolveForFigma(
+      selectRecipe,
+      { size: "medium" },
+      { state: "focus" }
+    );
+    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+  });
 });
 
 // ---------------------------------------------------------------------------
