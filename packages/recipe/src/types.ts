@@ -83,44 +83,44 @@ export type StyleValue =
 export interface BaseSlotProperties {
   // Color properties → ColorTokenRef | CSSLiteral (for currentColor, transparent)
   bgColor?: ColorTokenRef;
-  fontColor?: ColorTokenRef;
-  color?: ColorTokenRef | CSSLiteral;
-  borderColor?: ColorTokenRef;
   bladeColor?: ColorTokenRef;
-  fillColor?: ColorTokenRef;
-  checkedBgColor?: ColorTokenRef;
-  checkedThumbColor?: ColorTokenRef;
-  switchBgColor?: ColorTokenRef;
-  // Radius properties
-  borderRadius?: RadiusTokenRef | CSSLiteral;
+  bladeHeight?: number;
   bladeRadius?: number;
-  radius?: RadiusTokenRef | number;
-  // Dimension properties → number | CSSLiteral
-  height?: number;
-  width?: number;
-  minWidth?: number;
-  fontSize?: number;
-  padding?: number | CSSLiteral;
-  paddingInline?: number;
-  paddingX?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  iconRight?: number;
-  size?: number;
-  dotSize?: number;
-  thumbSize?: number;
-  thumbOffset?: number;
   blades?: number;
   bladeWidth?: number;
-  bladeHeight?: number;
-  output?: number;
-  // String properties
-  fontWeight?: FontWeightRef | number;
-  contentPadding?: CSSLiteral;
   // Compound properties
   border?: CompoundBorder;
+  borderColor?: ColorTokenRef;
+  // Radius properties
+  borderRadius?: RadiusTokenRef | CSSLiteral;
+  checkedBgColor?: ColorTokenRef;
+  checkedThumbColor?: ColorTokenRef;
+  color?: ColorTokenRef | CSSLiteral;
+  contentPadding?: CSSLiteral;
+  dotSize?: number;
+  fillColor?: ColorTokenRef;
+  fontColor?: ColorTokenRef;
+  fontSize?: number;
+  // String properties
+  fontWeight?: FontWeightRef | number;
+  // Dimension properties → number | CSSLiteral
+  height?: number;
+  iconRight?: number;
+  minWidth?: number;
+  output?: number;
+  padding?: number | CSSLiteral;
+  paddingBottom?: number;
+  paddingInline?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingX?: number;
+  radius?: RadiusTokenRef | number;
+  size?: number;
+  switchBgColor?: ColorTokenRef;
+  thumbOffset?: number;
+  thumbSize?: number;
+  width?: number;
 }
 
 /** Map of CSS custom property names to their assigned style token values for a single slot.
