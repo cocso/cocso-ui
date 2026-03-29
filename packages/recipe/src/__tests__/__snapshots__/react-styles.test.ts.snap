@@ -73,6 +73,8 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > paginationReci
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupRecipe default variants 1`] = `
 {
+  "--cocso-radio-bg-color": "var(--cocso-color-white)",
+  "--cocso-radio-border-color": "var(--cocso-color-neutral-200)",
   "--cocso-radio-dot-size": "7px",
   "--cocso-radio-size": "16px",
 }
@@ -112,6 +114,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe d
 {
   "--cocso-switch-checked-bg-color": "var(--cocso-color-primary-950)",
   "--cocso-switch-height": "20px",
+  "--cocso-switch-switch-bg-color": "var(--cocso-color-primary-950)",
   "--cocso-switch-thumb-offset": "2px",
   "--cocso-switch-thumb-size": "16px",
   "--cocso-switch-width": "36px",
