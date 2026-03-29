@@ -1,10 +1,15 @@
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
+import selectJSON from "../../../../codegen/generated/select.figma.json";
 import { createSelectComponentFromSpec } from "../component-creators";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import { addStateVariants, createComponentSection } from "../shared";
 
 export function generateSelectSection(container: FrameNode): void {
+  const json = selectJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Select");
   const combinations = getAllVariantCombinations(selectRecipe);
 
@@ -18,7 +23,7 @@ export function generateSelectSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(selectRecipe, combo);
+    const spec = lookupSpec(json, selectRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -37,7 +42,8 @@ export function generateSelectSection(container: FrameNode): void {
     selectRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createSelectComponentFromSpec(name, spec, "Select option")
+    (name, spec) => createSelectComponentFromSpec(name, spec, "Select option"),
+    json
   );
   section.appendChild(componentSet);
 

@@ -1,7 +1,11 @@
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
+import linkJSON from "../../../../codegen/generated/link.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   addStateVariants,
   COLORS,
@@ -38,6 +42,7 @@ function createLinkComponent(name: string, spec: FigmaNodeSpec): ComponentNode {
 }
 
 export function generateLinkSection(container: FrameNode): void {
+  const json = linkJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Link");
   const combinations = getAllVariantCombinations(linkRecipe);
 
@@ -51,7 +56,7 @@ export function generateLinkSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(linkRecipe, combo);
+    const spec = lookupSpec(json, linkRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -66,13 +71,14 @@ export function generateLinkSection(container: FrameNode): void {
     linkRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createLinkComponent(name, spec)
+    (name, spec) => createLinkComponent(name, spec),
+    json
   );
   section.appendChild(componentSet);
 
   // External variant stays as flat component (no state variants)
   const externalRow = createVariantRow("external");
-  const externalSpec = resolveForFigma(linkRecipe, { variant: "inline" });
+  const externalSpec = lookupSpec(json, linkRecipe, { variant: "inline" });
   const extColor = externalSpec.color ?? COLORS.info500;
 
   const extComponent = figma.createComponent();

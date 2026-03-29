@@ -1,7 +1,11 @@
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
+import radioJSON from "../../../../codegen/generated/radio.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   addStateVariants,
   COLORS,
@@ -63,6 +67,7 @@ function createRadioFromSpec(name: string, spec: FigmaNodeSpec): ComponentNode {
 }
 
 export function generateRadioSection(container: FrameNode): void {
+  const json = radioJSON as unknown as FigmaJSONData;
   const section = createComponentSection("RadioGroup");
   const combinations = getAllVariantCombinations(radioGroupRecipe);
 
@@ -75,7 +80,7 @@ export function generateRadioSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(radioGroupRecipe, combo);
+    const spec = lookupSpec(json, radioGroupRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -89,7 +94,8 @@ export function generateRadioSection(container: FrameNode): void {
     radioGroupRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createRadioFromSpec(name, spec)
+    (name, spec) => createRadioFromSpec(name, spec),
+    json
   );
   section.appendChild(componentSet);
 

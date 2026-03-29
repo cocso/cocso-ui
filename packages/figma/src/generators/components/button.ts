@@ -1,8 +1,12 @@
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import buttonJSON from "../../../../codegen/generated/button.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   addStateVariants,
   COLORS,
@@ -102,6 +106,7 @@ function createButtonWithIcon(
 }
 
 export function generateButtonSection(container: FrameNode): void {
+  const json = buttonJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Button");
   const combinations = getAllVariantCombinations(buttonRecipe);
 
@@ -115,7 +120,7 @@ export function generateButtonSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(buttonRecipe, combo);
+    const spec = lookupSpec(json, buttonRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -130,12 +135,13 @@ export function generateButtonSection(container: FrameNode): void {
     buttonRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createComponentFromSpec(name, spec, "Button")
+    (name, spec) => createComponentFromSpec(name, spec, "Button"),
+    json
   );
   section.appendChild(componentSet);
 
   const prefixRow = createVariantRow("prefix icon");
-  const prefixSpec = resolveForFigma(buttonRecipe, {
+  const prefixSpec = lookupSpec(json, buttonRecipe, {
     variant: "primary",
     size: "medium",
     shape: "square",
@@ -148,7 +154,7 @@ export function generateButtonSection(container: FrameNode): void {
       "prefix"
     )
   );
-  const outlinePrefixSpec = resolveForFigma(buttonRecipe, {
+  const outlinePrefixSpec = lookupSpec(json, buttonRecipe, {
     variant: "outline",
     size: "medium",
     shape: "square",
@@ -184,7 +190,7 @@ export function generateButtonSection(container: FrameNode): void {
 
   const svgOnlyRow = createVariantRow("svgOnly");
   for (const sz of ["large", "medium", "small", "x-small"] as const) {
-    const spec = resolveForFigma(buttonRecipe, {
+    const spec = lookupSpec(json, buttonRecipe, {
       variant: "primary",
       size: sz,
       shape: "square",
@@ -193,7 +199,7 @@ export function generateButtonSection(container: FrameNode): void {
       createButtonWithIcon(`svgOnly, size=${sz}`, spec, "", "svgOnly")
     );
   }
-  const svgOnlyOutline = resolveForFigma(buttonRecipe, {
+  const svgOnlyOutline = lookupSpec(json, buttonRecipe, {
     variant: "outline",
     size: "medium",
     shape: "square",
@@ -210,7 +216,7 @@ export function generateButtonSection(container: FrameNode): void {
 
   const disabledRow = createVariantRow("disabled");
   for (const v of ["primary", "secondary", "outline"] as const) {
-    const spec = resolveForFigma(buttonRecipe, {
+    const spec = lookupSpec(json, buttonRecipe, {
       variant: v,
       size: "medium",
       shape: "square",

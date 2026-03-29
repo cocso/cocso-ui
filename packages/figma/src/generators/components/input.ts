@@ -1,10 +1,15 @@
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
+import inputJSON from "../../../../codegen/generated/input.figma.json";
 import { createWideComponentFromSpec } from "../component-creators";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import { addStateVariants, createComponentSection } from "../shared";
 
 export function generateInputSection(container: FrameNode): void {
+  const json = inputJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Input");
   const combinations = getAllVariantCombinations(inputRecipe);
 
@@ -18,7 +23,7 @@ export function generateInputSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(inputRecipe, combo);
+    const spec = lookupSpec(json, inputRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -33,7 +38,8 @@ export function generateInputSection(container: FrameNode): void {
     inputRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createWideComponentFromSpec(name, spec, "Placeholder")
+    (name, spec) => createWideComponentFromSpec(name, spec, "Placeholder"),
+    json
   );
   section.appendChild(componentSet);
 

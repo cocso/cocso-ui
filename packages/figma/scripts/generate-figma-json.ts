@@ -6,8 +6,10 @@
  * Usage: pnpm --filter @cocso-ui/figma generate:figma-json
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import type { RecipeDefinition } from "@cocso-ui/recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
@@ -21,11 +23,7 @@ import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
-import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import { resolveForFigma } from "../src/generators/recipe-resolver";
-
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,9 +33,19 @@ const OUTPUT_DIR = join(__dirname, "..", "..", "codegen", "generated");
 type AnyRecipe = RecipeDefinition<any, any>;
 
 const ALL_RECIPES: AnyRecipe[] = [
-  badgeRecipe, buttonRecipe, checkboxRecipe, dialogRecipe, inputRecipe,
-  linkRecipe, paginationRecipe, radioGroupRecipe, selectRecipe,
-  spinnerRecipe, stockQuantityStatusRecipe, switchRecipe, typographyRecipe,
+  badgeRecipe,
+  buttonRecipe,
+  checkboxRecipe,
+  dialogRecipe,
+  inputRecipe,
+  linkRecipe,
+  paginationRecipe,
+  radioGroupRecipe,
+  selectRecipe,
+  spinnerRecipe,
+  stockQuantityStatusRecipe,
+  switchRecipe,
+  typographyRecipe,
 ];
 
 function getAllCombinations(recipe: AnyRecipe): Record<string, string>[] {
@@ -85,7 +93,11 @@ function generate() {
       if (stateNames.length > 0) {
         const states: Record<string, unknown> = {};
         for (const state of stateNames) {
-          states[state] = resolveForFigma(recipe, combo as Record<string, never>, { state });
+          states[state] = resolveForFigma(
+            recipe,
+            combo as Record<string, never>,
+            { state }
+          );
         }
         entry.states = states;
       }
@@ -96,7 +108,7 @@ function generate() {
     writeFileSync(
       join(OUTPUT_DIR, `${recipe.name}.figma.json`),
       JSON.stringify(figmaData, null, 2),
-      "utf-8",
+      "utf-8"
     );
     console.log(`  ✓ ${recipe.name}.figma.json (${combos.length} combos)`);
   }

@@ -1,7 +1,11 @@
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import switchJSON from "../../../../codegen/generated/switch.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   addStateVariants,
   COLORS,
@@ -48,6 +52,7 @@ function createSwitchFromSpec(
 }
 
 export function generateSwitchSection(container: FrameNode): void {
+  const json = switchJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Switch");
   const combinations = getAllVariantCombinations(switchRecipe);
 
@@ -60,7 +65,7 @@ export function generateSwitchSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(switchRecipe, combo);
+    const spec = lookupSpec(json, switchRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -74,13 +79,14 @@ export function generateSwitchSection(container: FrameNode): void {
     switchRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createSwitchFromSpec(name, spec)
+    (name, spec) => createSwitchFromSpec(name, spec),
+    json
   );
   section.appendChild(componentSet);
 
   // Label + disabled rows stay as flat demos
   const labelRow = createVariantRow("with label");
-  const defaultSpec = resolveForFigma(switchRecipe, {
+  const defaultSpec = lookupSpec(json, switchRecipe, {
     variant: "primary",
     size: "medium",
     checked: "true",
@@ -89,7 +95,7 @@ export function generateSwitchSection(container: FrameNode): void {
   for (const checked of [true, false]) {
     const spec = checked
       ? defaultSpec
-      : resolveForFigma(switchRecipe, {
+      : lookupSpec(json, switchRecipe, {
           variant: "primary",
           size: "medium",
           checked: "false",
@@ -117,7 +123,7 @@ export function generateSwitchSection(container: FrameNode): void {
   );
   disabledOn.opacity = 0.4;
   disabledRow.appendChild(disabledOn);
-  const uncheckedSpec = resolveForFigma(switchRecipe, {
+  const uncheckedSpec = lookupSpec(json, switchRecipe, {
     variant: "primary",
     size: "medium",
     checked: "false",

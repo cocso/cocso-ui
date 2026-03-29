@@ -1,6 +1,18 @@
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import { type FigmaNodeSpec, resolveForFigma } from "./recipe-resolver";
 
+/**
+ * Pre-resolved Figma JSON data loaded from codegen output.
+ */
+export interface FigmaJSONData {
+  combinations: Record<
+    string,
+    FigmaNodeSpec & { states?: Record<string, FigmaNodeSpec> }
+  >;
+  name: string;
+  slots: string[];
+}
+
 export function getAllVariantCombinations<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
@@ -28,12 +40,49 @@ export function getAllVariantCombinations<
   return combinations;
 }
 
+/**
+ * Build a combo key string matching the format used in .figma.json files.
+ */
+export function comboKey(combo: Record<string, string>): string {
+  return Object.entries(combo)
+    .map(([k, v]) => `${k}=${v}`)
+    .join(",");
+}
+
+/**
+ * Look up a pre-resolved FigmaNodeSpec from JSON data.
+ * Falls back to resolveForFigma if not found (backward compatibility).
+ */
+export function lookupSpec<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(
+  json: FigmaJSONData | undefined,
+  recipe: RecipeDefinition<V, S>,
+  combo: Record<string, string>,
+  options?: { state?: string }
+): FigmaNodeSpec {
+  if (json) {
+    const key = comboKey(combo);
+    const entry = json.combinations[key];
+    if (entry) {
+      if (options?.state && entry.states) {
+        return entry.states[options.state] ?? entry;
+      }
+      return entry;
+    }
+  }
+  // Fallback to direct resolver
+  return resolveForFigma(recipe, combo as Record<string, never>, options);
+}
+
 export function groupVariantsByFirstDimension<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(
   recipe: RecipeDefinition<V, S>,
-  combinations: Record<string, string>[]
+  combinations: Record<string, string>[],
+  json?: FigmaJSONData
 ): Map<string, Array<{ name: string; spec: FigmaNodeSpec }>> {
   const dimensions = Object.keys(recipe.variants);
   const firstDim = dimensions[0];
@@ -44,7 +93,7 @@ export function groupVariantsByFirstDimension<
 
   for (const combo of combinations) {
     const groupKey = combo[firstDim] ?? "default";
-    const spec = resolveForFigma(recipe, combo as Record<string, string>);
+    const spec = lookupSpec(json, recipe, combo);
     const nameParts = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");

@@ -1,7 +1,11 @@
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import checkboxJSON from "../../../../codegen/generated/checkbox.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   addStateVariants,
   COLORS,
@@ -73,6 +77,7 @@ function createCheckboxFromSpec(
 }
 
 export function generateCheckboxSection(container: FrameNode): void {
+  const json = checkboxJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Checkbox");
   const combinations = getAllVariantCombinations(checkboxRecipe);
 
@@ -86,7 +91,7 @@ export function generateCheckboxSection(container: FrameNode): void {
 
   const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
-    const spec = resolveForFigma(checkboxRecipe, combo);
+    const spec = lookupSpec(json, checkboxRecipe, combo);
     const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
@@ -101,7 +106,8 @@ export function generateCheckboxSection(container: FrameNode): void {
     checkboxRecipe,
     combinations,
     variantFrame,
-    (name, spec) => createCheckboxFromSpec(name, spec)
+    (name, spec) => createCheckboxFromSpec(name, spec),
+    json
   );
   section.appendChild(componentSet);
 

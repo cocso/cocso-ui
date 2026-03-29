@@ -1,7 +1,8 @@
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
-import { type FigmaNodeSpec, resolveForFigma } from "./recipe-resolver";
+import type { FigmaNodeSpec } from "./recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "./recipe-utils";
 
 const data = tokenData as FigmaTokenData;
 
@@ -373,7 +374,8 @@ export function addStateVariants<
   recipe: RecipeDefinition<V, S>,
   variantCombinations: Record<string, string>[],
   parent: FrameNode,
-  createNode: (name: string, spec: FigmaNodeSpec) => ComponentNode
+  createNode: (name: string, spec: FigmaNodeSpec) => ComponentNode,
+  json?: FigmaJSONData
 ): ComponentSetNode | FrameNode {
   const states = recipe.states as Record<string, unknown> | undefined;
   if (!states || Object.keys(states).length === 0) {
@@ -390,9 +392,7 @@ export function addStateVariants<
 
   for (const [, combo] of variantCombinations.entries()) {
     for (const stateName of stateNames) {
-      const spec = resolveForFigma(recipe, combo as Record<string, string>, {
-        state: stateName,
-      });
+      const spec = lookupSpec(json, recipe, combo, { state: stateName });
       const comboStr = Object.entries(combo)
         .map(([k, v]) => `${k}=${v}`)
         .join(", ");
