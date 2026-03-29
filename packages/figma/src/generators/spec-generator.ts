@@ -216,69 +216,49 @@ function createTooltipBody(): FrameNode {
   return frame;
 }
 
-function createTooltipArrow(
-  placement: "top" | "right" | "bottom" | "left"
-): FrameNode {
-  const arrow = figma.createFrame();
-  arrow.name = "arrow";
-  arrow.resize(6, 6);
-  arrow.rotation = 45;
-  setFill(arrow, COLORS.neutral900);
-  arrow.strokes = [];
-
-  // Wrap in a container to position the arrow correctly
-  const wrapper = createAutoLayoutFrame("arrow-wrapper");
-  wrapper.primaryAxisAlignItems = "CENTER";
-  wrapper.counterAxisAlignItems = "CENTER";
-
-  if (placement === "top" || placement === "bottom") {
-    wrapper.layoutMode = "HORIZONTAL";
-    wrapper.primaryAxisAlignItems = "CENTER";
-  } else {
-    wrapper.layoutMode = "VERTICAL";
-    wrapper.primaryAxisAlignItems = "CENTER";
-  }
-
-  wrapper.appendChild(arrow);
-  return wrapper;
-}
-
 function createTooltipWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
   const comp = figma.createComponent();
   comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
-
-  // For top/bottom: stack vertically; for left/right: stack horizontally
-  if (placement === "top" || placement === "bottom") {
-    comp.layoutMode = "VERTICAL";
-  } else {
-    comp.layoutMode = "HORIZONTAL";
-  }
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.itemSpacing = 0;
+  comp.clipsContent = false;
   comp.fills = [];
 
   const body = createTooltipBody();
+  comp.appendChild(body);
+
+  // Size the component to match body
+  comp.resize(body.width, body.height);
 
   if (withArrow) {
-    const arrow = createTooltipArrow(placement);
+    const S = 6;
+    const H = S / 2;
+    const arrow = figma.createFrame();
+    arrow.name = "arrow";
+    arrow.resize(S, S);
+    arrow.rotation = 45;
+    setFill(arrow, COLORS.neutral900);
+    arrow.strokes = [];
 
-    // Arrow on the opposite side of the placement direction:
-    // top → arrow on bottom, bottom → arrow on top,
-    // left → arrow on right, right → arrow on left
-    if (placement === "top" || placement === "left") {
-      comp.appendChild(body);
-      comp.appendChild(arrow);
+    // No layoutMode on comp → children use manual x/y
+    const bw = body.width;
+    const bh = body.height;
+    if (placement === "left") {
+      arrow.x = bw - H;
+    } else if (placement === "right") {
+      arrow.x = -H;
     } else {
-      comp.appendChild(arrow);
-      comp.appendChild(body);
+      arrow.x = bw / 2 - H;
     }
-  } else {
-    comp.appendChild(body);
+    if (placement === "top") {
+      arrow.y = bh - H;
+    } else if (placement === "bottom") {
+      arrow.y = -H;
+    } else {
+      arrow.y = bh / 2 - H;
+    }
+    comp.appendChild(arrow);
   }
 
   return comp;
@@ -325,69 +305,47 @@ function createPopoverBody(): FrameNode {
   return frame;
 }
 
-function createPopoverArrow(
-  placement: "top" | "right" | "bottom" | "left"
-): FrameNode {
-  const arrow = figma.createFrame();
-  arrow.name = "arrow";
-  arrow.resize(8, 8);
-  arrow.rotation = 45;
-  setFill(arrow, COLORS.white);
-  setStroke(arrow, COLORS.neutral100, 1);
-
-  // Wrap in a container to position the arrow correctly
-  const wrapper = createAutoLayoutFrame("arrow-wrapper");
-  wrapper.primaryAxisAlignItems = "CENTER";
-  wrapper.counterAxisAlignItems = "CENTER";
-
-  if (placement === "top" || placement === "bottom") {
-    wrapper.layoutMode = "HORIZONTAL";
-    wrapper.primaryAxisAlignItems = "CENTER";
-  } else {
-    wrapper.layoutMode = "VERTICAL";
-    wrapper.primaryAxisAlignItems = "CENTER";
-  }
-
-  wrapper.appendChild(arrow);
-  return wrapper;
-}
-
 function createPopoverWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
   const comp = figma.createComponent();
   comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
-
-  // For top/bottom: stack vertically; for left/right: stack horizontally
-  if (placement === "top" || placement === "bottom") {
-    comp.layoutMode = "VERTICAL";
-  } else {
-    comp.layoutMode = "HORIZONTAL";
-  }
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.itemSpacing = 0;
+  comp.clipsContent = false;
   comp.fills = [];
 
   const body = createPopoverBody();
+  comp.appendChild(body);
+
+  comp.resize(body.width, body.height);
 
   if (withArrow) {
-    const arrow = createPopoverArrow(placement);
+    const S = 8;
+    const H = S / 2;
+    const arrow = figma.createFrame();
+    arrow.name = "arrow";
+    arrow.resize(S, S);
+    arrow.rotation = 45;
+    setFill(arrow, COLORS.white);
+    setStroke(arrow, COLORS.neutral100, 1);
 
-    // Arrow on the opposite side of the placement direction:
-    // top → arrow on bottom, bottom → arrow on top,
-    // left → arrow on right, right → arrow on left
-    if (placement === "top" || placement === "left") {
-      comp.appendChild(body);
-      comp.appendChild(arrow);
+    const bw = body.width;
+    const bh = body.height;
+    if (placement === "left") {
+      arrow.x = bw - H;
+    } else if (placement === "right") {
+      arrow.x = -H;
     } else {
-      comp.appendChild(arrow);
-      comp.appendChild(body);
+      arrow.x = bw / 2 - H;
     }
-  } else {
-    comp.appendChild(body);
+    if (placement === "top") {
+      arrow.y = bh - H;
+    } else if (placement === "bottom") {
+      arrow.y = -H;
+    } else {
+      arrow.y = bh / 2 - H;
+    }
+    comp.appendChild(arrow);
   }
 
   return comp;
