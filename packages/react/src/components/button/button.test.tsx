@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { colors, fontWeight as fontWeightToken } from "../../token";
+import { fontWeight as fontWeightToken } from "../../token";
 import { Button } from "./button";
 
 describe("Button", () => {
@@ -108,83 +108,49 @@ describe("Button", () => {
     });
   });
 
-  describe("size CSS variables", () => {
+  describe("size className", () => {
     it.each([
-      ["large", "40px"],
-      ["medium", "36px"],
-      ["small", "32px"],
-      ["x-small", "28px"],
-    ] as const)('sets height to "%s" when size="%s"', (size, expectedHeight) => {
+      "large",
+      "medium",
+      "small",
+      "x-small",
+    ] as const)('applies size className for size="%s"', (size) => {
       render(<Button size={size}>Button</Button>);
-      expect(screen.getByRole("button")).toHaveStyle({
-        "--cocso-button-height": expectedHeight,
-      });
+      expect(screen.getByRole("button").className).toContain(
+        `cocso-button--size-${size}`
+      );
     });
   });
 });
 
-describe("Button variant CSS variables", () => {
+describe("Button variant className", () => {
   it.each([
-    ["primary", colors.primary950],
-    ["secondary", colors.neutral50],
-    ["outline", colors.transparent],
-    ["ghost", colors.white],
-    ["success", colors.success500],
-    ["error", colors.danger500],
-    ["warning", colors.warning300],
-    ["info", colors.info500],
-  ] as const)('sets --cocso-button-bg-color for variant="%s"', (variant, expectedBg) => {
+    "primary",
+    "secondary",
+    "outline",
+    "ghost",
+    "success",
+    "error",
+    "warning",
+    "info",
+  ] as const)('applies variant className for variant="%s"', (variant) => {
     render(<Button variant={variant}>Button</Button>);
-    expect(screen.getByRole("button")).toHaveStyle({
-      "--cocso-button-bg-color": expectedBg,
-    });
-  });
-
-  it.each([
-    ["primary", colors.white],
-    ["success", colors.white],
-    ["error", colors.white],
-    ["secondary", colors.neutral600],
-    ["outline", colors.neutral950],
-    ["ghost", colors.neutral950],
-    ["warning", colors.neutral950],
-  ] as const)('sets --cocso-button-font-color for variant="%s"', (variant, expectedColor) => {
-    render(<Button variant={variant}>Button</Button>);
-    expect(screen.getByRole("button")).toHaveStyle({
-      "--cocso-button-font-color": expectedColor,
-    });
-  });
-
-  it('sets border for variant="outline"', () => {
-    render(<Button variant="outline">Button</Button>);
-    expect(screen.getByRole("button")).toHaveStyle({
-      "--cocso-button-border": `1px solid ${colors.neutral100}`,
-    });
-  });
-
-  it("sets no border for non-outline variant", () => {
-    render(<Button variant="primary">Button</Button>);
-    expect(screen.getByRole("button")).toHaveStyle({
-      "--cocso-button-border": "none",
-    });
-  });
-});
-
-describe("Button shape CSS variables", () => {
-  it.each([
-    ["square", "medium", "var(--cocso-radius-4)"],
-    ["square", "x-small", "var(--cocso-radius-3)"],
-    ["circle", "medium", "100%"],
-    ["rounded", "medium", "var(--cocso-radius-full)"],
-  ] as const)('sets border-radius for shape="%s" size="%s"', (shape, size, expected) => {
-    render(
-      <Button shape={shape} size={size}>
-        Button
-      </Button>
+    expect(screen.getByRole("button").className).toContain(
+      `cocso-button--variant-${variant}`
     );
-    expect(screen.getByRole("button")).toHaveStyle({
-      "--cocso-button-border-radius": expected,
-    });
+  });
+});
+
+describe("Button shape className", () => {
+  it.each([
+    "square",
+    "circle",
+    "rounded",
+  ] as const)('applies shape className for shape="%s"', (shape) => {
+    render(<Button shape={shape}>Button</Button>);
+    expect(screen.getByRole("button").className).toContain(
+      `cocso-button--shape-${shape}`
+    );
   });
 });
 

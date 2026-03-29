@@ -1,7 +1,7 @@
 "use client";
 
-import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import { switchStyles } from "@cocso-ui/codegen/generated/switch";
+import "@cocso-ui/codegen/generated/switch.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
@@ -39,22 +39,26 @@ export function Switch({
   variant = "primary",
   position = "right",
   disabled,
+  checked,
   label,
   ...props
 }: SwitchProps) {
   const generatedId = useId();
   const id = _id ?? generatedId;
 
-  const resolved = resolveStyleMap(switchRecipe, { variant, size });
+  const switchStylesName = switchStyles({
+    variant,
+    size,
+    checked: String(!!checked) as "true" | "false",
+  });
   const style = {
     ..._style,
     "--cocso-switch-bg-color": UNCHECKED_BG,
-    ...resolved,
   } as CSSProperties;
 
   return (
     <div
-      className={cn(styles.wrapper, className)}
+      className={cn(switchStylesName, styles.wrapper, className)}
       data-disabled={disabled || undefined}
       style={style}
     >
@@ -67,6 +71,7 @@ export function Switch({
         />
       )}
       <SwitchBase.Root
+        checked={checked}
         className={styles.switch}
         disabled={disabled}
         id={id}

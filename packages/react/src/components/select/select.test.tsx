@@ -181,13 +181,13 @@ describe("Select", () => {
     });
   });
 
-  describe("size CSS variables", () => {
+  describe("size className", () => {
     it.each([
-      ["x-small", "12px"],
-      ["small", "12px"],
-      ["medium", "14px"],
-      ["large", "14px"],
-    ] as const)('sets --cocso-select-font-size for size="%s"', (size, expectedFontSize) => {
+      "x-small",
+      "small",
+      "medium",
+      "large",
+    ] as const)('applies size className for size="%s"', (size) => {
       render(
         <Select aria-label="Choose option" size={size}>
           <option value="a">Option A</option>
@@ -195,12 +195,10 @@ describe("Select", () => {
       );
 
       const wrapper = screen.getByRole("combobox").closest("div");
-      expect(wrapper).toHaveStyle({
-        "--cocso-select-font-size": expectedFontSize,
-      });
+      expect(wrapper?.className).toContain(`cocso-select--size-${size}`);
     });
 
-    it('applies default size "medium" CSS variables when no size prop is given', () => {
+    it('applies default size "medium" className when no size prop is given', () => {
       render(
         <Select aria-label="Choose option">
           <option value="a">Option A</option>
@@ -208,25 +206,7 @@ describe("Select", () => {
       );
 
       const wrapper = screen.getByRole("combobox").closest("div");
-      expect(wrapper).toHaveStyle({ "--cocso-select-font-size": "14px" });
-    });
-
-    it.each([
-      ["x-small", "28px"],
-      ["small", "32px"],
-      ["medium", "36px"],
-      ["large", "40px"],
-    ] as const)('sets --cocso-select-height for size="%s"', (size, expectedHeight) => {
-      render(
-        <Select aria-label="Choose option" size={size}>
-          <option value="a">Option A</option>
-        </Select>
-      );
-
-      const wrapper = screen.getByRole("combobox").closest("div");
-      expect(wrapper).toHaveStyle({
-        "--cocso-select-height": expectedHeight,
-      });
+      expect(wrapper?.className).toContain("cocso-select--size-medium");
     });
   });
 });

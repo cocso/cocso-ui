@@ -6,4 +6,4 @@ export interface StockQuantityStatusVariantProps {
 
 export type StockQuantityStatusQuantity = "여유" | "보통" | "부족";
 
-export declare function stock-quantity-status(props?: StockQuantityStatusVariantProps): string;
+export declare function stockQuantityStatus(props?: StockQuantityStatusVariantProps): string;

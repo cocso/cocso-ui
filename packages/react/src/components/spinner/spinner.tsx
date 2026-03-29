@@ -1,14 +1,12 @@
-import {
-  getSpinnerGeometry,
-  spinnerRecipe,
-} from "@cocso-ui/recipe/recipes/spinner.recipe";
+import { spinner } from "@cocso-ui/codegen/generated/spinner";
+import "@cocso-ui/codegen/generated/spinner.css";
+import { getSpinnerGeometry } from "@cocso-ui/recipe/recipes/spinner.recipe";
 
 export type {
   SpinnerSize,
   SpinnerVariant,
 } from "@cocso-ui/recipe/recipes/spinner.recipe";
 
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import styles from "./spinner.module.css";
@@ -36,8 +34,6 @@ export function Spinner({
     bladeRadius: radius,
     output,
   } = getSpinnerGeometry(size);
-  const resolved = resolveStyleMap(spinnerRecipe, { variant, size });
-  const bladeColor = resolved["--cocso-spinner-blade-color"];
   const container = output;
   const left = (container - width) / 2;
   const originY = height - container / 2;
@@ -52,12 +48,11 @@ export function Spinner({
     <output
       aria-label={label}
       aria-live="polite"
-      className={cn(styles.spinner, className)}
+      className={cn(spinner({ variant, size }), styles.spinner, className)}
       ref={ref}
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: bladeColor,
         ..._style,
       }}
       {...props}

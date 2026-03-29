@@ -21,13 +21,10 @@
   --cocso-pagination-font-color: var(--cocso-color-neutral-400);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .cocso-pagination.cocso-pagination--pageState-active:hover {
-    --cocso-pagination-bg-color: var(--cocso-color-primary-800);
-  }
+.cocso-pagination.cocso-pagination--pageState-active {
+  --cocso-pagination-bg-color-hover: var(--cocso-color-primary-800);
+}
 
-  .cocso-pagination.cocso-pagination--pageState-inactive:hover {
-    --cocso-pagination-bg-color: var(--cocso-color-neutral-100);
-  }
-
+.cocso-pagination.cocso-pagination--pageState-inactive {
+  --cocso-pagination-bg-color-hover: var(--cocso-color-neutral-100);
 }

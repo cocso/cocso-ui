@@ -4,7 +4,7 @@ export interface StockQuantityStatusVariantProps {
   quantity?: "여유" | "보통" | "부족";
 }
 
-export function stock-quantity-status(props: StockQuantityStatusVariantProps = {}): string {
+export function stockQuantityStatus(props: StockQuantityStatusVariantProps = {}): string {
   const {
     quantity = "여유",
   } = props;

@@ -12,17 +12,14 @@
   --cocso-link-color: var(--cocso-color-info-500);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .cocso-link.cocso-link--variant-inline:hover {
-    --cocso-link-color: var(--cocso-color-info-700);
-  }
+.cocso-link.cocso-link--variant-inline {
+  --cocso-link-color-hover: var(--cocso-color-info-700);
+}
 
-  .cocso-link.cocso-link--variant-current:hover {
-    --cocso-link-color: currentColor;
-  }
+.cocso-link.cocso-link--variant-current {
+  --cocso-link-color-hover: currentColor;
+}
 
-  .cocso-link.cocso-link--variant-plain:hover {
-    --cocso-link-color: var(--cocso-color-info-700);
-  }
-
+.cocso-link.cocso-link--variant-plain {
+  --cocso-link-color-hover: var(--cocso-color-info-700);
 }

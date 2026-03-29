@@ -6,7 +6,7 @@ export interface SwitchVariantProps {
   checked?: "true" | "false";
 }
 
-export function switch(props: SwitchVariantProps = {}): string {
+export function switchStyles(props: SwitchVariantProps = {}): string {
   const {
     variant = "primary",
     size = "medium",

@@ -10,4 +10,4 @@ export type SwitchVariant = "primary" | "success" | "error" | "warning" | "info"
 export type SwitchSize = "large" | "medium" | "small";
 export type SwitchChecked = "true" | "false";
 
-export declare function switch(props?: SwitchVariantProps): string;
+export declare function switchStyles(props?: SwitchVariantProps): string;

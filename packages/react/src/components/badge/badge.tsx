@@ -1,5 +1,5 @@
-import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import { badge } from "@cocso-ui/codegen/generated/badge";
+import "@cocso-ui/codegen/generated/badge.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { ResponsiveFontSize } from "../../token";
@@ -47,19 +47,17 @@ export function Badge({
   style: _style,
   ...props
 }: BadgeProps) {
-  const resolved = resolveStyleMap(badgeRecipe, { variant, size, shape });
   const style = {
     ..._style,
     "--cocso-badge-padding-y": BADGE_PADDING_Y[size],
-    ...resolved,
   } as CSSProperties;
 
-  const fontColor = resolved["--cocso-badge-font-color"];
   const fontSize = BADGE_FONT_SIZES[size];
 
   return (
     <div
       className={cn(
+        badge({ variant, size, shape }),
         styles.badge,
         shape === "circle" && styles.circle,
         className
@@ -69,7 +67,7 @@ export function Badge({
       {...props}
     >
       <Typography
-        color={fontColor}
+        color="currentColor"
         lineHeight="tight"
         render={<span className={styles.inner}>{children}</span>}
         size={fontSize as ResponsiveFontSize}

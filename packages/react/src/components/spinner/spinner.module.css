@@ -12,6 +12,7 @@
     position: relative;
     display: block;
     flex-shrink: 0;
+    color: var(--cocso-spinner-blade-color);
   }
 
   .blade {

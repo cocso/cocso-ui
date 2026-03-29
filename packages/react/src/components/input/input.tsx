@@ -1,7 +1,7 @@
 "use client";
 
-import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import { input } from "@cocso-ui/codegen/generated/input";
+import "@cocso-ui/codegen/generated/input.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
@@ -41,13 +41,13 @@ export function Input({
 
   const style = {
     ..._style,
-    ...resolveStyleMap(inputRecipe, { size }),
   } as CSSProperties;
 
   const inputEl = (
     <FieldAwareInput
       aria-invalid={hasError || undefined}
       className={cn(
+        input({ size }),
         styles.input,
         stretch && styles.stretch,
         hasError && styles.error,

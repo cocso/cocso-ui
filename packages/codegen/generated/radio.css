@@ -25,14 +25,11 @@
   --cocso-radio-border-color: var(--cocso-color-neutral-200);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .cocso-radio.cocso-radio--selected-true:hover {
-    --cocso-radio-bg-color: var(--cocso-color-primary-800);
-    --cocso-radio-border-color: var(--cocso-color-primary-800);
-  }
+.cocso-radio.cocso-radio--selected-true {
+  --cocso-radio-bg-color-hover: var(--cocso-color-primary-800);
+  --cocso-radio-border-color-hover: var(--cocso-color-primary-800);
+}
 
-  .cocso-radio.cocso-radio--selected-false:hover {
-    --cocso-radio-border-color: var(--cocso-color-primary-500);
-  }
-
+.cocso-radio.cocso-radio--selected-false {
+  --cocso-radio-border-color-hover: var(--cocso-color-primary-500);
 }

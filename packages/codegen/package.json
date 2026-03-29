@@ -9,6 +9,9 @@
     "directory": "packages/codegen"
   },
   "type": "module",
+  "exports": {
+    "./generated/*": "./generated/*"
+  },
   "scripts": {
     "generate": "tsx src/generate.ts",
     "test": "vitest run",

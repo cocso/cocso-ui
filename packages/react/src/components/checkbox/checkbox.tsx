@@ -1,8 +1,8 @@
 "use client";
 
+import { checkbox } from "@cocso-ui/codegen/generated/checkbox";
+import "@cocso-ui/codegen/generated/checkbox.css";
 import { CheckIcon, CheckIndeterminateSmallIcon } from "@cocso-ui/react-icons";
-import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId, useRef, useState } from "react";
 import { match } from "ts-pattern";
@@ -85,17 +85,18 @@ export function Checkbox({
     }
   };
 
-  const resolved = resolveStyleMap(checkboxRecipe, { size, status });
   const style = {
     ..._style,
     "--cocso-checkbox-color": colors.white,
-    ...resolved,
   } as CSSProperties;
 
   const checkedState = getCheckedState(status);
 
   return (
-    <div className={cn(styles.wrapper, className)} style={style}>
+    <div
+      className={cn(checkbox({ size, status }), styles.wrapper, className)}
+      style={style}
+    >
       <CheckboxBase.Root
         checked={checkedState.checked}
         className={styles.checkbox}

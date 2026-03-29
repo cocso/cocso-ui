@@ -7,6 +7,7 @@
 
 import { describe, expect, it } from "vitest";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
+import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
@@ -50,7 +51,7 @@ function parseCSS(css: string): Map<string, Record<string, string>> {
     }
     if (trimmed.endsWith("{")) {
       currentSelector = trimmed.slice(0, -1).trim();
-      currentProps = {};
+      currentProps = rules.get(currentSelector) ?? {};
       continue;
     }
     if (currentSelector && trimmed.includes(":")) {
@@ -139,31 +140,27 @@ for (const recipe of ALL_RECIPES) {
     });
 
     it.each(combos.map((c, i) => [i, c] as const))(
-      `combo %i: cascaded CSS matches resolveForReact`,
+      `combo %i: cascaded CSS matches resolveStyleMap (incl. state-suffixed)`,
       (_i, combo) => {
-        const resolved = resolveForReact(recipe, combo as Record<string, never>);
+        const resolved = resolveStyleMap(recipe, combo as Record<string, never>, {
+          states: stateNames,
+        });
         const cascaded = cascadeForCombo(cssRules, `cocso-${recipe.name}`, combo);
 
         for (const [key, expectedValue] of Object.entries(resolved)) {
-          const kebabKey = camelToKebab(key);
-          expect(cascaded[kebabKey]).toBe(expectedValue);
+          expect(cascaded[key]).toBe(expectedValue);
         }
       },
     );
 
     if (stateNames.length > 0) {
-      it("should generate state override rules", () => {
+      it("should generate state-suffixed properties", () => {
         for (const state of stateNames) {
-          const pseudo = state === "hover" ? ":hover" : state === "active" ? ":active" : ":focus-visible";
-          const hasStateRule = [...cssRules.keys()].some((sel) => sel.includes(pseudo));
-          expect(hasStateRule).toBe(true);
+          const hasSuffixed = [...cssRules.values()].some((props) =>
+            Object.keys(props).some((k) => k.endsWith(`-${state}`)),
+          );
+          expect(hasSuffixed).toBe(true);
         }
-      });
-    }
-
-    if (stateNames.includes("hover")) {
-      it("should wrap hover in @media (hover: hover) and (pointer: fine)", () => {
-        expect(generatedCSS).toContain("@media (hover: hover) and (pointer: fine)");
       });
     }
   });

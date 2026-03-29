@@ -116,25 +116,26 @@ export function generateCSS<
     }
   }
 
-  // 4. State overrides (per dimension value, not Cartesian product)
+  // 4. State-suffixed properties (e.g., --cocso-button-bg-color-hover)
+  //    These are set alongside base properties so CSS Modules can reference them
+  //    via :hover { background-color: var(--cocso-button-bg-color-hover) }
   if (recipe.states) {
     for (const [state, stateMap] of Object.entries(recipe.states)) {
-      const isHover = state === "hover";
-      const pseudo = state === "hover" ? ":hover" : state === "active" ? ":active" : state === "focus" ? ":focus-visible" : "";
-      const mediaQuery = isHover ? "(hover: hover) and (pointer: fine)" : undefined;
-
       const typedStateMap = stateMap as Record<string, Record<string, Partial<Record<string, SlotStyles>>> | undefined>;
       for (const [dim, dimValues] of Object.entries(typedStateMap)) {
         if (!dimValues) continue;
         for (const [val, slotMap] of Object.entries(dimValues)) {
           const props = resolveSlotProps(prefix, recipe.slots, slotMap as Partial<Record<string, SlotStyles>>);
-          if (Object.keys(props).length > 0) {
-            rules.push({
-              selector: `.${name}.${name}--${dim}-${val}${pseudo}`,
-              properties: props,
-              mediaQuery,
-            });
+          if (Object.keys(props).length === 0) continue;
+          // Suffix each property key with the state name
+          const suffixedProps: Record<string, string> = {};
+          for (const [key, value] of Object.entries(props)) {
+            suffixedProps[`${key}-${state}`] = value;
           }
+          rules.push({
+            selector: `.${name}.${name}--${dim}-${val}`,
+            properties: suffixedProps,
+          });
         }
       }
     }
@@ -246,8 +247,9 @@ export function generateRuntime<
   lines.push("}");
   lines.push("");
 
+  const fnName = camelCase(recipe.name);
   if (isSingleSlot) {
-    lines.push(`export function ${recipe.name}(props: ${typeName} = {}): string {`);
+    lines.push(`export function ${fnName}(props: ${typeName} = {}): string {`);
     lines.push(`  const {`);
     for (const { dim } of dims) {
       const defaultVal = (defaults as Record<string, string>)[dim];
@@ -307,7 +309,7 @@ export function generateTypes<
   }
   lines.push("");
 
-  lines.push(`export declare function ${recipe.name}(props?: ${typeName}): string;`);
+  lines.push(`export declare function ${camelCase(recipe.name)}(props?: ${typeName}): string;`);
   lines.push("");
 
   return lines.join("\n");
@@ -318,4 +320,19 @@ function pascalCase(str: string): string {
     .split(/[-_]/)
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
     .join("");
+}
+
+const JS_RESERVED = new Set([
+  "break", "case", "catch", "continue", "debugger", "default", "delete",
+  "do", "else", "finally", "for", "function", "if", "in", "instanceof",
+  "new", "return", "switch", "this", "throw", "try", "typeof", "var",
+  "void", "while", "with", "class", "const", "enum", "export", "extends",
+  "import", "super", "implements", "interface", "let", "package", "private",
+  "protected", "public", "static", "yield",
+]);
+
+function camelCase(str: string): string {
+  const pascal = pascalCase(str);
+  const result = pascal.charAt(0).toLowerCase() + pascal.slice(1);
+  return JS_RESERVED.has(result) ? `${result}Styles` : result;
 }

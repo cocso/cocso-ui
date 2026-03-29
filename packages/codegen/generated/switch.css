@@ -65,29 +65,26 @@
   --cocso-switch-switch-bg-color: var(--cocso-color-info-500);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .cocso-switch.cocso-switch--variant-primary:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-primary-800);
-  }
+.cocso-switch.cocso-switch--variant-primary {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-primary-800);
+}
 
-  .cocso-switch.cocso-switch--variant-success:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-success-400);
-  }
+.cocso-switch.cocso-switch--variant-success {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-success-400);
+}
 
-  .cocso-switch.cocso-switch--variant-error:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-danger-400);
-  }
+.cocso-switch.cocso-switch--variant-error {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-danger-400);
+}
 
-  .cocso-switch.cocso-switch--variant-warning:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-warning-400);
-  }
+.cocso-switch.cocso-switch--variant-warning {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-warning-400);
+}
 
-  .cocso-switch.cocso-switch--variant-info:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-info-400);
-  }
+.cocso-switch.cocso-switch--variant-info {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-info-400);
+}
 
-  .cocso-switch.cocso-switch--checked-false:hover {
-    --cocso-switch-switch-bg-color: var(--cocso-color-neutral-200);
-  }
-
+.cocso-switch.cocso-switch--checked-false {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-neutral-200);
 }
