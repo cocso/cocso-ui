@@ -2,18 +2,14 @@ import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import buttonJSON from "../../../../codegen/generated/button.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import type { FigmaNodeSpec } from "../recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  lookupSpec,
-} from "../recipe-utils";
-import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createIcon,
   createTextNode,
+  createVariantMatrix,
   createVariantMatrixPerSlice,
   createVariantRow,
   ICON_SVGS,
@@ -21,11 +17,58 @@ import {
   setFill,
 } from "../shared";
 
+type IconMode = "text" | "prefix" | "suffix" | "prefixSuffix" | "svgOnly";
+
+function appendButtonContent(
+  component: ComponentNode,
+  spec: FigmaNodeSpec,
+  label: string,
+  mode: IconMode
+): void {
+  const textColor = spec.fontColor ?? COLORS.neutral900;
+  const fontSize = spec.fontSize ?? 14;
+  const fontWeight = spec.fontWeight ?? 500;
+  const iconSize = Math.round(fontSize * 1.15);
+  const hexColor = rgbToHex(textColor);
+
+  const makeText = () =>
+    createTextNode(
+      label,
+      fontSize,
+      fontWeight,
+      textColor,
+      spec._tokenRefs?.fontColor
+    );
+  const iconLeft = () => createIcon(ICON_SVGS.arrowLeft, iconSize, hexColor);
+  const iconRight = () => createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
+
+  switch (mode) {
+    case "svgOnly":
+      component.appendChild(iconRight());
+      break;
+    case "prefix":
+      component.appendChild(iconLeft());
+      component.appendChild(makeText());
+      break;
+    case "suffix":
+      component.appendChild(makeText());
+      component.appendChild(iconRight());
+      break;
+    case "prefixSuffix":
+      component.appendChild(iconLeft());
+      component.appendChild(makeText());
+      component.appendChild(iconRight());
+      break;
+    default:
+      component.appendChild(makeText());
+  }
+}
+
 function createButtonWithIcon(
   name: string,
   spec: FigmaNodeSpec,
   label: string,
-  mode: "prefix" | "suffix" | "svgOnly"
+  mode: IconMode
 ): ComponentNode {
   const component = figma.createComponent();
   component.name = name;
@@ -55,8 +98,12 @@ function createButtonWithIcon(
 
   const bgColor = spec.bgColor ?? spec.fills;
   if (bgColor) {
-    const bgRef = spec._tokenRefs?.bgColor ?? spec._tokenRefs?.fills;
-    setFill(component, bgColor, 1, bgRef);
+    setFill(
+      component,
+      bgColor,
+      1,
+      spec._tokenRefs?.bgColor ?? spec._tokenRefs?.fills
+    );
   } else {
     component.fills = [];
   }
@@ -68,40 +115,7 @@ function createButtonWithIcon(
     component.strokeWeight = spec.strokeWeight;
   }
 
-  const textColor = spec.fontColor ?? COLORS.neutral900;
-  const fontSize = spec.fontSize ?? 14;
-  const fontWeight = spec.fontWeight ?? 500;
-  const iconSize = Math.round(fontSize * 1.15);
-  const hexColor = rgbToHex(textColor);
-
-  if (mode === "svgOnly") {
-    const icon = createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
-    component.appendChild(icon);
-  } else if (mode === "prefix") {
-    const icon = createIcon(ICON_SVGS.arrowLeft, iconSize, hexColor);
-    component.appendChild(icon);
-    component.appendChild(
-      createTextNode(
-        label,
-        fontSize,
-        fontWeight,
-        textColor,
-        spec._tokenRefs?.fontColor
-      )
-    );
-  } else {
-    component.appendChild(
-      createTextNode(
-        label,
-        fontSize,
-        fontWeight,
-        textColor,
-        spec._tokenRefs?.fontColor
-      )
-    );
-    const icon = createIcon(ICON_SVGS.arrowRight, iconSize, hexColor);
-    component.appendChild(icon);
-  }
+  appendButtonContent(component, spec, label, mode);
 
   return component;
 }
@@ -109,13 +123,19 @@ function createButtonWithIcon(
 export function generateButtonSection(container: FrameNode): void {
   const json = buttonJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Button");
-  const combinations = getAllVariantCombinations(buttonRecipe);
 
-  // Visual matrix grid (design system documentation layout)
   const variants = Object.keys(buttonRecipe.variants.variant);
   const sizes = Object.keys(buttonRecipe.variants.size);
   const shapes = Object.keys(buttonRecipe.variants.shape);
+  const iconModes: IconMode[] = [
+    "text",
+    "prefix",
+    "suffix",
+    "prefixSuffix",
+    "svgOnly",
+  ];
 
+  // Main variant matrix — one grid per shape
   const matrixGrid = createVariantMatrixPerSlice(
     "Button variants",
     { name: "size", values: sizes },
@@ -136,122 +156,36 @@ export function generateButtonSection(container: FrameNode): void {
   );
   section.appendChild(matrixGrid);
 
-  // Create base (Default state) nodes for all variant combinations
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Button variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = lookupSpec(json, buttonRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createComponentFromSpec(name, spec, "Button");
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  // Add state variants (hover, active) and combine into ComponentSetNode
-  const componentSet = addStateVariants(
-    baseNodes,
-    buttonRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createComponentFromSpec(name, spec, "Button"),
-    json
+  // Icon type matrix — rows=iconMode, columns=variant (medium square only)
+  const iconMatrix = createVariantMatrix(
+    "Button icon types",
+    { name: "type", values: iconModes },
+    { name: "variant", values: variants },
+    (iconMode, variantVal) => {
+      const spec = lookupSpec(json, buttonRecipe, {
+        variant: variantVal,
+        size: "medium",
+        shape: "square",
+      });
+      return createButtonWithIcon(
+        `${iconMode}-${variantVal}`,
+        spec,
+        "Button",
+        iconMode as IconMode
+      );
+    }
   );
-  section.appendChild(componentSet);
+  section.appendChild(iconMatrix);
 
-  const prefixRow = createVariantRow("prefix icon");
-  const prefixSpec = lookupSpec(json, buttonRecipe, {
-    variant: "primary",
-    size: "medium",
-    shape: "square",
-  });
-  prefixRow.appendChild(
-    createButtonWithIcon(
-      "prefix, variant=primary",
-      prefixSpec,
-      "Button",
-      "prefix"
-    )
-  );
-  const outlinePrefixSpec = lookupSpec(json, buttonRecipe, {
-    variant: "outline",
-    size: "medium",
-    shape: "square",
-  });
-  prefixRow.appendChild(
-    createButtonWithIcon(
-      "prefix, variant=outline",
-      outlinePrefixSpec,
-      "Button",
-      "prefix"
-    )
-  );
-  section.appendChild(prefixRow);
-
-  const suffixRow = createVariantRow("suffix icon");
-  suffixRow.appendChild(
-    createButtonWithIcon(
-      "suffix, variant=primary",
-      prefixSpec,
-      "Button",
-      "suffix"
-    )
-  );
-  suffixRow.appendChild(
-    createButtonWithIcon(
-      "suffix, variant=outline",
-      outlinePrefixSpec,
-      "Button",
-      "suffix"
-    )
-  );
-  section.appendChild(suffixRow);
-
-  const svgOnlyRow = createVariantRow("svgOnly");
-  for (const sz of ["large", "medium", "small", "x-small"] as const) {
-    const spec = lookupSpec(json, buttonRecipe, {
-      variant: "primary",
-      size: sz,
-      shape: "square",
-    });
-    svgOnlyRow.appendChild(
-      createButtonWithIcon(`svgOnly, size=${sz}`, spec, "", "svgOnly")
-    );
-  }
-  const svgOnlyOutline = lookupSpec(json, buttonRecipe, {
-    variant: "outline",
-    size: "medium",
-    shape: "square",
-  });
-  svgOnlyRow.appendChild(
-    createButtonWithIcon(
-      "svgOnly, variant=outline",
-      svgOnlyOutline,
-      "",
-      "svgOnly"
-    )
-  );
-  section.appendChild(svgOnlyRow);
-
+  // Disabled row
   const disabledRow = createVariantRow("disabled");
-  for (const v of ["primary", "secondary", "outline"] as const) {
+  for (const v of variants) {
     const spec = lookupSpec(json, buttonRecipe, {
       variant: v,
       size: "medium",
       shape: "square",
     });
-    const comp = createComponentFromSpec(
-      `disabled, variant=${v}`,
-      spec,
-      "Button"
-    );
+    const comp = createComponentFromSpec(`disabled-${v}`, spec, "Button");
     comp.opacity = 0.4;
     disabledRow.appendChild(comp);
   }
