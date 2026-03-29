@@ -39,8 +39,14 @@
     opacity: 0.4;
   }
 
-  .arrow:not(:disabled):hover {
-    --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
+  @media (hover: hover) and (pointer: fine) {
+    .arrow:not(:disabled):hover {
+      --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
+    }
+
+    .item[data-active="false"]:hover {
+      --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
+    }
   }
 
   .arrow:not(:disabled):active {
@@ -62,10 +68,6 @@
     --cocso-pagination-font-color: var(--cocso-color-white);
     --cocso-pagination-bg-color: var(--cocso-color-primary-950);
     --cocso-pagination-font-weight: var(--cocso-font-weight-semibold);
-  }
-
-  .item[data-active="false"]:hover {
-    --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
   }
 
   .item[data-active="false"]:active {

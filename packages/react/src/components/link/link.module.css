@@ -11,18 +11,20 @@
     transition: color 0.15s ease-in-out;
   }
 
-  .link:hover {
-    color: var(--cocso-link-color-hover);
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover {
+      color: var(--cocso-link-color-hover);
+    }
+
+    .current:hover {
+      opacity: 0.7;
+    }
   }
 
   .link:focus-visible {
     outline: 2px solid var(--cocso-color-primary-950);
     outline-offset: 2px;
     border-radius: var(--cocso-radius-1);
-  }
-
-  .current:hover {
-    opacity: 0.7;
   }
 
   .indicator {

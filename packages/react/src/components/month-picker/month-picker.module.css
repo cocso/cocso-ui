@@ -94,17 +94,19 @@
     border-radius: var(--cocso-radius-4);
   }
 
-  :global(.react-datepicker__month-text:hover) {
-    background-color: var(--cocso-color-neutral-50);
-  }
-
   :global(.react-datepicker__month-text--selected) {
     font-weight: var(--cocso-font-weight-semibold);
     color: var(--cocso-color-white);
     background-color: var(--cocso-color-primary-950);
   }
 
-  :global(.react-datepicker__month-text--selected:hover) {
-    background-color: var(--cocso-color-primary-800);
+  @media (hover: hover) and (pointer: fine) {
+    :global(.react-datepicker__month-text:hover) {
+      background-color: var(--cocso-color-neutral-50);
+    }
+
+    :global(.react-datepicker__month-text--selected:hover) {
+      background-color: var(--cocso-color-primary-800);
+    }
   }
 }

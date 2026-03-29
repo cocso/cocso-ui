@@ -27,9 +27,11 @@
     transition: background-color 0.15s ease-in-out;
   }
 
-  .button:not([disabled]):hover {
-    --cocso-button-bg-color-hover: inherit;
-    background-color: var(--cocso-button-bg-color-hover);
+  @media (hover: hover) and (pointer: fine) {
+    .button:not([disabled]):hover {
+      --cocso-button-bg-color-hover: inherit;
+      background-color: var(--cocso-button-bg-color-hover);
+    }
   }
 
   .button:not([disabled]):active {
