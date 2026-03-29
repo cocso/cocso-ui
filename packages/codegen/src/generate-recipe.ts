@@ -247,7 +247,6 @@ export function generateRuntime<
   lines.push("");
 
   if (isSingleSlot) {
-    // Single-slot: function returns string
     lines.push(`export function ${recipe.name}(props: ${typeName} = {}): string {`);
     lines.push(`  const {`);
     for (const { dim } of dims) {
@@ -259,11 +258,12 @@ export function generateRuntime<
       }
     }
     lines.push(`  } = props;`);
-    lines.push(`  return \`${name}`);
+    lines.push(`  return [`);
+    lines.push(`    "${name}",`);
     for (const { dim } of dims) {
-      lines.push(`    \${${dim} ? \` ${name}--${dim}-\${${dim}}\` : ""}`);
+      lines.push(`    ${dim} && \`${name}--${dim}-\${${dim}}\`,`);
     }
-    lines.push(`  \`.trim().replace(/\\s+/g, " ");`);
+    lines.push(`  ].filter(Boolean).join(" ");`);
     lines.push("}");
   }
 

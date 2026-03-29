@@ -12,9 +12,10 @@ export function button(props: ButtonVariantProps = {}): string {
     size = "medium",
     shape = "square",
   } = props;
-  return `cocso-button
-    ${variant ? ` cocso-button--variant-${variant}` : ""}
-    ${size ? ` cocso-button--size-${size}` : ""}
-    ${shape ? ` cocso-button--shape-${shape}` : ""}
-  `.trim().replace(/\s+/g, " ");
+  return [
+    "cocso-button",
+    variant && `cocso-button--variant-${variant}`,
+    size && `cocso-button--size-${size}`,
+    shape && `cocso-button--shape-${shape}`,
+  ].filter(Boolean).join(" ");
 }
