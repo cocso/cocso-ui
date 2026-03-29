@@ -1,21 +1,13 @@
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import typographyJSON from "../../../../codegen/generated/typography.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-  lookupSpec,
-} from "../recipe-utils";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
   COLORS,
   createComponentSection,
   createTextNode,
   createVariantMatrix,
-  createVariantRow,
 } from "../shared";
-
-const SIZE_VALUE_RE = /size=([^,]*)/;
 
 function createTypographyComponent(
   name: string,
@@ -72,24 +64,6 @@ export function generateTypographySection(container: FrameNode): void {
     }
   );
   section.appendChild(matrixGrid);
-
-  const combinations = getAllVariantCombinations(typographyRecipe);
-  const groups = groupVariantsByFirstDimension(
-    typographyRecipe,
-    combinations,
-    json
-  );
-
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      const sizeValue = name.match(SIZE_VALUE_RE)?.[1] ?? "";
-      row.appendChild(
-        createTypographyComponent(name, spec, groupKey, sizeValue)
-      );
-    }
-    section.appendChild(row);
-  }
 
   container.appendChild(section);
 }

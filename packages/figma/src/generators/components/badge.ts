@@ -1,23 +1,13 @@
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import badgeJSON from "../../../../codegen/generated/badge.figma.json";
 import { createComponentFromSpec } from "../component-creators";
-import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-  lookupSpec,
-} from "../recipe-utils";
-import {
-  createComponentSection,
-  createVariantMatrixPerSlice,
-  createVariantRow,
-} from "../shared";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
+import { createComponentSection, createVariantMatrixPerSlice } from "../shared";
 
 export function generateBadgeSection(container: FrameNode): void {
   const json = badgeJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Badge");
 
-  // Visual matrix grid (design system documentation layout)
   const variants = Object.keys(badgeRecipe.variants.variant);
   const sizes = Object.keys(badgeRecipe.variants.size);
   const shapes = Object.keys(badgeRecipe.variants.shape);
@@ -41,18 +31,6 @@ export function generateBadgeSection(container: FrameNode): void {
     }
   );
   section.appendChild(matrixGrid);
-
-  const combinations = getAllVariantCombinations(badgeRecipe);
-  const groups = groupVariantsByFirstDimension(badgeRecipe, combinations, json);
-
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      const component = createComponentFromSpec(name, spec, "Badge");
-      row.appendChild(component);
-    }
-    section.appendChild(row);
-  }
 
   container.appendChild(section);
 }

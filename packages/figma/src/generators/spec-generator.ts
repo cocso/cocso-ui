@@ -197,22 +197,23 @@ function generateAccordionSection(container: FrameNode): void {
 
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 
-function createTooltipBody(): ComponentNode {
-  const comp = figma.createComponent();
-  comp.layoutMode = "HORIZONTAL";
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.paddingTop = 4;
-  comp.paddingBottom = 4;
-  comp.paddingLeft = 8;
-  comp.paddingRight = 8;
-  comp.cornerRadius = 4;
-  setFill(comp, COLORS.neutral900);
+function createTooltipBody(): FrameNode {
+  const frame = figma.createFrame();
+  frame.name = "tooltip-body";
+  frame.layoutMode = "HORIZONTAL";
+  frame.primaryAxisSizingMode = "AUTO";
+  frame.counterAxisSizingMode = "AUTO";
+  frame.counterAxisAlignItems = "CENTER";
+  frame.paddingTop = 4;
+  frame.paddingBottom = 4;
+  frame.paddingLeft = 8;
+  frame.paddingRight = 8;
+  frame.cornerRadius = 4;
+  setFill(frame, COLORS.neutral900);
 
   const text = createTextNode("Tooltip text", 12, 400, COLORS.white);
-  comp.appendChild(text);
-  return comp;
+  frame.appendChild(text);
+  return frame;
 }
 
 function createTooltipArrow(
@@ -303,24 +304,25 @@ function generateTooltipSection(container: FrameNode): void {
 
 // ─── Popover ─────────────────────────────────────────────────────────────────
 
-function createPopoverBody(): ComponentNode {
-  const comp = figma.createComponent();
-  comp.layoutMode = "HORIZONTAL";
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.paddingTop = 6;
-  comp.paddingBottom = 6;
-  comp.paddingLeft = 8;
-  comp.paddingRight = 8;
-  comp.cornerRadius = 6;
-  comp.effects = SHADOW_SM;
-  setFill(comp, COLORS.white);
-  setStroke(comp, COLORS.neutral100, 1);
+function createPopoverBody(): FrameNode {
+  const frame = figma.createFrame();
+  frame.name = "popover-body";
+  frame.layoutMode = "HORIZONTAL";
+  frame.primaryAxisSizingMode = "AUTO";
+  frame.counterAxisSizingMode = "AUTO";
+  frame.counterAxisAlignItems = "CENTER";
+  frame.paddingTop = 6;
+  frame.paddingBottom = 6;
+  frame.paddingLeft = 8;
+  frame.paddingRight = 8;
+  frame.cornerRadius = 6;
+  frame.effects = SHADOW_SM;
+  setFill(frame, COLORS.white);
+  setStroke(frame, COLORS.neutral100, 1);
 
   const text = createTextNode("Popover content", 14, 400, COLORS.neutral900);
-  comp.appendChild(text);
-  return comp;
+  frame.appendChild(text);
+  return frame;
 }
 
 function createPopoverArrow(

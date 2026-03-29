@@ -1,17 +1,11 @@
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import spinnerJSON from "../../../../codegen/generated/spinner.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-  lookupSpec,
-} from "../recipe-utils";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
   COLORS,
   createComponentSection,
   createVariantMatrix,
-  createVariantRow,
   rgbToHex,
 } from "../shared";
 
@@ -80,21 +74,6 @@ export function generateSpinnerSection(container: FrameNode): void {
     }
   );
   section.appendChild(matrixGrid);
-
-  const combinations = getAllVariantCombinations(spinnerRecipe);
-  const groups = groupVariantsByFirstDimension(
-    spinnerRecipe,
-    combinations,
-    json
-  );
-
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      row.appendChild(createSpinnerFromSpec(name, spec));
-    }
-    section.appendChild(row);
-  }
 
   container.appendChild(section);
 }
