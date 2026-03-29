@@ -156,19 +156,19 @@ export function generateButtonSection(container: FrameNode): void {
   );
   section.appendChild(matrixGrid);
 
-  // Icon type matrix — rows=iconMode, columns=variant (medium square only)
+  // Icon type matrix — rows=size, columns=iconMode (primary square)
   const iconMatrix = createVariantMatrix(
     "Button icon types",
+    { name: "size", values: sizes },
     { name: "type", values: iconModes },
-    { name: "variant", values: variants },
-    (iconMode, variantVal) => {
+    (sizeVal, iconMode) => {
       const spec = lookupSpec(json, buttonRecipe, {
-        variant: variantVal,
-        size: "medium",
+        variant: "primary",
+        size: sizeVal,
         shape: "square",
       });
       return createButtonWithIcon(
-        `${iconMode}-${variantVal}`,
+        `${iconMode}-${sizeVal}`,
         spec,
         "Button",
         iconMode as IconMode
