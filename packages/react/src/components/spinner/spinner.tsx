@@ -2,8 +2,16 @@ import { spinner } from "@cocso-ui/codegen/generated/spinner";
 import { getSpinnerGeometry } from "@cocso-ui/codegen/generated/spinner-geometry";
 import "@cocso-ui/codegen/generated/spinner.css";
 
-export type { SpinnerVariant } from "@cocso-ui/codegen/generated/spinner";
-export type { SpinnerSize } from "@cocso-ui/codegen/generated/spinner-geometry";
+/** Inline type aliases — codegen is a devDependency and must not leak into published .d.ts */
+export type SpinnerVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "warning"
+  | "info"
+  | "white";
+export type SpinnerSize = "large" | "medium" | "small";
 
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";

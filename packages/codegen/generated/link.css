@@ -2,24 +2,15 @@
 
 .cocso-link.cocso-link--variant-inline {
   --cocso-link-color: var(--cocso-color-info-500);
-}
-
-.cocso-link.cocso-link--variant-current {
-  --cocso-link-color: currentColor;
-}
-
-.cocso-link.cocso-link--variant-plain {
-  --cocso-link-color: var(--cocso-color-info-500);
-}
-
-.cocso-link.cocso-link--variant-inline {
   --cocso-link-color-hover: var(--cocso-color-info-700);
 }
 
 .cocso-link.cocso-link--variant-current {
+  --cocso-link-color: currentColor;
   --cocso-link-color-hover: currentColor;
 }
 
 .cocso-link.cocso-link--variant-plain {
+  --cocso-link-color: var(--cocso-color-info-500);
   --cocso-link-color-hover: var(--cocso-color-info-700);
 }

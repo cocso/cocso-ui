@@ -11,7 +11,10 @@
   "type": "module",
   "exports": {
     "./generated/*.css": "./generated/*.css",
-    "./generated/*": "./generated/*.ts"
+    "./generated/*": {
+      "types": "./generated/*.d.ts",
+      "default": "./generated/*.ts"
+    }
   },
   "scripts": {
     "generate": "tsx src/generate.ts",
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "@cocso-ui/recipe": "workspace:*",
+    "@types/node": "^22.15.0",
     "@vitest/coverage-v8": "^4.0.18",
     "tsx": "^4.19.0",
     "typescript": "^5.9.3",

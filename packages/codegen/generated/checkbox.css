@@ -18,29 +18,20 @@
 .cocso-checkbox.cocso-checkbox--status-on {
   --cocso-checkbox-border-color: var(--cocso-color-primary-950);
   --cocso-checkbox-bg-color: var(--cocso-color-primary-950);
-}
-
-.cocso-checkbox.cocso-checkbox--status-off {
-  --cocso-checkbox-border-color: var(--cocso-color-neutral-100);
-  --cocso-checkbox-bg-color: var(--cocso-color-white);
-}
-
-.cocso-checkbox.cocso-checkbox--status-intermediate {
-  --cocso-checkbox-border-color: var(--cocso-color-primary-950);
-  --cocso-checkbox-bg-color: var(--cocso-color-primary-950);
-}
-
-.cocso-checkbox.cocso-checkbox--status-on {
   --cocso-checkbox-bg-color-hover: var(--cocso-color-primary-800);
   --cocso-checkbox-border-color-hover: var(--cocso-color-primary-800);
 }
 
 .cocso-checkbox.cocso-checkbox--status-off {
+  --cocso-checkbox-border-color: var(--cocso-color-neutral-100);
+  --cocso-checkbox-bg-color: var(--cocso-color-white);
   --cocso-checkbox-bg-color-hover: var(--cocso-color-neutral-200);
   --cocso-checkbox-border-color-hover: var(--cocso-color-neutral-200);
 }
 
 .cocso-checkbox.cocso-checkbox--status-intermediate {
+  --cocso-checkbox-border-color: var(--cocso-color-primary-950);
+  --cocso-checkbox-bg-color: var(--cocso-color-primary-950);
   --cocso-checkbox-bg-color-hover: var(--cocso-color-primary-800);
   --cocso-checkbox-border-color-hover: var(--cocso-color-primary-800);
 }

@@ -12,6 +12,8 @@
   --cocso-select-icon-right: 8px;
   --cocso-select-font-size: 12px;
   --cocso-select-border-radius: var(--cocso-radius-3);
+  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
+  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
 }
 
 .cocso-select.cocso-select--size-small {
@@ -22,6 +24,8 @@
   --cocso-select-icon-right: 10px;
   --cocso-select-font-size: 12px;
   --cocso-select-border-radius: var(--cocso-radius-3);
+  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
+  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
 }
 
 .cocso-select.cocso-select--size-medium {
@@ -32,6 +36,8 @@
   --cocso-select-icon-right: 12px;
   --cocso-select-font-size: 14px;
   --cocso-select-border-radius: var(--cocso-radius-4);
+  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
+  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
 }
 
 .cocso-select.cocso-select--size-large {
@@ -42,36 +48,6 @@
   --cocso-select-icon-right: 14px;
   --cocso-select-font-size: 14px;
   --cocso-select-border-radius: var(--cocso-radius-4);
-}
-
-.cocso-select.cocso-select--size-x-small {
   --cocso-select-border-color-hover: var(--cocso-color-primary-500);
-}
-
-.cocso-select.cocso-select--size-small {
-  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
-}
-
-.cocso-select.cocso-select--size-medium {
-  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
-}
-
-.cocso-select.cocso-select--size-large {
-  --cocso-select-border-color-hover: var(--cocso-color-primary-500);
-}
-
-.cocso-select.cocso-select--size-x-small {
-  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
-}
-
-.cocso-select.cocso-select--size-small {
-  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
-}
-
-.cocso-select.cocso-select--size-medium {
-  --cocso-select-border-color-focus: var(--cocso-color-primary-700);
-}
-
-.cocso-select.cocso-select--size-large {
   --cocso-select-border-color-focus: var(--cocso-color-primary-700);
 }

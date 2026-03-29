@@ -225,7 +225,6 @@ function createArrowSvg(
   const w = size;
   const h = Math.round(size / 2);
   let fillPoints: string;
-  let strokePoints: string; // 2 outer edges only (excludes body-touching edge)
   let vw: number;
   let vh: number;
 
@@ -234,34 +233,33 @@ function createArrowSvg(
       vw = w;
       vh = h;
       fillPoints = `0,${h} ${w / 2},0 ${w},${h}`;
-      strokePoints = `0,${h} ${w / 2},0 ${w},${h}`; // both slopes, no base
       break;
     }
     case "bottom": {
       vw = w;
       vh = h;
       fillPoints = `0,0 ${w / 2},${h} ${w},0`;
-      strokePoints = `0,0 ${w / 2},${h} ${w},0`;
       break;
     }
     case "left": {
       vw = h;
       vh = w;
       fillPoints = `${h},0 0,${w / 2} ${h},${w}`;
-      strokePoints = `${h},0 0,${w / 2} ${h},${w}`;
       break;
     }
     default: {
       vw = h;
       vh = w;
       fillPoints = `0,0 ${h},${w / 2} 0,${w}`;
-      strokePoints = `0,0 ${h},${w / 2} 0,${w}`;
       break;
     }
   }
 
+  // polyline reuses fillPoints but does NOT auto-close (unlike polygon),
+  // so the segment from last point back to first (the body-touching base edge)
+  // is not stroked — achieving partial stroke on the two slope edges only.
   const strokeSvg = hexStroke
-    ? `<polyline points="${strokePoints}" fill="none" stroke="${hexStroke}" stroke-width="1"/>`
+    ? `<polyline points="${fillPoints}" fill="none" stroke="${hexStroke}" stroke-width="1"/>`
     : "";
   const svg = `<svg width="${vw}" height="${vh}" viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><polygon points="${fillPoints}" fill="${hexFill}"/>${strokeSvg}</svg>`;
   const node = figma.createNodeFromSvg(svg);

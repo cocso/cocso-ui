@@ -3,42 +3,58 @@
 .cocso-button.cocso-button--variant-primary {
   --cocso-button-bg-color: var(--cocso-color-primary-950);
   --cocso-button-font-color: var(--cocso-color-white);
+  --cocso-button-bg-color-hover: var(--cocso-color-primary-800);
+  --cocso-button-bg-color-active: var(--cocso-color-primary-700);
 }
 
 .cocso-button.cocso-button--variant-secondary {
   --cocso-button-bg-color: var(--cocso-color-neutral-50);
   --cocso-button-font-color: var(--cocso-color-neutral-600);
+  --cocso-button-bg-color-hover: var(--cocso-color-neutral-100);
+  --cocso-button-bg-color-active: var(--cocso-color-neutral-200);
 }
 
 .cocso-button.cocso-button--variant-outline {
   --cocso-button-bg-color: var(--cocso-color-transparent);
   --cocso-button-font-color: var(--cocso-color-neutral-950);
   --cocso-button-border: 1px solid var(--cocso-color-neutral-100);
+  --cocso-button-bg-color-hover: var(--cocso-color-neutral-50);
+  --cocso-button-bg-color-active: var(--cocso-color-neutral-100);
 }
 
 .cocso-button.cocso-button--variant-ghost {
   --cocso-button-bg-color: var(--cocso-color-white);
   --cocso-button-font-color: var(--cocso-color-neutral-950);
+  --cocso-button-bg-color-hover: var(--cocso-color-neutral-50);
+  --cocso-button-bg-color-active: var(--cocso-color-neutral-100);
 }
 
 .cocso-button.cocso-button--variant-success {
   --cocso-button-bg-color: var(--cocso-color-success-500);
   --cocso-button-font-color: var(--cocso-color-white);
+  --cocso-button-bg-color-hover: var(--cocso-color-success-600);
+  --cocso-button-bg-color-active: var(--cocso-color-success-700);
 }
 
 .cocso-button.cocso-button--variant-error {
   --cocso-button-bg-color: var(--cocso-color-danger-500);
   --cocso-button-font-color: var(--cocso-color-white);
+  --cocso-button-bg-color-hover: var(--cocso-color-danger-600);
+  --cocso-button-bg-color-active: var(--cocso-color-danger-700);
 }
 
 .cocso-button.cocso-button--variant-warning {
   --cocso-button-bg-color: var(--cocso-color-warning-300);
   --cocso-button-font-color: var(--cocso-color-neutral-950);
+  --cocso-button-bg-color-hover: var(--cocso-color-warning-400);
+  --cocso-button-bg-color-active: var(--cocso-color-warning-500);
 }
 
 .cocso-button.cocso-button--variant-info {
   --cocso-button-bg-color: var(--cocso-color-info-500);
   --cocso-button-font-color: var(--cocso-color-white);
+  --cocso-button-bg-color-hover: var(--cocso-color-info-600);
+  --cocso-button-bg-color-active: var(--cocso-color-info-700);
 }
 
 .cocso-button.cocso-button--size-large {
@@ -91,68 +107,4 @@
 
 .cocso-button.cocso-button--shape-square.cocso-button--size-small {
   --cocso-button-border-radius: var(--cocso-radius-4);
-}
-
-.cocso-button.cocso-button--variant-primary {
-  --cocso-button-bg-color-hover: var(--cocso-color-primary-800);
-}
-
-.cocso-button.cocso-button--variant-secondary {
-  --cocso-button-bg-color-hover: var(--cocso-color-neutral-100);
-}
-
-.cocso-button.cocso-button--variant-outline {
-  --cocso-button-bg-color-hover: var(--cocso-color-neutral-50);
-}
-
-.cocso-button.cocso-button--variant-ghost {
-  --cocso-button-bg-color-hover: var(--cocso-color-neutral-50);
-}
-
-.cocso-button.cocso-button--variant-success {
-  --cocso-button-bg-color-hover: var(--cocso-color-success-600);
-}
-
-.cocso-button.cocso-button--variant-error {
-  --cocso-button-bg-color-hover: var(--cocso-color-danger-600);
-}
-
-.cocso-button.cocso-button--variant-warning {
-  --cocso-button-bg-color-hover: var(--cocso-color-warning-400);
-}
-
-.cocso-button.cocso-button--variant-info {
-  --cocso-button-bg-color-hover: var(--cocso-color-info-600);
-}
-
-.cocso-button.cocso-button--variant-primary {
-  --cocso-button-bg-color-active: var(--cocso-color-primary-700);
-}
-
-.cocso-button.cocso-button--variant-secondary {
-  --cocso-button-bg-color-active: var(--cocso-color-neutral-200);
-}
-
-.cocso-button.cocso-button--variant-outline {
-  --cocso-button-bg-color-active: var(--cocso-color-neutral-100);
-}
-
-.cocso-button.cocso-button--variant-ghost {
-  --cocso-button-bg-color-active: var(--cocso-color-neutral-100);
-}
-
-.cocso-button.cocso-button--variant-success {
-  --cocso-button-bg-color-active: var(--cocso-color-success-700);
-}
-
-.cocso-button.cocso-button--variant-error {
-  --cocso-button-bg-color-active: var(--cocso-color-danger-700);
-}
-
-.cocso-button.cocso-button--variant-warning {
-  --cocso-button-bg-color-active: var(--cocso-color-warning-500);
-}
-
-.cocso-button.cocso-button--variant-info {
-  --cocso-button-bg-color-active: var(--cocso-color-info-700);
 }

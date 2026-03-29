@@ -6,7 +6,8 @@ import { Radio as RadioBase } from "../../primitives/radio";
 import { RadioGroup as RadioGroupBase } from "../../primitives/radio-group";
 import styles from "./radio-group.module.css";
 
-export type { RadioSize } from "@cocso-ui/codegen/generated/radio";
+/** Inline type alias — codegen is a devDependency and must not leak into published .d.ts */
+export type RadioSize = "large" | "medium" | "small";
 
 function RadioGroupRoot({
   className,

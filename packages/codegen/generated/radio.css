@@ -18,18 +18,12 @@
 .cocso-radio.cocso-radio--selected-true {
   --cocso-radio-bg-color: var(--cocso-color-primary-950);
   --cocso-radio-border-color: var(--cocso-color-primary-950);
-}
-
-.cocso-radio.cocso-radio--selected-false {
-  --cocso-radio-bg-color: var(--cocso-color-white);
-  --cocso-radio-border-color: var(--cocso-color-neutral-200);
-}
-
-.cocso-radio.cocso-radio--selected-true {
   --cocso-radio-bg-color-hover: var(--cocso-color-primary-800);
   --cocso-radio-border-color-hover: var(--cocso-color-primary-800);
 }
 
 .cocso-radio.cocso-radio--selected-false {
+  --cocso-radio-bg-color: var(--cocso-color-white);
+  --cocso-radio-border-color: var(--cocso-color-neutral-200);
   --cocso-radio-border-color-hover: var(--cocso-color-primary-500);
 }
