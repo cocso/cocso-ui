@@ -1,5 +1,5 @@
-import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
-import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
+import type { RecipeDefinition, SlotStyles, StyleValue } from "@cocso-ui/recipe";
+import { resolveStyleValue } from "@cocso-ui/recipe/resolvers/react";
 
 /**
  * Convert camelCase to kebab-case: "bgColor" -> "bg-color"
@@ -38,44 +38,23 @@ export function getAllCombinations<
 }
 
 /**
- * Build a BEM modifier string from a variant combination.
- * e.g., { variant: "primary", size: "large" } -> "--variant-primary--size-large"
+ * Resolve slot styles into a CSS custom property map.
+ * Reuses resolveStyleValue from the recipe package.
  */
-function bemModifiers(name: string, combo: Record<string, string>): string {
-  return Object.entries(combo)
-    .map(([dim, val]) => `${name}--${dim}-${val}`)
-    .join(" ");
-}
-
-/**
- * Check if a compound variant's conditions match a given variant combination.
- */
-function matchesCompound(
-  conditions: Record<string, string | string[]>,
-  combo: Record<string, string>,
-): boolean {
-  return Object.entries(conditions).every(([dim, expected]) => {
-    if (Array.isArray(expected)) {
-      return expected.includes(combo[dim]);
+function resolveSlotProps(
+  prefix: string,
+  slots: readonly string[],
+  slotMap: Partial<Record<string, SlotStyles>>,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const slot of slots) {
+    const styles = slotMap[slot];
+    if (!styles) continue;
+    for (const [prop, value] of Object.entries(styles)) {
+      result[camelToKebab(`${prefix}-${prop}`)] = resolveStyleValue(value);
     }
-    return combo[dim] === expected;
-  });
-}
-
-/**
- * Generate a CSS selector for a variant combination + optional state.
- */
-function cssSelector(
-  name: string,
-  combo: Record<string, string>,
-  state?: string,
-): string {
-  const base = `.${name}`;
-  const mods = Object.entries(combo)
-    .map(([dim, val]) => `.${name}--${dim}-${val}`)
-    .join("");
-  const pseudo = state === "hover" ? ":hover" : state === "active" ? ":active" : state === "focus" ? ":focus-visible" : "";
-  return `${base}${mods}${pseudo}`;
+  }
+  return result;
 }
 
 interface CSSRule {
@@ -86,61 +65,110 @@ interface CSSRule {
 
 /**
  * Generate CSS rules for a single recipe.
- * Uses resolveForReact at build time to get CSS values, then formats as CSS classes.
+ *
+ * Generates per-dimension rules (not Cartesian product), keeping CSS compact:
+ * - Base styles → .cocso-button { ... }
+ * - Per-dimension → .cocso-button--variant-primary { ... }
+ * - Compound variants → .cocso-button--shape-square.cocso-button--size-large { ... }
+ * - State overrides → @media (hover: hover) { .cocso-button--variant-primary:hover { ... } }
  */
 export function generateCSS<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   S extends string,
 >(recipe: RecipeDefinition<V, S>): string {
   const name = `cocso-${recipe.name}`;
-  const combos = getAllCombinations(recipe);
+  const prefix = `--cocso-${recipe.name}`;
   const rules: CSSRule[] = [];
-  const stateNames = recipe.states ? Object.keys(recipe.states) : [];
 
-  for (const combo of combos) {
-    // Resolve base state using existing resolver (perfect reuse)
-    const resolved = resolveForReact(recipe, combo as Record<string, never>);
-    // resolved keys are like "--cocso-button-bgColor", kebab-case them to "--cocso-button-bg-color"
-    const properties: Record<string, string> = {};
-    for (const [key, value] of Object.entries(resolved)) {
-      properties[camelToKebab(key)] = value;
+  // 1. Base styles
+  if (recipe.base) {
+    const props = resolveSlotProps(prefix, recipe.slots, recipe.base);
+    if (Object.keys(props).length > 0) {
+      rules.push({ selector: `.${name}`, properties: props });
     }
+  }
 
-    if (Object.keys(properties).length > 0) {
-      rules.push({
-        selector: cssSelector(name, combo),
-        properties,
-      });
-    }
-
-    // Resolve state overrides
-    for (const state of stateNames) {
-      const stateResolved = resolveForReact(recipe, combo as Record<string, never>, { state });
-      const stateProps: Record<string, string> = {};
-
-      for (const [key, value] of Object.entries(stateResolved)) {
-        const kebabKey = camelToKebab(key);
-        // Only include properties that differ from base
-        if (properties[kebabKey] !== value) {
-          stateProps[kebabKey] = value;
-        }
-      }
-
-      if (Object.keys(stateProps).length > 0) {
-        const isHover = state === "hover";
+  // 2. Per-dimension variant styles (orthogonal — no Cartesian product)
+  for (const [dim, values] of Object.entries(recipe.variants)) {
+    for (const [val, slotMap] of Object.entries(values as Record<string, Partial<Record<string, SlotStyles>>>)) {
+      const props = resolveSlotProps(prefix, recipe.slots, slotMap);
+      if (Object.keys(props).length > 0) {
         rules.push({
-          selector: cssSelector(name, combo, state),
-          properties: stateProps,
-          mediaQuery: isHover ? "(hover: hover) and (pointer: fine)" : undefined,
+          selector: `.${name}.${name}--${dim}-${val}`,
+          properties: props,
         });
       }
     }
   }
 
-  // Also add compound variant overrides as their own rules
-  // (already handled by resolveForReact, which applies compound variants)
+  // 3. Compound variants
+  if (recipe.compoundVariants) {
+    for (const cv of recipe.compoundVariants) {
+      const conditions = cv.conditions as Record<string, string | string[]>;
+      const props = resolveSlotProps(prefix, recipe.slots, cv.styles);
+      if (Object.keys(props).length === 0) continue;
+
+      // Expand array conditions into separate rules
+      const selectorSets = expandConditions(name, conditions);
+      for (const selector of selectorSets) {
+        rules.push({ selector, properties: { ...props } });
+      }
+    }
+  }
+
+  // 4. State overrides (per dimension value, not Cartesian product)
+  if (recipe.states) {
+    for (const [state, stateMap] of Object.entries(recipe.states)) {
+      const isHover = state === "hover";
+      const pseudo = state === "hover" ? ":hover" : state === "active" ? ":active" : state === "focus" ? ":focus-visible" : "";
+      const mediaQuery = isHover ? "(hover: hover) and (pointer: fine)" : undefined;
+
+      const typedStateMap = stateMap as Record<string, Record<string, Partial<Record<string, SlotStyles>>> | undefined>;
+      for (const [dim, dimValues] of Object.entries(typedStateMap)) {
+        if (!dimValues) continue;
+        for (const [val, slotMap] of Object.entries(dimValues)) {
+          const props = resolveSlotProps(prefix, recipe.slots, slotMap as Partial<Record<string, SlotStyles>>);
+          if (Object.keys(props).length > 0) {
+            rules.push({
+              selector: `.${name}.${name}--${dim}-${val}${pseudo}`,
+              properties: props,
+              mediaQuery,
+            });
+          }
+        }
+      }
+    }
+  }
 
   return formatCSS(rules);
+}
+
+/**
+ * Expand compound variant conditions with array values into multiple CSS selectors.
+ * e.g., { shape: "square", size: ["large", "medium"] }
+ * → [".cocso-button--shape-square.cocso-button--size-large",
+ *    ".cocso-button--shape-square.cocso-button--size-medium"]
+ */
+function expandConditions(
+  name: string,
+  conditions: Record<string, string | string[]>,
+): string[] {
+  const entries = Object.entries(conditions);
+  const results: string[] = [];
+
+  function walk(idx: number, parts: string[]) {
+    if (idx === entries.length) {
+      results.push(`.${name}${parts.join("")}`);
+      return;
+    }
+    const [dim, value] = entries[idx];
+    const values = Array.isArray(value) ? value : [value];
+    for (const v of values) {
+      walk(idx + 1, [...parts, `.${name}--${dim}-${v}`]);
+    }
+  }
+  walk(0, []);
+  return results;
 }
 
 function formatCSS(rules: CSSRule[]): string {
