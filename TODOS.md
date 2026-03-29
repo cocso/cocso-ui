@@ -1,21 +1,14 @@
 # TODOS
 
-## Figma generator codegen 마이그레이션 (Phase 2c)
+> All items from the Direction B codegen plan have been completed.
+> Remaining items are follow-up improvements.
 
-**What:** 13개 Figma generator가 `resolveForFigma`를 직접 호출하는 대신, codegen의 Figma JSON descriptor를 소비하도록 전환.
+## Visual regression 테스트 baseline 생성
 
-**Why:** codegen이 모든 recipe를 build-time에 해석하므로, Figma generator도 같은 생성 파이프라인을 사용하면 일관성 확보.
+**What:** Storybook test-runner + jest-image-snapshot 설정 완료. Storybook을 빌드/실행하고 `pnpm --filter @cocso-ui/storybook test:visual`로 baseline 스크린샷 생성 필요.
 
-**Context:** Phase 2b (React 마이그레이션) 완료. 현재 Figma는 동작에 문제 없이 resolveForFigma를 직접 사용 중. 긴급하지 않으나 아키텍처 일관성을 위해 진행 권장. resolveForFigma → codegen 의존성 구조(figma 패키지가 recipe에 직접 의존)가 복잡하여 별도 설계 필요.
+**Why:** CSS Module 수정이나 codegen CSS 변경 시 시각적 회귀를 자동 감지.
 
-**Depends on:** Phase 2b 완료 (✅).
+**Context:** test-runner.ts 설정 + jest-image-snapshot 의존성 추가됨. 첫 실행 시 __snapshots__/ 디렉토리에 baseline이 자동 생성됨. CI에 visual test 단계 추가는 baseline 안정화 후 진행.
 
-## Visual regression 테스트
-
-**What:** Storybook visual regression 또는 Playwright screenshot comparison 도입.
-
-**Why:** CSS Module 수정 시 transition/animation 누락이 silent failure. 시각적 회귀를 자동 감지할 수 있는 테스트 필요.
-
-**Context:** Eng review에서 critical gap으로 식별. P7 hover 수정이 적용되었으므로 시각적 검증 중요도 증가.
-
-**Depends on:** Storybook 정상 동작.
+**Depends on:** Storybook 빌드 성공 + Playwright 설치.
