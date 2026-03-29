@@ -37,7 +37,6 @@
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@cocso-ui/react-icons": "workspace:^",
-    "@cocso-ui/codegen": "workspace:*",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "input-otp": "^1.4.2",
@@ -49,6 +48,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
+    "@cocso-ui/codegen": "workspace:*",
     "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",

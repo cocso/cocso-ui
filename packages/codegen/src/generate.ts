@@ -24,7 +24,7 @@ import type { SpinnerSize } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
-import { generateCSS, generateFigmaJSON, generateRuntime, generateTypes } from "./generate-recipe.js";
+import { generateCSS, generateRuntime, generateTypes } from "./generate-recipe.js";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "generated");
 

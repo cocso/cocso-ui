@@ -308,9 +308,6 @@ importers:
       '@base-ui/react':
         specifier: ^1.2.0
         version: 1.2.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@cocso-ui/codegen':
-        specifier: workspace:*
-        version: link:../codegen
       '@cocso-ui/css':
         specifier: ^0.1.2
         version: 0.1.2
@@ -345,6 +342,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.29.0)
+      '@cocso-ui/codegen':
+        specifier: workspace:*
+        version: link:../codegen
       '@rollup/plugin-babel':
         specifier: ^7.0.0
         version: 7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)
