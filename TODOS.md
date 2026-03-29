@@ -20,12 +20,15 @@
 
 **Depends on:** PR1 (Token Binding) 완료.
 
-## PR3: 나머지 컴포넌트 State Variant (radio, switch, pagination)
+## PR3: 나머지 컴포넌트 State Variant (radio, switch, pagination) — PR2와 통합
 
-**What:** radio-group, switch, pagination에 state variant 추가. recipe 구조 확장 필요.
+**What:** radio-group, switch, pagination에 state variant 추가. recipe 구조 확장 포함.
 
-**Why:** PR2에서 구축한 addStateVariants 유틸리티를 나머지 stateful 컴포넌트에 적용하여 일관된 상태 모델 완성.
+**Why:** addStateVariants 유틸리티를 모든 stateful 컴포넌트에 적용하여 일관된 상태 모델 완성.
 
-**Context:** radio-group은 recipe에 color token이 없어 base variant에 borderColor/bgColor 추가 필요. switch는 unchecked 배경 토큰(switchBgColor) 추가 필요. pagination은 기존 `state` variant dimension(active/inactive/disabled)과 interaction state 이름 충돌 — `InteractionState` 별도 property 또는 `state` → `pageState` rename 필요. 디자이너 피드백 후 결정. 디자인 문서 `~/.gstack/projects/cocso-cocso-ui/haklee-v1-design-20260329-143653.md`의 Open Questions 참조.
+**Context:** PR2와 함께 구현됨:
+- radio-group: `selected` dimension 추가 (bgColor/borderColor per selected state) + hover state
+- switch: `checked` dimension + `switchBgColor` base + compoundVariants (checked color per variant) + hover state. `checkedBgColor` 유지 (React 호환)
+- pagination: `state` → `pageState` rename + hover state (React 미사용이므로 안전)
 
-**Depends on:** PR2 완료 + 디자이너 피드백.
+**Status:** PR2에 포함하여 구현 완료.
