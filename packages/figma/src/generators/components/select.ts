@@ -1,51 +1,22 @@
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
 import selectJSON from "../../../../codegen/generated/select.figma.json";
 import { createSelectComponentFromSpec } from "../component-creators";
-import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  lookupSpec,
-} from "../recipe-utils";
-import { addStateVariants, createComponentSection } from "../shared";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
+import { createComponentSection, createVariantRow } from "../shared";
 
 export function generateSelectSection(container: FrameNode): void {
   const json = selectJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Select");
-  const combinations = getAllVariantCombinations(selectRecipe);
 
-  // Create base (Default state) nodes
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Select variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = lookupSpec(json, selectRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createSelectComponentFromSpec(
-      name,
-      spec,
-      "Select option"
+  const sizes = Object.keys(selectRecipe.variants.size);
+  const row = createVariantRow("size");
+  for (const size of sizes) {
+    const spec = lookupSpec(json, selectRecipe, { size });
+    row.appendChild(
+      createSelectComponentFromSpec(`size=${size}`, spec, "Select")
     );
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
   }
-
-  // Add state variants (hover, focus) and combine into ComponentSetNode
-  const componentSet = addStateVariants(
-    baseNodes,
-    selectRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createSelectComponentFromSpec(name, spec, "Select option"),
-    json
-  );
-  section.appendChild(componentSet);
+  section.appendChild(row);
 
   container.appendChild(section);
 }

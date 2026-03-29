@@ -1,13 +1,8 @@
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
 import linkJSON from "../../../../codegen/generated/link.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  lookupSpec,
-} from "../recipe-utils";
-import {
-  addStateVariants,
   COLORS,
   createComponentSection,
   createIcon,
@@ -44,39 +39,17 @@ function createLinkComponent(name: string, spec: FigmaNodeSpec): ComponentNode {
 export function generateLinkSection(container: FrameNode): void {
   const json = linkJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Link");
-  const combinations = getAllVariantCombinations(linkRecipe);
 
-  // Create base (Default state) nodes
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Link variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = lookupSpec(json, linkRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createLinkComponent(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
+  // Variant row
+  const variants = Object.keys(linkRecipe.variants.variant);
+  const variantRow = createVariantRow("variant");
+  for (const variant of variants) {
+    const spec = lookupSpec(json, linkRecipe, { variant });
+    variantRow.appendChild(createLinkComponent(`variant=${variant}`, spec));
   }
+  section.appendChild(variantRow);
 
-  // Add state variants (hover) and combine into ComponentSetNode
-  const componentSet = addStateVariants(
-    baseNodes,
-    linkRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createLinkComponent(name, spec),
-    json
-  );
-  section.appendChild(componentSet);
-
-  // External variant stays as flat component (no state variants)
+  // External variant — flat component
   const externalRow = createVariantRow("external");
   const externalSpec = lookupSpec(json, linkRecipe, { variant: "inline" });
   const extColor = externalSpec.color ?? COLORS.info500;

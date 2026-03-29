@@ -1,13 +1,8 @@
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
 import switchJSON from "../../../../codegen/generated/switch.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  lookupSpec,
-} from "../recipe-utils";
-import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
@@ -55,7 +50,6 @@ function createSwitchFromSpec(
 export function generateSwitchSection(container: FrameNode): void {
   const json = switchJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Switch");
-  const combinations = getAllVariantCombinations(switchRecipe);
 
   // Visual matrix grid (design system documentation layout)
   const variants = Object.keys(switchRecipe.variants.variant);
@@ -80,34 +74,6 @@ export function generateSwitchSection(container: FrameNode): void {
     }
   );
   section.appendChild(matrixGrid);
-
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Switch variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = lookupSpec(json, switchRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createSwitchFromSpec(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  const componentSet = addStateVariants(
-    baseNodes,
-    switchRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createSwitchFromSpec(name, spec),
-    json
-  );
-  section.appendChild(componentSet);
 
   // Label + disabled rows stay as flat demos
   const labelRow = createVariantRow("with label");

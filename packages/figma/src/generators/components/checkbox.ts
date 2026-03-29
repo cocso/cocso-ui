@@ -1,13 +1,8 @@
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
 import checkboxJSON from "../../../../codegen/generated/checkbox.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  type FigmaJSONData,
-  getAllVariantCombinations,
-  lookupSpec,
-} from "../recipe-utils";
-import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
@@ -80,7 +75,6 @@ function createCheckboxFromSpec(
 export function generateCheckboxSection(container: FrameNode): void {
   const json = checkboxJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Checkbox");
-  const combinations = getAllVariantCombinations(checkboxRecipe);
 
   // Visual matrix grid (design system documentation layout)
   const sizes = Object.keys(checkboxRecipe.variants.size);
@@ -99,36 +93,6 @@ export function generateCheckboxSection(container: FrameNode): void {
     }
   );
   section.appendChild(matrixGrid);
-
-  // Create base (Default state) nodes
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Checkbox variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = lookupSpec(json, checkboxRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createCheckboxFromSpec(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  // Add state variants (hover) and combine into ComponentSetNode
-  const componentSet = addStateVariants(
-    baseNodes,
-    checkboxRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createCheckboxFromSpec(name, spec),
-    json
-  );
-  section.appendChild(componentSet);
 
   container.appendChild(section);
 }
