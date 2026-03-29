@@ -1,14 +1,14 @@
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import checkboxJSON from "../../../../codegen/generated/checkbox.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createIcon,
   createTextNode,
+  createVariantMatrix,
   ICON_SVGS,
   rgbToHex,
   setFill,
@@ -73,37 +73,26 @@ function createCheckboxFromSpec(
 }
 
 export function generateCheckboxSection(container: FrameNode): void {
+  const json = checkboxJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Checkbox");
-  const combinations = getAllVariantCombinations(checkboxRecipe);
 
-  // Create base (Default state) nodes
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Checkbox variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
+  // Visual matrix grid (design system documentation layout)
+  const sizes = Object.keys(checkboxRecipe.variants.size);
+  const statuses = Object.keys(checkboxRecipe.variants.status);
 
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = resolveForFigma(checkboxRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createCheckboxFromSpec(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  // Add state variants (hover) and combine into ComponentSetNode
-  const componentSet = addStateVariants(
-    baseNodes,
-    checkboxRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createCheckboxFromSpec(name, spec)
+  const matrixGrid = createVariantMatrix(
+    "Checkbox variants",
+    { name: "size", values: sizes },
+    { name: "status", values: statuses },
+    (sizeVal, statusVal) => {
+      const spec = lookupSpec(json, checkboxRecipe, {
+        size: sizeVal,
+        status: statusVal,
+      });
+      return createCheckboxFromSpec(`${sizeVal}-${statusVal}`, spec);
+    }
   );
-  section.appendChild(componentSet);
+  section.appendChild(matrixGrid);
 
   container.appendChild(section);
 }

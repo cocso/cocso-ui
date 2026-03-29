@@ -113,24 +113,19 @@ describe("Link", () => {
     });
   });
 
-  describe("variant CSS variables", () => {
+  describe("variant className", () => {
     it.each([
-      ["inline", "var(--cocso-color-info-500)", "var(--cocso-color-info-700)"],
-      ["current", "currentColor", "currentColor"],
-      ["plain", "var(--cocso-color-info-500)", "var(--cocso-color-info-700)"],
-    ] as const)('sets --cocso-link-color and --cocso-link-color-hover for variant="%s"', (variant, expectedColor, expectedColorHover) => {
+      "inline",
+      "current",
+      "plain",
+    ] as const)('applies variant className for variant="%s"', (variant) => {
       render(
         <Link href="#" variant={variant}>
           Link
         </Link>
       );
       const link = screen.getByRole("link");
-      expect(link.style.getPropertyValue("--cocso-link-color")).toBe(
-        expectedColor
-      );
-      expect(link.style.getPropertyValue("--cocso-link-color-hover")).toBe(
-        expectedColorHover
-      );
+      expect(link.className).toContain(`cocso-link--variant-${variant}`);
     });
   });
 

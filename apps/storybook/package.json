@@ -8,7 +8,8 @@
     "check": "biome check .",
     "check:write": "biome check --write .",
     "check-types": "tsc --noEmit",
-    "clean": "rm -rf storybook-static .turbo node_modules"
+    "clean": "rm -rf storybook-static .turbo node_modules",
+    "test:visual": "test-storybook --browsers chromium"
   },
   "dependencies": {
     "@cocso-ui/css": "workspace:^",
@@ -21,6 +22,8 @@
     "@storybook/react-vite": "^10.2.17",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@storybook/test-runner": "^0.22.0",
+    "jest-image-snapshot": "^6.5.0",
     "storybook": "^10.2.17",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"

@@ -1,34 +1,23 @@
 # TODOS
 
-## Direction B (코드 생성) 재평가
+## Phase 4: 신규 컴포넌트 (avatar, card, alert, tag, progress, breadcrumb, skeleton)
 
-**What:** 컴포넌트가 20개 이상으로 성장하면 Direction B(빌드 타임 코드 생성, seed-design 패턴) 재평가.
+**What:** 일반적 디자인 시스템에서 기대되는 7개 컴포넌트를 codegen 네이티브로 구축.
 
-**Why:** sub-approach 2b(프로퍼티 이름 기반 자동 추론)의 PROPERTY_CATEGORIES 유지 부담이 컴포넌트 수에 비례해 증가. 코드 생성은 이 부담을 제거하고, 제로 런타임 + 최강 타입 안전성을 제공.
+**Why:** 내부 제품 UI 커버리지를 높여 cocso-ui만으로 실제 제품 개발이 가능하도록.
 
-**Context:** 현재 13개 recipe, 10개 React 컴포넌트. Phase 1-4(Evolutionary Fix + Golden Matrix 검증)가 성공적으로 완료된 후, 규모 확대 시 자연스럽게 코드 생성으로 진화하는 경로가 확보됨. 디자인 문서 `~/.gstack/projects/cocso-cocso-ui/haklee-v1-design-20260328-192845.md`의 Approach B 섹션에 상세 분석 있음. research/refactoring-recommendation.md에 seed-design과의 비교 분석 포함.
+**Context:** codegen 파이프라인이 완성되어 새 컴포넌트 추가 프로세스가 확립됨: recipe 정의 → `pnpm generate` → React 컴포넌트 → Storybook → Figma generator → golden matrix. table/data-table은 XL 복잡도로 별도 프로젝트 문서 필요.
 
-**Depends on:** Phase 1-4 완료 + recipe 컴포넌트 20개 이상 도달.
+**우선순위:** avatar → card → alert → tag → progress → breadcrumb → skeleton
 
-## PR2: Figma State Variant Generation (5개 컴포넌트)
+**Depends on:** codegen 파이프라인 완료 (✅).
 
-**What:** button, link, checkbox, input, select에 hover/active/focus states 추가. 단일 ComponentSetNode per component. `addStateVariants` 공유 유틸리티 구축. `rgbToTokenName` 제거.
+## Visual regression 테스트 baseline 생성
 
-**Why:** 디자이너가 Figma variant panel에서 상태를 전환하고 시각적 차이를 확인할 수 있어야 함.
+**What:** `pnpm --filter @cocso-ui/storybook test:visual`로 baseline 스크린샷 생성.
 
-**Context:** PR1(Token Binding) 완료. 디자인 문서 `~/.gstack/projects/cocso-cocso-ui/haklee-v1-design-20260329-143653.md` (eng review 반영). checkbox는 State × Checked orthogonal dimension. input/select는 State=Focus 포함.
+**Why:** CSS 변경 시 시각적 회귀를 자동 감지.
 
-**Depends on:** PR1 (Token Binding) 완료.
+**Context:** test-runner.ts + jest-image-snapshot 설정 완료. 첫 실행 시 baseline 자동 생성.
 
-## PR3: 나머지 컴포넌트 State Variant (radio, switch, pagination) — PR2와 통합
-
-**What:** radio-group, switch, pagination에 state variant 추가. recipe 구조 확장 포함.
-
-**Why:** addStateVariants 유틸리티를 모든 stateful 컴포넌트에 적용하여 일관된 상태 모델 완성.
-
-**Context:** PR2와 함께 구현됨:
-- radio-group: `selected` dimension 추가 (bgColor/borderColor per selected state) + hover state
-- switch: `checked` dimension + `switchBgColor` base + compoundVariants (checked color per variant) + hover state. `checkedBgColor` 유지 (React 호환)
-- pagination: `state` → `pageState` rename + hover state (React 미사용이므로 안전)
-
-**Status:** PR2에 포함하여 구현 완료.
+**Depends on:** Storybook 빌드 성공 + Playwright 설치.

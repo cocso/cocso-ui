@@ -81,8 +81,14 @@
     height: 14px;
   }
 
-  .item:hover {
-    background-color: var(--cocso-color-neutral-50);
+  @media (hover: hover) and (pointer: fine) {
+    .item:hover {
+      background-color: var(--cocso-color-neutral-50);
+    }
+
+    .item[data-disabled]:hover {
+      background-color: transparent;
+    }
   }
 
   .item:active {
@@ -92,10 +98,6 @@
   .item[data-disabled] {
     cursor: not-allowed;
     opacity: 0.4;
-  }
-
-  .item[data-disabled]:hover {
-    background-color: transparent;
   }
 
   .item[data-disabled]:active {

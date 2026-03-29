@@ -1,5 +1,5 @@
-import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import { stockQuantityStatus } from "@cocso-ui/codegen/generated/stock-quantity-status";
+import "@cocso-ui/codegen/generated/stock-quantity-status.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import { spacing } from "../../token";
@@ -109,16 +109,14 @@ export function StockQuantityStatus({
   quantity,
   ...props
 }: StockQuantityStatusProps) {
-  const resolved = resolveStyleMap(stockQuantityStatusRecipe, { quantity });
   const style = {
     ..._style,
-    ...resolved,
     "--cocso-stock-quantity-status-indicator-width": spacing.s9,
   } as CSSProperties;
 
   return (
     <div
-      className={cn(styles.stock, className)}
+      className={cn(stockQuantityStatus({ quantity }), styles.stock, className)}
       ref={ref}
       style={style}
       {...props}

@@ -1,13 +1,13 @@
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
+import radioJSON from "../../../../codegen/generated/radio.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createTextNode,
+  createVariantMatrix,
   setFill,
 } from "../shared";
 
@@ -63,35 +63,26 @@ function createRadioFromSpec(name: string, spec: FigmaNodeSpec): ComponentNode {
 }
 
 export function generateRadioSection(container: FrameNode): void {
+  const json = radioJSON as unknown as FigmaJSONData;
   const section = createComponentSection("RadioGroup");
-  const combinations = getAllVariantCombinations(radioGroupRecipe);
 
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Radio variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
+  // Visual matrix grid (design system documentation layout)
+  const sizes = Object.keys(radioGroupRecipe.variants.size);
+  const selectedValues = Object.keys(radioGroupRecipe.variants.selected);
 
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = resolveForFigma(radioGroupRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createRadioFromSpec(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  const componentSet = addStateVariants(
-    baseNodes,
-    radioGroupRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createRadioFromSpec(name, spec)
+  const matrixGrid = createVariantMatrix(
+    "Radio variants",
+    { name: "size", values: sizes },
+    { name: "selected", values: selectedValues },
+    (sizeVal, selectedVal) => {
+      const spec = lookupSpec(json, radioGroupRecipe, {
+        size: sizeVal,
+        selected: selectedVal,
+      });
+      return createRadioFromSpec(`${sizeVal}-selected=${selectedVal}`, spec);
+    }
   );
-  section.appendChild(componentSet);
+  section.appendChild(matrixGrid);
 
   container.appendChild(section);
 }

@@ -1,14 +1,18 @@
-import {
-  getSpinnerGeometry,
-  spinnerRecipe,
-} from "@cocso-ui/recipe/recipes/spinner.recipe";
+import { spinner } from "@cocso-ui/codegen/generated/spinner";
+import { getSpinnerGeometry } from "@cocso-ui/codegen/generated/spinner-geometry";
+import "@cocso-ui/codegen/generated/spinner.css";
 
-export type {
-  SpinnerSize,
-  SpinnerVariant,
-} from "@cocso-ui/recipe/recipes/spinner.recipe";
+/** Inline type aliases — codegen is a devDependency and must not leak into published .d.ts */
+export type SpinnerVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "warning"
+  | "info"
+  | "white";
+export type SpinnerSize = "large" | "medium" | "small";
 
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import styles from "./spinner.module.css";
@@ -36,8 +40,6 @@ export function Spinner({
     bladeRadius: radius,
     output,
   } = getSpinnerGeometry(size);
-  const resolved = resolveStyleMap(spinnerRecipe, { variant, size });
-  const bladeColor = resolved["--cocso-spinner-blade-color"];
   const container = output;
   const left = (container - width) / 2;
   const originY = height - container / 2;
@@ -52,12 +54,11 @@ export function Spinner({
     <output
       aria-label={label}
       aria-live="polite"
-      className={cn(styles.spinner, className)}
+      className={cn(spinner({ variant, size }), styles.spinner, className)}
       ref={ref}
       style={{
         width: `${container}px`,
         height: `${container}px`,
-        color: bladeColor,
         ..._style,
       }}
       {...props}

@@ -6,6 +6,7 @@
     --cocso-badge-border: none;
     display: inline-flex;
     padding: var(--cocso-badge-padding);
+    color: var(--cocso-badge-font-color);
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;

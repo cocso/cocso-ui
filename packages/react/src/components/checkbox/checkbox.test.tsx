@@ -92,19 +92,17 @@ describe("Checkbox", () => {
     });
   });
 
-  describe("size CSS variables", () => {
+  describe("size className", () => {
     it.each([
       "large",
       "medium",
       "small",
-    ] as const)('sets size CSS variable for size="%s"', (size) => {
+    ] as const)('applies size className for size="%s"', (size) => {
       const { container } = render(
         <Checkbox onChange={vi.fn()} size={size} status="off" />
       );
       const wrapper = container.firstChild as HTMLElement;
-      expect(
-        wrapper.style.getPropertyValue("--cocso-checkbox-size")
-      ).toBeTruthy();
+      expect(wrapper.className).toContain(`cocso-checkbox--size-${size}`);
     });
   });
 

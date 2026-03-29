@@ -1,8 +1,8 @@
 "use client";
 
+import { select as selectClass } from "@cocso-ui/codegen/generated/select";
 import { SelectorIcon } from "@cocso-ui/react-icons";
-import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import "@cocso-ui/codegen/generated/select.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { useId } from "react";
 import { cn } from "../../cn";
@@ -48,13 +48,12 @@ export function Select({
   const hasError = !!error;
   const errorMessage = typeof error === "string" ? error : undefined;
 
-  const wrapperStyle = {
-    ...resolveStyleMap(selectRecipe, { size }),
-  } as CSSProperties;
+  const wrapperStyle = {} as CSSProperties;
 
   const select = (
     <div
       className={cn(
+        selectClass({ size }),
         styles.wrapper,
         stretch && styles.stretch,
         hasError && styles.error,

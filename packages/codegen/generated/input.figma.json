@@ -1,0 +1,208 @@
+{
+  "name": "input",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "size=x-small": {
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "height": 28,
+      "fontSize": 12,
+      "borderRadius": 6,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "_tokenRefs": {
+        "borderColor": "neutral-200",
+        "borderRadius": "radius-3"
+      },
+      "states": {
+        "hover": {
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "height": 28,
+          "fontSize": 12,
+          "borderRadius": 6,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "_tokenRefs": {
+            "borderColor": "primary-500",
+            "borderRadius": "radius-3"
+          }
+        },
+        "focus": {
+          "borderColor": {
+            "r": 0.27450980392156865,
+            "g": 0.2980392156862745,
+            "b": 0.3254901960784314
+          },
+          "height": 28,
+          "fontSize": 12,
+          "borderRadius": 6,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "_tokenRefs": {
+            "borderColor": "primary-700",
+            "borderRadius": "radius-3"
+          }
+        }
+      }
+    },
+    "size=small": {
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "height": 32,
+      "fontSize": 12,
+      "borderRadius": 6,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "_tokenRefs": {
+        "borderColor": "neutral-200",
+        "borderRadius": "radius-3"
+      },
+      "states": {
+        "hover": {
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "height": 32,
+          "fontSize": 12,
+          "borderRadius": 6,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "_tokenRefs": {
+            "borderColor": "primary-500",
+            "borderRadius": "radius-3"
+          }
+        },
+        "focus": {
+          "borderColor": {
+            "r": 0.27450980392156865,
+            "g": 0.2980392156862745,
+            "b": 0.3254901960784314
+          },
+          "height": 32,
+          "fontSize": 12,
+          "borderRadius": 6,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "_tokenRefs": {
+            "borderColor": "primary-700",
+            "borderRadius": "radius-3"
+          }
+        }
+      }
+    },
+    "size=medium": {
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "height": 36,
+      "fontSize": 14,
+      "borderRadius": 8,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "_tokenRefs": {
+        "borderColor": "neutral-200",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "height": 36,
+          "fontSize": 14,
+          "borderRadius": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "_tokenRefs": {
+            "borderColor": "primary-500",
+            "borderRadius": "radius-4"
+          }
+        },
+        "focus": {
+          "borderColor": {
+            "r": 0.27450980392156865,
+            "g": 0.2980392156862745,
+            "b": 0.3254901960784314
+          },
+          "height": 36,
+          "fontSize": 14,
+          "borderRadius": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "_tokenRefs": {
+            "borderColor": "primary-700",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "size=large": {
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "height": 40,
+      "fontSize": 14,
+      "borderRadius": 8,
+      "paddingLeft": 14,
+      "paddingRight": 14,
+      "_tokenRefs": {
+        "borderColor": "neutral-200",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "height": 40,
+          "fontSize": 14,
+          "borderRadius": 8,
+          "paddingLeft": 14,
+          "paddingRight": 14,
+          "_tokenRefs": {
+            "borderColor": "primary-500",
+            "borderRadius": "radius-4"
+          }
+        },
+        "focus": {
+          "borderColor": {
+            "r": 0.27450980392156865,
+            "g": 0.2980392156862745,
+            "b": 0.3254901960784314
+          },
+          "height": 40,
+          "fontSize": 14,
+          "borderRadius": 8,
+          "paddingLeft": 14,
+          "paddingRight": 14,
+          "_tokenRefs": {
+            "borderColor": "primary-700",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    }
+  }
+}

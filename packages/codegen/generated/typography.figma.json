@@ -1,0 +1,43 @@
+{
+  "name": "typography",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "type=body,size=x-large": {
+      "fontSize": 18
+    },
+    "type=body,size=large": {
+      "fontSize": 18
+    },
+    "type=body,size=medium": {
+      "fontSize": 16
+    },
+    "type=body,size=small": {
+      "fontSize": 14
+    },
+    "type=body,size=x-small": {
+      "fontSize": 12
+    },
+    "type=heading,size=x-large": {
+      "fontWeight": 700,
+      "fontSize": 28
+    },
+    "type=heading,size=large": {
+      "fontWeight": 700,
+      "fontSize": 24
+    },
+    "type=heading,size=medium": {
+      "fontWeight": 700,
+      "fontSize": 20
+    },
+    "type=heading,size=small": {
+      "fontWeight": 700,
+      "fontSize": 16
+    },
+    "type=heading,size=x-small": {
+      "fontWeight": 700,
+      "fontSize": 14
+    }
+  }
+}

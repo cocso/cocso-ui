@@ -1,6 +1,6 @@
+import { link } from "@cocso-ui/codegen/generated/link";
 import { ExternalLinkIcon } from "@cocso-ui/react-icons";
-import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import "@cocso-ui/codegen/generated/link.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
 import type { useRender } from "../../primitives/use-render";
@@ -39,10 +39,10 @@ function LinkComponent({
 
   const style = {
     ..._style,
-    ...resolveStyleMap(linkRecipe, { variant }, { states: ["hover"] }),
   } as CSSProperties;
 
   const mergedClassName = cn(
+    link({ variant }),
     styles.link,
     variant === "current" && styles.current,
     showIndicator && styles.indicator,

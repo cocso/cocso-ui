@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "generate": "tsx scripts/generate-tokens.ts",
+    "generate:figma-json": "tsx scripts/generate-figma-json.ts",
     "extract": "tsx scripts/extract-components.ts",
     "golden-matrix": "pnpm generate && tsx scripts/golden-matrix.ts",
     "prebuild": "pnpm generate",
