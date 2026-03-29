@@ -75,8 +75,57 @@ export type StyleValue =
   | CompoundBorder
   | ComponentRef;
 
-/** Map of CSS custom property names to their assigned style token values for a single slot. */
-export type SlotStyles = Record<string, StyleValue>;
+/**
+ * Known recipe slot properties with type-safe value constraints.
+ * Provides IDE autocompletion and compile-time validation for common property names.
+ * Custom properties not listed here are still allowed via the index signature.
+ */
+export interface BaseSlotProperties {
+  // Color properties → ColorTokenRef | CSSLiteral (for currentColor, transparent)
+  bgColor?: ColorTokenRef;
+  fontColor?: ColorTokenRef;
+  color?: ColorTokenRef | CSSLiteral;
+  borderColor?: ColorTokenRef;
+  bladeColor?: ColorTokenRef;
+  fillColor?: ColorTokenRef;
+  checkedBgColor?: ColorTokenRef;
+  checkedThumbColor?: ColorTokenRef;
+  switchBgColor?: ColorTokenRef;
+  // Radius properties
+  borderRadius?: RadiusTokenRef | CSSLiteral;
+  bladeRadius?: number;
+  radius?: RadiusTokenRef | number;
+  // Dimension properties → number | CSSLiteral
+  height?: number;
+  width?: number;
+  minWidth?: number;
+  fontSize?: number;
+  padding?: number | CSSLiteral;
+  paddingInline?: number;
+  paddingX?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  iconRight?: number;
+  size?: number;
+  dotSize?: number;
+  thumbSize?: number;
+  thumbOffset?: number;
+  blades?: number;
+  bladeWidth?: number;
+  bladeHeight?: number;
+  output?: number;
+  // String properties
+  fontWeight?: FontWeightRef | number;
+  contentPadding?: CSSLiteral;
+  // Compound properties
+  border?: CompoundBorder;
+}
+
+/** Map of CSS custom property names to their assigned style token values for a single slot.
+ * Known properties get type-safe autocompletion; custom properties are allowed via index signature. */
+export type SlotStyles = BaseSlotProperties & Record<string, StyleValue>;
 
 /** Semantic category for a recipe style property key, used by resolvers to determine value interpretation. */
 export type PropertyCategory =
