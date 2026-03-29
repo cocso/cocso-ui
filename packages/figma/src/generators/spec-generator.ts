@@ -216,49 +216,84 @@ function createTooltipBody(): FrameNode {
   return frame;
 }
 
+function createArrowSvg(
+  direction: "top" | "right" | "bottom" | "left",
+  size: number,
+  hexColor: string
+): FrameNode {
+  const w = size;
+  const h = Math.round(size / 2);
+  let points: string;
+  let vw: number;
+  let vh: number;
+
+  switch (direction) {
+    case "top": {
+      // Triangle pointing up: wide base at bottom
+      vw = w;
+      vh = h;
+      points = `0,${h} ${w / 2},0 ${w},${h}`;
+      break;
+    }
+    case "bottom": {
+      vw = w;
+      vh = h;
+      points = `0,0 ${w / 2},${h} ${w},0`;
+      break;
+    }
+    case "left": {
+      vw = h;
+      vh = w;
+      points = `${h},0 0,${w / 2} ${h},${w}`;
+      break;
+    }
+    default: {
+      // "right" — triangle pointing right
+      vw = h;
+      vh = w;
+      points = `0,0 ${h},${w / 2} 0,${w}`;
+      break;
+    }
+  }
+
+  const svg = `<svg width="${vw}" height="${vh}" viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><polygon points="${points}" fill="${hexColor}"/></svg>`;
+  const node = figma.createNodeFromSvg(svg);
+  node.name = "arrow";
+  return node;
+}
+
 function createTooltipWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
-  const comp = figma.createComponent();
-  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
-  comp.clipsContent = false;
-  comp.fills = [];
+  const ARROW_SIZE = 8;
 
   const body = createTooltipBody();
-  comp.appendChild(body);
 
-  // Size the component to match body
-  comp.resize(body.width, body.height);
+  // Component: vertical or horizontal stack with body + arrow
+  const comp = figma.createComponent();
+  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+  comp.fills = [];
 
-  if (withArrow) {
-    const S = 6;
-    const H = S / 2;
-    const arrow = figma.createFrame();
-    arrow.name = "arrow";
-    arrow.resize(S, S);
-    arrow.rotation = 45;
-    setFill(arrow, COLORS.neutral900);
-    arrow.strokes = [];
+  const isVertical = placement === "top" || placement === "bottom";
+  comp.layoutMode = isVertical ? "VERTICAL" : "HORIZONTAL";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.itemSpacing = -1; // overlap by 1px to eliminate seam
 
-    // Arrow direction: placement = where the arrow points
-    // top → arrow at top center, bottom → arrow at bottom, etc.
-    const bw = body.width;
-    const bh = body.height;
-    if (placement === "left") {
-      arrow.x = -H;
-    } else if (placement === "right") {
-      arrow.x = bw - H;
-    } else {
-      arrow.x = bw / 2 - H;
-    }
-    if (placement === "top") {
-      arrow.y = -H;
-    } else if (placement === "bottom") {
-      arrow.y = bh - H;
-    } else {
-      arrow.y = bh / 2 - H;
-    }
+  if (!withArrow) {
+    comp.appendChild(body);
+    return comp;
+  }
+
+  const arrow = createArrowSvg(placement, ARROW_SIZE, "#1e2124");
+
+  if (placement === "top" || placement === "left") {
+    comp.appendChild(arrow);
+    comp.appendChild(body);
+  } else {
+    comp.appendChild(body);
     comp.appendChild(arrow);
   }
 
@@ -310,42 +345,33 @@ function createPopoverWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
-  const comp = figma.createComponent();
-  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
-  comp.clipsContent = false;
-  comp.fills = [];
+  const ARROW_SIZE = 10;
 
   const body = createPopoverBody();
-  comp.appendChild(body);
 
-  comp.resize(body.width, body.height);
+  const comp = figma.createComponent();
+  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+  comp.fills = [];
 
-  if (withArrow) {
-    const S = 8;
-    const H = S / 2;
-    const arrow = figma.createFrame();
-    arrow.name = "arrow";
-    arrow.resize(S, S);
-    arrow.rotation = 45;
-    setFill(arrow, COLORS.white);
-    setStroke(arrow, COLORS.neutral100, 1);
+  const isVertical = placement === "top" || placement === "bottom";
+  comp.layoutMode = isVertical ? "VERTICAL" : "HORIZONTAL";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.itemSpacing = -1;
 
-    const bw = body.width;
-    const bh = body.height;
-    if (placement === "left") {
-      arrow.x = -H;
-    } else if (placement === "right") {
-      arrow.x = bw - H;
-    } else {
-      arrow.x = bw / 2 - H;
-    }
-    if (placement === "top") {
-      arrow.y = -H;
-    } else if (placement === "bottom") {
-      arrow.y = bh - H;
-    } else {
-      arrow.y = bh / 2 - H;
-    }
+  if (!withArrow) {
+    comp.appendChild(body);
+    return comp;
+  }
+
+  const arrow = createArrowSvg(placement, ARROW_SIZE, "#ffffff");
+
+  if (placement === "top" || placement === "left") {
+    comp.appendChild(arrow);
+    comp.appendChild(body);
+  } else {
+    comp.appendChild(body);
     comp.appendChild(arrow);
   }
 
