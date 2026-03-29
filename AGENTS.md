@@ -92,6 +92,14 @@ When asked to review comments on a GitHub PR:
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.
 - For UI/UX decisions, follow the Vercel agent skills: `web-design-guidelines`, `vercel-react-best-practices`, and `vercel-composition-patterns`.
 
+### Codegen Rules
+
+- Recipe definitions in `packages/recipe/` are the single source of truth for component visual specs.
+- After modifying any recipe, run `pnpm --filter @cocso-ui/codegen generate` and commit the generated output.
+- React components MUST import from `@cocso-ui/codegen/generated/*`, NOT from `@cocso-ui/recipe` at runtime.
+- New components with visual variants MUST define a recipe first, then generate codegen artifacts.
+- CI enforces codegen freshness: stale generated files will fail the build.
+
 ### API Contract Rules
 
 - The Swagger JSON schema is the single source of truth for all API contracts.
@@ -118,7 +126,7 @@ Repository-wide quality CI runs on every pull request.
 
 Coverage expectations:
 - `lint`: runs `pnpm run lint` — fails if any issue is found.
-- `test`: runs `pnpm run test:coverage` and posts a PR coverage summary. Coverage is reported for `@cocso-ui/react`, `@cocso-ui/recipe`, `@cocso-ui/figma`, and `@cocso-ui/baseframe`.
+- `test`: runs `pnpm run test:coverage` and posts a PR coverage summary. Coverage is reported for `@cocso-ui/react`, `@cocso-ui/recipe`, `@cocso-ui/codegen`, `@cocso-ui/figma`, and `@cocso-ui/baseframe`. Includes codegen freshness gate (recipe → generated file sync validation).
 - `icons`: builds `@cocso-ui/icons`, runs `validate` (registry ↔ SVG ↔ generated output consistency) and `validate:compat` (backward-compatibility import check).
 - `build`: runs `pnpm build` across all packages via Turborepo.
 - `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened).
