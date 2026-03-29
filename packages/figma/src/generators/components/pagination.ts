@@ -20,7 +20,8 @@ function createPaginationItem(
   textColor: RGB,
   bgColor: RGB | null,
   fontSize: number,
-  fontWeight: number
+  fontWeight: number,
+  tokenRefs?: { fontColor?: string; bgColor?: string }
 ): ComponentNode {
   const component = figma.createComponent();
   component.name = name;
@@ -33,12 +34,18 @@ function createPaginationItem(
   component.cornerRadius = radius;
 
   if (bgColor) {
-    setFill(component, bgColor);
+    setFill(component, bgColor, 1, tokenRefs?.bgColor);
   } else {
     component.fills = [];
   }
 
-  const text = createTextNode(label, fontSize, fontWeight, textColor);
+  const text = createTextNode(
+    label,
+    fontSize,
+    fontWeight,
+    textColor,
+    tokenRefs?.fontColor
+  );
   component.appendChild(text);
 
   return component;
@@ -107,7 +114,11 @@ export function generatePaginationSection(container: FrameNode): void {
       textColor,
       bgColor,
       fontSize,
-      fontW
+      fontW,
+      {
+        fontColor: spec._tokenRefs?.fontColor,
+        bgColor: spec._tokenRefs?.bgColor,
+      }
     );
 
     if (stateValue === "disabled") {

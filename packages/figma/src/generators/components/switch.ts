@@ -26,12 +26,16 @@ function createSwitchFromSpec(
 
   const trackColor =
     isChecked && spec.checkedBgColor ? spec.checkedBgColor : COLORS.neutral100;
+  const trackColorRef =
+    isChecked && spec.checkedBgColor
+      ? spec._tokenRefs?.checkedBgColor
+      : undefined;
 
   const component = figma.createComponent();
   component.name = name;
   component.resize(trackWidth, trackHeight);
   component.cornerRadius = trackHeight / 2;
-  setFill(component, trackColor);
+  setFill(component, trackColor, 1, trackColorRef);
 
   const thumb = figma.createEllipse();
   thumb.name = "thumb";

@@ -56,10 +56,12 @@ export function generateDialogSection(container: FrameNode): void {
     }
 
     const bgColor = spec.bgColor ?? COLORS.white;
-    setFill(component, bgColor);
+    setFill(component, bgColor, 1, spec._tokenRefs?.bgColor);
 
     if (spec.strokeColor && spec.strokeWeight) {
-      component.strokes = [createBoundPaint(spec.strokeColor)];
+      component.strokes = [
+        createBoundPaint(spec.strokeColor, 1, spec._tokenRefs?.strokeColor),
+      ];
       component.strokeWeight = spec.strokeWeight;
     }
 

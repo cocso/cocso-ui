@@ -763,4 +763,5 @@ if (totalMismatches === 0) {
   console.log(
     `\n⚠ ${totalMismatches} value mismatch(es) found across recipes.`
   );
+  process.exit(1);
 }

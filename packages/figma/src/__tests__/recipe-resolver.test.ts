@@ -1202,4 +1202,60 @@ describe("_tokenRefs", () => {
     expect(spec.borderRadius).toBe(1000);
     expect(spec._tokenRefs?.borderRadius).toBe("radius-full");
   });
+
+  it("_tokenRefs is frozen (immutable)", () => {
+    const spec = resolveForFigma(buttonRecipe, { variant: "primary" });
+    expect(spec._tokenRefs).toBeDefined();
+    expect(Object.isFrozen(spec._tokenRefs)).toBe(true);
+  });
+
+  it("all color properties have matching _tokenRefs entries", () => {
+    const spec = resolveForFigma(buttonRecipe, {
+      variant: "primary",
+      size: "medium",
+      shape: "square",
+    });
+    expect(spec._tokenRefs).toBeDefined();
+    if (spec.bgColor) {
+      expect(spec._tokenRefs?.bgColor).toBeDefined();
+    }
+    if (spec.fontColor) {
+      expect(spec._tokenRefs?.fontColor).toBeDefined();
+    }
+  });
+
+  it("tracks _tokenRefs across all recipes with color properties", () => {
+    const recipes = [
+      { recipe: buttonRecipe, variants: { variant: "primary" } },
+      {
+        recipe: badgeRecipe,
+        variants: { variant: "primary", size: "medium", shape: "square" },
+      },
+      { recipe: checkboxRecipe, variants: { size: "medium", status: "on" } },
+      {
+        recipe: switchRecipe,
+        variants: { variant: "primary", size: "medium" },
+      },
+    ] as const;
+
+    for (const { recipe, variants } of recipes) {
+      const spec = resolveForFigma(recipe, variants);
+      expect(spec._tokenRefs).toBeDefined();
+      // Every resolved color spec property should have a corresponding tokenRef
+      for (const [key, value] of Object.entries(spec)) {
+        if (key === "_tokenRefs") {
+          continue;
+        }
+        if (
+          typeof value === "object" &&
+          value !== null &&
+          "r" in value &&
+          "g" in value &&
+          "b" in value
+        ) {
+          expect(spec._tokenRefs?.[key]).toBeDefined();
+        }
+      }
+    }
+  });
 });
