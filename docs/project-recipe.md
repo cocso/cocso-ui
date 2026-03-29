@@ -178,7 +178,7 @@ Golden matrix diagnostic compares `resolveForReact` vs `resolveForFigma` outputs
 
 - **SILENT_DROP** (bgColor `transparent`): outline/similar variants — Figma drops transparent, which is semantically correct (no fill).
 - **COMPOUND_SPLIT** (border): CompoundBorder decomposes into strokeColor + strokeWeight. borderStyle not preserved in Figma.
-- **STATE_UNSUPPORTED**: `resolveForFigma` now supports `state` option (Phase 2). Recipes with states: button (hover, active), link (hover, active).
+- **STATE_UNSUPPORTED**: `resolveForFigma` supports `state` option. Recipes with states: button (hover, active), link (hover), checkbox (hover), input (hover, focus), select (hover, focus). Golden matrix now gates on STATE_UNSUPPORTED = 0 for recipes with states.
 
 ### Designer Verification Checklist
 
