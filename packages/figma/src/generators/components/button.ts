@@ -14,6 +14,7 @@ import {
   createComponentSection,
   createIcon,
   createTextNode,
+  createVariantMatrixPerSlice,
   createVariantRow,
   ICON_SVGS,
   rgbToHex,
@@ -109,6 +110,31 @@ export function generateButtonSection(container: FrameNode): void {
   const json = buttonJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Button");
   const combinations = getAllVariantCombinations(buttonRecipe);
+
+  // Visual matrix grid (design system documentation layout)
+  const variants = Object.keys(buttonRecipe.variants.variant);
+  const sizes = Object.keys(buttonRecipe.variants.size);
+  const shapes = Object.keys(buttonRecipe.variants.shape);
+
+  const matrixGrid = createVariantMatrixPerSlice(
+    "Button variants",
+    { name: "size", values: sizes },
+    { name: "variant", values: variants },
+    { name: "shape", values: shapes },
+    (sizeVal, variantVal, shapeVal) => {
+      const spec = lookupSpec(json, buttonRecipe, {
+        variant: variantVal,
+        size: sizeVal,
+        shape: shapeVal,
+      });
+      return createComponentFromSpec(
+        `${variantVal}-${sizeVal}-${shapeVal}`,
+        spec,
+        "Button"
+      );
+    }
+  );
+  section.appendChild(matrixGrid);
 
   // Create base (Default state) nodes for all variant combinations
   const variantFrame = figma.createFrame();
