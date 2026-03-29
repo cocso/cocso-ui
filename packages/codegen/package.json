@@ -10,7 +10,8 @@
   },
   "type": "module",
   "exports": {
-    "./generated/*": "./generated/*"
+    "./generated/*.css": "./generated/*.css",
+    "./generated/*": "./generated/*.ts"
   },
   "scripts": {
     "generate": "tsx src/generate.ts",
