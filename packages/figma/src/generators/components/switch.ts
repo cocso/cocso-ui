@@ -111,7 +111,10 @@ export function generateSwitchSection(container: FrameNode): void {
   section.appendChild(labelRow);
 
   const disabledRow = createVariantRow("disabled");
-  const disabledOn = createSwitchFromSpec("disabled-on", defaultSpec);
+  const disabledOn = createSwitchFromSpec(
+    "disabled, checked=true",
+    defaultSpec
+  );
   disabledOn.opacity = 0.4;
   disabledRow.appendChild(disabledOn);
   const uncheckedSpec = resolveForFigma(switchRecipe, {
@@ -119,7 +122,10 @@ export function generateSwitchSection(container: FrameNode): void {
     size: "medium",
     checked: "false",
   });
-  const disabledOff = createSwitchFromSpec("disabled-off", uncheckedSpec);
+  const disabledOff = createSwitchFromSpec(
+    "disabled, checked=false",
+    uncheckedSpec
+  );
   disabledOff.opacity = 0.4;
   disabledRow.appendChild(disabledOff);
   section.appendChild(disabledRow);

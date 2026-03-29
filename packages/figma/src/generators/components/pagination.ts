@@ -1,4 +1,5 @@
 import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
+import type { FigmaNodeSpec } from "../recipe-resolver";
 import { resolveForFigma } from "../recipe-resolver";
 import { getAllVariantCombinations } from "../recipe-utils";
 import {
