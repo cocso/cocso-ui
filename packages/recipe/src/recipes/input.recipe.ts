@@ -39,5 +39,28 @@ export const inputRecipe = defineRecipe({
       },
     },
   },
+  base: {
+    root: {
+      borderColor: "neutral-200",
+    },
+  },
+  states: {
+    hover: {
+      size: {
+        "x-small": { root: { borderColor: "primary-500" } },
+        small: { root: { borderColor: "primary-500" } },
+        medium: { root: { borderColor: "primary-500" } },
+        large: { root: { borderColor: "primary-500" } },
+      },
+    },
+    focus: {
+      size: {
+        "x-small": { root: { borderColor: "primary-700" } },
+        small: { root: { borderColor: "primary-700" } },
+        medium: { root: { borderColor: "primary-700" } },
+        large: { root: { borderColor: "primary-700" } },
+      },
+    },
+  },
   defaultVariants: { size: "medium" },
 });

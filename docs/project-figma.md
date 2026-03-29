@@ -207,7 +207,16 @@ The pre-build output conforms to `src/types/token-schema.ts`:
 - [x] Component spec extraction from Storybook
 - [x] Component preview catalog
 
-### Phase 3 (planned)
+### Phase 3 (done)
+
+- [x] `_tokenRefs` → Figma Variables binding via `createBoundPaint` (PR #149)
+- [x] `addStateVariants` shared utility for ComponentSetNode generation
+- [x] State variants for button (hover, active), link (hover), checkbox (hover), input (hover, focus), select (hover, focus)
+- [x] State variants for radio-group (hover, with selected dimension), switch (hover, with checked dimension + compoundVariants), pagination (hover, renamed state → pageState)
+- [x] `rgbToTokenName` reverse lookup removed (replaced by `_tokenRefs`)
+- [x] Golden matrix state coverage assertions in CI
+
+### Phase 4 (planned)
 
 - [ ] Figma Variable Alias for semantic → primitive token references
 - [ ] Composite shadow tokens as Figma Effect Styles

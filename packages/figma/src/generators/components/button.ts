@@ -2,11 +2,9 @@ import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { createComponentFromSpec } from "../component-creators";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { resolveForFigma } from "../recipe-resolver";
+import { getAllVariantCombinations } from "../recipe-utils";
 import {
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-} from "../recipe-utils";
-import {
+  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
@@ -106,16 +104,35 @@ function createButtonWithIcon(
 export function generateButtonSection(container: FrameNode): void {
   const section = createComponentSection("Button");
   const combinations = getAllVariantCombinations(buttonRecipe);
-  const groups = groupVariantsByFirstDimension(buttonRecipe, combinations);
 
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      const component = createComponentFromSpec(name, spec, "Button");
-      row.appendChild(component);
-    }
-    section.appendChild(row);
+  // Create base (Default state) nodes for all variant combinations
+  const variantFrame = figma.createFrame();
+  variantFrame.name = "Button variants";
+  variantFrame.layoutMode = "VERTICAL";
+  variantFrame.primaryAxisSizingMode = "AUTO";
+  variantFrame.counterAxisSizingMode = "AUTO";
+  variantFrame.fills = [];
+
+  const baseNodes: ComponentNode[] = [];
+  for (const combo of combinations) {
+    const spec = resolveForFigma(buttonRecipe, combo);
+    const name = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+    const component = createComponentFromSpec(name, spec, "Button");
+    variantFrame.appendChild(component);
+    baseNodes.push(component);
   }
+
+  // Add state variants (hover, active) and combine into ComponentSetNode
+  const componentSet = addStateVariants(
+    baseNodes,
+    buttonRecipe,
+    combinations,
+    variantFrame,
+    (name, spec) => createComponentFromSpec(name, spec, "Button")
+  );
+  section.appendChild(componentSet);
 
   const prefixRow = createVariantRow("prefix icon");
   const prefixSpec = resolveForFigma(buttonRecipe, {

@@ -1001,25 +1001,43 @@ describe("resolveForFigma — typography recipe", () => {
 // ---------------------------------------------------------------------------
 
 describe("resolveForFigma — pagination recipe", () => {
-  it("active state resolves bgColor=primary-950, fontColor=white, fontWeight=600", () => {
-    const spec = resolveForFigma(paginationRecipe, { state: "active" });
+  it("active pageState resolves bgColor=primary-950, fontColor=white, fontWeight=600", () => {
+    const spec = resolveForFigma(paginationRecipe, { pageState: "active" });
     expect(spec.bgColor).toEqual(resolveColorToken("primary-950"));
     expect(spec.fontColor).toEqual({ r: 1, g: 1, b: 1 });
     expect(spec.fontWeight).toBe(600);
   });
 
-  it("inactive state resolves fontColor=neutral-900, no bgColor", () => {
-    const spec = resolveForFigma(paginationRecipe, { state: "inactive" });
+  it("inactive pageState resolves fontColor=neutral-900, no bgColor", () => {
+    const spec = resolveForFigma(paginationRecipe, { pageState: "inactive" });
     expect(spec.fontColor).toEqual(resolveColorToken("neutral-900"));
     expect(spec.bgColor).toBeUndefined();
   });
 
   it("base resolves height=32, width=32, borderRadius=8 (radius-4), fontSize=14", () => {
-    const spec = resolveForFigma(paginationRecipe, { state: "active" });
+    const spec = resolveForFigma(paginationRecipe, { pageState: "active" });
     expect(spec.height).toBe(32);
     expect(spec.width).toBe(32);
     expect(spec.borderRadius).toBe(8);
     expect(spec.fontSize).toBe(14);
+  });
+
+  it("applies hover state to active pageState", () => {
+    const hover = resolveForFigma(
+      paginationRecipe,
+      { pageState: "active" },
+      { state: "hover" }
+    );
+    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+  });
+
+  it("applies hover state to inactive pageState", () => {
+    const hover = resolveForFigma(
+      paginationRecipe,
+      { pageState: "inactive" },
+      { state: "hover" }
+    );
+    expect(hover._tokenRefs?.bgColor).toBe("neutral-100");
   });
 });
 
@@ -1130,6 +1148,129 @@ describe("resolveForFigma with state option", () => {
       { state: "hover" }
     );
     expect(hover.bgColor).toEqual(base.bgColor);
+  });
+
+  // Checkbox state tests
+  it("applies hover state to checkbox status=on", () => {
+    const base = resolveForFigma(checkboxRecipe, { status: "on" });
+    const hover = resolveForFigma(
+      checkboxRecipe,
+      { status: "on" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("primary-950");
+    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+  });
+
+  it("applies hover state to checkbox status=off", () => {
+    const base = resolveForFigma(checkboxRecipe, { status: "off" });
+    const hover = resolveForFigma(
+      checkboxRecipe,
+      { status: "off" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("white");
+    expect(hover._tokenRefs?.bgColor).toBe("neutral-200");
+  });
+
+  // Input state tests
+  it("applies hover state to input borderColor", () => {
+    const base = resolveForFigma(inputRecipe, { size: "medium" });
+    const hover = resolveForFigma(
+      inputRecipe,
+      { size: "medium" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
+    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+  });
+
+  it("applies focus state to input borderColor", () => {
+    const focus = resolveForFigma(
+      inputRecipe,
+      { size: "medium" },
+      { state: "focus" }
+    );
+    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+  });
+
+  // Select state tests
+  it("applies hover state to select borderColor", () => {
+    const base = resolveForFigma(selectRecipe, { size: "medium" });
+    const hover = resolveForFigma(
+      selectRecipe,
+      { size: "medium" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
+    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+  });
+
+  it("applies focus state to select borderColor", () => {
+    const focus = resolveForFigma(
+      selectRecipe,
+      { size: "medium" },
+      { state: "focus" }
+    );
+    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+  });
+
+  // Radio state tests
+  it("applies hover state to radio selected=true", () => {
+    const base = resolveForFigma(radioGroupRecipe, { selected: "true" });
+    const hover = resolveForFigma(
+      radioGroupRecipe,
+      { selected: "true" },
+      { state: "hover" }
+    );
+    expect(base._tokenRefs?.bgColor).toBe("primary-950");
+    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+  });
+
+  it("applies hover state to radio selected=false", () => {
+    const hover = resolveForFigma(
+      radioGroupRecipe,
+      { selected: "false" },
+      { state: "hover" }
+    );
+    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+  });
+
+  // Switch state tests
+  it("applies hover to switch checked=true", () => {
+    const hover = resolveForFigma(
+      switchRecipe,
+      { variant: "primary", size: "medium", checked: "true" },
+      { state: "hover" }
+    );
+    expect(hover._tokenRefs?.switchBgColor).toBe("primary-800");
+  });
+
+  it("applies hover to switch checked=false", () => {
+    const hover = resolveForFigma(
+      switchRecipe,
+      { variant: "primary", size: "medium", checked: "false" },
+      { state: "hover" }
+    );
+    expect(hover._tokenRefs?.switchBgColor).toBe("neutral-200");
+  });
+
+  it("switch checked=true base resolves switchBgColor from compoundVariant", () => {
+    const spec = resolveForFigma(switchRecipe, {
+      variant: "primary",
+      size: "medium",
+      checked: "true",
+    });
+    expect(spec._tokenRefs?.switchBgColor).toBe("primary-950");
+  });
+
+  it("switch checked=false base resolves switchBgColor from base", () => {
+    const spec = resolveForFigma(switchRecipe, {
+      variant: "primary",
+      size: "medium",
+      checked: "false",
+    });
+    expect(spec._tokenRefs?.switchBgColor).toBe("neutral-100");
   });
 });
 

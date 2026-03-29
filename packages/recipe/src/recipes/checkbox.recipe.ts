@@ -17,5 +17,16 @@ export const checkboxRecipe = defineRecipe({
       },
     },
   },
+  states: {
+    hover: {
+      status: {
+        on: { root: { bgColor: "primary-800", borderColor: "primary-800" } },
+        off: { root: { bgColor: "neutral-200", borderColor: "neutral-200" } },
+        intermediate: {
+          root: { bgColor: "primary-800", borderColor: "primary-800" },
+        },
+      },
+    },
+  },
   defaultVariants: { size: "medium", status: "off" },
 });

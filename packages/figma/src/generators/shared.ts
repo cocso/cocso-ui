@@ -1,13 +1,9 @@
+import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
+import { type FigmaNodeSpec, resolveForFigma } from "./recipe-resolver";
 
 const data = tokenData as FigmaTokenData;
-
-const rgbToTokenName = new Map<string, string>();
-
-function rgbKey(c: RGB): string {
-  return `${c.r},${c.g},${c.b}`;
-}
 
 let variableCache: Map<string, Variable> | null = null;
 
@@ -44,13 +40,6 @@ export function createBoundPaint(
     );
   }
 
-  const tokenName = rgbToTokenName.get(rgbKey(color));
-  if (tokenName && variableCache) {
-    const variable = variableCache.get(tokenName);
-    if (variable) {
-      return figma.variables.setBoundVariableForPaint(paint, "color", variable);
-    }
-  }
   return paint;
 }
 
@@ -60,9 +49,7 @@ function colorToken(name: string): RGB {
   const token = tokenMap.get(name);
   if (token && typeof token.values.default === "object") {
     const c = token.values.default as FigmaColorValue;
-    const rgb = { r: c.r, g: c.g, b: c.b };
-    rgbToTokenName.set(rgbKey(rgb), name);
-    return rgb;
+    return { r: c.r, g: c.g, b: c.b };
   }
   console.warn(
     `[cocso-ui] Color token not found: ${name}, falling back to black`
@@ -369,4 +356,53 @@ export function setupPageLayout(page: PageNode): FrameNode {
   container.appendChild(subtitle);
 
   return container;
+}
+
+/**
+ * Creates state variant copies of base ComponentNodes and combines them into a
+ * ComponentSetNode via figma.combineAsVariants. Base nodes get State=Default
+ * appended to their name; additional state nodes are created from resolveForFigma.
+ *
+ * If the recipe has no states, returns the parent frame unchanged (no-op).
+ */
+export function addStateVariants<
+  V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
+  S extends string,
+>(
+  baseNodes: ComponentNode[],
+  recipe: RecipeDefinition<V, S>,
+  variantCombinations: Record<string, string>[],
+  parent: FrameNode,
+  createNode: (name: string, spec: FigmaNodeSpec) => ComponentNode
+): ComponentSetNode | FrameNode {
+  const states = recipe.states as Record<string, unknown> | undefined;
+  if (!states || Object.keys(states).length === 0) {
+    return parent;
+  }
+
+  const stateNames = Object.keys(states);
+  const allNodes: ComponentNode[] = [];
+
+  for (const node of baseNodes) {
+    node.name = `${node.name}, State=Default`;
+    allNodes.push(node);
+  }
+
+  for (const [, combo] of variantCombinations.entries()) {
+    for (const stateName of stateNames) {
+      const spec = resolveForFigma(recipe, combo as Record<string, string>, {
+        state: stateName,
+      });
+      const comboStr = Object.entries(combo)
+        .map(([k, v]) => `${k}=${v}`)
+        .join(", ");
+      const stateLabel = stateName.charAt(0).toUpperCase() + stateName.slice(1);
+      const name = `${comboStr}, State=${stateLabel}`;
+      const node = createNode(name, spec);
+      parent.appendChild(node);
+      allNodes.push(node);
+    }
+  }
+
+  return figma.combineAsVariants(allNodes, parent);
 }

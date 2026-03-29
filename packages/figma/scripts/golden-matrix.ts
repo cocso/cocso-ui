@@ -494,9 +494,9 @@ function analyzeRecipe(
 
   const stateDiffs: PropertyDiff[] = [];
   if (stateNames.length > 0) {
-    const defaultCombo = recipe.defaultVariants
-      ? { ...recipe.defaultVariants }
-      : combos[0];
+    const defaultCombo = (
+      recipe.defaultVariants ? { ...recipe.defaultVariants } : combos[0]
+    ) as Record<string, string>;
     const baseReact = resolveForReact(recipe, defaultCombo);
     for (const state of stateNames) {
       stateDiffs.push(
@@ -757,11 +757,29 @@ console.log(`Total recipes: ${results.length}`);
 console.log(`Total comparisons: ${totalDiffs.length}`);
 console.log(`Value mismatches: ${totalMismatches}`);
 
-if (totalMismatches === 0) {
-  console.log("\n✓ ALL RECIPES PASS — No architectural mismatches detected.");
-} else {
-  console.log(
-    `\n⚠ ${totalMismatches} value mismatch(es) found across recipes.`
+// State coverage gate: recipes with states must have 0 STATE_UNSUPPORTED diffs
+const stateUnsupported = results
+  .filter((r) => r.stateNames.length > 0)
+  .reduce(
+    (sum, r) => sum + countByCategory(r.stateDiffs, "STATE_UNSUPPORTED"),
+    0
   );
+console.log(`State unsupported: ${stateUnsupported}`);
+
+if (totalMismatches === 0 && stateUnsupported === 0) {
+  console.log(
+    "\n✓ ALL RECIPES PASS — No architectural mismatches or state gaps detected."
+  );
+} else {
+  if (totalMismatches > 0) {
+    console.log(
+      `\n⚠ ${totalMismatches} value mismatch(es) found across recipes.`
+    );
+  }
+  if (stateUnsupported > 0) {
+    console.log(
+      `\n⚠ ${stateUnsupported} state coverage gap(s) — recipes with states have STATE_UNSUPPORTED diffs.`
+    );
+  }
   process.exit(1);
 }

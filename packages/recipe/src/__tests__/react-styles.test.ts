@@ -205,8 +205,8 @@ describe("resolveStyleMap empty/no states", () => {
 
   it("recipe with no states and states requested returns base only", () => {
     const result = resolveStyleMap(
-      inputRecipe,
-      { size: "medium" },
+      badgeRecipe,
+      { variant: "primary", size: "medium", shape: "square" },
       { states: ["hover"] }
     );
     const stateKeys = Object.keys(result).filter((k) => k.includes("-hover"));
