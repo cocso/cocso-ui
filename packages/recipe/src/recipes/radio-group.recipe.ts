@@ -9,6 +9,18 @@ export const radioGroupRecipe = defineRecipe({
       medium: { root: { size: 16, dotSize: 7 } },
       small: { root: { size: 14, dotSize: 6 } },
     },
+    selected: {
+      true: { root: { bgColor: "primary-950", borderColor: "primary-950" } },
+      false: { root: { bgColor: "white", borderColor: "neutral-200" } },
+    },
   },
-  defaultVariants: { size: "medium" },
+  states: {
+    hover: {
+      selected: {
+        true: { root: { bgColor: "primary-800", borderColor: "primary-800" } },
+        false: { root: { borderColor: "primary-500" } },
+      },
+    },
+  },
+  defaultVariants: { size: "medium", selected: "false" },
 });

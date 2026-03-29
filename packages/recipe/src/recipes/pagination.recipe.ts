@@ -4,7 +4,7 @@ export const paginationRecipe = defineRecipe({
   name: "pagination",
   slots: ["root"] as const,
   variants: {
-    state: {
+    pageState: {
       active: {
         root: {
           bgColor: "primary-950",
@@ -32,5 +32,14 @@ export const paginationRecipe = defineRecipe({
       fontSize: 14,
     },
   },
-  defaultVariants: { state: "inactive" },
+  states: {
+    hover: {
+      pageState: {
+        active: { root: { bgColor: "primary-800" } },
+        inactive: { root: { bgColor: "neutral-100" } },
+        disabled: { root: {} },
+      },
+    },
+  },
+  defaultVariants: { pageState: "inactive" },
 });
