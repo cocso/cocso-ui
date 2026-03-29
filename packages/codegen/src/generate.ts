@@ -10,22 +10,50 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
+import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
+import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
+import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
+import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
+import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
+import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
+import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
+import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
+import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import { generateCSS, generateRuntime, generateTypes } from "./generate-recipe.js";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "generated");
 
+const ALL_RECIPES = [
+  badgeRecipe,
+  buttonRecipe,
+  checkboxRecipe,
+  dialogRecipe,
+  inputRecipe,
+  linkRecipe,
+  paginationRecipe,
+  radioGroupRecipe,
+  selectRecipe,
+  spinnerRecipe,
+  stockQuantityStatusRecipe,
+  switchRecipe,
+  typographyRecipe,
+];
+
 function generate() {
   mkdirSync(GENERATED_DIR, { recursive: true });
 
-  // Phase 1: button only
-  const recipes = [buttonRecipe];
-
-  for (const recipe of recipes) {
+  let totalCSS = 0;
+  for (const recipe of ALL_RECIPES) {
     const name = recipe.name;
     console.log(`Generating ${name}...`);
 
     const css = generateCSS(recipe);
+    const cssLines = css.split("\n").length;
+    totalCSS += cssLines;
     writeFileSync(join(GENERATED_DIR, `${name}.css`), css, "utf-8");
 
     const runtime = generateRuntime(recipe);
@@ -34,12 +62,10 @@ function generate() {
     const types = generateTypes(recipe);
     writeFileSync(join(GENERATED_DIR, `${name}.d.ts`), types, "utf-8");
 
-    console.log(`  ✓ ${name}.css (${css.split("\n").length} lines)`);
-    console.log(`  ✓ ${name}.ts`);
-    console.log(`  ✓ ${name}.d.ts`);
+    console.log(`  ✓ ${name}.css (${cssLines} lines)`);
   }
 
-  console.log(`\nDone. Generated ${recipes.length} recipe(s) to ${GENERATED_DIR}`);
+  console.log(`\nDone. Generated ${ALL_RECIPES.length} recipe(s), ${totalCSS} total CSS lines.`);
 }
 
 generate();
