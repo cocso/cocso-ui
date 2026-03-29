@@ -1,16 +1,14 @@
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
 import type { FigmaNodeSpec } from "../recipe-resolver";
+import { resolveForFigma } from "../recipe-resolver";
+import { getAllVariantCombinations } from "../recipe-utils";
 import {
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-} from "../recipe-utils";
-import {
+  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createIcon,
   createTextNode,
-  createVariantRow,
   ICON_SVGS,
   rgbToHex,
   setFill,
@@ -18,13 +16,20 @@ import {
 
 function createCheckboxFromSpec(
   name: string,
-  spec: FigmaNodeSpec,
-  status: "on" | "off" | "intermediate"
+  spec: FigmaNodeSpec
 ): ComponentNode {
   const boxSize = spec.size ?? 16;
   const radius = spec.radius ?? spec.borderRadius ?? 4;
   const bgColor = spec.bgColor ?? COLORS.white;
   const borderColor = spec.borderColor ?? COLORS.neutral200;
+
+  // Determine status from the name
+  let status: "on" | "off" | "intermediate" = "off";
+  if (name.includes("status=on")) {
+    status = "on";
+  } else if (name.includes("status=intermediate")) {
+    status = "intermediate";
+  }
 
   const component = figma.createComponent();
   component.name = name;
@@ -70,22 +75,35 @@ function createCheckboxFromSpec(
 export function generateCheckboxSection(container: FrameNode): void {
   const section = createComponentSection("Checkbox");
   const combinations = getAllVariantCombinations(checkboxRecipe);
-  const groups = groupVariantsByFirstDimension(checkboxRecipe, combinations);
 
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      let status: "on" | "off" | "intermediate" = "off";
-      if (name.includes("status=on")) {
-        status = "on";
-      } else if (name.includes("status=intermediate")) {
-        status = "intermediate";
-      }
-      const component = createCheckboxFromSpec(name, spec, status);
-      row.appendChild(component);
-    }
-    section.appendChild(row);
+  // Create base (Default state) nodes
+  const variantFrame = figma.createFrame();
+  variantFrame.name = "Checkbox variants";
+  variantFrame.layoutMode = "VERTICAL";
+  variantFrame.primaryAxisSizingMode = "AUTO";
+  variantFrame.counterAxisSizingMode = "AUTO";
+  variantFrame.fills = [];
+
+  const baseNodes: ComponentNode[] = [];
+  for (const combo of combinations) {
+    const spec = resolveForFigma(checkboxRecipe, combo);
+    const name = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+    const component = createCheckboxFromSpec(name, spec);
+    variantFrame.appendChild(component);
+    baseNodes.push(component);
   }
+
+  // Add state variants (hover) and combine into ComponentSetNode
+  const componentSet = addStateVariants(
+    baseNodes,
+    checkboxRecipe,
+    combinations,
+    variantFrame,
+    (name, spec) => createCheckboxFromSpec(name, spec)
+  );
+  section.appendChild(componentSet);
 
   container.appendChild(section);
 }
