@@ -53,6 +53,12 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Codegen Freshness
+        run: |
+          pnpm --filter @cocso-ui/recipe build
+          pnpm --filter @cocso-ui/codegen generate
+          git diff --exit-code packages/codegen/generated/ || (echo "::error::Generated files are stale. Run 'pnpm --filter @cocso-ui/codegen generate' and commit." && exit 1)
+
       - name: Test with Coverage
         run: pnpm run test:coverage
 
@@ -105,6 +111,7 @@ jobs:
           const pkgs = [
             { name: '@cocso-ui/react',     summary: 'packages/react/coverage/coverage-summary.json',     dir: 'packages/react' },
             { name: '@cocso-ui/recipe',    summary: 'packages/recipe/coverage/coverage-summary.json',    dir: 'packages/recipe' },
+            { name: '@cocso-ui/codegen',   summary: 'packages/codegen/coverage/coverage-summary.json',   dir: 'packages/codegen' },
             { name: '@cocso-ui/figma',     summary: 'packages/figma/coverage/coverage-summary.json',     dir: 'packages/figma' },
             { name: '@cocso-ui/baseframe', summary: 'ecosystem/baseframe/coverage/coverage-summary.json', dir: 'ecosystem/baseframe' },
           ];
