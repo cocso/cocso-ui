@@ -1,11 +1,9 @@
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { resolveForFigma } from "../recipe-resolver";
+import { getAllVariantCombinations } from "../recipe-utils";
 import {
-  getAllVariantCombinations,
-  groupVariantsByFirstDimension,
-} from "../recipe-utils";
-import {
+  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
@@ -16,20 +14,16 @@ import {
 
 function createSwitchFromSpec(
   name: string,
-  spec: FigmaNodeSpec,
-  isChecked: boolean
+  spec: FigmaNodeSpec
 ): ComponentNode {
   const trackWidth = spec.width ?? 36;
   const trackHeight = spec.height ?? 20;
   const thumbSize = spec.thumbSize ?? 16;
   const thumbOffset = spec.thumbOffset ?? 2;
+  const isChecked = name.includes("checked=true");
 
-  const trackColor =
-    isChecked && spec.checkedBgColor ? spec.checkedBgColor : COLORS.neutral100;
-  const trackColorRef =
-    isChecked && spec.checkedBgColor
-      ? spec._tokenRefs?.checkedBgColor
-      : undefined;
+  const trackColor = spec.switchBgColor ?? COLORS.neutral100;
+  const trackColorRef = spec._tokenRefs?.switchBgColor;
 
   const component = figma.createComponent();
   component.name = name;
@@ -56,28 +50,50 @@ function createSwitchFromSpec(
 export function generateSwitchSection(container: FrameNode): void {
   const section = createComponentSection("Switch");
   const combinations = getAllVariantCombinations(switchRecipe);
-  const groups = groupVariantsByFirstDimension(switchRecipe, combinations);
 
-  for (const [groupKey, items] of groups) {
-    const row = createVariantRow(groupKey);
-    for (const { name, spec } of items) {
-      row.appendChild(
-        createSwitchFromSpec(`${name}, checked=true`, spec, true)
-      );
-      row.appendChild(
-        createSwitchFromSpec(`${name}, checked=false`, spec, false)
-      );
-    }
-    section.appendChild(row);
+  const variantFrame = figma.createFrame();
+  variantFrame.name = "Switch variants";
+  variantFrame.layoutMode = "VERTICAL";
+  variantFrame.primaryAxisSizingMode = "AUTO";
+  variantFrame.counterAxisSizingMode = "AUTO";
+  variantFrame.fills = [];
+
+  const baseNodes: ComponentNode[] = [];
+  for (const combo of combinations) {
+    const spec = resolveForFigma(switchRecipe, combo);
+    const name = Object.entries(combo)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(", ");
+    const component = createSwitchFromSpec(name, spec);
+    variantFrame.appendChild(component);
+    baseNodes.push(component);
   }
 
+  const componentSet = addStateVariants(
+    baseNodes,
+    switchRecipe,
+    combinations,
+    variantFrame,
+    (name, spec) => createSwitchFromSpec(name, spec)
+  );
+  section.appendChild(componentSet);
+
+  // Label + disabled rows stay as flat demos
   const labelRow = createVariantRow("with label");
   const defaultSpec = resolveForFigma(switchRecipe, {
     variant: "primary",
     size: "medium",
+    checked: "true",
   });
 
   for (const checked of [true, false]) {
+    const spec = checked
+      ? defaultSpec
+      : resolveForFigma(switchRecipe, {
+          variant: "primary",
+          size: "medium",
+          checked: "false",
+        });
     const wrapper = figma.createFrame();
     wrapper.name = `with-label, checked=${checked}`;
     wrapper.layoutMode = "HORIZONTAL";
@@ -88,19 +104,22 @@ export function generateSwitchSection(container: FrameNode): void {
     wrapper.itemSpacing = 8;
     wrapper.fills = [];
 
-    wrapper.appendChild(
-      createSwitchFromSpec(checked ? "on" : "off", defaultSpec, checked)
-    );
+    wrapper.appendChild(createSwitchFromSpec(`checked=${checked}`, spec));
     wrapper.appendChild(createTextNode("Label", 14, 400, COLORS.neutral900));
     labelRow.appendChild(wrapper);
   }
   section.appendChild(labelRow);
 
   const disabledRow = createVariantRow("disabled");
-  const disabledOn = createSwitchFromSpec("disabled-on", defaultSpec, true);
+  const disabledOn = createSwitchFromSpec("disabled-on", defaultSpec);
   disabledOn.opacity = 0.4;
   disabledRow.appendChild(disabledOn);
-  const disabledOff = createSwitchFromSpec("disabled-off", defaultSpec, false);
+  const uncheckedSpec = resolveForFigma(switchRecipe, {
+    variant: "primary",
+    size: "medium",
+    checked: "false",
+  });
+  const disabledOff = createSwitchFromSpec("disabled-off", uncheckedSpec);
   disabledOff.opacity = 0.4;
   disabledRow.appendChild(disabledOff);
   section.appendChild(disabledRow);

@@ -3,21 +3,20 @@ import type { FigmaNodeSpec } from "../recipe-resolver";
 import { resolveForFigma } from "../recipe-resolver";
 import { getAllVariantCombinations } from "../recipe-utils";
 import {
+  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createTextNode,
-  createVariantRow,
   setFill,
 } from "../shared";
 
-function createRadioFromSpec(
-  name: string,
-  spec: FigmaNodeSpec,
-  isSelected: boolean
-): ComponentNode {
+function createRadioFromSpec(name: string, spec: FigmaNodeSpec): ComponentNode {
   const outerSize = spec.size ?? 16;
   const dotSize = spec.dotSize ?? 7;
+  const bgColor = spec.bgColor ?? COLORS.white;
+  const borderColor = spec.borderColor ?? COLORS.neutral200;
+  const isSelected = name.includes("selected=true");
 
   const component = figma.createComponent();
   component.name = name;
@@ -34,7 +33,7 @@ function createRadioFromSpec(
   circle.cornerRadius = outerSize / 2;
 
   if (isSelected) {
-    setFill(circle, COLORS.primary950);
+    setFill(circle, bgColor, 1, spec._tokenRefs?.bgColor);
 
     circle.layoutMode = "HORIZONTAL";
     circle.primaryAxisSizingMode = "FIXED";
@@ -48,8 +47,10 @@ function createRadioFromSpec(
     dot.fills = [createBoundPaint(COLORS.white)];
     circle.appendChild(dot);
   } else {
-    setFill(circle, COLORS.white);
-    circle.strokes = [createBoundPaint(COLORS.neutral950)];
+    setFill(circle, bgColor, 1, spec._tokenRefs?.bgColor);
+    circle.strokes = [
+      createBoundPaint(borderColor, 1, spec._tokenRefs?.borderColor),
+    ];
     circle.strokeWeight = 2;
   }
 
@@ -65,20 +66,32 @@ export function generateRadioSection(container: FrameNode): void {
   const section = createComponentSection("RadioGroup");
   const combinations = getAllVariantCombinations(radioGroupRecipe);
 
-  const row = createVariantRow("size");
+  const variantFrame = figma.createFrame();
+  variantFrame.name = "Radio variants";
+  variantFrame.layoutMode = "VERTICAL";
+  variantFrame.primaryAxisSizingMode = "AUTO";
+  variantFrame.counterAxisSizingMode = "AUTO";
+  variantFrame.fills = [];
+
+  const baseNodes: ComponentNode[] = [];
   for (const combo of combinations) {
     const spec = resolveForFigma(radioGroupRecipe, combo);
-    const nameParts = Object.entries(combo)
+    const name = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");
-    row.appendChild(
-      createRadioFromSpec(`${nameParts}, selected=true`, spec, true)
-    );
-    row.appendChild(
-      createRadioFromSpec(`${nameParts}, selected=false`, spec, false)
-    );
+    const component = createRadioFromSpec(name, spec);
+    variantFrame.appendChild(component);
+    baseNodes.push(component);
   }
 
-  section.appendChild(row);
+  const componentSet = addStateVariants(
+    baseNodes,
+    radioGroupRecipe,
+    combinations,
+    variantFrame,
+    (name, spec) => createRadioFromSpec(name, spec)
+  );
+  section.appendChild(componentSet);
+
   container.appendChild(section);
 }
