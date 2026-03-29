@@ -219,44 +219,51 @@ function createTooltipBody(): FrameNode {
 function createArrowSvg(
   direction: "top" | "right" | "bottom" | "left",
   size: number,
-  hexColor: string
+  hexFill: string,
+  hexStroke?: string
 ): FrameNode {
   const w = size;
   const h = Math.round(size / 2);
-  let points: string;
+  let fillPoints: string;
+  let strokePoints: string; // 2 outer edges only (excludes body-touching edge)
   let vw: number;
   let vh: number;
 
   switch (direction) {
     case "top": {
-      // Triangle pointing up: wide base at bottom
       vw = w;
       vh = h;
-      points = `0,${h} ${w / 2},0 ${w},${h}`;
+      fillPoints = `0,${h} ${w / 2},0 ${w},${h}`;
+      strokePoints = `0,${h} ${w / 2},0 ${w},${h}`; // both slopes, no base
       break;
     }
     case "bottom": {
       vw = w;
       vh = h;
-      points = `0,0 ${w / 2},${h} ${w},0`;
+      fillPoints = `0,0 ${w / 2},${h} ${w},0`;
+      strokePoints = `0,0 ${w / 2},${h} ${w},0`;
       break;
     }
     case "left": {
       vw = h;
       vh = w;
-      points = `${h},0 0,${w / 2} ${h},${w}`;
+      fillPoints = `${h},0 0,${w / 2} ${h},${w}`;
+      strokePoints = `${h},0 0,${w / 2} ${h},${w}`;
       break;
     }
     default: {
-      // "right" — triangle pointing right
       vw = h;
       vh = w;
-      points = `0,0 ${h},${w / 2} 0,${w}`;
+      fillPoints = `0,0 ${h},${w / 2} 0,${w}`;
+      strokePoints = `0,0 ${h},${w / 2} 0,${w}`;
       break;
     }
   }
 
-  const svg = `<svg width="${vw}" height="${vh}" viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><polygon points="${points}" fill="${hexColor}"/></svg>`;
+  const strokeSvg = hexStroke
+    ? `<polyline points="${strokePoints}" fill="none" stroke="${hexStroke}" stroke-width="1"/>`
+    : "";
+  const svg = `<svg width="${vw}" height="${vh}" viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg"><polygon points="${fillPoints}" fill="${hexFill}"/>${strokeSvg}</svg>`;
   const node = figma.createNodeFromSvg(svg);
   node.name = "arrow";
   return node;
@@ -365,7 +372,7 @@ function createPopoverWithPlacement(
     return comp;
   }
 
-  const arrow = createArrowSvg(placement, ARROW_SIZE, "#ffffff");
+  const arrow = createArrowSvg(placement, ARROW_SIZE, "#ffffff", "#e6e8ea");
 
   if (placement === "top" || placement === "left") {
     comp.appendChild(arrow);
