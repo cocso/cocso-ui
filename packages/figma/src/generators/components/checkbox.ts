@@ -13,6 +13,7 @@ import {
   createComponentSection,
   createIcon,
   createTextNode,
+  createVariantMatrix,
   ICON_SVGS,
   rgbToHex,
   setFill,
@@ -80,6 +81,24 @@ export function generateCheckboxSection(container: FrameNode): void {
   const json = checkboxJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Checkbox");
   const combinations = getAllVariantCombinations(checkboxRecipe);
+
+  // Visual matrix grid (design system documentation layout)
+  const sizes = Object.keys(checkboxRecipe.variants.size);
+  const statuses = Object.keys(checkboxRecipe.variants.status);
+
+  const matrixGrid = createVariantMatrix(
+    "Checkbox variants",
+    { name: "size", values: sizes },
+    { name: "status", values: statuses },
+    (sizeVal, statusVal) => {
+      const spec = lookupSpec(json, checkboxRecipe, {
+        size: sizeVal,
+        status: statusVal,
+      });
+      return createCheckboxFromSpec(`${sizeVal}-${statusVal}`, spec);
+    }
+  );
+  section.appendChild(matrixGrid);
 
   // Create base (Default state) nodes
   const variantFrame = figma.createFrame();

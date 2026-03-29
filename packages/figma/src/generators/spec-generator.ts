@@ -4,6 +4,7 @@ import {
   createComponentSection,
   createIcon,
   createTextNode,
+  createVariantMatrix,
   createVariantRow,
   ICON_SVGS,
   rgbToHex,
@@ -196,63 +197,228 @@ function generateAccordionSection(container: FrameNode): void {
 
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 
+function createTooltipBody(): ComponentNode {
+  const comp = figma.createComponent();
+  comp.layoutMode = "HORIZONTAL";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.paddingTop = 4;
+  comp.paddingBottom = 4;
+  comp.paddingLeft = 8;
+  comp.paddingRight = 8;
+  comp.cornerRadius = 4;
+  setFill(comp, COLORS.neutral900);
+
+  const text = createTextNode("Tooltip text", 12, 400, COLORS.white);
+  comp.appendChild(text);
+  return comp;
+}
+
+function createTooltipArrow(
+  placement: "top" | "right" | "bottom" | "left"
+): FrameNode {
+  const arrow = figma.createFrame();
+  arrow.name = "arrow";
+  arrow.resize(6, 6);
+  arrow.rotation = 45;
+  setFill(arrow, COLORS.neutral900);
+  arrow.strokes = [];
+
+  // Wrap in a container to position the arrow correctly
+  const wrapper = createAutoLayoutFrame("arrow-wrapper");
+  wrapper.primaryAxisAlignItems = "CENTER";
+  wrapper.counterAxisAlignItems = "CENTER";
+
+  if (placement === "top" || placement === "bottom") {
+    wrapper.layoutMode = "HORIZONTAL";
+    wrapper.primaryAxisAlignItems = "CENTER";
+  } else {
+    wrapper.layoutMode = "VERTICAL";
+    wrapper.primaryAxisAlignItems = "CENTER";
+  }
+
+  wrapper.appendChild(arrow);
+  return wrapper;
+}
+
+function createTooltipWithPlacement(
+  placement: "top" | "right" | "bottom" | "left",
+  withArrow: boolean
+): ComponentNode {
+  const comp = figma.createComponent();
+  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+
+  // For top/bottom: stack vertically; for left/right: stack horizontally
+  if (placement === "top" || placement === "bottom") {
+    comp.layoutMode = "VERTICAL";
+  } else {
+    comp.layoutMode = "HORIZONTAL";
+  }
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.itemSpacing = 0;
+  comp.fills = [];
+
+  const body = createTooltipBody();
+
+  if (withArrow) {
+    const arrow = createTooltipArrow(placement);
+
+    // Arrow on the opposite side of the placement direction:
+    // top → arrow on bottom, bottom → arrow on top,
+    // left → arrow on right, right → arrow on left
+    if (placement === "top" || placement === "left") {
+      comp.appendChild(body);
+      comp.appendChild(arrow);
+    } else {
+      comp.appendChild(arrow);
+      comp.appendChild(body);
+    }
+  } else {
+    comp.appendChild(body);
+  }
+
+  return comp;
+}
+
 function generateTooltipSection(container: FrameNode): void {
   const section = createComponentSection("Tooltip");
 
-  const row = createVariantRow("default");
-  const component = figma.createComponent();
-  component.name = "variant=default";
-  component.layoutMode = "HORIZONTAL";
-  component.primaryAxisSizingMode = "AUTO";
-  component.counterAxisSizingMode = "AUTO";
-  component.counterAxisAlignItems = "CENTER";
-  component.paddingTop = 4;
-  component.paddingBottom = 4;
-  component.paddingLeft = 8;
-  component.paddingRight = 8;
-  component.cornerRadius = 4;
-  setFill(component, COLORS.neutral900);
+  const matrix = createVariantMatrix(
+    "Tooltip placements",
+    { name: "arrow", values: ["with arrow", "no arrow"] },
+    { name: "placement", values: ["top", "right", "bottom", "left"] },
+    (rowValue, colValue) => {
+      const withArrow = rowValue === "with arrow";
+      const placement = colValue as "top" | "right" | "bottom" | "left";
+      return createTooltipWithPlacement(placement, withArrow);
+    }
+  );
 
-  const text = createTextNode("Tooltip text", 12, 400, COLORS.white);
-  component.appendChild(text);
-
-  row.appendChild(component);
-  section.appendChild(row);
+  section.appendChild(matrix);
   container.appendChild(section);
 }
 
 // ─── Popover ─────────────────────────────────────────────────────────────────
 
+function createPopoverBody(): ComponentNode {
+  const comp = figma.createComponent();
+  comp.layoutMode = "HORIZONTAL";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.paddingTop = 6;
+  comp.paddingBottom = 6;
+  comp.paddingLeft = 8;
+  comp.paddingRight = 8;
+  comp.cornerRadius = 6;
+  comp.effects = SHADOW_SM;
+  setFill(comp, COLORS.white);
+  setStroke(comp, COLORS.neutral100, 1);
+
+  const text = createTextNode("Popover content", 14, 400, COLORS.neutral900);
+  comp.appendChild(text);
+  return comp;
+}
+
+function createPopoverArrow(
+  placement: "top" | "right" | "bottom" | "left"
+): FrameNode {
+  const arrow = figma.createFrame();
+  arrow.name = "arrow";
+  arrow.resize(8, 8);
+  arrow.rotation = 45;
+  setFill(arrow, COLORS.white);
+  setStroke(arrow, COLORS.neutral100, 1);
+
+  // Wrap in a container to position the arrow correctly
+  const wrapper = createAutoLayoutFrame("arrow-wrapper");
+  wrapper.primaryAxisAlignItems = "CENTER";
+  wrapper.counterAxisAlignItems = "CENTER";
+
+  if (placement === "top" || placement === "bottom") {
+    wrapper.layoutMode = "HORIZONTAL";
+    wrapper.primaryAxisAlignItems = "CENTER";
+  } else {
+    wrapper.layoutMode = "VERTICAL";
+    wrapper.primaryAxisAlignItems = "CENTER";
+  }
+
+  wrapper.appendChild(arrow);
+  return wrapper;
+}
+
+function createPopoverWithPlacement(
+  placement: "top" | "right" | "bottom" | "left",
+  withArrow: boolean
+): ComponentNode {
+  const comp = figma.createComponent();
+  comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+
+  // For top/bottom: stack vertically; for left/right: stack horizontally
+  if (placement === "top" || placement === "bottom") {
+    comp.layoutMode = "VERTICAL";
+  } else {
+    comp.layoutMode = "HORIZONTAL";
+  }
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.itemSpacing = 0;
+  comp.fills = [];
+
+  const body = createPopoverBody();
+
+  if (withArrow) {
+    const arrow = createPopoverArrow(placement);
+
+    // Arrow on the opposite side of the placement direction:
+    // top → arrow on bottom, bottom → arrow on top,
+    // left → arrow on right, right → arrow on left
+    if (placement === "top" || placement === "left") {
+      comp.appendChild(body);
+      comp.appendChild(arrow);
+    } else {
+      comp.appendChild(arrow);
+      comp.appendChild(body);
+    }
+  } else {
+    comp.appendChild(body);
+  }
+
+  return comp;
+}
+
 function generatePopoverSection(container: FrameNode): void {
   const section = createComponentSection("Popover");
 
-  const row = createVariantRow("default");
-  const component = figma.createComponent();
-  component.name = "variant=default";
-  component.layoutMode = "HORIZONTAL";
-  component.primaryAxisSizingMode = "AUTO";
-  component.counterAxisSizingMode = "AUTO";
-  component.counterAxisAlignItems = "CENTER";
-  component.paddingTop = 6;
-  component.paddingBottom = 6;
-  component.paddingLeft = 8;
-  component.paddingRight = 8;
-  component.cornerRadius = 6;
-  component.effects = SHADOW_SM;
-  setFill(component, COLORS.white);
-  setStroke(component, COLORS.neutral100, 1);
+  const matrix = createVariantMatrix(
+    "Popover placements",
+    { name: "arrow", values: ["with arrow", "no arrow"] },
+    { name: "placement", values: ["top", "right", "bottom", "left"] },
+    (rowValue, colValue) => {
+      const withArrow = rowValue === "with arrow";
+      const placement = colValue as "top" | "right" | "bottom" | "left";
+      return createPopoverWithPlacement(placement, withArrow);
+    }
+  );
 
-  const text = createTextNode("Popover content", 14, 400, COLORS.neutral900);
-  component.appendChild(text);
-
-  row.appendChild(component);
-  section.appendChild(row);
+  section.appendChild(matrix);
   container.appendChild(section);
 }
 
 // ─── Dropdown ────────────────────────────────────────────────────────────────
 
-function createDropdownItem(label: string, withHover: boolean): FrameNode {
+function createDropdownItem(
+  label: string,
+  options?: {
+    hover?: boolean;
+    disabled?: boolean;
+    iconSvg?: string;
+  }
+): FrameNode {
   const item = figma.createFrame();
   item.name = "item";
   item.layoutMode = "HORIZONTAL";
@@ -264,30 +430,48 @@ function createDropdownItem(label: string, withHover: boolean): FrameNode {
   item.paddingLeft = 8;
   item.paddingRight = 8;
   item.cornerRadius = 6;
+  item.itemSpacing = 8;
 
-  if (withHover) {
+  if (options?.hover) {
     setFill(item, COLORS.neutral50);
   } else {
     item.fills = [];
   }
 
-  const text = createTextNode(label, 14, 400, COLORS.neutral900);
+  if (options?.iconSvg) {
+    const iconColor = options?.disabled ? COLORS.neutral400 : COLORS.neutral900;
+    const icon = createIcon(options.iconSvg, 16, rgbToHex(iconColor));
+    item.appendChild(icon);
+  }
+
+  const textColor = options?.disabled ? COLORS.neutral400 : COLORS.neutral900;
+  const text = createTextNode(label, 14, 400, textColor);
   item.appendChild(text);
 
   return item;
 }
 
+function createDropdownSeparator(): FrameNode {
+  const sep = figma.createFrame();
+  sep.name = "separator";
+  sep.resize(sep.width, 1);
+  sep.layoutAlign = "STRETCH";
+  setFill(sep, COLORS.neutral100);
+  return sep;
+}
+
 function generateDropdownSection(container: FrameNode): void {
   const section = createComponentSection("Dropdown");
 
-  // Content variant — dropdown panel with 3 items
+  // Content variant — full dropdown panel with 4 items:
+  // normal item, item with icon prefix, separator line, disabled item
   const contentRow = createVariantRow("content");
   const contentComponent = figma.createComponent();
   contentComponent.name = "variant=content";
   contentComponent.layoutMode = "VERTICAL";
   contentComponent.primaryAxisSizingMode = "AUTO";
   contentComponent.counterAxisSizingMode = "FIXED";
-  contentComponent.resize(160, contentComponent.height);
+  contentComponent.resize(180, contentComponent.height);
   contentComponent.itemSpacing = 0;
   contentComponent.paddingTop = 6;
   contentComponent.paddingBottom = 6;
@@ -296,33 +480,131 @@ function generateDropdownSection(container: FrameNode): void {
   setFill(contentComponent, COLORS.white);
   setStroke(contentComponent, COLORS.neutral100, 1);
 
-  contentComponent.appendChild(createDropdownItem("Menu item", false));
-  contentComponent.appendChild(createDropdownItem("Menu item", false));
-  contentComponent.appendChild(createDropdownItem("Menu item", false));
+  contentComponent.appendChild(createDropdownItem("Menu item"));
+  contentComponent.appendChild(
+    createDropdownItem("With icon", { iconSvg: ICON_SVGS.pencil })
+  );
+  contentComponent.appendChild(createDropdownSeparator());
+  contentComponent.appendChild(
+    createDropdownItem("Disabled", { disabled: true })
+  );
 
   contentRow.appendChild(contentComponent);
   section.appendChild(contentRow);
 
-  // Item (hover) variant
-  const itemRow = createVariantRow("item");
-  const itemComponent = figma.createComponent();
-  itemComponent.name = "variant=item-hover";
-  itemComponent.layoutMode = "HORIZONTAL";
-  itemComponent.primaryAxisSizingMode = "AUTO";
-  itemComponent.counterAxisSizingMode = "AUTO";
-  itemComponent.counterAxisAlignItems = "CENTER";
-  itemComponent.paddingTop = 6;
-  itemComponent.paddingBottom = 6;
-  itemComponent.paddingLeft = 8;
-  itemComponent.paddingRight = 8;
-  itemComponent.cornerRadius = 6;
-  setFill(itemComponent, COLORS.neutral50);
+  // Item states — normal + hover + disabled side by side
+  const statesRow = createVariantRow("item states");
 
-  const itemText = createTextNode("Menu item", 14, 400, COLORS.neutral900);
-  itemComponent.appendChild(itemText);
+  const normalItem = figma.createComponent();
+  normalItem.name = "variant=item-normal";
+  normalItem.layoutMode = "HORIZONTAL";
+  normalItem.primaryAxisSizingMode = "AUTO";
+  normalItem.counterAxisSizingMode = "AUTO";
+  normalItem.counterAxisAlignItems = "CENTER";
+  normalItem.paddingTop = 6;
+  normalItem.paddingBottom = 6;
+  normalItem.paddingLeft = 8;
+  normalItem.paddingRight = 8;
+  normalItem.cornerRadius = 6;
+  normalItem.fills = [];
+  normalItem.appendChild(createTextNode("Normal", 14, 400, COLORS.neutral900));
+  statesRow.appendChild(normalItem);
 
-  itemRow.appendChild(itemComponent);
-  section.appendChild(itemRow);
+  const hoverItem = figma.createComponent();
+  hoverItem.name = "variant=item-hover";
+  hoverItem.layoutMode = "HORIZONTAL";
+  hoverItem.primaryAxisSizingMode = "AUTO";
+  hoverItem.counterAxisSizingMode = "AUTO";
+  hoverItem.counterAxisAlignItems = "CENTER";
+  hoverItem.paddingTop = 6;
+  hoverItem.paddingBottom = 6;
+  hoverItem.paddingLeft = 8;
+  hoverItem.paddingRight = 8;
+  hoverItem.cornerRadius = 6;
+  setFill(hoverItem, COLORS.neutral50);
+  hoverItem.appendChild(createTextNode("Hover", 14, 400, COLORS.neutral900));
+  statesRow.appendChild(hoverItem);
+
+  const disabledItem = figma.createComponent();
+  disabledItem.name = "variant=item-disabled";
+  disabledItem.layoutMode = "HORIZONTAL";
+  disabledItem.primaryAxisSizingMode = "AUTO";
+  disabledItem.counterAxisSizingMode = "AUTO";
+  disabledItem.counterAxisAlignItems = "CENTER";
+  disabledItem.paddingTop = 6;
+  disabledItem.paddingBottom = 6;
+  disabledItem.paddingLeft = 8;
+  disabledItem.paddingRight = 8;
+  disabledItem.cornerRadius = 6;
+  disabledItem.fills = [];
+  disabledItem.appendChild(
+    createTextNode("Disabled", 14, 400, COLORS.neutral400)
+  );
+  statesRow.appendChild(disabledItem);
+
+  section.appendChild(statesRow);
+
+  // With icons — items with prefix icons
+  const iconsRow = createVariantRow("with icons");
+
+  const iconItem1 = figma.createComponent();
+  iconItem1.name = "variant=icon-item-1";
+  iconItem1.layoutMode = "HORIZONTAL";
+  iconItem1.primaryAxisSizingMode = "AUTO";
+  iconItem1.counterAxisSizingMode = "AUTO";
+  iconItem1.counterAxisAlignItems = "CENTER";
+  iconItem1.paddingTop = 6;
+  iconItem1.paddingBottom = 6;
+  iconItem1.paddingLeft = 8;
+  iconItem1.paddingRight = 8;
+  iconItem1.cornerRadius = 6;
+  iconItem1.itemSpacing = 8;
+  iconItem1.fills = [];
+  iconItem1.appendChild(
+    createIcon(ICON_SVGS.pencil, 16, rgbToHex(COLORS.neutral900))
+  );
+  iconItem1.appendChild(createTextNode("Edit", 14, 400, COLORS.neutral900));
+  iconsRow.appendChild(iconItem1);
+
+  const iconItem2 = figma.createComponent();
+  iconItem2.name = "variant=icon-item-2";
+  iconItem2.layoutMode = "HORIZONTAL";
+  iconItem2.primaryAxisSizingMode = "AUTO";
+  iconItem2.counterAxisSizingMode = "AUTO";
+  iconItem2.counterAxisAlignItems = "CENTER";
+  iconItem2.paddingTop = 6;
+  iconItem2.paddingBottom = 6;
+  iconItem2.paddingLeft = 8;
+  iconItem2.paddingRight = 8;
+  iconItem2.cornerRadius = 6;
+  iconItem2.itemSpacing = 8;
+  iconItem2.fills = [];
+  iconItem2.appendChild(
+    createIcon(ICON_SVGS.search, 16, rgbToHex(COLORS.neutral900))
+  );
+  iconItem2.appendChild(createTextNode("Search", 14, 400, COLORS.neutral900));
+  iconsRow.appendChild(iconItem2);
+
+  const iconItem3 = figma.createComponent();
+  iconItem3.name = "variant=icon-item-3";
+  iconItem3.layoutMode = "HORIZONTAL";
+  iconItem3.primaryAxisSizingMode = "AUTO";
+  iconItem3.counterAxisSizingMode = "AUTO";
+  iconItem3.counterAxisAlignItems = "CENTER";
+  iconItem3.paddingTop = 6;
+  iconItem3.paddingBottom = 6;
+  iconItem3.paddingLeft = 8;
+  iconItem3.paddingRight = 8;
+  iconItem3.cornerRadius = 6;
+  iconItem3.itemSpacing = 8;
+  iconItem3.fills = [];
+  iconItem3.appendChild(
+    createIcon(ICON_SVGS.plus, 16, rgbToHex(COLORS.neutral900))
+  );
+  iconItem3.appendChild(createTextNode("Add new", 14, 400, COLORS.neutral900));
+  iconsRow.appendChild(iconItem3);
+
+  section.appendChild(iconsRow);
 
   container.appendChild(section);
 }

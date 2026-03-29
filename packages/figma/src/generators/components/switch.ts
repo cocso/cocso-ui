@@ -12,6 +12,7 @@ import {
   createBoundPaint,
   createComponentSection,
   createTextNode,
+  createVariantMatrixPerSlice,
   createVariantRow,
   setFill,
 } from "../shared";
@@ -55,6 +56,30 @@ export function generateSwitchSection(container: FrameNode): void {
   const json = switchJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Switch");
   const combinations = getAllVariantCombinations(switchRecipe);
+
+  // Visual matrix grid (design system documentation layout)
+  const variants = Object.keys(switchRecipe.variants.variant);
+  const sizes = Object.keys(switchRecipe.variants.size);
+  const checkedValues = Object.keys(switchRecipe.variants.checked);
+
+  const matrixGrid = createVariantMatrixPerSlice(
+    "Switch variants",
+    { name: "size", values: sizes },
+    { name: "variant", values: variants },
+    { name: "checked", values: checkedValues },
+    (sizeVal, variantVal, checkedVal) => {
+      const spec = lookupSpec(json, switchRecipe, {
+        variant: variantVal,
+        size: sizeVal,
+        checked: checkedVal,
+      });
+      return createSwitchFromSpec(
+        `${variantVal}-${sizeVal}-checked=${checkedVal}`,
+        spec
+      );
+    }
+  );
+  section.appendChild(matrixGrid);
 
   const variantFrame = figma.createFrame();
   variantFrame.name = "Switch variants";

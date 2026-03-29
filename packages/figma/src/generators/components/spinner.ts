@@ -1,12 +1,16 @@
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
+import spinnerJSON from "../../../../codegen/generated/spinner.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import {
+  type FigmaJSONData,
   getAllVariantCombinations,
   groupVariantsByFirstDimension,
+  lookupSpec,
 } from "../recipe-utils";
 import {
   COLORS,
   createComponentSection,
+  createVariantMatrix,
   createVariantRow,
   rgbToHex,
 } from "../shared";
@@ -56,9 +60,33 @@ function createSpinnerFromSpec(
 }
 
 export function generateSpinnerSection(container: FrameNode): void {
+  const json = spinnerJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Spinner");
+
+  // Visual matrix grid (design system documentation layout)
+  const variants = Object.keys(spinnerRecipe.variants.variant);
+  const sizes = Object.keys(spinnerRecipe.variants.size);
+
+  const matrixGrid = createVariantMatrix(
+    "Spinner variants",
+    { name: "variant", values: variants },
+    { name: "size", values: sizes },
+    (variantVal, sizeVal) => {
+      const spec = lookupSpec(json, spinnerRecipe, {
+        variant: variantVal,
+        size: sizeVal,
+      });
+      return createSpinnerFromSpec(`${variantVal}-${sizeVal}`, spec);
+    }
+  );
+  section.appendChild(matrixGrid);
+
   const combinations = getAllVariantCombinations(spinnerRecipe);
-  const groups = groupVariantsByFirstDimension(spinnerRecipe, combinations);
+  const groups = groupVariantsByFirstDimension(
+    spinnerRecipe,
+    combinations,
+    json
+  );
 
   for (const [groupKey, items] of groups) {
     const row = createVariantRow(groupKey);

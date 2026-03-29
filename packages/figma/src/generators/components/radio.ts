@@ -12,6 +12,7 @@ import {
   createBoundPaint,
   createComponentSection,
   createTextNode,
+  createVariantMatrix,
   setFill,
 } from "../shared";
 
@@ -70,6 +71,24 @@ export function generateRadioSection(container: FrameNode): void {
   const json = radioJSON as unknown as FigmaJSONData;
   const section = createComponentSection("RadioGroup");
   const combinations = getAllVariantCombinations(radioGroupRecipe);
+
+  // Visual matrix grid (design system documentation layout)
+  const sizes = Object.keys(radioGroupRecipe.variants.size);
+  const selectedValues = Object.keys(radioGroupRecipe.variants.selected);
+
+  const matrixGrid = createVariantMatrix(
+    "Radio variants",
+    { name: "size", values: sizes },
+    { name: "selected", values: selectedValues },
+    (sizeVal, selectedVal) => {
+      const spec = lookupSpec(json, radioGroupRecipe, {
+        size: sizeVal,
+        selected: selectedVal,
+      });
+      return createRadioFromSpec(`${sizeVal}-selected=${selectedVal}`, spec);
+    }
+  );
+  section.appendChild(matrixGrid);
 
   const variantFrame = figma.createFrame();
   variantFrame.name = "Radio variants";
