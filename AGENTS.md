@@ -97,6 +97,7 @@ When asked to review comments on a GitHub PR:
 - Recipe definitions in `packages/recipe/` are the single source of truth for component visual specs.
 - After modifying any recipe, run `pnpm --filter @cocso-ui/codegen generate` and commit the generated output.
 - React components MUST import from `@cocso-ui/codegen/generated/*`, NOT from `@cocso-ui/recipe` at runtime.
+- React components MUST NOT re-export types via `export type { X } from "@cocso-ui/codegen/..."`. Since codegen is a devDependency, such re-exports leak unresolvable bare specifiers into published `.d.ts` files. Inline the type aliases instead.
 - New components with visual variants MUST define a recipe first, then generate codegen artifacts.
 - CI enforces codegen freshness: stale generated files will fail the build.
 

@@ -66,9 +66,11 @@ Output: packages/codegen/generated/
 
 ### Dependency Direction
 
-- `@cocso-ui/codegen` → devDependency on `@cocso-ui/recipe` (build-time import)
-- `@cocso-ui/react` → dependency on `@cocso-ui/codegen` (generated CSS + functions)
+- `@cocso-ui/codegen` → devDependency on `@cocso-ui/recipe` (build-time import only)
+- `@cocso-ui/react` → devDependency on `@cocso-ui/codegen` (rollup bundles generated output at build time; codegen must NOT appear in published dependencies or .d.ts)
 - `@cocso-ui/figma` → reads generated `.figma.json` from codegen output
+
+> **Important:** React components must NOT re-export types from `@cocso-ui/codegen` via `export type { X } from "@cocso-ui/codegen/..."`. Since codegen is a devDependency and `private: true`, such re-exports leak unresolvable bare specifiers into the published `.d.ts` files. Instead, inline the type aliases directly in the React source files.
 
 ### CSS Generation Strategy
 
@@ -94,7 +96,7 @@ Per-dimension rules (not Cartesian product) for compact output:
 }
 ```
 
-748 total CSS lines across 13 recipes (vs 1744 lines for button alone with Cartesian product).
+607 total CSS lines across 13 recipes (duplicate selectors merged; vs 1744 lines for button alone with Cartesian product).
 
 ## Interfaces
 
@@ -117,9 +119,17 @@ export interface ButtonVariantProps {
 
 ### Package exports
 
+```json
+{
+  "./generated/*.css": "./generated/*.css",
+  "./generated/*": {
+    "types": "./generated/*.d.ts",
+    "default": "./generated/*.ts"
+  }
+}
 ```
-@cocso-ui/codegen/generated/*    — wildcard export for all generated files
-```
+
+CSS files are matched by the first (more specific) pattern; extensionless TS imports are matched by the second pattern with explicit `types` condition for TypeScript resolution.
 
 ## Storage
 
