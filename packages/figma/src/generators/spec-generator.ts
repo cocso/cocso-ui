@@ -241,20 +241,21 @@ function createTooltipWithPlacement(
     setFill(arrow, COLORS.neutral900);
     arrow.strokes = [];
 
-    // No layoutMode on comp → children use manual x/y
+    // Arrow direction: placement = where the arrow points
+    // top → arrow at top center, bottom → arrow at bottom, etc.
     const bw = body.width;
     const bh = body.height;
     if (placement === "left") {
-      arrow.x = bw - H;
-    } else if (placement === "right") {
       arrow.x = -H;
+    } else if (placement === "right") {
+      arrow.x = bw - H;
     } else {
       arrow.x = bw / 2 - H;
     }
     if (placement === "top") {
-      arrow.y = bh - H;
-    } else if (placement === "bottom") {
       arrow.y = -H;
+    } else if (placement === "bottom") {
+      arrow.y = bh - H;
     } else {
       arrow.y = bh / 2 - H;
     }
@@ -332,16 +333,16 @@ function createPopoverWithPlacement(
     const bw = body.width;
     const bh = body.height;
     if (placement === "left") {
-      arrow.x = bw - H;
-    } else if (placement === "right") {
       arrow.x = -H;
+    } else if (placement === "right") {
+      arrow.x = bw - H;
     } else {
       arrow.x = bw / 2 - H;
     }
     if (placement === "top") {
-      arrow.y = bh - H;
-    } else if (placement === "bottom") {
       arrow.y = -H;
+    } else if (placement === "bottom") {
+      arrow.y = bh - H;
     } else {
       arrow.y = bh / 2 - H;
     }
