@@ -269,41 +269,78 @@ function createArrowSvg(
   return node;
 }
 
+function placeBodyAndArrow(
+  comp: ComponentNode,
+  body: FrameNode,
+  arrow: FrameNode,
+  placement: "top" | "right" | "bottom" | "left"
+): void {
+  const bw = body.width;
+  const bh = body.height;
+  const aw = arrow.width;
+  const ah = arrow.height;
+  const overlap = 1;
+
+  // Body first (lower z), arrow second (higher z = renders on top)
+  switch (placement) {
+    case "top": {
+      body.x = 0;
+      body.y = ah - overlap;
+      arrow.x = Math.round(bw / 2 - aw / 2);
+      arrow.y = 0;
+      comp.resize(bw, bh + ah - overlap);
+      break;
+    }
+    case "bottom": {
+      body.x = 0;
+      body.y = 0;
+      arrow.x = Math.round(bw / 2 - aw / 2);
+      arrow.y = bh - overlap;
+      comp.resize(bw, bh + ah - overlap);
+      break;
+    }
+    case "left": {
+      body.x = aw - overlap;
+      body.y = 0;
+      arrow.x = 0;
+      arrow.y = Math.round(bh / 2 - ah / 2);
+      comp.resize(bw + aw - overlap, bh);
+      break;
+    }
+    default: {
+      // right
+      body.x = 0;
+      body.y = 0;
+      arrow.x = bw - overlap;
+      arrow.y = Math.round(bh / 2 - ah / 2);
+      comp.resize(bw + aw - overlap, bh);
+      break;
+    }
+  }
+
+  comp.appendChild(body);
+  comp.appendChild(arrow);
+}
+
 function createTooltipWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
-  const ARROW_SIZE = 8;
-
   const body = createTooltipBody();
 
-  // Component: vertical or horizontal stack with body + arrow
   const comp = figma.createComponent();
   comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+  comp.clipsContent = false;
   comp.fills = [];
-
-  const isVertical = placement === "top" || placement === "bottom";
-  comp.layoutMode = isVertical ? "VERTICAL" : "HORIZONTAL";
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.itemSpacing = -1; // overlap by 1px to eliminate seam
 
   if (!withArrow) {
     comp.appendChild(body);
+    comp.resize(body.width, body.height);
     return comp;
   }
 
-  const arrow = createArrowSvg(placement, ARROW_SIZE, "#1e2124");
-
-  if (placement === "top" || placement === "left") {
-    comp.appendChild(arrow);
-    comp.appendChild(body);
-  } else {
-    comp.appendChild(body);
-    comp.appendChild(arrow);
-  }
-
+  const arrow = createArrowSvg(placement, 8, "#1e2124");
+  placeBodyAndArrow(comp, body, arrow, placement);
   return comp;
 }
 
@@ -352,36 +389,21 @@ function createPopoverWithPlacement(
   placement: "top" | "right" | "bottom" | "left",
   withArrow: boolean
 ): ComponentNode {
-  const ARROW_SIZE = 10;
-
   const body = createPopoverBody();
 
   const comp = figma.createComponent();
   comp.name = `arrow=${withArrow ? "true" : "false"}, placement=${placement}`;
+  comp.clipsContent = false;
   comp.fills = [];
-
-  const isVertical = placement === "top" || placement === "bottom";
-  comp.layoutMode = isVertical ? "VERTICAL" : "HORIZONTAL";
-  comp.primaryAxisSizingMode = "AUTO";
-  comp.counterAxisSizingMode = "AUTO";
-  comp.counterAxisAlignItems = "CENTER";
-  comp.itemSpacing = -1;
 
   if (!withArrow) {
     comp.appendChild(body);
+    comp.resize(body.width, body.height);
     return comp;
   }
 
-  const arrow = createArrowSvg(placement, ARROW_SIZE, "#ffffff", "#e6e8ea");
-
-  if (placement === "top" || placement === "left") {
-    comp.appendChild(arrow);
-    comp.appendChild(body);
-  } else {
-    comp.appendChild(body);
-    comp.appendChild(arrow);
-  }
-
+  const arrow = createArrowSvg(placement, 10, "#ffffff", "#e6e8ea");
+  placeBodyAndArrow(comp, body, arrow, placement);
   return comp;
 }
 
