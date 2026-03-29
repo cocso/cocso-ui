@@ -1,0 +1,236 @@
+{
+  "name": "radio",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "size=large,selected=true": {
+      "size": 18,
+      "dotSize": 8,
+      "bgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "_tokenRefs": {
+        "bgColor": "primary-950",
+        "borderColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "size": 18,
+          "dotSize": 8,
+          "bgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "borderColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "_tokenRefs": {
+            "bgColor": "primary-800",
+            "borderColor": "primary-800"
+          }
+        }
+      }
+    },
+    "size=large,selected=false": {
+      "size": 18,
+      "dotSize": 8,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderColor": "neutral-200"
+      },
+      "states": {
+        "hover": {
+          "size": 18,
+          "dotSize": 8,
+          "bgColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "_tokenRefs": {
+            "bgColor": "white",
+            "borderColor": "primary-500"
+          }
+        }
+      }
+    },
+    "size=medium,selected=true": {
+      "size": 16,
+      "dotSize": 7,
+      "bgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "_tokenRefs": {
+        "bgColor": "primary-950",
+        "borderColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "size": 16,
+          "dotSize": 7,
+          "bgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "borderColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "_tokenRefs": {
+            "bgColor": "primary-800",
+            "borderColor": "primary-800"
+          }
+        }
+      }
+    },
+    "size=medium,selected=false": {
+      "size": 16,
+      "dotSize": 7,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderColor": "neutral-200"
+      },
+      "states": {
+        "hover": {
+          "size": 16,
+          "dotSize": 7,
+          "bgColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "_tokenRefs": {
+            "bgColor": "white",
+            "borderColor": "primary-500"
+          }
+        }
+      }
+    },
+    "size=small,selected=true": {
+      "size": 14,
+      "dotSize": 6,
+      "bgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "_tokenRefs": {
+        "bgColor": "primary-950",
+        "borderColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "size": 14,
+          "dotSize": 6,
+          "bgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "borderColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "_tokenRefs": {
+            "bgColor": "primary-800",
+            "borderColor": "primary-800"
+          }
+        }
+      }
+    },
+    "size=small,selected=false": {
+      "size": 14,
+      "dotSize": 6,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderColor": {
+        "r": 0.803921568627451,
+        "g": 0.8196078431372549,
+        "b": 0.8352941176470589
+      },
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderColor": "neutral-200"
+      },
+      "states": {
+        "hover": {
+          "size": 14,
+          "dotSize": 6,
+          "bgColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
+          "_tokenRefs": {
+            "bgColor": "white",
+            "borderColor": "primary-500"
+          }
+        }
+      }
+    }
+  }
+}

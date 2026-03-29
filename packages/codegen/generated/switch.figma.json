@@ -1,0 +1,1268 @@
+{
+  "name": "switch",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "variant=primary,size=large,checked=true": {
+      "switchBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "primary-950",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "primary-800",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=primary,size=large,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=primary,size=medium,checked=true": {
+      "switchBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "primary-950",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "primary-800",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=primary,size=medium,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=primary,size=small,checked=true": {
+      "switchBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "primary-950",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "primary-800",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=primary,size=small,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "primary-950"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "primary-950"
+          }
+        }
+      }
+    },
+    "variant=success,size=large,checked=true": {
+      "switchBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "success-500",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.24705882352941178,
+            "g": 0.6509803921568628,
+            "b": 0.32941176470588235
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "success-400",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=success,size=large,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=success,size=medium,checked=true": {
+      "switchBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "success-500",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.24705882352941178,
+            "g": 0.6509803921568628,
+            "b": 0.32941176470588235
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "success-400",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=success,size=medium,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=success,size=small,checked=true": {
+      "switchBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "success-500",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.24705882352941178,
+            "g": 0.6509803921568628,
+            "b": 0.32941176470588235
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "success-400",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=success,size=small,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "success-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.13333333333333333,
+            "g": 0.5294117647058824,
+            "b": 0.2196078431372549
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "success-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=large,checked=true": {
+      "switchBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "danger-500",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.9411764705882353,
+            "g": 0.37254901960784315,
+            "b": 0.25882352941176473
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "danger-400",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=large,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=medium,checked=true": {
+      "switchBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "danger-500",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.9411764705882353,
+            "g": 0.37254901960784315,
+            "b": 0.25882352941176473
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "danger-400",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=medium,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=small,checked=true": {
+      "switchBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "danger-500",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.9411764705882353,
+            "g": 0.37254901960784315,
+            "b": 0.25882352941176473
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "danger-400",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=error,size=small,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "danger-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.8705882352941177,
+            "g": 0.20392156862745098,
+            "b": 0.07058823529411765
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "danger-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=large,checked=true": {
+      "switchBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "warning-500",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.7803921568627451,
+            "g": 0.5215686274509804,
+            "b": 0
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "warning-400",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=large,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=medium,checked=true": {
+      "switchBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "warning-500",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.7803921568627451,
+            "g": 0.5215686274509804,
+            "b": 0
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "warning-400",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=medium,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=small,checked=true": {
+      "switchBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "warning-500",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.7803921568627451,
+            "g": 0.5215686274509804,
+            "b": 0
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "warning-400",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=warning,size=small,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "warning-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.6196078431372549,
+            "g": 0.41568627450980394,
+            "b": 0
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "warning-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=large,checked=true": {
+      "switchBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "info-500",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2980392156862745,
+            "g": 0.5294117647058824,
+            "b": 0.9647058823529412
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "info-400",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=large,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 40,
+      "height": 22,
+      "thumbSize": 18,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 40,
+          "height": 22,
+          "thumbSize": 18,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=medium,checked=true": {
+      "switchBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "info-500",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2980392156862745,
+            "g": 0.5294117647058824,
+            "b": 0.9647058823529412
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "info-400",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=medium,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 36,
+      "height": 20,
+      "thumbSize": 16,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 36,
+          "height": 20,
+          "thumbSize": 16,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=small,checked=true": {
+      "switchBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "info-500",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.2980392156862745,
+            "g": 0.5294117647058824,
+            "b": 0.9647058823529412
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "info-400",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    },
+    "variant=info,size=small,checked=false": {
+      "switchBgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "checkedBgColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "width": 32,
+      "height": 18,
+      "thumbSize": 14,
+      "thumbOffset": 2,
+      "_tokenRefs": {
+        "switchBgColor": "neutral-100",
+        "checkedBgColor": "info-500"
+      },
+      "states": {
+        "hover": {
+          "switchBgColor": {
+            "r": 0.803921568627451,
+            "g": 0.8196078431372549,
+            "b": 0.8352941176470589
+          },
+          "checkedBgColor": {
+            "r": 0.1450980392156863,
+            "g": 0.43137254901960786,
+            "b": 0.9568627450980393
+          },
+          "width": 32,
+          "height": 18,
+          "thumbSize": 14,
+          "thumbOffset": 2,
+          "_tokenRefs": {
+            "switchBgColor": "neutral-200",
+            "checkedBgColor": "info-500"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,8 +2,12 @@
   "name": "@cocso-ui/figma",
   "version": "0.0.1",
   "private": true,
+  "exports": {
+    "./resolvers": "./src/generators/recipe-resolver.ts"
+  },
   "scripts": {
     "generate": "tsx scripts/generate-tokens.ts",
+    "generate:figma-json": "tsx scripts/generate-figma-json.ts",
     "extract": "tsx scripts/extract-components.ts",
     "golden-matrix": "pnpm generate && tsx scripts/golden-matrix.ts",
     "prebuild": "pnpm generate",

@@ -194,6 +194,9 @@ importers:
 
   packages/codegen:
     devDependencies:
+      '@cocso-ui/figma':
+        specifier: workspace:*
+        version: link:../figma
       '@cocso-ui/recipe':
         specifier: workspace:*
         version: link:../recipe
