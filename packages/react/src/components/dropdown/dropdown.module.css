@@ -37,8 +37,8 @@
     flex-direction: column;
     min-width: 128px;
     padding: var(--cocso-spacing-4);
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
+    background-color: var(--cocso-color-surface-primary);
+    border: 1px solid var(--cocso-color-border-secondary);
     border-radius: var(--cocso-radius-3);
     box-shadow: var(--cocso-shadow-sm);
     animation-duration: 0.2s;
@@ -83,7 +83,7 @@
 
   @media (hover: hover) and (pointer: fine) {
     .item:hover {
-      background-color: var(--cocso-color-neutral-50);
+      background-color: var(--cocso-color-surface-secondary);
     }
 
     .item[data-disabled]:hover {

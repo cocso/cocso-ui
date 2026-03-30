@@ -37,7 +37,7 @@
     padding-inline: 0;
     font-size: 0.8rem;
     color: var(--cocso-color-text-primary);
-    background-color: var(--cocso-color-white);
+    background-color: var(--cocso-color-surface-primary);
   }
 
   :global(.react-datepicker__aria-live) {
@@ -127,17 +127,17 @@
   }
 
   :global(.react-datepicker__day.react-datepicker__day--selected) {
-    color: var(--cocso-color-white);
-    background-color: var(--cocso-color-primary-950);
+    color: var(--cocso-color-surface-primary);
+    background-color: var(--cocso-color-interactive-primary);
   }
 
   @media (hover: hover) and (pointer: fine) {
     :global(.react-datepicker__day:hover) {
-      background-color: var(--cocso-color-neutral-50);
+      background-color: var(--cocso-color-interactive-secondary);
     }
 
     :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
-      background-color: var(--cocso-color-primary-800);
+      background-color: var(--cocso-color-interactive-primary-hover);
     }
   }
 

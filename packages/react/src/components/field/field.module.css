@@ -10,7 +10,7 @@
   .label {
     font-size: var(--cocso-field-label-font-size);
     font-weight: var(--cocso-font-weight-medium);
-    color: var(--cocso-color-neutral-900);
+    color: var(--cocso-color-text-primary);
     cursor: pointer;
     user-select: none;
   }
@@ -19,18 +19,18 @@
     margin-left: var(--cocso-spacing-4);
     font-size: var(--cocso-field-description-font-size);
     font-weight: var(--cocso-font-weight-regular);
-    color: var(--cocso-color-neutral-400);
+    color: var(--cocso-color-text-tertiary);
   }
 
   .description {
     margin: 0;
     font-size: var(--cocso-field-description-font-size);
-    color: var(--cocso-color-neutral-500);
+    color: var(--cocso-color-text-secondary);
   }
 
   .errorMessage {
     margin: 0;
     font-size: var(--cocso-field-description-font-size);
-    color: var(--cocso-color-danger-500);
+    color: var(--cocso-color-feedback-danger);
   }
 }

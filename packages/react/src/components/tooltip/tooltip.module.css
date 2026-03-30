@@ -56,8 +56,8 @@
     overflow: visible;
     font-size: var(--cocso-text-xs);
     line-height: 1.5;
-    color: var(--cocso-color-white);
-    background-color: var(--cocso-color-neutral-900);
+    color: var(--cocso-color-surface-primary);
+    background-color: var(--cocso-color-surface-inverse);
     border-radius: var(--cocso-radius-2);
     animation-duration: 0.15s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -87,7 +87,7 @@
   .arrow {
     width: 6px;
     height: 6px;
-    background-color: var(--cocso-color-neutral-900);
+    background-color: var(--cocso-color-surface-inverse);
   }
 
   .arrow[data-side="bottom"] {
