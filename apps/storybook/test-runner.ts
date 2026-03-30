@@ -1,4 +1,5 @@
 import type { TestRunnerConfig } from "@storybook/test-runner";
+import { waitForPageReady } from "@storybook/test-runner";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 
 const config: TestRunnerConfig = {
@@ -6,8 +7,8 @@ const config: TestRunnerConfig = {
     expect.extend({ toMatchImageSnapshot });
   },
   async postVisit(page, context) {
-    // Wait for animations and network requests to settle
-    await page.waitForLoadState("networkidle");
+    // Wait for Storybook page to be fully ready (fonts, assets, rendering)
+    await waitForPageReady(page);
 
     const image = await page.screenshot({ fullPage: false });
     expect(image).toMatchImageSnapshot({
