@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { defineRecipe } from "../define-recipe";
 import { resolveForReact, resolveStyleValue } from "../resolvers/react";
 
@@ -69,6 +69,15 @@ describe("resolveStyleValue", () => {
   it("passes through unrecognized string values", () => {
     expect(resolveStyleValue("5px 10px")).toBe("5px 10px");
     expect(resolveStyleValue("auto")).toBe("auto");
+  });
+
+  it("warns on unrecognized token-like values", () => {
+    const spy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    resolveStyleValue("unknown-123");
+    expect(spy).toHaveBeenCalledOnce();
+    expect(spy.mock.calls[0][0]).toContain("unknown-123");
+    expect(spy.mock.calls[0][0]).toContain("Unrecognized style value");
+    spy.mockRestore();
   });
 });
 

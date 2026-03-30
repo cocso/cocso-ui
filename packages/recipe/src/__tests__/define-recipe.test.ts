@@ -102,6 +102,23 @@ describe("defineRecipe", () => {
     expect(testRecipe.base?.root?.display).toBe("inline-flex");
   });
 
+  it("warns when variant dimension name contains a dash", () => {
+    const spy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    defineRecipe({
+      name: "dash-test",
+      slots: ["root"] as const,
+      variants: {
+        "font-size": {
+          sm: { root: { fontSize: 12 } },
+        },
+      },
+    });
+    expect(spy).toHaveBeenCalledOnce();
+    expect(spy.mock.calls[0][0]).toContain("font-size");
+    expect(spy.mock.calls[0][0]).toContain("contains a dash");
+    spy.mockRestore();
+  });
+
   it("warns when variant value names collide across dimensions", () => {
     const spy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
     defineRecipe({
