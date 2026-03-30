@@ -8,7 +8,7 @@ import { linkRecipe } from "../recipes/link.recipe";
 import { paginationRecipe } from "../recipes/pagination.recipe";
 import { radioGroupRecipe } from "../recipes/radio-group.recipe";
 import { selectRecipe } from "../recipes/select.recipe";
-import { spinnerRecipe } from "../recipes/spinner.recipe";
+import { getSpinnerGeometry, spinnerRecipe } from "../recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "../recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "../recipes/switch.recipe";
 import { typographyRecipe } from "../recipes/typography.recipe";
@@ -29,6 +29,24 @@ describe("recipe definitions", () => {
     { name: "switch", recipe: switchRecipe },
     { name: "typography", recipe: typographyRecipe },
   ];
+
+  describe("getSpinnerGeometry", () => {
+    it("returns geometry for a valid spinner size", () => {
+      const geo = getSpinnerGeometry("medium");
+      expect(geo).toHaveProperty("bladeHeight");
+      expect(geo).toHaveProperty("bladeRadius");
+      expect(geo).toHaveProperty("blades");
+      expect(geo).toHaveProperty("bladeWidth");
+      expect(geo).toHaveProperty("output");
+      expect(typeof geo.bladeHeight).toBe("number");
+    });
+
+    it("returns different geometries for different sizes", () => {
+      const sm = getSpinnerGeometry("small");
+      const lg = getSpinnerGeometry("large");
+      expect(sm.bladeHeight).not.toBe(lg.bladeHeight);
+    });
+  });
 
   for (const { name, recipe } of recipes) {
     it(`${name} recipe has correct name`, () => {

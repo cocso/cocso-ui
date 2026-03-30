@@ -6,7 +6,7 @@ import { Children } from "react";
 import { cn } from "../../cn";
 import styles from "./breadcrumb.module.css";
 
-/** Inline type alias — codegen is a devDependency and must not leak into published .d.ts */
+/** Inline type aliases — codegen is a devDependency and must not leak into published .d.ts */
 export type BreadcrumbSize = "sm" | "md" | "lg";
 
 export interface BreadcrumbProps extends ComponentProps<"nav"> {

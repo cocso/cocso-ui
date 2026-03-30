@@ -8,8 +8,9 @@
  * Usage: pnpm --filter @cocso-ui/codegen generate
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { alertRecipe } from "@cocso-ui/recipe/recipes/alert.recipe";
 import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
@@ -32,9 +33,9 @@ import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import { generateCSS, generateRuntime, generateTypes } from "./generate-recipe.js";
 
-const GENERATED_DIR = join(import.meta.dirname, "..", "generated");
+const DEFAULT_OUT_DIR = join(import.meta.dirname, "..", "generated");
 
-const ALL_RECIPES = [
+export const ALL_RECIPES = [
   alertRecipe,
   avatarRecipe,
   badgeRecipe,
@@ -56,7 +57,7 @@ const ALL_RECIPES = [
   typographyRecipe,
 ];
 
-function generate() {
+export function generate(outDir = DEFAULT_OUT_DIR) {
   // Pre-validate all recipes before writing any files to prevent partial writes.
   for (const recipe of ALL_RECIPES) {
     if (recipe.slots.length > 1) {
@@ -67,7 +68,7 @@ function generate() {
     }
   }
 
-  mkdirSync(GENERATED_DIR, { recursive: true });
+  mkdirSync(outDir, { recursive: true });
 
   let totalCSS = 0;
   for (const recipe of ALL_RECIPES) {
@@ -77,13 +78,13 @@ function generate() {
     const css = generateCSS(recipe);
     const cssLines = css.split("\n").length;
     totalCSS += cssLines;
-    writeFileSync(join(GENERATED_DIR, `${name}.css`), css, "utf-8");
+    writeFileSync(join(outDir, `${name}.css`), css, "utf-8");
 
     const runtime = generateRuntime(recipe);
-    writeFileSync(join(GENERATED_DIR, `${name}.ts`), runtime, "utf-8");
+    writeFileSync(join(outDir, `${name}.ts`), runtime, "utf-8");
 
     const types = generateTypes(recipe);
-    writeFileSync(join(GENERATED_DIR, `${name}.d.ts`), types, "utf-8");
+    writeFileSync(join(outDir, `${name}.d.ts`), types, "utf-8");
 
     console.log(`  ✓ ${name}.css (${cssLines} lines)`);
   }
@@ -115,10 +116,15 @@ function generate() {
     "}",
     "",
   ];
-  writeFileSync(join(GENERATED_DIR, "spinner-geometry.ts"), geometryLines.join("\n"), "utf-8");
+  writeFileSync(join(outDir, "spinner-geometry.ts"), geometryLines.join("\n"), "utf-8");
   console.log("  ✓ spinner-geometry.ts");
 
   console.log(`\nDone. Generated ${ALL_RECIPES.length} recipe(s), ${totalCSS} total CSS lines.`);
 }
 
-generate();
+// Run when executed directly (not when imported by tests)
+const isDirectRun =
+  typeof process !== "undefined" &&
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === process.argv[1];
+if (isDirectRun) generate();

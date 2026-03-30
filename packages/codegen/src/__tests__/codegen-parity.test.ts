@@ -147,7 +147,7 @@ for (const recipe of ALL_RECIPES) {
     const combos = getAllCombinations(recipe);
     const stateNames = recipe.states ? Object.keys(recipe.states) : [];
 
-    it("should be compact (no Cartesian explosion)", () => {
+    it("is compact (no Cartesian explosion)", () => {
       const lineCount = generatedCSS.split("\n").length;
       // Per-dimension CSS should never exceed 20 lines per variant value
       const dimValues = Object.values(recipe.variants as Record<string, Record<string, unknown>>)
