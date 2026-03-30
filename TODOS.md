@@ -14,11 +14,11 @@
 
 ### 1. Semantic 토큰 레이어 확장 (심화)
 
-현재 52개 semantic color 토큰이 정의되어 있으나, 추가 확장이 필요한 영역:
-- [ ] Elevation/shadow semantic 토큰 추가 — `--cocso-shadow-*` 체계 정의
-- [ ] Spacing semantic 토큰 — 컴포넌트 간 일관된 spacing scale 정의
-- [ ] Typography semantic 토큰 — heading/body/caption 등 용도별 토큰화
-- [ ] Motion/transition semantic 토큰 — duration, easing 표준화
+66개 semantic 토큰이 정의되어 있으나 (52 color + 5 shadow + 5 duration + 4 easing), 추가 확장이 필요한 영역:
+- [x] Elevation/shadow semantic 토큰 추가 — `--cocso-shadow-thumb/card/dropdown/popover/dialog` 5개 정의 완료
+- [ ] Spacing semantic 토큰 — 컴포넌트 간 일관된 spacing scale 정의 (현재 primitive 22개로 충분, 필요 시 추가)
+- [ ] Typography semantic 토큰 — heading/body/caption 등 용도별 토큰화 (recipe 타입 시스템 변경 필요, 별도 PR)
+- [x] Motion/transition semantic 토큰 — `--cocso-duration-fast/normal/slow/decorative/decorative-slow` + `--cocso-easing-default/soft/entrance/accordion` 9개 정의 완료. 16개 CSS 모듈 마이그레이션 완료.
 
 ### 2. Recipe 미보유 10개 컴포넌트 처리
 
