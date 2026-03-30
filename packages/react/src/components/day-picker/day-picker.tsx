@@ -54,7 +54,7 @@ export function DayPicker({
         <Dropdown.Trigger
           render={
             trigger ?? (
-              <Button size="small" variant="outline">
+              <Button disabled={disabled} size="small" variant="outline">
                 {value ? format(value, dateFormat, { locale }) : "Select date"}
               </Button>
             )

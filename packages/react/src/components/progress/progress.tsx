@@ -23,7 +23,8 @@ export function Progress({
   max = 100,
   ...props
 }: ProgressProps) {
-  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+  const safeMax = max > 0 ? max : 100;
+  const percentage = Math.min(100, Math.max(0, (value / safeMax) * 100));
 
   return (
     <div
