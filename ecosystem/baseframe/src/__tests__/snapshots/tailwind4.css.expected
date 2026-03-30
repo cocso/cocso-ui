@@ -127,6 +127,24 @@
   --color-text-primary: var(--cocso-color-text-primary);
   --color-text-secondary: var(--cocso-color-text-secondary);
   --color-text-tertiary: var(--cocso-color-text-tertiary);
+  --color-surface-primary: var(--cocso-color-surface-primary);
+  --color-surface-secondary: var(--cocso-color-surface-secondary);
+  --color-surface-inverse: var(--cocso-color-surface-inverse);
+  --color-border-primary: var(--cocso-color-border-primary);
+  --color-border-secondary: var(--cocso-color-border-secondary);
+  --color-interactive-primary: var(--cocso-color-interactive-primary);
+  --color-interactive-primary-hover: var(--cocso-color-interactive-primary-hover);
+  --color-interactive-primary-active: var(--cocso-color-interactive-primary-active);
+  --color-interactive-secondary: var(--cocso-color-interactive-secondary);
+  --color-interactive-danger: var(--cocso-color-interactive-danger);
+  --color-interactive-success: var(--cocso-color-interactive-success);
+  --color-interactive-warning: var(--cocso-color-interactive-warning);
+  --color-interactive-info: var(--cocso-color-interactive-info);
+  --color-focus-ring: var(--cocso-color-focus-ring);
+  --color-feedback-danger: var(--cocso-color-feedback-danger);
+  --color-feedback-success: var(--cocso-color-feedback-success);
+  --color-feedback-warning: var(--cocso-color-feedback-warning);
+  --color-feedback-info: var(--cocso-color-feedback-info);
 }
 
 @utility z-* { z-index: --value(--z-index-*); }

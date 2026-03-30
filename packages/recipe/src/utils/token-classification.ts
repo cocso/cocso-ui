@@ -2,6 +2,7 @@ import type { ComponentRef, CompoundBorder, FontWeightRef } from "../types";
 
 /** Recognized color token family prefixes used to identify color design token references. */
 export const COLOR_PREFIXES = new Set([
+  // primitive token families
   "neutral",
   "primary",
   "danger",
@@ -10,7 +11,14 @@ export const COLOR_PREFIXES = new Set([
   "info",
   "white",
   "black",
+  // semantic token categories
   "text",
+  "surface",
+  "border",
+  "interactive",
+  "focus",
+  "feedback",
+  "alpha",
 ]);
 
 /** CSS literal values that pass through the resolver unchanged without token resolution. */

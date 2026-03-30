@@ -160,4 +160,38 @@
   --cocso-color-text-primary: var(--cocso-color-neutral-950);
   --cocso-color-text-secondary: var(--cocso-color-neutral-600);
   --cocso-color-text-tertiary: var(--cocso-color-neutral-400);
+
+  /* --- Semantic tokens: surface ------------------------------------------- */
+  /* Surface colors define background layers within the UI hierarchy.         */
+  --cocso-color-surface-primary: var(--cocso-color-white);
+  --cocso-color-surface-secondary: var(--cocso-color-neutral-50);
+  --cocso-color-surface-inverse: var(--cocso-color-neutral-950);
+
+  /* --- Semantic tokens: border -------------------------------------------- */
+  /* Border colors define stroke styles for containers and separators.        */
+  --cocso-color-border-primary: var(--cocso-color-neutral-200);
+  --cocso-color-border-secondary: var(--cocso-color-neutral-100);
+
+  /* --- Semantic tokens: interactive --------------------------------------- */
+  /* Interactive colors define the fill of actionable elements such as        */
+  /* buttons, toggles, and links across their state variants.                 */
+  --cocso-color-interactive-primary: var(--cocso-color-primary-950);
+  --cocso-color-interactive-primary-hover: var(--cocso-color-primary-800);
+  --cocso-color-interactive-primary-active: var(--cocso-color-primary-700);
+  --cocso-color-interactive-secondary: var(--cocso-color-neutral-100);
+  --cocso-color-interactive-danger: var(--cocso-color-danger-500);
+  --cocso-color-interactive-success: var(--cocso-color-success-500);
+  --cocso-color-interactive-warning: var(--cocso-color-warning-500);
+  --cocso-color-interactive-info: var(--cocso-color-info-500);
+
+  /* --- Semantic tokens: focus --------------------------------------------- */
+  /* Focus colors define the color of focus indicators such as outlines.      */
+  --cocso-color-focus-ring: var(--cocso-color-primary-950);
+
+  /* --- Semantic tokens: feedback ------------------------------------------ */
+  /* Feedback colors communicate status to users (errors, warnings, etc.).    */
+  --cocso-color-feedback-danger: var(--cocso-color-danger-500);
+  --cocso-color-feedback-success: var(--cocso-color-success-500);
+  --cocso-color-feedback-warning: var(--cocso-color-warning-500);
+  --cocso-color-feedback-info: var(--cocso-color-info-500);
 }
