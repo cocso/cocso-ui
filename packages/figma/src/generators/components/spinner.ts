@@ -57,7 +57,6 @@ export function generateSpinnerSection(container: FrameNode): void {
   const json = spinnerJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Spinner");
 
-  // Visual matrix grid (design system documentation layout)
   const variants = Object.keys(spinnerRecipe.variants.variant);
   const sizes = Object.keys(spinnerRecipe.variants.size);
 

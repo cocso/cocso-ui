@@ -9,6 +9,8 @@ import {
   createTextNode,
   createVariantRow,
   ICON_SVGS,
+  LABEL_FONT_SIZE,
+  LABEL_FONT_WEIGHT,
   rgbToHex,
 } from "../shared";
 
@@ -23,8 +25,8 @@ function createLinkComponent(name: string, spec: FigmaNodeSpec): ComponentNode {
   const linkColor = spec.color ?? COLORS.info500;
   const text = createTextNode(
     "Link text",
-    14,
-    400,
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
     linkColor,
     spec._tokenRefs?.color
   );
@@ -40,7 +42,6 @@ export function generateLinkSection(container: FrameNode): void {
   const json = linkJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Link");
 
-  // Variant row
   const variants = Object.keys(linkRecipe.variants.variant);
   const variantRow = createVariantRow("variant");
   for (const variant of variants) {
@@ -65,14 +66,18 @@ export function generateLinkSection(container: FrameNode): void {
 
   const extText = createTextNode(
     "External link",
-    14,
-    400,
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
     extColor,
     externalSpec._tokenRefs?.color
   );
   extText.textDecoration = "UNDERLINE";
   extComponent.appendChild(extText);
-  const extIcon = createIcon(ICON_SVGS.externalLink, 14, rgbToHex(extColor));
+  const extIcon = createIcon(
+    ICON_SVGS.externalLink,
+    LABEL_FONT_SIZE,
+    rgbToHex(extColor)
+  );
   extComponent.appendChild(extIcon);
   externalRow.appendChild(extComponent);
   section.appendChild(externalRow);

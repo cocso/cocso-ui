@@ -10,6 +10,8 @@ import {
   createTextNode,
   createVariantMatrix,
   ICON_SVGS,
+  LABEL_FONT_SIZE,
+  LABEL_FONT_WEIGHT,
   rgbToHex,
   setFill,
 } from "../shared";
@@ -59,12 +61,18 @@ function createCheckboxFromSpec(
     box.clipsContent = true;
 
     const iconSvg = status === "on" ? ICON_SVGS.check : ICON_SVGS.indeterminate;
-    const iconSize = Math.round(boxSize * 0.75);
+    const CHECKMARK_SCALE = 0.75;
+    const iconSize = Math.round(boxSize * CHECKMARK_SCALE);
     const icon = createIcon(iconSvg, iconSize, rgbToHex(COLORS.white));
     box.appendChild(icon);
   }
 
-  const labelText = createTextNode("Label", 14, 400, COLORS.neutral900);
+  const labelText = createTextNode(
+    "Label",
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
+    COLORS.neutral900
+  );
 
   component.appendChild(box);
   component.appendChild(labelText);
@@ -76,7 +84,6 @@ export function generateCheckboxSection(container: FrameNode): void {
   const json = checkboxJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Checkbox");
 
-  // Visual matrix grid (design system documentation layout)
   const sizes = Object.keys(checkboxRecipe.variants.size);
   const statuses = Object.keys(checkboxRecipe.variants.status);
 

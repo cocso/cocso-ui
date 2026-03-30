@@ -1,0 +1,173 @@
+{
+  "name": "card",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "variant=elevated,padding=sm": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=elevated,padding=md": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=elevated,padding=lg": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=outlined,padding=sm": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4",
+        "strokeColor": "neutral-100"
+      }
+    },
+    "variant=outlined,padding=md": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4",
+        "strokeColor": "neutral-100"
+      }
+    },
+    "variant=outlined,padding=lg": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-4",
+        "strokeColor": "neutral-100"
+      }
+    },
+    "variant=filled,padding=sm": {
+      "bgColor": {
+        "r": 0.9568627450980393,
+        "g": 0.9607843137254902,
+        "b": 0.9647058823529412
+      },
+      "borderRadius": 8,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "_tokenRefs": {
+        "bgColor": "neutral-50",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=filled,padding=md": {
+      "bgColor": {
+        "r": 0.9568627450980393,
+        "g": 0.9607843137254902,
+        "b": 0.9647058823529412
+      },
+      "borderRadius": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "_tokenRefs": {
+        "bgColor": "neutral-50",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=filled,padding=lg": {
+      "bgColor": {
+        "r": 0.9568627450980393,
+        "g": 0.9607843137254902,
+        "b": 0.9647058823529412
+      },
+      "borderRadius": 8,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "_tokenRefs": {
+        "bgColor": "neutral-50",
+        "borderRadius": "radius-4"
+      }
+    }
+  }
+}

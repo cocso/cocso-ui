@@ -4,6 +4,8 @@ import {
   ArrowIOSBackwardIcon,
   ArrowIOSForwardIcon,
 } from "@cocso-ui/react-icons";
+import type { Locale } from "date-fns";
+import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import type { ComponentProps, ReactElement } from "react";
 import { useState } from "react";
@@ -16,7 +18,9 @@ import styles from "./month-picker.module.css";
 
 export interface MonthPickerProps
   extends Omit<ComponentProps<"div">, "children"> {
+  dateFormat?: string;
   disabled?: boolean;
+  locale?: Locale;
   maxDate?: Date;
   minDate?: Date;
   onValueChange?: (value: Date | null) => void;
@@ -30,6 +34,8 @@ export function MonthPicker({
   value,
   onValueChange,
   trigger,
+  locale = ko,
+  dateFormat = "yyyy년 MM월",
   minDate,
   maxDate,
   disabled,
@@ -45,13 +51,21 @@ export function MonthPicker({
   return (
     <div className={cn(styles.root, className)} ref={ref} {...props}>
       <Dropdown onOpenChange={setOpen} open={open}>
-        <Dropdown.Trigger render={trigger} />
+        <Dropdown.Trigger
+          render={
+            trigger ?? (
+              <Button disabled={disabled} size="small" variant="outline">
+                {value ? format(value, dateFormat, { locale }) : "Select month"}
+              </Button>
+            )
+          }
+        />
         <Dropdown.Content aria-label="Select month" className={styles.content}>
           <DatePicker
-            dateFormat="yyyy년 MM월 dd일"
+            dateFormat={dateFormat}
             disabled={disabled}
             inline
-            locale={ko}
+            locale={locale}
             maxDate={maxDate}
             minDate={minDate}
             onChange={handleChange}
@@ -64,7 +78,9 @@ export function MonthPicker({
             }) => (
               <>
                 <Typography size="small" type="body" weight="semibold">
-                  {date.toLocaleDateString("ko-KR", { year: "numeric" })}
+                  {date.toLocaleDateString(locale.code ?? "ko-KR", {
+                    year: "numeric",
+                  })}
                 </Typography>
 
                 <div className={styles.menu}>

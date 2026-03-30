@@ -68,7 +68,10 @@ export function resolveColorToken(name: string): RGB {
     const c = token.values.default as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };
   }
-  return { r: 0, g: 0, b: 0 };
+  console.warn(
+    `[cocso-ui/figma] Unknown color token: "${name}". Falling back to magenta.`
+  );
+  return { r: 1, g: 0, b: 1 };
 }
 
 const RADIUS_MAP: Record<string, number> = {
@@ -88,8 +91,18 @@ export function resolveRadiusToken(name: string): number {
   }
   const match = name.match(RADIUS_TOKEN_RE);
   if (match) {
-    return RADIUS_MAP[match[1]] ?? 0;
+    const value = RADIUS_MAP[match[1]];
+    if (value === undefined) {
+      console.warn(
+        `[cocso-ui/figma] Unknown radius token: "${name}". RADIUS_MAP covers 1-6 only. Falling back to 0.`
+      );
+      return 0;
+    }
+    return value;
   }
+  console.warn(
+    `[cocso-ui/figma] Unknown radius token: "${name}". Falling back to 0.`
+  );
   return 0;
 }
 

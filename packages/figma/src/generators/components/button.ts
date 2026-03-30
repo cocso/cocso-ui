@@ -12,6 +12,7 @@ import {
   createVariantMatrix,
   createVariantMatrixPerSlice,
   createVariantRow,
+  DISABLED_OPACITY,
   ICON_SVGS,
   rgbToHex,
   setFill,
@@ -28,7 +29,8 @@ function appendButtonContent(
   const textColor = spec.fontColor ?? COLORS.neutral900;
   const fontSize = spec.fontSize ?? 14;
   const fontWeight = spec.fontWeight ?? 500;
-  const iconSize = Math.round(fontSize * 1.15);
+  const ICON_SCALE = 1.15;
+  const iconSize = Math.round(fontSize * ICON_SCALE);
   const hexColor = rgbToHex(textColor);
 
   const makeText = () =>
@@ -186,7 +188,7 @@ export function generateButtonSection(container: FrameNode): void {
       shape: "square",
     });
     const comp = createComponentFromSpec(`disabled-${v}`, spec, "Button");
-    comp.opacity = 0.4;
+    comp.opacity = DISABLED_OPACITY;
     disabledRow.appendChild(comp);
   }
   section.appendChild(disabledRow);

@@ -159,23 +159,29 @@ pnpm --filter @cocso-ui/react test      # 365 tests (component behavior tests; c
 
 Golden matrix diagnostic compares `resolveForReact` vs `resolveForFigma` outputs across all variant combinations for every recipe. Run with `pnpm --filter @cocso-ui/figma golden-matrix`.
 
-### Summary (13 recipes, 237 combinations, 1629 property comparisons)
+### Summary (19 recipes, 309 combinations)
 
 | Recipe | Phase | Combos | VALUE_MISMATCH | Result |
 |--------|-------|-------:|---------------:|--------|
-| button | target | 96 | 0 | PASS |
+| alert | phase4 | 4 | 0 | PASS |
+| avatar | phase4 | 10 | 0 | PASS |
 | badge | target | 63 | 0 | PASS |
-| input | target | 4 | 0 | PASS |
-| select | extended | 4 | 0 | PASS |
-| link | extended | 3 | 0 | PASS |
+| breadcrumb | phase4 | 3 | 0 | PASS |
+| button | target | 96 | 0 | PASS |
+| card | phase4 | 9 | 0 | PASS |
 | checkbox | extended | 9 | 0 | PASS |
-| switch | extended | 15 | 0 | PASS |
-| radio-group | extended | 3 | 0 | PASS |
-| spinner | extended | 21 | 0 | PASS |
-| typography | extended | 10 | 0 | PASS |
 | dialog | extended | 3 | 0 | PASS |
+| input | target | 4 | 0 | PASS |
+| link | extended | 3 | 0 | PASS |
 | pagination | extended | 3 | 0 | PASS |
+| progress | phase4 | 18 | 0 | PASS |
+| radio-group | extended | 3 | 0 | PASS |
+| select | extended | 4 | 0 | PASS |
+| skeleton | phase4 | 9 | 0 | PASS |
+| spinner | extended | 21 | 0 | PASS |
 | stock-quantity-status | extended | 3 | 0 | PASS |
+| switch | extended | 15 | 0 | PASS |
+| typography | extended | 10 | 0 | PASS |
 
 ### Known Difference Patterns
 

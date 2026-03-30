@@ -29,6 +29,20 @@ export function defineRecipe<
   V extends Record<string, Record<string, Partial<Record<S, SlotStyles>>>>,
   const S extends string,
 >(recipe: RecipeDefinition<V, S>): RecipeDefinition<V, S> {
+  // Validate dimension names: must be single camelCase words (no dashes).
+  // The codegen parity test parser splits on the first dash to separate
+  // dimension from value in CSS class names (e.g., "variant-primary").
+  // Dash-containing dimension names like "font-size" would break parsing.
+  for (const dimension of Object.keys(recipe.variants)) {
+    if (dimension.includes("-")) {
+      console.warn(
+        `[recipe:${recipe.name}] Variant dimension "${dimension}" contains a dash. ` +
+          "Dimension names must be single camelCase words (e.g., fontSize, not font-size) " +
+          "to ensure correct codegen CSS class name parsing."
+      );
+    }
+  }
+
   const seen = new Map<string, string>();
   for (const [dimension, values] of Object.entries(recipe.variants)) {
     for (const valueName of Object.keys(values as Record<string, unknown>)) {

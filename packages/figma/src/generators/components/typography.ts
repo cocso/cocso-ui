@@ -42,7 +42,6 @@ export function generateTypographySection(container: FrameNode): void {
   const json = typographyJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Typography");
 
-  // Visual matrix grid (design system documentation layout)
   const types = Object.keys(typographyRecipe.variants.type);
   const sizes = Object.keys(typographyRecipe.variants.size);
 

@@ -10,15 +10,21 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { RecipeDefinition } from "@cocso-ui/recipe";
+import { alertRecipe } from "@cocso-ui/recipe/recipes/alert.recipe";
+import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
+import { breadcrumbRecipe } from "@cocso-ui/recipe/recipes/breadcrumb.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { cardRecipe } from "@cocso-ui/recipe/recipes/card.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
 import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
 import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
+import { progressRecipe } from "@cocso-ui/recipe/recipes/progress.recipe";
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
+import { skeletonRecipe } from "@cocso-ui/recipe/recipes/skeleton.recipe";
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
@@ -33,15 +39,21 @@ const OUTPUT_DIR = join(__dirname, "..", "..", "codegen", "generated");
 type AnyRecipe = RecipeDefinition<any, any>;
 
 const ALL_RECIPES: AnyRecipe[] = [
+  alertRecipe,
+  avatarRecipe,
   badgeRecipe,
+  breadcrumbRecipe,
   buttonRecipe,
+  cardRecipe,
   checkboxRecipe,
   dialogRecipe,
   inputRecipe,
   linkRecipe,
   paginationRecipe,
+  progressRecipe,
   radioGroupRecipe,
   selectRecipe,
+  skeletonRecipe,
   spinnerRecipe,
   stockQuantityStatusRecipe,
   switchRecipe,

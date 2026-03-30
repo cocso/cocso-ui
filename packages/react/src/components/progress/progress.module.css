@@ -1,0 +1,16 @@
+@layer components {
+  .track {
+    width: 100%;
+    height: var(--cocso-progress-height);
+    overflow: hidden;
+    background-color: var(--cocso-progress-bg-color);
+    border-radius: var(--cocso-progress-border-radius);
+  }
+
+  .fill {
+    height: 100%;
+    background-color: var(--cocso-progress-fill-color);
+    border-radius: inherit;
+    transition: width 0.2s ease;
+  }
+}

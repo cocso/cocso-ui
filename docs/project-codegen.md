@@ -23,12 +23,12 @@ TypeScript (build-time tool, uses `tsx` for recipe import)
 ## In Scope
 
 - `generate-recipe.ts`: core code generation engine (CSS, className functions, TypeScript types).
-- `generate.ts`: orchestrator that imports all 13 recipes and invokes generation.
+- `generate.ts`: orchestrator that imports all 19 recipes and invokes generation.
 - Per-dimension CSS generation (BEM classes setting CSS custom properties).
 - State-suffixed CSS custom properties for CSS Module compatibility.
 - Spinner geometry static data extraction (`spinner-geometry.ts`).
 - Figma JSON generation via `packages/figma/scripts/generate-figma-json.ts`.
-- Codegen parity tests (276 tests verifying generated output matches resolveStyleMap).
+- Codegen parity tests (409 tests verifying generated output matches resolveStyleMap).
 
 ## Out of Scope
 

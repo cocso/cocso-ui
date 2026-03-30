@@ -8,6 +8,8 @@ import {
   createComponentSection,
   createTextNode,
   createVariantMatrix,
+  LABEL_FONT_SIZE,
+  LABEL_FONT_WEIGHT,
   setFill,
 } from "../shared";
 
@@ -56,7 +58,12 @@ function createRadioFromSpec(name: string, spec: FigmaNodeSpec): ComponentNode {
 
   component.appendChild(circle);
 
-  const labelText = createTextNode("Label", 14, 400, COLORS.neutral900);
+  const labelText = createTextNode(
+    "Label",
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
+    COLORS.neutral900
+  );
   component.appendChild(labelText);
 
   return component;
@@ -66,7 +73,6 @@ export function generateRadioSection(container: FrameNode): void {
   const json = radioJSON as unknown as FigmaJSONData;
   const section = createComponentSection("RadioGroup");
 
-  // Visual matrix grid (design system documentation layout)
   const sizes = Object.keys(radioGroupRecipe.variants.size);
   const selectedValues = Object.keys(radioGroupRecipe.variants.selected);
 

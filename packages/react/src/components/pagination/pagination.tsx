@@ -90,7 +90,7 @@ export function Pagination({
             const pageNumber = page - halfVisible + index + 1;
             return pageNumber > 1 && pageNumber < totalPages
               ? renderPageButton(pageNumber)
-              : "";
+              : null;
           })}
           {page < totalPages - halfVisible && (
             <span className={styles.trunc}>

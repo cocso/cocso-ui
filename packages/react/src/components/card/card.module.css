@@ -1,0 +1,14 @@
+@layer components {
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--cocso-card-padding);
+    background-color: var(--cocso-card-bg-color);
+    border: var(--cocso-card-border, none);
+    border-radius: var(--cocso-card-border-radius);
+  }
+
+  .elevated {
+    box-shadow: var(--cocso-shadow-sm);
+  }
+}
