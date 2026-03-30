@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { getSpinnerGeometry } from "../recipes/spinner.recipe";
 import { badgeRecipe } from "../recipes/badge.recipe";
 import { buttonRecipe } from "../recipes/button.recipe";
 import { checkboxRecipe } from "../recipes/checkbox.recipe";
@@ -9,7 +8,7 @@ import { linkRecipe } from "../recipes/link.recipe";
 import { paginationRecipe } from "../recipes/pagination.recipe";
 import { radioGroupRecipe } from "../recipes/radio-group.recipe";
 import { selectRecipe } from "../recipes/select.recipe";
-import { spinnerRecipe } from "../recipes/spinner.recipe";
+import { getSpinnerGeometry, spinnerRecipe } from "../recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "../recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "../recipes/switch.recipe";
 import { typographyRecipe } from "../recipes/typography.recipe";

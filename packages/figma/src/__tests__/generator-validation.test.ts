@@ -1,13 +1,13 @@
+/**
+ * Static validation tests for generator source code.
+ * These catch Figma Plugin API misuse before runtime.
+ */
+
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const GENERATORS_DIR = join(import.meta.dirname, "../generators");
-
-/**
- * Static validation tests for generator source code.
- * These catch Figma Plugin API misuse before runtime.
- */
 
 const VALID_SIZING_MODES = ["FIXED", "AUTO"];
 const VALID_LAYOUT_MODES = ["HORIZONTAL", "VERTICAL", "NONE"];
