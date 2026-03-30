@@ -6,8 +6,8 @@ const config: TestRunnerConfig = {
     expect.extend({ toMatchImageSnapshot });
   },
   async postVisit(page, context) {
-    // Wait for animations to settle
-    await page.waitForTimeout(300);
+    // Wait for animations and network requests to settle
+    await page.waitForLoadState("networkidle");
 
     const image = await page.screenshot({ fullPage: false });
     expect(image).toMatchImageSnapshot({
