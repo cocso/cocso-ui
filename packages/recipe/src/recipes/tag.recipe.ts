@@ -22,13 +22,28 @@ export const tagRecipe = defineRecipe({
     },
     size: {
       sm: {
-        root: { height: 22, paddingInline: 6, fontSize: 11, borderRadius: "radius-2" },
+        root: {
+          height: 22,
+          paddingInline: 6,
+          fontSize: 11,
+          borderRadius: "radius-2",
+        },
       },
       md: {
-        root: { height: 26, paddingInline: 8, fontSize: 12, borderRadius: "radius-3" },
+        root: {
+          height: 26,
+          paddingInline: 8,
+          fontSize: 12,
+          borderRadius: "radius-3",
+        },
       },
       lg: {
-        root: { height: 30, paddingInline: 10, fontSize: 13, borderRadius: "radius-3" },
+        root: {
+          height: 30,
+          paddingInline: 10,
+          fontSize: 13,
+          borderRadius: "radius-3",
+        },
       },
     },
   },
