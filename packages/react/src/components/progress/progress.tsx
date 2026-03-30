@@ -1,0 +1,45 @@
+import { progress } from "@cocso-ui/codegen/generated/progress";
+import "@cocso-ui/codegen/generated/progress.css";
+import type { ComponentProps } from "react";
+import { cn } from "../../cn";
+import styles from "./progress.module.css";
+
+/** Inline type alias — codegen is a devDependency and must not leak into published .d.ts */
+export type ProgressSize = "sm" | "md" | "lg";
+
+export interface ProgressProps extends ComponentProps<"div"> {
+  max?: number;
+  size?: ProgressSize;
+  value: number;
+}
+
+/** Determinate progress indicator showing completion percentage. */
+export function Progress({
+  ref,
+  className,
+  style,
+  size = "md",
+  value,
+  max = 100,
+  ...props
+}: ProgressProps) {
+  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+
+  return (
+    <div
+      aria-valuemax={max}
+      aria-valuemin={0}
+      aria-valuenow={value}
+      className={cn(progress({ size }), styles.track, className)}
+      ref={ref}
+      role="progressbar"
+      style={style}
+      {...props}
+    >
+      <div
+        className={styles.fill}
+        style={{ width: `${percentage}%` }}
+      />
+    </div>
+  );
+}

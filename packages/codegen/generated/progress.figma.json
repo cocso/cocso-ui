@@ -1,0 +1,65 @@
+{
+  "name": "progress",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "primary-950",
+        "borderRadius": "radius-1"
+      }
+    },
+    "size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "primary-950",
+        "borderRadius": "radius-2"
+      }
+    },
+    "size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "primary-950",
+        "borderRadius": "radius-3"
+      }
+    }
+  }
+}

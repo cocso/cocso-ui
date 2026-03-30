@@ -1,0 +1,44 @@
+@layer components {
+  .alert {
+    display: flex;
+    gap: var(--cocso-spacing-3);
+    align-items: flex-start;
+    padding: var(--cocso-alert-padding);
+    color: var(--cocso-alert-font-color);
+    font-size: var(--cocso-alert-font-size);
+    background-color: var(--cocso-alert-bg-color);
+    border: 1px solid var(--cocso-alert-border-color);
+    border-radius: var(--cocso-alert-border-radius);
+  }
+
+  .icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .close {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    color: currentColor;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--cocso-radius-2);
+    opacity: 0.7;
+  }
+
+  .close:hover {
+    opacity: 1;
+  }
+}

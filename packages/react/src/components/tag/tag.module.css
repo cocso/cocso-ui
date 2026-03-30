@@ -1,0 +1,42 @@
+@layer components {
+  .tag {
+    display: inline-flex;
+    gap: var(--cocso-spacing-1);
+    align-items: center;
+    height: var(--cocso-tag-height);
+    padding-inline: var(--cocso-tag-padding-inline);
+    color: var(--cocso-tag-font-color);
+    font-weight: var(--cocso-tag-font-weight);
+    font-size: var(--cocso-tag-font-size);
+    line-height: 1;
+    background-color: var(--cocso-tag-bg-color);
+    border: var(--cocso-tag-border, none);
+    border-radius: var(--cocso-tag-border-radius);
+  }
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .remove {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    color: currentColor;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--cocso-radius-1);
+    opacity: 0.6;
+  }
+
+  .remove:hover {
+    opacity: 1;
+  }
+}
