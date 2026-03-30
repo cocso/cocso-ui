@@ -1046,23 +1046,23 @@ describe("resolveForFigma — pagination recipe", () => {
 // ---------------------------------------------------------------------------
 
 describe("resolveForFigma — stock-quantity-status recipe", () => {
-  it("여유 resolves color to info-500", () => {
+  it("sufficient resolves color to info-500", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
-      quantity: "여유",
+      quantity: "sufficient",
     });
     expect(spec.color).toEqual(resolveColorToken("info-500"));
   });
 
-  it("보통 resolves color to success-400", () => {
+  it("normal resolves color to success-400", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
-      quantity: "보통",
+      quantity: "normal",
     });
     expect(spec.color).toEqual(resolveColorToken("success-400"));
   });
 
-  it("부족 resolves color to danger-500", () => {
+  it("insufficient resolves color to danger-500", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
-      quantity: "부족",
+      quantity: "insufficient",
     });
     expect(spec.color).toEqual(resolveColorToken("danger-500"));
   });

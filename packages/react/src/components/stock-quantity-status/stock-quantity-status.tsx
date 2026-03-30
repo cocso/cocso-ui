@@ -6,14 +6,20 @@ import { spacing } from "../../token";
 import { Typography } from "../typography";
 import styles from "./stock-quantity-status.module.css";
 
-export type QuantityStatus = "보통" | "여유" | "부족";
+export type QuantityStatus = "normal" | "sufficient" | "insufficient";
+
+const DISPLAY_LABELS: Record<QuantityStatus, string> = {
+  normal: "보통",
+  sufficient: "여유",
+  insufficient: "부족",
+};
 
 export interface StockQuantityStatusProps extends ComponentProps<"div"> {
   quantity: QuantityStatus;
 }
 
 const renderIndicator = (quantity: QuantityStatus) => {
-  if (quantity === "여유") {
+  if (quantity === "sufficient") {
     return (
       <svg
         aria-hidden="true"
@@ -43,7 +49,7 @@ const renderIndicator = (quantity: QuantityStatus) => {
     );
   }
 
-  if (quantity === "보통") {
+  if (quantity === "normal") {
     return (
       <svg
         aria-hidden="true"
@@ -123,7 +129,7 @@ export function StockQuantityStatus({
     >
       <span className={styles.indicator}>{renderIndicator(quantity)}</span>
       <Typography color="currentColor" size="small" type="body">
-        {quantity}
+        {DISPLAY_LABELS[quantity]}
       </Typography>
     </div>
   );

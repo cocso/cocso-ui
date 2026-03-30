@@ -458,7 +458,7 @@ export function ComponentCatalog() {
 
       {/* StockQuantityStatus */}
       <Section title="StockQuantityStatus">
-        {(["여유", "보통", "부족"] as const).map((quantity) => (
+        {(["sufficient", "normal", "insufficient"] as const).map((quantity) => (
           <Item
             component="StockQuantityStatus"
             key={quantity}
