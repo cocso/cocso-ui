@@ -1,3 +1,4 @@
+import { generateAvatarSection } from "./components/avatar";
 import { generateBadgeSection } from "./components/badge";
 import { generateButtonSection } from "./components/button";
 import { generateCheckboxSection } from "./components/checkbox";
@@ -14,6 +15,7 @@ import { generateTypographySection } from "./components/typography";
 
 const generators: Array<(container: FrameNode) => void> = [
   generateButtonSection,
+  generateAvatarSection,
   generateBadgeSection,
   generateInputSection,
   generateSelectSection,

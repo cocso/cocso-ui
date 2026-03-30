@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 import { resolveForReact } from "@cocso-ui/recipe/resolvers/react";
 import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
+import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
@@ -113,6 +114,7 @@ function cascadeForCombo(
 type AnyRecipe = RecipeDefinition<any, any>;
 
 const ALL_RECIPES: AnyRecipe[] = [
+  avatarRecipe,
   badgeRecipe,
   buttonRecipe,
   checkboxRecipe,

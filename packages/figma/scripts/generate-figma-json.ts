@@ -10,6 +10,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { RecipeDefinition } from "@cocso-ui/recipe";
+import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
@@ -33,6 +34,7 @@ const OUTPUT_DIR = join(__dirname, "..", "..", "codegen", "generated");
 type AnyRecipe = RecipeDefinition<any, any>;
 
 const ALL_RECIPES: AnyRecipe[] = [
+  avatarRecipe,
   badgeRecipe,
   buttonRecipe,
   checkboxRecipe,

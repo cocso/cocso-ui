@@ -10,6 +10,7 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
@@ -29,6 +30,7 @@ import { generateCSS, generateRuntime, generateTypes } from "./generate-recipe.j
 const GENERATED_DIR = join(import.meta.dirname, "..", "generated");
 
 const ALL_RECIPES = [
+  avatarRecipe,
   badgeRecipe,
   buttonRecipe,
   checkboxRecipe,
