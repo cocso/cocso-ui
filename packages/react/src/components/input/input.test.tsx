@@ -52,35 +52,22 @@ describe("Input", () => {
     });
   });
 
-  describe("size CSS variables", () => {
+  describe("size className", () => {
     it.each([
-      ["x-small", "12px"],
-      ["small", "12px"],
-      ["medium", "14px"],
-      ["large", "14px"],
-    ] as const)('sets --cocso-input-font-size for size="%s"', (size, expectedFontSize) => {
+      "x-small",
+      "small",
+      "medium",
+      "large",
+    ] as const)('applies size className for size="%s"', (size) => {
       render(<Input aria-label="이름" size={size} />);
       const input = screen.getByRole("textbox");
-      expect(input).toHaveStyle({
-        "--cocso-input-font-size": expectedFontSize,
-      });
+      expect(input.className).toContain(`cocso-input--size-${size}`);
     });
 
     it('applies default size "medium" when no size prop is given', () => {
       render(<Input aria-label="이름" />);
       const input = screen.getByRole("textbox");
-      expect(input).toHaveStyle({ "--cocso-input-font-size": "14px" });
-    });
-
-    it.each([
-      ["x-small", "28px"],
-      ["small", "32px"],
-      ["medium", "36px"],
-      ["large", "40px"],
-    ] as const)('sets --cocso-input-height for size="%s"', (size, expectedHeight) => {
-      render(<Input aria-label="이름" size={size} />);
-      const input = screen.getByRole("textbox");
-      expect(input).toHaveStyle({ "--cocso-input-height": expectedHeight });
+      expect(input.className).toContain("cocso-input--size-medium");
     });
   });
 

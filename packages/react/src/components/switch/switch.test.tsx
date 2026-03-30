@@ -74,72 +74,40 @@ describe("Switch", () => {
     });
   });
 
-  describe("size CSS variables", () => {
-    it("applies size CSS variables to the wrapper", () => {
-      const { container } = render(<Switch size="medium" />);
+  describe("size className", () => {
+    it.each([
+      "small",
+      "medium",
+      "large",
+    ] as const)('applies size className for size="%s"', (size) => {
+      const { container } = render(<Switch size={size} />);
       const wrapper = container.firstChild as HTMLElement;
-      expect(wrapper.style.getPropertyValue("--cocso-switch-width")).not.toBe(
-        ""
-      );
-      expect(wrapper.style.getPropertyValue("--cocso-switch-height")).not.toBe(
-        ""
-      );
-      expect(
-        wrapper.style.getPropertyValue("--cocso-switch-thumb-size")
-      ).not.toBe("");
+      expect(wrapper.className).toContain(`cocso-switch--size-${size}`);
     });
 
-    it('applies smaller dimensions for size="small" than size="medium"', () => {
-      const { container: mediumContainer } = render(<Switch size="medium" />);
+    it("applies distinct size classNames for each size", () => {
       const { container: smallContainer } = render(<Switch size="small" />);
-      const mediumWrapper = mediumContainer.firstChild as HTMLElement;
-      const smallWrapper = smallContainer.firstChild as HTMLElement;
-      expect(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-width")
-      ).not.toBe(smallWrapper.style.getPropertyValue("--cocso-switch-width"));
-      expect(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-height")
-      ).not.toBe(smallWrapper.style.getPropertyValue("--cocso-switch-height"));
-      expect(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
-      ).not.toBe(
-        smallWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
-      );
-    });
-  });
-
-  describe("size large", () => {
-    it('applies larger dimensions for size="large" than size="medium"', () => {
-      const { container: largeContainer } = render(<Switch size="large" />);
       const { container: mediumContainer } = render(<Switch size="medium" />);
-      const largeWrapper = largeContainer.firstChild as HTMLElement;
+      const { container: largeContainer } = render(<Switch size="large" />);
+      const smallWrapper = smallContainer.firstChild as HTMLElement;
       const mediumWrapper = mediumContainer.firstChild as HTMLElement;
-      expect(
-        largeWrapper.style.getPropertyValue("--cocso-switch-width")
-      ).not.toBe(mediumWrapper.style.getPropertyValue("--cocso-switch-width"));
-      expect(
-        largeWrapper.style.getPropertyValue("--cocso-switch-height")
-      ).not.toBe(mediumWrapper.style.getPropertyValue("--cocso-switch-height"));
-      expect(
-        largeWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
-      ).not.toBe(
-        mediumWrapper.style.getPropertyValue("--cocso-switch-thumb-size")
-      );
+      const largeWrapper = largeContainer.firstChild as HTMLElement;
+      expect(smallWrapper.className).toContain("cocso-switch--size-small");
+      expect(mediumWrapper.className).toContain("cocso-switch--size-medium");
+      expect(largeWrapper.className).toContain("cocso-switch--size-large");
     });
   });
 
-  describe("variant CSS variable", () => {
+  describe("variant className", () => {
     it.each([
       "primary",
       "success",
       "error",
       "warning",
-    ] as const)('sets --cocso-switch-checked-bg-color for variant="%s"', (variant) => {
+    ] as const)('applies variant className for variant="%s"', (variant) => {
       const { container } = render(<Switch variant={variant} />);
       const wrapper = container.firstChild as HTMLElement;
-      expect(
-        wrapper.style.getPropertyValue("--cocso-switch-checked-bg-color")
-      ).not.toBe("");
+      expect(wrapper.className).toContain(`cocso-switch--variant-${variant}`);
     });
   });
 

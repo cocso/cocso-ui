@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 
-import { colors } from "../../token";
 import { Spinner } from "./spinner";
 
 describe("Spinner", () => {
@@ -54,23 +53,23 @@ describe("Spinner", () => {
     });
   });
 
-  describe("variant color", () => {
+  describe("variant className", () => {
     it.each([
-      ["primary", colors.primary950],
-      ["secondary", colors.neutral500],
-      ["success", colors.success500],
-      ["error", colors.danger500],
-      ["warning", colors.warning500],
-      ["info", colors.info500],
-      ["white", colors.white],
-    ] as const)('applies correct color for variant="%s"', (variant, expectedColor) => {
+      "primary",
+      "secondary",
+      "success",
+      "error",
+      "warning",
+      "info",
+      "white",
+    ] as const)('applies variant className for variant="%s"', (variant) => {
       render(<Spinner data-testid="spinner" variant={variant} />);
-      expect(screen.getByTestId("spinner")).toHaveStyle({
-        color: expectedColor,
-      });
+      expect(screen.getByTestId("spinner").className).toContain(
+        `cocso-spinner--variant-${variant}`
+      );
     });
 
-    it("each variant produces a distinct color", () => {
+    it("each variant produces a distinct className", () => {
       const variants = [
         "primary",
         "secondary",
@@ -79,17 +78,17 @@ describe("Spinner", () => {
         "warning",
         "white",
       ] as const;
-      const colorValues = variants.map((variant) => {
+      const classNames = variants.map((variant) => {
         const { unmount } = render(
           <Spinner data-testid={`spinner-${variant}`} variant={variant} />
         );
         const el = screen.getByTestId(`spinner-${variant}`);
-        const color = el.style.color;
+        const className = el.className;
         unmount();
-        return color;
+        return className;
       });
-      const uniqueColors = new Set(colorValues);
-      expect(uniqueColors.size).toBe(variants.length);
+      const uniqueClassNames = new Set(classNames);
+      expect(uniqueClassNames.size).toBe(variants.length);
     });
   });
 

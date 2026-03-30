@@ -1,6 +1,10 @@
 import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import dialogJSON from "../../../../codegen/generated/dialog.figma.json";
+import {
+  type FigmaJSONData,
+  getAllVariantCombinations,
+  lookupSpec,
+} from "../recipe-utils";
 import {
   COLORS,
   createAutoLayoutFrame,
@@ -16,12 +20,13 @@ import {
 } from "../shared";
 
 export function generateDialogSection(container: FrameNode): void {
+  const json = dialogJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Dialog");
   const combinations = getAllVariantCombinations(dialogRecipe);
   const row = createVariantRow("size");
 
   for (const combo of combinations) {
-    const spec = resolveForFigma(dialogRecipe, combo);
+    const spec = lookupSpec(json, dialogRecipe, combo);
     const nameParts = Object.entries(combo)
       .map(([k, v]) => `${k}=${v}`)
       .join(", ");

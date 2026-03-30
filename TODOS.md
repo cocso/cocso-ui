@@ -1,34 +1,51 @@
 # TODOS
 
-## Direction B (코드 생성) 재평가
+## Pre-fix: 코드리뷰 대응 (다음 PR)
 
-**What:** 컴포넌트가 20개 이상으로 성장하면 Direction B(빌드 타임 코드 생성, seed-design 패턴) 재평가.
+### Codegen
 
-**Why:** sub-approach 2b(프로퍼티 이름 기반 자동 추론)의 PROPERTY_CATEGORIES 유지 부담이 컴포넌트 수에 비례해 증가. 코드 생성은 이 부담을 제거하고, 제로 런타임 + 최강 타입 안전성을 제공.
+- [ ] **인라인 타입 동기화 검증**: `SpinnerVariant`, `SpinnerSize`, `RadioSize` 인라인 타입이 codegen 생성 타입과 일치하는지 자동 검증 추가. CI freshness gate는 `generated/`만 검사하므로 React 소스의 인라인 타입은 drift 가능.
+- [ ] **multi-slot guard 위치 개선**: `generateRuntime`/`generateTypes` 내부에서 throw하면 CSS는 이미 써진 후. `generate.ts` 진입점에서 모든 recipe의 slot 수를 사전 검증하여 partial write 방지.
+- [ ] **parity test compound-selector 파서 강화**: `cascadeForCombo`가 첫 번째 `-`로 dimension/value를 분리. dash 포함 dimension 이름(e.g., `font-size`)에서 오파싱 가능. convention 의존이므로 dimension 이름 제약을 문서화하거나 파서 개선.
 
-**Context:** 현재 13개 recipe, 10개 React 컴포넌트. Phase 1-4(Evolutionary Fix + Golden Matrix 검증)가 성공적으로 완료된 후, 규모 확대 시 자연스럽게 코드 생성으로 진화하는 경로가 확보됨. 디자인 문서 `~/.gstack/projects/cocso-cocso-ui/haklee-v1-design-20260328-192845.md`의 Approach B 섹션에 상세 분석 있음. research/refactoring-recommendation.md에 seed-design과의 비교 분석 포함.
+### Figma
 
-**Depends on:** Phase 1-4 완료 + recipe 컴포넌트 20개 이상 도달.
+- [ ] **resolveColorToken silent fallback 제거**: 알 수 없는 색상 토큰에 `{r:0, g:0, b:0}` (검정) 반환 대신 경고 로그 또는 에러. 토큰 오타 시 Figma 출력이 silent하게 검정으로 렌더링됨.
+- [ ] **resolveRadiusToken silent fallback 제거**: 미등록 radius 토큰에 0 반환 대신 경고. `RADIUS_MAP`이 1-6만 커버.
 
-## PR2: Figma State Variant Generation (5개 컴포넌트)
+### Recipe
 
-**What:** button, link, checkbox, input, select에 hover/active/focus states 추가. 단일 ComponentSetNode per component. `addStateVariants` 공유 유틸리티 구축. `rgbToTokenName` 제거.
+- [ ] **resolveStyleValue 토큰 오타 감지**: 인식되지 않는 문자열이 그대로 CSS custom property 값으로 출력됨. dev-mode 경고 또는 알려진 패턴(color/radius/spacing/fontWeight/CSS literal) 매칭 실패 시 경고 추가.
 
-**Why:** 디자이너가 Figma variant panel에서 상태를 전환하고 시각적 차이를 확인할 수 있어야 함.
+### React 컴포넌트
 
-**Context:** PR1(Token Binding) 완료. 디자인 문서 `~/.gstack/projects/cocso-cocso-ui/haklee-v1-design-20260329-143653.md` (eng review 반영). checkbox는 State × Checked orthogonal dimension. input/select는 State=Focus 포함.
+- [ ] **DayPicker locale prop 추가**: 현재 한국어(`ko`) 하드코딩. 문서는 영어 기본이라고 명시. `locale` prop 노출하거나 문서 수정.
+- [ ] **DayPicker trigger 기본값**: `trigger` prop 미전달 시 `Dropdown.Trigger`에 `undefined` 전달되어 크래시 가능. MonthPicker처럼 기본 trigger 제공.
+- [ ] **Pagination null 반환**: 범위 밖 페이지에 `""` 대신 `null` 반환. 빈 문자열은 DOM에 불필요한 텍스트 노드 생성.
+- [ ] **StockQuantityStatus 영문 enum 전환 검토**: variant 값이 `"보통" | "여유" | "부족"` (한국어). AGENTS.md 규칙("Write all code in English") 위반 여부 확인. 의도적 결정이면 예외 문서화.
 
-**Depends on:** PR1 (Token Binding) 완료.
+### Storybook
 
-## PR3: 나머지 컴포넌트 State Variant (radio, switch, pagination) — PR2와 통합
+- [ ] **Visual regression timeout 개선**: `test-runner.ts`의 `waitForTimeout(300)` → `waitForLoadState('networkidle')` 등 조건 기반 대기로 교체. flaky test 위험.
 
-**What:** radio-group, switch, pagination에 state variant 추가. recipe 구조 확장 포함.
+## Phase 4: 신규 컴포넌트 (avatar, card, alert, tag, progress, breadcrumb, skeleton)
 
-**Why:** addStateVariants 유틸리티를 모든 stateful 컴포넌트에 적용하여 일관된 상태 모델 완성.
+**What:** 일반적 디자인 시스템에서 기대되는 7개 컴포넌트를 codegen 네이티브로 구축.
 
-**Context:** PR2와 함께 구현됨:
-- radio-group: `selected` dimension 추가 (bgColor/borderColor per selected state) + hover state
-- switch: `checked` dimension + `switchBgColor` base + compoundVariants (checked color per variant) + hover state. `checkedBgColor` 유지 (React 호환)
-- pagination: `state` → `pageState` rename + hover state (React 미사용이므로 안전)
+**Why:** 내부 제품 UI 커버리지를 높여 cocso-ui만으로 실제 제품 개발이 가능하도록.
 
-**Status:** PR2에 포함하여 구현 완료.
+**Context:** codegen 파이프라인이 완성되어 새 컴포넌트 추가 프로세스가 확립됨: recipe 정의 → `pnpm generate` → React 컴포넌트 → Storybook → Figma generator → golden matrix. table/data-table은 XL 복잡도로 별도 프로젝트 문서 필요.
+
+**우선순위:** avatar → card → alert → tag → progress → breadcrumb → skeleton
+
+**Depends on:** codegen 파이프라인 완료 (✅).
+
+## Visual regression 테스트 baseline 생성
+
+**What:** `pnpm --filter @cocso-ui/storybook test:visual`로 baseline 스크린샷 생성.
+
+**Why:** CSS 변경 시 시각적 회귀를 자동 감지.
+
+**Context:** test-runner.ts + jest-image-snapshot 설정 완료. 첫 실행 시 baseline 자동 생성.
+
+**Depends on:** Storybook 빌드 성공 + Playwright 설치.

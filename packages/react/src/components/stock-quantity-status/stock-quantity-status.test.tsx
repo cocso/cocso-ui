@@ -33,17 +33,17 @@ describe("StockQuantityStatus", () => {
     });
   });
 
-  describe("color CSS variable", () => {
+  describe("quantity className", () => {
     it.each([
-      ["여유", "var(--cocso-color-info-500)"],
-      ["보통", "var(--cocso-color-success-400)"],
-      ["부족", "var(--cocso-color-danger-500)"],
-    ] as const)('sets --cocso-stock-quantity-status-color to "%s" for quantity="%s"', (quantity, expectedColor) => {
+      "여유",
+      "보통",
+      "부족",
+    ] as const)('applies quantity className for quantity="%s"', (quantity) => {
       const { container } = render(<StockQuantityStatus quantity={quantity} />);
       const root = container.firstChild as HTMLElement;
-      expect(
-        root.style.getPropertyValue("--cocso-stock-quantity-status-color")
-      ).toBe(expectedColor);
+      expect(root.className).toContain(
+        `cocso-stock-quantity-status--quantity-${quantity}`
+      );
     });
   });
 

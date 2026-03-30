@@ -1,13 +1,13 @@
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
+import switchJSON from "../../../../codegen/generated/switch.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
+import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {
-  addStateVariants,
   COLORS,
   createBoundPaint,
   createComponentSection,
   createTextNode,
+  createVariantMatrixPerSlice,
   createVariantRow,
   setFill,
 } from "../shared";
@@ -48,39 +48,36 @@ function createSwitchFromSpec(
 }
 
 export function generateSwitchSection(container: FrameNode): void {
+  const json = switchJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Switch");
-  const combinations = getAllVariantCombinations(switchRecipe);
 
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Switch variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
+  // Visual matrix grid (design system documentation layout)
+  const variants = Object.keys(switchRecipe.variants.variant);
+  const sizes = Object.keys(switchRecipe.variants.size);
+  const checkedValues = Object.keys(switchRecipe.variants.checked);
 
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = resolveForFigma(switchRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const component = createSwitchFromSpec(name, spec);
-    variantFrame.appendChild(component);
-    baseNodes.push(component);
-  }
-
-  const componentSet = addStateVariants(
-    baseNodes,
-    switchRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createSwitchFromSpec(name, spec)
+  const matrixGrid = createVariantMatrixPerSlice(
+    "Switch variants",
+    { name: "size", values: sizes },
+    { name: "variant", values: variants },
+    { name: "checked", values: checkedValues },
+    (sizeVal, variantVal, checkedVal) => {
+      const spec = lookupSpec(json, switchRecipe, {
+        variant: variantVal,
+        size: sizeVal,
+        checked: checkedVal,
+      });
+      return createSwitchFromSpec(
+        `${variantVal}-${sizeVal}-checked=${checkedVal}`,
+        spec
+      );
+    }
   );
-  section.appendChild(componentSet);
+  section.appendChild(matrixGrid);
 
   // Label + disabled rows stay as flat demos
   const labelRow = createVariantRow("with label");
-  const defaultSpec = resolveForFigma(switchRecipe, {
+  const defaultSpec = lookupSpec(json, switchRecipe, {
     variant: "primary",
     size: "medium",
     checked: "true",
@@ -89,7 +86,7 @@ export function generateSwitchSection(container: FrameNode): void {
   for (const checked of [true, false]) {
     const spec = checked
       ? defaultSpec
-      : resolveForFigma(switchRecipe, {
+      : lookupSpec(json, switchRecipe, {
           variant: "primary",
           size: "medium",
           checked: "false",
@@ -117,7 +114,7 @@ export function generateSwitchSection(container: FrameNode): void {
   );
   disabledOn.opacity = 0.4;
   disabledRow.appendChild(disabledOn);
-  const uncheckedSpec = resolveForFigma(switchRecipe, {
+  const uncheckedSpec = lookupSpec(json, switchRecipe, {
     variant: "primary",
     size: "medium",
     checked: "false",

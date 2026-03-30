@@ -1,5 +1,5 @@
-import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
-import { resolveStyleMap } from "@cocso-ui/recipe/resolvers/react-styles";
+import { button } from "@cocso-ui/codegen/generated/button";
+import "@cocso-ui/codegen/generated/button.css";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { cn } from "../../cn";
 import { mergeProps } from "../../primitives/merge-props";
@@ -62,20 +62,14 @@ export function Button({
   spinnerVariant,
   ...props
 }: ButtonProps) {
-  const resolved = resolveStyleMap(
-    buttonRecipe,
-    { variant, size, shape },
-    { states: ["hover", "active"] }
-  );
   const style = {
     ..._style,
-    ...resolved,
-    "--cocso-button-border": resolved["--cocso-button-border"] ?? "none",
     "--cocso-button-font-weight": fontWeightToken[weight],
   } as CSSProperties;
 
   const isDisabled = disabled || loading;
   const mergedClassName = cn(
+    button({ variant, size, shape }),
     styles.button,
     svgOnly && styles.svgOnly,
     className

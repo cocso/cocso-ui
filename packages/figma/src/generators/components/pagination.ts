@@ -1,9 +1,4 @@
-import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
-import type { FigmaNodeSpec } from "../recipe-resolver";
-import { resolveForFigma } from "../recipe-resolver";
-import { getAllVariantCombinations } from "../recipe-utils";
 import {
-  addStateVariants,
   COLORS,
   createComponentSection,
   createIcon,
@@ -81,88 +76,12 @@ function createPaginationArrow(
   return component;
 }
 
-function createPaginationItemFromSpec(
-  name: string,
-  spec: FigmaNodeSpec
-): ComponentNode {
-  const itemSize = spec.height ?? 32;
-  const radius = spec.borderRadius ?? 8;
-  const fontSize = spec.fontSize ?? 14;
-  const textColor = spec.fontColor ?? COLORS.neutral900;
-  const fontW = spec.fontWeight ?? 400;
-  const bgColor = spec.bgColor ?? null;
-
-  let pageState = "inactive";
-  if (name.includes("pageState=active")) {
-    pageState = "active";
-  } else if (name.includes("pageState=disabled")) {
-    pageState = "disabled";
-  }
-
-  let label = "2";
-  if (pageState === "active") {
-    label = "1";
-  } else if (pageState === "disabled") {
-    label = "...";
-  }
-
-  const item = createPaginationItem(
-    name,
-    itemSize,
-    radius,
-    label,
-    textColor,
-    bgColor,
-    fontSize,
-    fontW,
-    {
-      fontColor: spec._tokenRefs?.fontColor,
-      bgColor: spec._tokenRefs?.bgColor,
-    }
-  );
-
-  if (pageState === "disabled") {
-    item.opacity = 0.4;
-  }
-
-  return item;
-}
-
 export function generatePaginationSection(container: FrameNode): void {
   const section = createComponentSection("Pagination");
-  const combinations = getAllVariantCombinations(paginationRecipe);
 
   const itemSize = 32;
   const radius = 8;
   const fontSize = 14;
-
-  // Create base (Default state) nodes for ComponentSetNode
-  const variantFrame = figma.createFrame();
-  variantFrame.name = "Pagination variants";
-  variantFrame.layoutMode = "VERTICAL";
-  variantFrame.primaryAxisSizingMode = "AUTO";
-  variantFrame.counterAxisSizingMode = "AUTO";
-  variantFrame.fills = [];
-
-  const baseNodes: ComponentNode[] = [];
-  for (const combo of combinations) {
-    const spec = resolveForFigma(paginationRecipe, combo);
-    const name = Object.entries(combo)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(", ");
-    const item = createPaginationItemFromSpec(name, spec);
-    variantFrame.appendChild(item);
-    baseNodes.push(item);
-  }
-
-  const componentSet = addStateVariants(
-    baseNodes,
-    paginationRecipe,
-    combinations,
-    variantFrame,
-    (name, spec) => createPaginationItemFromSpec(name, spec)
-  );
-  section.appendChild(componentSet);
 
   const arrowRow = createVariantRow("arrow");
   arrowRow.appendChild(

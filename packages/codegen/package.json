@@ -1,0 +1,32 @@
+{
+  "name": "@cocso-ui/codegen",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Build-time code generation from recipe definitions — CSS, className functions, TypeScript types, Figma JSON",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/codegen"
+  },
+  "type": "module",
+  "exports": {
+    "./generated/*.css": "./generated/*.css",
+    "./generated/*": {
+      "types": "./generated/*.d.ts",
+      "default": "./generated/*.ts"
+    }
+  },
+  "scripts": {
+    "generate": "tsx src/generate.ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@cocso-ui/recipe": "workspace:*",
+    "@types/node": "^22.15.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

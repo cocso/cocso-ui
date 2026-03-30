@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a single source of truth for component visual specs (variant-to-token mappings). React components consume recipes directly via `resolveStyleMap()`, eliminating the need for manual `.styles.ts` mirrors. Figma generation consumes recipes via `resolveForFigma()`.
+Provide a single source of truth for component visual specs (variant-to-token mappings). Consumed at build time by `@cocso-ui/codegen` to generate CSS classes, className functions, and TypeScript types. Figma generation consumes recipes via `resolveForFigma()` (pre-resolved to JSON descriptors).
 
 ## Path
 
@@ -16,21 +16,22 @@ TypeScript (pure data — zero runtime dependencies)
 
 ## Users
 
-- **React developers**: components consume recipes directly via `resolveStyleMap()`. No separate `.styles.ts` files or conformance tests needed.
-- **Figma plugin**: generates Figma components from recipe data via `resolveForFigma()`.
-- **Design system maintainers**: recipes are the authoritative spec for variant→token mappings.
+- **Codegen pipeline**: `@cocso-ui/codegen` imports recipes at build time to generate CSS, className functions, and TypeScript types.
+- **Figma plugin**: generates Figma components from pre-resolved JSON descriptors (built from recipes via `resolveForFigma()`).
+- **Design system maintainers**: recipes are the authoritative spec for variant→token mappings. `BaseSlotProperties` provides type-safe autocompletion for property names.
 
 ## In Scope
 
 - `defineRecipe()` API with type-safe variant/slot/state/compoundVariant definitions.
+- `BaseSlotProperties` interface: type-safe property names with semantic value constraints (35 known properties). Custom properties still allowed via index signature.
 - `StyleValue` type system: `ColorTokenRef`, `RadiusTokenRef`, `SpacingTokenRef`, `FontWeightRef`, `CSSLiteral`, `NumericValue`, `CompoundBorder`, `ComponentRef`.
-- `resolveForReact()`: recipe + variants → CSS custom property map.
+- `resolveForReact()` + `resolveStyleValue()`: recipe + variants → CSS custom property map. Used by codegen at build time.
 - `PropertyCategory` type system + `categoryOf()`: centralized property key → semantic category mapping for resolvers.
 - Component recipes for: Button, Badge, Input, Select, Link, StockQuantityStatus, Checkbox, Switch, Spinner, RadioGroup, Dialog, Typography, Pagination.
 
 ## Out of Scope
 
-- CSS generation or class name generation (unlike seed-design/Panda CSS).
+- CSS generation or class name generation (handled by `@cocso-ui/codegen`).
 - Recipes for structural-only components (Accordion, Tab, Tooltip, Popover, Dropdown, Toast, Field, OTPField). These components use spec-based Figma generation via `generateFromExtractedSpecs` instead.
 - Recipes for third-party wrappers (DayPicker, MonthPicker). Deferred pending evaluation of calendar grid extraction quality.
 - Figma resolver (`resolveForFigma` lives in `packages/figma/`, not here).
@@ -68,14 +69,16 @@ TypeScript (pure data — zero runtime dependencies)
 ### Dependency Direction
 
 - `@cocso-ui/recipe` → zero dependencies (pure TypeScript data)
-- `@cocso-ui/react` → runtime dependency on recipe (direct consumption via `resolveStyleMap()`)
-- `@cocso-ui/figma` → dependency on recipe (for component generation)
+- `@cocso-ui/codegen` → devDependency on recipe (build-time import for code generation)
+- `@cocso-ui/react` → dependency on codegen (consumes generated CSS + className functions, NO runtime dependency on recipe)
+- `@cocso-ui/figma` → dependency on recipe (for resolveForFigma) + reads codegen Figma JSON
 
 ### Conflict Resolution Protocol
 
 Recipe is the single source of truth. When component styles need to change:
 1. Update the recipe definition.
-2. `resolveStyleMap()` propagates the change to the React component automatically — no manual `.styles.ts` sync required.
+2. Run `pnpm --filter @cocso-ui/codegen generate` to regenerate CSS, className functions, and types.
+3. Changes propagate to React components via generated artifacts. CI diff gate ensures freshness.
 
 ### CSS Property Naming Convention
 
@@ -147,10 +150,10 @@ pnpm --filter @cocso-ui/react test      # 365 tests (component behavior tests; c
 
 ## Roadmap
 
-- **Phase 1 (done)**: 10 component recipes + React resolver + Figma resolver + conformance tests.
-- **Phase 2 (planned)**: Typography recipe responsive sizing support (base-size-only currently; responsive breakpoints deferred).
-- **Phase 3 (planned)**: Auto-generate `TokenCatalog` from baseframe YAML to prevent token name drift.
-- **Phase 4 (potential)**: Recipe-driven Storybook arg generation.
+- **Phase 1-2 (done)**: 13 component recipes + React resolver + Figma resolver + codegen pipeline.
+- **Direction B codegen (done)**: Build-time code generation replaces runtime resolveStyleMap. React components consume generated CSS + className functions. Zero runtime dependency on recipe package.
+- **Phase 5a (done)**: BaseSlotProperties interface for type-safe recipe authoring (35 known properties).
+- **Future**: Typography recipe responsive sizing support. Auto-generate TokenCatalog from baseframe YAML.
 
 ## Figma Parity — Golden Matrix Results
 

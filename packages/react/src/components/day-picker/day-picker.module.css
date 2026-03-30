@@ -126,17 +126,19 @@
     border-radius: var(--cocso-radius-4);
   }
 
-  :global(.react-datepicker__day:hover) {
-    background-color: var(--cocso-color-neutral-50);
-  }
-
   :global(.react-datepicker__day.react-datepicker__day--selected) {
     color: var(--cocso-color-white);
     background-color: var(--cocso-color-primary-950);
   }
 
-  :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
-    background-color: var(--cocso-color-primary-800);
+  @media (hover: hover) and (pointer: fine) {
+    :global(.react-datepicker__day:hover) {
+      background-color: var(--cocso-color-neutral-50);
+    }
+
+    :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
+      background-color: var(--cocso-color-primary-800);
+    }
   }
 
   :global(.react-datepicker__day-name:nth-child(1)) {

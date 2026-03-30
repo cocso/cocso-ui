@@ -1,7 +1,8 @@
 import type { RecipeDefinition, SlotStyles } from "@cocso-ui/recipe";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
-import { type FigmaNodeSpec, resolveForFigma } from "./recipe-resolver";
+import type { FigmaNodeSpec } from "./recipe-resolver";
+import { type FigmaJSONData, lookupSpec } from "./recipe-utils";
 
 const data = tokenData as FigmaTokenData;
 
@@ -373,7 +374,8 @@ export function addStateVariants<
   recipe: RecipeDefinition<V, S>,
   variantCombinations: Record<string, string>[],
   parent: FrameNode,
-  createNode: (name: string, spec: FigmaNodeSpec) => ComponentNode
+  createNode: (name: string, spec: FigmaNodeSpec) => ComponentNode,
+  json?: FigmaJSONData
 ): ComponentSetNode | FrameNode {
   const states = recipe.states as Record<string, unknown> | undefined;
   if (!states || Object.keys(states).length === 0) {
@@ -390,9 +392,7 @@ export function addStateVariants<
 
   for (const [, combo] of variantCombinations.entries()) {
     for (const stateName of stateNames) {
-      const spec = resolveForFigma(recipe, combo as Record<string, string>, {
-        state: stateName,
-      });
+      const spec = lookupSpec(json, recipe, combo, { state: stateName });
       const comboStr = Object.entries(combo)
         .map(([k, v]) => `${k}=${v}`)
         .join(", ");
@@ -405,4 +405,174 @@ export function addStateVariants<
   }
 
   return figma.combineAsVariants(allNodes, parent);
+}
+
+// ─── Matrix Grid Layout ─────────────────────────────────
+
+export interface VariantDimension {
+  name: string;
+  values: string[];
+}
+
+const MATRIX_CELL_PADDING = 12;
+const MATRIX_LABEL_WIDTH = 80;
+const MATRIX_HEADER_HEIGHT = 28;
+
+/**
+ * Create a 2D grid of component variants. Rows and columns correspond to
+ * two variant dimensions (e.g., rows=size, columns=variant).
+ *
+ * Header row shows column labels; each body row has a row label + component cells.
+ * Cells are uniformly sized (max component dimensions + padding).
+ */
+export function createVariantMatrix(
+  title: string,
+  rowDimension: VariantDimension,
+  columnDimension: VariantDimension,
+  getComponent: (rowValue: string, colValue: string) => ComponentNode
+): FrameNode {
+  // Phase 1: create all components and measure max cell size
+  const cells: ComponentNode[][] = [];
+  let maxW = 0;
+  let maxH = 0;
+
+  for (const rowVal of rowDimension.values) {
+    const row: ComponentNode[] = [];
+    for (const colVal of columnDimension.values) {
+      const comp = getComponent(rowVal, colVal);
+      maxW = Math.max(maxW, comp.width);
+      maxH = Math.max(maxH, comp.height);
+      row.push(comp);
+    }
+    cells.push(row);
+  }
+
+  const cellW = maxW + MATRIX_CELL_PADDING * 2;
+  const cellH = maxH + MATRIX_CELL_PADDING * 2;
+
+  // Phase 2: build outer container
+  const grid = createAutoLayoutFrame(title, "VERTICAL");
+  grid.itemSpacing = 0;
+
+  // Phase 3: header row
+  const headerRow = createAutoLayoutFrame("Header", "HORIZONTAL");
+  headerRow.itemSpacing = 0;
+  headerRow.counterAxisAlignItems = "CENTER";
+
+  const corner = figma.createFrame();
+  corner.name = "corner";
+  corner.resize(MATRIX_LABEL_WIDTH, MATRIX_HEADER_HEIGHT);
+  corner.fills = [];
+  headerRow.appendChild(corner);
+
+  for (const colVal of columnDimension.values) {
+    const headerCell = figma.createFrame();
+    headerCell.name = `header-${colVal}`;
+    headerCell.resize(cellW, MATRIX_HEADER_HEIGHT);
+    headerCell.layoutMode = "HORIZONTAL";
+    headerCell.primaryAxisSizingMode = "FIXED";
+    headerCell.counterAxisSizingMode = "FIXED";
+    headerCell.primaryAxisAlignItems = "CENTER";
+    headerCell.counterAxisAlignItems = "CENTER";
+    headerCell.fills = [];
+    headerCell.clipsContent = false;
+
+    const label = createTextNode(colVal, 11, 600, COLORS.neutral500);
+    headerCell.appendChild(label);
+    headerRow.appendChild(headerCell);
+  }
+  grid.appendChild(headerRow);
+
+  // Phase 4: separator
+  const totalW = MATRIX_LABEL_WIDTH + cellW * columnDimension.values.length;
+  const sep = figma.createFrame();
+  sep.name = "header-sep";
+  sep.resize(totalW, 1);
+  setFill(sep, COLORS.neutral100);
+  grid.appendChild(sep);
+
+  // Phase 5: body rows
+  for (let r = 0; r < rowDimension.values.length; r++) {
+    const rowVal = rowDimension.values[r];
+    const bodyRow = createAutoLayoutFrame(`Row: ${rowVal}`, "HORIZONTAL");
+    bodyRow.itemSpacing = 0;
+    bodyRow.counterAxisAlignItems = "CENTER";
+
+    // row label
+    const labelCell = figma.createFrame();
+    labelCell.name = `label-${rowVal}`;
+    labelCell.resize(MATRIX_LABEL_WIDTH, cellH);
+    labelCell.layoutMode = "HORIZONTAL";
+    labelCell.primaryAxisSizingMode = "FIXED";
+    labelCell.counterAxisSizingMode = "FIXED";
+    labelCell.primaryAxisAlignItems = "MIN";
+    labelCell.counterAxisAlignItems = "CENTER";
+    labelCell.paddingLeft = 4;
+    labelCell.fills = [];
+    labelCell.clipsContent = false;
+
+    const rowLabel = createTextNode(rowVal, 11, 500, COLORS.neutral500);
+    labelCell.appendChild(rowLabel);
+    bodyRow.appendChild(labelCell);
+
+    // component cells
+    for (let c = 0; c < columnDimension.values.length; c++) {
+      const cell = figma.createFrame();
+      cell.name = `cell-${rowVal}-${columnDimension.values[c]}`;
+      cell.resize(cellW, cellH);
+      cell.layoutMode = "HORIZONTAL";
+      cell.primaryAxisSizingMode = "FIXED";
+      cell.counterAxisSizingMode = "FIXED";
+      cell.primaryAxisAlignItems = "CENTER";
+      cell.counterAxisAlignItems = "CENTER";
+      cell.fills = [];
+      cell.clipsContent = false;
+
+      cell.appendChild(cells[r][c]);
+      bodyRow.appendChild(cell);
+    }
+
+    grid.appendChild(bodyRow);
+  }
+
+  return grid;
+}
+
+/**
+ * Create multiple variant matrices, one per value of a third "slice" dimension.
+ * E.g., button has variant × size × shape — creates one grid per shape value.
+ */
+export function createVariantMatrixPerSlice(
+  title: string,
+  rowDimension: VariantDimension,
+  columnDimension: VariantDimension,
+  sliceDimension: VariantDimension,
+  getComponent: (
+    rowValue: string,
+    colValue: string,
+    sliceValue: string
+  ) => ComponentNode
+): FrameNode {
+  const container = createAutoLayoutFrame(title, "VERTICAL");
+  container.itemSpacing = 24;
+
+  for (const sliceVal of sliceDimension.values) {
+    const sliceLabel = createTextNode(
+      `${sliceDimension.name}=${sliceVal}`,
+      12,
+      600,
+      COLORS.neutral600
+    );
+    container.appendChild(sliceLabel);
+
+    const matrix = createVariantMatrix(
+      `${title} (${sliceDimension.name}=${sliceVal})`,
+      rowDimension,
+      columnDimension,
+      (rowVal, colVal) => getComponent(rowVal, colVal, sliceVal)
+    );
+    container.appendChild(matrix);
+  }
+
+  return container;
 }
