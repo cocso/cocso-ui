@@ -71,7 +71,7 @@ interface RecipeResult {
   baseCombos: ComboDiff[];
   comboCount: number;
   name: string;
-  phase: "target" | "extended" | "phase4";
+  phase: "target" | "extended";
   stateDiffs: PropertyDiff[];
   stateNames: string[];
   variantDims: Record<string, string[]>;
@@ -99,7 +99,7 @@ interface ParsedReactValue {
 type AnyRecipe = RecipeDefinition<any, any>;
 
 interface RecipeEntry {
-  phase: "target" | "extended" | "phase4";
+  phase: "target" | "extended";
   recipe: AnyRecipe;
 }
 
@@ -120,12 +120,12 @@ const RECIPES: Record<string, RecipeEntry> = {
     recipe: stockQuantityStatusRecipe,
     phase: "extended",
   },
-  alert: { recipe: alertRecipe, phase: "phase4" },
-  avatar: { recipe: avatarRecipe, phase: "phase4" },
-  breadcrumb: { recipe: breadcrumbRecipe, phase: "phase4" },
-  card: { recipe: cardRecipe, phase: "phase4" },
-  progress: { recipe: progressRecipe, phase: "phase4" },
-  skeleton: { recipe: skeletonRecipe, phase: "phase4" },
+  alert: { recipe: alertRecipe, phase: "extended" },
+  avatar: { recipe: avatarRecipe, phase: "extended" },
+  breadcrumb: { recipe: breadcrumbRecipe, phase: "extended" },
+  card: { recipe: cardRecipe, phase: "extended" },
+  progress: { recipe: progressRecipe, phase: "extended" },
+  skeleton: { recipe: skeletonRecipe, phase: "extended" },
 };
 
 // ---------------------------------------------------------------------------
