@@ -16,7 +16,6 @@ import { generateSkeletonSection } from "./components/skeleton";
 import { generateSpinnerSection } from "./components/spinner";
 import { generateStockQuantityStatusSection } from "./components/stock-quantity-status";
 import { generateSwitchSection } from "./components/switch";
-import { generateTagSection } from "./components/tag";
 import { generateTypographySection } from "./components/typography";
 
 const generators: Array<(container: FrameNode) => void> = [
@@ -39,7 +38,6 @@ const generators: Array<(container: FrameNode) => void> = [
   generateBreadcrumbSection,
   generateProgressSection,
   generateSkeletonSection,
-  generateTagSection,
 ];
 
 export function generateFromRecipes(container: FrameNode): number {

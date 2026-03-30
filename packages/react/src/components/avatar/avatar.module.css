@@ -3,6 +3,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: var(--cocso-avatar-width);
+    height: var(--cocso-avatar-height);
     overflow: hidden;
     font-size: var(--cocso-avatar-font-size);
     font-weight: var(--cocso-avatar-font-weight);

@@ -2,7 +2,30 @@
 
 .cocso-progress {
   --cocso-progress-bg-color: var(--cocso-color-neutral-100);
+}
+
+.cocso-progress.cocso-progress--variant-primary {
   --cocso-progress-fill-color: var(--cocso-color-primary-950);
+}
+
+.cocso-progress.cocso-progress--variant-secondary {
+  --cocso-progress-fill-color: var(--cocso-color-neutral-500);
+}
+
+.cocso-progress.cocso-progress--variant-success {
+  --cocso-progress-fill-color: var(--cocso-color-success-500);
+}
+
+.cocso-progress.cocso-progress--variant-danger {
+  --cocso-progress-fill-color: var(--cocso-color-danger-500);
+}
+
+.cocso-progress.cocso-progress--variant-warning {
+  --cocso-progress-fill-color: var(--cocso-color-warning-500);
+}
+
+.cocso-progress.cocso-progress--variant-info {
+  --cocso-progress-fill-color: var(--cocso-color-info-500);
 }
 
 .cocso-progress.cocso-progress--size-sm {

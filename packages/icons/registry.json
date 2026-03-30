@@ -153,9 +153,9 @@
     {
       "aliases": [],
       "category": "semantic",
-      "colorStrategy": "fill",
-      "componentName": "CheckCircleIcon",
-      "name": "check-circle",
+      "colorStrategy": "stroke",
+      "componentName": "CheckIcon",
+      "name": "check",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -163,9 +163,9 @@
     {
       "aliases": [],
       "category": "semantic",
-      "colorStrategy": "stroke",
-      "componentName": "CheckIcon",
-      "name": "check",
+      "colorStrategy": "fill",
+      "componentName": "CheckCircleIcon",
+      "name": "check-circle",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -194,6 +194,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "ChevronRightIcon",
+      "name": "chevron-right",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "ChevronUpIcon",
       "name": "chevron-up",
       "source": "tabler",
@@ -209,6 +219,76 @@
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "mixed",
+      "componentName": "COCSOColorHorizontalLogo",
+      "name": "cocso-color-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 493 96"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "COCSOColorLogo",
+      "name": "cocso-color-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 38 32"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOHorizontalLogo",
+      "name": "cocso-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 493 96"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOLogo",
+      "name": "cocso-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 280 280"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOTextLogo",
+      "name": "cocso-text-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 220 47"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOUILogo",
+      "name": "cocsoui-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 24 20"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "COCSOUITextLogo",
+      "name": "cocsoui-text-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 97 16"
     },
     {
       "aliases": [],
@@ -292,6 +372,16 @@
     },
     {
       "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "DrugInfoHorizontalLogo",
+      "name": "drug-info-horizontal-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 187 42"
+    },
+    {
+      "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
       "componentName": "EditDocumentIcon",
@@ -332,6 +422,16 @@
     },
     {
       "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "HMPLogo",
+      "name": "hmp-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 141 108"
+    },
+    {
+      "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
       "componentName": "HospitalIcon",
@@ -352,6 +452,17 @@
     },
     {
       "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "HuonsLogo",
+      "name": "huons-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 339 300",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
       "componentName": "InfoIcon",
@@ -359,6 +470,27 @@
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "KakaoLogo",
+      "name": "kakao-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "KakaoOutlineLogo",
+      "name": "kakao-outline-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 36 34"
     },
     {
       "aliases": [],
@@ -409,6 +541,28 @@
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "NaverLogo",
+      "name": "naver-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
+    },
+    {
+      "aliases": [],
+      "category": "brand",
+      "colorStrategy": "fill",
+      "componentName": "NaverOutlineLogo",
+      "name": "naver-outline-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 20 20",
+      "useStaticIds": true
     },
     {
       "aliases": [],
@@ -464,8 +618,8 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "PersonEditIcon",
-      "name": "person-edit",
+      "componentName": "PersonIcon",
+      "name": "person",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -474,8 +628,8 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "PersonIcon",
-      "name": "person",
+      "componentName": "PersonEditIcon",
+      "name": "person-edit",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -572,10 +726,20 @@
     },
     {
       "aliases": [],
+      "category": "brand",
+      "colorStrategy": "hardcoded",
+      "componentName": "SeoulPharmaLogo",
+      "name": "seoul-pharma-logo",
+      "source": "custom",
+      "tags": [],
+      "viewBox": "0 0 100 100"
+    },
+    {
+      "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "SettingsBackupRestoreIcon",
-      "name": "settings-backup-restore",
+      "componentName": "SettingsIcon",
+      "name": "settings",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -584,8 +748,8 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "SettingsIcon",
-      "name": "settings",
+      "componentName": "SettingsBackupRestoreIcon",
+      "name": "settings-backup-restore",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -604,6 +768,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "SlashIcon",
+      "name": "slash",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "SpaceDashboardIcon",
       "name": "space-dashboard",
       "source": "tabler",
@@ -614,8 +788,8 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "Stat1Icon",
-      "name": "stat1",
+      "componentName": "StatMinus1Icon",
+      "name": "stat-minus1",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -624,8 +798,8 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
-      "componentName": "StatMinus1Icon",
-      "name": "stat-minus1",
+      "componentName": "Stat1Icon",
+      "name": "stat1",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -689,160 +863,6 @@
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "mixed",
-      "componentName": "COCSOColorHorizontalLogo",
-      "name": "cocso-color-horizontal-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 493 96"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "COCSOColorLogo",
-      "name": "cocso-color-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 38 32"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "COCSOHorizontalLogo",
-      "name": "cocso-horizontal-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 493 96"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "COCSOLogo",
-      "name": "cocso-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 280 280"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "COCSOTextLogo",
-      "name": "cocso-text-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 220 47"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "COCSOUILogo",
-      "name": "cocsoui-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 24 20"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "COCSOUITextLogo",
-      "name": "cocsoui-text-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 97 16"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "DrugInfoHorizontalLogo",
-      "name": "drug-info-horizontal-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 187 42"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "HMPLogo",
-      "name": "hmp-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 141 108"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "HuonsLogo",
-      "name": "huons-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 339 300",
-      "useStaticIds": true
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "KakaoLogo",
-      "name": "kakao-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 20 20",
-      "useStaticIds": true
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "KakaoOutlineLogo",
-      "name": "kakao-outline-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 36 34"
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "NaverLogo",
-      "name": "naver-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 20 20",
-      "useStaticIds": true
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "fill",
-      "componentName": "NaverOutlineLogo",
-      "name": "naver-outline-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 20 20",
-      "useStaticIds": true
-    },
-    {
-      "aliases": [],
-      "category": "brand",
-      "colorStrategy": "hardcoded",
-      "componentName": "SeoulPharmaLogo",
-      "name": "seoul-pharma-logo",
-      "source": "custom",
-      "tags": [],
-      "viewBox": "0 0 100 100"
     }
   ]
 }

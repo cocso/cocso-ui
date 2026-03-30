@@ -64,20 +64,19 @@ describe("Breadcrumb", () => {
   });
 
   describe("size className", () => {
-    it.each(["sm", "md", "lg"] as const)(
-      'applies size className for size="%s"',
-      (size) => {
-        const { container } = render(
-          <Breadcrumb size={size}>
-            <span>Home</span>
-          </Breadcrumb>
-        );
-        const breadcrumb = container.firstChild as HTMLElement;
-        expect(breadcrumb.className).toContain(
-          `cocso-breadcrumb--size-${size}`
-        );
-      }
-    );
+    it.each([
+      "sm",
+      "md",
+      "lg",
+    ] as const)('applies size className for size="%s"', (size) => {
+      const { container } = render(
+        <Breadcrumb size={size}>
+          <span>Home</span>
+        </Breadcrumb>
+      );
+      const breadcrumb = container.firstChild as HTMLElement;
+      expect(breadcrumb.className).toContain(`cocso-breadcrumb--size-${size}`);
+    });
 
     it('defaults to size="md"', () => {
       const { container } = render(

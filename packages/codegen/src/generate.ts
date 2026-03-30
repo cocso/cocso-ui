@@ -29,7 +29,6 @@ import { getSpinnerGeometry, spinnerRecipe } from "@cocso-ui/recipe/recipes/spin
 import type { SpinnerSize } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
-import { tagRecipe } from "@cocso-ui/recipe/recipes/tag.recipe";
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
 import { generateCSS, generateRuntime, generateTypes } from "./generate-recipe.js";
 
@@ -54,7 +53,6 @@ const ALL_RECIPES = [
   spinnerRecipe,
   stockQuantityStatusRecipe,
   switchRecipe,
-  tagRecipe,
   typographyRecipe,
 ];
 

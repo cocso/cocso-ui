@@ -4,13 +4,21 @@ import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./progress.module.css";
 
-/** Inline type alias — codegen is a devDependency and must not leak into published .d.ts */
+/** Inline type aliases — codegen is a devDependency and must not leak into published .d.ts */
+export type ProgressVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info";
 export type ProgressSize = "sm" | "md" | "lg";
 
 export interface ProgressProps extends ComponentProps<"div"> {
   max?: number;
   size?: ProgressSize;
   value: number;
+  variant?: ProgressVariant;
 }
 
 /** Determinate progress indicator showing completion percentage. */
@@ -18,6 +26,7 @@ export function Progress({
   ref,
   className,
   style,
+  variant = "primary",
   size = "md",
   value,
   max = 100,
@@ -31,7 +40,7 @@ export function Progress({
       aria-valuemax={max}
       aria-valuemin={0}
       aria-valuenow={value}
-      className={cn(progress({ size }), styles.track, className)}
+      className={cn(progress({ variant, size }), styles.track, className)}
       ref={ref}
       role="progressbar"
       style={style}

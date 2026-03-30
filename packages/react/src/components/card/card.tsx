@@ -23,7 +23,12 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={cn(card({ variant, padding }), styles.card, className)}
+      className={cn(
+        card({ variant, padding }),
+        styles.card,
+        variant === "elevated" && styles.elevated,
+        className
+      )}
       ref={ref}
       style={style}
       {...props}

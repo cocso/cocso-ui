@@ -35,16 +35,16 @@ describe("Alert", () => {
   });
 
   describe("variant className", () => {
-    it.each(["info", "success", "warning", "error"] as const)(
-      'applies variant className for variant="%s"',
-      (variant) => {
-        const { container } = render(
-          <Alert variant={variant}>Alert</Alert>
-        );
-        const alert = container.firstChild as HTMLElement;
-        expect(alert.className).toContain(`cocso-alert--variant-${variant}`);
-      }
-    );
+    it.each([
+      "info",
+      "success",
+      "warning",
+      "error",
+    ] as const)('applies variant className for variant="%s"', (variant) => {
+      const { container } = render(<Alert variant={variant}>Alert</Alert>);
+      const alert = container.firstChild as HTMLElement;
+      expect(alert.className).toContain(`cocso-alert--variant-${variant}`);
+    });
 
     it('defaults to variant="info"', () => {
       const { container } = render(<Alert>Alert</Alert>);

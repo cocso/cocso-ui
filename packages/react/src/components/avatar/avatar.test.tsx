@@ -24,14 +24,17 @@ describe("Avatar", () => {
   });
 
   describe("size className", () => {
-    it.each(["xs", "sm", "md", "lg", "xl"] as const)(
-      'applies size className for size="%s"',
-      (size) => {
-        const { container } = render(<Avatar fallback="A" size={size} />);
-        const avatar = container.firstChild as HTMLElement;
-        expect(avatar.className).toContain(`cocso-avatar--size-${size}`);
-      }
-    );
+    it.each([
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+    ] as const)('applies size className for size="%s"', (size) => {
+      const { container } = render(<Avatar fallback="A" size={size} />);
+      const avatar = container.firstChild as HTMLElement;
+      expect(avatar.className).toContain(`cocso-avatar--size-${size}`);
+    });
 
     it('defaults to size="md"', () => {
       const { container } = render(<Avatar fallback="A" />);
@@ -41,14 +44,14 @@ describe("Avatar", () => {
   });
 
   describe("shape className", () => {
-    it.each(["circle", "square"] as const)(
-      'applies shape className for shape="%s"',
-      (shape) => {
-        const { container } = render(<Avatar fallback="A" shape={shape} />);
-        const avatar = container.firstChild as HTMLElement;
-        expect(avatar.className).toContain(`cocso-avatar--shape-${shape}`);
-      }
-    );
+    it.each([
+      "circle",
+      "square",
+    ] as const)('applies shape className for shape="%s"', (shape) => {
+      const { container } = render(<Avatar fallback="A" shape={shape} />);
+      const avatar = container.firstChild as HTMLElement;
+      expect(avatar.className).toContain(`cocso-avatar--shape-${shape}`);
+    });
 
     it('defaults to shape="circle"', () => {
       const { container } = render(<Avatar fallback="A" />);

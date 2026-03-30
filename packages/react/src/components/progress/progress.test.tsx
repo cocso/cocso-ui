@@ -43,26 +43,27 @@ describe("Progress", () => {
 
     it("calculates fill width as percentage", () => {
       const { container } = render(<Progress max={200} value={100} />);
-      const fill = container.querySelector('[style]') as HTMLElement;
+      const fill = container.querySelector("[style]") as HTMLElement;
       expect(fill.style.width).toBe("50%");
     });
 
     it("does not produce NaN when max=0", () => {
       const { container } = render(<Progress max={0} value={50} />);
-      const fill = container.querySelector('[style]') as HTMLElement;
+      const fill = container.querySelector("[style]") as HTMLElement;
       expect(fill.style.width).not.toContain("NaN");
     });
   });
 
   describe("size className", () => {
-    it.each(["sm", "md", "lg"] as const)(
-      'applies size className for size="%s"',
-      (size) => {
-        const { container } = render(<Progress size={size} value={50} />);
-        const progress = container.firstChild as HTMLElement;
-        expect(progress.className).toContain(`cocso-progress--size-${size}`);
-      }
-    );
+    it.each([
+      "sm",
+      "md",
+      "lg",
+    ] as const)('applies size className for size="%s"', (size) => {
+      const { container } = render(<Progress size={size} value={50} />);
+      const progress = container.firstChild as HTMLElement;
+      expect(progress.className).toContain(`cocso-progress--size-${size}`);
+    });
 
     it('defaults to size="md"', () => {
       const { container } = render(<Progress value={50} />);

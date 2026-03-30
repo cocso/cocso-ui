@@ -1,5 +1,6 @@
 import { breadcrumb } from "@cocso-ui/codegen/generated/breadcrumb";
 import "@cocso-ui/codegen/generated/breadcrumb.css";
+import { ChevronRightIcon } from "@cocso-ui/react-icons";
 import type { ComponentProps, ReactNode } from "react";
 import { Children } from "react";
 import { cn } from "../../cn";
@@ -19,7 +20,7 @@ export function Breadcrumb({
   className,
   style,
   size = "md",
-  separator = "/",
+  separator = <ChevronRightIcon height="1em" width="1em" />,
   children,
   ...props
 }: BreadcrumbProps) {

@@ -25,7 +25,6 @@ export * from "./components/spinner";
 export * from "./components/stock-quantity-status";
 export * from "./components/switch";
 export * from "./components/tab";
-export * from "./components/tag";
 export * from "./components/toast";
 export * from "./components/tooltip";
 export * from "./components/typography";

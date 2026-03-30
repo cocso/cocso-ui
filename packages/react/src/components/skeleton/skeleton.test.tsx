@@ -18,16 +18,17 @@ describe("Skeleton", () => {
   });
 
   describe("variant className", () => {
-    it.each(["text", "circular", "rectangular"] as const)(
-      'applies variant className for variant="%s"',
-      (variant) => {
-        const { container } = render(<Skeleton variant={variant} />);
-        const skeleton = container.firstChild as HTMLElement;
-        expect(skeleton.className).toContain(
-          `cocso-skeleton--variant-${variant}`
-        );
-      }
-    );
+    it.each([
+      "text",
+      "circular",
+      "rectangular",
+    ] as const)('applies variant className for variant="%s"', (variant) => {
+      const { container } = render(<Skeleton variant={variant} />);
+      const skeleton = container.firstChild as HTMLElement;
+      expect(skeleton.className).toContain(
+        `cocso-skeleton--variant-${variant}`
+      );
+    });
 
     it('defaults to variant="text"', () => {
       const { container } = render(<Skeleton />);
@@ -37,16 +38,17 @@ describe("Skeleton", () => {
   });
 
   describe("animation className", () => {
-    it.each(["pulse", "wave", "none"] as const)(
-      'applies animation className for animation="%s"',
-      (animation) => {
-        const { container } = render(<Skeleton animation={animation} />);
-        const skeleton = container.firstChild as HTMLElement;
-        expect(skeleton.className).toContain(
-          `cocso-skeleton--animation-${animation}`
-        );
-      }
-    );
+    it.each([
+      "pulse",
+      "wave",
+      "none",
+    ] as const)('applies animation className for animation="%s"', (animation) => {
+      const { container } = render(<Skeleton animation={animation} />);
+      const skeleton = container.firstChild as HTMLElement;
+      expect(skeleton.className).toContain(
+        `cocso-skeleton--animation-${animation}`
+      );
+    });
 
     it('defaults to animation="pulse"', () => {
       const { container } = render(<Skeleton />);

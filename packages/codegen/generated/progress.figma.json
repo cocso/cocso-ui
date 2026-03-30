@@ -4,7 +4,7 @@
     "root"
   ],
   "combinations": {
-    "size=sm": {
+    "variant=primary,size=sm": {
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -23,7 +23,7 @@
         "borderRadius": "radius-1"
       }
     },
-    "size=md": {
+    "variant=primary,size=md": {
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -42,7 +42,7 @@
         "borderRadius": "radius-2"
       }
     },
-    "size=lg": {
+    "variant=primary,size=lg": {
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -58,6 +58,291 @@
       "_tokenRefs": {
         "bgColor": "neutral-100",
         "fillColor": "primary-950",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=secondary,size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "neutral-500",
+        "borderRadius": "radius-1"
+      }
+    },
+    "variant=secondary,size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "neutral-500",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=secondary,size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "neutral-500",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=success,size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "success-500",
+        "borderRadius": "radius-1"
+      }
+    },
+    "variant=success,size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "success-500",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=success,size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "success-500",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=danger,size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "danger-500",
+        "borderRadius": "radius-1"
+      }
+    },
+    "variant=danger,size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "danger-500",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=danger,size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "danger-500",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=warning,size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "warning-500",
+        "borderRadius": "radius-1"
+      }
+    },
+    "variant=warning,size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "warning-500",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=warning,size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "warning-500",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=info,size=sm": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "height": 4,
+      "borderRadius": 2,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "info-500",
+        "borderRadius": "radius-1"
+      }
+    },
+    "variant=info,size=md": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "height": 8,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "info-500",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=info,size=lg": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fillColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "height": 12,
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "fillColor": "info-500",
         "borderRadius": "radius-3"
       }
     }
