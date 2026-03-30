@@ -10,20 +10,43 @@ export const checkboxRecipe = defineRecipe({
       small: { root: { size: 14, radius: "radius-1" } },
     },
     status: {
-      on: { root: { borderColor: "primary-950", bgColor: "primary-950" } },
-      off: { root: { borderColor: "neutral-100", bgColor: "white" } },
+      on: {
+        root: {
+          borderColor: "interactive-primary",
+          bgColor: "interactive-primary",
+        },
+      },
+      off: {
+        root: { borderColor: "border-secondary", bgColor: "surface-primary" },
+      },
       intermediate: {
-        root: { borderColor: "primary-950", bgColor: "primary-950" },
+        root: {
+          borderColor: "interactive-primary",
+          bgColor: "interactive-primary",
+        },
       },
     },
   },
   states: {
     hover: {
       status: {
-        on: { root: { bgColor: "primary-800", borderColor: "primary-800" } },
-        off: { root: { bgColor: "neutral-200", borderColor: "neutral-200" } },
+        on: {
+          root: {
+            bgColor: "interactive-primary-hover",
+            borderColor: "interactive-primary-hover",
+          },
+        },
+        off: {
+          root: {
+            bgColor: "interactive-secondary-hover",
+            borderColor: "interactive-secondary-hover",
+          },
+        },
         intermediate: {
-          root: { bgColor: "primary-800", borderColor: "primary-800" },
+          root: {
+            bgColor: "interactive-primary-hover",
+            borderColor: "interactive-primary-hover",
+          },
         },
       },
     },

@@ -12,7 +12,7 @@ export const breadcrumbRecipe = defineRecipe({
   },
   base: {
     root: {
-      fontColor: "neutral-500",
+      fontColor: "text-muted",
     },
   },
   defaultVariants: { size: "md" },

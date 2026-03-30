@@ -6,13 +6,13 @@ export const spinnerRecipe = defineRecipe({
 
   variants: {
     variant: {
-      primary: { root: { bladeColor: "primary-950" } },
-      secondary: { root: { bladeColor: "neutral-500" } },
-      success: { root: { bladeColor: "success-500" } },
-      error: { root: { bladeColor: "danger-500" } },
-      warning: { root: { bladeColor: "warning-500" } },
-      info: { root: { bladeColor: "info-500" } },
-      white: { root: { bladeColor: "white" } },
+      primary: { root: { bladeColor: "interactive-primary" } },
+      secondary: { root: { bladeColor: "text-muted" } },
+      success: { root: { bladeColor: "feedback-success" } },
+      error: { root: { bladeColor: "feedback-danger" } },
+      warning: { root: { bladeColor: "feedback-warning" } },
+      info: { root: { bladeColor: "feedback-info" } },
+      white: { root: { bladeColor: "surface-primary" } },
     },
     size: {
       large: {

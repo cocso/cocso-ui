@@ -10,15 +10,27 @@ export const radioGroupRecipe = defineRecipe({
       small: { root: { size: 14, dotSize: 6 } },
     },
     selected: {
-      true: { root: { bgColor: "primary-950", borderColor: "primary-950" } },
-      false: { root: { bgColor: "white", borderColor: "neutral-200" } },
+      true: {
+        root: {
+          bgColor: "interactive-primary",
+          borderColor: "interactive-primary",
+        },
+      },
+      false: {
+        root: { bgColor: "surface-primary", borderColor: "border-primary" },
+      },
     },
   },
   states: {
     hover: {
       selected: {
-        true: { root: { bgColor: "primary-800", borderColor: "primary-800" } },
-        false: { root: { borderColor: "primary-500" } },
+        true: {
+          root: {
+            bgColor: "interactive-primary-hover",
+            borderColor: "interactive-primary-hover",
+          },
+        },
+        false: { root: { borderColor: "interactive-primary-muted" } },
       },
     },
   },

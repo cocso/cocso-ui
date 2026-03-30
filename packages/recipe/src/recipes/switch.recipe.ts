@@ -5,16 +5,16 @@ export const switchRecipe = defineRecipe({
   slots: ["root"] as const,
   base: {
     root: {
-      switchBgColor: "neutral-100",
+      switchBgColor: "surface-neutral",
     },
   },
   variants: {
     variant: {
-      primary: { root: { checkedBgColor: "primary-950" } },
-      success: { root: { checkedBgColor: "success-500" } },
-      error: { root: { checkedBgColor: "danger-500" } },
-      warning: { root: { checkedBgColor: "warning-500" } },
-      info: { root: { checkedBgColor: "info-500" } },
+      primary: { root: { checkedBgColor: "interactive-primary" } },
+      success: { root: { checkedBgColor: "interactive-success" } },
+      error: { root: { checkedBgColor: "interactive-danger" } },
+      warning: { root: { checkedBgColor: "interactive-warning-active" } },
+      info: { root: { checkedBgColor: "interactive-info" } },
     },
     size: {
       large: {
@@ -35,37 +35,41 @@ export const switchRecipe = defineRecipe({
   compoundVariants: [
     {
       conditions: { variant: "primary", checked: "true" },
-      styles: { root: { switchBgColor: "primary-950" } },
+      styles: { root: { switchBgColor: "interactive-primary" } },
     },
     {
       conditions: { variant: "success", checked: "true" },
-      styles: { root: { switchBgColor: "success-500" } },
+      styles: { root: { switchBgColor: "interactive-success" } },
     },
     {
       conditions: { variant: "error", checked: "true" },
-      styles: { root: { switchBgColor: "danger-500" } },
+      styles: { root: { switchBgColor: "interactive-danger" } },
     },
     {
       conditions: { variant: "warning", checked: "true" },
-      styles: { root: { switchBgColor: "warning-500" } },
+      styles: { root: { switchBgColor: "interactive-warning-active" } },
     },
     {
       conditions: { variant: "info", checked: "true" },
-      styles: { root: { switchBgColor: "info-500" } },
+      styles: { root: { switchBgColor: "interactive-info" } },
     },
   ],
   states: {
     hover: {
       variant: {
-        primary: { root: { switchBgColor: "primary-800" } },
-        success: { root: { switchBgColor: "success-400" } },
-        error: { root: { switchBgColor: "danger-400" } },
-        warning: { root: { switchBgColor: "warning-400" } },
-        info: { root: { switchBgColor: "info-400" } },
+        primary: { root: { switchBgColor: "interactive-primary-hover" } },
+        success: {
+          root: { switchBgColor: "interactive-success-hover-subtle" },
+        },
+        error: { root: { switchBgColor: "interactive-danger-hover-subtle" } },
+        warning: {
+          root: { switchBgColor: "interactive-warning-hover-subtle" },
+        },
+        info: { root: { switchBgColor: "interactive-info-hover-subtle" } },
       },
       checked: {
         true: { root: {} },
-        false: { root: { switchBgColor: "neutral-200" } },
+        false: { root: { switchBgColor: "interactive-secondary-hover" } },
       },
     },
   },

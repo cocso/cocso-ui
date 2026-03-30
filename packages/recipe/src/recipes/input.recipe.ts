@@ -41,24 +41,24 @@ export const inputRecipe = defineRecipe({
   },
   base: {
     root: {
-      borderColor: "neutral-200",
+      borderColor: "border-primary",
     },
   },
   states: {
     hover: {
       size: {
-        "x-small": { root: { borderColor: "primary-500" } },
-        small: { root: { borderColor: "primary-500" } },
-        medium: { root: { borderColor: "primary-500" } },
-        large: { root: { borderColor: "primary-500" } },
+        "x-small": { root: { borderColor: "interactive-primary-muted" } },
+        small: { root: { borderColor: "interactive-primary-muted" } },
+        medium: { root: { borderColor: "interactive-primary-muted" } },
+        large: { root: { borderColor: "interactive-primary-muted" } },
       },
     },
     focus: {
       size: {
-        "x-small": { root: { borderColor: "primary-700" } },
-        small: { root: { borderColor: "primary-700" } },
-        medium: { root: { borderColor: "primary-700" } },
-        large: { root: { borderColor: "primary-700" } },
+        "x-small": { root: { borderColor: "interactive-primary-active" } },
+        small: { root: { borderColor: "interactive-primary-active" } },
+        medium: { root: { borderColor: "interactive-primary-active" } },
+        large: { root: { borderColor: "interactive-primary-active" } },
       },
     },
   },

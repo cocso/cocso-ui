@@ -157,15 +157,24 @@
   --cocso-color-alpha-shadow1: rgba(0, 0, 0, 0.04);
   --cocso-color-alpha-shadow2: rgba(0, 0, 0, 0.08);
   --cocso-color-alpha-shadow3: rgba(0, 0, 0, 0.12);
+  /* --- Semantic tokens: special ------------------------------------------- */
+  --cocso-color-transparent: transparent;
+
+  /* --- Semantic tokens: text ---------------------------------------------- */
+  /* Text colors define foreground colors for typography and labels.          */
   --cocso-color-text-primary: var(--cocso-color-neutral-950);
   --cocso-color-text-secondary: var(--cocso-color-neutral-600);
   --cocso-color-text-tertiary: var(--cocso-color-neutral-400);
+  --cocso-color-text-disabled: var(--cocso-color-neutral-400);
+  --cocso-color-text-on-primary: var(--cocso-color-white);
+  --cocso-color-text-muted: var(--cocso-color-neutral-500);
 
   /* --- Semantic tokens: surface ------------------------------------------- */
   /* Surface colors define background layers within the UI hierarchy.         */
   --cocso-color-surface-primary: var(--cocso-color-white);
   --cocso-color-surface-secondary: var(--cocso-color-neutral-50);
   --cocso-color-surface-inverse: var(--cocso-color-neutral-950);
+  --cocso-color-surface-neutral: var(--cocso-color-neutral-100);
 
   /* --- Semantic tokens: border -------------------------------------------- */
   /* Border colors define stroke styles for containers and separators.        */
@@ -178,11 +187,25 @@
   --cocso-color-interactive-primary: var(--cocso-color-primary-950);
   --cocso-color-interactive-primary-hover: var(--cocso-color-primary-800);
   --cocso-color-interactive-primary-active: var(--cocso-color-primary-700);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-primary-500);
   --cocso-color-interactive-secondary: var(--cocso-color-neutral-100);
+  --cocso-color-interactive-secondary-hover: var(--cocso-color-neutral-200);
   --cocso-color-interactive-danger: var(--cocso-color-danger-500);
+  --cocso-color-interactive-danger-hover: var(--cocso-color-danger-600);
+  --cocso-color-interactive-danger-active: var(--cocso-color-danger-700);
+  --cocso-color-interactive-danger-hover-subtle: var(--cocso-color-danger-400);
   --cocso-color-interactive-success: var(--cocso-color-success-500);
-  --cocso-color-interactive-warning: var(--cocso-color-warning-500);
+  --cocso-color-interactive-success-hover: var(--cocso-color-success-600);
+  --cocso-color-interactive-success-active: var(--cocso-color-success-700);
+  --cocso-color-interactive-success-hover-subtle: var(--cocso-color-success-400);
+  --cocso-color-interactive-warning: var(--cocso-color-warning-300);
+  --cocso-color-interactive-warning-hover: var(--cocso-color-warning-400);
+  --cocso-color-interactive-warning-active: var(--cocso-color-warning-500);
+  --cocso-color-interactive-warning-hover-subtle: var(--cocso-color-warning-400);
   --cocso-color-interactive-info: var(--cocso-color-info-500);
+  --cocso-color-interactive-info-hover: var(--cocso-color-info-600);
+  --cocso-color-interactive-info-active: var(--cocso-color-info-700);
+  --cocso-color-interactive-info-hover-subtle: var(--cocso-color-info-400);
 
   /* --- Semantic tokens: focus --------------------------------------------- */
   /* Focus colors define the color of focus indicators such as outlines.      */
@@ -191,7 +214,20 @@
   /* --- Semantic tokens: feedback ------------------------------------------ */
   /* Feedback colors communicate status to users (errors, warnings, etc.).    */
   --cocso-color-feedback-danger: var(--cocso-color-danger-500);
+  --cocso-color-feedback-danger-subtle: var(--cocso-color-danger-50);
+  --cocso-color-feedback-danger-text: var(--cocso-color-danger-600);
+  --cocso-color-feedback-danger-border: var(--cocso-color-danger-200);
   --cocso-color-feedback-success: var(--cocso-color-success-500);
+  --cocso-color-feedback-success-subtle: var(--cocso-color-success-50);
+  --cocso-color-feedback-success-text: var(--cocso-color-success-600);
+  --cocso-color-feedback-success-border: var(--cocso-color-success-200);
+  --cocso-color-feedback-success-muted: var(--cocso-color-success-400);
   --cocso-color-feedback-warning: var(--cocso-color-warning-500);
+  --cocso-color-feedback-warning-subtle: var(--cocso-color-warning-50);
+  --cocso-color-feedback-warning-text: var(--cocso-color-warning-600);
+  --cocso-color-feedback-warning-border: var(--cocso-color-warning-200);
   --cocso-color-feedback-info: var(--cocso-color-info-500);
+  --cocso-color-feedback-info-subtle: var(--cocso-color-info-50);
+  --cocso-color-feedback-info-text: var(--cocso-color-info-600);
+  --cocso-color-feedback-info-border: var(--cocso-color-info-200);
 }

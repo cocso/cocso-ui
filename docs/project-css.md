@@ -51,19 +51,21 @@ Semantic tokens follow the pattern `--cocso-color-{category}-{role}` and map to 
 
 | Category | Role examples | Purpose |
 |---|---|---|
-| `text` | `primary`, `secondary`, `tertiary` | Text and label colors |
-| `surface` | `primary`, `secondary`, `inverse` | Background layer hierarchy |
+| `text` | `primary`, `secondary`, `tertiary`, `disabled`, `on-primary`, `muted` | Text and label colors |
+| `surface` | `primary`, `secondary`, `inverse`, `neutral` | Background layer hierarchy |
 | `border` | `primary`, `secondary` | Container and separator strokes |
-| `interactive` | `primary`, `primary-hover`, `primary-active`, `secondary`, `danger`, `success`, `warning`, `info` | Actionable element fills across state variants |
+| `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `secondary`, `secondary-hover`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
 | `focus` | `ring` | Focus indicator colors |
-| `feedback` | `danger`, `success`, `warning`, `info` | Status communication (errors, warnings, confirmations) |
+| `feedback` | `danger`, `danger-subtle`, `danger-text`, `danger-border`, `success`/`warning`/`info` (same pattern), `success-muted` | Status communication (errors, warnings, confirmations) |
 | `alpha` | `shadow1`, `shadow2`, `shadow3` | Semi-transparent overlay values |
 
+**Status:** 52 semantic color tokens defined (6 text + 4 surface + 2 border + 20 interactive + 1 focus + 17 feedback + 1 transparent + 3 alpha). All 19 recipes reference semantic tokens exclusively (primitive direct reference: 0).
+
 **Rules:**
-- Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, etc.
+- Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, `subtle`, `muted`, etc.
 - Each semantic token maps to exactly one primitive token in light mode.
-- Existing tokens (`text-primary/secondary/tertiary`, `alpha-shadow1/2/3`) remain unchanged and compatible.
 - Do not use numeric scales for semantic tokens (that is the primitive pattern).
+- New recipes must use semantic tokens only — primitive direct references are not allowed.
 
 ## Interfaces
 
@@ -98,8 +100,9 @@ pnpm --filter @cocso-ui/css lint
 
 ## Roadmap
 
+- ~~Semantic token layer~~ — Complete. 52 semantic color tokens, all 19 recipes migrated.
 - Document token inventory in `apps/website`.
-- Add dark mode overrides for semantic tokens via `@media (prefers-color-scheme: dark)` or a `.dark` class.
+- Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
 
 ## Open Questions
 

@@ -17,7 +17,7 @@ export const skeletonRecipe = defineRecipe({
   },
   base: {
     root: {
-      bgColor: "neutral-100",
+      bgColor: "surface-neutral",
     },
   },
   defaultVariants: { variant: "text", animation: "pulse" },

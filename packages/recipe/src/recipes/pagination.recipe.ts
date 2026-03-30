@@ -7,19 +7,19 @@ export const paginationRecipe = defineRecipe({
     pageState: {
       active: {
         root: {
-          bgColor: "primary-950",
-          fontColor: "white",
+          bgColor: "interactive-primary",
+          fontColor: "text-on-primary",
           fontWeight: 600,
         },
       },
       inactive: {
         root: {
-          fontColor: "neutral-900",
+          fontColor: "text-primary",
         },
       },
       disabled: {
         root: {
-          fontColor: "neutral-400",
+          fontColor: "text-disabled",
         },
       },
     },
@@ -35,8 +35,8 @@ export const paginationRecipe = defineRecipe({
   states: {
     hover: {
       pageState: {
-        active: { root: { bgColor: "primary-800" } },
-        inactive: { root: { bgColor: "neutral-100" } },
+        active: { root: { bgColor: "interactive-primary-hover" } },
+        inactive: { root: { bgColor: "interactive-secondary" } },
         disabled: { root: {} },
       },
     },

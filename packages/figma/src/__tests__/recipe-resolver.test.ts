@@ -46,6 +46,25 @@ describe("resolveColorToken", () => {
     const rgb = resolveColorToken("does-not-exist-999");
     expect(rgb).toEqual({ r: 1, g: 0, b: 1 });
   });
+
+  it("resolves semantic token via fallback to primitive", () => {
+    // interactive-primary maps to primary-950 via SEMANTIC_TO_PRIMITIVE
+    const semantic = resolveColorToken("interactive-primary");
+    const primitive = resolveColorToken("primary-950");
+    expect(semantic).toEqual(primitive);
+  });
+
+  it("resolves feedback semantic token via fallback", () => {
+    const semantic = resolveColorToken("feedback-danger-subtle");
+    const primitive = resolveColorToken("danger-50");
+    expect(semantic).toEqual(primitive);
+  });
+
+  it("resolves surface semantic token via fallback", () => {
+    const semantic = resolveColorToken("surface-primary");
+    const primitive = resolveColorToken("white");
+    expect(semantic).toEqual(primitive);
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -1008,9 +1027,9 @@ describe("resolveForFigma — pagination recipe", () => {
     expect(spec.fontWeight).toBe(600);
   });
 
-  it("inactive pageState resolves fontColor=neutral-900, no bgColor", () => {
+  it("inactive pageState resolves fontColor=neutral-950 (via text-primary), no bgColor", () => {
     const spec = resolveForFigma(paginationRecipe, { pageState: "inactive" });
-    expect(spec.fontColor).toEqual(resolveColorToken("neutral-900"));
+    expect(spec.fontColor).toEqual(resolveColorToken("neutral-950"));
     expect(spec.bgColor).toBeUndefined();
   });
 
@@ -1028,7 +1047,7 @@ describe("resolveForFigma — pagination recipe", () => {
       { pageState: "active" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-primary-hover");
   });
 
   it("applies hover state to inactive pageState", () => {
@@ -1037,7 +1056,7 @@ describe("resolveForFigma — pagination recipe", () => {
       { pageState: "inactive" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.bgColor).toBe("neutral-100");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-secondary");
   });
 });
 
@@ -1158,8 +1177,8 @@ describe("resolveForFigma with state option", () => {
       { status: "on" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.bgColor).toBe("primary-950");
-    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+    expect(base._tokenRefs?.bgColor).toBe("interactive-primary");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-primary-hover");
   });
 
   it("applies hover state to checkbox status=off", () => {
@@ -1169,8 +1188,8 @@ describe("resolveForFigma with state option", () => {
       { status: "off" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.bgColor).toBe("white");
-    expect(hover._tokenRefs?.bgColor).toBe("neutral-200");
+    expect(base._tokenRefs?.bgColor).toBe("surface-primary");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-secondary-hover");
   });
 
   // Input state tests
@@ -1181,8 +1200,8 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
-    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+    expect(base._tokenRefs?.borderColor).toBe("border-primary");
+    expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-muted");
   });
 
   it("applies focus state to input borderColor", () => {
@@ -1191,7 +1210,7 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "focus" }
     );
-    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+    expect(focus._tokenRefs?.borderColor).toBe("interactive-primary-active");
   });
 
   // Select state tests
@@ -1202,8 +1221,8 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.borderColor).toBe("neutral-200");
-    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+    expect(base._tokenRefs?.borderColor).toBe("border-primary");
+    expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-muted");
   });
 
   it("applies focus state to select borderColor", () => {
@@ -1212,7 +1231,7 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "focus" }
     );
-    expect(focus._tokenRefs?.borderColor).toBe("primary-700");
+    expect(focus._tokenRefs?.borderColor).toBe("interactive-primary-active");
   });
 
   // Radio state tests
@@ -1223,8 +1242,8 @@ describe("resolveForFigma with state option", () => {
       { selected: "true" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.bgColor).toBe("primary-950");
-    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+    expect(base._tokenRefs?.bgColor).toBe("interactive-primary");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-primary-hover");
   });
 
   it("applies hover state to radio selected=false", () => {
@@ -1233,7 +1252,7 @@ describe("resolveForFigma with state option", () => {
       { selected: "false" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.borderColor).toBe("primary-500");
+    expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-muted");
   });
 
   // Switch state tests
@@ -1243,7 +1262,7 @@ describe("resolveForFigma with state option", () => {
       { variant: "primary", size: "medium", checked: "true" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.switchBgColor).toBe("primary-800");
+    expect(hover._tokenRefs?.switchBgColor).toBe("interactive-primary-hover");
   });
 
   it("applies hover to switch checked=false", () => {
@@ -1252,7 +1271,7 @@ describe("resolveForFigma with state option", () => {
       { variant: "primary", size: "medium", checked: "false" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.switchBgColor).toBe("neutral-200");
+    expect(hover._tokenRefs?.switchBgColor).toBe("interactive-secondary-hover");
   });
 
   it("switch checked=true base resolves switchBgColor from compoundVariant", () => {
@@ -1261,7 +1280,7 @@ describe("resolveForFigma with state option", () => {
       size: "medium",
       checked: "true",
     });
-    expect(spec._tokenRefs?.switchBgColor).toBe("primary-950");
+    expect(spec._tokenRefs?.switchBgColor).toBe("interactive-primary");
   });
 
   it("switch checked=false base resolves switchBgColor from base", () => {
@@ -1270,7 +1289,7 @@ describe("resolveForFigma with state option", () => {
       size: "medium",
       checked: "false",
     });
-    expect(spec._tokenRefs?.switchBgColor).toBe("neutral-100");
+    expect(spec._tokenRefs?.switchBgColor).toBe("surface-neutral");
   });
 });
 
@@ -1282,8 +1301,8 @@ describe("_tokenRefs", () => {
   it("tracks color token references", () => {
     const spec = resolveForFigma(buttonRecipe, { variant: "primary" });
     expect(spec._tokenRefs).toBeDefined();
-    expect(spec._tokenRefs?.bgColor).toBe("primary-950");
-    expect(spec._tokenRefs?.fontColor).toBe("white");
+    expect(spec._tokenRefs?.bgColor).toBe("interactive-primary");
+    expect(spec._tokenRefs?.fontColor).toBe("text-on-primary");
   });
 
   it("tracks radius token references", () => {
@@ -1297,7 +1316,7 @@ describe("_tokenRefs", () => {
 
   it("tracks compound border color reference as strokeColor", () => {
     const spec = resolveForFigma(buttonRecipe, { variant: "outline" });
-    expect(spec._tokenRefs?.strokeColor).toBe("neutral-100");
+    expect(spec._tokenRefs?.strokeColor).toBe("border-secondary");
   });
 
   it("updates token refs on state override", () => {
@@ -1307,8 +1326,8 @@ describe("_tokenRefs", () => {
       { variant: "primary" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.bgColor).toBe("primary-950");
-    expect(hover._tokenRefs?.bgColor).toBe("primary-800");
+    expect(base._tokenRefs?.bgColor).toBe("interactive-primary");
+    expect(hover._tokenRefs?.bgColor).toBe("interactive-primary-hover");
   });
 
   it("does not include _tokenRefs when no tokens are resolved", () => {

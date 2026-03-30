@@ -5,9 +5,12 @@ export type ColorTokenRef =
   | "black"
   | `${"neutral" | "primary" | "danger" | "warning" | "success" | "info"}-${50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950}`
   | `${"white" | "black"}-alpha-${5 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90}`
-  | "text-primary"
-  | "text-secondary"
-  | "text-tertiary";
+  | `text-${string}`
+  | `surface-${string}`
+  | `border-${string}`
+  | `interactive-${string}`
+  | `focus-${string}`
+  | `feedback-${string}`;
 
 /** Design token reference for border radius values (e.g., `"radius-2"`, `"radius-full"`). */
 export type RadiusTokenRef =
