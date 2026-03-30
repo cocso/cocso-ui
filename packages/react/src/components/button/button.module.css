@@ -24,7 +24,8 @@
     border: var(--cocso-button-border, none);
     border-radius: var(--cocso-button-border-radius);
     opacity: 1;
-    transition: background-color 0.15s ease-in-out;
+    transition: background-color var(--cocso-duration-fast)
+      var(--cocso-easing-default);
   }
 
   @media (hover: hover) and (pointer: fine) {

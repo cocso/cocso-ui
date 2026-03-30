@@ -390,8 +390,9 @@ cocso-ui는 Phase 4 완료 후 20 recipes + 30 React components 규모로 성장
 |-----------|------|-----------|
 | 컴포넌트 수 | 19 recipes, 29 React | 추가 recipe 커버리지 확대 |
 | ~~`@media (hover: hover)` 분리~~ | ✅ 완료 | — |
-| ~~Semantic 토큰 마이그레이션~~ | ✅ 완료 (52개 semantic 토큰, 19개 recipe 전체 primitive 0건) | — |
-| 다크 모드 | 미지원 (semantic 토큰 인프라 완성, 즉시 착수 가능) | `light-dark()` 함수 + token.css semantic 값 교체 |
+| ~~Semantic 토큰 마이그레이션~~ | ✅ 완료 (66개 semantic 토큰: 52 color + 5 shadow + 5 duration + 4 easing) | — |
+| ~~Shadow/Motion 토큰~~ | ✅ 완료 (16개 CSS 모듈 semantic 토큰 참조 마이그레이션, baseframe YAML 생성 파이프라인 완성) | — |
+| 다크 모드 | 미지원 (semantic 토큰 인프라 완성, shadow 토큰 포함, 즉시 착수 가능) | `light-dark()` 함수 + baseframe YAML dark mode 값 추가 |
 | 양방향 Figma sync | 단방향 | figma-extractor + CI daily sync |
 
 **권고 우선순위**:
@@ -399,4 +400,4 @@ cocso-ui는 Phase 4 완료 후 20 recipes + 30 React components 규모로 성장
 2. (중기) 양방향 Figma sync — 디자이너 협업 강화
 3. (장기) table/data-table — XL 복잡도, 별도 프로젝트 문서 필요
 
-**요약**: 19 recipes로 실증된 codegen 파이프라인 + 52개 semantic 토큰 체계 완성, 세 시스템 중 가장 깊은 테스트체계, SSOT 순도 최고. 다크 모드가 성숙도의 마지막 관문.
+**요약**: 19 recipes로 실증된 codegen 파이프라인 + 66개 semantic 토큰 체계 완성 (52 color + 5 shadow + 9 motion), baseframe YAML → CSS 완전 생성 파이프라인 구축. 세 시스템 중 가장 깊은 테스트체계, SSOT 순도 최고. 다크 모드가 성숙도의 마지막 관문.

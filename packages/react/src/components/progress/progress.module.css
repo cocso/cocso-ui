@@ -11,6 +11,6 @@
     height: 100%;
     background-color: var(--cocso-progress-fill-color);
     border-radius: inherit;
-    transition: width 0.2s ease;
+    transition: width var(--cocso-duration-normal) var(--cocso-easing-soft);
   }
 }

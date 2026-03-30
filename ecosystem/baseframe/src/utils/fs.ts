@@ -16,5 +16,5 @@ export function findYamlFiles(dir: string): string[] {
     }
   }
   scan(dir);
-  return files;
+  return files.sort();
 }

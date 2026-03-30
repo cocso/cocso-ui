@@ -8,11 +8,12 @@
   }
 
   .content[data-open] {
-    animation: slide-down 0.25s cubic-bezier(0.87, 0, 0.13, 1);
+    animation: slide-down var(--cocso-duration-slow)
+      var(--cocso-easing-accordion);
   }
 
   .content:not([data-open]) {
-    animation: slide-up 0.25s cubic-bezier(0.87, 0, 0.13, 1);
+    animation: slide-up var(--cocso-duration-slow) var(--cocso-easing-accordion);
   }
 
   .trigger {
@@ -31,7 +32,8 @@
     display: inline-block;
     width: var(--cocso-spacing-10);
     height: var(--cocso-spacing-10);
-    transition: transform 0.2s ease-in-out;
+    transition: transform var(--cocso-duration-normal)
+      var(--cocso-easing-default);
   }
 
   .trigger:not([data-panel-open]) > .chevron {

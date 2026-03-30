@@ -23,9 +23,9 @@
     border-radius: var(--cocso-checkbox-radius);
     opacity: 1;
     transition:
-      color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out,
-      background-color 0.15s ease-in-out;
+      color var(--cocso-duration-fast) var(--cocso-easing-default),
+      border-color var(--cocso-duration-fast) var(--cocso-easing-default),
+      background-color var(--cocso-duration-fast) var(--cocso-easing-default);
   }
 
   .icon {
@@ -33,7 +33,7 @@
     max-width: 100%;
     height: auto;
     stroke: var(--cocso-checkbox-color);
-    transition: stroke 0.15s ease-in-out;
+    transition: stroke var(--cocso-duration-fast) var(--cocso-easing-default);
   }
 
   .checkbox:focus-within {
@@ -59,7 +59,7 @@
     right: var(--cocso-spacing-1);
     bottom: var(--cocso-spacing-1);
     left: var(--cocso-spacing-1);
-    transition: opacity 0.15s ease-in-out;
+    transition: opacity var(--cocso-duration-fast) var(--cocso-easing-default);
   }
 
   .label {

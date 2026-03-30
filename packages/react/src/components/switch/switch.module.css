@@ -46,9 +46,9 @@
     height: var(--cocso-switch-thumb-size);
     background-color: var(--cocso-color-white);
     border-radius: var(--cocso-radius-full);
-    box-shadow: var(--cocso-shadow-xs);
+    box-shadow: var(--cocso-shadow-thumb);
     transform: translate(var(--cocso-switch-thumb-offset), -50%);
-    transition: transform 0.15s ease;
+    transition: transform var(--cocso-duration-fast) var(--cocso-easing-soft);
     will-change: transform;
   }
 

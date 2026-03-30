@@ -13,7 +13,8 @@
     inset: 0;
     z-index: var(--cocso-z-index-overlay);
     background-color: var(--cocso-color-black-alpha-30);
-    animation: overlay-show 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: overlay-show var(--cocso-duration-slow)
+      var(--cocso-easing-entrance);
   }
 
   @keyframes content-show {
@@ -42,9 +43,10 @@
     background-color: var(--cocso-color-white);
     border: 1px solid var(--cocso-color-neutral-100);
     border-radius: var(--cocso-radius-5);
-    box-shadow: var(--cocso-shadow-md);
+    box-shadow: var(--cocso-shadow-dialog);
     transform: translate(-50%, -50%);
-    animation: content-show 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: content-show var(--cocso-duration-slow)
+      var(--cocso-easing-entrance);
   }
 
   .small {

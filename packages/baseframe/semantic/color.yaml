@@ -16,6 +16,10 @@ data:
       values:
         default: rgba(0, 0, 0, 0.12)
 
+    $color.transparent:
+      values:
+        default: transparent
+
     $color.text.primary:
       values:
         default: $color.neutral-950
@@ -25,8 +29,16 @@ data:
     $color.text.tertiary:
       values:
         default: $color.neutral-400
+    $color.text.disabled:
+      values:
+        default: $color.neutral-400
+    $color.text.on-primary:
+      values:
+        default: $color.white
+    $color.text.muted:
+      values:
+        default: $color.neutral-500
 
-    # surface — background layer hierarchy
     $color.surface.primary:
       values:
         default: $color.white
@@ -36,8 +48,10 @@ data:
     $color.surface.inverse:
       values:
         default: $color.neutral-950
+    $color.surface.neutral:
+      values:
+        default: $color.neutral-100
 
-    # border — container and separator strokes
     $color.border.primary:
       values:
         default: $color.neutral-200
@@ -45,7 +59,6 @@ data:
       values:
         default: $color.neutral-100
 
-    # interactive — actionable element fills across state variants
     $color.interactive.primary:
       values:
         default: $color.primary-950
@@ -55,37 +68,116 @@ data:
     $color.interactive.primary-active:
       values:
         default: $color.primary-700
+    $color.interactive.primary-muted:
+      values:
+        default: $color.primary-500
     $color.interactive.secondary:
       values:
         default: $color.neutral-100
+    $color.interactive.secondary-hover:
+      values:
+        default: $color.neutral-200
     $color.interactive.danger:
       values:
         default: $color.danger-500
+    $color.interactive.danger-hover:
+      values:
+        default: $color.danger-600
+    $color.interactive.danger-active:
+      values:
+        default: $color.danger-700
+    $color.interactive.danger-hover-subtle:
+      values:
+        default: $color.danger-400
     $color.interactive.success:
       values:
         default: $color.success-500
+    $color.interactive.success-hover:
+      values:
+        default: $color.success-600
+    $color.interactive.success-active:
+      values:
+        default: $color.success-700
+    $color.interactive.success-hover-subtle:
+      values:
+        default: $color.success-400
     $color.interactive.warning:
       values:
+        default: $color.warning-300
+    $color.interactive.warning-hover:
+      values:
+        default: $color.warning-400
+    $color.interactive.warning-active:
+      values:
         default: $color.warning-500
+    $color.interactive.warning-hover-subtle:
+      values:
+        default: $color.warning-400
     $color.interactive.info:
       values:
         default: $color.info-500
+    $color.interactive.info-hover:
+      values:
+        default: $color.info-600
+    $color.interactive.info-active:
+      values:
+        default: $color.info-700
+    $color.interactive.info-hover-subtle:
+      values:
+        default: $color.info-400
 
-    # focus — focus indicator colors
     $color.focus.ring:
       values:
         default: $color.primary-950
 
-    # feedback — status communication (errors, warnings, confirmations)
     $color.feedback.danger:
       values:
         default: $color.danger-500
+    $color.feedback.danger-subtle:
+      values:
+        default: $color.danger-50
+    $color.feedback.danger-text:
+      values:
+        default: $color.danger-600
+    $color.feedback.danger-border:
+      values:
+        default: $color.danger-200
     $color.feedback.success:
       values:
         default: $color.success-500
+    $color.feedback.success-subtle:
+      values:
+        default: $color.success-50
+    $color.feedback.success-text:
+      values:
+        default: $color.success-600
+    $color.feedback.success-border:
+      values:
+        default: $color.success-200
+    $color.feedback.success-muted:
+      values:
+        default: $color.success-400
     $color.feedback.warning:
       values:
         default: $color.warning-500
+    $color.feedback.warning-subtle:
+      values:
+        default: $color.warning-50
+    $color.feedback.warning-text:
+      values:
+        default: $color.warning-600
+    $color.feedback.warning-border:
+      values:
+        default: $color.warning-200
     $color.feedback.info:
       values:
         default: $color.info-500
+    $color.feedback.info-subtle:
+      values:
+        default: $color.info-50
+    $color.feedback.info-text:
+      values:
+        default: $color.info-600
+    $color.feedback.info-border:
+      values:
+        default: $color.info-200

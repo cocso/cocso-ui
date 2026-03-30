@@ -18,7 +18,8 @@
   .blade {
     position: absolute;
     bottom: 0;
-    animation: spinner-blade-fade 0.75s linear infinite;
+    animation: spinner-blade-fade var(--cocso-duration-decorative) linear
+      infinite;
   }
 
   @keyframes spinner-reduced-pulse {

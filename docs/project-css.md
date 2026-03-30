@@ -45,7 +45,7 @@ Token prefix convention: `--cocso-<category>-<scale>` (e.g. `--cocso-color-neutr
 
 ### Semantic Token Naming Convention
 
-Semantic tokens follow the pattern `--cocso-color-{category}-{role}` and map to exactly one primitive token in light mode.
+Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactly one primitive token or direct value in light mode. Color semantic tokens include `color` in the category (e.g. `--cocso-color-text-primary`). Non-color semantic tokens omit it (e.g. `--cocso-shadow-card`, `--cocso-duration-fast`).
 
 **Categories and roles:**
 
@@ -58,8 +58,11 @@ Semantic tokens follow the pattern `--cocso-color-{category}-{role}` and map to 
 | `focus` | `ring` | Focus indicator colors |
 | `feedback` | `danger`, `danger-subtle`, `danger-text`, `danger-border`, `success`/`warning`/`info` (same pattern), `success-muted` | Status communication (errors, warnings, confirmations) |
 | `alpha` | `shadow1`, `shadow2`, `shadow3` | Semi-transparent overlay values |
+| `shadow` | `thumb`, `card`, `dropdown`, `popover`, `dialog` | Surface elevation levels |
+| `duration` | `fast`, `normal`, `slow`, `decorative`, `decorative-slow` | Transition/animation timing |
+| `easing` | `default`, `soft`, `entrance`, `accordion` | Transition/animation curves |
 
-**Status:** 52 semantic color tokens defined (6 text + 4 surface + 2 border + 20 interactive + 1 focus + 17 feedback + 1 transparent + 3 alpha). All 19 recipes reference semantic tokens exclusively (primitive direct reference: 0).
+**Status:** 66 semantic tokens defined (52 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
 
 **Rules:**
 - Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, `subtle`, `muted`, etc.
@@ -100,9 +103,12 @@ pnpm --filter @cocso-ui/css lint
 
 ## Roadmap
 
-- ~~Semantic token layer~~ — Complete. 52 semantic color tokens, all 19 recipes migrated.
+- ~~Semantic color token layer~~ — Complete. 52 semantic color tokens, all 19 recipes migrated.
+- ~~Semantic shadow + motion token layer~~ — Complete. 5 shadow tokens + 9 motion tokens (5 duration + 4 easing). All CSS modules migrated.
+- Typography semantic tokens — requires recipe type system changes (`fontSize: TypographyTokenRef | number`). Separate PR.
 - Document token inventory in `apps/website`.
 - Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
+- Input/select/OTP ring+elevation composite shadow patterns — needs dedicated semantic tokens (follow-up).
 
 ## Open Questions
 

@@ -1,0 +1,35 @@
+kind: Tokens
+metadata:
+  id: motion
+  name: Motion
+  description: motion tokens for transition durations and easing curves
+data:
+  collection: global
+  tokens:
+    $duration.fast:
+      values:
+        default: '0.15s'
+    $duration.normal:
+      values:
+        default: '0.2s'
+    $duration.slow:
+      values:
+        default: '0.25s'
+    $duration.decorative:
+      values:
+        default: '0.75s'
+    $duration.decorative-slow:
+      values:
+        default: '1.5s'
+    $easing.default:
+      values:
+        default: 'ease-in-out'
+    $easing.soft:
+      values:
+        default: 'ease'
+    $easing.entrance:
+      values:
+        default: 'cubic-bezier(0.16, 1, 0.3, 1)'
+    $easing.accordion:
+      values:
+        default: 'cubic-bezier(0.87, 0, 0.13, 1)'

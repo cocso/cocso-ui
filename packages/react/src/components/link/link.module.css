@@ -8,7 +8,7 @@
     color: var(--cocso-link-color);
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.15s ease-in-out;
+    transition: color var(--cocso-duration-fast) var(--cocso-easing-default);
   }
 
   @media (hover: hover) and (pointer: fine) {
