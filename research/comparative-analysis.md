@@ -302,7 +302,7 @@ Tailwind v4: theme.css 읽고 JIT 생성
 | 빌드 복잡도 | 높음 (순서 엄격) | 중간 (recipe build → codegen → react) | 낮음 |
 | 코드 생성 필요 | 필수 | 필수 (recipe → CSS/className/DTS) | CSS vars만 |
 | Incremental build | 지원 | CI freshness gate (git diff) | Tailwind JIT |
-| CI 시간 영향 | 중간 | 낮음 (748 CSS lines, 빠른 생성) | 낮음 |
+| CI 시간 영향 | 중간 | 낮음 (816 CSS lines, 빠른 생성) | 낮음 |
 
 ---
 
@@ -314,7 +314,7 @@ Tailwind v4: theme.css 읽고 JIT 생성
 | 새 토큰 추가 | YAML 한 줄 | baseframe YAML | config.ts 한 줄 |
 | 새 variant 추가 | YAML + recipe 동기화 | recipe 한 곳 (SSOT) | VARIANTS 한 곳 |
 | 새 state 추가 | YAML state 블록 | recipe states + golden matrix 자동 검증 | class string에 추가 |
-| 20+ 컴포넌트 | 검증됨 (당근 프로덕션) | 미검증 (현재 13) | 검증됨 (37 generators) |
+| 20+ 컴포넌트 | 검증됨 (당근 프로덕션) | 미검증 (현재 19) | 검증됨 (37 generators) |
 | 다크 모드 | 지원 (YAML modes) | 미지원 (계획됨) | 지원 (light-dark()) |
 
 ---

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Expand cocso-ui's component coverage with 7 commonly expected design system components, enabling internal product development with cocso-ui alone. All components are built codegen-native via the established recipe pipeline.
+Expand cocso-ui's component coverage with 6 commonly expected design system components, enabling internal product development with cocso-ui alone. All components are built codegen-native via the established recipe pipeline. (Tag was excluded due to overlap with Badge.)
 
 ## Path
 
@@ -28,9 +28,8 @@ Seven components in priority order:
 | avatar | size (xs/sm/md/lg/xl), shape (circle/square) | User or entity visual identifier |
 | card | variant (elevated/outlined/filled), padding (sm/md/lg) | Content container with optional header/body/footer |
 | alert | variant (info/success/warning/error) | Contextual feedback message |
-| tag | variant (solid/subtle/outline), size (sm/md/lg) | Compact label or category indicator |
-| progress | size (sm/md/lg) | Determinate progress indicator |
-| breadcrumb | size (sm/md/lg) | Navigation hierarchy indicator |
+| progress | variant (primary/secondary/success/warning/error/info), size (sm/md/lg) | Determinate progress indicator |
+| breadcrumb | size (sm/md/lg) | Navigation hierarchy indicator. Uses ChevronRightIcon as default separator. |
 | skeleton | variant (text/circular/rectangular), animation (pulse/wave/none) | Loading placeholder |
 
 Each component includes: recipe, codegen artifacts, React component, CSS module, Storybook stories, Figma generator, parity test coverage.
@@ -44,7 +43,7 @@ Each component includes: recipe, codegen artifacts, React component, CSS module,
 
 ## Architecture
 
-All 7 components follow the single-slot pattern established by the existing 13 components:
+All 6 components follow the single-slot pattern established by the existing 13 components:
 
 ```
 recipe (slots: ["root"])
@@ -116,13 +115,15 @@ CI enforces codegen freshness: stale generated files fail the build.
 
 ## Roadmap
 
-1. avatar (first — simplest, establishes Phase 4 pattern)
-2. card (content container, widely needed)
-3. alert (feedback messages)
-4. tag (labels and categories)
-5. progress (loading indicators)
-6. breadcrumb (navigation)
-7. skeleton (loading placeholders, last — depends on animation patterns)
+All 6 components completed in PR #152:
+
+1. ✅ avatar — size (xs–xl), shape (circle/square)
+2. ✅ card — variant (elevated/outlined/filled), padding (sm–lg)
+3. ✅ alert — variant (info/success/warning/error), icon + close
+4. ✅ progress — variant (primary–info), size (sm–lg)
+5. ✅ breadcrumb — size (sm–lg), ChevronRightIcon separator
+6. ✅ skeleton — variant (text/circular/rectangular), animation (pulse/wave/none)
+7. ~~tag~~ — excluded (overlap with Badge)
 
 ## Open Questions
 
