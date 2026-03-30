@@ -31,6 +31,17 @@ export function Avatar({
 }: AvatarProps) {
   const initials = fallback ?? alt?.charAt(0).toUpperCase();
 
+  function renderContent() {
+    if (src) {
+      // biome-ignore lint/correctness/useImageSize: avatar image is sized by CSS (100% width/height)
+      return <img alt={alt ?? ""} className={styles.image} src={src} />;
+    }
+    if (initials) {
+      return <span className={styles.fallback}>{initials}</span>;
+    }
+    return children;
+  }
+
   return (
     <div
       className={cn(avatar({ size, shape }), styles.avatar, className)}
@@ -38,13 +49,7 @@ export function Avatar({
       style={style}
       {...props}
     >
-      {src ? (
-        <img alt={alt ?? ""} className={styles.image} src={src} />
-      ) : initials ? (
-        <span className={styles.fallback}>{initials}</span>
-      ) : (
-        children
-      )}
+      {renderContent()}
     </div>
   );
 }

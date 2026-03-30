@@ -30,7 +30,7 @@ export function Skeleton({
         styles.skeleton,
         animation === "pulse" && styles.pulse,
         animation === "wave" && styles.wave,
-        className,
+        className
       )}
       ref={ref}
       style={style}

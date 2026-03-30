@@ -4,9 +4,9 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    color: var(--cocso-avatar-font-color);
-    font-weight: var(--cocso-avatar-font-weight);
     font-size: var(--cocso-avatar-font-size);
+    font-weight: var(--cocso-avatar-font-weight);
+    color: var(--cocso-avatar-font-color);
     background-color: var(--cocso-avatar-bg-color);
     border-radius: var(--cocso-avatar-border-radius);
   }
@@ -22,8 +22,8 @@
     align-items: center;
     justify-content: center;
     line-height: 1;
-    -webkit-user-select: none;
     -moz-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
   }
 }

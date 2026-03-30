@@ -4,8 +4,8 @@
     gap: var(--cocso-spacing-3);
     align-items: flex-start;
     padding: var(--cocso-alert-padding);
-    color: var(--cocso-alert-font-color);
     font-size: var(--cocso-alert-font-size);
+    color: var(--cocso-alert-font-color);
     background-color: var(--cocso-alert-bg-color);
     border: 1px solid var(--cocso-alert-border-color);
     border-radius: var(--cocso-alert-border-radius);

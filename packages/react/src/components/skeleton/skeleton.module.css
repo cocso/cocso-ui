@@ -18,6 +18,7 @@
   .wave::after {
     position: absolute;
     inset: 0;
+    content: "";
     background: linear-gradient(
       90deg,
       transparent,
@@ -25,7 +26,6 @@
       transparent
     );
     animation: skeleton-wave 1.5s ease-in-out infinite;
-    content: "";
   }
 
   @keyframes skeleton-pulse {

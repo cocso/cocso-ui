@@ -36,10 +36,7 @@ export function Progress({
       style={style}
       {...props}
     >
-      <div
-        className={styles.fill}
-        style={{ width: `${percentage}%` }}
-      />
+      <div className={styles.fill} style={{ width: `${percentage}%` }} />
     </div>
   );
 }

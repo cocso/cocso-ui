@@ -35,6 +35,7 @@ export function Breadcrumb({
     >
       <ol className={styles.list}>
         {items.map((child, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: breadcrumb items are ordered children without reordering
           <li className={styles.item} key={index}>
             {child}
             {index < items.length - 1 && (

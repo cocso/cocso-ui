@@ -5,10 +5,10 @@
     align-items: center;
     height: var(--cocso-tag-height);
     padding-inline: var(--cocso-tag-padding-inline);
-    color: var(--cocso-tag-font-color);
-    font-weight: var(--cocso-tag-font-weight);
     font-size: var(--cocso-tag-font-size);
+    font-weight: var(--cocso-tag-font-weight);
     line-height: 1;
+    color: var(--cocso-tag-font-color);
     background-color: var(--cocso-tag-bg-color);
     border: var(--cocso-tag-border, none);
     border-radius: var(--cocso-tag-border-radius);

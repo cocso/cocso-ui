@@ -1,6 +1,6 @@
 import { tag } from "@cocso-ui/codegen/generated/tag";
 import "@cocso-ui/codegen/generated/tag.css";
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./tag.module.css";
 
