@@ -125,5 +125,7 @@ export function generate(outDir = DEFAULT_OUT_DIR) {
 const isDirectRun =
   typeof process !== "undefined" &&
   process.argv[1] &&
-  import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/"));
+  new URL(import.meta.url).pathname.endsWith(
+    process.argv[1].replace(/\\/g, "/"),
+  );
 if (isDirectRun) generate();
