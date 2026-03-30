@@ -407,6 +407,14 @@ export function addStateVariants<
   return figma.combineAsVariants(allNodes, parent);
 }
 
+// ─── Component Content Defaults ────────────────────────────
+// Shared fallback values for component label text used by checkbox, radio,
+// switch, link, stock-quantity-status, and dialog generators.
+
+export const LABEL_FONT_SIZE = 14;
+export const LABEL_FONT_WEIGHT = 400;
+export const DISABLED_OPACITY = 0.4;
+
 // ─── Matrix Grid Layout ─────────────────────────────────
 
 export interface VariantDimension {

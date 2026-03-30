@@ -14,6 +14,7 @@ import {
   createTextNode,
   createVariantRow,
   ICON_SVGS,
+  LABEL_FONT_SIZE,
   rgbToHex,
   SHADOW_MD,
   setFill,
@@ -102,7 +103,7 @@ export function generateDialogSection(container: FrameNode): void {
 
     const desc = createTextNode(
       "Dialog description goes here.",
-      14,
+      LABEL_FONT_SIZE,
       500,
       COLORS.neutral600
     );

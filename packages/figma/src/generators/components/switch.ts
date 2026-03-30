@@ -9,6 +9,9 @@ import {
   createTextNode,
   createVariantMatrixPerSlice,
   createVariantRow,
+  DISABLED_OPACITY,
+  LABEL_FONT_SIZE,
+  LABEL_FONT_WEIGHT,
   setFill,
 } from "../shared";
 
@@ -51,7 +54,6 @@ export function generateSwitchSection(container: FrameNode): void {
   const json = switchJSON as unknown as FigmaJSONData;
   const section = createComponentSection("Switch");
 
-  // Visual matrix grid (design system documentation layout)
   const variants = Object.keys(switchRecipe.variants.variant);
   const sizes = Object.keys(switchRecipe.variants.size);
   const checkedValues = Object.keys(switchRecipe.variants.checked);
@@ -102,7 +104,7 @@ export function generateSwitchSection(container: FrameNode): void {
     wrapper.fills = [];
 
     wrapper.appendChild(createSwitchFromSpec(`checked=${checked}`, spec));
-    wrapper.appendChild(createTextNode("Label", 14, 400, COLORS.neutral900));
+    wrapper.appendChild(createTextNode("Label", LABEL_FONT_SIZE, LABEL_FONT_WEIGHT, COLORS.neutral900));
     labelRow.appendChild(wrapper);
   }
   section.appendChild(labelRow);
@@ -112,7 +114,7 @@ export function generateSwitchSection(container: FrameNode): void {
     "disabled, checked=true",
     defaultSpec
   );
-  disabledOn.opacity = 0.4;
+  disabledOn.opacity = DISABLED_OPACITY;
   disabledRow.appendChild(disabledOn);
   const uncheckedSpec = lookupSpec(json, switchRecipe, {
     variant: "primary",
@@ -123,7 +125,7 @@ export function generateSwitchSection(container: FrameNode): void {
     "disabled, checked=false",
     uncheckedSpec
   );
-  disabledOff.opacity = 0.4;
+  disabledOff.opacity = DISABLED_OPACITY;
   disabledRow.appendChild(disabledOff);
   section.appendChild(disabledRow);
 

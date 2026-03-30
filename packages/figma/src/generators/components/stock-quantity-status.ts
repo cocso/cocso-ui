@@ -8,6 +8,8 @@ import {
   createComponentSection,
   createTextNode,
   createVariantRow,
+  LABEL_FONT_SIZE,
+  LABEL_FONT_WEIGHT,
   setFill,
 } from "../shared";
 
@@ -52,8 +54,8 @@ export function generateStockQuantityStatusSection(container: FrameNode): void {
 
       const text = createTextNode(
         groupKey,
-        14,
-        400,
+        LABEL_FONT_SIZE,
+        LABEL_FONT_WEIGHT,
         textColor,
         spec._tokenRefs?.color
       );
