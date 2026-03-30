@@ -2,9 +2,9 @@
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > badgeRecipe default variants 1`] = `
 {
-  "--cocso-badge-bg-color": "var(--cocso-color-neutral-50)",
+  "--cocso-badge-bg-color": "var(--cocso-color-surface-secondary)",
   "--cocso-badge-border-radius": "var(--cocso-radius-4)",
-  "--cocso-badge-font-color": "var(--cocso-color-neutral-600)",
+  "--cocso-badge-font-color": "var(--cocso-color-text-secondary)",
   "--cocso-badge-font-size": "12px",
   "--cocso-badge-padding": "4px 8px",
 }
@@ -12,10 +12,10 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > badgeRecipe de
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > buttonRecipe default variants 1`] = `
 {
-  "--cocso-button-bg-color": "var(--cocso-color-primary-950)",
+  "--cocso-button-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-button-border-radius": "var(--cocso-radius-4)",
   "--cocso-button-content-padding": "0 6px",
-  "--cocso-button-font-color": "var(--cocso-color-white)",
+  "--cocso-button-font-color": "var(--cocso-color-text-on-primary)",
   "--cocso-button-font-size": "14px",
   "--cocso-button-height": "36px",
   "--cocso-button-padding-inline": "12px",
@@ -24,8 +24,8 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > buttonRecipe d
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > checkboxRecipe default variants 1`] = `
 {
-  "--cocso-checkbox-bg-color": "var(--cocso-color-white)",
-  "--cocso-checkbox-border-color": "var(--cocso-color-neutral-100)",
+  "--cocso-checkbox-bg-color": "var(--cocso-color-surface-primary)",
+  "--cocso-checkbox-border-color": "var(--cocso-color-border-secondary)",
   "--cocso-checkbox-radius": "var(--cocso-radius-2)",
   "--cocso-checkbox-size": "16px",
 }
@@ -33,8 +33,8 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > checkboxRecipe
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > dialogRecipe default variants 1`] = `
 {
-  "--cocso-dialog-bg-color": "var(--cocso-color-white)",
-  "--cocso-dialog-border": "1px solid var(--cocso-color-neutral-100)",
+  "--cocso-dialog-bg-color": "var(--cocso-color-surface-primary)",
+  "--cocso-dialog-border": "1px solid var(--cocso-color-border-secondary)",
   "--cocso-dialog-border-radius": "var(--cocso-radius-5)",
   "--cocso-dialog-height": "260px",
   "--cocso-dialog-padding-bottom": "20px",
@@ -47,7 +47,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > dialogRecipe d
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > inputRecipe default variants 1`] = `
 {
-  "--cocso-input-border-color": "var(--cocso-color-neutral-200)",
+  "--cocso-input-border-color": "var(--cocso-color-border-primary)",
   "--cocso-input-border-radius": "var(--cocso-radius-4)",
   "--cocso-input-font-size": "14px",
   "--cocso-input-height": "36px",
@@ -57,14 +57,14 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > inputRecipe de
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > linkRecipe default variants 1`] = `
 {
-  "--cocso-link-color": "var(--cocso-color-info-500)",
+  "--cocso-link-color": "var(--cocso-color-interactive-info)",
 }
 `;
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > paginationRecipe default variants 1`] = `
 {
   "--cocso-pagination-border-radius": "var(--cocso-radius-4)",
-  "--cocso-pagination-font-color": "var(--cocso-color-neutral-900)",
+  "--cocso-pagination-font-color": "var(--cocso-color-text-primary)",
   "--cocso-pagination-font-size": "14px",
   "--cocso-pagination-height": "32px",
   "--cocso-pagination-width": "32px",
@@ -73,8 +73,8 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > paginationReci
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupRecipe default variants 1`] = `
 {
-  "--cocso-radio-bg-color": "var(--cocso-color-white)",
-  "--cocso-radio-border-color": "var(--cocso-color-neutral-200)",
+  "--cocso-radio-bg-color": "var(--cocso-color-surface-primary)",
+  "--cocso-radio-border-color": "var(--cocso-color-border-primary)",
   "--cocso-radio-dot-size": "7px",
   "--cocso-radio-size": "16px",
 }
@@ -82,7 +82,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupReci
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > selectRecipe default variants 1`] = `
 {
-  "--cocso-select-border-color": "var(--cocso-color-neutral-200)",
+  "--cocso-select-border-color": "var(--cocso-color-border-primary)",
   "--cocso-select-border-radius": "var(--cocso-radius-4)",
   "--cocso-select-font-size": "14px",
   "--cocso-select-height": "36px",
@@ -95,7 +95,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > selectRecipe d
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe default variants 1`] = `
 {
-  "--cocso-spinner-blade-color": "var(--cocso-color-primary-950)",
+  "--cocso-spinner-blade-color": "var(--cocso-color-interactive-primary)",
   "--cocso-spinner-blade-height": "5px",
   "--cocso-spinner-blade-radius": "1px",
   "--cocso-spinner-blade-width": "2px",
@@ -106,15 +106,15 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe 
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > stockQuantityStatusRecipe default variants 1`] = `
 {
-  "--cocso-stock-quantity-status-color": "var(--cocso-color-info-500)",
+  "--cocso-stock-quantity-status-color": "var(--cocso-color-feedback-info)",
 }
 `;
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe default variants 1`] = `
 {
-  "--cocso-switch-checked-bg-color": "var(--cocso-color-primary-950)",
+  "--cocso-switch-checked-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-switch-height": "20px",
-  "--cocso-switch-switch-bg-color": "var(--cocso-color-primary-950)",
+  "--cocso-switch-switch-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-switch-thumb-offset": "2px",
   "--cocso-switch-thumb-size": "16px",
   "--cocso-switch-width": "36px",

@@ -8,17 +8,17 @@
 }
 
 .cocso-pagination.cocso-pagination--pageState-active {
-  --cocso-pagination-bg-color: var(--cocso-color-primary-950);
-  --cocso-pagination-font-color: var(--cocso-color-white);
+  --cocso-pagination-bg-color: var(--cocso-color-interactive-primary);
+  --cocso-pagination-font-color: var(--cocso-color-text-on-primary);
   --cocso-pagination-font-weight: 600px;
-  --cocso-pagination-bg-color-hover: var(--cocso-color-primary-800);
+  --cocso-pagination-bg-color-hover: var(--cocso-color-interactive-primary-hover);
 }
 
 .cocso-pagination.cocso-pagination--pageState-inactive {
-  --cocso-pagination-font-color: var(--cocso-color-neutral-900);
-  --cocso-pagination-bg-color-hover: var(--cocso-color-neutral-100);
+  --cocso-pagination-font-color: var(--cocso-color-text-primary);
+  --cocso-pagination-bg-color-hover: var(--cocso-color-interactive-secondary);
 }
 
 .cocso-pagination.cocso-pagination--pageState-disabled {
-  --cocso-pagination-font-color: var(--cocso-color-neutral-400);
+  --cocso-pagination-font-color: var(--cocso-color-text-disabled);
 }

@@ -40,6 +40,11 @@
       "import": "./dist/utils/token-classification.js",
       "default": "./dist/utils/token-classification.js"
     },
+    "./utils/semantic-mapping": {
+      "types": "./dist/utils/semantic-mapping.d.ts",
+      "import": "./dist/utils/semantic-mapping.js",
+      "default": "./dist/utils/semantic-mapping.js"
+    },
     "./utils/property-categories": {
       "types": "./dist/utils/property-categories.d.ts",
       "import": "./dist/utils/property-categories.js",

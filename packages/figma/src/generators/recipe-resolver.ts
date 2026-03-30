@@ -9,6 +9,7 @@ import {
   isCompoundBorder,
 } from "@cocso-ui/recipe/utils";
 import { categoryOf } from "@cocso-ui/recipe/utils/property-categories";
+import { SEMANTIC_TO_PRIMITIVE } from "@cocso-ui/recipe/utils/semantic-mapping";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
 
@@ -72,6 +73,18 @@ export function resolveColorToken(name: string): RGB {
     const c = token.values.default as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };
   }
+
+  // Semantic token fallback: resolve via mapping table (max 1 level)
+  const primitive = SEMANTIC_TO_PRIMITIVE[name];
+  if (primitive) {
+    const primitiveFull = `color/${primitive}`;
+    const primitiveToken = tokenMap.get(primitiveFull);
+    if (primitiveToken && typeof primitiveToken.values.default === "object") {
+      const c = primitiveToken.values.default as FigmaColorValue;
+      return { r: c.r, g: c.g, b: c.b };
+    }
+  }
+
   console.warn(
     `[cocso-ui/figma] Unknown color token: "${name}". Falling back to magenta.`
   );

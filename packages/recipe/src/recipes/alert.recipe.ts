@@ -7,30 +7,30 @@ export const alertRecipe = defineRecipe({
     variant: {
       info: {
         root: {
-          bgColor: "info-50",
-          fontColor: "info-600",
-          borderColor: "info-200",
+          bgColor: "feedback-info-subtle",
+          fontColor: "feedback-info-text",
+          borderColor: "feedback-info-border",
         },
       },
       success: {
         root: {
-          bgColor: "success-50",
-          fontColor: "success-600",
-          borderColor: "success-200",
+          bgColor: "feedback-success-subtle",
+          fontColor: "feedback-success-text",
+          borderColor: "feedback-success-border",
         },
       },
       warning: {
         root: {
-          bgColor: "warning-50",
-          fontColor: "warning-600",
-          borderColor: "warning-200",
+          bgColor: "feedback-warning-subtle",
+          fontColor: "feedback-warning-text",
+          borderColor: "feedback-warning-border",
         },
       },
       error: {
         root: {
-          bgColor: "danger-50",
-          fontColor: "danger-600",
-          borderColor: "danger-200",
+          bgColor: "feedback-danger-subtle",
+          fontColor: "feedback-danger-text",
+          borderColor: "feedback-danger-border",
         },
       },
     },

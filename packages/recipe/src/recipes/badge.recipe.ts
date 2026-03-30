@@ -6,21 +6,45 @@ export const badgeRecipe = defineRecipe({
 
   variants: {
     variant: {
-      primary: { root: { bgColor: "primary-950", fontColor: "white" } },
-      secondary: { root: { bgColor: "neutral-50", fontColor: "neutral-600" } },
-      success: { root: { bgColor: "success-50", fontColor: "success-600" } },
-      error: { root: { bgColor: "danger-50", fontColor: "danger-600" } },
-      warning: { root: { bgColor: "warning-50", fontColor: "warning-600" } },
-      info: { root: { bgColor: "info-50", fontColor: "info-600" } },
+      primary: {
+        root: { bgColor: "interactive-primary", fontColor: "text-on-primary" },
+      },
+      secondary: {
+        root: { bgColor: "surface-secondary", fontColor: "text-secondary" },
+      },
+      success: {
+        root: {
+          bgColor: "feedback-success-subtle",
+          fontColor: "feedback-success-text",
+        },
+      },
+      error: {
+        root: {
+          bgColor: "feedback-danger-subtle",
+          fontColor: "feedback-danger-text",
+        },
+      },
+      warning: {
+        root: {
+          bgColor: "feedback-warning-subtle",
+          fontColor: "feedback-warning-text",
+        },
+      },
+      info: {
+        root: {
+          bgColor: "feedback-info-subtle",
+          fontColor: "feedback-info-text",
+        },
+      },
       outline: {
         root: {
           bgColor: "transparent",
-          fontColor: "neutral-950",
+          fontColor: "text-primary",
           border: {
             _type: "border" as const,
             width: 1,
             style: "solid" as const,
-            color: "neutral-100" as const,
+            color: "border-secondary" as const,
           },
         },
       },

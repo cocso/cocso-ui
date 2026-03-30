@@ -5,12 +5,12 @@ export const progressRecipe = defineRecipe({
   slots: ["root"] as const,
   variants: {
     variant: {
-      primary: { root: { fillColor: "primary-950" } },
-      secondary: { root: { fillColor: "neutral-500" } },
-      success: { root: { fillColor: "success-500" } },
-      danger: { root: { fillColor: "danger-500" } },
-      warning: { root: { fillColor: "warning-500" } },
-      info: { root: { fillColor: "info-500" } },
+      primary: { root: { fillColor: "interactive-primary" } },
+      secondary: { root: { fillColor: "text-muted" } },
+      success: { root: { fillColor: "feedback-success" } },
+      danger: { root: { fillColor: "feedback-danger" } },
+      warning: { root: { fillColor: "feedback-warning" } },
+      info: { root: { fillColor: "feedback-info" } },
     },
     size: {
       sm: { root: { height: 4, borderRadius: "radius-1" } },
@@ -20,7 +20,7 @@ export const progressRecipe = defineRecipe({
   },
   base: {
     root: {
-      bgColor: "neutral-100",
+      bgColor: "surface-neutral",
     },
   },
   defaultVariants: { variant: "primary", size: "md" },

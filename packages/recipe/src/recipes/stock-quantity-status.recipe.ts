@@ -5,9 +5,9 @@ export const stockQuantityStatusRecipe = defineRecipe({
   slots: ["root"] as const,
   variants: {
     quantity: {
-      sufficient: { root: { color: "info-500" } },
-      normal: { root: { color: "success-400" } },
-      insufficient: { root: { color: "danger-500" } },
+      sufficient: { root: { color: "feedback-info" } },
+      normal: { root: { color: "feedback-success-muted" } },
+      insufficient: { root: { color: "feedback-danger" } },
     },
   },
   defaultVariants: { quantity: "sufficient" },

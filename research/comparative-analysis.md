@@ -388,16 +388,15 @@ cocso-ui는 Phase 4 완료 후 20 recipes + 30 React components 규모로 성장
 
 | 격차 항목 | 현황 | 다음 단계 |
 |-----------|------|-----------|
-| 컴포넌트 수 | 20 recipes, 30 React | 30+개 recipe 커버리지 |
-| `@media (hover: hover)` 분리 | 없음 | CSS Module 수정만으로 도입 가능 |
-| 다크 모드 | 미지원 | baseframe YAML dark token + codegen 확장 |
+| 컴포넌트 수 | 19 recipes, 29 React | 추가 recipe 커버리지 확대 |
+| ~~`@media (hover: hover)` 분리~~ | ✅ 완료 | — |
+| ~~Semantic 토큰 마이그레이션~~ | ✅ 완료 (52개 semantic 토큰, 19개 recipe 전체 primitive 0건) | — |
+| 다크 모드 | 미지원 (semantic 토큰 인프라 완성, 즉시 착수 가능) | `light-dark()` 함수 + token.css semantic 값 교체 |
 | 양방향 Figma sync | 단방향 | figma-extractor + CI daily sync |
-| Recipe 없는 컴포넌트 | 10개 (SSOT 67%) | accordion, tab, toast 등 recipe 마이그레이션 |
 
 **권고 우선순위**:
-1. (단기) `@media (hover: hover)` 분리 — 구현 범위 최소, 사용자 체감 최대
-2. (단기) Recipe 없는 10개 중 tab·toast·accordion에 recipe 도입 — SSOT 커버리지 67%→83%
-3. (중기) 다크 모드 — `light-dark()` 함수(CSS Level 5) 참고
-4. (장기) 양방향 Figma sync — 디자이너 협업 강화
+1. (단기) 다크 모드 — semantic 토큰 인프라 완성으로 `light-dark()` 함수 기반 즉시 착수 가능
+2. (중기) 양방향 Figma sync — 디자이너 협업 강화
+3. (장기) table/data-table — XL 복잡도, 별도 프로젝트 문서 필요
 
-**요약**: 20 recipes로 실증된 codegen 파이프라인, 세 시스템 중 가장 깊은 테스트체계, SSOT 순도 최고. 컴포넌트 수와 다크 모드가 성숙도의 마지막 관문.
+**요약**: 19 recipes로 실증된 codegen 파이프라인 + 52개 semantic 토큰 체계 완성, 세 시스템 중 가장 깊은 테스트체계, SSOT 순도 최고. 다크 모드가 성숙도의 마지막 관문.

@@ -48,7 +48,7 @@ TypeScript (build-time tool, uses `tsx` for recipe import)
     │   └─ className function generation
     │
     ├─→ generate.ts (orchestrator)
-    │   ├─ imports all 13 recipes via tsx
+    │   ├─ imports all 19 recipes via tsx
     │   ├─ generates CSS + TS + DTS per recipe
     │   └─ generates spinner-geometry.ts
     │
@@ -96,7 +96,7 @@ Per-dimension rules (not Cartesian product) for compact output:
 }
 ```
 
-607 total CSS lines across 13 recipes (duplicate selectors merged; vs 1744 lines for button alone with Cartesian product).
+816 total CSS lines across 19 recipes (duplicate selectors merged; vs 1744 lines for button alone with Cartesian product). All generated CSS references semantic token `var()` (e.g., `var(--cocso-color-interactive-primary)`) — no primitive direct references.
 
 ## Interfaces
 

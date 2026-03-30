@@ -16,22 +16,22 @@
 }
 
 .cocso-checkbox.cocso-checkbox--status-on {
-  --cocso-checkbox-border-color: var(--cocso-color-primary-950);
-  --cocso-checkbox-bg-color: var(--cocso-color-primary-950);
-  --cocso-checkbox-bg-color-hover: var(--cocso-color-primary-800);
-  --cocso-checkbox-border-color-hover: var(--cocso-color-primary-800);
+  --cocso-checkbox-border-color: var(--cocso-color-interactive-primary);
+  --cocso-checkbox-bg-color: var(--cocso-color-interactive-primary);
+  --cocso-checkbox-bg-color-hover: var(--cocso-color-interactive-primary-hover);
+  --cocso-checkbox-border-color-hover: var(--cocso-color-interactive-primary-hover);
 }
 
 .cocso-checkbox.cocso-checkbox--status-off {
-  --cocso-checkbox-border-color: var(--cocso-color-neutral-100);
-  --cocso-checkbox-bg-color: var(--cocso-color-white);
-  --cocso-checkbox-bg-color-hover: var(--cocso-color-neutral-200);
-  --cocso-checkbox-border-color-hover: var(--cocso-color-neutral-200);
+  --cocso-checkbox-border-color: var(--cocso-color-border-secondary);
+  --cocso-checkbox-bg-color: var(--cocso-color-surface-primary);
+  --cocso-checkbox-bg-color-hover: var(--cocso-color-interactive-secondary-hover);
+  --cocso-checkbox-border-color-hover: var(--cocso-color-interactive-secondary-hover);
 }
 
 .cocso-checkbox.cocso-checkbox--status-intermediate {
-  --cocso-checkbox-border-color: var(--cocso-color-primary-950);
-  --cocso-checkbox-bg-color: var(--cocso-color-primary-950);
-  --cocso-checkbox-bg-color-hover: var(--cocso-color-primary-800);
-  --cocso-checkbox-border-color-hover: var(--cocso-color-primary-800);
+  --cocso-checkbox-border-color: var(--cocso-color-interactive-primary);
+  --cocso-checkbox-bg-color: var(--cocso-color-interactive-primary);
+  --cocso-checkbox-bg-color-hover: var(--cocso-color-interactive-primary-hover);
+  --cocso-checkbox-border-color-hover: var(--cocso-color-interactive-primary-hover);
 }

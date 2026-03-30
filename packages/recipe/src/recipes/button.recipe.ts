@@ -6,25 +6,39 @@ export const buttonRecipe = defineRecipe({
 
   variants: {
     variant: {
-      primary: { root: { bgColor: "primary-950", fontColor: "white" } },
-      secondary: { root: { bgColor: "neutral-50", fontColor: "neutral-600" } },
+      primary: {
+        root: { bgColor: "interactive-primary", fontColor: "text-on-primary" },
+      },
+      secondary: {
+        root: { bgColor: "surface-secondary", fontColor: "text-secondary" },
+      },
       outline: {
         root: {
           bgColor: "transparent",
-          fontColor: "neutral-950",
+          fontColor: "text-primary",
           border: {
             _type: "border" as const,
             width: 1,
             style: "solid" as const,
-            color: "neutral-100" as const,
+            color: "border-secondary" as const,
           },
         },
       },
-      ghost: { root: { bgColor: "white", fontColor: "neutral-950" } },
-      success: { root: { bgColor: "success-500", fontColor: "white" } },
-      error: { root: { bgColor: "danger-500", fontColor: "white" } },
-      warning: { root: { bgColor: "warning-300", fontColor: "neutral-950" } },
-      info: { root: { bgColor: "info-500", fontColor: "white" } },
+      ghost: {
+        root: { bgColor: "surface-primary", fontColor: "text-primary" },
+      },
+      success: {
+        root: { bgColor: "interactive-success", fontColor: "text-on-primary" },
+      },
+      error: {
+        root: { bgColor: "interactive-danger", fontColor: "text-on-primary" },
+      },
+      warning: {
+        root: { bgColor: "interactive-warning", fontColor: "text-primary" },
+      },
+      info: {
+        root: { bgColor: "interactive-info", fontColor: "text-on-primary" },
+      },
     },
     size: {
       large: {
@@ -81,26 +95,26 @@ export const buttonRecipe = defineRecipe({
   states: {
     hover: {
       variant: {
-        primary: { root: { bgColor: "primary-800" } },
-        secondary: { root: { bgColor: "neutral-100" } },
-        outline: { root: { bgColor: "neutral-50" } },
-        ghost: { root: { bgColor: "neutral-50" } },
-        success: { root: { bgColor: "success-600" } },
-        error: { root: { bgColor: "danger-600" } },
-        warning: { root: { bgColor: "warning-400" } },
-        info: { root: { bgColor: "info-600" } },
+        primary: { root: { bgColor: "interactive-primary-hover" } },
+        secondary: { root: { bgColor: "interactive-secondary" } },
+        outline: { root: { bgColor: "surface-secondary" } },
+        ghost: { root: { bgColor: "surface-secondary" } },
+        success: { root: { bgColor: "interactive-success-hover" } },
+        error: { root: { bgColor: "interactive-danger-hover" } },
+        warning: { root: { bgColor: "interactive-warning-hover" } },
+        info: { root: { bgColor: "interactive-info-hover" } },
       },
     },
     active: {
       variant: {
-        primary: { root: { bgColor: "primary-700" } },
-        secondary: { root: { bgColor: "neutral-200" } },
-        outline: { root: { bgColor: "neutral-100" } },
-        ghost: { root: { bgColor: "neutral-100" } },
-        success: { root: { bgColor: "success-700" } },
-        error: { root: { bgColor: "danger-700" } },
-        warning: { root: { bgColor: "warning-500" } },
-        info: { root: { bgColor: "info-700" } },
+        primary: { root: { bgColor: "interactive-primary-active" } },
+        secondary: { root: { bgColor: "interactive-secondary-hover" } },
+        outline: { root: { bgColor: "interactive-secondary" } },
+        ghost: { root: { bgColor: "interactive-secondary" } },
+        success: { root: { bgColor: "interactive-success-active" } },
+        error: { root: { bgColor: "interactive-danger-active" } },
+        warning: { root: { bgColor: "interactive-warning-active" } },
+        info: { root: { bgColor: "interactive-info-active" } },
       },
     },
   },

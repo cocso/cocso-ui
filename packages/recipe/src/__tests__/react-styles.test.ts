@@ -69,10 +69,10 @@ describe("resolveStyleMap base resolution", () => {
       shape: "square",
     });
     expect(result["--cocso-button-bg-color"]).toBe(
-      "var(--cocso-color-primary-950)"
+      "var(--cocso-color-interactive-primary)"
     );
     expect(result["--cocso-button-font-color"]).toBe(
-      "var(--cocso-color-white)"
+      "var(--cocso-color-text-on-primary)"
     );
     expect(result["--cocso-button-height"]).toBe("36px");
     expect(result["--cocso-button-padding-inline"]).toBe("12px");
@@ -89,10 +89,10 @@ describe("resolveStyleMap base resolution", () => {
       shape: "square",
     });
     expect(result["--cocso-badge-bg-color"]).toBe(
-      "var(--cocso-color-neutral-50)"
+      "var(--cocso-color-surface-secondary)"
     );
     expect(result["--cocso-badge-font-color"]).toBe(
-      "var(--cocso-color-neutral-600)"
+      "var(--cocso-color-text-secondary)"
     );
     expect(result["--cocso-badge-border-radius"]).toBe("var(--cocso-radius-4)");
   });
@@ -100,7 +100,7 @@ describe("resolveStyleMap base resolution", () => {
   it("uses default variants when no variants passed", () => {
     const result = resolveStyleMap(buttonRecipe, {});
     expect(result["--cocso-button-bg-color"]).toBe(
-      "var(--cocso-color-primary-950)"
+      "var(--cocso-color-interactive-primary)"
     );
     expect(result["--cocso-button-height"]).toBe("36px");
   });
@@ -115,7 +115,7 @@ describe("resolveStyleMap multi-state resolution", () => {
     );
     expect("--cocso-button-bg-color-hover" in result).toBe(true);
     expect(result["--cocso-button-bg-color-hover"]).toBe(
-      "var(--cocso-color-primary-800)"
+      "var(--cocso-color-interactive-primary-hover)"
     );
   });
 
@@ -127,7 +127,7 @@ describe("resolveStyleMap multi-state resolution", () => {
     );
     expect("--cocso-button-bg-color-active" in result).toBe(true);
     expect(result["--cocso-button-bg-color-active"]).toBe(
-      "var(--cocso-color-primary-700)"
+      "var(--cocso-color-interactive-primary-active)"
     );
   });
 
@@ -138,10 +138,10 @@ describe("resolveStyleMap multi-state resolution", () => {
       { states: ["hover", "active"] }
     );
     expect(result["--cocso-button-bg-color-hover"]).toBe(
-      "var(--cocso-color-primary-800)"
+      "var(--cocso-color-interactive-primary-hover)"
     );
     expect(result["--cocso-button-bg-color-active"]).toBe(
-      "var(--cocso-color-primary-700)"
+      "var(--cocso-color-interactive-primary-active)"
     );
   });
 
@@ -175,9 +175,11 @@ describe("resolveStyleMap hover === base edge case (link current variant)", () =
       { variant: "inline" },
       { states: ["hover"] }
     );
-    expect(result["--cocso-link-color"]).toBe("var(--cocso-color-info-500)");
+    expect(result["--cocso-link-color"]).toBe(
+      "var(--cocso-color-interactive-info)"
+    );
     expect(result["--cocso-link-color-hover"]).toBe(
-      "var(--cocso-color-info-700)"
+      "var(--cocso-color-interactive-info-active)"
     );
   });
 });
