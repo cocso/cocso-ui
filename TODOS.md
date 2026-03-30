@@ -6,39 +6,62 @@
 - [x] Visual regression test baseline — US-002 complete. 109 snapshots across 30 story suites written to `apps/storybook/__snapshots__/`.
 - [x] Semantic 토큰 레이어 확장 — 19개 recipe 전체 primitive→semantic 마이그레이션 완료. 52개 semantic color 토큰 체계 (기존 21 + 신규 31). `ColorTokenRef` 타입 확장, `--cocso-color-transparent` hotfix, Figma resolver semantic fallback chain 추가. golden-matrix 19 recipes / 2053 comparisons / 0 VALUE_MISMATCH.
 - [x] Recipe 미보유 10개 컴포넌트 C1/C2/C3 적합성 평가 — 10개 전부 부적합 판정 (Tab/Toast: headless, Accordion: structural-only, Day-picker/Month-picker: 서드파티 래퍼, Tooltip/Popover/Dropdown: multi-slot 미지원, Field/OTP Field: C1 미충족). CSS Module primitive→semantic 교체 완료 (8개 컴포넌트).
+- [x] Visual regression CI (Phase 2) — CI에 `visual-regression` job 추가. Playwright Chromium 고정 환경, `--ci` mode (baseline 존재 시), graceful skip (baseline 미존재 시 warning). `workflow_dispatch`로 Ubuntu baseline 생성/업데이트. diff artifact 업로드 (실패 시 7일 보존).
 
-## 후속 과제 (다음 사이클)
+## 다음 PR 과제
+
+아래 항목들은 순서대로 다음 PR에서 진행 예정.
+
+### 1. Semantic 토큰 레이어 확장 (심화)
+
+현재 52개 semantic color 토큰이 정의되어 있으나, 추가 확장이 필요한 영역:
+- [ ] Elevation/shadow semantic 토큰 추가 — `--cocso-shadow-*` 체계 정의
+- [ ] Spacing semantic 토큰 — 컴포넌트 간 일관된 spacing scale 정의
+- [ ] Typography semantic 토큰 — heading/body/caption 등 용도별 토큰화
+- [ ] Motion/transition semantic 토큰 — duration, easing 표준화
+
+### 2. Recipe 미보유 10개 컴포넌트 처리
+
+C1/C2/C3 부적합 판정된 10개 컴포넌트에 대한 후속 조치:
+- [ ] Tab — headless 패턴 유지, recipe 없이 CSS Module semantic 토큰 적용 확인
+- [ ] Toast — headless 패턴 유지, 스타일 토큰 정리
+- [ ] Accordion — structural-only, semantic 토큰 적용 완료 확인
+- [ ] Day-picker / Month-picker — 서드파티 래퍼, 커스텀 스타일 오버라이드 정리
+- [ ] Tooltip / Popover / Dropdown — multi-slot 미지원, CSS variable 기반 테마 대응 검토
+- [ ] Field / OTP Field — C1 미충족, primitive→semantic 교체 완료 확인
+
+### 3. table/data-table
+
+XL 복잡도, 별도 프로젝트 문서 필요:
+- [ ] `docs/project-table.md` 작성 — 요구사항, 스코프, API 설계
+- [ ] 기존 테이블 패턴 리서치 (Tanstack Table, AG Grid 등)
+- [ ] 컴포넌트 설계 및 recipe 정의
+- [ ] 구현 및 스토리 작성
+
+## 먼 미래 과제
+
+아래 항목들은 위 과제들이 모두 완료된 후 진행. 우선순위가 가장 낮음.
 
 - [ ] 다크 모드 — `light-dark()` 함수 + baseframe dark token (semantic 토큰 완성됨, 즉시 착수 가능)
 - [ ] 양방향 Figma sync — figma-extractor + CI daily sync. Figma tokens.json에 semantic 토큰 추가 필요.
-- [ ] table/data-table — XL 복잡도, 별도 프로젝트 문서 필요
-- [ ] Visual regression CI (Phase 2) — add a CI job running `test:visual --ci` after `build`. Requires pinned Chromium environment for consistent rendering across machines.
 
-## Visual regression test infrastructure (US-002)
+## Visual regression test infrastructure
 
-**Status:** Baseline generated. 109 snapshots across 30 story suites.
+**Status:** CI integrated (Phase 2 complete). Baseline generation via `workflow_dispatch`.
 
-### What was done
+### CI Job (`visual-regression` in `.github/workflows/ci.yml`)
 
-- Upgraded `@storybook/test-runner` from 0.22.1 to 0.24.3 to fix async `serverRequire` incompatibility with Storybook 10 (v0.22.x used synchronous `serverRequire` but Storybook 10 made it return a Promise, causing config to load as `{}`).
-- Moved `test-runner.ts` from the app root into `.storybook/test-runner.ts` — the test-runner discovers config by calling `getInterpretedFile(<configDir>/test-runner)`, so the file must live inside `configDir`.
-- Added `--config-dir .storybook` to the `test:visual` script so the test-runner resolves the correct Storybook config in the monorepo context.
+- Standalone job, runs in parallel with lint/test/icons/build
+- Playwright Chromium with browser caching (`actions/cache`)
+- Builds Storybook, serves static on port 6006
+- Graceful baseline check: if no PNGs → warning + skip; if PNGs exist → `--ci` mode
+- On failure: uploads diff artifacts (7-day retention)
 
-### CI strategy: Phase 1 — local-only
+### Baseline Management (`Update Visual Regression Baselines` workflow)
 
-Visual regression tests are intentionally NOT wired into CI at this stage. Reasons:
-
-- PNG snapshots are committed to the repo. CI would need a consistent Chromium environment with pinned fonts to avoid flaky pixel-diff failures across different machines/OS versions.
-- The `--ci` flag (fail on missing snapshots instead of writing them) is required for safe CI integration but needs the baseline to be stable first.
-
-**Phase 2 (future CI job):**
-```yaml
-- name: Build Storybook
-  run: pnpm --filter @cocso-ui/storybook build
-- name: Visual regression tests
-  run: pnpm --filter @cocso-ui/storybook test:visual -- --ci
-  # Requires: Playwright Chromium installed, Storybook served on port 6006
-```
+- `workflow_dispatch` trigger with branch input
+- Generates Ubuntu baselines and auto-commits
+- Use for: initial bootstrap, intentional UI changes
 
 ### How to run locally
 
@@ -56,5 +79,7 @@ pnpm --filter @cocso-ui/storybook test:visual
 pnpm --filter @cocso-ui/storybook test:visual -- --updateSnapshot
 ```
 
-**Snapshot location:** `apps/storybook/__snapshots__/` (109 PNG files, committed to repo)
+**Note:** Local (macOS) results may differ from CI (Ubuntu) due to font rasterizer differences. CI baselines are the source of truth. Local visual tests are advisory only.
+
+**Snapshot location:** `apps/storybook/__snapshots__/`
 **Failure threshold:** 0.01% pixel diff (configured in `.storybook/test-runner.ts`)
