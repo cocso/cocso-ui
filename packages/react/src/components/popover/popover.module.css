@@ -56,8 +56,8 @@
     overflow: visible;
     font-size: var(--cocso-text-sm);
     line-height: 1.5;
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
+    background-color: var(--cocso-color-surface-primary);
+    border: 1px solid var(--cocso-color-border-secondary);
     border-radius: var(--cocso-radius-3);
     box-shadow: var(--cocso-shadow-sm);
     animation-duration: 0.2s;
@@ -104,8 +104,8 @@
   .arrow {
     width: 10px;
     height: 10px;
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
+    background-color: var(--cocso-color-surface-primary);
+    border: 1px solid var(--cocso-color-border-secondary);
   }
 
   .arrow[data-side="bottom"] {

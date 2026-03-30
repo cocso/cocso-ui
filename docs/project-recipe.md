@@ -32,9 +32,49 @@ TypeScript (pure data — zero runtime dependencies)
 ## Out of Scope
 
 - CSS generation or class name generation (handled by `@cocso-ui/codegen`).
-- Recipes for structural-only components (Accordion, Tab, Tooltip, Popover, Dropdown, Toast, Field, OTPField). These components use spec-based Figma generation via `generateFromExtractedSpecs` instead.
-- Recipes for third-party wrappers (DayPicker, MonthPicker). Deferred pending evaluation of calendar grid extraction quality.
 - Figma resolver (`resolveForFigma` lives in `packages/figma/`, not here).
+
+## Recipe Fitness Evaluation (C1/C2/C3 Criteria)
+
+### Criteria
+
+| Criterion | Description | Required |
+|---|---|---|
+| C1: Visual variants | 2+ visual variant dimensions (color, size, shape) exist or are planned | Yes |
+| C2: CSS token references | CSS Module uses `var(--cocso-*)` tokens for visual properties | Yes |
+| C3: Slot/Variant pattern | Component structure expressible as single-slot + variant combinations | Yes |
+
+All three criteria must pass for a component to be eligible for a recipe. Components without recipes use spec-based Figma generation via `generateFromExtractedSpecs` instead.
+
+### Evaluation Results (10 components without recipes)
+
+| Component | C1 | C2 | C3 | Tokens | Verdict | Reason |
+|---|---|---|---|---|---|---|
+| tab | NO | NO | NO | 0 | Headless passthrough | Pure delegation to Tabs primitive, no visual layer |
+| toast | NO | NO | NO | 0 | Third-party re-export | Re-exports `{ Toaster, toast }` from sonner |
+| accordion | NO | PARTIAL (3) | PARTIAL | 3 | Structural-only | No variant dimensions; token coverage minimal (animation not tokenized) |
+| tooltip | NO | YES (11) | PARTIAL | 11 | Single-appearance overlay | Strong token coverage but single fixed appearance (dark pill), no variant axis |
+| popover | NO | YES (17) | PARTIAL | 17 | Single-appearance overlay | Strongest token coverage, single fixed appearance (light card), no variant axis |
+| dropdown | NO | YES (14) | PARTIAL | 14 | Single-appearance overlay | Good token coverage, single fixed appearance (light panel), no variant axis |
+| field | NO | YES (14) | PARTIAL | 14 | Composite with state | Error/default state-driven styling across multiple sub-elements, not a variant dimension |
+| one-time-password-field | NO | YES (11) | PARTIAL | 11 | Single-variant + state | Active/inactive state on slots, hardcoded sizing |
+| day-picker | NO | YES (20) | NO | 20 | Third-party wrapper | `:global()` overrides on react-datepicker DOM, not composable as recipe slots |
+| month-picker | NO | YES (20) | NO | 20 | Third-party wrapper | Same `:global()` pattern as day-picker |
+
+**Summary**: None of the 10 components pass C1+C2+C3 (all required). All remain out of scope for recipes with documented reasons. SSOT coverage remains 19/29 (65.5% total) / 19/19 (100% visual-recipe).
+
+### Re-evaluation Candidates
+
+- **tooltip, popover, dropdown**: Strong C2 coverage. If design adds variant dimensions (e.g., tooltip light/dark, popover size), these become immediate recipe candidates.
+- **field**: Error/default state could be modeled as a `status` variant if the component is refactored to single-slot styling.
+- **one-time-password-field**: If a `size` dimension is added, becomes eligible.
+
+### Deferred (structural blockers)
+
+- **day-picker, month-picker**: Require replacing `:global()` CSS overrides on react-datepicker with owned slot components before recipe work can begin.
+- **accordion**: Needs animation tokenization (replace bare `--accordion-panel-height` with `--cocso-*` token) and a visual variant dimension.
+- **tab**: Recipe should target the headless primitive library, not this passthrough wrapper.
+- **toast**: Owned by sonner; no visual surface to encode.
 
 ## Architecture
 

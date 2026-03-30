@@ -25,7 +25,8 @@
         "**/*.test.tsx",
         "**/*.test.ts",
         "**/*.spec.tsx",
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "apps/storybook/.storybook/test-runner.ts"
       ],
       "javascript": {
         "globals": [
@@ -41,6 +42,13 @@
           "suite",
           "expectTypeOf"
         ]
+      },
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noMisplacedAssertion": "off"
+          }
+        }
       }
     },
     {

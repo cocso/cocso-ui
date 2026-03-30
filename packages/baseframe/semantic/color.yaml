@@ -25,3 +25,67 @@ data:
     $color.text.tertiary:
       values:
         default: $color.neutral-400
+
+    # surface — background layer hierarchy
+    $color.surface.primary:
+      values:
+        default: $color.white
+    $color.surface.secondary:
+      values:
+        default: $color.neutral-50
+    $color.surface.inverse:
+      values:
+        default: $color.neutral-950
+
+    # border — container and separator strokes
+    $color.border.primary:
+      values:
+        default: $color.neutral-200
+    $color.border.secondary:
+      values:
+        default: $color.neutral-100
+
+    # interactive — actionable element fills across state variants
+    $color.interactive.primary:
+      values:
+        default: $color.primary-950
+    $color.interactive.primary-hover:
+      values:
+        default: $color.primary-800
+    $color.interactive.primary-active:
+      values:
+        default: $color.primary-700
+    $color.interactive.secondary:
+      values:
+        default: $color.neutral-100
+    $color.interactive.danger:
+      values:
+        default: $color.danger-500
+    $color.interactive.success:
+      values:
+        default: $color.success-500
+    $color.interactive.warning:
+      values:
+        default: $color.warning-500
+    $color.interactive.info:
+      values:
+        default: $color.info-500
+
+    # focus — focus indicator colors
+    $color.focus.ring:
+      values:
+        default: $color.primary-950
+
+    # feedback — status communication (errors, warnings, confirmations)
+    $color.feedback.danger:
+      values:
+        default: $color.danger-500
+    $color.feedback.success:
+      values:
+        default: $color.success-500
+    $color.feedback.warning:
+      values:
+        default: $color.warning-500
+    $color.feedback.info:
+      values:
+        default: $color.info-500

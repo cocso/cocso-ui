@@ -13,15 +13,21 @@ import { writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { RecipeDefinition } from "@cocso-ui/recipe";
+import { alertRecipe } from "@cocso-ui/recipe/recipes/alert.recipe";
+import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
+import { breadcrumbRecipe } from "@cocso-ui/recipe/recipes/breadcrumb.recipe";
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
+import { cardRecipe } from "@cocso-ui/recipe/recipes/card.recipe";
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
 import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
 import { paginationRecipe } from "@cocso-ui/recipe/recipes/pagination.recipe";
+import { progressRecipe } from "@cocso-ui/recipe/recipes/progress.recipe";
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
+import { skeletonRecipe } from "@cocso-ui/recipe/recipes/skeleton.recipe";
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
 import { stockQuantityStatusRecipe } from "@cocso-ui/recipe/recipes/stock-quantity-status.recipe";
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
@@ -114,6 +120,12 @@ const RECIPES: Record<string, RecipeEntry> = {
     recipe: stockQuantityStatusRecipe,
     phase: "extended",
   },
+  alert: { recipe: alertRecipe, phase: "extended" },
+  avatar: { recipe: avatarRecipe, phase: "extended" },
+  breadcrumb: { recipe: breadcrumbRecipe, phase: "extended" },
+  card: { recipe: cardRecipe, phase: "extended" },
+  progress: { recipe: progressRecipe, phase: "extended" },
+  skeleton: { recipe: skeletonRecipe, phase: "extended" },
 };
 
 // ---------------------------------------------------------------------------

@@ -43,6 +43,28 @@ packages/css/
 
 Token prefix convention: `--cocso-<category>-<scale>` (e.g. `--cocso-color-neutral-500`, `--cocso-color-white`).
 
+### Semantic Token Naming Convention
+
+Semantic tokens follow the pattern `--cocso-color-{category}-{role}` and map to exactly one primitive token in light mode.
+
+**Categories and roles:**
+
+| Category | Role examples | Purpose |
+|---|---|---|
+| `text` | `primary`, `secondary`, `tertiary` | Text and label colors |
+| `surface` | `primary`, `secondary`, `inverse` | Background layer hierarchy |
+| `border` | `primary`, `secondary` | Container and separator strokes |
+| `interactive` | `primary`, `primary-hover`, `primary-active`, `secondary`, `danger`, `success`, `warning`, `info` | Actionable element fills across state variants |
+| `focus` | `ring` | Focus indicator colors |
+| `feedback` | `danger`, `success`, `warning`, `info` | Status communication (errors, warnings, confirmations) |
+| `alpha` | `shadow1`, `shadow2`, `shadow3` | Semi-transparent overlay values |
+
+**Rules:**
+- Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, etc.
+- Each semantic token maps to exactly one primitive token in light mode.
+- Existing tokens (`text-primary/secondary/tertiary`, `alpha-shadow1/2/3`) remain unchanged and compatible.
+- Do not use numeric scales for semantic tokens (that is the primitive pattern).
+
 ## Interfaces
 
 Package exports:
@@ -76,8 +98,8 @@ pnpm --filter @cocso-ui/css lint
 
 ## Roadmap
 
-- Add semantic token layer (e.g. `--cocso-color-surface-primary`).
 - Document token inventory in `apps/website`.
+- Add dark mode overrides for semantic tokens via `@media (prefers-color-scheme: dark)` or a `.dark` class.
 
 ## Open Questions
 

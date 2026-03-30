@@ -3,7 +3,11 @@ import type {
   SlotStyles,
   StyleValue,
 } from "@cocso-ui/recipe";
-import { isColorToken, isCompoundBorder } from "@cocso-ui/recipe/utils";
+import {
+  FONT_WEIGHT_MAP,
+  isColorToken,
+  isCompoundBorder,
+} from "@cocso-ui/recipe/utils";
 import { categoryOf } from "@cocso-ui/recipe/utils/property-categories";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
@@ -170,6 +174,11 @@ function applyStringValue(
     value === "none" ||
     value === "inherit"
   ) {
+    return;
+  }
+
+  if (key === "fontWeight" && value in FONT_WEIGHT_MAP) {
+    spec[key] = FONT_WEIGHT_MAP[value as keyof typeof FONT_WEIGHT_MAP];
     return;
   }
 
