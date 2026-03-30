@@ -16,6 +16,7 @@ export interface Registry {
 
 export type ColorStrategy = "stroke" | "fill" | "mixed" | "hardcoded";
 
+/** Convert PascalCase to kebab-case: "ArrowDown" → "arrow-down". */
 export function pascalToKebab(str: string): string {
   return str
     .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
@@ -23,6 +24,7 @@ export function pascalToKebab(str: string): string {
     .toLowerCase();
 }
 
+/** Convert kebab-case to PascalCase: "arrow-down" → "ArrowDown". */
 export function kebabToPascal(str: string): string {
   return str
     .split("-")
@@ -32,6 +34,7 @@ export function kebabToPascal(str: string): string {
 
 const LEADING_DIGIT = /^\d/;
 
+/** Validate that a component name follows the PascalCase convention. */
 export function validateComponentName(name: string): void {
   if (LEADING_DIGIT.test(name)) {
     throw new Error(
@@ -40,6 +43,7 @@ export function validateComponentName(name: string): void {
   }
 }
 
+/** Detect whether an SVG icon uses currentColor or hardcoded fill colors. */
 export function detectColorStrategy(content: string): ColorStrategy {
   const hasStroke = content.includes('stroke="currentColor"');
   const hasFillCurrent = content.includes('fill="currentColor"');

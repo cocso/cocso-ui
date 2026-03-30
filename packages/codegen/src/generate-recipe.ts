@@ -1,3 +1,8 @@
+/**
+ * Recipe code generation engine.
+ * Generates CSS classes, className composition functions, and TypeScript
+ * type declarations from recipe definitions.
+ */
 import type { RecipeDefinition, SlotStyles, StyleValue } from "@cocso-ui/recipe";
 import { resolveStyleValue } from "@cocso-ui/recipe/resolvers/react";
 
