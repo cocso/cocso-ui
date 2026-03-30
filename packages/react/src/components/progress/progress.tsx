@@ -37,9 +37,9 @@ export function Progress({
 
   return (
     <div
-      aria-valuemax={max}
+      aria-valuemax={safeMax}
       aria-valuemin={0}
-      aria-valuenow={value}
+      aria-valuenow={Math.min(Math.max(0, value), safeMax)}
       className={cn(progress({ variant, size }), styles.track, className)}
       ref={ref}
       role="progressbar"
