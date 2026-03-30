@@ -212,3 +212,52 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+  visual-regression:
+    name: Visual Regression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Build Storybook
+        run: pnpm --filter @cocso-ui/storybook build
+
+      - name: Run Visual Regression Tests
+        run: |
+          npx serve apps/storybook/storybook-static -p 6006 &
+          npx wait-on http://localhost:6006 --timeout 60000
+          SNAPSHOT_COUNT=$(find apps/storybook/__snapshots__ -name "*.png" 2>/dev/null | wc -l)
+          if [ "$SNAPSHOT_COUNT" -eq 0 ]; then
+            echo "::warning::No baseline snapshots found. Run the 'Update Visual Regression Baselines' workflow to generate them."
+          else
+            pnpm --filter @cocso-ui/storybook test:visual -- --ci
+          fi
+
+      - name: Upload Diff Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-diffs
+          path: apps/storybook/__snapshots__/__diff_output__/
+          retention-days: 7

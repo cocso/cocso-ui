@@ -52,7 +52,6 @@ research/
 .npmrc
 *storybook.log
 storybook-static
-apps/storybook/__snapshots__/
 
 # Figma plugin generated tokens
 packages/figma/src/generated/tokens.json

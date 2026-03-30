@@ -84,10 +84,40 @@ pnpm build:storybook
 
 CI expects: `build` to pass.
 
+## Visual Regression Testing
+
+Visual regression tests run in CI via the `visual-regression` job in `.github/workflows/ci.yml`.
+
+### Architecture
+
+- **Test runner:** `@storybook/test-runner` with `jest-image-snapshot`
+- **Browser:** Playwright Chromium (pinned via lockfile)
+- **Threshold:** 0.01% pixel diff (configured in `.storybook/test-runner.ts`)
+- **Snapshots:** PNG files in `__snapshots__/`, committed to repo
+- **CI behavior:** `--ci` mode when baselines exist (fail on missing/diff); graceful skip when no baselines
+
+### Baseline Management
+
+Ubuntu-generated baselines are the source of truth. Use the `Update Visual Regression Baselines` workflow (`workflow_dispatch`) to generate or update baselines:
+
+1. Go to Actions → "Update Visual Regression Baselines"
+2. Select target branch
+3. Workflow generates baselines on Ubuntu and auto-commits
+
+Local (macOS) visual tests are advisory only — font rasterizer differences (Core Text vs FreeType) may cause false positives.
+
+### Scripts
+
+| Command | Description |
+|---|---|
+| `pnpm --filter @cocso-ui/storybook test:visual` | Run visual tests locally |
+| `pnpm --filter @cocso-ui/storybook test:visual -- --updateSnapshot` | Update local baselines |
+| `pnpm --filter @cocso-ui/storybook test:visual -- --ci` | CI mode (fail on missing baselines) |
+
 ## Roadmap
 
-- Add visual regression testing (e.g. Chromatic).
 - Achieve full story coverage for all `@cocso-ui/react` components.
+- Evaluate cloud-based visual regression service (Chromatic/Argos) when snapshot count exceeds 200.
 
 ## Open Questions
 
