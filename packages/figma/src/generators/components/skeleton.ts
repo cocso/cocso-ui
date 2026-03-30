@@ -24,9 +24,9 @@ export function generateSkeletonSection(container: FrameNode): void {
       return createComponentFromSpec(
         `${variantVal}-${animationVal}`,
         spec,
-        "Skeleton",
+        "Skeleton"
       );
-    },
+    }
   );
   section.appendChild(matrixGrid);
   container.appendChild(section);

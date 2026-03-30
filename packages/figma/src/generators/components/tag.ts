@@ -21,12 +21,8 @@ export function generateTagSection(container: FrameNode): void {
         variant: variantVal,
         size: sizeVal,
       });
-      return createComponentFromSpec(
-        `${variantVal}-${sizeVal}`,
-        spec,
-        "Tag",
-      );
-    },
+      return createComponentFromSpec(`${variantVal}-${sizeVal}`, spec, "Tag");
+    }
   );
   section.appendChild(matrixGrid);
   container.appendChild(section);

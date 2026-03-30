@@ -18,7 +18,7 @@ export function generateAlertSection(container: FrameNode): void {
     (variantVal) => {
       const spec = lookupSpec(json, alertRecipe, { variant: variantVal });
       return createComponentFromSpec(`${variantVal}`, spec, "Alert");
-    },
+    }
   );
   section.appendChild(matrixGrid);
   container.appendChild(section);

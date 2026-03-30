@@ -21,12 +21,8 @@ export function generateAvatarSection(container: FrameNode): void {
         size: sizeVal,
         shape: shapeVal,
       });
-      return createComponentFromSpec(
-        `${shapeVal}-${sizeVal}`,
-        spec,
-        "Avatar",
-      );
-    },
+      return createComponentFromSpec(`${shapeVal}-${sizeVal}`, spec, "Avatar");
+    }
   );
   section.appendChild(matrixGrid);
 

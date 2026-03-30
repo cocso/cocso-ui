@@ -18,7 +18,7 @@ export function generateBreadcrumbSection(container: FrameNode): void {
     (sizeVal) => {
       const spec = lookupSpec(json, breadcrumbRecipe, { size: sizeVal });
       return createComponentFromSpec(`${sizeVal}`, spec, "Breadcrumb");
-    },
+    }
   );
   section.appendChild(matrixGrid);
   container.appendChild(section);

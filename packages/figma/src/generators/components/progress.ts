@@ -18,7 +18,7 @@ export function generateProgressSection(container: FrameNode): void {
     (sizeVal) => {
       const spec = lookupSpec(json, progressRecipe, { size: sizeVal });
       return createComponentFromSpec(`${sizeVal}`, spec, "Progress");
-    },
+    }
   );
   section.appendChild(matrixGrid);
   container.appendChild(section);
