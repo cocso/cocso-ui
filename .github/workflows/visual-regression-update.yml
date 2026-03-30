@@ -36,18 +36,22 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - name: Install Playwright Chromium
+        working-directory: apps/storybook
         run: npx playwright install chromium --with-deps
 
       - name: Build Storybook
-        run: pnpm --filter @cocso-ui/storybook build
+        run: pnpm turbo run build --filter=@cocso-ui/storybook
 
       - name: Generate Baselines
+        working-directory: apps/storybook
         run: |
-          npx serve apps/storybook/storybook-static -p 6006 &
+          npx serve storybook-static -p 6006 &
           npx wait-on http://localhost:6006 --timeout 60000
-          pnpm --filter @cocso-ui/storybook test:visual -- --updateSnapshot
+          pnpm test:visual -- --updateSnapshot
 
       - name: Commit Baselines
         run: |
