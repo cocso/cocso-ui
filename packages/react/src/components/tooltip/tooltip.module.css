@@ -59,8 +59,8 @@
     color: var(--cocso-color-surface-primary);
     background-color: var(--cocso-color-surface-inverse);
     border-radius: var(--cocso-radius-2);
-    animation-duration: 0.15s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-duration: var(--cocso-duration-fast);
+    animation-timing-function: var(--cocso-easing-entrance);
     will-change: transform, opacity;
   }
 

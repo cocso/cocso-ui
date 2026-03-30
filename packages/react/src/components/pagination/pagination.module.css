@@ -24,7 +24,7 @@
     cursor: pointer;
     background-color: var(--cocso-pagination-bg-color);
     border-radius: var(--cocso-radius-4);
-    transition: transform 0.15s ease-in-out;
+    transition: transform var(--cocso-duration-fast) var(--cocso-easing-default);
     will-change: transform;
   }
 

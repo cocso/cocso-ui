@@ -59,9 +59,9 @@
     background-color: var(--cocso-color-surface-primary);
     border: 1px solid var(--cocso-color-border-secondary);
     border-radius: var(--cocso-radius-3);
-    box-shadow: var(--cocso-shadow-sm);
-    animation-duration: 0.2s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--cocso-shadow-popover);
+    animation-duration: var(--cocso-duration-normal);
+    animation-timing-function: var(--cocso-easing-entrance);
     will-change: transform, opacity;
   }
 

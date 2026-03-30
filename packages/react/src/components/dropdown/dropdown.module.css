@@ -40,9 +40,9 @@
     background-color: var(--cocso-color-surface-primary);
     border: 1px solid var(--cocso-color-border-secondary);
     border-radius: var(--cocso-radius-3);
-    box-shadow: var(--cocso-shadow-sm);
-    animation-duration: 0.2s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--cocso-shadow-dropdown);
+    animation-duration: var(--cocso-duration-normal);
+    animation-timing-function: var(--cocso-easing-entrance);
     will-change: transform, opacity;
   }
 
@@ -68,8 +68,8 @@
     cursor: pointer;
     border-radius: var(--cocso-radius-3);
     transition:
-      background-color 0.15s ease,
-      scale 0.15s ease;
+      background-color var(--cocso-duration-fast) var(--cocso-easing-soft),
+      scale var(--cocso-duration-fast) var(--cocso-easing-soft);
   }
 
   .prefix {

@@ -33,7 +33,7 @@
     box-shadow:
       0 0 0 1px var(--cocso-color-neutral-100),
       var(--cocso-shadow-xs);
-    transition: box-shadow 0.15s ease;
+    transition: box-shadow var(--cocso-duration-fast) var(--cocso-easing-soft);
   }
 
   .select:focus-visible {

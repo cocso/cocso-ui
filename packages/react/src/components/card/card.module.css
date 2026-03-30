@@ -9,6 +9,6 @@
   }
 
   .elevated {
-    box-shadow: var(--cocso-shadow-sm);
+    box-shadow: var(--cocso-shadow-card);
   }
 }

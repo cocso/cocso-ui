@@ -7,7 +7,8 @@
   }
 
   .pulse {
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    animation: skeleton-pulse var(--cocso-duration-decorative-slow)
+      var(--cocso-easing-default) infinite;
   }
 
   .wave {
@@ -25,7 +26,8 @@
       rgb(255 255 255 / 0.4),
       transparent
     );
-    animation: skeleton-wave 1.5s ease-in-out infinite;
+    animation: skeleton-wave var(--cocso-duration-decorative-slow)
+      var(--cocso-easing-default) infinite;
   }
 
   @keyframes skeleton-pulse {
