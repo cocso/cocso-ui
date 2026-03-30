@@ -8,8 +8,9 @@
  * Usage: pnpm --filter @cocso-ui/codegen generate
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { alertRecipe } from "@cocso-ui/recipe/recipes/alert.recipe";
 import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
@@ -125,7 +126,5 @@ export function generate(outDir = DEFAULT_OUT_DIR) {
 const isDirectRun =
   typeof process !== "undefined" &&
   process.argv[1] &&
-  new URL(import.meta.url).pathname.endsWith(
-    process.argv[1].replace(/\\/g, "/"),
-  );
+  fileURLToPath(import.meta.url) === process.argv[1];
 if (isDirectRun) generate();
