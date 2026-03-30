@@ -100,6 +100,7 @@ When asked to review comments on a GitHub PR:
 - React components MUST NOT re-export types via `export type { X } from "@cocso-ui/codegen/..."`. Since codegen is a devDependency, such re-exports leak unresolvable bare specifiers into published `.d.ts` files. Inline the type aliases instead.
 - New components with visual variants MUST define a recipe first, then generate codegen artifacts.
 - CI enforces codegen freshness: stale generated files will fail the build.
+- Variant dimension names MUST be single camelCase words without dashes (e.g., `fontSize`, not `font-size`). The codegen parity test parser splits CSS class names on the first dash to separate dimension from value.
 
 ### API Contract Rules
 

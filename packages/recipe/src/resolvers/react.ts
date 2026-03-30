@@ -12,6 +12,14 @@ import {
   isCompoundBorder,
 } from "../utils/token-classification";
 
+// Minimal type declarations for environment-agnostic package.
+declare const console: { warn(...args: unknown[]): void };
+
+// Potential token reference pattern: hyphenated identifiers that look like
+// misspelled color/radius/spacing tokens (e.g., "primay-950", "nutral-100").
+// CSS keywords like "auto", "inline-flex", "pointer" do NOT match this.
+const POTENTIAL_TOKEN_RE = /^[a-z]+-\d/;
+
 export function resolveStyleValue(value: StyleValue): string {
   if (typeof value === "number") {
     return `${value}px`;
@@ -37,6 +45,12 @@ function resolveStringValue(value: string): string {
   }
   if (value.startsWith("radius-") || value.startsWith("spacing-")) {
     return `var(--cocso-${value})`;
+  }
+  if (POTENTIAL_TOKEN_RE.test(value)) {
+    console.warn(
+      `[cocso-ui/recipe] Unrecognized style value: "${value}". ` +
+        "Expected color token, radius, spacing, fontWeight, or CSS literal."
+    );
   }
   return value;
 }

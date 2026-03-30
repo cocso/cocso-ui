@@ -45,6 +45,16 @@ const ALL_RECIPES = [
 ];
 
 function generate() {
+  // Pre-validate all recipes before writing any files to prevent partial writes.
+  for (const recipe of ALL_RECIPES) {
+    if (recipe.slots.length > 1) {
+      throw new Error(
+        `[codegen] Recipe "${recipe.name}" has ${recipe.slots.length} slots (${recipe.slots.join(", ")}). ` +
+          "Multi-slot codegen is not yet supported. Use single-slot with CSS module sub-element styling.",
+      );
+    }
+  }
+
   mkdirSync(GENERATED_DIR, { recursive: true });
 
   let totalCSS = 0;

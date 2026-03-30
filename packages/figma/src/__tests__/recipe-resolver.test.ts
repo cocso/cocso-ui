@@ -42,9 +42,9 @@ describe("resolveColorToken", () => {
     expect(direct).toEqual(shorthand);
   });
 
-  it("falls back to black for unknown token", () => {
+  it("falls back to magenta for unknown token", () => {
     const rgb = resolveColorToken("does-not-exist-999");
-    expect(rgb).toEqual({ r: 0, g: 0, b: 0 });
+    expect(rgb).toEqual({ r: 1, g: 0, b: 1 });
   });
 });
 

@@ -91,6 +91,11 @@ function cascadeForCombo(
     if (selector.includes(":")) continue;
     const modifiers = selector.split(`.${name}--`).slice(1);
     if (modifiers.length < 2) continue;
+    // NOTE: This parser splits on the first dash to separate dimension from
+    // value (e.g., "variant-primary" → dim="variant", val="primary").
+    // This works because dimension names are single camelCase words (no dashes).
+    // Variant values may contain dashes (e.g., "x-small" → dim="size", val="x-small").
+    // Convention enforced by defineRecipe() in @cocso-ui/recipe.
     const allMatch = modifiers.every((mod) => {
       const dashIdx = mod.indexOf("-");
       if (dashIdx === -1) return false;
