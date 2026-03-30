@@ -58,7 +58,12 @@ function createRadioFromSpec(name: string, spec: FigmaNodeSpec): ComponentNode {
 
   component.appendChild(circle);
 
-  const labelText = createTextNode("Label", LABEL_FONT_SIZE, LABEL_FONT_WEIGHT, COLORS.neutral900);
+  const labelText = createTextNode(
+    "Label",
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
+    COLORS.neutral900
+  );
   component.appendChild(labelText);
 
   return component;

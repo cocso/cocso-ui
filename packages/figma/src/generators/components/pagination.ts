@@ -4,6 +4,7 @@ import {
   createIcon,
   createTextNode,
   createVariantRow,
+  DISABLED_OPACITY,
   ICON_SVGS,
   rgbToHex,
   setFill,
@@ -70,7 +71,7 @@ function createPaginationArrow(
   component.appendChild(icon);
 
   if (isDisabled) {
-    component.opacity = 0.4;
+    component.opacity = DISABLED_OPACITY;
   }
 
   return component;

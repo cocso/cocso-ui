@@ -104,7 +104,14 @@ export function generateSwitchSection(container: FrameNode): void {
     wrapper.fills = [];
 
     wrapper.appendChild(createSwitchFromSpec(`checked=${checked}`, spec));
-    wrapper.appendChild(createTextNode("Label", LABEL_FONT_SIZE, LABEL_FONT_WEIGHT, COLORS.neutral900));
+    wrapper.appendChild(
+      createTextNode(
+        "Label",
+        LABEL_FONT_SIZE,
+        LABEL_FONT_WEIGHT,
+        COLORS.neutral900
+      )
+    );
     labelRow.appendChild(wrapper);
   }
   section.appendChild(labelRow);

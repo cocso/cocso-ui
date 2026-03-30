@@ -73,7 +73,11 @@ export function generateLinkSection(container: FrameNode): void {
   );
   extText.textDecoration = "UNDERLINE";
   extComponent.appendChild(extText);
-  const extIcon = createIcon(ICON_SVGS.externalLink, LABEL_FONT_SIZE, rgbToHex(extColor));
+  const extIcon = createIcon(
+    ICON_SVGS.externalLink,
+    LABEL_FONT_SIZE,
+    rgbToHex(extColor)
+  );
   extComponent.appendChild(extIcon);
   externalRow.appendChild(extComponent);
   section.appendChild(externalRow);

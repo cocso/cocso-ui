@@ -67,7 +67,12 @@ function createCheckboxFromSpec(
     box.appendChild(icon);
   }
 
-  const labelText = createTextNode("Label", LABEL_FONT_SIZE, LABEL_FONT_WEIGHT, COLORS.neutral900);
+  const labelText = createTextNode(
+    "Label",
+    LABEL_FONT_SIZE,
+    LABEL_FONT_WEIGHT,
+    COLORS.neutral900
+  );
 
   component.appendChild(box);
   component.appendChild(labelText);
