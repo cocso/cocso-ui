@@ -1,7 +1,7 @@
-import type { TestRunnerConfig } from "@storybook/test-runner";
-import { waitForPageReady } from "@storybook/test-runner";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import type { TestRunnerConfig } from "@storybook/test-runner";
+import { waitForPageReady } from "@storybook/test-runner";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 
 const config: TestRunnerConfig = {
