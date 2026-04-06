@@ -161,8 +161,8 @@ function splitIntoSections(md: string): MdSection[] {
       sections.push({ title: parts[i].trim(), content: "" });
     } else {
       sections.push({
-        title: parts[i].substring(0, newlineIdx).trim(),
-        content: parts[i].substring(newlineIdx + 1).trim(),
+        title: parts[i].slice(0, newlineIdx).trim(),
+        content: parts[i].slice(newlineIdx + 1).trim(),
       });
     }
   }
