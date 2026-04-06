@@ -1,0 +1,60 @@
+---
+title: Breadcrumb
+description: A navigation hierarchy indicator that shows the user's current location within the site.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Breadcrumb renders an ordered list of navigation links separated by a configurable separator. It marks the current page as the last item and wraps the list in a <code>&lt;nav&gt;</code> element for accessibility.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Pass anchor elements (<code>&lt;a&gt;</code>) for navigable ancestors and a <code>&lt;span&gt;</code> for the current page.</Section.ListItem>
+    <Section.ListItem>The last child is automatically styled as the active page and receives no separator after it.</Section.ListItem>
+    <Section.ListItem>Override the separator via the <code>separator</code> prop — use a string (e.g., <code>"/"</code>) or any ReactNode.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>The wrapping <code>&lt;nav&gt;</code> element has <code>aria-label="Breadcrumb"</code> so screen readers identify the landmark.</Section.ListItem>
+    <Section.ListItem>Separators are hidden from assistive technologies via <code>aria-hidden="true"</code>.</Section.ListItem>
+    <Section.ListItem>Mark the current page with <code>aria-current="page"</code> on the last item for screen reader users.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Breadcrumb } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Basic breadcrumb with the default chevron separator.</Section.Text>
+  <ComponentExample name="breadcrumb-default" />
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>Three sizes are available: <code>sm</code>, <code>md</code>, and <code>lg</code>. The default is <code>md</code>.</Section.Text>
+  <ComponentExample name="breadcrumb-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Breadcrumb</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Controls the font size of the breadcrumb items." },
+      { name: "separator", type: "ReactNode", default: "<ChevronRightIcon />", description: "The separator element rendered between each breadcrumb item. Pass a string or any React element." },
+      { name: "children", type: "ReactNode", required: true, description: "The breadcrumb items. Pass anchor elements for navigable ancestors and a span for the current page." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
