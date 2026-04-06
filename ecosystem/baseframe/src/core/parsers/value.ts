@@ -175,7 +175,7 @@ function parseTokenRef(value: string): ParseResult {
     return { isValid: false, error: `Invalid token reference: ${value}` };
   }
 
-  const clean = value.substring(1);
+  const clean = value.slice(1);
   const parts = clean.split(".");
 
   if (parts.length < 2) {

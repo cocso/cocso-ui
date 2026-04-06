@@ -19,25 +19,25 @@
     "@cocso-ui/react": "workspace:^",
     "@cocso-ui/react-icons": "workspace:^",
     "@modelcontextprotocol/sdk": "1.26.0",
-    "@suspensive/react": "^3.19.2",
+    "@suspensive/react": "^3.20.2",
     "flexsearch": "^0.8.212",
-    "fumadocs-core": "^16.6.16",
-    "fumadocs-mdx": "^14.2.9",
-    "fumadocs-ui": "^16.6.16",
+    "fumadocs-core": "^16.7.10",
+    "fumadocs-mdx": "^14.2.11",
+    "fumadocs-ui": "^16.7.10",
     "mcp-handler": "^1.1.0",
-    "next": "^16.1.6",
-    "posthog-js": "^1.360.1",
+    "next": "^16.2.2",
+    "posthog-js": "^1.364.7",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^25.4.0",
+    "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
   }
 }
