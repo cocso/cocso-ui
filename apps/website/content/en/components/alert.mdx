@@ -1,0 +1,63 @@
+---
+title: Alert
+description: A contextual feedback message that communicates status or important information.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Alert renders a contextual feedback banner with four semantic variants. It supports an optional icon slot and a dismiss button for transient notifications.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>info</code> for neutral informational messages.</Section.ListItem>
+    <Section.ListItem>Use <code>success</code> to confirm a completed action.</Section.ListItem>
+    <Section.ListItem>Use <code>warning</code> to communicate a potential problem or caution.</Section.ListItem>
+    <Section.ListItem>Use <code>error</code> to signal a failure or destructive condition.</Section.ListItem>
+    <Section.ListItem>Provide <code>onClose</code> to add a dismiss button for transient alerts.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Alert renders with <code>role="alert"</code>, which causes screen readers to announce the content immediately when it appears.</Section.ListItem>
+    <Section.ListItem>The close button has a built-in <code>aria-label="Close"</code>. Override it when additional context helps screen reader users (e.g., <code>"Dismiss warning"</code>).</Section.ListItem>
+    <Section.ListItem>For persistent alerts that should not interrupt the reading flow, consider <code>role="status"</code> via the HTML <code>role</code> prop instead.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Alert } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>All four semantic variants in their default appearance.</Section.Text>
+  <ComponentExample name="alert-default" />
+</Section>
+
+<Section>
+  <Section.Title>With Close Button</Section.Title>
+  <Section.Text>Pass an <code>onClose</code> callback to render a dismiss button inside the alert.</Section.Text>
+  <ComponentExample name="alert-variants" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Alert</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"info" | "success" | "warning" | "error"', default: '"info"', description: "Controls the background color and icon color to communicate semantic meaning." },
+      { name: "icon", type: "ReactNode", description: "Optional icon element rendered before the content. Use an icon from `@cocso-ui/react-icons` that matches the variant." },
+      { name: "onClose", type: "() => void", description: "When provided, renders a close button. Call this to remove or hide the alert from the UI." },
+      { name: "children", type: "ReactNode", required: true, description: "The alert message content." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

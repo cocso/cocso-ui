@@ -1,0 +1,60 @@
+---
+title: Breadcrumb
+description: 사이트 내 사용자의 현재 위치를 보여주는 탐색 계층 표시기입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Breadcrumb는 설정 가능한 구분자로 구분된 탐색 링크의 정렬된 목록을 렌더링합니다. 현재 페이지를 마지막 항목으로 표시하고 목록을 접근성을 위한 <code>&lt;nav&gt;</code> 요소로 감쌉니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>탐색 가능한 상위 항목에는 앵커 요소(<code>&lt;a&gt;</code>)를, 현재 페이지에는 <code>&lt;span&gt;</code>을 전달하세요.</Section.ListItem>
+    <Section.ListItem>마지막 자식은 자동으로 활성 페이지로 스타일링되며 뒤에 구분자가 렌더링되지 않습니다.</Section.ListItem>
+    <Section.ListItem><code>separator</code> prop으로 구분자를 재정의할 수 있습니다 — 문자열(예: <code>"/"</code>) 또는 ReactNode를 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>감싸는 <code>&lt;nav&gt;</code> 요소에 <code>aria-label="Breadcrumb"</code>가 있어 스크린 리더가 랜드마크를 식별합니다.</Section.ListItem>
+    <Section.ListItem>구분자는 <code>aria-hidden="true"</code>로 보조 기술에서 숨겨집니다.</Section.ListItem>
+    <Section.ListItem>스크린 리더 사용자를 위해 마지막 항목에 <code>aria-current="page"</code>를 표시하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Breadcrumb } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 chevron 구분자를 사용하는 기본 브레드크럼입니다.</Section.Text>
+  <ComponentExample name="breadcrumb-default" />
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>세 가지 크기를 사용할 수 있습니다: <code>sm</code>, <code>md</code>, <code>lg</code>. 기본값은 <code>md</code>입니다.</Section.Text>
+  <ComponentExample name="breadcrumb-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Breadcrumb</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "브레드크럼 항목의 폰트 크기를 제어합니다." },
+      { name: "separator", type: "ReactNode", default: "<ChevronRightIcon />", description: "각 브레드크럼 항목 사이에 렌더링되는 구분자 요소입니다. 문자열 또는 React 요소를 전달하세요." },
+      { name: "children", type: "ReactNode", required: true, description: "브레드크럼 항목들입니다. 탐색 가능한 상위 항목에는 앵커 요소를, 현재 페이지에는 span을 전달하세요." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>
