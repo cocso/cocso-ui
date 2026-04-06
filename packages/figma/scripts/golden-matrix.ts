@@ -267,9 +267,9 @@ function classifyRadius(
     figmaValue,
     category: expected === figmaValue ? "EQUIVALENT" : "VALUE_MISMATCH",
     note:
-      expected !== figmaValue
-        ? `token "${token}" → expected ${expected}, got ${figmaValue}`
-        : undefined,
+      expected === figmaValue
+        ? undefined
+        : `token "${token}" → expected ${expected}, got ${figmaValue}`,
   };
 }
 

@@ -72,7 +72,7 @@ export function parseRgba(str: string): FigmaColorValue {
     r: Number(m[1]) / 255,
     g: Number(m[2]) / 255,
     b: Number(m[3]) / 255,
-    a: m[4] !== undefined ? Number(m[4]) : 1,
+    a: m[4] === undefined ? 1 : Number(m[4]),
   };
 }
 

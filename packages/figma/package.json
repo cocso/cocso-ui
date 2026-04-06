@@ -26,19 +26,19 @@
   "devDependencies": {
     "@cocso-ui/css": "workspace:*",
     "@cocso-ui/react": "workspace:*",
-    "@figma/plugin-typings": "^1.121.0",
+    "@figma/plugin-typings": "^1.124.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^4.5.2",
-    "@vitest/coverage-v8": "^4.0.18",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.2",
     "esbuild": "^0.27.3",
-    "playwright": "^1.52.0",
+    "playwright": "^1.59.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.0.0",
-    "vitest": "^4.0.18"
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.2"
   }
 }
