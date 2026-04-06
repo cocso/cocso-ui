@@ -1,8 +1,8 @@
 ## `@cocso-ui/website`
 
-이 Package는 cocso 디자인 시스템의 공개 문서 사이트를 제공해요.
+이 Package는 cocso 디자인 시스템의 공개 문서 사이트를 제공합니다.
 
-Next.js 16과 fumadocs 기반으로 컴포넌트 가이드, 디자인 토큰 레퍼런스, 시작 가이드를 제공해요.
+Next.js 16과 fumadocs 기반으로 컴포넌트 가이드, 디자인 토큰 레퍼런스, 시작 가이드를 제공합니다.
 
 ### Usage
 

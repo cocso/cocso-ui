@@ -1,14 +1,14 @@
 ## `@cocso-ui/baseframe`
 
-YAML design token definitions을 읽어 CSS custom properties와 TailwindCSS v4 테마 파일을 생성하는 CLI 도구에요.
+YAML design token definitions을 읽어 CSS custom properties와 TailwindCSS v4 테마 파일을 생성하는 CLI 도구입니다.
 
-COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실의 원천(source of truth)으로 사용하고 있어요.
+COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실의 원천(source of truth)으로 사용합니다.
 
 <br />
 
 ### 2-Layer Architecture
 
-두 개의 CSS 레이어로 design token을 제공해요.
+두 개의 CSS 레이어로 design token을 제공합니다.
 
 **Layer 1 — `token.css` (Design System variables)**
 
@@ -19,7 +19,7 @@ COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실
 }
 ```
 
-`--cocso-*` 네임스페이스로 직접 참조할 수 있어요. `packages/react/` 컴포넌트에서 사용해요.
+`--cocso-*` 네임스페이스로 직접 참조할 수 있습니다. `packages/react/` 컴포넌트에서 사용합니다.
 
 **Layer 2 — `tailwind4.css` (TailwindCSS namespace mapping)**
 
@@ -32,8 +32,8 @@ COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실
 @utility z-* { z-index: --value(--z-index-*); }
 ```
 
-TailwindCSS v4 표준 네임스페이스(`--color-*`, `--font-weight-*`, `--shadow-*`)로 매핑해요.
-`--z-index-*`는 비표준이므로 `@utility`로 명시 등록해요.
+TailwindCSS v4 표준 네임스페이스(`--color-*`, `--font-weight-*`, `--shadow-*`)로 매핑합니다.
+`--z-index-*`는 비표준이므로 `@utility`로 명시 등록합니다.
 
 <br />
 

@@ -1,8 +1,8 @@
 ## `@cocso-ui/icons`
 
-이 Package는 cocso 디자인 시스템의 SVG 아이콘 원본 소스와 빌드 파이프라인을 제공해요.
+이 Package는 cocso 디자인 시스템의 SVG 아이콘 원본 소스와 빌드 파이프라인을 제공합니다.
 
-`@cocso-ui/react-icons`와 `@cocso-ui/figma`가 이 패키지에서 생성된 산출물을 소비해요.
+`@cocso-ui/react-icons`와 `@cocso-ui/figma`가 이 패키지에서 생성된 산출물을 소비합니다.
 
 ### Usage
 

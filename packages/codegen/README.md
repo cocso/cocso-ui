@@ -1,8 +1,8 @@
 ## `@cocso-ui/codegen`
 
-이 Package는 [@cocso-ui/recipe](../recipe) 정의로부터 빌드 타임에 CSS 클래스, className 함수, TypeScript 타입을 생성해요.
+이 Package는 [@cocso-ui/recipe](../recipe) 정의로부터 빌드 타임에 CSS 클래스, className 함수, TypeScript 타입을 생성합니다.
 
-생성된 산출물은 `@cocso-ui/react` 컴포넌트가 런타임 없이 스타일을 적용할 수 있게 해요.
+생성된 산출물은 `@cocso-ui/react` 컴포넌트가 런타임 없이 스타일을 적용할 수 있게 합니다.
 
 ### Usage
 
@@ -14,7 +14,7 @@ pnpm --filter @cocso-ui/codegen generate
 pnpm --filter @cocso-ui/codegen test
 ```
 
-생성된 파일은 아래와 같이 import 할 수 있어요.
+생성된 파일은 아래와 같이 import 할 수 있습니다.
 
 ```typescript
 import { button } from '@cocso-ui/codegen/generated/button';
