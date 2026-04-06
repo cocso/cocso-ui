@@ -35,16 +35,13 @@ const categorizeIcons = () => {
   const categories: { [key: string]: { [key: string]: React.ComponentType<IconProps> } } = {
     brand: {},
     semantic: {},
-    graphic: {},
     other: {},
   };
 
   Object.entries(icons).forEach(([name, component]) => {
     if (name.includes('Logo') && !name.includes('Vertical')) {
       categories.brand[name] = component;
-    } else if (name.includes('Vertical') || name.includes('Phone')) {
-      categories.graphic[name] = component;
-    } else if (name.includes('Icon') && !name.includes('Phone')) {
+    } else if (name.includes('Icon')) {
       categories.semantic[name] = component;
     } else {
       categories.other[name] = component;
@@ -168,13 +165,3 @@ export const SemanticIcons: Story = {
   },
 };
 
-export const GraphicIcons: Story = {
-  render: () => {
-    const { graphic } = categorizeIcons();
-    return (
-      <div style={{ width: '100%', maxWidth: '1200px' }}>
-        <IconGrid icons={graphic} showNames={true} size={32} title="Graphic Icons" />
-      </div>
-    );
-  },
-};
