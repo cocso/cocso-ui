@@ -304,6 +304,9 @@ jobs:
             done
           fi
 
+          # Prevent Vercel from deploying this screenshots-only branch
+          echo '{"ignoreCommand":"exit 0"}' > "$STAGING/vercel.json"
+
           cd "$STAGING"
           git init
           git config user.name "github-actions[bot]"
