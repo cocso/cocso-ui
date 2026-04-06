@@ -15,7 +15,7 @@ interface TokenTableProps extends ComponentProps<"div"> {
 export const TokenTable = ({ data, className, ...props }: TokenTableProps) => {
   return (
     <div className={twMerge("w-full overflow-x-auto", className)} {...props}>
-      <table className="w-full border-collapse text-sm">
+      <table className="w-full border-collapse text-[11px]">
         <thead>
           <tr className="border-neutral-200 border-b text-left">
             <th className="whitespace-nowrap px-3 py-2 font-semibold text-neutral-950">
@@ -39,17 +39,17 @@ export const TokenTable = ({ data, className, ...props }: TokenTableProps) => {
               key={token.name}
             >
               <td className="px-3 py-2.5 align-middle">
-                <code className="rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[13px] text-neutral-900">
+                <code className="rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[11px] text-neutral-900">
                   {token.name}
                 </code>
               </td>
               <td className="px-3 py-2.5 align-middle">
-                <code className="font-mono text-[13px] text-info-600">
+                <code className="font-mono text-[11px] text-info-600">
                   {token.token}
                 </code>
               </td>
               <td className="px-3 py-2.5 align-middle">
-                <code className="font-mono text-[13px] text-neutral-600">
+                <code className="font-mono text-[11px] text-neutral-600">
                   {token.value}
                 </code>
               </td>
