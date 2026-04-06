@@ -25,3 +25,7 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# Visual regression CI artifacts (generated per-run, never committed)
+__snapshots__/__current__/
+__snapshots__/__diff_output__/
