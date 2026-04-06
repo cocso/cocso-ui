@@ -13,34 +13,11 @@ on:
       - opened
       - synchronize
       - reopened
-      - closed
 
 jobs:
-  cleanup-vr-branches:
-    name: Cleanup VR Screenshot Branches
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    permissions:
-      contents: write
-    steps:
-      - name: Delete vr-screenshots branches for this PR
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.number }}
-        run: |
-          gh api repos/${{ github.repository }}/git/refs \
-            --paginate \
-            --jq '.[] | select(.ref | startswith("refs/heads/vr-screenshots-'"${PR_NUMBER}"'-")) | .ref' \
-          | while read ref; do
-              branch="${ref#refs/heads/}"
-              echo "Deleting branch: $branch"
-              gh api --method DELETE "repos/${{ github.repository }}/git/refs/heads/$branch" || true
-            done
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -62,7 +39,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     permissions:
       contents: read
       pull-requests: write
@@ -196,7 +172,6 @@ jobs:
   icons:
     name: Icon Validation
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -224,7 +199,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -246,7 +220,6 @@ jobs:
   visual-regression:
     name: Visual Regression
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     permissions:
       contents: write
       pull-requests: write
