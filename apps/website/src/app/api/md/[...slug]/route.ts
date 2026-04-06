@@ -14,6 +14,7 @@ const SECTION_TEXT_RE = /<Section\.Text>\s*([\s\S]*?)\s*<\/Section\.Text>/g;
 const SECTION_LIST_ITEM_RE =
   /<Section\.ListItem>([\s\S]*?)<\/Section\.ListItem>/g;
 const PROPS_TABLE_RE = /<PropsTable\s+data=\{(\[[\s\S]*?\])\}\s*\/>/g;
+const JSX_STRING_EXPR_RE = /\{"([^"\\]*)"\}/g;
 const SECTION_WRAPPER_RE = /<\/?Section(?:\.[A-Za-z]+)?>/g;
 const COMPONENT_EXAMPLE_OPEN_RE = /<ComponentExample[^>]*>/g;
 const COMPONENT_EXAMPLE_CLOSE_RE = /<\/ComponentExample>/g;
@@ -129,6 +130,7 @@ async function mdxToMarkdown(raw: string): Promise<string> {
   md = md.replace(PAGE_NAV_RE, "");
 
   md = md.replace(/<\/?[A-Z][A-Za-z.]*(?:\s[^>]*)?\/?>/g, "");
+  md = md.replace(JSX_STRING_EXPR_RE, "$1");
   md = md.replace(JSX_INDENT_RE, "");
 
   md = md.replace(
