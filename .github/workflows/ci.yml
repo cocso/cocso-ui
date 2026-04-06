@@ -267,14 +267,13 @@ jobs:
 
       - name: Push Screenshots to Branch
         id: push-screenshots
-        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true' && steps.vr-test.outcome == 'success'
+        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
-          RUN_ID: ${{ github.run_id }}
         run: |
-          BRANCH="vr-screenshots-${PR_NUMBER}-${RUN_ID}"
+          BRANCH="vr-screenshots-${PR_NUMBER}"
           SNAPSHOTS="apps/storybook/__snapshots__"
 
           STAGING=$(mktemp -d)
@@ -314,23 +313,21 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add .
-          git commit -m "vr: screenshots for PR #${PR_NUMBER} run ${RUN_ID}"
-          git push origin "HEAD:refs/heads/${BRANCH}"
+          git commit -m "vr: screenshots for PR #${PR_NUMBER}"
+          git push --force origin "HEAD:refs/heads/${BRANCH}"
 
       - name: Generate Visual Regression Report
-        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true' && steps.vr-test.outcome == 'success' && steps.push-screenshots.outcome == 'success'
+        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true' && steps.push-screenshots.outcome == 'success'
         env:
           PR_NUMBER: ${{ github.event.number }}
-          RUN_ID: ${{ github.run_id }}
         run: |
           node << 'EOF'
           const fs = require('fs');
           const path = require('path');
 
           const PR_NUMBER = process.env.PR_NUMBER;
-          const RUN_ID = process.env.RUN_ID;
           const REPO = process.env.GITHUB_REPOSITORY;
-          const BRANCH = `vr-screenshots-${PR_NUMBER}-${RUN_ID}`;
+          const BRANCH = `vr-screenshots-${PR_NUMBER}`;
           const BASE_URL = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/screenshots`;
 
           const SNAPSHOTS_DIR = 'apps/storybook/__snapshots__';
@@ -391,7 +388,7 @@ jobs:
           EOF
 
       - name: Post Visual Regression Comment
-        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true' && steps.vr-test.outcome == 'success' && steps.push-screenshots.outcome == 'success'
+        if: github.event_name == 'pull_request' && steps.vr-test.outputs.has_baselines == 'true' && steps.push-screenshots.outcome == 'success'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: visual-regression

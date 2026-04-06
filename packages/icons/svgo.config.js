@@ -5,6 +5,8 @@ export default {
       name: "preset-default",
       params: {
         overrides: {
+          // Keep viewBox — icons rely on it for sizing
+          removeViewBox: false,
           // Keep clipPath/gradient elements used by brand icons
           removeHiddenElems: false,
           // Do not merge paths in brand icons — visual fidelity
