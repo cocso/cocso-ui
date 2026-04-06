@@ -47,7 +47,7 @@ function buildJS(format, input, output) {
     ],
     plugins: [
       postcss({
-        modules: true,
+        autoModules: true,
         minimize: true,
         extract: isESM,
       }),

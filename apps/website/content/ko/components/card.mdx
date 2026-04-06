@@ -1,0 +1,60 @@
+---
+title: Card
+description: 설정 가능한 elevation과 패딩으로 관련 콘텐츠를 그룹화하는 컨테이너 표면입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Card는 시각적으로 구분되는 표면 내에 관련 콘텐츠를 그룹화하는 유연한 컨테이너입니다. 세 가지 변형이 일반적인 elevation 패턴을 커버합니다 — 부유하는 콘텐츠에는 <code>elevated</code>, 테두리가 있는 섹션에는 <code>outlined</code>, 미묘한 배경 그룹화에는 <code>filled</code>를 사용하세요.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>시각적 강조가 필요한 주요 콘텐츠 카드에는 <code>elevated</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>깊이감 없이 명확한 경계가 필요할 때는 <code>outlined</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>보조 영역이나 중첩된 콘텐츠 영역에는 <code>filled</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>내부 콘텐츠의 밀도 요구사항에 맞게 <code>padding</code>을 조정하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Card는 암시적 역할 없이 <code>&lt;div&gt;</code>로 렌더링됩니다. 탐색을 돕기 위해 콘텐츠에 시맨틱 구조(제목, 목록)를 추가하세요.</Section.ListItem>
+    <Section.ListItem>카드가 클릭 가능한 영역으로 작동하는 경우, 카드 자체에 클릭 핸들러를 붙이는 대신 내부에 <code>&lt;button&gt;</code> 또는 <code>&lt;a&gt;</code>를 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Card } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 elevated 스타일과 medium 패딩이 적용된 카드입니다.</Section.Text>
+  <ComponentExample name="card-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>세 가지 시각적 변형이 elevation과 테두리 스타일을 조정합니다.</Section.Text>
+  <ComponentExample name="card-variants" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Card</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"elevated" | "outlined" | "filled"', default: '"elevated"', description: "카드의 시각적 스타일을 제어합니다. `elevated`는 그림자를 추가하고, `outlined`는 테두리를 추가하며, `filled`는 배경색을 사용합니다." },
+      { name: "padding", type: '"sm" | "md" | "lg"', default: '"md"', description: "내부 패딩을 제어합니다. 콘텐츠 밀도에 따라 조정하세요." },
+      { name: "children", type: "ReactNode", required: true, description: "카드 내부에 렌더링되는 콘텐츠입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -13,8 +13,12 @@ type Sidebar = Record<string, SidebarSection>;
 
 const componentItems: readonly SidebarItem[] = [
   { type: "page", name: "Accordion", url: "/components/accordion" },
+  { type: "page", name: "Alert", url: "/components/alert" },
+  { type: "page", name: "Avatar", url: "/components/avatar" },
   { type: "page", name: "Badge", url: "/components/badge" },
+  { type: "page", name: "Breadcrumb", url: "/components/breadcrumb" },
   { type: "page", name: "Button", url: "/components/button" },
+  { type: "page", name: "Card", url: "/components/card" },
   { type: "page", name: "Checkbox", url: "/components/checkbox" },
   { type: "page", name: "Day Picker", url: "/components/day-picker" },
   { type: "page", name: "Dialog", url: "/components/dialog" },
@@ -30,8 +34,10 @@ const componentItems: readonly SidebarItem[] = [
   },
   { type: "page", name: "Pagination", url: "/components/pagination" },
   { type: "page", name: "Popover", url: "/components/popover" },
+  { type: "page", name: "Progress", url: "/components/progress" },
   { type: "page", name: "Radio Group", url: "/components/radio-group" },
   { type: "page", name: "Select", url: "/components/select" },
+  { type: "page", name: "Skeleton", url: "/components/skeleton" },
   { type: "page", name: "Spinner", url: "/components/spinner" },
   {
     type: "page",
