@@ -7,11 +7,13 @@ on:
       - v1
     paths:
       - 'packages/react/**'
+      - 'packages/react-icons/**'
       - 'packages/css/**'
       - 'packages/recipe/**'
       - 'packages/baseframe-sources/**'
       - 'ecosystem/codegen/**'
       - 'ecosystem/baseframe/**'
+      - 'ecosystem/icons/**'
       - 'apps/storybook/**'
       - 'pnpm-lock.yaml'
   pull_request:
@@ -20,11 +22,13 @@ on:
       - v1
     paths:
       - 'packages/react/**'
+      - 'packages/react-icons/**'
       - 'packages/css/**'
       - 'packages/recipe/**'
       - 'packages/baseframe-sources/**'
       - 'ecosystem/codegen/**'
       - 'ecosystem/baseframe/**'
+      - 'ecosystem/icons/**'
       - 'apps/storybook/**'
       - 'pnpm-lock.yaml'
 
