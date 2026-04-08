@@ -8,7 +8,7 @@ import { findYamlFiles } from "../utils/fs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../../");
-const SOURCES_DIR = path.join(REPO_ROOT, "packages/baseframe");
+const SOURCES_DIR = path.join(REPO_ROOT, "packages/baseframe-sources");
 const SNAPSHOTS_DIR = path.join(__dirname, "snapshots");
 
 function loadTokens(): { tokens: Token[]; collections: Collections } {

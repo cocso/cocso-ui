@@ -153,7 +153,7 @@ importers:
     dependencies:
       '@cocso-ui/baseframe-sources':
         specifier: workspace:*
-        version: link:../../packages/baseframe
+        version: link:../../packages/baseframe-sources
       fs-extra:
         specifier: ^11.3.4
         version: 11.3.4
@@ -177,8 +177,8 @@ importers:
         specifier: ^0.27.3
         version: 0.27.3
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.2
+        version: 6.0.2
       vitest:
         specifier: ^4.0.18
         version: 4.0.18(@opentelemetry/api@1.9.0)(@types/node@25.4.0)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.2)
@@ -205,7 +205,7 @@ importers:
         specifier: ^4.0.8
         version: 4.0.18(@opentelemetry/api@1.9.0)(@types/node@24.12.0)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.2)
 
-  packages/baseframe: {}
+  packages/baseframe-sources: {}
 
   packages/codegen:
     devDependencies:
@@ -234,7 +234,7 @@ importers:
     dependencies:
       '@cocso-ui/baseframe-sources':
         specifier: workspace:*
-        version: link:../baseframe
+        version: link:../baseframe-sources
       '@cocso-ui/icons':
         specifier: workspace:*
         version: link:../icons
@@ -324,7 +324,7 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       '@cocso-ui/react-icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../react-icons
       clsx:
         specifier: ^2.1.1

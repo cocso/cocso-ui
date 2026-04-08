@@ -2,7 +2,7 @@
 
 YAML design token definitions을 읽어 CSS custom properties와 TailwindCSS v4 테마 파일을 생성하는 CLI 도구입니다.
 
-COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe)를 진실의 원천(source of truth)으로 사용합니다.
+COCSO에서는 [@cocso-ui/baseframe-sources](../../packages/baseframe-sources)를 진실의 원천(source of truth)으로 사용합니다.
 
 <br />
 

@@ -1,6 +1,7 @@
 {
   "name": "@cocso-ui/recipe",
   "version": "0.0.1",
+  "private": true,
   "description": "Component visual spec recipes — CI-enforced declarative mirror for React and Figma",
   "repository": {
     "type": "git",
