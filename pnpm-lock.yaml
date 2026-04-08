@@ -324,7 +324,7 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       '@cocso-ui/react-icons':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../react-icons
       clsx:
         specifier: ^2.1.1
