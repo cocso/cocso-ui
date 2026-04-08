@@ -6,6 +6,7 @@ import type { Registry } from "./types";
 const PKG_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SVG_DIR = join(PKG_ROOT, "svg");
 const REACT_DIST = join(PKG_ROOT, "dist", "react");
+const RN_DIST = join(PKG_ROOT, "dist", "react-native");
 const FIGMA_DIST = join(PKG_ROOT, "dist", "figma", "icon-svgs.ts");
 const REGISTRY_FILE = join(PKG_ROOT, "registry.json");
 
@@ -139,8 +140,52 @@ if (errors === prevErrors3) {
   pass(`All ${registry.icons.length} React components present in dist/react/`);
 }
 
-// 4. Generated Figma output
-console.log("\n\x1b[36m4. Generated Figma output\x1b[0m");
+// 4. Generated React Native components
+console.log("\n\x1b[36m4. Generated React Native components\x1b[0m");
+const prevErrors4rn = errors;
+
+if (existsSync(RN_DIST)) {
+  for (const icon of registry.icons) {
+    const tsxPath = join(RN_DIST, icon.category, `${icon.componentName}.tsx`);
+    if (!existsSync(tsxPath)) {
+      fail(
+        `${icon.componentName}: missing at dist/react-native/${icon.category}/${icon.componentName}.tsx`
+      );
+    }
+  }
+
+  for (const file of ["icon.tsx", "types.ts"]) {
+    if (!existsSync(join(RN_DIST, file))) {
+      fail(`dist/react-native/${file} missing`);
+    }
+  }
+
+  const indexPath = join(RN_DIST, "index.ts");
+  if (existsSync(indexPath)) {
+    const indexContent = readFileSync(indexPath, "utf-8");
+    if (
+      !(
+        indexContent.includes('"./semantic"') &&
+        indexContent.includes('"./brand"')
+      )
+    ) {
+      fail("dist/react-native/index.ts missing semantic or brand re-exports");
+    }
+  } else {
+    fail("dist/react-native/index.ts missing");
+  }
+} else {
+  fail("dist/react-native/ directory missing (run build first)");
+}
+
+if (errors === prevErrors4rn) {
+  pass(
+    `All ${registry.icons.length} React Native components present in dist/react-native/`
+  );
+}
+
+// 5. Generated Figma output
+console.log("\n\x1b[36m5. Generated Figma output\x1b[0m");
 const prevErrors4 = errors;
 
 if (existsSync(FIGMA_DIST)) {

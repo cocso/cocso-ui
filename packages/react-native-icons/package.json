@@ -1,0 +1,54 @@
+{
+  "name": "@cocso-ui/react-native-icons",
+  "version": "0.1.0",
+  "description": "React Native icon components for the cocso design system",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/react-native-icons"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c rollup.config.cjs",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --fix"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@cocso-ui/icons": "workspace:*",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@rollup/plugin-babel": "^7.0.0",
+    "@rollup/plugin-commonjs": "^29.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "react-native-svg": "^15.15.4",
+    "rollup": "^4.60.1",
+    "rollup-plugin-dts": "^6.4.1",
+    "typescript": "^6.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0",
+    "react-native-svg": ">=13.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
