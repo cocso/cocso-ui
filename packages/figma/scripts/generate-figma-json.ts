@@ -33,7 +33,15 @@ import { resolveForFigma } from "../src/generators/recipe-resolver";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const OUTPUT_DIR = join(__dirname, "..", "..", "..", "ecosystem", "codegen", "generated");
+const OUTPUT_DIR = join(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "ecosystem",
+  "codegen",
+  "generated"
+);
 
 // biome-ignore lint: any recipe type
 type AnyRecipe = RecipeDefinition<any, any>;
