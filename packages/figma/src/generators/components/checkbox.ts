@@ -1,5 +1,5 @@
 import { checkboxRecipe } from "@cocso-ui/recipe/recipes/checkbox.recipe";
-import checkboxJSON from "../../../../codegen/generated/checkbox.figma.json";
+import checkboxJSON from "../../../../../ecosystem/codegen/generated/checkbox.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

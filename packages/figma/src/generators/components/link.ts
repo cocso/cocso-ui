@@ -1,5 +1,5 @@
 import { linkRecipe } from "@cocso-ui/recipe/recipes/link.recipe";
-import linkJSON from "../../../../codegen/generated/link.figma.json";
+import linkJSON from "../../../../../ecosystem/codegen/generated/link.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

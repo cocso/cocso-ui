@@ -1,5 +1,5 @@
 import { cardRecipe } from "@cocso-ui/recipe/recipes/card.recipe";
-import cardJSON from "../../../../codegen/generated/card.figma.json";
+import cardJSON from "../../../../../ecosystem/codegen/generated/card.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

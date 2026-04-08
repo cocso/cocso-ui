@@ -1,5 +1,5 @@
 import { alertRecipe } from "@cocso-ui/recipe/recipes/alert.recipe";
-import alertJSON from "../../../../codegen/generated/alert.figma.json";
+import alertJSON from "../../../../../ecosystem/codegen/generated/alert.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

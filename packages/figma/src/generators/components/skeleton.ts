@@ -1,5 +1,5 @@
 import { skeletonRecipe } from "@cocso-ui/recipe/recipes/skeleton.recipe";
-import skeletonJSON from "../../../../codegen/generated/skeleton.figma.json";
+import skeletonJSON from "../../../../../ecosystem/codegen/generated/skeleton.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

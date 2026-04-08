@@ -1,5 +1,5 @@
 import { avatarRecipe } from "@cocso-ui/recipe/recipes/avatar.recipe";
-import avatarJSON from "../../../../codegen/generated/avatar.figma.json";
+import avatarJSON from "../../../../../ecosystem/codegen/generated/avatar.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

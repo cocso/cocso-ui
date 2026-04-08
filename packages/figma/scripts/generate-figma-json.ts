@@ -1,6 +1,6 @@
 /**
  * Generate pre-resolved Figma JSON descriptors for all recipes.
- * Outputs to packages/codegen/generated/*.figma.json for consumption
+ * Outputs to ecosystem/codegen/generated/*.figma.json for consumption
  * by Figma generators and as a codegen artifact.
  *
  * Usage: pnpm --filter @cocso-ui/figma generate:figma-json
@@ -33,7 +33,15 @@ import { resolveForFigma } from "../src/generators/recipe-resolver";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const OUTPUT_DIR = join(__dirname, "..", "..", "codegen", "generated");
+const OUTPUT_DIR = join(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "ecosystem",
+  "codegen",
+  "generated"
+);
 
 // biome-ignore lint: any recipe type
 type AnyRecipe = RecipeDefinition<any, any>;

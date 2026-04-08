@@ -1,5 +1,5 @@
 import { typographyRecipe } from "@cocso-ui/recipe/recipes/typography.recipe";
-import typographyJSON from "../../../../codegen/generated/typography.figma.json";
+import typographyJSON from "../../../../../ecosystem/codegen/generated/typography.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

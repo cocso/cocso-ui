@@ -1,5 +1,5 @@
 import { switchRecipe } from "@cocso-ui/recipe/recipes/switch.recipe";
-import switchJSON from "../../../../codegen/generated/switch.figma.json";
+import switchJSON from "../../../../../ecosystem/codegen/generated/switch.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

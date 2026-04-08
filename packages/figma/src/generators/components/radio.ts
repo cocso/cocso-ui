@@ -1,5 +1,5 @@
 import { radioGroupRecipe } from "@cocso-ui/recipe/recipes/radio-group.recipe";
-import radioJSON from "../../../../codegen/generated/radio.figma.json";
+import radioJSON from "../../../../../ecosystem/codegen/generated/radio.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

@@ -14,11 +14,17 @@ baseframe:
 
 icons:
   - changed-files:
-      - any-glob-to-any-file: 'packages/react-icons/**'
+      - any-glob-to-any-file:
+          - 'ecosystem/icons/**'
+          - 'packages/react-icons/**'
 
 ci:
   - changed-files:
       - any-glob-to-any-file: '.github/**'
+
+codegen:
+  - changed-files:
+      - any-glob-to-any-file: 'ecosystem/codegen/**'
 
 recipe:
   - changed-files:

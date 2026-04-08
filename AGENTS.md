@@ -28,14 +28,14 @@
 - `packages/`: Shared, publishable packages consumed across apps and external projects.
   - `packages/react/`: `@cocso-ui/react` — React component library.
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
-  - `packages/icons/`: `@cocso-ui/icons` — canonical SVG icon sources, SVGO optimization, and code generation (SVG → React TSX, SVG → Figma template strings).
   - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set (re-exports generated components from `@cocso-ui/icons`).
   - `packages/baseframe-sources/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
   - `packages/recipe/`: `@cocso-ui/recipe` — component visual spec recipes (single source of truth for variant→token mappings, consumed by codegen at build time and Figma generation).
-  - `packages/codegen/`: `@cocso-ui/codegen` — build-time code generation from recipe definitions (CSS classes, className functions, TypeScript types). Generated output consumed by `@cocso-ui/react`.
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables and generating components from recipes.
 - `ecosystem/`: Tooling that wraps or consumes packages for developer workflows.
   - `ecosystem/baseframe/`: `@cocso-ui/baseframe` — CLI for scaffolding components from YAML.
+  - `ecosystem/codegen/`: `@cocso-ui/codegen` — build-time code generation from recipe definitions (CSS classes, className functions, TypeScript types). Generated output consumed by `@cocso-ui/react`.
+  - `ecosystem/icons/`: `@cocso-ui/icons` — canonical SVG icon sources, SVGO optimization, and code generation (SVG → React TSX, SVG → Figma template strings).
   - `ecosystem/mcp/`: `@cocso-ui/mcp` — MCP server for design-system-aware component discovery and guidance.
 - `AGENTS.md`: This file — repository-wide rules.
 - `biome.jsonc`: Lint and format configuration (Biome).

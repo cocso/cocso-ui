@@ -1,5 +1,5 @@
 import { buttonRecipe } from "@cocso-ui/recipe/recipes/button.recipe";
-import buttonJSON from "../../../../codegen/generated/button.figma.json";
+import buttonJSON from "../../../../../ecosystem/codegen/generated/button.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
