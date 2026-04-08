@@ -5,6 +5,7 @@
   "private": true,
   "exports": {
     "./react": "./dist/react/index.ts",
+    "./react-native": "./dist/react-native/index.ts",
     "./figma": "./dist/figma/icon-svgs.ts",
     "./registry.json": "./registry.json"
   },
@@ -16,10 +17,11 @@
   "scripts": {
     "optimize": "tsx scripts/optimize.ts",
     "generate:react": "tsx scripts/generate-react.ts",
+    "generate:react-native": "tsx scripts/generate-react-native.ts",
     "generate:figma": "tsx scripts/generate-figma.ts",
     "validate": "tsx scripts/validate.ts",
     "validate:compat": "tsx scripts/validate-compat.ts",
-    "build": "tsx scripts/optimize.ts && tsx scripts/generate-react.ts && tsx scripts/generate-figma.ts",
+    "build": "tsx scripts/optimize.ts && tsx scripts/generate-react.ts && tsx scripts/generate-react-native.ts && tsx scripts/generate-figma.ts",
     "add-icon": "tsx scripts/add-icon.ts",
     "fetch:tabler": "tsx scripts/fetch-tabler.ts",
     "lint": "biome check ."
