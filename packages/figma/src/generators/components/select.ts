@@ -1,5 +1,5 @@
 import { selectRecipe } from "@cocso-ui/recipe/recipes/select.recipe";
-import selectJSON from "../../../../codegen/generated/select.figma.json";
+import selectJSON from "../../../../../ecosystem/codegen/generated/select.figma.json";
 import { createSelectComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantRow } from "../shared";

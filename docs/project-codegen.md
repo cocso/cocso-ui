@@ -7,7 +7,7 @@ Generate build-time artifacts (CSS classes, className functions, TypeScript type
 ## Path
 
 ```
-packages/codegen/
+ecosystem/codegen/
 ```
 
 ## Runtime and Language
@@ -56,7 +56,7 @@ TypeScript (build-time tool, uses `tsx` for recipe import)
         ├─ calls resolveForFigma() per variant combo
         └─ serializes to .figma.json
 
-Output: packages/codegen/generated/
+Output: ecosystem/codegen/generated/
     ├── {recipe}.css           # BEM CSS classes with CSS custom properties
     ├── {recipe}.ts            # className composition function
     ├── {recipe}.d.ts          # TypeScript type declarations
@@ -158,7 +158,7 @@ CI gate in `.github/workflows/ci.yml`:
   run: |
     pnpm --filter @cocso-ui/recipe build
     pnpm --filter @cocso-ui/codegen generate
-    git diff --exit-code packages/codegen/generated/
+    git diff --exit-code ecosystem/codegen/generated/
 ```
 
 ## Roadmap

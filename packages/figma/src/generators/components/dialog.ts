@@ -1,5 +1,5 @@
 import { dialogRecipe } from "@cocso-ui/recipe/recipes/dialog.recipe";
-import dialogJSON from "../../../../codegen/generated/dialog.figma.json";
+import dialogJSON from "../../../../../ecosystem/codegen/generated/dialog.figma.json";
 import {
   type FigmaJSONData,
   getAllVariantCombinations,

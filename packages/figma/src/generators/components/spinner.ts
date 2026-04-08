@@ -1,5 +1,5 @@
 import { spinnerRecipe } from "@cocso-ui/recipe/recipes/spinner.recipe";
-import spinnerJSON from "../../../../codegen/generated/spinner.figma.json";
+import spinnerJSON from "../../../../../ecosystem/codegen/generated/spinner.figma.json";
 import type { FigmaNodeSpec } from "../recipe-resolver";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import {

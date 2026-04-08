@@ -7,7 +7,7 @@ Provide a single source of truth for all SVG icons in the cocso design system. A
 ## Path
 
 ```
-packages/icons/
+ecosystem/icons/
 ```
 
 ## Runtime and Language
@@ -42,7 +42,7 @@ Node.js (TypeScript). Build-time only — no runtime dependency.
 ## Architecture
 
 ```
-packages/icons/
+ecosystem/icons/
 ├── svg/
 │   ├── semantic/              # 69 UI icons (stroke/fill, all 24x24)
 │   └── brand/                 # 15 brand logos (mixed color strategies, custom viewBox)

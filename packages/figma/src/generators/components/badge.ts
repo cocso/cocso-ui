@@ -1,5 +1,5 @@
 import { badgeRecipe } from "@cocso-ui/recipe/recipes/badge.recipe";
-import badgeJSON from "../../../../codegen/generated/badge.figma.json";
+import badgeJSON from "../../../../../ecosystem/codegen/generated/badge.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

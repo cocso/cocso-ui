@@ -1,5 +1,5 @@
 import { breadcrumbRecipe } from "@cocso-ui/recipe/recipes/breadcrumb.recipe";
-import breadcrumbJSON from "../../../../codegen/generated/breadcrumb.figma.json";
+import breadcrumbJSON from "../../../../../ecosystem/codegen/generated/breadcrumb.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

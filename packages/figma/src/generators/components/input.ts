@@ -1,5 +1,5 @@
 import { inputRecipe } from "@cocso-ui/recipe/recipes/input.recipe";
-import inputJSON from "../../../../codegen/generated/input.figma.json";
+import inputJSON from "../../../../../ecosystem/codegen/generated/input.figma.json";
 import { createWideComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantRow } from "../shared";

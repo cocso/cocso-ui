@@ -1,5 +1,5 @@
 import { progressRecipe } from "@cocso-ui/recipe/recipes/progress.recipe";
-import progressJSON from "../../../../codegen/generated/progress.figma.json";
+import progressJSON from "../../../../../ecosystem/codegen/generated/progress.figma.json";
 import { createComponentFromSpec } from "../component-creators";
 import { type FigmaJSONData, lookupSpec } from "../recipe-utils";
 import { createComponentSection, createVariantMatrixPerSlice } from "../shared";

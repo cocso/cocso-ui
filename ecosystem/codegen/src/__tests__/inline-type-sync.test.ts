@@ -17,6 +17,8 @@ const REACT_SRC = join(
   "..",
   "..",
   "..",
+  "..",
+  "packages",
   "react",
   "src",
   "components",
