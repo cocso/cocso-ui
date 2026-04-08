@@ -32,4 +32,4 @@ pnpm --filter @cocso-ui/codegen generate
 
 ### Dependencies
 
-- [@cocso-ui/codegen](../codegen) — recipe를 소비해 빌드 산출물 생성
+- [@cocso-ui/codegen](../../ecosystem/codegen) — recipe를 소비해 빌드 산출물 생성

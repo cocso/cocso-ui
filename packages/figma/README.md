@@ -25,5 +25,5 @@ pnpm --filter @cocso-ui/figma test
 ### Dependencies
 
 - [@cocso-ui/baseframe-sources](../baseframe-sources) — YAML 토큰 소스
-- [@cocso-ui/icons](../icons) — 아이콘 SVG 템플릿
+- [@cocso-ui/icons](../../ecosystem/icons) — 아이콘 SVG 템플릿
 - [@cocso-ui/recipe](../recipe) — 컴포넌트 recipe 정의
