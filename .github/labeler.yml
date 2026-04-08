@@ -9,7 +9,7 @@ css:
 baseframe:
   - changed-files:
       - any-glob-to-any-file:
-          - 'packages/baseframe/**'
+          - 'packages/baseframe-sources/**'
           - 'ecosystem/baseframe/**'
 
 icons:

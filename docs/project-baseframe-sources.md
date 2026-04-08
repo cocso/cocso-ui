@@ -7,7 +7,7 @@ Provide a versioned YAML source registry of design tokens (colors, shadows, spac
 ## Path
 
 ```
-packages/baseframe/
+packages/baseframe-sources/
 ```
 
 ## Runtime and Language
@@ -34,7 +34,7 @@ YAML (no runtime; data package only).
 ## Architecture
 
 ```
-packages/baseframe/
+packages/baseframe-sources/
 ├── collections.yaml        # Token collection registry (global / default mode)
 ├── primitive/              # Raw value tokens
 │   ├── color.yaml          # $color.white, $color.neutral-*, $color.primary-*, ...

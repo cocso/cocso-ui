@@ -4,13 +4,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
-    "directory": "packages/baseframe"
+    "directory": "packages/baseframe-sources"
+  },
+  "exports": {
+    ".": "./package.json",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
   },
-  "main": "package.json",
   "files": [
     "*.yaml",
     "primitive/*.yaml",
