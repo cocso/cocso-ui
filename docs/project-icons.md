@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a single source of truth for all SVG icons in the cocso design system. All downstream consumers (`@cocso-ui/react-icons`, `@cocso-ui/figma`) generate their icon representations from this canonical SVG source, eliminating duplication and synchronization bugs.
+Provide a single source of truth for all SVG icons in the cocso design system. All downstream consumers (`@cocso-ui/react-icons`, `@cocso-ui/react-native-icons`, `@cocso-ui/figma`) generate their icon representations from this canonical SVG source, eliminating duplication and synchronization bugs.
 
 ## Path
 
@@ -17,6 +17,7 @@ Node.js (TypeScript). Build-time only — no runtime dependency.
 ## Users
 
 - `@cocso-ui/react-icons` — consumes generated React icon components via `@cocso-ui/icons/react`.
+- `@cocso-ui/react-native-icons` — consumes generated React Native icon components via `@cocso-ui/icons/react-native`.
 - `@cocso-ui/figma` — consumes generated SVG template strings via `@cocso-ui/icons/figma`.
 - `@cocso-ui/recipe` — references icons by canonical name in component specs.
 - Frontend engineers — browse and discover available icons via Storybook and documentation site.
@@ -27,6 +28,7 @@ Node.js (TypeScript). Build-time only — no runtime dependency.
 - Icon metadata registry (`registry.json`): name, category, colorStrategy, componentName, source, tags, viewBox.
 - SVGO optimization with conservative configuration (`scripts/optimize.ts`).
 - Code generation: SVG to React TSX components (`scripts/generate-react.ts` → `dist/react/`).
+- Code generation: SVG to React Native TSX components (`scripts/generate-react-native.ts` → `dist/react-native/`).
 - Code generation: SVG to Figma `{color}` template strings (`scripts/generate-figma.ts` → `dist/figma/`).
 - CLI: fetch icons from Tabler Icons (`scripts/fetch-tabler.ts`).
 - CLI: add custom SVG icons with metadata auto-detection (`scripts/add-icon.ts`).
@@ -35,7 +37,7 @@ Node.js (TypeScript). Build-time only — no runtime dependency.
 ## Out of Scope
 
 - Icon design or SVG authoring.
-- Non-React framework bindings (Vue, Angular, Svelte).
+- Non-React/React-Native framework bindings (Vue, Angular, Svelte).
 - Webfont or sprite sheet generation.
 - Figma plugin icon sync (handled by `@cocso-ui/figma`).
 
@@ -48,9 +50,11 @@ ecosystem/icons/
 │   └── brand/                 # 15 brand logos (mixed color strategies, custom viewBox)
 ├── registry.json              # Icon metadata (84 entries)
 ├── templates/react/           # Shared React source files (icon.tsx, child.tsx, types.ts)
+├── templates/react-native/    # Shared React Native source files (icon.tsx, types.ts)
 ├── scripts/
 │   ├── optimize.ts            # SVGO optimization
 │   ├── generate-react.ts      # SVG → React TSX components
+│   ├── generate-react-native.ts # SVG → React Native TSX components
 │   ├── generate-figma.ts      # SVG → Figma SVG template strings
 │   ├── fetch-tabler.ts        # Fetch icons from Tabler Icons
 │   ├── add-icon.ts            # Add custom SVG icons
@@ -65,6 +69,12 @@ ecosystem/icons/
 │   │   ├── child.tsx          # Child helper component
 │   │   ├── types.ts           # IconProps type
 │   │   └── index.ts           # Barrel export
+│   ├── react-native/          # Generated React Native components (committed to git)
+│   │   ├── semantic/          # 71 TSX files
+│   │   ├── brand/             # 15 TSX files
+│   │   ├── icon.tsx           # Icon wrapper component
+│   │   ├── types.ts           # IconProps type (extends SvgProps)
+│   │   └── index.ts           # Barrel export
 │   └── figma/
 │       └── icon-svgs.ts       # ICON_SVGS record (84 primary + 7 aliases)
 └── package.json
@@ -76,6 +86,7 @@ ecosystem/icons/
 svg/semantic/*.svg + svg/brand/*.svg
     ↓ optimize.ts (SVGO)
     ├── generate-react.ts → dist/react/ → consumed by @cocso-ui/react-icons (re-export)
+    ├── generate-react-native.ts → dist/react-native/ → consumed by @cocso-ui/react-native-icons (re-export)
     └── generate-figma.ts → dist/figma/ → consumed by @cocso-ui/figma (import ICON_SVGS)
 ```
 
@@ -101,6 +112,9 @@ Public package: `@cocso-ui/icons`
 ```ts
 // React components (re-exported by @cocso-ui/react-icons)
 import { SearchIcon, CheckIcon } from '@cocso-ui/icons/react';
+
+// React Native components (re-exported by @cocso-ui/react-native-icons)
+import { SearchIcon, CheckIcon } from '@cocso-ui/icons/react-native';
 
 // Figma SVG templates (consumed by @cocso-ui/figma)
 import { ICON_SVGS } from '@cocso-ui/icons/figma';
