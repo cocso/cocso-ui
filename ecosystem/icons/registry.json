@@ -107,11 +107,7 @@
       "componentName": "AttachFileIcon",
       "name": "attach-file",
       "source": "custom",
-      "tags": [
-        "attach",
-        "file",
-        "paperclip"
-      ],
+      "tags": ["attach", "file", "paperclip"],
       "viewBox": "0 0 24 24"
     },
     {
@@ -745,10 +741,7 @@
       "componentName": "SendIcon",
       "name": "send",
       "source": "custom",
-      "tags": [
-        "message",
-        "share"
-      ],
+      "tags": ["message", "share"],
       "viewBox": "0 0 24 24"
     },
     {
