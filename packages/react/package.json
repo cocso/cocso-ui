@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/react",
-  "version": "0.2.21",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocso/cocso-ui.git",
@@ -69,7 +69,7 @@
     "vitest": "^4.1.2"
   },
   "peerDependencies": {
-    "@cocso-ui/css": "^0.1.2",
+    "@cocso-ui/css": "^1.0.0",
     "react": "^19.1.1"
   },
   "publishConfig": {
