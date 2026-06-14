@@ -1,0 +1,74 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { Checkbox, type CheckboxStatus } from './checkbox';
+
+const meta = {
+  title: 'Components/Checkbox',
+  component: Checkbox,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
+  argTypes: {
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    disabled: { control: 'boolean' },
+  },
+} satisfies Meta<typeof Checkbox>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render: () => {
+    const [status, setStatus] = useState<CheckboxStatus>('off');
+    return <Checkbox onChange={setStatus} status={status} />;
+  },
+};
+
+export const WithLabel: Story = {
+  render: () => {
+    const [status, setStatus] = useState<CheckboxStatus>('off');
+    return <Checkbox label="동의합니다" onChange={setStatus} status={status} />;
+  },
+};
+
+export const Uncontrolled: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Checkbox defaultStatus="off" label="Uncontrolled" />
+      <Checkbox defaultStatus="on" label="Default on" />
+    </div>
+  ),
+};
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Checkbox label="Off" status="off" />
+      <Checkbox label="On" status="on" />
+      <Checkbox label="Intermediate" status="intermediate" />
+    </div>
+  ),
+};
+
+export const Sizes: Story = {
+  render: () => {
+    const [s1, setS1] = useState<CheckboxStatus>('on');
+    const [s2, setS2] = useState<CheckboxStatus>('on');
+    const [s3, setS3] = useState<CheckboxStatus>('on');
+    return (
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Checkbox label="Small" onChange={setS1} size="small" status={s1} />
+        <Checkbox label="Medium" onChange={setS2} size="medium" status={s2} />
+        <Checkbox label="Large" onChange={setS3} size="large" status={s3} />
+      </div>
+    );
+  },
+};
+
+export const Disabled: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Checkbox disabled label="Disabled off" status="off" />
+      <Checkbox disabled label="Disabled on" status="on" />
+    </div>
+  ),
+};

@@ -1,0 +1,125 @@
+{
+  "name": "skeleton",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "variant=text,animation=pulse": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 16,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=text,animation=wave": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 16,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=text,animation=none": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 16,
+      "borderRadius": 4,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-2"
+      }
+    },
+    "variant=circular,animation=pulse": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 40,
+      "width": 40,
+      "borderRadius": 1000,
+      "_tokenRefs": {
+        "bgColor": "neutral-100"
+      }
+    },
+    "variant=circular,animation=wave": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 40,
+      "width": 40,
+      "borderRadius": 1000,
+      "_tokenRefs": {
+        "bgColor": "neutral-100"
+      }
+    },
+    "variant=circular,animation=none": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 40,
+      "width": 40,
+      "borderRadius": 1000,
+      "_tokenRefs": {
+        "bgColor": "neutral-100"
+      }
+    },
+    "variant=rectangular,animation=pulse": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 120,
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=rectangular,animation=wave": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 120,
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=rectangular,animation=none": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "height": 120,
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "neutral-100",
+        "borderRadius": "radius-4"
+      }
+    }
+  }
+}

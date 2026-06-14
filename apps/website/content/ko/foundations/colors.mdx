@@ -1,0 +1,166 @@
+---
+title: Colors
+description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를 위한 색상 가이드입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>COCSO UI는 `--cocso-*` 접두사의 CSS 커스텀 속성 기반 토큰 색상 시스템을 사용합니다. 색상은 컴포넌트 전반에서 일관되게 활용할 수 있도록 시맨틱 스케일로 구성됩니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Neutral</Section.Title>
+  <Section.Text>중립 스케일은 UI의 기반을 형성합니다. 텍스트, 배경, 테두리, 보조 요소에 사용됩니다. Primary 스케일은 Neutral 스케일에서 파생되며 동일한 색상 값을 공유합니다. 버튼, 링크, 포커스 링 등 인터랙티브 요소를 위한 별칭(alias)으로 사용됩니다.</Section.Text>
+  <ColorScale
+    name="Neutral"
+    colors={[
+      { step: "50", token: "--cocso-color-neutral-50", value: "#F4F5F6" },
+      { step: "100", token: "--cocso-color-neutral-100", value: "#E6E8EA" },
+      { step: "200", token: "--cocso-color-neutral-200", value: "#CDD1D5" },
+      { step: "300", token: "--cocso-color-neutral-300", value: "#B1B8BE" },
+      { step: "400", token: "--cocso-color-neutral-400", value: "#8A949E" },
+      { step: "500", token: "--cocso-color-neutral-500", value: "#6D7882" },
+      { step: "600", token: "--cocso-color-neutral-600", value: "#58616A" },
+      { step: "700", token: "--cocso-color-neutral-700", value: "#464C53" },
+      { step: "800", token: "--cocso-color-neutral-800", value: "#33363D" },
+      { step: "900", token: "--cocso-color-neutral-900", value: "#1E2124" },
+      { step: "950", token: "--cocso-color-neutral-950", value: "#131416" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>Danger</Section.Title>
+  <Section.Text>Danger 스케일은 에러 상태, 파괴적 액션, 심각한 경고를 전달합니다. 폼 유효성 검사 오류, 삭제 확인, 경고 배너에 사용합니다.</Section.Text>
+  <ColorScale
+    name="Danger"
+    colors={[
+      { step: "50", token: "--cocso-color-danger-50", value: "#FDEFEC" },
+      { step: "100", token: "--cocso-color-danger-100", value: "#FCDFD9" },
+      { step: "200", token: "--cocso-color-danger-200", value: "#F7AFA1" },
+      { step: "300", token: "--cocso-color-danger-300", value: "#F48771" },
+      { step: "400", token: "--cocso-color-danger-400", value: "#F05F42" },
+      { step: "500", token: "--cocso-color-danger-500", value: "#DE3412" },
+      { step: "600", token: "--cocso-color-danger-600", value: "#BD2C0F" },
+      { step: "700", token: "--cocso-color-danger-700", value: "#8A240F" },
+      { step: "800", token: "--cocso-color-danger-800", value: "#5C180A" },
+      { step: "900", token: "--cocso-color-danger-900", value: "#390D05" },
+      { step: "950", token: "--cocso-color-danger-950", value: "#260903" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>Warning</Section.Title>
+  <Section.Text>Warning 스케일은 심각한 오류는 아니지만 주의가 필요한 상황을 나타냅니다. 권고 메시지와 보류 상태 표시에 사용합니다.</Section.Text>
+  <ColorScale
+    name="Warning"
+    colors={[
+      { step: "50", token: "--cocso-color-warning-50", value: "#FFF3DB" },
+      { step: "100", token: "--cocso-color-warning-100", value: "#FFE0A3" },
+      { step: "200", token: "--cocso-color-warning-200", value: "#FFC95C" },
+      { step: "300", token: "--cocso-color-warning-300", value: "#FFB114" },
+      { step: "400", token: "--cocso-color-warning-400", value: "#C78500" },
+      { step: "500", token: "--cocso-color-warning-500", value: "#9E6A00" },
+      { step: "600", token: "--cocso-color-warning-600", value: "#8A5C00" },
+      { step: "700", token: "--cocso-color-warning-700", value: "#614100" },
+      { step: "800", token: "--cocso-color-warning-800", value: "#422C00" },
+      { step: "900", token: "--cocso-color-warning-900", value: "#2E1F00" },
+      { step: "950", token: "--cocso-color-warning-950", value: "#241800" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>Success</Section.Title>
+  <Section.Text>Success 스케일은 완료된 액션, 긍정적 피드백, 정상 상태를 나타냅니다. 성공 토스트, 완료 단계, 가용성 표시에 사용합니다.</Section.Text>
+  <ColorScale
+    name="Success"
+    colors={[
+      { step: "50", token: "--cocso-color-success-50", value: "#EAF6EC" },
+      { step: "100", token: "--cocso-color-success-100", value: "#D8EEDD" },
+      { step: "200", token: "--cocso-color-success-200", value: "#A9DAB4" },
+      { step: "300", token: "--cocso-color-success-300", value: "#7EC88E" },
+      { step: "400", token: "--cocso-color-success-400", value: "#3FA654" },
+      { step: "500", token: "--cocso-color-success-500", value: "#228738" },
+      { step: "600", token: "--cocso-color-success-600", value: "#267337" },
+      { step: "700", token: "--cocso-color-success-700", value: "#285D33" },
+      { step: "800", token: "--cocso-color-success-800", value: "#1F4727" },
+      { step: "900", token: "--cocso-color-success-900", value: "#122B18" },
+      { step: "950", token: "--cocso-color-success-950", value: "#0E2012" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>Info</Section.Title>
+  <Section.Text>Info 스케일은 정보성 콘텐츠와 중립적인 강조를 전달합니다. 툴팁, 도움말 텍스트, 비중요 알림에 사용합니다.</Section.Text>
+  <ColorScale
+    name="Info"
+    colors={[
+      { step: "50", token: "--cocso-color-info-50", value: "#ECF2FE" },
+      { step: "100", token: "--cocso-color-info-100", value: "#D8E5FD" },
+      { step: "200", token: "--cocso-color-info-200", value: "#B1CEFB" },
+      { step: "300", token: "--cocso-color-info-300", value: "#86AFF9" },
+      { step: "400", token: "--cocso-color-info-400", value: "#4C87F6" },
+      { step: "500", token: "--cocso-color-info-500", value: "#256EF4" },
+      { step: "600", token: "--cocso-color-info-600", value: "#0B50D0" },
+      { step: "700", token: "--cocso-color-info-700", value: "#083891" },
+      { step: "800", token: "--cocso-color-info-800", value: "#052561" },
+      { step: "900", token: "--cocso-color-info-900", value: "#03163A" },
+      { step: "950", token: "--cocso-color-info-950", value: "#020F27" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>White & Black</Section.Title>
+  <Section.Text>오버레이, 그림자, 투명도 효과에 사용하는 알파 변형 흰색과 검정색입니다. 불투명도는 5%~90% 범위입니다.</Section.Text>
+  <ColorScale
+    name="White with Alpha"
+    colors={[
+      { step: "5", token: "--cocso-color-white-5", value: "rgba(255,255,255,0.05)" },
+      { step: "10", token: "--cocso-color-white-10", value: "rgba(255,255,255,0.10)" },
+      { step: "20", token: "--cocso-color-white-20", value: "rgba(255,255,255,0.20)" },
+      { step: "30", token: "--cocso-color-white-30", value: "rgba(255,255,255,0.30)" },
+      { step: "40", token: "--cocso-color-white-40", value: "rgba(255,255,255,0.40)" },
+      { step: "50", token: "--cocso-color-white-50", value: "rgba(255,255,255,0.50)" },
+      { step: "60", token: "--cocso-color-white-60", value: "rgba(255,255,255,0.60)" },
+      { step: "70", token: "--cocso-color-white-70", value: "rgba(255,255,255,0.70)" },
+      { step: "80", token: "--cocso-color-white-80", value: "rgba(255,255,255,0.80)" },
+      { step: "90", token: "--cocso-color-white-90", value: "rgba(255,255,255,0.90)" },
+    ]}
+  />
+  <ColorScale
+    name="Black with Alpha"
+    colors={[
+      { step: "5", token: "--cocso-color-black-5", value: "rgba(0,0,0,0.05)" },
+      { step: "10", token: "--cocso-color-black-10", value: "rgba(0,0,0,0.10)" },
+      { step: "20", token: "--cocso-color-black-20", value: "rgba(0,0,0,0.20)" },
+      { step: "30", token: "--cocso-color-black-30", value: "rgba(0,0,0,0.30)" },
+      { step: "40", token: "--cocso-color-black-40", value: "rgba(0,0,0,0.40)" },
+      { step: "50", token: "--cocso-color-black-50", value: "rgba(0,0,0,0.50)" },
+      { step: "60", token: "--cocso-color-black-60", value: "rgba(0,0,0,0.60)" },
+      { step: "70", token: "--cocso-color-black-70", value: "rgba(0,0,0,0.70)" },
+      { step: "80", token: "--cocso-color-black-80", value: "rgba(0,0,0,0.80)" },
+      { step: "90", token: "--cocso-color-black-90", value: "rgba(0,0,0,0.90)" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>Text Role Colors</Section.Title>
+  <Section.Text>시맨틱 텍스트 색상 토큰은 일관된 전경 대비를 제공합니다. 테마 일관성을 위해 원시 스케일 값 대신 이 토큰을 사용하세요.</Section.Text>
+  <ColorScale
+    name="Text Roles"
+    colors={[
+      { step: "primary", token: "--cocso-color-text-primary", value: "#131416" },
+      { step: "secondary", token: "--cocso-color-text-secondary", value: "#58616A" },
+      { step: "tertiary", token: "--cocso-color-text-tertiary", value: "#8A949E" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

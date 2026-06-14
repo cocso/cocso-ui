@@ -1,0 +1,95 @@
+@layer components {
+  .button {
+    --cocso-button-height: inherit;
+    --cocso-button-padding-inline: inherit;
+    --cocso-button-content-padding: inherit;
+    --cocso-button-font-color: inherit;
+    --cocso-button-font-size: inherit;
+    --cocso-button-font-weight: inherit;
+    --cocso-button-border: inherit;
+    --cocso-button-border-radius: inherit;
+    --cocso-button-bg-color: inherit;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--cocso-button-height);
+    padding-inline: var(--cocso-button-padding-inline);
+    font-size: var(--cocso-button-font-size);
+    font-weight: var(--cocso-button-font-weight);
+    color: var(--cocso-button-font-color);
+    cursor: pointer;
+    background-color: var(--cocso-button-bg-color);
+    border: var(--cocso-button-border, none);
+    border-radius: var(--cocso-button-border-radius);
+    opacity: 1;
+    transition: background-color var(--cocso-duration-fast)
+      var(--cocso-easing-default);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button:not([disabled]):hover {
+      --cocso-button-bg-color-hover: inherit;
+      background-color: var(--cocso-button-bg-color-hover);
+    }
+  }
+
+  .button:not([disabled]):active {
+    --cocso-button-bg-color-active: inherit;
+    background-color: var(--cocso-button-bg-color-active);
+  }
+
+  .content {
+    padding: var(--cocso-button-content-padding);
+  }
+
+  .prefix {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--cocso-spacing-2);
+  }
+
+  .suffix {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin-left: var(--cocso-spacing-2);
+  }
+
+  .button:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-950);
+    outline-offset: 2px;
+  }
+
+  .button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .svgOnly {
+    aspect-ratio: 1 / 1;
+    padding: 0;
+  }
+
+  .spinnerOverlay {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonInner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .invisible {
+    opacity: 0;
+  }
+}

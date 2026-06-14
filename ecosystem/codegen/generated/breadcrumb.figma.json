@@ -1,0 +1,41 @@
+{
+  "name": "breadcrumb",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "size=sm": {
+      "fontColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "fontSize": 12,
+      "_tokenRefs": {
+        "fontColor": "neutral-500"
+      }
+    },
+    "size=md": {
+      "fontColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "fontSize": 14,
+      "_tokenRefs": {
+        "fontColor": "neutral-500"
+      }
+    },
+    "size=lg": {
+      "fontColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "fontSize": 16,
+      "_tokenRefs": {
+        "fontColor": "neutral-500"
+      }
+    }
+  }
+}

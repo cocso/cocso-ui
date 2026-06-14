@@ -1,0 +1,124 @@
+{
+  "name": "pagination",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "pageState=active": {
+      "height": 32,
+      "width": 32,
+      "borderRadius": 8,
+      "fontSize": 14,
+      "bgColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "fontColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontWeight": 600,
+      "_tokenRefs": {
+        "borderRadius": "radius-4",
+        "bgColor": "primary-950",
+        "fontColor": "white"
+      },
+      "states": {
+        "hover": {
+          "height": 32,
+          "width": 32,
+          "borderRadius": 8,
+          "fontSize": 14,
+          "bgColor": {
+            "r": 0.2,
+            "g": 0.21176470588235294,
+            "b": 0.23921568627450981
+          },
+          "fontColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "fontWeight": 600,
+          "_tokenRefs": {
+            "borderRadius": "radius-4",
+            "bgColor": "primary-800",
+            "fontColor": "white"
+          }
+        }
+      }
+    },
+    "pageState=inactive": {
+      "height": 32,
+      "width": 32,
+      "borderRadius": 8,
+      "fontSize": 14,
+      "fontColor": {
+        "r": 0.11764705882352941,
+        "g": 0.12941176470588237,
+        "b": 0.1411764705882353
+      },
+      "_tokenRefs": {
+        "borderRadius": "radius-4",
+        "fontColor": "neutral-900"
+      },
+      "states": {
+        "hover": {
+          "height": 32,
+          "width": 32,
+          "borderRadius": 8,
+          "fontSize": 14,
+          "fontColor": {
+            "r": 0.11764705882352941,
+            "g": 0.12941176470588237,
+            "b": 0.1411764705882353
+          },
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "_tokenRefs": {
+            "borderRadius": "radius-4",
+            "fontColor": "neutral-900",
+            "bgColor": "neutral-100"
+          }
+        }
+      }
+    },
+    "pageState=disabled": {
+      "height": 32,
+      "width": 32,
+      "borderRadius": 8,
+      "fontSize": 14,
+      "fontColor": {
+        "r": 0.5411764705882353,
+        "g": 0.5803921568627451,
+        "b": 0.6196078431372549
+      },
+      "_tokenRefs": {
+        "borderRadius": "radius-4",
+        "fontColor": "neutral-400"
+      },
+      "states": {
+        "hover": {
+          "height": 32,
+          "width": 32,
+          "borderRadius": 8,
+          "fontSize": 14,
+          "fontColor": {
+            "r": 0.5411764705882353,
+            "g": 0.5803921568627451,
+            "b": 0.6196078431372549
+          },
+          "_tokenRefs": {
+            "borderRadius": "radius-4",
+            "fontColor": "neutral-400"
+          }
+        }
+      }
+    }
+  }
+}

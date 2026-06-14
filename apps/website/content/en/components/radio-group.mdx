@@ -1,0 +1,71 @@
+---
+title: Radio Group
+description: A set of mutually exclusive radio buttons for selecting a single option.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>RadioGroup is a compound component that enforces single-selection semantics and follows the WAI-ARIA radio group pattern including roving tabindex keyboard navigation. Use RadioGroup for mutually exclusive choices between 2–7 options. For more options, consider Select for a compact layout. For binary choices, Switch or Checkbox may be more appropriate. It supports both controlled (<code>value</code> + <code>onValueChange</code>) and uncontrolled (<code>defaultValue</code>) usage.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Follows the WAI-ARIA Radio Group pattern with roving tabindex navigation.</Section.ListItem>
+    <Section.ListItem><code>Arrow Down</code> / <code>Arrow Right</code> moves focus to the next radio item. <code>Arrow Up</code> / <code>Arrow Left</code> moves to the previous.</Section.ListItem>
+    <Section.ListItem><code>Tab</code> moves focus into and out of the radio group as a single unit.</Section.ListItem>
+    <Section.ListItem>Each <code>RadioGroup.Item</code> has <code>role="radio"</code> with <code>aria-checked</code> reflecting the selected state.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { RadioGroup } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Each `RadioGroup.Item` is paired with a `RadioGroup.Indicator` that renders the selected state. Use `defaultValue` for uncontrolled usage.</Section.Text>
+  <ComponentExample name="radio-group-default" />
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>Three sizes are available on `RadioGroup.Item`: `large`, `medium`, and `small`. The default is `medium`.</Section.Text>
+  <ComponentExample name="radio-group-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>RadioGroup (Root)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string", description: "Value of the item selected by default. Use for uncontrolled scenarios where the component manages its own state." },
+      { name: "value", type: "string", description: "The currently selected value. Use together with `onValueChange` for controlled selection." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Callback invoked when the user selects a different radio item. Receives the new value string." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables all items in the group, preventing selection changes and dimming the visual appearance." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Item</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "Unique value identifying this radio item. Must match the group's `value` or `defaultValue` to appear selected." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the radio button dimensions and associated label size." },
+      { name: "disabled", type: "boolean", default: "false", description: "Disables this individual radio item independently of the group's disabled state." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Indicator</SubHeading>
+
+  <Section.Text>Renders the visual indicator dot inside <code>RadioGroup.Item</code>. Accepts standard HTML span props.</Section.Text>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

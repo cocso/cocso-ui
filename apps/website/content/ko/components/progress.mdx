@@ -1,0 +1,66 @@
+---
+title: Progress
+description: 완료율을 시각화하는 확정적 진행 표시줄입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Progress는 <code>max</code>에 대한 현재 <code>value</code>의 비율로 채워지는 수평 막대를 렌더링합니다. 시맨틱 색상 변형을 사용해 작업의 성격을 전달하고, 세 가지 크기로 주변 콘텐츠 밀도에 맞출 수 있습니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>확정적 진행에는 항상 <code>value</code>를 제공하세요. 불확정적 로딩에는 Spinner를 사용하세요.</Section.ListItem>
+    <Section.ListItem>추적 중인 작업의 결과를 반영하려면 시맨틱 변형(<code>success</code>, <code>danger</code>)을 사용하세요.</Section.ListItem>
+    <Section.ListItem>총량이 100이 아닐 때(예: 다단계 폼의 단계)는 <code>max</code>를 설정하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem><code>role="progressbar"</code>와 올바른 <code>aria-valuenow</code>, <code>aria-valuemin</code>, <code>aria-valuemax</code> 속성으로 렌더링됩니다.</Section.ListItem>
+    <Section.ListItem>스크린 리더를 위해 표시 레이블과 연결하려면 <code>aria-label</code> 또는 <code>aria-labelledby</code>를 추가하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Progress } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>25%, 50%, 75%, 100% 완료율의 진행 표시줄입니다.</Section.Text>
+  <ComponentExample name="progress-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>여섯 가지 시맨틱 색상 변형이 추적 중인 작업의 성격을 나타냅니다.</Section.Text>
+  <ComponentExample name="progress-variants" />
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>세 가지 크기가 트랙의 높이를 제어합니다: <code>sm</code>, <code>md</code>, <code>lg</code>. 기본값은 <code>md</code>입니다.</Section.Text>
+  <ComponentExample name="progress-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Progress</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "number", required: true, description: "현재 진행 값입니다. [0, max] 범위로 클램프됩니다." },
+      { name: "max", type: "number", default: "100", description: "최대 값입니다. 퍼센트가 아닌 단계나 항목을 추적할 때 설정하세요." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "danger" | "warning" | "info"', default: '"primary"', description: "진행의 시맨틱 의미를 전달하기 위해 채우기 색상을 제어합니다." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "진행 트랙의 높이를 제어합니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

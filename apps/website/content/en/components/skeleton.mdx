@@ -1,0 +1,65 @@
+---
+title: Skeleton
+description: A loading placeholder that previews the shape of content before it loads.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Skeleton renders a neutral placeholder element that mimics the shape of the content it replaces. Use it during data fetching to reduce perceived layout shift and communicate that content is on its way.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Match the <code>variant</code> to the shape of the content: <code>text</code> for lines, <code>circular</code> for avatars or icons, <code>rectangular</code> for images or cards.</Section.ListItem>
+    <Section.ListItem>Use <code>style</code> to set explicit width and height when the skeleton needs to match a specific content region.</Section.ListItem>
+    <Section.ListItem>Prefer <code>pulse</code> for most cases. Use <code>wave</code> for a more prominent shimmer effect. Use <code>none</code> when motion is distracting (e.g., inside a dense table).</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Skeleton renders with <code>aria-hidden="true"</code> so screen readers skip the placeholder entirely.</Section.ListItem>
+    <Section.ListItem>Pair skeletons with a live region (e.g., <code>aria-live="polite"</code>) that announces when content has finished loading.</Section.ListItem>
+    <Section.ListItem>The pulse and wave animations respect the <code>prefers-reduced-motion</code> media query.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Skeleton } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A composite skeleton mimicking a typical list item with an avatar and text lines.</Section.Text>
+  <ComponentExample name="skeleton-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>Three shape variants match the geometry of common UI elements.</Section.Text>
+  <ComponentExample name="skeleton-variants" />
+</Section>
+
+<Section>
+  <Section.Title>Animation</Section.Title>
+  <Section.Text>Three animation modes: <code>pulse</code> fades in and out, <code>wave</code> sweeps a shimmer effect, <code>none</code> is static.</Section.Text>
+  <ComponentExample name="skeleton-animations" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Skeleton</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"text" | "circular" | "rectangular"', default: '"text"', description: "Controls the shape of the skeleton. Match this to the shape of the content being loaded." },
+      { name: "animation", type: '"pulse" | "wave" | "none"', default: '"pulse"', description: "Controls the animation style. Use `none` when the skeleton appears in a dense or motion-sensitive context." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

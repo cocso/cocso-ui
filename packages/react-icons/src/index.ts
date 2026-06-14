@@ -1,2 +1,1 @@
-export * from './components/brand';
-export * from './components/semantic';
+export * from "@cocso-ui/icons/react";

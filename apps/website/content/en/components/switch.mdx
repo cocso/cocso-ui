@@ -1,0 +1,165 @@
+---
+title: Switch
+description: A toggle control for binary on/off settings.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Switch component provides a visual toggle for activating or deactivating a setting. Built on a headless accessibility foundation, it supports multiple sizes, semantic color variants, and label position configuration. It supports both controlled usage via <code>checked</code> and <code>onCheckedChange</code>, and uncontrolled usage via <code>defaultChecked</code>.
+  </Section.Text>
+  <Section.Text>
+    Switch represents an instant toggle — use it for settings that take effect immediately without a form submission (e.g., "Enable notifications", "Dark mode"). For changes that require a save action, use Checkbox instead.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="switch"</code> and <code>aria-checked</code> for assistive technologies.</Section.ListItem>
+    <Section.ListItem><code>Space</code> toggles the switch. <code>Tab</code> moves focus to the next focusable element.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, it is automatically associated with the switch via the <code>id</code> attribute.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the switch is visually dimmed and excluded from keyboard navigation.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Switch } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>
+    A basic switch controlled with local state.
+  </Section.Text>
+  <ComponentExample name="switch-default">
+    ```tsx
+    "use client";
+
+    import { Switch } from "@cocso-ui/react";
+    import { useState } from "react";
+
+    export default function SwitchDefault() {
+      const [checked, setChecked] = useState(false);
+
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch checked={checked} label="Enable notifications" onCheckedChange={setChecked} />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Three sizes are available. Choose based on surrounding layout density.
+  </Section.Text>
+  <ComponentExample name="switch-sizes">
+    ```tsx
+    import { Switch } from "@cocso-ui/react";
+
+    export default function SwitchSizes() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch defaultChecked label="Large" size="large" />
+          <Switch defaultChecked label="Medium" size="medium" />
+          <Switch defaultChecked label="Small" size="small" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>
+    Color variants convey the semantic meaning of the toggle. Use <code>primary</code> for general settings and state variants for actions with specific outcomes.
+  </Section.Text>
+  <ComponentExample name="switch-variants">
+    ```tsx
+    import { Switch } from "@cocso-ui/react";
+
+    export default function SwitchVariants() {
+      return (
+        <div className="flex flex-col gap-4 p-4">
+          <Switch defaultChecked label="Primary" variant="primary" />
+          <Switch defaultChecked label="Success" variant="success" />
+          <Switch defaultChecked label="Error" variant="error" />
+          <Switch defaultChecked label="Warning" variant="warning" />
+          <Switch defaultChecked label="Info" variant="info" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Label Position</Section.Title>
+  <Section.Text>
+    Use the <code>position</code> prop to control whether the label appears to the left or right of the switch. The default is <code>right</code>.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>Disabled</Section.Title>
+  <Section.Text>
+    Set <code>disabled</code> to prevent the user from toggling the switch.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      { name: "checked", type: "boolean", description: "Controlled checked state. Use together with `onCheckedChange` for full control over toggle behavior." },
+      { name: "defaultChecked", type: "boolean", description: "Initial checked state for uncontrolled usage. The component manages its own state internally." },
+      { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Callback invoked when the user toggles the switch. Receives the new boolean value." },
+      {
+        name: "label",
+        type: "string",
+        description: "Label text displayed next to the switch, automatically associated for screen reader accessibility.",
+      },
+      {
+        name: "size",
+        type: '"small" | "medium" | "large"',
+        default: '"medium"',
+        description: "Controls the track and thumb dimensions. Use `large` for prominent settings panels and `small` for compact layouts.",
+      },
+      {
+        name: "variant",
+        type: '"primary" | "success" | "error" | "warning" | "info"',
+        default: '"primary"',
+        description: "Controls the track color when checked. Use semantic variants to convey the meaning of the toggle (e.g., `error` for a destructive setting).",
+      },
+      {
+        name: "position",
+        type: '"left" | "right"',
+        default: '"right"',
+        description: "Positions the label relative to the switch. Use `left` in settings panels with labels on the left and `right` for inline toggles.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Prevents interaction and visually dims the switch. Disabled switches are excluded from keyboard navigation.",
+      },
+      {
+        name: "id",
+        type: "string",
+        description: "The HTML id attribute.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,67 @@
+---
+title: Avatar
+description: 이미지, 이니셜 폴백, 또는 아이콘을 사용하는 사용자 또는 엔티티의 시각적 식별자입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Avatar는 사용자 또는 엔티티 이미지를 표시합니다. 이미지가 없으면 <code>fallback</code> prop 또는 <code>alt</code>의 첫 번째 문자로부터 파생된 이니셜로 대체됩니다. 둘 다 없으면 중립적인 플레이스홀더를 렌더링합니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>폴백을 사용하더라도 접근성을 위해 항상 <code>alt</code>를 제공하세요.</Section.ListItem>
+    <Section.ListItem>두 글자 이니셜(예: <code>"JD"</code>)과 같이 자동 생성된 이니셜을 재정의하려면 <code>fallback</code>을 사용하세요.</Section.ListItem>
+    <Section.ListItem>브랜드 로고나 사람이 아닌 엔티티에는 <code>shape="square"</code>를 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>스크린 리더가 아바타의 주체를 식별할 수 있도록 의미 있는 <code>alt</code> 텍스트를 제공하세요.</Section.ListItem>
+    <Section.ListItem>아바타가 장식적이고 주변에 텍스트가 있는 경우 <code>alt=""</code>를 전달하여 읽기를 억제하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Avatar } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>이미지 소스, 이니셜 폴백, 플레이스홀더 폴백이 있는 아바타입니다.</Section.Text>
+  <ComponentExample name="avatar-default" />
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>다섯 가지 크기를 사용할 수 있습니다: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>. 기본값은 <code>md</code>입니다.</Section.Text>
+  <ComponentExample name="avatar-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>모양</Section.Title>
+  <Section.Text>두 가지 모양 옵션을 사용할 수 있습니다. 사람에게는 <code>circle</code>을, 브랜드나 엔티티에는 <code>square</code>를 사용하세요.</Section.Text>
+  <ComponentExample name="avatar-shapes" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Avatar</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "src", type: "string", description: "아바타 이미지의 URL입니다. 생략 시 폴백을 렌더링합니다." },
+      { name: "alt", type: "string", description: "이미지의 대체 텍스트이자 한 글자 이니셜 자동 생성의 소스입니다." },
+      { name: "fallback", type: "string", description: "이미지가 없을 때 렌더링되는 텍스트입니다. `alt`로부터 자동 생성된 이니셜을 재정의합니다." },
+      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "아바타의 크기를 제어합니다." },
+      { name: "shape", type: '"circle" | "square"', default: '"circle"', description: "border-radius를 제어합니다. 로고나 사람이 아닌 엔티티에는 `square`를 사용하세요." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

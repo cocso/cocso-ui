@@ -1,0 +1,66 @@
+---
+title: Progress
+description: A determinate progress bar that visualizes completion as a percentage.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Progress renders a horizontal bar that fills proportionally to the current <code>value</code> relative to <code>max</code>. It uses semantic color variants to communicate the nature of the operation and three sizes to match surrounding content density.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Always provide a <code>value</code> for determinate progress. For indeterminate loading, use Spinner instead.</Section.ListItem>
+    <Section.ListItem>Use semantic variants (<code>success</code>, <code>danger</code>) to reflect the outcome of the tracked operation.</Section.ListItem>
+    <Section.ListItem>Set <code>max</code> when the total is not 100 (e.g., steps in a multi-step form).</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders with <code>role="progressbar"</code> and the correct <code>aria-valuenow</code>, <code>aria-valuemin</code>, and <code>aria-valuemax</code> attributes.</Section.ListItem>
+    <Section.ListItem>Add an <code>aria-label</code> or <code>aria-labelledby</code> to associate the bar with a visible label for screen readers.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Progress } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Progress bars at 25%, 50%, 75%, and 100% completion.</Section.Text>
+  <ComponentExample name="progress-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>Six semantic color variants indicate the nature of the tracked operation.</Section.Text>
+  <ComponentExample name="progress-variants" />
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>Three sizes control the height of the track: <code>sm</code>, <code>md</code>, and <code>lg</code>. The default is <code>md</code>.</Section.Text>
+  <ComponentExample name="progress-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Progress</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "number", required: true, description: "Current progress value. Clamped to the range [0, max]." },
+      { name: "max", type: "number", default: "100", description: "Maximum value. Set this when tracking steps or items rather than a percentage." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "danger" | "warning" | "info"', default: '"primary"', description: "Controls the fill color to communicate the semantic meaning of the progress." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Controls the height of the progress track." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

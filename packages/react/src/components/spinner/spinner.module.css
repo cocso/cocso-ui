@@ -1,0 +1,41 @@
+@layer components {
+  @keyframes spinner-blade-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  .spinner {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+    color: var(--cocso-spinner-blade-color);
+  }
+
+  .blade {
+    position: absolute;
+    bottom: 0;
+    animation: spinner-blade-fade var(--cocso-duration-decorative) linear
+      infinite;
+  }
+
+  @keyframes spinner-reduced-pulse {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blade {
+      animation: spinner-reduced-pulse 2s ease-in-out infinite;
+      animation-delay: 0s !important;
+    }
+  }
+}

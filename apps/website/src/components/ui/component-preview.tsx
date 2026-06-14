@@ -1,0 +1,26 @@
+"use client";
+
+import { lazy, Suspense } from "@suspensive/react";
+import { type ComponentType, useRef } from "react";
+
+interface Props {
+  name: string;
+}
+
+export const ComponentPreview = ({ name }: Props) => {
+  const cache = useRef<Record<string, ComponentType<unknown>>>({});
+
+  if (!cache.current[name]) {
+    cache.current[name] = lazy(() => import(`../example/${name}`));
+  }
+
+  const Component = cache.current[name];
+
+  return (
+    <Suspense fallback={null}>
+      <div aria-live="polite" className="center w-full">
+        <Component />
+      </div>
+    </Suspense>
+  );
+};

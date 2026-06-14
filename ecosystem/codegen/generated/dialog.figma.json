@@ -1,0 +1,83 @@
+{
+  "name": "dialog",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "size=small": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 12,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 20,
+      "paddingBottom": 20,
+      "paddingLeft": 20,
+      "paddingRight": 20,
+      "width": 380,
+      "height": 200,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-5",
+        "strokeColor": "neutral-100"
+      }
+    },
+    "size=medium": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 12,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 20,
+      "paddingBottom": 20,
+      "paddingLeft": 20,
+      "paddingRight": 20,
+      "width": 520,
+      "height": 260,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-5",
+        "strokeColor": "neutral-100"
+      }
+    },
+    "size=large": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 12,
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "paddingTop": 20,
+      "paddingBottom": 20,
+      "paddingLeft": 20,
+      "paddingRight": 20,
+      "width": 680,
+      "height": 340,
+      "_tokenRefs": {
+        "bgColor": "white",
+        "borderRadius": "radius-5",
+        "strokeColor": "neutral-100"
+      }
+    }
+  }
+}

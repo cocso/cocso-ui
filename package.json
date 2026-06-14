@@ -2,6 +2,7 @@
   "name": "cocso-ui",
   "private": true,
   "scripts": {
+    "check": "turbo run lint && pnpm --filter @cocso-ui/storybook check",
     "build": "turbo run build",
     "build:storybook": "turbo run build:storybook --filter=@cocso-ui/storybook",
     "dev": "turbo run dev",
@@ -9,19 +10,20 @@
     "lint:fix": "turbo run lint:fix",
     "check-types": "turbo run check-types",
     "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "turbo run build && changeset publish"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.6",
+    "@biomejs/biome": "^2.4.10",
     "@changesets/cli": "^2.30.0",
-    "turbo": "^2.8.14",
-    "typescript": "^5.9.3",
-    "ultracite": "^7.2.5"
+    "turbo": "^2.9.3",
+    "typescript": "^6.0.2",
+    "ultracite": "^7.4.3"
   },
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@10.31.0"
+  "packageManager": "pnpm@10.32.1"
 }

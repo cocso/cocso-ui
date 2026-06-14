@@ -1,25 +1,22 @@
-import { buildAst } from '../parsers';
-import type { Ast, Collections, Token, ValidationError } from '../types';
-import { validateAllTokens } from './validate';
+import { buildAst } from "../parsers";
+import type { Ast, Collections, Token, ValidationError } from "../types";
+import { validateAllTokens } from "./validate";
 
-export function buildValidatedAst(tokens: Token[], collections: Collections): Ast {
-  const collectionMap = new Map(collections.data.map(collection => [collection.name, collection]));
+export function buildValidatedAst(
+  tokens: Token[],
+  collections: Collections
+): Ast {
+  const collectionMap = new Map(
+    collections.data.map((collection) => [collection.name, collection])
+  );
 
   const validation = validateAllTokens(tokens, collectionMap);
 
   if (!validation.isValid) {
-    console.error('Token validation failed:');
-    for (const error of validation.errors as ValidationError[]) {
-      console.error(`  ${error.message}`);
-    }
-    throw new Error('Token validation failed. Please fix the errors above.');
-  }
-
-  if (validation.warnings.length > 0) {
-    console.warn('Token validation warnings:');
-    for (const warning of validation.warnings as string[]) {
-      console.warn(`  ${warning}`);
-    }
+    const messages = (validation.errors as ValidationError[])
+      .map((e) => `  ${e.message}`)
+      .join("\n");
+    throw new Error(`Token validation failed:\n${messages}`);
   }
 
   return buildAst(tokens, collections);

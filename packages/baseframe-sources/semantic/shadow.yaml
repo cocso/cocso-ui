@@ -1,0 +1,23 @@
+kind: Tokens
+metadata:
+  id: shadow-semantic
+  name: Shadow Semantic
+  description: semantic shadow tokens mapping UI surfaces to elevation levels
+data:
+  collection: global
+  tokens:
+    $shadow.thumb:
+      values:
+        default: $shadow.xs
+    $shadow.card:
+      values:
+        default: $shadow.sm
+    $shadow.dropdown:
+      values:
+        default: $shadow.sm
+    $shadow.popover:
+      values:
+        default: $shadow.sm
+    $shadow.dialog:
+      values:
+        default: $shadow.md

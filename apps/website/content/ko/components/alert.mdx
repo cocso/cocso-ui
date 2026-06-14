@@ -1,0 +1,63 @@
+---
+title: Alert
+description: 상태나 중요한 정보를 전달하는 맥락형 피드백 메시지입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Alert는 네 가지 시맨틱 변형을 가진 맥락형 피드백 배너를 렌더링합니다. 선택적 아이콘 슬롯과 일시적 알림을 위한 닫기 버튼을 지원합니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>중립적인 정보 메시지에는 <code>info</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>완료된 작업을 확인할 때는 <code>success</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>잠재적 문제나 주의사항을 전달할 때는 <code>warning</code>을 사용합니다.</Section.ListItem>
+    <Section.ListItem>실패나 파괴적인 상태를 알릴 때는 <code>error</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>일시적인 알림에 닫기 버튼을 추가하려면 <code>onClose</code>를 제공하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Alert는 <code>role="alert"</code>로 렌더링되어 스크린 리더가 콘텐츠를 즉시 읽습니다.</Section.ListItem>
+    <Section.ListItem>닫기 버튼에는 기본적으로 <code>aria-label="Close"</code>가 적용됩니다. 추가 맥락이 필요할 때는 재정의하세요.</Section.ListItem>
+    <Section.ListItem>읽기 흐름을 방해하지 않아야 하는 지속적인 알림에는 HTML <code>role</code> prop을 통해 <code>role="status"</code>를 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Alert } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>네 가지 시맨틱 변형의 기본 모습입니다.</Section.Text>
+  <ComponentExample name="alert-default" />
+</Section>
+
+<Section>
+  <Section.Title>닫기 버튼</Section.Title>
+  <Section.Text><code>onClose</code> 콜백을 전달하면 Alert 내부에 닫기 버튼이 렌더링됩니다.</Section.Text>
+  <ComponentExample name="alert-variants" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Alert</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"info" | "success" | "warning" | "error"', default: '"info"', description: "시맨틱 의미를 전달하기 위해 배경색과 아이콘 색상을 제어합니다." },
+      { name: "icon", type: "ReactNode", description: "콘텐츠 앞에 렌더링되는 선택적 아이콘 요소입니다. 변형에 맞는 `@cocso-ui/react-icons`의 아이콘을 사용하세요." },
+      { name: "onClose", type: "() => void", description: "제공 시 닫기 버튼을 렌더링합니다. 이 함수를 호출하여 Alert를 제거하거나 숨기세요." },
+      { name: "children", type: "ReactNode", required: true, description: "Alert 메시지 콘텐츠입니다." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

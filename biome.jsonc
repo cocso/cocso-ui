@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/biome/core", "ultracite/biome/react"],
+  "files": {
+    "includes": ["!!**/*.stories.*", "!!**/dist", "!!ecosystem/baseframe/bin"]
+  },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
+  "linter": {
+    "rules": {
+      "performance": {
+        "noBarrelFile": "off"
+      },
+      "style": {
+        "useFilenamingConvention": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/*.test.tsx",
+        "**/*.test.ts",
+        "**/*.spec.tsx",
+        "**/*.spec.ts",
+        "apps/storybook/.storybook/test-runner.ts"
+      ],
+      "javascript": {
+        "globals": [
+          "vi",
+          "describe",
+          "it",
+          "test",
+          "expect",
+          "beforeAll",
+          "afterAll",
+          "beforeEach",
+          "afterEach",
+          "suite",
+          "expectTypeOf"
+        ]
+      },
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noMisplacedAssertion": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages/figma/src/plugin/**",
+        "packages/figma/src/core/variable-creator.ts",
+        "packages/figma/src/generators/**"
+      ],
+      "javascript": {
+        "globals": ["figma", "__html__"]
+      }
+    },
+    {
+      "includes": [
+        "packages/figma/catalog/**",
+        "packages/figma/scripts/browser-extract.js"
+      ],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["ecosystem/icons/templates/**"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ]
+}

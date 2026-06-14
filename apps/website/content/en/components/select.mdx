@@ -1,0 +1,171 @@
+---
+title: Select
+description: A native dropdown for selecting a value from a list of options.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Select component wraps the native HTML select element with consistent styling, label support, and validation states. Use it when a user needs to choose a single value from a predefined list. As a native HTML select wrapper, it supports both controlled (<code>value</code> + <code>onChange</code>) and uncontrolled (<code>defaultValue</code>) usage.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Select uses the native HTML <code>&lt;select&gt;</code> element, ensuring consistent behavior across devices including mobile.</Section.ListItem>
+    <Section.ListItem>For lists with fewer than 4 options, consider RadioGroup for better visibility.</Section.ListItem>
+    <Section.ListItem>For searchable or multi-select scenarios, a custom combobox may be more appropriate.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Renders a native <code>&lt;select&gt;</code> element with full browser and mobile keyboard support.</Section.ListItem>
+    <Section.ListItem>Arrow keys navigate between options; <code>Enter</code> or <code>Space</code> opens and confirms the selection.</Section.ListItem>
+    <Section.ListItem>When <code>label</code> is provided, the select is wrapped in a <code>Field</code> component with an associated <code>&lt;label&gt;</code> element.</Section.ListItem>
+    <Section.ListItem><code>error</code> and <code>description</code> messages are linked via <code>aria-describedby</code>.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Select } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>
+    A basic select with a label and options.
+  </Section.Text>
+  <ComponentExample name="select-default">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectDefault() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select label="Country">
+            <option value="">Select a country</option>
+            <option value="kr">South Korea</option>
+            <option value="us">United States</option>
+            <option value="jp">Japan</option>
+          </Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Four sizes are available to match surrounding content density.
+  </Section.Text>
+  <ComponentExample name="select-sizes">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectSizes() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select label="Large" size="large"><option>Option</option></Select>
+          <Select label="Medium" size="medium"><option>Option</option></Select>
+          <Select label="Small" size="small"><option>Option</option></Select>
+          <Select label="X-Small" size="x-small"><option>Option</option></Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>States</Section.Title>
+  <Section.Text>
+    Use <code>description</code> for help text, <code>error</code> for validation messages, and <code>disabled</code> to prevent interaction.
+  </Section.Text>
+  <ComponentExample name="select-states">
+    ```tsx
+    import { Select } from "@cocso-ui/react";
+
+    export default function SelectStates() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Select description="Choose your preferred option." label="With description">
+            <option>Option A</option>
+            <option>Option B</option>
+          </Select>
+          <Select error="Please select an option." label="With error">
+            <option value="">Select...</option>
+          </Select>
+          <Select disabled label="Disabled">
+            <option>Cannot change</option>
+          </Select>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "value",
+        type: "string",
+        description: "Controlled value. Use together with `onChange` to manage the select state externally.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "Initial value for uncontrolled usage. The select manages its own state internally after mount.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLSelectElement>) => void",
+        description: "Callback invoked when the selected value changes. Works in both controlled and uncontrolled modes.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "Label text displayed above the select. When provided, the select is wrapped in a Field component with an associated `<label>` element.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "Controls the height, padding, and font size. Choose based on surrounding content density.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Prevents interaction and visually dims the select. Disabled selects are excluded from form submission.",
+      },
+      {
+        name: "error",
+        type: "boolean | string",
+        default: "false",
+        description: "When a string, displays a red error message below the select linked via `aria-describedby`. When `true`, applies error border styling without a message.",
+      },
+      {
+        name: "description",
+        type: "string",
+        description: "Help text displayed below the select in a muted style, linked via `aria-describedby`. Hidden when `error` is set.",
+      },
+      {
+        name: "stretch",
+        type: "boolean",
+        default: "false",
+        description: "Expands the select to fill the full width of its container. Use in form layouts where the select should match the grid column width.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

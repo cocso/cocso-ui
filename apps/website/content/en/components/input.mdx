@@ -1,0 +1,166 @@
+---
+title: Input
+description: A text field for collecting user input.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    The Input component is a single-line text field. It supports labels, descriptions, error messages, and multiple sizes. Use it in forms, search fields, and any scenario requiring free-form text input. As a native HTML input wrapper, it supports both controlled (<code>value</code> + <code>onChange</code>) and uncontrolled (<code>defaultValue</code>) usage.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Always provide a <code>label</code> for accessibility. The Field wrapper associates a visible <code>&lt;label&gt;</code> element with the input.</Section.ListItem>
+    <Section.ListItem>Use <code>description</code> for persistent help text such as format requirements.</Section.ListItem>
+    <Section.ListItem>Use <code>error</code> only for validation feedback after interaction.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>When <code>label</code> is provided, the input is automatically wrapped in a <code>Field</code> component that associates a <code>&lt;label&gt;</code> element with the input.</Section.ListItem>
+    <Section.ListItem><code>error</code> and <code>description</code> messages are linked to the input via <code>aria-describedby</code>, ensuring screen readers announce them.</Section.ListItem>
+    <Section.ListItem>An auto-generated <code>id</code> is used when none is provided, maintaining the label-input association.</Section.ListItem>
+    <Section.ListItem>When <code>disabled</code>, the input cannot be focused or edited and is excluded from form submission.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Input } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>
+    A basic input field with a label and placeholder.
+  </Section.Text>
+  <ComponentExample name="input-default">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputDefault() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="Email" placeholder="Enter your email" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>
+    Four sizes are available to match surrounding content density.
+  </Section.Text>
+  <ComponentExample name="input-sizes">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputSizes() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="Large" placeholder="Large input" size="large" />
+          <Input label="Medium" placeholder="Medium input" size="medium" />
+          <Input label="Small" placeholder="Small input" size="small" />
+          <Input label="X-Small" placeholder="X-Small input" size="x-small" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>States</Section.Title>
+  <Section.Text>
+    Use <code>description</code> for help text, <code>error</code> for validation messages, and <code>disabled</code> to prevent interaction.
+  </Section.Text>
+  <ComponentExample name="input-states">
+    ```tsx
+    import { Input } from "@cocso-ui/react";
+
+    export default function InputStates() {
+      return (
+        <div className="flex w-full max-w-sm flex-col gap-4 p-4">
+          <Input label="With description" description="We'll never share your email." placeholder="Email" />
+          <Input error="This field is required." label="With error" placeholder="Required field" />
+          <Input disabled label="Disabled" placeholder="Cannot edit" />
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Stretch</Section.Title>
+  <Section.Text>
+    Set <code>stretch</code> to make the input fill the full width of its container.
+  </Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "value",
+        type: "string",
+        description: "Controlled value. Use together with `onChange` to manage the input state externally.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "Initial value for uncontrolled usage. The input manages its own state internally after mount.",
+      },
+      {
+        name: "onChange",
+        type: "(e: ChangeEvent<HTMLInputElement>) => void",
+        description: "Callback invoked when the input value changes. Works in both controlled and uncontrolled modes.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description: "Label text displayed above the input. When provided, the input is wrapped in a Field component with an associated `<label>` element.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "Controls the height, padding, and font size. Choose based on surrounding content density — use `large` for standalone forms and `x-small` for compact data entry.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Prevents interaction and visually dims the input. Disabled inputs are excluded from form submission.",
+      },
+      {
+        name: "error",
+        type: "boolean | string",
+        default: "false",
+        description: "When a string, displays a red error message below the input linked via `aria-describedby`. When `true`, applies error border styling without a message.",
+      },
+      {
+        name: "description",
+        type: "string",
+        description: "Help text displayed below the input in a muted style, linked via `aria-describedby`. Hidden when `error` is set.",
+      },
+      {
+        name: "stretch",
+        type: "boolean",
+        default: "false",
+        description: "Expands the input to fill the full width of its container. Use in form layouts where the input should match the grid column width.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

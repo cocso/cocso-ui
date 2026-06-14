@@ -1,0 +1,65 @@
+---
+title: Skeleton
+description: 콘텐츠가 로드되기 전에 모양을 미리 보여주는 로딩 플레이스홀더입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Skeleton은 대체하는 콘텐츠의 모양을 모방하는 중립적인 플레이스홀더 요소를 렌더링합니다. 데이터 로딩 중에 지각적 레이아웃 이동을 줄이고 콘텐츠가 곧 나타날 것임을 전달하는 데 사용하세요.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>콘텐츠의 모양에 맞게 <code>variant</code>를 선택하세요: 텍스트 줄에는 <code>text</code>, 아바타나 아이콘에는 <code>circular</code>, 이미지나 카드에는 <code>rectangular</code>.</Section.ListItem>
+    <Section.ListItem>특정 콘텐츠 영역에 맞춰야 할 때는 <code>style</code>로 명시적인 너비와 높이를 설정하세요.</Section.ListItem>
+    <Section.ListItem>대부분의 경우 <code>pulse</code>를 선호하세요. 더 두드러진 시머 효과에는 <code>wave</code>를 사용하세요. 밀집한 테이블 내부처럼 움직임이 방해될 때는 <code>none</code>을 사용하세요.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Skeleton은 <code>aria-hidden="true"</code>로 렌더링되어 스크린 리더가 플레이스홀더를 건너뜁니다.</Section.ListItem>
+    <Section.ListItem>콘텐츠 로딩이 완료되면 알려주는 라이브 영역(예: <code>aria-live="polite"</code>)과 함께 사용하세요.</Section.ListItem>
+    <Section.ListItem>pulse와 wave 애니메이션은 <code>prefers-reduced-motion</code> 미디어 쿼리를 존중합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Skeleton } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>아바타와 텍스트 줄이 있는 일반적인 목록 항목을 모방하는 복합 스켈레톤입니다.</Section.Text>
+  <ComponentExample name="skeleton-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>세 가지 모양 변형이 일반적인 UI 요소의 형태와 일치합니다.</Section.Text>
+  <ComponentExample name="skeleton-variants" />
+</Section>
+
+<Section>
+  <Section.Title>애니메이션</Section.Title>
+  <Section.Text>세 가지 애니메이션 모드: <code>pulse</code>는 페이드 인/아웃, <code>wave</code>는 시머 효과를 쓸어내립니다, <code>none</code>은 정적입니다.</Section.Text>
+  <ComponentExample name="skeleton-animations" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Skeleton</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"text" | "circular" | "rectangular"', default: '"text"', description: "스켈레톤의 모양을 제어합니다. 로드 중인 콘텐츠의 모양과 일치시키세요." },
+      { name: "animation", type: '"pulse" | "wave" | "none"', default: '"pulse"', description: "애니메이션 스타일을 제어합니다. 밀집하거나 움직임에 민감한 컨텍스트에서는 `none`을 사용하세요." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

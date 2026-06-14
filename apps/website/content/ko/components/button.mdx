@@ -1,0 +1,247 @@
+---
+title: Button
+description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    Button 컴포넌트는 액션이나 내비게이션을 트리거합니다. 로딩 및 비활성화를 포함한 다양한 시각적 변형, 크기, 모양, 상태를 지원합니다. 주요 call-to-action, 보조 컨트롤, 또는 아이콘 전용 어포던스로 사용하세요.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>페이지에서 주요 call-to-action에는 <code>primary</code>를 사용하고, 시각적 명확성을 위해 섹션당 하나로 제한합니다.</Section.ListItem>
+    <Section.ListItem>보조 액션에는 <code>secondary</code> 또는 <code>outline</code>을, 인라인 또는 3차 컨트롤에는 <code>ghost</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>명시적인 상태 결과가 있는 액션에만 시맨틱 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)을 사용합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>기본 키보드 지원이 있는 네이티브 <code>&lt;button&gt;</code> 요소로 렌더링됩니다.</Section.ListItem>
+    <Section.ListItem><code>Space</code> 또는 <code>Enter</code> 키로 버튼을 활성화합니다.</Section.ListItem>
+    <Section.ListItem><code>loading</code>이 설정되면 <code>role="status"</code>가 있는 스피너 오버레이가 표시되며 상호작용이 불가능해집니다.</Section.ListItem>
+    <Section.ListItem><code>disabled</code> 상태에서는 탭 순서에서 제외되어 포커스를 받을 수 없습니다.</Section.ListItem>
+    <Section.ListItem>버튼이 URL로 이동할 때는 <code>render</code> prop을 사용하여 링크(<code>&lt;a&gt;</code>)로 렌더링하면 시맨틱 의미를 보존할 수 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Button } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>
+    변형을 사용하여 액션의 의도를 전달합니다. <code>primary</code>는 기본 고강조 스타일이며, 낮은 강조를 위해 <code>secondary</code>, <code>outline</code>, <code>ghost</code>를 사용합니다. 상태 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)은 시맨틱 의미를 전달합니다.
+  </Section.Text>
+  <ComponentExample name="button-variants">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonVariants() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="error">Error</Button>
+          <Button variant="warning">Warning</Button>
+          <Button variant="info">Info</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text>
+    네 가지 크기를 사용할 수 있습니다. 컨텍스트와 주변 콘텐츠 밀도에 따라 선택하세요.
+  </Section.Text>
+  <ComponentExample name="button-sizes">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonSizes() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button size="large">Large</Button>
+          <Button size="medium">Medium</Button>
+          <Button size="small">Small</Button>
+          <Button size="x-small">X-Small</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Shape</Section.Title>
+  <Section.Text>
+    표준 직사각형 버튼에는 <code>square</code>, 필 스타일에는 <code>rounded</code>, 아이콘 전용 원형 버튼에는 <code>circle</code>과 <code>svgOnly</code>를 조합하여 사용합니다.
+  </Section.Text>
+  <ComponentExample name="button-shapes">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+    import { PlusIcon } from "@cocso-ui/react-icons";
+
+    export default function ButtonShapes() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button shape="square">Square</Button>
+          <Button shape="rounded">Rounded</Button>
+          <Button shape="circle" svgOnly><PlusIcon size={18} /></Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>로딩</Section.Title>
+  <Section.Text>
+    비동기 작업이 진행 중일 때 스피너를 표시하고 상호작용을 비활성화하려면 <code>loading</code>을 설정합니다.
+  </Section.Text>
+  <ComponentExample name="button-loading">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonLoading() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button loading variant="primary">Loading</Button>
+          <Button loading variant="secondary">Loading</Button>
+          <Button loading variant="outline">Loading</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Prefix & Suffix</Section.Title>
+  <Section.Text>
+    버튼 레이블 앞이나 뒤에 아이콘 또는 요소를 배치하려면 <code>prefix</code>와 <code>suffix</code>를 사용합니다.
+  </Section.Text>
+  <ComponentExample name="button-prefix-suffix">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+    import { ArrowForwardIcon, PlusIcon } from "@cocso-ui/react-icons";
+
+    export default function ButtonPrefixSuffix() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button prefix={<PlusIcon size={16} />}>Add item</Button>
+          <Button suffix={<ArrowForwardIcon size={16} />}>Continue</Button>
+          <Button prefix={<PlusIcon size={16} />} suffix={<ArrowForwardIcon size={16} />}>Both</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>비활성화</Section.Title>
+  <Section.Text>
+    상호작용을 막으려면 <code>disabled</code>를 설정합니다. 비활성화된 버튼은 시각적으로 흐리게 표시되며 포커스할 수 없습니다.
+  </Section.Text>
+  <ComponentExample name="button-disabled">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonDisabled() {
+      return (
+        <div className="flex flex-wrap items-center gap-3 p-4">
+          <Button disabled variant="primary">Disabled Primary</Button>
+          <Button disabled variant="outline">Disabled Outline</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable
+    data={[
+      {
+        name: "variant",
+        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info"',
+        default: '"primary"',
+        description: "액션의 의도를 전달하기 위해 배경색과 텍스트 색상을 제어합니다. 주요 call-to-action에는 `primary`를, 시각적 비중을 줄이려면 `ghost`를 사용하세요.",
+      },
+      {
+        name: "size",
+        type: '"large" | "medium" | "small" | "x-small"',
+        default: '"medium"',
+        description: "높이, 패딩, 폰트 크기를 제어합니다. 페이지 주요 액션에는 `large`를, 컴팩트한 툴바에는 `x-small`을 사용하세요.",
+      },
+      {
+        name: "shape",
+        type: '"square" | "circle" | "rounded"',
+        default: '"square"',
+        description: "border-radius를 제어합니다. 표준 액션에는 `square`를, 필 모양 레이블에는 `rounded`를, 아이콘 전용 버튼에는 `svgOnly`와 함께 `circle`을 사용하세요.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "상호작용을 막고 버튼을 시각적으로 흐리게 표시합니다. 비활성화된 버튼은 탭 순서에서 제외됩니다.",
+      },
+      {
+        name: "loading",
+        type: "boolean",
+        default: "false",
+        description: "스피너를 오버레이하고 상호작용을 막습니다. 폼 제출이나 API 호출 같은 비동기 작업 중에 사용하세요.",
+      },
+      {
+        name: "prefix",
+        type: "ReactNode",
+        description: "레이블 앞에 렌더링되는 요소입니다.",
+      },
+      {
+        name: "suffix",
+        type: "ReactNode",
+        description: "레이블 뒤에 렌더링되는 요소입니다.",
+      },
+      {
+        name: "svgOnly",
+        type: "boolean",
+        default: "false",
+        description: "텍스트 패딩을 제거하고 버튼을 정사각형 아이콘 컨테이너로 렌더링합니다. 둥근 아이콘 버튼에는 `circle` shape와 함께 사용하세요.",
+      },
+      {
+        name: "weight",
+        type: "FontWeight",
+        default: '"medium"',
+        description: "레이블 텍스트의 기본 폰트 굵기를 재정의합니다.",
+      },
+      {
+        name: "spinnerVariant",
+        type: "SpinnerVariant",
+        description: "로딩 중 스피너 색상을 재정의합니다. 기본 스피너가 커스텀 배경과 충분한 대비를 이루지 못할 때 유용합니다.",
+      },
+      {
+        name: "render",
+        type: "RenderProp",
+        description: "다형성 렌더링을 위해 기본 `<button>` 요소를 대체합니다. 예를 들어, 버튼처럼 보이는 링크를 렌더링하려면 `<a>`를 전달하세요.",
+      },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

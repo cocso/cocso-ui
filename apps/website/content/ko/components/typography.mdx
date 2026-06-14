@@ -1,0 +1,129 @@
+---
+title: Typography
+description: custom, body, heading 모드를 지원하는 유연한 텍스트 렌더링 컴포넌트입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Typography 컴포넌트는 <code>type</code> prop으로 제어되는 세 가지 모드로 동작합니다. custom은 임의의 숫자 폰트 크기, body는 명명된 크기 단계를 가진 시맨틱 본문 텍스트, heading은 반응형 크기 단계를 가진 시맨틱 제목입니다. 모든 모드는 weight, lineHeight, render prop을 지원합니다.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>페이지와 섹션 제목에는 <code>heading</code> 타입을 사용합니다. <code>x-large</code>와 <code>large</code>는 반응형 디자인을 위해 태블릿 브레이크포인트에서 자동으로 크기가 증가합니다.</Section.ListItem>
+    <Section.ListItem>모든 표준 산문 및 UI 텍스트에는 <code>body</code>를 사용합니다.</Section.ListItem>
+    <Section.ListItem>명명된 스케일에 없는 특정 숫자 크기가 디자인 명세에 필요할 때는 <code>custom</code>을 사용합니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem><code>heading</code> 타입은 기본적으로 <code>&lt;h2&gt;</code>로 렌더링됩니다. 문서 구조에 맞는 올바른 heading 레벨을 설정하려면 <code>render</code> prop을 사용하세요(예: <code>render={`<h1 />`}</code>).</Section.ListItem>
+    <Section.ListItem><code>body</code>와 <code>custom</code> 타입은 기본적으로 <code>&lt;p&gt;</code>로 렌더링됩니다. 인라인 콘텐츠를 감쌀 때는 <code>render</code>로 요소를 변경하세요(예: <code>render={`<span />`}</code>).</Section.ListItem>
+    <Section.ListItem>시각적 크기에 관계없이 논리적인 heading 계층 구조(h1 → h2 → h3)를 유지하세요. 작은 heading이 더 높은 레벨일 수 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Typography } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Heading</Section.Title>
+  <Section.Text>heading 모드는 기본적으로 h2 요소를 렌더링합니다. x-large와 large 크기는 반응형으로, 태블릿 브레이크포인트에서 크기가 증가합니다.</Section.Text>
+  <ComponentExample name="typography-heading">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyHeading() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="heading" size="x-large">X-Large Heading</Typography>
+          <Typography type="heading" size="large">Large Heading</Typography>
+          <Typography type="heading" size="medium">Medium Heading</Typography>
+          <Typography type="heading" size="small">Small Heading</Typography>
+          <Typography type="heading" size="x-small">X-Small Heading</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Body</Section.Title>
+  <Section.Text>body 모드는 기본값입니다. p 요소를 렌더링하며 모든 표준 산문 및 UI 텍스트에 사용합니다.</Section.Text>
+  <ComponentExample name="typography-body">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyBody() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="body" size="large">Large body text for prominent content.</Typography>
+          <Typography type="body" size="medium">Medium body text for standard content.</Typography>
+          <Typography type="body" size="small">Small body text for secondary content.</Typography>
+          <Typography type="body" size="x-small">X-Small body text for captions.</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Custom</Section.Title>
+  <Section.Text>custom 모드는 디자인 토큰 스케일의 임의 숫자 폰트 크기, 또는 base, tablet, desktop 키를 가진 반응형 객체를 받습니다.</Section.Text>
+  <ComponentExample name="typography-custom">
+    ```tsx
+    import { Typography } from "@cocso-ui/react";
+
+    export default function TypographyCustom() {
+      return (
+        <div className="flex flex-col gap-3 p-4">
+          <Typography type="custom" size={24} weight="bold">Custom size 24, bold</Typography>
+          <Typography type="custom" size={16} weight="medium">Custom size 16, medium</Typography>
+          <Typography type="custom" size={12} weight="normal" lineHeight="relaxed">Custom size 12, relaxed line height</Typography>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Responsive</Section.Title>
+  <Section.Text>heading 크기 x-large와 large는 태블릿 브레이크포인트에서 자동으로 크기가 증가합니다. custom 모드에서는 반응형 객체나 배열을 전달하여 각 브레이크포인트별 크기를 독립적으로 제어할 수 있습니다.</Section.Text>
+  <TokenTable
+    data={[
+      { name: "heading x-large", token: "base → tablet", value: "28px → 36px" },
+      { name: "heading large", token: "base → tablet", value: "24px → 32px" },
+      { name: "heading medium", token: "base", value: "20px" },
+      { name: "heading small", token: "base", value: "16px" },
+      { name: "heading x-small", token: "base", value: "14px" },
+      { name: "body large", token: "base", value: "18px" },
+      { name: "body medium", token: "base", value: "16px" },
+      { name: "body small", token: "base", value: "14px" },
+      { name: "body x-small", token: "base", value: "12px" },
+    ]}
+  />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+  <PropsTable data={[
+    { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "렌더링 모드와 사용 가능한 크기 단계를 선택합니다. `heading`은 반응형 제목을 렌더링하고, `body`는 단락 텍스트를 렌더링하며, `custom`은 임의의 숫자 크기를 받습니다." },
+    { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "디자인 토큰 스케일의 숫자 폰트 크기(예: 12, 16, 24), 또는 브레이크포인트별 크기 지정을 위한 `base`, `tablet`, `desktop` 키를 가진 반응형 객체/배열입니다." },
+    { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "명명된 body 크기 단계: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
+    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "명명된 heading 크기 단계. `x-large`와 `large`는 반응형으로 태블릿 브레이크포인트에서 크기가 증가합니다. `medium` (20px), `small` (16px), `x-small` (14px)은 고정 크기입니다." },
+    { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "폰트 굵기입니다. heading에서는 `\"bold\"`, body/custom에서는 `\"normal\"`이 기본값입니다." },
+    { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "줄 높이를 설정합니다." },
+    { name: "render", type: "RenderProp", description: "기본 HTML 요소를 대체합니다. heading 기본값은 `<h2>`, body/custom 기본값은 `<p>`입니다. 올바른 시맨틱 레벨을 설정할 때 사용하세요." },
+    { name: "color", type: "string", description: "텍스트 색상을 직접 설정합니다. CSS 색상 값 또는 디자인 토큰 참조를 사용합니다." },
+  ]} />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

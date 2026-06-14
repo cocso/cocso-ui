@@ -1,0 +1,82 @@
+---
+title: Accordion
+description: 관련 콘텐츠를 펼치거나 숨기는 인터랙티브 헤딩이 수직으로 쌓인 컴포넌트입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>Accordion은 WAI-ARIA disclosure 위젯 패턴을 따르는 복합 컴포넌트입니다. 기본적으로 키보드 탐색을 지원합니다. 각 아이템은 독립적으로 펼치거나 접을 수 있습니다. FAQ, 설정 패널, 공간이 제한된 상세 섹션 등 접을 수 있는 콘텐츠 영역에 Accordion을 사용하세요. 헤더는 간결하고 명확하게 작성하세요. 숨겨진 콘텐츠의 주요 레이블 역할을 합니다. 제어형(<code>value</code> + <code>onValueChange</code>)과 비제어형(<code>defaultValue</code>) 사용을 모두 지원합니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>WAI-ARIA Accordion (disclosure widget) 패턴을 따릅니다.</Section.ListItem>
+    <Section.ListItem><code>Enter</code> 또는 <code>Space</code>로 포커스된 아이템을 열거나 닫을 수 있습니다.</Section.ListItem>
+    <Section.ListItem><code>Arrow Down</code>으로 다음 헤더로 포커스를 이동합니다. <code>Arrow Up</code>으로 이전 헤더로 이동합니다.</Section.ListItem>
+    <Section.ListItem><code>Home</code>으로 첫 번째 헤더로 포커스를 이동합니다. <code>End</code>로 마지막 헤더로 이동합니다.</Section.ListItem>
+    <Section.ListItem>각 트리거에는 콘텐츠 패널과 연결하는 <code>aria-expanded</code>와 <code>aria-controls</code>가 있습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Accordion } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>기본 아코디언은 열릴 때 회전하는 쉐브론 인디케이터와 함께 각 아이템을 렌더링합니다.</Section.Text>
+  <ComponentExample name="accordion-default" />
+</Section>
+
+<Section>
+  <Section.Title>Chevron 숨기기</Section.Title>
+  <Section.Text><code>Accordion.Trigger</code>에 <code>chevron={false}</code>를 설정하면 쉐브론 아이콘을 숨깁니다.</Section.Text>
+  <ComponentExample name="accordion-no-chevron" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>Accordion (루트 컨테이너)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string | string[]", description: "기본으로 열려 있는 아이템의 값입니다. 컴포넌트가 자체적으로 열림 상태를 관리하는 비제어 방식에 사용합니다." },
+      { name: "value", type: "string | string[]", description: "제어형 열림 값입니다. 단일 문자열 또는 여러 아이템을 열기 위한 배열을 받습니다. `onValueChange`와 함께 사용하세요." },
+      { name: "onValueChange", type: "(value: string | string[]) => void", description: "아이템이 펼쳐지거나 접힐 때 호출되는 콜백입니다. 새로운 값(문자열 또는 배열)을 받습니다." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Item</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "이 아코디언 아이템의 고유 문자열 식별자입니다. 루트의 `value` 또는 `defaultValue`와 일치해야 펼친 상태로 표시됩니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "아이템 열기/닫기를 비활성화합니다. 헤더는 표시되지만 상호작용할 수 없습니다." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Header</SubHeading>
+
+  <Section.Text>트리거를 감싸는 <code>&lt;h3&gt;</code> 요소를 렌더링합니다. 표준 HTML 헤딩 props를 허용합니다.</Section.Text>
+
+  <SubHeading>Accordion.Trigger</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "chevron", type: "boolean", default: "true", description: "`true`이면 펼침/접힘 상태를 나타내는 회전 쉐브론 아이콘을 표시합니다. 커스텀 인디케이터를 사용할 때는 `false`로 설정하세요." },
+    ]}
+  />
+
+  <SubHeading>Accordion.Content</SubHeading>
+
+  <Section.Text>콘텐츠를 드러내는 애니메이션 패널입니다. Base UI Accordion.Panel props를 허용합니다.</Section.Text>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

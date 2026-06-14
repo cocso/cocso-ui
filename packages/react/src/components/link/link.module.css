@@ -1,0 +1,41 @@
+@layer components {
+  .link {
+    display: inline-flex;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    color: var(--cocso-link-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--cocso-duration-fast) var(--cocso-easing-default);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover {
+      color: var(--cocso-link-color-hover);
+    }
+
+    .current:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .link:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-950);
+    outline-offset: 2px;
+    border-radius: var(--cocso-radius-1);
+  }
+
+  .indicator {
+    text-decoration: underline;
+    text-decoration-thickness: 0.0625em;
+    text-underline-offset: 0.15em;
+  }
+
+  .externalIcon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+  }
+}

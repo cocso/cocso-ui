@@ -1,0 +1,323 @@
+{
+  "name": "spinner",
+  "slots": [
+    "root"
+  ],
+  "combinations": {
+    "variant=primary,size=large": {
+      "bladeColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "primary-950"
+      }
+    },
+    "variant=primary,size=medium": {
+      "bladeColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "primary-950"
+      }
+    },
+    "variant=primary,size=small": {
+      "bladeColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "primary-950"
+      }
+    },
+    "variant=secondary,size=large": {
+      "bladeColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "neutral-500"
+      }
+    },
+    "variant=secondary,size=medium": {
+      "bladeColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "neutral-500"
+      }
+    },
+    "variant=secondary,size=small": {
+      "bladeColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "neutral-500"
+      }
+    },
+    "variant=success,size=large": {
+      "bladeColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "success-500"
+      }
+    },
+    "variant=success,size=medium": {
+      "bladeColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "success-500"
+      }
+    },
+    "variant=success,size=small": {
+      "bladeColor": {
+        "r": 0.13333333333333333,
+        "g": 0.5294117647058824,
+        "b": 0.2196078431372549
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "success-500"
+      }
+    },
+    "variant=error,size=large": {
+      "bladeColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "danger-500"
+      }
+    },
+    "variant=error,size=medium": {
+      "bladeColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "danger-500"
+      }
+    },
+    "variant=error,size=small": {
+      "bladeColor": {
+        "r": 0.8705882352941177,
+        "g": 0.20392156862745098,
+        "b": 0.07058823529411765
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "danger-500"
+      }
+    },
+    "variant=warning,size=large": {
+      "bladeColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "warning-500"
+      }
+    },
+    "variant=warning,size=medium": {
+      "bladeColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "warning-500"
+      }
+    },
+    "variant=warning,size=small": {
+      "bladeColor": {
+        "r": 0.6196078431372549,
+        "g": 0.41568627450980394,
+        "b": 0
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "warning-500"
+      }
+    },
+    "variant=info,size=large": {
+      "bladeColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "info-500"
+      }
+    },
+    "variant=info,size=medium": {
+      "bladeColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "info-500"
+      }
+    },
+    "variant=info,size=small": {
+      "bladeColor": {
+        "r": 0.1450980392156863,
+        "g": 0.43137254901960786,
+        "b": 0.9568627450980393
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "info-500"
+      }
+    },
+    "variant=white,size=large": {
+      "bladeColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "blades": 10,
+      "bladeWidth": 2,
+      "bladeHeight": 6,
+      "bladeRadius": 1,
+      "output": 20,
+      "_tokenRefs": {
+        "bladeColor": "white"
+      }
+    },
+    "variant=white,size=medium": {
+      "bladeColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "blades": 8,
+      "bladeWidth": 2,
+      "bladeHeight": 5,
+      "bladeRadius": 1,
+      "output": 16,
+      "_tokenRefs": {
+        "bladeColor": "white"
+      }
+    },
+    "variant=white,size=small": {
+      "bladeColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "blades": 6,
+      "bladeWidth": 1.5,
+      "bladeHeight": 4,
+      "bladeRadius": 0.75,
+      "output": 12,
+      "_tokenRefs": {
+        "bladeColor": "white"
+      }
+    }
+  }
+}

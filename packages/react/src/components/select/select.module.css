@@ -1,0 +1,84 @@
+@layer components {
+  .wrapper {
+    position: relative;
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .wrapper.stretch {
+    width: 100%;
+  }
+
+  .select {
+    --cocso-select-min-width: inherit;
+    --cocso-select-height: inherit;
+    --cocso-select-padding-left: inherit;
+    --cocso-select-padding-right: inherit;
+    --cocso-select-font-size: inherit;
+    --cocso-select-border-radius: inherit;
+    --cocso-select-bg-color: var(--cocso-color-white);
+    min-width: var(--cocso-select-min-width);
+    height: var(--cocso-select-height);
+    padding-right: var(--cocso-select-padding-right);
+    padding-left: var(--cocso-select-padding-left);
+    font-size: var(--cocso-select-font-size);
+    color: var(--cocso-color-neutral-950);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: var(--cocso-select-bg-color);
+    border: none;
+    border-radius: var(--cocso-select-border-radius);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-100),
+      var(--cocso-shadow-xs);
+    transition: box-shadow var(--cocso-duration-fast) var(--cocso-easing-soft);
+  }
+
+  .select:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-400),
+      var(--cocso-shadow-xs);
+  }
+
+  .wrapper.stretch .select {
+    width: 100%;
+  }
+
+  .wrapper:has(select:disabled) {
+    cursor: not-allowed;
+  }
+
+  .select:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .wrapper.error .select {
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
+  }
+
+  .wrapper.error .select:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    right: var(--cocso-select-icon-right, var(--cocso-spacing-5));
+    color: var(--cocso-color-neutral-500);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .wrapper:has(select:disabled) .icon {
+    opacity: 0.4;
+  }
+}

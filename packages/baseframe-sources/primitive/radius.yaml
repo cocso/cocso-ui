@@ -1,0 +1,29 @@
+kind: Tokens
+metadata:
+  id: radius
+  name: Radius
+  description: primitive border-radius tokens for Baseframe
+data:
+  collection: global
+  tokens:
+    $radius.1:
+      values:
+        default: "2px"
+    $radius.2:
+      values:
+        default: "4px"
+    $radius.3:
+      values:
+        default: "6px"
+    $radius.4:
+      values:
+        default: "8px"
+    $radius.5:
+      values:
+        default: "12px"
+    $radius.6:
+      values:
+        default: "16px"
+    $radius.full:
+      values:
+        default: "1000px"

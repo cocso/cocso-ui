@@ -1,0 +1,30 @@
+@layer components {
+  .badge {
+    --cocso-badge-padding: inherit;
+    --cocso-badge-border-radius: inherit;
+    --cocso-badge-bg-color: inherit;
+    --cocso-badge-border: none;
+    display: inline-flex;
+    padding: var(--cocso-badge-padding);
+    color: var(--cocso-badge-font-color);
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: var(--cocso-badge-bg-color);
+    border: var(--cocso-badge-border);
+    border-radius: var(--cocso-badge-border-radius);
+  }
+
+  .circle {
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: var(--cocso-badge-padding-y);
+  }
+
+  .inner {
+    display: inline-flex;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+  }
+}

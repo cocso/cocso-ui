@@ -1,0 +1,86 @@
+@layer components {
+  .pagination {
+    display: flex;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .arrow,
+  .item {
+    --cocso-pagination-font-size: var(--cocso-text-sm);
+    --cocso-pagination-font-color: var(--cocso-color-text-primary);
+    --cocso-pagination-font-weight: inherit;
+    --cocso-pagination-bg-color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--cocso-spacing-12);
+    height: var(--cocso-spacing-12);
+    font-size: var(--cocso-pagination-font-size);
+    font-weight: var(--cocso-pagination-font-weight);
+    color: var(--cocso-pagination-font-color);
+    cursor: pointer;
+    background-color: var(--cocso-pagination-bg-color);
+    border-radius: var(--cocso-radius-4);
+    transition: transform var(--cocso-duration-fast) var(--cocso-easing-default);
+    will-change: transform;
+  }
+
+  .arrow:focus-visible,
+  .item:focus-visible {
+    outline: 2px solid var(--cocso-color-primary-950);
+    outline-offset: 2px;
+  }
+
+  .arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .arrow:not(:disabled):hover {
+      --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
+    }
+
+    .item[data-active="false"]:hover {
+      --cocso-pagination-bg-color: var(--cocso-color-neutral-50);
+    }
+  }
+
+  .arrow:not(:disabled):active {
+    --cocso-pagination-bg-color: var(--cocso-color-neutral-100);
+  }
+
+  .arrow > svg {
+    flex-shrink: 0;
+    width: var(--cocso-spacing-8);
+    height: var(--cocso-spacing-8);
+  }
+
+  .arrow:active,
+  .item:active {
+    transform: scale(0.98);
+  }
+
+  .item[data-active="true"] {
+    --cocso-pagination-font-color: var(--cocso-color-white);
+    --cocso-pagination-bg-color: var(--cocso-color-primary-950);
+    --cocso-pagination-font-weight: var(--cocso-font-weight-semibold);
+  }
+
+  .item[data-active="false"]:active {
+    --cocso-pagination-bg-color: var(--cocso-color-neutral-100);
+  }
+
+  .trunc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--cocso-spacing-13);
+    height: var(--cocso-spacing-13);
+    font-size: var(--cocso-text-base);
+    color: var(--cocso-color-text-primary);
+  }
+}

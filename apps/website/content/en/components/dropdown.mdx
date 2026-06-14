@@ -1,0 +1,119 @@
+---
+title: Dropdown
+description: A context menu that appears on trigger activation, built on Base UI's Menu primitive.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    Dropdown is a compound component that renders a floating list of actions anchored to a trigger element. Use it for contextual actions such as edit, duplicate, and delete, or for a list of commands associated with a specific item.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Composed with a compound API: <code>Dropdown</code>, <code>Dropdown.Trigger</code>, <code>Dropdown.Content</code>, <code>Dropdown.Item</code></Section.ListItem>
+    <Section.ListItem>Keyboard navigation with arrow keys; <code>Escape</code> closes the menu.</Section.ListItem>
+    <Section.ListItem>Items support a <code>prefix</code> slot for a leading icon.</Section.ListItem>
+    <Section.ListItem>Supports both controlled (<code>open</code> + <code>onOpenChange</code>) and uncontrolled (<code>defaultOpen</code>) usage.</Section.ListItem>
+  </Section.UnorderedList>
+  <Section.Text className="font-semibold">Guidelines</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use Dropdown for contextual actions associated with a specific item — edit, duplicate, delete.</Section.ListItem>
+    <Section.ListItem>For navigation menus or content selection, use Select or Tab instead.</Section.ListItem>
+    <Section.ListItem>Keep the menu to 3–7 items for best usability.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Uses <code>role="menu"</code> and <code>role="menuitem"</code> for proper ARIA semantics.</Section.ListItem>
+    <Section.ListItem><code>Arrow Down</code> / <code>Arrow Up</code> navigates between items.</Section.ListItem>
+    <Section.ListItem><code>Enter</code> or <code>Space</code> activates the focused item.</Section.ListItem>
+    <Section.ListItem><code>Escape</code> closes the menu and returns focus to the trigger.</Section.ListItem>
+    <Section.ListItem>Type-ahead is supported — pressing a character focuses the first item whose label starts with that character.</Section.ListItem>
+    <Section.ListItem>The trigger element receives <code>aria-expanded</code> and <code>aria-haspopup="menu"</code> attributes.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Dropdown } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A dropdown menu triggered by an icon button, containing labeled action items.</Section.Text>
+  <ComponentExample name="dropdown-default">
+```tsx
+"use client";
+
+import { Button, Dropdown } from "@cocso-ui/react";
+import { ContentCopyIcon, DeleteIcon, MoreHorizIcon, PencilIcon } from "@cocso-ui/react-icons";
+
+export default function DropdownDefault() {
+  return (
+    <div className="p-4">
+      <Dropdown>
+        <Dropdown.Trigger render={<Button variant="secondary" svgOnly />}>
+          <MoreHorizIcon size={18} />
+        </Dropdown.Trigger>
+        <Dropdown.Content>
+          <Dropdown.Item prefix={<PencilIcon size={16} />}>Edit</Dropdown.Item>
+          <Dropdown.Item prefix={<ContentCopyIcon size={16} />}>Duplicate</Dropdown.Item>
+          <Dropdown.Item prefix={<DeleteIcon size={16} />}>Delete</Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown>
+    </div>
+  );
+}
+```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Prefix Icon</Section.Title>
+  <Section.Text>Pass an icon node to the <code>prefix</code> prop of <code>Dropdown.Item</code> to render a leading icon before the label.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Dropdown (Root Container)</SubHeading>
+  <PropsTable
+    data={[
+      { name: "open", type: "boolean", description: "Controlled open state. Use together with `onOpenChange` for programmatic menu control." },
+      { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback invoked when the menu should open or close. Receives the new boolean state." },
+      { name: "defaultOpen", type: "boolean", default: "false", description: "Initial open state for uncontrolled usage." },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Trigger</SubHeading>
+  <PropsTable
+    data={[
+      { name: "render", type: "ReactElement", description: "The element to render as the menu trigger. Receives click handler and `aria-expanded`/`aria-haspopup` via prop merging.", required: true },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Content</SubHeading>
+  <PropsTable
+    data={[
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Preferred placement side relative to the trigger. The menu auto-flips if there is insufficient space." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"start"', description: "Alignment of the menu along the trigger edge. `start` aligns to the leading edge, `end` to the trailing edge." },
+      { name: "sideOffset", type: "number", default: "4", description: "Distance in pixels between the trigger and the menu panel." },
+    ]}
+  />
+
+  <SubHeading>Dropdown.Item</SubHeading>
+  <PropsTable
+    data={[
+      { name: "prefix", type: "ReactNode", description: "Element rendered before the item label, typically a 16px icon. Use for visual identification of the action." },
+      { name: "onClick", type: "() => void", description: "Callback invoked when the item is selected via click or keyboard activation." },
+      { name: "disabled", type: "boolean", default: "false", description: "Prevents interaction with the item. Disabled items are visually dimmed and skipped during keyboard navigation." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

@@ -1,0 +1,71 @@
+---
+title: Radio Group
+description: 단일 옵션을 선택하기 위한 상호 배타적 라디오 버튼 세트입니다.
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>RadioGroup은 단일 선택 시맨틱을 적용하며, roving tabindex 키보드 탐색을 포함한 WAI-ARIA 라디오 그룹 패턴을 따릅니다. 2~7개 옵션 간 상호 배타적인 선택에 RadioGroup을 사용하세요. 더 많은 옵션이 있는 경우 콤팩트한 레이아웃을 위해 Select를 고려하세요. 이진 선택에는 Switch나 Checkbox가 더 적합할 수 있습니다.</Section.Text>
+</Section>
+
+<Section>
+  <Section.Title>접근성</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>roving tabindex 탐색을 포함한 WAI-ARIA Radio Group 패턴을 따릅니다.</Section.ListItem>
+    <Section.ListItem><code>Arrow Down</code> / <code>Arrow Right</code>로 다음 라디오 아이템으로 포커스를 이동합니다. <code>Arrow Up</code> / <code>Arrow Left</code>로 이전 아이템으로 이동합니다.</Section.ListItem>
+    <Section.ListItem><code>Tab</code>으로 라디오 그룹을 단일 단위로 진입하거나 빠져나옵니다.</Section.ListItem>
+    <Section.ListItem>각 <code>RadioGroup.Item</code>은 선택 상태를 반영하는 <code>aria-checked</code>를 가진 <code>role="radio"</code>를 갖습니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { RadioGroup } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>기본</Section.Title>
+  <Section.Text>각 <code>RadioGroup.Item</code>은 선택 상태를 렌더링하는 <code>RadioGroup.Indicator</code>와 쌍을 이룹니다. 비제어 사용에는 <code>defaultValue</code>를 사용하세요.</Section.Text>
+  <ComponentExample name="radio-group-default" />
+</Section>
+
+<Section>
+  <Section.Title>크기</Section.Title>
+  <Section.Text><code>RadioGroup.Item</code>에서 세 가지 크기를 사용할 수 있습니다. <code>large</code>, <code>medium</code>, <code>small</code>이며 기본값은 <code>medium</code>입니다.</Section.Text>
+  <ComponentExample name="radio-group-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>API 레퍼런스</Section.Title>
+
+  <SubHeading>RadioGroup (Root)</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "defaultValue", type: "string", description: "기본으로 선택되는 아이템의 값입니다. 컴포넌트가 자체 상태를 관리하는 비제어 시나리오에 사용하세요." },
+      { name: "value", type: "string", description: "현재 선택된 값입니다. 제어형 선택을 위해 `onValueChange`와 함께 사용하세요." },
+      { name: "onValueChange", type: "(value: string) => void", description: "사용자가 다른 라디오 아이템을 선택할 때 호출되는 콜백입니다. 새로운 값 문자열을 받습니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "그룹 내 모든 아이템을 비활성화하여 선택 변경을 방지하고 시각적 모양을 흐리게 합니다." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Item</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "value", type: "string", required: true, description: "이 라디오 아이템을 식별하는 고유 값입니다. 선택 상태로 표시되려면 그룹의 `value` 또는 `defaultValue`와 일치해야 합니다." },
+      { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "라디오 버튼 크기와 연관된 레이블 크기를 제어합니다." },
+      { name: "disabled", type: "boolean", default: "false", description: "그룹의 비활성화 상태와 독립적으로 이 개별 라디오 아이템을 비활성화합니다." },
+    ]}
+  />
+
+  <SubHeading>RadioGroup.Indicator</SubHeading>
+
+  <Section.Text><code>RadioGroup.Item</code> 내부에 시각적 인디케이터 점을 렌더링합니다. 표준 HTML span props를 받습니다.</Section.Text>
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

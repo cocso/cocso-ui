@@ -7,7 +7,7 @@
     "directory": "packages/react-icons"
   },
   "scripts": {
-    "prebuild": "rm -rf dist && node scripts/generate-index-file.mjs",
+    "prebuild": "rm -rf dist",
     "build": "rollup -c rollup.config.cjs",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --fix"
@@ -29,6 +29,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@cocso-ui/icons": "workspace:*",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@rollup/plugin-babel": "^7.0.0",
@@ -37,14 +38,12 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "react": "^19.2.4",
-    "rollup": "^4.59.0",
-    "rollup-plugin-dts": "^6.3.0",
-    "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "^5.9.3"
+    "rollup": "^4.60.1",
+    "rollup-plugin-dts": "^6.4.1",
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^19.1.1"
   },
   "publishConfig": {
     "access": "public"

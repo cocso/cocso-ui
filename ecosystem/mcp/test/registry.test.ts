@@ -1,0 +1,103 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  getRegistrySnapshot,
+  parseLlmsIndex,
+  rankComponentsForPrompt,
+} from "../src/registry.js";
+import { DocumentationSectionId } from "../src/types.js";
+
+const SAMPLE_LLMS = `# COCSO UI
+
+## Getting Started
+
+- [Installation](https://cocso-ui.com/getting-started/installation.md): install guide
+
+## Components
+
+- [Button](https://cocso-ui.com/components/button.md): trigger action
+- [Dialog](https://cocso-ui.com/components/dialog.md): modal interaction
+`;
+
+describe("parseLlmsIndex", () => {
+  it("maps links with section context", () => {
+    const links = parseLlmsIndex(SAMPLE_LLMS);
+    expect(links).toHaveLength(3);
+    expect(links[0]?.section).toBe(DocumentationSectionId.GETTING_STARTED);
+    expect(links[1]?.section).toBe(DocumentationSectionId.COMPONENTS);
+  });
+
+  it("normalizes docs urls to canonical host", () => {
+    const links = parseLlmsIndex(
+      "## Components\n\n- [Button](https://www.cocso-ui.com/components/button.md): trigger action\n"
+    );
+    expect(links[0]?.url).toBe("https://cocso-ui.com/components/button.md");
+  });
+
+  it("skips invalid links without failing the parser", () => {
+    const links = parseLlmsIndex(
+      "## Components\n\n- [Broken](not-a-valid-url): broken\n- [Button](https://cocso-ui.com/components/button.md): ok\n"
+    );
+
+    expect(links).toHaveLength(1);
+    expect(links[0]?.title).toBe("Button");
+  });
+
+  it("parses compact llms format without line breaks", () => {
+    const compact =
+      "## Getting Started - [Installation](https://cocso-ui.com/getting-started/installation.md): install guide ## Components - [Button](https://cocso-ui.com/components/button.md): trigger action - [Dialog](https://cocso-ui.com/components/dialog.md): modal interaction";
+
+    const links = parseLlmsIndex(compact);
+    expect(links).toHaveLength(3);
+    expect(links[0]?.section).toBe(DocumentationSectionId.GETTING_STARTED);
+    expect(links[1]?.section).toBe(DocumentationSectionId.COMPONENTS);
+    expect(links[2]?.title).toBe("Dialog");
+  });
+});
+
+describe("getRegistrySnapshot", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("rejects empty link snapshots", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({
+        ok: true,
+        status: 200,
+        text: async () => "# unexpected html shell",
+      }))
+    );
+
+    await expect(getRegistrySnapshot()).rejects.toThrow(
+      "rejecting empty registry snapshot"
+    );
+  });
+});
+
+describe("rankComponentsForPrompt", () => {
+  it("ranks best matches first", () => {
+    const ranked = rankComponentsForPrompt(
+      "Build a page with modal confirmation and actions",
+      [
+        {
+          title: "Button",
+          slug: "button",
+          url: "https://cocso-ui.com/components/button.md",
+          description: "trigger action",
+          importPackage: "@cocso-ui/react",
+        },
+        {
+          title: "Dialog",
+          slug: "dialog",
+          url: "https://cocso-ui.com/components/dialog.md",
+          description: "modal interaction",
+          importPackage: "@cocso-ui/react",
+        },
+      ],
+      2
+    );
+
+    expect(ranked[0]?.slug).toBe("dialog");
+  });
+});

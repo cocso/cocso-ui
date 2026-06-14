@@ -41,10 +41,21 @@ yarn-error.log*
 .DS_Store
 *.pem
 .omc/
+.omx/
+.superset/
+.claude/
+.mcp.json
+.opencode.json
+
+research/
 
 .npmrc
 *storybook.log
 storybook-static
+
+# Figma plugin generated tokens
+packages/figma/src/generated/tokens.json
+packages/figma/golden-matrix-report.md
 
 # Changeset
 !.changeset/README.md

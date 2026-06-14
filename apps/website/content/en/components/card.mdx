@@ -1,0 +1,60 @@
+---
+title: Card
+description: A contained surface for grouping related content with configurable elevation and padding.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Card is a flexible container that groups related content within a visually distinct surface. Three variants cover common elevation patterns — use <code>elevated</code> for floating content, <code>outlined</code> for bordered sections, and <code>filled</code> for subtle background grouping.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Use <code>elevated</code> for primary content cards that need visual prominence.</Section.ListItem>
+    <Section.ListItem>Use <code>outlined</code> when a clear boundary is needed without adding depth.</Section.ListItem>
+    <Section.ListItem>Use <code>filled</code> for secondary areas or nested content regions.</Section.ListItem>
+    <Section.ListItem>Adjust <code>padding</code> to match the density requirements of the content inside.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Card renders as a <code>&lt;div&gt;</code> with no implicit role. Add semantic structure to its content (headings, lists) to aid navigation.</Section.ListItem>
+    <Section.ListItem>If a card acts as a clickable region, use a <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> inside rather than attaching click handlers to the card itself.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Card } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>A card with default elevated style and medium padding.</Section.Text>
+  <ComponentExample name="card-default" />
+</Section>
+
+<Section>
+  <Section.Title>Variant</Section.Title>
+  <Section.Text>Three visual variants adjust the elevation and border style.</Section.Text>
+  <ComponentExample name="card-variants" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Card</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "variant", type: '"elevated" | "outlined" | "filled"', default: '"elevated"', description: "Controls the visual style of the card. `elevated` adds a shadow, `outlined` adds a border, `filled` uses a background color." },
+      { name: "padding", type: '"sm" | "md" | "lg"', default: '"md"', description: "Controls the internal padding. Adjust based on content density." },
+      { name: "children", type: "ReactNode", required: true, description: "The content rendered inside the card." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

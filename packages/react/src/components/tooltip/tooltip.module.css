@@ -1,0 +1,112 @@
+@layer components {
+  @keyframes slide-up-and-fade {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-right-and-fade {
+    from {
+      opacity: 0;
+      transform: translateX(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-down-and-fade {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-left-and-fade {
+    from {
+      opacity: 0;
+      transform: translateX(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content {
+      animation: none;
+    }
+  }
+
+  .content {
+    position: relative;
+    padding-block: var(--cocso-spacing-3);
+    padding-inline: var(--cocso-spacing-5);
+    overflow: visible;
+    font-size: var(--cocso-text-xs);
+    line-height: 1.5;
+    color: var(--cocso-color-surface-primary);
+    background-color: var(--cocso-color-surface-inverse);
+    border-radius: var(--cocso-radius-2);
+    animation-duration: var(--cocso-duration-fast);
+    animation-timing-function: var(--cocso-easing-entrance);
+    will-change: transform, opacity;
+  }
+
+  .content[data-open][data-side="top"] {
+    margin-bottom: var(--cocso-spacing-5);
+    animation-name: slide-up-and-fade;
+  }
+
+  .content[data-open][data-side="right"] {
+    margin-left: var(--cocso-spacing-5);
+    animation-name: slide-right-and-fade;
+  }
+
+  .content[data-open][data-side="bottom"] {
+    margin-top: var(--cocso-spacing-5);
+    animation-name: slide-down-and-fade;
+  }
+
+  .content[data-open][data-side="left"] {
+    margin-right: var(--cocso-spacing-5);
+    animation-name: slide-left-and-fade;
+  }
+
+  .arrow {
+    width: 6px;
+    height: 6px;
+    background-color: var(--cocso-color-surface-inverse);
+  }
+
+  .arrow[data-side="bottom"] {
+    top: 0;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .arrow[data-side="top"] {
+    bottom: 0;
+    transform: translateY(50%) rotate(45deg);
+  }
+
+  .arrow[data-side="right"] {
+    left: 0;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .arrow[data-side="left"] {
+    right: 0;
+    transform: translateX(50%) rotate(45deg);
+  }
+}

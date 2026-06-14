@@ -1,0 +1,67 @@
+---
+title: Avatar
+description: A visual identifier for a user or entity, with image, initials fallback, or icon.
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>Avatar displays a user or entity image. When no image is available it falls back to initials derived from the <code>fallback</code> prop or the first character of <code>alt</code>. If neither is provided, it renders a neutral placeholder.</Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Always provide <code>alt</code> for accessibility even when using a fallback.</Section.ListItem>
+    <Section.ListItem>Use <code>fallback</code> to override the auto-generated initial (e.g., for two-letter initials like <code>"JD"</code>).</Section.ListItem>
+    <Section.ListItem>Use <code>shape="square"</code> for brand logos or non-person entities.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Accessibility</Section.Title>
+  <Section.UnorderedList>
+    <Section.ListItem>Provide a meaningful <code>alt</code> text so screen readers can identify the avatar's subject.</Section.ListItem>
+    <Section.ListItem>When the avatar is decorative and accompanied by visible text, pass <code>alt=""</code> to suppress the announcement.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>Import</Section.Title>
+  ```tsx
+  import { Avatar } from "@cocso-ui/react";
+  ```
+</Section>
+
+<Section>
+  <Section.Title>Default</Section.Title>
+  <Section.Text>Avatar with an image source, an initials fallback, and a placeholder fallback.</Section.Text>
+  <ComponentExample name="avatar-default" />
+</Section>
+
+<Section>
+  <Section.Title>Size</Section.Title>
+  <Section.Text>Five sizes are available: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>. The default is <code>md</code>.</Section.Text>
+  <ComponentExample name="avatar-sizes" />
+</Section>
+
+<Section>
+  <Section.Title>Shape</Section.Title>
+  <Section.Text>Two shape options are available. Use <code>circle</code> for people and <code>square</code> for brands or entities.</Section.Text>
+  <ComponentExample name="avatar-shapes" />
+</Section>
+
+<Section>
+  <Section.Title>API Reference</Section.Title>
+
+  <SubHeading>Avatar</SubHeading>
+
+  <PropsTable
+    data={[
+      { name: "src", type: "string", description: "URL of the avatar image. When omitted, the component renders a fallback." },
+      { name: "alt", type: "string", description: "Alternative text for the image and source for auto-generating a single-letter initial." },
+      { name: "fallback", type: "string", description: "Text rendered when no image is available. Overrides the auto-generated initial from `alt`." },
+      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "Controls the dimensions of the avatar." },
+      { name: "shape", type: '"circle" | "square"', default: '"circle"', description: "Controls the border-radius. Use `square` for logos or non-person entities." },
+    ]}
+  />
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

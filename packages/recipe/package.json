@@ -1,0 +1,64 @@
+{
+  "name": "@cocso-ui/recipe",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Component visual spec recipes — CI-enforced declarative mirror for React and Figma",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocso/cocso-ui.git",
+    "directory": "packages/recipe"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./resolvers/react": {
+      "types": "./dist/resolvers/react.d.ts",
+      "import": "./dist/resolvers/react.js",
+      "default": "./dist/resolvers/react.js"
+    },
+    "./resolvers/react-styles": {
+      "types": "./dist/resolvers/react-styles.d.ts",
+      "import": "./dist/resolvers/react-styles.js",
+      "default": "./dist/resolvers/react-styles.js"
+    },
+    "./recipes/*": {
+      "types": "./dist/recipes/*.d.ts",
+      "import": "./dist/recipes/*.js",
+      "default": "./dist/recipes/*.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/token-classification.d.ts",
+      "import": "./dist/utils/token-classification.js",
+      "default": "./dist/utils/token-classification.js"
+    },
+    "./utils/semantic-mapping": {
+      "types": "./dist/utils/semantic-mapping.d.ts",
+      "import": "./dist/utils/semantic-mapping.js",
+      "default": "./dist/utils/semantic-mapping.js"
+    },
+    "./utils/property-categories": {
+      "types": "./dist/utils/property-categories.d.ts",
+      "import": "./dist/utils/property-categories.js",
+      "default": "./dist/utils/property-categories.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.2",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  }
+}

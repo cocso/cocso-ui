@@ -1,0 +1,32 @@
+@layer components {
+  .breadcrumb {
+    font-size: var(--cocso-breadcrumb-font-size);
+    color: var(--cocso-breadcrumb-font-color);
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: inline-flex;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+  }
+
+  .item:last-child {
+    font-weight: 500;
+    color: var(--cocso-color-neutral-950);
+  }
+
+  .separator {
+    color: var(--cocso-color-neutral-300);
+    user-select: none;
+  }
+}
