@@ -103,6 +103,20 @@
     {
       "aliases": [],
       "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "AttachFileIcon",
+      "name": "attach-file",
+      "source": "custom",
+      "tags": [
+        "attach",
+        "file",
+        "paperclip"
+      ],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
       "colorStrategy": "stroke",
       "componentName": "AutoRenewIcon",
       "name": "auto-renew",
@@ -722,6 +736,19 @@
       "name": "selector",
       "source": "tabler",
       "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "fill",
+      "componentName": "SendIcon",
+      "name": "send",
+      "source": "custom",
+      "tags": [
+        "message",
+        "share"
+      ],
       "viewBox": "0 0 24 24"
     },
     {
