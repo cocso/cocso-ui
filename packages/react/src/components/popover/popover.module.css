@@ -49,6 +49,10 @@
     }
   }
 
+  .positioner {
+    z-index: var(--cocso-z-index-overlay);
+  }
+
   .content {
     position: relative;
     padding-block: var(--cocso-spacing-4);

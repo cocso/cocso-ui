@@ -1,0 +1,494 @@
+---
+title: v0.2 → v1.0 마이그레이션 가이드
+description: "@cocso-ui/react v0.2.x에서 v1.0.0으로 업그레이드하기 위한 주요 변경 사항과 대응 방법을 안내합니다."
+---
+
+<Section>
+  <Section.Title>개요</Section.Title>
+  <Section.Text>
+    v1.0.0은 첫 번째 안정 릴리스입니다. 컴포넌트 프리미티브가 <code>@radix-ui/&#42;</code>에서 <code>@base-ui/react</code>로 마이그레이션되었으며, CSS 토큰 시스템이 전면 개편되었습니다.
+    이 가이드는 v0.2.x 코드베이스를 v1.0.0으로 업그레이드할 때 발생하는 모든 주요 변경 사항을 다룹니다.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem><code>@cocso-ui/css</code>, <code>@cocso-ui/react</code>, <code>@cocso-ui/react-icons</code>를 반드시 동시에 v1으로 업그레이드하세요. v0.2.x와 v1.x를 혼용하는 것은 지원되지 않습니다.</Section.ListItem>
+    <Section.ListItem>아래 변경 사항을 위에서 아래 순서대로 적용하면 대부분의 타입 오류가 해결됩니다.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>1. 크기(size) enum 통합</Section.Title>
+  <Section.Text>
+    모든 컴포넌트의 <code>size</code> prop 값이 통합된 영어 단어 체계로 변경되었습니다.
+  </Section.Text>
+
+  <SubHeading>변경 매핑</SubHeading>
+
+  | 0.2.x 값 | 1.0.0 값 | 비고 |
+  |----------|----------|------|
+  | `2xs` | — | 제거됨 |
+  | `xs` | `x-small` | |
+  | `sm` | `small` | |
+  | `md` | `medium` | |
+  | `lg` | `large` | |
+  | `xl` | `large` | Button에서 `xl` 제거 → `large`로 대체 |
+
+  ```tsx
+  // 0.2.x
+  <Button size="xs">...</Button>
+  <Button size="xl">...</Button>
+
+  // 1.0.0
+  <Button size="x-small">...</Button>
+  <Button size="large">...</Button>
+  ```
+
+  <SubHeading>컴포넌트별 지원 크기 매트릭스</SubHeading>
+
+  아래 표는 v1.0.0 기준으로 각 컴포넌트가 지원하는 크기 값을 나타냅니다.
+
+  | 컴포넌트 | `x-small` | `small` | `medium` | `large` |
+  |----------|:---------:|:-------:|:--------:|:-------:|
+  | Button | ✓ | ✓ | ✓ | ✓ |
+  | Input | ✓ | ✓ | ✓ | ✓ |
+  | Select | ✓ | ✓ | ✓ | ✓ |
+  | Link | ✓ | ✓ | ✓ | ✓ |
+  | Badge | — | ✓ | ✓ | ✓ |
+  | Checkbox | — | ✓ | ✓ | ✓ |
+  | Radio Group | — | ✓ | ✓ | ✓ |
+  | Spinner | — | ✓ | ✓ | ✓ |
+  | Switch | — | ✓ | ✓ | ✓ |
+  | Dialog.Content | — | ✓ | ✓ | ✓ |
+
+  > **참고**: Avatar(`xs/sm/md/lg/xl`), Breadcrumb(`sm/md/lg`), Progress(`sm/md/lg`)는 v1에서도 별도의 약어 체계를 유지합니다. 이 컴포넌트들은 이번 통합 대상에 포함되지 않습니다.
+</Section>
+
+<Section>
+  <Section.Title>2. Variant 이름 변경</Section.Title>
+
+  <SubHeading>Button</SubHeading>
+
+  | 0.2.x variant | 1.0.0 variant | 비고 |
+  |---------------|---------------|------|
+  | `primary` | `primary` | 유지 |
+  | `secondary` | `secondary` | ⚠️ 의미 변경 — 아래 경고 참조 |
+  | `tertiary` | `ghost` | |
+  | `neutral` | `secondary` | ⚠️ 아래 경고 참조 |
+  | `success` | `success` | 유지 |
+  | `error` | `error` | 유지 |
+  | `warning` | `warning` | 유지 |
+  | — | `outline` | 신규 |
+  | — | `info` | 신규 |
+
+  ```tsx
+  // 0.2.x
+  <Button variant="tertiary">취소</Button>
+  <Button variant="neutral">닫기</Button>
+
+  // 1.0.0
+  <Button variant="ghost">취소</Button>
+  <Button variant="secondary">닫기</Button>
+  ```
+
+  > ⚠️ **주의**: `secondary`는 0.2.x와 1.0.0 모두에 존재하지만 시각적 스타일이 다릅니다. `neutral` → `secondary`로 단순 치환하기 전에 디자인을 검토하세요.
+
+  <SubHeading>Badge</SubHeading>
+
+  | 0.2.x variant | 1.0.0 variant |
+  |---------------|---------------|
+  | `default` | `secondary` |
+  | `primary` | `primary` |
+  | `danger` | `error` |
+  | `success` | `success` |
+  | `warning` | `warning` |
+  | — | `info` (신규) |
+  | — | `outline` (신규) |
+
+  ```tsx
+  // 0.2.x
+  <Badge variant="default">일반</Badge>
+  <Badge variant="danger">위험</Badge>
+
+  // 1.0.0
+  <Badge variant="secondary">일반</Badge>
+  <Badge variant="error">위험</Badge>
+  ```
+
+  <SubHeading>Spinner — prop 이름 및 값 변경</SubHeading>
+
+  Spinner의 색상 prop 이름이 `color`에서 `variant`로 변경되었습니다.
+
+  | 0.2.x `color` | 1.0.0 `variant` |
+  |---------------|-----------------|
+  | `primary` | `primary` |
+  | `neutral` | `secondary` |
+  | `white` | `white` |
+  | — | `success` (신규) |
+  | — | `error` (신규) |
+  | — | `warning` (신규) |
+  | — | `info` (신규) |
+
+  ```tsx
+  // 0.2.x
+  <Spinner color="neutral" />
+
+  // 1.0.0
+  <Spinner variant="secondary" />
+  ```
+</Section>
+
+<Section>
+  <Section.Title>3. Modal → Dialog</Section.Title>
+  <Section.Text>
+    <code>Modal</code> export가 완전히 제거되었습니다. <code>Dialog</code>로 대체하세요.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x
+  import { Modal } from "@cocso-ui/react";
+
+  // 1.0.0
+  import { Dialog } from "@cocso-ui/react";
+  ```
+
+  <SubHeading>asChild → render 패턴</SubHeading>
+
+  Base UI는 Radix의 `asChild` 패턴 대신 `render` prop을 사용합니다.
+
+  ```tsx
+  // 0.2.x (Radix asChild)
+  <Modal.Trigger asChild>
+    <Button>다이얼로그 열기</Button>
+  </Modal.Trigger>
+
+  <Modal.Close asChild>
+    <Button variant="secondary">취소</Button>
+  </Modal.Close>
+
+  // 1.0.0 (Base UI render)
+  <Dialog.Trigger render={<Button />}>다이얼로그 열기</Dialog.Trigger>
+
+  <Dialog.Close render={<Button variant="secondary" />}>취소</Dialog.Close>
+  ```
+
+  <SubHeading>전체 구조 비교</SubHeading>
+
+  ```tsx
+  // 0.2.x
+  <Modal>
+    <Modal.Trigger asChild><Button>열기</Button></Modal.Trigger>
+    <Modal.Content>
+      <Modal.Title>제목</Modal.Title>
+      <Modal.Description>설명</Modal.Description>
+      <Modal.Close asChild><Button variant="secondary">닫기</Button></Modal.Close>
+    </Modal.Content>
+  </Modal>
+
+  // 1.0.0
+  <Dialog>
+    <Dialog.Trigger render={<Button />}>열기</Dialog.Trigger>
+    <Dialog.Content>
+      <Dialog.Title>제목</Dialog.Title>
+      <Dialog.Description>설명</Dialog.Description>
+      <Dialog.Close render={<Button variant="secondary" />}>닫기</Dialog.Close>
+    </Dialog.Content>
+  </Dialog>
+  ```
+</Section>
+
+<Section>
+  <Section.Title>4. DayPicker / MonthPicker — children → trigger prop</Section.Title>
+  <Section.Text>
+    트리거 요소를 children으로 전달하던 패턴이 제거되고 명시적인 <code>trigger</code> prop으로 변경되었습니다.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x
+  <DayPicker value={date} onValueChange={setDate}>
+    <FormField.Input placeholder="날짜 선택" readOnly />
+  </DayPicker>
+
+  <MonthPicker value={month} onValueChange={setMonth}>
+    <FormField.Input placeholder="월 선택" readOnly />
+  </MonthPicker>
+
+  // 1.0.0
+  <DayPicker
+    value={date}
+    onValueChange={setDate}
+    trigger={<InputTrigger placeholder="날짜 선택" />}
+  />
+
+  <MonthPicker
+    value={month}
+    onValueChange={setMonth}
+    trigger={<InputTrigger placeholder="월 선택" />}
+  />
+  ```
+
+  > **권장사항**: 인풋 스타일의 트리거에는 `InputTrigger` 컴포넌트를 사용하세요 (아래 섹션 10 참조). 이 컴포넌트는 네이티브 `<button>`이므로 Base UI의 `nativeButton` 경고가 발생하지 않습니다.
+</Section>
+
+<Section>
+  <Section.Title>5. OneTimePasswordField — 복합 컴포넌트 → 단일 컴포넌트</Section.Title>
+  <Section.Text>
+    0.2.x의 <code>OneTimePasswordField.Root</code> + <code>OneTimePasswordField.Input</code> 복합 구조가 단일 컴포넌트로 통합되었습니다.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x (복합 컴포넌트)
+  <OneTimePasswordField.Root length={6} onComplete={handleComplete}>
+    <OneTimePasswordField.Input index={0} />
+    <OneTimePasswordField.Input index={1} />
+    <OneTimePasswordField.Input index={2} />
+    <OneTimePasswordField.Input index={3} />
+    <OneTimePasswordField.Input index={4} />
+    <OneTimePasswordField.Input index={5} />
+  </OneTimePasswordField.Root>
+
+  // 1.0.0 (단일 컴포넌트)
+  <OneTimePasswordField
+    maxLength={6}
+    onValueChange={(value) => {
+      if (value.length === 6) handleComplete(value);
+    }}
+  />
+  ```
+
+  <SubHeading>v1.0.0 API 레퍼런스</SubHeading>
+
+  | prop | 타입 | 기본값 | 설명 |
+  |------|------|--------|------|
+  | `maxLength` | `number` | 필수 | OTP 자릿수 |
+  | `onValueChange` | `(value: string) => void` | — | 값이 변경될 때마다 호출 |
+  | `value` | `string` | — | 제어형 값 |
+  | `slotClassName` | `string` | — | 개별 슬롯에 적용할 className |
+</Section>
+
+<Section>
+  <Section.Title>6. StockQuantityStatus — 한국어 값 → 영어 값</Section.Title>
+  <Section.Text>
+    <code>quantity</code> prop의 값이 한국어에서 영어로 변경되었습니다. 화면에 표시되는 레이블(보통/여유/부족)은 컴포넌트 내부에서 그대로 렌더링됩니다.
+  </Section.Text>
+
+  | 0.2.x `quantity` | 1.0.0 `quantity` | 표시 텍스트 |
+  |------------------|------------------|-------------|
+  | `'보통'` | `'normal'` | 보통 |
+  | `'여유'` | `'sufficient'` | 여유 |
+  | `'부족'` | `'insufficient'` | 부족 |
+
+  ```tsx
+  // 0.2.x
+  <StockQuantityStatus quantity="보통" />
+  <StockQuantityStatus quantity="여유" />
+  <StockQuantityStatus quantity="부족" />
+
+  // 1.0.0
+  <StockQuantityStatus quantity="normal" />
+  <StockQuantityStatus quantity="sufficient" />
+  <StockQuantityStatus quantity="insufficient" />
+  ```
+
+  코드베이스 전체 치환:
+  ```bash
+  # sed 예시 (macOS)
+  sed -i '' \
+    -e 's/quantity="보통"/quantity="normal"/g' \
+    -e 's/quantity="여유"/quantity="sufficient"/g' \
+    -e 's/quantity="부족"/quantity="insufficient"/g' \
+    $(find src -name "*.tsx")
+  ```
+</Section>
+
+<Section>
+  <Section.Title>7. Checkbox — onChange 시그니처 변경</Section.Title>
+  <Section.Text>
+    <code>onChange</code>의 콜백 타입에서 <code>'intermediate'</code>가 제거되었습니다. indeterminate 상태 처리 방식이 변경되었습니다.
+  </Section.Text>
+
+  | | 0.2.x | 1.0.0 |
+  |--|-------|-------|
+  | `onChange` 타입 | `(status: 'on' \| 'off' \| 'intermediate') => void` | `(status: 'on' \| 'off') => void` |
+  | indeterminate 제어 | `onChange`로 수신 | `status="intermediate"` prop으로 외부 제어 |
+  | 초기값 | — | `defaultStatus` prop (비제어) |
+
+  ```tsx
+  // 0.2.x
+  <Checkbox
+    status={checkboxStatus}
+    onChange={(status) => {
+      // status가 'intermediate'일 수 있었음
+      setCheckboxStatus(status);
+    }}
+  />
+
+  // 1.0.0 — indeterminate는 외부 상태로 별도 관리
+  const [status, setStatus] = useState<"on" | "off" | "intermediate">("intermediate");
+
+  <Checkbox
+    status={status}
+    onChange={(next) => {
+      // next는 'on' | 'off' 만 가능
+      setStatus(next);
+    }}
+  />
+
+  // 비제어 방식 (초기값 설정)
+  <Checkbox defaultStatus="intermediate" onChange={(next) => console.log(next)} />
+  ```
+
+  > **참고**: `status="intermediate"`는 계속 지원됩니다. 다만 사용자가 클릭했을 때 `onChange`로 전달되는 값은 `'on'` 또는 `'off'`만 가능합니다. indeterminate로의 전환은 항상 외부 상태(부모 컴포넌트)에서 제어해야 합니다.
+</Section>
+
+<Section>
+  <Section.Title>8. CSS 토큰 prefix 변경 — <code>--ds-&#42;</code> → <code>--cocso-&#42;</code></Section.Title>
+  <Section.Text>
+    모든 CSS custom property의 prefix가 <code>--ds-</code>에서 <code>--cocso-</code>로 변경되었습니다.
+    색상, 간격, z-index, 그림자, 폰트 토큰이 모두 해당됩니다.
+  </Section.Text>
+
+  ```css
+  /* 0.2.x */
+  .my-component {
+    color: var(--ds-color-primary-500);
+    padding: var(--ds-spacing-4);
+    z-index: var(--ds-z-index-modal);
+  }
+
+  /* 1.0.0 */
+  .my-component {
+    color: var(--cocso-color-primary-500);
+    padding: var(--cocso-spacing-4);
+    z-index: var(--cocso-z-index-modal);
+  }
+  ```
+
+  코드베이스 전체 일괄 치환 (프로젝트 루트에서 실행):
+  ```bash
+  # sed 예시 (macOS)
+  find src -type f \( -name "*.css" -o -name "*.scss" -o -name "*.tsx" -o -name "*.ts" \) \
+    -exec sed -i '' 's/--ds-/--cocso-/g' {} +
+  ```
+</Section>
+
+<Section>
+  <Section.Title>9. ⚠️ Primary 색상 시맨틱 변경 (시각적 회귀 주의)</Section.Title>
+
+  > ⚠️ **중요 — 반드시 확인하세요**
+  >
+  > v1.0.0에서 `--cocso-color-primary-*`는 **neutral(회색) 스케일**에 매핑됩니다.
+  > v0.2.x의 `--ds-color-primary-*`는 **파란색(blue) 스케일**이었습니다.
+  >
+  > primary 색상을 재정의하지 않은 앱은 v1 업그레이드 후 주요 UI 요소가 **파란색 → 회색**으로 변경되는 시각적 회귀가 발생합니다.
+  > 기존의 파란색은 `info` 스케일로 이동했습니다.
+
+  <SubHeading>영향받는 대상</SubHeading>
+
+  - `variant="primary"` Button, Badge, Spinner
+  - `--ds-color-primary-*` 토큰을 직접 참조하는 커스텀 CSS
+  - primary 색상에 의존하는 포커스 링, 선택 상태 등
+
+  <SubHeading>완화 방법</SubHeading>
+
+  파란색 primary를 유지하려면 CSS에서 아래와 같이 재정의하세요:
+
+  ```css
+  /* globals.css 또는 최상위 CSS 파일에 추가 */
+  :root {
+    --cocso-color-primary-50:  var(--cocso-color-info-50);
+    --cocso-color-primary-100: var(--cocso-color-info-100);
+    --cocso-color-primary-200: var(--cocso-color-info-200);
+    --cocso-color-primary-300: var(--cocso-color-info-300);
+    --cocso-color-primary-400: var(--cocso-color-info-400);
+    --cocso-color-primary-500: var(--cocso-color-info-500);
+    --cocso-color-primary-600: var(--cocso-color-info-600);
+    --cocso-color-primary-700: var(--cocso-color-info-700);
+    --cocso-color-primary-800: var(--cocso-color-info-800);
+    --cocso-color-primary-900: var(--cocso-color-info-900);
+  }
+  ```
+
+  > **설계 의도**: v1의 새 디자인 시스템에서 primary는 neutral(회색)을 기반으로 합니다. 파란색 강조가 필요한 경우 `info` variant를 사용하거나 위 재정의를 적용하세요.
+</Section>
+
+<Section>
+  <Section.Title>10. Base UI 채택 관련 사항</Section.Title>
+  <Section.Text>
+    컴포넌트 프리미티브가 Radix UI에서 Base UI로 교체되었습니다. 대부분의 변경 사항은 이미 위 섹션에서 다루었지만, 런타임에서 발생할 수 있는 추가 주의사항을 안내합니다.
+  </Section.Text>
+
+  <SubHeading>asChild → render prop</SubHeading>
+
+  Base UI는 Radix의 `asChild` 패턴을 지원하지 않습니다. 모든 컴포넌트 합성은 `render` prop을 사용합니다.
+
+  ```tsx
+  // 0.2.x (Radix asChild)
+  <Dropdown.Trigger asChild>
+    <Button variant="outline">메뉴 열기</Button>
+  </Dropdown.Trigger>
+
+  // 1.0.0 (Base UI render)
+  <Dropdown.Trigger render={<Button variant="outline" />}>
+    메뉴 열기
+  </Dropdown.Trigger>
+  ```
+
+  <SubHeading>콘솔 경고 및 해결 방법</SubHeading>
+
+  **경고**: `Base UI: A component that acts as a button expected a native <button> because the nativeButton prop is true.`
+
+  이 경고는 `Dialog.Trigger`, `Dropdown.Trigger`, `DayPicker`, `MonthPicker` 등의 `render` prop에 `<button>`이 아닌 요소(`<input>`, `<div>`, `<span>` 등)를 전달할 때 발생합니다.
+
+  **해결 방법 (3가지 중 선택)**:
+
+  **방법 1 — `nativeButton={false}` 전달 (비권장)**
+  ```tsx
+  <Dialog.Trigger nativeButton={false} render={<div className="custom-trigger" />}>
+    열기
+  </Dialog.Trigger>
+  ```
+
+  **방법 2 — `InputTrigger` 컴포넌트 사용 (권장)**
+
+  `InputTrigger`는 인풋처럼 보이는 네이티브 `<button>`입니다. DayPicker, MonthPicker, Dropdown 등에서 인풋 스타일 트리거가 필요할 때 사용하세요.
+
+  ```tsx
+  import { InputTrigger, DayPicker } from "@cocso-ui/react";
+  import { CalendarIcon } from "@cocso-ui/react-icons";
+
+  <DayPicker
+    value={date}
+    onValueChange={setDate}
+    trigger={
+      <InputTrigger
+        placeholder="날짜를 선택하세요"
+        suffix={<CalendarIcon size={16} />}
+      />
+    }
+  />
+  ```
+
+  **방법 3 — 실제 `<button>`으로 감싸기**
+  ```tsx
+  <Dropdown.Trigger render={<button type="button" className="custom-btn" />}>
+    열기
+  </Dropdown.Trigger>
+  ```
+
+  <SubHeading>InputTrigger API</SubHeading>
+
+  `InputTrigger`는 `@cocso-ui/react`에서 직접 import 가능한 신규 컴포넌트입니다.
+
+  | prop | 타입 | 기본값 | 설명 |
+  |------|------|--------|------|
+  | `size` | `'large' \| 'medium' \| 'small' \| 'x-small'` | `'medium'` | 인풋 크기 |
+  | `placeholder` | `string` | — | 값이 없을 때 표시되는 텍스트 |
+  | `prefix` | `ReactNode` | — | 앞에 표시되는 요소 (아이콘 등) |
+  | `suffix` | `ReactNode` | — | 뒤에 표시되는 요소 (달력 아이콘 등) |
+  | `error` | `boolean \| string` | `false` | 오류 상태 표시 |
+  | `stretch` | `boolean` | `false` | 부모 너비에 맞게 늘어남 |
+  | `disabled` | `boolean` | `false` | 비활성화 |
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

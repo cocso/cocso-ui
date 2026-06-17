@@ -31,6 +31,10 @@
     }
   }
 
+  .positioner {
+    z-index: var(--cocso-z-index-overlay);
+  }
+
   .content {
     z-index: var(--cocso-z-index-overlay);
     display: flex;

@@ -31,11 +31,13 @@ function PopoverContent({
         align={align}
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
+        className={styles.positioner}
         side={side}
         sideOffset={sideOffset}
       >
         <PopoverBase.Popup
           className={cn(styles.content, className)}
+          data-cocso-component="popover-content"
           {...props}
         />
       </PopoverBase.Positioner>

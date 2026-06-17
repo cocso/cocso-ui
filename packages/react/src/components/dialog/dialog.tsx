@@ -17,9 +17,13 @@ function DialogContent({
 }: ComponentProps<typeof DialogBase.Popup> & { size?: DialogSize }) {
   return (
     <DialogBase.Portal>
-      <DialogBase.Backdrop className={styles.overlay} />
+      <DialogBase.Backdrop
+        className={styles.overlay}
+        data-cocso-component="dialog-overlay"
+      />
       <DialogBase.Popup
         className={cn(styles.panel, styles[size], className)}
+        data-cocso-component="dialog-content"
         {...props}
       >
         {children}

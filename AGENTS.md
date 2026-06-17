@@ -88,6 +88,20 @@ When asked to review comments on a GitHub PR:
 - Resolve: GraphQL `mutation { resolveReviewThread(input: {threadId: "PRRT_..."}) { thread { isResolved } } }`
 - Always reply first, then resolve every thread.
 
+### Component Override Contract
+
+- CSS Module class names are content-hashed and MUST NOT be relied on for
+  external overrides.
+- Components that render a themable surface MUST expose a stable
+  `data-cocso-component="<name>"` attribute on that surface so consumers can
+  target it from global CSS (e.g. `[data-cocso-component="dropdown-content"]`).
+- `<name>` uses lowercase kebab-case and identifies the component part
+  (e.g. `dropdown-content`, `dropdown-item`, `dialog-overlay`).
+- Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
+  `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
+  stacking context via its `transform`, so a `z-index` on the popup alone is
+  ignored by ancestors.
+
 ### Frontend Design Rules
 
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.

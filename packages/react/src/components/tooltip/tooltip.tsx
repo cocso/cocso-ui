@@ -31,11 +31,13 @@ function TooltipContent({
         align={align}
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
+        className={styles.positioner}
         side={side}
         sideOffset={sideOffset}
       >
         <TooltipBase.Popup
           className={cn(styles.content, className)}
+          data-cocso-component="tooltip-content"
           {...props}
         />
       </TooltipBase.Positioner>

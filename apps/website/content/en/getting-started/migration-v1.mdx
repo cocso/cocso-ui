@@ -1,0 +1,492 @@
+---
+title: v0.2 → v1.0 Migration Guide
+description: "Breaking changes and remediation steps for upgrading @cocso-ui/react from v0.2.x to v1.0.0."
+---
+
+<Section>
+  <Section.Title>Overview</Section.Title>
+  <Section.Text>
+    v1.0.0 is the first stable release. Component primitives have been migrated from <code>@radix-ui/&#42;</code> to <code>@base-ui/react</code> and the CSS token system has been overhauled.
+    This guide covers every breaking change when upgrading a v0.2.x codebase to v1.0.0.
+  </Section.Text>
+  <Section.UnorderedList>
+    <Section.ListItem>Always upgrade <code>@cocso-ui/css</code>, <code>@cocso-ui/react</code>, and <code>@cocso-ui/react-icons</code> to v1 together. Mixing v0.2.x with v1.x is not supported.</Section.ListItem>
+    <Section.ListItem>Applying the changes below top-to-bottom resolves most type errors in one pass.</Section.ListItem>
+  </Section.UnorderedList>
+</Section>
+
+<Section>
+  <Section.Title>1. Size enum unification</Section.Title>
+  <Section.Text>
+    The <code>size</code> prop values across all components have been unified to a consistent English-word system.
+  </Section.Text>
+
+  <SubHeading>Mapping table</SubHeading>
+
+  | 0.2.x value | 1.0.0 value | Notes |
+  |-------------|-------------|-------|
+  | `2xs` | — | Removed |
+  | `xs` | `x-small` | |
+  | `sm` | `small` | |
+  | `md` | `medium` | |
+  | `lg` | `large` | |
+  | `xl` | `large` | Button dropped `xl` — map to `large` |
+
+  ```tsx
+  // 0.2.x
+  <Button size="xs">...</Button>
+  <Button size="xl">...</Button>
+
+  // 1.0.0
+  <Button size="x-small">...</Button>
+  <Button size="large">...</Button>
+  ```
+
+  <SubHeading>Per-component size support matrix</SubHeading>
+
+  The table below shows which size values each component supports in v1.0.0.
+
+  | Component | `x-small` | `small` | `medium` | `large` |
+  |-----------|:---------:|:-------:|:--------:|:-------:|
+  | Button | ✓ | ✓ | ✓ | ✓ |
+  | Input | ✓ | ✓ | ✓ | ✓ |
+  | Select | ✓ | ✓ | ✓ | ✓ |
+  | Link | ✓ | ✓ | ✓ | ✓ |
+  | Badge | — | ✓ | ✓ | ✓ |
+  | Checkbox | — | ✓ | ✓ | ✓ |
+  | Radio Group | — | ✓ | ✓ | ✓ |
+  | Spinner | — | ✓ | ✓ | ✓ |
+  | Switch | — | ✓ | ✓ | ✓ |
+  | Dialog.Content | — | ✓ | ✓ | ✓ |
+
+  > **Note**: Avatar (`xs/sm/md/lg/xl`), Breadcrumb (`sm/md/lg`), and Progress (`sm/md/lg`) retain their own abbreviation schemes in v1 and are not part of this unification.
+</Section>
+
+<Section>
+  <Section.Title>2. Variant renames</Section.Title>
+
+  <SubHeading>Button</SubHeading>
+
+  | 0.2.x variant | 1.0.0 variant | Notes |
+  |---------------|---------------|-------|
+  | `primary` | `primary` | Unchanged |
+  | `secondary` | `secondary` | ⚠️ Different meaning — see warning below |
+  | `tertiary` | `ghost` | |
+  | `neutral` | `secondary` | ⚠️ See warning below |
+  | `success` | `success` | Unchanged |
+  | `error` | `error` | Unchanged |
+  | `warning` | `warning` | Unchanged |
+  | — | `outline` | New |
+  | — | `info` | New |
+
+  ```tsx
+  // 0.2.x
+  <Button variant="tertiary">Cancel</Button>
+  <Button variant="neutral">Close</Button>
+
+  // 1.0.0
+  <Button variant="ghost">Cancel</Button>
+  <Button variant="secondary">Close</Button>
+  ```
+
+  > ⚠️ **Warning**: `secondary` exists in both v0.2.x and v1.0.0 but its visual style has changed. Do not blindly replace `neutral` → `secondary` — review the design first.
+
+  <SubHeading>Badge</SubHeading>
+
+  | 0.2.x variant | 1.0.0 variant |
+  |---------------|---------------|
+  | `default` | `secondary` |
+  | `primary` | `primary` |
+  | `danger` | `error` |
+  | `success` | `success` |
+  | `warning` | `warning` |
+  | — | `info` (new) |
+  | — | `outline` (new) |
+
+  ```tsx
+  // 0.2.x
+  <Badge variant="default">Normal</Badge>
+  <Badge variant="danger">Error</Badge>
+
+  // 1.0.0
+  <Badge variant="secondary">Normal</Badge>
+  <Badge variant="error">Error</Badge>
+  ```
+
+  <SubHeading>Spinner — prop renamed and values changed</SubHeading>
+
+  The Spinner color prop was renamed from `color` to `variant`.
+
+  | 0.2.x `color` | 1.0.0 `variant` |
+  |---------------|-----------------|
+  | `primary` | `primary` |
+  | `neutral` | `secondary` |
+  | `white` | `white` |
+  | — | `success` (new) |
+  | — | `error` (new) |
+  | — | `warning` (new) |
+  | — | `info` (new) |
+
+  ```tsx
+  // 0.2.x
+  <Spinner color="neutral" />
+
+  // 1.0.0
+  <Spinner variant="secondary" />
+  ```
+</Section>
+
+<Section>
+  <Section.Title>3. Modal → Dialog</Section.Title>
+  <Section.Text>
+    The <code>Modal</code> export has been completely removed. Replace it with <code>Dialog</code>.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x
+  import { Modal } from "@cocso-ui/react";
+
+  // 1.0.0
+  import { Dialog } from "@cocso-ui/react";
+  ```
+
+  <SubHeading>asChild → render pattern</SubHeading>
+
+  Base UI uses a `render` prop instead of Radix's `asChild` pattern.
+
+  ```tsx
+  // 0.2.x (Radix asChild)
+  <Modal.Trigger asChild>
+    <Button>Open dialog</Button>
+  </Modal.Trigger>
+
+  <Modal.Close asChild>
+    <Button variant="secondary">Cancel</Button>
+  </Modal.Close>
+
+  // 1.0.0 (Base UI render)
+  <Dialog.Trigger render={<Button />}>Open dialog</Dialog.Trigger>
+
+  <Dialog.Close render={<Button variant="secondary" />}>Cancel</Dialog.Close>
+  ```
+
+  <SubHeading>Full structure comparison</SubHeading>
+
+  ```tsx
+  // 0.2.x
+  <Modal>
+    <Modal.Trigger asChild><Button>Open</Button></Modal.Trigger>
+    <Modal.Content>
+      <Modal.Title>Title</Modal.Title>
+      <Modal.Description>Description</Modal.Description>
+      <Modal.Close asChild><Button variant="secondary">Close</Button></Modal.Close>
+    </Modal.Content>
+  </Modal>
+
+  // 1.0.0
+  <Dialog>
+    <Dialog.Trigger render={<Button />}>Open</Dialog.Trigger>
+    <Dialog.Content>
+      <Dialog.Title>Title</Dialog.Title>
+      <Dialog.Description>Description</Dialog.Description>
+      <Dialog.Close render={<Button variant="secondary" />}>Close</Dialog.Close>
+    </Dialog.Content>
+  </Dialog>
+  ```
+</Section>
+
+<Section>
+  <Section.Title>4. DayPicker / MonthPicker — children → trigger prop</Section.Title>
+  <Section.Text>
+    The pattern of passing a trigger element as children has been removed. Use the explicit <code>trigger</code> prop instead.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x
+  <DayPicker value={date} onValueChange={setDate}>
+    <FormField.Input placeholder="Select date" readOnly />
+  </DayPicker>
+
+  <MonthPicker value={month} onValueChange={setMonth}>
+    <FormField.Input placeholder="Select month" readOnly />
+  </MonthPicker>
+
+  // 1.0.0
+  <DayPicker
+    value={date}
+    onValueChange={setDate}
+    trigger={<InputTrigger placeholder="Select date" />}
+  />
+
+  <MonthPicker
+    value={month}
+    onValueChange={setMonth}
+    trigger={<InputTrigger placeholder="Select month" />}
+  />
+  ```
+
+  > **Recommendation**: Use the `InputTrigger` component for input-style triggers (see section 10). It is a native `<button>` so it never triggers Base UI's `nativeButton` warning.
+</Section>
+
+<Section>
+  <Section.Title>5. OneTimePasswordField — composite → single component</Section.Title>
+  <Section.Text>
+    The composite <code>OneTimePasswordField.Root</code> + <code>OneTimePasswordField.Input</code> structure from 0.2.x has been replaced with a single component.
+  </Section.Text>
+
+  ```tsx
+  // 0.2.x (composite)
+  <OneTimePasswordField.Root length={6} onComplete={handleComplete}>
+    <OneTimePasswordField.Input index={0} />
+    <OneTimePasswordField.Input index={1} />
+    <OneTimePasswordField.Input index={2} />
+    <OneTimePasswordField.Input index={3} />
+    <OneTimePasswordField.Input index={4} />
+    <OneTimePasswordField.Input index={5} />
+  </OneTimePasswordField.Root>
+
+  // 1.0.0 (single component)
+  <OneTimePasswordField
+    maxLength={6}
+    onValueChange={(value) => {
+      if (value.length === 6) handleComplete(value);
+    }}
+  />
+  ```
+
+  <SubHeading>v1.0.0 API reference</SubHeading>
+
+  | Prop | Type | Default | Description |
+  |------|------|---------|-------------|
+  | `maxLength` | `number` | required | Number of OTP digits |
+  | `onValueChange` | `(value: string) => void` | — | Called on every value change |
+  | `value` | `string` | — | Controlled value |
+  | `slotClassName` | `string` | — | className applied to each slot |
+</Section>
+
+<Section>
+  <Section.Title>6. StockQuantityStatus — Korean → English values</Section.Title>
+  <Section.Text>
+    The <code>quantity</code> prop values have changed from Korean strings to English. The display labels (보통/여유/부족) are still rendered by the component internally.
+  </Section.Text>
+
+  | 0.2.x `quantity` | 1.0.0 `quantity` | Display label |
+  |------------------|------------------|---------------|
+  | `'보통'` | `'normal'` | 보통 |
+  | `'여유'` | `'sufficient'` | 여유 |
+  | `'부족'` | `'insufficient'` | 부족 |
+
+  ```tsx
+  // 0.2.x
+  <StockQuantityStatus quantity="보통" />
+  <StockQuantityStatus quantity="여유" />
+  <StockQuantityStatus quantity="부족" />
+
+  // 1.0.0
+  <StockQuantityStatus quantity="normal" />
+  <StockQuantityStatus quantity="sufficient" />
+  <StockQuantityStatus quantity="insufficient" />
+  ```
+
+  Codebase-wide replacement:
+  ```bash
+  # sed example (macOS)
+  sed -i '' \
+    -e 's/quantity="보통"/quantity="normal"/g' \
+    -e 's/quantity="여유"/quantity="sufficient"/g' \
+    -e 's/quantity="부족"/quantity="insufficient"/g' \
+    $(find src -name "*.tsx")
+  ```
+</Section>
+
+<Section>
+  <Section.Title>7. Checkbox — onChange signature change</Section.Title>
+  <Section.Text>
+    The <code>'intermediate'</code> value has been removed from the <code>onChange</code> callback type. Indeterminate state handling has changed.
+  </Section.Text>
+
+  | | 0.2.x | 1.0.0 |
+  |--|-------|-------|
+  | `onChange` type | `(status: 'on' \| 'off' \| 'intermediate') => void` | `(status: 'on' \| 'off') => void` |
+  | Indeterminate control | Received via `onChange` | External control via `status="intermediate"` prop |
+  | Initial value | — | `defaultStatus` prop (uncontrolled) |
+
+  ```tsx
+  // 0.2.x
+  <Checkbox
+    status={checkboxStatus}
+    onChange={(status) => {
+      // status could be 'intermediate'
+      setCheckboxStatus(status);
+    }}
+  />
+
+  // 1.0.0 — indeterminate is managed as separate external state
+  const [status, setStatus] = useState<"on" | "off" | "intermediate">("intermediate");
+
+  <Checkbox
+    status={status}
+    onChange={(next) => {
+      // next is only 'on' | 'off'
+      setStatus(next);
+    }}
+  />
+
+  // Uncontrolled with initial value
+  <Checkbox defaultStatus="intermediate" onChange={(next) => console.log(next)} />
+  ```
+
+  > **Note**: `status="intermediate"` is still fully supported. However, when the user clicks, `onChange` only ever receives `'on'` or `'off'`. Transitioning back to intermediate must always be driven by external (parent) state.
+</Section>
+
+<Section>
+  <Section.Title>8. CSS token prefix rename — <code>--ds-&#42;</code> → <code>--cocso-&#42;</code></Section.Title>
+  <Section.Text>
+    All CSS custom properties have been renamed from the <code>--ds-</code> prefix to <code>--cocso-</code>.
+    Color, spacing, z-index, shadow, and font tokens are all affected.
+  </Section.Text>
+
+  ```css
+  /* 0.2.x */
+  .my-component {
+    color: var(--ds-color-primary-500);
+    padding: var(--ds-spacing-4);
+    z-index: var(--ds-z-index-modal);
+  }
+
+  /* 1.0.0 */
+  .my-component {
+    color: var(--cocso-color-primary-500);
+    padding: var(--cocso-spacing-4);
+    z-index: var(--cocso-z-index-modal);
+  }
+  ```
+
+  Codebase-wide replacement (run from project root):
+  ```bash
+  # sed example (macOS)
+  find src -type f \( -name "*.css" -o -name "*.scss" -o -name "*.tsx" -o -name "*.ts" \) \
+    -exec sed -i '' 's/--ds-/--cocso-/g' {} +
+  ```
+</Section>
+
+<Section>
+  <Section.Title>9. ⚠️ Primary color semantic change (visual regression risk)</Section.Title>
+
+  > ⚠️ **Critical — review before upgrading**
+  >
+  > In v1.0.0 `--cocso-color-primary-*` maps to the **neutral (gray) scale**.
+  > In v0.2.x `--ds-color-primary-*` was the **blue scale**.
+  >
+  > Apps that did not override the primary palette will see a **blue → gray** visual regression in primary UI elements after upgrading to v1.
+  > The old blue has moved to the `info` scale.
+
+  <SubHeading>What is affected</SubHeading>
+
+  - `variant="primary"` Button, Badge, Spinner
+  - Custom CSS directly referencing `--ds-color-primary-*` tokens
+  - Focus rings, selected states, and any other UI that relied on the blue primary color
+
+  <SubHeading>Mitigation</SubHeading>
+
+  To preserve the blue primary, override the tokens in your CSS:
+
+  ```css
+  /* Add to globals.css or your root CSS file */
+  :root {
+    --cocso-color-primary-50:  var(--cocso-color-info-50);
+    --cocso-color-primary-100: var(--cocso-color-info-100);
+    --cocso-color-primary-200: var(--cocso-color-info-200);
+    --cocso-color-primary-300: var(--cocso-color-info-300);
+    --cocso-color-primary-400: var(--cocso-color-info-400);
+    --cocso-color-primary-500: var(--cocso-color-info-500);
+    --cocso-color-primary-600: var(--cocso-color-info-600);
+    --cocso-color-primary-700: var(--cocso-color-info-700);
+    --cocso-color-primary-800: var(--cocso-color-info-800);
+    --cocso-color-primary-900: var(--cocso-color-info-900);
+  }
+  ```
+
+  > **Design intent**: In the v1 design system, primary is intentionally based on the neutral scale. Use the `info` variant or apply the override above if blue emphasis is required.
+</Section>
+
+<Section>
+  <Section.Title>10. Base UI adoption notes</Section.Title>
+  <Section.Text>
+    Component primitives have been replaced from Radix UI with Base UI. Most changes are already covered in the sections above, but the following runtime notes apply broadly.
+  </Section.Text>
+
+  <SubHeading>asChild → render prop</SubHeading>
+
+  Base UI does not support Radix's `asChild` pattern. All component composition uses the `render` prop.
+
+  ```tsx
+  // 0.2.x (Radix asChild)
+  <Dropdown.Trigger asChild>
+    <Button variant="outline">Open menu</Button>
+  </Dropdown.Trigger>
+
+  // 1.0.0 (Base UI render)
+  <Dropdown.Trigger render={<Button variant="outline" />}>
+    Open menu
+  </Dropdown.Trigger>
+  ```
+
+  <SubHeading>Common console warnings and fixes</SubHeading>
+
+  **Warning**: `Base UI: A component that acts as a button expected a native <button> because the nativeButton prop is true.`
+
+  This fires when a non-`<button>` element (`<input>`, `<div>`, `<span>`, etc.) is passed as the `render` prop to `Dialog.Trigger`, `Dropdown.Trigger`, `DayPicker`, `MonthPicker`, or similar components.
+
+  **Fix option 1 — pass `nativeButton={false}` (not recommended)**
+  ```tsx
+  <Dialog.Trigger nativeButton={false} render={<div className="custom-trigger" />}>
+    Open
+  </Dialog.Trigger>
+  ```
+
+  **Fix option 2 — use the `InputTrigger` component (recommended)**
+
+  `InputTrigger` is a native `<button>` styled to look like an `Input`. Use it whenever you need an input-style trigger for DayPicker, MonthPicker, Dropdown, etc.
+
+  ```tsx
+  import { InputTrigger, DayPicker } from "@cocso-ui/react";
+  import { CalendarIcon } from "@cocso-ui/react-icons";
+
+  <DayPicker
+    value={date}
+    onValueChange={setDate}
+    trigger={
+      <InputTrigger
+        placeholder="Select a date"
+        suffix={<CalendarIcon size={16} />}
+      />
+    }
+  />
+  ```
+
+  **Fix option 3 — wrap in a real `<button>`**
+  ```tsx
+  <Dropdown.Trigger render={<button type="button" className="custom-btn" />}>
+    Open
+  </Dropdown.Trigger>
+  ```
+
+  <SubHeading>InputTrigger API</SubHeading>
+
+  `InputTrigger` is a new component importable directly from `@cocso-ui/react`.
+
+  | Prop | Type | Default | Description |
+  |------|------|---------|-------------|
+  | `size` | `'large' \| 'medium' \| 'small' \| 'x-small'` | `'medium'` | Input size |
+  | `placeholder` | `string` | — | Shown when no children value is present |
+  | `prefix` | `ReactNode` | — | Leading content (e.g. an icon) |
+  | `suffix` | `ReactNode` | — | Trailing content (e.g. a calendar icon) |
+  | `error` | `boolean \| string` | `false` | Error state styling |
+  | `stretch` | `boolean` | `false` | Expand to fill parent width |
+  | `disabled` | `boolean` | `false` | Disabled state |
+</Section>
+
+<Section>
+  <PageNavigation />
+</Section>

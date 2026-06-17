@@ -1,0 +1,68 @@
+@layer components {
+  .trigger {
+    --cocso-input-height: inherit;
+    --cocso-input-padding-x: inherit;
+    --cocso-input-font-size: inherit;
+    --cocso-input-border-radius: inherit;
+    --cocso-input-bg-color: var(--cocso-color-white);
+
+    display: inline-flex;
+    gap: var(--cocso-spacing-4);
+    align-items: center;
+    width: fit-content;
+    height: var(--cocso-input-height);
+    padding-inline: var(--cocso-input-padding-x);
+    font-size: var(--cocso-input-font-size);
+    color: var(--cocso-color-neutral-950);
+    text-align: left;
+    cursor: pointer;
+    background-color: var(--cocso-input-bg-color);
+    border: none;
+    border-radius: var(--cocso-input-border-radius);
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-100),
+      var(--cocso-shadow-xs);
+    transition: box-shadow var(--cocso-duration-fast) var(--cocso-easing-soft);
+  }
+
+  .trigger:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow:
+      0 0 0 1px var(--cocso-color-neutral-400),
+      var(--cocso-shadow-xs);
+  }
+
+  .trigger.stretch {
+    width: 100%;
+  }
+
+  .trigger:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .trigger.error,
+  .trigger.error:focus-visible {
+    box-shadow:
+      0 0 0 1px var(--cocso-color-danger-500),
+      var(--cocso-shadow-xs);
+  }
+
+  .value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .placeholder {
+    color: var(--cocso-color-neutral-400);
+  }
+
+  .affix {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+}

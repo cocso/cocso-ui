@@ -1,0 +1,69 @@
+/**
+ * Opt-in dark theme for @cocso-ui.
+ *
+ * Import AFTER `token.css` and set `data-theme="dark"` on a container
+ * (typically <html>):
+ *
+ *   import "@cocso-ui/css/token.css";
+ *   import "@cocso-ui/css/theme-dark.css";
+ *
+ *   <html data-theme="dark"> … </html>
+ *
+ * Only the semantic token layer is remapped — raw color-scale tokens
+ * (`--cocso-color-neutral-*`, `--cocso-color-info-*`, …) are unchanged, so
+ * any app override of those scales is preserved. Neutral-driven tokens are
+ * inverted along the scale (50 ↔ 950); saturated accent base colors (the
+ * `-500` feedback/interactive values) are kept as-is since they read well on a
+ * dark surface.
+ */
+[data-theme="dark"] {
+  /* Text */
+  --cocso-color-text-primary: var(--cocso-color-neutral-50);
+  --cocso-color-text-secondary: var(--cocso-color-neutral-400);
+  --cocso-color-text-tertiary: var(--cocso-color-neutral-500);
+  --cocso-color-text-disabled: var(--cocso-color-neutral-600);
+  --cocso-color-text-on-primary: var(--cocso-color-neutral-950);
+  --cocso-color-text-muted: var(--cocso-color-neutral-500);
+
+  /* Surface */
+  --cocso-color-surface-primary: var(--cocso-color-neutral-950);
+  --cocso-color-surface-secondary: var(--cocso-color-neutral-900);
+  --cocso-color-surface-inverse: var(--cocso-color-white);
+  --cocso-color-surface-neutral: var(--cocso-color-neutral-800);
+
+  /* Border */
+  --cocso-color-border-primary: var(--cocso-color-neutral-800);
+  --cocso-color-border-secondary: var(--cocso-color-neutral-900);
+
+  /* Interactive — primary (derived from the neutral scale) */
+  --cocso-color-interactive-primary: var(--cocso-color-primary-50);
+  --cocso-color-interactive-primary-hover: var(--cocso-color-primary-200);
+  --cocso-color-interactive-primary-active: var(--cocso-color-primary-300);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-primary-500);
+
+  /* Interactive — secondary (neutral) */
+  --cocso-color-interactive-secondary: var(--cocso-color-neutral-800);
+  --cocso-color-interactive-secondary-hover: var(--cocso-color-neutral-700);
+
+  /* Focus ring */
+  --cocso-color-focus-ring: var(--cocso-color-primary-50);
+
+  /* Feedback surfaces — flip the light tints/text/borders for dark backgrounds */
+  --cocso-color-feedback-danger-subtle: var(--cocso-color-danger-950);
+  --cocso-color-feedback-danger-text: var(--cocso-color-danger-300);
+  --cocso-color-feedback-danger-border: var(--cocso-color-danger-800);
+  --cocso-color-feedback-success-subtle: var(--cocso-color-success-950);
+  --cocso-color-feedback-success-text: var(--cocso-color-success-300);
+  --cocso-color-feedback-success-border: var(--cocso-color-success-800);
+  --cocso-color-feedback-warning-subtle: var(--cocso-color-warning-950);
+  --cocso-color-feedback-warning-text: var(--cocso-color-warning-300);
+  --cocso-color-feedback-warning-border: var(--cocso-color-warning-800);
+  --cocso-color-feedback-info-subtle: var(--cocso-color-info-950);
+  --cocso-color-feedback-info-text: var(--cocso-color-info-300);
+  --cocso-color-feedback-info-border: var(--cocso-color-info-800);
+
+  /* Elevation reads stronger on dark surfaces */
+  --cocso-color-alpha-shadow1: rgba(0, 0, 0, 0.24);
+  --cocso-color-alpha-shadow2: rgba(0, 0, 0, 0.36);
+  --cocso-color-alpha-shadow3: rgba(0, 0, 0, 0.48);
+}

@@ -2,7 +2,7 @@ import type { ComponentProps, Ref } from "react";
 import { match } from "ts-pattern";
 import { cn } from "../../cn";
 import { mergeProps } from "../../primitives/merge-props";
-import { useRender } from "../../primitives/use-render";
+import { type RenderProp, useRender } from "../../primitives/use-render";
 import type {
   FontSize,
   FontWeight,
@@ -22,7 +22,7 @@ export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
 type TypographyPropsBase = {
   ref?: Ref<HTMLElement>;
-  render?: useRender.RenderProp;
+  render?: RenderProp;
   weight?: FontWeight;
   lineHeight?: LineHeight;
 } & Omit<ComponentProps<"p">, "ref">;

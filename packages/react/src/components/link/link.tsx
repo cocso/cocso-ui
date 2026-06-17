@@ -3,7 +3,7 @@ import { ExternalLinkIcon } from "@cocso-ui/react-icons";
 import "@cocso-ui/codegen/generated/link.css";
 import type { ComponentProps, CSSProperties } from "react";
 import { cn } from "../../cn";
-import type { useRender } from "../../primitives/use-render";
+import type { RenderProp } from "../../primitives/use-render";
 import type { FontWeight, LineHeight } from "../../token";
 import type { TypographyProps } from "../typography";
 import { Typography } from "../typography";
@@ -15,7 +15,7 @@ export type LinkVariant = "inline" | "current" | "plain";
 export interface LinkProps extends ComponentProps<"a"> {
   indicator?: boolean;
   lineHeight?: LineHeight;
-  render?: useRender.RenderProp;
+  render?: RenderProp;
   size?: TypographyProps["size"];
   type?: TypographyProps["type"];
   variant?: LinkVariant;
