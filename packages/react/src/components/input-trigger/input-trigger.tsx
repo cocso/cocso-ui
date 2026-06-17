@@ -52,6 +52,7 @@ export function InputTrigger({
         hasError && styles.error,
         className
       )}
+      data-cocso-component="input-trigger"
       disabled={disabled}
       ref={ref}
       type="button"

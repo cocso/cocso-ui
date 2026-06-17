@@ -53,6 +53,7 @@ export function Input({
         hasError && styles.error,
         className
       )}
+      data-cocso-component="input"
       disabled={disabled}
       id={id}
       ref={ref}

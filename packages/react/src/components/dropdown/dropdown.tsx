@@ -26,7 +26,11 @@ function DropdownContent({
         side={side}
         sideOffset={sideOffset}
       >
-        <MenuBase.Popup className={cn(styles.content, className)} {...props} />
+        <MenuBase.Popup
+          className={cn(styles.content, className)}
+          data-cocso-component="dropdown-content"
+          {...props}
+        />
       </MenuBase.Positioner>
     </MenuBase.Portal>
   );
@@ -41,7 +45,11 @@ function DropdownItem({
   prefix?: ReactNode;
 }) {
   return (
-    <MenuBase.Item className={cn(styles.item, className)} {...props}>
+    <MenuBase.Item
+      className={cn(styles.item, className)}
+      data-cocso-component="dropdown-item"
+      {...props}
+    >
       {prefix && <span className={styles.prefix}>{prefix}</span>}
       {children}
     </MenuBase.Item>

@@ -37,6 +37,7 @@ function PopoverContent({
       >
         <PopoverBase.Popup
           className={cn(styles.content, className)}
+          data-cocso-component="popover-content"
           {...props}
         />
       </PopoverBase.Positioner>

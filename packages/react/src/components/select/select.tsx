@@ -59,6 +59,7 @@ export function Select({
         hasError && styles.error,
         className
       )}
+      data-cocso-component="select"
       style={wrapperStyle}
     >
       <FieldAwareSelect
