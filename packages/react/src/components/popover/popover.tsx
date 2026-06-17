@@ -31,6 +31,7 @@ function PopoverContent({
         align={align}
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
+        className={styles.positioner}
         side={side}
         sideOffset={sideOffset}
       >

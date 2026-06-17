@@ -5,11 +5,27 @@ import styles from "./dropdown.module.css";
 
 function DropdownContent({
   className,
+  side,
+  sideOffset,
+  align,
+  alignOffset,
+  arrowPadding,
   ...props
-}: ComponentProps<typeof MenuBase.Popup>) {
+}: ComponentProps<typeof MenuBase.Popup> &
+  Pick<
+    ComponentProps<typeof MenuBase.Positioner>,
+    "side" | "sideOffset" | "align" | "alignOffset" | "arrowPadding"
+  >) {
   return (
     <MenuBase.Portal>
-      <MenuBase.Positioner>
+      <MenuBase.Positioner
+        align={align}
+        alignOffset={alignOffset}
+        arrowPadding={arrowPadding}
+        className={styles.positioner}
+        side={side}
+        sideOffset={sideOffset}
+      >
         <MenuBase.Popup className={cn(styles.content, className)} {...props} />
       </MenuBase.Positioner>
     </MenuBase.Portal>
