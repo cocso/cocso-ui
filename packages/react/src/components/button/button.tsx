@@ -3,7 +3,7 @@ import "@cocso-ui/codegen/generated/button.css";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { cn } from "../../cn";
 import { mergeProps } from "../../primitives/merge-props";
-import { useRender } from "../../primitives/use-render";
+import { type RenderProp, useRender } from "../../primitives/use-render";
 import { type FontWeight, fontWeight as fontWeightToken } from "../../token";
 import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
@@ -27,7 +27,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
   disabled?: boolean;
   loading?: boolean;
   prefix?: ReactNode;
-  render?: useRender.RenderProp;
+  render?: RenderProp;
   shape?: ButtonShape;
   size?: ButtonSize;
   spinnerVariant?: SpinnerVariant;

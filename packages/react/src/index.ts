@@ -29,4 +29,5 @@ export * from "./components/tab";
 export * from "./components/toast";
 export * from "./components/tooltip";
 export * from "./components/typography";
+export type { RenderProp } from "./primitives/use-render";
 export * from "./token";
