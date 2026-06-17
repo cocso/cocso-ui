@@ -1,5 +1,15 @@
 # @cocso-ui/css
 
+## 1.0.1
+
+### Patch Changes
+
+- b108361: Add an opt-in dark theme at `@cocso-ui/css/theme-dark.css`. Import it after
+  `token.css` and set `data-theme="dark"` on a container to remap the semantic
+  token layer (text, surface, border, interactive, focus, feedback surfaces) to
+  dark tones. Raw color-scale tokens are untouched, so app-level scale overrides
+  are preserved and existing light-only apps are unaffected.
+
 ## 1.0.0
 
 ### Major Changes
@@ -9,7 +19,6 @@
   several token values changed.
 
   Migration:
-
   - Replace all `--ds-color-*` / `--ds-*` references with `--cocso-*`.
   - Re-check any hardcoded reliance on the previous blue `primary` palette; it now
     resolves to the neutral scale.

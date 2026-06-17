@@ -1,11 +1,47 @@
 # @cocso-ui/react
 
+## 1.0.1
+
+### Patch Changes
+
+- 65512ff: Fix `Dropdown` / `Popover` stacking and add positioning props.
+  - Move the overlay `z-index` onto the floating `Positioner` (the element that
+    owns the stacking context via its `transform`). Previously `z-index` lived on
+    the inner popup, so a `position: fixed` sidebar could render on top of an open
+    `Dropdown` and the popup could appear transparent.
+  - `Dropdown.Content` now forwards `side`, `sideOffset`, `align`, `alignOffset`,
+    and `arrowPadding` to its positioner, matching `Popover.Content`. Per-instance
+    placement no longer needs global CSS overrides.
+
+- a0d80ac: Add `InputTrigger` — a native `<button>` styled to look like an `Input`. Use it
+  as the trigger for `Dropdown`, `DayPicker`, `MonthPicker`, etc. Because it is a
+  real button, it avoids Base UI's `nativeButton` warning that fires when a plain
+  `Input` is used as a trigger, while still presenting an input-like surface with
+  a value/placeholder and optional `prefix`/`suffix` affix icons.
+- df7317e: `Pagination` now accepts a `locale` prop (`"en" | "ko"`, default `"en"`) that
+  supplies built-in accessible labels, so Korean apps no longer need to pass a
+  full `labels` object on every instance. The `labels` prop still overrides
+  individual strings.
+- 0534c93: Add stable `data-cocso-component` attributes to themable surfaces (`Dropdown`,
+  `Popover`, `Dialog`, `Tooltip`, `Select`, `Input`, `InputTrigger`) so global CSS
+  overrides can target them without depending on content-hashed CSS Module class
+  names. Also move the `Tooltip` overlay `z-index` onto its positioner, fixing the
+  same stacking-context issue addressed for `Dropdown`/`Popover`.
+- 4f3c468: Expose first-class prop types so consumers no longer need to import from
+  `@base-ui/react`:
+  - `Tab` now exports `TabProps`, `TabListProps`, `TabTriggerProps`, and
+    `TabContentProps`.
+  - A `RenderProp` type alias is re-exported from the package root for typing the
+    `render` prop of polymorphic components (`Button`, `Link`, `Typography`).
+
+- Updated dependencies [b108361]
+  - @cocso-ui/css@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
 
 - 0ee7777: BREAKING: first stable v1 release.
-
   - Component primitives migrated from `@radix-ui/*` to `@base-ui/react`.
   - `Modal` removed and replaced by `Dialog`.
   - Design tokens rebased via `@cocso-ui/css@1` (primary now derives from neutral;
@@ -14,7 +50,6 @@
     skeleton, tooltip.
 
   Migration:
-
   - Replace `Modal` imports/usages with `Dialog`.
   - Upgrade `@cocso-ui/css` and `@cocso-ui/react-icons` to v1 together with this
     package; mixing with 0.2.x is not supported.
