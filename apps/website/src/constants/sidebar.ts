@@ -70,6 +70,11 @@ const en: Sidebar = {
         name: "MCP Connection",
         url: "/getting-started/mcp-connection",
       },
+      {
+        type: "page",
+        name: "v0.2 → v1.0 Migration",
+        url: "/getting-started/migration-v1",
+      },
     ],
   },
   foundations: {
@@ -96,6 +101,11 @@ const ko: Sidebar = {
         type: "page",
         name: "MCP 연결",
         url: "/getting-started/mcp-connection",
+      },
+      {
+        type: "page",
+        name: "v0.2 → v1.0 마이그레이션",
+        url: "/getting-started/migration-v1",
       },
     ],
   },
