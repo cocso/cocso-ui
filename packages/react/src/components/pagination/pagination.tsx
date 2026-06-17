@@ -14,9 +14,27 @@ export interface PaginationLabels {
   previous?: string;
 }
 
+export type PaginationLocale = "en" | "ko";
+
+const LOCALE_LABELS: Record<PaginationLocale, Required<PaginationLabels>> = {
+  en: {
+    navigation: "Page navigation",
+    previous: "Previous page",
+    next: "Next page",
+    page: (n: number) => `Page ${n}`,
+  },
+  ko: {
+    navigation: "페이지 탐색",
+    previous: "이전 페이지",
+    next: "다음 페이지",
+    page: (n: number) => `${n} 페이지`,
+  },
+};
+
 export interface PaginationProps
   extends Omit<ComponentProps<"nav">, "onChange"> {
   labels?: PaginationLabels;
+  locale?: PaginationLocale;
   maxVisible?: number;
   onChange: (pageNumber: number) => void;
   page: number;
@@ -32,14 +50,16 @@ export function Pagination({
   maxVisible = 5,
   onChange,
   labels,
+  locale = "en",
   ...props
 }: PaginationProps) {
   const halfVisible = Math.ceil(maxVisible / 2);
 
-  const navigationLabel = labels?.navigation ?? "Page navigation";
-  const previousLabel = labels?.previous ?? "Previous page";
-  const nextLabel = labels?.next ?? "Next page";
-  const pageLabel = labels?.page ?? ((n: number) => `Page ${n}`);
+  const defaults = LOCALE_LABELS[locale];
+  const navigationLabel = labels?.navigation ?? defaults.navigation;
+  const previousLabel = labels?.previous ?? defaults.previous;
+  const nextLabel = labels?.next ?? defaults.next;
+  const pageLabel = labels?.page ?? defaults.page;
 
   const renderPageButton = (pageNumber: number) => (
     <button
