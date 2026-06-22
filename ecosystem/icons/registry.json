@@ -144,8 +144,28 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "BarcodeIcon",
+      "name": "barcode",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "BellIcon",
       "name": "bell",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "BookmarkIcon",
+      "name": "bookmark",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -194,8 +214,28 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "CashIcon",
+      "name": "cash",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "ChangeCircleIcon",
       "name": "change-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ChartBarIcon",
+      "name": "chart-bar",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -284,8 +324,38 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "CircleMinusIcon",
+      "name": "circle-minus",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CirclePlusIcon",
+      "name": "circle-plus",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "CircleXIcon",
       "name": "circle-x",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ClipboardCheckIcon",
+      "name": "clipboard-check",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -394,6 +464,26 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "CoinIcon",
+      "name": "coin",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ColumnsIcon",
+      "name": "columns",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "ContentCopyIcon",
       "name": "content-copy",
       "source": "tabler",
@@ -404,8 +494,28 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "CreditCardIcon",
+      "name": "credit-card",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "DeleteIcon",
       "name": "delete",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "DeviceFloppyIcon",
+      "name": "device-floppy",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -544,6 +654,36 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "FileIcon",
+      "name": "file",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FileExportIcon",
+      "name": "file-export",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FileImportIcon",
+      "name": "file-import",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "FileSaveIcon",
       "name": "file-save",
       "source": "tabler",
@@ -554,8 +694,38 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "FileTextIcon",
+      "name": "file-text",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "FilterIcon",
       "name": "filter",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FolderIcon",
+      "name": "folder",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FolderOpenIcon",
+      "name": "folder-open",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -676,8 +846,48 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "LayoutGridIcon",
+      "name": "layout-grid",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "LinkIcon",
       "name": "link",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ListIcon",
+      "name": "list",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "LockIcon",
+      "name": "lock",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "LockOpenIcon",
+      "name": "lock-open",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -708,6 +918,26 @@
       "colorStrategy": "stroke",
       "componentName": "MailIcon",
       "name": "mail",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MapIcon",
+      "name": "map",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MapPinIcon",
+      "name": "map-pin",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -908,8 +1138,28 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "PowerIcon",
+      "name": "power",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "PrinterIcon",
       "name": "printer",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "QrcodeIcon",
+      "name": "qrcode",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -1058,8 +1308,38 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "SortAscendingIcon",
+      "name": "sort-ascending",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "SortDescendingIcon",
+      "name": "sort-descending",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "SpaceDashboardIcon",
       "name": "space-dashboard",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "StarIcon",
+      "name": "star",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -1100,6 +1380,26 @@
       "colorStrategy": "stroke",
       "componentName": "SystemUpdateIcon",
       "name": "system-update",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "TableIcon",
+      "name": "table",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "TagIcon",
+      "name": "tag",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -1157,9 +1457,59 @@
     {
       "aliases": [],
       "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "UserPlusIcon",
+      "name": "user-plus",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "UsersIcon",
+      "name": "users",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
       "colorStrategy": "fill",
       "componentName": "VerifiedIcon",
       "name": "verified",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "WalletIcon",
+      "name": "wallet",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ZoomInIcon",
+      "name": "zoom-in",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ZoomOutIcon",
+      "name": "zoom-out",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
