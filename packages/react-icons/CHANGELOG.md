@@ -1,5 +1,26 @@
 # @cocso-ui/react-icons
 
+## 1.0.1
+
+### Patch Changes
+
+- 88bd926: Add 27 common semantic icons (Tabler, stroke): `EyeIcon`, `EyeOffIcon`,
+  `AlertTriangleIcon`, `CircleXIcon`, `HelpCircleIcon`, `BellIcon`, `UploadIcon`,
+  `PrinterIcon`, `ShareIcon`, `FilterIcon`, `ArrowsSortIcon`, `DotsVerticalIcon`,
+  `ChevronLeftIcon`, `ChevronDownIcon`, `HomeIcon`, `LogoutIcon`, `LoginIcon`,
+  `ClockIcon`, `HistoryIcon`, `MailIcon`, `PhoneIcon`, `CalendarIcon`, `PillIcon`,
+  `PackageIcon`, `TruckIcon`, `ClipboardListIcon`, `ReceiptIcon`.
+- 8a6195d: Add 35 more semantic icons (Tabler, stroke) covering settlement
+  (`CreditCardIcon`, `CashIcon`, `CoinIcon`, `WalletIcon`, `BarcodeIcon`,
+  `QrcodeIcon`, `FileExportIcon`, `FileImportIcon`, `ReceiptIcon`), tables
+  (`TableIcon`, `ListIcon`, `LayoutGridIcon`, `ColumnsIcon`, `SortAscendingIcon`,
+  `SortDescendingIcon`), files (`DeviceFloppyIcon`, `FileIcon`, `FileTextIcon`,
+  `FolderIcon`, `FolderOpenIcon`), accounts (`LockIcon`, `LockOpenIcon`,
+  `UsersIcon`, `UserPlusIcon`, `PowerIcon`), and misc (`StarIcon`, `BookmarkIcon`,
+  `TagIcon`, `MapPinIcon`, `MapIcon`, `ZoomInIcon`, `ZoomOutIcon`, `ChartBarIcon`,
+  `CirclePlusIcon`, `CircleMinusIcon`, `ClipboardCheckIcon`).
+- c4d879f: Add `PinIcon` (Tabler `pin`, stroke) to the semantic icon set.
+
 ## 1.0.0
 
 ### Major Changes
@@ -18,7 +39,6 @@
   모든 semantic 아이콘의 SVG를 [Tabler Icons](https://tabler.io/icons) 기반으로 교체하였습니다.
 
   #### 주요 변경사항
-
   - **SVG 소스 전환**: 기존 커스텀/Material 기반 SVG를 Tabler Icons SVG로 교체 (56개 아이콘)
   - **Filled 아이콘 적용**: `ArrowDropDownIcon`, `ArrowDropUpIcon`, `CheckCircleIcon`, `RemoveCircleIcon`, `VerifiedIcon`, `SideNavigationIcon`에 filled 스타일 적용
   - **신규 아이콘 추가**: `ArrowBackwardIcon`, `ArrowUpIcon`, `DocumentScannerIcon`, `DollarIcon`, `HospitalIcon`, `LinkIcon`, `NetworkNodeIcon`, `PencilIcon`, `PieChartIcon`, `PlugConnectIcon`, `SystemUpdateIcon`
@@ -26,7 +46,6 @@
   - **CheckIndeterminateSmallIcon**: 마이너스 라인 길이 조정
 
   #### Breaking Changes
-
   - `AddIcon`이 삭제되었습니다. `PlusIcon`을 사용해주세요.
   - 아이콘의 SVG path가 변경되어 시각적 형태가 달라질 수 있습니다.
 
