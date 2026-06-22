@@ -658,6 +658,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "PinIcon",
+      "name": "pin",
+      "source": "tabler",
+      "tags": ["location", "map", "place", "navigation"],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "PlugConnectIcon",
       "name": "plug-connect",
       "source": "tabler",
