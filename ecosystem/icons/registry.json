@@ -14,6 +14,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "AlertTriangleIcon",
+      "name": "alert-triangle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "AllInboxIcon",
       "name": "all-inbox",
       "source": "tabler",
@@ -103,6 +113,16 @@
     {
       "aliases": [],
       "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ArrowsSortIcon",
+      "name": "arrows-sort",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
       "colorStrategy": "fill",
       "componentName": "AttachFileIcon",
       "name": "attach-file",
@@ -124,6 +144,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "BellIcon",
+      "name": "bell",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "BusinessMessagesIcon",
       "name": "business-messages",
       "source": "tabler",
@@ -136,6 +166,16 @@
       "colorStrategy": "stroke",
       "componentName": "CalculateIcon",
       "name": "calculate",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CalendarIcon",
+      "name": "calendar",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -204,6 +244,26 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "ChevronDownIcon",
+      "name": "chevron-down",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ChevronLeftIcon",
+      "name": "chevron-left",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "ChevronRightIcon",
       "name": "chevron-right",
       "source": "tabler",
@@ -216,6 +276,36 @@
       "colorStrategy": "stroke",
       "componentName": "ChevronUpIcon",
       "name": "chevron-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "CircleXIcon",
+      "name": "circle-x",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ClipboardListIcon",
+      "name": "clipboard-list",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ClockIcon",
+      "name": "clock",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -374,6 +464,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "DotsVerticalIcon",
+      "name": "dots-vertical",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "DownloadIcon",
       "name": "download",
       "source": "tabler",
@@ -424,8 +524,58 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "EyeIcon",
+      "name": "eye",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "EyeOffIcon",
+      "name": "eye-off",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "FileSaveIcon",
       "name": "file-save",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "FilterIcon",
+      "name": "filter",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "HelpCircleIcon",
+      "name": "help-circle",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "HistoryIcon",
+      "name": "history",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -439,6 +589,16 @@
       "source": "custom",
       "tags": [],
       "viewBox": "0 0 141 108"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "HomeIcon",
+      "name": "home",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
     },
     {
       "aliases": [],
@@ -518,6 +678,36 @@
       "colorStrategy": "stroke",
       "componentName": "LinkIcon",
       "name": "link",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "LoginIcon",
+      "name": "login",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "LogoutIcon",
+      "name": "logout",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "MailIcon",
+      "name": "mail",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -608,6 +798,16 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "PackageIcon",
+      "name": "package",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "PencilIcon",
       "name": "pencil",
       "source": "tabler",
@@ -648,8 +848,28 @@
       "aliases": [],
       "category": "semantic",
       "colorStrategy": "stroke",
+      "componentName": "PhoneIcon",
+      "name": "phone",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
       "componentName": "PieChartIcon",
       "name": "pie-chart",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PillIcon",
+      "name": "pill",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -680,6 +900,26 @@
       "colorStrategy": "stroke",
       "componentName": "PlusIcon",
       "name": "plus",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "PrinterIcon",
+      "name": "printer",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ReceiptIcon",
+      "name": "receipt",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
@@ -787,6 +1027,16 @@
     {
       "aliases": [],
       "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "ShareIcon",
+      "name": "share",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
       "colorStrategy": "fill",
       "componentName": "SideNavigationIcon",
       "name": "side-navigation",
@@ -880,6 +1130,26 @@
       "colorStrategy": "stroke",
       "componentName": "TrendingUpIcon",
       "name": "trending-up",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "TruckIcon",
+      "name": "truck",
+      "source": "tabler",
+      "tags": [],
+      "viewBox": "0 0 24 24"
+    },
+    {
+      "aliases": [],
+      "category": "semantic",
+      "colorStrategy": "stroke",
+      "componentName": "UploadIcon",
+      "name": "upload",
       "source": "tabler",
       "tags": [],
       "viewBox": "0 0 24 24"
