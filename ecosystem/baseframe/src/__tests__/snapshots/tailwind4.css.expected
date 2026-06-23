@@ -121,6 +121,8 @@
   --z-index-overlay: var(--cocso-z-index-overlay);
   --z-index-dialog: var(--cocso-z-index-dialog);
   --z-index-dialog-content: var(--cocso-z-index-dialog-content);
+  --z-index-popover: var(--cocso-z-index-popover);
+  --z-index-tooltip: var(--cocso-z-index-tooltip);
   --color-alpha-shadow1: var(--cocso-color-alpha-shadow1);
   --color-alpha-shadow2: var(--cocso-color-alpha-shadow2);
   --color-alpha-shadow3: var(--cocso-color-alpha-shadow3);

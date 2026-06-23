@@ -27,5 +27,11 @@ data:
     $z-index.dialog-content:
       values:
         default: "250"
+    $z-index.popover:
+      values:
+        default: "300"
+    $z-index.tooltip:
+      values:
+        default: "400"
 
 
