@@ -50,7 +50,7 @@
   }
 
   .positioner {
-    z-index: var(--cocso-z-index-overlay);
+    z-index: var(--cocso-z-index-popover);
   }
 
   .content {

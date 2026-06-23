@@ -41,7 +41,7 @@ packages/baseframe-sources/
 │   ├── font-weight.yaml    # $font-weight.thin through $font-weight.black
 │   ├── shadow.yaml         # $shadow.1 through $shadow.4, shadow dimensions
 │   ├── spacing.yaml        # $spacing.0 through $spacing.max
-│   └── z-index.yaml        # $z-index.behind through $z-index.dialog-content
+│   └── z-index.yaml        # $z-index.behind through $z-index.tooltip
 └── semantic/               # Alias tokens
     └── color.yaml          # $color.alpha.*, $color.text.*
 ```

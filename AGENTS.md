@@ -101,6 +101,18 @@ When asked to review comments on a GitHub PR:
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
   ignored by ancestors.
+- The z-index scale ascends so floating layers always sit above modals
+  (portals flatten to `<body>`, so stacking is decided by `z-index` alone):
+  `header (50)` < `overlay (100, dialog backdrop)` < `dialog (200, dialog
+  content)` < `popover (300, dropdown/popover and anything built on Dropdown
+  such as DayPicker/MonthPicker)` < `tooltip (400)`. This guarantees a tooltip
+  or dropdown opened inside a Dialog renders above the dialog content. Toast is
+  rendered by `sonner` and intentionally sits above this scale; do not assign it
+  a token.
+- Trigger-attached floating surfaces MUST use `--cocso-z-index-popover`;
+  tooltips MUST use `--cocso-z-index-tooltip`. Do NOT use
+  `--cocso-z-index-overlay` for floating popups — it is the dialog backdrop
+  layer and would render the popup behind dialog content.
 
 ### Frontend Design Rules
 
