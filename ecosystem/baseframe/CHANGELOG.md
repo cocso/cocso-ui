@@ -1,5 +1,12 @@
 # @cocso-ui/baseframe
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [17504b4]
+  - @cocso-ui/baseframe-sources@0.2.0
+
 ## 0.0.6
 
 ### Patch Changes
