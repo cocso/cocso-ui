@@ -1,10 +1,25 @@
 # @cocso-ui/react
 
+## 1.0.2
+
+### Patch Changes
+
+- 17504b4: Add a dedicated floating layer to the z-index scale so popups always render above modals.
+
+  - Add `popover` (300) and `tooltip` (400) z-index tokens, above `dialog` (200).
+  - Dropdown and Popover positioners now use `--cocso-z-index-popover`; Tooltip uses `--cocso-z-index-tooltip`. DayPicker/MonthPicker inherit the dropdown layer.
+  - Fixes tooltips and dropdowns (incl. DayPicker/MonthPicker) being hidden behind dialog content when opened inside a Dialog.
+  - Remove the redundant `z-index` on the Dropdown popup; the layer belongs on the Positioner per the floating component contract.
+
+- Updated dependencies [17504b4]
+  - @cocso-ui/css@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes
 
 - 65512ff: Fix `Dropdown` / `Popover` stacking and add positioning props.
+
   - Move the overlay `z-index` onto the floating `Positioner` (the element that
     owns the stacking context via its `transform`). Previously `z-index` lived on
     the inner popup, so a `position: fixed` sidebar could render on top of an open
@@ -29,6 +44,7 @@
   same stacking-context issue addressed for `Dropdown`/`Popover`.
 - 4f3c468: Expose first-class prop types so consumers no longer need to import from
   `@base-ui/react`:
+
   - `Tab` now exports `TabProps`, `TabListProps`, `TabTriggerProps`, and
     `TabContentProps`.
   - A `RenderProp` type alias is re-exported from the package root for typing the
@@ -42,6 +58,7 @@
 ### Major Changes
 
 - 0ee7777: BREAKING: first stable v1 release.
+
   - Component primitives migrated from `@radix-ui/*` to `@base-ui/react`.
   - `Modal` removed and replaced by `Dialog`.
   - Design tokens rebased via `@cocso-ui/css@1` (primary now derives from neutral;
@@ -50,6 +67,7 @@
     skeleton, tooltip.
 
   Migration:
+
   - Replace `Modal` imports/usages with `Dialog`.
   - Upgrade `@cocso-ui/css` and `@cocso-ui/react-icons` to v1 together with this
     package; mixing with 0.2.x is not supported.

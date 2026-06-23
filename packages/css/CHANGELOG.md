@@ -1,5 +1,16 @@
 # @cocso-ui/css
 
+## 1.1.0
+
+### Minor Changes
+
+- 17504b4: Add a dedicated floating layer to the z-index scale so popups always render above modals.
+
+  - Add `popover` (300) and `tooltip` (400) z-index tokens, above `dialog` (200).
+  - Dropdown and Popover positioners now use `--cocso-z-index-popover`; Tooltip uses `--cocso-z-index-tooltip`. DayPicker/MonthPicker inherit the dropdown layer.
+  - Fixes tooltips and dropdowns (incl. DayPicker/MonthPicker) being hidden behind dialog content when opened inside a Dialog.
+  - Remove the redundant `z-index` on the Dropdown popup; the layer belongs on the Positioner per the floating component contract.
+
 ## 1.0.1
 
 ### Patch Changes
@@ -19,6 +30,7 @@
   several token values changed.
 
   Migration:
+
   - Replace all `--ds-color-*` / `--ds-*` references with `--cocso-*`.
   - Re-check any hardcoded reliance on the previous blue `primary` palette; it now
     resolves to the neutral scale.
