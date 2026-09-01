@@ -6,7 +6,7 @@ on:
       branch:
         description: 'Branch to update baselines on'
         required: true
-        default: 'v1'
+        default: 'main'
 
 jobs:
   update-baselines:
@@ -51,7 +51,7 @@ jobs:
         run: |
           npx serve storybook-static -p 6006 &
           npx wait-on http://localhost:6006 --timeout 60000
-          pnpm test:visual -- --updateSnapshot
+          pnpm test:visual:update
 
       - name: Commit Baselines
         run: |
