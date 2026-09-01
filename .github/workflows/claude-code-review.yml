@@ -31,8 +31,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      # Advisory job: it comments on the PR, it does not gate merges. It cannot
+      # run unless the Claude Code GitHub App is installed on this repository
+      # (the OIDC token exchange returns 401 without it). Letting that turn every
+      # PR red teaches people to ignore CI, so the failure is surfaced as a
+      # warning instead and the job self-heals once the App is installed.
       - name: Run Claude Code Review
         id: claude-review
+        continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -42,3 +48,7 @@ jobs:
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
+      - name: Report unavailable review
+        if: steps.claude-review.outcome == 'failure'
+        run: |
+          echo "::warning title=Claude Code review did not run::Install the Claude Code GitHub App at https://github.com/apps/claude to enable it. The exact error is in the 'Run Claude Code Review' step log."
