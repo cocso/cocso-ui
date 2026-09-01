@@ -40,8 +40,8 @@
     width: 90vw;
     max-height: 85vh;
     padding: var(--cocso-spacing-9);
-    background-color: var(--cocso-color-white);
-    border: 1px solid var(--cocso-color-neutral-100);
+    background-color: var(--cocso-color-surface-primary);
+    border: 1px solid var(--cocso-color-border-secondary);
     border-radius: var(--cocso-radius-5);
     box-shadow: var(--cocso-shadow-dialog);
     transform: translate(-50%, -50%);

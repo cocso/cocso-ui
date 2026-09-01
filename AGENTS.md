@@ -97,6 +97,14 @@ When asked to review comments on a GitHub PR:
   target it from global CSS (e.g. `[data-cocso-component="dropdown-content"]`).
 - `<name>` uses lowercase kebab-case and identifies the component part
   (e.g. `dropdown-content`, `dropdown-item`, `dialog-overlay`).
+- CSS Modules MUST NOT hardcode a primitive color (`--cocso-color-white`,
+  `--cocso-color-neutral-500`, and the rest of the raw scale). `theme-dark.css`
+  redefines the semantic layer and deliberately leaves the raw scale alone, so a
+  primitive written into a module keeps its value when the theme flips. Use the
+  semantic token that resolves to the same value in the light theme.
+  `packages/react/src/test/module-css-tokens.test.ts` enforces this; its pending
+  list names the violations still being cleaned up, and nothing may be added to
+  it.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
