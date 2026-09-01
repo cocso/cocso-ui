@@ -172,6 +172,7 @@ pnpm --filter @cocso-ui/css lint
 - Document token inventory in `apps/website`.
 - Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
 - Input/select/OTP ring+elevation composite shadow patterns — needs dedicated semantic tokens (follow-up).
+- Remove `--cocso-z-index-dialog-content` (250). No component uses it, it is absent from the documented z-index scale, and it reads as the layer to reach for when a floating surface needs lifting — which drops tooltips below popovers. Removing a published token is breaking, so it waits for the next major.
 - A third AA-conformant text tier. `text-tertiary` and `text-muted` cannot carry body text in either theme, and no existing neutral step can replace them without collapsing into `text-secondary`. Requires new primitive steps between `neutral-400` and `neutral-600` (light) and around `neutral-450` (dark), so it is a ramp change with consumer impact, not a semantic remap.
 - Alias Tailwind's `--radius-xs`…`--radius-4xl` onto the `--cocso-radius-*` tokens in `baseframe` codegen, so both spellings resolve to one variable. Removes the duplicate radius namespace at the source; changes what `rounded-md` resolves to for existing consumers (identical at a 16px root font size), so it needs a minor release and a consumer note.
 

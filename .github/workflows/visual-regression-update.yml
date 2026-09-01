@@ -58,8 +58,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add apps/storybook/__snapshots__/
-          # No [skip ci]: the point of new baselines is that the next visual
-          # regression run compares against them. Skipping CI here leaves the
-          # branch asserting a baseline nothing has verified.
-          git diff --cached --quiet || git commit -m "chore: update visual regression baselines"
+          # [skip ci] is honest here: a push made with GITHUB_TOKEN cannot
+          # trigger a workflow at all, so dropping the marker would not get the
+          # new baselines verified — it would only make the intent misleading.
+          # Verify them by running Visual Regression manually on the branch.
+          git diff --cached --quiet || git commit -m "chore: update visual regression baselines [skip ci]"
           git push
