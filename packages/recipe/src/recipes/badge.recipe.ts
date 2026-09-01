@@ -9,6 +9,12 @@ export const badgeRecipe = defineRecipe({
       primary: {
         root: { bgColor: "interactive-primary", fontColor: "text-on-primary" },
       },
+      "primary-subtle": {
+        root: {
+          bgColor: "interactive-primary-subtle",
+          fontColor: "interactive-primary-text",
+        },
+      },
       secondary: {
         root: { bgColor: "surface-secondary", fontColor: "text-secondary" },
       },

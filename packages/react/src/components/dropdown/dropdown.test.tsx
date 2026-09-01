@@ -34,6 +34,32 @@ describe("Dropdown", () => {
     });
   });
 
+  describe("override hooks", () => {
+    it("exposes a positioner hook that owns the stacking context", async () => {
+      const user = userEvent.setup();
+      render(
+        <Dropdown>
+          <Dropdown.Trigger render={<button type="button">Open Menu</button>} />
+          <Dropdown.Content>
+            <Dropdown.Item>Item 1</Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole("button", { name: "Open Menu" }));
+
+      await waitFor(() => {
+        const positioner = document.querySelector(
+          '[data-cocso-component="dropdown-positioner"]'
+        );
+        expect(positioner).toBeInTheDocument();
+        expect(
+          positioner?.querySelector('[data-cocso-component="dropdown-content"]')
+        ).toBeInTheDocument();
+      });
+    });
+  });
+
   describe("open/close behavior", () => {
     it("opens the dropdown and shows items when trigger is clicked", async () => {
       render(

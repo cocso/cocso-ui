@@ -7,9 +7,10 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'error', 'warning', 'info'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'error', 'warning', 'info', 'neutral', 'error-ghost'] },
     size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
-    shape: { control: 'select', options: ['square', 'rounded', 'circle'] },
+    shape: { control: 'select', options: ['square', 'rounded', 'circle', 'sharp'] },
+    align: { control: 'select', options: ['center', 'start', 'between'] },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -37,6 +38,8 @@ export const Variants: Story = {
       <Button variant="error">Error</Button>
       <Button variant="warning">Warning</Button>
       <Button variant="info">Info</Button>
+      <Button variant="neutral">Neutral</Button>
+      <Button variant="error-ghost">Error Ghost</Button>
     </div>
   ),
 };
@@ -58,6 +61,21 @@ export const Shapes: Story = {
       <Button shape="square">Square</Button>
       <Button shape="rounded">Rounded</Button>
       <Button shape="circle" svgOnly>◎</Button>
+      <Button shape="sharp">Sharp</Button>
+    </div>
+  ),
+};
+
+export const Alignments: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '240px' }}>
+      <Button align="center" style={{ width: '100%' }}>Center</Button>
+      <Button align="start" shape="sharp" style={{ width: '100%' }} variant="neutral">
+        Start (menu item)
+      </Button>
+      <Button align="between" style={{ width: '100%' }} suffix="›" variant="outline">
+        Between
+      </Button>
     </div>
   ),
 };

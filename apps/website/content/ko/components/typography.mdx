@@ -16,9 +16,11 @@ description: custom, body, heading 모드를 지원하는 유연한 텍스트 �
 <Section>
   <Section.Title>접근성</Section.Title>
   <Section.UnorderedList>
-    <Section.ListItem><code>heading</code> 타입은 기본적으로 <code>&lt;h2&gt;</code>로 렌더링됩니다. 문서 구조에 맞는 올바른 heading 레벨을 설정하려면 <code>render</code> prop을 사용하세요(예: <code>render={`<h1 />`}</code>).</Section.ListItem>
+    <Section.ListItem><code>heading</code> 타입은 기본적으로 <code>&lt;h2&gt;</code>로 렌더링됩니다. 문서 구조에 맞는 heading 레벨은 <code>level</code> prop으로 설정하세요(예: 페이지 제목은 <code>level={1}</code>). 페이지마다 <code>h1</code>은 정확히 하나여야 합니다.</Section.ListItem>
     <Section.ListItem><code>body</code>와 <code>custom</code> 타입은 기본적으로 <code>&lt;p&gt;</code>로 렌더링됩니다. 인라인 콘텐츠를 감쌀 때는 <code>render</code>로 요소를 변경하세요(예: <code>render={`<span />`}</code>).</Section.ListItem>
     <Section.ListItem>시각적 크기에 관계없이 논리적인 heading 계층 구조(h1 → h2 → h3)를 유지하세요. 작은 heading이 더 높은 레벨일 수 있습니다.</Section.ListItem>
+    <Section.ListItem>제목을 <code>type="custom"</code>으로 만들지 마세요. <code>&lt;p&gt;</code>로 렌더링되어 문서 구조에서 빠집니다. 명명된 단계가 맞지 않으면 <code>type="heading"</code>에 숫자 <code>size</code>를 넘기세요.</Section.ListItem>
+    <Section.ListItem>Typography는 자체 색상을 지정하지 않습니다. <code>color</code>를 넘기지 않으면 모든 모드가 가장 가까운 조상에서 상속하므로, 위쪽 어딘가에 하드코딩된 색이 있으면 테마를 바꿔도 그대로 남아 글자가 안 읽힐 수 있습니다. 테마를 따르는 조상에서 상속받게 두거나 시맨틱 토큰을 넘기세요.</Section.ListItem>
   </Section.UnorderedList>
 </Section>
 
@@ -31,7 +33,7 @@ description: custom, body, heading 모드를 지원하는 유연한 텍스트 �
 
 <Section>
   <Section.Title>Heading</Section.Title>
-  <Section.Text>heading 모드는 기본적으로 h2 요소를 렌더링합니다. x-large와 large 크기는 반응형으로, 태블릿 브레이크포인트에서 크기가 증가합니다.</Section.Text>
+  <Section.Text>heading 모드는 기본적으로 h2 요소를 렌더링하며, <code>level</code>로 시각적 <code>size</code>와 무관하게 <code>h1</code>–<code>h6</code>를 선택합니다. x-large와 large 크기는 반응형으로, 태블릿 브레이크포인트에서 크기가 증가합니다.</Section.Text>
   <ComponentExample name="typography-heading">
     ```tsx
     import { Typography } from "@cocso-ui/react";
@@ -116,11 +118,12 @@ description: custom, body, heading 모드를 지원하는 유연한 텍스트 �
     { name: "type", type: '"custom" | "body" | "heading"', default: '"body"', description: "렌더링 모드와 사용 가능한 크기 단계를 선택합니다. `heading`은 반응형 제목을 렌더링하고, `body`는 단락 텍스트를 렌더링하며, `custom`은 임의의 숫자 크기를 받습니다." },
     { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "디자인 토큰 스케일의 숫자 폰트 크기(예: 12, 16, 24), 또는 브레이크포인트별 크기 지정을 위한 `base`, `tablet`, `desktop` 키를 가진 반응형 객체/배열입니다." },
     { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "명명된 body 크기 단계: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
-    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "명명된 heading 크기 단계. `x-large`와 `large`는 반응형으로 태블릿 브레이크포인트에서 크기가 증가합니다. `medium` (20px), `small` (16px), `x-small` (14px)은 고정 크기입니다." },
+    { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small" | ResponsiveFontSize', default: '"medium"', description: "명명된 heading 크기 단계 또는 폰트 스케일의 임의 크기. `x-large`와 `large`는 반응형으로 태블릿 브레이크포인트에서 크기가 증가합니다. `medium` (20px), `small` (16px), `x-small` (14px)은 고정 크기입니다. 명명된 단계로 커버되지 않는 구획 제목에는 숫자를 넘기세요 — `size={18}`." },
+    { name: "level (heading)", type: "1 | 2 | 3 | 4 | 5 | 6", default: "2", description: "`h1`–`h6`로 렌더링되는 시맨틱 heading 레벨입니다. 시각적 `size`와 독립적이므로 작은 heading도 `h1`이 될 수 있습니다." },
     { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "폰트 굵기입니다. heading에서는 `\"bold\"`, body/custom에서는 `\"normal\"`이 기본값입니다." },
     { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "줄 높이를 설정합니다." },
-    { name: "render", type: "RenderProp", description: "기본 HTML 요소를 대체합니다. heading 기본값은 `<h2>`, body/custom 기본값은 `<p>`입니다. 올바른 시맨틱 레벨을 설정할 때 사용하세요." },
-    { name: "color", type: "string", description: "텍스트 색상을 직접 설정합니다. CSS 색상 값 또는 디자인 토큰 참조를 사용합니다." },
+    { name: "render", type: "RenderProp", description: "기본 HTML 요소를 대체합니다. heading 기본값은 `<h2>`, body/custom 기본값은 `<p>`입니다. heading 레벨은 `level`을 우선 사용하고, 완전히 다른 요소가 필요할 때 `render`를 사용하세요." },
+    { name: "color", type: "string", default: "상속", description: "텍스트 색상을 직접 설정합니다. CSS 색상 값 또는 디자인 토큰 참조를 사용합니다. 넘기지 않으면 색을 지정한 가장 가까운 조상에서 상속됩니다 — `heading`, `body`를 포함해 어떤 모드에도 자체 색상이 없습니다." },
   ]} />
 </Section>
 

@@ -36,7 +36,7 @@ description: A clickable element that triggers an action or event.
 <Section>
   <Section.Title>Variant</Section.Title>
   <Section.Text>
-    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning.
+    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>neutral</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning, and <code>error-ghost</code> is the low-emphasis destructive action used inside menus and list rows.
   </Section.Text>
   <ComponentExample name="button-variants">
     ```tsx
@@ -53,6 +53,8 @@ description: A clickable element that triggers an action or event.
           <Button variant="error">Error</Button>
           <Button variant="warning">Warning</Button>
           <Button variant="info">Info</Button>
+          <Button variant="neutral">Neutral</Button>
+          <Button variant="error-ghost">Error Ghost</Button>
         </div>
       );
     }
@@ -86,7 +88,7 @@ description: A clickable element that triggers an action or event.
 <Section>
   <Section.Title>Shape</Section.Title>
   <Section.Text>
-    Use <code>square</code> for standard rectangular buttons, <code>rounded</code> for a pill style, and combine <code>circle</code> with <code>svgOnly</code> for icon-only circular buttons.
+    Use <code>square</code> for standard rectangular buttons, <code>rounded</code> for a pill style, <code>sharp</code> for flush edges inside menus and list rows, and combine <code>circle</code> with <code>svgOnly</code> for icon-only circular buttons.
   </Section.Text>
   <ComponentExample name="button-shapes">
     ```tsx
@@ -99,6 +101,33 @@ description: A clickable element that triggers an action or event.
           <Button shape="square">Square</Button>
           <Button shape="rounded">Rounded</Button>
           <Button shape="circle" svgOnly><PlusIcon size={18} /></Button>
+          <Button shape="sharp">Sharp</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>Alignment</Section.Title>
+  <Section.Text>
+    <code>align</code> controls how the label sits inside the button when the button is wider than its content. Combine <code>align="start"</code>, <code>shape="sharp"</code>, and a full-width class to build menu rows without overriding component styles.
+  </Section.Text>
+  <ComponentExample name="button-alignments">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonAlignments() {
+      return (
+        <div className="flex w-60 flex-col gap-2 p-4">
+          <Button className="w-full">Center</Button>
+          <Button align="start" className="w-full" shape="sharp" variant="neutral">
+            Start
+          </Button>
+          <Button align="between" className="w-full" suffix="›" variant="outline">
+            Between
+          </Button>
         </div>
       );
     }
@@ -178,7 +207,7 @@ description: A clickable element that triggers an action or event.
     data={[
       {
         name: "variant",
-        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info"',
+        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost"',
         default: '"primary"',
         description: "Controls the background and text color to communicate the intent of the action. Use `primary` for the main call-to-action and `ghost` for minimal visual weight.",
       },
@@ -190,9 +219,15 @@ description: A clickable element that triggers an action or event.
       },
       {
         name: "shape",
-        type: '"square" | "circle" | "rounded"',
+        type: '"square" | "circle" | "rounded" | "sharp"',
         default: '"square"',
-        description: "Controls the border-radius. Use `square` for standard actions, `rounded` for pill-shaped labels, and `circle` with `svgOnly` for icon-only buttons.",
+        description: "Controls the border-radius. Use `square` for standard actions, `rounded` for pill-shaped labels, `sharp` for flush menu rows, and `circle` with `svgOnly` for icon-only buttons.",
+      },
+      {
+        name: "align",
+        type: '"center" | "start" | "between"',
+        default: '"center"',
+        description: "Controls horizontal alignment of the label inside the button. Use `start` for left-aligned menu items and `between` to push the label and suffix to opposite edges.",
       },
       {
         name: "disabled",

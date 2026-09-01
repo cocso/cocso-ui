@@ -40,7 +40,7 @@ export const PageNavigation = () => {
       {prevPage ? (
         <Link
           className={twMerge(
-            "corner-squircle flex flex-1 flex-col gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 shadow-xs transition-colors",
+            "corner-squircle flex flex-1 flex-col gap-1.5 rounded-5 border border-neutral-200 px-4 py-3 shadow-xs transition-colors",
             "hover:bg-neutral-50 active:bg-neutral-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}
@@ -58,7 +58,7 @@ export const PageNavigation = () => {
       {nextPage ? (
         <Link
           className={twMerge(
-            "corner-squircle flex flex-1 flex-col items-end gap-1.5 rounded-xl border border-neutral-200 px-4 py-3 shadow-xs transition-colors",
+            "corner-squircle flex flex-1 flex-col items-end gap-1.5 rounded-5 border border-neutral-200 px-4 py-3 shadow-xs transition-colors",
             "hover:bg-neutral-50 active:bg-neutral-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
           )}

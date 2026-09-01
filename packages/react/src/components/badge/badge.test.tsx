@@ -20,6 +20,7 @@ describe("Badge", () => {
   describe("variant className", () => {
     it.each([
       "primary",
+      "primary-subtle",
       "secondary",
       "success",
       "error",

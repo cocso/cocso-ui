@@ -23,7 +23,7 @@ TypeScript (pure data — zero runtime dependencies)
 ## In Scope
 
 - `defineRecipe()` API with type-safe variant/slot/state/compoundVariant definitions.
-- `BaseSlotProperties` interface: type-safe property names with semantic value constraints (35 known properties). Custom properties still allowed via index signature.
+- `BaseSlotProperties` interface: type-safe property names with semantic value constraints (36 known properties). Custom properties still allowed via index signature.
 - `StyleValue` type system: `ColorTokenRef`, `RadiusTokenRef`, `SpacingTokenRef`, `FontWeightRef`, `CSSLiteral`, `NumericValue`, `CompoundBorder`, `ComponentRef`.
 - `resolveForReact()` + `resolveStyleValue()`: recipe + variants → CSS custom property map. Used by codegen at build time.
 - `PropertyCategory` type system + `categoryOf()`: centralized property key → semantic category mapping for resolvers.
@@ -192,7 +192,7 @@ pnpm --filter @cocso-ui/react test      # 365 tests (component behavior tests; c
 
 - **Phase 1-2 (done)**: 13 component recipes + React resolver + Figma resolver + codegen pipeline.
 - **Direction B codegen (done)**: Build-time code generation replaces runtime resolveStyleMap. React components consume generated CSS + className functions. Zero runtime dependency on recipe package.
-- **Phase 5a (done)**: BaseSlotProperties interface for type-safe recipe authoring (35 known properties).
+- **Phase 5a (done)**: BaseSlotProperties interface for type-safe recipe authoring (36 known properties).
 - **Future**: Typography recipe responsive sizing support. Auto-generate TokenCatalog from baseframe YAML.
 
 ## Figma Parity — Golden Matrix Results

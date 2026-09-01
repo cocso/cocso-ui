@@ -165,7 +165,7 @@ export default function IconGallery() {
   return (
     <div className="flex w-full flex-col gap-4">
       <input
-        className="w-full cursor-text rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
+        className="w-full cursor-text rounded-4 border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search icons..."
         type="text"
@@ -177,7 +177,7 @@ export default function IconGallery() {
             <Dropdown.Trigger
               render={
                 <button
-                  className="flex w-full cursor-pointer flex-col items-center gap-2 rounded-lg border border-neutral-100 bg-transparent p-3 transition-colors hover:bg-neutral-50 active:bg-neutral-100"
+                  className="flex w-full cursor-pointer flex-col items-center gap-2 rounded-4 border border-neutral-100 bg-transparent p-3 transition-colors hover:bg-neutral-50 active:bg-neutral-100"
                   type="button"
                 >
                   <Component size={24} />

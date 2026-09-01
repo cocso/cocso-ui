@@ -162,5 +162,38 @@ description: A color guide for COCSO UI's brand identity and visual hierarchy.
 </Section>
 
 <Section>
+  <Section.Title>Theming</Section.Title>
+  <Section.Text>The `--cocso-color-primary-*` ramp is the supported entry point for rebranding. By default it is aliased to the `neutral-*` ramp — a deliberate monochrome default, not a placeholder. Redefine the ramp in your own `:root` after importing the token stylesheet, and every component that derives from it follows: Button, Badge, Checkbox, RadioGroup, Pagination, and focus rings.</Section.Text>
+  <Section.Text>Do not target CSS Module class names — they are content-hashed and change between releases. If a component does not follow a token override, that is a bug in COCSO UI; report it instead of pinning a hashed selector.</Section.Text>
+  ```css
+  @import "@cocso-ui/css/token.css";
+
+  :root {
+    --cocso-color-primary-50: var(--cocso-color-info-50);
+    --cocso-color-primary-100: var(--cocso-color-info-100);
+    --cocso-color-primary-200: var(--cocso-color-info-200);
+    --cocso-color-primary-300: var(--cocso-color-info-300);
+    --cocso-color-primary-400: var(--cocso-color-info-400);
+    --cocso-color-primary-500: var(--cocso-color-info-500);
+    --cocso-color-primary-600: var(--cocso-color-info-600);
+    --cocso-color-primary-700: var(--cocso-color-info-700);
+    --cocso-color-primary-800: var(--cocso-color-info-800);
+    --cocso-color-primary-900: var(--cocso-color-info-900);
+    --cocso-color-primary-950: var(--cocso-color-info-950);
+  }
+  ```
+  <Section.Text>For finer control, override the semantic layer instead of the ramp — for example `--cocso-color-interactive-primary` (filled primary surfaces) or `--cocso-color-focus-ring` (focus outlines) — or scope an override to a single component through its `data-cocso-component` attribute.</Section.Text>
+  ```css
+  [data-cocso-component="radio-item"] {
+    --cocso-radio-checked-color: var(--cocso-color-info-500);
+  }
+  ```
+  <Section.Text>Floating surfaces (Dropdown, Popover, Tooltip, DayPicker, MonthPicker) resolve their stacking through the z-index scale: `header (50)` < `overlay (100)` < `dialog (200)` < `popover (300)` < `tooltip (400)`. A dropdown opened inside a dialog therefore renders above it with no override needed. If a host app has to escape the scale, target the positioner hook — the positioner owns the stacking context, so a `z-index` on the popup alone is ignored.</Section.Text>
+  ```css
+  [data-cocso-component="dropdown-positioner"] { z-index: 9001; }
+  ```
+</Section>
+
+<Section>
   <PageNavigation />
 </Section>

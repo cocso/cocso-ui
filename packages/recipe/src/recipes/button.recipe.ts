@@ -28,16 +28,22 @@ export const buttonRecipe = defineRecipe({
         root: { bgColor: "surface-primary", fontColor: "text-primary" },
       },
       success: {
-        root: { bgColor: "interactive-success", fontColor: "text-on-primary" },
+        root: { bgColor: "interactive-success", fontColor: "text-on-success" },
       },
       error: {
-        root: { bgColor: "interactive-danger", fontColor: "text-on-primary" },
+        root: { bgColor: "interactive-danger", fontColor: "text-on-danger" },
       },
       warning: {
-        root: { bgColor: "interactive-warning", fontColor: "text-primary" },
+        root: { bgColor: "interactive-warning", fontColor: "text-on-warning" },
       },
       info: {
-        root: { bgColor: "interactive-info", fontColor: "text-on-primary" },
+        root: { bgColor: "interactive-info", fontColor: "text-on-info" },
+      },
+      neutral: {
+        root: { bgColor: "interactive-neutral", fontColor: "text-primary" },
+      },
+      "error-ghost": {
+        root: { bgColor: "transparent", fontColor: "feedback-danger-text" },
       },
     },
     size: {
@@ -78,6 +84,12 @@ export const buttonRecipe = defineRecipe({
       square: { root: {} },
       circle: { root: { borderRadius: "100%" } },
       rounded: { root: { borderRadius: "radius-full" } },
+      sharp: { root: { borderRadius: "0" } },
+    },
+    align: {
+      center: { root: { justifyContent: "center" } },
+      start: { root: { justifyContent: "flex-start" } },
+      between: { root: { justifyContent: "space-between" } },
     },
   },
 
@@ -96,32 +108,63 @@ export const buttonRecipe = defineRecipe({
     hover: {
       variant: {
         primary: { root: { bgColor: "interactive-primary-hover" } },
-        secondary: { root: { bgColor: "interactive-secondary" } },
+        secondary: {
+          root: {
+            bgColor: "interactive-secondary",
+            // Same reason as the pressed state: the fill steps toward the
+            // label, so the label steps away from the fill.
+            fontColor: "text-primary",
+          },
+        },
         outline: { root: { bgColor: "surface-secondary" } },
         ghost: { root: { bgColor: "surface-secondary" } },
         success: { root: { bgColor: "interactive-success-hover" } },
         error: { root: { bgColor: "interactive-danger-hover" } },
         warning: { root: { bgColor: "interactive-warning-hover" } },
         info: { root: { bgColor: "interactive-info-hover" } },
+        neutral: { root: { bgColor: "interactive-neutral-hover" } },
+        "error-ghost": {
+          root: { bgColor: "interactive-danger-subtle-hover" },
+        },
       },
     },
     active: {
       variant: {
         primary: { root: { bgColor: "interactive-primary-active" } },
-        secondary: { root: { bgColor: "interactive-secondary-hover" } },
+        secondary: {
+          root: {
+            bgColor: "interactive-secondary-hover",
+            // neutral-200 under `text-secondary` is 4.10:1; the label steps to
+            // `text-primary` so the pressed state stays readable.
+            fontColor: "text-primary",
+          },
+        },
         outline: { root: { bgColor: "interactive-secondary" } },
         ghost: { root: { bgColor: "interactive-secondary" } },
         success: { root: { bgColor: "interactive-success-active" } },
         error: { root: { bgColor: "interactive-danger-active" } },
-        warning: { root: { bgColor: "interactive-warning-active" } },
+        // `interactive-warning-active` (warning-500) under the dark label is
+        // 3.96:1, so the pressed fill stops at the hover step. Warning is the
+        // only variant whose ramp runs out before the third state.
+        warning: { root: { bgColor: "interactive-warning-hover" } },
         info: { root: { bgColor: "interactive-info-active" } },
+        neutral: { root: { bgColor: "interactive-neutral-active" } },
+        "error-ghost": {
+          root: { bgColor: "interactive-danger-subtle-active" },
+        },
       },
     },
   },
 
-  defaultVariants: { variant: "primary", size: "medium", shape: "square" },
+  defaultVariants: {
+    variant: "primary",
+    size: "medium",
+    shape: "square",
+    align: "center",
+  },
 });
 
 export type ButtonVariant = keyof typeof buttonRecipe.variants.variant;
 export type ButtonSize = keyof typeof buttonRecipe.variants.size;
 export type ButtonShape = keyof typeof buttonRecipe.variants.shape;
+export type ButtonAlign = keyof typeof buttonRecipe.variants.align;

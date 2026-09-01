@@ -9,7 +9,9 @@
     "check:write": "biome check --write .",
     "check-types": "tsc --noEmit",
     "clean": "rm -rf storybook-static .turbo node_modules",
-    "test:visual": "test-storybook --browsers chromium --config-dir .storybook"
+    "test:visual": "test-storybook --browsers chromium --config-dir .storybook",
+    "test:visual:ci": "test-storybook --browsers chromium --config-dir .storybook --ci",
+    "test:visual:update": "test-storybook --browsers chromium --config-dir .storybook --updateSnapshot"
   },
   "dependencies": {
     "@cocso-ui/css": "workspace:^",

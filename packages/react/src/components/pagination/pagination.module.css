@@ -30,7 +30,7 @@
 
   .arrow:focus-visible,
   .item:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-950);
+    outline: 2px solid var(--cocso-color-focus-ring);
     outline-offset: 2px;
   }
 

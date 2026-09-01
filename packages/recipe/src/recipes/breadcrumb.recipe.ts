@@ -12,7 +12,10 @@ export const breadcrumbRecipe = defineRecipe({
   },
   base: {
     root: {
-      fontColor: "text-muted",
+      // `text-muted` is 4.09:1 on the dark theme's surface and 4.13:1 on the
+      // light theme's `surface-secondary` — under AA for the 12/14/16px sizes
+      // this component renders. Crumbs are navigation text, not decoration.
+      fontColor: "text-secondary",
     },
   },
   defaultVariants: { size: "md" },

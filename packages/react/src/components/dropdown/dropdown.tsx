@@ -23,6 +23,7 @@ function DropdownContent({
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
         className={styles.positioner}
+        data-cocso-component="dropdown-positioner"
         side={side}
         sideOffset={sideOffset}
       >

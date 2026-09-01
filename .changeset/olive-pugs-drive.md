@@ -19,4 +19,4 @@ Two placeholders were also below WCAG AA in the light theme: `Input` and `InputT
 
 New `--cocso-color-border-strong` carries the field focus ring, which had no semantic token at its value. It is `neutral-400` in the light theme and `neutral-500` in the dark one — `neutral-600` would be 2.93:1 against the dark surface, under the 3:1 WCAG 1.4.11 asks of a focus indicator.
 
-A test now scans every CSS Module for primitive colors, so this class of defect cannot be reintroduced silently.
+A test now scans every CSS Module for primitive colors — no exceptions — so this class of defect cannot be reintroduced silently.

@@ -26,24 +26,6 @@ const COMPONENTS_DIR = join(import.meta.dirname, "..", "components");
 const PRIMITIVE_COLOR =
   /var\(--cocso-color-((?:neutral|primary|danger|warning|success|info)-\d+|white|black)\)/g;
 
-/**
- * Violations that exist on `main` and are already fixed on another branch.
- * Delete the entry when the fix lands; the guard is here to stop new ones, not
- * to freeze the ones being cleaned up.
- */
-const PENDING: Record<string, string> = {
-  // Focus outlines move to `--cocso-color-focus-ring`.
-  "button/button.module.css": "focus outline",
-  "checkbox/checkbox.module.css": "focus outline",
-  "link/link.module.css": "focus outline",
-  "pagination/pagination.module.css": "focus outline",
-  "switch/switch.module.css": "focus outline",
-  // Selection colors move to `--cocso-radio-*`, focus outline to focus-ring.
-  "radio-group/radio-group.module.css": "selection colors and focus outline",
-  // Current crumb and separator move to semantic text tokens.
-  "breadcrumb/breadcrumb.module.css": "current crumb and separator",
-};
-
 function moduleCssFiles(): string[] {
   const files: string[] = [];
   for (const dir of readdirSync(COMPONENTS_DIR, { withFileTypes: true })) {
@@ -71,14 +53,7 @@ describe("CSS Modules do not hardcode primitive colors", () => {
     expect(files.length).toBeGreaterThan(10);
   });
 
-  it.each(files.filter((file) => !PENDING[file]))("%s", (file) => {
+  it.each(files)("%s", (file) => {
     expect(primitivesIn(file)).toEqual([]);
-  });
-
-  it("has no stale entries in the pending list", () => {
-    const stale = Object.keys(PENDING).filter(
-      (file) => primitivesIn(file).length === 0
-    );
-    expect(stale).toEqual([]);
   });
 });

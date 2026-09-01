@@ -36,7 +36,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
 <Section>
   <Section.Title>Variant</Section.Title>
   <Section.Text>
-    변형을 사용하여 액션의 의도를 전달합니다. <code>primary</code>는 기본 고강조 스타일이며, 낮은 강조를 위해 <code>secondary</code>, <code>outline</code>, <code>ghost</code>를 사용합니다. 상태 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)은 시맨틱 의미를 전달합니다.
+    변형을 사용하여 액션의 의도를 전달합니다. <code>primary</code>는 기본 고강조 스타일이며, 낮은 강조를 위해 <code>secondary</code>, <code>neutral</code>, <code>outline</code>, <code>ghost</code>를 사용합니다. 상태 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)은 시맨틱 의미를 전달하며, <code>error-ghost</code>는 메뉴나 목록 행에서 쓰는 저강조 파괴적 액션입니다.
   </Section.Text>
   <ComponentExample name="button-variants">
     ```tsx
@@ -53,6 +53,8 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
           <Button variant="error">Error</Button>
           <Button variant="warning">Warning</Button>
           <Button variant="info">Info</Button>
+          <Button variant="neutral">Neutral</Button>
+          <Button variant="error-ghost">Error Ghost</Button>
         </div>
       );
     }
@@ -86,7 +88,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
 <Section>
   <Section.Title>Shape</Section.Title>
   <Section.Text>
-    표준 직사각형 버튼에는 <code>square</code>, 필 스타일에는 <code>rounded</code>, 아이콘 전용 원형 버튼에는 <code>circle</code>과 <code>svgOnly</code>를 조합하여 사용합니다.
+    표준 직사각형 버튼에는 <code>square</code>, 필 스타일에는 <code>rounded</code>, 메뉴나 목록 행에 맞붙이는 각진 모서리에는 <code>sharp</code>, 아이콘 전용 원형 버튼에는 <code>circle</code>과 <code>svgOnly</code>를 조합하여 사용합니다.
   </Section.Text>
   <ComponentExample name="button-shapes">
     ```tsx
@@ -99,6 +101,33 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
           <Button shape="square">Square</Button>
           <Button shape="rounded">Rounded</Button>
           <Button shape="circle" svgOnly><PlusIcon size={18} /></Button>
+          <Button shape="sharp">Sharp</Button>
+        </div>
+      );
+    }
+    ```
+  </ComponentExample>
+</Section>
+
+<Section>
+  <Section.Title>정렬</Section.Title>
+  <Section.Text>
+    <code>align</code>은 버튼 너비가 콘텐츠보다 넓을 때 레이블의 정렬 위치를 제어합니다. <code>align="start"</code>, <code>shape="sharp"</code>, 전체 너비 클래스를 조합하면 컴포넌트 스타일을 덮어쓰지 않고 메뉴 행을 만들 수 있습니다.
+  </Section.Text>
+  <ComponentExample name="button-alignments">
+    ```tsx
+    import { Button } from "@cocso-ui/react";
+
+    export default function ButtonAlignments() {
+      return (
+        <div className="flex w-60 flex-col gap-2 p-4">
+          <Button className="w-full">Center</Button>
+          <Button align="start" className="w-full" shape="sharp" variant="neutral">
+            Start
+          </Button>
+          <Button align="between" className="w-full" suffix="›" variant="outline">
+            Between
+          </Button>
         </div>
       );
     }
@@ -178,7 +207,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
     data={[
       {
         name: "variant",
-        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info"',
+        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost"',
         default: '"primary"',
         description: "액션의 의도를 전달하기 위해 배경색과 텍스트 색상을 제어합니다. 주요 call-to-action에는 `primary`를, 시각적 비중을 줄이려면 `ghost`를 사용하세요.",
       },
@@ -190,9 +219,15 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
       },
       {
         name: "shape",
-        type: '"square" | "circle" | "rounded"',
+        type: '"square" | "circle" | "rounded" | "sharp"',
         default: '"square"',
-        description: "border-radius를 제어합니다. 표준 액션에는 `square`를, 필 모양 레이블에는 `rounded`를, 아이콘 전용 버튼에는 `svgOnly`와 함께 `circle`을 사용하세요.",
+        description: "border-radius를 제어합니다. 표준 액션에는 `square`를, 필 모양 레이블에는 `rounded`를, 각진 모서리가 필요한 메뉴 행에는 `sharp`를, 아이콘 전용 버튼에는 `svgOnly`와 함께 `circle`을 사용하세요.",
+      },
+      {
+        name: "align",
+        type: '"center" | "start" | "between"',
+        default: '"center"',
+        description: "버튼 안에서 레이블의 가로 정렬을 제어합니다. 좌측 정렬 메뉴 항목에는 `start`를, 레이블과 suffix를 양끝에 배치하려면 `between`을 사용하세요.",
       },
       {
         name: "disabled",
