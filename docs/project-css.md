@@ -70,6 +70,26 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 - Do not use numeric scales for semantic tokens (that is the primitive pattern).
 - New recipes must use semantic tokens only — primitive direct references are not allowed.
 
+### Contrast
+
+Measured against the light theme's `surface-primary` (`#ffffff`) and `surface-secondary` (`#f4f5f6`), and the dark theme's equivalents (`#131416`, `#1e2124`):
+
+| Token | Light on primary | Light on secondary | Dark on primary | Dark on secondary |
+|---|---|---|---|---|
+| `text-primary` | 18.43 | 16.89 | 16.89 | 14.82 |
+| `text-secondary` | 6.30 | 5.77 | 5.98 | 5.25 |
+| `text-tertiary` | 3.08 | 2.82 | 4.09 | 3.59 |
+| `text-muted` | 4.51 | 4.13 | 4.09 | 3.59 |
+| `feedback-*` 500-level | ~4.6 | ~4.2 | — | — |
+| `feedback-*` 600-level | ~6.0 | ~5.5 | — | — |
+
+**Rules:**
+- Body-size text (anything under 24px, or under 18.66px bold) may only use `text-primary` or `text-secondary`. Those are the only tiers that clear WCAG AA (4.5:1) on every surface in both themes.
+- `text-tertiary` and `text-muted` do not clear AA for body text on any surface. They are for large text (3:1) and for non-text graphics such as spinner blades and progress fills, where WCAG 1.4.11 asks for 3:1. Components MUST NOT use them for essential text.
+- `text-disabled` is exempt: WCAG 1.4.3 excludes inactive components.
+- Status colors: use the 600-level token for text (`feedback-danger-text` and friends) and reserve the 500-level for filled surfaces, where the contrast that matters is against the white foreground on top. The 500 level clears AA on white by a margin under 0.1 and drops below it on `surface-secondary`.
+- The neutral ramp has no step that would give a third AA-conformant text tier: in the light theme it would have to be at least `neutral-600` (already `text-secondary`), and in the dark theme at most `neutral-400` (already `text-secondary`). Adding one means extending the ramp, not remapping the semantic layer — see Roadmap.
+
 ## Interfaces
 
 Package exports:
@@ -109,6 +129,7 @@ pnpm --filter @cocso-ui/css lint
 - Document token inventory in `apps/website`.
 - Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
 - Input/select/OTP ring+elevation composite shadow patterns — needs dedicated semantic tokens (follow-up).
+- A third AA-conformant text tier. `text-tertiary` and `text-muted` cannot carry body text in either theme, and no existing neutral step can replace them without collapsing into `text-secondary`. Requires new primitive steps between `neutral-400` and `neutral-600` (light) and around `neutral-450` (dark), so it is a ramp change with consumer impact, not a semantic remap.
 
 ## Open Questions
 

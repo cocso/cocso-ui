@@ -117,6 +117,10 @@ When asked to review comments on a GitHub PR:
 ### Frontend Design Rules
 
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.
+- Text below 24px (or below 18.66px bold) may only use `text-primary` or
+  `text-secondary`. `text-tertiary` and `text-muted` are below WCAG AA at body
+  size on every surface in both themes; they are for large text and non-text
+  graphics only. See the Contrast section in `docs/project-css.md`.
 - For UI/UX decisions, follow the Vercel agent skills: `web-design-guidelines`, `vercel-react-best-practices`, and `vercel-composition-patterns`.
 
 ### Codegen Rules
