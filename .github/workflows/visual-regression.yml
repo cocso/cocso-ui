@@ -1,6 +1,9 @@
 name: Visual Regression
 
 on:
+  # Baselines are committed by the update workflow using GITHUB_TOKEN, and such
+  # a push cannot trigger a workflow. This is how those baselines get verified.
+  workflow_dispatch:
   push:
     branches:
       - main

@@ -12,6 +12,12 @@ on:
 
 jobs:
   claude-review:
+    # The changeset-release PR is opened by the Actions app, and workflows on
+    # app-authored PRs sit in `action_required` until a maintainer approves them,
+    # then report failure. There is nothing to review in a generated version
+    # bump, so skip it rather than leave a red check on every release.
+    if: github.event.pull_request.user.login != 'github-actions[bot]'
+
     # Optional: Filter by PR author
     # if: |
     #   github.event.pull_request.user.login == 'external-contributor' ||

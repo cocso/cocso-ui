@@ -129,6 +129,12 @@ When asked to review comments on a GitHub PR:
   or dropdown opened inside a Dialog renders above the dialog content. Toast is
   rendered by `sonner` and intentionally sits above this scale; do not assign it
   a token.
+- `--cocso-z-index-dialog-content` (250) is vestigial: no component uses it and
+  it is not part of the scale above. Do NOT reach for it to lift a floating
+  surface — a consumer did, and forcing every positioner to 250 dropped tooltips
+  from 400 to 250, below the popovers they are supposed to sit over. It stays
+  exported only because removing a published token is breaking; it is queued for
+  removal in the next major.
 - Trigger-attached floating surfaces MUST use `--cocso-z-index-popover`;
   tooltips MUST use `--cocso-z-index-tooltip`. Do NOT use
   `--cocso-z-index-overlay` for floating popups — it is the dialog backdrop
