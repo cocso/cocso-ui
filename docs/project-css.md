@@ -72,6 +72,28 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 - Do not use numeric scales for semantic tokens (that is the primitive pattern).
 - New recipes must use semantic tokens only — primitive direct references are not allowed.
 
+### Radius Scale
+
+`tailwind4.css` exports `--radius-1` … `--radius-6` and `--radius-full`, aliased to the `--cocso-radius-*` tokens. Tailwind's own `--radius-xs` … `--radius-4xl` defaults are **not** cleared, so both namespaces resolve in consumer apps and the first six steps land on the same pixel values at a 16px root font size:
+
+| cocso | value | Tailwind default | value |
+|---|---|---|---|
+| `rounded-1` | `2px` | `rounded-xs` | `0.125rem` |
+| `rounded-2` | `4px` | `rounded-sm` | `0.25rem` |
+| `rounded-3` | `6px` | `rounded-md` | `0.375rem` |
+| `rounded-4` | `8px` | `rounded-lg` | `0.5rem` |
+| `rounded-5` | `12px` | `rounded-xl` | `0.75rem` |
+| `rounded-6` | `16px` | `rounded-2xl` | `1rem` |
+
+They are not interchangeable:
+
+- `rounded-3` resolves to `var(--cocso-radius-3)`, so a consumer or theme override of the token reaches it. `rounded-md` is a frozen `rem` literal that no token override can reach.
+- Recipes address radius as `radius-1` … `radius-6`, so component corners already follow the cocso scale. App surfaces authored with Tailwind defaults drift from component corners whenever the root font size changes.
+
+**Rule:** app and consumer code uses the cocso scale (`rounded-1` … `rounded-6`, `rounded-full`). Do not mix the two names on one element — `rounded-4 rounded-full` leaves the winner to stylesheet order.
+
+Aliasing Tailwind's radius names onto the cocso tokens so both spellings track the same variable would remove the divergence at the source. That is a change to `@cocso-ui/baseframe` codegen (`tailwind4.css` is generated from `baseframe-sources`, with a golden snapshot test), not a hand edit — tracked in Roadmap.
+
 ### Theming Entry Point
 
 `--cocso-color-primary-50` … `--cocso-color-primary-950` is the supported entry point for rebranding. The primitive `primary-*` ramp is aliased to the `neutral-*` ramp by default, which is a deliberate monochrome default — not a placeholder. Consumers that want a branded accent redefine the ramp in their own `:root` **after** importing `@cocso-ui/css/token.css`:
@@ -128,6 +150,7 @@ pnpm --filter @cocso-ui/css lint
 - Document token inventory in `apps/website`.
 - Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
 - Input/select/OTP ring+elevation composite shadow patterns — needs dedicated semantic tokens (follow-up).
+- Alias Tailwind's `--radius-xs`…`--radius-4xl` onto the `--cocso-radius-*` tokens in `baseframe` codegen, so both spellings resolve to one variable. Removes the duplicate radius namespace at the source; changes what `rounded-md` resolves to for existing consumers (identical at a 16px root font size), so it needs a minor release and a consumer note.
 
 ## Open Questions
 
