@@ -16,7 +16,7 @@ description: A flexible text rendering component supporting custom, body, and he
 <Section>
   <Section.Title>Accessibility</Section.Title>
   <Section.UnorderedList>
-    <Section.ListItem><code>heading</code> type renders as <code>&lt;h2&gt;</code> by default. Use the <code>render</code> prop to set the correct heading level for your document outline (e.g., <code>render={`<h1 />`}</code>).</Section.ListItem>
+    <Section.ListItem><code>heading</code> type renders as <code>&lt;h2&gt;</code> by default. Use the <code>level</code> prop to set the correct heading level for your document outline (e.g., <code>level={1}</code> for a page title). Every page needs exactly one <code>h1</code>.</Section.ListItem>
     <Section.ListItem><code>body</code> and <code>custom</code> types render as <code>&lt;p&gt;</code> by default. Change the element with <code>render</code> when wrapping inline content (e.g., <code>render={`<span />`}</code>).</Section.ListItem>
     <Section.ListItem>Maintain a logical heading hierarchy (h1 → h2 → h3) regardless of visual size. A smaller heading can still be a higher level.</Section.ListItem>
   </Section.UnorderedList>
@@ -31,7 +31,7 @@ description: A flexible text rendering component supporting custom, body, and he
 
 <Section>
   <Section.Title>Heading</Section.Title>
-  <Section.Text>Heading mode renders an h2 element by default. The x-large and large sizes are responsive, increasing in size at the tablet breakpoint.</Section.Text>
+  <Section.Text>Heading mode renders an h2 element by default; <code>level</code> selects <code>h1</code>–<code>h6</code> independently of the visual <code>size</code>. The x-large and large sizes are responsive, increasing in size at the tablet breakpoint.</Section.Text>
   <ComponentExample name="typography-heading">
     ```tsx
     import { Typography } from "@cocso-ui/react";
@@ -117,9 +117,10 @@ description: A flexible text rendering component supporting custom, body, and he
     { name: "size (custom)", type: "ResponsiveFontSize", default: "16", description: "A numeric font size from the design token scale (e.g., 12, 16, 24), or a responsive object/array with `base`, `tablet`, `desktop` keys for different breakpoints." },
     { name: "size (body)", type: '"large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named body size step: `large` (18px), `medium` (16px), `small` (14px), `x-small` (12px)." },
     { name: "size (heading)", type: '"x-large" | "large" | "medium" | "small" | "x-small"', default: '"medium"', description: "Named heading size step. `x-large` and `large` are responsive, increasing at the tablet breakpoint. `medium` (20px), `small` (16px), `x-small` (14px) are fixed." },
+    { name: "level (heading)", type: "1 | 2 | 3 | 4 | 5 | 6", default: "2", description: "Semantic heading rank rendered as `h1`–`h6`. Independent of the visual `size` prop, so a small heading can still be an `h1`." },
     { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "Font weight. Defaults to `\"bold\"` for headings and `\"normal\"` for body/custom text." },
     { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "Sets the line height." },
-    { name: "render", type: "RenderProp", description: "Replaces the default HTML element. Heading defaults to `<h2>`, body/custom to `<p>`. Use this to set the correct semantic level." },
+    { name: "render", type: "RenderProp", description: "Replaces the default HTML element. Heading defaults to `<h2>`, body/custom to `<p>`. For heading rank prefer `level`; use `render` when you need a different element entirely." },
     { name: "color", type: "string", description: "Sets the text color directly. Accepts any CSS color value or design token reference." },
   ]} />
 </Section>

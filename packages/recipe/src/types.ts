@@ -47,6 +47,9 @@ export type CSSLiteral =
   | "0"
   | "inline-flex"
   | "flex"
+  | "center"
+  | "flex-start"
+  | "space-between"
   | `${number}px`
   | `${number} ${number}px`
   | `${number}px ${number}px`;
@@ -109,6 +112,7 @@ export interface BaseSlotProperties {
   // Dimension properties → number | CSSLiteral
   height?: number;
   iconRight?: number;
+  justifyContent?: CSSLiteral;
   minWidth?: number;
   output?: number;
   padding?: number | CSSLiteral;

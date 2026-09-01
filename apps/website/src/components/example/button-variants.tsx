@@ -11,6 +11,8 @@ export default function ButtonVariants() {
       <Button variant="error">Error</Button>
       <Button variant="warning">Warning</Button>
       <Button variant="info">Info</Button>
+      <Button variant="neutral">Neutral</Button>
+      <Button variant="error-ghost">Error Ghost</Button>
     </div>
   );
 }

@@ -20,6 +20,9 @@ export type BodySize = "large" | "medium" | "small" | "x-small";
 
 export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
+/** Semantic heading rank rendered as `h1`–`h6`. Independent of visual `size`. */
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 type TypographyPropsBase = {
   ref?: Ref<HTMLElement>;
   render?: RenderProp;
@@ -39,6 +42,7 @@ type BodyTypographyProps = TypographyPropsBase & {
 
 type HeadingTypographyProps = TypographyPropsBase & {
   type: "heading";
+  level?: HeadingLevel;
   size?: HeadingSize;
 };
 export type TypographyProps =
@@ -56,7 +60,11 @@ export function Typography({
   lineHeight = "normal",
   ...props
 }: TypographyProps) {
-  const defaultTagName = getDefaultTagName(type);
+  const level = (props as { level?: HeadingLevel }).level;
+  if (type === "heading") {
+    Reflect.deleteProperty(props, "level");
+  }
+  const defaultTagName = getDefaultTagName(type, level);
   const rawSize = (props as { size?: unknown }).size;
   const isCurrent = rawSize === "current";
 
@@ -106,9 +114,12 @@ export function Typography({
   });
 }
 
-const getDefaultTagName = (type: TypographyProps["type"]) =>
+const getDefaultTagName = (
+  type: TypographyProps["type"],
+  level?: HeadingLevel
+) =>
   match(type)
-    .with("heading", () => "h2" as const)
+    .with("heading", () => `h${level ?? 2}` as const)
     .otherwise(() => "p" as const);
 
 const getBodyFontSize = (size: BodySize) =>

@@ -21,6 +21,30 @@ describe("Typography", () => {
       ).toBeInTheDocument();
     });
 
+    it.each([
+      1, 2, 3, 4, 5, 6,
+    ] as const)("renders children as h%s when level is given", (level) => {
+      render(
+        <Typography level={level} type="heading">
+          Heading text
+        </Typography>
+      );
+      expect(
+        screen.getByRole("heading", { level, name: "Heading text" })
+      ).toBeInTheDocument();
+    });
+
+    it("does not leak the level prop to the DOM", () => {
+      render(
+        <Typography level={1} type="heading">
+          Heading text
+        </Typography>
+      );
+      expect(screen.getByRole("heading", { level: 1 })).not.toHaveAttribute(
+        "level"
+      );
+    });
+
     it('renders children as a paragraph when type="custom"', () => {
       render(<Typography type="custom">Custom text</Typography>);
       expect(screen.getByText("Custom text").tagName).toBe("P");

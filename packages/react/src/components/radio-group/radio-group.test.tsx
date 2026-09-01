@@ -35,6 +35,23 @@ describe("RadioGroup", () => {
       expect(screen.getAllByRole("radio")).toHaveLength(3);
     });
 
+    it("exposes stable override hooks on item and indicator", () => {
+      render(
+        <RadioGroup aria-label="Options" defaultValue="option-1">
+          <RadioGroup.Item aria-label="Option 1" value="option-1">
+            <RadioGroup.Indicator />
+          </RadioGroup.Item>
+        </RadioGroup>
+      );
+
+      const item = screen.getByRole("radio");
+      expect(item).toHaveAttribute("data-cocso-component", "radio-item");
+      expect(item.className).toContain("cocso-radio");
+      expect(
+        item.querySelector('[data-cocso-component="radio-indicator"]')
+      ).toBeInTheDocument();
+    });
+
     it("renders with a default value selected", () => {
       render(
         <RadioGroup aria-label="Options" defaultValue="option-2">

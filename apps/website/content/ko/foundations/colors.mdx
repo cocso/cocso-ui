@@ -162,5 +162,34 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
 </Section>
 
 <Section>
+  <Section.Title>테마</Section.Title>
+  <Section.Text>`--cocso-color-primary-*` 램프가 리브랜딩의 공식 진입점입니다. 기본값은 `neutral-*` 램프에 연결되어 있으며, 이는 임시값이 아니라 의도된 무채색 기본값입니다. 토큰 스타일시트를 import한 뒤 각자의 `:root`에서 램프를 재정의하면 여기서 파생되는 모든 컴포넌트가 따라옵니다 — Button, Badge, Checkbox, RadioGroup, Pagination, 포커스 링.</Section.Text>
+  <Section.Text>CSS Module 클래스 이름은 대상으로 삼지 마세요. 콘텐츠 해시가 붙어 릴리스마다 바뀝니다. 토큰을 덮었는데 따라오지 않는 컴포넌트가 있다면 COCSO UI의 버그이니, 해시 선택자를 고정하지 말고 제보해 주세요.</Section.Text>
+  ```css
+  @import "@cocso-ui/css/token.css";
+
+  :root {
+    --cocso-color-primary-50: var(--cocso-color-info-50);
+    --cocso-color-primary-100: var(--cocso-color-info-100);
+    --cocso-color-primary-200: var(--cocso-color-info-200);
+    --cocso-color-primary-300: var(--cocso-color-info-300);
+    --cocso-color-primary-400: var(--cocso-color-info-400);
+    --cocso-color-primary-500: var(--cocso-color-info-500);
+    --cocso-color-primary-600: var(--cocso-color-info-600);
+    --cocso-color-primary-700: var(--cocso-color-info-700);
+    --cocso-color-primary-800: var(--cocso-color-info-800);
+    --cocso-color-primary-900: var(--cocso-color-info-900);
+    --cocso-color-primary-950: var(--cocso-color-info-950);
+  }
+  ```
+  <Section.Text>더 세밀하게 제어하려면 램프 대신 시맨틱 계층을 덮으세요 — 예를 들어 `--cocso-color-interactive-primary`(채워진 primary 표면)나 `--cocso-color-focus-ring`(포커스 외곽선) — 또는 `data-cocso-component` 속성으로 특정 컴포넌트에만 범위를 좁힐 수 있습니다.</Section.Text>
+  ```css
+  [data-cocso-component="radio-item"] {
+    --cocso-radio-checked-color: var(--cocso-color-info-500);
+  }
+  ```
+</Section>
+
+<Section>
   <PageNavigation />
 </Section>

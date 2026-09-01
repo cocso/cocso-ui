@@ -3,6 +3,17 @@ import { defineRecipe } from "../define-recipe";
 export const radioGroupRecipe = defineRecipe({
   name: "radio",
   slots: ["root"] as const,
+  // Base emits the tokens the RadioGroup CSS module reads, so consumers can
+  // restyle selection and focus through custom properties instead of
+  // content-hashed CSS Module class names.
+  base: {
+    root: {
+      bgColor: "surface-primary",
+      borderColor: "text-primary",
+      checkedColor: "interactive-primary",
+      focusRingColor: "focus-ring",
+    },
+  },
   variants: {
     size: {
       large: { root: { size: 18, dotSize: 8 } },

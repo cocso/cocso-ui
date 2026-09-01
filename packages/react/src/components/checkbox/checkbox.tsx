@@ -95,11 +95,13 @@ export function Checkbox({
   return (
     <div
       className={cn(checkbox({ size, status }), styles.wrapper, className)}
+      data-cocso-component="checkbox"
       style={style}
     >
       <CheckboxBase.Root
         checked={checkedState.checked}
         className={styles.checkbox}
+        data-cocso-component="checkbox-control"
         disabled={disabled}
         id={id}
         indeterminate={checkedState.indeterminate}

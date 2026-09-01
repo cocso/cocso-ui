@@ -97,6 +97,15 @@ When asked to review comments on a GitHub PR:
   target it from global CSS (e.g. `[data-cocso-component="dropdown-content"]`).
 - `<name>` uses lowercase kebab-case and identifies the component part
   (e.g. `dropdown-content`, `dropdown-item`, `dialog-overlay`).
+- CSS Modules MUST NOT hardcode a design token value that a consumer is expected
+  to be able to retheme (selection color, focus ring, fill). Declare it in the
+  recipe (`base` or a variant) so codegen emits a component-scoped custom
+  property `--cocso-<component>-<property>`, and have the CSS Module read that
+  property. A value reachable only through a content-hashed class name is not
+  overridable and counts as a bug.
+- Primitive `primary-*` overrides in a consumer `:root` MUST propagate to every
+  component. `--cocso-color-primary-50`…`950` is the documented theming entry
+  point; see the Theming Entry Point section in `docs/project-css.md`.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
