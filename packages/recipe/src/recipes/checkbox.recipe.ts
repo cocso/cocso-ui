@@ -3,6 +3,12 @@ import { defineRecipe } from "../define-recipe";
 export const checkboxRecipe = defineRecipe({
   name: "checkbox",
   slots: ["root"] as const,
+  // Base emits the focus ring token the Checkbox CSS module reads, so consumers
+  // can restyle focus through a custom property instead of a content-hashed
+  // CSS Module class name.
+  base: {
+    root: { focusRingColor: "focus-ring" },
+  },
   variants: {
     size: {
       large: { root: { size: 18, radius: "radius-3" } },

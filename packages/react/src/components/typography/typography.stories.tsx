@@ -8,6 +8,7 @@ const meta = {
   parameters: { layout: 'padded' },
   argTypes: {
     type: { control: 'select', options: ['custom', 'body', 'heading'] },
+    level: { control: 'select', options: [1, 2, 3, 4, 5, 6] },
     weight: { control: 'select', options: ['normal', 'medium', 'semibold', 'bold'] },
     color: { control: 'color' },
   },
@@ -41,6 +42,26 @@ export const Heading: Story = {
       <Typography size="medium" type="heading">Heading Medium</Typography>
       <Typography size="small" type="heading">Heading Small</Typography>
       <Typography size="x-small" type="heading">Heading X-Small</Typography>
+    </div>
+  ),
+};
+
+export const HeadingLevels: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Typography level={1} size="x-large" type="heading">Renders &lt;h1&gt;</Typography>
+      <Typography level={2} size="large" type="heading">Renders &lt;h2&gt; (default)</Typography>
+      <Typography level={3} size="medium" type="heading">Renders &lt;h3&gt;</Typography>
+    </div>
+  ),
+};
+
+export const SectionHeading: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Typography level={1} size="large" type="heading">Page title (large)</Typography>
+      <Typography level={2} size={18} type="heading">Section title (size 18)</Typography>
+      <Typography type="body">Body text for comparison.</Typography>
     </div>
   ),
 };

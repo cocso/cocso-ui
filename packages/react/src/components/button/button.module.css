@@ -9,10 +9,11 @@
     --cocso-button-border: inherit;
     --cocso-button-border-radius: inherit;
     --cocso-button-bg-color: inherit;
+    --cocso-button-justify-content: center;
     position: relative;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: var(--cocso-button-justify-content);
 
     height: var(--cocso-button-height);
     padding-inline: var(--cocso-button-padding-inline);
@@ -61,7 +62,7 @@
   }
 
   .button:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-950);
+    outline: 2px solid var(--cocso-color-focus-ring);
     outline-offset: 2px;
   }
 

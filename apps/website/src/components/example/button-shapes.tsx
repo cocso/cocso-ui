@@ -9,6 +9,7 @@ export default function ButtonShapes() {
       <Button shape="circle" svgOnly>
         <PlusIcon size={18} />
       </Button>
+      <Button shape="sharp">Sharp</Button>
     </div>
   );
 }

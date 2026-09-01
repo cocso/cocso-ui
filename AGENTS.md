@@ -97,10 +97,23 @@ When asked to review comments on a GitHub PR:
   target it from global CSS (e.g. `[data-cocso-component="dropdown-content"]`).
 - `<name>` uses lowercase kebab-case and identifies the component part
   (e.g. `dropdown-content`, `dropdown-item`, `dialog-overlay`).
+- CSS Modules MUST NOT hardcode a design token value that a consumer is expected
+  to be able to retheme (selection color, focus ring, fill). Declare it in the
+  recipe (`base` or a variant) so codegen emits a component-scoped custom
+  property `--cocso-<component>-<property>`, and have the CSS Module read that
+  property. A value reachable only through a content-hashed class name is not
+  overridable and counts as a bug.
+- Primitive `primary-*` overrides in a consumer `:root` MUST propagate to every
+  component. `--cocso-color-primary-50`…`950` is the documented theming entry
+  point; see the Theming Entry Point section in `docs/project-css.md`.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
   ignored by ancestors.
+- Because the Positioner owns stacking, it MUST carry its own
+  `data-cocso-component="<name>-positioner"` hook in addition to the popup
+  hook. A consumer that needs to escape the z-index scale (e.g. a host app with
+  a fixed legacy header) has no other supported selector.
 - The z-index scale ascends so floating layers always sit above modals
   (portals flatten to `<body>`, so stacking is decided by `z-index` alone):
   `header (50)` < `overlay (100, dialog backdrop)` < `dialog (200, dialog
@@ -117,6 +130,11 @@ When asked to review comments on a GitHub PR:
 ### Frontend Design Rules
 
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.
+- Use the cocso radius scale (`rounded-1`…`rounded-6`, `rounded-full`), not
+  Tailwind's `rounded-xs`…`rounded-4xl` defaults. Both namespaces resolve and
+  the first six steps share pixel values, but only the cocso scale chains to
+  `--cocso-radius-*` and tracks a token override. Never put two radius
+  utilities on one element — the winner is stylesheet order.
 - For UI/UX decisions, follow the Vercel agent skills: `web-design-guidelines`, `vercel-react-best-practices`, and `vercel-composition-patterns`.
 
 ### Codegen Rules

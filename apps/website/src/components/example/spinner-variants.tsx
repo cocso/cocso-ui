@@ -9,7 +9,7 @@ export default function SpinnerVariants() {
       <Spinner variant="error" />
       <Spinner variant="warning" />
       <Spinner variant="info" />
-      <div className="rounded-lg bg-neutral-900 p-3">
+      <div className="rounded-4 bg-neutral-900 p-3">
         <Spinner variant="white" />
       </div>
     </div>

@@ -133,6 +133,8 @@ describe("Button variant className", () => {
     "error",
     "warning",
     "info",
+    "neutral",
+    "error-ghost",
   ] as const)('applies variant className for variant="%s"', (variant) => {
     render(<Button variant={variant}>Button</Button>);
     expect(screen.getByRole("button").className).toContain(
@@ -146,10 +148,31 @@ describe("Button shape className", () => {
     "square",
     "circle",
     "rounded",
+    "sharp",
   ] as const)('applies shape className for shape="%s"', (shape) => {
     render(<Button shape={shape}>Button</Button>);
     expect(screen.getByRole("button").className).toContain(
       `cocso-button--shape-${shape}`
+    );
+  });
+});
+
+describe("Button align className", () => {
+  it.each([
+    "center",
+    "start",
+    "between",
+  ] as const)('applies align className for align="%s"', (align) => {
+    render(<Button align={align}>Button</Button>);
+    expect(screen.getByRole("button").className).toContain(
+      `cocso-button--align-${align}`
+    );
+  });
+
+  it("defaults to center alignment", () => {
+    render(<Button>Button</Button>);
+    expect(screen.getByRole("button").className).toContain(
+      "cocso-button--align-center"
     );
   });
 });

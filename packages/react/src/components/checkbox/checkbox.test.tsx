@@ -11,6 +11,19 @@ describe("Checkbox", () => {
       expect(screen.getByRole("checkbox")).toBeInTheDocument();
     });
 
+    it("exposes stable override hooks on wrapper and control", () => {
+      const { container } = render(
+        <Checkbox onChange={vi.fn()} status="off" />
+      );
+
+      const wrapper = container.firstChild as HTMLElement;
+      expect(wrapper).toHaveAttribute("data-cocso-component", "checkbox");
+      expect(wrapper.className).toContain("cocso-checkbox");
+      expect(
+        wrapper.querySelector('[data-cocso-component="checkbox-control"]')
+      ).toBeInTheDocument();
+    });
+
     it("renders label when provided", () => {
       render(<Checkbox label="I agree" onChange={vi.fn()} status="off" />);
       expect(screen.getByText("I agree")).toBeInTheDocument();

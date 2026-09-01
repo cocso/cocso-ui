@@ -27,6 +27,9 @@ export const CSS_LITERALS = new Set([
   "currentColor",
   "100%",
   "inherit",
+  "center",
+  "flex-start",
+  "space-between",
   // "transparent" is NOT here — it resolves as a color token
   // via var(--cocso-color-transparent) to match React's colors.transparent
 ]);

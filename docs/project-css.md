@@ -54,7 +54,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | `text` | `primary`, `secondary`, `tertiary`, `disabled`, `on-primary`, `muted` | Text and label colors |
 | `surface` | `primary`, `secondary`, `inverse`, `neutral` | Background layer hierarchy |
 | `border` | `primary`, `secondary` | Container and separator strokes |
-| `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `secondary`, `secondary-hover`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
+| `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `primary-subtle`, `primary-text`, `secondary`, `secondary-hover`, `neutral`, `neutral-hover`, `neutral-active`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `danger-subtle-hover`, `danger-subtle-active`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
 | `focus` | `ring` | Focus indicator colors |
 | `feedback` | `danger`, `danger-subtle`, `danger-text`, `danger-border`, `success`/`warning`/`info` (same pattern), `success-muted` | Status communication (errors, warnings, confirmations) |
 | `alpha` | `shadow1`, `shadow2`, `shadow3` | Semi-transparent overlay values |
@@ -62,13 +62,54 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | `duration` | `fast`, `normal`, `slow`, `decorative`, `decorative-slow` | Transition/animation timing |
 | `easing` | `default`, `soft`, `entrance`, `accordion` | Transition/animation curves |
 
-**Status:** 66 semantic tokens defined (52 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
+**Status:** 73 semantic tokens defined (59 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
+
+**Subtle fill vs. feedback surface:** `interactive-*-subtle` is the low-emphasis *fill* of an actionable element (subtle badge, text/ghost button hover). `feedback-*-subtle` is the *status surface* of a non-actionable element (alert background). They may resolve to the same primitive; do not merge them.
 
 **Rules:**
 - Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, `subtle`, `muted`, etc.
 - Each semantic token maps to exactly one primitive token in light mode.
 - Do not use numeric scales for semantic tokens (that is the primitive pattern).
 - New recipes must use semantic tokens only — primitive direct references are not allowed.
+
+### Radius Scale
+
+`tailwind4.css` exports `--radius-1` … `--radius-6` and `--radius-full`, aliased to the `--cocso-radius-*` tokens. Tailwind's own `--radius-xs` … `--radius-4xl` defaults are **not** cleared, so both namespaces resolve in consumer apps and the first six steps land on the same pixel values at a 16px root font size:
+
+| cocso | value | Tailwind default | value |
+|---|---|---|---|
+| `rounded-1` | `2px` | `rounded-xs` | `0.125rem` |
+| `rounded-2` | `4px` | `rounded-sm` | `0.25rem` |
+| `rounded-3` | `6px` | `rounded-md` | `0.375rem` |
+| `rounded-4` | `8px` | `rounded-lg` | `0.5rem` |
+| `rounded-5` | `12px` | `rounded-xl` | `0.75rem` |
+| `rounded-6` | `16px` | `rounded-2xl` | `1rem` |
+
+They are not interchangeable:
+
+- `rounded-3` resolves to `var(--cocso-radius-3)`, so a consumer or theme override of the token reaches it. `rounded-md` is a frozen `rem` literal that no token override can reach.
+- Recipes address radius as `radius-1` … `radius-6`, so component corners already follow the cocso scale. App surfaces authored with Tailwind defaults drift from component corners whenever the root font size changes.
+
+**Rule:** app and consumer code uses the cocso scale (`rounded-1` … `rounded-6`, `rounded-full`). Do not mix the two names on one element — `rounded-4 rounded-full` leaves the winner to stylesheet order.
+
+Aliasing Tailwind's radius names onto the cocso tokens so both spellings track the same variable would remove the divergence at the source. That is a change to `@cocso-ui/baseframe` codegen (`tailwind4.css` is generated from `baseframe-sources`, with a golden snapshot test), not a hand edit — tracked in Roadmap.
+
+### Theming Entry Point
+
+`--cocso-color-primary-50` … `--cocso-color-primary-950` is the supported entry point for rebranding. The primitive `primary-*` ramp is aliased to the `neutral-*` ramp by default, which is a deliberate monochrome default — not a placeholder. Consumers that want a branded accent redefine the ramp in their own `:root` **after** importing `@cocso-ui/css/token.css`:
+
+```css
+@import "@cocso-ui/css/token.css";
+
+:root {
+  --cocso-color-primary-50: var(--cocso-color-info-50);
+  /* … through 950 */
+}
+```
+
+Every semantic `interactive-primary*`, `focus-ring`, and component-scoped custom property derives from that ramp, so a single override propagates to Button, Badge, Checkbox, RadioGroup, Pagination, and focus rings without touching component class names.
+
+**Contract:** no component may hardcode a primitive `primary-*` value in a CSS Module. A themable value must be emitted as a component-scoped custom property from the recipe (`--cocso-<component>-<property>`) and read by the CSS Module, so the ramp override reaches it. See the Component Override Contract in `AGENTS.md`.
 
 ## Interfaces
 
@@ -109,6 +150,7 @@ pnpm --filter @cocso-ui/css lint
 - Document token inventory in `apps/website`.
 - Add dark mode overrides for semantic tokens via `light-dark()` CSS function or `[data-theme="dark"]` attribute.
 - Input/select/OTP ring+elevation composite shadow patterns — needs dedicated semantic tokens (follow-up).
+- Alias Tailwind's `--radius-xs`…`--radius-4xl` onto the `--cocso-radius-*` tokens in `baseframe` codegen, so both spellings resolve to one variable. Removes the duplicate radius namespace at the source; changes what `rounded-md` resolves to for existing consumers (identical at a 16px root font size), so it needs a minor release and a consumer note.
 
 ## Open Questions
 
