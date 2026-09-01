@@ -26,3 +26,7 @@ A state that darkens a fill without moving its label walks the pairing toward th
 `text-tertiary` and `text-muted` are unchanged. Remapping them does not reach AA — the neutral ramp has no step that clears 4.5:1 in both themes without collapsing into `text-secondary` — so `docs/project-css.md` documents what each tier may carry, and a genuine third text tier is recorded as a ramp change on the roadmap.
 
 A test resolves every recipe pairing of a fill and a foreground through both themes and asserts AA, so these cannot come back silently.
+
+**`colors` export**
+
+The `colors` map was documented as "keyed by semantic name", which is only true of part of it: it mixes semantic tokens the dark theme redefines (`colors.textSecondary`) with raw ramp values it deliberately does not (`colors.primary600`), under one flat namespace. A consumer adding a dark theme found ramp values passed as text colours sitting at 2.7–3.1:1 against the flipped surface. Documented, no behaviour change.

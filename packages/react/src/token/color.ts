@@ -1,4 +1,21 @@
-/** Cocso design system color token map keyed by semantic name. */
+/**
+ * Cocso design system colors, as CSS `var()` references.
+ *
+ * Two kinds live here, and they behave differently when the theme changes:
+ *
+ * - **Semantic tokens** — `textPrimary`, `surfaceSecondary`, `interactivePrimary`,
+ *   `feedbackDangerText`, and so on. `theme-dark.css` redefines these, so they
+ *   follow the active theme.
+ * - **Ramp values** — `primary600`, `neutral400`, `danger600`, and the rest of
+ *   the numbered scale. `theme-dark.css` deliberately leaves the raw scale
+ *   alone, so these render identically in both themes.
+ *
+ * Both are reached as `colors.X`, so nothing at the call site says which kind
+ * you picked. Use a semantic token for anything that has to stay legible when
+ * the theme changes: a ramp value used as a text color keeps its lightness
+ * while the surface behind it flips, and sinks into the background of the theme
+ * it was not chosen for.
+ */
 export const colors = {
   transparent: "var(--cocso-color-transparent)",
 
