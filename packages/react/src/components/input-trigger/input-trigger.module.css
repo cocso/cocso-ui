@@ -4,7 +4,7 @@
     --cocso-input-padding-x: inherit;
     --cocso-input-font-size: inherit;
     --cocso-input-border-radius: inherit;
-    --cocso-input-bg-color: var(--cocso-color-white);
+    --cocso-input-bg-color: var(--cocso-color-surface-primary);
 
     display: inline-flex;
     gap: var(--cocso-spacing-4);
@@ -13,14 +13,14 @@
     height: var(--cocso-input-height);
     padding-inline: var(--cocso-input-padding-x);
     font-size: var(--cocso-input-font-size);
-    color: var(--cocso-color-neutral-950);
+    color: var(--cocso-color-text-primary);
     text-align: left;
     cursor: pointer;
     background-color: var(--cocso-input-bg-color);
     border: none;
     border-radius: var(--cocso-input-border-radius);
     box-shadow:
-      0 0 0 1px var(--cocso-color-neutral-100),
+      0 0 0 1px var(--cocso-color-border-secondary),
       var(--cocso-shadow-xs);
     transition: box-shadow var(--cocso-duration-fast) var(--cocso-easing-soft);
   }
@@ -28,7 +28,7 @@
   .trigger:focus-visible {
     outline: 2px solid transparent;
     box-shadow:
-      0 0 0 1px var(--cocso-color-neutral-400),
+      0 0 0 1px var(--cocso-color-border-strong),
       var(--cocso-shadow-xs);
   }
 
@@ -44,7 +44,7 @@
   .trigger.error,
   .trigger.error:focus-visible {
     box-shadow:
-      0 0 0 1px var(--cocso-color-danger-500),
+      0 0 0 1px var(--cocso-color-feedback-danger),
       var(--cocso-shadow-xs);
   }
 
@@ -56,7 +56,7 @@
   }
 
   .placeholder {
-    color: var(--cocso-color-neutral-400);
+    color: var(--cocso-color-text-secondary);
   }
 
   .affix {

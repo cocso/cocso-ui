@@ -29,6 +29,7 @@ export const SEMANTIC_TO_PRIMITIVE: Readonly<Record<string, string>> = {
   // --- border ---
   "border-primary": "neutral-200",
   "border-secondary": "neutral-100",
+  "border-strong": "neutral-400",
 
   // --- interactive ---
   "interactive-primary": "primary-950",

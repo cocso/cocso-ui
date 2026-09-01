@@ -37,6 +37,9 @@
   /* Border */
   --cocso-color-border-primary: var(--cocso-color-neutral-800);
   --cocso-color-border-secondary: var(--cocso-color-neutral-900);
+  /* neutral-600 would be 2.93:1 on the dark surface, under the 3:1 that
+     WCAG 1.4.11 asks of a focus indicator. */
+  --cocso-color-border-strong: var(--cocso-color-neutral-500);
 
   /* Interactive — primary (derived from the neutral scale) */
   --cocso-color-interactive-primary: var(--cocso-color-primary-50);

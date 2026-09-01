@@ -106,6 +106,13 @@ When asked to review comments on a GitHub PR:
 - Primitive `primary-*` overrides in a consumer `:root` MUST propagate to every
   component. `--cocso-color-primary-50`…`950` is the documented theming entry
   point; see the Theming Entry Point section in `docs/project-css.md`.
+- CSS Modules MUST NOT hardcode a primitive color (`--cocso-color-white`,
+  `--cocso-color-neutral-500`, and the rest of the raw scale). `theme-dark.css`
+  redefines the semantic layer and deliberately leaves the raw scale alone, so a
+  primitive written into a module keeps its value when the theme flips. Use the
+  semantic token that resolves to the same value in the light theme.
+  `packages/react/src/test/module-css-tokens.test.ts` enforces this across every
+  CSS Module, with no exceptions.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is

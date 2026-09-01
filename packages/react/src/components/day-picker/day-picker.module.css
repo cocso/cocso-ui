@@ -24,11 +24,11 @@
   }
 
   :global(.react-datepicker__day).sunday {
-    color: var(--cocso-color-danger-600);
+    color: var(--cocso-color-feedback-danger-text);
   }
 
   :global(.react-datepicker__day).saturday {
-    color: var(--cocso-color-info-600);
+    color: var(--cocso-color-feedback-info-text);
   }
 
   :global(.react-datepicker) {
@@ -142,11 +142,11 @@
   }
 
   :global(.react-datepicker__day-name:nth-child(1)) {
-    color: var(--cocso-color-danger-600);
+    color: var(--cocso-color-feedback-danger-text);
   }
 
   :global(.react-datepicker__day-name:nth-child(7)) {
-    color: var(--cocso-color-info-600);
+    color: var(--cocso-color-feedback-info-text);
   }
 
   :global(.react-datepicker__day--outside-month) {
