@@ -188,6 +188,10 @@ description: A color guide for COCSO UI's brand identity and visual hierarchy.
     --cocso-radio-checked-color: var(--cocso-color-info-500);
   }
   ```
+  <Section.Text>Floating surfaces (Dropdown, Popover, Tooltip, DayPicker, MonthPicker) resolve their stacking through the z-index scale: `header (50)` < `overlay (100)` < `dialog (200)` < `popover (300)` < `tooltip (400)`. A dropdown opened inside a dialog therefore renders above it with no override needed. If a host app has to escape the scale, target the positioner hook — the positioner owns the stacking context, so a `z-index` on the popup alone is ignored.</Section.Text>
+  ```css
+  [data-cocso-component="dropdown-positioner"] { z-index: 9001; }
+  ```
 </Section>
 
 <Section>

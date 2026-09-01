@@ -110,6 +110,10 @@ When asked to review comments on a GitHub PR:
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
   ignored by ancestors.
+- Because the Positioner owns stacking, it MUST carry its own
+  `data-cocso-component="<name>-positioner"` hook in addition to the popup
+  hook. A consumer that needs to escape the z-index scale (e.g. a host app with
+  a fixed legacy header) has no other supported selector.
 - The z-index scale ascends so floating layers always sit above modals
   (portals flatten to `<body>`, so stacking is decided by `z-index` alone):
   `header (50)` < `overlay (100, dialog backdrop)` < `dialog (200, dialog

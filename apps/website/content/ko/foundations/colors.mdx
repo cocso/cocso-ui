@@ -188,6 +188,10 @@ description: COCSO UI의 브랜드 아이덴티티와 시각적 계층 구조를
     --cocso-radio-checked-color: var(--cocso-color-info-500);
   }
   ```
+  <Section.Text>플로팅 표면(Dropdown, Popover, Tooltip, DayPicker, MonthPicker)의 쌓임 순서는 z-index 스케일로 결정됩니다: `header (50)` < `overlay (100)` < `dialog (200)` < `popover (300)` < `tooltip (400)`. 따라서 다이얼로그 안에서 연 드롭다운은 오버라이드 없이도 위에 그려집니다. 호스트 앱 사정으로 이 스케일을 벗어나야 한다면 positioner 훅을 대상으로 하세요 — 쌓임 맥락은 positioner가 소유하므로 popup에만 건 `z-index`는 무시됩니다.</Section.Text>
+  ```css
+  [data-cocso-component="dropdown-positioner"] { z-index: 9001; }
+  ```
 </Section>
 
 <Section>

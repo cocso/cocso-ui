@@ -36,3 +36,7 @@ Button, Link, Switch, and Pagination focus outlines now read `--cocso-color-focu
 Added semantic tokens with light and dark values: `interactive-primary-subtle`, `interactive-primary-text`, `interactive-neutral`, `interactive-neutral-hover`, `interactive-neutral-active`, `interactive-danger-subtle-hover`, `interactive-danger-subtle-active`.
 
 The `--cocso-color-primary-*` ramp keeps its default alias to `neutral-*` — this release documents it as the supported theming entry point rather than changing it.
+
+**Floating positioner override hooks**
+
+`Dropdown`, `Popover`, and `Tooltip` now set `data-cocso-component="dropdown-positioner"`, `"popover-positioner"`, and `"tooltip-positioner"` on their `Positioner`. The positioner owns the stacking context, so a `z-index` on the popup alone is ignored — previously the only way to escape the z-index scale was matching a content-hashed class name (`[class*='_positioner__']`).
