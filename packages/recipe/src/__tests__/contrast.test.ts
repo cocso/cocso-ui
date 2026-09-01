@@ -186,6 +186,39 @@ const PAIRINGS = RECIPES.flatMap((recipe) => [
   ...statePairings(recipe),
 ]);
 
+/**
+ * Surfaces that host bordered content — the page and the cards on it.
+ * `surface-neutral` is a component fill (avatar, switch track), not a container
+ * that dividers are drawn on, so a border sharing its value is not a defect.
+ */
+const SURFACE_TOKENS = ["surface-primary", "surface-secondary"] as const;
+
+const BORDER_TOKENS = [
+  "border-primary",
+  "border-secondary",
+  "border-strong",
+] as const;
+
+describe("Borders are distinguishable from the surfaces they sit on", () => {
+  describe.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("%s theme", (_theme, aliases) => {
+    const pairs = BORDER_TOKENS.flatMap((border) =>
+      SURFACE_TOKENS.map((surface) => ({ border, surface }))
+    );
+
+    // Not a contrast threshold — dividers are allowed to be subtle, and the
+    // light theme's own are around 1.13:1. The defect this catches is a border
+    // resolving to the exact value of a surface, which the dark theme did:
+    // `border-secondary` and `surface-secondary` were both `neutral-900`, so
+    // every divider drawn on a card disappeared.
+    it.each(pairs)("$border differs from $surface", ({ border, surface }) => {
+      expect(resolve(border, aliases)).not.toEqual(resolve(surface, aliases));
+    });
+  });
+});
+
 describe("Contrast — recipe fills against their foregrounds", () => {
   it("finds pairings to check", () => {
     expect(PAIRINGS.length).toBeGreaterThan(20);
