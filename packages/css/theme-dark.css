@@ -34,9 +34,12 @@
   --cocso-color-surface-inverse: var(--cocso-color-white);
   --cocso-color-surface-neutral: var(--cocso-color-neutral-800);
 
-  /* Border */
-  --cocso-color-border-primary: var(--cocso-color-neutral-800);
-  --cocso-color-border-secondary: var(--cocso-color-neutral-900);
+  /* Border — one step lighter than the surface they sit on, mirroring the light
+     theme where surfaces take the two lightest steps and borders the next two.
+     `border-secondary` was `neutral-900`, the same value as `surface-secondary`,
+     so every divider drawn on a card was invisible at 1.00:1. */
+  --cocso-color-border-primary: var(--cocso-color-neutral-700);
+  --cocso-color-border-secondary: var(--cocso-color-neutral-800);
   /* neutral-600 would be 2.93:1 on the dark surface, under the 3:1 that
      WCAG 1.4.11 asks of a focus indicator. */
   --cocso-color-border-strong: var(--cocso-color-neutral-500);
