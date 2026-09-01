@@ -34,6 +34,27 @@ describe("Typography", () => {
       ).toBeInTheDocument();
     });
 
+    it("renders a heading at a font size outside the named steps", () => {
+      render(
+        <Typography level={2} size={18} type="heading">
+          Section title
+        </Typography>
+      );
+      const heading = screen.getByRole("heading", { level: 2 });
+      expect(heading).toHaveStyle({ "--cocso-typography-font-size": "18px" });
+    });
+
+    it("keeps the named heading steps working alongside numeric sizes", () => {
+      render(
+        <Typography size="small" type="heading">
+          Named step
+        </Typography>
+      );
+      expect(screen.getByRole("heading", { level: 2 })).toHaveStyle({
+        "--cocso-typography-font-size": "16px",
+      });
+    });
+
     it("does not leak the level prop to the DOM", () => {
       render(
         <Typography level={1} type="heading">

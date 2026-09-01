@@ -56,6 +56,16 @@ export const HeadingLevels: Story = {
   ),
 };
 
+export const SectionHeading: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Typography level={1} size="large" type="heading">Page title (large)</Typography>
+      <Typography level={2} size={18} type="heading">Section title (size 18)</Typography>
+      <Typography type="body">Body text for comparison.</Typography>
+    </div>
+  ),
+};
+
 export const Weights: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

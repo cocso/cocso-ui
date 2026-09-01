@@ -30,6 +30,7 @@ Button, Link, Switch, and Pagination focus outlines now read `--cocso-color-focu
 **Typography**
 
 - New `level` prop on `type="heading"` (`1`–`6`, default `2`) that selects the rendered `h1`–`h6` independently of the visual `size`, replacing `render={<h1>{title}</h1>}` for the common case.
+- `type="heading"` now accepts any size from the font scale in addition to the named steps, so `size={18}` is a heading rather than a reason to fall back to `type="custom"`. The named steps are unchanged. The scale has no section-heading step — `small` is 16, the same size as `body` `medium` — so consumers were reaching for `type="custom" size={18} weight="bold"`, which renders a `<p>` and drops the text out of the document outline.
 
 **Tokens (`@cocso-ui/css`)**
 
