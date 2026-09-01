@@ -20,6 +20,7 @@ description: custom, body, heading 모드를 지원하는 유연한 텍스트 �
     <Section.ListItem><code>body</code>와 <code>custom</code> 타입은 기본적으로 <code>&lt;p&gt;</code>로 렌더링됩니다. 인라인 콘텐츠를 감쌀 때는 <code>render</code>로 요소를 변경하세요(예: <code>render={`<span />`}</code>).</Section.ListItem>
     <Section.ListItem>시각적 크기에 관계없이 논리적인 heading 계층 구조(h1 → h2 → h3)를 유지하세요. 작은 heading이 더 높은 레벨일 수 있습니다.</Section.ListItem>
     <Section.ListItem>제목을 <code>type="custom"</code>으로 만들지 마세요. <code>&lt;p&gt;</code>로 렌더링되어 문서 구조에서 빠집니다. 명명된 단계가 맞지 않으면 <code>type="heading"</code>에 숫자 <code>size</code>를 넘기세요.</Section.ListItem>
+    <Section.ListItem>Typography는 자체 색상을 지정하지 않습니다. <code>color</code>를 넘기지 않으면 모든 모드가 가장 가까운 조상에서 상속하므로, 위쪽 어딘가에 하드코딩된 색이 있으면 테마를 바꿔도 그대로 남아 글자가 안 읽힐 수 있습니다. 테마를 따르는 조상에서 상속받게 두거나 시맨틱 토큰을 넘기세요.</Section.ListItem>
   </Section.UnorderedList>
 </Section>
 
@@ -122,7 +123,7 @@ description: custom, body, heading 모드를 지원하는 유연한 텍스트 �
     { name: "weight", type: "FontWeight", default: '"normal" (custom/body), "bold" (heading)', description: "폰트 굵기입니다. heading에서는 `\"bold\"`, body/custom에서는 `\"normal\"`이 기본값입니다." },
     { name: "lineHeight", type: "LineHeight", default: '"normal"', description: "줄 높이를 설정합니다." },
     { name: "render", type: "RenderProp", description: "기본 HTML 요소를 대체합니다. heading 기본값은 `<h2>`, body/custom 기본값은 `<p>`입니다. heading 레벨은 `level`을 우선 사용하고, 완전히 다른 요소가 필요할 때 `render`를 사용하세요." },
-    { name: "color", type: "string", description: "텍스트 색상을 직접 설정합니다. CSS 색상 값 또는 디자인 토큰 참조를 사용합니다." },
+    { name: "color", type: "string", default: "상속", description: "텍스트 색상을 직접 설정합니다. CSS 색상 값 또는 디자인 토큰 참조를 사용합니다. 넘기지 않으면 색을 지정한 가장 가까운 조상에서 상속됩니다 — `heading`, `body`를 포함해 어떤 모드에도 자체 색상이 없습니다." },
   ]} />
 </Section>
 
