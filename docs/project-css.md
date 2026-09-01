@@ -62,7 +62,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | `duration` | `fast`, `normal`, `slow`, `decorative`, `decorative-slow` | Transition/animation timing |
 | `easing` | `default`, `soft`, `entrance`, `accordion` | Transition/animation curves |
 
-**Status:** 77 semantic tokens defined (63 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
+**Status:** 70 semantic tokens defined (56 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
 
 **Rules:**
 - Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, `subtle`, `muted`, etc.
