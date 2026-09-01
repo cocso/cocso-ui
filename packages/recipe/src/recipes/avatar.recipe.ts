@@ -40,7 +40,7 @@ export const avatarRecipe = defineRecipe({
   base: {
     root: {
       bgColor: "surface-neutral",
-      fontColor: "text-secondary",
+      fontColor: "text-primary",
       fontWeight: "medium",
     },
   },

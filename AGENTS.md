@@ -130,6 +130,10 @@ When asked to review comments on a GitHub PR:
 ### Frontend Design Rules
 
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.
+- Text below 24px (or below 18.66px bold) may only use `text-primary` or
+  `text-secondary`. `text-tertiary` and `text-muted` are below WCAG AA at body
+  size on every surface in both themes; they are for large text and non-text
+  graphics only. See the Contrast section in `docs/project-css.md`.
 - Use the cocso radius scale (`rounded-1`…`rounded-6`, `rounded-full`), not
   Tailwind's `rounded-xs`…`rounded-4xl` defaults. Both namespaces resolve and
   the first six steps share pixel values, but only the cocso scale chains to

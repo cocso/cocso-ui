@@ -11,7 +11,9 @@
   --cocso-button-bg-color: var(--cocso-color-surface-secondary);
   --cocso-button-font-color: var(--cocso-color-text-secondary);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-secondary);
+  --cocso-button-font-color-hover: var(--cocso-color-text-primary);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary-hover);
+  --cocso-button-font-color-active: var(--cocso-color-text-primary);
 }
 
 .cocso-button.cocso-button--variant-outline {
@@ -31,28 +33,28 @@
 
 .cocso-button.cocso-button--variant-success {
   --cocso-button-bg-color: var(--cocso-color-interactive-success);
-  --cocso-button-font-color: var(--cocso-color-text-on-primary);
+  --cocso-button-font-color: var(--cocso-color-text-on-success);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-success-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-success-active);
 }
 
 .cocso-button.cocso-button--variant-error {
   --cocso-button-bg-color: var(--cocso-color-interactive-danger);
-  --cocso-button-font-color: var(--cocso-color-text-on-primary);
+  --cocso-button-font-color: var(--cocso-color-text-on-danger);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-active);
 }
 
 .cocso-button.cocso-button--variant-warning {
   --cocso-button-bg-color: var(--cocso-color-interactive-warning);
-  --cocso-button-font-color: var(--cocso-color-text-primary);
+  --cocso-button-font-color: var(--cocso-color-text-on-warning);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-warning-hover);
-  --cocso-button-bg-color-active: var(--cocso-color-interactive-warning-active);
+  --cocso-button-bg-color-active: var(--cocso-color-interactive-warning-hover);
 }
 
 .cocso-button.cocso-button--variant-info {
   --cocso-button-bg-color: var(--cocso-color-interactive-info);
-  --cocso-button-font-color: var(--cocso-color-text-on-primary);
+  --cocso-button-font-color: var(--cocso-color-text-on-info);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-info-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-info-active);
 }

@@ -2,7 +2,7 @@
 
 .cocso-avatar {
   --cocso-avatar-bg-color: var(--cocso-color-surface-neutral);
-  --cocso-avatar-font-color: var(--cocso-color-text-secondary);
+  --cocso-avatar-font-color: var(--cocso-color-text-primary);
   --cocso-avatar-font-weight: 500;
 }
 

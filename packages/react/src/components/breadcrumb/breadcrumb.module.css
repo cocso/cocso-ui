@@ -20,13 +20,16 @@
     align-items: center;
   }
 
+  /* Was a hardcoded `neutral-950`, which is the dark theme's own background:
+     the current crumb rendered at 1.0:1 and was invisible. The semantic token
+     resolves to the same value in the light theme. */
   .item:last-child {
     font-weight: 500;
-    color: var(--cocso-color-neutral-950);
+    color: var(--cocso-color-text-primary);
   }
 
   .separator {
-    color: var(--cocso-color-neutral-300);
+    color: var(--cocso-color-text-tertiary);
     user-select: none;
   }
 }

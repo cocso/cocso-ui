@@ -38,6 +38,12 @@
 
   .button:not([disabled]):active {
     --cocso-button-bg-color-active: inherit;
+    /* Variants that do not restyle their label on press fall back to the base
+       colour, so this stays a no-op for them. */
+    color: var(
+      --cocso-button-font-color-active,
+      var(--cocso-button-font-color)
+    );
     background-color: var(--cocso-button-bg-color-active);
   }
 
