@@ -59,6 +59,20 @@
   --cocso-button-bg-color-active: var(--cocso-color-interactive-info-active);
 }
 
+.cocso-button.cocso-button--variant-neutral {
+  --cocso-button-bg-color: var(--cocso-color-interactive-neutral);
+  --cocso-button-font-color: var(--cocso-color-text-primary);
+  --cocso-button-bg-color-hover: var(--cocso-color-interactive-neutral-hover);
+  --cocso-button-bg-color-active: var(--cocso-color-interactive-neutral-active);
+}
+
+.cocso-button.cocso-button--variant-error-ghost {
+  --cocso-button-bg-color: var(--cocso-color-transparent);
+  --cocso-button-font-color: var(--cocso-color-feedback-danger-text);
+  --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-subtle-hover);
+  --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
+}
+
 .cocso-button.cocso-button--size-large {
   --cocso-button-height: 40px;
   --cocso-button-padding-inline: 14px;
@@ -93,6 +107,22 @@
 
 .cocso-button.cocso-button--shape-rounded {
   --cocso-button-border-radius: var(--cocso-radius-full);
+}
+
+.cocso-button.cocso-button--shape-sharp {
+  --cocso-button-border-radius: 0;
+}
+
+.cocso-button.cocso-button--align-center {
+  --cocso-button-justify-content: center;
+}
+
+.cocso-button.cocso-button--align-start {
+  --cocso-button-justify-content: flex-start;
+}
+
+.cocso-button.cocso-button--align-between {
+  --cocso-button-justify-content: space-between;
 }
 
 .cocso-button.cocso-button--shape-square.cocso-button--size-x-small {

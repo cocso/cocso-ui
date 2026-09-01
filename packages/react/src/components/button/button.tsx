@@ -19,11 +19,16 @@ export type ButtonVariant =
   | "success"
   | "error"
   | "warning"
-  | "info";
+  | "info"
+  | "neutral"
+  | "error-ghost";
 
-export type ButtonShape = "square" | "circle" | "rounded";
+export type ButtonShape = "square" | "circle" | "rounded" | "sharp";
+
+export type ButtonAlign = "center" | "start" | "between";
 
 export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
+  align?: ButtonAlign;
   disabled?: boolean;
   loading?: boolean;
   prefix?: ReactNode;
@@ -54,6 +59,7 @@ export function Button({
   variant = "primary",
   weight = "medium",
   shape = "square",
+  align = "center",
   prefix,
   suffix,
   svgOnly = false,
@@ -69,7 +75,7 @@ export function Button({
 
   const isDisabled = disabled || loading;
   const mergedClassName = cn(
-    button({ variant, size, shape }),
+    button({ variant, size, shape, align }),
     styles.button,
     svgOnly && styles.svgOnly,
     className

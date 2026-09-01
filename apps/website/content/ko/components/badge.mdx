@@ -32,7 +32,7 @@ description: 상태, 카테고리, 수량을 강조하는 소형 레이블입니
 
 <Section>
   <Section.Title>Variant</Section.Title>
-  <Section.Text>일곱 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 중립적인 레이블링에는 <code>primary</code>와 <code>secondary</code>를, 상태 전달에는 시맨틱 변형을 사용하세요.</Section.Text>
+  <Section.Text>여덟 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 중립적인 레이블링에는 <code>primary</code>와 <code>secondary</code>를, 목록처럼 뱃지가 많은 화면에서 primary를 조용하게 쓰려면 <code>primary-subtle</code>을, 상태 전달에는 시맨틱 변형을 사용하세요.</Section.Text>
   <ComponentExample name="badge-variants" />
 </Section>
 
@@ -55,7 +55,7 @@ description: 상태, 카테고리, 수량을 강조하는 소형 레이블입니
 
   <PropsTable
     data={[
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "시맨틱 의미를 전달하기 위해 배경색과 텍스트 색상을 제어합니다. 중립적인 레이블에는 `secondary`를, 상태 인디케이터에는 시맨틱 변형을 사용하세요." },
+      { name: "variant", type: '"primary" | "primary-subtle" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "시맨틱 의미를 전달하기 위해 배경색과 텍스트 색상을 제어합니다. 중립적인 레이블에는 `secondary`를, 채운 primary가 시끄러운 목록에는 `primary-subtle`을, 상태 인디케이터에는 시맨틱 변형을 사용하세요." },
       { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "패딩과 폰트 크기를 제어합니다. 인라인 상태 인디케이터에는 `small`을, 눈에 띄는 카테고리 레이블에는 `large`를 사용하세요." },
       { name: "shape", type: '"square" | "circle" | "rounded"', default: '"square"', description: "border-radius를 제어합니다. 숫자 카운트(예: 알림 배지)에는 `circle`을, 필 모양 태그에는 `rounded`를 사용하세요." },
       { name: "children", type: "ReactNode", required: true, description: "배지 내부에 렌더링되는 레이블 텍스트 또는 요소입니다." },

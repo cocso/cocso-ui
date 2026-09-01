@@ -20,6 +20,21 @@ export type BodySize = "large" | "medium" | "small" | "x-small";
 
 export type HeadingSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
+const HEADING_SIZES = [
+  "x-large",
+  "large",
+  "medium",
+  "small",
+  "x-small",
+] as const;
+
+const isHeadingSize = (value: unknown): value is HeadingSize =>
+  typeof value === "string" &&
+  (HEADING_SIZES as readonly string[]).includes(value);
+
+/** Semantic heading rank rendered as `h1`–`h6`. Independent of visual `size`. */
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 type TypographyPropsBase = {
   ref?: Ref<HTMLElement>;
   render?: RenderProp;
@@ -39,7 +54,17 @@ type BodyTypographyProps = TypographyPropsBase & {
 
 type HeadingTypographyProps = TypographyPropsBase & {
   type: "heading";
-  size?: HeadingSize;
+  level?: HeadingLevel;
+  /**
+   * A named heading step, or any size from the font scale when the named steps
+   * do not fit — `size={18}` is the section-heading step, which the named scale
+   * does not cover (`small` is 16, the same as `body` `medium`).
+   *
+   * Reach for a numeric size rather than `type="custom"`: `custom` renders a
+   * `<p>`, so using it for a heading removes the element from the document
+   * outline.
+   */
+  size?: HeadingSize | ResponsiveFontSize;
 };
 export type TypographyProps =
   | CustomTypographyProps
@@ -56,7 +81,11 @@ export function Typography({
   lineHeight = "normal",
   ...props
 }: TypographyProps) {
-  const defaultTagName = getDefaultTagName(type);
+  const level = (props as { level?: HeadingLevel }).level;
+  if (type === "heading") {
+    Reflect.deleteProperty(props, "level");
+  }
+  const defaultTagName = getDefaultTagName(type, level);
   const rawSize = (props as { size?: unknown }).size;
   const isCurrent = rawSize === "current";
 
@@ -106,9 +135,12 @@ export function Typography({
   });
 }
 
-const getDefaultTagName = (type: TypographyProps["type"]) =>
+const getDefaultTagName = (
+  type: TypographyProps["type"],
+  level?: HeadingLevel
+) =>
   match(type)
-    .with("heading", () => "h2" as const)
+    .with("heading", () => `h${level ?? 2}` as const)
     .otherwise(() => "p" as const);
 
 const getBodyFontSize = (size: BodySize) =>
@@ -136,9 +168,8 @@ const getFontSize = (type: TypographyProps["type"], props: TypographyProps) =>
         ((props as BodyTypographyProps).size ?? "medium") as BodySize
       )
     )
-    .with("heading", () =>
-      getHeadingFontSize(
-        ((props as HeadingTypographyProps).size ?? "medium") as HeadingSize
-      )
-    )
+    .with("heading", () => {
+      const size = (props as HeadingTypographyProps).size ?? "medium";
+      return isHeadingSize(size) ? getHeadingFontSize(size) : size;
+    })
     .otherwise(() => 16);

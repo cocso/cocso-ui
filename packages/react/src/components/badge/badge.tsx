@@ -10,6 +10,7 @@ export type BadgeSize = "large" | "medium" | "small";
 
 type BadgeVariant =
   | "primary"
+  | "primary-subtle"
   | "secondary"
   | "success"
   | "error"

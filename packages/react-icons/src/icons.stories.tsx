@@ -18,11 +18,14 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
+const isBrand = (name: string) => name.endsWith('Logo');
+const isSemantic = (name: string) => name.endsWith('Icon');
+
 const getAllIcons = () => {
   const icons: { [key: string]: React.ComponentType<IconProps> } = {};
 
   Object.entries(ReactIcons).forEach(([name, component]) => {
-    if ((typeof component === 'function' && name.endsWith('Icon')) || name.endsWith('Logo')) {
+    if (typeof component === 'function' && (isSemantic(name) || isBrand(name))) {
       icons[name] = component as React.ComponentType<IconProps>;
     }
   });
@@ -38,10 +41,12 @@ const categorizeIcons = () => {
     other: {},
   };
 
+  // Match on the name suffix, not a substring. `includes('Logo')` also matched
+  // `LogoutIcon`, which put a semantic icon in the brand grid and reflowed it.
   Object.entries(icons).forEach(([name, component]) => {
-    if (name.includes('Logo') && !name.includes('Vertical')) {
+    if (isBrand(name)) {
       categories.brand[name] = component;
-    } else if (name.includes('Icon')) {
+    } else if (isSemantic(name)) {
       categories.semantic[name] = component;
     } else {
       categories.other[name] = component;

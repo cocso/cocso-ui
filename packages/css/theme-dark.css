@@ -43,10 +43,21 @@
   --cocso-color-interactive-primary-hover: var(--cocso-color-primary-200);
   --cocso-color-interactive-primary-active: var(--cocso-color-primary-300);
   --cocso-color-interactive-primary-muted: var(--cocso-color-primary-500);
+  --cocso-color-interactive-primary-subtle: var(--cocso-color-primary-900);
+  --cocso-color-interactive-primary-text: var(--cocso-color-primary-200);
 
   /* Interactive — secondary (neutral) */
   --cocso-color-interactive-secondary: var(--cocso-color-neutral-800);
   --cocso-color-interactive-secondary-hover: var(--cocso-color-neutral-700);
+
+  /* Interactive — danger tint (text/ghost destructive actions) */
+  --cocso-color-interactive-danger-subtle-hover: var(--cocso-color-danger-950);
+  --cocso-color-interactive-danger-subtle-active: var(--cocso-color-danger-900);
+
+  /* Interactive — neutral surface (quiet, low-emphasis actions) */
+  --cocso-color-interactive-neutral: var(--cocso-color-neutral-800);
+  --cocso-color-interactive-neutral-hover: var(--cocso-color-neutral-700);
+  --cocso-color-interactive-neutral-active: var(--cocso-color-neutral-600);
 
   /* Focus ring */
   --cocso-color-focus-ring: var(--cocso-color-primary-50);

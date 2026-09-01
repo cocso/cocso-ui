@@ -25,6 +25,7 @@ function RadioGroupItem({
   return (
     <RadioBase.Root
       className={cn(radio({ size }), styles.item, className)}
+      data-cocso-component="radio-item"
       style={style}
       {...props}
     />
@@ -38,6 +39,7 @@ function RadioGroupIndicator({
   return (
     <RadioBase.Indicator
       className={cn(styles.indicator, className)}
+      data-cocso-component="radio-indicator"
       {...props}
     />
   );

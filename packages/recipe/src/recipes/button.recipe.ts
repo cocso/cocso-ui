@@ -39,6 +39,12 @@ export const buttonRecipe = defineRecipe({
       info: {
         root: { bgColor: "interactive-info", fontColor: "text-on-info" },
       },
+      neutral: {
+        root: { bgColor: "interactive-neutral", fontColor: "text-primary" },
+      },
+      "error-ghost": {
+        root: { bgColor: "transparent", fontColor: "feedback-danger-text" },
+      },
     },
     size: {
       large: {
@@ -78,6 +84,12 @@ export const buttonRecipe = defineRecipe({
       square: { root: {} },
       circle: { root: { borderRadius: "100%" } },
       rounded: { root: { borderRadius: "radius-full" } },
+      sharp: { root: { borderRadius: "0" } },
+    },
+    align: {
+      center: { root: { justifyContent: "center" } },
+      start: { root: { justifyContent: "flex-start" } },
+      between: { root: { justifyContent: "space-between" } },
     },
   },
 
@@ -110,6 +122,10 @@ export const buttonRecipe = defineRecipe({
         error: { root: { bgColor: "interactive-danger-hover" } },
         warning: { root: { bgColor: "interactive-warning-hover" } },
         info: { root: { bgColor: "interactive-info-hover" } },
+        neutral: { root: { bgColor: "interactive-neutral-hover" } },
+        "error-ghost": {
+          root: { bgColor: "interactive-danger-subtle-hover" },
+        },
       },
     },
     active: {
@@ -132,13 +148,23 @@ export const buttonRecipe = defineRecipe({
         // only variant whose ramp runs out before the third state.
         warning: { root: { bgColor: "interactive-warning-hover" } },
         info: { root: { bgColor: "interactive-info-active" } },
+        neutral: { root: { bgColor: "interactive-neutral-active" } },
+        "error-ghost": {
+          root: { bgColor: "interactive-danger-subtle-active" },
+        },
       },
     },
   },
 
-  defaultVariants: { variant: "primary", size: "medium", shape: "square" },
+  defaultVariants: {
+    variant: "primary",
+    size: "medium",
+    shape: "square",
+    align: "center",
+  },
 });
 
 export type ButtonVariant = keyof typeof buttonRecipe.variants.variant;
 export type ButtonSize = keyof typeof buttonRecipe.variants.size;
 export type ButtonShape = keyof typeof buttonRecipe.variants.shape;
+export type ButtonAlign = keyof typeof buttonRecipe.variants.align;

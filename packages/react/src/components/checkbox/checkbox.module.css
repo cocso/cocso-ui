@@ -37,7 +37,7 @@
   }
 
   .checkbox:focus-within {
-    outline: 2px solid var(--cocso-color-primary-950);
+    outline: 2px solid var(--cocso-checkbox-focus-ring-color);
     outline-offset: 2px;
   }
 

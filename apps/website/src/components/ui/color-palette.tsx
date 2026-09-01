@@ -22,11 +22,11 @@ const ColorSwatch = ({ name, token, value }: ColorSwatchProps) => {
       <Dropdown.Trigger
         render={
           <button
-            className="flex w-full cursor-pointer flex-col gap-1.5 rounded-lg border border-transparent bg-transparent p-1 text-left transition-colors hover:border-neutral-200 hover:bg-neutral-50 active:bg-neutral-100"
+            className="flex w-full cursor-pointer flex-col gap-1.5 rounded-4 border border-transparent bg-transparent p-1 text-left transition-colors hover:border-neutral-200 hover:bg-neutral-50 active:bg-neutral-100"
             type="button"
           >
             <div
-              className="h-10 w-full rounded-lg border border-neutral-200"
+              className="h-10 w-full rounded-4 border border-neutral-200"
               style={{ backgroundColor: value }}
             />
             <div className="flex flex-col gap-0.5">

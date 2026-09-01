@@ -5,6 +5,11 @@
   --cocso-badge-font-color: var(--cocso-color-text-on-primary);
 }
 
+.cocso-badge.cocso-badge--variant-primary-subtle {
+  --cocso-badge-bg-color: var(--cocso-color-interactive-primary-subtle);
+  --cocso-badge-font-color: var(--cocso-color-interactive-primary-text);
+}
+
 .cocso-badge.cocso-badge--variant-secondary {
   --cocso-badge-bg-color: var(--cocso-color-surface-secondary);
   --cocso-badge-font-color: var(--cocso-color-text-secondary);

@@ -32,6 +32,7 @@ function TooltipContent({
         alignOffset={alignOffset}
         arrowPadding={arrowPadding}
         className={styles.positioner}
+        data-cocso-component="tooltip-positioner"
         side={side}
         sideOffset={sideOffset}
       >

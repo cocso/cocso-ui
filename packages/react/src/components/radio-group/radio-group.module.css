@@ -14,18 +14,18 @@
     width: var(--cocso-radio-size, 16px);
     height: var(--cocso-radio-size, 16px);
     cursor: pointer;
-    background-color: var(--cocso-color-white);
-    border: var(--cocso-spacing-2) solid var(--cocso-color-text-primary);
+    background-color: var(--cocso-radio-bg-color);
+    border: var(--cocso-spacing-2) solid var(--cocso-radio-border-color);
     border-radius: 100%;
   }
 
   .item:focus-visible {
-    outline: 2px solid var(--cocso-color-primary-950);
+    outline: 2px solid var(--cocso-radio-focus-ring-color);
     outline-offset: 2px;
   }
 
   .item[data-checked] {
-    border-color: var(--cocso-color-primary-950);
+    border-color: var(--cocso-radio-checked-color);
   }
 
   .item[data-disabled] {
@@ -47,7 +47,7 @@
     width: var(--cocso-radio-dot-size, 7px);
     height: var(--cocso-radio-dot-size, 7px);
     content: "";
-    background-color: var(--cocso-color-primary-950);
+    background-color: var(--cocso-radio-checked-color);
     border-radius: 50%;
   }
 }

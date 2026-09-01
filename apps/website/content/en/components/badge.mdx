@@ -32,7 +32,7 @@ description: A small label that highlights status, category, or quantity.
 
 <Section>
   <Section.Title>Variant</Section.Title>
-  <Section.Text>Seven color variants map to semantic meanings. Use <code>primary</code> and <code>secondary</code> for neutral labeling, and semantic variants for conveying status.</Section.Text>
+  <Section.Text>Eight color variants map to semantic meanings. Use <code>primary</code> and <code>secondary</code> for neutral labeling, <code>primary-subtle</code> when a filled primary badge is too loud in dense lists, and semantic variants for conveying status.</Section.Text>
   <ComponentExample name="badge-variants" />
 </Section>
 
@@ -55,7 +55,7 @@ description: A small label that highlights status, category, or quantity.
 
   <PropsTable
     data={[
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "Controls the background and text color to communicate semantic meaning. Use `secondary` for neutral labels and semantic variants for status indicators." },
+      { name: "variant", type: '"primary" | "primary-subtle" | "secondary" | "success" | "error" | "warning" | "info" | "outline"', default: '"secondary"', description: "Controls the background and text color to communicate semantic meaning. Use `secondary` for neutral labels, `primary-subtle` when a filled primary badge is too loud in dense lists, and semantic variants for status indicators." },
       { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the padding and font size. Use `small` for inline status indicators and `large` for prominent category labels." },
       { name: "shape", type: '"square" | "circle" | "rounded"', default: '"square"', description: "Controls the border-radius. Use `circle` for numeric counts (e.g., notification badges) and `rounded` for pill-shaped tags." },
       { name: "children", type: "ReactNode", required: true, description: "The label text or elements rendered inside the badge." },
