@@ -23,6 +23,9 @@
   --cocso-color-text-tertiary: var(--cocso-color-neutral-500);
   --cocso-color-text-disabled: var(--cocso-color-neutral-600);
   --cocso-color-text-on-primary: var(--cocso-color-neutral-950);
+  /* text-on-success/-danger/-info/-warning are deliberately NOT overridden.
+     Their fills (`interactive-success` and friends) keep the same hue in both
+     themes, so a foreground that flipped would land light-on-light. */
   --cocso-color-text-muted: var(--cocso-color-neutral-500);
 
   /* Surface */

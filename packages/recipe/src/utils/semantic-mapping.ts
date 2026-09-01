@@ -14,6 +14,10 @@ export const SEMANTIC_TO_PRIMITIVE: Readonly<Record<string, string>> = {
   "text-tertiary": "neutral-400",
   "text-disabled": "neutral-400",
   "text-on-primary": "white",
+  "text-on-success": "white",
+  "text-on-danger": "white",
+  "text-on-info": "white",
+  "text-on-warning": "neutral-950",
   "text-muted": "neutral-500",
 
   // --- surface ---

@@ -51,7 +51,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 
 | Category | Role examples | Purpose |
 |---|---|---|
-| `text` | `primary`, `secondary`, `tertiary`, `disabled`, `on-primary`, `muted` | Text and label colors |
+| `text` | `primary`, `secondary`, `tertiary`, `disabled`, `muted`, `on-primary`, `on-success`, `on-danger`, `on-info`, `on-warning` | Text and label colors |
 | `surface` | `primary`, `secondary`, `inverse`, `neutral` | Background layer hierarchy |
 | `border` | `primary`, `secondary` | Container and separator strokes |
 | `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `secondary`, `secondary-hover`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
@@ -62,7 +62,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | `duration` | `fast`, `normal`, `slow`, `decorative`, `decorative-slow` | Transition/animation timing |
 | `easing` | `default`, `soft`, `entrance`, `accordion` | Transition/animation curves |
 
-**Status:** 66 semantic tokens defined (52 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
+**Status:** 77 semantic tokens defined (63 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
 
 **Rules:**
 - Roles must be descriptive: `primary`, `secondary`, `tertiary`, `inverse`, `hover`, `active`, `disabled`, `subtle`, `muted`, etc.
@@ -88,6 +88,8 @@ Measured against the light theme's `surface-primary` (`#ffffff`) and `surface-se
 - `text-tertiary` and `text-muted` do not clear AA for body text on any surface. They are for large text (3:1) and for non-text graphics such as spinner blades and progress fills, where WCAG 1.4.11 asks for 3:1. Components MUST NOT use them for essential text.
 - `text-disabled` is exempt: WCAG 1.4.3 excludes inactive components.
 - Status colors: use the 600-level token for text (`feedback-danger-text` and friends) and reserve the 500-level for filled surfaces, where the contrast that matters is against the white foreground on top. The 500 level clears AA on white by a margin under 0.1 and drops below it on `surface-secondary`.
+- A foreground for a fill MUST NOT flip with the theme unless its fill flips too. `text-on-primary` flips because `interactive-primary` flips; the fixed-hue fills (`interactive-success`, `-danger`, `-info`, `-warning`) keep their value in both themes, so they have their own `text-on-*` foregrounds that are identical in light and dark. Pairing a flipping foreground with a fixed fill put near-white text on bright amber at 1.67:1.
+- An interactive state that darkens a fill without moving its foreground walks the pairing toward the threshold. `button` `secondary` crossed it on hover and again when pressed, so its label steps to `text-primary` for both.
 - The neutral ramp has no step that would give a third AA-conformant text tier: in the light theme it would have to be at least `neutral-600` (already `text-secondary`), and in the dark theme at most `neutral-400` (already `text-secondary`). Adding one means extending the ramp, not remapping the semantic layer — see Roadmap.
 
 ## Interfaces

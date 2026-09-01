@@ -155,6 +155,10 @@
   --cocso-color-text-tertiary: var(--cocso-color-neutral-400);
   --cocso-color-text-disabled: var(--cocso-color-neutral-400);
   --cocso-color-text-on-primary: var(--cocso-color-white);
+  --cocso-color-text-on-success: var(--cocso-color-white);
+  --cocso-color-text-on-danger: var(--cocso-color-white);
+  --cocso-color-text-on-info: var(--cocso-color-white);
+  --cocso-color-text-on-warning: var(--cocso-color-neutral-950);
   --cocso-color-text-muted: var(--cocso-color-neutral-500);
   --cocso-color-surface-primary: var(--cocso-color-white);
   --cocso-color-surface-secondary: var(--cocso-color-neutral-50);

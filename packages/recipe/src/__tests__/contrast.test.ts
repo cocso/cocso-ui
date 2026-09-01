@@ -1,0 +1,212 @@
+/**
+ * Contrast Test — every recipe pairing of a fill and a foreground
+ *
+ * Recipes name colors semantically, and the semantic layer is redefined by the
+ * dark theme. A pairing that reads well in one theme can therefore fail in the
+ * other without either file looking wrong on its own: `text-on-primary` flips
+ * to a dark value in the dark theme because `interactive-primary` flips to a
+ * light one, but `interactive-warning` keeps its hue in both themes, so the
+ * same foreground landed near-white on bright amber at 1.67:1.
+ *
+ * This resolves each pairing through both themes and asserts WCAG AA.
+ */
+
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { describe, expect, it } from "vitest";
+import { alertRecipe } from "../recipes/alert.recipe";
+import { avatarRecipe } from "../recipes/avatar.recipe";
+import { badgeRecipe } from "../recipes/badge.recipe";
+import { breadcrumbRecipe } from "../recipes/breadcrumb.recipe";
+import { buttonRecipe } from "../recipes/button.recipe";
+import { paginationRecipe } from "../recipes/pagination.recipe";
+import type { RecipeDefinition, SlotStyles } from "../types";
+
+/** Any recipe, regardless of its variant and slot type parameters. */
+type AnyRecipe = RecipeDefinition<
+  Record<string, Record<string, Partial<Record<string, SlotStyles>>>>,
+  string
+>;
+
+const CSS_DIR = join(import.meta.dirname, "..", "..", "..", "css");
+
+/** WCAG 2.2 SC 1.4.3, normal text. */
+const AA_NORMAL_TEXT = 4.5;
+
+function parseTokens(file: string) {
+  const css = readFileSync(join(CSS_DIR, file), "utf-8");
+  const primitives = new Map<string, string>();
+  const aliases = new Map<string, string>();
+  for (const [, name, value] of css.matchAll(
+    /--cocso-color-([a-z0-9-]+):\s*(#[0-9a-fA-F]{6});/g
+  )) {
+    primitives.set(name, value);
+  }
+  for (const [, name, target] of css.matchAll(
+    /--cocso-color-([a-z0-9-]+):\s*var\(--cocso-color-([a-z0-9-]+)\);/g
+  )) {
+    aliases.set(name, target);
+  }
+  return { primitives, aliases };
+}
+
+const lightTokens = parseTokens("token.css");
+const darkTokens = parseTokens("theme-dark.css");
+
+const PRIMITIVES = new Map(lightTokens.primitives);
+PRIMITIVES.set("white", "#ffffff");
+PRIMITIVES.set("black", "#000000");
+
+const LIGHT_ALIASES = lightTokens.aliases;
+const DARK_ALIASES = new Map([...lightTokens.aliases, ...darkTokens.aliases]);
+
+function resolve(
+  token: string,
+  aliases: Map<string, string>,
+  depth = 0
+): string | null {
+  if (depth > 8) {
+    return null;
+  }
+  const primitive = PRIMITIVES.get(token);
+  if (primitive) {
+    return primitive;
+  }
+  const alias = aliases.get(token);
+  return alias ? resolve(alias, aliases, depth + 1) : null;
+}
+
+function relativeLuminance(hex: string): number {
+  const channels = [1, 3, 5].map(
+    (i) => Number.parseInt(hex.slice(i, i + 2), 16) / 255
+  );
+  const [r, g, b] = channels.map((c) =>
+    c <= 0.039_28 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  );
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a: string, b: string): number {
+  const [hi, lo] = [relativeLuminance(a), relativeLuminance(b)].sort(
+    (x, y) => y - x
+  );
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+interface Pairing {
+  bgColor: string;
+  fontColor: string;
+  label: string;
+}
+
+function slotColors(styles: SlotStyles | undefined) {
+  const bgColor = styles?.bgColor as string | undefined;
+  const fontColor = styles?.fontColor as string | undefined;
+  return { bgColor, fontColor };
+}
+
+/** Variant pairings that set both a fill and a foreground. */
+function variantPairings(recipe: AnyRecipe): Pairing[] {
+  const pairings: Pairing[] = [];
+  for (const [dimension, values] of Object.entries(recipe.variants)) {
+    for (const [value, slots] of Object.entries(
+      values as Record<string, Record<string, SlotStyles>>
+    )) {
+      const { bgColor, fontColor } = slotColors(slots.root);
+      if (bgColor && fontColor) {
+        pairings.push({
+          label: `${recipe.name} ${dimension}=${value}`,
+          bgColor,
+          fontColor,
+        });
+      }
+    }
+  }
+  const base = slotColors(recipe.base?.root as SlotStyles | undefined);
+  if (base.bgColor && base.fontColor) {
+    pairings.push({
+      label: `${recipe.name} base`,
+      bgColor: base.bgColor,
+      fontColor: base.fontColor,
+    });
+  }
+  return pairings;
+}
+
+/**
+ * Interactive state pairings. A state usually overrides only the fill, so the
+ * foreground falls back to the one the variant declares — which is exactly how
+ * a state can drift below AA while the variant itself passes.
+ */
+function statePairings(recipe: AnyRecipe): Pairing[] {
+  const pairings: Pairing[] = [];
+  const variantForegrounds = new Map<string, string>();
+  for (const [value, slots] of Object.entries(
+    (recipe.variants.variant ?? {}) as Record<
+      string,
+      Record<string, SlotStyles>
+    >
+  )) {
+    const { fontColor } = slotColors(slots.root);
+    if (fontColor) {
+      variantForegrounds.set(value, fontColor);
+    }
+  }
+
+  for (const [state, dimensions] of Object.entries(recipe.states ?? {})) {
+    const variants = (dimensions as Record<string, unknown>).variant as
+      | Record<string, Record<string, SlotStyles>>
+      | undefined;
+    for (const [value, slots] of Object.entries(variants ?? {})) {
+      const { bgColor, fontColor } = slotColors(slots.root);
+      const foreground = fontColor ?? variantForegrounds.get(value);
+      if (bgColor && foreground) {
+        pairings.push({
+          label: `${recipe.name} variant=${value}:${state}`,
+          bgColor,
+          fontColor: foreground,
+        });
+      }
+    }
+  }
+  return pairings;
+}
+
+const RECIPES = [
+  alertRecipe,
+  avatarRecipe,
+  badgeRecipe,
+  breadcrumbRecipe,
+  buttonRecipe,
+  paginationRecipe,
+] as AnyRecipe[];
+
+const PAIRINGS = RECIPES.flatMap((recipe) => [
+  ...variantPairings(recipe),
+  ...statePairings(recipe),
+]);
+
+describe("Contrast — recipe fills against their foregrounds", () => {
+  it("finds pairings to check", () => {
+    expect(PAIRINGS.length).toBeGreaterThan(20);
+  });
+
+  describe.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("%s theme", (_theme, aliases) => {
+    it.each(PAIRINGS)("$label clears WCAG AA", ({ bgColor, fontColor }) => {
+      const background = resolve(bgColor, aliases);
+      const foreground = resolve(fontColor, aliases);
+
+      // `transparent` has no resolvable colour; the surface underneath decides.
+      if (!(background && foreground)) {
+        return;
+      }
+
+      expect(contrast(background, foreground)).toBeGreaterThanOrEqual(
+        AA_NORMAL_TEXT
+      );
+    });
+  });
+});
