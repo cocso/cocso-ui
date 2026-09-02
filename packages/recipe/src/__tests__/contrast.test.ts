@@ -11,7 +11,7 @@
  * This resolves each pairing through both themes and asserts WCAG AA.
  */
 
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { alertRecipe } from "../recipes/alert.recipe";
@@ -319,6 +319,47 @@ describe("Colors used as bare text clear AA on every surface", () => {
         contrast(background as string, foreground as string)
       ).toBeGreaterThanOrEqual(AA_NORMAL_TEXT);
     });
+  });
+});
+
+/**
+ * What this check covers, asserted rather than assumed.
+ *
+ * `RECIPES` is written out by hand, and a hand-written list is the thing that
+ * silently narrows. It held six of nineteen for as long as it existed, and
+ * `link` — which paints text with a fixed-hue fill token, 1.74:1 on hover in
+ * the dark theme — was one of the thirteen it left out. Nothing failed, because
+ * the only thing asserted about the list's size was a floor.
+ *
+ * A floor catches a check that stops covering things. It does not catch a new
+ * recipe the check has never heard of, which is the direction this actually
+ * broke in.
+ */
+/**
+ * Recipes whose file name differs from the `name` they declare. `radio-group`
+ * declares `radio`, which is what the generated class and CSS file are called.
+ */
+const FILE_NAME_ALIASES: Readonly<Record<string, string>> = {
+  "radio-group": "radio",
+};
+
+describe("The contrast check covers every recipe", () => {
+  it("has no recipe on disk missing from RECIPES", () => {
+    const onDisk = readdirSync(join(import.meta.dirname, "..", "recipes"))
+      .filter((file) => file.endsWith(".recipe.ts"))
+      .map((file) => file.replace(".recipe.ts", ""))
+      .map((name) => FILE_NAME_ALIASES[name] ?? name)
+      .sort();
+    const checked = RECIPES.map((recipe) => recipe.name).sort();
+
+    expect(
+      onDisk.filter((name) => !checked.includes(name)),
+      "a recipe exists that the contrast check never resolves — add it to RECIPES"
+    ).toEqual([]);
+    expect(
+      checked.filter((name) => !onDisk.includes(name)),
+      "RECIPES names a recipe that no longer exists"
+    ).toEqual([]);
   });
 });
 
