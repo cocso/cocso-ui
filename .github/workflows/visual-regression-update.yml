@@ -62,9 +62,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add apps/storybook/__snapshots__/
-          # [skip ci] is honest here: a push made with GITHUB_TOKEN cannot
-          # trigger a workflow at all, so dropping the marker would not get the
-          # new baselines verified — it would only make the intent misleading.
-          # Verify them by running Visual Regression manually on the branch.
-          git diff --cached --quiet || git commit -m "chore: update visual regression baselines [skip ci]"
+          # Deliberately no [skip ci] marker. A push made with GITHUB_TOKEN
+          # cannot trigger a workflow regardless, so the marker bought nothing —
+          # and it survived into the body of the squash commit when the branch
+          # was merged, which made GitHub skip every workflow on main, the
+          # release job included. Verify these baselines by running Visual
+          # Regression manually on the branch.
+          git diff --cached --quiet || git commit -m "chore: update visual regression baselines"
           git push
