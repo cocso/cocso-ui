@@ -4,7 +4,7 @@
   --cocso-input-border-color: var(--cocso-color-border-primary);
 }
 
-.cocso-input.cocso-input--size-x-small {
+.cocso-input:where(.cocso-input--size-x-small) {
   --cocso-input-height: 28px;
   --cocso-input-padding-x: 8px;
   --cocso-input-font-size: 12px;
@@ -13,7 +13,7 @@
   --cocso-input-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-input.cocso-input--size-small {
+.cocso-input:where(.cocso-input--size-small) {
   --cocso-input-height: 32px;
   --cocso-input-padding-x: 10px;
   --cocso-input-font-size: 12px;
@@ -22,7 +22,7 @@
   --cocso-input-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-input.cocso-input--size-medium {
+.cocso-input:where(.cocso-input--size-medium) {
   --cocso-input-height: 36px;
   --cocso-input-padding-x: 12px;
   --cocso-input-font-size: 14px;
@@ -31,7 +31,7 @@
   --cocso-input-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-input.cocso-input--size-large {
+.cocso-input:where(.cocso-input--size-large) {
   --cocso-input-height: 40px;
   --cocso-input-padding-x: 14px;
   --cocso-input-font-size: 14px;

@@ -6,25 +6,25 @@
   --cocso-alert-font-size: 14px;
 }
 
-.cocso-alert.cocso-alert--variant-info {
+.cocso-alert:where(.cocso-alert--variant-info) {
   --cocso-alert-bg-color: var(--cocso-color-feedback-info-subtle);
   --cocso-alert-font-color: var(--cocso-color-feedback-info-text);
   --cocso-alert-border-color: var(--cocso-color-feedback-info-border);
 }
 
-.cocso-alert.cocso-alert--variant-success {
+.cocso-alert:where(.cocso-alert--variant-success) {
   --cocso-alert-bg-color: var(--cocso-color-feedback-success-subtle);
   --cocso-alert-font-color: var(--cocso-color-feedback-success-text);
   --cocso-alert-border-color: var(--cocso-color-feedback-success-border);
 }
 
-.cocso-alert.cocso-alert--variant-warning {
+.cocso-alert:where(.cocso-alert--variant-warning) {
   --cocso-alert-bg-color: var(--cocso-color-feedback-warning-subtle);
   --cocso-alert-font-color: var(--cocso-color-feedback-warning-text);
   --cocso-alert-border-color: var(--cocso-color-feedback-warning-border);
 }
 
-.cocso-alert.cocso-alert--variant-error {
+.cocso-alert:where(.cocso-alert--variant-error) {
   --cocso-alert-bg-color: var(--cocso-color-feedback-danger-subtle);
   --cocso-alert-font-color: var(--cocso-color-feedback-danger-text);
   --cocso-alert-border-color: var(--cocso-color-feedback-danger-border);

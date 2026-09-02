@@ -4,7 +4,7 @@
   --cocso-select-border-color: var(--cocso-color-border-primary);
 }
 
-.cocso-select.cocso-select--size-x-small {
+.cocso-select:where(.cocso-select--size-x-small) {
   --cocso-select-min-width: 28px;
   --cocso-select-height: 28px;
   --cocso-select-padding-left: 8px;
@@ -16,7 +16,7 @@
   --cocso-select-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-select.cocso-select--size-small {
+.cocso-select:where(.cocso-select--size-small) {
   --cocso-select-min-width: 32px;
   --cocso-select-height: 32px;
   --cocso-select-padding-left: 10px;
@@ -28,7 +28,7 @@
   --cocso-select-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-select.cocso-select--size-medium {
+.cocso-select:where(.cocso-select--size-medium) {
   --cocso-select-min-width: 36px;
   --cocso-select-height: 36px;
   --cocso-select-padding-left: 12px;
@@ -40,7 +40,7 @@
   --cocso-select-border-color-focus: var(--cocso-color-interactive-primary-active);
 }
 
-.cocso-select.cocso-select--size-large {
+.cocso-select:where(.cocso-select--size-large) {
   --cocso-select-min-width: 40px;
   --cocso-select-height: 40px;
   --cocso-select-padding-left: 14px;

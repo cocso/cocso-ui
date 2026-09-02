@@ -99,7 +99,7 @@ export function generateCSS<
       const props = resolveSlotProps(prefix, recipe.slots, slotMap);
       if (Object.keys(props).length > 0) {
         rules.push({
-          selector: `.${name}.${name}--${dim}-${val}`,
+          selector: withModifiers(name, [`.${name}--${dim}-${val}`]),
           properties: props,
         });
       }
@@ -138,7 +138,7 @@ export function generateCSS<
             suffixedProps[`${key}-${state}`] = value;
           }
           rules.push({
-            selector: `.${name}.${name}--${dim}-${val}`,
+            selector: withModifiers(name, [`.${name}--${dim}-${val}`]),
             properties: suffixedProps,
           });
         }
@@ -150,10 +150,30 @@ export function generateCSS<
 }
 
 /**
+ * Wrap a recipe's modifier classes in `:where()` so they add no specificity.
+ *
+ * These rules carry the `--cocso-<component>-<property>` custom properties that
+ * AGENTS.md documents as the consumer override point. Written plainly, a
+ * variant rule is `.cocso-button.cocso-button--variant-outline` — (0,2,0),
+ * which a consumer's single class cannot reach. The documented entry point was
+ * therefore unreachable without `!important`, and an `!important` fill also
+ * beats the separate `background-color` the module paints on `:hover`, so
+ * overriding a colour silently deleted the hover state.
+ *
+ * `:where()` contributes zero, leaving every generated rule at (0,1,0) — the
+ * component's own class. Precedence between them is then decided by emission
+ * order alone, which `formatCSS` preserves and `generate-recipe.test.ts`
+ * asserts: base, then per-dimension variants, then compound variants.
+ */
+function withModifiers(name: string, modifiers: string[]): string {
+  return `.${name}:where(${modifiers.join("")})`;
+}
+
+/**
  * Expand compound variant conditions with array values into multiple CSS selectors.
  * e.g., { shape: "square", size: ["large", "medium"] }
- * → [".cocso-button--shape-square.cocso-button--size-large",
- *    ".cocso-button--shape-square.cocso-button--size-medium"]
+ * → [".cocso-button:where(.cocso-button--shape-square.cocso-button--size-large)",
+ *    ".cocso-button:where(.cocso-button--shape-square.cocso-button--size-medium)"]
  */
 function expandConditions(
   name: string,
@@ -164,7 +184,7 @@ function expandConditions(
 
   function walk(idx: number, parts: string[]) {
     if (idx === entries.length) {
-      results.push(`.${name}${parts.join("")}`);
+      results.push(withModifiers(name, parts));
       return;
     }
     const [dim, value] = entries[idx];

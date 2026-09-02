@@ -10,17 +10,17 @@
   --cocso-dialog-padding-right: 20px;
 }
 
-.cocso-dialog.cocso-dialog--size-small {
+.cocso-dialog:where(.cocso-dialog--size-small) {
   --cocso-dialog-width: 380px;
   --cocso-dialog-height: 200px;
 }
 
-.cocso-dialog.cocso-dialog--size-medium {
+.cocso-dialog:where(.cocso-dialog--size-medium) {
   --cocso-dialog-width: 520px;
   --cocso-dialog-height: 260px;
 }
 
-.cocso-dialog.cocso-dialog--size-large {
+.cocso-dialog:where(.cocso-dialog--size-large) {
   --cocso-dialog-width: 680px;
   --cocso-dialog-height: 340px;
 }

@@ -94,9 +94,13 @@
     border-radius: var(--cocso-radius-4);
   }
 
+  /* `text-on-primary`, not `surface-primary` — see the same rule in
+     `day-picker.module.css`. The two resolve alike in the stock themes, but
+     only `text-on-primary` follows `interactive-primary` when an app rebrands
+     the fill. */
   :global(.react-datepicker__month-text--selected) {
     font-weight: var(--cocso-font-weight-semibold);
-    color: var(--cocso-color-surface-primary);
+    color: var(--cocso-color-text-on-primary);
     background-color: var(--cocso-color-interactive-primary);
   }
 

@@ -114,6 +114,14 @@ When asked to review comments on a GitHub PR:
   semantic token that resolves to the same value in the light theme.
   `packages/react/src/test/module-css-tokens.test.ts` enforces this across every
   CSS Module, with no exceptions.
+- A CSS Module that names a semantic token as a foreground (`color`, `fill`,
+  `stroke`) MUST clear WCAG AA against whatever it sits on — the fill its own
+  rule block declares, or the page surfaces when it declares none.
+  `packages/react/src/test/module-css-contrast.test.ts` checks this in both
+  themes. Nothing did before, and two defects lived there: validation messages
+  painted with `feedback-danger` (the fill level, 4.18:1 on a card) and both
+  date pickers using `surface-primary` as the foreground on an
+  `interactive-primary` fill.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is

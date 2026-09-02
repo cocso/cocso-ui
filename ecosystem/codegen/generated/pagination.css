@@ -7,18 +7,18 @@
   --cocso-pagination-font-size: 14px;
 }
 
-.cocso-pagination.cocso-pagination--pageState-active {
+.cocso-pagination:where(.cocso-pagination--pageState-active) {
   --cocso-pagination-bg-color: var(--cocso-color-interactive-primary);
   --cocso-pagination-font-color: var(--cocso-color-text-on-primary);
   --cocso-pagination-font-weight: 600px;
   --cocso-pagination-bg-color-hover: var(--cocso-color-interactive-primary-hover);
 }
 
-.cocso-pagination.cocso-pagination--pageState-inactive {
+.cocso-pagination:where(.cocso-pagination--pageState-inactive) {
   --cocso-pagination-font-color: var(--cocso-color-text-primary);
   --cocso-pagination-bg-color-hover: var(--cocso-color-interactive-secondary);
 }
 
-.cocso-pagination.cocso-pagination--pageState-disabled {
+.cocso-pagination:where(.cocso-pagination--pageState-disabled) {
   --cocso-pagination-font-color: var(--cocso-color-text-disabled);
 }

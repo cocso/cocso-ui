@@ -4,14 +4,14 @@
   --cocso-breadcrumb-font-color: var(--cocso-color-text-secondary);
 }
 
-.cocso-breadcrumb.cocso-breadcrumb--size-sm {
+.cocso-breadcrumb:where(.cocso-breadcrumb--size-sm) {
   --cocso-breadcrumb-font-size: 12px;
 }
 
-.cocso-breadcrumb.cocso-breadcrumb--size-md {
+.cocso-breadcrumb:where(.cocso-breadcrumb--size-md) {
   --cocso-breadcrumb-font-size: 14px;
 }
 
-.cocso-breadcrumb.cocso-breadcrumb--size-lg {
+.cocso-breadcrumb:where(.cocso-breadcrumb--size-lg) {
   --cocso-breadcrumb-font-size: 16px;
 }
