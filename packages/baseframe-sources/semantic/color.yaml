@@ -59,6 +59,16 @@ data:
       values:
         default: $color.neutral-100
 
+    $color.overlay.subtle:
+      values:
+        default: $color.black-alpha-5
+    $color.overlay.muted:
+      values:
+        default: $color.black-alpha-10
+    $color.overlay.strong:
+      values:
+        default: $color.black-alpha-20
+
     $color.interactive.primary:
       values:
         default: $color.primary-950

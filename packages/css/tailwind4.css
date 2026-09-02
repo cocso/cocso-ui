@@ -139,6 +139,9 @@
   --color-surface-neutral: var(--cocso-color-surface-neutral);
   --color-border-primary: var(--cocso-color-border-primary);
   --color-border-secondary: var(--cocso-color-border-secondary);
+  --color-overlay-subtle: var(--cocso-color-overlay-subtle);
+  --color-overlay-muted: var(--cocso-color-overlay-muted);
+  --color-overlay-strong: var(--cocso-color-overlay-strong);
   --color-interactive-primary: var(--cocso-color-interactive-primary);
   --color-interactive-primary-hover: var(--cocso-color-interactive-primary-hover);
   --color-interactive-primary-active: var(--cocso-color-interactive-primary-active);

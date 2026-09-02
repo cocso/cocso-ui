@@ -12,9 +12,10 @@
  * Only the semantic token layer is remapped — raw color-scale tokens
  * (`--cocso-color-neutral-*`, `--cocso-color-info-*`, …) are unchanged, so
  * any app override of those scales is preserved. Neutral-driven tokens are
- * inverted along the scale (50 ↔ 950); saturated accent base colors (the
- * `-500` feedback/interactive values) are kept as-is since they read well on a
- * dark surface.
+ * inverted along the scale (50 ↔ 950); saturated accent colors move one step
+ * up the ramp (`-500` → `-400`) so they clear AA on the dark surface, except
+ * the `interactive-*` fills, which keep their hue in both themes so their
+ * fixed `text-on-*` foregrounds stay valid.
  */
 [data-theme="dark"] {
   /* Text */
@@ -44,6 +45,16 @@
      WCAG 1.4.11 asks of a focus indicator. */
   --cocso-color-border-strong: var(--cocso-color-neutral-500);
 
+  /* Overlay — translucent tints that darken whatever sits under them in the
+     light theme and must lighten it here. The `black-alpha-*` primitives they
+     resolve to in the light theme are raw scale and stay black in both themes
+     by design (the Dialog scrim depends on that), so a consumer reaching for
+     `black-alpha-5` directly got a 5% black wash on a #131416 surface: an
+     invisible hover state and a hairline border that was not there. */
+  --cocso-color-overlay-subtle: var(--cocso-color-white-alpha-5);
+  --cocso-color-overlay-muted: var(--cocso-color-white-alpha-10);
+  --cocso-color-overlay-strong: var(--cocso-color-white-alpha-20);
+
   /* Interactive — primary (derived from the neutral scale) */
   --cocso-color-interactive-primary: var(--cocso-color-primary-50);
   --cocso-color-interactive-primary-hover: var(--cocso-color-primary-200);
@@ -67,6 +78,21 @@
 
   /* Focus ring */
   --cocso-color-focus-ring: var(--cocso-color-primary-50);
+
+  /* Feedback base colors — one step up the ramp. The light theme's 500 level is
+     tuned for white; on the dark `surface-primary` (#131416) it lands at
+     4.04 (danger), 4.05 (info), 3.96 (warning) and 4.03 (success), all under
+     the 4.5:1 AA needs for the body-size text that StockQuantityStatus draws
+     with them. The 400 level clears it at 5.36-5.96 without shifting hue; the
+     300 level clears it too but washes out to pastel, and a pastel red does
+     not read as "danger". `feedback-success-muted` is left at the light
+     theme's 400 and therefore coincides with `feedback-success` here: the
+     ramp has no quieter green that still clears AA at body size, and no
+     surface renders the two side by side. */
+  --cocso-color-feedback-danger: var(--cocso-color-danger-400);
+  --cocso-color-feedback-info: var(--cocso-color-info-400);
+  --cocso-color-feedback-warning: var(--cocso-color-warning-400);
+  --cocso-color-feedback-success: var(--cocso-color-success-400);
 
   /* Feedback surfaces — flip the light tints/text/borders for dark backgrounds */
   --cocso-color-feedback-danger-subtle: var(--cocso-color-danger-950);

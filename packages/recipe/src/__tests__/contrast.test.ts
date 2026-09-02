@@ -219,6 +219,45 @@ describe("Borders are distinguishable from the surfaces they sit on", () => {
   });
 });
 
+/**
+ * Feedback colors painted straight onto a page surface, with no fill of their
+ * own. `StockQuantityStatus` sets `color: feedback-danger` (and friends) on
+ * body-size text, so these are foregrounds — but the pairing scan above never
+ * sees them, because it only collects variants that declare a fill. The dark
+ * theme left these four on the light theme's 500 level, tuned against white,
+ * and they landed at 3.96–4.05 on the dark surface.
+ *
+ * `feedback-success-muted` is deliberately absent: it resolves to `success-400`
+ * in both themes and is 3.09:1 on white, so adding it here would assert a
+ * failure that predates this test. `StockQuantityStatus` uses it for the
+ * "normal" state and needs its own fix.
+ */
+const BARE_FEEDBACK_TEXT_TOKENS = [
+  "feedback-danger",
+  "feedback-info",
+  "feedback-warning",
+  "feedback-success",
+] as const;
+
+describe("Feedback colors used as bare text clear AA on the page surface", () => {
+  describe.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("%s theme", (_theme, aliases) => {
+    it.each(
+      BARE_FEEDBACK_TEXT_TOKENS
+    )("%s clears WCAG AA on surface-primary", (token) => {
+      const foreground = resolve(token, aliases);
+      const background = resolve("surface-primary", aliases);
+      expect(foreground).not.toBeNull();
+      expect(background).not.toBeNull();
+      expect(
+        contrast(background as string, foreground as string)
+      ).toBeGreaterThanOrEqual(AA_NORMAL_TEXT);
+    });
+  });
+});
+
 describe("Contrast — recipe fills against their foregrounds", () => {
   it("finds pairings to check", () => {
     expect(PAIRINGS.length).toBeGreaterThan(20);
