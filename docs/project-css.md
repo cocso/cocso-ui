@@ -37,6 +37,8 @@ pnpm --filter @cocso-ui/baseframe generate:css
 
 `theme-dark.css` is the exception — it is hand-written, because the YAML collection has a single `default` mode and the generator would have to emit every primitive into the dark selector to cover a second one. See Roadmap.
 
+`packages/recipe/src/__tests__/theme-coverage.test.ts` keeps it honest: every semantic token in `token.css` — a token whose value is a `var(--cocso-color-*)` reference — must either have a value in `theme-dark.css` or be listed in that test's `INTENTIONALLY_LIGHT_ONLY` allowlist with the reason. Twenty-one tokens are on that list today and all of them belong there, but the check exists because five did not: the `feedback-*` base colors had no dark value for as long as the dark theme existed, and nothing said whether that was a decision or an oversight.
+
 ## Out of Scope
 
 - Component-level styles — owned by `@cocso-ui/react`.
