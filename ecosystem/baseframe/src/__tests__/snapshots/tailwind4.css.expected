@@ -176,6 +176,8 @@
   --color-interactive-info-hover: var(--cocso-color-interactive-info-hover);
   --color-interactive-info-active: var(--cocso-color-interactive-info-active);
   --color-interactive-info-hover-subtle: var(--cocso-color-interactive-info-hover-subtle);
+  --color-interactive-info-text: var(--cocso-color-interactive-info-text);
+  --color-interactive-info-text-hover: var(--cocso-color-interactive-info-text-hover);
   --color-focus-ring: var(--cocso-color-focus-ring);
   --color-feedback-danger: var(--cocso-color-feedback-danger);
   --color-feedback-danger-subtle: var(--cocso-color-feedback-danger-subtle);

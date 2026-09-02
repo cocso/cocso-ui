@@ -59,7 +59,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > inputRecipe de
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > linkRecipe default variants 1`] = `
 {
-  "--cocso-link-color": "var(--cocso-color-interactive-info)",
+  "--cocso-link-color": "var(--cocso-color-interactive-info-text)",
 }
 `;
 

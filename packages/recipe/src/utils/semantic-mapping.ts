@@ -61,6 +61,8 @@ export const SEMANTIC_TO_PRIMITIVE: Readonly<Record<string, string>> = {
   "interactive-info-hover": "info-600",
   "interactive-info-active": "info-700",
   "interactive-info-hover-subtle": "info-400",
+  "interactive-info-text": "info-500",
+  "interactive-info-text-hover": "info-700",
 
   // --- focus ---
   "focus-ring": "primary-950",

@@ -5,17 +5,17 @@ export const linkRecipe = defineRecipe({
   slots: ["root"] as const,
   variants: {
     variant: {
-      inline: { root: { color: "interactive-info" } },
+      inline: { root: { color: "interactive-info-text" } },
       current: { root: { color: "currentColor" } },
-      plain: { root: { color: "interactive-info" } },
+      plain: { root: { color: "interactive-info-text" } },
     },
   },
   states: {
     hover: {
       variant: {
-        inline: { root: { color: "interactive-info-active" } },
+        inline: { root: { color: "interactive-info-text-hover" } },
         current: { root: { color: "currentColor" } },
-        plain: { root: { color: "interactive-info-active" } },
+        plain: { root: { color: "interactive-info-text-hover" } },
       },
     },
   },

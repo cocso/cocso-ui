@@ -19,7 +19,20 @@ import { avatarRecipe } from "../recipes/avatar.recipe";
 import { badgeRecipe } from "../recipes/badge.recipe";
 import { breadcrumbRecipe } from "../recipes/breadcrumb.recipe";
 import { buttonRecipe } from "../recipes/button.recipe";
+import { cardRecipe } from "../recipes/card.recipe";
+import { checkboxRecipe } from "../recipes/checkbox.recipe";
+import { dialogRecipe } from "../recipes/dialog.recipe";
+import { inputRecipe } from "../recipes/input.recipe";
+import { linkRecipe } from "../recipes/link.recipe";
 import { paginationRecipe } from "../recipes/pagination.recipe";
+import { progressRecipe } from "../recipes/progress.recipe";
+import { radioGroupRecipe } from "../recipes/radio-group.recipe";
+import { selectRecipe } from "../recipes/select.recipe";
+import { skeletonRecipe } from "../recipes/skeleton.recipe";
+import { spinnerRecipe } from "../recipes/spinner.recipe";
+import { stockQuantityStatusRecipe } from "../recipes/stock-quantity-status.recipe";
+import { switchRecipe } from "../recipes/switch.recipe";
+import { typographyRecipe } from "../recipes/typography.recipe";
 import type { RecipeDefinition, SlotStyles } from "../types";
 
 /** Any recipe, regardless of its variant and slot type parameters. */
@@ -172,13 +185,34 @@ function statePairings(recipe: AnyRecipe): Pairing[] {
   return pairings;
 }
 
+/**
+ * Every recipe, not a hand-picked few. The list used to hold six of nineteen,
+ * and `link` was one of the thirteen it left out: it paints text with
+ * `interactive-info`, a fill token the dark theme deliberately does not flip,
+ * so a link was 4.05:1 on the dark surface and its hover state — `info-700`,
+ * meant for a pressed fill — was 1.74:1. Hovering a link nearly erased it, and
+ * the check that exists to catch exactly that was not looking.
+ */
 const RECIPES = [
   alertRecipe,
   avatarRecipe,
   badgeRecipe,
   breadcrumbRecipe,
   buttonRecipe,
+  cardRecipe,
+  checkboxRecipe,
+  dialogRecipe,
+  inputRecipe,
+  linkRecipe,
   paginationRecipe,
+  progressRecipe,
+  radioGroupRecipe,
+  selectRecipe,
+  skeletonRecipe,
+  spinnerRecipe,
+  stockQuantityStatusRecipe,
+  switchRecipe,
+  typographyRecipe,
 ] as AnyRecipe[];
 
 const PAIRINGS = RECIPES.flatMap((recipe) => [
