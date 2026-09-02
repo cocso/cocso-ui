@@ -1,5 +1,35 @@
 # @cocso-ui/react
 
+## 1.1.5
+
+### Patch Changes
+
+- 3248bbc: Paint StockQuantityStatus with the text-level status tokens.
+
+  All three states used the `feedback-*` base — the fill level, which clears AA
+  on white by under 0.1 and misses it everywhere else: 4.17–4.19 on a card and
+  3.70–3.72 on `interactive-primary-subtle`. They now use `feedback-*-text`,
+  which clears every surface in both themes. `Link` moves with them via
+  `interactive-info-text`.
+
+  With this, no recipe in either theme paints text below AA on any surface,
+  `text-disabled` aside, which WCAG 1.4.3 exempts.
+
+- 30e8738: Enforce the "no body text in `text-tertiary`" rule per use rather than per
+  token.
+
+  `module-css-contrast.test.ts` exempted `text-tertiary` and `text-muted`
+  outright, which turned the rule off inside the check meant to enforce it: they
+  are exempt precisely because they miss AA everywhere, so nothing stopped a new
+  component painting body text with one. The two existing uses — the breadcrumb
+  separator glyph and the Select chevron — are non-text graphics and stay exempt
+  by name. Any new use has to justify itself.
+
+  No runtime change.
+
+- Updated dependencies [3248bbc]
+  - @cocso-ui/css@1.5.0
+
 ## 1.1.4
 
 ### Patch Changes
