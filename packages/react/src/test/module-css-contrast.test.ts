@@ -106,8 +106,22 @@ function contrast(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-/** The page and the cards on it — what a component is drawn on top of. */
-const SURFACES = ["surface-primary", "surface-secondary"] as const;
+/**
+ * Surfaces text actually lands on. The page and the cards, plus the tints a
+ * component paints and then writes on — an Alert's panel, a Badge's pill, a
+ * subtle button's fill. `interactive-primary-subtle` is `neutral-100` and the
+ * worst of them, which is why the page-and-card view understated the light
+ * theme's floor.
+ */
+const SURFACES = [
+  "surface-primary",
+  "surface-secondary",
+  "interactive-primary-subtle",
+  "feedback-danger-subtle",
+  "feedback-success-subtle",
+  "feedback-warning-subtle",
+  "feedback-info-subtle",
+] as const;
 
 /**
  * Foregrounds that are allowed to miss AA, and why. A token belongs here

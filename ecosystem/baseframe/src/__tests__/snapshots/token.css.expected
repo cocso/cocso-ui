@@ -199,7 +199,7 @@
   --cocso-color-interactive-info-hover: var(--cocso-color-info-600);
   --cocso-color-interactive-info-active: var(--cocso-color-info-700);
   --cocso-color-interactive-info-hover-subtle: var(--cocso-color-info-400);
-  --cocso-color-interactive-info-text: var(--cocso-color-info-500);
+  --cocso-color-interactive-info-text: var(--cocso-color-info-600);
   --cocso-color-interactive-info-text-hover: var(--cocso-color-info-700);
   --cocso-color-focus-ring: var(--cocso-color-primary-950);
   --cocso-color-feedback-danger: var(--cocso-color-danger-500);

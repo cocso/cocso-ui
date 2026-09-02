@@ -177,6 +177,14 @@ When asked to review comments on a GitHub PR:
   for a different colour. Checkbox draws its glyph with `text-on-primary` on an
   `interactive-primary` fill, so an app that rebrands the fill and not the glyph
   gets an unreadable checkbox.
+- Contrast is measured against every surface text lands on — the page, the
+  cards, and the tints a component paints and then writes on
+  (`feedback-*-subtle`, `interactive-primary-subtle`). The tints are darker
+  than a card in the light theme, and a check that looks only at the page
+  understates the floor.
+- A 500-level accent is a FILL. Body text uses the 600 level
+  (`feedback-*-text`, `interactive-info-text`): the 500 level clears AA on
+  white by under 0.1 and misses it on every other surface.
 - Text below 24px (or below 18.66px bold) may only use `text-primary` or
   `text-secondary`. `text-tertiary` and `text-muted` are below WCAG AA at body
   size on every surface in both themes; they are for large text and non-text

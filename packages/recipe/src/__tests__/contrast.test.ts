@@ -227,6 +227,26 @@ const PAIRINGS = RECIPES.flatMap((recipe) => [
  */
 const SURFACE_TOKENS = ["surface-primary", "surface-secondary"] as const;
 
+/**
+ * Surfaces text actually lands on. `surface-primary` and `surface-secondary`
+ * are the page and the cards; the rest are tints a component paints and then
+ * writes on — an Alert's panel, a Badge's pill, a subtle button's fill.
+ *
+ * The list used to hold the first two, which is what let the light theme's
+ * floor go unmeasured: `interactive-primary-subtle` is `neutral-100` and worse
+ * than a card, so the 500-level accents were 3.70:1 there, not the 4.17:1 the
+ * page-and-card view reported.
+ */
+const SURFACES = [
+  "surface-primary",
+  "surface-secondary",
+  "interactive-primary-subtle",
+  "feedback-danger-subtle",
+  "feedback-success-subtle",
+  "feedback-warning-subtle",
+  "feedback-info-subtle",
+] as const;
+
 const BORDER_TOKENS = [
   "border-primary",
   "border-secondary",
@@ -254,36 +274,45 @@ describe("Borders are distinguishable from the surfaces they sit on", () => {
 });
 
 /**
- * Feedback colors painted straight onto a page surface, with no fill of their
- * own. `StockQuantityStatus` sets `color: feedback-danger` (and friends) on
- * body-size text, so these are foregrounds — but the pairing scan above never
- * sees them, because it only collects variants that declare a fill. The dark
- * theme left these four on the light theme's 500 level, tuned against white,
- * and they landed at 3.96–4.05 on the dark surface.
+ * Colors painted straight onto a surface, with no fill of their own. The
+ * pairing scan above never sees these — it only collects variants that declare
+ * a fill — so `StockQuantityStatus` and `Link` were structurally invisible to
+ * it. Between them they have produced three defects: the `feedback-*` bases had
+ * no dark value at all, `Link` painted text with a fixed-hue fill token whose
+ * hover state was 1.74:1 on a dark surface, and the 500 level sat below AA on
+ * every light surface except white.
  *
- * `feedback-success-muted` is deliberately absent: it resolves to `success-400`
- * in both themes and is 3.09:1 on white. `StockQuantityStatus` used to paint
- * its "normal" state with it and now uses `feedback-success` instead, so no
- * component paints text with the muted step any more. The token stays exported
- * — removing a published token is breaking — but it is not a text color.
+ * They are checked against every surface, not just the page. That distinction
+ * is what was missing: `interactive-primary-subtle` is `neutral-100` and worse
+ * than a card, so the 500-level accents measured 3.70:1 there while the
+ * page-and-card view reported 4.17:1.
+ *
+ * `feedback-*` bases are deliberately absent. They are fills — the Progress
+ * bar and the Spinner blade — and WCAG 1.4.11 asks 3:1 of a non-text graphic,
+ * which they clear on every surface in both themes. No component paints text
+ * with them any more.
  */
-const BARE_FEEDBACK_TEXT_TOKENS = [
-  "feedback-danger",
-  "feedback-info",
-  "feedback-warning",
-  "feedback-success",
+const BARE_TEXT_TOKENS = [
+  "feedback-danger-text",
+  "feedback-info-text",
+  "feedback-warning-text",
+  "feedback-success-text",
+  "interactive-info-text",
+  "interactive-info-text-hover",
 ] as const;
 
-describe("Feedback colors used as bare text clear AA on the page surface", () => {
+describe("Colors used as bare text clear AA on every surface", () => {
   describe.each([
     ["light", LIGHT_ALIASES],
     ["dark", DARK_ALIASES],
   ])("%s theme", (_theme, aliases) => {
-    it.each(
-      BARE_FEEDBACK_TEXT_TOKENS
-    )("%s clears WCAG AA on surface-primary", (token) => {
+    const cases = BARE_TEXT_TOKENS.flatMap((token) =>
+      SURFACES.map((surface) => ({ surface, token }))
+    );
+
+    it.each(cases)("$token on $surface", ({ token, surface }) => {
       const foreground = resolve(token, aliases);
-      const background = resolve("surface-primary", aliases);
+      const background = resolve(surface, aliases);
       expect(foreground).not.toBeNull();
       expect(background).not.toBeNull();
       expect(
