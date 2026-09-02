@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  # Recovery hatch. A `push` trigger is skipped whenever the head commit
+  # message contains a skip marker, and a squash merge inherits the bodies of
+  # every commit on the branch — one stray marker in a bot commit silently
+  # cancelled a release.
+  workflow_dispatch:
 
 permissions:
   contents: write

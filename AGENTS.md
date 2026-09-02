@@ -8,6 +8,7 @@
 - Prefer enum types over string literals whenever possible.
 - If you modified frontend code, run `pnpm check` from the repository root before finishing your task.
 - Commit when each logical unit of work is complete; do NOT use the `--no-verify` flag.
+- NEVER put `[skip ci]` (or any other skip marker) in a commit message on a branch that will be squash-merged. A squash merge concatenates every commit body, so one marker anywhere on the branch makes GitHub skip every workflow on `main` — including `Changeset Release`, which is how packages are published.
 - Run `git commit` only after `git add`; keep each commit atomic and independently revertible.
 - If a commit fails because workspace binaries are missing, run `pnpm install` at the repository root and retry.
 - After addressing pull request review comments and pushing updates, mark the corresponding review threads as resolved.
