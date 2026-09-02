@@ -10,6 +10,9 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../../");
 const SOURCES_DIR = path.join(REPO_ROOT, "packages/baseframe-sources");
 const SNAPSHOTS_DIR = path.join(__dirname, "snapshots");
+const CSS_DIR = path.join(REPO_ROOT, "packages/css");
+
+const REGENERATE = "pnpm --filter @cocso-ui/baseframe generate:css";
 
 function loadTokens(): { tokens: Token[]; collections: Collections } {
   const tokens: Token[] = [];
@@ -50,5 +53,37 @@ describe("golden file tests", () => {
       "utf-8"
     );
     expect(generated).toBe(expected);
+  });
+});
+
+/**
+ * `packages/css/token.css` and `tailwind4.css` are published, but they are not
+ * written by hand — they are this generator's output, and nothing checked that.
+ * Twelve semantic tokens (`border-strong`, `text-on-success` and friends) were
+ * added to `token.css` directly and never made it back into the YAML, so they
+ * were missing from `tailwind4.css` and from the Figma token export, which
+ * reads the YAML. The snapshot tests above cannot catch that: they compare the
+ * generator to a fixture, and both stayed consistent while the published file
+ * drifted away from them.
+ */
+describe("published CSS matches the token sources", () => {
+  it(`token.css is generated from packages/baseframe-sources (${REGENERATE})`, () => {
+    const { tokens, collections } = loadTokens();
+    const generated = cssVars.generateCssVariables(tokens, collections, {
+      prefix: "cocso",
+      selectors: { global: { default: ":root" } },
+    });
+    const published = fs.readFileSync(path.join(CSS_DIR, "token.css"), "utf-8");
+    expect(published).toBe(generated);
+  });
+
+  it(`tailwind4.css is generated from packages/baseframe-sources (${REGENERATE})`, () => {
+    const { tokens, collections } = loadTokens();
+    const generated = tailwind.generateTailwindCSS(tokens, collections, {});
+    const published = fs.readFileSync(
+      path.join(CSS_DIR, "tailwind4.css"),
+      "utf-8"
+    );
+    expect(published).toBe(generated);
   });
 });

@@ -87,7 +87,11 @@ export function Checkbox({
 
   const style = {
     ..._style,
-    "--cocso-checkbox-color": colors.white,
+    // `text-on-primary`, not `colors.white`: the fill is `interactive-primary`,
+    // which the dark theme flips to `primary-50`. A hardcoded white glyph on
+    // that fill is 1.09:1 — a checked box and an unchecked one look the same.
+    // `text-on-primary` is white in the light theme, so nothing moves there.
+    "--cocso-checkbox-color": colors.textOnPrimary,
   } as CSSProperties;
 
   const checkedState = getCheckedState(status);

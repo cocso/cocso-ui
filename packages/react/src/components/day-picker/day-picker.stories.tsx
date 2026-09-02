@@ -49,7 +49,10 @@ export const WithMinMax: Story = {
 
 export const Disabled: Story = {
   render: () => {
-    const [date] = useState<Date | undefined>(new Date());
+    // Fixed, not `new Date()`: the trigger renders this date as text, and the
+    // story has a committed visual-regression baseline, so a live date fails
+    // the comparison every midnight.
+    const [date] = useState<Date | undefined>(new Date(2026, 0, 15));
     return (
       <DayPicker
         disabled

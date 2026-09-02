@@ -1072,11 +1072,11 @@ describe("resolveForFigma — stock-quantity-status recipe", () => {
     expect(spec.color).toEqual(resolveColorToken("info-500"));
   });
 
-  it("normal resolves color to success-400", () => {
+  it("normal resolves color to success-500", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
       quantity: "normal",
     });
-    expect(spec.color).toEqual(resolveColorToken("success-400"));
+    expect(spec.color).toEqual(resolveColorToken("success-500"));
   });
 
   it("insufficient resolves color to danger-500", () => {

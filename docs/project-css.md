@@ -27,6 +27,18 @@ Plain CSS. No build step required.
 - `tailwind4.css` — Tailwind v4 theme configuration referencing token variables.
 - Token categories: color (primitive + semantic), spacing, typography, border radius, shadow.
 
+`token.css` and `tailwind4.css` are **generated** from `packages/baseframe-sources`, never hand-edited. Add the token to the YAML and run:
+
+```bash
+pnpm --filter @cocso-ui/baseframe generate:css
+```
+
+`golden.test.ts` fails when either published file disagrees with the YAML. It did not always: twelve semantic tokens (`border-strong`, `text-on-success` and friends) were written into `token.css` directly and never made it back to the source, so they never reached `tailwind4.css` and were invisible to the Figma token export, which reads the YAML.
+
+`theme-dark.css` is the exception — it is hand-written, because the YAML collection has a single `default` mode and the generator would have to emit every primitive into the dark selector to cover a second one. See Roadmap.
+
+`packages/recipe/src/__tests__/theme-coverage.test.ts` keeps it honest: every semantic token in `token.css` — a token whose value is a `var(--cocso-color-*)` reference — must either have a value in `theme-dark.css` or be listed in that test's `INTENTIONALLY_LIGHT_ONLY` allowlist with the reason. Twenty-one tokens are on that list today and all of them belong there, but the check exists because five did not: the `feedback-*` base colors had no dark value for as long as the dark theme existed, and nothing said whether that was a decision or an oversight.
+
 ## Out of Scope
 
 - Component-level styles — owned by `@cocso-ui/react`.
@@ -53,7 +65,8 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 |---|---|---|
 | `text` | `primary`, `secondary`, `tertiary`, `disabled`, `muted`, `on-primary`, `on-success`, `on-danger`, `on-info`, `on-warning` | Text and label colors |
 | `surface` | `primary`, `secondary`, `inverse`, `neutral` | Background layer hierarchy |
-| `border` | `primary`, `secondary` | Container and separator strokes |
+| `border` | `primary`, `secondary`, `strong` | Container and separator strokes |
+| `overlay` | `subtle`, `muted`, `strong` | Translucent tints laid over an unknown background (hover fills, hairline washes) |
 | `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `primary-subtle`, `primary-text`, `secondary`, `secondary-hover`, `neutral`, `neutral-hover`, `neutral-active`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `danger-subtle-hover`, `danger-subtle-active`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
 | `focus` | `ring` | Focus indicator colors |
 | `feedback` | `danger`, `danger-subtle`, `danger-text`, `danger-border`, `success`/`warning`/`info` (same pattern), `success-muted` | Status communication (errors, warnings, confirmations) |
@@ -62,7 +75,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | `duration` | `fast`, `normal`, `slow`, `decorative`, `decorative-slow` | Transition/animation timing |
 | `easing` | `default`, `soft`, `entrance`, `accordion` | Transition/animation curves |
 
-**Status:** 70 semantic tokens defined (56 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
+**Status:** 73 semantic tokens defined (59 color + 5 shadow + 5 duration + 4 easing). All 19 recipes reference semantic color tokens exclusively (primitive direct reference: 0). All CSS module shadow and motion values reference semantic tokens.
 
 **Subtle fill vs. feedback surface:** `interactive-*-subtle` is the low-emphasis *fill* of an actionable element (subtle badge, text/ghost button hover). `feedback-*-subtle` is the *status surface* of a non-actionable element (alert background). They may resolve to the same primitive; do not merge them.
 
@@ -71,6 +84,7 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 - Each semantic token maps to exactly one primitive token in light mode.
 - Do not use numeric scales for semantic tokens (that is the primitive pattern).
 - New recipes must use semantic tokens only — primitive direct references are not allowed.
+- For a translucent tint over an unknown background — a hover fill, a hairline wash — use `overlay-subtle`/`-muted`/`-strong`, never `black-alpha-*` directly. The alpha primitives are raw scale: `theme-dark.css` leaves them black in both themes on purpose, because the Dialog scrim depends on staying black. A consumer that reached for `black-alpha-5` got a 5% black wash on a `#131416` surface, which is an invisible hover state and a border that is not there. `overlay-*` maps to `black-alpha-5/10/20` in light and `white-alpha-5/10/20` in dark; `hover` is `subtle`, `active` is `muted`.
 
 ### Contrast
 
@@ -82,8 +96,8 @@ Measured against the light theme's `surface-primary` (`#ffffff`) and `surface-se
 | `text-secondary` | 6.30 | 5.77 | 5.98 | 5.25 |
 | `text-tertiary` | 3.08 | 2.82 | 4.09 | 3.59 |
 | `text-muted` | 4.51 | 4.13 | 4.09 | 3.59 |
-| `feedback-*` 500-level | ~4.6 | ~4.2 | — | — |
-| `feedback-*` 600-level | ~6.0 | ~5.5 | — | — |
+| `feedback-*` base | ~4.6 | ~4.2 | 5.36–5.96 | 4.70–5.23 |
+| `feedback-*-text` | ~6.0 | ~5.5 | 6.59–10.14 | 6.59–8.90 |
 
 **Rules:**
 - Body-size text (anything under 24px, or under 18.66px bold) may only use `text-primary` or `text-secondary`. Those are the only tiers that clear WCAG AA (4.5:1) on every surface in both themes.
@@ -92,6 +106,7 @@ Measured against the light theme's `surface-primary` (`#ffffff`) and `surface-se
 - A border token MUST NOT resolve to the same value as `surface-primary` or `surface-secondary` in either theme. Dividers are allowed to be subtle — the light theme's are around 1.13:1 — but a border that equals the surface it sits on is not subtle, it is absent. The dark theme had `border-secondary` and `surface-secondary` both on `neutral-900`, so every divider drawn on a card disappeared.
 - The same rule reaches JavaScript. `@cocso-ui/react` exports `colors`, which mixes semantic tokens (`colors.textSecondary`, redefined by the dark theme) with raw ramp values (`colors.primary600`, deliberately not redefined) under one flat namespace. A ramp value passed as a text color keeps its lightness while the surface behind it flips, so it must not be used for text in a themed app.
 - Status colors: use the 600-level token for text (`feedback-danger-text` and friends) and reserve the 500-level for filled surfaces, where the contrast that matters is against the white foreground on top. The 500 level clears AA on white by a margin under 0.1 and drops below it on `surface-secondary`.
+- The `feedback-*` base tokens step one level up the ramp in the dark theme (500 → 400). The 500 level is tuned against white and lands at 3.96–4.05 on the dark `surface-primary`, under AA, which is what `StockQuantityStatus` hit — it paints body-size text directly with `feedback-info`, `feedback-danger` and `feedback-success-muted`. The 400 level clears AA on both dark surfaces without shifting hue; the 300 level clears it too but washes out to pastel, and a pastel red does not read as danger. In the dark theme `feedback-success` and `feedback-success-muted` therefore resolve to the same primitive: the ramp has no quieter green that still clears AA at body size, and no surface renders the two together.
 - A foreground for a fill MUST NOT flip with the theme unless its fill flips too. `text-on-primary` flips because `interactive-primary` flips; the fixed-hue fills (`interactive-success`, `-danger`, `-info`, `-warning`) keep their value in both themes, so they have their own `text-on-*` foregrounds that are identical in light and dark. Pairing a flipping foreground with a fixed fill put near-white text on bright amber at 1.67:1.
 - An interactive state that darkens a fill without moving its foreground walks the pairing toward the threshold. `button` `secondary` crossed it on hover and again when pressed, so its label steps to `text-primary` for both.
 - The neutral ramp has no step that would give a third AA-conformant text tier: in the light theme it would have to be at least `neutral-600` (already `text-secondary`), and in the dark theme at most `neutral-400` (already `text-secondary`). Adding one means extending the ramp, not remapping the semantic layer — see Roadmap.
