@@ -124,18 +124,34 @@ const SURFACES = [
 ] as const;
 
 /**
- * Foregrounds that are allowed to miss AA, and why. A token belongs here
- * because of what it is for, not because it happens to fail.
+ * Tokens exempt wherever they appear, because of what the token is for.
  */
-const EXEMPT: Readonly<Record<string, string>> = {
+const EXEMPT_TOKENS: Readonly<Record<string, string>> = {
   // WCAG 1.4.3 excludes inactive components.
   "text-disabled": "disabled text is exempt under WCAG 1.4.3",
-  // Documented as large-text and non-text only, in AGENTS.md and
-  // docs/project-css.md. Used by the breadcrumb separator, which is
-  // `aria-hidden` and duplicates the list structure.
-  "text-tertiary": "large text and non-text graphics only",
-  "text-muted": "large text and non-text graphics only",
 };
+
+/**
+ * Individual uses that are exempt, keyed by `<file>:<token>`.
+ *
+ * `text-tertiary` and `text-muted` were exempt by token, which was too broad:
+ * AGENTS.md forbids them for body text precisely because neither clears AA on
+ * any surface, so a blanket exemption turned the rule off for the check that
+ * was supposed to enforce it. They are legitimate for non-text graphics, and
+ * both current uses are exactly that — but the next one has to justify itself
+ * rather than inherit the exemption.
+ */
+const EXEMPT_USES: Readonly<Record<string, string>> = {
+  "breadcrumb/breadcrumb.module.css:text-tertiary":
+    "the separator glyph — `aria-hidden`, and the list structure carries the hierarchy",
+  "select/select.module.css:text-muted":
+    "the chevron, a non-text graphic; WCAG 1.4.11 asks 3:1 and it clears that on every surface",
+};
+
+function isExempt(declaration: { file: string; token: string }): boolean {
+  const { file, token } = declaration;
+  return token in EXEMPT_TOKENS || `${file}:${token}` in EXEMPT_USES;
+}
 
 interface Declaration {
   /** The fill declared alongside it, if the same rule block declares one. */
@@ -220,13 +236,14 @@ describe("CSS Module foregrounds clear AA on the surfaces they sit on", () => {
     expect(DECLARATIONS.length).toBeGreaterThan(10);
   });
 
-  const cases = DECLARATIONS.filter(({ token }) => !(token in EXEMPT)).flatMap(
-    (declaration) =>
-      THEMES.flatMap(([theme, aliases]) =>
-        (declaration.background ? [declaration.background] : [...SURFACES]).map(
-          (surface) => ({ ...declaration, theme, aliases, surface })
-        )
+  const cases = DECLARATIONS.filter(
+    (declaration) => !isExempt(declaration)
+  ).flatMap((declaration) =>
+    THEMES.flatMap(([theme, aliases]) =>
+      (declaration.background ? [declaration.background] : [...SURFACES]).map(
+        (surface) => ({ ...declaration, theme, aliases, surface })
       )
+    )
   );
 
   it.each(cases)("$file:$line $token on $surface ($theme)", ({
