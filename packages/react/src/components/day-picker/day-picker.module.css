@@ -126,8 +126,14 @@
     border-radius: var(--cocso-radius-4);
   }
 
+  /* `text-on-primary`, not `surface-primary`: the two happen to resolve to the
+     same values in the stock themes, so this read correctly by accident. It is
+     the foreground for an `interactive-primary` fill, and those two are a pair
+     — an app that rebrands the fill gets `text-on-primary` along with it, but
+     `surface-primary` keeps tracking the page instead. On a rebranded blue
+     fill that is 3.23:1 in the dark theme; `text-on-primary` is 5.70:1. */
   :global(.react-datepicker__day.react-datepicker__day--selected) {
-    color: var(--cocso-color-surface-primary);
+    color: var(--cocso-color-text-on-primary);
     background-color: var(--cocso-color-interactive-primary);
   }
 

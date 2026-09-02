@@ -139,13 +139,13 @@ describe("generateCSS", () => {
   it("generates per-dimension variant rules", () => {
     const css = generateCSS(simpleRecipe);
     expect(css).toContain(
-      ".cocso-test-btn.cocso-test-btn--variant-primary {"
+      ".cocso-test-btn:where(.cocso-test-btn--variant-primary) {"
     );
     expect(css).toContain(
       "--cocso-test-btn-bg-color: var(--cocso-color-primary-950);"
     );
     expect(css).toContain(
-      ".cocso-test-btn.cocso-test-btn--size-sm {"
+      ".cocso-test-btn:where(.cocso-test-btn--size-sm) {"
     );
     expect(css).toContain("--cocso-test-btn-height: 28px;");
   });
@@ -154,13 +154,13 @@ describe("generateCSS", () => {
     const css = generateCSS(compoundRecipe);
     // Array condition { size: ["sm", "md"] } should expand to 2 selectors
     expect(css).toContain(
-      ".cocso-test-compound.cocso-test-compound--shape-square.cocso-test-compound--size-sm {"
+      ".cocso-test-compound:where(.cocso-test-compound--shape-square.cocso-test-compound--size-sm) {"
     );
     expect(css).toContain(
-      ".cocso-test-compound.cocso-test-compound--shape-square.cocso-test-compound--size-md {"
+      ".cocso-test-compound:where(.cocso-test-compound--shape-square.cocso-test-compound--size-md) {"
     );
     expect(css).toContain(
-      ".cocso-test-compound.cocso-test-compound--shape-square.cocso-test-compound--size-lg {"
+      ".cocso-test-compound:where(.cocso-test-compound--shape-square.cocso-test-compound--size-lg) {"
     );
   });
 
@@ -186,7 +186,7 @@ describe("generateCSS", () => {
     const css = generateCSS(stateRecipe);
     // The primary variant should appear once with both base and state properties merged
     const matches = css.match(
-      /\.cocso-test-state\.cocso-test-state--variant-primary \{/g
+      /\.cocso-test-state:where\(\.cocso-test-state--variant-primary\) \{/g
     );
     // Base + hover + active on same selector → should be merged into one block
     expect(matches).not.toBeNull();
@@ -197,7 +197,7 @@ describe("generateCSS", () => {
     const css = generateCSS(noDefaultRecipe);
     // Should not have a bare .cocso-test-nodfl {} block
     expect(css).not.toMatch(/^\.cocso-test-nodfl \{/m);
-    expect(css).toContain(".cocso-test-nodfl.cocso-test-nodfl--status-success {");
+    expect(css).toContain(".cocso-test-nodfl:where(.cocso-test-nodfl--status-success) {");
   });
 });
 

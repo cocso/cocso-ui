@@ -31,9 +31,14 @@
     color: var(--cocso-color-text-secondary);
   }
 
+  /* `feedback-danger-text`, not `feedback-danger`: the base is the fill level
+     and is 4.18:1 on `surface-secondary` in the light theme, so a validation
+     message — 12px text, and the text a user most needs to read — was below AA
+     on any card. The text level clears it on every surface in both themes
+     (5.95 / 5.45 light, 7.50 / 6.59 dark). */
   .errorMessage {
     margin: 0;
     font-size: var(--cocso-field-description-font-size);
-    color: var(--cocso-color-feedback-danger);
+    color: var(--cocso-color-feedback-danger-text);
   }
 }

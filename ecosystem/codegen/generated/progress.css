@@ -4,41 +4,41 @@
   --cocso-progress-bg-color: var(--cocso-color-surface-neutral);
 }
 
-.cocso-progress.cocso-progress--variant-primary {
+.cocso-progress:where(.cocso-progress--variant-primary) {
   --cocso-progress-fill-color: var(--cocso-color-interactive-primary);
 }
 
-.cocso-progress.cocso-progress--variant-secondary {
+.cocso-progress:where(.cocso-progress--variant-secondary) {
   --cocso-progress-fill-color: var(--cocso-color-text-muted);
 }
 
-.cocso-progress.cocso-progress--variant-success {
+.cocso-progress:where(.cocso-progress--variant-success) {
   --cocso-progress-fill-color: var(--cocso-color-feedback-success);
 }
 
-.cocso-progress.cocso-progress--variant-danger {
+.cocso-progress:where(.cocso-progress--variant-danger) {
   --cocso-progress-fill-color: var(--cocso-color-feedback-danger);
 }
 
-.cocso-progress.cocso-progress--variant-warning {
+.cocso-progress:where(.cocso-progress--variant-warning) {
   --cocso-progress-fill-color: var(--cocso-color-feedback-warning);
 }
 
-.cocso-progress.cocso-progress--variant-info {
+.cocso-progress:where(.cocso-progress--variant-info) {
   --cocso-progress-fill-color: var(--cocso-color-feedback-info);
 }
 
-.cocso-progress.cocso-progress--size-sm {
+.cocso-progress:where(.cocso-progress--size-sm) {
   --cocso-progress-height: 4px;
   --cocso-progress-border-radius: var(--cocso-radius-1);
 }
 
-.cocso-progress.cocso-progress--size-md {
+.cocso-progress:where(.cocso-progress--size-md) {
   --cocso-progress-height: 8px;
   --cocso-progress-border-radius: var(--cocso-radius-2);
 }
 
-.cocso-progress.cocso-progress--size-lg {
+.cocso-progress:where(.cocso-progress--size-lg) {
   --cocso-progress-height: 12px;
   --cocso-progress-border-radius: var(--cocso-radius-3);
 }

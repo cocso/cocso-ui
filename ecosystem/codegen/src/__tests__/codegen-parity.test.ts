@@ -88,14 +88,20 @@ function cascadeForCombo(
 
   // 2. Per-dimension
   for (const [dim, val] of Object.entries(combo)) {
-    const dimProps = cssRules.get(`.${name}.${name}--${dim}-${val}`);
+    const dimProps = cssRules.get(
+      `.${name}:where(.${name}--${dim}-${val})`
+    );
     if (dimProps) Object.assign(result, dimProps);
   }
 
   // 3. Compound (multi-modifier selectors)
   for (const [selector, props] of cssRules) {
-    if (selector.includes(":")) continue;
-    const modifiers = selector.split(`.${name}--`).slice(1);
+    // Modifiers live inside `:where(...)` so they add no specificity — see
+    // `withModifiers` in generate-recipe.ts. Everything before the paren is the
+    // component's own class; a pseudo-class rule has none and is skipped.
+    const inner = selector.match(/^\.[a-z0-9-]+:where\((.+)\)$/)?.[1];
+    if (!inner) continue;
+    const modifiers = inner.split(`.${name}--`).slice(1);
     if (modifiers.length < 2) continue;
     // NOTE: This parser splits on the first dash to separate dimension from
     // value (e.g., "variant-primary" → dim="variant", val="primary").
