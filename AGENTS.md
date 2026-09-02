@@ -144,6 +144,19 @@ When asked to review comments on a GitHub PR:
 ### Frontend Design Rules
 
 - When a component exists in the `@cocso-ui/react` package, always use it instead of implementing a custom equivalent.
+- A fixed-hue `interactive-*` token is a FILL. Do NOT paint text with one: the
+  dark theme deliberately leaves those values alone because a saturated accent
+  reads on either surface as a fill, but as a foreground the ramp runs the wrong
+  way — Link used `interactive-info` for its text and `interactive-info-active`
+  for its hover, which measured 4.05:1 and 1.74:1 on the dark surface. Use the
+  `-text` form of the role (`interactive-primary-text`, `interactive-info-text`),
+  which flips.
+- `interactive-primary` and `text-on-primary` are a PAIR. A consumer that
+  overrides one MUST override the other: the fill and the foreground drawn on it
+  are chosen together, and overriding only the fill leaves a foreground picked
+  for a different colour. Checkbox draws its glyph with `text-on-primary` on an
+  `interactive-primary` fill, so an app that rebrands the fill and not the glyph
+  gets an unreadable checkbox.
 - Text below 24px (or below 18.66px bold) may only use `text-primary` or
   `text-secondary`. `text-tertiary` and `text-muted` are below WCAG AA at body
   size on every surface in both themes; they are for large text and non-text

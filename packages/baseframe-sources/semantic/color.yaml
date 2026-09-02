@@ -171,6 +171,12 @@ data:
     $color.interactive.info-hover-subtle:
       values:
         default: $color.info-400
+    $color.interactive.info-text:
+      values:
+        default: $color.info-500
+    $color.interactive.info-text-hover:
+      values:
+        default: $color.info-700
 
     $color.focus.ring:
       values:

@@ -176,10 +176,10 @@ describe("resolveStyleMap hover === base edge case (link current variant)", () =
       { states: ["hover"] }
     );
     expect(result["--cocso-link-color"]).toBe(
-      "var(--cocso-color-interactive-info)"
+      "var(--cocso-color-interactive-info-text)"
     );
     expect(result["--cocso-link-color-hover"]).toBe(
-      "var(--cocso-color-interactive-info-active)"
+      "var(--cocso-color-interactive-info-text-hover)"
     );
   });
 });

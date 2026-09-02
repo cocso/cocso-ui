@@ -76,6 +76,15 @@
   --cocso-color-interactive-neutral-hover: var(--cocso-color-neutral-700);
   --cocso-color-interactive-neutral-active: var(--cocso-color-neutral-600);
 
+  /* Interactive — info as text (Link). The `interactive-info` fills above keep
+     their hue in both themes because a saturated accent reads on either
+     surface, but Link paints *text* with them, and there the ramp runs the
+     wrong way: on a dark surface `info-500` is 4.05:1 and the `info-700`
+     hover state is 1.74:1, so hovering a link nearly erased it. These two
+     carry the light theme's values unchanged and flip here. */
+  --cocso-color-interactive-info-text: var(--cocso-color-info-300);
+  --cocso-color-interactive-info-text-hover: var(--cocso-color-info-200);
+
   /* Focus ring */
   --cocso-color-focus-ring: var(--cocso-color-primary-50);
 
