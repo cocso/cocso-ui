@@ -114,9 +114,21 @@ When asked to review comments on a GitHub PR:
   semantic token that resolves to the same value in the light theme.
   `packages/react/src/test/module-css-tokens.test.ts` enforces this across every
   CSS Module, with no exceptions.
-- A CSS Module that names a semantic token as a foreground (`color`, `fill`,
-  `stroke`) MUST clear WCAG AA against whatever it sits on — the fill its own
-  rule block declares, or the page surfaces when it declares none.
+- A component MUST NOT name a colour in its `.tsx` — not a raw ramp entry from
+  `colors` (`colors.neutral100`, `colors.white`), not a literal (`#D9D9D9`,
+  `rgb(...)`), whether in an inline style or an SVG attribute. Those values
+  survive the theme flip, and a value written there is also unreachable from a
+  consumer's stylesheet. Name the semantic token for the role, adding it to
+  `colors` in `packages/react/src/token/color.ts` if it is not exported yet.
+  `packages/react/src/test/component-tsx-colors.test.ts` enforces this. It was
+  added after three components had done it: Checkbox (white glyph on a
+  near-white fill, 1.09:1), Switch (a track that stayed bright in the dark
+  theme) and StockQuantityStatus (`#D9D9D9` six times).
+- A CSS Module that names a semantic token as a text colour MUST clear WCAG AA
+  against whatever it sits on — the fill its own rule block declares, or the
+  page surfaces when it declares none. (`color` only: `fill` and `stroke` paint
+  non-text graphics, which WCAG 1.4.11 asks 3:1 of and only when the graphic
+  carries meaning, and the stylesheet cannot tell whether it does.)
   `packages/react/src/test/module-css-contrast.test.ts` checks this in both
   themes. Nothing did before, and two defects lived there: validation messages
   painted with `feedback-danger` (the fill level, 4.18:1 on a card) and both

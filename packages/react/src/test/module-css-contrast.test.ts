@@ -19,6 +19,15 @@
  * with a component custom property is covered by the recipe test instead; one
  * that names a semantic token directly is only covered here.
  *
+ * `color` only, not `fill` or `stroke`. Those paint non-text graphics, which
+ * WCAG 1.4.11 asks 3:1 of and only when the graphic carries meaning — and
+ * whether it does is a fact about the markup, not the stylesheet. The
+ * StockQuantityStatus capsule is the case in point: its unfilled track is
+ * `surface-neutral` at 1.23:1 against the page, which is correct for the quiet
+ * trough behind a status colour, on an `aria-hidden` SVG whose meaning is
+ * carried by the label beside it. Judging that from CSS alone would only
+ * produce a wrong answer confidently.
+ *
  * A foreground is measured against the `background-color` its own rule block
  * declares, and only against the page surfaces when the block declares none —
  * the same model the recipe test uses. Checking a foreground meant for a fill
@@ -122,8 +131,7 @@ interface Declaration {
   token: string;
 }
 
-const FOREGROUND =
-  /^\s*(?:color|fill|stroke):\s*var\(--cocso-color-([a-z0-9-]+)\)/;
+const FOREGROUND = /^\s*color:\s*var\(--cocso-color-([a-z0-9-]+)\)/;
 const BACKGROUND =
   /^\s*background(?:-color)?:\s*var\(--cocso-color-([a-z0-9-]+)\)/;
 
