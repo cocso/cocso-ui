@@ -5,7 +5,7 @@
 }
 
 .cocso-stock-quantity-status.cocso-stock-quantity-status--quantity-normal {
-  --cocso-stock-quantity-status-color: var(--cocso-color-feedback-success-muted);
+  --cocso-stock-quantity-status-color: var(--cocso-color-feedback-success);
 }
 
 .cocso-stock-quantity-status.cocso-stock-quantity-status--quantity-insufficient {

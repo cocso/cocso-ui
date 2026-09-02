@@ -228,9 +228,10 @@ describe("Borders are distinguishable from the surfaces they sit on", () => {
  * and they landed at 3.96–4.05 on the dark surface.
  *
  * `feedback-success-muted` is deliberately absent: it resolves to `success-400`
- * in both themes and is 3.09:1 on white, so adding it here would assert a
- * failure that predates this test. `StockQuantityStatus` uses it for the
- * "normal" state and needs its own fix.
+ * in both themes and is 3.09:1 on white. `StockQuantityStatus` used to paint
+ * its "normal" state with it and now uses `feedback-success` instead, so no
+ * component paints text with the muted step any more. The token stays exported
+ * — removing a published token is breaking — but it is not a text color.
  */
 const BARE_FEEDBACK_TEXT_TOKENS = [
   "feedback-danger",

@@ -118,4 +118,6 @@ export const colors = {
   textPrimary: "var(--cocso-color-text-primary)",
   textSecondary: "var(--cocso-color-text-secondary)",
   textTertiary: "var(--cocso-color-text-tertiary)",
+  textOnPrimary: "var(--cocso-color-text-on-primary)",
+  surfaceNeutral: "var(--cocso-color-surface-neutral)",
 };

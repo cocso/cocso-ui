@@ -88,12 +88,12 @@ const INTENTIONALLY_LIGHT_ONLY: Readonly<Record<string, string>> = {
   "text-on-info": "foreground for a fill that does not flip",
   "text-on-warning": "foreground for a fill that does not flip",
 
-  // Not a deliberate omission so much as a deferred one: this resolves to
-  // `success-400`, which is 5.96:1 on the dark surface but 3.09:1 on white, so
-  // it fails AA in the LIGHT theme, where `StockQuantityStatus` uses it for the
-  // "normal" state. A dark override would paper over the wrong half of the
-  // problem. Tracked separately; see the exclusion note in `contrast.test.ts`.
-  "feedback-success-muted": "light-theme contrast defect, fixed separately",
+  // Resolves to `success-400`: 5.96:1 on the dark surface, but 3.09:1 on white.
+  // No component paints text with it any more — `StockQuantityStatus` moved its
+  // "normal" state to `feedback-success` — and it stays exported only because
+  // removing a published token is breaking. A dark override would give a
+  // retired token a second value rather than fix anything.
+  "feedback-success-muted": "retired, not used as a text color",
 };
 
 const LIGHT = semanticTokens(readCss("token.css"));

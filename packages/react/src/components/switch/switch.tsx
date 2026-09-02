@@ -18,7 +18,11 @@ export type SwitchVariant =
   | "warning"
   | "info";
 
-const UNCHECKED_BG = colors.neutral100;
+// `surface-neutral`, not `colors.neutral100`: the raw ramp keeps its light
+// value when the theme flips, so an unchecked track stayed bright on a dark
+// page. `surface-neutral` is `neutral-100` in the light theme, so nothing
+// moves there, and `neutral-800` in the dark one.
+const UNCHECKED_BG = colors.surfaceNeutral;
 
 export interface SwitchProps extends ComponentProps<typeof SwitchBase.Root> {
   disabled?: boolean;
