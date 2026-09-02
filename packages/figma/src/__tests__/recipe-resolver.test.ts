@@ -863,9 +863,9 @@ describe("resolveForFigma — select recipe", () => {
 // ---------------------------------------------------------------------------
 
 describe("resolveForFigma — link recipe", () => {
-  it("inline variant resolves color to info-500", () => {
+  it("inline variant resolves color to info-600", () => {
     const spec = resolveForFigma(linkRecipe, { variant: "inline" });
-    expect(spec.color).toEqual(resolveColorToken("info-500"));
+    expect(spec.color).toEqual(resolveColorToken("info-600"));
   });
 
   it("current variant resolves color to undefined (currentColor filtered)", () => {
@@ -873,9 +873,9 @@ describe("resolveForFigma — link recipe", () => {
     expect(spec.color).toBeUndefined();
   });
 
-  it("plain variant resolves color to info-500", () => {
+  it("plain variant resolves color to info-600", () => {
     const spec = resolveForFigma(linkRecipe, { variant: "plain" });
-    expect(spec.color).toEqual(resolveColorToken("info-500"));
+    expect(spec.color).toEqual(resolveColorToken("info-600"));
   });
 });
 
@@ -1065,25 +1065,25 @@ describe("resolveForFigma — pagination recipe", () => {
 // ---------------------------------------------------------------------------
 
 describe("resolveForFigma — stock-quantity-status recipe", () => {
-  it("sufficient resolves color to info-500", () => {
+  it("sufficient resolves color to info-600", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
       quantity: "sufficient",
     });
-    expect(spec.color).toEqual(resolveColorToken("info-500"));
+    expect(spec.color).toEqual(resolveColorToken("info-600"));
   });
 
-  it("normal resolves color to success-500", () => {
+  it("normal resolves color to success-600", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
       quantity: "normal",
     });
-    expect(spec.color).toEqual(resolveColorToken("success-500"));
+    expect(spec.color).toEqual(resolveColorToken("success-600"));
   });
 
-  it("insufficient resolves color to danger-500", () => {
+  it("insufficient resolves color to danger-600", () => {
     const spec = resolveForFigma(stockQuantityStatusRecipe, {
       quantity: "insufficient",
     });
-    expect(spec.color).toEqual(resolveColorToken("danger-500"));
+    expect(spec.color).toEqual(resolveColorToken("danger-600"));
   });
 });
 

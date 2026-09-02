@@ -173,7 +173,7 @@ data:
         default: $color.info-400
     $color.interactive.info-text:
       values:
-        default: $color.info-500
+        default: $color.info-600
     $color.interactive.info-text-hover:
       values:
         default: $color.info-700

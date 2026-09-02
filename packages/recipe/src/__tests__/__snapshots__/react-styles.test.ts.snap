@@ -110,7 +110,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe 
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > stockQuantityStatusRecipe default variants 1`] = `
 {
-  "--cocso-stock-quantity-status-color": "var(--cocso-color-feedback-info)",
+  "--cocso-stock-quantity-status-color": "var(--cocso-color-feedback-info-text)",
 }
 `;
 
