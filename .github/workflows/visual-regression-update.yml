@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to update baselines on'
-        required: true
-        default: 'main'
+        description: 'Branch to update baselines on (defaults to the branch this run was dispatched from)'
+        required: false
 
 jobs:
   update-baselines:
@@ -15,10 +14,15 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Falls back to the dispatch ref, not to `main`. The input used to
+      # default to 'main', so `gh workflow run visual-regression-update.yml
+      # --ref <branch>` — which reads as "run this on <branch>" — checked out
+      # main, regenerated its baselines and pushed the result straight to the
+      # default branch. Only `-f branch=<branch>` selected the branch.
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
