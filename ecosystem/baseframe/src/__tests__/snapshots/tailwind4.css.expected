@@ -132,6 +132,10 @@
   --color-text-tertiary: var(--cocso-color-text-tertiary);
   --color-text-disabled: var(--cocso-color-text-disabled);
   --color-text-on-primary: var(--cocso-color-text-on-primary);
+  --color-text-on-success: var(--cocso-color-text-on-success);
+  --color-text-on-danger: var(--cocso-color-text-on-danger);
+  --color-text-on-info: var(--cocso-color-text-on-info);
+  --color-text-on-warning: var(--cocso-color-text-on-warning);
   --color-text-muted: var(--cocso-color-text-muted);
   --color-surface-primary: var(--cocso-color-surface-primary);
   --color-surface-secondary: var(--cocso-color-surface-secondary);
@@ -139,6 +143,7 @@
   --color-surface-neutral: var(--cocso-color-surface-neutral);
   --color-border-primary: var(--cocso-color-border-primary);
   --color-border-secondary: var(--cocso-color-border-secondary);
+  --color-border-strong: var(--cocso-color-border-strong);
   --color-overlay-subtle: var(--cocso-color-overlay-subtle);
   --color-overlay-muted: var(--cocso-color-overlay-muted);
   --color-overlay-strong: var(--cocso-color-overlay-strong);
@@ -146,12 +151,19 @@
   --color-interactive-primary-hover: var(--cocso-color-interactive-primary-hover);
   --color-interactive-primary-active: var(--cocso-color-interactive-primary-active);
   --color-interactive-primary-muted: var(--cocso-color-interactive-primary-muted);
+  --color-interactive-primary-subtle: var(--cocso-color-interactive-primary-subtle);
+  --color-interactive-primary-text: var(--cocso-color-interactive-primary-text);
   --color-interactive-secondary: var(--cocso-color-interactive-secondary);
   --color-interactive-secondary-hover: var(--cocso-color-interactive-secondary-hover);
+  --color-interactive-neutral: var(--cocso-color-interactive-neutral);
+  --color-interactive-neutral-hover: var(--cocso-color-interactive-neutral-hover);
+  --color-interactive-neutral-active: var(--cocso-color-interactive-neutral-active);
   --color-interactive-danger: var(--cocso-color-interactive-danger);
   --color-interactive-danger-hover: var(--cocso-color-interactive-danger-hover);
   --color-interactive-danger-active: var(--cocso-color-interactive-danger-active);
   --color-interactive-danger-hover-subtle: var(--cocso-color-interactive-danger-hover-subtle);
+  --color-interactive-danger-subtle-hover: var(--cocso-color-interactive-danger-subtle-hover);
+  --color-interactive-danger-subtle-active: var(--cocso-color-interactive-danger-subtle-active);
   --color-interactive-success: var(--cocso-color-interactive-success);
   --color-interactive-success-hover: var(--cocso-color-interactive-success-hover);
   --color-interactive-success-active: var(--cocso-color-interactive-success-active);

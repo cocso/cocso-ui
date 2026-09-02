@@ -156,6 +156,9 @@ When asked to review comments on a GitHub PR:
 
 ### Codegen Rules
 
+- `packages/css/token.css` and `packages/css/tailwind4.css` are generated from `packages/baseframe-sources`. Do NOT hand-edit them: add the token to the YAML and run `pnpm --filter @cocso-ui/baseframe generate:css`. `ecosystem/baseframe/src/__tests__/golden.test.ts` fails when a published file and the YAML disagree. A token added straight to `token.css` never reaches `tailwind4.css` or the Figma token export, both of which read the YAML.
+- `packages/css/theme-dark.css` is the exception and IS hand-written. It redefines the semantic layer only; the raw color scale stays untouched so a consumer override of a ramp survives the theme flip.
+
 - Recipe definitions in `packages/recipe/` are the single source of truth for component visual specs.
 - After modifying any recipe, run `pnpm --filter @cocso-ui/codegen generate` and commit the generated output.
 - React components MUST import from `@cocso-ui/codegen/generated/*`, NOT from `@cocso-ui/recipe` at runtime.

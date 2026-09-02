@@ -27,6 +27,16 @@ Plain CSS. No build step required.
 - `tailwind4.css` — Tailwind v4 theme configuration referencing token variables.
 - Token categories: color (primitive + semantic), spacing, typography, border radius, shadow.
 
+`token.css` and `tailwind4.css` are **generated** from `packages/baseframe-sources`, never hand-edited. Add the token to the YAML and run:
+
+```bash
+pnpm --filter @cocso-ui/baseframe generate:css
+```
+
+`golden.test.ts` fails when either published file disagrees with the YAML. It did not always: twelve semantic tokens (`border-strong`, `text-on-success` and friends) were written into `token.css` directly and never made it back to the source, so they never reached `tailwind4.css` and were invisible to the Figma token export, which reads the YAML.
+
+`theme-dark.css` is the exception — it is hand-written, because the YAML collection has a single `default` mode and the generator would have to emit every primitive into the dark selector to cover a second one. See Roadmap.
+
 ## Out of Scope
 
 - Component-level styles — owned by `@cocso-ui/react`.

@@ -35,6 +35,18 @@ data:
     $color.text.on-primary:
       values:
         default: $color.white
+    $color.text.on-success:
+      values:
+        default: $color.white
+    $color.text.on-danger:
+      values:
+        default: $color.white
+    $color.text.on-info:
+      values:
+        default: $color.white
+    $color.text.on-warning:
+      values:
+        default: $color.neutral-950
     $color.text.muted:
       values:
         default: $color.neutral-500
@@ -58,6 +70,9 @@ data:
     $color.border.secondary:
       values:
         default: $color.neutral-100
+    $color.border.strong:
+      values:
+        default: $color.neutral-400
 
     $color.overlay.subtle:
       values:
@@ -81,12 +96,27 @@ data:
     $color.interactive.primary-muted:
       values:
         default: $color.primary-500
+    $color.interactive.primary-subtle:
+      values:
+        default: $color.primary-100
+    $color.interactive.primary-text:
+      values:
+        default: $color.primary-800
     $color.interactive.secondary:
       values:
         default: $color.neutral-100
     $color.interactive.secondary-hover:
       values:
         default: $color.neutral-200
+    $color.interactive.neutral:
+      values:
+        default: $color.neutral-100
+    $color.interactive.neutral-hover:
+      values:
+        default: $color.neutral-200
+    $color.interactive.neutral-active:
+      values:
+        default: $color.neutral-300
     $color.interactive.danger:
       values:
         default: $color.danger-500
@@ -99,6 +129,12 @@ data:
     $color.interactive.danger-hover-subtle:
       values:
         default: $color.danger-400
+    $color.interactive.danger-subtle-hover:
+      values:
+        default: $color.danger-50
+    $color.interactive.danger-subtle-active:
+      values:
+        default: $color.danger-100
     $color.interactive.success:
       values:
         default: $color.success-500
