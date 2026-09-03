@@ -140,4 +140,77 @@ describe("Input", () => {
       expect(input).toHaveValue("기존값");
     });
   });
+
+  describe("password toggle", () => {
+    it("renders no button unless asked for", () => {
+      render(<Input aria-label="비밀번호" type="password" />);
+      expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    });
+
+    it("switches the type attribute rather than a style", async () => {
+      render(
+        <Input
+          aria-label="비밀번호"
+          data-testid="input"
+          passwordToggle
+          type="password"
+        />
+      );
+      const input = screen.getByTestId("input");
+      expect(input).toHaveAttribute("type", "password");
+
+      await userEvent.click(screen.getByRole("button"));
+      expect(input).toHaveAttribute("type", "text");
+
+      await userEvent.click(screen.getByRole("button"));
+      expect(input).toHaveAttribute("type", "password");
+    });
+
+    it("names the action for its current state", async () => {
+      render(<Input aria-label="비밀번호" passwordToggle type="password" />);
+      const toggle = screen.getByRole("button", { name: "Show password" });
+      expect(toggle).toHaveAttribute("aria-pressed", "false");
+
+      await userEvent.click(toggle);
+      const pressed = screen.getByRole("button", { name: "Hide password" });
+      expect(pressed).toHaveAttribute("aria-pressed", "true");
+    });
+
+    it("does not submit the form it sits in", async () => {
+      const onSubmit = vi.fn((event: React.FormEvent) => {
+        event.preventDefault();
+      });
+      render(
+        <form onSubmit={onSubmit}>
+          <Input aria-label="비밀번호" passwordToggle type="password" />
+        </form>
+      );
+
+      expect(screen.getByRole("button")).toHaveAttribute("type", "button");
+      await userEvent.click(screen.getByRole("button"));
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("keeps the caller's className on the input, not the wrapper", () => {
+      render(
+        <Input
+          aria-label="비밀번호"
+          className="caller-class"
+          data-testid="input"
+          passwordToggle
+          type="password"
+        />
+      );
+      const input = screen.getByTestId("input");
+      expect(input).toHaveClass("caller-class");
+      expect(input.parentElement).not.toHaveClass("caller-class");
+    });
+
+    it("disables the toggle along with the field", () => {
+      render(
+        <Input aria-label="비밀번호" disabled passwordToggle type="password" />
+      );
+      expect(screen.getByRole("button")).toBeDisabled();
+    });
+  });
 });

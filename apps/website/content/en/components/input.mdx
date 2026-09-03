@@ -157,6 +157,12 @@ description: A text field for collecting user input.
         default: "false",
         description: "Expands the input to fill the full width of its container. Use in form layouts where the input should match the grid column width.",
       },
+      {
+        name: "passwordToggle",
+        type: "boolean",
+        default: "false",
+        description: "Overlays a button inside the field that reveals the value. It switches `type` between `password` and `text`, so the browser's password save and autofill — which key off `autocomplete` — are unaffected. It is not inferred from `type=\"password\"`, so an existing field does not grow a button on upgrade.",
+      },
     ]}
   />
 </Section>
