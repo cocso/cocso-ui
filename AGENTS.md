@@ -185,6 +185,20 @@ When asked to review comments on a GitHub PR:
 - A 500-level accent is a FILL. Body text uses the 600 level
   (`feedback-*-text`, `interactive-info-text`): the 500 level clears AA on
   white by under 0.1 and misses it on every other surface.
+- A CSS Module that animates MUST honour `prefers-reduced-motion`. Motion here
+  is decoration — every component reads the same without it — so there is no
+  case where respecting the preference costs meaning. Seventeen modules
+  animated and three honoured it.
+- Spacing MUST be logical, not physical: `margin-inline-start`/`-end` and
+  `padding-inline-start`/`-end`, never `margin-left` or `padding-right`. A
+  physical side lands on the wrong side once the document direction flips.
+  Physical `left`/`right` offsets are fine where the side is a placement fact
+  rather than a text one — a `Popover` under `[data-side="left"]`.
+  `packages/react/src/test/module-css-motion-rtl.test.ts` enforces both.
+- Every interactive component MUST be reachable with Tab and operable from the
+  keyboard. `packages/react/src/test/keyboard.test.tsx` drives it. axe reads
+  markup, not behaviour: a component can be flawless to it and unusable
+  without a mouse.
 - Every exported component MUST pass axe in a static render.
   `packages/react/src/test/a11y.test.tsx` runs it over each one in a
   representative state. It is a floor, not an audit — keyboard order, focus

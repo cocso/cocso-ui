@@ -73,8 +73,8 @@
 
   .close {
     position: absolute;
+    inset-inline-end: var(--cocso-spacing-9);
     top: var(--cocso-spacing-9);
-    right: var(--cocso-spacing-9);
     display: flex;
     align-items: center;
     align-self: flex-end;

@@ -65,4 +65,11 @@
     align-items: center;
     justify-content: center;
   }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .trigger {
+      transition: none;
+    }
+  }
 }

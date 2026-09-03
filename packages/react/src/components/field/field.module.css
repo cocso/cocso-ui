@@ -19,7 +19,7 @@
      field is required, so it must clear WCAG AA (4.5:1). `text-tertiary` is
      3.08:1 on white and 2.82:1 on `surface-secondary`. */
   .optional {
-    margin-left: var(--cocso-spacing-4);
+    margin-inline-start: var(--cocso-spacing-4);
     font-size: var(--cocso-field-description-font-size);
     font-weight: var(--cocso-font-weight-regular);
     color: var(--cocso-color-text-secondary);

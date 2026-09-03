@@ -38,4 +38,11 @@
     width: 1em;
     height: 1em;
   }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .link {
+      transition: none;
+    }
+  }
 }
