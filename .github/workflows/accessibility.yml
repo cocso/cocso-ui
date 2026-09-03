@@ -1,0 +1,91 @@
+name: Accessibility
+
+# Walks every story in a real browser and runs axe, with the rules that need a
+# rendered box left on.
+#
+# `packages/react/src/test/a11y.test.tsx` runs the same tool in jsdom, which
+# computes no layout and therefore cannot evaluate `color-contrast` or target
+# size at all — it disables them explicitly rather than appearing to cover them.
+# This job is where those get checked, and where the pointer-target and
+# contrast findings that jsdom missed came from.
+#
+# Deliberately separate from Visual Regression, which walks the same stories in
+# the same browser. One job reporting both would announce an accessibility
+# defect as a pixel change.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - v1
+    paths:
+      - 'packages/react/**'
+      - 'packages/react-icons/**'
+      - 'packages/css/**'
+      - 'packages/recipe/**'
+      - 'packages/baseframe-sources/**'
+      - 'ecosystem/codegen/**'
+      - 'ecosystem/baseframe/**'
+      - 'ecosystem/icons/**'
+      - 'apps/storybook/**'
+      - 'pnpm-lock.yaml'
+      # Editing the check itself must re-run the check.
+      - '.github/workflows/accessibility.yml'
+  pull_request:
+    branches:
+      - main
+      - v1
+    paths:
+      - 'packages/react/**'
+      - 'packages/react-icons/**'
+      - 'packages/css/**'
+      - 'packages/recipe/**'
+      - 'packages/baseframe-sources/**'
+      - 'ecosystem/codegen/**'
+      - 'ecosystem/baseframe/**'
+      - 'ecosystem/icons/**'
+      - 'apps/storybook/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/accessibility.yml'
+
+jobs:
+  accessibility:
+    name: Accessibility
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        working-directory: apps/storybook
+        run: npx playwright install chromium --with-deps
+
+      - name: Build Storybook
+        run: pnpm turbo run build --filter=@cocso-ui/storybook
+
+      - name: Run axe Over Every Story
+        working-directory: apps/storybook
+        run: |
+          npx serve storybook-static -p 6006 &
+          npx wait-on http://localhost:6006 --timeout 60000
+          pnpm test:a11y

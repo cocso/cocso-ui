@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { TestRunnerConfig } from "@storybook/test-runner";
 import { waitForPageReady } from "@storybook/test-runner";
+import { checkA11y, injectAxe } from "axe-playwright";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 
 /**
@@ -21,13 +22,50 @@ import { toMatchImageSnapshot } from "jest-image-snapshot";
  */
 const FAILURE_THRESHOLD_PIXELS = 100;
 
+/**
+ * Which pass this run is. Both walk every story with a real browser, and they
+ * are separate jobs so a failure says which kind it is rather than reporting an
+ * accessibility defect as a visual regression.
+ */
+const A11Y_ONLY = process.env.STORYBOOK_A11Y === "1";
+
+/**
+ * Rules that fire on the harness rather than the component.
+ *
+ * `region` wants every piece of page content inside a landmark. A story renders
+ * one bare component with no page around it, so it fires on all of them, and a
+ * component library does not own the page's landmarks.
+ *
+ * Everything else stays on — including the rules that need layout, which is the
+ * point of running here instead of in jsdom. `color-contrast` and target size
+ * cannot be evaluated without a rendered box, so the unit-level check disables
+ * them and this one does not.
+ */
+const HARNESS_RULES = {
+  region: { enabled: false },
+};
+
 const config: TestRunnerConfig = {
   setup() {
     expect.extend({ toMatchImageSnapshot });
   },
+  async preVisit(page) {
+    if (A11Y_ONLY) {
+      await injectAxe(page);
+    }
+  },
   async postVisit(page, context) {
     // Wait for Storybook page to be fully ready (fonts, assets, rendering)
     await waitForPageReady(page);
+
+    if (A11Y_ONLY) {
+      await checkA11y(page, "#storybook-root", {
+        axeOptions: { rules: HARNESS_RULES },
+        detailedReport: true,
+        detailedReportOptions: { html: true },
+      });
+      return;
+    }
 
     const image = await page.screenshot({ fullPage: false });
 

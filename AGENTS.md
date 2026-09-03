@@ -199,6 +199,10 @@ When asked to review comments on a GitHub PR:
   keyboard. `packages/react/src/test/keyboard.test.tsx` drives it. axe reads
   markup, not behaviour: a component can be flawless to it and unusable
   without a mouse.
+- A story is documentation, so it MUST render an accessible example: a control
+  with an accessible name, landmarks that do not collide. The `accessibility`
+  job checks stories, not just components, and eleven of its first findings
+  were demos modelling a control nobody had named.
 - Every exported component MUST pass axe in a static render.
   `packages/react/src/test/a11y.test.tsx` runs it over each one in a
   representative state. It is a floor, not an audit — keyboard order, focus
@@ -268,6 +272,7 @@ Coverage expectations:
 - `build`: runs `pnpm build` across all packages via Turborepo.
 - `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened). Advisory only — it comments, it does not gate merges. It requires the Claude Code GitHub App (https://github.com/apps/claude) to be installed on the repository; without it the OIDC token exchange returns 401 and the job emits a warning instead of failing.
 - `visual-regression`: screenshots every Storybook story and compares it to the committed baselines in `apps/storybook/__snapshots__/`.
+- `accessibility`: walks every Storybook story in the same browser and runs axe with the layout-dependent rules left on. `packages/react/src/test/a11y.test.tsx` runs axe in jsdom, which computes no layout and disables `color-contrast` and target size rather than appearing to cover them; this job is where those are checked. Kept separate from `visual-regression` so a failure says which kind it is.
 
 Visual regression rules:
 - Comparison uses an absolute pixel budget (`failureThresholdType: "pixel"`), never a percentage. Stories are `layout: centered` inside a 1280x720 viewport, so a ratio-based threshold measures against mostly-empty canvas and silently passes real component changes.
@@ -277,7 +282,7 @@ Visual regression rules:
   ```
   The workflow pushes the regenerated baselines to whatever it checks out. `--ref` alone only selects which copy of the workflow file runs; the checkout follows the `branch` input, which now falls back to the dispatch ref rather than to `main`.
 - Any PR that adds or changes a story must regenerate baselines on its branch before merge. A story with no baseline is reported separately as new; it is not silently counted as passing.
-- A story with a committed baseline MUST render deterministically. No `new Date()`, `Math.random()`, or anything else that varies between the capture and the comparison — the DayPicker `Disabled` story rendered today's date as its trigger label, so it failed on every unrelated PR opened after the day the baseline was taken. Pin the value instead.
+- A story with a committed baseline MUST render deterministically. No `new Date()`, `Math.random()`, no remote resource — an `Avatar` story fetched a random-avatar service and failed the comparison when it served different bytes — or anything else that varies between the capture and the comparison — the DayPicker `Disabled` story rendered today's date as its trigger label, so it failed on every unrelated PR opened after the day the baseline was taken. Pin the value instead.
 
 All CI jobs must pass before a PR is merged.
 

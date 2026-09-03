@@ -87,7 +87,7 @@ export const Error: Story = {
 
 export const ReadOnly: Story = {
   render: () => (
-    <Input readOnly value="읽기 전용" />
+    <Input aria-label="읽기 전용 필드" readOnly value="읽기 전용" />
   ),
 };
 
