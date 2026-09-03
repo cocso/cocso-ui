@@ -45,8 +45,9 @@ function findVariant(
 
 function findToken(name: string): FigmaColorValue | undefined {
   const token = tokens.tokens.find((t) => t.name === name);
-  if (token && typeof token.values.default === "object") {
-    return token.values.default as FigmaColorValue;
+  const value = token?.values.light ?? token?.values.default;
+  if (token && typeof value === "object") {
+    return value as FigmaColorValue;
   }
   return undefined;
 }

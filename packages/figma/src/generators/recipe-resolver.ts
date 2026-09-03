@@ -12,6 +12,7 @@ import { categoryOf } from "@cocso-ui/recipe/utils/property-categories";
 import { SEMANTIC_TO_PRIMITIVE } from "@cocso-ui/recipe/utils/semantic-mapping";
 import tokenData from "../generated/tokens.json";
 import type { FigmaColorValue, FigmaTokenData } from "../types/token-schema";
+import { lightValue } from "./shared";
 
 const data = tokenData as FigmaTokenData;
 const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
@@ -69,8 +70,8 @@ type MutableSpec = Record<string, unknown>;
 export function resolveColorToken(name: string): RGB {
   const fullName = name.startsWith("color/") ? name : `color/${name}`;
   const token = tokenMap.get(fullName);
-  if (token && typeof token.values.default === "object") {
-    const c = token.values.default as FigmaColorValue;
+  if (token && typeof lightValue(token) === "object") {
+    const c = lightValue(token) as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };
   }
 
@@ -79,8 +80,8 @@ export function resolveColorToken(name: string): RGB {
   if (primitive) {
     const primitiveFull = `color/${primitive}`;
     const primitiveToken = tokenMap.get(primitiveFull);
-    if (primitiveToken && typeof primitiveToken.values.default === "object") {
-      const c = primitiveToken.values.default as FigmaColorValue;
+    if (primitiveToken && typeof lightValue(primitiveToken) === "object") {
+      const c = lightValue(primitiveToken) as FigmaColorValue;
       return { r: c.r, g: c.g, b: c.b };
     }
   }

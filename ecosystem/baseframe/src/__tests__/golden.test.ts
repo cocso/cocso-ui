@@ -3,7 +3,13 @@ import { fileURLToPath } from "node:url";
 import fs from "fs-extra";
 import { describe, expect, it } from "vitest";
 import YAML from "yaml";
-import { type Collections, cssVars, type Token, tailwind } from "../core";
+import {
+  buildValidatedAst,
+  type Collections,
+  cssVars,
+  type Token,
+  tailwind,
+} from "../core";
 import { findYamlFiles } from "../utils/fs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -31,18 +37,60 @@ function loadTokens(): { tokens: Token[]; collections: Collections } {
   return { tokens, collections };
 }
 
+/**
+ * The AST split the generate script uses. `token.css` carries the primitives
+ * and the light theme; `theme-dark.css` carries the same semantic tokens in
+ * their dark mode and nothing else, so a consumer's ramp override survives the
+ * flip.
+ */
+function astFor(
+  tokens: Token[],
+  collections: Collections,
+  wanted: Record<string, string[]>
+) {
+  const ast = buildValidatedAst(tokens, collections);
+  return {
+    ...ast,
+    collections: ast.collections
+      .filter((collection) => collection.name in wanted)
+      .map((collection) => ({
+        ...collection,
+        modes: wanted[collection.name],
+      })),
+  };
+}
+
+const LIGHT_SELECTORS = {
+  global: { default: ":root" },
+  theme: { light: ":root" },
+};
+const DARK_SELECTORS = { theme: { dark: '[data-theme="dark"]' } };
+
 describe("golden file tests", () => {
   it("token.css matches snapshot", () => {
     const { tokens, collections } = loadTokens();
-    const generated = cssVars.generateCssVariables(tokens, collections, {
-      prefix: "cocso",
-      selectors: { global: { default: ":root" } },
-    });
+    const generated = cssVars.generateFromAst(
+      astFor(tokens, collections, { global: ["default"], theme: ["light"] }),
+      { prefix: "cocso", selectors: LIGHT_SELECTORS }
+    );
     const expected = fs.readFileSync(
       path.join(SNAPSHOTS_DIR, "token.css.expected"),
       "utf-8"
     );
     expect(generated).toBe(expected);
+  });
+
+  it("theme-dark.css matches snapshot", () => {
+    const { tokens, collections } = loadTokens();
+    const generated = cssVars.generateFromAst(
+      astFor(tokens, collections, { theme: ["dark"] }),
+      { prefix: "cocso", selectors: DARK_SELECTORS }
+    );
+    const expected = fs.readFileSync(
+      path.join(SNAPSHOTS_DIR, "theme-dark.css.expected"),
+      "utf-8"
+    );
+    expect(expected).toContain(generated.trimStart());
   });
 
   it("tailwind4.css matches snapshot", () => {
@@ -69,12 +117,26 @@ describe("golden file tests", () => {
 describe("published CSS matches the token sources", () => {
   it(`token.css is generated from packages/baseframe-sources (${REGENERATE})`, () => {
     const { tokens, collections } = loadTokens();
-    const generated = cssVars.generateCssVariables(tokens, collections, {
-      prefix: "cocso",
-      selectors: { global: { default: ":root" } },
-    });
+    const generated = cssVars.generateFromAst(
+      astFor(tokens, collections, { global: ["default"], theme: ["light"] }),
+      { prefix: "cocso", selectors: LIGHT_SELECTORS }
+    );
     const published = fs.readFileSync(path.join(CSS_DIR, "token.css"), "utf-8");
     expect(published).toBe(generated);
+  });
+
+  it(`theme-dark.css is generated from packages/baseframe-sources (${REGENERATE})`, () => {
+    const { tokens, collections } = loadTokens();
+    const generated = cssVars.generateFromAst(
+      astFor(tokens, collections, { theme: ["dark"] }),
+      { prefix: "cocso", selectors: DARK_SELECTORS }
+    );
+    const published = fs.readFileSync(
+      path.join(CSS_DIR, "theme-dark.css"),
+      "utf-8"
+    );
+    // The banner is written by the generate script, not the generator.
+    expect(published).toContain(generated.trimStart());
   });
 
   it(`tailwind4.css is generated from packages/baseframe-sources (${REGENERATE})`, () => {

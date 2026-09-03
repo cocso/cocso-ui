@@ -21,6 +21,19 @@ export async function loadColorVariables(): Promise<void> {
   }
 }
 
+/**
+ * The value a token carries in the light theme.
+ *
+ * Tokens used to have one mode called `default`; the semantic layer now
+ * declares `light` and `dark`, while primitives still carry a single value.
+ * Component generation works in the light theme, so this is what it reads.
+ */
+export function lightValue(token: {
+  values: Record<string, unknown>;
+}): unknown {
+  return token.values.light ?? token.values.default;
+}
+
 export function createBoundPaint(
   color: RGB,
   opacity = 1,
@@ -48,8 +61,8 @@ const tokenMap = new Map(data.tokens.map((t) => [t.name, t]));
 
 function colorToken(name: string): RGB {
   const token = tokenMap.get(name);
-  if (token && typeof token.values.default === "object") {
-    const c = token.values.default as FigmaColorValue;
+  if (token && typeof lightValue(token) === "object") {
+    const c = lightValue(token) as FigmaColorValue;
     return { r: c.r, g: c.g, b: c.b };
   }
   console.warn(

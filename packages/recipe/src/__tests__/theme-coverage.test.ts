@@ -1,22 +1,17 @@
 /**
- * Dark theme coverage — every semantic color token is accounted for
+ * Dark theme coverage — a token that does not move said so on purpose
  *
- * `theme-dark.css` is hand-written, and nothing checked that it kept up with
- * `token.css`. A semantic token added to the light theme simply had no dark
- * value, and the only way to notice was to look at it in a dark browser: the
- * four `feedback-*` base colors sat on the light theme's 500 level for as long
- * as the dark theme existed, 3.96–4.05:1 on the dark surface, under AA.
+ * The generator now requires every token in the `theme` collection to declare
+ * both a light and a dark value, so "a semantic token with no dark value" is no
+ * longer expressible. That closes the hole the `feedback-*` bases fell through,
+ * where the absence of a value was indistinguishable from a decision.
  *
- * Leaving a token alone is often correct — the fixed-hue `interactive-*` fills
- * and their `text-on-*` foregrounds are deliberate, and `theme-dark.css` says
- * so in its header. What was missing is the distinction between "decided to
- * leave it" and "never noticed it". This test draws that line: a semantic
- * token either has a dark value, or it is listed below with the reason.
- *
- * "Semantic" is mechanical — the token's value in `token.css` is a
- * `var(--cocso-color-*)` reference to another token. Raw ramp entries are
- * literals and are deliberately not redefined by the dark theme, so an app
- * override of a ramp survives the theme flip.
+ * What it does not close is the other half: a dark value written to equal the
+ * light one. That is correct for the fixed-hue `interactive-*` fills and their
+ * `text-on-*` foregrounds, and it is a defect for anything else — and the two
+ * look identical in the source. This keeps the distinction, one step further
+ * along than before: a token whose dark value matches its light one is listed
+ * here with the reason.
  */
 
 import { readFileSync } from "node:fs";
@@ -43,9 +38,11 @@ function semanticTokens(css: string): Map<string, string> {
   return tokens;
 }
 
-function declaredTokens(css: string): Set<string> {
-  return new Set(
-    [...css.matchAll(/--cocso-color-([a-z0-9-]+):/g)].map(([, name]) => name)
+function declaredTokens(css: string): Map<string, string> {
+  return new Map(
+    [...css.matchAll(/--cocso-color-([a-z0-9-]+):\s*([^;]+);/g)].map(
+      ([, name, value]) => [name, value.trim()]
+    )
   );
 }
 
@@ -57,8 +54,8 @@ function declaredTokens(css: string): Set<string> {
 const RAMP_ALIAS = /^primary-\d+$/;
 
 /**
- * Semantic tokens the dark theme deliberately does not redefine, and why.
- * Adding a token here is a decision; leaving one out is a bug.
+ * Semantic tokens whose dark value is deliberately the same as their light one,
+ * and why. Adding a token here is a decision; leaving one out is a bug.
  */
 const INTENTIONALLY_LIGHT_ONLY: Readonly<Record<string, string>> = {
   // Fixed-hue fills. A saturated accent reads well on a dark surface as-is,
@@ -88,6 +85,15 @@ const INTENTIONALLY_LIGHT_ONLY: Readonly<Record<string, string>> = {
   "text-on-info": "foreground for a fill that does not flip",
   "text-on-warning": "foreground for a fill that does not flip",
 
+  // Both sit on the middle of the neutral ramp, which is the one place a value
+  // reads on either extreme: `neutral-500` is 4.51:1 on white and 4.09:1 on the
+  // dark surface. Flipping a mid-scale value moves it toward one theme and away
+  // from the other. Both were already written into the dark theme at the same
+  // value as the light one; the check that only looked for presence could not
+  // tell that apart from a decision, and this one can.
+  "text-muted": "mid-ramp, reads on both extremes",
+  "interactive-primary-muted": "mid-ramp, reads on both extremes",
+
   // Resolves to `success-400`: 5.96:1 on the dark surface, but 3.09:1 on white.
   // No component paints text with it any more — `StockQuantityStatus` moved its
   // "normal" state to `feedback-success` — and it stays exported only because
@@ -99,26 +105,32 @@ const INTENTIONALLY_LIGHT_ONLY: Readonly<Record<string, string>> = {
 const LIGHT = semanticTokens(readCss("token.css"));
 const DARK = declaredTokens(readCss("theme-dark.css"));
 
-describe("Dark theme covers every semantic color token", () => {
+describe("A dark value that equals its light value says so on purpose", () => {
   const semantic = [...LIGHT.keys()].filter((name) => !RAMP_ALIAS.test(name));
 
   it("finds semantic tokens to check", () => {
     expect(semantic.length).toBeGreaterThan(50);
   });
 
-  it.each(
-    semantic
-  )("%s has a dark value or a documented reason not to", (name) => {
-    const covered = DARK.has(name) || name in INTENTIONALLY_LIGHT_ONLY;
+  it("every semantic token declares a dark value", () => {
+    // Guaranteed by the generator now, which rejects a token missing a mode its
+    // collection declares. Asserted anyway: it is the property the rest of this
+    // file rests on, and it used to be false.
+    expect(semantic.filter((name) => !DARK.has(name))).toEqual([]);
+  });
+
+  it.each(semantic)("%s", (name) => {
+    const moved = LIGHT.get(name) !== DARK.get(name);
+    const listed = name in INTENTIONALLY_LIGHT_ONLY;
     expect(
-      covered,
-      `--cocso-color-${name} has no value in theme-dark.css. Either give it one, or add it to INTENTIONALLY_LIGHT_ONLY with the reason.`
+      moved || listed,
+      `--cocso-color-${name} resolves to the same value in both themes. Either give it a dark value, or add it to INTENTIONALLY_LIGHT_ONLY with the reason.`
     ).toBe(true);
   });
 
   it("has no stale entries in the allowlist", () => {
     const stale = Object.keys(INTENTIONALLY_LIGHT_ONLY).filter(
-      (name) => DARK.has(name) || !LIGHT.has(name)
+      (name) => !LIGHT.has(name) || LIGHT.get(name) !== DARK.get(name)
     );
     expect(stale).toEqual([]);
   });

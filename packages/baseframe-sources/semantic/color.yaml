@@ -4,232 +4,326 @@ metadata:
   name: Color
   description: semantic color tokens for Baseframe
 data:
-  collection: global
+  collection: theme
   tokens:
     $color.alpha.shadow1:
       values:
-        default: rgba(0, 0, 0, 0.04)
+        light: 'rgba(0, 0, 0, 0.04)'
+        dark: 'rgba(0, 0, 0, 0.24)'
     $color.alpha.shadow2:
       values:
-        default: rgba(0, 0, 0, 0.08)
+        light: 'rgba(0, 0, 0, 0.08)'
+        dark: 'rgba(0, 0, 0, 0.36)'
     $color.alpha.shadow3:
       values:
-        default: rgba(0, 0, 0, 0.12)
-
+        light: 'rgba(0, 0, 0, 0.12)'
+        dark: 'rgba(0, 0, 0, 0.48)'
     $color.transparent:
       values:
-        default: transparent
-
+        light: transparent
+        dark: transparent
     $color.text.primary:
       values:
-        default: $color.neutral-950
+        light: $color.neutral-950
+        dark: $color.neutral-50
     $color.text.secondary:
       values:
-        default: $color.neutral-600
+        light: $color.neutral-600
+        dark: $color.neutral-400
     $color.text.tertiary:
       values:
-        default: $color.neutral-400
+        light: $color.neutral-400
+        dark: $color.neutral-500
     $color.text.disabled:
       values:
-        default: $color.neutral-400
+        light: $color.neutral-400
+        dark: $color.neutral-600
     $color.text.on-primary:
       values:
-        default: $color.white
+        light: $color.white
+        dark: $color.neutral-950
+    # text-on-* do not move. Their fills (interactive-success and friends) keep
+    # the same hue in both themes, so a foreground that flipped would land
+    # light-on-light — it put near-white text on bright amber at 1.67:1.
     $color.text.on-success:
       values:
-        default: $color.white
+        light: $color.white
+        dark: $color.white
     $color.text.on-danger:
       values:
-        default: $color.white
+        light: $color.white
+        dark: $color.white
     $color.text.on-info:
       values:
-        default: $color.white
+        light: $color.white
+        dark: $color.white
     $color.text.on-warning:
       values:
-        default: $color.neutral-950
+        light: $color.neutral-950
+        dark: $color.neutral-950
     $color.text.muted:
       values:
-        default: $color.neutral-500
-
+        light: $color.neutral-500
+        dark: $color.neutral-500
     $color.surface.primary:
       values:
-        default: $color.white
+        light: $color.white
+        dark: $color.neutral-950
     $color.surface.secondary:
       values:
-        default: $color.neutral-50
+        light: $color.neutral-50
+        dark: $color.neutral-900
     $color.surface.inverse:
       values:
-        default: $color.neutral-950
+        light: $color.neutral-950
+        dark: $color.white
     $color.surface.neutral:
       values:
-        default: $color.neutral-100
-
+        light: $color.neutral-100
+        dark: $color.neutral-800
+    # One step lighter than the surface they sit on in the dark theme, mirroring
+    # the light theme. border-secondary was neutral-900, the same value as
+    # surface-secondary, so every divider drawn on a card was invisible at 1.00.
     $color.border.primary:
       values:
-        default: $color.neutral-200
+        light: $color.neutral-200
+        dark: $color.neutral-700
     $color.border.secondary:
       values:
-        default: $color.neutral-100
+        light: $color.neutral-100
+        dark: $color.neutral-800
     $color.border.strong:
       values:
-        default: $color.neutral-400
-
+        light: $color.neutral-400
+        dark: $color.neutral-500
+    # Translucent tints that darken what is under them in the light theme and
+    # must lighten it in the dark one. The black-alpha-* primitives they point at
+    # stay black in both themes by design — the Dialog scrim depends on that —
+    # so the overlay role needs its own tokens.
     $color.overlay.subtle:
       values:
-        default: $color.black-alpha-5
+        light: $color.black-alpha-5
+        dark: $color.white-alpha-5
     $color.overlay.muted:
       values:
-        default: $color.black-alpha-10
+        light: $color.black-alpha-10
+        dark: $color.white-alpha-10
     $color.overlay.strong:
       values:
-        default: $color.black-alpha-20
-
+        light: $color.black-alpha-20
+        dark: $color.white-alpha-20
     $color.interactive.primary:
       values:
-        default: $color.primary-950
+        light: $color.primary-950
+        dark: $color.primary-50
     $color.interactive.primary-hover:
       values:
-        default: $color.primary-800
+        light: $color.primary-800
+        dark: $color.primary-200
     $color.interactive.primary-active:
       values:
-        default: $color.primary-700
+        light: $color.primary-700
+        dark: $color.primary-300
     $color.interactive.primary-muted:
       values:
-        default: $color.primary-500
+        light: $color.primary-500
+        dark: $color.primary-500
     $color.interactive.primary-subtle:
       values:
-        default: $color.primary-100
+        light: $color.primary-100
+        dark: $color.primary-900
     $color.interactive.primary-text:
       values:
-        default: $color.primary-800
+        light: $color.primary-800
+        dark: $color.primary-200
     $color.interactive.secondary:
       values:
-        default: $color.neutral-100
+        light: $color.neutral-100
+        dark: $color.neutral-800
     $color.interactive.secondary-hover:
       values:
-        default: $color.neutral-200
+        light: $color.neutral-200
+        dark: $color.neutral-700
     $color.interactive.neutral:
       values:
-        default: $color.neutral-100
+        light: $color.neutral-100
+        dark: $color.neutral-800
     $color.interactive.neutral-hover:
       values:
-        default: $color.neutral-200
+        light: $color.neutral-200
+        dark: $color.neutral-700
     $color.interactive.neutral-active:
       values:
-        default: $color.neutral-300
+        light: $color.neutral-300
+        dark: $color.neutral-600
+    # Fixed-hue fills: a saturated accent reads on either surface as a filled
+    # area, so these keep their value. They are fills, not text — Link painted
+    # its label with interactive-info and its hover with interactive-info-active,
+    # which measured 4.05 and 1.74 on the dark surface. Text uses the -text form.
     $color.interactive.danger:
       values:
-        default: $color.danger-500
+        light: $color.danger-500
+        dark: $color.danger-500
     $color.interactive.danger-hover:
       values:
-        default: $color.danger-600
+        light: $color.danger-600
+        dark: $color.danger-600
     $color.interactive.danger-active:
       values:
-        default: $color.danger-700
+        light: $color.danger-700
+        dark: $color.danger-700
     $color.interactive.danger-hover-subtle:
       values:
-        default: $color.danger-400
+        light: $color.danger-400
+        dark: $color.danger-400
     $color.interactive.danger-subtle-hover:
       values:
-        default: $color.danger-50
+        light: $color.danger-50
+        dark: $color.danger-950
     $color.interactive.danger-subtle-active:
       values:
-        default: $color.danger-100
+        light: $color.danger-100
+        dark: $color.danger-900
     $color.interactive.success:
       values:
-        default: $color.success-500
+        light: $color.success-500
+        dark: $color.success-500
     $color.interactive.success-hover:
       values:
-        default: $color.success-600
+        light: $color.success-600
+        dark: $color.success-600
     $color.interactive.success-active:
       values:
-        default: $color.success-700
+        light: $color.success-700
+        dark: $color.success-700
     $color.interactive.success-hover-subtle:
       values:
-        default: $color.success-400
+        light: $color.success-400
+        dark: $color.success-400
     $color.interactive.warning:
       values:
-        default: $color.warning-300
+        light: $color.warning-300
+        dark: $color.warning-300
     $color.interactive.warning-hover:
       values:
-        default: $color.warning-400
+        light: $color.warning-400
+        dark: $color.warning-400
     $color.interactive.warning-active:
       values:
-        default: $color.warning-500
+        light: $color.warning-500
+        dark: $color.warning-500
     $color.interactive.warning-hover-subtle:
       values:
-        default: $color.warning-400
+        light: $color.warning-400
+        dark: $color.warning-400
     $color.interactive.info:
       values:
-        default: $color.info-500
+        light: $color.info-500
+        dark: $color.info-500
     $color.interactive.info-hover:
       values:
-        default: $color.info-600
+        light: $color.info-600
+        dark: $color.info-600
     $color.interactive.info-active:
       values:
-        default: $color.info-700
+        light: $color.info-700
+        dark: $color.info-700
     $color.interactive.info-hover-subtle:
       values:
-        default: $color.info-400
+        light: $color.info-400
+        dark: $color.info-400
+    # The text form of the info role. info-500 clears AA on white by 0.05 and
+    # misses it everywhere else — 4.17 on a card, 3.70 on the worst tint — so the
+    # light value is the 600 level. The dark values run the other way up the ramp.
     $color.interactive.info-text:
       values:
-        default: $color.info-600
+        light: $color.info-600
+        dark: $color.info-300
     $color.interactive.info-text-hover:
       values:
-        default: $color.info-700
-
+        light: $color.info-700
+        dark: $color.info-200
     $color.focus.ring:
       values:
-        default: $color.primary-950
-
+        light: $color.primary-950
+        dark: $color.primary-50
+    # The 500 level is tuned against white and lands at 3.96-4.05 on the dark
+    # surface, under AA. One step up clears it at 5.36-5.96 without shifting hue;
+    # the 300 level clears it too but washes out, and a pastel red does not read
+    # as danger. These are fills now — Progress and Spinner — since text moved to
+    # the -text tokens.
     $color.feedback.danger:
       values:
-        default: $color.danger-500
+        light: $color.danger-500
+        dark: $color.danger-400
+    # Status surfaces. Near-invisible by luminance in both themes (1.01-1.18),
+    # which is deliberate: what separates a tint from its background is hue, and
+    # a contrast ratio does not measure that. Measured by dE, the dark tints are
+    # the more distinct of the two.
     $color.feedback.danger-subtle:
       values:
-        default: $color.danger-50
+        light: $color.danger-50
+        dark: $color.danger-950
     $color.feedback.danger-text:
       values:
-        default: $color.danger-600
+        light: $color.danger-600
+        dark: $color.danger-300
     $color.feedback.danger-border:
       values:
-        default: $color.danger-200
+        light: $color.danger-200
+        dark: $color.danger-800
     $color.feedback.success:
       values:
-        default: $color.success-500
+        light: $color.success-500
+        dark: $color.success-400
     $color.feedback.success-subtle:
       values:
-        default: $color.success-50
+        light: $color.success-50
+        dark: $color.success-950
     $color.feedback.success-text:
       values:
-        default: $color.success-600
+        light: $color.success-600
+        dark: $color.success-300
     $color.feedback.success-border:
       values:
-        default: $color.success-200
+        light: $color.success-200
+        dark: $color.success-800
+    # Retired. success-400 is 3.09 on white, so it is not a text colour; nothing
+    # paints with it since StockQuantityStatus moved to feedback-success-text. It
+    # stays exported because removing a published token is breaking.
     $color.feedback.success-muted:
       values:
-        default: $color.success-400
+        light: $color.success-400
+        dark: $color.success-400
     $color.feedback.warning:
       values:
-        default: $color.warning-500
+        light: $color.warning-500
+        dark: $color.warning-400
     $color.feedback.warning-subtle:
       values:
-        default: $color.warning-50
+        light: $color.warning-50
+        dark: $color.warning-950
     $color.feedback.warning-text:
       values:
-        default: $color.warning-600
+        light: $color.warning-600
+        dark: $color.warning-300
     $color.feedback.warning-border:
       values:
-        default: $color.warning-200
+        light: $color.warning-200
+        dark: $color.warning-800
     $color.feedback.info:
       values:
-        default: $color.info-500
+        light: $color.info-500
+        dark: $color.info-400
     $color.feedback.info-subtle:
       values:
-        default: $color.info-50
+        light: $color.info-50
+        dark: $color.info-950
     $color.feedback.info-text:
       values:
-        default: $color.info-600
+        light: $color.info-600
+        dark: $color.info-300
     $color.feedback.info-border:
       values:
-        default: $color.info-200
+        light: $color.info-200
+        dark: $color.info-800
