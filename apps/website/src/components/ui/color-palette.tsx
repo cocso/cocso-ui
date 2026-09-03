@@ -104,4 +104,4 @@ const ColorScale = ({ name, colors, className, ...props }: ColorScaleProps) => {
   );
 };
 
-export { ColorSwatch, ColorScale };
+export { ColorScale, ColorSwatch };
