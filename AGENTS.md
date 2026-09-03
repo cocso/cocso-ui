@@ -282,7 +282,7 @@ Visual regression rules:
   ```
   The workflow pushes the regenerated baselines to whatever it checks out. `--ref` alone only selects which copy of the workflow file runs; the checkout follows the `branch` input, which now falls back to the dispatch ref rather than to `main`.
 - Any PR that adds or changes a story must regenerate baselines on its branch before merge. A story with no baseline is reported separately as new; it is not silently counted as passing.
-- A story with a committed baseline MUST render deterministically. No `new Date()`, `Math.random()`, or anything else that varies between the capture and the comparison — the DayPicker `Disabled` story rendered today's date as its trigger label, so it failed on every unrelated PR opened after the day the baseline was taken. Pin the value instead.
+- A story with a committed baseline MUST render deterministically. No `new Date()`, `Math.random()`, no remote resource — an `Avatar` story fetched a random-avatar service and failed the comparison when it served different bytes — or anything else that varies between the capture and the comparison — the DayPicker `Disabled` story rendered today's date as its trigger label, so it failed on every unrelated PR opened after the day the baseline was taken. Pin the value instead.
 
 All CI jobs must pass before a PR is merged.
 
