@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [status, setStatus] = useState<CheckboxStatus>('off');
-    return <Checkbox onChange={setStatus} status={status} />;
+    return <Checkbox aria-label="동의" onChange={setStatus} status={status} />;
   },
 };
 

@@ -15,6 +15,7 @@ const meta = {
     stretch: { control: 'boolean' },
   },
   args: {
+    'aria-label': '분류',
     size: 'medium',
   },
 } satisfies Meta<typeof Select>;
@@ -60,17 +61,17 @@ export const WithLabel: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Select size="x-small"><option>x-small</option></Select>
-      <Select size="small"><option>small</option></Select>
-      <Select size="medium"><option>medium</option></Select>
-      <Select size="large"><option>large</option></Select>
+      <Select aria-label="x-small" size="x-small"><option>x-small</option></Select>
+      <Select aria-label="small" size="small"><option>small</option></Select>
+      <Select aria-label="medium" size="medium"><option>medium</option></Select>
+      <Select aria-label="large" size="large"><option>large</option></Select>
     </div>
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <Select disabled>
+    <Select aria-label="비활성 선택" disabled>
       <option>비활성화</option>
     </Select>
   ),
@@ -79,7 +80,7 @@ export const Disabled: Story = {
 export const Error: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Select error>
+      <Select aria-label="오류 상태" error>
         <option value="1">시각 에러 (boolean)</option>
       </Select>
       <Select error="항목을 선택해주세요" label="카테고리">
@@ -94,7 +95,7 @@ export const Stretch: Story = {
   parameters: { layout: 'padded' },
   render: () => (
     <div style={{ width: '300px' }}>
-      <Select stretch>
+      <Select aria-label="전체 너비 선택" stretch>
         <option value="1">옵션 1</option>
         <option value="2">옵션 2</option>
       </Select>

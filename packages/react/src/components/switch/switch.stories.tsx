@@ -14,6 +14,7 @@ const meta = {
     disabled: { control: 'boolean' },
   },
   args: {
+    'aria-label': '알림 받기',
     size: 'medium',
     variant: 'primary',
     position: 'right',
@@ -26,7 +27,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [checked, setChecked] = useState(false);
-    return <Switch checked={checked} onCheckedChange={setChecked} />;
+    return (
+      <Switch aria-label="알림 받기" checked={checked} onCheckedChange={setChecked} />
+    );
   },
 };
 

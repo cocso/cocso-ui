@@ -30,17 +30,17 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-      <Breadcrumb size="sm">
+      <Breadcrumb aria-label="Breadcrumb, small" size="sm">
         <a href="#">Home</a>
         <a href="#">Products</a>
         <span>Detail</span>
       </Breadcrumb>
-      <Breadcrumb size="md">
+      <Breadcrumb aria-label="Breadcrumb, medium" size="md">
         <a href="#">Home</a>
         <a href="#">Products</a>
         <span>Detail</span>
       </Breadcrumb>
-      <Breadcrumb size="lg">
+      <Breadcrumb aria-label="Breadcrumb, large" size="lg">
         <a href="#">Home</a>
         <a href="#">Products</a>
         <span>Detail</span>

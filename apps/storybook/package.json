@@ -11,7 +11,8 @@
     "clean": "rm -rf storybook-static .turbo node_modules",
     "test:visual": "test-storybook --browsers chromium --config-dir .storybook",
     "test:visual:ci": "test-storybook --browsers chromium --config-dir .storybook --ci",
-    "test:visual:update": "test-storybook --browsers chromium --config-dir .storybook --updateSnapshot"
+    "test:visual:update": "test-storybook --browsers chromium --config-dir .storybook --updateSnapshot",
+    "test:a11y": "STORYBOOK_A11Y=1 test-storybook --browsers chromium --config-dir .storybook --ci"
   },
   "dependencies": {
     "@cocso-ui/css": "workspace:^",
@@ -25,6 +26,7 @@
     "@storybook/test-runner": "^0.24.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "axe-playwright": "^2.2.2",
     "jest-image-snapshot": "^6.5.0",
     "playwright": "^1.59.1",
     "serve": "^14.2.6",

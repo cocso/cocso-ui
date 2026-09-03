@@ -38,6 +38,11 @@ export function OneTimePasswordField({
 }: OneTimePasswordFieldProps) {
   return (
     <OTPInput
+      // The hidden input is the control, and it is unnamed without this. The
+      // component exists for one-time codes, so a default name is meaningful
+      // where a generic one would not be — the same call `Spinner` and
+      // `Progress` make. A caller passing `aria-label` overrides it.
+      aria-label="One-time code"
       containerClassName={cn(styles.otp, className)}
       onChange={onValueChange}
       ref={ref}

@@ -199,6 +199,10 @@ When asked to review comments on a GitHub PR:
   keyboard. `packages/react/src/test/keyboard.test.tsx` drives it. axe reads
   markup, not behaviour: a component can be flawless to it and unusable
   without a mouse.
+- A story is documentation, so it MUST render an accessible example: a control
+  with an accessible name, landmarks that do not collide. The `accessibility`
+  job checks stories, not just components, and eleven of its first findings
+  were demos modelling a control nobody had named.
 - Every exported component MUST pass axe in a static render.
   `packages/react/src/test/a11y.test.tsx` runs it over each one in a
   representative state. It is a floor, not an audit — keyboard order, focus
@@ -268,6 +272,7 @@ Coverage expectations:
 - `build`: runs `pnpm build` across all packages via Turborepo.
 - `claude-review`: automated Claude Code review runs on every PR (opened, synchronize, ready_for_review, reopened). Advisory only — it comments, it does not gate merges. It requires the Claude Code GitHub App (https://github.com/apps/claude) to be installed on the repository; without it the OIDC token exchange returns 401 and the job emits a warning instead of failing.
 - `visual-regression`: screenshots every Storybook story and compares it to the committed baselines in `apps/storybook/__snapshots__/`.
+- `accessibility`: walks every Storybook story in the same browser and runs axe with the layout-dependent rules left on. `packages/react/src/test/a11y.test.tsx` runs axe in jsdom, which computes no layout and disables `color-contrast` and target size rather than appearing to cover them; this job is where those are checked. Kept separate from `visual-regression` so a failure says which kind it is.
 
 Visual regression rules:
 - Comparison uses an absolute pixel budget (`failureThresholdType: "pixel"`), never a percentage. Stories are `layout: centered` inside a 1280x720 viewport, so a ratio-based threshold measures against mostly-empty canvas and silently passes real component changes.
