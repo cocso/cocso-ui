@@ -3,6 +3,18 @@ metadata:
   id: collections
   name: collections
 data:
+  # Primitives: the raw ramps and scales. One mode, because the dark theme
+  # deliberately leaves them alone — that is what lets a consumer's `primary-*`
+  # override survive the theme flip.
   - name: global
     modes:
       - default
+  # The semantic colour layer. Two modes, and the generator requires every
+  # token in a collection to declare a value for each of them, so a token added
+  # to the light theme cannot ship without someone deciding what it does in the
+  # dark one. `feedback-*` sat on the light theme's values for as long as the
+  # dark theme existed because nothing asked.
+  - name: theme
+    modes:
+      - light
+      - dark

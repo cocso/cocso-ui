@@ -266,8 +266,14 @@ describe("generateTokenData (integration)", () => {
     expect(data.schemaVersion).toBe(1);
     expect(data.generatedAt).toBeTruthy();
     expect(data.collections).toHaveLength(1);
+    for (const token of data.tokens) {
+      expect(Object.keys(token.values).sort()).toEqual(["dark", "light"]);
+    }
     expect(data.collections[0].name).toBe("cocso-ui");
-    expect(data.collections[0].modes).toContain("default");
+    // The semantic layer lives in a two-mode collection, and Figma carries one
+    // set of modes per collection, so everything is emitted under light/dark —
+    // primitives with the same value in both, which is what they do in CSS.
+    expect(data.collections[0].modes).toEqual(["light", "dark"]);
 
     // Should have tokens
     expect(data.tokens.length).toBeGreaterThan(100);
@@ -276,31 +282,39 @@ describe("generateTokenData (integration)", () => {
     const white = data.tokens.find((t) => t.name === "color/white");
     expect(white).toBeDefined();
     expect(white?.resolvedType).toBe("COLOR");
-    expect(white?.values.default).toEqual({ r: 1, g: 1, b: 1, a: 1 });
+    // A primitive carries the same value in both modes, the way the raw
+    // ramps stay put when the CSS theme flips.
+    expect(white?.values.light).toEqual({ r: 1, g: 1, b: 1, a: 1 });
+    expect(white?.values.dark).toEqual({ r: 1, g: 1, b: 1, a: 1 });
+
+    // The point of the two modes: a semantic token whose value differs.
+    const danger = data.tokens.find((t) => t.name === "color/feedback/danger");
+    expect(danger).toBeDefined();
+    expect(danger?.values.light).not.toEqual(danger?.values.dark);
 
     const spacing8 = data.tokens.find((t) => t.name === "spacing/8");
     expect(spacing8).toBeDefined();
     expect(spacing8?.resolvedType).toBe("FLOAT");
-    expect(spacing8?.values.default).toBe(16);
+    expect(spacing8?.values.light).toBe(16);
 
     const radiusFull = data.tokens.find((t) => t.name === "radius/full");
     expect(radiusFull).toBeDefined();
-    expect(radiusFull?.values.default).toBe(1000);
+    expect(radiusFull?.values.light).toBe(1000);
 
     const fontWeightBold = data.tokens.find(
       (t) => t.name === "font-weight/bold"
     );
     expect(fontWeightBold).toBeDefined();
-    expect(fontWeightBold?.values.default).toBe(700);
+    expect(fontWeightBold?.values.light).toBe(700);
 
     const zIndexBehind = data.tokens.find((t) => t.name === "z-index/behind");
     expect(zIndexBehind).toBeDefined();
     expect(zIndexBehind?.resolvedType).toBe("FLOAT");
-    expect(zIndexBehind?.values.default).toBe(-1);
+    expect(zIndexBehind?.values.light).toBe(-1);
 
     const shadowY3 = data.tokens.find((t) => t.name === "shadow/y-3");
     expect(shadowY3).toBeDefined();
-    expect(shadowY3?.values.default).toBe(8);
+    expect(shadowY3?.values.light).toBe(8);
 
     // TokenRef resolution: $color.text.primary -> $color.neutral-950 -> #131416
     const textPrimary = data.tokens.find(
@@ -313,7 +327,7 @@ describe("generateTokenData (integration)", () => {
     const primary50 = data.tokens.find((t) => t.name === "color/primary-50");
     expect(primary50).toBeDefined();
     expect(primary50?.resolvedType).toBe("COLOR");
-    const p50Val = primary50?.values.default as FigmaColorValue;
+    const p50Val = primary50?.values.light as FigmaColorValue;
     // #F4F5F6 = rgb(244, 245, 246)
     expect(p50Val.r).toBeCloseTo(244 / 255, 2);
     expect(p50Val.g).toBeCloseTo(245 / 255, 2);
@@ -321,7 +335,7 @@ describe("generateTokenData (integration)", () => {
 
     // All COLOR tokens should have valid 0-1 range
     for (const token of data.tokens.filter((t) => t.resolvedType === "COLOR")) {
-      const v = token.values.default as FigmaColorValue;
+      const v = token.values.light as FigmaColorValue;
       expect(v.r).toBeGreaterThanOrEqual(0);
       expect(v.r).toBeLessThanOrEqual(1);
       expect(v.g).toBeGreaterThanOrEqual(0);
@@ -334,7 +348,7 @@ describe("generateTokenData (integration)", () => {
 
     // All FLOAT tokens should be unitless numbers
     for (const token of data.tokens.filter((t) => t.resolvedType === "FLOAT")) {
-      expect(typeof token.values.default).toBe("number");
+      expect(typeof token.values.light).toBe("number");
     }
   });
 

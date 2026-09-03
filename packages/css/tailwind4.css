@@ -123,6 +123,23 @@
   --z-index-dialog-content: var(--cocso-z-index-dialog-content);
   --z-index-popover: var(--cocso-z-index-popover);
   --z-index-tooltip: var(--cocso-z-index-tooltip);
+  --duration-fast: var(--cocso-duration-fast);
+  --duration-normal: var(--cocso-duration-normal);
+  --duration-slow: var(--cocso-duration-slow);
+  --duration-decorative: var(--cocso-duration-decorative);
+  --duration-decorative-slow: var(--cocso-duration-decorative-slow);
+  --easing-default: var(--cocso-easing-default);
+  --easing-soft: var(--cocso-easing-soft);
+  --easing-entrance: var(--cocso-easing-entrance);
+  --easing-accordion: var(--cocso-easing-accordion);
+  --shadow-thumb: var(--cocso-shadow-thumb);
+  --shadow-card: var(--cocso-shadow-card);
+  --shadow-dropdown: var(--cocso-shadow-dropdown);
+  --shadow-popover: var(--cocso-shadow-popover);
+  --shadow-dialog: var(--cocso-shadow-dialog);
+}
+
+@theme {
   --color-alpha-shadow1: var(--cocso-color-alpha-shadow1);
   --color-alpha-shadow2: var(--cocso-color-alpha-shadow2);
   --color-alpha-shadow3: var(--cocso-color-alpha-shadow3);
@@ -196,20 +213,6 @@
   --color-feedback-info-subtle: var(--cocso-color-feedback-info-subtle);
   --color-feedback-info-text: var(--cocso-color-feedback-info-text);
   --color-feedback-info-border: var(--cocso-color-feedback-info-border);
-  --duration-fast: var(--cocso-duration-fast);
-  --duration-normal: var(--cocso-duration-normal);
-  --duration-slow: var(--cocso-duration-slow);
-  --duration-decorative: var(--cocso-duration-decorative);
-  --duration-decorative-slow: var(--cocso-duration-decorative-slow);
-  --easing-default: var(--cocso-easing-default);
-  --easing-soft: var(--cocso-easing-soft);
-  --easing-entrance: var(--cocso-easing-entrance);
-  --easing-accordion: var(--cocso-easing-accordion);
-  --shadow-thumb: var(--cocso-shadow-thumb);
-  --shadow-card: var(--cocso-shadow-card);
-  --shadow-dropdown: var(--cocso-shadow-dropdown);
-  --shadow-popover: var(--cocso-shadow-popover);
-  --shadow-dialog: var(--cocso-shadow-dialog);
 }
 
 @utility z-* { z-index: --value(--z-index-*); }

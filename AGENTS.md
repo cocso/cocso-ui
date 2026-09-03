@@ -108,9 +108,9 @@ When asked to review comments on a GitHub PR:
   component. `--cocso-color-primary-50`…`950` is the documented theming entry
   point; see the Theming Entry Point section in `docs/project-css.md`.
 - CSS Modules MUST NOT hardcode a primitive color (`--cocso-color-white`,
-  `--cocso-color-neutral-500`, and the rest of the raw scale). `theme-dark.css`
-  redefines the semantic layer and deliberately leaves the raw scale alone, so a
-  primitive written into a module keeps its value when the theme flips. Use the
+  `--cocso-color-neutral-500`, and the rest of the raw scale). The dark theme
+  carries the semantic layer only and deliberately leaves the raw scale alone,
+  so a primitive written into a module keeps its value when the theme flips. Use the
   semantic token that resolves to the same value in the light theme.
   `packages/react/src/test/module-css-tokens.test.ts` enforces this across every
   CSS Module, with no exceptions.
@@ -201,8 +201,9 @@ When asked to review comments on a GitHub PR:
 
 ### Codegen Rules
 
-- `packages/css/token.css` and `packages/css/tailwind4.css` are generated from `packages/baseframe-sources`. Do NOT hand-edit them: add the token to the YAML and run `pnpm --filter @cocso-ui/baseframe generate:css`. `ecosystem/baseframe/src/__tests__/golden.test.ts` fails when a published file and the YAML disagree. A token added straight to `token.css` never reaches `tailwind4.css` or the Figma token export, both of which read the YAML.
-- `packages/css/theme-dark.css` is the exception and IS hand-written. It redefines the semantic layer only; the raw color scale stays untouched so a consumer override of a ramp survives the theme flip.
+- `packages/css/token.css`, `packages/css/tailwind4.css` and `packages/css/theme-dark.css` are ALL generated from `packages/baseframe-sources`. Do NOT hand-edit them: add the token to the YAML and run `pnpm --filter @cocso-ui/baseframe generate:css`. `ecosystem/baseframe/src/__tests__/golden.test.ts` fails when a published file and the YAML disagree.
+- Semantic color tokens live in the `theme` collection, which declares the modes `light` and `dark`. The generator rejects a token missing a value for a mode its collection declares, so a semantic token cannot ship without someone deciding what it does in the dark theme. That is the check the `feedback-*` bases went without for as long as the dark theme existed.
+- Primitives stay in the `global` collection with its single mode, and `theme-dark.css` carries the semantic layer only. The raw ramps are never re-emitted there, which is what keeps a consumer's `--cocso-color-primary-*` override alive when the theme flips.
 
 - Recipe definitions in `packages/recipe/` are the single source of truth for component visual specs.
 - After modifying any recipe, run `pnpm --filter @cocso-ui/codegen generate` and commit the generated output.

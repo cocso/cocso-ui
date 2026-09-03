@@ -101,7 +101,7 @@ interface RawToken {
   collection: string;
   modes: string[];
   name: string;
-  rawValue: string | number;
+  values: Record<string, string | number>;
 }
 
 function loadRawTokens(): {
@@ -117,8 +117,11 @@ function loadRawTokens(): {
     const doc = parseYaml(content);
 
     if (doc?.kind === "TokenCollections" && doc.data) {
+      // Figma carries one set of modes per collection, and everything here is
+      // emitted into one. Take the richest set — the themed collection's — and
+      // let single-mode collections fill every mode with their one value.
       for (const col of doc.data) {
-        if (col.modes) {
+        if (col.modes && col.modes.length > modes.length) {
           modes = col.modes;
         }
       }
@@ -135,17 +138,32 @@ function loadRawTokens(): {
     for (const [tokenName, tokenDef] of Object.entries(tokens)) {
       const values = (tokenDef as { values: Record<string, string | number> })
         .values;
-      const rawValue = values.default;
       allTokens.push({
         name: tokenName,
         collection,
-        rawValue: typeof rawValue === "number" ? rawValue : String(rawValue),
+        values,
         modes: Object.keys(values),
       });
     }
   }
 
   return { tokens: allTokens, modes };
+}
+
+/**
+ * The value a token carries in a given Figma mode.
+ *
+ * A token declares the modes its own collection has, and those differ: the
+ * primitives live in a single-mode collection and the semantic layer in a
+ * light/dark one. Figma wants one set of modes per collection, so a primitive
+ * contributes its single value to every mode — which is also what it does in
+ * CSS, where the dark theme does not redefine the raw ramps.
+ */
+function valueForMode(
+  token: RawToken,
+  mode: string
+): string | number | undefined {
+  return token.values[mode] ?? token.values.default;
 }
 
 /**
@@ -219,16 +237,27 @@ export function parseResolvedValue(
 export function generateTokenData(): FigmaTokenData {
   const { tokens: rawTokens, modes } = loadRawTokens();
 
-  const tokenMap = new Map<string, string | number>();
-  for (const t of rawTokens) {
-    tokenMap.set(t.name, t.rawValue);
+  // One map per mode, so a semantic token resolves through the ramp using the
+  // value that mode gives it. `feedback-danger` reaches `danger-500` in light
+  // and `danger-400` in dark, and the ramp itself is the same in both.
+  const mapsByMode = new Map<string, Map<string, string | number>>();
+  for (const mode of modes) {
+    const map = new Map<string, string | number>();
+    for (const t of rawTokens) {
+      const value = valueForMode(t, mode);
+      if (value !== undefined) {
+        map.set(t.name, value);
+      }
+    }
+    mapsByMode.set(mode, map);
   }
 
   const tokens: FigmaTokenDef[] = [];
   const skipped: FigmaSkippedToken[] = [];
 
   for (const raw of rawTokens) {
-    if (typeof raw.rawValue === "string" && isShadowComposite(raw.rawValue)) {
+    const firstValue = valueForMode(raw, modes[0]);
+    if (typeof firstValue === "string" && isShadowComposite(firstValue)) {
       skipped.push({
         sourceTokenName: raw.name,
         reason:
@@ -238,15 +267,24 @@ export function generateTokenData(): FigmaTokenData {
     }
 
     try {
-      const resolved = resolveTokenRef(raw.name, tokenMap);
-      const parsed = parseResolvedValue(resolved);
+      const values: Record<string, unknown> = {};
+      let resolvedType: FigmaTokenDef["resolvedType"] | undefined;
+      for (const mode of modes) {
+        const resolved = resolveTokenRef(
+          raw.name,
+          mapsByMode.get(mode) as Map<string, string | number>
+        );
+        const parsed = parseResolvedValue(resolved);
+        resolvedType = parsed.type;
+        values[mode] = parsed.value;
+      }
 
       tokens.push({
         name: toFigmaName(raw.name),
         sourceTokenName: raw.name,
         collection: "cocso-ui",
-        resolvedType: parsed.type,
-        values: { default: parsed.value },
+        resolvedType: resolvedType as FigmaTokenDef["resolvedType"],
+        values: values as FigmaTokenDef["values"],
       });
     } catch (err) {
       skipped.push({
