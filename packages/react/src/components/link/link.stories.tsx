@@ -39,7 +39,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <Link href="#" variant="inline">Inline</Link>
-      <span style={{ color: 'oklch(0.6 0.15 250)' }}>
+      <span style={{ color: 'var(--cocso-color-interactive-info-text)' }}>
         <Link href="#" variant="current">Current</Link>
       </span>
       <Link href="#" variant="plain">Plain</Link>
@@ -53,7 +53,7 @@ export const WithExternalIcon: Story = {
       <Link href="#" variant="inline">
         외부 링크 <Link.ExternalIcon />
       </Link>
-      <span style={{ color: 'oklch(0.6 0.15 250)' }}>
+      <span style={{ color: 'var(--cocso-color-interactive-info-text)' }}>
         <Link href="#" variant="current">
           외부 링크 <Link.ExternalIcon />
         </Link>

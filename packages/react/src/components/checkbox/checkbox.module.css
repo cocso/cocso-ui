@@ -1,8 +1,13 @@
 @layer components {
+  /* WCAG 2.2 SC 2.5.8 asks 24x24 CSS px of a pointer target. The visual box is
+     14-18px depending on size, and the label toggles the control, so the row is
+     the target — measured at 21px tall before this. The minimum height lifts
+     the target without touching the box, which stays the size it was drawn. */
   .wrapper {
     display: flex;
     gap: var(--cocso-spacing-5);
     align-items: center;
+    min-height: 24px;
   }
 
   .checkbox {
