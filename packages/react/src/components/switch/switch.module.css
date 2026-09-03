@@ -65,4 +65,11 @@
       -50%
     );
   }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .thumb {
+      transition: none;
+    }
+  }
 }

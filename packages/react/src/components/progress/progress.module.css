@@ -13,4 +13,11 @@
     border-radius: inherit;
     transition: width var(--cocso-duration-normal) var(--cocso-easing-soft);
   }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .fill {
+      transition: none;
+    }
+  }
 }

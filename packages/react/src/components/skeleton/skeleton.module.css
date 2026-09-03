@@ -48,4 +48,15 @@
       transform: translateX(100%);
     }
   }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse {
+      animation: none;
+    }
+
+    .wave::after {
+      animation: none;
+    }
+  }
 }

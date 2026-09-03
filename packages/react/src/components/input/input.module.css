@@ -62,8 +62,8 @@
 
   .toggle {
     position: absolute;
+    inset-inline-end: var(--cocso-input-padding-x);
     top: 50%;
-    right: var(--cocso-input-padding-x);
     display: flex;
     align-items: center;
     padding: 0;
@@ -108,5 +108,12 @@
     box-shadow:
       0 0 0 1px var(--cocso-color-feedback-danger),
       var(--cocso-shadow-xs);
+  }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .input {
+      transition: none;
+    }
   }
 }

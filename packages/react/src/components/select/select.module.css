@@ -19,8 +19,8 @@
     --cocso-select-bg-color: var(--cocso-color-surface-primary);
     min-width: var(--cocso-select-min-width);
     height: var(--cocso-select-height);
-    padding-right: var(--cocso-select-padding-right);
-    padding-left: var(--cocso-select-padding-left);
+    padding-inline-start: var(--cocso-select-padding-left);
+    padding-inline-end: var(--cocso-select-padding-right);
     font-size: var(--cocso-select-font-size);
     color: var(--cocso-color-text-primary);
     -moz-appearance: none;
@@ -69,10 +69,14 @@
       var(--cocso-shadow-xs);
   }
 
+  /* The custom property names still read left/right because they are the
+     codegen-emitted override surface and renaming them would break a consumer
+     targeting them. The properties reading them are logical, so the field
+     mirrors correctly in an RTL document. */
   .icon {
     position: absolute;
+    inset-inline-end: var(--cocso-select-icon-right, var(--cocso-spacing-5));
     top: 50%;
-    right: var(--cocso-select-icon-right, var(--cocso-spacing-5));
     color: var(--cocso-color-text-muted);
     pointer-events: none;
     transform: translateY(-50%);
@@ -80,5 +84,12 @@
 
   .wrapper:has(select:disabled) .icon {
     opacity: 0.4;
+  }
+
+  /* Motion is decoration here; the component reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .select {
+      transition: none;
+    }
   }
 }
