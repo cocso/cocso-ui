@@ -15,6 +15,13 @@ export type ProgressVariant =
 export type ProgressSize = "sm" | "md" | "lg";
 
 export interface ProgressProps extends ComponentProps<"div"> {
+  /**
+   * Accessible name. `role="progressbar"` is invalid without one — a screen
+   * reader announces a bar and nothing about what it measures — and the
+   * library cannot know it, so this defaults the way `Spinner` does rather
+   * than leaving the role unnamed.
+   */
+  label?: string;
   max?: number;
   size?: ProgressSize;
   value: number;
@@ -30,6 +37,7 @@ export function Progress({
   size = "md",
   value,
   max = 100,
+  label = "Progress",
   ...props
 }: ProgressProps) {
   const safeMax = max > 0 ? max : 100;
@@ -37,6 +45,7 @@ export function Progress({
 
   return (
     <div
+      aria-label={label}
       aria-valuemax={safeMax}
       aria-valuemin={0}
       aria-valuenow={Math.min(Math.max(0, value), safeMax)}

@@ -7,7 +7,22 @@ import type {
 import { clampColor, isValidColor } from "./color-converter";
 import { groupByCollection } from "./token-converter";
 
-async function getOrCreateCollection(name: string): Promise<{
+/**
+ * Find or create the collection, and make its modes match the ones the export
+ * declares.
+ *
+ * This used to force a single mode called `default`, from when the sources had
+ * one. They now declare `light` and `dark`, and a mode the collection does not
+ * have has no id — so `toUpsertParams` would find nothing in the map and write
+ * a variable with no values at all, silently, for every token.
+ *
+ * Figma always gives a new collection one mode, so the first declared name
+ * renames it and the rest are added.
+ */
+async function getOrCreateCollection(
+  name: string,
+  modes: string[]
+): Promise<{
   collection: VariableCollection;
   modeIdMap: Record<string, string>;
 }> {
@@ -21,10 +36,21 @@ async function getOrCreateCollection(name: string): Promise<{
     modeIdMap[mode.name] = mode.modeId;
   }
 
-  if (!modeIdMap.default && collection.modes.length > 0) {
-    const firstMode = collection.modes[0];
-    collection.renameMode(firstMode.modeId, "default");
-    modeIdMap.default = firstMode.modeId;
+  const wanted = modes.length > 0 ? modes : ["default"];
+
+  for (const [index, modeName] of wanted.entries()) {
+    if (modeIdMap[modeName]) {
+      continue;
+    }
+    // Rename the mode Figma created with the collection rather than leaving a
+    // stray "Mode 1" beside the ones we add.
+    if (index === 0 && collection.modes.length === 1) {
+      const [only] = collection.modes;
+      collection.renameMode(only.modeId, modeName);
+      modeIdMap[modeName] = only.modeId;
+      continue;
+    }
+    modeIdMap[modeName] = collection.addMode(modeName);
   }
 
   return { collection, modeIdMap };
@@ -113,8 +139,11 @@ export async function syncTokens(data: FigmaTokenData): Promise<SyncResult> {
 
   for (const [collectionName, tokens] of groups) {
     try {
-      const { collection, modeIdMap } =
-        await getOrCreateCollection(collectionName);
+      const declared = data.collections.find((c) => c.name === collectionName);
+      const { collection, modeIdMap } = await getOrCreateCollection(
+        collectionName,
+        declared?.modes ?? []
+      );
 
       for (const token of tokens) {
         try {

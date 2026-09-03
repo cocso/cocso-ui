@@ -185,6 +185,14 @@ When asked to review comments on a GitHub PR:
 - A 500-level accent is a FILL. Body text uses the 600 level
   (`feedback-*-text`, `interactive-info-text`): the 500 level clears AA on
   white by under 0.1 and misses it on every other surface.
+- Every exported component MUST pass axe in a static render.
+  `packages/react/src/test/a11y.test.tsx` runs it over each one in a
+  representative state. It is a floor, not an audit — keyboard order, focus
+  movement and screen-reader output are outside what a jsdom render can see,
+  and rules needing layout are disabled explicitly rather than left to pass
+  silently. A component rendering an ARIA role MUST give it an accessible
+  name: `Progress` shipped `role="progressbar"` unnamed, which announces a bar
+  and nothing about what it measures.
 - Text below 24px (or below 18.66px bold) may only use `text-primary` or
   `text-secondary`. `text-tertiary` and `text-muted` are below WCAG AA at body
   size on every surface in both themes; they are for large text and non-text

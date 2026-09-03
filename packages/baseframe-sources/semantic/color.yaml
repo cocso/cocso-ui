@@ -18,6 +18,7 @@ data:
       values:
         light: 'rgba(0, 0, 0, 0.12)'
         dark: 'rgba(0, 0, 0, 0.48)'
+    # same-in-both: no colour to flip
     $color.transparent:
       values:
         light: transparent
@@ -45,22 +46,27 @@ data:
     # text-on-* do not move. Their fills (interactive-success and friends) keep
     # the same hue in both themes, so a foreground that flipped would land
     # light-on-light — it put near-white text on bright amber at 1.67:1.
+    # same-in-both: foreground for a fill that does not flip
     $color.text.on-success:
       values:
         light: $color.white
         dark: $color.white
+    # same-in-both: foreground for a fill that does not flip
     $color.text.on-danger:
       values:
         light: $color.white
         dark: $color.white
+    # same-in-both: foreground for a fill that does not flip
     $color.text.on-info:
       values:
         light: $color.white
         dark: $color.white
+    # same-in-both: foreground for a fill that does not flip
     $color.text.on-warning:
       values:
         light: $color.neutral-950
         dark: $color.neutral-950
+    # same-in-both: mid-ramp, reads on both extremes
     $color.text.muted:
       values:
         light: $color.neutral-500
@@ -124,6 +130,7 @@ data:
       values:
         light: $color.primary-700
         dark: $color.primary-300
+    # same-in-both: mid-ramp, reads on both extremes
     $color.interactive.primary-muted:
       values:
         light: $color.primary-500
@@ -160,18 +167,22 @@ data:
     # area, so these keep their value. They are fills, not text — Link painted
     # its label with interactive-info and its hover with interactive-info-active,
     # which measured 4.05 and 1.74 on the dark surface. Text uses the -text form.
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.danger:
       values:
         light: $color.danger-500
         dark: $color.danger-500
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.danger-hover:
       values:
         light: $color.danger-600
         dark: $color.danger-600
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.danger-active:
       values:
         light: $color.danger-700
         dark: $color.danger-700
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.danger-hover-subtle:
       values:
         light: $color.danger-400
@@ -184,50 +195,62 @@ data:
       values:
         light: $color.danger-100
         dark: $color.danger-900
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.success:
       values:
         light: $color.success-500
         dark: $color.success-500
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.success-hover:
       values:
         light: $color.success-600
         dark: $color.success-600
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.success-active:
       values:
         light: $color.success-700
         dark: $color.success-700
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.success-hover-subtle:
       values:
         light: $color.success-400
         dark: $color.success-400
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.warning:
       values:
         light: $color.warning-300
         dark: $color.warning-300
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.warning-hover:
       values:
         light: $color.warning-400
         dark: $color.warning-400
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.warning-active:
       values:
         light: $color.warning-500
         dark: $color.warning-500
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.warning-hover-subtle:
       values:
         light: $color.warning-400
         dark: $color.warning-400
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.info:
       values:
         light: $color.info-500
         dark: $color.info-500
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.info-hover:
       values:
         light: $color.info-600
         dark: $color.info-600
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.info-active:
       values:
         light: $color.info-700
         dark: $color.info-700
+    # same-in-both: fixed-hue fill, reads on both themes
     $color.interactive.info-hover-subtle:
       values:
         light: $color.info-400
@@ -291,6 +314,7 @@ data:
     # Retired. success-400 is 3.09 on white, so it is not a text colour; nothing
     # paints with it since StockQuantityStatus moved to feedback-success-text. It
     # stays exported because removing a published token is breaking.
+    # same-in-both: retired, not used as a text color
     $color.feedback.success-muted:
       values:
         light: $color.success-400
