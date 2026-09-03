@@ -37,6 +37,56 @@
     width: 100%;
   }
 
+  /* Present only when the reveal button is. The button needs a positioned
+     ancestor, and it overlays the field rather than wrapping it: a wrapper with
+     its own border would show the focus ring twice, and the caller's
+     `className` stays on the input either way. */
+  .control {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .control.stretch {
+    width: 100%;
+  }
+
+  /* Reserve the button's column so a long value never runs underneath it. */
+  .input.withToggle {
+    padding-inline-end: calc(
+      var(--cocso-input-padding-x) *
+      2 +
+      var(--cocso-spacing-5)
+    );
+  }
+
+  .toggle {
+    position: absolute;
+    top: 50%;
+    right: var(--cocso-input-padding-x);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    /* One step back from the value, and it clears AA in both themes.
+       `text-tertiary` is 3.08:1 on white and must not be used here. */
+    color: var(--cocso-color-text-secondary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--cocso-radius-2);
+    transform: translateY(-50%);
+  }
+
+  .toggle:focus-visible {
+    outline: 2px solid var(--cocso-color-border-strong);
+    outline-offset: 1px;
+  }
+
+  .toggle:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
   .input:disabled {
     cursor: not-allowed;
     opacity: 0.4;

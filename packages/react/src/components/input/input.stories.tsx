@@ -90,3 +90,19 @@ export const ReadOnly: Story = {
     <Input readOnly value="읽기 전용" />
   ),
 };
+
+export const PasswordToggle: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+      <Input label="비밀번호" passwordToggle placeholder="비밀번호" stretch type="password" />
+      <Input
+        defaultValue="드러난값"
+        label="드러난 상태"
+        passwordToggle
+        stretch
+        type="text"
+      />
+      <Input disabled label="비활성" passwordToggle placeholder="비밀번호" stretch type="password" />
+    </div>
+  ),
+};
