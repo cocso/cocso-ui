@@ -13,6 +13,10 @@ compose-foundation = { group = "androidx.compose.foundation", name = "foundation
 # Text and the progress indicator only. The Material controls the design
 # system replaces (Button, TextField, Switch) are deliberately not used.
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+# The eye glyph CCInput's reveal toggle needs. The core icon set has no
+# equivalent, and iOS uses `eye`/`eye.slash` — a text label instead would be the
+# one place the two platforms show a different control for the same thing.
+compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }

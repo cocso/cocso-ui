@@ -90,10 +90,36 @@ describe("A component's variants agree across platforms", () => {
   });
 });
 
+/**
+ * A view is recipe-backed when the generator emitted a style for it. Not every
+ * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum, with
+ * no recipe behind it and so nothing to resolve.
+ *
+ * The set is read from the generated styles rather than assumed, and the
+ * leftovers are then checked against the one name expected to be among them —
+ * so a resolver that stops being emitted fails here rather than quietly
+ * exempting the view that used to call it.
+ */
+const generatedStyles = new Set(
+  [
+    ...readFileSync(
+      path.join(SWIFT_DIR, "CocsoStyles.swift"),
+      "utf-8"
+    ).matchAll(/public struct (CC\w+)Style\b/g),
+  ].map(([, name]) => name)
+);
+
 describe("Views take their values from the generated styles", () => {
   const shared = swift.filter((n) => kotlin.includes(n));
+  const recipeBacked = shared.filter((n) => generatedStyles.has(n));
 
-  it.each(shared)("%s resolves a style rather than naming tokens", (name) => {
+  it("exempts only the views with no recipe behind them", () => {
+    expect(shared.filter((n) => !generatedStyles.has(n))).toEqual([
+      "CCTouchTarget",
+    ]);
+  });
+
+  it.each(recipeBacked)("%s resolves a style rather than naming tokens", (name) => {
     const swiftSource = readFileSync(
       path.join(SWIFT_DIR, `${name}.swift`),
       "utf-8"

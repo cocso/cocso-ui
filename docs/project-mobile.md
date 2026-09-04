@@ -11,8 +11,8 @@ The source of truth is already platform-neutral: `packages/baseframe-sources` is
 ## Path
 
 - `ecosystem/baseframe/` — the generator. Already owns CSS emission from the same AST; gains Swift and Kotlin emitters.
-- `packages/swiftui/` — *planned*. Swift package: `Sources/CocsoUI/`.
-- `packages/compose/` — *planned*. Gradle module: `src/main/kotlin/ai/cocso/ui/`.
+- `packages/swiftui/` — Swift package: `Sources/CocsoUI/`.
+- `packages/compose/` — Gradle module: `src/main/kotlin/ai/cocso/ui/`.
 
 ## Runtime and Language
 
@@ -37,7 +37,7 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 
 ## Out of Scope
 
-- **The rest of the components.** Four exist — `CCButton`, `CCBadge`, `CCCard`, `CCAlert` — enough to prove the layering. The remaining recipes have generated styles already; what each still needs is a view, and those are added as they are wanted rather than all at once.
+- **The recipes with no view yet.** Twelve components exist, matched on both platforms. Every recipe has a generated style already; what the rest still need is a view, and those are added as they are wanted rather than all at once.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
 - Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
 - Alpha colours and composite shadows. The CSS carries `rgba()` scrims and multi-layer shadows that have no single-value equivalent on either platform. They are excluded and named, not silently dropped.
@@ -98,20 +98,25 @@ The generator prints what it wrote and what it excluded, with the reason — the
 ## Build and Test
 
 ```bash
-pnpm --filter @cocso-ui/baseframe generate:mobile   # planned
+pnpm --filter @cocso-ui/baseframe generate:mobile
+pnpm --filter @cocso-ui/codegen generate:mobile-styles
 pnpm --filter @cocso-ui/baseframe test
+pnpm --filter @cocso-ui/codegen test
+(cd packages/swiftui && swift build)
+(cd packages/compose && ./gradlew :compileDebugKotlin)
 ```
 
 CI expectations:
 
 - `golden.test.ts` compares every generated artifact to the sources, and fails when a published file and the YAML disagree. The mobile artifacts join the CSS ones there.
 - A parity assertion: the Swift and Kotlin token sets are identical to each other and to the CSS. That is the check `cocso/mobile` did not have, and its absence is why 55 colours could go missing without anything failing.
+- `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the one name expected to be in it, so a resolver that stops being emitted fails rather than silently excusing its view.
 
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
 2. Consumption in `cocso/mobile` — replace its hand-written `sync_tokens_from_cocso_ui.py` with this artifact, and delete the converter.
-3. The remaining views. Every recipe has a generated style; each needs a view before it is usable. `cocso/mobile`'s fifteen `CC*` components are the obvious source of what to build and in what order — and, once these exist, what they should be replaced by, since theirs pick colours per variant by hand.
+3. **Views.** Twelve are done — button, badge, card, alert, typography, avatar, skeleton, progress, spinner, checkbox, switch, input — plus the `CCTouchTarget` primitive. The rest follow as they are wanted; `cocso/mobile`'s `CC*` set is the source of what to build and in what order, and what it should be replaced by, since theirs pick colours per variant by hand.
 
 ## Open Questions
 
