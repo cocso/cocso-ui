@@ -3,9 +3,7 @@ import SwiftUI
 /**
  A surface that groups content.
 
- Values come from `CCCardStyle.resolve`, generated from `card.recipe.ts`. The
- recipe's `padding` dimension is CSS shorthand, which does not cross as a
- length, so the inset is taken from the spacing scale here and named as such.
+ Values come from `CCCardStyle.resolve`, generated from `card.recipe.ts`.
  */
 public struct CCCard<Content: View>: View {
     private let variant: CCCardVariant
@@ -24,14 +22,6 @@ public struct CCCard<Content: View>: View {
         self.content = content()
     }
 
-    private var inset: CGFloat {
-        switch padding {
-        case .sm: return CocsoTokens.Spacing.s5
-        case .md: return CocsoTokens.Spacing.s7
-        case .lg: return CocsoTokens.Spacing.s9
-        }
-    }
-
     public var body: some View {
         let style = CCCardStyle.resolve(
             variant: variant,
@@ -39,7 +29,10 @@ public struct CCCard<Content: View>: View {
             scheme: colorScheme
         )
         content
-            .padding(inset)
+            // The recipe's 12/16/24. Picking these from the spacing scale by
+            // hand gave 8/12/20 — every card was tighter than the web's.
+            .padding(.horizontal, style.paddingX ?? 0)
+            .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
     }

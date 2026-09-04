@@ -13,11 +13,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -40,6 +44,9 @@ fun CCCheckbox(
     val side = style.size ?: 16.dp
     val radius = RoundedCornerShape(style.radius ?: 2.dp)
     val interactionSource = remember { MutableInteractionSource() }
+    // WCAG 2.4.7 applies wherever there is a keyboard, and Android supports
+    // one. The recipe carries the ring's colour; without this it went unread.
+    var isFocused by remember { mutableStateOf(false) }
     // `text-on-primary`, not white: the fill is `interactive-primary`, which the
     // dark theme flips to a near-white. That pairing is why the web's checkbox
     // was 1.09:1 in dark mode.
@@ -48,6 +55,7 @@ fun CCCheckbox(
     Row(
         modifier = modifier
             .alpha(if (enabled) 1f else 0.4f)
+            .onFocusChanged { isFocused = it.isFocused }
             .clickable(
                 enabled = enabled,
                 interactionSource = interactionSource,
@@ -78,7 +86,12 @@ fun CCCheckbox(
                 .size(side)
                 .clip(radius)
                 .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
-                .border(1.dp, style.borderColor ?: CocsoTokens.Color.borderPrimary(), radius),
+                .border(1.dp, style.borderColor ?: CocsoTokens.Color.borderPrimary(), radius)
+                .border(
+                    if (isFocused) 2.dp else 0.dp,
+                    style.focusRingColor ?: CocsoTokens.Color.focusRing(),
+                    radius,
+                ),
             contentAlignment = Alignment.Center,
         ) {
             when (status) {

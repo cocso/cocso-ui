@@ -29,9 +29,13 @@ public struct CCProgress: View {
         let fraction = total > 0 ? min(max(value / total, 0), 1) : 0
         let height = style.height ?? 8
         GeometryReader { geometry in
+            // The recipe gives a radius per size. A capsule here ignored it,
+            // and Android did not — the same bar was a different shape on the
+            // two platforms.
+            let shape = RoundedRectangle(cornerRadius: style.borderRadius ?? height / 2)
             ZStack(alignment: .leading) {
-                Capsule().fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme))
-                Capsule()
+                shape.fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme))
+                shape
                     .fill(style.fillColor ?? CocsoTokens.Color.interactivePrimary(colorScheme))
                     .frame(width: geometry.size.width * fraction)
             }

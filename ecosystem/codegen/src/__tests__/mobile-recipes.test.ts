@@ -17,7 +17,14 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { UNITLESS_PROPERTIES } from "@cocso-ui/recipe";
+import { generateCSS } from "../generate-recipe";
 import { generateRecipeStyles, type RecipeLike } from "../mobile-recipes";
+
+/** `font-weight` back to the `fontWeight` the recipe wrote. */
+function camelCase(kebab: string): string {
+  return kebab.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
+}
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "../../../..");
@@ -196,5 +203,32 @@ describe("Nothing is dropped without a decision", () => {
     for (const { recipe, property, reason } of output.skipped) {
       expect(reason, `${recipe}.${property} was dropped silently`).toBeTruthy();
     }
+  });
+});
+
+/**
+ * Units on properties that do not take them.
+ *
+ * `resolveStyleValue` turns every number into a length, which is right for
+ * almost all of them. It was wrong for four: the web's headings and its active
+ * pagination page asked for `font-weight: 600px` and `700px`, which a browser
+ * discards — they were not bold at all — and the spinner published its blade
+ * count as `10px`, which fails inside the `calc()` a consumer divides by.
+ *
+ * The mobile emitter got these right, which is how they surfaced: the two
+ * sides of the same recipe disagreed, and only one of them was wrong.
+ */
+describe("Numbers carry a unit only where CSS takes one", () => {
+  it("never puts a length on an unitless property", () => {
+    const offenders: string[] = [];
+    for (const recipe of recipes) {
+      for (const line of generateCSS(recipe as never).split("\n")) {
+        const match = line.match(/--cocso-[\w-]*?-([\w-]+): (-?[\d.]+)(px|rem|em);/);
+        if (match && UNITLESS_PROPERTIES.has(camelCase(match[1]))) {
+          offenders.push(`${recipe.name}: ${line.trim()}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 });

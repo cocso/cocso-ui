@@ -144,3 +144,64 @@ describe("Views take their values from the generated styles", () => {
     ).toMatch(new RegExp(`${name[0].toLowerCase()}${name.slice(1)}Style\\(`));
   });
 });
+
+/**
+ * Every value the resolver hands a view is used by it.
+ *
+ * Carrying a value across and then not reading it is the same loss as never
+ * carrying it, and it is quieter — the generator reports success. Four
+ * properties were arriving unread when this was written, and each one was a
+ * visible difference from the web:
+ *
+ * - `CCCard` picked its inset from the spacing scale by hand, giving 8/12/20
+ *   where the recipe says 12/16/24. Every card was tighter than the web's.
+ * - `CCButton` dropped the padding the recipe puts inside the label.
+ * - `CCProgress` drew a capsule on iOS and honoured the radius on Android, so
+ *   the same bar was a different shape on the two platforms.
+ * - `CCCheckbox` never drew its focus ring, which WCAG 2.4.7 asks for wherever
+ *   there is a keyboard — and both platforms have one.
+ */
+describe("Views read every value their resolver gives them", () => {
+  const styles = readFileSync(
+    path.join(SWIFT_DIR, "CocsoStyles.swift"),
+    "utf-8"
+  );
+
+  const properties = new Map(
+    [
+      ...styles.matchAll(
+        /public struct (CC\w+)Style: Equatable, Sendable \{([\s\S]*?)\n\}/g
+      ),
+    ].map(([, name, body]) => [
+      name,
+      [...body.matchAll(/public var (\w+):/g)].map(([, property]) => property),
+    ])
+  );
+
+  const shared = swift.filter(
+    (n) => kotlin.includes(n) && properties.has(n) && properties.get(n)?.length
+  );
+
+  it("has resolvers to check", () => {
+    expect(shared.length).toBeGreaterThan(0);
+  });
+
+  it.each(shared)("%s leaves nothing on the table", (name) => {
+    for (const [platform, dir, extension] of [
+      ["iOS", SWIFT_DIR, ".swift"],
+      ["Android", KOTLIN_DIR, ".kt"],
+    ] as const) {
+      const source = readFileSync(
+        path.join(dir, `${name}${extension}`),
+        "utf-8"
+      );
+      const unread = (properties.get(name) ?? []).filter(
+        (property) => !new RegExp(`\\b${property}\\b`).test(source)
+      );
+      expect(
+        unread,
+        `${name} (${platform}) is given these and never reads them`
+      ).toEqual([]);
+    }
+  });
+});

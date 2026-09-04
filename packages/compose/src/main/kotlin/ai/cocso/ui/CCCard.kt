@@ -14,8 +14,6 @@ import androidx.compose.ui.unit.dp
  * A surface that groups content.
  *
  * Values come from [cCCardStyle], generated from `card.recipe.ts`. The recipe's
- * `padding` dimension is CSS shorthand, which does not cross as a length, so
- * the inset is taken from the spacing scale and named as such.
  */
 @Composable
 fun CCCard(
@@ -25,17 +23,17 @@ fun CCCard(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val style = cCCardStyle(variant = variant, padding = padding)
-    val inset = when (padding) {
-        CCCardPadding.sm -> CocsoTokens.Spacing.s5
-        CCCardPadding.md -> CocsoTokens.Spacing.s7
-        CCCardPadding.lg -> CocsoTokens.Spacing.s9
-    }
 
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(style.borderRadius ?: 0.dp))
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
-            .padding(inset),
+            // The recipe's 12/16/24. Picking these from the spacing scale by
+            // hand gave 8/12/20 — every card was tighter than the web's.
+            .padding(
+                horizontal = style.paddingX ?: 0.dp,
+                vertical = style.paddingY ?: 0.dp,
+            ),
         content = content,
     )
 }

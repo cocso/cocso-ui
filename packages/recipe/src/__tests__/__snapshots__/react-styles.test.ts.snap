@@ -103,7 +103,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe 
   "--cocso-spinner-blade-height": "5px",
   "--cocso-spinner-blade-radius": "1px",
   "--cocso-spinner-blade-width": "2px",
-  "--cocso-spinner-blades": "8px",
+  "--cocso-spinner-blades": "8",
   "--cocso-spinner-output": "16px",
 }
 `;

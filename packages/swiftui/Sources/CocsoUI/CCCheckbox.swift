@@ -9,6 +9,9 @@ public struct CCCheckbox: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.isEnabled) private var isEnabled
+    // WCAG 2.4.7 applies wherever there is a keyboard, and an iPad has one.
+    // The recipe carries the ring's colour; without this it went unread.
+    @FocusState private var isFocused: Bool
 
     public init(
         label: String,
@@ -37,12 +40,21 @@ public struct CCCheckbox: View {
                             )
                     )
                     .overlay(glyph(side: side))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: (style.radius ?? 2) + 2)
+                            .strokeBorder(
+                                style.focusRingColor ?? CocsoTokens.Color.focusRing(colorScheme),
+                                lineWidth: isFocused ? 2 : 0
+                            )
+                            .padding(-2)
+                    )
                     .frame(width: side, height: side)
                 CCTypography(label, type: .body, size: .medium)
             }
             .ccMinimumTouchTarget()
         }
         .buttonStyle(.plain)
+        .focused($isFocused)
         .opacity(isEnabled ? 1 : 0.4)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)

@@ -89,6 +89,13 @@ fun CCButton(
         } else {
             Text(
                 text = title,
+                // The recipe pads the label inside the button as well as the
+                // button itself; dropping it made every button narrower than
+                // the web's by the difference.
+                modifier = Modifier.padding(
+                    horizontal = style.contentPaddingX ?: 0.dp,
+                    vertical = style.contentPaddingY ?: 0.dp,
+                ),
                 color = style.fontColor ?: CocsoTokens.Color.textPrimary(),
                 fontSize = (style.fontSize?.value ?: 14f).sp,
             )

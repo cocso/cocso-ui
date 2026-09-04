@@ -10,6 +10,7 @@ import {
   isColorToken,
   isComponentRef,
   isCompoundBorder,
+  UNITLESS_PROPERTIES,
 } from "../utils/token-classification";
 
 // Minimal type declarations for environment-agnostic package.
@@ -20,9 +21,14 @@ declare const console: { warn(...args: unknown[]): void };
 // CSS keywords like "auto", "inline-flex", "pointer" do NOT match this.
 const POTENTIAL_TOKEN_RE = /^[a-z]+-\d/;
 
-export function resolveStyleValue(value: StyleValue): string {
+export function resolveStyleValue(
+  value: StyleValue,
+  property?: string
+): string {
   if (typeof value === "number") {
-    return `${value}px`;
+    return property && UNITLESS_PROPERTIES.has(property)
+      ? String(value)
+      : `${value}px`;
   }
   if (isCompoundBorder(value)) {
     return `${value.width}px ${value.style} var(--cocso-color-${value.color})`;
@@ -67,7 +73,7 @@ function applySlotStyles(
       continue;
     }
     for (const [prop, value] of Object.entries(styles)) {
-      result[`${prefix}-${prop}`] = resolveStyleValue(value);
+      result[`${prefix}-${prop}`] = resolveStyleValue(value, prop);
     }
   }
 }

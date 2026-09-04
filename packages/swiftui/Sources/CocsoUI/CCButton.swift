@@ -73,6 +73,11 @@ public struct CCButton: View {
             ZStack {
                 Text(title)
                     .font(.system(size: resolved.fontSize ?? 14))
+                    // The recipe pads the label inside the button as well as
+                    // the button itself; dropping it made every button narrower
+                    // than the web's by the difference.
+                    .padding(.horizontal, resolved.contentPaddingX ?? 0)
+                    .padding(.vertical, resolved.contentPaddingY ?? 0)
                     .opacity(loading ? 0 : 1)
                 if loading {
                     ProgressView()

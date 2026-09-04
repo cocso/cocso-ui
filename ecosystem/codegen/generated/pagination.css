@@ -10,7 +10,7 @@
 .cocso-pagination:where(.cocso-pagination--pageState-active) {
   --cocso-pagination-bg-color: var(--cocso-color-interactive-primary);
   --cocso-pagination-font-color: var(--cocso-color-text-on-primary);
-  --cocso-pagination-font-weight: 600px;
+  --cocso-pagination-font-weight: 600;
   --cocso-pagination-bg-color-hover: var(--cocso-color-interactive-primary-hover);
 }
 
