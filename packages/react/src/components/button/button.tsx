@@ -9,7 +9,7 @@ import type { SpinnerVariant } from "../spinner";
 import { Spinner } from "../spinner";
 import styles from "./button.module.css";
 
-export type ButtonSize = "large" | "medium" | "small" | "x-small";
+export type ButtonSize = "x-large" | "large" | "medium" | "small" | "x-small";
 
 export type ButtonVariant =
   | "primary"
