@@ -30,13 +30,14 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 ## In Scope
 
 - **Design tokens for both platforms**, carrying both themes. Colour, spacing, radius, typography, motion.
+- **Generated style resolvers** for every recipe, so a variant added on the web reaches both platforms without anyone re-typing it.
+- **Views**, hand-written, consuming those resolvers — the same split the web has between a recipe and its `.tsx`. A view decides structure and behaviour; it never decides what a variant looks like.
 - Theme resolution that follows the platform's own mechanism — `ColorScheme` on SwiftUI, `isSystemInDarkTheme` on Compose — rather than a cocso-specific switch.
 - A parity gate: the two platforms expose the same token names, and both match the CSS.
 
 ## Out of Scope
 
-- **Views.** The style layer is generated; the SwiftUI `View` and the Compose `@Composable` that consume it are not, which mirrors the web's split between a recipe and its `.tsx`.
-- **Components.** Deliberately later. `cocso/mobile` has fifteen (`CC*`) that work and are parity-checked; duplicating them before the token layer is settled would mean porting them twice.
+- **The rest of the components.** Four exist — `CCButton`, `CCBadge`, `CCCard`, `CCAlert` — enough to prove the layering. The remaining recipes have generated styles already; what each still needs is a view, and those are added as they are wanted rather than all at once.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
 - Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
 - Alpha colours and composite shadows. The CSS carries `rgba()` scrims and multi-layer shadows that have no single-value equivalent on either platform. They are excluded and named, not silently dropped.
@@ -110,7 +111,7 @@ CI expectations:
 
 1. **Token layer, both themes.** This milestone.
 2. Consumption in `cocso/mobile` — replace its hand-written `sync_tokens_from_cocso_ui.py` with this artifact, and delete the converter.
-3. Components, if the case is made. Fifteen exist in `cocso/mobile` and are parity-checked by opencross; the question is whether they move here or stay there, and it does not have to be answered to ship tokens.
+3. The remaining views. Every recipe has a generated style; each needs a view before it is usable. `cocso/mobile`'s fifteen `CC*` components are the obvious source of what to build and in what order — and, once these exist, what they should be replaced by, since theirs pick colours per variant by hand.
 
 ## Open Questions
 
