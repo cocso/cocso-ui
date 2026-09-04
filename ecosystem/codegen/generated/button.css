@@ -147,3 +147,7 @@
 .cocso-button:where(.cocso-button--shape-square.cocso-button--size-small) {
   --cocso-button-border-radius: var(--cocso-radius-4);
 }
+
+.cocso-button:where(.cocso-button--shape-square.cocso-button--size-x-large) {
+  --cocso-button-border-radius: var(--cocso-radius-6);
+}

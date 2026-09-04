@@ -425,6 +425,9 @@ fun cCButtonStyle(
     if (shape == CCButtonShape.square && size == CCButtonSize.small) {
         style = style.copy(borderRadius = CocsoTokens.Radius.r4)
     }
+    if (shape == CCButtonShape.square && size == CCButtonSize.xLarge) {
+        style = style.copy(borderRadius = CocsoTokens.Radius.r6)
+    }
     return style
 }
 
