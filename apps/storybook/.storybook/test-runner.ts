@@ -16,11 +16,15 @@ import { toMatchImageSnapshot } from "jest-image-snapshot";
  * hide an entire added Badge, which is exactly what happened: a Badge variant
  * was added to the Variants story and the run reported it as unchanged.
  *
- * Baselines are captured on the same CI runner image as the comparison, so
- * genuine noise is near zero; this budget only absorbs incidental
- * anti-aliasing drift.
+ * The count used to be 100. That is still more than a small control can show:
+ * recolouring the whole 1px border of a 16px Checkbox moves 76 pixels, and the
+ * Avatar's initials changing from grey to near-black moved 76 — both passed as
+ * "unchanged", the second for five months. Measured across 33 stories whose
+ * render did not change, the difference between baseline and run was exactly
+ * 0 pixels in every one, so the budget below absorbs nothing real; it is only
+ * insurance against a single anti-aliased edge.
  */
-const FAILURE_THRESHOLD_PIXELS = 100;
+const FAILURE_THRESHOLD_PIXELS = 16;
 
 /**
  * Which pass this run is. Both walk every story with a real browser, and they
