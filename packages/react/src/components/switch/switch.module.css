@@ -25,6 +25,9 @@
     cursor: pointer;
     background-color: var(--cocso-switch-bg-color);
     border-radius: var(--cocso-radius-full);
+    /* 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지 보이지 않았다.
+       테두리는 레시피가 정하고, 켜진 트랙에서는 그 자체가 이미 대비를 넘는다. */
+    box-shadow: 0 0 0 1px var(--cocso-switch-border-color);
     opacity: 1;
   }
 

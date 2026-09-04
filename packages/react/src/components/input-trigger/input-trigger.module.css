@@ -19,8 +19,12 @@
     background-color: var(--cocso-input-bg-color);
     border: none;
     border-radius: var(--cocso-input-border-radius);
+    /* 쉬는 상태의 테두리가 이 컨트롤이 어디 있는지 말하는 유일한 정보다 —
+     WCAG 1.4.11 이 3:1 을 요구하는 대상이 그것이고, `border-secondary` 는
+     흰 배경에서 1.23:1 이라 경계가 보이지 않았다. 포커스는 `focus-ring` 이
+     맡는다: 쉬는 상태와 같은 토큰을 쓰면 포커스 표시가 사라진다(2.4.7). */
     box-shadow:
-      0 0 0 1px var(--cocso-color-border-secondary),
+      0 0 0 1px var(--cocso-color-border-strong),
       var(--cocso-shadow-xs);
     transition: box-shadow var(--cocso-duration-fast) var(--cocso-easing-soft);
   }
@@ -28,7 +32,7 @@
   .trigger:focus-visible {
     outline: 2px solid transparent;
     box-shadow:
-      0 0 0 1px var(--cocso-color-border-strong),
+      0 0 0 1px var(--cocso-color-focus-ring),
       var(--cocso-shadow-xs);
   }
 

@@ -47,6 +47,25 @@ export const FONT_WEIGHT_MAP: Record<FontWeightRef, number> = {
 };
 
 /** Type guard: returns `true` if `value` is a recognized color design token reference. */
+/**
+ * CSS properties whose value is a bare number. A length here is invalid, and a
+ * browser drops the whole declaration — `font-weight: 600px` is not a bolder
+ * weight, it is no weight at all.
+ *
+ * `blades` is not a CSS property but a count a consumer divides by; `10px` in
+ * a `calc()` is the same silent failure.
+ */
+export const UNITLESS_PROPERTIES = new Set([
+  "blades",
+  "flexGrow",
+  "flexShrink",
+  "fontWeight",
+  "lineHeight",
+  "opacity",
+  "order",
+  "zIndex",
+]);
+
 export function isColorToken(value: string): boolean {
   if (value === "white" || value === "black" || value === "transparent") {
     return true;

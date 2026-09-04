@@ -23,7 +23,13 @@ export const checkboxRecipe = defineRecipe({
         },
       },
       off: {
-        root: { borderColor: "border-secondary", bgColor: "surface-primary" },
+        root: {
+          // 선택되지 않은 상태의 테두리가 이 컨트롤이 어디 있는지 말하는 유일한
+          // 정보다. `border-secondary` 는 흰 배경에서 1.23:1 이라 WCAG 1.4.11 의
+          // 3:1 을 넘지 못했다.
+          borderColor: "border-strong",
+          bgColor: "surface-primary",
+        },
       },
       intermediate: {
         root: {

@@ -98,9 +98,18 @@ data:
       values:
         light: $color.neutral-100
         dark: $color.neutral-800
+    # A control's boundary is the only thing that says where the control is, and
+    # WCAG 1.4.11 asks 3:1 for that. `neutral-400` gave 3.08 on the page and
+    # 2.82 on a card — the token named `strong` did not clear the bar its name
+    # promises, and an input at rest was invisible on a card.
+    #
+    # `neutral-500` is the lightest step clearing 3:1 on both the page and a card
+    # in both themes — 4.51/4.13 light, 4.09/3.59 dark — so there is nothing
+    # lighter for the dark theme to flip to that would still clear the bar.
+    # same-in-both: the lightest step clearing 3:1 on page and card in both themes
     $color.border.strong:
       values:
-        light: $color.neutral-400
+        light: $color.neutral-500
         dark: $color.neutral-500
     # Translucent tints that darken what is under them in the light theme and
     # must lighten it in the dark one. The black-alpha-* primitives they point at

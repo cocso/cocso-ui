@@ -2,6 +2,7 @@
 
 .cocso-switch {
   --cocso-switch-switch-bg-color: var(--cocso-color-surface-neutral);
+  --cocso-switch-border-color: var(--cocso-color-border-strong);
 }
 
 .cocso-switch:where(.cocso-switch--variant-primary) {

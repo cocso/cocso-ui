@@ -29,7 +29,7 @@
 }
 
 .cocso-spinner:where(.cocso-spinner--size-large) {
-  --cocso-spinner-blades: 10px;
+  --cocso-spinner-blades: 10;
   --cocso-spinner-blade-width: 2px;
   --cocso-spinner-blade-height: 6px;
   --cocso-spinner-blade-radius: 1px;
@@ -37,7 +37,7 @@
 }
 
 .cocso-spinner:where(.cocso-spinner--size-medium) {
-  --cocso-spinner-blades: 8px;
+  --cocso-spinner-blades: 8;
   --cocso-spinner-blade-width: 2px;
   --cocso-spinner-blade-height: 5px;
   --cocso-spinner-blade-radius: 1px;
@@ -45,7 +45,7 @@
 }
 
 .cocso-spinner:where(.cocso-spinner--size-small) {
-  --cocso-spinner-blades: 6px;
+  --cocso-spinner-blades: 6;
   --cocso-spinner-blade-width: 1.5px;
   --cocso-spinner-blade-height: 4px;
   --cocso-spinner-blade-radius: 0.75px;

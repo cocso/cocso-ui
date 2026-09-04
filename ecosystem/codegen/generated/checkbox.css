@@ -27,7 +27,7 @@
 }
 
 .cocso-checkbox:where(.cocso-checkbox--status-off) {
-  --cocso-checkbox-border-color: var(--cocso-color-border-secondary);
+  --cocso-checkbox-border-color: var(--cocso-color-border-strong);
   --cocso-checkbox-bg-color: var(--cocso-color-surface-primary);
   --cocso-checkbox-bg-color-hover: var(--cocso-color-interactive-secondary-hover);
   --cocso-checkbox-border-color-hover: var(--cocso-color-interactive-secondary-hover);

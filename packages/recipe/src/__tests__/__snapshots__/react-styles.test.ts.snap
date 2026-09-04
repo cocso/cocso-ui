@@ -26,7 +26,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > buttonRecipe d
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > checkboxRecipe default variants 1`] = `
 {
   "--cocso-checkbox-bg-color": "var(--cocso-color-surface-primary)",
-  "--cocso-checkbox-border-color": "var(--cocso-color-border-secondary)",
+  "--cocso-checkbox-border-color": "var(--cocso-color-border-strong)",
   "--cocso-checkbox-focus-ring-color": "var(--cocso-color-focus-ring)",
   "--cocso-checkbox-radius": "var(--cocso-radius-2)",
   "--cocso-checkbox-size": "16px",
@@ -76,7 +76,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > paginationReci
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupRecipe default variants 1`] = `
 {
   "--cocso-radio-bg-color": "var(--cocso-color-surface-primary)",
-  "--cocso-radio-border-color": "var(--cocso-color-border-primary)",
+  "--cocso-radio-border-color": "var(--cocso-color-border-strong)",
   "--cocso-radio-checked-color": "var(--cocso-color-interactive-primary)",
   "--cocso-radio-dot-size": "7px",
   "--cocso-radio-focus-ring-color": "var(--cocso-color-focus-ring)",
@@ -103,7 +103,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > spinnerRecipe 
   "--cocso-spinner-blade-height": "5px",
   "--cocso-spinner-blade-radius": "1px",
   "--cocso-spinner-blade-width": "2px",
-  "--cocso-spinner-blades": "8px",
+  "--cocso-spinner-blades": "8",
   "--cocso-spinner-output": "16px",
 }
 `;
@@ -116,6 +116,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > stockQuantityS
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe default variants 1`] = `
 {
+  "--cocso-switch-border-color": "var(--cocso-color-border-strong)",
   "--cocso-switch-checked-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-switch-height": "20px",
   "--cocso-switch-switch-bg-color": "var(--cocso-color-interactive-primary)",

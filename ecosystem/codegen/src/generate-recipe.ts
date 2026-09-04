@@ -56,7 +56,10 @@ function resolveSlotProps(
     const styles = slotMap[slot];
     if (!styles) continue;
     for (const [prop, value] of Object.entries(styles)) {
-      result[camelToKebab(`${prefix}-${prop}`)] = resolveStyleValue(value);
+      // The property name decides whether a number takes a unit, so it is
+      // passed rather than dropped: `font-weight: 600px` is invalid, and a
+      // browser discards the declaration rather than rounding it.
+      result[camelToKebab(`${prefix}-${prop}`)] = resolveStyleValue(value, prop);
     }
   }
   return result;

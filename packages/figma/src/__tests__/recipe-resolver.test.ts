@@ -895,13 +895,15 @@ describe("resolveForFigma — checkbox recipe", () => {
     expect(spec.borderColor).toEqual(resolveColorToken("primary-950"));
   });
 
-  it("medium/off resolves bgColor=white, borderColor=neutral-100", () => {
+  it("medium/off resolves bgColor=white, borderColor=neutral-500", () => {
     const spec = resolveForFigma(checkboxRecipe, {
       size: "medium",
       status: "off",
     });
     expect(spec.bgColor).toEqual({ r: 1, g: 1, b: 1 });
-    expect(spec.borderColor).toEqual(resolveColorToken("neutral-100"));
+    // 선택되지 않은 체크박스의 테두리는 유일한 식별자라 `border-strong`
+    // (`neutral-500`) 이다. `neutral-100` 은 흰 배경에서 1.23:1 이었다.
+    expect(spec.borderColor).toEqual(resolveColorToken("neutral-500"));
   });
 
   it("large/on resolves size=18, radius=6 (radius-3)", () => {

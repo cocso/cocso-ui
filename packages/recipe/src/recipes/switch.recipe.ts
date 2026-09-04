@@ -6,6 +6,10 @@ export const switchRecipe = defineRecipe({
   base: {
     root: {
       switchBgColor: "surface-neutral",
+      // 꺼진 트랙은 `surface-neutral` 이고 흰 배경에서 1.23:1 이라, 스위치가
+      // 어디 있는지 보이지 않았다. WCAG 1.4.11 이 요구하는 3:1 은 컨트롤의
+      // 경계에 대한 것이고, 켜진 트랙(`interactive-primary`)은 그 자체로 넘는다.
+      borderColor: "border-strong",
     },
   },
   variants: {
