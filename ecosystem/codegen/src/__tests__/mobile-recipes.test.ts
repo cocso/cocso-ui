@@ -150,3 +150,51 @@ describe("The published files are what the generator produces", () => {
     expect(readFileSync(KOTLIN_FILE, "utf-8")).toContain(output.kotlin);
   });
 });
+
+/**
+ * What the generator refuses to carry.
+ *
+ * A refusal is printed, which is the honest half — but printing is not a gate,
+ * and the view on the other side has no way to know. `borderRadius: "100%"`
+ * was refused for a year of this file's life, and `CCButton(shape: .circle)`
+ * drew a square on both platforms because each view was left to notice the
+ * shape from the variant's name and two of them did not.
+ *
+ * So the set is pinned. A recipe that starts using a property this cannot
+ * carry fails here, where the choice is still open — teach the generator, or
+ * decide the property has no platform equivalent and write down why.
+ */
+describe("Nothing is dropped without a decision", () => {
+  const NO_PLATFORM_EQUIVALENT = [
+    // A CSS border is width, style and colour in one value. Both platforms
+    // take them separately, and no single property here can hold it.
+    "badge.border",
+    "button.border",
+    "card.border",
+    "dialog.border",
+    // `transparent` and `currentColor` are absences, not colours: SwiftUI says
+    // `.clear` and Compose leaves the background unset.
+    "badge.bgColor",
+    "button.bgColor",
+    "link.color",
+    // The recipe's `align` dimension already carries this, and the views read
+    // it from there.
+    "button.justifyContent",
+  ].sort();
+
+  it("refuses only what has no platform equivalent", () => {
+    // A property refused in several variant layers is one decision.
+    const refused = [
+      ...new Set(
+        output.skipped.map(({ recipe, property }) => `${recipe}.${property}`)
+      ),
+    ].sort();
+    expect(refused).toEqual(NO_PLATFORM_EQUIVALENT);
+  });
+
+  it("gives every refusal a reason", () => {
+    for (const { recipe, property, reason } of output.skipped) {
+      expect(reason, `${recipe}.${property} was dropped silently`).toBeTruthy();
+    }
+  });
+});

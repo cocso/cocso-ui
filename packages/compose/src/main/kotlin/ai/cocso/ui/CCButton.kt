@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -56,7 +57,16 @@ fun CCButton(
         modifier = modifier
             .fillMaxWidth()
             .height(style.height ?: 36.dp)
-            .clip(RoundedCornerShape(style.borderRadius ?: 0.dp))
+            // `shape = circle` is a percentage radius in the recipe, which has
+            // no length to travel as; before it arrived as a flag this drew a
+            // square.
+            .clip(
+                if (style.borderRadiusFull == true) {
+                    CircleShape
+                } else {
+                    RoundedCornerShape(style.borderRadius ?: 0.dp)
+                }
+            )
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
             // WCAG 1.4.3 exempts an inactive control, and the web dims a
             // disabled button the same way rather than restating every variant.

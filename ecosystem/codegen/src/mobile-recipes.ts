@@ -42,7 +42,8 @@ export interface RecipeMobileOutput {
 const PASCAL_BOUNDARY = /(^|[-_])([a-z0-9])/g;
 const LEADING_DIGIT = /^\d/;
 const NAME_SEPARATORS = /[-_]/;
-const PX_PAIR = /^(-?\d+(?:\.\d+)?)px\s+(-?\d+(?:\.\d+)?)px$/;
+/** A CSS length this maps to a number: `12px`, `-2px`, or a unitless `0`. */
+const PX_LENGTH = /^(?:(-?\d+(?:\.\d+)?)px|(0))$/;
 
 function pascal(value: string): string {
   const out = value.replace(PASCAL_BOUNDARY, (_, __, c: string) =>
@@ -125,7 +126,9 @@ type Emitted =
   | { kind: "color"; token: string; themed: boolean }
   | { kind: "length"; value: number }
   | { kind: "radius"; token: string }
-  | { kind: "weight"; value: string };
+  | { kind: "weight"; value: string }
+  | { kind: "flag"; value: boolean }
+  | { kind: "count"; value: number };
 
 const COLOR_PROPERTIES = new Set([
   "bgColor",
@@ -144,12 +147,42 @@ const COLOR_PROPERTIES = new Set([
 const RADIUS_PROPERTIES = new Set(["borderRadius", "bladeRadius", "radius"]);
 
 /**
- * `padding: "4px 8px"` is CSS shorthand for a vertical and a horizontal inset.
- * Both platforms take them separately, so it is split rather than dropped.
+ * Numbers that count something rather than measure it. Everything else numeric
+ * in a recipe is a length, so these are named rather than guessed — emitting
+ * `blades` as a `Dp` made both views convert a density-scaled length back to
+ * an integer to get a number the recipe had written as one.
+ */
+const COUNT_PROPERTIES = new Set(["blades"]);
+
+function pxLength(value: string): number | null {
+  const match = value.trim().match(PX_LENGTH);
+  return match ? Number(match[1] ?? match[2]) : null;
+}
+
+/**
+ * CSS padding shorthand, reduced to the vertical and horizontal insets both
+ * platforms take separately.
+ *
+ * One value sets all four sides and two set `vertical horizontal`, which this
+ * carries. Three and four values give the top and bottom different insets,
+ * which an x/y pair cannot express — those are refused rather than half-read.
+ *
+ * A unitless `0` is a length in CSS and is one here too. Reading it as
+ * anything else is how `0 6px` was silently dropped from the button.
  */
 function splitPadding(value: string): { x: number; y: number } | null {
-  const match = value.match(PX_PAIR);
-  return match ? { x: Number(match[2]), y: Number(match[1]) } : null;
+  const parts = value.trim().split(/\s+/).map(pxLength);
+  if (parts.some((part) => part === null)) {
+    return null;
+  }
+  const lengths = parts as number[];
+  if (lengths.length === 1) {
+    return { x: lengths[0], y: lengths[0] };
+  }
+  if (lengths.length === 2) {
+    return { y: lengths[0], x: lengths[1] };
+  }
+  return null;
 }
 
 const FONT_WEIGHTS: Record<string, string> = {
@@ -178,15 +211,34 @@ function classifyProperty(
     const token = tokenIdentifier(value, "color");
     return { [key]: { kind: "color", themed: themedColors.has(token), token } };
   }
+  if (COUNT_PROPERTIES.has(key)) {
+    return typeof value === "number"
+      ? { [key]: { kind: "count", value } }
+      : `${key} is not a number`;
+  }
   if (RADIUS_PROPERTIES.has(key)) {
-    if (typeof value !== "string") {
-      return `${key} is not a token name`;
+    if (typeof value === "number") {
+      return { [key]: { kind: "length", value } };
     }
-    // `100%` and `0` are literals the recipe writes directly, not tokens. A
-    // percentage radius is a capsule, which both platforms express with their
-    // own shape rather than a length.
+    if (typeof value !== "string") {
+      return `${key} is neither a token name nor a length`;
+    }
+    // `100%` and `0` are literals the recipe writes directly, not tokens.
+    //
+    // A percentage radius is a capsule. Neither platform has a length that
+    // means that, so it travels as a flag the view reads — which is the point:
+    // dropping it left the view to notice the shape from the variant name, and
+    // `CCButton(shape: .circle)` and `CCSkeleton(variant: .circular)` both
+    // rendered a square because neither did.
+    if (/^\d+(?:\.\d+)?%$/.test(value)) {
+      return { [`${key}Full`]: { kind: "flag", value: true } };
+    }
     if (!value.startsWith("radius-")) {
-      return `${key} is \`${value}\`, a literal rather than a radius token`;
+      const length = pxLength(value);
+      if (length === null) {
+        return `${key} is \`${value}\`, neither a radius token nor a length`;
+      }
+      return { [key]: { kind: "length", value: length } };
     }
     return { [key]: { kind: "radius", token: tokenIdentifier(value, "radius") } };
   }
@@ -314,6 +366,10 @@ function swiftType(kind: Emitted["kind"]): string {
       return "SwiftUI.Color";
     case "weight":
       return "Font.Weight";
+    case "flag":
+      return "Bool";
+    case "count":
+      return "Int";
     default:
       return "CGFloat";
   }
@@ -329,6 +385,9 @@ function swiftValue(value: Emitted): string {
       return `CocsoTokens.Radius.${value.token}`;
     case "weight":
       return `.${value.value}`;
+    case "flag":
+    case "count":
+      return `${value.value}`;
     default:
       return `${value.value}`;
   }
@@ -340,6 +399,10 @@ function kotlinType(kind: Emitted["kind"]): string {
       return "ComposeColor";
     case "weight":
       return "FontWeight";
+    case "flag":
+      return "Boolean";
+    case "count":
+      return "Int";
     default:
       return "Dp";
   }
@@ -363,6 +426,9 @@ function kotlinValue(value: Emitted): string {
       };
       return `FontWeight.${names[value.value] ?? pascal(value.value)}`;
     }
+    case "flag":
+    case "count":
+      return `${value.value}`;
     default:
       return `${value.value}.dp`;
   }

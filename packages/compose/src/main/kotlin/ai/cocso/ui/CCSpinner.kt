@@ -27,9 +27,7 @@ fun CCSpinner(
 ) {
     val style = cCSpinnerStyle(variant = variant, size = size)
     val side = style.output ?: 16.dp
-    // The recipe carries the blade count as a length, the way the CSS custom
-    // property does; both platforms read the number back out the same way.
-    val bladeCount = (style.blades?.value ?: 8f).toInt().coerceAtLeast(1)
+    val bladeCount = (style.blades ?: 8).coerceAtLeast(1)
     val bladeWidth = style.bladeWidth ?: 2.dp
     val bladeHeight = style.bladeHeight ?: 5.dp
     val color = style.bladeColor ?: CocsoTokens.Color.interactivePrimary()
@@ -54,7 +52,8 @@ fun CCSpinner(
     ) {
         val w = bladeWidth.toPx()
         val h = bladeHeight.toPx()
-        val corner = CornerRadius(w / 2f, w / 2f)
+        val r = (style.bladeRadius ?: 1.dp).toPx()
+        val corner = CornerRadius(r, r)
         repeat(bladeCount) { index ->
             val degrees = rotation + index.toFloat() / bladeCount * 360f
             rotate(degrees = degrees, pivot = center) {

@@ -39,7 +39,7 @@ public struct CCAvatar: View {
         .frame(width: side, height: style.height ?? side)
         .background(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme))
         .clipShape(
-            shape == .circle
+            style.borderRadiusFull == true
                 ? AnyShape(Circle())
                 : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
         )

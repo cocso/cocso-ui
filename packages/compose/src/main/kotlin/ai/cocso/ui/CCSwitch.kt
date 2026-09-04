@@ -18,7 +18,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 
 /** A toggle. */
@@ -50,12 +53,16 @@ fun CCSwitch(
                 enabled = enabled,
                 interactionSource = interactionSource,
                 indication = null,
-                role = Role.Switch,
                 onClick = { onChange(!checked) },
             )
             .ccMinimumTouchTarget()
+            // The role belongs inside the block: clearing the subtree's
+            // semantics drops what `clickable` set.
             .clearAndSetSemantics {
                 contentDescription = label
+                role = Role.Switch
+                toggleableState =
+                    if (checked) ToggleableState.On else ToggleableState.Off
                 stateDescription = if (checked) "On" else "Off"
             },
         horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s5),

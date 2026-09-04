@@ -38,10 +38,10 @@ public struct CCBadge: View {
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? .clear)
-            // The recipe's `circle` shape is a CSS percentage, which does not
-            // survive as a length; a capsule is what that means here.
+            // A percentage radius has no length to travel as, so the recipe
+            // sends `borderRadiusFull` and a capsule is what it means here.
             .clipShape(
-                shape == .circle
+                style.borderRadiusFull == true
                     ? AnyShape(Capsule())
                     : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
             )

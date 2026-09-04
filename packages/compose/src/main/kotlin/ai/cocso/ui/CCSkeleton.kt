@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -66,7 +67,16 @@ fun CCSkeleton(
     Box(
         modifier = sized
             .height(style.height ?: 16.dp)
-            .clip(RoundedCornerShape(style.borderRadius ?: 0.dp))
+            // `variant = circular` is a percentage radius in the recipe, which
+            // has no length to travel as; before it arrived as a flag this drew
+            // a square.
+            .clip(
+                if (style.borderRadiusFull == true) {
+                    CircleShape
+                } else {
+                    RoundedCornerShape(style.borderRadius ?: 0.dp)
+                }
+            )
             .alpha(opacity)
             .background(style.bgColor ?: CocsoTokens.Color.surfaceNeutral())
             // Decoration: it carries no information a screen reader can use.

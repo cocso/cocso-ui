@@ -86,7 +86,14 @@ public struct CCButton: View {
         .buttonStyle(.plain)
         .foregroundStyle(resolved.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme))
         .background(resolved.bgColor ?? .clear)
-        .clipShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
+        .clipShape(
+            // `shape: .circle` is a percentage radius in the recipe, which has
+            // no length to travel as; before it arrived as a flag this drew a
+            // square.
+            resolved.borderRadiusFull == true
+                ? AnyShape(Capsule())
+                : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
+        )
         // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
         // button the same way rather than restating every variant.
         .opacity(isEnabled ? 1 : 0.4)

@@ -28,7 +28,10 @@ fun CCAvatar(
     val style = cCAvatarStyle(size = size, shape = shape)
     val side = style.width ?: 32.dp
     val clipShape =
-        if (shape == CCAvatarShape.circle) CircleShape
+        // A percentage radius in the recipe arrives as `borderRadiusFull`.
+        // Reading the shape off the variant name instead is how the two
+        // platforms ended up compensating in two different ways.
+        if (style.borderRadiusFull == true) CircleShape
         else RoundedCornerShape(style.borderRadius ?: 0.dp)
 
     Box(

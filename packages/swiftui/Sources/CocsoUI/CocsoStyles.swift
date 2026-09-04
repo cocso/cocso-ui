@@ -75,6 +75,7 @@ public struct CCAvatarStyle: Equatable, Sendable {
     public var height: CGFloat?
     public var width: CGFloat?
     public var fontSize: CGFloat?
+    public var borderRadiusFull: Bool?
     public var borderRadius: CGFloat?
 
     /// Base, then each variant dimension, then compound
@@ -112,6 +113,9 @@ public struct CCAvatarStyle: Equatable, Sendable {
             style.height = 64
             style.width = 64
             style.fontSize = 20
+        }
+        if shape == .circle {
+            style.borderRadiusFull = true
         }
         if shape == .square && size == .xs {
             style.borderRadius = CocsoTokens.Radius.r2
@@ -161,6 +165,7 @@ public struct CCBadgeStyle: Equatable, Sendable {
     public var paddingX: CGFloat?
     public var paddingY: CGFloat?
     public var fontSize: CGFloat?
+    public var borderRadiusFull: Bool?
     public var borderRadius: CGFloat?
 
     /// Base, then each variant dimension, then compound
@@ -217,6 +222,9 @@ public struct CCBadgeStyle: Equatable, Sendable {
             style.paddingX = 6
             style.paddingY = 3
             style.fontSize = 11
+        }
+        if shape == .circle {
+            style.borderRadiusFull = true
         }
         if shape == .rounded {
             style.borderRadius = CocsoTokens.Radius.full
@@ -303,7 +311,10 @@ public struct CCButtonStyle: Equatable, Sendable {
     public var fontColor: SwiftUI.Color?
     public var height: CGFloat?
     public var paddingInline: CGFloat?
+    public var contentPaddingX: CGFloat?
+    public var contentPaddingY: CGFloat?
     public var fontSize: CGFloat?
+    public var borderRadiusFull: Bool?
     public var borderRadius: CGFloat?
 
     /// Base, then each variant dimension, then compound
@@ -357,25 +368,39 @@ public struct CCButtonStyle: Equatable, Sendable {
         if size == .large {
             style.height = 40
             style.paddingInline = 14
+            style.contentPaddingX = 6
+            style.contentPaddingY = 0
             style.fontSize = 14
         }
         if size == .medium {
             style.height = 36
             style.paddingInline = 12
+            style.contentPaddingX = 6
+            style.contentPaddingY = 0
             style.fontSize = 14
         }
         if size == .small {
             style.height = 32
             style.paddingInline = 10
+            style.contentPaddingX = 2
+            style.contentPaddingY = 0
             style.fontSize = 14
         }
         if size == .xSmall {
             style.height = 28
             style.paddingInline = 8
+            style.contentPaddingX = 0
+            style.contentPaddingY = 0
             style.fontSize = 12
+        }
+        if shape == .circle {
+            style.borderRadiusFull = true
         }
         if shape == .rounded {
             style.borderRadius = CocsoTokens.Radius.full
+        }
+        if shape == .sharp {
+            style.borderRadius = 0
         }
         if shape == .square && size == .xSmall {
             style.borderRadius = CocsoTokens.Radius.r3
@@ -408,6 +433,8 @@ public enum CCCardPadding: String, CaseIterable, Sendable {
 public struct CCCardStyle: Equatable, Sendable {
     public var bgColor: SwiftUI.Color?
     public var borderRadius: CGFloat?
+    public var paddingX: CGFloat?
+    public var paddingY: CGFloat?
 
     /// Base, then each variant dimension, then compound
     /// variants — the order the CSS cascade encodes.
@@ -428,6 +455,18 @@ public struct CCCardStyle: Equatable, Sendable {
         if variant == .filled {
             style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme)
             style.borderRadius = CocsoTokens.Radius.r4
+        }
+        if padding == .sm {
+            style.paddingX = 12
+            style.paddingY = 12
+        }
+        if padding == .md {
+            style.paddingX = 16
+            style.paddingY = 16
+        }
+        if padding == .lg {
+            style.paddingX = 24
+            style.paddingY = 24
         }
         return style
     }
@@ -852,6 +891,7 @@ public struct CCSkeletonStyle: Equatable, Sendable {
     public var height: CGFloat?
     public var borderRadius: CGFloat?
     public var width: CGFloat?
+    public var borderRadiusFull: Bool?
 
     /// Base, then each variant dimension, then compound
     /// variants — the order the CSS cascade encodes.
@@ -869,6 +909,7 @@ public struct CCSkeletonStyle: Equatable, Sendable {
         if variant == .circular {
             style.height = 40
             style.width = 40
+            style.borderRadiusFull = true
         }
         if variant == .rectangular {
             style.height = 120
@@ -896,9 +937,10 @@ public enum CCSpinnerSize: String, CaseIterable, Sendable {
 
 public struct CCSpinnerStyle: Equatable, Sendable {
     public var bladeColor: SwiftUI.Color?
-    public var blades: CGFloat?
+    public var blades: Int?
     public var bladeWidth: CGFloat?
     public var bladeHeight: CGFloat?
+    public var bladeRadius: CGFloat?
     public var output: CGFloat?
 
     /// Base, then each variant dimension, then compound
@@ -934,18 +976,21 @@ public struct CCSpinnerStyle: Equatable, Sendable {
             style.blades = 10
             style.bladeWidth = 2
             style.bladeHeight = 6
+            style.bladeRadius = 1
             style.output = 20
         }
         if size == .medium {
             style.blades = 8
             style.bladeWidth = 2
             style.bladeHeight = 5
+            style.bladeRadius = 1
             style.output = 16
         }
         if size == .small {
             style.blades = 6
             style.bladeWidth = 1.5
             style.bladeHeight = 4
+            style.bladeRadius = 0.75
             style.output = 12
         }
         return style

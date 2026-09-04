@@ -21,7 +21,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 
 /** A checkbox with three states, matching the web's `status`. */
@@ -50,13 +52,23 @@ fun CCCheckbox(
                 enabled = enabled,
                 interactionSource = interactionSource,
                 indication = null,
-                role = Role.Checkbox,
                 onClick = { onChange(if (status == CCCheckboxStatus.on) CCCheckboxStatus.off else CCCheckboxStatus.on) },
             )
             .ccMinimumTouchTarget()
+            // The role belongs inside the block: clearing the subtree's
+            // semantics drops what `clickable` set, and a checkbox that
+            // announces itself as a plain button is the result.
+            //
+            // `toggleableState` carries all three states. `selected` has only
+            // two, and would report `intermediate` as unchecked.
             .clearAndSetSemantics {
                 contentDescription = label
-                selected = status == CCCheckboxStatus.on
+                role = Role.Checkbox
+                toggleableState = when (status) {
+                    CCCheckboxStatus.on -> ToggleableState.On
+                    CCCheckboxStatus.off -> ToggleableState.Off
+                    CCCheckboxStatus.intermediate -> ToggleableState.Indeterminate
+                }
             },
         horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s5),
         verticalAlignment = Alignment.CenterVertically,

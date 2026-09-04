@@ -103,14 +103,17 @@ console.log(`${recipes.length} recipes`);
 
 // Named, never silent — the same rule the token generator follows.
 if (output.skipped.length > 0) {
-  console.log(`\nnot carried across (${output.skipped.length}):`);
-  const seen = new Set<string>();
+  // One line per property, and a count that matches the lines. A property
+  // refused in several variant layers is one decision, not several.
+  const seen = new Map<string, string>();
   for (const { property, recipe, reason } of output.skipped) {
     const key = `${recipe}.${property}`;
-    if (seen.has(key)) {
-      continue;
+    if (!seen.has(key)) {
+      seen.set(key, reason);
     }
-    seen.add(key);
-    console.log(`  ${recipe}.${property} — ${reason}`);
+  }
+  console.log(`\nnot carried across (${seen.size}):`);
+  for (const [key, reason] of seen) {
+    console.log(`  ${key} — ${reason}`);
   }
 }

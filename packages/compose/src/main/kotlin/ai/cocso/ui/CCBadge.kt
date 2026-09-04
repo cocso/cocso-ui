@@ -2,6 +2,7 @@ package ai.cocso.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,14 +26,18 @@ fun CCBadge(
     shape: CCBadgeShape = CCBadgeShape.square,
 ) {
     val style = cCBadgeStyle(variant = variant, size = size, shape = shape)
-    // The recipe's `circle` shape is a CSS percentage, which does not survive
-    // as a length; a fully rounded corner is what that means here.
-    val corner = if (shape == CCBadgeShape.circle) 999.dp else (style.borderRadius ?: 0.dp)
+    // A percentage radius has no length to travel as, so the recipe sends
+    // `borderRadiusFull` and a fully rounded corner is what it means here.
+    val badgeShape = if (style.borderRadiusFull == true) {
+        CircleShape
+    } else {
+        RoundedCornerShape(style.borderRadius ?: 0.dp)
+    }
 
     Text(
         text = text,
         modifier = modifier
-            .clip(RoundedCornerShape(corner))
+            .clip(badgeShape)
             .background(style.bgColor ?: CocsoTokens.Color.surfaceSecondary())
             .padding(
                 horizontal = style.paddingX ?: 0.dp,

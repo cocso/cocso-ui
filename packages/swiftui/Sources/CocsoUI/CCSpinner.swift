@@ -23,10 +23,10 @@ public struct CCSpinner: View {
     public var body: some View {
         let style = CCSpinnerStyle.resolve(variant: variant, size: size, scheme: colorScheme)
         let side = style.output ?? 16
-        let bladeCount = Int(style.blades ?? 8)
+        let bladeCount = style.blades ?? 8
         ZStack {
             ForEach(0..<max(bladeCount, 1), id: \.self) { index in
-                Capsule()
+                RoundedRectangle(cornerRadius: style.bladeRadius ?? 1)
                     .fill(style.bladeColor ?? CocsoTokens.Color.interactivePrimary(colorScheme))
                     .frame(width: style.bladeWidth ?? 2, height: style.bladeHeight ?? 5)
                     .offset(y: -side / 2 + (style.bladeHeight ?? 5) / 2)

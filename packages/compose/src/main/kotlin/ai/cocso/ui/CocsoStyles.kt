@@ -81,6 +81,7 @@ data class CCAvatarStyle(
     val height: Dp? = null,
     val width: Dp? = null,
     val fontSize: Dp? = null,
+    val borderRadiusFull: Boolean? = null,
     val borderRadius: Dp? = null,
 )
 
@@ -118,6 +119,9 @@ fun cCAvatarStyle(
         style = style.copy(height = 64.dp)
         style = style.copy(width = 64.dp)
         style = style.copy(fontSize = 20.dp)
+    }
+    if (shape == CCAvatarShape.circle) {
+        style = style.copy(borderRadiusFull = true)
     }
     if (shape == CCAvatarShape.square && size == CCAvatarSize.xs) {
         style = style.copy(borderRadius = CocsoTokens.Radius.r2)
@@ -166,6 +170,7 @@ data class CCBadgeStyle(
     val paddingX: Dp? = null,
     val paddingY: Dp? = null,
     val fontSize: Dp? = null,
+    val borderRadiusFull: Boolean? = null,
     val borderRadius: Dp? = null,
 )
 
@@ -222,6 +227,9 @@ fun cCBadgeStyle(
         style = style.copy(paddingX = 6.dp)
         style = style.copy(paddingY = 3.dp)
         style = style.copy(fontSize = 11.dp)
+    }
+    if (shape == CCBadgeShape.circle) {
+        style = style.copy(borderRadiusFull = true)
     }
     if (shape == CCBadgeShape.rounded) {
         style = style.copy(borderRadius = CocsoTokens.Radius.full)
@@ -306,7 +314,10 @@ data class CCButtonStyle(
     val fontColor: ComposeColor? = null,
     val height: Dp? = null,
     val paddingInline: Dp? = null,
+    val contentPaddingX: Dp? = null,
+    val contentPaddingY: Dp? = null,
     val fontSize: Dp? = null,
+    val borderRadiusFull: Boolean? = null,
     val borderRadius: Dp? = null,
 )
 
@@ -360,25 +371,39 @@ fun cCButtonStyle(
     if (size == CCButtonSize.large) {
         style = style.copy(height = 40.dp)
         style = style.copy(paddingInline = 14.dp)
+        style = style.copy(contentPaddingX = 6.dp)
+        style = style.copy(contentPaddingY = 0.dp)
         style = style.copy(fontSize = 14.dp)
     }
     if (size == CCButtonSize.medium) {
         style = style.copy(height = 36.dp)
         style = style.copy(paddingInline = 12.dp)
+        style = style.copy(contentPaddingX = 6.dp)
+        style = style.copy(contentPaddingY = 0.dp)
         style = style.copy(fontSize = 14.dp)
     }
     if (size == CCButtonSize.small) {
         style = style.copy(height = 32.dp)
         style = style.copy(paddingInline = 10.dp)
+        style = style.copy(contentPaddingX = 2.dp)
+        style = style.copy(contentPaddingY = 0.dp)
         style = style.copy(fontSize = 14.dp)
     }
     if (size == CCButtonSize.xSmall) {
         style = style.copy(height = 28.dp)
         style = style.copy(paddingInline = 8.dp)
+        style = style.copy(contentPaddingX = 0.dp)
+        style = style.copy(contentPaddingY = 0.dp)
         style = style.copy(fontSize = 12.dp)
+    }
+    if (shape == CCButtonShape.circle) {
+        style = style.copy(borderRadiusFull = true)
     }
     if (shape == CCButtonShape.rounded) {
         style = style.copy(borderRadius = CocsoTokens.Radius.full)
+    }
+    if (shape == CCButtonShape.sharp) {
+        style = style.copy(borderRadius = 0.dp)
     }
     if (shape == CCButtonShape.square && size == CCButtonSize.xSmall) {
         style = style.copy(borderRadius = CocsoTokens.Radius.r3)
@@ -410,6 +435,8 @@ enum class CCCardPadding {
 data class CCCardStyle(
     val bgColor: ComposeColor? = null,
     val borderRadius: Dp? = null,
+    val paddingX: Dp? = null,
+    val paddingY: Dp? = null,
 )
 
 @Composable
@@ -430,6 +457,18 @@ fun cCCardStyle(
     if (variant == CCCardVariant.filled) {
         style = style.copy(bgColor = CocsoTokens.Color.surfaceSecondary())
         style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+    }
+    if (padding == CCCardPadding.sm) {
+        style = style.copy(paddingX = 12.dp)
+        style = style.copy(paddingY = 12.dp)
+    }
+    if (padding == CCCardPadding.md) {
+        style = style.copy(paddingX = 16.dp)
+        style = style.copy(paddingY = 16.dp)
+    }
+    if (padding == CCCardPadding.lg) {
+        style = style.copy(paddingX = 24.dp)
+        style = style.copy(paddingY = 24.dp)
     }
     return style
 }
@@ -845,6 +884,7 @@ data class CCSkeletonStyle(
     val height: Dp? = null,
     val borderRadius: Dp? = null,
     val width: Dp? = null,
+    val borderRadiusFull: Boolean? = null,
 )
 
 @Composable
@@ -862,6 +902,7 @@ fun cCSkeletonStyle(
     if (variant == CCSkeletonVariant.circular) {
         style = style.copy(height = 40.dp)
         style = style.copy(width = 40.dp)
+        style = style.copy(borderRadiusFull = true)
     }
     if (variant == CCSkeletonVariant.rectangular) {
         style = style.copy(height = 120.dp)
@@ -888,9 +929,10 @@ enum class CCSpinnerSize {
 
 data class CCSpinnerStyle(
     val bladeColor: ComposeColor? = null,
-    val blades: Dp? = null,
+    val blades: Int? = null,
     val bladeWidth: Dp? = null,
     val bladeHeight: Dp? = null,
+    val bladeRadius: Dp? = null,
     val output: Dp? = null,
 )
 
@@ -923,21 +965,24 @@ fun cCSpinnerStyle(
         style = style.copy(bladeColor = CocsoTokens.Color.surfacePrimary())
     }
     if (size == CCSpinnerSize.large) {
-        style = style.copy(blades = 10.dp)
+        style = style.copy(blades = 10)
         style = style.copy(bladeWidth = 2.dp)
         style = style.copy(bladeHeight = 6.dp)
+        style = style.copy(bladeRadius = 1.dp)
         style = style.copy(output = 20.dp)
     }
     if (size == CCSpinnerSize.medium) {
-        style = style.copy(blades = 8.dp)
+        style = style.copy(blades = 8)
         style = style.copy(bladeWidth = 2.dp)
         style = style.copy(bladeHeight = 5.dp)
+        style = style.copy(bladeRadius = 1.dp)
         style = style.copy(output = 16.dp)
     }
     if (size == CCSpinnerSize.small) {
-        style = style.copy(blades = 6.dp)
+        style = style.copy(blades = 6)
         style = style.copy(bladeWidth = 1.5.dp)
         style = style.copy(bladeHeight = 4.dp)
+        style = style.copy(bladeRadius = 0.75.dp)
         style = style.copy(output = 12.dp)
     }
     return style
