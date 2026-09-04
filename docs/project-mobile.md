@@ -115,7 +115,9 @@ CI expectations:
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
-2. Consumption in `cocso/mobile` — replace its hand-written `sync_tokens_from_cocso_ui.py` with this artifact, and delete the converter.
+2. **Consumption in `cocso/mobile`.** Done for values and names: its converter now reads `CocsoTokens.swift` — the generated, golden-tested artifact — instead of parsing the YAML and re-deriving identifiers, which is what let the same token hold two names (`rFull` here, `full` there) and what silently dropped 55 colours when the source grew a second mode. Its CI checks the sync, so that drift now fails a build.
+
+   Not done, and a separate decision: the app is light-only, and its 1,157 call sites take a constant rather than passing a colour scheme. Adopting dark mode there is a change to the app, not to this pipeline. Its 22 app-only tokens — brand colours and a type scale — sit in `design/tokens.local.json`; whether any belong in the design system is a design question, not a migration one.
 3. **Views.** Twelve are done — button, badge, card, alert, typography, avatar, skeleton, progress, spinner, checkbox, switch, input — plus the `CCTouchTarget` primitive. The rest follow as they are wanted; `cocso/mobile`'s `CC*` set is the source of what to build and in what order, and what it should be replaced by, since theirs pick colours per variant by hand.
 
 ## Open Questions
