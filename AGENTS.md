@@ -31,6 +31,8 @@
   - `packages/css/`: `@cocso-ui/css` — design tokens and CSS.
   - `packages/react-icons/`: `@cocso-ui/react-icons` — icon set (re-exports generated components from `@cocso-ui/icons`).
   - `packages/react-native-icons/`: `@cocso-ui/react-native-icons` — React Native icon set (re-exports generated react-native-svg components from `@cocso-ui/icons`).
+  - `packages/swiftui/`: SwiftUI design tokens (Swift package, iOS 16+). Generated — see `docs/project-mobile.md`.
+  - `packages/compose/`: Jetpack Compose design tokens (Android library, API 26+). Generated — see `docs/project-mobile.md`.
   - `packages/baseframe-sources/`: `@cocso-ui/baseframe-sources` — YAML component source definitions.
   - `packages/recipe/`: `@cocso-ui/recipe` — component visual spec recipes (single source of truth for variant→token mappings, consumed by codegen at build time and Figma generation).
   - `packages/figma/`: `@cocso-ui/figma` — Figma plugin for syncing design tokens to Figma Variables and generating components from recipes.
@@ -227,6 +229,7 @@ When asked to review comments on a GitHub PR:
 
 ### Codegen Rules
 
+- `packages/swiftui/Sources/CocsoUI/CocsoTokens.swift` and `packages/compose/src/main/kotlin/ai/cocso/ui/CocsoTokens.kt` are generated from the same sources by `pnpm --filter @cocso-ui/baseframe generate:mobile`, and `ecosystem/baseframe/src/__tests__/mobile.test.ts` fails when they disagree with the sources or with each other. A native platform cannot read a CSS variable, so these carry values rather than references — resolved once per theme mode.
 - `packages/css/token.css`, `packages/css/tailwind4.css` and `packages/css/theme-dark.css` are ALL generated from `packages/baseframe-sources`. Do NOT hand-edit them: add the token to the YAML and run `pnpm --filter @cocso-ui/baseframe generate:css`. `ecosystem/baseframe/src/__tests__/golden.test.ts` fails when a published file and the YAML disagree.
 - Semantic color tokens live in the `theme` collection, which declares the modes `light` and `dark`. The generator rejects a token missing a value for a mode its collection declares, so a semantic token cannot ship without someone deciding what it does in the dark theme. That is the check the `feedback-*` bases went without for as long as the dark theme existed.
 - Primitives stay in the `global` collection with its single mode, and `theme-dark.css` carries the semantic layer only. The raw ramps are never re-emitted there, which is what keeps a consumer's `--cocso-color-primary-*` override alive when the theme flips.
