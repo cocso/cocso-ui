@@ -290,6 +290,7 @@ enum class CCButtonVariant {
 }
 
 enum class CCButtonSize {
+    xLarge,
     large,
     medium,
     small,
@@ -367,6 +368,13 @@ fun cCButtonStyle(
     }
     if (variant == CCButtonVariant.errorGhost) {
         style = style.copy(fontColor = CocsoTokens.Color.feedbackDangerText())
+    }
+    if (size == CCButtonSize.xLarge) {
+        style = style.copy(height = 56.dp)
+        style = style.copy(paddingInline = 16.dp)
+        style = style.copy(contentPaddingX = 6.dp)
+        style = style.copy(contentPaddingY = 0.dp)
+        style = style.copy(fontSize = 16.dp)
     }
     if (size == CCButtonSize.large) {
         style = style.copy(height = 40.dp)

@@ -2,7 +2,7 @@
 
 export interface ButtonVariantProps {
   variant?: "primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost";
-  size?: "large" | "medium" | "small" | "x-small";
+  size?: "x-large" | "large" | "medium" | "small" | "x-small";
   shape?: "square" | "circle" | "rounded" | "sharp";
   align?: "center" | "start" | "between";
 }

@@ -2,13 +2,13 @@
 
 export interface ButtonVariantProps {
   variant?: "primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost";
-  size?: "large" | "medium" | "small" | "x-small";
+  size?: "x-large" | "large" | "medium" | "small" | "x-small";
   shape?: "square" | "circle" | "rounded" | "sharp";
   align?: "center" | "start" | "between";
 }
 
 export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost";
-export type ButtonSize = "large" | "medium" | "small" | "x-small";
+export type ButtonSize = "x-large" | "large" | "medium" | "small" | "x-small";
 export type ButtonShape = "square" | "circle" | "rounded" | "sharp";
 export type ButtonAlign = "center" | "start" | "between";
 
