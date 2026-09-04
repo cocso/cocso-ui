@@ -422,6 +422,9 @@ public struct CCButtonStyle: Equatable, Sendable {
         if shape == .square && size == .small {
             style.borderRadius = CocsoTokens.Radius.r4
         }
+        if shape == .square && size == .xLarge {
+            style.borderRadius = CocsoTokens.Radius.r6
+        }
         return style
     }
 }

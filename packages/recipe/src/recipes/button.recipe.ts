@@ -113,6 +113,13 @@ export const buttonRecipe = defineRecipe({
       conditions: { shape: "square", size: ["large", "medium", "small"] },
       styles: { root: { borderRadius: "radius-4" } },
     },
+    // The radius follows the size — 6 at x-small, 8 through large — and a
+    // 56px control at 8 reads as nearly square. 16 keeps the proportion;
+    // it is also within 2px of what cocso/mobile drew by hand.
+    {
+      conditions: { shape: "square", size: "x-large" },
+      styles: { root: { borderRadius: "radius-6" } },
+    },
   ],
 
   states: {
