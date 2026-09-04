@@ -60,6 +60,14 @@ fun CCButton(
             // `shape = circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
             // square.
+            // WCAG 1.4.3 exempts an inactive control, and the web dims a
+            // disabled button the same way rather than restating every variant.
+            //
+            // This comes before `background`: a Compose modifier affects what is
+            // drawn after it in the chain, so `alpha` placed below the fill dimmed
+            // only the label and left the fill at full strength — a disabled
+            // primary button was solid black on Android and grey on iOS.
+            .alpha(if (enabled) 1f else 0.4f)
             .clip(
                 if (style.borderRadiusFull == true) {
                     CircleShape
@@ -68,9 +76,6 @@ fun CCButton(
                 }
             )
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
-            // WCAG 1.4.3 exempts an inactive control, and the web dims a
-            // disabled button the same way rather than restating every variant.
-            .alpha(if (enabled) 1f else 0.4f)
             .clickable(
                 enabled = enabled && !loading,
                 interactionSource = interactionSource,

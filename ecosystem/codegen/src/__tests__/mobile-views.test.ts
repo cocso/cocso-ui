@@ -205,3 +205,28 @@ describe("Views read every value their resolver gives them", () => {
     }
   });
 });
+
+/**
+ * `alpha` before `background`, on Compose.
+ *
+ * A Compose modifier affects what is drawn after it in the chain. `alpha`
+ * placed below the fill dims only the content on top of it, so a disabled
+ * button kept its fill at full strength on Android while iOS — where
+ * `.opacity` covers the whole view — dimmed it. The two platforms disagreed on
+ * what "disabled" looks like, and nothing here said so.
+ */
+describe("Compose dims the whole control, not only its content", () => {
+  const views = kotlin.filter((n) => n !== "CCTouchTarget");
+  it.each(views)("%s applies alpha before background", (name) => {
+    const source = readFileSync(path.join(KOTLIN_DIR, `${name}.kt`), "utf-8");
+    const alpha = source.indexOf(".alpha(");
+    const background = source.indexOf(".background(");
+    if (alpha === -1 || background === -1) {
+      return;
+    }
+    expect(
+      alpha,
+      `${name}: .alpha( comes after .background(, so the fill is never dimmed`
+    ).toBeLessThan(background);
+  });
+});
