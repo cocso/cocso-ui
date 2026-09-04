@@ -73,6 +73,13 @@
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
 }
 
+.cocso-button:where(.cocso-button--size-x-large) {
+  --cocso-button-height: 56px;
+  --cocso-button-padding-inline: 16px;
+  --cocso-button-content-padding: 0 6px;
+  --cocso-button-font-size: 16px;
+}
+
 .cocso-button:where(.cocso-button--size-large) {
   --cocso-button-height: 40px;
   --cocso-button-padding-inline: 14px;

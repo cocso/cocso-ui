@@ -4,6 +4,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+// Coordinates a consumer names when it pulls this in as a composite build:
+//   includeBuild("<path>/packages/compose")
+//   implementation("ai.cocso.ui:cocso-ui-compose")
+// The name is `rootProject.name` in settings.gradle.kts. Publication to a
+// repository waits for a second consumer; cocso/mobile consumes by path.
+group = "ai.cocso.ui"
+version = "0.1.0"
+
 android {
     namespace = "ai.cocso.ui"
     compileSdk = 35

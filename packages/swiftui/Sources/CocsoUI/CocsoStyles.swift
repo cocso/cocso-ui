@@ -287,6 +287,7 @@ public enum CCButtonVariant: String, CaseIterable, Sendable {
 }
 
 public enum CCButtonSize: String, CaseIterable, Sendable {
+    case xLarge
     case large
     case medium
     case small
@@ -364,6 +365,13 @@ public struct CCButtonStyle: Equatable, Sendable {
         }
         if variant == .errorGhost {
             style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme)
+        }
+        if size == .xLarge {
+            style.height = 56
+            style.paddingInline = 16
+            style.contentPaddingX = 6
+            style.contentPaddingY = 0
+            style.fontSize = 16
         }
         if size == .large {
             style.height = 40

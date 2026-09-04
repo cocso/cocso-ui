@@ -47,6 +47,17 @@ export const buttonRecipe = defineRecipe({
       },
     },
     size: {
+      // The full-width call to action a phone screen ends on. cocso/mobile drew
+      // its button at 56 by hand because nothing here reached that height;
+      // adding the size is what lets it stop deciding for itself.
+      "x-large": {
+        root: {
+          height: 56,
+          paddingInline: 16,
+          contentPadding: "0 6px",
+          fontSize: 16,
+        },
+      },
       large: {
         root: {
           height: 40,
