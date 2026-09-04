@@ -387,3 +387,41 @@ describe("Contrast — recipe fills against their foregrounds", () => {
     });
   });
 });
+
+/**
+ * A control's boundary is the only thing that says where the control is.
+ *
+ * The border check above deliberately applies no ratio, because a divider is
+ * allowed to be subtle. That reason holds for a divider and not for a text
+ * field: WCAG 1.4.11 asks 3:1 for the visual information required to identify
+ * a component, and for these the border is that information — they sit on the
+ * page with the page's own background.
+ *
+ * The blanket exemption is what let an input rest at 1.23:1 on white and
+ * 1.13:1 on a card, identifiable only once focused. `border-strong` itself was
+ * 2.82:1 on a card, so even the token named `strong` did not clear the bar.
+ */
+describe("A control's boundary identifies it", () => {
+  /** The border a control draws when it is doing nothing. */
+  const RESTING_BOUNDARIES = ["border-strong"] as const;
+
+  /** What a control sits on. A control is not painted on a tint. */
+  const CONTROL_SURFACES = ["surface-primary", "surface-secondary"] as const;
+
+  describe.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("%s theme", (_theme, aliases) => {
+    const pairs = RESTING_BOUNDARIES.flatMap((border) =>
+      CONTROL_SURFACES.map((surface) => ({ border, surface }))
+    );
+
+    it.each(pairs)("$border clears 3:1 on $surface", ({ border, surface }) => {
+      const ratio = contrast(
+        resolve(border, aliases),
+        resolve(surface, aliases)
+      );
+      expect(ratio).toBeGreaterThanOrEqual(3);
+    });
+  });
+});

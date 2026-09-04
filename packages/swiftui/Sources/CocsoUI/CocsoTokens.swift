@@ -126,7 +126,7 @@ public enum CocsoTokens {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
         public static func borderStrong(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x8A949E)
+            scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
         }
         public static func feedbackDanger(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF05F42) : SwiftUI.Color(hex: 0xDE3412)

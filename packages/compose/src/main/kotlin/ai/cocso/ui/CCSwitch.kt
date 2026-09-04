@@ -1,6 +1,7 @@
 package ai.cocso.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -75,6 +76,13 @@ fun CCSwitch(
                 .background(
                     (if (checked) style.checkedBgColor else style.switchBgColor)
                         ?: CocsoTokens.Color.surfaceNeutral()
+                )
+                // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지 보이지
+                // 않았다. 색은 레시피가 정한다.
+                .border(
+                    1.dp,
+                    style.borderColor ?: CocsoTokens.Color.borderStrong(),
+                    CircleShape,
                 )
                 .padding(horizontal = inset),
             contentAlignment = if (checked) Alignment.CenterEnd else Alignment.CenterStart,

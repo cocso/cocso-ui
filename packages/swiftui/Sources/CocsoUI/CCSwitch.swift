@@ -44,6 +44,15 @@ public struct CCSwitch: View {
                             (isOn ? style.checkedBgColor : style.switchBgColor)
                                 ?? CocsoTokens.Color.surfaceNeutral(colorScheme)
                         )
+                        // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지
+                        // 보이지 않았다. 색은 레시피가 정한다.
+                        .overlay(
+                            Capsule().strokeBorder(
+                                style.borderColor
+                                    ?? CocsoTokens.Color.borderStrong(colorScheme),
+                                lineWidth: 1
+                            )
+                        )
                     Circle()
                         .fill(CocsoTokens.Color.surfacePrimary(colorScheme))
                         .frame(width: thumb, height: thumb)

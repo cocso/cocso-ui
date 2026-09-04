@@ -517,7 +517,7 @@ public struct CCCheckboxStyle: Equatable, Sendable {
             style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
         }
         if status == .off {
-            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
+            style.borderColor = CocsoTokens.Color.borderStrong(scheme)
             style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
         }
         if status == .intermediate {
@@ -803,7 +803,7 @@ public struct CCRadioStyle: Equatable, Sendable {
         }
         if selected == .`false` {
             style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
-            style.borderColor = CocsoTokens.Color.borderPrimary(scheme)
+            style.borderColor = CocsoTokens.Color.borderStrong(scheme)
         }
         return style
     }
@@ -1047,6 +1047,7 @@ public enum CCSwitchChecked: String, CaseIterable, Sendable {
 
 public struct CCSwitchStyle: Equatable, Sendable {
     public var switchBgColor: SwiftUI.Color?
+    public var borderColor: SwiftUI.Color?
     public var checkedBgColor: SwiftUI.Color?
     public var width: CGFloat?
     public var height: CGFloat?
@@ -1063,6 +1064,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
     ) -> CCSwitchStyle {
         var style = CCSwitchStyle()
         style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
         if variant == .primary {
             style.checkedBgColor = CocsoTokens.Color.interactivePrimary(scheme)
         }

@@ -518,7 +518,7 @@ fun cCCheckboxStyle(
         style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())
     }
     if (status == CCCheckboxStatus.off) {
-        style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
+        style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
         style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
     }
     if (status == CCCheckboxStatus.intermediate) {
@@ -798,7 +798,7 @@ fun cCRadioStyle(
     }
     if (selected == CCRadioSelected.`false`) {
         style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
-        style = style.copy(borderColor = CocsoTokens.Color.borderPrimary())
+        style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
     }
     return style
 }
@@ -1037,6 +1037,7 @@ enum class CCSwitchChecked {
 
 data class CCSwitchStyle(
     val switchBgColor: ComposeColor? = null,
+    val borderColor: ComposeColor? = null,
     val checkedBgColor: ComposeColor? = null,
     val width: Dp? = null,
     val height: Dp? = null,
@@ -1053,6 +1054,7 @@ fun cCSwitchStyle(
 ): CCSwitchStyle {
     var style = CCSwitchStyle()
     style = style.copy(switchBgColor = CocsoTokens.Color.surfaceNeutral())
+    style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
     if (variant == CCSwitchVariant.primary) {
         style = style.copy(checkedBgColor = CocsoTokens.Color.interactivePrimary())
     }

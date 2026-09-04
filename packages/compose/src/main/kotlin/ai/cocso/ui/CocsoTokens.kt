@@ -127,7 +127,7 @@ object CocsoTokens {
         @Composable
         @ReadOnlyComposable
         fun borderStrong(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF6D7882) else ComposeColor(0xFF8A949E)
+            if (isSystemInDarkTheme()) ComposeColor(0xFF6D7882) else ComposeColor(0xFF6D7882)
         @Composable
         @ReadOnlyComposable
         fun feedbackDanger(): ComposeColor =

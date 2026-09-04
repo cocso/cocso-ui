@@ -28,7 +28,12 @@ export const radioGroupRecipe = defineRecipe({
         },
       },
       false: {
-        root: { bgColor: "surface-primary", borderColor: "border-primary" },
+        root: {
+          // 선택되지 않은 라디오의 테두리가 유일한 식별자다. `border-primary` 는
+          // 흰 배경에서 1.54:1 이었다.
+          bgColor: "surface-primary",
+          borderColor: "border-strong",
+        },
       },
     },
   },

@@ -183,7 +183,7 @@
   --cocso-color-surface-neutral: var(--cocso-color-neutral-100);
   --cocso-color-border-primary: var(--cocso-color-neutral-200);
   --cocso-color-border-secondary: var(--cocso-color-neutral-100);
-  --cocso-color-border-strong: var(--cocso-color-neutral-400);
+  --cocso-color-border-strong: var(--cocso-color-neutral-500);
   --cocso-color-overlay-subtle: var(--cocso-color-black-alpha-5);
   --cocso-color-overlay-muted: var(--cocso-color-black-alpha-10);
   --cocso-color-overlay-strong: var(--cocso-color-black-alpha-20);
