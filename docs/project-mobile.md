@@ -115,10 +115,13 @@ CI expectations:
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
-2. **Consumption in `cocso/mobile`.** Done for values and names: its converter now reads `CocsoTokens.swift` — the generated, golden-tested artifact — instead of parsing the YAML and re-deriving identifiers, which is what let the same token hold two names (`rFull` here, `full` there) and what silently dropped 55 colours when the source grew a second mode. Its CI checks the sync, so that drift now fails a build.
+2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-   Not done, and a separate decision: the app is light-only, and its 1,157 call sites take a constant rather than passing a colour scheme. Adopting dark mode there is a change to the app, not to this pipeline. Its 22 app-only tokens — brand colours and a type scale — sit in `design/tokens.local.json`; whether any belong in the design system is a design question, not a migration one.
-3. **Views.** Twelve are done — button, badge, card, alert, typography, avatar, skeleton, progress, spinner, checkbox, switch, input — plus the `CCTouchTarget` primitive. The rest follow as they are wanted; `cocso/mobile`'s `CC*` set is the source of what to build and in what order, and what it should be replaced by, since theirs pick colours per variant by hand.
+3. **Views.** Twelve exist here, matched on both platforms, plus the `CCTouchTarget` primitive.
+
+   `cocso/mobile` consumes them by path — `.cocso-ui/packages/{swiftui,compose}`, a symlink locally and a checkout in CI — as an SPM path package and a Gradle composite build (the Compose module carries `group`/`version` for that). Its `CCButton` is now an adapter over ours: same name and API, so its 59 and 60 call sites did not change, and what a variant looks like is decided here. That took one addition on this side — `x-large` (56px, radius following size to 16), the height the app had drawn by hand — and it surfaced one defect on this side: the Compose button dimmed only its label when disabled, because `alpha` sat below `background`. A guard now holds that order.
+
+   Next in the app: the four remaining overlapping components (Badge, Card, ProgressBar, TextField) the same way; the nine app-only ones (TabBar, NavBar, TopBar, Gallery, ListRow, FAB, ScreenHeader, EmptyState, Logo) stay theirs but read `CocsoTokens`/`CocsoStyles`.
 
 ## Open Questions
 
