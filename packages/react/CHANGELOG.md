@@ -1,5 +1,17 @@
 # @cocso-ui/react
 
+## 1.3.0
+
+### Minor Changes
+
+- 92997e4: Button 에 `size="x-large"` (56px) 를 추가했습니다. 화면 하단을 차지하는 전폭 CTA 를
+  위한 크기로, `cocso/mobile` 이 손으로 그리던 높이입니다. 세 플랫폼이 같은
+  레시피에서 받습니다.
+
+### Patch Changes
+
+- b95a5a6: `Button size="x-large"` 의 모서리 반경이 크기에 따라 16px 로 커집니다 (x-small 6, small–large 8 의 진행을 잇습니다).
+
 ## 1.2.5
 
 ### Patch Changes
