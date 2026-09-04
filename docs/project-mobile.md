@@ -35,6 +35,7 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 
 ## Out of Scope
 
+- **Views.** The style layer is generated; the SwiftUI `View` and the Compose `@Composable` that consume it are not, which mirrors the web's split between a recipe and its `.tsx`.
 - **Components.** Deliberately later. `cocso/mobile` has fifteen (`CC*`) that work and are parity-checked; duplicating them before the token layer is settled would mean porting them twice.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
 - Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
@@ -51,8 +52,13 @@ packages/baseframe-sources/     YAML, single source of truth
 ecosystem/baseframe/            one validated AST, three emitters
   src/core/builders/css-vars    → token.css, theme-dark.css
   src/core/builders/tailwind    → tailwind4.css
-  src/core/builders/swift       → DesignTokens.swift     (planned)
-  src/core/builders/kotlin      → DesignTokens.kt        (planned)
+  src/core/builders/mobile      → CocsoTokens.swift / .kt
+
+packages/recipe/                variant → token, platform-neutral
+        │
+        ▼
+ecosystem/codegen/
+  src/mobile-recipes            → CocsoStyles.swift / .kt
         │
         ▼
 packages/swiftui/  packages/compose/
