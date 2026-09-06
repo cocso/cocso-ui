@@ -1,0 +1,30 @@
+# Visual Regression 이 PR 마다 만드는 `vr-screenshots-<n>` 브랜치를 그 PR 이 닫힐 때
+# 지운다. 이 브랜치는 코드가 아니라 before/after/diff PNG 의 보관소이고, PR 코멘트가
+# raw URL 로 참조한다. 만들기만 하고 지우는 쪽이 없어 #170 부터 40 개가 쌓였다.
+#
+# PR 이 닫힌 뒤에는 리포트 이미지가 깨지는 것을 감수한다 — 병합된 PR 의 VR 리포트를
+# 다시 볼 일은 드물고, 텍스트 리포트는 그대로 남는다.
+name: Visual Regression Cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  delete-screenshots-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: vr-screenshots-${{ github.event.number }} 삭제
+        env:
+          BRANCH: vr-screenshots-${{ github.event.number }}
+        run: |
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            git push origin --delete "$BRANCH"
+            echo "deleted $BRANCH"
+          else
+            echo "no $BRANCH to delete"
+          fi
