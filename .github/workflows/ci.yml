@@ -212,3 +212,44 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+  # 이 두 패키지는 CI 가 한 번도 빌드하지 않고 있었다. 파리티 테스트는 vitest 로
+  # 소스를 읽어 비교할 뿐이라, Swift 나 Kotlin 이 컴파일되지 않아도 초록이었다.
+  compose:
+    name: Compose
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # 골든 비교까지 여기서 돈다 — gradle.properties 가 verify 를 기본으로 둔다.
+      - name: Build and Render
+        working-directory: packages/compose
+        run: ./gradlew :testDebugUnitTest
+
+      - name: Upload Render Diff
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roborazzi-diff
+          path: packages/compose/build/outputs/roborazzi/
+
+  swiftui:
+    name: SwiftUI
+    runs-on: macos-15
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Build
+        working-directory: packages/swiftui
+        run: swift build
