@@ -6,6 +6,9 @@ public struct CCSkeleton: View {
     private let animation: CCSkeletonAnimation
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var pulsing = false
 
@@ -21,7 +24,7 @@ public struct CCSkeleton: View {
         let style = CCSkeletonStyle.resolve(
             variant: variant,
             animation: animation,
-            scheme: colorScheme
+            scheme: colorScheme, brand: brand
         )
         // Motion here is decoration, and the web stops it under
         // `prefers-reduced-motion`; this is the same setting on iOS.
@@ -32,7 +35,7 @@ public struct CCSkeleton: View {
             ? AnyShape(Circle())
             : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
         return shape
-            .fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme))
+            .fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand))
             .frame(width: style.width, height: style.height ?? 16)
             .opacity(animates && pulsing ? 0.45 : 1)
             .animation(

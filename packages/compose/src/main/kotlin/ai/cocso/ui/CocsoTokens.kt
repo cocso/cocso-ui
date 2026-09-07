@@ -7,9 +7,23 @@ package ai.cocso.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/**
+ * The brand a token resolves for. The base is no brand: `interactive-primary`
+ * is neutral-950, and a brand is a theme laid over it. Brand-aware tokens read
+ * `LocalCocsoBrand` themselves, so no call site changes — the app provides it
+ * once at its root.
+ */
+enum class CocsoBrand {
+    Base,
+    Cocso,
+}
+
+val LocalCocsoBrand = compositionLocalOf { CocsoBrand.Base }
 
 object CocsoTokens {
     object Color {
@@ -262,20 +276,28 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF464C53) else ComposeColor(0xFFCDD1D5)
         @Composable
         @ReadOnlyComposable
-        fun interactivePrimary(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFFF4F5F6) else ComposeColor(0xFF131416)
+        fun interactivePrimary(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.interactivePrimary()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFFF4F5F6) else ComposeColor(0xFF131416)
+        }
         @Composable
         @ReadOnlyComposable
-        fun interactivePrimaryActive(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFFB1B8BE) else ComposeColor(0xFF464C53)
+        fun interactivePrimaryActive(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.interactivePrimaryActive()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFFB1B8BE) else ComposeColor(0xFF464C53)
+        }
         @Composable
         @ReadOnlyComposable
-        fun interactivePrimaryHover(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFFCDD1D5) else ComposeColor(0xFF33363D)
+        fun interactivePrimaryHover(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.interactivePrimaryHover()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFFCDD1D5) else ComposeColor(0xFF33363D)
+        }
         @Composable
         @ReadOnlyComposable
-        fun interactivePrimaryMuted(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF6D7882) else ComposeColor(0xFF6D7882)
+        fun interactivePrimaryMuted(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.interactivePrimaryMuted()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF6D7882) else ComposeColor(0xFF6D7882)
+        }
         @Composable
         @ReadOnlyComposable
         fun interactivePrimarySubtle(): ComposeColor =
@@ -370,8 +392,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFFFFFFFF) else ComposeColor(0xFFFFFFFF)
         @Composable
         @ReadOnlyComposable
-        fun textOnPrimary(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF131416) else ComposeColor(0xFFFFFFFF)
+        fun textOnPrimary(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.textOnPrimary()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF131416) else ComposeColor(0xFFFFFFFF)
+        }
         @Composable
         @ReadOnlyComposable
         fun textOnSuccess(): ComposeColor =

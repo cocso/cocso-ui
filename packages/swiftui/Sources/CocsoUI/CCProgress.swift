@@ -9,6 +9,9 @@ public struct CCProgress: View {
     private let label: String
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
 
     public init(
         value: Double,
@@ -25,7 +28,7 @@ public struct CCProgress: View {
     }
 
     public var body: some View {
-        let style = CCProgressStyle.resolve(variant: variant, size: size, scheme: colorScheme)
+        let style = CCProgressStyle.resolve(variant: variant, size: size, scheme: colorScheme, brand: brand)
         let fraction = total > 0 ? min(max(value / total, 0), 1) : 0
         let height = style.height ?? 8
         GeometryReader { geometry in
@@ -34,9 +37,9 @@ public struct CCProgress: View {
             // two platforms.
             let shape = RoundedRectangle(cornerRadius: style.borderRadius ?? height / 2)
             ZStack(alignment: .leading) {
-                shape.fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme))
+                shape.fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand))
                 shape
-                    .fill(style.fillColor ?? CocsoTokens.Color.interactivePrimary(colorScheme))
+                    .fill(style.fillColor ?? CocsoTokens.Color.interactivePrimary(colorScheme, brand: brand))
                     .frame(width: geometry.size.width * fraction)
             }
         }

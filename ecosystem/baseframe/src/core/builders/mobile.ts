@@ -253,6 +253,126 @@ function kotlinValue(value: Resolved): string {
   return `ComposeColor(0x${alpha}${value.hex})`;
 }
 
+function pascal(name: string): string {
+  return name[0].toUpperCase() + name.slice(1);
+}
+
+function swiftBrandDeclarations(brands: MobileOptions["brands"]): string[] {
+  if (!brands || brands.length === 0) {
+    return [];
+  }
+  return [
+    "/// The brand a token resolves for. The base is no brand: `interactive-primary`",
+    "/// is neutral-950, and a brand is a theme laid over it. Read it from",
+    "/// `@Environment(\\.cocsoBrand)` and pass it to the tokens and resolvers that",
+    "/// take it; the app sets it once at its root.",
+    "public enum CocsoBrand: Sendable {",
+    "    case base",
+    ...brands.map((b) => `    case ${b.name}`),
+    "}",
+    "",
+    "private struct CocsoBrandKey: EnvironmentKey {",
+    "    static let defaultValue: CocsoBrand = .base",
+    "}",
+    "",
+    "public extension EnvironmentValues {",
+    "    var cocsoBrand: CocsoBrand {",
+    "        get { self[CocsoBrandKey.self] }",
+    "        set { self[CocsoBrandKey.self] = newValue }",
+    "    }",
+    "}",
+    "",
+  ];
+}
+
+function kotlinBrandDeclarations(brands: MobileOptions["brands"]): string[] {
+  if (!brands || brands.length === 0) {
+    return [];
+  }
+  return [
+    "/**",
+    " * The brand a token resolves for. The base is no brand: `interactive-primary`",
+    " * is neutral-950, and a brand is a theme laid over it. Brand-aware tokens read",
+    " * `LocalCocsoBrand` themselves, so no call site changes — the app provides it",
+    " * once at its root.",
+    " */",
+    "enum class CocsoBrand {",
+    "    Base,",
+    ...brands.map((b) => `    ${pascal(b.name)},`),
+    "}",
+    "",
+    "val LocalCocsoBrand = compositionLocalOf { CocsoBrand.Base }",
+    "",
+  ];
+}
+
+/** One themed Swift token, with a brand axis when any brand overrides it. */
+function swiftThemedFunction(
+  entry: Entry,
+  brands: MobileOptions["brands"]
+): string[] {
+  const dark = entry.dark ?? entry.light;
+  const base = `scheme == .dark ? ${swiftValue(dark)} : ${swiftValue(entry.light)}`;
+  const branded = (brands ?? []).filter((b) => b.overrides.has(entry.name));
+  if (branded.length === 0) {
+    // When brands exist every themed token takes the axis, so a resolver can
+    // pass `brand:` uniformly; a token no brand overrides ignores it.
+    const axis = brands?.length ? ", brand _: CocsoBrand = .base" : "";
+    return [
+      `        public static func ${entry.name}(_ scheme: ColorScheme${axis}) -> SwiftUI.Color {`,
+      `            ${base}`,
+      "        }",
+    ];
+  }
+  // A brand-aware token. The default keeps every existing call site compiling
+  // and rendering the base; a view that reads the brand from its environment
+  // passes it through.
+  return [
+    `        public static func ${entry.name}(`,
+    "            _ scheme: ColorScheme,",
+    "            brand: CocsoBrand = .base",
+    "        ) -> SwiftUI.Color {",
+    "            switch brand {",
+    ...branded.map(
+      (b) =>
+        `            case .${b.name}: return CocsoBrand${pascal(b.name)}.Color.${entry.name}(scheme)`
+    ),
+    `            default: return ${base}`,
+    "            }",
+    "        }",
+  ];
+}
+
+/** One themed Kotlin token; brand-aware ones read `LocalCocsoBrand` themselves. */
+function kotlinThemedFunction(
+  entry: Entry,
+  brands: MobileOptions["brands"]
+): string[] {
+  const dark = entry.dark ?? entry.light;
+  const base = `if (isSystemInDarkTheme()) ${kotlinValue(dark)} else ${kotlinValue(entry.light)}`;
+  const branded = (brands ?? []).filter((b) => b.overrides.has(entry.name));
+  if (branded.length === 0) {
+    return [
+      "        @Composable",
+      "        @ReadOnlyComposable",
+      `        fun ${entry.name}(): ComposeColor =`,
+      `            ${base}`,
+    ];
+  }
+  // No call site changes — the app provides `LocalCocsoBrand` once at its root.
+  return [
+    "        @Composable",
+    "        @ReadOnlyComposable",
+    `        fun ${entry.name}(): ComposeColor = when (LocalCocsoBrand.current) {`,
+    ...branded.map(
+      (b) =>
+        `            CocsoBrand.${pascal(b.name)} -> CocsoBrand${pascal(b.name)}.Color.${entry.name}()`
+    ),
+    `            else -> ${base}`,
+    "        }",
+  ];
+}
+
 function generateSwift(ast: Ast, options: MobileOptions): string {
   const { groups } = collectEntries(ast, options.only);
   const type = options.typeName ?? "CocsoTokens";
@@ -273,6 +393,7 @@ function generateSwift(ast: Ast, options: MobileOptions): string {
     "    }",
     "}",
     "",
+    ...(type === "CocsoTokens" ? swiftBrandDeclarations(options.brands) : []),
     `public enum ${type} {`,
   ];
 
@@ -304,12 +425,7 @@ function generateSwift(ast: Ast, options: MobileOptions): string {
         "        /// `@Environment(\\.colorScheme)`."
       );
       for (const entry of themed) {
-        const dark = entry.dark ?? entry.light;
-        lines.push(
-          `        public static func ${entry.name}(_ scheme: ColorScheme) -> SwiftUI.Color {`,
-          `            scheme == .dark ? ${swiftValue(dark)} : ${swiftValue(entry.light)}`,
-          "        }"
-        );
+        lines.push(...swiftThemedFunction(entry, options.brands));
       }
     }
     lines.push("    }", "");
@@ -331,12 +447,16 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
     "import androidx.compose.runtime.Composable",
     "import androidx.compose.runtime.ReadOnlyComposable",
     "import androidx.compose.foundation.isSystemInDarkTheme",
+    ...(type === "CocsoTokens" && options.brands?.length
+      ? ["import androidx.compose.runtime.compositionLocalOf"]
+      : []),
     // Aliased: these objects sit inside `object Color`, where the bare name is
     // the token group rather than Compose's type.
     "import androidx.compose.ui.graphics.Color as ComposeColor",
     "import androidx.compose.ui.unit.Dp",
     "import androidx.compose.ui.unit.dp",
     "",
+    ...(type === "CocsoTokens" ? kotlinBrandDeclarations(options.brands) : []),
     `object ${type} {`,
   ];
 
@@ -361,13 +481,7 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
         "        // light tokens in a dark window by forgetting to pass a flag."
       );
       for (const entry of themed) {
-        const dark = entry.dark ?? entry.light;
-        lines.push(
-          "        @Composable",
-          "        @ReadOnlyComposable",
-          `        fun ${entry.name}(): ComposeColor =`,
-          `            if (isSystemInDarkTheme()) ${kotlinValue(dark)} else ${kotlinValue(entry.light)}`
-        );
+        lines.push(...kotlinThemedFunction(entry, options.brands));
       }
     }
     lines.push("    }", "");

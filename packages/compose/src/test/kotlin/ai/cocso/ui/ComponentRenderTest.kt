@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import android.graphics.BitmapFactory
 import java.io.File
@@ -128,4 +129,27 @@ class ComponentRenderTest {
     @Test
     @Config(sdk = [34], qualifiers = "w360dp-h2200dp-night")
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
+
+    /**
+     * The brand reaches the views. An overlay the views never read would leave
+     * the app's own primary blue while every design-system view stayed black —
+     * two primaries on one screen. The base default is black; under the cocso
+     * brand the primary button's fill is the info blue, read back from pixels.
+     */
+    @Test
+    fun brandRecoloursThePrimaryButton() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalCocsoBrand provides CocsoBrand.Cocso) {
+                CCButton(title = "Brand", onClick = {}, modifier = Modifier.width(200.dp))
+            }
+        }
+        composeRule.waitForIdle()
+        val path = "src/test/screenshots/button-brand-cocso.png"
+        composeRule.onRoot().captureRoboImage(path)
+        val image = BitmapFactory.decodeFile(path)
+        // A point inside the fill, away from the label.
+        val px = image.getPixel(image.width / 8, image.height / 2)
+        val r = (px shr 16) and 0xFF; val g = (px shr 8) and 0xFF; val b = px and 0xFF
+        assertTrue("primary 가 파랑이 아니다: #%02X%02X%02X".format(r, g, b), b > 0xC0 && r < 0x60 && g in 0x50..0x90)
+    }
 }

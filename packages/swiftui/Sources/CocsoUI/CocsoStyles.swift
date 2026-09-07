@@ -24,7 +24,8 @@ public struct CCAlertStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         variant: CCAlertVariant,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCAlertStyle {
         var style = CCAlertStyle()
         style.borderRadius = CocsoTokens.Radius.r4
@@ -32,24 +33,24 @@ public struct CCAlertStyle: Equatable, Sendable {
         style.paddingY = 12
         style.fontSize = 14
         if variant == .info {
-            style.bgColor = CocsoTokens.Color.feedbackInfoSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackInfoText(scheme)
-            style.borderColor = CocsoTokens.Color.feedbackInfoBorder(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackInfoSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackInfoText(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.feedbackInfoBorder(scheme, brand: brand)
         }
         if variant == .success {
-            style.bgColor = CocsoTokens.Color.feedbackSuccessSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackSuccessText(scheme)
-            style.borderColor = CocsoTokens.Color.feedbackSuccessBorder(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackSuccessSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackSuccessText(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.feedbackSuccessBorder(scheme, brand: brand)
         }
         if variant == .warning {
-            style.bgColor = CocsoTokens.Color.feedbackWarningSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackWarningText(scheme)
-            style.borderColor = CocsoTokens.Color.feedbackWarningBorder(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackWarningSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackWarningText(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.feedbackWarningBorder(scheme, brand: brand)
         }
         if variant == .error {
-            style.bgColor = CocsoTokens.Color.feedbackDangerSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme)
-            style.borderColor = CocsoTokens.Color.feedbackDangerBorder(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackDangerSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.feedbackDangerBorder(scheme, brand: brand)
         }
         return style
     }
@@ -83,11 +84,12 @@ public struct CCAvatarStyle: Equatable, Sendable {
     public static func resolve(
         size: CCAvatarSize,
         shape: CCAvatarShape,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCAvatarStyle {
         var style = CCAvatarStyle()
-        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme)
-        style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
+        style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         style.fontWeight = .medium
         if size == .xs {
             style.height = 24
@@ -176,41 +178,42 @@ public struct CCBadgeStyle: Equatable, Sendable {
         variant: CCBadgeVariant,
         size: CCBadgeSize,
         shape: CCBadgeShape,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCBadgeStyle {
         var style = CCBadgeStyle()
         if variant == .primary {
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
         }
         if variant == .primarySubtle {
-            style.bgColor = CocsoTokens.Color.interactivePrimarySubtle(scheme)
-            style.fontColor = CocsoTokens.Color.interactivePrimaryText(scheme)
+            style.bgColor = CocsoTokens.Color.interactivePrimarySubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.interactivePrimaryText(scheme, brand: brand)
         }
         if variant == .secondary {
-            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme)
-            style.fontColor = CocsoTokens.Color.textSecondary(scheme)
+            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
         }
         if variant == .success {
-            style.bgColor = CocsoTokens.Color.feedbackSuccessSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackSuccessText(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackSuccessSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackSuccessText(scheme, brand: brand)
         }
         if variant == .error {
-            style.bgColor = CocsoTokens.Color.feedbackDangerSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackDangerSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
         }
         if variant == .warning {
-            style.bgColor = CocsoTokens.Color.feedbackWarningSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackWarningText(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackWarningSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackWarningText(scheme, brand: brand)
         }
         if variant == .info {
-            style.bgColor = CocsoTokens.Color.feedbackInfoSubtle(scheme)
-            style.fontColor = CocsoTokens.Color.feedbackInfoText(scheme)
+            style.bgColor = CocsoTokens.Color.feedbackInfoSubtle(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.feedbackInfoText(scheme, brand: brand)
         }
         if variant == .outline {
-            style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
             style.borderWidth = 1
-            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
         }
         if size == .large {
             style.paddingX = 10
@@ -260,10 +263,11 @@ public struct CCBreadcrumbStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         size: CCBreadcrumbSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCBreadcrumbStyle {
         var style = CCBreadcrumbStyle()
-        style.fontColor = CocsoTokens.Color.textSecondary(scheme)
+        style.fontColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
         if size == .sm {
             style.fontSize = 12
         }
@@ -333,79 +337,80 @@ public struct CCButtonStyle: Equatable, Sendable {
         size: CCButtonSize,
         shape: CCButtonShape,
         align: CCButtonAlign,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCButtonStyle {
         var style = CCButtonStyle()
         if variant == .primary {
-            style.bgColorPressed = CocsoTokens.Color.interactivePrimaryActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactivePrimaryActive(scheme, brand: brand)
         }
         if variant == .secondary {
-            style.bgColorPressed = CocsoTokens.Color.interactiveSecondaryHover(scheme)
-            style.fontColorPressed = CocsoTokens.Color.textPrimary(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondaryHover(scheme, brand: brand)
+            style.fontColorPressed = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if variant == .outline {
-            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme, brand: brand)
         }
         if variant == .ghost {
-            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme, brand: brand)
         }
         if variant == .success {
-            style.bgColorPressed = CocsoTokens.Color.interactiveSuccessActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveSuccessActive(scheme, brand: brand)
         }
         if variant == .error {
-            style.bgColorPressed = CocsoTokens.Color.interactiveDangerActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveDangerActive(scheme, brand: brand)
         }
         if variant == .warning {
-            style.bgColorPressed = CocsoTokens.Color.interactiveWarningHover(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveWarningHover(scheme, brand: brand)
         }
         if variant == .info {
-            style.bgColorPressed = CocsoTokens.Color.interactiveInfoActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveInfoActive(scheme, brand: brand)
         }
         if variant == .neutral {
-            style.bgColorPressed = CocsoTokens.Color.interactiveNeutralActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveNeutralActive(scheme, brand: brand)
         }
         if variant == .errorGhost {
-            style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme)
+            style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme, brand: brand)
         }
         if variant == .primary {
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
         }
         if variant == .secondary {
-            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme)
-            style.fontColor = CocsoTokens.Color.textSecondary(scheme)
+            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
         }
         if variant == .outline {
-            style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
             style.borderWidth = 1
-            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
         }
         if variant == .ghost {
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
-            style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if variant == .success {
-            style.bgColor = CocsoTokens.Color.interactiveSuccess(scheme)
-            style.fontColor = CocsoTokens.Color.textOnSuccess(scheme)
+            style.bgColor = CocsoTokens.Color.interactiveSuccess(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnSuccess(scheme, brand: brand)
         }
         if variant == .error {
-            style.bgColor = CocsoTokens.Color.interactiveDanger(scheme)
-            style.fontColor = CocsoTokens.Color.textOnDanger(scheme)
+            style.bgColor = CocsoTokens.Color.interactiveDanger(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnDanger(scheme, brand: brand)
         }
         if variant == .warning {
-            style.bgColor = CocsoTokens.Color.interactiveWarning(scheme)
-            style.fontColor = CocsoTokens.Color.textOnWarning(scheme)
+            style.bgColor = CocsoTokens.Color.interactiveWarning(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnWarning(scheme, brand: brand)
         }
         if variant == .info {
-            style.bgColor = CocsoTokens.Color.interactiveInfo(scheme)
-            style.fontColor = CocsoTokens.Color.textOnInfo(scheme)
+            style.bgColor = CocsoTokens.Color.interactiveInfo(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnInfo(scheme, brand: brand)
         }
         if variant == .neutral {
-            style.bgColor = CocsoTokens.Color.interactiveNeutral(scheme)
-            style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.bgColor = CocsoTokens.Color.interactiveNeutral(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if variant == .errorGhost {
-            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme)
+            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
         }
         if size == .xLarge {
             style.height = 56
@@ -495,21 +500,22 @@ public struct CCCardStyle: Equatable, Sendable {
     public static func resolve(
         variant: CCCardVariant,
         padding: CCCardPadding,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCCardStyle {
         var style = CCCardStyle()
         if variant == .elevated {
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
             style.borderRadius = CocsoTokens.Radius.r4
         }
         if variant == .outlined {
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
             style.borderRadius = CocsoTokens.Radius.r4
             style.borderWidth = 1
-            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
         }
         if variant == .filled {
-            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme)
+            style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme, brand: brand)
             style.borderRadius = CocsoTokens.Radius.r4
         }
         if padding == .sm {
@@ -552,10 +558,11 @@ public struct CCCheckboxStyle: Equatable, Sendable {
     public static func resolve(
         size: CCCheckboxSize,
         status: CCCheckboxStatus,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCCheckboxStyle {
         var style = CCCheckboxStyle()
-        style.focusRingColor = CocsoTokens.Color.focusRing(scheme)
+        style.focusRingColor = CocsoTokens.Color.focusRing(scheme, brand: brand)
         if size == .large {
             style.size = 18
             style.radius = CocsoTokens.Radius.r3
@@ -569,16 +576,16 @@ public struct CCCheckboxStyle: Equatable, Sendable {
             style.radius = CocsoTokens.Radius.r1
         }
         if status == .on {
-            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if status == .off {
-            style.borderColor = CocsoTokens.Color.borderStrong(scheme)
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
+            style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
         }
         if status == .intermediate {
-            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         return style
     }
@@ -606,13 +613,14 @@ public struct CCDialogStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         size: CCDialogSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCDialogStyle {
         var style = CCDialogStyle()
-        style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
+        style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
         style.borderRadius = CocsoTokens.Radius.r5
         style.borderWidth = 1
-        style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
+        style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
         style.paddingTop = 20
         style.paddingBottom = 20
         style.paddingLeft = 20
@@ -651,10 +659,11 @@ public struct CCInputStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         size: CCInputSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCInputStyle {
         var style = CCInputStyle()
-        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
         if size == .xSmall {
             style.height = 28
             style.paddingX = 8
@@ -696,14 +705,15 @@ public struct CCLinkStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         variant: CCLinkVariant,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCLinkStyle {
         var style = CCLinkStyle()
         if variant == .inline {
-            style.color = CocsoTokens.Color.interactiveInfoText(scheme)
+            style.color = CocsoTokens.Color.interactiveInfoText(scheme, brand: brand)
         }
         if variant == .plain {
-            style.color = CocsoTokens.Color.interactiveInfoText(scheme)
+            style.color = CocsoTokens.Color.interactiveInfoText(scheme, brand: brand)
         }
         return style
     }
@@ -728,7 +738,8 @@ public struct CCPaginationStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         pageState: CCPaginationPageState,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCPaginationStyle {
         var style = CCPaginationStyle()
         style.height = 32
@@ -736,15 +747,15 @@ public struct CCPaginationStyle: Equatable, Sendable {
         style.borderRadius = CocsoTokens.Radius.r4
         style.fontSize = 14
         if pageState == .active {
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
             style.fontWeight = .semibold
         }
         if pageState == .inactive {
-            style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if pageState == .disabled {
-            style.fontColor = CocsoTokens.Color.textDisabled(scheme)
+            style.fontColor = CocsoTokens.Color.textDisabled(scheme, brand: brand)
         }
         return style
     }
@@ -776,27 +787,28 @@ public struct CCProgressStyle: Equatable, Sendable {
     public static func resolve(
         variant: CCProgressVariant,
         size: CCProgressSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCProgressStyle {
         var style = CCProgressStyle()
-        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme)
+        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
         if variant == .primary {
-            style.fillColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.fillColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if variant == .secondary {
-            style.fillColor = CocsoTokens.Color.textMuted(scheme)
+            style.fillColor = CocsoTokens.Color.textMuted(scheme, brand: brand)
         }
         if variant == .success {
-            style.fillColor = CocsoTokens.Color.feedbackSuccess(scheme)
+            style.fillColor = CocsoTokens.Color.feedbackSuccess(scheme, brand: brand)
         }
         if variant == .danger {
-            style.fillColor = CocsoTokens.Color.feedbackDanger(scheme)
+            style.fillColor = CocsoTokens.Color.feedbackDanger(scheme, brand: brand)
         }
         if variant == .warning {
-            style.fillColor = CocsoTokens.Color.feedbackWarning(scheme)
+            style.fillColor = CocsoTokens.Color.feedbackWarning(scheme, brand: brand)
         }
         if variant == .info {
-            style.fillColor = CocsoTokens.Color.feedbackInfo(scheme)
+            style.fillColor = CocsoTokens.Color.feedbackInfo(scheme, brand: brand)
         }
         if size == .sm {
             style.height = 4
@@ -838,13 +850,14 @@ public struct CCRadioStyle: Equatable, Sendable {
     public static func resolve(
         size: CCRadioSize,
         selected: CCRadioSelected,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCRadioStyle {
         var style = CCRadioStyle()
-        style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
-        style.borderColor = CocsoTokens.Color.textPrimary(scheme)
-        style.checkedColor = CocsoTokens.Color.interactivePrimary(scheme)
-        style.focusRingColor = CocsoTokens.Color.focusRing(scheme)
+        style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
+        style.borderColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
+        style.checkedColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+        style.focusRingColor = CocsoTokens.Color.focusRing(scheme, brand: brand)
         if size == .large {
             style.size = 18
             style.dotSize = 8
@@ -858,12 +871,12 @@ public struct CCRadioStyle: Equatable, Sendable {
             style.dotSize = 6
         }
         if selected == .`true` {
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
-            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if selected == .`false` {
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
-            style.borderColor = CocsoTokens.Color.borderStrong(scheme)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
+            style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
         }
         return style
     }
@@ -890,10 +903,11 @@ public struct CCSelectStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         size: CCSelectSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCSelectStyle {
         var style = CCSelectStyle()
-        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
         if size == .xSmall {
             style.minWidth = 28
             style.height = 28
@@ -958,10 +972,11 @@ public struct CCSkeletonStyle: Equatable, Sendable {
     public static func resolve(
         variant: CCSkeletonVariant,
         animation: CCSkeletonAnimation,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCSkeletonStyle {
         var style = CCSkeletonStyle()
-        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme)
+        style.bgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
         if variant == .text {
             style.height = 16
             style.borderRadius = CocsoTokens.Radius.r2
@@ -1008,29 +1023,30 @@ public struct CCSpinnerStyle: Equatable, Sendable {
     public static func resolve(
         variant: CCSpinnerVariant,
         size: CCSpinnerSize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCSpinnerStyle {
         var style = CCSpinnerStyle()
         if variant == .primary {
-            style.bladeColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.bladeColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if variant == .secondary {
-            style.bladeColor = CocsoTokens.Color.textMuted(scheme)
+            style.bladeColor = CocsoTokens.Color.textMuted(scheme, brand: brand)
         }
         if variant == .success {
-            style.bladeColor = CocsoTokens.Color.feedbackSuccess(scheme)
+            style.bladeColor = CocsoTokens.Color.feedbackSuccess(scheme, brand: brand)
         }
         if variant == .error {
-            style.bladeColor = CocsoTokens.Color.feedbackDanger(scheme)
+            style.bladeColor = CocsoTokens.Color.feedbackDanger(scheme, brand: brand)
         }
         if variant == .warning {
-            style.bladeColor = CocsoTokens.Color.feedbackWarning(scheme)
+            style.bladeColor = CocsoTokens.Color.feedbackWarning(scheme, brand: brand)
         }
         if variant == .info {
-            style.bladeColor = CocsoTokens.Color.feedbackInfo(scheme)
+            style.bladeColor = CocsoTokens.Color.feedbackInfo(scheme, brand: brand)
         }
         if variant == .white {
-            style.bladeColor = CocsoTokens.Color.surfacePrimary(scheme)
+            style.bladeColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
         }
         if size == .large {
             style.blades = 10
@@ -1070,17 +1086,18 @@ public struct CCStockQuantityStatusStyle: Equatable, Sendable {
     /// variants — the order the CSS cascade encodes.
     public static func resolve(
         quantity: CCStockQuantityStatusQuantity,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCStockQuantityStatusStyle {
         var style = CCStockQuantityStatusStyle()
         if quantity == .sufficient {
-            style.color = CocsoTokens.Color.feedbackInfoText(scheme)
+            style.color = CocsoTokens.Color.feedbackInfoText(scheme, brand: brand)
         }
         if quantity == .normal {
-            style.color = CocsoTokens.Color.feedbackSuccessText(scheme)
+            style.color = CocsoTokens.Color.feedbackSuccessText(scheme, brand: brand)
         }
         if quantity == .insufficient {
-            style.color = CocsoTokens.Color.feedbackDangerText(scheme)
+            style.color = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
         }
         return style
     }
@@ -1122,26 +1139,27 @@ public struct CCSwitchStyle: Equatable, Sendable {
         variant: CCSwitchVariant,
         size: CCSwitchSize,
         checked: CCSwitchChecked,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCSwitchStyle {
         var style = CCSwitchStyle()
-        style.thumbColor = CocsoTokens.Color.textOnPrimary(scheme)
-        style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme)
-        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
+        style.thumbColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
+        style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
         if variant == .primary {
-            style.checkedBgColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.checkedBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if variant == .success {
-            style.checkedBgColor = CocsoTokens.Color.interactiveSuccess(scheme)
+            style.checkedBgColor = CocsoTokens.Color.interactiveSuccess(scheme, brand: brand)
         }
         if variant == .error {
-            style.checkedBgColor = CocsoTokens.Color.interactiveDanger(scheme)
+            style.checkedBgColor = CocsoTokens.Color.interactiveDanger(scheme, brand: brand)
         }
         if variant == .warning {
-            style.checkedBgColor = CocsoTokens.Color.interactiveWarningActive(scheme)
+            style.checkedBgColor = CocsoTokens.Color.interactiveWarningActive(scheme, brand: brand)
         }
         if variant == .info {
-            style.checkedBgColor = CocsoTokens.Color.interactiveInfo(scheme)
+            style.checkedBgColor = CocsoTokens.Color.interactiveInfo(scheme, brand: brand)
         }
         if size == .large {
             style.width = 40
@@ -1162,22 +1180,22 @@ public struct CCSwitchStyle: Equatable, Sendable {
             style.thumbOffset = 2
         }
         if checked == .`false` {
-            style.thumbBorderColor = CocsoTokens.Color.textSecondary(scheme)
+            style.thumbBorderColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
         }
         if variant == .primary && checked == .`true` {
-            style.switchBgColor = CocsoTokens.Color.interactivePrimary(scheme)
+            style.switchBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if variant == .success && checked == .`true` {
-            style.switchBgColor = CocsoTokens.Color.interactiveSuccess(scheme)
+            style.switchBgColor = CocsoTokens.Color.interactiveSuccess(scheme, brand: brand)
         }
         if variant == .error && checked == .`true` {
-            style.switchBgColor = CocsoTokens.Color.interactiveDanger(scheme)
+            style.switchBgColor = CocsoTokens.Color.interactiveDanger(scheme, brand: brand)
         }
         if variant == .warning && checked == .`true` {
-            style.switchBgColor = CocsoTokens.Color.interactiveWarningActive(scheme)
+            style.switchBgColor = CocsoTokens.Color.interactiveWarningActive(scheme, brand: brand)
         }
         if variant == .info && checked == .`true` {
-            style.switchBgColor = CocsoTokens.Color.interactiveInfo(scheme)
+            style.switchBgColor = CocsoTokens.Color.interactiveInfo(scheme, brand: brand)
         }
         return style
     }
@@ -1205,7 +1223,8 @@ public struct CCTypographyStyle: Equatable, Sendable {
     public static func resolve(
         type: CCTypographyType,
         size: CCTypographySize,
-        scheme: ColorScheme
+        scheme: ColorScheme,
+        brand: CocsoBrand = .base
     ) -> CCTypographyStyle {
         var style = CCTypographyStyle()
         if type == .heading {

@@ -144,6 +144,34 @@ final class ComponentRenderTests: XCTestCase {
         render("light", .aqua) { everything() }
     }
 
+    /// The brand reaches the views. An overlay the views never read would leave
+    /// the app's own primary blue while every design-system view stayed black —
+    /// two primaries on one screen. Under the cocso brand the primary button's
+    /// fill is the info blue, read back from pixels.
+    @MainActor
+    func testBrandRecoloursThePrimaryButton() {
+        let view = CCButton("Brand") {}
+            .frame(width: 200, height: 60)
+            .environment(\.cocsoBrand, .cocso)
+        let controller = NSHostingController(rootView: view)
+        controller.view.appearance = NSAppearance(named: .aqua)
+        controller.view.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
+        guard let rep = controller.view.bitmapImageRepForCachingDisplay(in: controller.view.bounds) else {
+            return XCTFail("비트맵을 만들지 못했다")
+        }
+        controller.view.cacheDisplay(in: controller.view.bounds, to: rep)
+        // A point inside the fill, away from the label.
+        guard let color = rep.colorAt(x: rep.pixelsWide / 8, y: rep.pixelsHigh / 2)?
+            .usingColorSpace(.sRGB) else {
+            return XCTFail("픽셀을 읽지 못했다")
+        }
+        let (r, g, b) = (color.redComponent, color.greenComponent, color.blueComponent)
+        XCTAssertTrue(
+            b > 0.75 && r < 0.4 && g > 0.3 && g < 0.6,
+            "primary 가 파랑이 아니다: r=\(r) g=\(g) b=\(b)"
+        )
+    }
+
     @MainActor
     func testEveryComponentDrawsInDarkTheme() {
         eachComponentDraws(.darkAqua)

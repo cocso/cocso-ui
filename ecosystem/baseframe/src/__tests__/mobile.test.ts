@@ -24,6 +24,8 @@ import {
   type Token,
 } from "../core";
 import { findYamlFiles } from "../utils/fs";
+// The published files carry the brand axis, so the comparison has to emit it too.
+import { brandOverrides } from "../../scripts/generate-brand";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../../");
@@ -57,7 +59,7 @@ function loadTokens(): { collections: Collections; tokens: Token[] } {
 
 const { collections, tokens } = loadTokens();
 const ast = buildValidatedAst(tokens, collections);
-const output = mobile.generateMobileFromAst(ast);
+const output = mobile.generateMobileFromAst(ast, { brands: brandOverrides() });
 
 /** Every `let name` / `func name(` in the Swift, per enum. */
 function swiftNames(source: string): Set<string> {
@@ -150,8 +152,9 @@ describe("The mobile tokens match the CSS", () => {
   });
 });
 
+// The signature carries a brand axis when brands exist (`, brand _: CocsoBrand = .base`).
 const SWIFT_TEXT_PRIMARY =
-  /public static func textPrimary\(_ scheme: ColorScheme\) -> SwiftUI\.Color \{\n(.+)\n/;
+  /public static func textPrimary\(_ scheme: ColorScheme(?:, brand _: CocsoBrand = \.base)?\) -> SwiftUI\.Color \{\n(.+)\n/;
 const KOTLIN_TEXT_PRIMARY = /fun textPrimary\(\): ComposeColor =\n(.+)\n/;
 const KOTLIN_NEUTRAL_500 = /val neutral500: ComposeColor/;
 

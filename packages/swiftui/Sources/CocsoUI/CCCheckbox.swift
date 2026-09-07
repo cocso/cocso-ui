@@ -8,6 +8,9 @@ public struct CCCheckbox: View {
     private let onChange: (CCCheckboxStatus) -> Void
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
     // WCAG 2.4.7 applies wherever there is a keyboard, and an iPad has one.
     // The recipe carries the ring's colour; without this it went unread.
@@ -26,16 +29,16 @@ public struct CCCheckbox: View {
     }
 
     public var body: some View {
-        let style = CCCheckboxStyle.resolve(size: size, status: status, scheme: colorScheme)
+        let style = CCCheckboxStyle.resolve(size: size, status: status, scheme: colorScheme, brand: brand)
         let side = style.size ?? 16
         Button(action: { onChange(status == .on ? .off : .on) }) {
             HStack(spacing: CocsoTokens.Spacing.s5) {
                 RoundedRectangle(cornerRadius: style.radius ?? 2)
-                    .fill(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme))
+                    .fill(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
                     .overlay(
                         RoundedRectangle(cornerRadius: style.radius ?? 2)
                             .strokeBorder(
-                                style.borderColor ?? CocsoTokens.Color.borderPrimary(colorScheme),
+                                style.borderColor ?? CocsoTokens.Color.borderPrimary(colorScheme, brand: brand),
                                 lineWidth: 1
                             )
                     )
@@ -43,7 +46,7 @@ public struct CCCheckbox: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: (style.radius ?? 2) + 2)
                             .strokeBorder(
-                                style.focusRingColor ?? CocsoTokens.Color.focusRing(colorScheme),
+                                style.focusRingColor ?? CocsoTokens.Color.focusRing(colorScheme, brand: brand),
                                 lineWidth: isFocused ? 2 : 0
                             )
                             .padding(-2)
@@ -69,7 +72,7 @@ public struct CCCheckbox: View {
         // `text-on-primary`, not white: the fill is `interactive-primary`, which
         // the dark theme flips to a near-white. That pairing is why the web's
         // checkbox was 1.09:1 in dark mode.
-        let tint = CocsoTokens.Color.textOnPrimary(colorScheme)
+        let tint = CocsoTokens.Color.textOnPrimary(colorScheme, brand: brand)
         switch status {
         case .on:
             Image(systemName: "checkmark")

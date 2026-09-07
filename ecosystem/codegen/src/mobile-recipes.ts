@@ -459,7 +459,7 @@ function swiftValue(value: Emitted): string {
   switch (value.kind) {
     case "color":
       return value.themed
-        ? `CocsoTokens.Color.${value.token}(scheme)`
+        ? `CocsoTokens.Color.${value.token}(scheme, brand: brand)`
         : `CocsoTokens.Color.${value.token}`;
     case "radius":
       return `CocsoTokens.Radius.${value.token}`;
@@ -556,6 +556,9 @@ export function generateRecipeSwift(prepared: Prepared[]): string {
         (d) => `${camel(d.name)}: ${p.typeName}${pascal(d.name)}`
       ),
       "scheme: ColorScheme",
+      // The brand a view read from `@Environment(\\.cocsoBrand)`. Defaults to the
+      // base so nothing that does not know about brands changes.
+      "brand: CocsoBrand = .base",
     ].join(",\n        ");
     lines.push(`    public static func resolve(`, `        ${params}`, `    ) -> ${p.typeName}Style {`);
     lines.push(`        var style = ${p.typeName}Style()`);

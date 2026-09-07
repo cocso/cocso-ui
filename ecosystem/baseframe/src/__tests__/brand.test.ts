@@ -25,6 +25,8 @@ const SWIFT_NAMES = /public static (?:let|func) (\w+)/g;
 const KOTLIN_NAMES = /(?:val|fun) (\w+)\b/g;
 const DARK_MIX_LIGHT_INFO =
   /interactivePrimary\(_ scheme: ColorScheme\)[\s\S]*?\.dark \? SwiftUI\.Color\(hex: 0x2260D3\) : SwiftUI\.Color\(hex: 0x256EF4\)/;
+const SWIFT_TEXT_PRIMARY_BODY =
+  /public static func textPrimary\([^{]*\{([\s\S]*?)\n {8}\}/;
 const WHITE_ON_PRIMARY_BOTH =
   /textOnPrimary\(_ scheme: ColorScheme\)[\s\S]*?0xFFFFFF\) : SwiftUI\.Color\(hex: 0xFFFFFF\)/;
 
@@ -112,5 +114,76 @@ describe("brand cocso", () => {
     // The fill is blue in both themes, so the text on it is white in both. The
     // base flips text-on-primary dark because the base fill flips light.
     expect(output.swift).toMatch(WHITE_ON_PRIMARY_BOTH);
+  });
+});
+
+/**
+ * The base tokens know the brand.
+ *
+ * An overlay the views never read is a theme the app applies to nothing it did
+ * not draw itself: the app's own `interactivePrimary` turns blue while every
+ * design-system view keeps drawing the base black, and one screen shows two
+ * primaries. So for every token a brand overrides, the base function takes a
+ * brand and delegates — and for no other token, so the axis stays honest about
+ * what it changes.
+ */
+describe("Base tokens delegate to the brand", () => {
+  const swift = fs.readFileSync(
+    path.join(REPO_ROOT, "packages/swiftui/Sources/CocsoUI/CocsoTokens.swift"),
+    "utf-8"
+  );
+  const kotlin = fs.readFileSync(
+    path.join(
+      REPO_ROOT,
+      "packages/compose/src/main/kotlin/ai/cocso/ui/CocsoTokens.kt"
+    ),
+    "utf-8"
+  );
+
+  it.each(
+    BRANDS
+  )("every themed token %s overrides has a case on both platforms", (brand) => {
+    const pascal = brand[0].toUpperCase() + brand.slice(1);
+    const overlay = buildBrand(brand).swift;
+    // Only what is themed in the base. The overlay also carries the `primary-*`
+    // ramp, which the base keeps as constants on purpose — no recipe reads a
+    // ramp directly, the semantic tokens carry the brand, and turning a constant
+    // into a function would hide that the ramp is single-mode.
+    const baseThemed = new Set(
+      [...swift.matchAll(/public static func (\w+)\(/g)].map(([, n]) => n)
+    );
+    const themed = [...overlay.matchAll(/public static func (\w+)\(_ scheme/g)]
+      .map(([, n]) => n)
+      .filter((n) => baseThemed.has(n));
+    expect(themed.length).toBeGreaterThan(0);
+    const ramps = [
+      ...overlay.matchAll(/public static func (primary\d+)\(/g),
+    ].map(([, n]) => n);
+    for (const ramp of ramps) {
+      expect(swift, `${ramp} stays a constant in the base`).toContain(
+        `public static let ${ramp}`
+      );
+    }
+    for (const name of themed) {
+      expect(swift, `${name} (Swift)`).toContain(
+        `case .${brand}: return CocsoBrand${pascal}.Color.${name}(scheme)`
+      );
+      expect(kotlin, `${name} (Kotlin)`).toContain(
+        `CocsoBrand.${pascal} -> CocsoBrand${pascal}.Color.${name}()`
+      );
+    }
+  });
+
+  it("gives no brand case to a token no brand overrides", () => {
+    // text-primary is themed and no brand touches it.
+    const fn = swift.match(SWIFT_TEXT_PRIMARY_BODY)?.[1] ?? "";
+    expect(fn).not.toContain("case .");
+  });
+
+  it("declares the brand and its environment on both platforms", () => {
+    expect(swift).toContain("public enum CocsoBrand");
+    expect(swift).toContain("var cocsoBrand: CocsoBrand");
+    expect(kotlin).toContain("enum class CocsoBrand");
+    expect(kotlin).toContain("val LocalCocsoBrand = compositionLocalOf");
   });
 });
