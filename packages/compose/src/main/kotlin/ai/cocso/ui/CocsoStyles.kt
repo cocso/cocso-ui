@@ -1088,6 +1088,7 @@ data class CCSwitchStyle(
     val height: Dp? = null,
     val thumbSize: Dp? = null,
     val thumbOffset: Dp? = null,
+    val thumbBorderColor: ComposeColor? = null,
 )
 
 @Composable
@@ -1133,6 +1134,9 @@ fun cCSwitchStyle(
         style = style.copy(height = 18.dp)
         style = style.copy(thumbSize = 14.dp)
         style = style.copy(thumbOffset = 2.dp)
+    }
+    if (checked == CCSwitchChecked.`false`) {
+        style = style.copy(thumbBorderColor = CocsoTokens.Color.textSecondary())
     }
     if (variant == CCSwitchVariant.primary && checked == CCSwitchChecked.`true`) {
         style = style.copy(switchBgColor = CocsoTokens.Color.interactivePrimary())

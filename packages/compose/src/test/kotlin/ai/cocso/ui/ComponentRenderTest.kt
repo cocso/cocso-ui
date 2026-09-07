@@ -41,7 +41,7 @@ import org.robolectric.annotation.GraphicsMode
 // 창이 내용보다 짧으면 아래쪽 컴포넌트가 잘린 채로 골든이 박힌다. 처음 기록한
 // 이미지가 정확히 그랬고 — 체크박스·스위치·입력 셋이 빠져 있었다 — 눈으로 보지
 // 않았으면 셋을 보지 않는 테스트를 통과시켰을 것이다.
-@Config(sdk = [34], qualifiers = "w360dp-h1400dp")
+@Config(sdk = [34], qualifiers = "w360dp-h1800dp")
 class ComponentRenderTest {
 
     @get:Rule
@@ -103,8 +103,14 @@ class ComponentRenderTest {
         CCSkeleton(modifier = Modifier.fillMaxWidth())
         CCProgress(value = 60f)
         CCSpinner()
-        CCCheckbox(label = "Checkbox", status = CCCheckboxStatus.on, onChange = {})
-        CCSwitch(label = "Switch", checked = true, onChange = {})
+        // 상태가 있는 컴포넌트는 상태마다 그린다. 켠 스위치만 그리던 동안
+        // 꺼진 손잡이의 테두리를 고쳐도 골든이 움직이지 않았다 — 렌더 게이트는
+        // 그리는 것만큼만 본다.
+        CCCheckbox(label = "Checkbox on", status = CCCheckboxStatus.on, onChange = {})
+        CCCheckbox(label = "Checkbox off", status = CCCheckboxStatus.off, onChange = {})
+        CCCheckbox(label = "Checkbox mixed", status = CCCheckboxStatus.intermediate, onChange = {})
+        CCSwitch(label = "Switch on", checked = true, onChange = {})
+        CCSwitch(label = "Switch off", checked = false, onChange = {})
         CCInput(label = "Input", value = "value", onValueChange = {}, placeholder = "placeholder")
     }
 
@@ -112,6 +118,6 @@ class ComponentRenderTest {
     fun everyComponentDrawsInLightTheme() = render("components-light") { everything() }
 
     @Test
-    @Config(sdk = [34], qualifiers = "w360dp-h1400dp-night")
+    @Config(sdk = [34], qualifiers = "w360dp-h1800dp-night")
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
 }

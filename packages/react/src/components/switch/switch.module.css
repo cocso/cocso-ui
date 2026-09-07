@@ -58,7 +58,11 @@
     /* 레시피가 정한다 — 값은 그대로 `text-on-primary` 다. */
     background-color: var(--cocso-switch-thumb-color);
     border-radius: var(--cocso-radius-full);
-    box-shadow: var(--cocso-shadow-thumb);
+    /* 꺼진 상태에서만 값이 온다. 손잡이와 트랙이 1.23:1 이라 경계가 필요하고,
+       켜진 트랙 위에서는 이미 18:1 이라 필요 없다 (1.4.11). */
+    box-shadow:
+      0 0 0 1px var(--cocso-switch-thumb-border-color, transparent),
+      var(--cocso-shadow-thumb);
     transform: translate(var(--cocso-switch-thumb-offset), -50%);
     transition: transform var(--cocso-duration-fast) var(--cocso-easing-soft);
     will-change: transform;

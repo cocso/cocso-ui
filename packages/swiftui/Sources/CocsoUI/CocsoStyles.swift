@@ -1098,6 +1098,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
     public var height: CGFloat?
     public var thumbSize: CGFloat?
     public var thumbOffset: CGFloat?
+    public var thumbBorderColor: SwiftUI.Color?
 
     /// Base, then each variant dimension, then compound
     /// variants — the order the CSS cascade encodes.
@@ -1143,6 +1144,9 @@ public struct CCSwitchStyle: Equatable, Sendable {
             style.height = 18
             style.thumbSize = 14
             style.thumbOffset = 2
+        }
+        if checked == .`false` {
+            style.thumbBorderColor = CocsoTokens.Color.textSecondary(scheme)
         }
         if variant == .primary && checked == .`true` {
             style.switchBgColor = CocsoTokens.Color.interactivePrimary(scheme)
