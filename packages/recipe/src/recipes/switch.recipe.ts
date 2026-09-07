@@ -38,7 +38,20 @@ export const switchRecipe = defineRecipe({
     },
     checked: {
       true: { root: {} },
-      false: { root: {} },
+      false: {
+        root: {
+          // 꺼진 트랙은 `surface-neutral` 이고 손잡이는 `text-on-primary` 라
+          // 둘의 대비가 1.23:1 이다 — 손잡이가 어디 있는지가 이 컨트롤의 상태
+          // 자체인데 그 경계가 보이지 않았다. WCAG 1.4.11 이 3:1 을 요구하는
+          // 대상이 그것이다.
+          //
+          // 색 하나로는 풀리지 않는다: 두 트랙이 명도의 양 끝이라 둘 다에서
+          // 3:1 을 넘는 중립색이 없다. 켜진 상태의 손잡이는 이미 18:1 이므로
+          // 테두리는 꺼진 상태에만 필요하고, `text-secondary` 는 꺼진 트랙에서
+          // 라이트 5.13 · 다크 3.92 로 두 테마 모두 넘는다.
+          thumbBorderColor: "text-secondary",
+        },
+      },
     },
   },
   compoundVariants: [

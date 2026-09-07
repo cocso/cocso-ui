@@ -2,6 +2,7 @@ package ai.cocso.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -93,6 +94,13 @@ fun CCSwitch(
                     .clip(CircleShape)
                     // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
                     .background(style.thumbColor ?: CocsoTokens.Color.textOnPrimary())
+                    // 꺼진 상태에만 값이 온다 — 손잡이와 트랙이 1.23:1 이라
+                    // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다.
+                    .then(
+                        style.thumbBorderColor?.let {
+                            Modifier.border(1.dp, it, CircleShape)
+                        } ?: Modifier
+                    )
             )
         }
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)

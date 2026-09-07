@@ -162,6 +162,7 @@ export const COLOR_PROPERTIES = new Set([
   "focusRingColor",
   "fontColor",
   "switchBgColor",
+  "thumbBorderColor",
   "thumbColor",
 ]);
 
