@@ -126,9 +126,30 @@ resolver keys tokens by name and two declarations of `$color.interactive.primary
 would make the last one win silently. It emits `theme-<brand>.css`
 (`[data-brand="<brand>"]`, and `[data-brand][data-theme="dark"]` so the brand's
 dark value outranks theme-dark.css) and `CocsoBrand<Brand>.swift` / `.kt` with
-the same names as `CocsoTokens`, resolved per scheme. A consumer applies the
-overlay over the base; `brand.test.ts` asserts the overlay names every token
-against one the base has, so an override of nothing cannot ship.
+the same names as `CocsoTokens`, resolved per scheme.
+
+The views read the brand, not the app. An overlay the views never read would
+leave the app's own `interactivePrimary` blue while every design-system view
+kept drawing the base black — two primaries on one screen. So for each themed
+token a brand overrides, the base function takes a brand and delegates:
+
+- SwiftUI: `CocsoTokens.Color.interactivePrimary(scheme, brand:)`, and every
+  resolver's `resolve(..., scheme:, brand:)`. Views read
+  `@Environment(\.cocsoBrand)` and pass it through; the app sets
+  `.environment(\.cocsoBrand, .cocso)` once at its root.
+- Compose: brand-aware tokens read `LocalCocsoBrand.current` themselves, so no
+  call site changes; the app wraps its root in
+  `CompositionLocalProvider(LocalCocsoBrand provides CocsoBrand.Cocso)`.
+
+The `primary-*` ramp stays a constant in the base even though a brand overrides
+it: no recipe reads a ramp directly, the semantic tokens carry the brand, and
+turning a constant into a function would hide that the ramp is single-mode.
+
+`brand.test.ts` asserts the overlay names every token against one the base has
+(an override of nothing cannot ship), that exactly the base-themed tokens a
+brand overrides gain a brand case on both platforms, and that a token no brand
+touches gains none. The render tests on both platforms draw the primary button
+under the cocso brand and read the fill back from pixels.
 
 ## Roadmap
 

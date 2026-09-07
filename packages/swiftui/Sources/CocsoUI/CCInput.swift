@@ -10,6 +10,9 @@ public struct CCInput: View {
     private let errorMessage: String?
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
     @State private var revealed = false
     // 웹의 `.input:focus-visible` — 쉬는 테두리와 다른 토큰이어야 포커스가
@@ -33,7 +36,7 @@ public struct CCInput: View {
     }
 
     public var body: some View {
-        let style = CCInputStyle.resolve(size: size, scheme: colorScheme)
+        let style = CCInputStyle.resolve(size: size, scheme: colorScheme, brand: brand)
         VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
             CCTypography(label, type: .body, size: .small)
             HStack(spacing: 0) {
@@ -44,11 +47,11 @@ public struct CCInput: View {
                     if text.isEmpty && !placeholder.isEmpty {
                         Text(placeholder)
                             .font(.system(size: style.fontSize ?? 14))
-                            .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme))
+                            .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                     }
                     field
                         .font(.system(size: style.fontSize ?? 14))
-                        .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme))
+                        .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                         .focused($isFocused)
                 }
                 if isSecure {
@@ -56,7 +59,7 @@ public struct CCInput: View {
                         Image(systemName: revealed ? "eye.slash" : "eye")
                             // One step back from the value, and it clears AA in
                             // both themes; `text-tertiary` is 3.08:1 on white.
-                            .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme))
+                            .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                     }
                     .buttonStyle(.plain)
                     .ccMinimumTouchTarget()
@@ -65,7 +68,7 @@ public struct CCInput: View {
             }
             .padding(.horizontal, style.paddingX ?? 12)
             .frame(height: style.height ?? 36)
-            .background(CocsoTokens.Color.surfacePrimary(colorScheme))
+            .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 4))
             .overlay(
                 RoundedRectangle(cornerRadius: style.borderRadius ?? 4)
@@ -79,7 +82,7 @@ public struct CCInput: View {
                 // 4.18:1 on a card in the light theme.
                 Text(errorMessage)
                     .font(.system(size: 12))
-                    .foregroundStyle(CocsoTokens.Color.feedbackDangerText(colorScheme))
+                    .foregroundStyle(CocsoTokens.Color.feedbackDangerText(colorScheme, brand: brand))
             }
         }
         .opacity(isEnabled ? 1 : 0.4)
@@ -87,9 +90,9 @@ public struct CCInput: View {
 
     private func borderColor(_ style: CCInputStyle) -> SwiftUI.Color {
         // 웹의 순서: 오류가 먼저, 그다음 포커스, 그다음 쉬는 상태.
-        if errorMessage != nil { return CocsoTokens.Color.feedbackDanger(colorScheme) }
-        if isFocused { return CocsoTokens.Color.focusRing(colorScheme) }
-        return style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme)
+        if errorMessage != nil { return CocsoTokens.Color.feedbackDanger(colorScheme, brand: brand) }
+        if isFocused { return CocsoTokens.Color.focusRing(colorScheme, brand: brand) }
+        return style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand)
     }
 
     @ViewBuilder

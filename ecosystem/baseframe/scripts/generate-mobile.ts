@@ -15,6 +15,7 @@ import fs from "fs-extra";
 import YAML from "yaml";
 import { buildValidatedAst, type Collections, mobile, type Token } from "../src/core";
 import { findYamlFiles } from "../src/utils/fs";
+import { brandOverrides } from "./generate-brand";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "../../..");
@@ -45,7 +46,9 @@ if (!collections) {
 }
 
 const ast = buildValidatedAst(tokens, collections);
-const output = mobile.generateMobileFromAst(ast);
+// Brand-aware tokens: for every semantic token a brand overrides, the base
+// function gains a `brand` axis and delegates. See generate-brand.ts.
+const output = mobile.generateMobileFromAst(ast, { brands: brandOverrides() });
 
 for (const [language, target] of Object.entries(targets)) {
   fs.mkdirpSync(path.dirname(target));

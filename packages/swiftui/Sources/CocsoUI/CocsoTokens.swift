@@ -16,6 +16,26 @@ private extension Color {
     }
 }
 
+/// The brand a token resolves for. The base is no brand: `interactive-primary`
+/// is neutral-950, and a brand is a theme laid over it. Read it from
+/// `@Environment(\.cocsoBrand)` and pass it to the tokens and resolvers that
+/// take it; the app sets it once at its root.
+public enum CocsoBrand: Sendable {
+    case base
+    case cocso
+}
+
+private struct CocsoBrandKey: EnvironmentKey {
+    static let defaultValue: CocsoBrand = .base
+}
+
+public extension EnvironmentValues {
+    var cocsoBrand: CocsoBrand {
+        get { self[CocsoBrandKey.self] }
+        set { self[CocsoBrandKey.self] = newValue }
+    }
+}
+
 public enum CocsoTokens {
     public enum Color {
         public static let black: SwiftUI.Color = SwiftUI.Color(hex: 0x000000)
@@ -110,220 +130,250 @@ public enum CocsoTokens {
         /// Resolved against the view's colour scheme. Read these as
         /// `CocsoTokens.Color.textPrimary(scheme)`, with `scheme` from
         /// `@Environment(\.colorScheme)`.
-        public static func alphaShadow1(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func alphaShadow1(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.24) : SwiftUI.Color(hex: 0x000000, opacity: 0.04)
         }
-        public static func alphaShadow2(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func alphaShadow2(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.36) : SwiftUI.Color(hex: 0x000000, opacity: 0.08)
         }
-        public static func alphaShadow3(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func alphaShadow3(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.48) : SwiftUI.Color(hex: 0x000000, opacity: 0.12)
         }
-        public static func borderPrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func borderPrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }
-        public static func borderSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func borderSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func borderStrong(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func borderStrong(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
         }
-        public static func feedbackDanger(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackDanger(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF05F42) : SwiftUI.Color(hex: 0xDE3412)
         }
-        public static func feedbackDangerBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackDangerBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x5C180A) : SwiftUI.Color(hex: 0xF7AFA1)
         }
-        public static func feedbackDangerSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackDangerSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x260903) : SwiftUI.Color(hex: 0xFDEFEC)
         }
-        public static func feedbackDangerText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackDangerText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF48771) : SwiftUI.Color(hex: 0xBD2C0F)
         }
-        public static func feedbackInfo(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackInfo(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x4C87F6) : SwiftUI.Color(hex: 0x256EF4)
         }
-        public static func feedbackInfoBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackInfoBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x052561) : SwiftUI.Color(hex: 0xB1CEFB)
         }
-        public static func feedbackInfoSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackInfoSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x020F27) : SwiftUI.Color(hex: 0xECF2FE)
         }
-        public static func feedbackInfoText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackInfoText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x86AFF9) : SwiftUI.Color(hex: 0x0B50D0)
         }
-        public static func feedbackSuccess(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackSuccess(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x3FA654) : SwiftUI.Color(hex: 0x228738)
         }
-        public static func feedbackSuccessBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackSuccessBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x1F4727) : SwiftUI.Color(hex: 0xA9DAB4)
         }
-        public static func feedbackSuccessMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackSuccessMuted(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x3FA654) : SwiftUI.Color(hex: 0x3FA654)
         }
-        public static func feedbackSuccessSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackSuccessSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x0E2012) : SwiftUI.Color(hex: 0xEAF6EC)
         }
-        public static func feedbackSuccessText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackSuccessText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x7EC88E) : SwiftUI.Color(hex: 0x267337)
         }
-        public static func feedbackWarning(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackWarning(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xC78500) : SwiftUI.Color(hex: 0x9E6A00)
         }
-        public static func feedbackWarningBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackWarningBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x422C00) : SwiftUI.Color(hex: 0xFFC95C)
         }
-        public static func feedbackWarningSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackWarningSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x241800) : SwiftUI.Color(hex: 0xFFF3DB)
         }
-        public static func feedbackWarningText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func feedbackWarningText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFB114) : SwiftUI.Color(hex: 0x8A5C00)
         }
-        public static func focusRing(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func focusRing(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF4F5F6) : SwiftUI.Color(hex: 0x131416)
         }
-        public static func interactiveDanger(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDanger(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xDE3412) : SwiftUI.Color(hex: 0xDE3412)
         }
-        public static func interactiveDangerActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDangerActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x8A240F) : SwiftUI.Color(hex: 0x8A240F)
         }
-        public static func interactiveDangerHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDangerHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xBD2C0F) : SwiftUI.Color(hex: 0xBD2C0F)
         }
-        public static func interactiveDangerHoverSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDangerHoverSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF05F42) : SwiftUI.Color(hex: 0xF05F42)
         }
-        public static func interactiveDangerSubtleActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDangerSubtleActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x390D05) : SwiftUI.Color(hex: 0xFCDFD9)
         }
-        public static func interactiveDangerSubtleHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveDangerSubtleHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x260903) : SwiftUI.Color(hex: 0xFDEFEC)
         }
-        public static func interactiveInfo(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfo(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x256EF4) : SwiftUI.Color(hex: 0x256EF4)
         }
-        public static func interactiveInfoActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfoActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x083891) : SwiftUI.Color(hex: 0x083891)
         }
-        public static func interactiveInfoHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfoHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x0B50D0) : SwiftUI.Color(hex: 0x0B50D0)
         }
-        public static func interactiveInfoHoverSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfoHoverSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x4C87F6) : SwiftUI.Color(hex: 0x4C87F6)
         }
-        public static func interactiveInfoText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfoText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x86AFF9) : SwiftUI.Color(hex: 0x0B50D0)
         }
-        public static func interactiveInfoTextHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveInfoTextHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xB1CEFB) : SwiftUI.Color(hex: 0x083891)
         }
-        public static func interactiveNeutral(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveNeutral(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func interactiveNeutralActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveNeutralActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x58616A) : SwiftUI.Color(hex: 0xB1B8BE)
         }
-        public static func interactiveNeutralHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveNeutralHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }
-        public static func interactivePrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0xF4F5F6) : SwiftUI.Color(hex: 0x131416)
+        public static func interactivePrimary(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.interactivePrimary(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0xF4F5F6) : SwiftUI.Color(hex: 0x131416)
+            }
         }
-        public static func interactivePrimaryActive(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0xB1B8BE) : SwiftUI.Color(hex: 0x464C53)
+        public static func interactivePrimaryActive(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.interactivePrimaryActive(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0xB1B8BE) : SwiftUI.Color(hex: 0x464C53)
+            }
         }
-        public static func interactivePrimaryHover(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0xCDD1D5) : SwiftUI.Color(hex: 0x33363D)
+        public static func interactivePrimaryHover(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.interactivePrimaryHover(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0xCDD1D5) : SwiftUI.Color(hex: 0x33363D)
+            }
         }
-        public static func interactivePrimaryMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
+        public static func interactivePrimaryMuted(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.interactivePrimaryMuted(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
+            }
         }
-        public static func interactivePrimarySubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactivePrimarySubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x1E2124) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func interactivePrimaryText(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactivePrimaryText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xCDD1D5) : SwiftUI.Color(hex: 0x33363D)
         }
-        public static func interactiveSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func interactiveSecondaryHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSecondaryHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }
-        public static func interactiveSuccess(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSuccess(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x228738) : SwiftUI.Color(hex: 0x228738)
         }
-        public static func interactiveSuccessActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSuccessActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x285D33) : SwiftUI.Color(hex: 0x285D33)
         }
-        public static func interactiveSuccessHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSuccessHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x267337) : SwiftUI.Color(hex: 0x267337)
         }
-        public static func interactiveSuccessHoverSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveSuccessHoverSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x3FA654) : SwiftUI.Color(hex: 0x3FA654)
         }
-        public static func interactiveWarning(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveWarning(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFB114) : SwiftUI.Color(hex: 0xFFB114)
         }
-        public static func interactiveWarningActive(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveWarningActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x9E6A00) : SwiftUI.Color(hex: 0x9E6A00)
         }
-        public static func interactiveWarningHover(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveWarningHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xC78500) : SwiftUI.Color(hex: 0xC78500)
         }
-        public static func interactiveWarningHoverSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func interactiveWarningHoverSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xC78500) : SwiftUI.Color(hex: 0xC78500)
         }
-        public static func overlayMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func overlayMuted(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.1) : SwiftUI.Color(hex: 0x000000, opacity: 0.1)
         }
-        public static func overlayStrong(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func overlayStrong(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.2) : SwiftUI.Color(hex: 0x000000, opacity: 0.2)
         }
-        public static func overlaySubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func overlaySubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.05) : SwiftUI.Color(hex: 0x000000, opacity: 0.05)
         }
-        public static func surfaceInverse(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func surfaceInverse(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0x131416)
         }
-        public static func surfaceNeutral(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func surfaceNeutral(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func surfacePrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func surfacePrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0xFFFFFF)
         }
-        public static func surfaceSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func surfaceSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x1E2124) : SwiftUI.Color(hex: 0xF4F5F6)
         }
-        public static func textDisabled(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textDisabled(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x58616A) : SwiftUI.Color(hex: 0x8A949E)
         }
-        public static func textMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textMuted(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
         }
-        public static func textOnDanger(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textOnDanger(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)
         }
-        public static func textOnInfo(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textOnInfo(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)
         }
-        public static func textOnPrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0xFFFFFF)
+        public static func textOnPrimary(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.textOnPrimary(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0xFFFFFF)
+            }
         }
-        public static func textOnSuccess(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textOnSuccess(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)
         }
-        public static func textOnWarning(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textOnWarning(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0x131416)
         }
-        public static func textPrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textPrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF4F5F6) : SwiftUI.Color(hex: 0x131416)
         }
-        public static func textSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x8A949E) : SwiftUI.Color(hex: 0x58616A)
         }
-        public static func textTertiary(_ scheme: ColorScheme) -> SwiftUI.Color {
+        public static func textTertiary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x8A949E)
         }
     }

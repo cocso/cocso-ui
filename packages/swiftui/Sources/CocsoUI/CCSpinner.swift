@@ -7,6 +7,9 @@ public struct CCSpinner: View {
     private let label: String
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var spinning = false
 
@@ -21,13 +24,13 @@ public struct CCSpinner: View {
     }
 
     public var body: some View {
-        let style = CCSpinnerStyle.resolve(variant: variant, size: size, scheme: colorScheme)
+        let style = CCSpinnerStyle.resolve(variant: variant, size: size, scheme: colorScheme, brand: brand)
         let side = style.output ?? 16
         let bladeCount = style.blades ?? 8
         ZStack {
             ForEach(0..<max(bladeCount, 1), id: \.self) { index in
                 RoundedRectangle(cornerRadius: style.bladeRadius ?? 1)
-                    .fill(style.bladeColor ?? CocsoTokens.Color.interactivePrimary(colorScheme))
+                    .fill(style.bladeColor ?? CocsoTokens.Color.interactivePrimary(colorScheme, brand: brand))
                     .frame(width: style.bladeWidth ?? 2, height: style.bladeHeight ?? 5)
                     .offset(y: -side / 2 + (style.bladeHeight ?? 5) / 2)
                     .rotationEffect(.degrees(Double(index) / Double(max(bladeCount, 1)) * 360))

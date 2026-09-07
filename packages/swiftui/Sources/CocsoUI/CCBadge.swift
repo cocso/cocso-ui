@@ -12,6 +12,9 @@ public struct CCBadge: View {
     private let shape: CCBadgeShape
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
 
     public init(
         _ text: String,
@@ -30,11 +33,11 @@ public struct CCBadge: View {
             variant: variant,
             size: size,
             shape: shape,
-            scheme: colorScheme
+            scheme: colorScheme, brand: brand
         )
         Text(text)
             .font(.system(size: style.fontSize ?? 12, weight: .semibold))
-            .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme))
+            .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? .clear)

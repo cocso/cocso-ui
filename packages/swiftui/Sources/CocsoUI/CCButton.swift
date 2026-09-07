@@ -21,6 +21,9 @@ public struct CCButton: View {
     private let action: () -> Void
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
     // 웹의 `.button:focus-visible` 과 같은 링. 키보드가 있는 곳이면 2.4.7 이
     // 적용되고, iPad 에는 있다.
@@ -53,7 +56,7 @@ public struct CCButton: View {
             size: size,
             shape: shape,
             align: align,
-            scheme: colorScheme
+            scheme: colorScheme, brand: brand
         )
     }
 
@@ -104,7 +107,7 @@ public struct CCButton: View {
         .foregroundStyle(
             (isPressed ? resolved.fontColorPressed : nil)
                 ?? resolved.fontColor
-                ?? CocsoTokens.Color.textPrimary(colorScheme)
+                ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand)
         )
         .background(
             (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
@@ -123,7 +126,7 @@ public struct CCButton: View {
         .overlay(
             RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
                 .strokeBorder(
-                    CocsoTokens.Color.focusRing(colorScheme),
+                    CocsoTokens.Color.focusRing(colorScheme, brand: brand),
                     lineWidth: isFocused ? 2 : 0
                 )
                 .padding(-2)

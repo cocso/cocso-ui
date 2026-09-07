@@ -11,6 +11,9 @@ public struct CCCard<Content: View>: View {
     private let content: Content
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
 
     public init(
         variant: CCCardVariant = .elevated,
@@ -26,14 +29,14 @@ public struct CCCard<Content: View>: View {
         let style = CCCardStyle.resolve(
             variant: variant,
             padding: padding,
-            scheme: colorScheme
+            scheme: colorScheme, brand: brand
         )
         content
             // The recipe's 12/16/24. Picking these from the spacing scale by
             // hand gave 8/12/20 — every card was tighter than the web's.
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
-            .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme))
+            .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
             // The recipe's border — the outlined variant. Without it a white card
             // on a white surface had no edge at all.

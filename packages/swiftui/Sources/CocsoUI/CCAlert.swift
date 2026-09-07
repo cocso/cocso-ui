@@ -13,6 +13,9 @@ public struct CCAlert: View {
     private let variant: CCAlertVariant
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
 
     public init(
         _ title: String,
@@ -25,7 +28,7 @@ public struct CCAlert: View {
     }
 
     public var body: some View {
-        let style = CCAlertStyle.resolve(variant: variant, scheme: colorScheme)
+        let style = CCAlertStyle.resolve(variant: variant, scheme: colorScheme, brand: brand)
         let radius = style.borderRadius ?? 0
         VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
             Text(title)
@@ -36,7 +39,7 @@ public struct CCAlert: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme))
+        .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
         .padding(.horizontal, style.paddingX ?? 0)
         .padding(.vertical, style.paddingY ?? 0)
         .background(style.bgColor ?? .clear)

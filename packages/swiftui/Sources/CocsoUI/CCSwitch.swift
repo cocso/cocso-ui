@@ -9,6 +9,9 @@ public struct CCSwitch: View {
     private let onChange: (Bool) -> Void
 
     @Environment(\.colorScheme) private var colorScheme
+    // The brand the app set at its root. Tokens and resolvers take it so a
+    // design-system view draws the same primary the app does.
+    @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
 
     public init(
@@ -30,7 +33,7 @@ public struct CCSwitch: View {
             variant: variant,
             size: size,
             checked: isOn ? CCSwitchChecked.`true` : CCSwitchChecked.`false`,
-            scheme: colorScheme
+            scheme: colorScheme, brand: brand
         )
         let track = CGSize(width: style.width ?? 36, height: style.height ?? 20)
         let thumb = style.thumbSize ?? 16
@@ -42,20 +45,20 @@ public struct CCSwitch: View {
                     Capsule()
                         .fill(
                             (isOn ? style.checkedBgColor : style.switchBgColor)
-                                ?? CocsoTokens.Color.surfaceNeutral(colorScheme)
+                                ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand)
                         )
                         // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지
                         // 보이지 않았다. 색은 레시피가 정한다.
                         .overlay(
                             Capsule().strokeBorder(
                                 style.borderColor
-                                    ?? CocsoTokens.Color.borderStrong(colorScheme),
+                                    ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
                                 lineWidth: 1
                             )
                         )
                     Circle()
                         // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
-                        .fill(style.thumbColor ?? CocsoTokens.Color.textOnPrimary(colorScheme))
+                        .fill(style.thumbColor ?? CocsoTokens.Color.textOnPrimary(colorScheme, brand: brand))
                         // 꺼진 상태에만 값이 온다 — 손잡이와 트랙이 1.23:1 이라
                         // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다.
                         .overlay(

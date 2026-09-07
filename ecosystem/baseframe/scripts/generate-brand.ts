@@ -125,6 +125,21 @@ export function buildBrand(brand: string): BrandOutput {
   return { css, kotlin: out.kotlin, skipped: out.skipped, swift: out.swift };
 }
 
+/**
+ * The identifiers each brand overrides, as the mobile emitter names them. The
+ * base emitter takes this to give exactly those tokens a brand axis.
+ */
+export function brandOverrides(): { name: string; overrides: Set<string> }[] {
+  return BRANDS.map((brand) => ({
+    name: brand,
+    overrides: new Set(
+      [...buildBrand(brand).swift.matchAll(/public static (?:let|func) (\w+)/g)].map(
+        ([, name]) => name
+      )
+    ),
+  }));
+}
+
 export const BRANDS = fs
   .readdirSync(brandsDir, { withFileTypes: true })
   .filter((d) => d.isDirectory())
