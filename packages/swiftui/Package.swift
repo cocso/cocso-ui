@@ -8,5 +8,12 @@ let package = Package(
     name: "CocsoUI",
     platforms: [.iOS(.v16), .macOS(.v13)],
     products: [.library(name: "CocsoUI", targets: ["CocsoUI"])],
-    targets: [.target(name: "CocsoUI", path: "Sources/CocsoUI")]
+    targets: [
+        .target(name: "CocsoUI", path: "Sources/CocsoUI"),
+        .testTarget(
+            name: "CocsoUITests",
+            dependencies: ["CocsoUI"],
+            path: "Tests/CocsoUITests"
+        )
+    ]
 )

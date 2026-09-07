@@ -62,3 +62,5 @@ packages/figma/golden-matrix-report.md
 
 # Roborazzi 가 비교 실패 시 남기는 diff. 골든은 src/test/screenshots/ 에 있다.
 packages/compose/build/
+packages/swiftui/.build/
+packages/swiftui/.swiftpm/
