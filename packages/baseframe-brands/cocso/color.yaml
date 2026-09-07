@@ -1,0 +1,61 @@
+kind: Tokens
+metadata:
+  id: brand-cocso-color
+  name: cocso brand colour
+  description: >
+    cocso.co.kr 의 브랜드 색. 디자인 시스템의 베이스 primary 는 중립(neutral)
+    램프의 별칭이라 어떤 브랜드도 아니다 — medicaldb 처럼 그 검정을 그대로 쓰는
+    소비자가 있다. cocso 브랜드는 그 위에 얹는 테마다.
+
+    이 값들은 website/apps/web/src/styles/theme-override.css 가 `:root:root` 로
+    덮고 있던 것을 그대로 옮긴 것이다. 같은 값이 세 저장소에 살지 않도록 여기가
+    유일한 출처가 되고, 웹은 theme-cocso.css 를 import 하고 모바일은
+    CocsoBrandCocso 를 동기화한다.
+
+    별도 디렉터리에 있는 이유: 베이스 AST 에 같은 이름(`$color.interactive.primary`)
+    을 두 번 선언하면 리졸버의 Map 이 조용히 뒤쪽을 택한다. 브랜드는 원시 램프와만
+    합쳐 따로 빌드한다.
+data:
+  collection: brand
+  tokens:
+    # primary 램프 전체 → info 램프. 웹이 램프까지 덮는 이유는 `primary-*` 를
+    # 직접 참조하는 소비 코드가 있기 때문이다.
+    $color.primary-50:
+      values: { light: $color.info-50, dark: $color.info-50 }
+    $color.primary-100:
+      values: { light: $color.info-100, dark: $color.info-100 }
+    $color.primary-200:
+      values: { light: $color.info-200, dark: $color.info-200 }
+    $color.primary-300:
+      values: { light: $color.info-300, dark: $color.info-300 }
+    $color.primary-400:
+      values: { light: $color.info-400, dark: $color.info-400 }
+    $color.primary-500:
+      values: { light: $color.info-500, dark: $color.info-500 }
+    $color.primary-600:
+      values: { light: $color.info-600, dark: $color.info-600 }
+    $color.primary-700:
+      values: { light: $color.info-700, dark: $color.info-700 }
+    $color.primary-800:
+      values: { light: $color.info-800, dark: $color.info-800 }
+    $color.primary-900:
+      values: { light: $color.info-900, dark: $color.info-900 }
+    $color.primary-950:
+      values: { light: $color.info-950, dark: $color.info-950 }
+    $color.interactive.primary:
+      values:
+        light: $color.info-500
+        # 웹은 color-mix(in srgb, info-500 85%, surface-primary) 다. 생성기는
+        # color-mix 를 내보내지 못하므로 그 결과를 고정한다: #2260d3.
+        # 흰 글자 대비 5.70 (라이트 info-500 위 4.55).
+        dark: "#2260d3"
+    $color.interactive.primary-hover:
+      values: { light: $color.info-600, dark: $color.info-600 }
+    $color.interactive.primary-active:
+      values: { light: $color.info-700, dark: $color.info-700 }
+    $color.interactive.primary-muted:
+      values: { light: $color.info-500, dark: $color.info-500 }
+    # 채움이 두 테마 모두 파랑이므로 그 위 글자도 두 테마 모두 white 다.
+    # 베이스는 다크에서 neutral-950 인데, 그것은 채움이 밝게 뒤집힐 때의 값이다.
+    $color.text.on-primary:
+      values: { light: $color.white, dark: $color.white }

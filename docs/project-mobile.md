@@ -112,6 +112,24 @@ CI expectations:
 - A parity assertion: the Swift and Kotlin token sets are identical to each other and to the CSS. That is the check `cocso/mobile` did not have, and its absence is why 55 colours could go missing without anything failing.
 - `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the one name expected to be in it, so a resolver that stops being emitted fails rather than silently excusing its view.
 
+## Brands
+
+The base `interactive-primary` is neutral-950 — the `primary-*` ramp aliases the
+neutral ramp, so the design system itself carries no brand colour. cocso.co.kr
+is blue (the info ramp), medicaldb-website is the base black, and both consume
+this system. A brand is therefore a theme, not a change to the base.
+
+`packages/baseframe-brands/<brand>/` holds a brand's overrides of semantic
+tokens, in both modes. `generate:brand` builds each as its own AST — the colour
+primitives plus the brand file, never the base semantic layer, because the
+resolver keys tokens by name and two declarations of `$color.interactive.primary`
+would make the last one win silently. It emits `theme-<brand>.css`
+(`[data-brand="<brand>"]`, and `[data-brand][data-theme="dark"]` so the brand's
+dark value outranks theme-dark.css) and `CocsoBrand<Brand>.swift` / `.kt` with
+the same names as `CocsoTokens`, resolved per scheme. A consumer applies the
+overlay over the base; `brand.test.ts` asserts the overlay names every token
+against one the base has, so an override of nothing cannot ship.
+
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.

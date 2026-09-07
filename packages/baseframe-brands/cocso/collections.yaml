@@ -1,0 +1,12 @@
+kind: TokenCollections
+metadata:
+  id: brand-cocso-collections
+  name: brand collections
+data:
+  # 원시 램프는 베이스의 `global` 을 그대로 쓴다(생성 스크립트가 합친다).
+  # 브랜드 시맨틱 층은 베이스 `theme` 과 같은 두 모드를 갖는다 — 한 모드에만
+  # 값을 준 브랜드 토큰은 빌드되지 않는다.
+  - name: brand
+    modes:
+      - light
+      - dark
