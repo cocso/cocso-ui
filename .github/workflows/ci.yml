@@ -250,6 +250,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v6
 
-      - name: Build
+      # 렌더 테스트까지 여기서 돈다. 시뮬레이터가 필요 없도록 macOS 에서
+      # 그리며, 뷰는 UIKit 을 쓰지 않으므로 같은 SwiftUI 가 그려진다.
+      - name: Build and Render
         working-directory: packages/swiftui
-        run: swift build
+        run: swift test
