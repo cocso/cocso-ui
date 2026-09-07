@@ -5,6 +5,11 @@ export const switchRecipe = defineRecipe({
   slots: ["root"] as const,
   base: {
     root: {
+      // 손잡이 색을 레시피가 정하지 않던 동안 웹·iOS·Android 가 각자 골랐다.
+      // 웹은 `text-on-primary`, 두 모바일은 `surface-primary` 를 골랐고 —
+      // 두 테마에서 같은 값으로 풀려서 보이는 것은 같았지만, 갈라질 자유가
+      // 있었다는 것이 결함이다. 값은 웹이 그리던 것 그대로다.
+      thumbColor: "text-on-primary",
       switchBgColor: "surface-neutral",
       // 꺼진 트랙은 `surface-neutral` 이고 흰 배경에서 1.23:1 이라, 스위치가
       // 어디 있는지 보이지 않았다. WCAG 1.4.11 이 요구하는 3:1 은 컨트롤의

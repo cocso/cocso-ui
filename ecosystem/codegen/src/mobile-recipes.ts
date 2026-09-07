@@ -141,7 +141,16 @@ type Emitted =
   | { kind: "flag"; value: boolean }
   | { kind: "count"; value: number };
 
-const COLOR_PROPERTIES = new Set([
+/**
+ * Colour properties, by name.
+ *
+ * The list is the contract, not a convenience: `borderRadius` is a length and
+ * `border` is a composite, so a value alone does not say what it is. But a
+ * hand-kept list drifts — `thumbColor` was missing, so the switch's thumb was
+ * refused with "has no single-value equivalent", which was not the reason.
+ * `colour-allowlist.test.ts` asserts every `*Color` a recipe writes is here.
+ */
+export const COLOR_PROPERTIES = new Set([
   "bgColor",
   "bladeColor",
   "borderColor",
@@ -153,6 +162,7 @@ const COLOR_PROPERTIES = new Set([
   "focusRingColor",
   "fontColor",
   "switchBgColor",
+  "thumbColor",
 ]);
 
 const RADIUS_PROPERTIES = new Set(["borderRadius", "bladeRadius", "radius"]);

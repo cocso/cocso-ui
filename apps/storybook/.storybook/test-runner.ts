@@ -54,7 +54,19 @@ const config: TestRunnerConfig = {
     expect.extend({ toMatchImageSnapshot });
   },
   async preVisit(page) {
-    if (A11Y_ONLY) {
+    if (!A11Y_ONLY) {
+      return;
+    }
+    // The test runner reuses a page across stories, and Storybook moves between
+    // them without a document navigation, so `window.axe` survives. Injecting
+    // it again on top of a live instance is what produced `Axe is already
+    // running` — a failure that reads like an accessibility violation, fails
+    // the gate, and passes on a re-run. Nine stories failed that way on this
+    // branch and none of them had anything wrong with them.
+    const alreadyInjected = await page.evaluate(
+      () => typeof (window as { axe?: unknown }).axe !== "undefined"
+    );
+    if (!alreadyInjected) {
       await injectAxe(page);
     }
   },

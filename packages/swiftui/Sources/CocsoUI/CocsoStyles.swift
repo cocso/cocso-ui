@@ -1090,6 +1090,7 @@ public enum CCSwitchChecked: String, CaseIterable, Sendable {
 }
 
 public struct CCSwitchStyle: Equatable, Sendable {
+    public var thumbColor: SwiftUI.Color?
     public var switchBgColor: SwiftUI.Color?
     public var borderColor: SwiftUI.Color?
     public var checkedBgColor: SwiftUI.Color?
@@ -1107,6 +1108,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
         scheme: ColorScheme
     ) -> CCSwitchStyle {
         var style = CCSwitchStyle()
+        style.thumbColor = CocsoTokens.Color.textOnPrimary(scheme)
         style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme)
         style.borderColor = CocsoTokens.Color.borderStrong(scheme)
         if variant == .primary {

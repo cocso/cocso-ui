@@ -120,6 +120,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe d
   "--cocso-switch-checked-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-switch-height": "20px",
   "--cocso-switch-switch-bg-color": "var(--cocso-color-interactive-primary)",
+  "--cocso-switch-thumb-color": "var(--cocso-color-text-on-primary)",
   "--cocso-switch-thumb-offset": "2px",
   "--cocso-switch-thumb-size": "16px",
   "--cocso-switch-width": "36px",

@@ -19,7 +19,11 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { UNITLESS_PROPERTIES } from "@cocso-ui/recipe";
 import { generateCSS } from "../generate-recipe";
-import { generateRecipeStyles, type RecipeLike } from "../mobile-recipes";
+import {
+  COLOR_PROPERTIES,
+  generateRecipeStyles,
+  type RecipeLike,
+} from "../mobile-recipes";
 
 /** `font-weight` back to the `fontWeight` the recipe wrote. */
 function camelCase(kebab: string): string {
@@ -245,5 +249,37 @@ describe("Numbers carry a unit only where CSS takes one", () => {
       }
     }
     expect(offenders).toEqual([]);
+  });
+});
+
+/**
+ * The colour allowlist against the recipes.
+ *
+ * `COLOR_PROPERTIES` is hand-kept, and a name missing from it is not reported
+ * as missing — the property falls through to the generic branch and is refused
+ * with "has no single-value equivalent", which is the wrong reason and reads
+ * like a platform limit. `switch.thumbColor` sat there, so the three platforms
+ * kept choosing the thumb's colour themselves.
+ */
+describe("Every colour a recipe writes is known to be one", () => {
+  it("has no `*Color` property missing from the allowlist", () => {
+    const written = new Set<string>();
+    for (const recipe of recipes) {
+      const walk = (node: unknown) => {
+        if (!node || typeof node !== "object") {
+          return;
+        }
+        for (const [key, value] of Object.entries(node)) {
+          if (/[Cc]olor$/.test(key) && typeof value === "string") {
+            written.add(key);
+          }
+          walk(value);
+        }
+      };
+      walk(recipe);
+    }
+    expect([...written].filter((name) => !COLOR_PROPERTIES.has(name))).toEqual(
+      []
+    );
   });
 });
