@@ -1,6 +1,7 @@
 package ai.cocso.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,6 +40,12 @@ fun CCBadge(
         modifier = modifier
             .clip(badgeShape)
             .background(style.bgColor ?: CocsoTokens.Color.surfaceSecondary())
+            // The recipe's border — the outline variant.
+            .then(
+                style.borderColor?.let {
+                    Modifier.border(style.borderWidth ?: 1.dp, it, badgeShape)
+                } ?: Modifier
+            )
             .padding(
                 horizontal = style.paddingX ?: 0.dp,
                 vertical = style.paddingY ?: 0.dp,

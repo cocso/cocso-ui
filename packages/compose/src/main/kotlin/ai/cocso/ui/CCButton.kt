@@ -50,6 +50,11 @@ fun CCButton(
     enabled: Boolean = true,
 ) {
     val style = cCButtonStyle(variant = variant, size = size, shape = shape, align = align)
+    val buttonShape = if (style.borderRadiusFull == true) {
+        CircleShape
+    } else {
+        RoundedCornerShape(style.borderRadius ?: 0.dp)
+    }
     val interactionSource = remember { MutableInteractionSource() }
     // 웹의 `.button:focus-visible` 과 같은 링 (2.4.7).
     var isFocused by remember { mutableStateOf(false) }
@@ -80,22 +85,24 @@ fun CCButton(
             // primary button was solid black on Android and grey on iOS.
             .alpha(if (enabled) 1f else 0.4f)
             .onFocusChanged { isFocused = it.isFocused }
-            .border(
-                if (isFocused) 2.dp else 0.dp,
-                CocsoTokens.Color.focusRing(),
-                if (style.borderRadiusFull == true) {
-                    CircleShape
-                } else {
-                    RoundedCornerShape(style.borderRadius ?: 0.dp)
-                },
+            // The recipe's border — the outline variant. Then the focus ring,
+            // only while focused: `Modifier.border(0.dp)` is not "none", it is
+            // `Dp.Hairline`, a one-pixel line. With it applied unconditionally
+            // every secondary and error button carried a permanent
+            // `focus-ring`-coloured edge; primary hid it by being the same colour.
+            .then(
+                style.borderColor?.let {
+                    Modifier.border(style.borderWidth ?: 1.dp, it, buttonShape)
+                } ?: Modifier
             )
-            .clip(
-                if (style.borderRadiusFull == true) {
-                    CircleShape
+            .then(
+                if (isFocused) {
+                    Modifier.border(2.dp, CocsoTokens.Color.focusRing(), buttonShape)
                 } else {
-                    RoundedCornerShape(style.borderRadius ?: 0.dp)
+                    Modifier
                 }
             )
+            .clip(buttonShape)
             .background(
                 (if (isPressed) style.bgColorPressed else null)
                     ?: style.bgColor

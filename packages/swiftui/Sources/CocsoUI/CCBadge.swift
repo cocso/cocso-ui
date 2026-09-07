@@ -45,6 +45,22 @@ public struct CCBadge: View {
                     ? AnyShape(Capsule())
                     : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
             )
+            // The recipe's border — the outline variant.
+            .overlay(recipeBorder(style))
+    }
+
+    /// `AnyShape` is not `InsettableShape`, so `strokeBorder` has to be called on
+    /// the concrete shape. Nothing when the variant has no border.
+    @ViewBuilder
+    private func recipeBorder(_ style: CCBadgeStyle) -> some View {
+        if let color = style.borderColor {
+            if style.borderRadiusFull == true {
+                Capsule().strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+            } else {
+                RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
+                    .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+            }
+        }
     }
 }
 

@@ -117,6 +117,9 @@ public struct CCButton: View {
                 ? AnyShape(Capsule())
                 : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
         )
+        // The recipe's border — the outline variant. Until the generator carried
+        // compound borders this variant had no edge on either platform.
+        .overlay(recipeBorder(resolved))
         .overlay(
             RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
                 .strokeBorder(
@@ -130,6 +133,21 @@ public struct CCButton: View {
         .opacity(isEnabled ? 1 : 0.4)
         .accessibilityLabel(title)
         .accessibilityAddTraits(.isButton)
+    }
+
+    /// `AnyShape` is not `InsettableShape`, so `strokeBorder` has to be called on
+    /// the concrete shape — and keeping it out of `body` keeps the type-checker
+    /// inside its time budget. Nothing when the variant has no border.
+    @ViewBuilder
+    private func recipeBorder(_ style: CCButtonStyle) -> some View {
+        if let color = style.borderColor {
+            if style.borderRadiusFull == true {
+                Capsule().strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+            } else {
+                RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
+                    .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+            }
+        }
     }
 }
 

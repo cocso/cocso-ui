@@ -167,6 +167,8 @@ enum class CCBadgeShape {
 data class CCBadgeStyle(
     val bgColor: ComposeColor? = null,
     val fontColor: ComposeColor? = null,
+    val borderWidth: Dp? = null,
+    val borderColor: ComposeColor? = null,
     val paddingX: Dp? = null,
     val paddingY: Dp? = null,
     val fontSize: Dp? = null,
@@ -212,6 +214,8 @@ fun cCBadgeStyle(
     }
     if (variant == CCBadgeVariant.outline) {
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
     }
     if (size == CCBadgeSize.large) {
         style = style.copy(paddingX = 10.dp)
@@ -315,6 +319,8 @@ data class CCButtonStyle(
     val fontColorPressed: ComposeColor? = null,
     val bgColor: ComposeColor? = null,
     val fontColor: ComposeColor? = null,
+    val borderWidth: Dp? = null,
+    val borderColor: ComposeColor? = null,
     val height: Dp? = null,
     val paddingInline: Dp? = null,
     val contentPaddingX: Dp? = null,
@@ -374,6 +380,8 @@ fun cCButtonStyle(
     }
     if (variant == CCButtonVariant.outline) {
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
     }
     if (variant == CCButtonVariant.ghost) {
         style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
@@ -479,6 +487,8 @@ enum class CCCardPadding {
 data class CCCardStyle(
     val bgColor: ComposeColor? = null,
     val borderRadius: Dp? = null,
+    val borderWidth: Dp? = null,
+    val borderColor: ComposeColor? = null,
     val paddingX: Dp? = null,
     val paddingY: Dp? = null,
 )
@@ -497,6 +507,8 @@ fun cCCardStyle(
     if (variant == CCCardVariant.outlined) {
         style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
         style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
     }
     if (variant == CCCardVariant.filled) {
         style = style.copy(bgColor = CocsoTokens.Color.surfaceSecondary())
@@ -581,6 +593,8 @@ enum class CCDialogSize {
 data class CCDialogStyle(
     val bgColor: ComposeColor? = null,
     val borderRadius: Dp? = null,
+    val borderWidth: Dp? = null,
+    val borderColor: ComposeColor? = null,
     val paddingTop: Dp? = null,
     val paddingBottom: Dp? = null,
     val paddingLeft: Dp? = null,
@@ -597,6 +611,8 @@ fun cCDialogStyle(
     var style = CCDialogStyle()
     style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
     style = style.copy(borderRadius = CocsoTokens.Radius.r5)
+    style = style.copy(borderWidth = 1.dp)
+    style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
     style = style.copy(paddingTop = 20.dp)
     style = style.copy(paddingBottom = 20.dp)
     style = style.copy(paddingLeft = 20.dp)

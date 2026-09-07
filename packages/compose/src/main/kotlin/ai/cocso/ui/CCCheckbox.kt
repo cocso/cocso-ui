@@ -87,10 +87,18 @@ fun CCCheckbox(
                 .clip(radius)
                 .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
                 .border(1.dp, style.borderColor ?: CocsoTokens.Color.borderPrimary(), radius)
-                .border(
-                    if (isFocused) 2.dp else 0.dp,
-                    style.focusRingColor ?: CocsoTokens.Color.focusRing(),
-                    radius,
+                // Only while focused. `Modifier.border(0.dp)` is `Dp.Hairline`,
+                // a one-pixel line, not the absence of one — see CCButton.
+                .then(
+                    if (isFocused) {
+                        Modifier.border(
+                            2.dp,
+                            style.focusRingColor ?: CocsoTokens.Color.focusRing(),
+                            radius,
+                        )
+                    } else {
+                        Modifier
+                    }
                 ),
             contentAlignment = Alignment.Center,
         ) {
