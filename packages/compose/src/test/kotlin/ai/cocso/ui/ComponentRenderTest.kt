@@ -41,7 +41,7 @@ import org.robolectric.annotation.GraphicsMode
 // 창이 내용보다 짧으면 아래쪽 컴포넌트가 잘린 채로 골든이 박힌다. 처음 기록한
 // 이미지가 정확히 그랬고 — 체크박스·스위치·입력 셋이 빠져 있었다 — 눈으로 보지
 // 않았으면 셋을 보지 않는 테스트를 통과시켰을 것이다.
-@Config(sdk = [34], qualifiers = "w360dp-h1800dp")
+@Config(sdk = [34], qualifiers = "w360dp-h2200dp")
 class ComponentRenderTest {
 
     @get:Rule
@@ -96,8 +96,16 @@ class ComponentRenderTest {
     private fun everything() {
         CCTypography("Typography", type = CCTypographyType.heading, size = CCTypographySize.large)
         CCButton(title = "Button", onClick = {})
+        // Variants whose only visible difference is a border. The primary
+        // button hid a permanent hairline by being the same colour as it; the
+        // outlined card had no edge at all. Neither showed in a golden that
+        // drew only the defaults.
+        CCButton(title = "Secondary", onClick = {}, variant = CCButtonVariant.secondary)
+        CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
         CCBadge(text = "Badge")
+        CCBadge(text = "Outline", variant = CCBadgeVariant.outline)
         CCCard { CCTypography("Card") }
+        CCCard(variant = CCCardVariant.outlined) { CCTypography("Outlined card") }
         CCAlert(title = "Alert", message = "message")
         CCAvatar(initials = "CO", label = "코쏘")
         CCSkeleton(modifier = Modifier.fillMaxWidth())
@@ -118,6 +126,6 @@ class ComponentRenderTest {
     fun everyComponentDrawsInLightTheme() = render("components-light") { everything() }
 
     @Test
-    @Config(sdk = [34], qualifiers = "w360dp-h1800dp-night")
+    @Config(sdk = [34], qualifiers = "w360dp-h2200dp-night")
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
 }

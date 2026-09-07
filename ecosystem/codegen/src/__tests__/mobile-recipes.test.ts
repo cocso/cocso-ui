@@ -177,12 +177,6 @@ describe("The published files are what the generator produces", () => {
  */
 describe("Nothing is dropped without a decision", () => {
   const NO_PLATFORM_EQUIVALENT = [
-    // A CSS border is width, style and colour in one value. Both platforms
-    // take them separately, and no single property here can hold it.
-    "badge.border",
-    "button.border",
-    "card.border",
-    "dialog.border",
     // `transparent` and `currentColor` are absences, not colours: SwiftUI says
     // `.clear` and Compose leaves the background unset.
     "badge.bgColor",

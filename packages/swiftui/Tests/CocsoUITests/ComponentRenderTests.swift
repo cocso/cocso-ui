@@ -102,8 +102,12 @@ final class ComponentRenderTests: XCTestCase {
     private func eachComponentDraws(_ scheme: NSAppearance.Name) {
         assertDraws("typography", scheme) { CCTypography("Typography", type: .heading, size: .large) }
         assertDraws("button", scheme) { CCButton("Button") {} }
+        assertDraws("button-secondary", scheme) { CCButton("Secondary", variant: .secondary) {} }
+        assertDraws("button-outline", scheme) { CCButton("Outline", variant: .outline) {} }
         assertDraws("badge", scheme) { CCBadge("Badge") }
+        assertDraws("badge-outline", scheme) { CCBadge("Outline", variant: .outline) }
         assertDraws("card", scheme) { CCCard { CCTypography("Card") } }
+        assertDraws("card-outlined", scheme) { CCCard(variant: .outlined) { CCTypography("Outlined") } }
         assertDraws("alert", scheme) { CCAlert("Alert", message: "message") }
         assertDraws("avatar", scheme) { CCAvatar(initials: "CO", label: "코쏘") }
         assertDraws("progress", scheme) { CCProgress(value: 60) }
@@ -118,8 +122,12 @@ final class ComponentRenderTests: XCTestCase {
     private func everything() -> some View {
         CCTypography("Typography", type: .heading, size: .large)
         CCButton("Button") {}
+        CCButton("Secondary", variant: .secondary) {}
+        CCButton("Outline", variant: .outline) {}
         CCBadge("Badge")
+        CCBadge("Outline", variant: .outline)
         CCCard { CCTypography("Card") }
+        CCCard(variant: .outlined) { CCTypography("Outlined card") }
         CCAlert("Alert", message: "message")
         CCAvatar(initials: "CO", label: "코쏘")
         CCProgress(value: 60)

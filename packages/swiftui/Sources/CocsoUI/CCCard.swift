@@ -35,6 +35,14 @@ public struct CCCard<Content: View>: View {
             .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
+            // The recipe's border — the outlined variant. Without it a white card
+            // on a white surface had no edge at all.
+            .overlay(
+                style.borderColor.map { color in
+                    RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
+                        .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+                }
+            )
     }
 }
 

@@ -287,7 +287,39 @@ function classifyProperty(
   if (typeof value === "number") {
     return { [key]: { kind: "length", value } };
   }
+  if (isCompoundBorder(value)) {
+    // `border: { width, style, color }` is CSS's one-line border. Neither
+    // platform has that value, but both take a width and a colour — the same
+    // split `padding` gets. It was refused as having "no single-value
+    // equivalent", which was true and beside the point: the outlined card, the
+    // outline button and the outline badge drew no border at all on either
+    // platform, and a white card on a white surface has no edge.
+    if (value.style !== "solid") {
+      return `${key} has a \`${value.style}\` border, which neither platform draws`;
+    }
+    const token = tokenIdentifier(value.color, "color");
+    return {
+      [`${key}Width`]: { kind: "length", value: value.width },
+      [`${key}Color`]: {
+        kind: "color",
+        themed: themedColors.has(token),
+        token,
+      },
+    };
+  }
   return `${key} carries \`${String(value)}\`, which has no single-value equivalent`;
+}
+
+function isCompoundBorder(
+  value: unknown
+): value is { color: string; style: string; width: number } {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    typeof (value as { width?: unknown }).width === "number" &&
+    typeof (value as { color?: unknown }).color === "string" &&
+    typeof (value as { style?: unknown }).style === "string"
+  );
 }
 
 interface Layer {

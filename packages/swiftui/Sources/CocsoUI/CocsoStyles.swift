@@ -162,6 +162,8 @@ public enum CCBadgeShape: String, CaseIterable, Sendable {
 public struct CCBadgeStyle: Equatable, Sendable {
     public var bgColor: SwiftUI.Color?
     public var fontColor: SwiftUI.Color?
+    public var borderWidth: CGFloat?
+    public var borderColor: SwiftUI.Color?
     public var paddingX: CGFloat?
     public var paddingY: CGFloat?
     public var fontSize: CGFloat?
@@ -207,6 +209,8 @@ public struct CCBadgeStyle: Equatable, Sendable {
         }
         if variant == .outline {
             style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
         }
         if size == .large {
             style.paddingX = 10
@@ -312,6 +316,8 @@ public struct CCButtonStyle: Equatable, Sendable {
     public var fontColorPressed: SwiftUI.Color?
     public var bgColor: SwiftUI.Color?
     public var fontColor: SwiftUI.Color?
+    public var borderWidth: CGFloat?
+    public var borderColor: SwiftUI.Color?
     public var height: CGFloat?
     public var paddingInline: CGFloat?
     public var contentPaddingX: CGFloat?
@@ -371,6 +377,8 @@ public struct CCButtonStyle: Equatable, Sendable {
         }
         if variant == .outline {
             style.fontColor = CocsoTokens.Color.textPrimary(scheme)
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
         }
         if variant == .ghost {
             style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
@@ -477,6 +485,8 @@ public enum CCCardPadding: String, CaseIterable, Sendable {
 public struct CCCardStyle: Equatable, Sendable {
     public var bgColor: SwiftUI.Color?
     public var borderRadius: CGFloat?
+    public var borderWidth: CGFloat?
+    public var borderColor: SwiftUI.Color?
     public var paddingX: CGFloat?
     public var paddingY: CGFloat?
 
@@ -495,6 +505,8 @@ public struct CCCardStyle: Equatable, Sendable {
         if variant == .outlined {
             style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
             style.borderRadius = CocsoTokens.Radius.r4
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
         }
         if variant == .filled {
             style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme)
@@ -581,6 +593,8 @@ public enum CCDialogSize: String, CaseIterable, Sendable {
 public struct CCDialogStyle: Equatable, Sendable {
     public var bgColor: SwiftUI.Color?
     public var borderRadius: CGFloat?
+    public var borderWidth: CGFloat?
+    public var borderColor: SwiftUI.Color?
     public var paddingTop: CGFloat?
     public var paddingBottom: CGFloat?
     public var paddingLeft: CGFloat?
@@ -597,6 +611,8 @@ public struct CCDialogStyle: Equatable, Sendable {
         var style = CCDialogStyle()
         style.bgColor = CocsoTokens.Color.surfacePrimary(scheme)
         style.borderRadius = CocsoTokens.Radius.r5
+        style.borderWidth = 1
+        style.borderColor = CocsoTokens.Color.borderSecondary(scheme)
         style.paddingTop = 20
         style.paddingBottom = 20
         style.paddingLeft = 20

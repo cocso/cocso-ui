@@ -1,6 +1,7 @@
 package ai.cocso.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
@@ -24,10 +25,19 @@ fun CCCard(
 ) {
     val style = cCCardStyle(variant = variant, padding = padding)
 
+    val cardShape = RoundedCornerShape(style.borderRadius ?: 0.dp)
+
     Column(
         modifier = modifier
-            .clip(RoundedCornerShape(style.borderRadius ?: 0.dp))
+            .clip(cardShape)
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
+            // The recipe's border — the outlined variant. Without it a white card
+            // on a white surface had no edge at all.
+            .then(
+                style.borderColor?.let {
+                    Modifier.border(style.borderWidth ?: 1.dp, it, cardShape)
+                } ?: Modifier
+            )
             // The recipe's 12/16/24. Picking these from the spacing scale by
             // hand gave 8/12/20 — every card was tighter than the web's.
             .padding(
