@@ -18,7 +18,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "generate:mobile": "tsx scripts/generate-mobile.ts"
+    "generate:mobile": "tsx scripts/generate-mobile.ts",
+    "generate:brand": "tsx scripts/generate-brand.ts"
   },
   "dependencies": {
     "@cocso-ui/baseframe-sources": "workspace:*",

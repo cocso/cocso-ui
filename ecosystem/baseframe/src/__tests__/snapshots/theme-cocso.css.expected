@@ -1,0 +1,39 @@
+/* cocso brand theme. Import after token.css and theme-dark.css; set
+ * data-brand="cocso" on the container that carries data-theme. */
+[data-brand="cocso"] {
+  --cocso-color-primary-50: var(--cocso-color-info-50);
+  --cocso-color-primary-100: var(--cocso-color-info-100);
+  --cocso-color-primary-200: var(--cocso-color-info-200);
+  --cocso-color-primary-300: var(--cocso-color-info-300);
+  --cocso-color-primary-400: var(--cocso-color-info-400);
+  --cocso-color-primary-500: var(--cocso-color-info-500);
+  --cocso-color-primary-600: var(--cocso-color-info-600);
+  --cocso-color-primary-700: var(--cocso-color-info-700);
+  --cocso-color-primary-800: var(--cocso-color-info-800);
+  --cocso-color-primary-900: var(--cocso-color-info-900);
+  --cocso-color-primary-950: var(--cocso-color-info-950);
+  --cocso-color-interactive-primary: var(--cocso-color-info-500);
+  --cocso-color-interactive-primary-hover: var(--cocso-color-info-600);
+  --cocso-color-interactive-primary-active: var(--cocso-color-info-700);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-info-500);
+  --cocso-color-text-on-primary: var(--cocso-color-white);
+}
+
+[data-brand="cocso"][data-theme="dark"] {
+  --cocso-color-primary-50: var(--cocso-color-info-50);
+  --cocso-color-primary-100: var(--cocso-color-info-100);
+  --cocso-color-primary-200: var(--cocso-color-info-200);
+  --cocso-color-primary-300: var(--cocso-color-info-300);
+  --cocso-color-primary-400: var(--cocso-color-info-400);
+  --cocso-color-primary-500: var(--cocso-color-info-500);
+  --cocso-color-primary-600: var(--cocso-color-info-600);
+  --cocso-color-primary-700: var(--cocso-color-info-700);
+  --cocso-color-primary-800: var(--cocso-color-info-800);
+  --cocso-color-primary-900: var(--cocso-color-info-900);
+  --cocso-color-primary-950: var(--cocso-color-info-950);
+  --cocso-color-interactive-primary: #2260d3;
+  --cocso-color-interactive-primary-hover: var(--cocso-color-info-600);
+  --cocso-color-interactive-primary-active: var(--cocso-color-info-700);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-info-500);
+  --cocso-color-text-on-primary: var(--cocso-color-white);
+}

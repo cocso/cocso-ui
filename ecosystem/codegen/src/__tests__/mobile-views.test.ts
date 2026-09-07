@@ -25,14 +25,21 @@ const KOTLIN_DIR = path.join(
   "packages/compose/src/main/kotlin/ai/cocso/ui"
 );
 
-/** Files the generators own. The views are everything else. */
-const GENERATED = new Set(["CocsoTokens", "CocsoStyles"]);
+/**
+ * Files the generators own. The views are everything else.
+ *
+ * By prefix, not by list: every generated file is named `Cocso*` and every view
+ * `CC*`. A list held two names until a third generated file — the brand
+ * overlay `CocsoBrandCocso` — arrived and was read as a component with no
+ * recipe behind it.
+ */
+const GENERATED = /^Cocso/;
 
 function componentNames(dir: string, extension: string): string[] {
   return readdirSync(dir)
     .filter((f) => f.endsWith(extension))
     .map((f) => f.slice(0, -extension.length))
-    .filter((name) => !GENERATED.has(name))
+    .filter((name) => !GENERATED.test(name))
     .sort();
 }
 

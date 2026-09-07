@@ -17,6 +17,13 @@ import type { Ast, TokenDecl } from "../types";
  */
 
 export interface MobileOptions {
+  /**
+   * Emit only tokens from these collections. The others stay in the AST for
+   * reference resolution — a brand overlay declares `$color.interactive.primary`
+   * as `$color.info-500`, so the primitives must be present to resolve it, but
+   * must not be emitted again alongside it.
+   */
+  only?: string[];
   /** Kotlin only. */
   packageName?: string;
   /** Swift: the enclosing type. Kotlin: the object name. */
@@ -176,7 +183,10 @@ interface Entry {
   themed: boolean;
 }
 
-function collectEntries(ast: Ast): {
+function collectEntries(
+  ast: Ast,
+  only?: string[]
+): {
   groups: Map<string, Entry[]>;
   skipped: { name: string; reason: string }[];
 } {
@@ -187,6 +197,9 @@ function collectEntries(ast: Ast): {
   const skipped: { name: string; reason: string }[] = [];
 
   for (const token of ast.tokens) {
+    if (only && !only.includes(token.token.collection)) {
+      continue;
+    }
     const modes = modesOf.get(token.token.collection) ?? ["default"];
     const themed = modes.includes("light") && modes.includes("dark");
     const lightMode = themed ? "light" : "default";
@@ -241,7 +254,7 @@ function kotlinValue(value: Resolved): string {
 }
 
 function generateSwift(ast: Ast, options: MobileOptions): string {
-  const { groups } = collectEntries(ast);
+  const { groups } = collectEntries(ast, options.only);
   const type = options.typeName ?? "CocsoTokens";
   const lines = [
     HEADER,
@@ -307,7 +320,7 @@ function generateSwift(ast: Ast, options: MobileOptions): string {
 }
 
 function generateKotlin(ast: Ast, options: MobileOptions): string {
-  const { groups } = collectEntries(ast);
+  const { groups } = collectEntries(ast, options.only);
   const type = options.typeName ?? "CocsoTokens";
   const pkg = options.packageName ?? "ai.cocso.ui";
   const lines = [
@@ -368,7 +381,7 @@ export function generateMobileFromAst(
   ast: Ast,
   options: MobileOptions = {}
 ): MobileOutput {
-  const { skipped } = collectEntries(ast);
+  const { skipped } = collectEntries(ast, options.only);
   return {
     kotlin: generateKotlin(ast, options),
     skipped,

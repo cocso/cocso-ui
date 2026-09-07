@@ -62,3 +62,27 @@ import '@cocso-ui/css/theme-dark.css';
 `text-tertiary`가 맞는 자리는 텍스트가 아닌 것 — 아이콘이 아닌 장식, 구분선,
 비활성 상태처럼 1.4.3이 면제하는 경우입니다. 텍스트에 시각적 위계가 필요하면
 색이 아니라 크기와 굵기로 표현하고, 색은 `text-secondary`를 쓰세요.
+
+### 브랜드 테마 (opt-in)
+
+디자인 시스템의 베이스 `primary` 는 어떤 브랜드도 아닙니다 — `primary-*` 램프가
+중립(neutral) 램프의 별칭이라 `interactive-primary` 는 검정입니다. 브랜드 색은 그
+위에 얹는 테마입니다.
+
+```javascript
+import '@cocso-ui/css/token.css';
+import '@cocso-ui/css/theme-dark.css';   // 다크를 쓴다면
+import '@cocso-ui/css/theme-cocso.css';  // 마지막에
+```
+
+```html
+<html data-brand="cocso" data-theme="dark">
+```
+
+`theme-cocso.css` 는 `primary-*` 램프와 `interactive-primary` 계열, `text-on-primary`
+를 info 램프(파랑)로 바꿉니다. 다크 선택자 `[data-brand][data-theme="dark"]` 는
+(0,2,0) 이라 `theme-dark.css` 의 (0,1,0) 을 import 순서와 무관하게 이깁니다 — 앱이
+`:root:root` 로 특정도를 올릴 필요가 없습니다.
+
+같은 값이 iOS·Android 에는 `CocsoBrandCocso` 로 나갑니다. 소스는 하나
+(`packages/baseframe-brands/cocso/`)이고, 세 플랫폼이 같은 파일에서 생성됩니다.
