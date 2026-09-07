@@ -22,6 +22,12 @@ public struct CCButton: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.isEnabled) private var isEnabled
+    // 웹의 `.button:focus-visible` 과 같은 링. 키보드가 있는 곳이면 2.4.7 이
+    // 적용되고, iPad 에는 있다.
+    @FocusState private var isFocused: Bool
+    // 웹의 `.button:active`. 레시피가 variant 마다 눌림 색을 정하고, 여기서
+    // 정하지 않는다.
+    @GestureState private var isPressed = false
 
     public init(
         _ title: String,
@@ -89,8 +95,20 @@ public struct CCButton: View {
             .frame(height: resolved.height)
         }
         .buttonStyle(.plain)
-        .foregroundStyle(resolved.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme))
-        .background(resolved.bgColor ?? .clear)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0).updating($isPressed) { _, state, _ in
+                state = true
+            }
+        )
+        .focused($isFocused)
+        .foregroundStyle(
+            (isPressed ? resolved.fontColorPressed : nil)
+                ?? resolved.fontColor
+                ?? CocsoTokens.Color.textPrimary(colorScheme)
+        )
+        .background(
+            (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
+        )
         .clipShape(
             // `shape: .circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
@@ -98,6 +116,14 @@ public struct CCButton: View {
             resolved.borderRadiusFull == true
                 ? AnyShape(Capsule())
                 : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
+                .strokeBorder(
+                    CocsoTokens.Color.focusRing(colorScheme),
+                    lineWidth: isFocused ? 2 : 0
+                )
+                .padding(-2)
         )
         // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
         // button the same way rather than restating every variant.

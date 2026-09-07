@@ -12,6 +12,9 @@ public struct CCInput: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.isEnabled) private var isEnabled
     @State private var revealed = false
+    // 웹의 `.input:focus-visible` — 쉬는 테두리와 다른 토큰이어야 포커스가
+    // 보인다(2.4.7). 쉬는 상태는 이제 `border-strong` 이다.
+    @FocusState private var isFocused: Bool
 
     public init(
         label: String,
@@ -34,9 +37,20 @@ public struct CCInput: View {
         VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
             CCTypography(label, type: .body, size: .small)
             HStack(spacing: 0) {
-                field
-                    .font(.system(size: style.fontSize ?? 14))
-                    .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme))
+                ZStack(alignment: .leading) {
+                    // SwiftUI 의 기본 플레이스홀더는 시스템 회색이다. 웹은
+                    // `text-secondary` 로 그리므로 직접 그린다 — Compose 쪽도
+                    // 같은 이유로 직접 그린다.
+                    if text.isEmpty && !placeholder.isEmpty {
+                        Text(placeholder)
+                            .font(.system(size: style.fontSize ?? 14))
+                            .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme))
+                    }
+                    field
+                        .font(.system(size: style.fontSize ?? 14))
+                        .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme))
+                        .focused($isFocused)
+                }
                 if isSecure {
                     Button(action: { revealed.toggle() }) {
                         Image(systemName: revealed ? "eye.slash" : "eye")
@@ -56,10 +70,8 @@ public struct CCInput: View {
             .overlay(
                 RoundedRectangle(cornerRadius: style.borderRadius ?? 4)
                     .strokeBorder(
-                        errorMessage == nil
-                            ? (style.borderColor ?? CocsoTokens.Color.borderSecondary(colorScheme))
-                            : CocsoTokens.Color.feedbackDanger(colorScheme),
-                        lineWidth: 1
+                        borderColor(style),
+                        lineWidth: isFocused ? 2 : 1
                     )
             )
             if let errorMessage {
@@ -73,14 +85,21 @@ public struct CCInput: View {
         .opacity(isEnabled ? 1 : 0.4)
     }
 
+    private func borderColor(_ style: CCInputStyle) -> SwiftUI.Color {
+        // 웹의 순서: 오류가 먼저, 그다음 포커스, 그다음 쉬는 상태.
+        if errorMessage != nil { return CocsoTokens.Color.feedbackDanger(colorScheme) }
+        if isFocused { return CocsoTokens.Color.focusRing(colorScheme) }
+        return style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme)
+    }
+
     @ViewBuilder
     private var field: some View {
         // The secure entry is toggled rather than overlaid, so the system's
         // password autofill keeps working either way.
         if isSecure && !revealed {
-            SecureField(placeholder, text: $text)
+            SecureField("", text: $text)
         } else {
-            TextField(placeholder, text: $text)
+            TextField("", text: $text)
         }
     }
 }

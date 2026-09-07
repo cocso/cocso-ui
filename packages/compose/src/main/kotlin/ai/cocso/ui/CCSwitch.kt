@@ -91,7 +91,8 @@ fun CCSwitch(
                 modifier = Modifier
                     .size(thumb)
                     .clip(CircleShape)
-                    .background(CocsoTokens.Color.surfacePrimary())
+                    // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
+                    .background(style.thumbColor ?: CocsoTokens.Color.textOnPrimary())
             )
         }
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)

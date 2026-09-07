@@ -55,7 +55,11 @@ export const selectRecipe = defineRecipe({
 
   base: {
     root: {
-      borderColor: "border-primary",
+      // input 과 같은 이유. 쉬는 상태의 테두리가 이 컨트롤이 어디 있는지
+      // 말하는 유일한 정보이고, `border-primary` 는 흰 배경에서 1.54:1 이다.
+      // 웹의 `select.module.css` 는 이미 이 값을 무시하고 `border-strong` 을
+      // 직접 그리고 있었다.
+      borderColor: "border-strong",
     },
   },
   states: {

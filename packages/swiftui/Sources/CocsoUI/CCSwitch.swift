@@ -54,7 +54,8 @@ public struct CCSwitch: View {
                             )
                         )
                     Circle()
-                        .fill(CocsoTokens.Color.surfacePrimary(colorScheme))
+                        // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
+                        .fill(style.thumbColor ?? CocsoTokens.Color.textOnPrimary(colorScheme))
                         .frame(width: thumb, height: thumb)
                         .padding(.horizontal, inset)
                 }
