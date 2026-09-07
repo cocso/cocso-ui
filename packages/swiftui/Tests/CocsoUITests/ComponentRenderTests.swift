@@ -1,6 +1,5 @@
 #if canImport(AppKit)
 import AppKit
-import SnapshotTesting
 import SwiftUI
 import XCTest
 
@@ -22,11 +21,20 @@ import XCTest
  an iPhone's, which is why the reference images are a change detector rather
  than a description of how iOS looks.
 
- The reference catches a change in appearance. The ink assertion catches what a
- reference cannot: the first run of a component that was never visible, since
- that run records whatever it is handed.
+ There is no pixel reference here — see `render` for why. Each component is
+ drawn alone and checked for ink, which is deterministic across machines and
+ catches the failure a reference cannot on its first run: a component that was
+ never visible.
  */
 final class ComponentRenderTests: XCTestCase {
+    /// 열두 개를 한 화면에 그려 그 전체에 잉크가 있는지 본다.
+    ///
+    /// 여기엔 픽셀 참조가 없다. macOS 는 SwiftUI·SF Pro·힌팅 버전에 따라
+    /// 기계마다 다르게 그려서, 한 곳에서 기록한 참조가 다른 곳에서 틀린다 —
+    /// 지각 허용치 0.9 로도 CI 러너와 개발 머신 사이의 차이가 넘쳤다.
+    /// Robolectric 은 결정론적이라 Compose 쪽은 골든을 갖고, iOS 쪽은 그 대신
+    /// 결정론적인 것만 검사한다: 그려졌는가. 모양의 변화를 잡는 일은 Compose
+    /// 골든과 웹의 Visual Regression 이 맡는다.
     @MainActor
     private func render(
         _ name: String,
@@ -37,28 +45,13 @@ final class ComponentRenderTests: XCTestCase {
             content()
         }
         .padding(16)
-        // 높이까지 고정해야 배경이 이미지 전체를 채운다. 폭만 주면 내용 아래가
-        // 투명하게 남아, 참조 이미지가 무엇 위에 그려진 것인지 알 수 없다 —
-        // Compose 쪽 렌더 테스트와 같은 조건으로 맞춘다.
         .frame(width: 320, height: 900, alignment: .topLeading)
         .background(
             CocsoTokens.Color.surfacePrimary(appearance == .darkAqua ? .dark : .light)
         )
-
         let controller = NSHostingController(rootView: view)
         controller.view.appearance = NSAppearance(named: appearance)
         controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 900)
-
-        // macOS 는 기계마다 다르게 그린다 — SwiftUI·SF Pro·힌팅 버전이 러너와
-        // 개발 머신 사이에서 어긋나, 여기서 기록한 참조가 CI 에서 픽셀 단위로
-        // 틀렸다. Robolectric 은 결정론적이라 Compose 에는 없는 문제다.
-        // 참조는 지각 허용치 안에서 큰 변화만 잡고, 정말 지켜야 하는 것 —
-        // 그려졌는가 — 는 아래 잉크 검사가 맡는다.
-        assertSnapshot(
-            of: controller,
-            as: .image(precision: 0.9, perceptualPrecision: 0.9),
-            named: name
-        )
         assertHasInk(controller.view, name: name)
     }
 
