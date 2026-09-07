@@ -308,6 +308,8 @@ public enum CCButtonAlign: String, CaseIterable, Sendable {
 }
 
 public struct CCButtonStyle: Equatable, Sendable {
+    public var bgColorPressed: SwiftUI.Color?
+    public var fontColorPressed: SwiftUI.Color?
     public var bgColor: SwiftUI.Color?
     public var fontColor: SwiftUI.Color?
     public var height: CGFloat?
@@ -328,6 +330,37 @@ public struct CCButtonStyle: Equatable, Sendable {
         scheme: ColorScheme
     ) -> CCButtonStyle {
         var style = CCButtonStyle()
+        if variant == .primary {
+            style.bgColorPressed = CocsoTokens.Color.interactivePrimaryActive(scheme)
+        }
+        if variant == .secondary {
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondaryHover(scheme)
+            style.fontColorPressed = CocsoTokens.Color.textPrimary(scheme)
+        }
+        if variant == .outline {
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme)
+        }
+        if variant == .ghost {
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme)
+        }
+        if variant == .success {
+            style.bgColorPressed = CocsoTokens.Color.interactiveSuccessActive(scheme)
+        }
+        if variant == .error {
+            style.bgColorPressed = CocsoTokens.Color.interactiveDangerActive(scheme)
+        }
+        if variant == .warning {
+            style.bgColorPressed = CocsoTokens.Color.interactiveWarningHover(scheme)
+        }
+        if variant == .info {
+            style.bgColorPressed = CocsoTokens.Color.interactiveInfoActive(scheme)
+        }
+        if variant == .neutral {
+            style.bgColorPressed = CocsoTokens.Color.interactiveNeutralActive(scheme)
+        }
+        if variant == .errorGhost {
+            style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme)
+        }
         if variant == .primary {
             style.bgColor = CocsoTokens.Color.interactivePrimary(scheme)
             style.fontColor = CocsoTokens.Color.textOnPrimary(scheme)
@@ -605,7 +638,7 @@ public struct CCInputStyle: Equatable, Sendable {
         scheme: ColorScheme
     ) -> CCInputStyle {
         var style = CCInputStyle()
-        style.borderColor = CocsoTokens.Color.borderPrimary(scheme)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
         if size == .xSmall {
             style.height = 28
             style.paddingX = 8
@@ -844,7 +877,7 @@ public struct CCSelectStyle: Equatable, Sendable {
         scheme: ColorScheme
     ) -> CCSelectStyle {
         var style = CCSelectStyle()
-        style.borderColor = CocsoTokens.Color.borderPrimary(scheme)
+        style.borderColor = CocsoTokens.Color.borderStrong(scheme)
         if size == .xSmall {
             style.minWidth = 28
             style.height = 28

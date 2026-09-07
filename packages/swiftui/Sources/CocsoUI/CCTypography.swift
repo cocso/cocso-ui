@@ -22,6 +22,5 @@ public struct CCTypography: View {
         let style = CCTypographyStyle.resolve(type: type, size: size, scheme: colorScheme)
         Text(text)
             .font(.system(size: style.fontSize ?? 14, weight: style.fontWeight ?? .regular))
-            .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme))
     }
 }

@@ -1202,7 +1202,10 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.borderColor).toBe("border-primary");
+    // The resting border is `border-strong`: it is the only thing saying where
+    // the control is, and WCAG 1.4.11 asks 3:1 for that. What this test is
+    // about is the hover state replacing it, whatever it is.
+    expect(base._tokenRefs?.borderColor).toBe("border-strong");
     expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-muted");
   });
 
@@ -1223,7 +1226,7 @@ describe("resolveForFigma with state option", () => {
       { size: "medium" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.borderColor).toBe("border-primary");
+    expect(base._tokenRefs?.borderColor).toBe("border-strong");
     expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-muted");
   });
 

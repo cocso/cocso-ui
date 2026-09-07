@@ -311,6 +311,8 @@ enum class CCButtonAlign {
 }
 
 data class CCButtonStyle(
+    val bgColorPressed: ComposeColor? = null,
+    val fontColorPressed: ComposeColor? = null,
     val bgColor: ComposeColor? = null,
     val fontColor: ComposeColor? = null,
     val height: Dp? = null,
@@ -331,6 +333,37 @@ fun cCButtonStyle(
     align: CCButtonAlign,
 ): CCButtonStyle {
     var style = CCButtonStyle()
+    if (variant == CCButtonVariant.primary) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactivePrimaryActive())
+    }
+    if (variant == CCButtonVariant.secondary) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondaryHover())
+        style = style.copy(fontColorPressed = CocsoTokens.Color.textPrimary())
+    }
+    if (variant == CCButtonVariant.outline) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondary())
+    }
+    if (variant == CCButtonVariant.ghost) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondary())
+    }
+    if (variant == CCButtonVariant.success) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSuccessActive())
+    }
+    if (variant == CCButtonVariant.error) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveDangerActive())
+    }
+    if (variant == CCButtonVariant.warning) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveWarningHover())
+    }
+    if (variant == CCButtonVariant.info) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveInfoActive())
+    }
+    if (variant == CCButtonVariant.neutral) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveNeutralActive())
+    }
+    if (variant == CCButtonVariant.errorGhost) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive())
+    }
     if (variant == CCButtonVariant.primary) {
         style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())
         style = style.copy(fontColor = CocsoTokens.Color.textOnPrimary())
@@ -604,7 +637,7 @@ fun cCInputStyle(
     size: CCInputSize,
 ): CCInputStyle {
     var style = CCInputStyle()
-    style = style.copy(borderColor = CocsoTokens.Color.borderPrimary())
+    style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
     if (size == CCInputSize.xSmall) {
         style = style.copy(height = 28.dp)
         style = style.copy(paddingX = 8.dp)
@@ -838,7 +871,7 @@ fun cCSelectStyle(
     size: CCSelectSize,
 ): CCSelectStyle {
     var style = CCSelectStyle()
-    style = style.copy(borderColor = CocsoTokens.Color.borderPrimary())
+    style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
     if (size == CCSelectSize.xSmall) {
         style = style.copy(minWidth = 28.dp)
         style = style.copy(height = 28.dp)

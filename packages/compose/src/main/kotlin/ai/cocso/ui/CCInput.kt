@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -50,6 +51,9 @@ fun CCInput(
     val shape = RoundedCornerShape(style.borderRadius ?: 4.dp)
     val fontSize = (style.fontSize?.value ?: 14f).sp
     var revealed by remember { mutableStateOf(false) }
+    // 웹의 `.input:focus-visible` — 쉬는 테두리와 다른 토큰이어야 포커스가
+    // 보인다(2.4.7). 쉬는 상태는 이제 `border-strong` 이다.
+    var isFocused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(
@@ -64,11 +68,12 @@ fun CCInput(
                 .clip(shape)
                 .background(CocsoTokens.Color.surfacePrimary())
                 .border(
-                    1.dp,
-                    if (errorMessage == null) {
-                        style.borderColor ?: CocsoTokens.Color.borderSecondary()
-                    } else {
-                        CocsoTokens.Color.feedbackDanger()
+                    if (isFocused) 2.dp else 1.dp,
+                    // 웹의 순서: 오류가 먼저, 그다음 포커스, 그다음 쉬는 상태.
+                    when {
+                        errorMessage != null -> CocsoTokens.Color.feedbackDanger()
+                        isFocused -> CocsoTokens.Color.focusRing()
+                        else -> style.borderColor ?: CocsoTokens.Color.borderStrong()
                     },
                     shape,
                 )
@@ -79,7 +84,8 @@ fun CCInput(
                 if (value.isEmpty() && placeholder.isNotEmpty()) {
                     Text(
                         text = placeholder,
-                        color = CocsoTokens.Color.textMuted(),
+                        // 웹의 `.input::placeholder` 와 같은 토큰.
+                        color = CocsoTokens.Color.textSecondary(),
                         fontSize = fontSize,
                     )
                 }
@@ -88,7 +94,9 @@ fun CCInput(
                     onValueChange = onValueChange,
                     enabled = enabled,
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onFocusChanged { isFocused = it.isFocused },
                     textStyle = TextStyle(
                         color = CocsoTokens.Color.textPrimary(),
                         fontSize = fontSize,

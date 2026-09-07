@@ -91,7 +91,10 @@ fun CCSwitch(
                 modifier = Modifier
                     .size(thumb)
                     .clip(CircleShape)
-                    .background(CocsoTokens.Color.surfacePrimary())
+                    // 웹의 `switch.module.css` 와 같은 토큰. 두 테마에서
+                    // `surface-primary` 와 같은 값이라 보이는 것은 같지만,
+                    // 손잡이가 채움 위에 얹히는 것이라는 뜻은 이쪽이 맞다.
+                    .background(CocsoTokens.Color.textOnPrimary())
             )
         }
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)

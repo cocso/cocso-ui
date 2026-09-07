@@ -54,7 +54,10 @@ public struct CCSwitch: View {
                             )
                         )
                     Circle()
-                        .fill(CocsoTokens.Color.surfacePrimary(colorScheme))
+                        // 웹의 `switch.module.css` 와 같은 토큰. 두 테마에서
+                        // `surface-primary` 와 같은 값이라 보이는 것은 같지만,
+                        // 손잡이가 채움 위에 얹히는 것이라는 뜻은 이쪽이 맞다.
+                        .fill(CocsoTokens.Color.textOnPrimary(colorScheme))
                         .frame(width: thumb, height: thumb)
                         .padding(.horizontal, inset)
                 }

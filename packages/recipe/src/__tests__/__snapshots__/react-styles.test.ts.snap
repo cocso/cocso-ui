@@ -49,7 +49,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > dialogRecipe d
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > inputRecipe default variants 1`] = `
 {
-  "--cocso-input-border-color": "var(--cocso-color-border-primary)",
+  "--cocso-input-border-color": "var(--cocso-color-border-strong)",
   "--cocso-input-border-radius": "var(--cocso-radius-4)",
   "--cocso-input-font-size": "14px",
   "--cocso-input-height": "36px",
@@ -86,7 +86,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > radioGroupReci
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > selectRecipe default variants 1`] = `
 {
-  "--cocso-select-border-color": "var(--cocso-color-border-primary)",
+  "--cocso-select-border-color": "var(--cocso-color-border-strong)",
   "--cocso-select-border-radius": "var(--cocso-radius-4)",
   "--cocso-select-font-size": "14px",
   "--cocso-select-height": "36px",

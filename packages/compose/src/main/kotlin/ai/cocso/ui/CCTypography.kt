@@ -18,7 +18,6 @@ fun CCTypography(
     Text(
         text = text,
         modifier = modifier,
-        color = CocsoTokens.Color.textPrimary(),
         fontSize = (style.fontSize?.value ?: 14f).sp,
         fontWeight = style.fontWeight ?: FontWeight.Normal,
     )

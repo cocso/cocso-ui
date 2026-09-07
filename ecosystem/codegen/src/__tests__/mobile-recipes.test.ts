@@ -187,6 +187,21 @@ describe("Nothing is dropped without a decision", () => {
     // The recipe's `align` dimension already carries this, and the views read
     // it from there.
     "button.justifyContent",
+    // A finger cannot hover. `active` does cross — it is the pressed state,
+    // and the button reads it.
+    "button.states.hover",
+    "checkbox.states.hover",
+    "input.states.hover",
+    "link.states.hover",
+    "pagination.states.hover",
+    "radio.states.hover",
+    "select.states.hover",
+    "switch.states.hover",
+    // The web's CSS overrides the recipe's focus with `focus-ring`, and the
+    // views draw that ring themselves — a resolved border colour would be the
+    // resting one twice over, which is the 2.4.7 failure it exists to avoid.
+    "input.states.focus",
+    "select.states.focus",
   ].sort();
 
   it("refuses only what has no platform equivalent", () => {

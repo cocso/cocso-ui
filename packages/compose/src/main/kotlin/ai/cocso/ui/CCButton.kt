@@ -3,6 +3,7 @@ package ai.cocso.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,11 +13,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.border
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,6 +51,11 @@ fun CCButton(
 ) {
     val style = cCButtonStyle(variant = variant, size = size, shape = shape, align = align)
     val interactionSource = remember { MutableInteractionSource() }
+    // 웹의 `.button:focus-visible` 과 같은 링 (2.4.7).
+    var isFocused by remember { mutableStateOf(false) }
+    // 웹의 `.button:active`. 레시피가 variant 마다 눌림 색을 정하고, 여기서
+    // 정하지 않는다.
+    val isPressed by interactionSource.collectIsPressedAsState()
 
     val alignment = when (align) {
         // `between` spreads content in CSS, which has no single alignment here.
@@ -68,6 +79,16 @@ fun CCButton(
             // only the label and left the fill at full strength — a disabled
             // primary button was solid black on Android and grey on iOS.
             .alpha(if (enabled) 1f else 0.4f)
+            .onFocusChanged { isFocused = it.isFocused }
+            .border(
+                if (isFocused) 2.dp else 0.dp,
+                CocsoTokens.Color.focusRing(),
+                if (style.borderRadiusFull == true) {
+                    CircleShape
+                } else {
+                    RoundedCornerShape(style.borderRadius ?: 0.dp)
+                },
+            )
             .clip(
                 if (style.borderRadiusFull == true) {
                     CircleShape
@@ -75,7 +96,11 @@ fun CCButton(
                     RoundedCornerShape(style.borderRadius ?: 0.dp)
                 }
             )
-            .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
+            .background(
+                (if (isPressed) style.bgColorPressed else null)
+                    ?: style.bgColor
+                    ?: CocsoTokens.Color.surfacePrimary()
+            )
             .clickable(
                 enabled = enabled && !loading,
                 interactionSource = interactionSource,
@@ -89,7 +114,9 @@ fun CCButton(
         if (loading) {
             CircularProgressIndicator(
                 modifier = Modifier.height(16.dp),
-                color = style.fontColor ?: CocsoTokens.Color.textPrimary(),
+                color = (if (isPressed) style.fontColorPressed else null)
+                    ?: style.fontColor
+                    ?: CocsoTokens.Color.textPrimary(),
             )
         } else {
             Text(
@@ -101,7 +128,9 @@ fun CCButton(
                     horizontal = style.contentPaddingX ?: 0.dp,
                     vertical = style.contentPaddingY ?: 0.dp,
                 ),
-                color = style.fontColor ?: CocsoTokens.Color.textPrimary(),
+                color = (if (isPressed) style.fontColorPressed else null)
+                    ?: style.fontColor
+                    ?: CocsoTokens.Color.textPrimary(),
                 fontSize = (style.fontSize?.value ?: 14f).sp,
             )
         }

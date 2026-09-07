@@ -29,6 +29,17 @@ export interface RecipeLike {
   defaultVariants?: Record<string, string>;
   name: string;
   slots: readonly string[];
+  /**
+   * `states.<state>.<dimension>.<value>.root`.
+   *
+   * This interface did not declare them, so the generator could not see them
+   * and nothing said so — the button's pressed appearance simply never reached
+   * either platform, and a mobile button did not respond to a touch at all.
+   */
+  states?: Record<
+    string,
+    Record<string, Record<string, Record<string, Record<string, unknown>>>>
+  >;
   variants: Record<string, Record<string, Record<string, unknown>>>;
 }
 
@@ -292,7 +303,8 @@ function prepare(
 
   const take = (
     slotStyles: Record<string, Record<string, unknown>> | undefined,
-    conditions?: Record<string, string>
+    conditions?: Record<string, string>,
+    suffix = ""
   ) => {
     const root = slotStyles?.root;
     if (!root) {
@@ -306,8 +318,8 @@ function prepare(
         continue;
       }
       for (const [name, emitted] of Object.entries(result)) {
-        collected[name] = emitted;
-        properties.set(name, emitted.kind);
+        collected[name + suffix] = emitted;
+        properties.set(name + suffix, emitted.kind);
       }
     }
     if (Object.keys(collected).length > 0) {
@@ -316,6 +328,31 @@ function prepare(
   };
 
   take(recipe.base);
+
+  // A state a finger can produce. `hover` has no touch equivalent, and the
+  // web's CSS overrides the recipe's `focus` with `focus-ring` anyway — the
+  // views draw that ring themselves. Both are refused by name rather than
+  // dropped, so a new state cannot arrive unnoticed.
+  const TOUCHABLE_STATES: Record<string, string> = { active: "Pressed" };
+  for (const [state, dimensions] of Object.entries(recipe.states ?? {})) {
+    const suffix = TOUCHABLE_STATES[state];
+    if (!suffix) {
+      skipped.push({
+        property: `states.${state}`,
+        recipe: recipe.name,
+        reason:
+          state === "hover"
+            ? "hover has no equivalent on a touch screen"
+            : `${state} is drawn by the view, not by a resolved value`,
+      });
+      continue;
+    }
+    for (const [dimension, values] of Object.entries(dimensions)) {
+      for (const [value, slots] of Object.entries(values)) {
+        take(slots, { [dimension]: value }, suffix);
+      }
+    }
+  }
   const dimensions = Object.entries(recipe.variants).map(([name, values]) => {
     for (const [value, slots] of Object.entries(values)) {
       take(slots, { [name]: value });
