@@ -5,6 +5,9 @@
 agp = "8.7.3"
 kotlin = "2.0.21"
 compose-bom = "2024.12.01"
+junit = "4.13.2"
+roborazzi = "1.7.0"
+robolectric = "4.13"
 
 [libraries]
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -17,8 +20,17 @@ compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 # equivalent, and iOS uses `eye`/`eye.slash` — a text label instead would be the
 # one place the two platforms show a different control for the same thing.
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+# 렌더 검증용. 이 패키지의 뷰는 컴파일과 텍스트 비교로만 확인되고 있었고,
+# 컴파일되지만 아무것도 그리지 않는 뷰는 그 게이트를 그대로 통과했다.
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
+roborazzi-compose = { group = "io.github.takahirom.roborazzi", name = "roborazzi-compose", version.ref = "roborazzi" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
