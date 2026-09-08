@@ -1,6 +1,14 @@
 package ai.cocso.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.hazeSource
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -147,6 +155,28 @@ class ComponentInteractionTest {
         composeRule.onNodeWithText("Home").performClick()
         assertEquals(1, linked)
         assertEquals("h", crumb)
+    }
+
+    /**
+     * Glass with a haze state composes and lays out. Robolectric has no
+     * RenderEffect, so this cannot say the blur is drawn — the render tests
+     * draw the solid fallback — only that providing a state does not break a
+     * screen: the bar is there and its content is reachable.
+     */
+    @Test
+    fun glassWithHazeStateStillLaysOut() {
+        composeRule.setContent {
+            val haze = remember { HazeState() }
+            CompositionLocalProvider(LocalCocsoHazeState provides haze) {
+                Column {
+                    Box(Modifier.fillMaxWidth().height(200.dp).hazeSource(haze)) { CCTypography("Content") }
+                    CCGlassBar { CCButton(title = "Tab", onClick = {}) }
+                    CCCard(variant = CCCardVariant.glass) { CCTypography("Glass card") }
+                }
+            }
+        }
+        composeRule.onNodeWithText("Tab").assertExists()
+        composeRule.onNodeWithText("Glass card").assertExists()
     }
 
     /** The strings are resources, so a Korean device hears Korean. */

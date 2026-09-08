@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -16,9 +17,8 @@ import androidx.compose.ui.unit.dp
  *
  * Values come from [cCCardStyle], generated from `card.recipe.ts`.
  *
- * The `glass` variant is the recipe's tint and edge. SwiftUI puts its material
- * under the tint; Compose has no backdrop blur — see [ccGlass] — so here the
- * tint sits on the page surface and the card reads as a solid of the same tone.
+ * The `glass` variant is the recipe's tint and edge over [ccGlass]: blurred
+ * when the app provides a haze state, a solid of the same tone when it does not.
  */
 @Composable
 fun CCCard(
@@ -33,6 +33,10 @@ fun CCCard(
 
     Column(
         modifier = modifier
+            // A block, as the web's `display: flex` card is: it takes the width
+            // it is given. A card that hugged its content sat in a list as a
+            // ragged column of different widths, and every caller sized it.
+            .fillMaxWidth()
             // The web's `.elevated { box-shadow: var(--cocso-shadow-card) }` —
             // structure, not a recipe value, the same way it is on the web.
             .then(
@@ -45,12 +49,11 @@ fun CCCard(
             .clip(cardShape)
             .then(
                 if (variant == CCCardVariant.glass) {
-                    Modifier.background(CocsoTokens.Color.surfacePrimary())
+                    Modifier.ccGlass(cardShape, tint = style.bgColor ?: CocsoTokens.Color.surfaceGlass())
                 } else {
-                    Modifier
+                    Modifier.background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
                 }
             )
-            .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
             // The recipe's border — the outlined variant. Without it a white card
             // on a white surface had no edge at all.
             .then(

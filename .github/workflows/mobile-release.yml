@@ -1,0 +1,81 @@
+name: Mobile Release
+
+# Cuts the mobile packages' release: a plain semver tag on main (which SwiftPM
+# reads for the root Package.swift) and the Compose module on GitHub Packages.
+# The version is VERSION_NAME in packages/compose/gradle.properties; nothing
+# happens while that tag already exists, so a push that does not bump it is a
+# no-op and a bump releases once.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/swiftui/**"
+      - "packages/compose/**"
+      - "Package.swift"
+      - ".github/workflows/mobile-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+concurrency:
+  group: mobile-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Tag and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Read VERSION_NAME
+        id: version
+        run: |
+          v="$(sed -n 's/^VERSION_NAME=//p' packages/compose/gradle.properties | tr -d '[:space:]')"
+          [ -n "$v" ] || { echo "::error::VERSION_NAME missing"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/$v" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Java
+        if: steps.version.outputs.exists == 'false'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Gradle
+        if: steps.version.outputs.exists == 'false'
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Publish Compose to GitHub Packages
+        if: steps.version.outputs.exists == 'false'
+        working-directory: packages/compose
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew publishReleasePublicationToGitHubPackagesRepository --console=plain
+
+      - name: Tag and release
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          v="${{ steps.version.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$v" -m "Mobile packages $v"
+          git push origin "refs/tags/$v"
+          gh release create "$v" --title "Mobile packages $v" --notes "$(cat <<EOF
+          SwiftUI: \`.package(url: "https://github.com/cocso/cocso-ui", from: "$v")\`
+          Compose: \`implementation("ai.cocso.ui:cocso-ui-compose:$v")\` from \`https://maven.pkg.github.com/cocso/cocso-ui\`
+          EOF
+          )"

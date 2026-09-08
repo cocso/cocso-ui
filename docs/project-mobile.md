@@ -39,7 +39,7 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 
 - Nothing from the recipe layer, any more: all nineteen recipes have a view on both platforms.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
-- Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
+- Nothing about distribution, any more — see Publishing.
 - Nothing from the token layer, any more. Alpha colours and composite shadows were excluded at first; both cross now (`overlay-*`, `surface-glass`; `Shadow.card` as layers). The one token still skipped is `$color.transparent`, which both platforms already have.
 
 ## Architecture
@@ -205,14 +205,15 @@ on Compose it pads for the system bar itself. The items are the app's — which
 tabs there are is not a design-system decision — and this is the surface they
 sit on.
 
-Compose has no backdrop blur: `Modifier.blur` blurs a layer's own content, and
-blurring what is behind a layer needs the app to draw that content into the
-layer (a compositor pass — what the `haze` library does). An unblurred
-translucent pane over a busy screen is mud, so on Android the tint sits on
-`surface-primary` and glass reads as a solid of the same tone — iOS glass,
-Android solid, one colour on both. That is the one visible difference between
-the platforms and it is deliberate; it is also the pairing the platforms' own
-apps have settled on.
+Compose has no backdrop blur of its own, so the module uses Haze (1.5.x, the
+line built against Compose 1.7): the app marks the content that scrolls beneath
+with `Modifier.hazeSource(state)` and provides the same `HazeState` through
+`LocalCocsoHazeState`; every glass surface — `ccGlass`, `CCGlassBar`, the glass
+card and button — then blurs what is behind it at the web's 16dp (API 31+;
+Haze draws a scrim below that). With no state provided, glass is the tint over
+`surface-primary`, a solid of the same tone — which is what a screen that opts
+out gets, and what the render tests draw, since Robolectric has no
+`RenderEffect`.
 
 ## Shadows
 
@@ -264,6 +265,26 @@ they worked. `ComponentInteractionTests.swift` is the SwiftUI half: `swift
 test` has no UI-test host, so ViewInspector (a test-only dependency) walks each
 view's body and fires its `Button` the way a finger would — the same nine
 scenarios, plus a check that the Korean string table is in the bundle.
+
+## Publishing
+
+One version for both packages: `VERSION_NAME` in
+`packages/compose/gradle.properties`. The `Mobile Release` workflow runs on a
+push to `main` that touches either package (or by hand); if no tag with that
+version exists it publishes the Compose module to GitHub Packages and tags
+`main` with the plain semver, which SwiftPM reads. A push that does not bump
+the version is a no-op; a bump releases once. Bump it in the change that
+alters what a package ships.
+
+- SwiftUI: `.package(url: "https://github.com/cocso/cocso-ui", from: "1.0.0")`.
+  The root `Package.swift` points at `packages/swiftui/Sources/CocsoUI` and
+  carries no test target, so a consumer's graph holds only what ships —
+  `packages/swiftui/Package.swift` (path consumption, tests, ViewInspector)
+  stays for `cocso/mobile` and CI. The CI SwiftUI job builds both.
+- Compose: `implementation("ai.cocso.ui:cocso-ui-compose:1.0.0")` from
+  `maven { url = uri("https://maven.pkg.github.com/cocso/cocso-ui") }`. GitHub
+  Packages needs a token with `read:packages` even for a public repository;
+  the composite build by path remains for a consumer that would rather not.
 
 ## Roadmap
 

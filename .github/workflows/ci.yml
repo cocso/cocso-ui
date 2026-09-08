@@ -264,6 +264,11 @@ jobs:
         working-directory: packages/swiftui
         run: swift test
 
+      # The root manifest is what a consumer reaches by URL; it points at the
+      # same sources and must keep building.
+      - name: Build root manifest
+        run: swift build
+
       # `swift test` builds the macOS slice only. The package ships to iOS, and
       # an API that exists on one platform and not the other compiled here and
       # failed in the app; this builds the iOS slice without a simulator.

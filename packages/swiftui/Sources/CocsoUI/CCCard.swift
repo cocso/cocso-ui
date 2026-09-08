@@ -36,6 +36,10 @@ public struct CCCard<Content: View>: View {
             // hand gave 8/12/20 — every card was tighter than the web's.
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
+            // A block, as the web's `display: flex` card is: it takes the width
+            // it is given. A card that hugged its content sat in a list as a
+            // ragged column of different widths, and every caller sized it.
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             // Glass: the recipe's tint (`surface-glass`) sits on the platform's
             // blur, which is the one part of glass that is not a value — see

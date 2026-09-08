@@ -64,3 +64,4 @@ packages/figma/golden-matrix-report.md
 packages/compose/build/
 packages/swiftui/.build/
 packages/swiftui/.swiftpm/
+.build/

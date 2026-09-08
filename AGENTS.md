@@ -207,9 +207,15 @@ When asked to review comments on a GitHub PR:
   `CCGlass`) is for layers that float over scrolling content — tab bars,
   navigation bars, a composer's buttons, a card over a photo — not for surfaces
   content sits in. Its tint is opaque enough for `text-primary` to clear AA
-  over any backdrop; do not lighten it per screen. On Compose, glass is the
-  same tint composited over `surface-primary` (a solid): the platform cannot
-  blur a backdrop, and an unblurred translucent pane is mud.
+  over any backdrop; do not lighten it per screen. On Compose the blur is
+  Haze's and needs the app to provide `LocalCocsoHazeState`; without it glass
+  is the tint over `surface-primary`, a solid — never an unblurred translucent
+  pane, which is mud.
+- A change to what `packages/swiftui` or `packages/compose` ships MUST bump
+  `VERSION_NAME` in `packages/compose/gradle.properties` in the same change.
+  The `Mobile Release` workflow tags `main` with it (plain semver, for SwiftPM)
+  and publishes the Compose module to GitHub Packages; a push without a bump
+  releases nothing.
 - Spacing MUST be logical, not physical: `margin-inline-start`/`-end` and
   `padding-inline-start`/`-end`, never `margin-left` or `padding-right`. A
   physical side lands on the wrong side once the document direction flips.

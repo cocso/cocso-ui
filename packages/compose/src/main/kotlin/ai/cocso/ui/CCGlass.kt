@@ -11,29 +11,35 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.graphics.Shape
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.HazeTint
+import dev.chrisbanes.haze.hazeEffect
 import androidx.compose.ui.unit.dp
 
 /**
- * A glass surface: the tint of a pane over what scrolls beneath it.
+ * A glass surface: what scrolls beneath it shows through, blurred.
  *
  * Glass is for the layers that float over content and stay put while it
  * moves — a tab bar, a navigation bar, a floating card over a photo. The tint
  * is `surface-glass` and the edge is `border-glass`, so the pane is the same
  * tone on every platform and in both themes.
  *
- * Compose has no backdrop blur: `Modifier.blur` blurs a layer's own content,
- * and blurring what is behind a layer needs the app to draw that content into
- * the layer (a compositor pass — what the `haze` library does). An unblurred
- * translucent pane over a busy screen is mud, so here the tint sits on the
- * page surface and the pane reads as a solid of the same tone — iOS glass,
- * Android solid, the same colour on both, which is the pairing the platforms'
- * own apps have settled on.
+ * Compose has no backdrop blur of its own, so the blur is Haze's: the app
+ * marks the content that scrolls beneath with `Modifier.hazeSource(state)` and
+ * provides the same state through [LocalCocsoHazeState]; every glass surface
+ * then blurs what is behind it (API 31+; Haze draws a scrim below that). With
+ * no state provided the pane is the tint over the page surface — a solid of
+ * the same tone — so a screen that opts out, and the render tests, still read.
  */
 enum class CCGlassEdge {
     /** A bar along the top of the screen — a navigation or a title bar. */
@@ -42,15 +48,49 @@ enum class CCGlassEdge {
     Bottom,
 }
 
-/** Glass filling the modifier's bounds. For a floating shape pass one. */
+/**
+ * The haze state the app's scrolling content is a source for. `null` — the
+ * default — draws glass as a solid. Provide it once at the root:
+ *
+ * ```
+ * val haze = remember { HazeState() }
+ * CompositionLocalProvider(LocalCocsoHazeState provides haze) {
+ *     LazyColumn(Modifier.hazeSource(haze)) { … }
+ *     CCGlassBar { … }
+ * }
+ * ```
+ */
+val LocalCocsoHazeState = compositionLocalOf<HazeState?> { null }
+
+/** How far the pane blurs what is beneath it — the web's `backdrop-filter: blur(16px)`. */
+private val GLASS_BLUR = 16.dp
+
+/**
+ * Glass filling the modifier's bounds, tinted [tint] (`surface-glass` unless a
+ * recipe says otherwise). For a floating shape pass one.
+ */
 @Composable
-fun Modifier.ccGlass(shape: Shape = RectangleShape): Modifier =
-    background(CocsoTokens.Color.surfacePrimary(), shape)
-        .background(CocsoTokens.Color.surfaceGlass(), shape)
-        .then(
-            if (shape == RectangleShape) Modifier
-            else Modifier.border(1.dp, CocsoTokens.Color.borderGlass(), shape)
+fun Modifier.ccGlass(shape: Shape = RectangleShape, tint: ComposeColor = CocsoTokens.Color.surfaceGlass()): Modifier {
+    val state = LocalCocsoHazeState.current
+    val page = CocsoTokens.Color.surfacePrimary()
+    val pane = if (state != null) {
+        clip(shape).hazeEffect(
+            state = state,
+            style = HazeStyle(
+                backgroundColor = page,
+                tint = HazeTint(tint),
+                blurRadius = GLASS_BLUR,
+                noiseFactor = 0f,
+            ),
         )
+    } else {
+        background(page, shape).background(tint, shape)
+    }
+    return pane.then(
+        if (shape == RectangleShape) Modifier
+        else Modifier.border(1.dp, CocsoTokens.Color.borderGlass(), shape)
+    )
+}
 
 /**
  * A bar on glass — the surface a tab bar or a navigation bar sits on.

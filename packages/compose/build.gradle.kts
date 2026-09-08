@@ -3,15 +3,17 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.roborazzi)
+    `maven-publish`
 }
 
-// Coordinates a consumer names when it pulls this in as a composite build:
-//   includeBuild("<path>/packages/compose")
-//   implementation("ai.cocso.ui:cocso-ui-compose")
-// The name is `rootProject.name` in settings.gradle.kts. Publication to a
-// repository waits for a second consumer; cocso/mobile consumes by path.
+// Coordinates, two ways in:
+//   composite build:  includeBuild("<path>/packages/compose")
+//   GitHub Packages:  maven { url = uri("https://maven.pkg.github.com/cocso/cocso-ui") }
+//                     implementation("ai.cocso.ui:cocso-ui-compose:<VERSION_NAME>")
+// The artifact name is `rootProject.name` in settings.gradle.kts; the version
+// is VERSION_NAME in gradle.properties, shared with the Swift package's tag.
 group = "ai.cocso.ui"
-version = "0.1.0"
+version = providers.gradleProperty("VERSION_NAME").get()
 
 android {
     namespace = "ai.cocso.ui"
@@ -36,6 +38,32 @@ android {
             isIncludeAndroidResources = true
         }
     }
+
+    publishing {
+        singleVariant("release") { withSourcesJar() }
+    }
+}
+
+// GitHub Packages, from the mobile-release workflow. GITHUB_ACTOR/GITHUB_TOKEN
+// are what Actions provides; a developer publishing by hand sets the same two.
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "ai.cocso.ui"
+            artifactId = "cocso-ui-compose"
+            afterEvaluate { from(components["release"]) }
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/cocso/cocso-ui")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -44,6 +72,8 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
+    // Glass: real backdrop blur when the app provides a HazeState — see CCGlass.
+    implementation(libs.haze)
 
     testImplementation(platform(libs.compose.bom))
     testImplementation(libs.junit)
