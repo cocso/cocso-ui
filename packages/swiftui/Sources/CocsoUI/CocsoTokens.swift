@@ -139,6 +139,9 @@ public enum CocsoTokens {
         public static func alphaShadow3(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.48) : SwiftUI.Color(hex: 0x000000, opacity: 0.12)
         }
+        public static func borderGlass(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.2) : SwiftUI.Color(hex: 0x000000, opacity: 0.1)
+        }
         public static func borderPrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }
@@ -328,6 +331,9 @@ public enum CocsoTokens {
         public static func overlaySubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.05) : SwiftUI.Color(hex: 0x000000, opacity: 0.05)
         }
+        public static func surfaceGlass(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.7) : SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.8)
+        }
         public static func surfaceInverse(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0x131416)
         }
@@ -452,11 +458,30 @@ public enum CocsoTokens {
     }
 
     public enum Duration {
-        public static let decorative: CGFloat = 0.75
-        public static let decorativeSlow: CGFloat = 1.5
-        public static let fast: CGFloat = 0.15
-        public static let normal: CGFloat = 0.2
-        public static let slow: CGFloat = 0.25
+        public static let decorative: TimeInterval = 0.75
+        public static let decorativeSlow: TimeInterval = 1.5
+        public static let fast: TimeInterval = 0.15
+        public static let normal: TimeInterval = 0.2
+        public static let slow: TimeInterval = 0.25
+    }
+
+    public enum Easing {
+        /// `cubic-bezier(0.87, 0, 0.13, 1)`, as `.timingCurve`.
+        public static func accordion(_ duration: TimeInterval) -> Animation {
+            .timingCurve(0.87, 0, 0.13, 1, duration: duration)
+        }
+        /// `cubic-bezier(0.42, 0, 0.58, 1)`, as `.timingCurve`.
+        public static func `default`(_ duration: TimeInterval) -> Animation {
+            .timingCurve(0.42, 0, 0.58, 1, duration: duration)
+        }
+        /// `cubic-bezier(0.16, 1, 0.3, 1)`, as `.timingCurve`.
+        public static func entrance(_ duration: TimeInterval) -> Animation {
+            .timingCurve(0.16, 1, 0.3, 1, duration: duration)
+        }
+        /// `cubic-bezier(0.25, 0.1, 0.25, 1)`, as `.timingCurve`.
+        public static func soft(_ duration: TimeInterval) -> Animation {
+            .timingCurve(0.25, 0.1, 0.25, 1, duration: duration)
+        }
     }
 
 }

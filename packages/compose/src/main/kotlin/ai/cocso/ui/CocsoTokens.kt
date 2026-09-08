@@ -4,6 +4,8 @@
 
 package ai.cocso.ui
 
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.Easing as ComposeEasing
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -130,6 +132,10 @@ object CocsoTokens {
         @ReadOnlyComposable
         fun alphaShadow3(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0x7A000000) else ComposeColor(0x1F000000)
+        @Composable
+        @ReadOnlyComposable
+        fun borderGlass(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0x33FFFFFF) else ComposeColor(0x1A000000)
         @Composable
         @ReadOnlyComposable
         fun borderPrimary(): ComposeColor =
@@ -360,6 +366,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0x0DFFFFFF) else ComposeColor(0x0D000000)
         @Composable
         @ReadOnlyComposable
+        fun surfaceGlass(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xB3000000) else ComposeColor(0xCCFFFFFF)
+        @Composable
+        @ReadOnlyComposable
         fun surfaceInverse(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFFFFFFFF) else ComposeColor(0xFF131416)
         @Composable
@@ -492,11 +502,18 @@ object CocsoTokens {
     }
 
     object Duration {
-        val decorative: Dp = 0.75.dp
-        val decorativeSlow: Dp = 1.5.dp
-        val fast: Dp = 0.15.dp
-        val normal: Dp = 0.2.dp
-        val slow: Dp = 0.25.dp
+        val decorative: Int = 750
+        val decorativeSlow: Int = 1500
+        val fast: Int = 150
+        val normal: Int = 200
+        val slow: Int = 250
+    }
+
+    object Easing {
+        val accordion: ComposeEasing = CubicBezierEasing(0.87f, 0f, 0.13f, 1f)
+        val default: ComposeEasing = CubicBezierEasing(0.42f, 0f, 0.58f, 1f)
+        val entrance: ComposeEasing = CubicBezierEasing(0.16f, 1f, 0.3f, 1f)
+        val soft: ComposeEasing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
     }
 
 }

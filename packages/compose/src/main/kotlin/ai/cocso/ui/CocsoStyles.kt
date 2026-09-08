@@ -476,6 +476,7 @@ enum class CCCardVariant {
     elevated,
     outlined,
     filled,
+    glass,
 }
 
 enum class CCCardPadding {
@@ -513,6 +514,12 @@ fun cCCardStyle(
     if (variant == CCCardVariant.filled) {
         style = style.copy(bgColor = CocsoTokens.Color.surfaceSecondary())
         style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+    }
+    if (variant == CCCardVariant.glass) {
+        style = style.copy(bgColor = CocsoTokens.Color.surfaceGlass())
+        style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderGlass())
     }
     if (padding == CCCardPadding.sm) {
         style = style.copy(paddingX = 12.dp)

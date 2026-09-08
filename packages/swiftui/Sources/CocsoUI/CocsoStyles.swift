@@ -479,6 +479,7 @@ public enum CCCardVariant: String, CaseIterable, Sendable {
     case elevated
     case outlined
     case filled
+    case glass
 }
 
 public enum CCCardPadding: String, CaseIterable, Sendable {
@@ -517,6 +518,12 @@ public struct CCCardStyle: Equatable, Sendable {
         if variant == .filled {
             style.bgColor = CocsoTokens.Color.surfaceSecondary(scheme, brand: brand)
             style.borderRadius = CocsoTokens.Radius.r4
+        }
+        if variant == .glass {
+            style.bgColor = CocsoTokens.Color.surfaceGlass(scheme, brand: brand)
+            style.borderRadius = CocsoTokens.Radius.r4
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderGlass(scheme, brand: brand)
         }
         if padding == .sm {
             style.paddingX = 12

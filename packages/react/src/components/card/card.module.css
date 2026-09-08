@@ -11,4 +11,11 @@
   .elevated {
     box-shadow: var(--cocso-shadow-card);
   }
+
+  /* What scrolls beneath shows through, blurred. The tint and the edge come
+     from the recipe (`surface-glass`, `border-glass`); the blur radius is the
+     one part CSS owns, and 16px is close to what SwiftUI's material draws. */
+  .glass {
+    backdrop-filter: blur(16px);
+  }
 }

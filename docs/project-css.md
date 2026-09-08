@@ -64,8 +64,8 @@ Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactl
 | Category | Role examples | Purpose |
 |---|---|---|
 | `text` | `primary`, `secondary`, `tertiary`, `disabled`, `muted`, `on-primary`, `on-success`, `on-danger`, `on-info`, `on-warning` | Text and label colors |
-| `surface` | `primary`, `secondary`, `inverse`, `neutral` | Background layer hierarchy |
-| `border` | `primary`, `secondary`, `strong` | Container and separator strokes |
+| `surface` | `primary`, `secondary`, `inverse`, `neutral`, `glass` | Background layer hierarchy; `glass` is the tint of a translucent pane over scrolling content (tab bars, floating cards) |
+| `border` | `primary`, `secondary`, `strong`, `glass` | Container and separator strokes; `glass` is the edge of a glass pane |
 | `overlay` | `subtle`, `muted`, `strong` | Translucent tints laid over an unknown background (hover fills, hairline washes) |
 | `interactive` | `primary`, `primary-hover`, `primary-active`, `primary-muted`, `primary-subtle`, `primary-text`, `secondary`, `secondary-hover`, `neutral`, `neutral-hover`, `neutral-active`, `danger`, `danger-hover`, `danger-active`, `danger-hover-subtle`, `danger-subtle-hover`, `danger-subtle-active`, `success`/`warning`/`info` (same pattern) | Actionable element fills across state variants |
 | `focus` | `ring` | Focus indicator colors |

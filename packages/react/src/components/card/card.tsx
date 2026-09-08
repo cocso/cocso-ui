@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import { cn } from "../../cn";
 import styles from "./card.module.css";
 
-export type CardVariant = "elevated" | "outlined" | "filled";
+export type CardVariant = "elevated" | "outlined" | "filled" | "glass";
 export type CardPadding = "sm" | "md" | "lg";
 
 export interface CardProps extends ComponentProps<"div"> {
@@ -27,6 +27,7 @@ export function Card({
         card({ variant, padding }),
         styles.card,
         variant === "elevated" && styles.elevated,
+        variant === "glass" && styles.glass,
         className
       )}
       ref={ref}

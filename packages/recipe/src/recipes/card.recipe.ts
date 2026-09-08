@@ -23,6 +23,21 @@ export const cardRecipe = defineRecipe({
       filled: {
         root: { bgColor: "surface-secondary", borderRadius: "radius-4" },
       },
+      // Glass: what is beneath shows through. The tint and the edge are here so
+      // all three platforms agree on them; the blur is the platform's own
+      // (`backdrop-filter`, SwiftUI's `Material`) and is not a value.
+      glass: {
+        root: {
+          bgColor: "surface-glass",
+          borderRadius: "radius-4",
+          border: {
+            _type: "border" as const,
+            width: 1,
+            style: "solid" as const,
+            color: "border-glass" as const,
+          },
+        },
+      },
     },
     padding: {
       sm: { root: { padding: "12px" } },
