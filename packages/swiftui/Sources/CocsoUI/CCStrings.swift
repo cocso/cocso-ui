@@ -18,6 +18,17 @@ public enum CCStrings {
     public static var hidePassword: String { localized("cc.hidePassword") }
     public static var close: String { localized("cc.close") }
     public static var select: String { localized("cc.select") }
+    public static var pagination: String { localized("cc.pagination") }
+    public static var previousPage: String { localized("cc.previousPage") }
+    public static var nextPage: String { localized("cc.nextPage") }
+    public static var breadcrumb: String { localized("cc.breadcrumb") }
+    public static var stockSufficient: String { localized("cc.stockSufficient") }
+    public static var stockNormal: String { localized("cc.stockNormal") }
+    public static var stockInsufficient: String { localized("cc.stockInsufficient") }
+    /// "Page 3" — the number placed where the language puts it.
+    public static func page(_ number: Int) -> String {
+        String(format: localized("cc.page"), locale: .current, Int64(number))
+    }
 
     private static func localized(_ key: String) -> String {
         NSLocalizedString(key, bundle: .module, comment: "")

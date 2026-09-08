@@ -9,6 +9,10 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [.iOS(.v16), .macOS(.v13)],
     products: [.library(name: "CocsoUI", targets: ["CocsoUI"])],
+    dependencies: [
+        // Tests only: taps and reads SwiftUI views without a UI-test host.
+        .package(url: "https://github.com/nalexn/ViewInspector", from: "0.10.0")
+    ],
     targets: [
         // The strings the views speak, in en and ko — see CCStrings.
         .target(
@@ -18,7 +22,7 @@ let package = Package(
         ),
         .testTarget(
             name: "CocsoUITests",
-            dependencies: ["CocsoUI"],
+            dependencies: ["CocsoUI", "ViewInspector"],
             path: "Tests/CocsoUITests"
         )
     ]

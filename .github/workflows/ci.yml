@@ -263,3 +263,10 @@ jobs:
       - name: Build and Render
         working-directory: packages/swiftui
         run: swift test
+
+      # `swift test` builds the macOS slice only. The package ships to iOS, and
+      # an API that exists on one platform and not the other compiled here and
+      # failed in the app; this builds the iOS slice without a simulator.
+      - name: Build for iOS
+        working-directory: packages/swiftui
+        run: xcodebuild -scheme CocsoUI -destination 'generic/platform=iOS Simulator' -derivedDataPath .build/xcode build | grep -E "error:|BUILD (SUCCEEDED|FAILED)"

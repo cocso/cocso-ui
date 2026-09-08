@@ -8,3 +8,11 @@
 "cc.hidePassword" = "Hide password";
 "cc.close" = "Close";
 "cc.select" = "Select";
+"cc.pagination" = "Pagination";
+"cc.previousPage" = "Previous page";
+"cc.nextPage" = "Next page";
+"cc.page" = "Page %lld";
+"cc.breadcrumb" = "Breadcrumb";
+"cc.stockSufficient" = "Sufficient";
+"cc.stockNormal" = "Normal";
+"cc.stockInsufficient" = "Insufficient";

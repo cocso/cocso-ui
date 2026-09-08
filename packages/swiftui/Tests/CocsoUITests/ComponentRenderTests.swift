@@ -124,6 +124,10 @@ final class ComponentRenderTests: XCTestCase {
         assertDraws("radio-off", scheme) { CCRadio("Radio", selected: false) {} }
         assertDraws("select", scheme) { CCSelect(label: "Select", options: [.init(id: "a", title: "A")], selection: .constant("a")) }
         assertDraws("dialog", scheme) { CCDialogPanel("Dialog", message: "message") { CCButton("OK") {} } }
+        assertDraws("link", scheme) { CCLink("Link") {} }
+        assertDraws("breadcrumb", scheme) { CCBreadcrumb(items: [.init(id: "a", title: "Home"), .init(id: "b", title: "Here")]) { _ in } }
+        assertDraws("pagination", scheme) { CCPagination(page: 3, totalPages: 10) { _ in } }
+        assertDraws("stock", scheme) { CCStockQuantityStatus(quantity: .normal) }
     }
 
     @ViewBuilder
@@ -150,6 +154,10 @@ final class ComponentRenderTests: XCTestCase {
         CCSwitch(label: "Switch off", isOn: false) { _ in }
         CCRadioGroup(label: "Radio", options: [.init(id: "a", title: "A"), .init(id: "b", title: "B")], selection: .constant("a"))
         CCSelect(label: "Select", options: [.init(id: "a", title: "Option A")], selection: .constant("a"))
+        CCLink("Link") {}
+        CCBreadcrumb(items: [.init(id: "a", title: "Home"), .init(id: "b", title: "Here")]) { _ in }
+        CCPagination(page: 3, totalPages: 10) { _ in }
+        HStack { CCStockQuantityStatus(quantity: .sufficient); CCStockQuantityStatus(quantity: .normal); CCStockQuantityStatus(quantity: .insufficient) }
     }
 
     @MainActor

@@ -9,4 +9,12 @@
     <string name="cc_hide_password">비밀번호 숨기기</string>
     <string name="cc_close">닫기</string>
     <string name="cc_select">선택</string>
+    <string name="cc_pagination">페이지 이동</string>
+    <string name="cc_previous_page">이전 페이지</string>
+    <string name="cc_next_page">다음 페이지</string>
+    <string name="cc_page">%1$d 페이지</string>
+    <string name="cc_breadcrumb">탐색 경로</string>
+    <string name="cc_stock_sufficient">여유</string>
+    <string name="cc_stock_normal">보통</string>
+    <string name="cc_stock_insufficient">부족</string>
 </resources>
