@@ -1,5 +1,12 @@
 # @cocso-ui/figma
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [d0ff69b]
+  - @cocso-ui/recipe@0.1.0
+
 ## 0.0.5
 
 ### Patch Changes
