@@ -7,6 +7,7 @@ public struct CCInput: View {
     @Binding private var text: String
     private let size: CCInputSize
     private let isSecure: Bool
+    private let description: String?
     private let errorMessage: String?
 
     @Environment(\.colorScheme) private var colorScheme
@@ -26,6 +27,7 @@ public struct CCInput: View {
         placeholder: String = "",
         size: CCInputSize = .medium,
         isSecure: Bool = false,
+        description: String? = nil,
         errorMessage: String? = nil
     ) {
         self.label = label
@@ -33,6 +35,7 @@ public struct CCInput: View {
         self.placeholder = placeholder
         self.size = size
         self.isSecure = isSecure
+        self.description = description
         self.errorMessage = errorMessage
     }
 
@@ -89,6 +92,12 @@ public struct CCInput: View {
                     .animation(CCMotion.colour(reduced: reduceMotion), value: isFocused)
                     .animation(CCMotion.colour(reduced: reduceMotion), value: errorMessage)
             )
+            // The web's `description`: help under the field, in the quieter ink.
+            if let description {
+                Text(description)
+                    .font(.system(size: 12))
+                    .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
+            }
             if let errorMessage {
                 // The text level, not the fill level: `feedback-danger` is
                 // 4.18:1 on a card in the light theme.

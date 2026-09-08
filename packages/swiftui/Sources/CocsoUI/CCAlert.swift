@@ -11,6 +11,8 @@ public struct CCAlert: View {
     private let title: String
     private let message: String?
     private let variant: CCAlertVariant
+    private let icon: Image?
+    private let onClose: (() -> Void)?
 
     @Environment(\.colorScheme) private var colorScheme
     // The brand the app set at its root. Tokens and resolvers take it so a
@@ -21,22 +23,41 @@ public struct CCAlert: View {
     public init(
         _ title: String,
         message: String? = nil,
-        variant: CCAlertVariant = .info
+        variant: CCAlertVariant = .info,
+        icon: Image? = nil,
+        onClose: (() -> Void)? = nil
     ) {
         self.title = title
         self.message = message
         self.variant = variant
+        self.icon = icon
+        self.onClose = onClose
     }
 
     public var body: some View {
         let style = CCAlertStyle.resolve(variant: variant, scheme: colorScheme, brand: brand)
         let radius = style.borderRadius ?? 0
-        VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
-            Text(title)
-                .font(.system(size: style.fontSize ?? 14, weight: .semibold))
-            if let message {
-                Text(message)
-                    .font(.system(size: style.fontSize ?? 14))
+        // The web's `icon` before the text and `onClose` after it, both in the
+        // alert's own ink.
+        HStack(alignment: .top, spacing: CocsoTokens.Spacing.s5) {
+            icon?.font(.system(size: style.fontSize ?? 14, weight: .medium))
+            VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
+                Text(title)
+                    .font(.system(size: style.fontSize ?? 14, weight: .semibold))
+                if let message {
+                    Text(message)
+                        .font(.system(size: style.fontSize ?? 14))
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            if let onClose {
+                Button(action: onClose) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .medium))
+                }
+                .buttonStyle(.plain)
+                .ccMinimumTouchTarget()
+                .accessibilityLabel(CCStrings.close)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

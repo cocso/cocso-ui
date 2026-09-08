@@ -866,7 +866,7 @@ fun cCRadioStyle(
         style = style.copy(dotSize = 6.dp)
     }
     if (selected == CCRadioSelected.`true`) {
-        style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())
+        style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
         style = style.copy(borderColor = CocsoTokens.Color.interactivePrimary())
     }
     if (selected == CCRadioSelected.`false`) {

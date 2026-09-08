@@ -93,10 +93,9 @@ fun CCRadio(
     // WCAG 2.4.7 applies wherever there is a keyboard, and Android supports one.
     var isFocused by remember { mutableStateOf(false) }
 
-    // The ring recolours on the web's colour curve; the dot pops in on the
-    // entrance curve. `checkedColor` is the fill the dot sits in; the dot itself
-    // is `text-on-primary`, the pairing the checkbox glyph uses, so it reads on
-    // a rebranded fill.
+    // The web's radio: the page's fill, a 2dp ring (`spacing-2`) that takes
+    // `checkedColor` when selected, and a `checkedColor` dot. The ring recolours
+    // on the colour curve; the dot pops in on the entrance curve.
     val fill by animateColorAsState(
         style.bgColor ?: CocsoTokens.Color.surfacePrimary(),
         animationSpec = CCMotion.colour(),
@@ -136,11 +135,8 @@ fun CCRadio(
             modifier = Modifier
                 .size(side)
                 .clip(CircleShape)
-                // The fill already carries `checkedColor` when selected; it is
-                // named so a consumer can retheme it, and read here so a fill
-                // the resolver leaves empty still shows the selection.
-                .background(if (selected) checked else fill)
-                .border(1.dp, ring, CircleShape)
+                .background(fill)
+                .border(CocsoTokens.Spacing.s2, ring, CircleShape)
                 // Only while focused — `Modifier.border(0.dp)` is a hairline.
                 .then(
                     if (isFocused) {
@@ -161,7 +157,7 @@ fun CCRadio(
                     modifier = Modifier
                         .size(dot)
                         .clip(CircleShape)
-                        .background(CocsoTokens.Color.textOnPrimary())
+                        .background(checked)
                 )
             }
         }

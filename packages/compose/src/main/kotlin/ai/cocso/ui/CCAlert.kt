@@ -4,7 +4,18 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,8 +46,11 @@ fun CCAlert(
     modifier: Modifier = Modifier,
     message: String? = null,
     variant: CCAlertVariant = CCAlertVariant.info,
+    icon: ImageVector? = null,
+    onClose: (() -> Unit)? = null,
 ) {
     val style = cCAlertStyle(variant = variant)
+    val interactionSource = remember { MutableInteractionSource() }
     val shape = RoundedCornerShape(style.borderRadius ?: 0.dp)
 
     // A variant change recolours on the web's colour curve.
@@ -56,7 +70,9 @@ fun CCAlert(
         label = "alert-text",
     )
 
-    Column(
+    // The web's `icon` before the text and `onClose` after it, both in the
+    // alert's own ink.
+    Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape)
@@ -66,19 +82,39 @@ fun CCAlert(
                 horizontal = style.paddingX ?: 0.dp,
                 vertical = style.paddingY ?: 0.dp,
             ),
-        verticalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s3),
+        horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s5),
+        verticalAlignment = Alignment.Top,
     ) {
-        Text(
-            text = title,
-            color = ink,
-            fontSize = (style.fontSize?.value ?: 14f).sp,
-            fontWeight = FontWeight.SemiBold,
-        )
-        if (message != null) {
+        if (icon != null) {
+            Icon(icon, contentDescription = null, tint = ink, modifier = Modifier.size(16.dp))
+        }
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s3),
+        ) {
             Text(
-                text = message,
+                text = title,
                 color = ink,
                 fontSize = (style.fontSize?.value ?: 14f).sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+            if (message != null) {
+                Text(
+                    text = message,
+                    color = ink,
+                    fontSize = (style.fontSize?.value ?: 14f).sp,
+                )
+            }
+        }
+        if (onClose != null) {
+            Icon(
+                imageVector = Icons.Filled.Close,
+                contentDescription = CCStrings.close(),
+                tint = ink,
+                modifier = Modifier
+                    .clickable(interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClose)
+                    .ccMinimumTouchTarget()
+                    .size(16.dp),
             )
         }
     }
