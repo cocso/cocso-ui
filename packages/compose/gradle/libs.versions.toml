@@ -8,6 +8,10 @@ compose-bom = "2024.12.01"
 junit = "4.13.2"
 roborazzi = "1.7.0"
 robolectric = "4.13"
+# Backdrop blur. Compose has none of its own; Haze draws the content behind a
+# node into it, blurred (API 31+, a scrim below). 1.5.x is the line built
+# against Compose 1.7, which the BOM above resolves to.
+haze = "1.5.4"
 
 [libraries]
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -20,6 +24,7 @@ compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 # equivalent, and iOS uses `eye`/`eye.slash` — a text label instead would be the
 # one place the two platforms show a different control for the same thing.
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
 # 렌더 검증용. 이 패키지의 뷰는 컴파일과 텍스트 비교로만 확인되고 있었고,
 # 컴파일되지만 아무것도 그리지 않는 뷰는 그 게이트를 그대로 통과했다.
 junit = { group = "junit", name = "junit", version.ref = "junit" }
