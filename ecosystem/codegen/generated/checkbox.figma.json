@@ -5,6 +5,11 @@
   ],
   "combinations": {
     "size=large,status=on": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 18,
       "radius": 6,
       "borderColor": {
@@ -18,12 +23,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-3",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 18,
           "radius": 6,
           "borderColor": {
@@ -37,20 +48,26 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-3",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }
     },
     "size=large,status=off": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 18,
       "radius": 6,
       "borderColor": {
-        "r": 0.9019607843137255,
-        "g": 0.9098039215686274,
-        "b": 0.9176470588235294
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "bgColor": {
         "r": 1,
@@ -58,12 +75,18 @@
         "b": 1
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-3",
-        "borderColor": "neutral-100",
-        "bgColor": "white"
+        "borderColor": "border-strong",
+        "bgColor": "surface-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 18,
           "radius": 6,
           "borderColor": {
@@ -77,14 +100,20 @@
             "b": 0.8352941176470589
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-3",
-            "borderColor": "neutral-200",
-            "bgColor": "neutral-200"
+            "borderColor": "interactive-secondary-hover",
+            "bgColor": "interactive-secondary-hover"
           }
         }
       }
     },
     "size=large,status=intermediate": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 18,
       "radius": 6,
       "borderColor": {
@@ -98,12 +127,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-3",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 18,
           "radius": 6,
           "borderColor": {
@@ -117,14 +152,20 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-3",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }
     },
     "size=medium,status=on": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 16,
       "radius": 4,
       "borderColor": {
@@ -138,12 +179,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-2",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 16,
           "radius": 4,
           "borderColor": {
@@ -157,20 +204,26 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-2",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }
     },
     "size=medium,status=off": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 16,
       "radius": 4,
       "borderColor": {
-        "r": 0.9019607843137255,
-        "g": 0.9098039215686274,
-        "b": 0.9176470588235294
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "bgColor": {
         "r": 1,
@@ -178,12 +231,18 @@
         "b": 1
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-2",
-        "borderColor": "neutral-100",
-        "bgColor": "white"
+        "borderColor": "border-strong",
+        "bgColor": "surface-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 16,
           "radius": 4,
           "borderColor": {
@@ -197,14 +256,20 @@
             "b": 0.8352941176470589
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-2",
-            "borderColor": "neutral-200",
-            "bgColor": "neutral-200"
+            "borderColor": "interactive-secondary-hover",
+            "bgColor": "interactive-secondary-hover"
           }
         }
       }
     },
     "size=medium,status=intermediate": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 16,
       "radius": 4,
       "borderColor": {
@@ -218,12 +283,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-2",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 16,
           "radius": 4,
           "borderColor": {
@@ -237,14 +308,20 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-2",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }
     },
     "size=small,status=on": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 14,
       "radius": 2,
       "borderColor": {
@@ -258,12 +335,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-1",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 14,
           "radius": 2,
           "borderColor": {
@@ -277,20 +360,26 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-1",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }
     },
     "size=small,status=off": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 14,
       "radius": 2,
       "borderColor": {
-        "r": 0.9019607843137255,
-        "g": 0.9098039215686274,
-        "b": 0.9176470588235294
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "bgColor": {
         "r": 1,
@@ -298,12 +387,18 @@
         "b": 1
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-1",
-        "borderColor": "neutral-100",
-        "bgColor": "white"
+        "borderColor": "border-strong",
+        "bgColor": "surface-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 14,
           "radius": 2,
           "borderColor": {
@@ -317,14 +412,20 @@
             "b": 0.8352941176470589
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-1",
-            "borderColor": "neutral-200",
-            "bgColor": "neutral-200"
+            "borderColor": "interactive-secondary-hover",
+            "bgColor": "interactive-secondary-hover"
           }
         }
       }
     },
     "size=small,status=intermediate": {
+      "focusRingColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
       "size": 14,
       "radius": 2,
       "borderColor": {
@@ -338,12 +439,18 @@
         "b": 0.08627450980392157
       },
       "_tokenRefs": {
+        "focusRingColor": "focus-ring",
         "radius": "radius-1",
-        "borderColor": "primary-950",
-        "bgColor": "primary-950"
+        "borderColor": "interactive-primary",
+        "bgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "focusRingColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
           "size": 14,
           "radius": 2,
           "borderColor": {
@@ -357,9 +464,10 @@
             "b": 0.23921568627450981
           },
           "_tokenRefs": {
+            "focusRingColor": "focus-ring",
             "radius": "radius-1",
-            "borderColor": "primary-800",
-            "bgColor": "primary-800"
+            "borderColor": "interactive-primary-hover",
+            "bgColor": "interactive-primary-hover"
           }
         }
       }

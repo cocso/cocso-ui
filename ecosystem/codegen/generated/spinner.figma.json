@@ -16,7 +16,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "primary-950"
+        "bladeColor": "interactive-primary"
       }
     },
     "variant=primary,size=medium": {
@@ -31,7 +31,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "primary-950"
+        "bladeColor": "interactive-primary"
       }
     },
     "variant=primary,size=small": {
@@ -46,7 +46,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "primary-950"
+        "bladeColor": "interactive-primary"
       }
     },
     "variant=secondary,size=large": {
@@ -61,7 +61,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "neutral-500"
+        "bladeColor": "text-muted"
       }
     },
     "variant=secondary,size=medium": {
@@ -76,7 +76,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "neutral-500"
+        "bladeColor": "text-muted"
       }
     },
     "variant=secondary,size=small": {
@@ -91,7 +91,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "neutral-500"
+        "bladeColor": "text-muted"
       }
     },
     "variant=success,size=large": {
@@ -106,7 +106,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "success-500"
+        "bladeColor": "feedback-success"
       }
     },
     "variant=success,size=medium": {
@@ -121,7 +121,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "success-500"
+        "bladeColor": "feedback-success"
       }
     },
     "variant=success,size=small": {
@@ -136,7 +136,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "success-500"
+        "bladeColor": "feedback-success"
       }
     },
     "variant=error,size=large": {
@@ -151,7 +151,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "danger-500"
+        "bladeColor": "feedback-danger"
       }
     },
     "variant=error,size=medium": {
@@ -166,7 +166,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "danger-500"
+        "bladeColor": "feedback-danger"
       }
     },
     "variant=error,size=small": {
@@ -181,7 +181,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "danger-500"
+        "bladeColor": "feedback-danger"
       }
     },
     "variant=warning,size=large": {
@@ -196,7 +196,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "warning-500"
+        "bladeColor": "feedback-warning"
       }
     },
     "variant=warning,size=medium": {
@@ -211,7 +211,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "warning-500"
+        "bladeColor": "feedback-warning"
       }
     },
     "variant=warning,size=small": {
@@ -226,7 +226,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "warning-500"
+        "bladeColor": "feedback-warning"
       }
     },
     "variant=info,size=large": {
@@ -241,7 +241,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "info-500"
+        "bladeColor": "feedback-info"
       }
     },
     "variant=info,size=medium": {
@@ -256,7 +256,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "info-500"
+        "bladeColor": "feedback-info"
       }
     },
     "variant=info,size=small": {
@@ -271,7 +271,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "info-500"
+        "bladeColor": "feedback-info"
       }
     },
     "variant=white,size=large": {
@@ -286,7 +286,7 @@
       "bladeRadius": 1,
       "output": 20,
       "_tokenRefs": {
-        "bladeColor": "white"
+        "bladeColor": "surface-primary"
       }
     },
     "variant=white,size=medium": {
@@ -301,7 +301,7 @@
       "bladeRadius": 1,
       "output": 16,
       "_tokenRefs": {
-        "bladeColor": "white"
+        "bladeColor": "surface-primary"
       }
     },
     "variant=white,size=small": {
@@ -316,7 +316,7 @@
       "bladeRadius": 0.75,
       "output": 12,
       "_tokenRefs": {
-        "bladeColor": "white"
+        "bladeColor": "surface-primary"
       }
     }
   }

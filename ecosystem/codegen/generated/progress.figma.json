@@ -18,8 +18,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "primary-950",
+        "bgColor": "surface-neutral",
+        "fillColor": "interactive-primary",
         "borderRadius": "radius-1"
       }
     },
@@ -37,8 +37,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "primary-950",
+        "bgColor": "surface-neutral",
+        "fillColor": "interactive-primary",
         "borderRadius": "radius-2"
       }
     },
@@ -56,8 +56,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "primary-950",
+        "bgColor": "surface-neutral",
+        "fillColor": "interactive-primary",
         "borderRadius": "radius-3"
       }
     },
@@ -75,8 +75,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "neutral-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "text-muted",
         "borderRadius": "radius-1"
       }
     },
@@ -94,8 +94,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "neutral-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "text-muted",
         "borderRadius": "radius-2"
       }
     },
@@ -113,8 +113,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "neutral-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "text-muted",
         "borderRadius": "radius-3"
       }
     },
@@ -132,8 +132,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "success-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-success",
         "borderRadius": "radius-1"
       }
     },
@@ -151,8 +151,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "success-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-success",
         "borderRadius": "radius-2"
       }
     },
@@ -170,8 +170,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "success-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-success",
         "borderRadius": "radius-3"
       }
     },
@@ -189,8 +189,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "danger-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-danger",
         "borderRadius": "radius-1"
       }
     },
@@ -208,8 +208,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "danger-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-danger",
         "borderRadius": "radius-2"
       }
     },
@@ -227,8 +227,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "danger-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-danger",
         "borderRadius": "radius-3"
       }
     },
@@ -246,8 +246,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "warning-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-warning",
         "borderRadius": "radius-1"
       }
     },
@@ -265,8 +265,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "warning-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-warning",
         "borderRadius": "radius-2"
       }
     },
@@ -284,8 +284,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "warning-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-warning",
         "borderRadius": "radius-3"
       }
     },
@@ -303,8 +303,8 @@
       "height": 4,
       "borderRadius": 2,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "info-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-info",
         "borderRadius": "radius-1"
       }
     },
@@ -322,8 +322,8 @@
       "height": 8,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "info-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-info",
         "borderRadius": "radius-2"
       }
     },
@@ -341,8 +341,8 @@
       "height": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
-        "fillColor": "info-500",
+        "bgColor": "surface-neutral",
+        "fillColor": "feedback-info",
         "borderRadius": "radius-3"
       }
     }

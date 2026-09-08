@@ -5,10 +5,20 @@
   ],
   "combinations": {
     "variant=primary,size=large,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
         "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -20,15 +30,27 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "primary-950",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-primary",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2,
             "g": 0.21176470588235294,
             "b": 0.23921568627450981
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.07450980392156863,
@@ -40,17 +62,29 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "primary-800",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-primary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary"
           }
         }
       }
     },
     "variant=primary,size=large,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -61,16 +95,34 @@
       "height": 22,
       "thumbSize": 18,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.07450980392156863,
@@ -81,18 +133,36 @@
           "height": 22,
           "thumbSize": 18,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=primary,size=medium,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
         "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -104,15 +174,27 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "primary-950",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-primary",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2,
             "g": 0.21176470588235294,
             "b": 0.23921568627450981
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.07450980392156863,
@@ -124,17 +206,29 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "primary-800",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-primary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary"
           }
         }
       }
     },
     "variant=primary,size=medium,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -145,16 +239,34 @@
       "height": 20,
       "thumbSize": 16,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.07450980392156863,
@@ -165,18 +277,36 @@
           "height": 20,
           "thumbSize": 16,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=primary,size=small,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
         "b": 0.08627450980392157
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -188,16 +318,28 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "primary-950",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-primary",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2,
             "g": 0.21176470588235294,
             "b": 0.23921568627450981
           },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
           "checkedBgColor": {
             "r": 0.07450980392156863,
             "g": 0.0784313725490196,
@@ -208,17 +350,29 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "primary-800",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-primary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary"
           }
         }
       }
     },
     "variant=primary,size=small,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.07450980392156863,
@@ -229,16 +383,34 @@
       "height": 18,
       "thumbSize": 14,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "primary-950"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-primary",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.07450980392156863,
@@ -249,18 +421,36 @@
           "height": 18,
           "thumbSize": 14,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "primary-950"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-primary",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=success,size=large,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.13333333333333333,
         "g": 0.5294117647058824,
         "b": 0.2196078431372549
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -272,15 +462,27 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "success-500",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-success",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.24705882352941178,
             "g": 0.6509803921568628,
             "b": 0.32941176470588235
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.13333333333333333,
@@ -292,17 +494,29 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "success-400",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-success-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success"
           }
         }
       }
     },
     "variant=success,size=large,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -313,16 +527,34 @@
       "height": 22,
       "thumbSize": 18,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.13333333333333333,
@@ -333,18 +565,36 @@
           "height": 22,
           "thumbSize": 18,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=success,size=medium,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.13333333333333333,
         "g": 0.5294117647058824,
         "b": 0.2196078431372549
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -356,15 +606,27 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "success-500",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-success",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.24705882352941178,
             "g": 0.6509803921568628,
             "b": 0.32941176470588235
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.13333333333333333,
@@ -376,17 +638,29 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "success-400",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-success-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success"
           }
         }
       }
     },
     "variant=success,size=medium,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -397,16 +671,34 @@
       "height": 20,
       "thumbSize": 16,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.13333333333333333,
@@ -417,18 +709,36 @@
           "height": 20,
           "thumbSize": 16,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=success,size=small,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.13333333333333333,
         "g": 0.5294117647058824,
         "b": 0.2196078431372549
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -440,16 +750,28 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "success-500",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-success",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.24705882352941178,
             "g": 0.6509803921568628,
             "b": 0.32941176470588235
           },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
           "checkedBgColor": {
             "r": 0.13333333333333333,
             "g": 0.5294117647058824,
@@ -460,17 +782,29 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "success-400",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-success-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success"
           }
         }
       }
     },
     "variant=success,size=small,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.13333333333333333,
@@ -481,16 +815,34 @@
       "height": 18,
       "thumbSize": 14,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "success-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-success",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.13333333333333333,
@@ -501,18 +853,36 @@
           "height": 18,
           "thumbSize": 14,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "success-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-success",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=error,size=large,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.8705882352941177,
         "g": 0.20392156862745098,
         "b": 0.07058823529411765
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -524,15 +894,27 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "danger-500",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-danger",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.9411764705882353,
             "g": 0.37254901960784315,
             "b": 0.25882352941176473
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.8705882352941177,
@@ -544,17 +926,29 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "danger-400",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-danger-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger"
           }
         }
       }
     },
     "variant=error,size=large,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -565,16 +959,34 @@
       "height": 22,
       "thumbSize": 18,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.8705882352941177,
@@ -585,18 +997,36 @@
           "height": 22,
           "thumbSize": 18,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=error,size=medium,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.8705882352941177,
         "g": 0.20392156862745098,
         "b": 0.07058823529411765
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -608,15 +1038,27 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "danger-500",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-danger",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.9411764705882353,
             "g": 0.37254901960784315,
             "b": 0.25882352941176473
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.8705882352941177,
@@ -628,17 +1070,29 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "danger-400",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-danger-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger"
           }
         }
       }
     },
     "variant=error,size=medium,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -649,16 +1103,34 @@
       "height": 20,
       "thumbSize": 16,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.8705882352941177,
@@ -669,18 +1141,36 @@
           "height": 20,
           "thumbSize": 16,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=error,size=small,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.8705882352941177,
         "g": 0.20392156862745098,
         "b": 0.07058823529411765
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -692,16 +1182,28 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "danger-500",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-danger",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.9411764705882353,
             "g": 0.37254901960784315,
             "b": 0.25882352941176473
           },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
           "checkedBgColor": {
             "r": 0.8705882352941177,
             "g": 0.20392156862745098,
@@ -712,17 +1214,29 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "danger-400",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-danger-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger"
           }
         }
       }
     },
     "variant=error,size=small,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.8705882352941177,
@@ -733,16 +1247,34 @@
       "height": 18,
       "thumbSize": 14,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "danger-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-danger",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.8705882352941177,
@@ -753,18 +1285,36 @@
           "height": 18,
           "thumbSize": 14,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "danger-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-danger",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=warning,size=large,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.6196078431372549,
         "g": 0.41568627450980394,
         "b": 0
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -776,15 +1326,27 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "warning-500",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-warning-active",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.7803921568627451,
             "g": 0.5215686274509804,
             "b": 0
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.6196078431372549,
@@ -796,17 +1358,29 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "warning-400",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-warning-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active"
           }
         }
       }
     },
     "variant=warning,size=large,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -817,16 +1391,34 @@
       "height": 22,
       "thumbSize": 18,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.6196078431372549,
@@ -837,18 +1429,36 @@
           "height": 22,
           "thumbSize": 18,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=warning,size=medium,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.6196078431372549,
         "g": 0.41568627450980394,
         "b": 0
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -860,15 +1470,27 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "warning-500",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-warning-active",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.7803921568627451,
             "g": 0.5215686274509804,
             "b": 0
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.6196078431372549,
@@ -880,17 +1502,29 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "warning-400",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-warning-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active"
           }
         }
       }
     },
     "variant=warning,size=medium,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -901,16 +1535,34 @@
       "height": 20,
       "thumbSize": 16,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.6196078431372549,
@@ -921,18 +1573,36 @@
           "height": 20,
           "thumbSize": 16,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=warning,size=small,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.6196078431372549,
         "g": 0.41568627450980394,
         "b": 0
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -944,16 +1614,28 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "warning-500",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-warning-active",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.7803921568627451,
             "g": 0.5215686274509804,
             "b": 0
           },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
           "checkedBgColor": {
             "r": 0.6196078431372549,
             "g": 0.41568627450980394,
@@ -964,17 +1646,29 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "warning-400",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-warning-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active"
           }
         }
       }
     },
     "variant=warning,size=small,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.6196078431372549,
@@ -985,16 +1679,34 @@
       "height": 18,
       "thumbSize": 14,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "warning-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-warning-active",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.6196078431372549,
@@ -1005,18 +1717,36 @@
           "height": 18,
           "thumbSize": 14,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "warning-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-warning-active",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=info,size=large,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.1450980392156863,
         "g": 0.43137254901960786,
         "b": 0.9568627450980393
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1028,15 +1758,27 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "info-500",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-info",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2980392156862745,
             "g": 0.5294117647058824,
             "b": 0.9647058823529412
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.1450980392156863,
@@ -1048,17 +1790,29 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "info-400",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-info-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info"
           }
         }
       }
     },
     "variant=info,size=large,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1069,16 +1823,34 @@
       "height": 22,
       "thumbSize": 18,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.1450980392156863,
@@ -1089,18 +1861,36 @@
           "height": 22,
           "thumbSize": 18,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=info,size=medium,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.1450980392156863,
         "g": 0.43137254901960786,
         "b": 0.9568627450980393
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1112,15 +1902,27 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "info-500",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-info",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2980392156862745,
             "g": 0.5294117647058824,
             "b": 0.9647058823529412
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.1450980392156863,
@@ -1132,17 +1934,29 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "info-400",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-info-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info"
           }
         }
       }
     },
     "variant=info,size=medium,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1153,16 +1967,34 @@
       "height": 20,
       "thumbSize": 16,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.1450980392156863,
@@ -1173,18 +2005,36 @@
           "height": 20,
           "thumbSize": 16,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }
     },
     "variant=info,size=small,checked=true": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.1450980392156863,
         "g": 0.43137254901960786,
         "b": 0.9568627450980393
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1196,16 +2046,28 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "_tokenRefs": {
-        "switchBgColor": "info-500",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "interactive-info",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.2980392156862745,
             "g": 0.5294117647058824,
             "b": 0.9647058823529412
           },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
+          },
           "checkedBgColor": {
             "r": 0.1450980392156863,
             "g": 0.43137254901960786,
@@ -1216,17 +2078,29 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "_tokenRefs": {
-            "switchBgColor": "info-400",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-info-hover-subtle",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info"
           }
         }
       }
     },
     "variant=info,size=small,checked=false": {
+      "thumbColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
       "switchBgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
         "b": 0.9176470588235294
+      },
+      "borderColor": {
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "checkedBgColor": {
         "r": 0.1450980392156863,
@@ -1237,16 +2111,34 @@
       "height": 18,
       "thumbSize": 14,
       "thumbOffset": 2,
+      "thumbBorderColor": {
+        "r": 0.34509803921568627,
+        "g": 0.3803921568627451,
+        "b": 0.41568627450980394
+      },
       "_tokenRefs": {
-        "switchBgColor": "neutral-100",
-        "checkedBgColor": "info-500"
+        "thumbColor": "text-on-primary",
+        "switchBgColor": "surface-neutral",
+        "borderColor": "border-strong",
+        "checkedBgColor": "interactive-info",
+        "thumbBorderColor": "text-secondary"
       },
       "states": {
         "hover": {
+          "thumbColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
           "switchBgColor": {
             "r": 0.803921568627451,
             "g": 0.8196078431372549,
             "b": 0.8352941176470589
+          },
+          "borderColor": {
+            "r": 0.42745098039215684,
+            "g": 0.47058823529411764,
+            "b": 0.5098039215686274
           },
           "checkedBgColor": {
             "r": 0.1450980392156863,
@@ -1257,9 +2149,17 @@
           "height": 18,
           "thumbSize": 14,
           "thumbOffset": 2,
+          "thumbBorderColor": {
+            "r": 0.34509803921568627,
+            "g": 0.3803921568627451,
+            "b": 0.41568627450980394
+          },
           "_tokenRefs": {
-            "switchBgColor": "neutral-200",
-            "checkedBgColor": "info-500"
+            "thumbColor": "text-on-primary",
+            "switchBgColor": "interactive-secondary-hover",
+            "borderColor": "border-strong",
+            "checkedBgColor": "interactive-info",
+            "thumbBorderColor": "text-secondary"
           }
         }
       }

@@ -57,7 +57,12 @@ jobs:
         run: |
           pnpm --filter @cocso-ui/recipe build
           pnpm --filter @cocso-ui/codegen generate
-          git diff --exit-code ecosystem/codegen/generated/ || (echo "::error::Generated files are stale. Run 'pnpm --filter @cocso-ui/codegen generate' and commit." && exit 1)
+          # The Figma descriptors come from the same recipes and were not gated:
+          # seventeen of nineteen sat stale on main after the semantic-token
+          # renames, and nothing said so.
+          pnpm --filter @cocso-ui/figma generate
+          pnpm --filter @cocso-ui/figma generate:figma-json
+          git diff --exit-code ecosystem/codegen/generated/ || (echo "::error::Generated files are stale. Run 'pnpm --filter @cocso-ui/codegen generate' and 'pnpm --filter @cocso-ui/figma generate:figma-json' and commit." && exit 1)
 
       - name: Test with Coverage
         run: pnpm run test:coverage

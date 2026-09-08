@@ -13,7 +13,7 @@
       "height": 16,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-2"
       }
     },
@@ -26,7 +26,7 @@
       "height": 16,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-2"
       }
     },
@@ -39,7 +39,7 @@
       "height": 16,
       "borderRadius": 4,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-2"
       }
     },
@@ -53,7 +53,7 @@
       "width": 40,
       "borderRadius": 1000,
       "_tokenRefs": {
-        "bgColor": "neutral-100"
+        "bgColor": "surface-neutral"
       }
     },
     "variant=circular,animation=wave": {
@@ -66,7 +66,7 @@
       "width": 40,
       "borderRadius": 1000,
       "_tokenRefs": {
-        "bgColor": "neutral-100"
+        "bgColor": "surface-neutral"
       }
     },
     "variant=circular,animation=none": {
@@ -79,7 +79,7 @@
       "width": 40,
       "borderRadius": 1000,
       "_tokenRefs": {
-        "bgColor": "neutral-100"
+        "bgColor": "surface-neutral"
       }
     },
     "variant=rectangular,animation=pulse": {
@@ -91,7 +91,7 @@
       "height": 120,
       "borderRadius": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-4"
       }
     },
@@ -104,7 +104,7 @@
       "height": 120,
       "borderRadius": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-4"
       }
     },
@@ -117,7 +117,7 @@
       "height": 120,
       "borderRadius": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-100",
+        "bgColor": "surface-neutral",
         "borderRadius": "radius-4"
       }
     }
