@@ -135,6 +135,7 @@ describe("Button variant className", () => {
     "info",
     "neutral",
     "error-ghost",
+    "glass",
   ] as const)('applies variant className for variant="%s"', (variant) => {
     render(<Button variant={variant}>Button</Button>);
     expect(screen.getByRole("button").className).toContain(

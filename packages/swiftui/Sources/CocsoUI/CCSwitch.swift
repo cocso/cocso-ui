@@ -13,6 +13,7 @@ public struct CCSwitch: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         label: String,
@@ -71,12 +72,16 @@ public struct CCSwitch: View {
                         .padding(.horizontal, inset)
                 }
                 .frame(width: track.width, height: track.height)
+                // The thumb travels and the track recolours on the web's
+                // `transition: transform fast soft` — not on one frame.
+                .animation(CCMotion.movement(reduced: reduceMotion), value: isOn)
                 CCTypography(label, type: .body, size: .medium)
             }
             .ccMinimumTouchTarget()
         }
         .buttonStyle(.plain)
         .opacity(isEnabled ? 1 : 0.4)
+        .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)
         .accessibilityAddTraits(.isButton)

@@ -38,14 +38,21 @@ public struct CCSpinner: View {
             }
         }
         .frame(width: side, height: side)
-        .rotationEffect(.degrees(spinning ? 360 : 0))
-        // Reduced motion stops the rotation; the indicator still says work is
-        // happening through its accessibility value.
+        // One turn per `duration-decorative`, the period of the web's
+        // `spinner-blade-fade` — a rotating opacity ramp is the same picture as
+        // eight blades fading in turn.
+        .rotationEffect(.degrees(spinning && !reduceMotion ? 360 : 0))
+        // Reduced motion: the web swaps the spin for a slow pulse of the whole
+        // indicator (`spinner-reduced-pulse`, 0.4 ↔ 0.8 over 2s), and so does
+        // this — still says work is happening, without anything travelling.
+        .opacity(reduceMotion ? (spinning ? 0.8 : 0.4) : 1)
         .animation(
-            reduceMotion ? nil : .linear(duration: 0.8).repeatForever(autoreverses: false),
+            reduceMotion
+                ? CocsoTokens.Easing.default(1).repeatForever(autoreverses: true)
+                : .linear(duration: CocsoTokens.Duration.decorative).repeatForever(autoreverses: false),
             value: spinning
         )
-        .onAppear { spinning = !reduceMotion }
+        .onAppear { spinning = true }
         .accessibilityElement()
         .accessibilityLabel(label)
     }

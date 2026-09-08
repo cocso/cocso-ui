@@ -1,6 +1,7 @@
 package ai.cocso.ui
 
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -31,18 +32,38 @@ fun CCSpinner(
     val bladeWidth = style.bladeWidth ?: 2.dp
     val bladeHeight = style.bladeHeight ?: 5.dp
     val color = style.bladeColor ?: CocsoTokens.Color.interactivePrimary()
+    val reduced = reducedMotion()
 
-    // Reduced motion stops the rotation; the indicator still says work is
-    // happening through its accessibility label.
-    val rotation = if (reducedMotion()) {
+    // One turn per `duration-decorative`, the period of the web's
+    // `spinner-blade-fade` — a rotating opacity ramp is the same picture as
+    // eight blades fading in turn.
+    val rotation = if (reduced) {
         0f
     } else {
         rememberInfiniteTransition(label = "spinner").animateFloat(
             initialValue = 0f,
             targetValue = 360f,
-            animationSpec = infiniteRepeatable(tween(800, easing = LinearEasing)),
+            animationSpec = infiniteRepeatable(
+                tween(CocsoTokens.Duration.decorative, easing = LinearEasing)
+            ),
             label = "spinner-rotation",
         ).value
+    }
+    // Reduced motion: the web swaps the spin for a slow pulse of the whole
+    // indicator (`spinner-reduced-pulse`, 0.4 ↔ 0.8 over 2s), and so does this
+    // — still says work is happening, without anything travelling.
+    val pulse = if (reduced) {
+        rememberInfiniteTransition(label = "spinner-pulse").animateFloat(
+            initialValue = 0.4f,
+            targetValue = 0.8f,
+            animationSpec = infiniteRepeatable(
+                tween(1000, easing = CocsoTokens.Easing.default),
+                RepeatMode.Reverse,
+            ),
+            label = "spinner-opacity",
+        ).value
+    } else {
+        1f
     }
 
     Canvas(
@@ -62,7 +83,7 @@ fun CCSpinner(
                     topLeft = Offset(center.x - w / 2f, 0f),
                     size = Size(w, h),
                     cornerRadius = corner,
-                    alpha = (index + 1).toFloat() / bladeCount,
+                    alpha = (index + 1).toFloat() / bladeCount * pulse,
                 )
             }
         }

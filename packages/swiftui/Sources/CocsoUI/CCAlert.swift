@@ -16,6 +16,7 @@ public struct CCAlert: View {
     // The brand the app set at its root. Tokens and resolvers take it so a
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         _ title: String,
@@ -48,6 +49,11 @@ public struct CCAlert: View {
             RoundedRectangle(cornerRadius: radius)
                 .strokeBorder(style.borderColor ?? .clear, lineWidth: 1)
         )
+        // A variant change recolours on the web's colour curve, and a parent
+        // that shows or hides the alert inside `withAnimation` gets it sliding
+        // in from above rather than appearing.
+        .animation(CCMotion.colour(reduced: reduceMotion), value: variant)
+        .transition(.move(edge: .top).combined(with: .opacity))
         .accessibilityElement(children: .combine)
     }
 }

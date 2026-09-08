@@ -103,13 +103,17 @@ class ComponentRenderTest {
         // drew only the defaults.
         CCButton(title = "Secondary", onClick = {}, variant = CCButtonVariant.secondary)
         CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
+        CCButton(title = "Glass", onClick = {}, variant = CCButtonVariant.glass)
         CCBadge(text = "Badge")
         CCBadge(text = "Outline", variant = CCBadgeVariant.outline)
         CCCard { CCTypography("Card") }
         CCCard(variant = CCCardVariant.outlined) { CCTypography("Outlined card") }
+        CCCard(variant = CCCardVariant.glass) { CCTypography("Glass card") }
+        CCGlassBar { CCTypography("Glass bar") }
         CCAlert(title = "Alert", message = "message")
         CCAvatar(initials = "CO", label = "코쏘")
         CCSkeleton(modifier = Modifier.fillMaxWidth())
+        CCSkeleton(modifier = Modifier.fillMaxWidth(), animation = CCSkeletonAnimation.wave)
         CCProgress(value = 60f)
         CCSpinner()
         // 상태가 있는 컴포넌트는 상태마다 그린다. 켠 스위치만 그리던 동안

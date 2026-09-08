@@ -1,22 +1,27 @@
 package ai.cocso.ui
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -48,9 +53,38 @@ fun CCSwitch(
     val thumb = style.thumbSize ?: 16.dp
     val inset = style.thumbOffset ?: 2.dp
 
+    // The thumb travels and the track recolours on the web's
+    // `transition: transform fast soft` — not on one frame.
+    val travel by animateDpAsState(
+        if (checked) trackWidth - thumb - inset * 2 else 0.dp,
+        animationSpec = CCMotion.movement(),
+        label = "switch-thumb",
+    )
+    val track by animateColorAsState(
+        (if (checked) style.checkedBgColor else style.switchBgColor)
+            ?: CocsoTokens.Color.surfaceNeutral(),
+        animationSpec = CCMotion.colour(),
+        label = "switch-track",
+    )
+    val thumbFill by animateColorAsState(
+        style.thumbColor ?: CocsoTokens.Color.textOnPrimary(),
+        animationSpec = CCMotion.colour(),
+        label = "switch-thumb-colour",
+    )
+    val thumbEdge by animateColorAsState(
+        style.thumbBorderColor ?: ComposeColor.Transparent,
+        animationSpec = CCMotion.colour(),
+        label = "switch-thumb-border",
+    )
+    val dim by animateFloatAsState(
+        if (enabled) 1f else 0.4f,
+        animationSpec = CCMotion.colour(),
+        label = "switch-enabled",
+    )
+
     Row(
         modifier = modifier
-            .alpha(if (enabled) 1f else 0.4f)
+            .alpha(dim)
             .clickable(
                 enabled = enabled,
                 interactionSource = interactionSource,
@@ -74,10 +108,7 @@ fun CCSwitch(
             modifier = Modifier
                 .size(width = trackWidth, height = trackHeight)
                 .clip(CircleShape)
-                .background(
-                    (if (checked) style.checkedBgColor else style.switchBgColor)
-                        ?: CocsoTokens.Color.surfaceNeutral()
-                )
+                .background(track)
                 // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지 보이지
                 // 않았다. 색은 레시피가 정한다.
                 .border(
@@ -86,21 +117,19 @@ fun CCSwitch(
                     CircleShape,
                 )
                 .padding(horizontal = inset),
-            contentAlignment = if (checked) Alignment.CenterEnd else Alignment.CenterStart,
+            contentAlignment = Alignment.CenterStart,
         ) {
             Box(
                 modifier = Modifier
+                    .offset(x = travel)
                     .size(thumb)
                     .clip(CircleShape)
                     // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
-                    .background(style.thumbColor ?: CocsoTokens.Color.textOnPrimary())
+                    .background(thumbFill)
                     // 꺼진 상태에만 값이 온다 — 손잡이와 트랙이 1.23:1 이라
-                    // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다.
-                    .then(
-                        style.thumbBorderColor?.let {
-                            Modifier.border(1.dp, it, CircleShape)
-                        } ?: Modifier
-                    )
+                    // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다. 켜지면
+                    // 투명으로 애니메이션되어 사라진다.
+                    .border(1.dp, thumbEdge, CircleShape)
             )
         }
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)

@@ -45,6 +45,22 @@ export const buttonRecipe = defineRecipe({
       "error-ghost": {
         root: { bgColor: "transparent", fontColor: "feedback-danger-text" },
       },
+      // Glass: the tint of a pane over whatever is beneath, with the ink of the
+      // page. For the floating controls — a composer's actions, a pill over a
+      // photo. The web and SwiftUI blur what is beneath; Compose composites the
+      // same tint over the page surface, so it reads as a solid there.
+      glass: {
+        root: {
+          bgColor: "surface-glass",
+          fontColor: "text-primary",
+          border: {
+            _type: "border" as const,
+            width: 1,
+            style: "solid" as const,
+            color: "border-glass" as const,
+          },
+        },
+      },
     },
     size: {
       // The full-width call to action a phone screen ends on. cocso/mobile drew
@@ -144,6 +160,7 @@ export const buttonRecipe = defineRecipe({
         "error-ghost": {
           root: { bgColor: "interactive-danger-subtle-hover" },
         },
+        glass: { root: { bgColor: "surface-glass-active" } },
       },
     },
     active: {
@@ -170,6 +187,7 @@ export const buttonRecipe = defineRecipe({
         "error-ghost": {
           root: { bgColor: "interactive-danger-subtle-active" },
         },
+        glass: { root: { bgColor: "surface-glass-active" } },
       },
     },
   },

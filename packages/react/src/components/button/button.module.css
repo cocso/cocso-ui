@@ -29,6 +29,13 @@
       var(--cocso-easing-default);
   }
 
+  /* What is beneath shows through, blurred. The tint and the edge come from
+     the recipe (`surface-glass`, `border-glass`); the blur radius is the one
+     part CSS owns — see Card. */
+  .glass {
+    backdrop-filter: blur(16px);
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .button:not([disabled]):hover {
       --cocso-button-bg-color-hover: inherit;

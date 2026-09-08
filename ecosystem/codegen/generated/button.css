@@ -73,6 +73,14 @@
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
 }
 
+.cocso-button:where(.cocso-button--variant-glass) {
+  --cocso-button-bg-color: var(--cocso-color-surface-glass);
+  --cocso-button-font-color: var(--cocso-color-text-primary);
+  --cocso-button-border: 1px solid var(--cocso-color-border-glass);
+  --cocso-button-bg-color-hover: var(--cocso-color-surface-glass-active);
+  --cocso-button-bg-color-active: var(--cocso-color-surface-glass-active);
+}
+
 .cocso-button:where(.cocso-button--size-x-large) {
   --cocso-button-height: 56px;
   --cocso-button-padding-inline: 16px;

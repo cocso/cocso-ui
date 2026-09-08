@@ -53,6 +53,24 @@ const LEADING_DIGIT = /^\d/;
 const DOLLAR_PREFIX = /^\$/;
 const RGBA =
   /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/;
+const CUBIC_BEZIER =
+  /^cubic-bezier\(\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*\)$/;
+
+/**
+ * The CSS easing keywords, as the control points the specification defines
+ * them by. Both platforms take a cubic Bézier and neither takes the keyword,
+ * so the curve is what crosses.
+ */
+const NAMED_EASINGS: Record<string, Curve> = {
+  ease: [0.25, 0.1, 0.25, 1],
+  "ease-in": [0.42, 0, 1, 1],
+  "ease-in-out": [0.42, 0, 0.58, 1],
+  "ease-out": [0, 0, 0.58, 1],
+  linear: [0, 0, 1, 1],
+};
+
+/** Swift's keywords a token name can collide with — `$easing.default`. */
+const SWIFT_RESERVED = new Set(["default", "in", "is", "as", "for", "static"]);
 
 function toHex(n: number): string {
   return Math.max(0, Math.min(255, Math.round(n)))
@@ -61,10 +79,14 @@ function toHex(n: number): string {
     .padStart(2, "0");
 }
 
+type Curve = [number, number, number, number];
+
 /** A value the platforms can hold, once every reference is followed. */
 type Resolved =
   | { kind: "color"; hex: string; alpha: number }
-  | { kind: "number"; value: number };
+  | { kind: "number"; value: number }
+  /** A cubic Bézier easing — `$easing.*`. */
+  | { kind: "curve"; points: Curve };
 
 /**
  * Follow `$color.text.primary` → `$color.neutral-950` → `#131416`.
@@ -132,6 +154,18 @@ function classify(value: string | number | null): Resolved | string {
   const seconds = value.match(SECONDS);
   if (seconds) {
     return { kind: "number", value: Number(seconds[1]) };
+  }
+  // Easing. `ease-in-out` was "unsupported" and `cubic-bezier(...)` was a
+  // "composite value" — so the motion the web runs on reached neither platform
+  // and each view picked a duration and a curve of its own.
+  const named = NAMED_EASINGS[value];
+  if (named) {
+    return { kind: "curve", points: named };
+  }
+  const bezier = value.match(CUBIC_BEZIER);
+  if (bezier) {
+    const [, a, b, c, d] = bezier;
+    return { kind: "curve", points: [Number(a), Number(b), Number(c), Number(d)] };
   }
   // YAML quotes some scales, so a plain number can arrive as a string.
   if (PLAIN_NUMBER.test(value)) {
@@ -237,6 +271,9 @@ function collectEntries(
 }
 
 function swiftValue(value: Resolved): string {
+  if (value.kind === "curve") {
+    return value.points.join(", ");
+  }
   if (value.kind !== "color") {
     return `${value.value}`;
   }
@@ -246,11 +283,67 @@ function swiftValue(value: Resolved): string {
 }
 
 function kotlinValue(value: Resolved): string {
+  if (value.kind === "curve") {
+    return `CubicBezierEasing(${value.points.map((p) => `${p}f`).join(", ")})`;
+  }
   if (value.kind !== "color") {
     return `${value.value}`;
   }
   const alpha = toHex(value.alpha * 255);
   return `ComposeColor(0x${alpha}${value.hex})`;
+}
+
+function swiftIdentifier(name: string): string {
+  return SWIFT_RESERVED.has(name) ? `\`${name}\`` : name;
+}
+
+/**
+ * A single-mode token as a Swift constant — or, for an easing, a function.
+ *
+ * The scale decides the type. Every number was `CGFloat`, which made a
+ * duration a length: `Duration.fast` was `0.15` points. It is seconds, which
+ * is what `Animation` takes. An easing is a curve, and SwiftUI's curve type is
+ * an `Animation` with a duration, so the token is a function of one.
+ */
+function swiftConstant(group: string, entry: Entry): string[] {
+  const value = entry.light;
+  const name = swiftIdentifier(entry.name);
+  if (value.kind === "curve") {
+    return [
+      `        /// \`cubic-bezier(${value.points.join(", ")})\`, as \`.timingCurve\`.`,
+      `        public static func ${name}(_ duration: TimeInterval) -> Animation {`,
+      `            .timingCurve(${swiftValue(value)}, duration: duration)`,
+      "        }",
+    ];
+  }
+  if (group === "duration") {
+    return [
+      `        public static let ${name}: TimeInterval = ${swiftValue(value)}`,
+    ];
+  }
+  // Qualified: this sits inside `enum Color`, where the bare name is the enum
+  // rather than SwiftUI's type.
+  const swiftType = value.kind === "color" ? "SwiftUI.Color" : "CGFloat";
+  return [`        public static let ${name}: ${swiftType} = ${swiftValue(value)}`];
+}
+
+/**
+ * The Kotlin counterpart. A duration is the `Int` of milliseconds `tween`
+ * takes — it was `0.15.dp`, a fraction of a pixel — and an easing is Compose's
+ * own `Easing`, aliased because the token group is also called that.
+ */
+function kotlinConstant(group: string, entry: Entry): string {
+  const value = entry.light;
+  if (value.kind === "curve") {
+    return `        val ${entry.name}: ComposeEasing = ${kotlinValue(value)}`;
+  }
+  if (group === "duration" && value.kind === "number") {
+    return `        val ${entry.name}: Int = ${Math.round(value.value * 1000)}`;
+  }
+  if (value.kind === "color") {
+    return `        val ${entry.name}: ComposeColor = ${kotlinValue(value)}`;
+  }
+  return `        val ${entry.name}: Dp = ${kotlinValue(value)}.dp`;
 }
 
 function pascal(name: string): string {
@@ -407,13 +500,7 @@ function generateSwift(ast: Ast, options: MobileOptions): string {
     // have — as well as hiding that a ramp is the same in both themes, which
     // is what lets an app override one.
     for (const entry of entries.filter((e) => !e.themed)) {
-      // Qualified: this sits inside `enum Color`, where the bare name is the
-      // enum rather than SwiftUI's type.
-      const swiftType =
-        entry.light.kind === "color" ? "SwiftUI.Color" : "CGFloat";
-      lines.push(
-        `        public static let ${entry.name}: ${swiftType} = ${swiftValue(entry.light)}`
-      );
+      lines.push(...swiftConstant(group, entry));
     }
 
     const themed = entries.filter((e) => e.themed);
@@ -439,11 +526,20 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
   const { groups } = collectEntries(ast, options.only);
   const type = options.typeName ?? "CocsoTokens";
   const pkg = options.packageName ?? "ai.cocso.ui";
+  const hasEasing = groups.has("easing");
   const lines = [
     HEADER,
     "",
     `package ${pkg}`,
     "",
+    // Aliased for the same reason as `ComposeColor`: inside `object Easing`
+    // the bare name is the token group.
+    ...(hasEasing
+      ? [
+          "import androidx.compose.animation.core.CubicBezierEasing",
+          "import androidx.compose.animation.core.Easing as ComposeEasing",
+        ]
+      : []),
     "import androidx.compose.runtime.Composable",
     "import androidx.compose.runtime.ReadOnlyComposable",
     "import androidx.compose.foundation.isSystemInDarkTheme",
@@ -465,12 +561,7 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
     lines.push(`    object ${name} {`);
 
     for (const entry of entries.filter((e) => !e.themed)) {
-      const value =
-        entry.light.kind === "color"
-          ? kotlinValue(entry.light)
-          : `${entry.light.value}.dp`;
-      const kotlinType = entry.light.kind === "color" ? "ComposeColor" : "Dp";
-      lines.push(`        val ${entry.name}: ${kotlinType} = ${value}`);
+      lines.push(kotlinConstant(group, entry));
     }
 
     const themed = entries.filter((e) => e.themed);

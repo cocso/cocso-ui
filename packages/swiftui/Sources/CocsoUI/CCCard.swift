@@ -37,6 +37,13 @@ public struct CCCard<Content: View>: View {
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
+            // Glass: the recipe's tint (`surface-glass`) sits on the platform's
+            // blur, which is the one part of glass that is not a value — see
+            // `ccGlass`. The other variants put nothing under their fill.
+            .background(
+                variant == .glass ? AnyShapeStyle(.ultraThinMaterial) : AnyShapeStyle(.clear),
+                in: RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
+            )
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
             // The recipe's border — the outlined variant. Without it a white card
             // on a white surface had no edge at all.
@@ -54,7 +61,9 @@ public struct CCCard<Content: View>: View {
     VStack {
         CCCard { Text("Elevated") }
         CCCard(variant: .outlined) { Text("Outlined") }
+        CCCard(variant: .glass) { Text("Glass") }
     }
     .padding()
+    .background(LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomTrailing))
 }
 #endif

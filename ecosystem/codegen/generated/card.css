@@ -16,6 +16,12 @@
   --cocso-card-border-radius: var(--cocso-radius-4);
 }
 
+.cocso-card:where(.cocso-card--variant-glass) {
+  --cocso-card-bg-color: var(--cocso-color-surface-glass);
+  --cocso-card-border-radius: var(--cocso-radius-4);
+  --cocso-card-border: 1px solid var(--cocso-color-border-glass);
+}
+
 .cocso-card:where(.cocso-card--padding-sm) {
   --cocso-card-padding: 12px;
 }

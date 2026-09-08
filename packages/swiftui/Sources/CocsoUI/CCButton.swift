@@ -25,6 +25,7 @@ public struct CCButton: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     // 웹의 `.button:focus-visible` 과 같은 링. 키보드가 있는 곳이면 2.4.7 이
     // 적용되고, iPad 에는 있다.
     @FocusState private var isFocused: Bool
@@ -91,8 +92,12 @@ public struct CCButton: View {
                 if loading {
                     ProgressView()
                         .controlSize(.small)
+                        .transition(.opacity)
                 }
             }
+            // The label fades and the indicator fades in over it, rather than
+            // swapping on one frame.
+            .animation(CCMotion.colour(reduced: reduceMotion), value: loading)
             .frame(maxWidth: .infinity, alignment: alignment)
             .padding(.horizontal, resolved.paddingInline ?? 0)
             .frame(height: resolved.height)
@@ -112,6 +117,9 @@ public struct CCButton: View {
         .background(
             (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
         )
+        // Glass: the recipe's tint (`surface-glass`) over the platform's blur.
+        // Every other variant puts nothing under its fill.
+        .background(variant == .glass ? AnyShapeStyle(.ultraThinMaterial) : AnyShapeStyle(.clear))
         .clipShape(
             // `shape: .circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
@@ -131,9 +139,17 @@ public struct CCButton: View {
                 )
                 .padding(-2)
         )
+        // The pressed colours arrive on the web's curve (`duration-fast`,
+        // `easing-default`) rather than on the frame the finger lands, and the
+        // button gives a little under it — the one thing a touch has that a
+        // pointer does not.
+        .animation(CCMotion.colour(reduced: reduceMotion), value: isPressed)
+        .scaleEffect(isPressed ? CCMotion.pressedScale : 1)
+        .animation(CCMotion.movement(reduced: reduceMotion), value: isPressed)
         // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
         // button the same way rather than restating every variant.
         .opacity(isEnabled ? 1 : 0.4)
+        .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityLabel(title)
         .accessibilityAddTraits(.isButton)
     }
@@ -162,7 +178,9 @@ public struct CCButton: View {
         CCButton("Outline", variant: .outline) {}
         CCButton("Loading", loading: true) {}
         CCButton("Disabled") {}.disabled(true)
+        CCButton("Glass", variant: .glass, shape: .rounded) {}
     }
     .padding()
+    .background(LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomTrailing))
 }
 #endif

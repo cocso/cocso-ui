@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'error', 'warning', 'info', 'neutral', 'error-ghost'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'error', 'warning', 'info', 'neutral', 'error-ghost', 'glass'] },
     size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle', 'sharp'] },
     align: { control: 'select', options: ['center', 'start', 'between'] },
@@ -40,6 +40,30 @@ export const Variants: Story = {
       <Button variant="info">Info</Button>
       <Button variant="neutral">Neutral</Button>
       <Button variant="error-ghost">Error Ghost</Button>
+    </div>
+  ),
+};
+
+/**
+ * Glass over something worth seeing through. A gradient rather than an image
+ * so the baseline is deterministic.
+ */
+export const Glass: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        gap: '8px',
+        padding: 32,
+        background:
+          'linear-gradient(135deg, var(--cocso-color-info-500), var(--cocso-color-success-500))',
+        borderRadius: 'var(--cocso-radius-5)',
+      }}
+    >
+      <Button variant="glass">Glass</Button>
+      <Button variant="glass" shape="rounded">
+        Rounded glass
+      </Button>
     </div>
   ),
 };

@@ -25,11 +25,16 @@ export const SEMANTIC_TO_PRIMITIVE: Readonly<Record<string, string>> = {
   "surface-secondary": "neutral-50",
   "surface-inverse": "neutral-950",
   "surface-neutral": "neutral-100",
+  // Glass: the light-theme tint and edge. Figma paints the colour and drops
+  // the alpha, so a glass surface previews as its opaque tone.
+  "surface-glass": "white-alpha-80",
+  "surface-glass-active": "white-alpha-60",
 
   // --- border ---
   "border-primary": "neutral-200",
   "border-secondary": "neutral-100",
   "border-strong": "neutral-500",
+  "border-glass": "black-alpha-10",
 
   // --- interactive ---
   "interactive-primary": "primary-950",

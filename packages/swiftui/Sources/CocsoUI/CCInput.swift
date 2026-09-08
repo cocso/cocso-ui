@@ -14,6 +14,7 @@ public struct CCInput: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var revealed = false
     // 웹의 `.input:focus-visible` — 쉬는 테두리와 다른 토큰이어야 포커스가
     // 보인다(2.4.7). 쉬는 상태는 이제 `border-strong` 이다.
@@ -60,7 +61,11 @@ public struct CCInput: View {
                             // One step back from the value, and it clears AA in
                             // both themes; `text-tertiary` is 3.08:1 on white.
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
+                            // The two glyphs cross-fade rather than swap.
+                            .id(revealed)
+                            .transition(.opacity)
                     }
+                    .animation(CCMotion.colour(reduced: reduceMotion), value: revealed)
                     .buttonStyle(.plain)
                     .ccMinimumTouchTarget()
                     .accessibilityLabel(revealed ? "Hide password" : "Show password")
@@ -76,6 +81,10 @@ public struct CCInput: View {
                         borderColor(style),
                         lineWidth: isFocused ? 2 : 1
                     )
+                    // The web's `transition: box-shadow fast soft` — the focus
+                    // ring thickens and recolours rather than appearing.
+                    .animation(CCMotion.colour(reduced: reduceMotion), value: isFocused)
+                    .animation(CCMotion.colour(reduced: reduceMotion), value: errorMessage)
             )
             if let errorMessage {
                 // The text level, not the fill level: `feedback-danger` is
@@ -83,9 +92,13 @@ public struct CCInput: View {
                 Text(errorMessage)
                     .font(.system(size: 12))
                     .foregroundStyle(CocsoTokens.Color.feedbackDangerText(colorScheme, brand: brand))
+                    .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
+        // The message slides in under the field on the entrance curve.
+        .animation(CCMotion.entrance(reduced: reduceMotion), value: errorMessage)
         .opacity(isEnabled ? 1 : 0.4)
+        .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
     }
 
     private func borderColor(_ style: CCInputStyle) -> SwiftUI.Color {

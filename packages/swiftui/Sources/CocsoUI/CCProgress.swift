@@ -12,6 +12,7 @@ public struct CCProgress: View {
     // The brand the app set at its root. Tokens and resolvers take it so a
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         value: Double,
@@ -41,6 +42,9 @@ public struct CCProgress: View {
                 shape
                     .fill(style.fillColor ?? CocsoTokens.Color.interactivePrimary(colorScheme, brand: brand))
                     .frame(width: geometry.size.width * fraction)
+                    // The web's `transition: width normal soft`: the bar fills
+                    // to the new value rather than jumping to it.
+                    .animation(CCMotion.fill(reduced: reduceMotion), value: fraction)
             }
         }
         .frame(height: height)

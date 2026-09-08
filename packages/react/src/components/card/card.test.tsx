@@ -21,6 +21,7 @@ describe("Card", () => {
       "elevated",
       "outlined",
       "filled",
+      "glass",
     ] as const)('applies variant className for variant="%s"', (variant) => {
       const { container } = render(<Card variant={variant}>Card</Card>);
       const card = container.firstChild as HTMLElement;

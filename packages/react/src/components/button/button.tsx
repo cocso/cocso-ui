@@ -21,7 +21,8 @@ export type ButtonVariant =
   | "warning"
   | "info"
   | "neutral"
-  | "error-ghost";
+  | "error-ghost"
+  | "glass";
 
 export type ButtonShape = "square" | "circle" | "rounded" | "sharp";
 
@@ -77,6 +78,7 @@ export function Button({
   const mergedClassName = cn(
     button({ variant, size, shape, align }),
     styles.button,
+    variant === "glass" && styles.glass,
     svgOnly && styles.svgOnly,
     className
   );

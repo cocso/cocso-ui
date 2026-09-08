@@ -14,7 +14,11 @@ import androidx.compose.ui.unit.dp
 /**
  * A surface that groups content.
  *
- * Values come from [cCCardStyle], generated from `card.recipe.ts`. The recipe's
+ * Values come from [cCCardStyle], generated from `card.recipe.ts`.
+ *
+ * The `glass` variant is the recipe's tint and edge. SwiftUI puts its material
+ * under the tint; Compose has no backdrop blur — see [ccGlass] — so here the
+ * tint sits on the page surface and the card reads as a solid of the same tone.
  */
 @Composable
 fun CCCard(
@@ -30,6 +34,13 @@ fun CCCard(
     Column(
         modifier = modifier
             .clip(cardShape)
+            .then(
+                if (variant == CCCardVariant.glass) {
+                    Modifier.background(CocsoTokens.Color.surfacePrimary())
+                } else {
+                    Modifier
+                }
+            )
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
             // The recipe's border — the outlined variant. Without it a white card
             // on a white surface had no edge at all.

@@ -7,7 +7,10 @@ const meta = {
   tags: ["autodocs"],
   parameters: { layout: "centered" },
   argTypes: {
-    variant: { control: "select", options: ["elevated", "outlined", "filled"] },
+    variant: {
+      control: "select",
+      options: ["elevated", "outlined", "filled", "glass"],
+    },
     padding: { control: "select", options: ["sm", "md", "lg"] },
   },
   args: {
@@ -33,6 +36,27 @@ export const Variants: Story = {
       </Card>
       <Card variant="filled" style={{ width: 200 }}>
         Filled
+      </Card>
+    </div>
+  ),
+};
+
+/**
+ * Glass over something worth seeing through. A gradient rather than an image
+ * so the baseline is deterministic.
+ */
+export const Glass: Story = {
+  render: () => (
+    <div
+      style={{
+        padding: 32,
+        background:
+          "linear-gradient(135deg, var(--cocso-color-info-500), var(--cocso-color-success-500))",
+        borderRadius: "var(--cocso-radius-5)",
+      }}
+    >
+      <Card variant="glass" style={{ width: 240 }}>
+        Glass
       </Card>
     </div>
   ),

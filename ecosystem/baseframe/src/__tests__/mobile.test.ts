@@ -65,7 +65,10 @@ const output = mobile.generateMobileFromAst(ast, { brands: brandOverrides() });
 function swiftNames(source: string): Set<string> {
   return new Set([
     ...[...source.matchAll(/public static let (\w+)/g)].map(([, n]) => n),
-    ...[...source.matchAll(/public static func (\w+)\(/g)].map(([, n]) => n),
+    // `$easing.default` collides with a Swift keyword and is backticked.
+    ...[...source.matchAll(/public static func `?(\w+)`?\(/g)].map(
+      ([, n]) => n
+    ),
   ]);
 }
 
@@ -178,6 +181,63 @@ describe("A themed token resolves differently per theme", () => {
     // parameter would hide that.
     expect(output.swift).toContain("public static let neutral500");
     expect(output.kotlin).toMatch(KOTLIN_NEUTRAL_500);
+  });
+});
+
+const SWIFT_ENTRANCE =
+  /public static func entrance\(_ duration: TimeInterval\) -> Animation \{\n\s+\.timingCurve\(0\.16, 1, 0\.3, 1, duration: duration\)/;
+const KOTLIN_ENTRANCE =
+  /val entrance: ComposeEasing = CubicBezierEasing\(0\.16f, 1f, 0\.3f, 1f\)/;
+const KOTLIN_DURATION_BLOCK = /object Duration \{([\s\S]*?)\n {4}\}/;
+const CSS_EASING_DECL = /--cocso-easing-([a-z-]+):/g;
+const CSS_DURATION_DECL = /--cocso-duration-([a-z-]+):/g;
+const MOTION_TOKEN = /^\$(easing|duration)\./;
+
+/**
+ * Motion crosses as what it is. A duration was emitted as a length —
+ * `0.15.dp` on Compose, a `CGFloat` on SwiftUI — and an easing was refused as
+ * "unsupported", so the web's `duration-fast` + `easing-default` reached
+ * neither platform and each view hard-coded its own 800 and 1000.
+ */
+describe("Motion tokens are time and curves, not lengths", () => {
+  it("emits a duration in seconds on Swift and milliseconds on Kotlin", () => {
+    expect(output.swift).toContain(
+      "public static let fast: TimeInterval = 0.15"
+    );
+    expect(output.kotlin).toContain("val fast: Int = 150");
+    const duration = output.kotlin.match(KOTLIN_DURATION_BLOCK)?.[1] ?? "";
+    expect(duration).not.toContain(".dp");
+  });
+
+  it("emits an easing as the platform's own curve", () => {
+    expect(output.swift).toMatch(SWIFT_ENTRANCE);
+    expect(output.kotlin).toMatch(KOTLIN_ENTRANCE);
+  });
+
+  it("carries every duration and easing the CSS has", () => {
+    const css = fs.readFileSync(
+      path.join(REPO_ROOT, "packages/css/token.css"),
+      "utf-8"
+    );
+    const swift = swiftNames(output.swift);
+    const kotlin = kotlinNames(output.kotlin);
+    const names = [
+      ...[...css.matchAll(CSS_EASING_DECL)].map(([, n]) => `easing-${n}`),
+      ...[...css.matchAll(CSS_DURATION_DECL)].map(([, n]) => `duration-${n}`),
+    ];
+    expect(names.length).toBeGreaterThan(0);
+    for (const name of names) {
+      const ident = name
+        .split("-")
+        .slice(1)
+        .map((p, i) => (i === 0 ? p : p[0].toUpperCase() + p.slice(1)))
+        .join("");
+      expect(swift.has(ident), `${name} missing from Swift`).toBe(true);
+      expect(kotlin.has(ident), `${name} missing from Kotlin`).toBe(true);
+    }
+    expect(
+      output.skipped.filter(({ name }) => MOTION_TOKEN.test(name))
+    ).toEqual([]);
   });
 });
 

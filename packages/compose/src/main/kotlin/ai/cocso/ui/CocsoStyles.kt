@@ -291,6 +291,7 @@ enum class CCButtonVariant {
     info,
     neutral,
     errorGhost,
+    glass,
 }
 
 enum class CCButtonSize {
@@ -370,6 +371,9 @@ fun cCButtonStyle(
     if (variant == CCButtonVariant.errorGhost) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive())
     }
+    if (variant == CCButtonVariant.glass) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.surfaceGlassActive())
+    }
     if (variant == CCButtonVariant.primary) {
         style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())
         style = style.copy(fontColor = CocsoTokens.Color.textOnPrimary())
@@ -409,6 +413,12 @@ fun cCButtonStyle(
     }
     if (variant == CCButtonVariant.errorGhost) {
         style = style.copy(fontColor = CocsoTokens.Color.feedbackDangerText())
+    }
+    if (variant == CCButtonVariant.glass) {
+        style = style.copy(bgColor = CocsoTokens.Color.surfaceGlass())
+        style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderGlass())
     }
     if (size == CCButtonSize.xLarge) {
         style = style.copy(height = 56.dp)
@@ -476,6 +486,7 @@ enum class CCCardVariant {
     elevated,
     outlined,
     filled,
+    glass,
 }
 
 enum class CCCardPadding {
@@ -513,6 +524,12 @@ fun cCCardStyle(
     if (variant == CCCardVariant.filled) {
         style = style.copy(bgColor = CocsoTokens.Color.surfaceSecondary())
         style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+    }
+    if (variant == CCCardVariant.glass) {
+        style = style.copy(bgColor = CocsoTokens.Color.surfaceGlass())
+        style = style.copy(borderRadius = CocsoTokens.Radius.r4)
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderGlass())
     }
     if (padding == CCCardPadding.sm) {
         style = style.copy(paddingX = 12.dp)

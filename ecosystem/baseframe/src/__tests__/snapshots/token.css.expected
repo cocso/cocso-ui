@@ -181,9 +181,12 @@
   --cocso-color-surface-secondary: var(--cocso-color-neutral-50);
   --cocso-color-surface-inverse: var(--cocso-color-neutral-950);
   --cocso-color-surface-neutral: var(--cocso-color-neutral-100);
+  --cocso-color-surface-glass: var(--cocso-color-white-alpha-80);
+  --cocso-color-surface-glass-active: var(--cocso-color-white-alpha-60);
   --cocso-color-border-primary: var(--cocso-color-neutral-200);
   --cocso-color-border-secondary: var(--cocso-color-neutral-100);
   --cocso-color-border-strong: var(--cocso-color-neutral-500);
+  --cocso-color-border-glass: var(--cocso-color-black-alpha-10);
   --cocso-color-overlay-subtle: var(--cocso-color-black-alpha-5);
   --cocso-color-overlay-muted: var(--cocso-color-black-alpha-10);
   --cocso-color-overlay-strong: var(--cocso-color-black-alpha-20);
