@@ -33,6 +33,15 @@ fun CCCard(
 
     Column(
         modifier = modifier
+            // The web's `.elevated { box-shadow: var(--cocso-shadow-card) }` —
+            // structure, not a recipe value, the same way it is on the web.
+            .then(
+                if (variant == CCCardVariant.elevated) {
+                    Modifier.ccShadow(CocsoTokens.Shadow.card(), cardShape)
+                } else {
+                    Modifier
+                }
+            )
             .clip(cardShape)
             .then(
                 if (variant == CCCardVariant.glass) {

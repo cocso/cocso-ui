@@ -123,6 +123,8 @@ fun CCSwitch(
                 modifier = Modifier
                     .offset(x = travel)
                     .size(thumb)
+                    // The web's `--cocso-shadow-thumb`: the handle lifts off the track.
+                    .ccShadow(CocsoTokens.Shadow.thumb(), CircleShape)
                     .clip(CircleShape)
                     // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
                     .background(thumbFill)

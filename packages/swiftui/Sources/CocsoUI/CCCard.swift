@@ -53,6 +53,9 @@ public struct CCCard<Content: View>: View {
                         .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
                 }
             )
+            // The web's `.elevated { box-shadow: var(--cocso-shadow-card) }` —
+            // structure, not a recipe value, the same way it is on the web.
+            .ccShadow(variant == .elevated ? CocsoTokens.Shadow.card(colorScheme) : [])
     }
 }
 

@@ -51,6 +51,7 @@ const PLAIN_NUMBER = /^-?\d+(?:\.\d+)?$/;
 const NAME_SEPARATORS = /[.\-_]/;
 const LEADING_DIGIT = /^\d/;
 const DOLLAR_PREFIX = /^\$/;
+const DOTS = /\./g;
 const RGBA =
   /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/;
 const CUBIC_BEZIER =
@@ -81,12 +82,36 @@ function toHex(n: number): string {
 
 type Curve = [number, number, number, number];
 
+/** One layer of a CSS `box-shadow`, in points. */
+export interface ShadowLayer {
+  blur: number;
+  color: { alpha: number; hex: string };
+  spread: number;
+  x: number;
+  y: number;
+}
+
 /** A value the platforms can hold, once every reference is followed. */
-type Resolved =
+export type Resolved =
   | { kind: "color"; hex: string; alpha: number }
   | { kind: "number"; value: number }
   /** A cubic Bézier easing — `$easing.*`. */
-  | { kind: "curve"; points: Curve };
+  | { kind: "curve"; points: Curve }
+  /**
+   * A composite shadow — `$shadow.sm`. Refused for as long as the emitter
+   * existed as "no single-value equivalent", which was true and beside the
+   * point: both platforms draw a shadow from offset, blur and colour, and
+   * without it the elevated card was a flat rectangle on both.
+   */
+  | { kind: "shadow"; layers: ShadowLayer[] };
+
+/** A token reference embedded in a composite value — `0px 1px $color.alpha.shadow1`. */
+const EMBEDDED_REF = /\$[a-z0-9-]+(?:\.[a-z0-9-]+)+/gi;
+/** `0px 1px 2px 0px rgba(0, 0, 0, 0.04)` — offset, offset, blur, spread, colour. */
+const SHADOW_LAYER =
+  /^(-?[\d.]+)px\s+(-?[\d.]+)px\s+(-?[\d.]+)px\s+(-?[\d.]+)px\s+(rgba?\([^)]*\)|#[0-9a-f]{6})$/i;
+/** A comma that separates layers, not one inside `rgba(…)`. */
+const LAYER_SEPARATOR = /,(?![^(]*\))/;
 
 /**
  * Follow `$color.text.primary` → `$color.neutral-950` → `#131416`.
@@ -119,7 +144,56 @@ function resolve(
   if (typeof value === "string" && TOKEN_REF.test(value)) {
     return resolve(value, mode, byName, seen);
   }
+  // A composite carries references inside it — a shadow names its colour and
+  // sometimes its offsets. Each is followed in the same mode, so a shadow
+  // built on a themed colour comes out different per theme, the way the CSS
+  // `var()` makes it.
+  if (typeof value === "string" && value.includes("$")) {
+    return value.replace(EMBEDDED_REF, (ref) => {
+      const inner = resolve(ref, mode, byName, new Set(seen));
+      return inner === null ? ref : String(inner);
+    });
+  }
   return value;
+}
+
+function parseColor(value: string): { alpha: number; hex: string } | null {
+  const hex = value.match(HEX);
+  if (hex) {
+    return { alpha: 1, hex: hex[1].toUpperCase() };
+  }
+  const rgba = value.match(RGBA);
+  if (rgba) {
+    const [, r, g, b, a] = rgba;
+    return {
+      alpha: a === undefined ? 1 : Number(a),
+      hex: toHex(Number(r)) + toHex(Number(g)) + toHex(Number(b)),
+    };
+  }
+  return null;
+}
+
+function parseShadow(value: string): ShadowLayer[] | null {
+  const layers: ShadowLayer[] = [];
+  for (const part of value.split(LAYER_SEPARATOR)) {
+    const match = part.trim().match(SHADOW_LAYER);
+    if (!match) {
+      return null;
+    }
+    const [, x, y, blur, spread, colour] = match;
+    const color = parseColor(colour);
+    if (!color) {
+      return null;
+    }
+    layers.push({
+      blur: Number(blur),
+      color,
+      spread: Number(spread),
+      x: Number(x),
+      y: Number(y),
+    });
+  }
+  return layers.length > 0 ? layers : null;
 }
 
 function classify(value: string | number | null): Resolved | string {
@@ -174,6 +248,13 @@ function classify(value: string | number | null): Resolved | string {
   if (value === "transparent") {
     return "transparent — `.clear` and `Color.Transparent` already exist";
   }
+  const layers = parseShadow(value);
+  if (layers) {
+    return { kind: "shadow", layers };
+  }
+  if (value.includes("$")) {
+    return "unresolved reference inside a composite value";
+  }
   if (value.includes(",")) {
     return "composite value — no single-value equivalent";
   }
@@ -210,20 +291,32 @@ function groupTypeName(group: string): string {
     .join("");
 }
 
-interface Entry {
+export interface Entry {
   dark?: Resolved;
+  /** The token group — `color`, `spacing`, `shadow`. */
+  group: string;
   light: Resolved;
+  /** The platform identifier — `textPrimary`, `s4`. */
   name: string;
   themed: boolean;
+  /** The source name — `$color.text.primary`. */
+  token: string;
 }
 
-function collectEntries(
-  ast: Ast,
-  only?: string[]
-): {
+export interface ResolvedTokens {
   groups: Map<string, Entry[]>;
   skipped: { name: string; reason: string }[];
-} {
+}
+
+/**
+ * Every token in the AST, resolved to a value per mode.
+ *
+ * A token is themed when its collection declares both modes, or when a
+ * reference inside it reaches one that does: the shadows live in the
+ * single-mode `global` collection and name `$color.alpha.shadow1`, which the
+ * dark theme deepens. Read only in `default` they did not resolve at all.
+ */
+export function collectEntries(ast: Ast, only?: string[]): ResolvedTokens {
   const byName = new Map(ast.tokens.map((t) => [t.token.name, t]));
   const modesOf = new Map(ast.collections.map((c) => [c.name, c.modes]));
 
@@ -235,27 +328,34 @@ function collectEntries(
       continue;
     }
     const modes = modesOf.get(token.token.collection) ?? ["default"];
-    const themed = modes.includes("light") && modes.includes("dark");
-    const lightMode = themed ? "light" : "default";
+    const collectionThemed = modes.includes("light") && modes.includes("dark");
 
-    const light = classify(resolve(token.token.name, lightMode, byName));
+    // `resolve` falls back to `default`, so a single-mode token reads the same
+    // in both, and a composite reaching a themed colour reads differently.
+    const light = classify(resolve(token.token.name, "light", byName));
     if (typeof light === "string") {
       skipped.push({ name: token.token.name, reason: light });
       continue;
     }
-
-    let dark: Resolved | undefined;
-    if (themed) {
-      const resolved = classify(resolve(token.token.name, "dark", byName));
-      if (typeof resolved === "string") {
-        skipped.push({ name: token.token.name, reason: resolved });
-        continue;
-      }
-      dark = resolved;
+    const darkResolved = classify(resolve(token.token.name, "dark", byName));
+    if (typeof darkResolved === "string") {
+      skipped.push({ name: token.token.name, reason: darkResolved });
+      continue;
     }
+    const themed =
+      collectionThemed ||
+      JSON.stringify(light) !== JSON.stringify(darkResolved);
+    const dark = themed ? darkResolved : undefined;
 
     const { group, name } = identifier(token.token.name);
-    const entry: Entry = { dark, light, name, themed };
+    const entry: Entry = {
+      dark,
+      group,
+      light,
+      name,
+      themed,
+      token: token.token.name,
+    };
     const bucket = groups.get(group);
     if (bucket) {
       bucket.push(entry);
@@ -270,9 +370,26 @@ function collectEntries(
   return { groups, skipped };
 }
 
+function swiftColor(color: { alpha: number; hex: string }): string {
+  return color.alpha === 1
+    ? `SwiftUI.Color(hex: 0x${color.hex})`
+    : `SwiftUI.Color(hex: 0x${color.hex}, opacity: ${color.alpha})`;
+}
+
+function kotlinColor(color: { alpha: number; hex: string }): string {
+  return `ComposeColor(0x${toHex(color.alpha * 255)}${color.hex})`;
+}
+
 function swiftValue(value: Resolved): string {
   if (value.kind === "curve") {
     return value.points.join(", ");
+  }
+  if (value.kind === "shadow") {
+    const layers = value.layers.map(
+      (l) =>
+        `CocsoShadowLayer(x: ${l.x}, y: ${l.y}, blur: ${l.blur}, spread: ${l.spread}, color: ${swiftColor(l.color)})`
+    );
+    return `[${layers.join(", ")}]`;
   }
   if (value.kind !== "color") {
     return `${value.value}`;
@@ -285,6 +402,13 @@ function swiftValue(value: Resolved): string {
 function kotlinValue(value: Resolved): string {
   if (value.kind === "curve") {
     return `CubicBezierEasing(${value.points.map((p) => `${p}f`).join(", ")})`;
+  }
+  if (value.kind === "shadow") {
+    const layers = value.layers.map(
+      (l) =>
+        `CocsoShadowLayer(x = ${l.x}.dp, y = ${l.y}.dp, blur = ${l.blur}.dp, spread = ${l.spread}.dp, color = ${kotlinColor(l.color)})`
+    );
+    return `listOf(${layers.join(", ")})`;
   }
   if (value.kind !== "color") {
     return `${value.value}`;
@@ -321,6 +445,11 @@ function swiftConstant(group: string, entry: Entry): string[] {
       `        public static let ${name}: TimeInterval = ${swiftValue(value)}`,
     ];
   }
+  if (value.kind === "shadow") {
+    return [
+      `        public static let ${name}: [CocsoShadowLayer] = ${swiftValue(value)}`,
+    ];
+  }
   // Qualified: this sits inside `enum Color`, where the bare name is the enum
   // rather than SwiftUI's type.
   const swiftType = value.kind === "color" ? "SwiftUI.Color" : "CGFloat";
@@ -343,7 +472,60 @@ function kotlinConstant(group: string, entry: Entry): string {
   if (value.kind === "color") {
     return `        val ${entry.name}: ComposeColor = ${kotlinValue(value)}`;
   }
+  if (value.kind === "shadow") {
+    return `        val ${entry.name}: List<CocsoShadowLayer> = ${kotlinValue(value)}`;
+  }
   return `        val ${entry.name}: Dp = ${kotlinValue(value)}.dp`;
+}
+
+/** The type a themed token's function returns, per platform. */
+function swiftThemedType(value: Resolved): string {
+  return value.kind === "shadow" ? "[CocsoShadowLayer]" : "SwiftUI.Color";
+}
+
+function kotlinThemedType(value: Resolved): string {
+  return value.kind === "shadow" ? "List<CocsoShadowLayer>" : "ComposeColor";
+}
+
+function swiftShadowDeclarations(): string[] {
+  return [
+    "/// One layer of a `box-shadow`, as the web writes it: offset, blur, spread,",
+    "/// colour. Draw a token's layers with `ccShadow` — the CSS blur is a diameter",
+    "/// and SwiftUI's `radius` a sigma, so the view halves it.",
+    "public struct CocsoShadowLayer: Equatable, Sendable {",
+    "    public let x: CGFloat",
+    "    public let y: CGFloat",
+    "    public let blur: CGFloat",
+    "    public let spread: CGFloat",
+    "    public let color: SwiftUI.Color",
+    "",
+    "    public init(x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat, color: SwiftUI.Color) {",
+    "        self.x = x",
+    "        self.y = y",
+    "        self.blur = blur",
+    "        self.spread = spread",
+    "        self.color = color",
+    "    }",
+    "}",
+    "",
+  ];
+}
+
+function kotlinShadowDeclarations(): string[] {
+  return [
+    "/**",
+    " * One layer of a `box-shadow`, as the web writes it: offset, blur, spread,",
+    " * colour. Draw a token's layers with `Modifier.ccShadow`.",
+    " */",
+    "data class CocsoShadowLayer(",
+    "    val x: Dp,",
+    "    val y: Dp,",
+    "    val blur: Dp,",
+    "    val spread: Dp,",
+    "    val color: ComposeColor,",
+    ")",
+    "",
+  ];
 }
 
 function pascal(name: string): string {
@@ -412,7 +594,7 @@ function swiftThemedFunction(
     // pass `brand:` uniformly; a token no brand overrides ignores it.
     const axis = brands?.length ? ", brand _: CocsoBrand = .base" : "";
     return [
-      `        public static func ${entry.name}(_ scheme: ColorScheme${axis}) -> SwiftUI.Color {`,
+      `        public static func ${entry.name}(_ scheme: ColorScheme${axis}) -> ${swiftThemedType(entry.light)} {`,
       `            ${base}`,
       "        }",
     ];
@@ -448,7 +630,7 @@ function kotlinThemedFunction(
     return [
       "        @Composable",
       "        @ReadOnlyComposable",
-      `        fun ${entry.name}(): ComposeColor =`,
+      `        fun ${entry.name}(): ${kotlinThemedType(entry.light)} =`,
       `            ${base}`,
     ];
   }
@@ -464,6 +646,12 @@ function kotlinThemedFunction(
     `            else -> ${base}`,
     "        }",
   ];
+}
+
+function hasShadow(groups: Map<string, Entry[]>): boolean {
+  return [...groups.values()].some((entries) =>
+    entries.some((e) => e.light.kind === "shadow")
+  );
 }
 
 function generateSwift(ast: Ast, options: MobileOptions): string {
@@ -487,6 +675,7 @@ function generateSwift(ast: Ast, options: MobileOptions): string {
     "}",
     "",
     ...(type === "CocsoTokens" ? swiftBrandDeclarations(options.brands) : []),
+    ...(hasShadow(groups) ? swiftShadowDeclarations() : []),
     `public enum ${type} {`,
   ];
 
@@ -553,6 +742,7 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
     "import androidx.compose.ui.unit.dp",
     "",
     ...(type === "CocsoTokens" ? kotlinBrandDeclarations(options.brands) : []),
+    ...(hasShadow(groups) ? kotlinShadowDeclarations() : []),
     `object ${type} {`,
   ];
 
@@ -582,6 +772,130 @@ function generateKotlin(ast: Ast, options: MobileOptions): string {
   return lines.join("\n");
 }
 
+/** A resolved value as the JSON artifact writes it. */
+function jsonValue(value: Resolved): unknown {
+  switch (value.kind) {
+    case "color":
+      return { alpha: value.alpha, hex: `#${value.hex}` };
+    case "number":
+      return { value: value.value };
+    case "curve":
+      return { points: value.points };
+    case "shadow":
+      return {
+        layers: value.layers.map((l) => ({
+          blur: l.blur,
+          color: { alpha: l.color.alpha, hex: `#${l.color.hex}` },
+          spread: l.spread,
+          x: l.x,
+          y: l.y,
+        })),
+      };
+    default:
+      return value;
+  }
+}
+
+export interface TokensJsonOptions {
+  /** Each brand's resolved overlay, from its own AST. */
+  brands?: { name: string; tokens: ResolvedTokens }[];
+}
+
+/**
+ * The tokens as data, for a consumer that is a program rather than a compiler.
+ *
+ * `cocso/mobile` syncs its own token layer from `CocsoTokens.swift` with a
+ * regular-expression parser, and the parser has had to follow every change of
+ * signature: the brand axis, the backticked `default`, `CGFloat` becoming
+ * `TimeInterval`. Each time it kept working by a hard-coded minimum count. A
+ * consumer should not have to parse Swift to learn a colour; this is the same
+ * resolution the Swift and Kotlin come from, written as JSON — every token,
+ * every mode, every brand's override, and what was skipped and why.
+ *
+ * Deterministic: no timestamp, keys in source order, so a golden test can hold
+ * the published file to the generator.
+ */
+type BrandIndex = Map<string, Map<string, Entry>>;
+
+/** Each brand's overlay, keyed by `group/identifier` for lookup from the base. */
+function indexBrands(options: TokensJsonOptions): BrandIndex {
+  const index: BrandIndex = new Map();
+  for (const brand of options.brands ?? []) {
+    const byIdentifier = new Map<string, Entry>();
+    for (const entries of brand.tokens.groups.values()) {
+      for (const entry of entries) {
+        byIdentifier.set(`${entry.group}/${entry.name}`, entry);
+      }
+    }
+    index.set(brand.name, byIdentifier);
+  }
+  return index;
+}
+
+function modeValues(entry: Entry): Record<string, unknown> {
+  return entry.themed
+    ? {
+        dark: jsonValue(entry.dark ?? entry.light),
+        light: jsonValue(entry.light),
+      }
+    : { default: jsonValue(entry.light) };
+}
+
+/** One token as the artifact writes it, with any brand overrides inline. */
+function tokenJson(entry: Entry, brandIndex: BrandIndex): unknown {
+  const brands: Record<string, unknown> = {};
+  for (const [brandName, byIdentifier] of brandIndex) {
+    const override = byIdentifier.get(`${entry.group}/${entry.name}`);
+    if (override) {
+      brands[brandName] = modeValues({ ...override, themed: true });
+    }
+  }
+  return {
+    // The CSS custom property the same token is published as.
+    css: `--cocso-${entry.token.replace(DOLLAR_PREFIX, "").replace(DOTS, "-")}`,
+    group: entry.group,
+    identifier: entry.name,
+    kind: entry.group === "duration" ? "duration" : entry.light.kind,
+    themed: entry.themed,
+    values: modeValues(entry),
+    ...(Object.keys(brands).length > 0 ? { brands } : {}),
+  };
+}
+
+export function generateTokensJson(
+  ast: Ast,
+  options: TokensJsonOptions = {}
+): string {
+  const base = collectEntries(ast);
+  const brandIndex = indexBrands(options);
+  const tokens: Record<string, unknown> = {};
+  for (const entries of base.groups.values()) {
+    for (const entry of entries) {
+      tokens[entry.token] = tokenJson(entry, brandIndex);
+    }
+  }
+
+  return `${JSON.stringify(
+    {
+      $comment:
+        "Generated by @cocso-ui/baseframe — do not edit. Regenerate: pnpm --filter @cocso-ui/baseframe generate:mobile",
+      brands: (options.brands ?? []).map((b) => b.name),
+      kinds: {
+        color: "hex is #RRGGBB; alpha is 0–1",
+        curve: "cubic-bezier control points",
+        duration: "seconds",
+        number: "CSS pixels, or unitless for font-weight and z-index",
+        shadow: "box-shadow layers; lengths in CSS pixels",
+      },
+      skipped: base.skipped,
+      tokens,
+      version: 1,
+    },
+    null,
+    2
+  )}\n`;
+}
+
 export function generateMobileFromAst(
   ast: Ast,
   options: MobileOptions = {}
@@ -595,5 +909,7 @@ export function generateMobileFromAst(
 }
 
 export const mobile = {
+  collectEntries,
   generateMobileFromAst,
+  generateTokensJson,
 } as const;

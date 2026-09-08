@@ -27,6 +27,18 @@ enum class CocsoBrand {
 
 val LocalCocsoBrand = compositionLocalOf { CocsoBrand.Base }
 
+/**
+ * One layer of a `box-shadow`, as the web writes it: offset, blur, spread,
+ * colour. Draw a token's layers with `Modifier.ccShadow`.
+ */
+data class CocsoShadowLayer(
+    val x: Dp,
+    val y: Dp,
+    val blur: Dp,
+    val spread: Dp,
+    val color: ComposeColor,
+)
+
 object CocsoTokens {
     object Color {
         val black: ComposeColor = ComposeColor(0xFF000000)
@@ -465,6 +477,45 @@ object CocsoTokens {
         val blur4: Dp = 24.dp
         val y3: Dp = 8.dp
         val y4: Dp = 16.dp
+
+        // Resolved against the system theme, so a caller cannot render
+        // light tokens in a dark window by forgetting to pass a flag.
+        @Composable
+        @ReadOnlyComposable
+        fun card(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x5C000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x14000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun dialog(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x5C000000)), CocsoShadowLayer(x = 0.dp, y = 8.dp, blur = 16.dp, spread = 0.dp, color = ComposeColor(0x7A000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x14000000)), CocsoShadowLayer(x = 0.dp, y = 8.dp, blur = 16.dp, spread = 0.dp, color = ComposeColor(0x1F000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun dropdown(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x5C000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x14000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun lg(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x5C000000)), CocsoShadowLayer(x = 0.dp, y = 16.dp, blur = 24.dp, spread = 0.dp, color = ComposeColor(0x7A000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x14000000)), CocsoShadowLayer(x = 0.dp, y = 16.dp, blur = 24.dp, spread = 0.dp, color = ComposeColor(0x1F000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun md(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x5C000000)), CocsoShadowLayer(x = 0.dp, y = 8.dp, blur = 16.dp, spread = 0.dp, color = ComposeColor(0x7A000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x14000000)), CocsoShadowLayer(x = 0.dp, y = 8.dp, blur = 16.dp, spread = 0.dp, color = ComposeColor(0x1F000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun popover(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x5C000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x14000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun sm(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x5C000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 4.dp, blur = 8.dp, spread = 0.dp, color = ComposeColor(0x14000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun thumb(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 1.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 1.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)))
+        @Composable
+        @ReadOnlyComposable
+        fun xs(): List<CocsoShadowLayer> =
+            if (isSystemInDarkTheme()) listOf(CocsoShadowLayer(x = 0.dp, y = 1.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000)), CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x3D000000))) else listOf(CocsoShadowLayer(x = 0.dp, y = 1.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)), CocsoShadowLayer(x = 0.dp, y = 0.dp, blur = 2.dp, spread = 0.dp, color = ComposeColor(0x0A000000)))
     }
 
     object Spacing {

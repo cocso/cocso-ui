@@ -59,6 +59,8 @@ const snapshotsDir = path.join(
 const cssDir = path.join(repoRoot, "packages/css");
 
 export interface BrandOutput {
+  /** The brand's own AST — the colour primitives plus its overlay. */
+  ast: ReturnType<typeof buildValidatedAst>;
   css: string;
   kotlin: string;
   skipped: { name: string; reason: string }[];
@@ -122,7 +124,21 @@ export function buildBrand(brand: string): BrandOutput {
     typeName: `CocsoBrand${pascal}`,
   });
 
-  return { css, kotlin: out.kotlin, skipped: out.skipped, swift: out.swift };
+  return { ast, css, kotlin: out.kotlin, skipped: out.skipped, swift: out.swift };
+}
+
+/**
+ * Each brand's overlay as resolved values, for the JSON artifact — the same
+ * resolution its Swift and Kotlin come from.
+ */
+export function brandResolved(): {
+  name: string;
+  tokens: ReturnType<typeof mobile.collectEntries>;
+}[] {
+  return BRANDS.map((brand) => ({
+    name: brand,
+    tokens: mobile.collectEntries(buildBrand(brand).ast, ["brand"]),
+  }));
 }
 
 /**

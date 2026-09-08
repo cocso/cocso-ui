@@ -100,9 +100,9 @@ describe("A component's variants agree across platforms", () => {
 /**
  * A view is recipe-backed when the generator emitted a style for it. Not every
  * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum,
- * `CCMotion` builds the shared animations from the motion tokens, and
- * `CCGlass` is the glass surface bars sit on — each reads tokens directly
- * because there is no variant to resolve.
+ * `CCMotion` builds the shared animations from the motion tokens, `CCGlass` is
+ * the glass surface bars sit on, and `CCShadow` draws a shadow token's layers
+ * — each reads tokens directly because there is no variant to resolve.
  *
  * The set is read from the generated styles rather than assumed, and the
  * leftovers are then checked against the one name expected to be among them —
@@ -126,6 +126,7 @@ describe("Views take their values from the generated styles", () => {
     expect(shared.filter((n) => !generatedStyles.has(n))).toEqual([
       "CCGlass",
       "CCMotion",
+      "CCShadow",
       "CCTouchTarget",
     ]);
   });
