@@ -10,7 +10,7 @@ public struct CCSkeleton: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var pulsing = false
+    @State private var phase = false
 
     public init(
         variant: CCSkeletonVariant = .text,
@@ -37,14 +37,39 @@ public struct CCSkeleton: View {
         return shape
             .fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand))
             .frame(width: style.width, height: style.height ?? 16)
-            .opacity(animates && pulsing ? 0.45 : 1)
+            // The web's `skeleton-pulse`: 1 → 0.4 → 1 over `duration-decorative-slow`
+            // on `easing-default`. Half the period each way, auto-reversed.
+            .opacity(animates && animation == .pulse && phase ? 0.4 : 1)
+            .overlay(wave(animates: animates && animation == .wave))
+            .clipShape(shape)
             .animation(
                 animates
-                    ? .easeInOut(duration: 1).repeatForever(autoreverses: true)
+                    ? CocsoTokens.Easing.default(
+                        animation == .pulse
+                            ? CocsoTokens.Duration.decorativeSlow / 2
+                            : CocsoTokens.Duration.decorativeSlow
+                    )
+                    .repeatForever(autoreverses: animation == .pulse)
                     : nil,
-                value: pulsing
+                value: phase
             )
-            .onAppear { pulsing = animates }
+            .onAppear { phase = animates }
             .accessibilityHidden(true)
+    }
+
+    /// The web's `skeleton-wave`: a band of `white-alpha-40` sweeping from off
+    /// the left edge to off the right, once per `duration-decorative-slow`.
+    @ViewBuilder
+    private func wave(animates: Bool) -> some View {
+        if animates {
+            GeometryReader { geometry in
+                LinearGradient(
+                    colors: [.clear, CocsoTokens.Color.whiteAlpha40, .clear],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .offset(x: phase ? geometry.size.width : -geometry.size.width)
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package ai.cocso.ui
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -7,12 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.progressBarRangeInfo
-import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 
@@ -30,6 +32,9 @@ fun CCProgress(
     val fraction = if (total > 0f) (value / total).coerceIn(0f, 1f) else 0f
     val height = style.height ?: 8.dp
     val shape = RoundedCornerShape(style.borderRadius ?: height / 2)
+    // The web's `transition: width normal soft`: the bar fills to the new
+    // value rather than jumping to it. The semantics carry the real value.
+    val drawn by animateFloatAsState(fraction, animationSpec = CCMotion.fill(), label = "progress")
 
     Box(
         modifier = modifier
@@ -47,7 +52,7 @@ fun CCProgress(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(fraction)
+                .fillMaxWidth(drawn)
                 .fillMaxHeight()
                 .clip(shape)
                 .background(style.fillColor ?: CocsoTokens.Color.interactivePrimary())

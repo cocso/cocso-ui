@@ -108,6 +108,9 @@ final class ComponentRenderTests: XCTestCase {
         assertDraws("badge-outline", scheme) { CCBadge("Outline", variant: .outline) }
         assertDraws("card", scheme) { CCCard { CCTypography("Card") } }
         assertDraws("card-outlined", scheme) { CCCard(variant: .outlined) { CCTypography("Outlined") } }
+        assertDraws("card-glass", scheme) { CCCard(variant: .glass) { CCTypography("Glass") } }
+        assertDraws("glass-bar", scheme) { CCGlassBar { CCTypography("Tab") } }
+        assertDraws("skeleton-wave", scheme) { CCSkeleton(variant: .rectangular, animation: .wave) }
         assertDraws("alert", scheme) { CCAlert("Alert", message: "message") }
         assertDraws("avatar", scheme) { CCAvatar(initials: "CO", label: "코쏘") }
         assertDraws("progress", scheme) { CCProgress(value: 60) }
@@ -128,6 +131,9 @@ final class ComponentRenderTests: XCTestCase {
         CCBadge("Outline", variant: .outline)
         CCCard { CCTypography("Card") }
         CCCard(variant: .outlined) { CCTypography("Outlined card") }
+        CCCard(variant: .glass) { CCTypography("Glass card") }
+        CCGlassBar { CCTypography("Glass bar") }
+        CCSkeleton(animation: .wave)
         CCAlert("Alert", message: "message")
         CCAvatar(initials: "CO", label: "코쏘")
         CCProgress(value: 60)
@@ -170,6 +176,19 @@ final class ComponentRenderTests: XCTestCase {
             b > 0.75 && r < 0.4 && g > 0.3 && g < 0.6,
             "primary 가 파랑이 아니다: r=\(r) g=\(g) b=\(b)"
         )
+    }
+
+    /// The motion tokens are time and curves. `Duration.fast` was a `CGFloat`
+    /// of points and no easing crossed at all, so every view timed itself.
+    func testMotionTokensAreTimeAndCurves() {
+        XCTAssertEqual(CocsoTokens.Duration.fast, 0.15)
+        XCTAssertEqual(CocsoTokens.Duration.decorativeSlow, 1.5)
+        // A curve is an `Animation` once it has a duration; that it builds is
+        // the check, since `Animation` exposes nothing to read back.
+        _ = CocsoTokens.Easing.entrance(CocsoTokens.Duration.slow)
+        _ = CocsoTokens.Easing.default(CocsoTokens.Duration.fast)
+        XCTAssertNil(CCMotion.colour(reduced: true), "reduced motion must animate nothing")
+        XCTAssertNotNil(CCMotion.colour(reduced: false))
     }
 
     @MainActor

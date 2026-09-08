@@ -15,6 +15,7 @@ public struct CCBadge: View {
     // The brand the app set at its root. Tokens and resolvers take it so a
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         _ text: String,
@@ -37,6 +38,11 @@ public struct CCBadge: View {
         )
         Text(text)
             .font(.system(size: style.fontSize ?? 12, weight: .semibold))
+            // A count that changes rolls its digits; a variant that changes
+            // recolours. Both on the web's colour curve.
+            .contentTransition(.numericText())
+            .animation(CCMotion.colour(reduced: reduceMotion), value: text)
+            .animation(CCMotion.colour(reduced: reduceMotion), value: variant)
             .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)

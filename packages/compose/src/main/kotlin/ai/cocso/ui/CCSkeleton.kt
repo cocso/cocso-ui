@@ -1,6 +1,5 @@
 package ai.cocso.ui
 
-import android.provider.Settings
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -17,27 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
-
-/**
- * Whether the user has asked the system to stop animating.
- *
- * The web reads `prefers-reduced-motion` and SwiftUI reads
- * `accessibilityReduceMotion`. Android has no single flag: the setting users
- * reach through Developer options and through accessibility shortcuts both
- * land on the animator duration scale, and zero there is the platform's way of
- * saying the same thing.
- *
- * Kept here rather than in its own file because [CCSpinner] is the only other
- * caller and a file with no counterpart on iOS would fail the parity gate.
- */
-@Composable
-internal fun reducedMotion(): Boolean {
-    val resolver = LocalContext.current.contentResolver
-    return Settings.Global.getFloat(resolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
-}
 
 /** A placeholder while content loads. */
 @Composable
@@ -51,15 +35,36 @@ fun CCSkeleton(
     // `prefers-reduced-motion`; this is the same setting on Android.
     val animates = animation != CCSkeletonAnimation.none && !reducedMotion()
 
-    val opacity = if (animates) {
+    // The web's `skeleton-pulse`: 1 → 0.4 → 1 over `duration-decorative-slow`
+    // on `easing-default`. Half the period each way, reversed.
+    val opacity = if (animates && animation == CCSkeletonAnimation.pulse) {
         rememberInfiniteTransition(label = "skeleton").animateFloat(
             initialValue = 1f,
-            targetValue = 0.45f,
-            animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse),
+            targetValue = 0.4f,
+            animationSpec = infiniteRepeatable(
+                tween(CocsoTokens.Duration.decorativeSlow / 2, easing = CocsoTokens.Easing.default),
+                RepeatMode.Reverse,
+            ),
             label = "skeleton-opacity",
         ).value
     } else {
         1f
+    }
+
+    // The web's `skeleton-wave`: a band of `white-alpha-40` sweeping from off
+    // the left edge to off the right, once per `duration-decorative-slow`.
+    val sweep = if (animates && animation == CCSkeletonAnimation.wave) {
+        rememberInfiniteTransition(label = "skeleton-wave").animateFloat(
+            initialValue = -1f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                tween(CocsoTokens.Duration.decorativeSlow, easing = CocsoTokens.Easing.default),
+                RepeatMode.Restart,
+            ),
+            label = "skeleton-sweep",
+        ).value
+    } else {
+        null
     }
 
     val sized = style.width?.let { modifier.width(it) } ?: modifier.fillMaxWidth()
@@ -79,6 +84,23 @@ fun CCSkeleton(
             )
             .alpha(opacity)
             .background(style.bgColor ?: CocsoTokens.Color.surfaceNeutral())
+            .drawWithContent {
+                drawContent()
+                if (sweep != null) {
+                    val x = sweep * size.width
+                    drawRect(
+                        Brush.linearGradient(
+                            colors = listOf(
+                                ComposeColor.Transparent,
+                                CocsoTokens.Color.whiteAlpha40,
+                                ComposeColor.Transparent,
+                            ),
+                            start = Offset(x, 0f),
+                            end = Offset(x + size.width, 0f),
+                        )
+                    )
+                }
+            }
             // Decoration: it carries no information a screen reader can use.
             .clearAndSetSemantics {}
     )

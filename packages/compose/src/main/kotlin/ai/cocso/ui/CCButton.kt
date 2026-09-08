@@ -1,6 +1,11 @@
 package ai.cocso.ui
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -21,8 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.foundation.border
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +67,37 @@ fun CCButton(
     // 정하지 않는다.
     val isPressed by interactionSource.collectIsPressedAsState()
 
+    // The pressed colours arrive on the web's curve (`duration-fast`,
+    // `easing-default`) rather than on the frame the finger lands, and the
+    // button gives a little under it — the one thing a touch has that a
+    // pointer does not.
+    val background by animateColorAsState(
+        (if (isPressed) style.bgColorPressed else null)
+            ?: style.bgColor
+            ?: CocsoTokens.Color.surfacePrimary(),
+        animationSpec = CCMotion.colour(),
+        label = "button-background",
+    )
+    val foreground by animateColorAsState(
+        (if (isPressed) style.fontColorPressed else null)
+            ?: style.fontColor
+            ?: CocsoTokens.Color.textPrimary(),
+        animationSpec = CCMotion.colour(),
+        label = "button-foreground",
+    )
+    val scale by animateFloatAsState(
+        if (isPressed) CCMotion.pressedScale else 1f,
+        animationSpec = CCMotion.movement(),
+        label = "button-scale",
+    )
+    // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
+    // button the same way rather than restating every variant.
+    val dim by animateFloatAsState(
+        if (enabled) 1f else 0.4f,
+        animationSpec = CCMotion.colour(),
+        label = "button-enabled",
+    )
+
     val alignment = when (align) {
         // `between` spreads content in CSS, which has no single alignment here.
         // It maps to start, and a caller wanting the spread lays it out itself.
@@ -69,21 +105,25 @@ fun CCButton(
         CCButtonAlign.center -> Alignment.Center
     }
 
+    val crossfade: FiniteAnimationSpec<Float> = CCMotion.colour()
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(style.height ?: 36.dp)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
             // `shape = circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
             // square.
-            // WCAG 1.4.3 exempts an inactive control, and the web dims a
-            // disabled button the same way rather than restating every variant.
             //
             // This comes before `background`: a Compose modifier affects what is
             // drawn after it in the chain, so `alpha` placed below the fill dimmed
             // only the label and left the fill at full strength — a disabled
             // primary button was solid black on Android and grey on iOS.
-            .alpha(if (enabled) 1f else 0.4f)
+            .alpha(dim)
             .onFocusChanged { isFocused = it.isFocused }
             // The recipe's border — the outline variant. Then the focus ring,
             // only while focused: `Modifier.border(0.dp)` is not "none", it is
@@ -103,11 +143,7 @@ fun CCButton(
                 }
             )
             .clip(buttonShape)
-            .background(
-                (if (isPressed) style.bgColorPressed else null)
-                    ?: style.bgColor
-                    ?: CocsoTokens.Color.surfacePrimary()
-            )
+            .background(background)
             .clickable(
                 enabled = enabled && !loading,
                 interactionSource = interactionSource,
@@ -118,28 +154,28 @@ fun CCButton(
             .padding(horizontal = style.paddingInline ?: 0.dp),
         contentAlignment = alignment,
     ) {
-        if (loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.height(16.dp),
-                color = (if (isPressed) style.fontColorPressed else null)
-                    ?: style.fontColor
-                    ?: CocsoTokens.Color.textPrimary(),
-            )
-        } else {
-            Text(
-                text = title,
-                // The recipe pads the label inside the button as well as the
-                // button itself; dropping it made every button narrower than
-                // the web's by the difference.
-                modifier = Modifier.padding(
-                    horizontal = style.contentPaddingX ?: 0.dp,
-                    vertical = style.contentPaddingY ?: 0.dp,
-                ),
-                color = (if (isPressed) style.fontColorPressed else null)
-                    ?: style.fontColor
-                    ?: CocsoTokens.Color.textPrimary(),
-                fontSize = (style.fontSize?.value ?: 14f).sp,
-            )
+        // The label fades and the indicator fades in over it, rather than
+        // swapping on one frame.
+        Crossfade(targetState = loading, animationSpec = crossfade, label = "button-loading") { isLoading ->
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.height(16.dp),
+                    color = foreground,
+                )
+            } else {
+                Text(
+                    text = title,
+                    // The recipe pads the label inside the button as well as the
+                    // button itself; dropping it made every button narrower than
+                    // the web's by the difference.
+                    modifier = Modifier.padding(
+                        horizontal = style.contentPaddingX ?: 0.dp,
+                        vertical = style.contentPaddingY ?: 0.dp,
+                    ),
+                    color = foreground,
+                    fontSize = (style.fontSize?.value ?: 14f).sp,
+                )
+            }
         }
     }
 }

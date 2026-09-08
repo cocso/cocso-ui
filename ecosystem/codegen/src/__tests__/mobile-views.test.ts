@@ -99,8 +99,10 @@ describe("A component's variants agree across platforms", () => {
 
 /**
  * A view is recipe-backed when the generator emitted a style for it. Not every
- * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum, with
- * no recipe behind it and so nothing to resolve.
+ * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum,
+ * `CCMotion` builds the shared animations from the motion tokens, and
+ * `CCGlass` is the glass surface bars sit on — each reads tokens directly
+ * because there is no variant to resolve.
  *
  * The set is read from the generated styles rather than assumed, and the
  * leftovers are then checked against the one name expected to be among them —
@@ -122,6 +124,8 @@ describe("Views take their values from the generated styles", () => {
 
   it("exempts only the views with no recipe behind them", () => {
     expect(shared.filter((n) => !generatedStyles.has(n))).toEqual([
+      "CCGlass",
+      "CCMotion",
       "CCTouchTarget",
     ]);
   });
@@ -223,7 +227,7 @@ describe("Views read every value their resolver gives them", () => {
  * what "disabled" looks like, and nothing here said so.
  */
 describe("Compose dims the whole control, not only its content", () => {
-  const views = kotlin.filter((n) => n !== "CCTouchTarget");
+  const views = kotlin.filter((n) => generatedStyles.has(n));
   it.each(views)("%s applies alpha before background", (name) => {
     const source = readFileSync(path.join(KOTLIN_DIR, `${name}.kt`), "utf-8");
     const alpha = source.indexOf(".alpha(");
@@ -235,5 +239,69 @@ describe("Compose dims the whole control, not only its content", () => {
       alpha,
       `${name}: .alpha( comes after .background(, so the fill is never dimmed`
     ).toBeLessThan(background);
+  });
+});
+
+/**
+ * A view that animates honours reduced motion and times itself from the
+ * tokens.
+ *
+ * The web's rule (`module-css-motion-rtl.test.ts`): a module that animates
+ * MUST honour `prefers-reduced-motion`, because motion is decoration and every
+ * component reads the same without it. The same here, through
+ * `accessibilityReduceMotion` on iOS and the animator duration scale on
+ * Android — both reached through `CCMotion`. And the duration and curve come
+ * from the motion tokens: before they crossed, the spinner turned in `0.8` and
+ * the skeleton pulsed in `1000`, numbers that matched nothing on the web.
+ */
+describe("Views that animate honour reduced motion and use the motion tokens", () => {
+  const SWIFT_ANIMATES = /\.animation\(|\.transition\(|withAnimation/;
+  const KOTLIN_ANIMATES =
+    /animate\w+AsState|rememberInfiniteTransition|AnimatedContent|AnimatedVisibility|Crossfade/;
+  // A literal duration where a token should be.
+  const SWIFT_LITERAL = /\.(?:linear|easeIn|easeOut|easeInOut)\(duration: \d|Easing\.\w+\(\d/;
+  const KOTLIN_LITERAL = /tween\(\d/;
+  /** Literal durations that are deliberate, with the reason. */
+  const LITERAL_ALLOWED: Readonly<Record<string, string>> = {
+    // The web's `spinner-reduced-pulse` is a literal `2s` as well: the pulse
+    // that replaces the spin under reduced motion has no token on any platform.
+    CCSpinner: "spinner-reduced-pulse is a literal 2s on the web too",
+  };
+
+  const views = swift.filter(
+    (n) => kotlin.includes(n) && n !== "CCMotion" && n !== "CCTouchTarget"
+  );
+
+  it.each(views)("%s", (name) => {
+    const swiftSource = readFileSync(
+      path.join(SWIFT_DIR, `${name}.swift`),
+      "utf-8"
+    );
+    const kotlinSource = readFileSync(
+      path.join(KOTLIN_DIR, `${name}.kt`),
+      "utf-8"
+    );
+    if (SWIFT_ANIMATES.test(swiftSource)) {
+      expect(
+        swiftSource,
+        `${name} (iOS) animates without reading reduceMotion`
+      ).toMatch(/reduceMotion/);
+    }
+    if (KOTLIN_ANIMATES.test(kotlinSource)) {
+      expect(
+        kotlinSource,
+        `${name} (Android) animates without CCMotion or reducedMotion()`
+      ).toMatch(/CCMotion\.|reducedMotion\(\)/);
+    }
+    if (!(name in LITERAL_ALLOWED)) {
+      expect(
+        SWIFT_LITERAL.test(swiftSource),
+        `${name} (iOS) hard-codes a duration; use CocsoTokens.Duration`
+      ).toBe(false);
+      expect(
+        KOTLIN_LITERAL.test(kotlinSource),
+        `${name} (Android) hard-codes a duration; use CocsoTokens.Duration`
+      ).toBe(false);
+    }
   });
 });

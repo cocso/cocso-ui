@@ -1,5 +1,15 @@
 package ai.cocso.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,6 +41,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -56,8 +67,39 @@ fun CCInput(
     var isFocused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
 
+    // The web's `transition: box-shadow fast soft` — the focus ring thickens
+    // and recolours rather than appearing.
+    val borderWidth by animateDpAsState(
+        if (isFocused) 2.dp else 1.dp,
+        animationSpec = CCMotion.colour(),
+        label = "input-border-width",
+    )
+    val borderColor by animateColorAsState(
+        // 웹의 순서: 오류가 먼저, 그다음 포커스, 그다음 쉬는 상태.
+        when {
+            errorMessage != null -> CocsoTokens.Color.feedbackDanger()
+            isFocused -> CocsoTokens.Color.focusRing()
+            else -> style.borderColor ?: CocsoTokens.Color.borderStrong()
+        },
+        animationSpec = CCMotion.colour(),
+        label = "input-border",
+    )
+    val dim by animateFloatAsState(
+        if (enabled) 1f else 0.4f,
+        animationSpec = CCMotion.colour(),
+        label = "input-enabled",
+    )
+    val reveal: FiniteAnimationSpec<Float> = CCMotion.colour()
+    val fade: FiniteAnimationSpec<Float> = CCMotion.entrance()
+    val grow: FiniteAnimationSpec<IntSize> = CCMotion.entrance()
+    // The last message stays for the exit animation once the error clears.
+    var shownError by remember { mutableStateOf(errorMessage) }
+    if (errorMessage != null) {
+        shownError = errorMessage
+    }
+
     Column(
-        modifier = modifier.alpha(if (enabled) 1f else 0.4f),
+        modifier = modifier.alpha(dim),
         verticalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s3),
     ) {
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.small)
@@ -67,16 +109,7 @@ fun CCInput(
                 .height(style.height ?: 36.dp)
                 .clip(shape)
                 .background(CocsoTokens.Color.surfacePrimary())
-                .border(
-                    if (isFocused) 2.dp else 1.dp,
-                    // 웹의 순서: 오류가 먼저, 그다음 포커스, 그다음 쉬는 상태.
-                    when {
-                        errorMessage != null -> CocsoTokens.Color.feedbackDanger()
-                        isFocused -> CocsoTokens.Color.focusRing()
-                        else -> style.borderColor ?: CocsoTokens.Color.borderStrong()
-                    },
-                    shape,
-                )
+                .border(borderWidth, borderColor, shape)
                 .padding(horizontal = style.paddingX ?: 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -111,27 +144,35 @@ fun CCInput(
                 )
             }
             if (isSecure) {
-                Icon(
-                    imageVector = if (revealed) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                    contentDescription = if (revealed) "Hide password" else "Show password",
-                    // One step back from the value, and it clears AA in both
-                    // themes; `text-tertiary` is 3.08:1 on white.
-                    tint = CocsoTokens.Color.textSecondary(),
-                    modifier = Modifier
-                        .clickable(
-                            interactionSource = interactionSource,
-                            indication = null,
-                            onClick = { revealed = !revealed },
-                        )
-                        .ccMinimumTouchTarget(),
-                )
+                // The two glyphs cross-fade rather than swap.
+                Crossfade(targetState = revealed, animationSpec = reveal, label = "input-reveal") { isRevealed ->
+                    Icon(
+                        imageVector = if (isRevealed) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                        contentDescription = if (isRevealed) "Hide password" else "Show password",
+                        // One step back from the value, and it clears AA in both
+                        // themes; `text-tertiary` is 3.08:1 on white.
+                        tint = CocsoTokens.Color.textSecondary(),
+                        modifier = Modifier
+                            .clickable(
+                                interactionSource = interactionSource,
+                                indication = null,
+                                onClick = { revealed = !revealed },
+                            )
+                            .ccMinimumTouchTarget(),
+                    )
+                }
             }
         }
-        if (errorMessage != null) {
+        // The message slides in under the field on the entrance curve.
+        AnimatedVisibility(
+            visible = errorMessage != null,
+            enter = expandVertically(grow) + fadeIn(fade),
+            exit = shrinkVertically(grow) + fadeOut(fade),
+        ) {
             // The text level, not the fill level: `feedback-danger` is 4.18:1
             // on a card in the light theme.
             Text(
-                text = errorMessage,
+                text = shownError ?: "",
                 color = CocsoTokens.Color.feedbackDangerText(),
                 fontSize = 12.sp,
             )

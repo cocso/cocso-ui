@@ -1,5 +1,14 @@
 package ai.cocso.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -52,9 +61,28 @@ fun CCCheckbox(
     // was 1.09:1 in dark mode.
     val tint = CocsoTokens.Color.textOnPrimary()
 
+    // The fill arrives on the web's colour curve; the glyph pops in on the
+    // entrance curve, from small and clear.
+    val fill by animateColorAsState(
+        style.bgColor ?: CocsoTokens.Color.surfacePrimary(),
+        animationSpec = CCMotion.colour(),
+        label = "checkbox-fill",
+    )
+    val edge by animateColorAsState(
+        style.borderColor ?: CocsoTokens.Color.borderPrimary(),
+        animationSpec = CCMotion.colour(),
+        label = "checkbox-border",
+    )
+    val dim by animateFloatAsState(
+        if (enabled) 1f else 0.4f,
+        animationSpec = CCMotion.colour(),
+        label = "checkbox-enabled",
+    )
+    val glyph: FiniteAnimationSpec<Float> = CCMotion.entrance()
+
     Row(
         modifier = modifier
-            .alpha(if (enabled) 1f else 0.4f)
+            .alpha(dim)
             .onFocusChanged { isFocused = it.isFocused }
             .clickable(
                 enabled = enabled,
@@ -85,8 +113,8 @@ fun CCCheckbox(
             modifier = Modifier
                 .size(side)
                 .clip(radius)
-                .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
-                .border(1.dp, style.borderColor ?: CocsoTokens.Color.borderPrimary(), radius)
+                .background(fill)
+                .border(1.dp, edge, radius)
                 // Only while focused. `Modifier.border(0.dp)` is `Dp.Hairline`,
                 // a one-pixel line, not the absence of one — see CCButton.
                 .then(
@@ -102,20 +130,29 @@ fun CCCheckbox(
                 ),
             contentAlignment = Alignment.Center,
         ) {
-            when (status) {
-                CCCheckboxStatus.on -> Icon(
-                    imageVector = Icons.Filled.Check,
-                    contentDescription = null,
-                    tint = tint,
-                    modifier = Modifier.size(side * 0.8f),
-                )
-                CCCheckboxStatus.intermediate -> Box(
-                    modifier = Modifier
-                        .size(width = side * 0.55f, height = 2.dp)
-                        .clip(RoundedCornerShape(1.dp))
-                        .background(tint)
-                )
-                CCCheckboxStatus.off -> Unit
+            AnimatedContent(
+                targetState = status,
+                transitionSpec = {
+                    (scaleIn(glyph, initialScale = 0.5f) + fadeIn(glyph))
+                        .togetherWith(scaleOut(glyph, targetScale = 0.5f) + fadeOut(glyph))
+                },
+                label = "checkbox-glyph",
+            ) { shown ->
+                when (shown) {
+                    CCCheckboxStatus.on -> Icon(
+                        imageVector = Icons.Filled.Check,
+                        contentDescription = null,
+                        tint = tint,
+                        modifier = Modifier.size(side * 0.8f),
+                    )
+                    CCCheckboxStatus.intermediate -> Box(
+                        modifier = Modifier
+                            .size(width = side * 0.55f, height = 2.dp)
+                            .clip(RoundedCornerShape(1.dp))
+                            .background(tint)
+                    )
+                    CCCheckboxStatus.off -> Box(Modifier.size(side))
+                }
             }
         }
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)

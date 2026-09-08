@@ -14,7 +14,11 @@ import androidx.compose.ui.unit.dp
 /**
  * A surface that groups content.
  *
- * Values come from [cCCardStyle], generated from `card.recipe.ts`. The recipe's
+ * Values come from [cCCardStyle], generated from `card.recipe.ts`.
+ *
+ * The `glass` variant is the recipe's tint and edge over whatever is beneath.
+ * SwiftUI puts its material under the tint; Compose has no backdrop blur — see
+ * [ccGlass] — so here the pane is translucent and unblurred.
  */
 @Composable
 fun CCCard(

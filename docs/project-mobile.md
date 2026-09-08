@@ -110,7 +110,7 @@ CI expectations:
 
 - `golden.test.ts` compares every generated artifact to the sources, and fails when a published file and the YAML disagree. The mobile artifacts join the CSS ones there.
 - A parity assertion: the Swift and Kotlin token sets are identical to each other and to the CSS. That is the check `cocso/mobile` did not have, and its absence is why 55 colours could go missing without anything failing.
-- `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the one name expected to be in it, so a resolver that stops being emitted fails rather than silently excusing its view.
+- `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the three names expected to be in it (`CCTouchTarget`, `CCMotion`, `CCGlass` — primitives with no variant to resolve), so a resolver that stops being emitted fails rather than silently excusing its view. It also fails a view that animates without honouring reduced motion or with a literal duration.
 
 ## Brands
 
@@ -151,16 +151,75 @@ brand overrides gain a brand case on both platforms, and that a token no brand
 touches gains none. The render tests on both platforms draw the primary button
 under the cocso brand and read the fill back from pixels.
 
+## Motion
+
+The motion tokens cross as what they are. `CocsoTokens.Duration.*` is
+`TimeInterval` seconds on Swift and `Int` milliseconds on Kotlin — the unit each
+platform's animation API takes. It had been emitted as a length (`CGFloat`, and
+`0.15.dp` on Compose), which nothing could use, so every view timed itself: the
+spinner turned in `0.8`, the skeleton pulsed in `1000`, numbers that matched
+nothing on the web. `CocsoTokens.Easing.*` is new: each CSS easing as its
+control points, `Animation.timingCurve(…, duration:)` on Swift and
+`CubicBezierEasing` on Kotlin. `mobile.test.ts` asserts every `--cocso-duration-*`
+and `--cocso-easing-*` the CSS has is present on both platforms.
+
+The views animate through `CCMotion`, four pairings that are the web's:
+
+| | duration | easing | used for |
+|---|---|---|---|
+| `colour` | `fast` | `default` | pressed fills, borders, a dimmed control |
+| `movement` | `fast` | `soft` | the switch thumb, the pressed scale |
+| `fill` | `normal` | `soft` | the progress bar |
+| `entrance` | `slow` | `entrance` | an error message, a checkbox glyph |
+
+Every one is `nil` (SwiftUI) or `snap()` (Compose) under reduced motion —
+`accessibilityReduceMotion`, and the animator duration scale at zero on
+Android — because the web sets `transition: none` there and motion in every
+view is decoration. The skeleton's pulse and wave and the spinner's turn read
+`duration-decorative(-slow)` directly, the way the web's keyframes do; under
+reduced motion the spinner pulses in place (the web's `spinner-reduced-pulse`)
+and the skeleton holds still. `mobile-views.test.ts` fails a view that
+animates without reading the setting, or that writes a duration as a number.
+
+A pressed touchable also scales to `CCMotion.pressedScale` (0.97). The web has
+no equivalent — a pointer does not press — so it is small enough to be felt
+rather than seen.
+
+## Glass
+
+Glass is for the layers that float over content and stay put while it moves:
+a tab bar, a navigation bar, a card over a photo. Two tokens carry it,
+`surface-glass` (the tint: 80% white light, 70% black dark) and `border-glass`
+(the edge), chosen so `text-primary` on the pane clears AA over any backdrop —
+a tab bar cannot choose its photo. The `card` recipe has a `glass` variant on
+all three platforms; the web adds a 16px `backdrop-filter`, SwiftUI puts
+`.ultraThinMaterial` under the tint.
+
+`CCGlass` is the primitive the app-owned bars use: `ccGlass()` /
+`Modifier.ccGlass()` for the surface, and `CCGlassBar(edge:)` for a bar with
+the hairline on its inner edge. On SwiftUI place it with
+`.safeAreaInset(edge: .bottom)` and the glass runs under the home indicator;
+on Compose it pads for the system bar itself. The items are the app's — which
+tabs there are is not a design-system decision — and this is the surface they
+sit on.
+
+Compose has no backdrop blur: `Modifier.blur` blurs a layer's own content, and
+blurring what is behind a layer needs the app to draw that content into the
+layer (a compositor pass — what the `haze` library does). So on Android the
+pane is translucent and unblurred, and the tint being opaque enough for AA is
+also what keeps it legible. That is the one visible difference between the
+platforms and it is deliberate.
+
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
 2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-3. **Views.** Twelve exist here, matched on both platforms, plus the `CCTouchTarget` primitive.
+3. **Views.** Twelve exist here, matched on both platforms, plus three primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`.
 
    `cocso/mobile` consumes them by path — `.cocso-ui/packages/{swiftui,compose}`, a symlink locally and a checkout in CI — as an SPM path package and a Gradle composite build (the Compose module carries `group`/`version` for that). Its `CCButton` is now an adapter over ours: same name and API, so its 59 and 60 call sites did not change, and what a variant looks like is decided here. That took one addition on this side — `x-large` (56px, radius following size to 16), the height the app had drawn by hand — and it surfaced one defect on this side: the Compose button dimmed only its label when disabled, because `alpha` sat below `background`. A guard now holds that order.
 
-   Next in the app: the four remaining overlapping components (Badge, Card, ProgressBar, TextField) the same way; the nine app-only ones (TabBar, NavBar, TopBar, Gallery, ListRow, FAB, ScreenHeader, EmptyState, Logo) stay theirs but read `CocsoTokens`/`CocsoStyles`.
+   Next in the app: the four remaining overlapping components (Badge, Card, ProgressBar, TextField) the same way; the nine app-only ones (TabBar, NavBar, TopBar, Gallery, ListRow, FAB, ScreenHeader, EmptyState, Logo) stay theirs but read `CocsoTokens`/`CocsoStyles` — and the bars sit on `CCGlassBar`.
 
 ## Open Questions
 

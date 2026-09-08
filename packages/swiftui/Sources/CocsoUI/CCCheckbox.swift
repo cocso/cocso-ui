@@ -12,6 +12,7 @@ public struct CCCheckbox: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     // WCAG 2.4.7 applies wherever there is a keyboard, and an iPad has one.
     // The recipe carries the ring's colour; without this it went unread.
     @FocusState private var isFocused: Bool
@@ -42,7 +43,13 @@ public struct CCCheckbox: View {
                                 lineWidth: 1
                             )
                     )
-                    .overlay(glyph(side: side))
+                    // The fill arrives on the web's colour curve; the glyph
+                    // pops in on the entrance curve, from small and clear.
+                    .animation(CCMotion.colour(reduced: reduceMotion), value: status)
+                    .overlay(
+                        glyph(side: side)
+                            .animation(CCMotion.entrance(reduced: reduceMotion), value: status)
+                    )
                     .overlay(
                         RoundedRectangle(cornerRadius: (style.radius ?? 2) + 2)
                             .strokeBorder(
@@ -59,6 +66,7 @@ public struct CCCheckbox: View {
         .buttonStyle(.plain)
         .focused($isFocused)
         .opacity(isEnabled ? 1 : 0.4)
+        .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)
         .accessibilityAddTraits(status == .on ? [.isButton, .isSelected] : .isButton)
@@ -78,10 +86,12 @@ public struct CCCheckbox: View {
             Image(systemName: "checkmark")
                 .font(.system(size: side * 0.7, weight: .bold))
                 .foregroundStyle(tint)
+                .transition(.scale(scale: 0.5).combined(with: .opacity))
         case .intermediate:
             RoundedRectangle(cornerRadius: 1)
                 .fill(tint)
                 .frame(width: side * 0.55, height: 2)
+                .transition(.scale(scale: 0.5).combined(with: .opacity))
         case .off:
             EmptyView()
         }

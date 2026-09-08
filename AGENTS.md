@@ -191,6 +191,18 @@ When asked to review comments on a GitHub PR:
   is decoration — every component reads the same without it — so there is no
   case where respecting the preference costs meaning. Seventeen modules
   animated and three honoured it.
+- A mobile view (`packages/swiftui`, `packages/compose`) that animates MUST go
+  through `CCMotion` or read the reduced-motion setting itself, and MUST take
+  its duration and curve from `CocsoTokens.Duration` / `CocsoTokens.Easing`,
+  never a literal. The tokens are the web's transitions; a literal is a fourth
+  opinion. `ecosystem/codegen/src/__tests__/mobile-views.test.ts` enforces
+  both, with the spinner's reduced-motion pulse the one named exception (the
+  web's is a literal `2s` too).
+- Glass (`surface-glass`, `border-glass`, `Card variant="glass"`, `CCGlass`) is
+  for layers that float over scrolling content — tab bars, navigation bars, a
+  card over a photo — not for surfaces content sits in. Its tint is opaque
+  enough for `text-primary` to clear AA over any backdrop; do not lighten it
+  per screen.
 - Spacing MUST be logical, not physical: `margin-inline-start`/`-end` and
   `padding-inline-start`/`-end`, never `margin-left` or `padding-right`. A
   physical side lands on the wrong side once the document direction flips.
