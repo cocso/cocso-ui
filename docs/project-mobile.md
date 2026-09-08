@@ -285,5 +285,14 @@ scenarios, plus a check that the Korean string table is in the bundle.
 
 ## Open Questions
 
+- Test-only dependencies leak into consumers. `ViewInspector` is a
+  `testTarget` dependency, but Xcode's SPM integration resolves a path
+  package's whole graph, so `cocso/mobile`'s build fetches it too (seen in its
+  `workspace-state.json`). Harmless today — its CI already reaches GitHub for
+  `swift-snapshot-testing` — but the next heavy test dependency ties the app's
+  iOS build to that repository's availability. When one arrives, move the view
+  tests to their own package (`packages/swiftui-tests`) that depends on
+  `CocsoUI`, so the shipped package's graph holds only what it ships.
+
 - Where the generated files live once components arrive. `packages/swiftui/Sources/CocsoUI/` assumes a Swift package; if `cocso/mobile` consumes by path first, the package manifest can wait.
 - Whether opencross's parity harness should cover this repository too, or whether the CSS-side golden gate is the right home for a check that is about generated artifacts rather than about two platform implementations.
