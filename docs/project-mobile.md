@@ -37,7 +37,7 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 
 ## Out of Scope
 
-- **The recipes with no view yet.** Twelve components exist, matched on both platforms. Every recipe has a generated style already; what the rest still need is a view, and those are added as they are wanted rather than all at once.
+- **The recipes with no view yet.** Fifteen components exist, matched on both platforms. Every recipe has a generated style already; the four without a view (`link`, `pagination`, `breadcrumb`, `stock-quantity-status`) are web navigation and a domain badge, added if wanted rather than all at once.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
 - Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
 - Nothing from the token layer, any more. Alpha colours and composite shadows were excluded at first; both cross now (`overlay-*`, `surface-glass`; `Shadow.card` as layers). The one token still skipped is `$color.transparent`, which both platforms already have.
@@ -246,7 +246,12 @@ follow every signature change; a consumer that is a program reads this instead.
 1. **Token layer, both themes.** This milestone.
 2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-3. **Views.** Twelve exist here, matched on both platforms, plus four primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`.
+3. **Views.** Fifteen exist here, matched on both platforms, plus four primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`.
+
+   The three added last — the ones an app reaches for first and had been drawing itself:
+   - `CCDialogPanel` / `.ccDialog(isPresented:)` (SwiftUI) and `CCDialog` / `CCDialogPanel` (Compose): the web's scrim (`black-alpha-30`), `shadow-dialog`, and entrance on the entrance curve. Drawn in place on SwiftUI so it animates on the design system's curve; a `Dialog` window on Compose with its own dim turned off so the two scrims do not stack.
+   - `CCSelect`: the web's `<select>` trigger — chosen title or `text-secondary` placeholder, selector glyph at the recipe's `iconRight`, `border-strong` at rest, `focus-ring` focused — opening the platform's menu (`Menu` / `DropdownMenu`).
+   - `CCRadioGroup` / `CCRadio`: the file is `CCRadio` because the recipe is named `radio`. Ring recolours on the colour curve, the `text-on-primary` dot pops in on the entrance curve; `selectableGroup` / `.isSelected` for a screen reader.
 
    `cocso/mobile` consumes them by path — `.cocso-ui/packages/{swiftui,compose}`, a symlink locally and a checkout in CI — as an SPM path package and a Gradle composite build (the Compose module carries `group`/`version` for that). Its `CCButton` is now an adapter over ours: same name and API, so its 59 and 60 call sites did not change, and what a variant looks like is decided here. That took one addition on this side — `x-large` (56px, radius following size to 16), the height the app had drawn by hand — and it surfaced one defect on this side: the Compose button dimmed only its label when disabled, because `alpha` sat below `background`. A guard now holds that order.
 

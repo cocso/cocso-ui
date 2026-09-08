@@ -42,7 +42,7 @@ import org.robolectric.annotation.GraphicsMode
 // 창이 내용보다 짧으면 아래쪽 컴포넌트가 잘린 채로 골든이 박힌다. 처음 기록한
 // 이미지가 정확히 그랬고 — 체크박스·스위치·입력 셋이 빠져 있었다 — 눈으로 보지
 // 않았으면 셋을 보지 않는 테스트를 통과시켰을 것이다.
-@Config(sdk = [34], qualifiers = "w360dp-h2200dp")
+@Config(sdk = [34], qualifiers = "w360dp-h2800dp")
 class ComponentRenderTest {
 
     @get:Rule
@@ -125,13 +125,23 @@ class ComponentRenderTest {
         CCSwitch(label = "Switch on", checked = true, onChange = {})
         CCSwitch(label = "Switch off", checked = false, onChange = {})
         CCInput(label = "Input", value = "value", onValueChange = {}, placeholder = "placeholder")
+        CCRadioGroup(
+            label = "Radio",
+            options = listOf(CCRadioOption("a", "A"), CCRadioOption("b", "B")),
+            selection = "a",
+            onSelectionChange = {},
+        )
+        CCSelect(label = "Select", options = listOf(CCSelectOption("a", "Option A")), selection = "a", onSelectionChange = {})
+        // The panel alone: the presenting `CCDialog` opens a window Robolectric
+        // does not capture through `onRoot`.
+        CCDialogPanel(title = "Dialog", message = "message") { CCButton(title = "OK", onClick = {}) }
     }
 
     @Test
     fun everyComponentDrawsInLightTheme() = render("components-light") { everything() }
 
     @Test
-    @Config(sdk = [34], qualifiers = "w360dp-h2200dp-night")
+    @Config(sdk = [34], qualifiers = "w360dp-h2800dp-night")
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
 
     /**

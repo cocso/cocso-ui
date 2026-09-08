@@ -120,6 +120,10 @@ final class ComponentRenderTests: XCTestCase {
         assertDraws("checkbox-off", scheme) { CCCheckbox(label: "Checkbox", status: .off) { _ in } }
         assertDraws("switch-on", scheme) { CCSwitch(label: "Switch", isOn: true) { _ in } }
         assertDraws("switch-off", scheme) { CCSwitch(label: "Switch", isOn: false) { _ in } }
+        assertDraws("radio-on", scheme) { CCRadio("Radio", selected: true) {} }
+        assertDraws("radio-off", scheme) { CCRadio("Radio", selected: false) {} }
+        assertDraws("select", scheme) { CCSelect(label: "Select", options: [.init(id: "a", title: "A")], selection: .constant("a")) }
+        assertDraws("dialog", scheme) { CCDialogPanel("Dialog", message: "message") { CCButton("OK") {} } }
     }
 
     @ViewBuilder
@@ -144,6 +148,8 @@ final class ComponentRenderTests: XCTestCase {
         CCCheckbox(label: "Checkbox off", status: .off) { _ in }
         CCSwitch(label: "Switch on", isOn: true) { _ in }
         CCSwitch(label: "Switch off", isOn: false) { _ in }
+        CCRadioGroup(label: "Radio", options: [.init(id: "a", title: "A"), .init(id: "b", title: "B")], selection: .constant("a"))
+        CCSelect(label: "Select", options: [.init(id: "a", title: "Option A")], selection: .constant("a"))
     }
 
     @MainActor
