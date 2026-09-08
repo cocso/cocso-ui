@@ -22,8 +22,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
         "borderRadius": "radius-4"
       }
     },
@@ -45,8 +45,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white"
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary"
       }
     },
     "variant=primary,size=large,shape=rounded": {
@@ -67,8 +67,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
         "borderRadius": "radius-full"
       }
     },
@@ -90,8 +90,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
         "borderRadius": "radius-4"
       }
     },
@@ -113,8 +113,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white"
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary"
       }
     },
     "variant=primary,size=medium,shape=rounded": {
@@ -135,8 +135,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
         "borderRadius": "radius-full"
       }
     },
@@ -158,8 +158,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
         "borderRadius": "radius-3"
       }
     },
@@ -181,8 +181,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white"
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary"
       }
     },
     "variant=primary,size=small,shape=rounded": {
@@ -203,8 +203,212 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "primary-950",
-        "fontColor": "white",
+        "bgColor": "interactive-primary",
+        "fontColor": "text-on-primary",
+        "borderRadius": "radius-full"
+      }
+    },
+    "variant=primary-subtle,size=large,shape=square": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 14,
+      "borderRadius": 8,
+      "paddingTop": 5,
+      "paddingBottom": 5,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=primary-subtle,size=large,shape=circle": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "paddingTop": 5,
+      "paddingBottom": 5,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text"
+      }
+    },
+    "variant=primary-subtle,size=large,shape=rounded": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "paddingTop": 5,
+      "paddingBottom": 5,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
+        "borderRadius": "radius-full"
+      }
+    },
+    "variant=primary-subtle,size=medium,shape=square": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 12,
+      "borderRadius": 8,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
+        "borderRadius": "radius-4"
+      }
+    },
+    "variant=primary-subtle,size=medium,shape=circle": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text"
+      }
+    },
+    "variant=primary-subtle,size=medium,shape=rounded": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
+        "borderRadius": "radius-full"
+      }
+    },
+    "variant=primary-subtle,size=small,shape=square": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 11,
+      "borderRadius": 6,
+      "paddingTop": 3,
+      "paddingBottom": 3,
+      "paddingLeft": 6,
+      "paddingRight": 6,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
+        "borderRadius": "radius-3"
+      }
+    },
+    "variant=primary-subtle,size=small,shape=circle": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 11,
+      "borderRadius": 1000,
+      "paddingTop": 3,
+      "paddingBottom": 3,
+      "paddingLeft": 6,
+      "paddingRight": 6,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text"
+      }
+    },
+    "variant=primary-subtle,size=small,shape=rounded": {
+      "bgColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "fontColor": {
+        "r": 0.2,
+        "g": 0.21176470588235294,
+        "b": 0.23921568627450981
+      },
+      "fontSize": 11,
+      "borderRadius": 1000,
+      "paddingTop": 3,
+      "paddingBottom": 3,
+      "paddingLeft": 6,
+      "paddingRight": 6,
+      "_tokenRefs": {
+        "bgColor": "interactive-primary-subtle",
+        "fontColor": "interactive-primary-text",
         "borderRadius": "radius-full"
       }
     },
@@ -226,8 +430,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -249,8 +453,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600"
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary"
       }
     },
     "variant=secondary,size=large,shape=rounded": {
@@ -271,8 +475,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-full"
       }
     },
@@ -294,8 +498,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -317,8 +521,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600"
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary"
       }
     },
     "variant=secondary,size=medium,shape=rounded": {
@@ -339,8 +543,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-full"
       }
     },
@@ -362,8 +566,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-3"
       }
     },
@@ -385,8 +589,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600"
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary"
       }
     },
     "variant=secondary,size=small,shape=rounded": {
@@ -407,8 +611,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
-        "fontColor": "neutral-600",
+        "bgColor": "surface-secondary",
+        "fontColor": "text-secondary",
         "borderRadius": "radius-full"
       }
     },
@@ -430,8 +634,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-4"
       }
     },
@@ -453,8 +657,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600"
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text"
       }
     },
     "variant=success,size=large,shape=rounded": {
@@ -475,8 +679,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-full"
       }
     },
@@ -498,8 +702,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-4"
       }
     },
@@ -521,8 +725,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600"
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text"
       }
     },
     "variant=success,size=medium,shape=rounded": {
@@ -543,8 +747,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-full"
       }
     },
@@ -566,8 +770,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-3"
       }
     },
@@ -589,8 +793,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600"
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text"
       }
     },
     "variant=success,size=small,shape=rounded": {
@@ -611,8 +815,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "success-50",
-        "fontColor": "success-600",
+        "bgColor": "feedback-success-subtle",
+        "fontColor": "feedback-success-text",
         "borderRadius": "radius-full"
       }
     },
@@ -634,8 +838,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-4"
       }
     },
@@ -657,8 +861,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600"
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text"
       }
     },
     "variant=error,size=large,shape=rounded": {
@@ -679,8 +883,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-full"
       }
     },
@@ -702,8 +906,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-4"
       }
     },
@@ -725,8 +929,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600"
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text"
       }
     },
     "variant=error,size=medium,shape=rounded": {
@@ -747,8 +951,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-full"
       }
     },
@@ -770,8 +974,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-3"
       }
     },
@@ -793,8 +997,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600"
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text"
       }
     },
     "variant=error,size=small,shape=rounded": {
@@ -815,8 +1019,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "danger-50",
-        "fontColor": "danger-600",
+        "bgColor": "feedback-danger-subtle",
+        "fontColor": "feedback-danger-text",
         "borderRadius": "radius-full"
       }
     },
@@ -838,8 +1042,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-4"
       }
     },
@@ -861,8 +1065,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600"
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text"
       }
     },
     "variant=warning,size=large,shape=rounded": {
@@ -883,8 +1087,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-full"
       }
     },
@@ -906,8 +1110,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-4"
       }
     },
@@ -929,8 +1133,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600"
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text"
       }
     },
     "variant=warning,size=medium,shape=rounded": {
@@ -951,8 +1155,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-full"
       }
     },
@@ -974,8 +1178,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-3"
       }
     },
@@ -997,8 +1201,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600"
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text"
       }
     },
     "variant=warning,size=small,shape=rounded": {
@@ -1019,8 +1223,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "warning-50",
-        "fontColor": "warning-600",
+        "bgColor": "feedback-warning-subtle",
+        "fontColor": "feedback-warning-text",
         "borderRadius": "radius-full"
       }
     },
@@ -1042,8 +1246,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-4"
       }
     },
@@ -1065,8 +1269,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600"
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text"
       }
     },
     "variant=info,size=large,shape=rounded": {
@@ -1087,8 +1291,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-full"
       }
     },
@@ -1110,8 +1314,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-4"
       }
     },
@@ -1133,8 +1337,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600"
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text"
       }
     },
     "variant=info,size=medium,shape=rounded": {
@@ -1155,8 +1359,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-full"
       }
     },
@@ -1178,8 +1382,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-3"
       }
     },
@@ -1201,8 +1405,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600"
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text"
       }
     },
     "variant=info,size=small,shape=rounded": {
@@ -1223,8 +1427,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "bgColor": "info-50",
-        "fontColor": "info-600",
+        "bgColor": "feedback-info-subtle",
+        "fontColor": "feedback-info-text",
         "borderRadius": "radius-full"
       }
     },
@@ -1247,8 +1451,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -1271,8 +1475,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100"
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
       }
     },
     "variant=outline,size=large,shape=rounded": {
@@ -1294,8 +1498,8 @@
       "paddingLeft": 10,
       "paddingRight": 10,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-full"
       }
     },
@@ -1318,8 +1522,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -1342,8 +1546,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100"
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
       }
     },
     "variant=outline,size=medium,shape=rounded": {
@@ -1365,8 +1569,8 @@
       "paddingLeft": 8,
       "paddingRight": 8,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-full"
       }
     },
@@ -1389,8 +1593,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-3"
       }
     },
@@ -1413,8 +1617,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100"
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
       }
     },
     "variant=outline,size=small,shape=rounded": {
@@ -1436,8 +1640,8 @@
       "paddingLeft": 6,
       "paddingRight": 6,
       "_tokenRefs": {
-        "fontColor": "neutral-950",
-        "strokeColor": "neutral-100",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
         "borderRadius": "radius-full"
       }
     }

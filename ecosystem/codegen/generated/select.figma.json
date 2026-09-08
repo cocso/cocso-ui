@@ -6,9 +6,9 @@
   "combinations": {
     "size=x-small": {
       "borderColor": {
-        "r": 0.803921568627451,
-        "g": 0.8196078431372549,
-        "b": 0.8352941176470589
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "minWidth": 28,
       "height": 28,
@@ -18,7 +18,7 @@
       "fontSize": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "borderColor": "neutral-200",
+        "borderColor": "border-strong",
         "borderRadius": "radius-3"
       },
       "states": {
@@ -36,7 +36,7 @@
           "fontSize": 12,
           "borderRadius": 6,
           "_tokenRefs": {
-            "borderColor": "primary-500",
+            "borderColor": "interactive-primary-muted",
             "borderRadius": "radius-3"
           }
         },
@@ -54,7 +54,7 @@
           "fontSize": 12,
           "borderRadius": 6,
           "_tokenRefs": {
-            "borderColor": "primary-700",
+            "borderColor": "interactive-primary-active",
             "borderRadius": "radius-3"
           }
         }
@@ -62,9 +62,9 @@
     },
     "size=small": {
       "borderColor": {
-        "r": 0.803921568627451,
-        "g": 0.8196078431372549,
-        "b": 0.8352941176470589
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "minWidth": 32,
       "height": 32,
@@ -74,7 +74,7 @@
       "fontSize": 12,
       "borderRadius": 6,
       "_tokenRefs": {
-        "borderColor": "neutral-200",
+        "borderColor": "border-strong",
         "borderRadius": "radius-3"
       },
       "states": {
@@ -92,7 +92,7 @@
           "fontSize": 12,
           "borderRadius": 6,
           "_tokenRefs": {
-            "borderColor": "primary-500",
+            "borderColor": "interactive-primary-muted",
             "borderRadius": "radius-3"
           }
         },
@@ -110,7 +110,7 @@
           "fontSize": 12,
           "borderRadius": 6,
           "_tokenRefs": {
-            "borderColor": "primary-700",
+            "borderColor": "interactive-primary-active",
             "borderRadius": "radius-3"
           }
         }
@@ -118,9 +118,9 @@
     },
     "size=medium": {
       "borderColor": {
-        "r": 0.803921568627451,
-        "g": 0.8196078431372549,
-        "b": 0.8352941176470589
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "minWidth": 36,
       "height": 36,
@@ -130,7 +130,7 @@
       "fontSize": 14,
       "borderRadius": 8,
       "_tokenRefs": {
-        "borderColor": "neutral-200",
+        "borderColor": "border-strong",
         "borderRadius": "radius-4"
       },
       "states": {
@@ -148,7 +148,7 @@
           "fontSize": 14,
           "borderRadius": 8,
           "_tokenRefs": {
-            "borderColor": "primary-500",
+            "borderColor": "interactive-primary-muted",
             "borderRadius": "radius-4"
           }
         },
@@ -166,7 +166,7 @@
           "fontSize": 14,
           "borderRadius": 8,
           "_tokenRefs": {
-            "borderColor": "primary-700",
+            "borderColor": "interactive-primary-active",
             "borderRadius": "radius-4"
           }
         }
@@ -174,9 +174,9 @@
     },
     "size=large": {
       "borderColor": {
-        "r": 0.803921568627451,
-        "g": 0.8196078431372549,
-        "b": 0.8352941176470589
+        "r": 0.42745098039215684,
+        "g": 0.47058823529411764,
+        "b": 0.5098039215686274
       },
       "minWidth": 40,
       "height": 40,
@@ -186,7 +186,7 @@
       "fontSize": 14,
       "borderRadius": 8,
       "_tokenRefs": {
-        "borderColor": "neutral-200",
+        "borderColor": "border-strong",
         "borderRadius": "radius-4"
       },
       "states": {
@@ -204,7 +204,7 @@
           "fontSize": 14,
           "borderRadius": 8,
           "_tokenRefs": {
-            "borderColor": "primary-500",
+            "borderColor": "interactive-primary-muted",
             "borderRadius": "radius-4"
           }
         },
@@ -222,7 +222,7 @@
           "fontSize": 14,
           "borderRadius": 8,
           "_tokenRefs": {
-            "borderColor": "primary-700",
+            "borderColor": "interactive-primary-active",
             "borderRadius": "radius-4"
           }
         }

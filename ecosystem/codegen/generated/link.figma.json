@@ -6,12 +6,12 @@
   "combinations": {
     "variant=inline": {
       "color": {
-        "r": 0.1450980392156863,
-        "g": 0.43137254901960786,
-        "b": 0.9568627450980393
+        "r": 0.043137254901960784,
+        "g": 0.3137254901960784,
+        "b": 0.8156862745098039
       },
       "_tokenRefs": {
-        "color": "info-500"
+        "color": "interactive-info-text"
       },
       "states": {
         "hover": {
@@ -21,7 +21,7 @@
             "b": 0.5686274509803921
           },
           "_tokenRefs": {
-            "color": "info-700"
+            "color": "interactive-info-text-hover"
           }
         }
       }
@@ -33,12 +33,12 @@
     },
     "variant=plain": {
       "color": {
-        "r": 0.1450980392156863,
-        "g": 0.43137254901960786,
-        "b": 0.9568627450980393
+        "r": 0.043137254901960784,
+        "g": 0.3137254901960784,
+        "b": 0.8156862745098039
       },
       "_tokenRefs": {
-        "color": "info-500"
+        "color": "interactive-info-text"
       },
       "states": {
         "hover": {
@@ -48,7 +48,7 @@
             "b": 0.5686274509803921
           },
           "_tokenRefs": {
-            "color": "info-700"
+            "color": "interactive-info-text-hover"
           }
         }
       }

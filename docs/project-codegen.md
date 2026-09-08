@@ -27,7 +27,7 @@ TypeScript (build-time tool, uses `tsx` for recipe import)
 - Per-dimension CSS generation (BEM classes setting CSS custom properties).
 - State-suffixed CSS custom properties for CSS Module compatibility.
 - Spinner geometry static data extraction (`spinner-geometry.ts`).
-- Figma JSON generation via `packages/figma/scripts/generate-figma-json.ts`.
+- Figma JSON generation via `packages/figma/scripts/generate-figma-json.ts`. CI regenerates it in the `Codegen Freshness` step and fails on a diff, the same gate the CSS output has — it was ungated, and seventeen of nineteen descriptors sat stale on `main` after the semantic-token renames.
 - Codegen parity tests (409 tests verifying generated output matches resolveStyleMap).
 
 ## Out of Scope

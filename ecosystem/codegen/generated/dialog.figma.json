@@ -24,9 +24,9 @@
       "width": 380,
       "height": 200,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-5",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     },
     "size=medium": {
@@ -49,9 +49,9 @@
       "width": 520,
       "height": 260,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-5",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     },
     "size=large": {
@@ -74,9 +74,9 @@
       "width": 680,
       "height": 340,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-5",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     }
   }
