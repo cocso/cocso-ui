@@ -198,6 +198,11 @@ When asked to review comments on a GitHub PR:
   opinion. `ecosystem/codegen/src/__tests__/mobile-views.test.ts` enforces
   both, with the spinner's reduced-motion pulse the one named exception (the
   web's is a literal `2s` too).
+- A mobile view MUST NOT carry a word a user can hear: accessibility labels,
+  values and states, and default label parameters come from `CCStrings`
+  (`Localizable.strings` / `res/values/strings.xml`, en and ko), never a
+  literal. Five views said "On", "Off", "Mixed", "Loading" and "Show password"
+  in English to every user. `mobile-views.test.ts` enforces it.
 - Glass (`surface-glass`, `border-glass`, `Card`/`Button variant="glass"`,
   `CCGlass`) is for layers that float over scrolling content — tab bars,
   navigation bars, a composer's buttons, a card over a photo — not for surfaces

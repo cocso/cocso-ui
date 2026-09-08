@@ -55,7 +55,7 @@ public struct CCDialogPanel<Actions: View>: View {
                     }
                     .buttonStyle(.plain)
                     .ccMinimumTouchTarget()
-                    .accessibilityLabel("Close")
+                    .accessibilityLabel(CCStrings.close)
                 }
             }
             if let message {
@@ -67,9 +67,8 @@ public struct CCDialogPanel<Actions: View>: View {
         .padding(.bottom, style.paddingBottom ?? 0)
         .padding(.leading, style.paddingLeft ?? 0)
         .padding(.trailing, style.paddingRight ?? 0)
-        // The recipe's width and height are maxima — the web's `max-width` and
-        // `max-height` — so a short message gets a short panel.
-        .frame(maxWidth: style.width, maxHeight: style.height, alignment: .topLeading)
+        // The recipe's width is a maximum — the web's `max-width`.
+        .frame(maxWidth: style.width, alignment: .topLeading)
         .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
         .clipShape(RoundedRectangle(cornerRadius: radius))
         .overlay(

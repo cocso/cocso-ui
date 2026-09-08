@@ -617,7 +617,6 @@ data class CCDialogStyle(
     val paddingLeft: Dp? = null,
     val paddingRight: Dp? = null,
     val width: Dp? = null,
-    val height: Dp? = null,
 )
 
 @Composable
@@ -636,15 +635,12 @@ fun cCDialogStyle(
     style = style.copy(paddingRight = 20.dp)
     if (size == CCDialogSize.small) {
         style = style.copy(width = 380.dp)
-        style = style.copy(height = 200.dp)
     }
     if (size == CCDialogSize.medium) {
         style = style.copy(width = 520.dp)
-        style = style.copy(height = 260.dp)
     }
     if (size == CCDialogSize.large) {
         style = style.copy(width = 680.dp)
-        style = style.copy(height = 340.dp)
     }
     return style
 }

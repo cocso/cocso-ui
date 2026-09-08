@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -65,10 +64,8 @@ fun CCDialogPanel(
 
     Column(
         modifier = modifier
-            // The recipe's width and height are maxima — the web's `max-width` and
-            // `max-height` — so a short message gets a short panel.
+            // The recipe's width is a maximum — the web's `max-width`.
             .widthIn(max = style.width ?: 520.dp)
-            .heightIn(max = style.height ?: 260.dp)
             .ccShadow(CocsoTokens.Shadow.dialog(), shape)
             .clip(shape)
             .background(style.bgColor ?: CocsoTokens.Color.surfacePrimary())
@@ -93,7 +90,7 @@ fun CCDialogPanel(
                 // The web's `DialogClose`: a 14dp cross, named for a screen reader.
                 Icon(
                     imageVector = Icons.Filled.Close,
-                    contentDescription = "Close",
+                    contentDescription = CCStrings.close(),
                     tint = CocsoTokens.Color.textSecondary(),
                     modifier = Modifier
                         .clickable(

@@ -1,0 +1,10 @@
+/* Accessibility and default labels the views speak. Keyed, so an app localises by adding a table, not by editing a view. */
+"cc.loading" = "Loading";
+"cc.progress" = "Progress";
+"cc.on" = "On";
+"cc.off" = "Off";
+"cc.mixed" = "Mixed";
+"cc.showPassword" = "Show password";
+"cc.hidePassword" = "Hide password";
+"cc.close" = "Close";
+"cc.select" = "Select";

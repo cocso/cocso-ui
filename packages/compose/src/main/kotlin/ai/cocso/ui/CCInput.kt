@@ -143,12 +143,14 @@ fun CCInput(
                     },
                 )
             }
+            val showPassword = CCStrings.showPassword()
+            val hidePassword = CCStrings.hidePassword()
             if (isSecure) {
                 // The two glyphs cross-fade rather than swap.
                 Crossfade(targetState = revealed, animationSpec = reveal, label = "input-reveal") { isRevealed ->
                     Icon(
                         imageVector = if (isRevealed) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                        contentDescription = if (isRevealed) "Hide password" else "Show password",
+                        contentDescription = if (isRevealed) hidePassword else showPassword,
                         // One step back from the value, and it clears AA in both
                         // themes; `text-tertiary` is 3.08:1 on white.
                         tint = CocsoTokens.Color.textSecondary(),

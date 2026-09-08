@@ -60,7 +60,7 @@ fun CCSelect(
     selection: String?,
     onSelectionChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "Select",
+    placeholder: String = CCStrings.select(),
     size: CCSelectSize = CCSelectSize.medium,
     enabled: Boolean = true,
 ) {

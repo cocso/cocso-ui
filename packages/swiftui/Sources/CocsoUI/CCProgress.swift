@@ -17,7 +17,7 @@ public struct CCProgress: View {
     public init(
         value: Double,
         total: Double = 100,
-        label: String = "Progress",
+        label: String = CCStrings.progress,
         variant: CCProgressVariant = .primary,
         size: CCProgressSize = .md
     ) {

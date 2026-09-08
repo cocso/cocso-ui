@@ -16,7 +16,7 @@ public struct CCSpinner: View {
     public init(
         variant: CCSpinnerVariant = .primary,
         size: CCSpinnerSize = .medium,
-        label: String = "Loading"
+        label: String = CCStrings.loading
     ) {
         self.variant = variant
         self.size = size

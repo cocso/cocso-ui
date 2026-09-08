@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cc_loading">불러오는 중</string>
+    <string name="cc_progress">진행률</string>
+    <string name="cc_on">켬</string>
+    <string name="cc_off">끔</string>
+    <string name="cc_mixed">일부 선택</string>
+    <string name="cc_show_password">비밀번호 표시</string>
+    <string name="cc_hide_password">비밀번호 숨기기</string>
+    <string name="cc_close">닫기</string>
+    <string name="cc_select">선택</string>
+</resources>

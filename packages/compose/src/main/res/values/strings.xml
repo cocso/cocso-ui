@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Accessibility and default labels the views speak. Keyed, so an app
+     localises by adding a values-xx folder, not by editing a view. -->
+<resources>
+    <string name="cc_loading">Loading</string>
+    <string name="cc_progress">Progress</string>
+    <string name="cc_on">On</string>
+    <string name="cc_off">Off</string>
+    <string name="cc_mixed">Mixed</string>
+    <string name="cc_show_password">Show password</string>
+    <string name="cc_hide_password">Hide password</string>
+    <string name="cc_close">Close</string>
+    <string name="cc_select">Select</string>
+</resources>

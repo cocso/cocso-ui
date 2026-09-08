@@ -72,7 +72,7 @@ public struct CCCheckbox: View {
         .accessibilityAddTraits(status == .on ? [.isButton, .isSelected] : .isButton)
         // `.isSelected` has two states and the recipe has three, so the third
         // is spoken rather than left sounding like "off".
-        .accessibilityValue(Text(status == .intermediate ? "Mixed" : ""))
+        .accessibilityValue(Text(status == .intermediate ? CCStrings.mixed : ""))
     }
 
     @ViewBuilder

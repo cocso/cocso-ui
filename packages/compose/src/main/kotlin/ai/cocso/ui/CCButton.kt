@@ -9,13 +9,17 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,6 +32,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,6 +58,8 @@ fun CCButton(
     align: CCButtonAlign = CCButtonAlign.center,
     loading: Boolean = false,
     enabled: Boolean = true,
+    prefix: ImageVector? = null,
+    suffix: ImageVector? = null,
 ) {
     val style = cCButtonStyle(variant = variant, size = size, shape = shape, align = align)
     val buttonShape = if (style.borderRadiusFull == true) {
@@ -173,8 +180,9 @@ fun CCButton(
                     color = foreground,
                 )
             } else {
-                Text(
-                    text = title,
+                // The web's `prefix` / `suffix`: an icon either side of the label,
+                // at the label's size, in the label's colour.
+                Row(
                     // The recipe pads the label inside the button as well as the
                     // button itself; dropping it made every button narrower than
                     // the web's by the difference.
@@ -182,9 +190,22 @@ fun CCButton(
                         horizontal = style.contentPaddingX ?: 0.dp,
                         vertical = style.contentPaddingY ?: 0.dp,
                     ),
-                    color = foreground,
-                    fontSize = (style.fontSize?.value ?: 14f).sp,
-                )
+                    horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s4),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    val glyph = (style.fontSize ?: 14.dp) + 2.dp
+                    if (prefix != null) {
+                        Icon(prefix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                    }
+                    Text(
+                        text = title,
+                        color = foreground,
+                        fontSize = (style.fontSize?.value ?: 14f).sp,
+                    )
+                    if (suffix != null) {
+                        Icon(suffix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                    }
+                }
             }
         }
     }

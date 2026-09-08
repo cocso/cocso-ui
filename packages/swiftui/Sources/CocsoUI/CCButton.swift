@@ -18,6 +18,8 @@ public struct CCButton: View {
     private let shape: CCButtonShape
     private let align: CCButtonAlign
     private let loading: Bool
+    private let prefix: Image?
+    private let suffix: Image?
     private let action: () -> Void
 
     @Environment(\.colorScheme) private var colorScheme
@@ -40,6 +42,8 @@ public struct CCButton: View {
         shape: CCButtonShape = .square,
         align: CCButtonAlign = .center,
         loading: Bool = false,
+        prefix: Image? = nil,
+        suffix: Image? = nil,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -48,6 +52,8 @@ public struct CCButton: View {
         self.shape = shape
         self.align = align
         self.loading = loading
+        self.prefix = prefix
+        self.suffix = suffix
         self.action = action
     }
 
@@ -81,14 +87,20 @@ public struct CCButton: View {
             action()
         }) {
             ZStack {
-                Text(title)
-                    .font(.system(size: resolved.fontSize ?? 14))
-                    // The recipe pads the label inside the button as well as
-                    // the button itself; dropping it made every button narrower
-                    // than the web's by the difference.
-                    .padding(.horizontal, resolved.contentPaddingX ?? 0)
-                    .padding(.vertical, resolved.contentPaddingY ?? 0)
-                    .opacity(loading ? 0 : 1)
+                // The web's `prefix` / `suffix`: an icon either side of the label,
+                // at the label's size, in the label's colour.
+                HStack(spacing: CocsoTokens.Spacing.s4) {
+                    prefix?.font(.system(size: resolved.fontSize ?? 14, weight: .medium))
+                    Text(title)
+                        .font(.system(size: resolved.fontSize ?? 14))
+                    suffix?.font(.system(size: resolved.fontSize ?? 14, weight: .medium))
+                }
+                // The recipe pads the label inside the button as well as
+                // the button itself; dropping it made every button narrower
+                // than the web's by the difference.
+                .padding(.horizontal, resolved.contentPaddingX ?? 0)
+                .padding(.vertical, resolved.contentPaddingY ?? 0)
+                .opacity(loading ? 0 : 1)
                 if loading {
                     ProgressView()
                         .controlSize(.small)
@@ -179,6 +191,7 @@ public struct CCButton: View {
         CCButton("Loading", loading: true) {}
         CCButton("Disabled") {}.disabled(true)
         CCButton("Glass", variant: .glass, shape: .rounded) {}
+        CCButton("Add", variant: .outline, prefix: Image(systemName: "plus")) {}
     }
     .padding()
     .background(LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomTrailing))
