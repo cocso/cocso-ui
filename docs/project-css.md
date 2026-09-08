@@ -55,6 +55,8 @@ packages/css/
 
 Token prefix convention: `--cocso-<category>-<scale>` (e.g. `--cocso-color-neutral-500`, `--cocso-color-white`).
 
+The same tokens are published as data in `tokens.json` (resolved per mode, brand overrides inline, skipped tokens with reasons) for consumers that are programs rather than stylesheets — see the tokens.json section in `docs/project-mobile.md`.
+
 ### Semantic Token Naming Convention
 
 Semantic tokens follow the pattern `--cocso-{category}-{role}` and map to exactly one primitive token or direct value in light mode. Color semantic tokens include `color` in the category (e.g. `--cocso-color-text-primary`). Non-color semantic tokens omit it (e.g. `--cocso-shadow-card`, `--cocso-duration-fast`).

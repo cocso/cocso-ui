@@ -40,7 +40,7 @@ Both minimums match `cocso/mobile`, the first consumer, so nothing this emits is
 - **The recipes with no view yet.** Twelve components exist, matched on both platforms. Every recipe has a generated style already; what the rest still need is a view, and those are added as they are wanted rather than all at once.
 - React Native. `@cocso-ui/react-native-icons` exists for icons; a full RN component layer is a separate decision.
 - Shipping to package registries. The first consumer is in the same organisation and can consume by path or git ref; SPM and Maven publication waits until there is a second.
-- Alpha colours and composite shadows. The CSS carries `rgba()` scrims and multi-layer shadows that have no single-value equivalent on either platform. They are excluded and named, not silently dropped.
+- Nothing from the token layer, any more. Alpha colours and composite shadows were excluded at first; both cross now (`overlay-*`, `surface-glass`; `Shadow.card` as layers). The one token still skipped is `$color.transparent`, which both platforms already have.
 
 ## Architecture
 
@@ -213,12 +213,40 @@ Android solid, one colour on both. That is the one visible difference between
 the platforms and it is deliberate; it is also the pairing the platforms' own
 apps have settled on.
 
+## Shadows
+
+`$shadow.*` are composite `box-shadow` lists, and the emitter refused them as
+"no single-value equivalent" for as long as it existed — so the elevated card,
+the variant whose whole meaning is its shadow, was a flat rectangle on both
+platforms. They now cross as layers: `CocsoTokens.Shadow.card(scheme)` /
+`CocsoTokens.Shadow.card()` return a list of `CocsoShadowLayer` (offset, blur,
+spread, colour). They are themed even though the shadow tokens live in the
+single-mode `global` collection, because the layers name `$color.alpha.shadow*`
+and the dark theme deepens those; the emitter follows references embedded in a
+composite in the mode being emitted, the way `var()` does in the CSS.
+
+`CCShadow` draws them: SwiftUI applies each layer as a `.shadow` (blur halved —
+a CSS blur is a diameter, SwiftUI's radius a sigma); Compose has one shadow per
+node from an elevation, so `Modifier.ccShadow` collapses the layers to the
+softest one. The elevated card and the switch thumb use them, as the web does.
+
+## tokens.json
+
+`packages/css/tokens.json` is the same resolution as data, published with
+`@cocso-ui/css`: every token, `values` per mode (`light`/`dark`, or `default`),
+each brand's override under `brands`, the CSS custom-property name and the
+platform identifier, and `skipped` with reasons. `cocso/mobile` synced its
+token layer by parsing `CocsoTokens.swift` with regular expressions and had to
+follow every signature change; a consumer that is a program reads this instead.
+`mobile.test.ts` holds the published file to the generator, checks every
+`--cocso-*` in `token.css` appears, and that identifiers match the Swift.
+
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
 2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-3. **Views.** Twelve exist here, matched on both platforms, plus three primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`.
+3. **Views.** Twelve exist here, matched on both platforms, plus four primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`.
 
    `cocso/mobile` consumes them by path — `.cocso-ui/packages/{swiftui,compose}`, a symlink locally and a checkout in CI — as an SPM path package and a Gradle composite build (the Compose module carries `group`/`version` for that). Its `CCButton` is now an adapter over ours: same name and API, so its 59 and 60 call sites did not change, and what a variant looks like is decided here. That took one addition on this side — `x-large` (56px, radius following size to 16), the height the app had drawn by hand — and it surfaced one defect on this side: the Compose button dimmed only its label when disabled, because `alpha` sat below `background`. A guard now holds that order.
 
@@ -227,5 +255,4 @@ apps have settled on.
 ## Open Questions
 
 - Where the generated files live once components arrive. `packages/swiftui/Sources/CocsoUI/` assumes a Swift package; if `cocso/mobile` consumes by path first, the package manifest can wait.
-- Whether composite shadows get platform-specific semantic tokens (`shadow-card` as an iOS `.shadow` modifier and a Compose `Elevation`) or stay out. They are the one part of the CSS layer with no single-value equivalent.
 - Whether opencross's parity harness should cover this repository too, or whether the CSS-side golden gate is the right home for a check that is about generated artifacts rather than about two platform implementations.

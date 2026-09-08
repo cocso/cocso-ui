@@ -36,6 +36,25 @@ public extension EnvironmentValues {
     }
 }
 
+/// One layer of a `box-shadow`, as the web writes it: offset, blur, spread,
+/// colour. Draw a token's layers with `ccShadow` — the CSS blur is a diameter
+/// and SwiftUI's `radius` a sigma, so the view halves it.
+public struct CocsoShadowLayer: Equatable, Sendable {
+    public let x: CGFloat
+    public let y: CGFloat
+    public let blur: CGFloat
+    public let spread: CGFloat
+    public let color: SwiftUI.Color
+
+    public init(x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat, color: SwiftUI.Color) {
+        self.x = x
+        self.y = y
+        self.blur = blur
+        self.spread = spread
+        self.color = color
+    }
+}
+
 public enum CocsoTokens {
     public enum Color {
         public static let black: SwiftUI.Color = SwiftUI.Color(hex: 0x000000)
@@ -420,6 +439,37 @@ public enum CocsoTokens {
         public static let blur4: CGFloat = 24
         public static let y3: CGFloat = 8
         public static let y4: CGFloat = 16
+
+        /// Resolved against the view's colour scheme. Read these as
+        /// `CocsoTokens.Color.textPrimary(scheme)`, with `scheme` from
+        /// `@Environment(\.colorScheme)`.
+        public static func card(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08))]
+        }
+        public static func dialog(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36)), CocsoShadowLayer(x: 0, y: 8, blur: 16, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.48))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08)), CocsoShadowLayer(x: 0, y: 8, blur: 16, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.12))]
+        }
+        public static func dropdown(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08))]
+        }
+        public static func lg(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36)), CocsoShadowLayer(x: 0, y: 16, blur: 24, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.48))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08)), CocsoShadowLayer(x: 0, y: 16, blur: 24, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.12))]
+        }
+        public static func md(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36)), CocsoShadowLayer(x: 0, y: 8, blur: 16, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.48))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08)), CocsoShadowLayer(x: 0, y: 8, blur: 16, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.12))]
+        }
+        public static func popover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08))]
+        }
+        public static func sm(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.36))] : [CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 4, blur: 8, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.08))]
+        }
+        public static func thumb(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 1, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24))] : [CocsoShadowLayer(x: 0, y: 1, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04))]
+        }
+        public static func xs(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> [CocsoShadowLayer] {
+            scheme == .dark ? [CocsoShadowLayer(x: 0, y: 1, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24)), CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.24))] : [CocsoShadowLayer(x: 0, y: 1, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04)), CocsoShadowLayer(x: 0, y: 0, blur: 2, spread: 0, color: SwiftUI.Color(hex: 0x000000, opacity: 0.04))]
+        }
     }
 
     public enum Spacing {

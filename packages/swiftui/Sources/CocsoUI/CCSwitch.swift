@@ -69,6 +69,8 @@ public struct CCSwitch: View {
                             )
                         )
                         .frame(width: thumb, height: thumb)
+                        // The web's `--cocso-shadow-thumb`: the handle lifts off the track.
+                        .ccShadow(CocsoTokens.Shadow.thumb(colorScheme))
                         .padding(.horizontal, inset)
                 }
                 .frame(width: track.width, height: track.height)

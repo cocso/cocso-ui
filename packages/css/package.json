@@ -20,6 +20,7 @@
   },
   "files": [
     "*.css",
+    "tokens.json",
     "package.json"
   ],
   "devDependencies": {},
