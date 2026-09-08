@@ -269,19 +269,21 @@ scenarios, plus a check that the Korean string table is in the bundle.
 ## Publishing
 
 One version for both packages: `VERSION_NAME` in
-`packages/compose/gradle.properties`. The `Mobile Release` workflow runs on a
+`packages/compose/gradle.properties`. (`1.0.0` shipped the Compose module as
+`ai.cocso.ui:cocso-ui-compose`; from `1.0.1` it is `ai.cocso.ui:compose`, the
+conventional shape — group as the namespace, artifact as the module.) The `Mobile Release` workflow runs on a
 push to `main` that touches either package (or by hand); if no tag with that
 version exists it publishes the Compose module to GitHub Packages and tags
 `main` with the plain semver, which SwiftPM reads. A push that does not bump
 the version is a no-op; a bump releases once. Bump it in the change that
 alters what a package ships.
 
-- SwiftUI: `.package(url: "https://github.com/cocso/cocso-ui", from: "1.0.0")`.
+- SwiftUI: `.package(url: "https://github.com/cocso/cocso-ui", from: "1.0.1")`.
   The root `Package.swift` points at `packages/swiftui/Sources/CocsoUI` and
   carries no test target, so a consumer's graph holds only what ships —
   `packages/swiftui/Package.swift` (path consumption, tests, ViewInspector)
   stays for `cocso/mobile` and CI. The CI SwiftUI job builds both.
-- Compose: `implementation("ai.cocso.ui:cocso-ui-compose:1.0.0")` from
+- Compose: `implementation("ai.cocso.ui:compose:1.0.1")` from
   `maven { url = uri("https://maven.pkg.github.com/cocso/cocso-ui") }`. GitHub
   Packages needs a token with `read:packages` even for a public repository;
   the composite build by path remains for a consumer that would rather not.

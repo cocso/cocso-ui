@@ -214,8 +214,8 @@ When asked to review comments on a GitHub PR:
 - A change to what `packages/swiftui` or `packages/compose` ships MUST bump
   `VERSION_NAME` in `packages/compose/gradle.properties` in the same change.
   The `Mobile Release` workflow tags `main` with it (plain semver, for SwiftPM)
-  and publishes the Compose module to GitHub Packages; a push without a bump
-  releases nothing.
+  and publishes the Compose module (`ai.cocso.ui:compose`) to GitHub Packages;
+  a push without a bump releases nothing.
 - Spacing MUST be logical, not physical: `margin-inline-start`/`-end` and
   `padding-inline-start`/`-end`, never `margin-left` or `padding-right`. A
   physical side lands on the wrong side once the document direction flips.
