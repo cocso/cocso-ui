@@ -29,10 +29,11 @@ import androidx.compose.ui.unit.dp
  *
  * Compose has no backdrop blur: `Modifier.blur` blurs a layer's own content,
  * and blurring what is behind a layer needs the app to draw that content into
- * the layer (a compositor pass — what the `haze` library does). That is an
- * app decision, so here the pane is translucent and unblurred. The tint is
- * opaque enough that `text-primary` clears AA on it over any backdrop — see
- * the token — which is also what keeps an unblurred pane legible.
+ * the layer (a compositor pass — what the `haze` library does). An unblurred
+ * translucent pane over a busy screen is mud, so here the tint sits on the
+ * page surface and the pane reads as a solid of the same tone — iOS glass,
+ * Android solid, the same colour on both, which is the pairing the platforms'
+ * own apps have settled on.
  */
 enum class CCGlassEdge {
     /** A bar along the top of the screen — a navigation or a title bar. */
@@ -44,7 +45,8 @@ enum class CCGlassEdge {
 /** Glass filling the modifier's bounds. For a floating shape pass one. */
 @Composable
 fun Modifier.ccGlass(shape: Shape = RectangleShape): Modifier =
-    background(CocsoTokens.Color.surfaceGlass(), shape)
+    background(CocsoTokens.Color.surfacePrimary(), shape)
+        .background(CocsoTokens.Color.surfaceGlass(), shape)
         .then(
             if (shape == RectangleShape) Modifier
             else Modifier.border(1.dp, CocsoTokens.Color.borderGlass(), shape)

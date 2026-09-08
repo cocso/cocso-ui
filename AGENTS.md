@@ -198,11 +198,13 @@ When asked to review comments on a GitHub PR:
   opinion. `ecosystem/codegen/src/__tests__/mobile-views.test.ts` enforces
   both, with the spinner's reduced-motion pulse the one named exception (the
   web's is a literal `2s` too).
-- Glass (`surface-glass`, `border-glass`, `Card variant="glass"`, `CCGlass`) is
-  for layers that float over scrolling content — tab bars, navigation bars, a
-  card over a photo — not for surfaces content sits in. Its tint is opaque
-  enough for `text-primary` to clear AA over any backdrop; do not lighten it
-  per screen.
+- Glass (`surface-glass`, `border-glass`, `Card`/`Button variant="glass"`,
+  `CCGlass`) is for layers that float over scrolling content — tab bars,
+  navigation bars, a composer's buttons, a card over a photo — not for surfaces
+  content sits in. Its tint is opaque enough for `text-primary` to clear AA
+  over any backdrop; do not lighten it per screen. On Compose, glass is the
+  same tint composited over `surface-primary` (a solid): the platform cannot
+  blur a backdrop, and an unblurred translucent pane is mud.
 - Spacing MUST be logical, not physical: `margin-inline-start`/`-end` and
   `padding-inline-start`/`-end`, never `margin-left` or `padding-right`. A
   physical side lands on the wrong side once the document direction flips.

@@ -117,6 +117,9 @@ public struct CCButton: View {
         .background(
             (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
         )
+        // Glass: the recipe's tint (`surface-glass`) over the platform's blur.
+        // Every other variant puts nothing under its fill.
+        .background(variant == .glass ? AnyShapeStyle(.ultraThinMaterial) : AnyShapeStyle(.clear))
         .clipShape(
             // `shape: .circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
@@ -175,7 +178,9 @@ public struct CCButton: View {
         CCButton("Outline", variant: .outline) {}
         CCButton("Loading", loading: true) {}
         CCButton("Disabled") {}.disabled(true)
+        CCButton("Glass", variant: .glass, shape: .rounded) {}
     }
     .padding()
+    .background(LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomTrailing))
 }
 #endif

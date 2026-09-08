@@ -2,4 +2,4 @@
 "@cocso-ui/css": minor
 ---
 
-Add `surface-glass` and `border-glass`: the tint and edge of a glass surface — a translucent pane over content that scrolls beneath it (tab bars, navigation bars, floating cards). Light: 80% white / 10% black; dark: 70% black / 20% white. Opaque enough that `text-primary` on the pane clears WCAG AA over any backdrop.
+Add `surface-glass`, `surface-glass-active` and `border-glass`: the tint, pressed tint and edge of a glass surface — a translucent pane over content that scrolls beneath it (tab bars, navigation bars, floating buttons and cards). Light: 80% white (60% pressed) / 10% black edge; dark: 60% black (40% pressed) / 20% white edge. Opaque enough that `text-primary` on the pane clears WCAG AA over any backdrop.

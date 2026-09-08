@@ -159,6 +159,7 @@
   --color-surface-inverse: var(--cocso-color-surface-inverse);
   --color-surface-neutral: var(--cocso-color-surface-neutral);
   --color-surface-glass: var(--cocso-color-surface-glass);
+  --color-surface-glass-active: var(--cocso-color-surface-glass-active);
   --color-border-primary: var(--cocso-color-border-primary);
   --color-border-secondary: var(--cocso-color-border-secondary);
   --color-border-strong: var(--cocso-color-border-strong);

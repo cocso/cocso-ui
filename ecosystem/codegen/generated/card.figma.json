@@ -16,7 +16,7 @@
       "paddingLeft": 12,
       "paddingRight": 12,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4"
       }
     },
@@ -32,7 +32,7 @@
       "paddingLeft": 16,
       "paddingRight": 16,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4"
       }
     },
@@ -48,7 +48,7 @@
       "paddingLeft": 24,
       "paddingRight": 24,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4"
       }
     },
@@ -70,9 +70,9 @@
       "paddingLeft": 12,
       "paddingRight": 12,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     },
     "variant=outlined,padding=md": {
@@ -93,9 +93,9 @@
       "paddingLeft": 16,
       "paddingRight": 16,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     },
     "variant=outlined,padding=lg": {
@@ -116,9 +116,9 @@
       "paddingLeft": 24,
       "paddingRight": 24,
       "_tokenRefs": {
-        "bgColor": "white",
+        "bgColor": "surface-primary",
         "borderRadius": "radius-4",
-        "strokeColor": "neutral-100"
+        "strokeColor": "border-secondary"
       }
     },
     "variant=filled,padding=sm": {
@@ -133,7 +133,7 @@
       "paddingLeft": 12,
       "paddingRight": 12,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
+        "bgColor": "surface-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -149,7 +149,7 @@
       "paddingLeft": 16,
       "paddingRight": 16,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
+        "bgColor": "surface-secondary",
         "borderRadius": "radius-4"
       }
     },
@@ -165,8 +165,77 @@
       "paddingLeft": 24,
       "paddingRight": 24,
       "_tokenRefs": {
-        "bgColor": "neutral-50",
+        "bgColor": "surface-secondary",
         "borderRadius": "radius-4"
+      }
+    },
+    "variant=glass,padding=sm": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "strokeWeight": 1,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "_tokenRefs": {
+        "bgColor": "surface-glass",
+        "borderRadius": "radius-4",
+        "strokeColor": "border-glass"
+      }
+    },
+    "variant=glass,padding=md": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "strokeWeight": 1,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "_tokenRefs": {
+        "bgColor": "surface-glass",
+        "borderRadius": "radius-4",
+        "strokeColor": "border-glass"
+      }
+    },
+    "variant=glass,padding=lg": {
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "borderRadius": 8,
+      "strokeColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "strokeWeight": 1,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "_tokenRefs": {
+        "bgColor": "surface-glass",
+        "borderRadius": "radius-4",
+        "strokeColor": "border-glass"
       }
     }
   }

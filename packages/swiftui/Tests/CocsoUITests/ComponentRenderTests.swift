@@ -104,6 +104,7 @@ final class ComponentRenderTests: XCTestCase {
         assertDraws("button", scheme) { CCButton("Button") {} }
         assertDraws("button-secondary", scheme) { CCButton("Secondary", variant: .secondary) {} }
         assertDraws("button-outline", scheme) { CCButton("Outline", variant: .outline) {} }
+        assertDraws("button-glass", scheme) { CCButton("Glass", variant: .glass) {} }
         assertDraws("badge", scheme) { CCBadge("Badge") }
         assertDraws("badge-outline", scheme) { CCBadge("Outline", variant: .outline) }
         assertDraws("card", scheme) { CCCard { CCTypography("Card") } }
@@ -127,6 +128,7 @@ final class ComponentRenderTests: XCTestCase {
         CCButton("Button") {}
         CCButton("Secondary", variant: .secondary) {}
         CCButton("Outline", variant: .outline) {}
+        CCButton("Glass", variant: .glass) {}
         CCBadge("Badge")
         CCBadge("Outline", variant: .outline)
         CCCard { CCTypography("Card") }

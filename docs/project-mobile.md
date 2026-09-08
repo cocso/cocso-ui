@@ -188,12 +188,13 @@ rather than seen.
 ## Glass
 
 Glass is for the layers that float over content and stay put while it moves:
-a tab bar, a navigation bar, a card over a photo. Two tokens carry it,
-`surface-glass` (the tint: 80% white light, 70% black dark) and `border-glass`
-(the edge), chosen so `text-primary` on the pane clears AA over any backdrop —
-a tab bar cannot choose its photo. The `card` recipe has a `glass` variant on
-all three platforms; the web adds a 16px `backdrop-filter`, SwiftUI puts
-`.ultraThinMaterial` under the tint.
+a tab bar, a navigation bar, a composer's buttons, a card over a photo. Three
+tokens carry it, `surface-glass` (the tint: 80% white light, 60% black dark),
+`surface-glass-active` (pressed: the pane thins to 60% / 40%) and
+`border-glass` (the edge), chosen so `text-primary` on the pane clears AA over
+any backdrop — a tab bar cannot choose its photo. The `card` and `button`
+recipes have a `glass` variant on all three platforms; the web adds a 16px
+`backdrop-filter`, SwiftUI puts `.ultraThinMaterial` under the tint.
 
 `CCGlass` is the primitive the app-owned bars use: `ccGlass()` /
 `Modifier.ccGlass()` for the surface, and `CCGlassBar(edge:)` for a bar with
@@ -205,10 +206,12 @@ sit on.
 
 Compose has no backdrop blur: `Modifier.blur` blurs a layer's own content, and
 blurring what is behind a layer needs the app to draw that content into the
-layer (a compositor pass — what the `haze` library does). So on Android the
-pane is translucent and unblurred, and the tint being opaque enough for AA is
-also what keeps it legible. That is the one visible difference between the
-platforms and it is deliberate.
+layer (a compositor pass — what the `haze` library does). An unblurred
+translucent pane over a busy screen is mud, so on Android the tint sits on
+`surface-primary` and glass reads as a solid of the same tone — iOS glass,
+Android solid, one colour on both. That is the one visible difference between
+the platforms and it is deliberate; it is also the pairing the platforms' own
+apps have settled on.
 
 ## Roadmap
 

@@ -367,7 +367,11 @@ object CocsoTokens {
         @Composable
         @ReadOnlyComposable
         fun surfaceGlass(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xB3000000) else ComposeColor(0xCCFFFFFF)
+            if (isSystemInDarkTheme()) ComposeColor(0x99000000) else ComposeColor(0xCCFFFFFF)
+        @Composable
+        @ReadOnlyComposable
+        fun surfaceGlassActive(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0x66000000) else ComposeColor(0x99FFFFFF)
         @Composable
         @ReadOnlyComposable
         fun surfaceInverse(): ComposeColor =

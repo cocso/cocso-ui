@@ -90,13 +90,23 @@ data:
     # A glass surface: what scrolls beneath it shows through, blurred where the
     # platform can blur (CSS backdrop-filter, SwiftUI Material). Opaque enough
     # that `text-primary` on it clears AA over any backdrop — 80% white over
-    # pure black is #cccccc, 12.6:1 against neutral-950; 70% black over pure
-    # white is #4d4d4d, 7.3:1 against neutral-50. Lighter than that and a dark
-    # photo behind a tab bar takes the labels with it.
+    # pure black is #cccccc, 12.6:1 against neutral-950; 60% black over pure
+    # white is #666666, 5.7:1 against neutral-50. Lighter than that and a dark
+    # photo behind a tab bar takes the labels with it; darker than 60% in the
+    # dark theme and the pane reads as a solid black slab rather than glass.
     $color.surface.glass:
       values:
         light: $color.white-alpha-80
-        dark: $color.black-alpha-70
+        dark: $color.black-alpha-60
+    # Pressed glass thins — more of what is beneath shows through — the way a
+    # pane brightens under a finger. Still AA for text-primary over any
+    # backdrop (60% white over black is #999999, 4.6:1; 40% black over white
+    # is #999999 against neutral-50, 4.6:1) — the floor, not a margin, which
+    # is fine for the fraction of a second a press lasts.
+    $color.surface.glass-active:
+      values:
+        light: $color.white-alpha-60
+        dark: $color.black-alpha-40
     # One step lighter than the surface they sit on in the dark theme, mirroring
     # the light theme. border-secondary was neutral-900, the same value as
     # surface-secondary, so every divider drawn on a card was invisible at 1.00.

@@ -143,6 +143,16 @@ fun CCButton(
                 }
             )
             .clip(buttonShape)
+            // Glass reads as a solid here: Compose has no backdrop blur, so the
+            // recipe's tint (`surface-glass`) sits on the page surface instead
+            // of on a blur — the same tone, opaque. See CCGlass.
+            .then(
+                if (variant == CCButtonVariant.glass) {
+                    Modifier.background(CocsoTokens.Color.surfacePrimary())
+                } else {
+                    Modifier
+                }
+            )
             .background(background)
             .clickable(
                 enabled = enabled && !loading,

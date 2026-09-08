@@ -292,6 +292,7 @@ public enum CCButtonVariant: String, CaseIterable, Sendable {
     case info
     case neutral
     case errorGhost
+    case glass
 }
 
 public enum CCButtonSize: String, CaseIterable, Sendable {
@@ -372,6 +373,9 @@ public struct CCButtonStyle: Equatable, Sendable {
         if variant == .errorGhost {
             style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme, brand: brand)
         }
+        if variant == .glass {
+            style.bgColorPressed = CocsoTokens.Color.surfaceGlassActive(scheme, brand: brand)
+        }
         if variant == .primary {
             style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
             style.fontColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
@@ -411,6 +415,12 @@ public struct CCButtonStyle: Equatable, Sendable {
         }
         if variant == .errorGhost {
             style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
+        }
+        if variant == .glass {
+            style.bgColor = CocsoTokens.Color.surfaceGlass(scheme, brand: brand)
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderGlass(scheme, brand: brand)
         }
         if size == .xLarge {
             style.height = 56

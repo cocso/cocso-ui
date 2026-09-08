@@ -332,7 +332,10 @@ public enum CocsoTokens {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.05) : SwiftUI.Color(hex: 0x000000, opacity: 0.05)
         }
         public static func surfaceGlass(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.7) : SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.8)
+            scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.6) : SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.8)
+        }
+        public static func surfaceGlassActive(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.4) : SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.6)
         }
         public static func surfaceInverse(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0x131416)
