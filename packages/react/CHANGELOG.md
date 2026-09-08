@@ -1,5 +1,11 @@
 # @cocso-ui/react
 
+## 1.4.1
+
+### Patch Changes
+
+- 9f69341: `dialog` recipe: drop the `height` values. The web never read `--cocso-dialog-height` (the module CSS caps at 85vh), and the mobile views did, so a two-line dialog came out 260 tall. No visual change on the web.
+
 ## 1.4.0
 
 ### Minor Changes
