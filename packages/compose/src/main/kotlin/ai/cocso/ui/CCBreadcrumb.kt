@@ -3,6 +3,7 @@ package ai.cocso.ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -53,14 +54,21 @@ fun CCBreadcrumb(
             if (index == items.lastIndex) {
                 Text(item.title, color = CocsoTokens.Color.textPrimary(), fontSize = fontSize, fontWeight = FontWeight.Medium)
             } else {
-                Text(
-                    text = item.title,
-                    color = style.fontColor ?: CocsoTokens.Color.textSecondary(),
-                    fontSize = fontSize,
+                // The touch target is a box the text is centred in; a minimum
+                // size on the text itself pins it to the top and the row
+                // misaligns — the first golden showed "Home" above its chevron.
+                Box(
                     modifier = Modifier
                         .clickable(interactionSource = interactionSource, indication = null, role = Role.Button) { onSelect(item) }
                         .ccMinimumTouchTarget(),
-                )
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = item.title,
+                        color = style.fontColor ?: CocsoTokens.Color.textSecondary(),
+                        fontSize = fontSize,
+                    )
+                }
                 Icon(
                     imageVector = Icons.Filled.ChevronRight,
                     contentDescription = null,

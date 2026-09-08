@@ -2,6 +2,7 @@ package ai.cocso.ui
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.material3.LocalContentColor
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.semantics.Role
@@ -37,14 +39,19 @@ fun CCLink(
     val pressed by animateFloatAsState(if (isPressed) 0.7f else 1f, animationSpec = CCMotion.colour(), label = "link-pressed")
     val dim by animateFloatAsState(if (enabled) 1f else 0.4f, animationSpec = CCMotion.colour(), label = "link-enabled")
 
-    Text(
-        text = title,
-        // `null` is `currentColor`: the surrounding ink.
-        color = style.color ?: LocalContentColor.current,
-        textDecoration = if (variant == CCLinkVariant.inline) TextDecoration.Underline else TextDecoration.None,
+    // The touch target is a box the text is centred in — see CCBreadcrumb.
+    Box(
         modifier = modifier
             .alpha(dim * pressed)
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick)
             .ccMinimumTouchTarget(),
-    )
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = title,
+            // `null` is `currentColor`: the surrounding ink.
+            color = style.color ?: LocalContentColor.current,
+            textDecoration = if (variant == CCLinkVariant.inline) TextDecoration.Underline else TextDecoration.None,
+        )
+    }
 }
