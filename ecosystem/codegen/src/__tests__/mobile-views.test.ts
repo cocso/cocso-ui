@@ -101,8 +101,9 @@ describe("A component's variants agree across platforms", () => {
  * A view is recipe-backed when the generator emitted a style for it. Not every
  * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum,
  * `CCMotion` builds the shared animations from the motion tokens, `CCGlass` is
- * the glass surface bars sit on, and `CCShadow` draws a shadow token's layers
- * — each reads tokens directly because there is no variant to resolve.
+ * the glass surface bars sit on, `CCShadow` draws a shadow token's layers, and
+ * `CCStrings` is the words the views speak — each reads tokens or resources
+ * directly because there is no variant to resolve.
  *
  * The set is read from the generated styles rather than assumed, and the
  * leftovers are then checked against the one name expected to be among them —
@@ -127,6 +128,7 @@ describe("Views take their values from the generated styles", () => {
       "CCGlass",
       "CCMotion",
       "CCShadow",
+      "CCStrings",
       "CCTouchTarget",
     ]);
   });
@@ -304,5 +306,42 @@ describe("Views that animate honour reduced motion and use the motion tokens", (
         `${name} (Android) hard-codes a duration; use CocsoTokens.Duration`
       ).toBe(false);
     }
+  });
+});
+
+/**
+ * A view never carries a word.
+ *
+ * "On", "Off", "Mixed", "Loading", "Show password" were written into the views
+ * as literals, and a screen reader read them in English to a Korean user. They
+ * are resources now (`CCStrings`, en and ko), and this holds the line: no
+ * string literal a user could hear in an accessibility label, value, state or
+ * default label parameter. Labels a caller passes are the caller's.
+ */
+describe("Views speak through CCStrings, not literals", () => {
+  // A word: letters inside the quotes, not an empty default and not an
+  // interpolated number (`"\(Int(fraction * 100))%"`).
+  const WORD = String.raw`"(?!\\\()[^"]*[A-Za-z][^"]*"`;
+  const SWIFT_SPOKEN = new RegExp(
+    String.raw`\.accessibility(?:Label|Value|Hint)\((?:Text\()?${WORD}|(?:label|placeholder): String = ${WORD}`,
+    "g"
+  );
+  const KOTLIN_SPOKEN = new RegExp(
+    String.raw`(?:contentDescription|stateDescription)\s*=\s*(?:if \([^)]*\) )?${WORD}|(?:label|placeholder): String = ${WORD}`,
+    "g"
+  );
+  const views = swift.filter((n) => kotlin.includes(n) && n !== "CCStrings");
+
+  it.each(views)("%s", (name) => {
+    const swiftSource = readFileSync(path.join(SWIFT_DIR, `${name}.swift`), "utf-8");
+    const kotlinSource = readFileSync(path.join(KOTLIN_DIR, `${name}.kt`), "utf-8");
+    expect(
+      [...swiftSource.matchAll(SWIFT_SPOKEN)].map(([m]) => m),
+      `${name} (iOS) speaks a literal`
+    ).toEqual([]);
+    expect(
+      [...kotlinSource.matchAll(KOTLIN_SPOKEN)].map(([m]) => m),
+      `${name} (Android) speaks a literal`
+    ).toEqual([]);
   });
 });

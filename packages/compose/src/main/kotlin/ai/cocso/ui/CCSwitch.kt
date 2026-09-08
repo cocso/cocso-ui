@@ -81,6 +81,8 @@ fun CCSwitch(
         animationSpec = CCMotion.colour(),
         label = "switch-enabled",
     )
+    val stateOn = CCStrings.on()
+    val stateOff = CCStrings.off()
 
     Row(
         modifier = modifier
@@ -99,7 +101,7 @@ fun CCSwitch(
                 role = Role.Switch
                 toggleableState =
                     if (checked) ToggleableState.On else ToggleableState.Off
-                stateDescription = if (checked) "On" else "Off"
+                stateDescription = if (checked) stateOn else stateOff
             },
         horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s5),
         verticalAlignment = Alignment.CenterVertically,

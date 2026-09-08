@@ -24,7 +24,7 @@ fun CCProgress(
     value: Float,
     modifier: Modifier = Modifier,
     total: Float = 100f,
-    label: String = "Progress",
+    label: String = CCStrings.progress(),
     variant: CCProgressVariant = CCProgressVariant.primary,
     size: CCProgressSize = CCProgressSize.md,
 ) {

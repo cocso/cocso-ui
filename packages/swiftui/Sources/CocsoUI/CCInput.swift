@@ -51,6 +51,9 @@ public struct CCInput: View {
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                     }
                     field
+                        // The system's bezel drew a box inside the box — visible
+                        // on macOS renders, and not the web's single border.
+                        .textFieldStyle(.plain)
                         .font(.system(size: style.fontSize ?? 14))
                         .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                         .focused($isFocused)
@@ -68,7 +71,7 @@ public struct CCInput: View {
                     .animation(CCMotion.colour(reduced: reduceMotion), value: revealed)
                     .buttonStyle(.plain)
                     .ccMinimumTouchTarget()
-                    .accessibilityLabel(revealed ? "Hide password" : "Show password")
+                    .accessibilityLabel(revealed ? CCStrings.hidePassword : CCStrings.showPassword)
                 }
             }
             .padding(.horizontal, style.paddingX ?? 12)

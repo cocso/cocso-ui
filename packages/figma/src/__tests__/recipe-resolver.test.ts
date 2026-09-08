@@ -729,22 +729,28 @@ describe("resolveForFigma — dialog recipe", () => {
     expect(spec.paddingRight).toBe(20);
   });
 
-  it("small size resolves width=380, height=200", () => {
+  // Width only: the height the recipe once carried was read by nothing on the
+  // web and stretched the mobile panels, so it was dropped.
+  it("small size resolves width=380 and no height", () => {
     const spec = resolveForFigma(dialogRecipe, { size: "small" });
     expect(spec.width).toBe(380);
-    expect(spec.height).toBe(200);
+    expect(spec.height).toBeUndefined();
   });
 
-  it("medium size resolves width=520, height=260", () => {
+  // Width only: the height the recipe once carried was read by nothing on the
+  // web and stretched the mobile panels, so it was dropped.
+  it("medium size resolves width=520 and no height", () => {
     const spec = resolveForFigma(dialogRecipe, { size: "medium" });
     expect(spec.width).toBe(520);
-    expect(spec.height).toBe(260);
+    expect(spec.height).toBeUndefined();
   });
 
-  it("large size resolves width=680, height=340", () => {
+  // Width only: the height the recipe once carried was read by nothing on the
+  // web and stretched the mobile panels, so it was dropped.
+  it("large size resolves width=680 and no height", () => {
     const spec = resolveForFigma(dialogRecipe, { size: "large" });
     expect(spec.width).toBe(680);
-    expect(spec.height).toBe(340);
+    expect(spec.height).toBeUndefined();
   });
 });
 

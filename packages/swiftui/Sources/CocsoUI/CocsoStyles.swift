@@ -624,7 +624,6 @@ public struct CCDialogStyle: Equatable, Sendable {
     public var paddingLeft: CGFloat?
     public var paddingRight: CGFloat?
     public var width: CGFloat?
-    public var height: CGFloat?
 
     /// Base, then each variant dimension, then compound
     /// variants — the order the CSS cascade encodes.
@@ -644,15 +643,12 @@ public struct CCDialogStyle: Equatable, Sendable {
         style.paddingRight = 20
         if size == .small {
             style.width = 380
-            style.height = 200
         }
         if size == .medium {
             style.width = 520
-            style.height = 260
         }
         if size == .large {
             style.width = 680
-            style.height = 340
         }
         return style
     }

@@ -22,7 +22,6 @@
       "paddingLeft": 20,
       "paddingRight": 20,
       "width": 380,
-      "height": 200,
       "_tokenRefs": {
         "bgColor": "surface-primary",
         "borderRadius": "radius-5",
@@ -47,7 +46,6 @@
       "paddingLeft": 20,
       "paddingRight": 20,
       "width": 520,
-      "height": 260,
       "_tokenRefs": {
         "bgColor": "surface-primary",
         "borderRadius": "radius-5",
@@ -72,7 +70,6 @@
       "paddingLeft": 20,
       "paddingRight": 20,
       "width": 680,
-      "height": 340,
       "_tokenRefs": {
         "bgColor": "surface-primary",
         "borderRadius": "radius-5",

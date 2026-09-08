@@ -38,7 +38,6 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > dialogRecipe d
   "--cocso-dialog-bg-color": "var(--cocso-color-surface-primary)",
   "--cocso-dialog-border": "1px solid var(--cocso-color-border-secondary)",
   "--cocso-dialog-border-radius": "var(--cocso-radius-5)",
-  "--cocso-dialog-height": "260px",
   "--cocso-dialog-padding-bottom": "20px",
   "--cocso-dialog-padding-left": "20px",
   "--cocso-dialog-padding-right": "20px",

@@ -5,24 +5,12 @@ export const dialogRecipe = defineRecipe({
   slots: ["root"] as const,
   variants: {
     size: {
-      small: {
-        root: {
-          width: 380,
-          height: 200,
-        },
-      },
-      medium: {
-        root: {
-          width: 520,
-          height: 260,
-        },
-      },
-      large: {
-        root: {
-          width: 680,
-          height: 340,
-        },
-      },
+      // Width only. A height sat here for as long as the recipe existed and the
+      // web never read it (`dialog.module.css` caps at 85vh); the mobile views
+      // did, and a two-line dialog came out 260 tall.
+      small: { root: { width: 380 } },
+      medium: { root: { width: 520 } },
+      large: { root: { width: 680 } },
     },
   },
   base: {

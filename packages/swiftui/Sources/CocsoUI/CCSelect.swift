@@ -40,7 +40,7 @@ public struct CCSelect: View {
         label: String,
         options: [CCSelectOption],
         selection: Binding<String?>,
-        placeholder: String = "Select",
+        placeholder: String = CCStrings.select,
         size: CCSelectSize = .medium
     ) {
         self.label = label

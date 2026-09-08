@@ -87,6 +87,6 @@ public struct CCSwitch: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)
         .accessibilityAddTraits(.isButton)
-        .accessibilityValue(Text(isOn ? "On" : "Off"))
+        .accessibilityValue(Text(isOn ? CCStrings.on : CCStrings.off))
     }
 }

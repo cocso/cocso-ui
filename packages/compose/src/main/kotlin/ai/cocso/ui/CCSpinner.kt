@@ -24,7 +24,7 @@ fun CCSpinner(
     modifier: Modifier = Modifier,
     variant: CCSpinnerVariant = CCSpinnerVariant.primary,
     size: CCSpinnerSize = CCSpinnerSize.medium,
-    label: String = "Loading",
+    label: String = CCStrings.loading(),
 ) {
     val style = cCSpinnerStyle(variant = variant, size = size)
     val side = style.output ?: 16.dp

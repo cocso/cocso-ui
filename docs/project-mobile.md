@@ -110,7 +110,7 @@ CI expectations:
 
 - `golden.test.ts` compares every generated artifact to the sources, and fails when a published file and the YAML disagree. The mobile artifacts join the CSS ones there.
 - A parity assertion: the Swift and Kotlin token sets are identical to each other and to the CSS. That is the check `cocso/mobile` did not have, and its absence is why 55 colours could go missing without anything failing.
-- `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the three names expected to be in it (`CCTouchTarget`, `CCMotion`, `CCGlass` — primitives with no variant to resolve), so a resolver that stops being emitted fails rather than silently excusing its view. It also fails a view that animates without honouring reduced motion or with a literal duration.
+- `mobile-views.test.ts` covers the hand-written layer, which the generators cannot keep in step: the two platforms carry the same components, each exposes the same variant dimensions, and every recipe-backed view resolves its generated style rather than naming tokens itself. The exemption list is derived from the emitted styles and then checked against the five names expected to be in it (`CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`, `CCStrings` — primitives with no variant to resolve), so a resolver that stops being emitted fails rather than silently excusing its view. It also fails a view that animates without honouring reduced motion or with a literal duration, and one that speaks a literal string.
 
 ## Brands
 
@@ -241,12 +241,34 @@ follow every signature change; a consumer that is a program reads this instead.
 `mobile.test.ts` holds the published file to the generator, checks every
 `--cocso-*` in `token.css` appears, and that identifiers match the Swift.
 
+## Strings
+
+The views speak through `CCStrings` — `Localizable.strings` in the Swift
+package (`Bundle.module`, en and ko) and `res/values/strings.xml` in the
+Compose module (`values` and `values-ko`). Accessibility labels, values and
+states ("On", "Off", "Mixed", "Close"), and the default label parameters
+("Loading", "Progress", "Select") all come from there; a label the caller
+passes is the caller's to localise. `mobile-views.test.ts` fails a view that
+writes a literal into any of those places, and the Compose interaction test
+runs one control under the `ko` qualifier and hears Korean.
+
+## Interaction tests
+
+`ComponentInteractionTest.kt` drives each control the way a finger does and
+reads the callback and the semantics back: a button calls `onClick` and a
+loading one does not; a checkbox and a switch toggle and announce on/off; a
+radio selects exactly one; a select opens its menu and picks; a dialog's close
+asks to dismiss. The render tests said the controls were drawn; nothing said
+they worked. There is no SwiftUI counterpart — XCTest cannot tap a SwiftUI
+view without a UI-test host, which `swift test` does not provide — so the iOS
+views are covered by rendering and by their bindings' types.
+
 ## Roadmap
 
 1. **Token layer, both themes.** This milestone.
 2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-3. **Views.** Fifteen exist here, matched on both platforms, plus four primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`.
+3. **Views.** Fifteen exist here, matched on both platforms, plus five primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`, `CCStrings`. `CCButton` takes `prefix`/`suffix` icons as the web's does.
 
    The three added last — the ones an app reaches for first and had been drawing itself:
    - `CCDialogPanel` / `.ccDialog(isPresented:)` (SwiftUI) and `CCDialog` / `CCDialogPanel` (Compose): the web's scrim (`black-alpha-30`), `shadow-dialog`, and entrance on the entrance curve. Drawn in place on SwiftUI so it animates on the design system's curve; a `Dialog` window on Compose with its own dim turned off so the two scrims do not stack.
