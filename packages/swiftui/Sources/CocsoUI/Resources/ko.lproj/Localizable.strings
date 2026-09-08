@@ -7,3 +7,11 @@
 "cc.hidePassword" = "비밀번호 숨기기";
 "cc.close" = "닫기";
 "cc.select" = "선택";
+"cc.pagination" = "페이지 이동";
+"cc.previousPage" = "이전 페이지";
+"cc.nextPage" = "다음 페이지";
+"cc.page" = "%lld 페이지";
+"cc.breadcrumb" = "탐색 경로";
+"cc.stockSufficient" = "여유";
+"cc.stockNormal" = "보통";
+"cc.stockInsufficient" = "부족";

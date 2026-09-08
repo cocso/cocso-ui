@@ -22,4 +22,13 @@ object CCStrings {
     @Composable @ReadOnlyComposable fun hidePassword(): String = stringResource(R.string.cc_hide_password)
     @Composable @ReadOnlyComposable fun close(): String = stringResource(R.string.cc_close)
     @Composable @ReadOnlyComposable fun select(): String = stringResource(R.string.cc_select)
+    @Composable @ReadOnlyComposable fun pagination(): String = stringResource(R.string.cc_pagination)
+    @Composable @ReadOnlyComposable fun previousPage(): String = stringResource(R.string.cc_previous_page)
+    @Composable @ReadOnlyComposable fun nextPage(): String = stringResource(R.string.cc_next_page)
+    @Composable @ReadOnlyComposable fun breadcrumb(): String = stringResource(R.string.cc_breadcrumb)
+    @Composable @ReadOnlyComposable fun stockSufficient(): String = stringResource(R.string.cc_stock_sufficient)
+    @Composable @ReadOnlyComposable fun stockNormal(): String = stringResource(R.string.cc_stock_normal)
+    @Composable @ReadOnlyComposable fun stockInsufficient(): String = stringResource(R.string.cc_stock_insufficient)
+    /** "Page 3" — the number placed where the language puts it. */
+    @Composable @ReadOnlyComposable fun page(number: Int): String = stringResource(R.string.cc_page, number)
 }

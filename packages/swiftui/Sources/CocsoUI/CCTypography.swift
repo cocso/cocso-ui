@@ -5,6 +5,7 @@ public struct CCTypography: View {
     private let text: String
     private let type: CCTypographyType
     private let size: CCTypographySize
+    private let color: SwiftUI.Color?
 
     @Environment(\.colorScheme) private var colorScheme
     // The brand the app set at its root. Tokens and resolvers take it so a
@@ -14,11 +15,14 @@ public struct CCTypography: View {
     public init(
         _ text: String,
         type: CCTypographyType = .body,
-        size: CCTypographySize = .medium
+        size: CCTypographySize = .medium,
+        // The web's `color` prop; `nil` is the default ink.
+        color: SwiftUI.Color? = nil
     ) {
         self.text = text
         self.type = type
         self.size = size
+        self.color = color
     }
 
     public var body: some View {
@@ -28,6 +32,6 @@ public struct CCTypography: View {
             // Compose 와 같은 이유로 토큰을 쓴다. SwiftUI 의 기본 `.primary` 는
             // 테마를 따라가지만 순수 흑백이라 토큰과 미묘하게 다르고, 두 플랫폼이
             // 다른 규칙을 따르게 된다.
-            .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
+            .foregroundStyle(color ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
     }
 }

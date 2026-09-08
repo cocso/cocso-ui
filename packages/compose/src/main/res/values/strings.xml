@@ -11,4 +11,12 @@
     <string name="cc_hide_password">Hide password</string>
     <string name="cc_close">Close</string>
     <string name="cc_select">Select</string>
+    <string name="cc_pagination">Pagination</string>
+    <string name="cc_previous_page">Previous page</string>
+    <string name="cc_next_page">Next page</string>
+    <string name="cc_page">Page %1$d</string>
+    <string name="cc_breadcrumb">Breadcrumb</string>
+    <string name="cc_stock_sufficient">Sufficient</string>
+    <string name="cc_stock_normal">Normal</string>
+    <string name="cc_stock_insufficient">Insufficient</string>
 </resources>

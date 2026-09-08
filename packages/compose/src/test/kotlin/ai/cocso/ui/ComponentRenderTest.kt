@@ -3,6 +3,7 @@ package ai.cocso.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -42,7 +43,7 @@ import org.robolectric.annotation.GraphicsMode
 // 창이 내용보다 짧으면 아래쪽 컴포넌트가 잘린 채로 골든이 박힌다. 처음 기록한
 // 이미지가 정확히 그랬고 — 체크박스·스위치·입력 셋이 빠져 있었다 — 눈으로 보지
 // 않았으면 셋을 보지 않는 테스트를 통과시켰을 것이다.
-@Config(sdk = [34], qualifiers = "w360dp-h2800dp")
+@Config(sdk = [34], qualifiers = "w360dp-h3200dp")
 class ComponentRenderTest {
 
     @get:Rule
@@ -135,13 +136,21 @@ class ComponentRenderTest {
         // The panel alone: the presenting `CCDialog` opens a window Robolectric
         // does not capture through `onRoot`.
         CCDialogPanel(title = "Dialog", message = "message") { CCButton(title = "OK", onClick = {}) }
+        CCLink(title = "Link", onClick = {})
+        CCBreadcrumb(items = listOf(CCBreadcrumbItem("a", "Home"), CCBreadcrumbItem("b", "Here")), onSelect = {})
+        CCPagination(page = 3, totalPages = 10, onChange = {})
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            CCStockQuantityStatus(CCStockQuantityStatusQuantity.sufficient)
+            CCStockQuantityStatus(CCStockQuantityStatusQuantity.normal)
+            CCStockQuantityStatus(CCStockQuantityStatusQuantity.insufficient)
+        }
     }
 
     @Test
     fun everyComponentDrawsInLightTheme() = render("components-light") { everything() }
 
     @Test
-    @Config(sdk = [34], qualifiers = "w360dp-h2800dp-night")
+    @Config(sdk = [34], qualifiers = "w360dp-h3200dp-night")
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
 
     /**

@@ -1,5 +1,6 @@
 package ai.cocso.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -115,6 +116,37 @@ class ComponentInteractionTest {
         }
         composeRule.onNodeWithContentDescription("Close").performClick()
         assertTrue(dismissed)
+    }
+
+    @Test
+    fun paginationMovesAndTruncates() {
+        var page = 3
+        composeRule.setContent { CCPagination(page = page, totalPages = 10, onChange = { page = it }) }
+        composeRule.onNodeWithContentDescription("Next page").performClick()
+        assertEquals(4, page)
+        composeRule.onNodeWithContentDescription("Page 10").performClick()
+        assertEquals(10, page)
+        // The web's window: `maxVisible` pages after the first, then the gap.
+        assertEquals(listOf(1, 2, 3, 4, 5, null, 10), paginationSlots(3, 10, 5))
+        assertEquals(listOf(1, null, 6, 7, 8, 9, 10), paginationSlots(8, 10, 5))
+        assertEquals(listOf(1, 2, 3, 4, 5, 6, 7), paginationSlots(3, 7, 5))
+    }
+
+    @Test
+    fun linkAndBreadcrumbCallBack() {
+        var linked = 0
+        var crumb: String? = null
+        composeRule.setContent {
+            // Stacked: two siblings at the root overlap, and the top one takes the tap.
+            Column {
+                CCLink(title = "Terms", onClick = { linked++ })
+                CCBreadcrumb(items = listOf(CCBreadcrumbItem("h", "Home"), CCBreadcrumbItem("x", "Here")), onSelect = { crumb = it.id })
+            }
+        }
+        composeRule.onNodeWithText("Terms").performClick()
+        composeRule.onNodeWithText("Home").performClick()
+        assertEquals(1, linked)
+        assertEquals("h", crumb)
     }
 
     /** The strings are resources, so a Korean device hears Korean. */
