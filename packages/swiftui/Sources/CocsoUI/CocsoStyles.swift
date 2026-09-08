@@ -884,7 +884,7 @@ public struct CCRadioStyle: Equatable, Sendable {
             style.dotSize = 6
         }
         if selected == .`true` {
-            style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
             style.borderColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
         if selected == .`false` {

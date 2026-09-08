@@ -1253,8 +1253,11 @@ describe("resolveForFigma with state option", () => {
       { selected: "true" },
       { state: "hover" }
     );
-    expect(base._tokenRefs?.bgColor).toBe("interactive-primary");
-    expect(hover._tokenRefs?.bgColor).toBe("interactive-primary-hover");
+    // The ring, not the fill: a selected radio keeps the page's fill and takes
+    // the primary on its border, as the web's `[data-checked]` draws it.
+    expect(base._tokenRefs?.bgColor).toBe("surface-primary");
+    expect(base._tokenRefs?.borderColor).toBe("interactive-primary");
+    expect(hover._tokenRefs?.borderColor).toBe("interactive-primary-hover");
   });
 
   it("applies hover state to radio selected=false", () => {

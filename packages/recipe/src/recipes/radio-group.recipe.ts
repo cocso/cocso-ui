@@ -20,10 +20,14 @@ export const radioGroupRecipe = defineRecipe({
       medium: { root: { size: 16, dotSize: 7 } },
       small: { root: { size: 14, dotSize: 6 } },
     },
+    // The web's `[data-checked]`: the fill stays the page and the ring takes
+    // `checkedColor`; the dot is `checkedColor` too. The recipe used to fill the
+    // whole circle with the primary — a value the web never read, and the
+    // mobile views did, so a selected radio was a solid disc there.
     selected: {
       true: {
         root: {
-          bgColor: "interactive-primary",
+          bgColor: "surface-primary",
           borderColor: "interactive-primary",
         },
       },
@@ -40,12 +44,7 @@ export const radioGroupRecipe = defineRecipe({
   states: {
     hover: {
       selected: {
-        true: {
-          root: {
-            bgColor: "interactive-primary-hover",
-            borderColor: "interactive-primary-hover",
-          },
-        },
+        true: { root: { borderColor: "interactive-primary-hover" } },
         false: { root: { borderColor: "interactive-primary-muted" } },
       },
     },

@@ -1,11 +1,20 @@
 import SwiftUI
 
+/// Which side of the track the label sits on — the web's `position`.
+public enum CCSwitchLabelPosition: Sendable {
+    /// Label before the track. The web's `position="left"`.
+    case leading
+    /// Label after the track. The web's default.
+    case trailing
+}
+
 /// A toggle.
 public struct CCSwitch: View {
     private let label: String
     private let isOn: Bool
     private let variant: CCSwitchVariant
     private let size: CCSwitchSize
+    private let labelPosition: CCSwitchLabelPosition
     private let onChange: (Bool) -> Void
 
     @Environment(\.colorScheme) private var colorScheme
@@ -20,12 +29,14 @@ public struct CCSwitch: View {
         isOn: Bool,
         variant: CCSwitchVariant = .primary,
         size: CCSwitchSize = .medium,
+        labelPosition: CCSwitchLabelPosition = .trailing,
         onChange: @escaping (Bool) -> Void
     ) {
         self.label = label
         self.isOn = isOn
         self.variant = variant
         self.size = size
+        self.labelPosition = labelPosition
         self.onChange = onChange
     }
 
@@ -42,6 +53,9 @@ public struct CCSwitch: View {
 
         Button(action: { onChange(!isOn) }) {
             HStack(spacing: CocsoTokens.Spacing.s5) {
+                if labelPosition == .leading {
+                    CCTypography(label, type: .body, size: .medium)
+                }
                 ZStack(alignment: isOn ? .trailing : .leading) {
                     Capsule()
                         .fill(
@@ -77,7 +91,9 @@ public struct CCSwitch: View {
                 // The thumb travels and the track recolours on the web's
                 // `transition: transform fast soft` — not on one frame.
                 .animation(CCMotion.movement(reduced: reduceMotion), value: isOn)
-                CCTypography(label, type: .body, size: .medium)
+                if labelPosition == .trailing {
+                    CCTypography(label, type: .body, size: .medium)
+                }
             }
             .ccMinimumTouchTarget()
         }

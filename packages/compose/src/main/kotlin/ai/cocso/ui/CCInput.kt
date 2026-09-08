@@ -55,6 +55,7 @@ fun CCInput(
     placeholder: String = "",
     size: CCInputSize = CCInputSize.medium,
     isSecure: Boolean = false,
+    description: String? = null,
     errorMessage: String? = null,
     enabled: Boolean = true,
 ) {
@@ -164,6 +165,10 @@ fun CCInput(
                     )
                 }
             }
+        }
+        // The web's `description`: help under the field, in the quieter ink.
+        if (description != null) {
+            Text(text = description, color = CocsoTokens.Color.textSecondary(), fontSize = 12.sp)
         }
         // The message slides in under the field on the entrance curve.
         AnimatedVisibility(

@@ -90,6 +90,9 @@ public struct CCRadio: View {
         )
         let side = style.size ?? 16
         let dot = style.dotSize ?? 7
+        // The web's radio: the page's fill, a 2px ring (`spacing-2`) that takes
+        // `checkedColor` when selected, and a `checkedColor` dot.
+        let checked = style.checkedColor ?? CocsoTokens.Color.interactivePrimary(colorScheme, brand: brand)
         Button(action: onSelect) {
             HStack(spacing: CocsoTokens.Spacing.s5) {
                 Circle()
@@ -97,19 +100,17 @@ public struct CCRadio: View {
                     .overlay(
                         Circle().strokeBorder(
                             style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
-                            lineWidth: 1
+                            lineWidth: CocsoTokens.Spacing.s2
                         )
                     )
                     // The ring recolours on the web's colour curve; the dot pops in
-                    // on the entrance curve. `checkedColor` is the fill the dot
-                    // sits in; the dot itself is `text-on-primary`, the pairing the
-                    // checkbox glyph uses, so it reads on a rebranded fill.
+                    // on the entrance curve.
                     .animation(CCMotion.colour(reduced: reduceMotion), value: selected)
                     .overlay(
                         Group {
                             if selected {
                                 Circle()
-                                    .fill(CocsoTokens.Color.textOnPrimary(colorScheme, brand: brand))
+                                    .fill(checked)
                                     .frame(width: dot, height: dot)
                                     .transition(.scale(scale: 0.4).combined(with: .opacity))
                             }
@@ -125,9 +126,6 @@ public struct CCRadio: View {
                             .padding(-2)
                     )
                     .frame(width: side, height: side)
-                    // Read, not drawn twice: the fill already carries `checkedColor`
-                    // when selected, and the recipe names it so a consumer can retheme it.
-                    .accessibilityHidden(style.checkedColor == nil)
                 CCTypography(title, type: .body, size: .medium)
             }
             .ccMinimumTouchTarget()

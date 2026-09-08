@@ -31,6 +31,14 @@ import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 
+/** Which side of the track the label sits on — the web's `position`. */
+enum class CCSwitchLabelPosition {
+    /** Label before the track. The web's `position="left"`. */
+    Leading,
+    /** Label after the track. The web's default. */
+    Trailing,
+}
+
 /** A toggle. */
 @Composable
 fun CCSwitch(
@@ -40,6 +48,7 @@ fun CCSwitch(
     modifier: Modifier = Modifier,
     variant: CCSwitchVariant = CCSwitchVariant.primary,
     size: CCSwitchSize = CCSwitchSize.medium,
+    labelPosition: CCSwitchLabelPosition = CCSwitchLabelPosition.Trailing,
     enabled: Boolean = true,
 ) {
     val style = cCSwitchStyle(
@@ -106,6 +115,9 @@ fun CCSwitch(
         horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s5),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        if (labelPosition == CCSwitchLabelPosition.Leading) {
+            CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)
+        }
         Box(
             modifier = Modifier
                 .size(width = trackWidth, height = trackHeight)
@@ -136,6 +148,8 @@ fun CCSwitch(
                     .border(1.dp, thumbEdge, CircleShape)
             )
         }
-        CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)
+        if (labelPosition == CCSwitchLabelPosition.Trailing) {
+            CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.medium)
+        }
     }
 }

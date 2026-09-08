@@ -1,6 +1,9 @@
 package ai.cocso.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -16,12 +19,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-/** An identity mark: initials when there is no image. */
+/** An identity mark: an image, or initials when there is none. */
 @Composable
 fun CCAvatar(
     initials: String,
     label: String,
     modifier: Modifier = Modifier,
+    image: Painter? = null,
     size: CCAvatarSize = CCAvatarSize.md,
     shape: CCAvatarShape = CCAvatarShape.circle,
 ) {
@@ -44,6 +48,10 @@ fun CCAvatar(
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
     ) {
+        if (image != null) {
+            Image(painter = image, contentDescription = null, contentScale = ContentScale.Crop, modifier = Modifier.matchParentSize())
+            return@Box
+        }
         Text(
             text = initials,
             color = style.fontColor ?: CocsoTokens.Color.textPrimary(),
