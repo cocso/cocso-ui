@@ -9,7 +9,7 @@ plugins {
 // Coordinates, two ways in:
 //   composite build:  includeBuild("<path>/packages/compose")
 //   GitHub Packages:  maven { url = uri("https://maven.pkg.github.com/cocso/cocso-ui") }
-//                     implementation("ai.cocso.ui:cocso-ui-compose:<VERSION_NAME>")
+//                     implementation("ai.cocso.ui:compose:<VERSION_NAME>")
 // The artifact name is `rootProject.name` in settings.gradle.kts; the version
 // is VERSION_NAME in gradle.properties, shared with the Swift package's tag.
 group = "ai.cocso.ui"
@@ -50,7 +50,7 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "ai.cocso.ui"
-            artifactId = "cocso-ui-compose"
+            artifactId = "compose"
             afterEvaluate { from(components["release"]) }
         }
     }

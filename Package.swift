@@ -3,7 +3,7 @@ import PackageDescription
 
 // The manifest a consumer reaches by URL:
 //
-//   .package(url: "https://github.com/cocso/cocso-ui", from: "1.0.0")
+//   .package(url: "https://github.com/cocso/cocso-ui", from: "1.0.1")
 //
 // It points at the same sources as packages/swiftui/Package.swift, which
 // cocso/mobile consumes by path and which carries the test target. This one

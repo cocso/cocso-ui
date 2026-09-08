@@ -76,6 +76,6 @@ jobs:
           git push origin "refs/tags/$v"
           gh release create "$v" --title "Mobile packages $v" --notes "$(cat <<EOF
           SwiftUI: \`.package(url: "https://github.com/cocso/cocso-ui", from: "$v")\`
-          Compose: \`implementation("ai.cocso.ui:cocso-ui-compose:$v")\` from \`https://maven.pkg.github.com/cocso/cocso-ui\`
+          Compose: \`implementation("ai.cocso.ui:compose:$v")\` from \`https://maven.pkg.github.com/cocso/cocso-ui\`
           EOF
           )"
