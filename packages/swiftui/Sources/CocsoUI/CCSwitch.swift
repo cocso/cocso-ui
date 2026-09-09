@@ -23,6 +23,9 @@ public struct CCSwitch: View {
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // WCAG 2.4.7 applies wherever there is a keyboard, and an iPad has one.
+    // The web draws `.switch:focus-visible`; this drew nothing.
+    @FocusState private var isFocused: Bool
 
     public init(
         label: String,
@@ -88,6 +91,7 @@ public struct CCSwitch: View {
                         .padding(.horizontal, inset)
                 }
                 .frame(width: track.width, height: track.height)
+                .ccFocusRing(isFocused, in: Capsule())
                 // The thumb travels and the track recolours on the web's
                 // `transition: transform fast soft` — not on one frame.
                 .animation(CCMotion.movement(reduced: reduceMotion), value: isOn)
@@ -97,7 +101,8 @@ public struct CCSwitch: View {
             }
             .ccMinimumTouchTarget()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CCPressStyle())
+        .focused($isFocused)
         .opacity(isEnabled ? 1 : 0.4)
         .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityElement(children: .ignore)

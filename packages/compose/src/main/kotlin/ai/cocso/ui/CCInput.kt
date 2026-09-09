@@ -156,6 +156,7 @@ fun CCInput(
                         // themes; `text-tertiary` is 3.08:1 on white.
                         tint = CocsoTokens.Color.textSecondary(),
                         modifier = Modifier
+                            .ccPressFeedback(interactionSource)
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null,

@@ -59,6 +59,7 @@ fun CCBreadcrumb(
                 // misaligns — the first golden showed "Home" above its chevron.
                 Box(
                     modifier = Modifier
+                        .ccPressFeedback(interactionSource)
                         .clickable(interactionSource = interactionSource, indication = null, role = Role.Button) { onSelect(item) }
                         .ccMinimumTouchTarget(),
                     contentAlignment = Alignment.Center,

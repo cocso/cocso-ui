@@ -83,6 +83,7 @@ fun CCCheckbox(
     Row(
         modifier = modifier
             .alpha(dim)
+            .ccPressFeedback(interactionSource)
             .onFocusChanged { isFocused = it.isFocused }
             .clickable(
                 enabled = enabled,

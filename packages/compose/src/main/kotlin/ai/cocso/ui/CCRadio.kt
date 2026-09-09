@@ -117,6 +117,7 @@ fun CCRadio(
     Row(
         modifier = modifier
             .alpha(dim)
+            .ccPressFeedback(interactionSource)
             .onFocusChanged { isFocused = it.isFocused }
             .selectable(
                 selected = selected,

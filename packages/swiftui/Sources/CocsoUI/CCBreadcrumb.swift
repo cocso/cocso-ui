@@ -56,7 +56,7 @@ public struct CCBreadcrumb: View {
                             .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                             .ccMinimumTouchTarget()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(CCPressStyle())
                     .accessibilityAddTraits(.isLink)
                     Image(systemName: "chevron.right")
                         .font(.system(size: fontSize * 0.75, weight: .medium))

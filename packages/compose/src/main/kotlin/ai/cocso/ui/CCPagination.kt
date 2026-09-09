@@ -17,10 +17,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -90,11 +93,17 @@ private fun PaginationPage(number: Int, active: Boolean, onClick: () -> Unit) {
     val fill by animateColorAsState(style.bgColor ?: ComposeColor.Transparent, animationSpec = CCMotion.colour(), label = "page-fill")
     val ink by animateColorAsState(style.fontColor ?: CocsoTokens.Color.textPrimary(), animationSpec = CCMotion.colour(), label = "page-ink")
     val pageLabel = CCStrings.page(number)
+    // The web draws `.item:focus-visible` and scales the square on `:active`.
+    var isFocused by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
+            .ccPressFeedback(interactionSource)
+            .onFocusChanged { isFocused = it.isFocused }
             .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
             .clip(RoundedCornerShape(style.borderRadius ?: 8.dp))
             .background(fill)
+            .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp))
+            .ccMinimumTouchTarget()
             .clickable(interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick)
             .semantics {
                 contentDescription = pageLabel
@@ -120,12 +129,18 @@ private fun PaginationArrow(
 ) {
     val style = cCPaginationStyle(pageState = if (enabled) CCPaginationPageState.inactive else CCPaginationPageState.disabled)
     val interactionSource = remember { MutableInteractionSource() }
+    // The web draws `.arrow:focus-visible`; this drew nothing.
+    var isFocused by remember { mutableStateOf(false) }
     Icon(
         imageVector = glyph,
         contentDescription = label,
         tint = style.fontColor ?: CocsoTokens.Color.textPrimary(),
         modifier = Modifier
+            .ccPressFeedback(interactionSource)
+            .onFocusChanged { isFocused = it.isFocused }
             .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
+            .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp))
+            .ccMinimumTouchTarget()
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick),
     )
 }

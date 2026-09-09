@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -57,6 +60,9 @@ fun CCSwitch(
         checked = if (checked) CCSwitchChecked.`true` else CCSwitchChecked.`false`,
     )
     val interactionSource = remember { MutableInteractionSource() }
+    // WCAG 2.4.7 applies wherever there is a keyboard, and Android supports
+    // one. The web draws `.switch:focus-visible`; this drew nothing.
+    var isFocused by remember { mutableStateOf(false) }
     val trackWidth = style.width ?: 36.dp
     val trackHeight = style.height ?: 20.dp
     val thumb = style.thumbSize ?: 16.dp
@@ -96,6 +102,8 @@ fun CCSwitch(
     Row(
         modifier = modifier
             .alpha(dim)
+            .ccPressFeedback(interactionSource)
+            .onFocusChanged { isFocused = it.isFocused }
             .clickable(
                 enabled = enabled,
                 interactionSource = interactionSource,
@@ -130,6 +138,7 @@ fun CCSwitch(
                     style.borderColor ?: CocsoTokens.Color.borderStrong(),
                     CircleShape,
                 )
+                .ccFocusRing(isFocused, CircleShape)
                 .padding(horizontal = inset),
             contentAlignment = Alignment.CenterStart,
         ) {

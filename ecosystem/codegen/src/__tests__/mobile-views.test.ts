@@ -12,7 +12,7 @@
  * directories in one repository.
  */
 
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
@@ -345,5 +345,75 @@ describe("Views speak through CCStrings, not literals", () => {
       [...kotlinSource.matchAll(KOTLIN_SPOKEN)].map(([m]) => m),
       `${name} (Android) speaks a literal`
     ).toEqual([]);
+  });
+});
+
+/**
+ * A control answers a finger, and a keyboard can find it.
+ *
+ * Two things the web gives every control and the mobile views gave unevenly.
+ * Press: `CCButton` and `CCLink` responded and the other seven touchables did
+ * nothing, so a checkbox, a switch, a page number felt dead under a finger —
+ * on a touch screen that reads as a tap that missed. Focus: the web draws
+ * `outline: 2px focus-ring` on switch, link and pagination, and those three
+ * drew nothing, which is WCAG 2.4.7 wherever there is a keyboard.
+ *
+ * The focus half is derived, not listed: the web module is the source of
+ * truth, so a component whose CSS has `:focus-visible` must have a focus
+ * binding on both platforms. Nothing to keep in step by hand.
+ */
+describe("Every control presses back and can be focused", () => {
+  const WEB_DIR = path.join(repoRoot, "packages/react/src/components");
+  /** `CCRadio`'s web counterpart is `radio-group`; the rest are the kebab name. */
+  const WEB_NAME: Readonly<Record<string, string>> = { CCRadio: "radio-group" };
+
+  const webModule = (name: string): string | null => {
+    const dir =
+      WEB_NAME[name] ??
+      name
+        .replace(/^CC/, "")
+        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+        .toLowerCase();
+    const file = path.join(WEB_DIR, dir, `${dir}.module.css`);
+    return existsSync(file) ? readFileSync(file, "utf-8") : null;
+  };
+
+  const TOUCHABLE_SWIFT = /Button\(action|ccPressable/;
+  const TOUCHABLE_KOTLIN = /\.clickable\(|\.selectable\(|ccPressable/;
+  const PRESSES_SWIFT = /CCPressStyle|isPressed/;
+  const PRESSES_KOTLIN = /ccPressFeedback|ccPressable|collectIsPressedAsState/;
+  const FOCUS_SWIFT = /FocusState/;
+  const FOCUS_KOTLIN = /onFocusChanged/;
+
+  const shared = swift.filter((n) => kotlin.includes(n));
+
+  it.each(shared)("%s", (name) => {
+    const swiftSource = readFileSync(path.join(SWIFT_DIR, `${name}.swift`), "utf-8");
+    const kotlinSource = readFileSync(path.join(KOTLIN_DIR, `${name}.kt`), "utf-8");
+
+    if (TOUCHABLE_SWIFT.test(swiftSource)) {
+      expect(
+        PRESSES_SWIFT.test(swiftSource),
+        `${name} (iOS) is touchable and shows nothing on press`
+      ).toBe(true);
+    }
+    if (TOUCHABLE_KOTLIN.test(kotlinSource)) {
+      expect(
+        PRESSES_KOTLIN.test(kotlinSource),
+        `${name} (Android) is touchable and shows nothing on press`
+      ).toBe(true);
+    }
+
+    const css = webModule(name);
+    if (css?.includes(":focus-visible")) {
+      expect(
+        FOCUS_SWIFT.test(swiftSource),
+        `${name} (iOS) has no focus ring; the web draws one`
+      ).toBe(true);
+      expect(
+        FOCUS_KOTLIN.test(kotlinSource),
+        `${name} (Android) has no focus ring; the web draws one`
+      ).toBe(true);
+    }
   });
 });
