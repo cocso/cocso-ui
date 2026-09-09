@@ -105,6 +105,9 @@ class ComponentRenderTest {
         CCButton(title = "Secondary", onClick = {}, variant = CCButtonVariant.secondary)
         CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
         CCButton(title = "Glass", onClick = {}, variant = CCButtonVariant.glass)
+        // The spinner on the fill: a Material indicator in the system grey all
+        // but vanished on the primary fill.
+        CCButton(title = "Loading", onClick = {}, loading = true)
         CCBadge(text = "Badge")
         CCBadge(text = "Outline", variant = CCBadgeVariant.outline)
         CCCard { CCTypography("Card") }
