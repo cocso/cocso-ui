@@ -189,7 +189,19 @@ icon — presses through `ccPressable(action:)` / `Modifier.ccPressable(onClick)
 (`CCPressStyle` on SwiftUI): the same scale plus a dip to
 `CCMotion.pressedOpacity` (0.72), on the movement curve, built on the platform's
 button so a press that becomes a scroll is cancelled. The mobile app kept its
-own copy of this with its own numbers; this is the one it deletes.
+own copy of this with its own numbers; this is the one it deletes. Every
+touchable in the system uses one of the two — `CCButton` and `CCLink` answer in
+their own way, the rest through `CCPressStyle` / `Modifier.ccPressFeedback` —
+because on a touch screen a control that does nothing under a finger reads as
+a tap that missed.
+
+`ccFocusRing(_:in:)` / `Modifier.ccFocusRing` is the web's
+`outline: 2px solid focus-ring; outline-offset: 2px`, one definition for both
+platforms. Switch, Link and Pagination drew none until now while the web drew
+all three. `mobile-views.test.ts` derives the requirement from the web module
+rather than a list: a component whose CSS has `:focus-visible` must have a
+focus binding on both platforms, and any view that makes something touchable
+must show a press.
 
 ## Glass
 

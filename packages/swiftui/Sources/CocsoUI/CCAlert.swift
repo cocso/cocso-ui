@@ -55,7 +55,7 @@ public struct CCAlert: View {
                     Image(systemName: "xmark")
                         .font(.system(size: 12, weight: .medium))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(CCPressStyle())
                 .ccMinimumTouchTarget()
                 .accessibilityLabel(CCStrings.close)
             }

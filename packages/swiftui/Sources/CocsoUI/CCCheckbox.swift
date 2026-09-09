@@ -63,7 +63,7 @@ public struct CCCheckbox: View {
             }
             .ccMinimumTouchTarget()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CCPressStyle())
         .focused($isFocused)
         .opacity(isEnabled ? 1 : 0.4)
         .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)

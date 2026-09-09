@@ -91,7 +91,7 @@ public struct CCSelect: View {
                 .contentShape(Rectangle())
             }
             .menuStyle(.button)
-            .buttonStyle(.plain)
+            .buttonStyle(CCPressStyle())
             .focused($isFocused)
             .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             .clipShape(RoundedRectangle(cornerRadius: radius))

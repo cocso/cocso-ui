@@ -9,9 +9,13 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextDecoration
@@ -35,6 +39,8 @@ fun CCLink(
     val style = cCLinkStyle(variant = variant)
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+    // The web draws `.link:focus-visible` at `radius-1`; this drew nothing.
+    var isFocused by remember { mutableStateOf(false) }
     // The web's `.current:hover { opacity: 0.7 }` — the press is the touch's hover.
     val pressed by animateFloatAsState(if (isPressed) 0.7f else 1f, animationSpec = CCMotion.colour(), label = "link-pressed")
     val dim by animateFloatAsState(if (enabled) 1f else 0.4f, animationSpec = CCMotion.colour(), label = "link-enabled")
@@ -43,6 +49,8 @@ fun CCLink(
     Box(
         modifier = modifier
             .alpha(dim * pressed)
+            .onFocusChanged { isFocused = it.isFocused }
+            .ccFocusRing(isFocused, RoundedCornerShape(CocsoTokens.Radius.r1))
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick)
             .ccMinimumTouchTarget(),
         contentAlignment = Alignment.Center,

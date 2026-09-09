@@ -19,6 +19,13 @@ public struct CCPagination: View {
     // design-system view draws the same primary the app does.
     @Environment(\.cocsoBrand) private var brand
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // The web draws `.arrow:focus-visible, .item:focus-visible`; these drew
+    // nothing. One binding per control, keyed by the page it belongs to.
+    @FocusState private var focused: Focusable?
+
+    private enum Focusable: Hashable {
+        case previous, next, page(Int)
+    }
 
     public init(page: Int, totalPages: Int, maxVisible: Int = 5, onChange: @escaping (Int) -> Void) {
         self.page = page
@@ -51,7 +58,7 @@ public struct CCPagination: View {
     public var body: some View {
         HStack(spacing: CocsoTokens.Spacing.s3) {
             if totalPages > 1 {
-                arrow("chevron.left", label: CCStrings.previousPage, enabled: page > 1) { onChange(page - 1) }
+                arrow("chevron.left", label: CCStrings.previousPage, enabled: page > 1, focus: .previous) { onChange(page - 1) }
             }
             ForEach(Array(slots.enumerated()), id: \.offset) { _, slot in
                 if let number = slot {
@@ -64,7 +71,7 @@ public struct CCPagination: View {
                 }
             }
             if totalPages > 1 {
-                arrow("chevron.right", label: CCStrings.nextPage, enabled: page < totalPages) { onChange(page + 1) }
+                arrow("chevron.right", label: CCStrings.nextPage, enabled: page < totalPages, focus: .next) { onChange(page + 1) }
             }
         }
         .animation(CCMotion.colour(reduced: reduceMotion), value: page)
@@ -85,24 +92,34 @@ public struct CCPagination: View {
                 .frame(width: style.width ?? 32, height: style.height ?? 32)
                 .background(style.bgColor ?? .clear)
                 .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 8))
+                .ccFocusRing(focused == .page(number), in: RoundedRectangle(cornerRadius: style.borderRadius ?? 8))
                 .ccMinimumTouchTarget()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CCPressStyle())
+        .focused($focused, equals: .page(number))
         .accessibilityLabel(CCStrings.page(number))
         .accessibilityAddTraits(number == page ? [.isButton, .isSelected] : .isButton)
     }
 
     @ViewBuilder
-    private func arrow(_ glyph: String, label: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+    private func arrow(
+        _ glyph: String,
+        label: String,
+        enabled: Bool,
+        focus: Focusable,
+        action: @escaping () -> Void
+    ) -> some View {
         let style = CCPaginationStyle.resolve(pageState: enabled ? .inactive : .disabled, scheme: colorScheme, brand: brand)
         Button(action: action) {
             Image(systemName: glyph)
                 .font(.system(size: style.fontSize ?? 14, weight: .medium))
                 .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                 .frame(width: style.width ?? 32, height: style.height ?? 32)
+                .ccFocusRing(focused == focus, in: RoundedRectangle(cornerRadius: style.borderRadius ?? 8))
                 .ccMinimumTouchTarget()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CCPressStyle())
+        .focused($focused, equals: focus)
         .disabled(!enabled)
         .accessibilityLabel(label)
     }

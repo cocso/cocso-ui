@@ -110,6 +110,7 @@ fun CCSelect(
                     .widthIn(min = style.minWidth ?: 0.dp)
                     .height(style.height ?: 36.dp)
                     .onFocusChanged { isFocused = it.isFocused }
+                    .ccPressFeedback(interactionSource)
                     .clip(shape)
                     .background(CocsoTokens.Color.surfacePrimary())
                     .border(borderWidth, borderColor, shape)

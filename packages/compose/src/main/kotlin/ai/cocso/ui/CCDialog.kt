@@ -93,6 +93,7 @@ fun CCDialogPanel(
                     contentDescription = CCStrings.close(),
                     tint = CocsoTokens.Color.textSecondary(),
                     modifier = Modifier
+                        .ccPressFeedback(interactionSource)
                         .clickable(
                             interactionSource = interactionSource,
                             indication = null,

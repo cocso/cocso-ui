@@ -20,6 +20,8 @@ public struct CCLink: View {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @GestureState private var isPressed = false
+    // The web draws `.link:focus-visible` at `radius-1`; this drew nothing.
+    @FocusState private var isFocused: Bool
 
     public init(_ title: String, variant: CCLinkVariant = .inline, action: @escaping () -> Void) {
         self.title = title
@@ -32,11 +34,15 @@ public struct CCLink: View {
         Button(action: action) {
             Text(title)
                 .underline(variant == .inline)
-                // The web's `.current:hover { opacity: 0.7 }` — the press is the touch's hover.
-                .opacity(isPressed ? 0.7 : 1)
+                // The web's `.current:hover { opacity: 0.7 }` — the press is the
+                // touch's hover. No scale: inline text in a paragraph would
+                // shift the line around it.
+                .opacity(isPressed ? CCMotion.pressedOpacity : 1)
                 .ccMinimumTouchTarget()
+                .ccFocusRing(isFocused, in: RoundedRectangle(cornerRadius: CocsoTokens.Radius.r1))
         }
         .buttonStyle(.plain)
+        .focused($isFocused)
         .simultaneousGesture(
             DragGesture(minimumDistance: 0).updating($isPressed) { _, state, _ in state = true }
         )

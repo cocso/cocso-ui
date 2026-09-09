@@ -53,7 +53,7 @@ public struct CCDialogPanel<Actions: View>: View {
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(CCPressStyle())
                     .ccMinimumTouchTarget()
                     .accessibilityLabel(CCStrings.close)
                 }

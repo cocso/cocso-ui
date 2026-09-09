@@ -72,7 +72,7 @@ public struct CCInput: View {
                             .transition(.opacity)
                     }
                     .animation(CCMotion.colour(reduced: reduceMotion), value: revealed)
-                    .buttonStyle(.plain)
+                    .buttonStyle(CCPressStyle())
                     .ccMinimumTouchTarget()
                     .accessibilityLabel(revealed ? CCStrings.hidePassword : CCStrings.showPassword)
                 }

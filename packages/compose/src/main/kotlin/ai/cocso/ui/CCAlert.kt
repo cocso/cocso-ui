@@ -112,6 +112,7 @@ fun CCAlert(
                 contentDescription = CCStrings.close(),
                 tint = ink,
                 modifier = Modifier
+                    .ccPressFeedback(interactionSource)
                     .clickable(interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClose)
                     .ccMinimumTouchTarget()
                     .size(16.dp),
