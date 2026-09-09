@@ -253,7 +253,10 @@ jobs:
 
   swiftui:
     name: SwiftUI
-    runs-on: macos-15
+    # macOS 26 with Xcode 26 as the default: the glass is Liquid Glass behind
+    # `#available(iOS 26, macOS 26)`, which Xcode 16 cannot compile, and on
+    # macOS 26 the render tests draw that path rather than the fallback.
+    runs-on: macos-26
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6

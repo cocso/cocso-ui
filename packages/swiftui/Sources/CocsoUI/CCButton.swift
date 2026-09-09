@@ -126,12 +126,23 @@ public struct CCButton: View {
                 ?? resolved.fontColor
                 ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand)
         )
-        .background(
-            (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
-        )
-        // Glass: the recipe's tint (`surface-glass`) over the platform's blur.
-        // Every other variant puts nothing under its fill.
-        .background(variant == .glass ? AnyShapeStyle(.ultraThinMaterial) : AnyShapeStyle(.clear))
+        // Glass is the system's pane (Liquid Glass on iOS 26, material before)
+        // with the recipe's tint, pressed tint included — see `GlassPane`. Every
+        // other variant is a plain fill.
+        .background {
+            let fill = (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
+            if variant == .glass {
+                GlassPane(
+                    shape: resolved.borderRadiusFull == true
+                        ? AnyShape(Capsule())
+                        : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0)),
+                    edge: false,
+                    tint: fill
+                )
+            } else {
+                fill
+            }
+        }
         .clipShape(
             // `shape: .circle` is a percentage radius in the recipe, which has
             // no length to travel as; before it arrived as a flag this drew a
