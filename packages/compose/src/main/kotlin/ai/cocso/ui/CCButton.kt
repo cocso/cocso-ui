@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -174,10 +173,9 @@ fun CCButton(
         // swapping on one frame.
         Crossfade(targetState = loading, animationSpec = crossfade, label = "button-loading") { isLoading ->
             if (isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.height(16.dp),
-                    color = foreground,
-                )
+                // The web's `Spinner`: white on the filled variants, `secondary`
+                // on the rest — the same glyph the design system draws alone.
+                CCSpinner(variant = buttonSpinnerVariant(variant), size = CCSpinnerSize.medium)
             } else {
                 // The web's `prefix` / `suffix`: an icon either side of the label,
                 // at the label's size, in the label's colour.
@@ -208,4 +206,10 @@ fun CCButton(
             }
         }
     }
+}
+
+/** The web's `getButtonSpinnerVariant`: filled variants take the white spinner. */
+internal fun buttonSpinnerVariant(variant: CCButtonVariant): CCSpinnerVariant = when (variant) {
+    CCButtonVariant.primary, CCButtonVariant.success, CCButtonVariant.error, CCButtonVariant.info -> CCSpinnerVariant.white
+    else -> CCSpinnerVariant.secondary
 }

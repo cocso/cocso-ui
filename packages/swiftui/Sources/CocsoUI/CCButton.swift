@@ -67,6 +67,15 @@ public struct CCButton: View {
         )
     }
 
+    /// The web's `getButtonSpinnerVariant`: the filled variants take the white
+    /// spinner, everything else the secondary one.
+    private var spinnerVariant: CCSpinnerVariant {
+        switch variant {
+        case .primary, .success, .error, .info: return .white
+        default: return .secondary
+        }
+    }
+
     private var alignment: Alignment {
         // The recipe's three: `between` spreads content in CSS, which has no
         // single alignment here — it maps to leading, and a caller wanting the
@@ -102,8 +111,10 @@ public struct CCButton: View {
                 .padding(.vertical, resolved.contentPaddingY ?? 0)
                 .opacity(loading ? 0 : 1)
                 if loading {
-                    ProgressView()
-                        .controlSize(.small)
+                    // The web's `Spinner`: white on the filled variants,
+                    // `secondary` on the rest. A bare `ProgressView` drew the
+                    // system grey on the primary fill and all but vanished.
+                    CCSpinner(variant: spinnerVariant, size: .medium)
                         .transition(.opacity)
                 }
             }

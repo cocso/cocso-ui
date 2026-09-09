@@ -109,6 +109,8 @@ final class ComponentRenderTests: XCTestCase {
         assertDraws("button-secondary", scheme) { CCButton("Secondary", variant: .secondary) {} }
         assertDraws("button-outline", scheme) { CCButton("Outline", variant: .outline) {} }
         assertDraws("button-glass", scheme) { CCButton("Glass", variant: .glass) {} }
+        assertDraws("button-loading", scheme) { CCButton("Loading", loading: true) {} }
+        assertDraws("button-disabled", scheme) { CCButton("Disabled") {}.disabled(true) }
         assertDraws("badge", scheme) { CCBadge("Badge") }
         assertDraws("badge-outline", scheme) { CCBadge("Outline", variant: .outline) }
         assertDraws("card", scheme) { CCCard { CCTypography("Card") } }
@@ -141,6 +143,7 @@ final class ComponentRenderTests: XCTestCase {
         CCButton("Secondary", variant: .secondary) {}
         CCButton("Outline", variant: .outline) {}
         CCButton("Glass", variant: .glass) {}
+        CCButton("Loading", loading: true) {}
         CCBadge("Badge")
         CCBadge("Outline", variant: .outline)
         CCCard { CCTypography("Card") }
