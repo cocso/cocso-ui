@@ -184,7 +184,12 @@ animates without reading the setting, or that writes a duration as a number.
 
 A pressed touchable also scales to `CCMotion.pressedScale` (0.97). The web has
 no equivalent — a pointer does not press — so it is small enough to be felt
-rather than seen.
+rather than seen. Anything without recipe colours to change — a row, a tile, an
+icon — presses through `ccPressable(action:)` / `Modifier.ccPressable(onClick)`
+(`CCPressStyle` on SwiftUI): the same scale plus a dip to
+`CCMotion.pressedOpacity` (0.72), on the movement curve, built on the platform's
+button so a press that becomes a scroll is cancelled. The mobile app kept its
+own copy of this with its own numbers; this is the one it deletes.
 
 ## Glass
 
@@ -324,7 +329,7 @@ alters what a package ships.
 1. **Token layer, both themes.** This milestone.
 2. **Consumption in `cocso/mobile`.** Done. Its converter reads `CocsoTokens.swift` — the generated, golden-tested artifact — rather than parsing the YAML and re-deriving identifiers, and its CI checks the sync. Dark mode is adopted without touching its 1,157 call sites (`UIColor(dynamicProvider:)` on iOS, a `@Composable` getter on Android). Its 22 app-only tokens sit in `design/tokens.local.json`; whether any belong here is a design question.
 
-3. **Views.** All nineteen recipes have one, matched on both platforms, plus five primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`, `CCStrings`. `CCButton` takes `prefix`/`suffix` icons as the web's does. The last four — `CCLink`, `CCBreadcrumb`, `CCPagination` (the web's truncation, pinned by a test on both platforms), `CCStockQuantityStatus` (the web's glyph from the same SVG path data, parsed on each platform) — are web navigation and a domain badge.
+3. **Views.** All nineteen recipes have one, matched on both platforms, plus six primitives: `CCTouchTarget`, `CCMotion`, `CCGlass`, `CCShadow`, `CCStrings`, `CCPress`. `CCButton` takes `prefix`/`suffix` icons as the web's does. The last four — `CCLink`, `CCBreadcrumb`, `CCPagination` (the web's truncation, pinned by a test on both platforms), `CCStockQuantityStatus` (the web's glyph from the same SVG path data, parsed on each platform) — are web navigation and a domain badge.
 
    The three added last — the ones an app reaches for first and had been drawing itself:
    - `CCDialogPanel` / `.ccDialog(isPresented:)` (SwiftUI) and `CCDialog` / `CCDialogPanel` (Compose): the web's scrim (`black-alpha-30`), `shadow-dialog`, and entrance on the entrance curve. Drawn in place on SwiftUI so it animates on the design system's curve; a `Dialog` window on Compose with its own dim turned off so the two scrims do not stack.

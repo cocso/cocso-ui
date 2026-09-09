@@ -102,8 +102,9 @@ describe("A component's variants agree across platforms", () => {
  * view is: `CCTouchTarget` is a shared primitive holding a WCAG minimum,
  * `CCMotion` builds the shared animations from the motion tokens, `CCGlass` is
  * the glass surface bars sit on, `CCShadow` draws a shadow token's layers, and
- * `CCStrings` is the words the views speak — each reads tokens or resources
- * directly because there is no variant to resolve.
+ * `CCStrings` is the words the views speak, and `CCPress` is the press every
+ * touchable gives back — each reads tokens or resources directly because
+ * there is no variant to resolve.
  *
  * The set is read from the generated styles rather than assumed, and the
  * leftovers are then checked against the one name expected to be among them —
@@ -127,6 +128,7 @@ describe("Views take their values from the generated styles", () => {
     expect(shared.filter((n) => !generatedStyles.has(n))).toEqual([
       "CCGlass",
       "CCMotion",
+      "CCPress",
       "CCShadow",
       "CCStrings",
       "CCTouchTarget",

@@ -38,4 +38,9 @@ public enum CCMotion {
     /// equivalent — a pointer does not press — so it is small enough to be
     /// felt rather than seen.
     public static let pressedScale: CGFloat = 0.97
+
+    /// The opacity a pressable without recipe colours dips to while pressed —
+    /// a row, a tile, an icon. Deep enough to be seen on any fill, shallow
+    /// enough that the content stays readable for the moment it lasts.
+    public static let pressedOpacity: Double = 0.72
 }

@@ -179,6 +179,14 @@ class ComponentInteractionTest {
         composeRule.onNodeWithText("Glass card").assertExists()
     }
 
+    @Test
+    fun pressableCallsOnClick() {
+        var taps = 0
+        composeRule.setContent { CCTypography("Row", modifier = Modifier.ccPressable { taps++ }) }
+        composeRule.onNodeWithText("Row").performClick()
+        assertEquals(1, taps)
+    }
+
     /** The strings are resources, so a Korean device hears Korean. */
     @Test
     @Config(sdk = [34], qualifiers = "ko")

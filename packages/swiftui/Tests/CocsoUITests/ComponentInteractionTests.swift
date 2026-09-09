@@ -76,6 +76,14 @@ final class ComponentInteractionTests: XCTestCase {
         XCTAssertEqual(crumb, "h")
     }
 
+    /// `ccPressable` is a button: its action fires on a tap.
+    func testPressableCallsAction() throws {
+        var taps = 0
+        let view = Text("Row").ccPressable { taps += 1 }
+        try view.inspect().find(ViewType.Button.self).tap()
+        XCTAssertEqual(taps, 1)
+    }
+
     /// The strings are resources, and the Korean table is shipped.
     func testStringsAreLocalisedResources() {
         let korean = Bundle.module.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: "ko")
