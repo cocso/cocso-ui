@@ -48,31 +48,74 @@ extension View {
     }
 
     /// Glass clipped to a shape — a floating pill or a card over a photo.
-    public func ccGlass<S: InsettableShape>(in shape: S) -> some View {
-        background { GlassPane(shape: shape, edge: true) }
+    /// `interactive` makes the glass answer a press the way the system's
+    /// controls do; give it to a control, not to a surface.
+    public func ccGlass<S: InsettableShape>(in shape: S, interactive: Bool = false) -> some View {
+        background { GlassPane(shape: shape, edge: true, interactive: interactive) }
+    }
+}
+
+/**
+ Several glass pieces side by side — a menu circle beside an action circle.
+
+ A row, deliberately not a `GlassEffectContainer`. The container renders its
+ descendants' glass as one layer and, with the pane drawn behind the content
+ as `GlassPane` does, that layer came out over the content: the icons on the
+ mobile app's circles went faint as if behind the glass. The merging animation
+ the container gives up is cosmetic; legible icons are not. Same API as the
+ Compose row, so a bar built from pieces is written once.
+ */
+public struct CCGlassGroup<Content: View>: View {
+    private let spacing: CGFloat?
+    private let content: Content
+
+    public init(spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) {
+        self.spacing = spacing
+        self.content = content()
+    }
+
+    public var body: some View {
+        HStack(spacing: spacing ?? CocsoTokens.Spacing.s5) { content }
     }
 }
 
 /**
  The pane itself: what every glass surface in the system is made of.
 
- On iOS 26 and macOS 26 it is the platform's Liquid Glass — `glassEffect`, which
- refracts and reflects what is beneath and answers the light around it — tinted
- with `surface-glass`. Before that it is `.ultraThinMaterial` under the same
- tint. The tint is the same on both, and that is the contrast promise: it is
- opaque enough that `text-primary` clears AA on the pane over any backdrop, and
- a tab bar cannot choose what scrolls beneath it. The mobile app drew its top
- bar and tab capsule on this and, on iOS 26, they read as a different material
- from the system's own; now they are the system's own.
+ On iOS 26 and macOS 26 it is the platform's Liquid Glass — `glassEffect`,
+ which refracts what is beneath, answers the light around it, and reads that
+ backdrop to keep what sits on it legible, switching itself between a light and
+ a dark pane. It is tinted with `surface-glass-liquid`, a third of the material's tint, and
+ has no hairline: the first cut laid `surface-glass` over it, and a tint sized
+ to carry contrast on its own covered the refraction and left a flat plate (the
+ mobile app's menu circle read as a plain grey disc). Untinted, the glass keeps
+ `text-primary` at 15:1 / 10:1 in the light scheme but only 4.8:1 in the dark
+ scheme over a bright backdrop; the light tint lifts that to 6.4:1 and better
+ while the refraction stays visible. Measured on an iOS 26 simulator.
+
+ Before iOS 26 it is `.ultraThinMaterial` under the `surface-glass` tint with a
+ `border-glass` hairline; there the tint is what makes the contrast, and the
+ tokens are sized for that.
+
+ The glass is drawn behind the content, on a clear pane, rather than applied
+ to the content itself. Applied to the content, Liquid Glass reads the label
+ as part of what it must stay legible against and, over a bright backdrop in
+ the dark scheme, turns light while the token text stays near-white — 1.6:1.
+ Behind the content it keeps the scheme's pane, 6:1 and better.
 
  `CCCard` and `CCButton` draw their glass variants on this pane too, with the
- tint the recipe gives them, so one change here reaches every glass surface.
+ tint the recipe gives them for the material path, so one change here reaches
+ every glass surface.
  */
 struct GlassPane<S: Shape>: View {
     let shape: S
-    /// A hairline in `border-glass` on the shape's edge. Bars draw their own
-    /// on the inner edge instead; the recipe-backed views draw the recipe's.
+    /// A hairline in `border-glass` on the shape's edge, on the material path.
+    /// Bars draw their own on the inner edge instead; the recipe-backed views
+    /// draw the recipe's. Liquid Glass draws its own rim.
     let edge: Bool
+    /// Liquid Glass that answers a press. For controls.
+    var interactive: Bool = false
+    /// The material path's tint; the Liquid path takes `surface-glass-liquid`.
     var tint: SwiftUI.Color?
 
     @Environment(\.colorScheme) private var colorScheme
@@ -80,15 +123,16 @@ struct GlassPane<S: Shape>: View {
     @Environment(\.cocsoGlassUsesMaterial) private var usesMaterial
 
     var body: some View {
-        let fill = tint ?? CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand)
-        ZStack {
-            if #available(iOS 26.0, macOS 26.0, *), !usesMaterial {
-                Color.clear.glassEffect(.regular.tint(fill), in: shape)
-            } else {
+        if #available(iOS 26.0, macOS 26.0, *), !usesMaterial {
+            let glass = Glass.regular.tint(CocsoTokens.Color.surfaceGlassLiquid(colorScheme, brand: brand))
+            Color.clear.glassEffect(interactive ? glass.interactive() : glass, in: shape)
+        } else {
+            let fill = tint ?? CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand)
+            ZStack {
                 shape.fill(fill).background(.ultraThinMaterial, in: shape)
-            }
-            if edge {
-                shape.stroke(CocsoTokens.Color.borderGlass(colorScheme, brand: brand), lineWidth: 1)
+                if edge {
+                    shape.stroke(CocsoTokens.Color.borderGlass(colorScheme, brand: brand), lineWidth: 1)
+                }
             }
         }
     }

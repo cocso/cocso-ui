@@ -148,6 +148,9 @@ public struct CCButton: View {
                         ? AnyShape(Capsule())
                         : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0)),
                     edge: false,
+                    // A control: the glass answers the press on iOS 26. The
+                    // material path shows the press through the recipe's tint.
+                    interactive: true,
                     tint: fill
                 )
             } else {
