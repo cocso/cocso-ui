@@ -3,6 +3,9 @@ package ai.cocso.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +16,8 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -123,6 +128,28 @@ fun CCGlassBar(
             )
             // 16 / 8: the inset a toolbar row has on the web.
             .padding(horizontal = CocsoTokens.Spacing.s8, vertical = CocsoTokens.Spacing.s5),
+        content = content,
+    )
+}
+
+/**
+ * Several glass pieces side by side — a menu circle beside an action circle.
+ *
+ * The SwiftUI counterpart wraps them in a `GlassEffectContainer` so the
+ * system's glass blends where they meet; Haze has no such grouping, so here
+ * it is the row alone. Same API on both, so a bar built from pieces is written
+ * once.
+ */
+@Composable
+fun CCGlassGroup(
+    modifier: Modifier = Modifier,
+    spacing: Dp = CocsoTokens.Spacing.s5,
+    content: @Composable RowScope.() -> Unit,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(spacing),
+        verticalAlignment = Alignment.CenterVertically,
         content = content,
     )
 }

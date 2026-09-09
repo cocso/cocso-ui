@@ -107,6 +107,16 @@ data:
       values:
         light: $color.white-alpha-60
         dark: $color.black-alpha-40
+    # The tint for a pane the platform already makes legible — iOS 26 Liquid
+    # Glass reads its backdrop and adapts. `surface-glass` is sized to carry
+    # contrast on its own and, laid over that glass, covered the refraction and
+    # left a flat plate. A third of it keeps the glass visible and, measured on
+    # a simulator, keeps `text-primary` at 6.4:1 or better in the dark scheme
+    # over a bright backdrop (untinted was 4.8:1) and 12:1 or better in light.
+    $color.surface.glass-liquid:
+      values:
+        light: $color.white-alpha-30
+        dark: $color.black-alpha-20
     # One step lighter than the surface they sit on in the dark theme, mirroring
     # the light theme. border-secondary was neutral-900, the same value as
     # surface-secondary, so every divider drawn on a card was invisible at 1.00.

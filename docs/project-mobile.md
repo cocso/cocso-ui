@@ -199,9 +199,20 @@ recipes have a `glass` variant on all three platforms; the web adds a 16px
 
 On SwiftUI every glass surface — `ccGlass`, `CCGlassBar`, the glass card and
 button — is one `GlassPane`. On iOS 26 and macOS 26 it is the platform's
-Liquid Glass (`glassEffect`, tinted with the token); before that,
-`.ultraThinMaterial` under the same tint. The tint is identical on both paths,
-which is what keeps the AA promise; the mobile app's top bar and tab capsule
+Liquid Glass (`glassEffect`) tinted with `surface-glass-liquid` — a third of the
+material's tint — and without the hairline: the glass reads its backdrop and
+adapts to keep what sits on it legible, and `surface-glass`, sized to carry
+contrast on its own, covered the refraction and left a flat plate. Untinted it
+measured 4.8:1 in the dark scheme over a bright backdrop; the light tint gives
+6.4:1 and better there, 12:1 and better in the light scheme. Before iOS 26 it is
+`.ultraThinMaterial` under `surface-glass` with the `border-glass` hairline —
+there the tint is the contrast. `ccGlass(in:interactive:)` makes a control's glass
+answer a press (`Glass.interactive()`), which the glass button turns on;
+`CCGlassGroup` lays neighbouring pieces out as a row — deliberately without a
+`GlassEffectContainer`, which rendered the pane over the pieces' icons; and
+the glass stays behind the content on a clear pane, because applied to the
+content it turns light over a bright backdrop in the dark scheme while the
+token text stays near-white (1.6:1). The mobile app's top bar and tab capsule
 sit on this pane and, on iOS 26, are the system's own material. The CI SwiftUI
 job runs on macOS 26 so the render tests draw the Liquid Glass path — but an
 offscreen `cacheDisplay` does not capture Liquid Glass (it is composited), so

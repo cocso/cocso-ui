@@ -37,6 +37,7 @@
   --cocso-color-surface-neutral: var(--cocso-color-neutral-800);
   --cocso-color-surface-glass: var(--cocso-color-black-alpha-60);
   --cocso-color-surface-glass-active: var(--cocso-color-black-alpha-40);
+  --cocso-color-surface-glass-liquid: var(--cocso-color-black-alpha-20);
   --cocso-color-border-primary: var(--cocso-color-neutral-700);
   --cocso-color-border-secondary: var(--cocso-color-neutral-800);
   --cocso-color-border-strong: var(--cocso-color-neutral-500);
