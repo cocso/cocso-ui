@@ -20,6 +20,26 @@ public enum CCGlassEdge: Sendable {
     case bottom
 }
 
+private struct GlassUsesMaterialKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+public extension EnvironmentValues {
+    /// Draw glass as the material fallback even where Liquid Glass is available.
+    ///
+    /// For offscreen renders. `glassEffect` is composited, and an offscreen
+    /// `cacheDisplay` / `swift-snapshot-testing` render does not capture it —
+    /// worse, the layout around it collapses, so a snapshot of a screen with a
+    /// glass bar came back as the bar drawn twice and the body gone. A snapshot
+    /// harness sets this once and keeps checking the screen's layout, colours
+    /// and composition; the material itself is verified on a device or a
+    /// simulator, which is the only place it draws.
+    var cocsoGlassUsesMaterial: Bool {
+        get { self[GlassUsesMaterialKey.self] }
+        set { self[GlassUsesMaterialKey.self] = newValue }
+    }
+}
+
 extension View {
     /// Glass filling the view's bounds, extending under the safe area the way a
     /// bar's background should. For a floating shape use `ccGlass(in:)`.
@@ -57,11 +77,12 @@ struct GlassPane<S: Shape>: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.cocsoBrand) private var brand
+    @Environment(\.cocsoGlassUsesMaterial) private var usesMaterial
 
     var body: some View {
         let fill = tint ?? CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand)
         ZStack {
-            if #available(iOS 26.0, macOS 26.0, *) {
+            if #available(iOS 26.0, macOS 26.0, *), !usesMaterial {
                 Color.clear.glassEffect(.regular.tint(fill), in: shape)
             } else {
                 shape.fill(fill).background(.ultraThinMaterial, in: shape)

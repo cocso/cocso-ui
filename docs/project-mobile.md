@@ -210,6 +210,13 @@ on an iOS 26 simulator instead: `text-primary` against every pane interior,
 both appearances, over a bright and a dark backdrop — worst case 8.5:1, most
 10–17:1. Re-measure the same way if the tint or the glass changes.
 
+An offscreen render does worse than miss the pane: the layout around a
+`glassEffect` collapses (a screen snapshot came back as its glass bar drawn
+twice and the body gone). `EnvironmentValues.cocsoGlassUsesMaterial` forces the
+material path where Liquid Glass is available; the render tests here and any
+snapshot harness downstream set it once, and keep checking layout, colour and
+composition. The material itself is checked on a simulator.
+
 `CCGlass` is the primitive the app-owned bars use: `ccGlass()` /
 `Modifier.ccGlass()` for the surface, and `CCGlassBar(edge:)` for a bar with
 the hairline on its inner edge. On SwiftUI place it with

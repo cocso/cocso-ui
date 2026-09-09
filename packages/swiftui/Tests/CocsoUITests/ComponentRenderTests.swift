@@ -49,6 +49,9 @@ final class ComponentRenderTests: XCTestCase {
         .background(
             CocsoTokens.Color.surfacePrimary(appearance == .darkAqua ? .dark : .light)
         )
+        // Offscreen: Liquid Glass does not draw here and collapses the layout
+        // around it. The material path keeps this a test of layout and colour.
+        .environment(\.cocsoGlassUsesMaterial, true)
         let controller = NSHostingController(rootView: view)
         controller.view.appearance = NSAppearance(named: appearance)
         controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 900)
@@ -92,6 +95,7 @@ final class ComponentRenderTests: XCTestCase {
             .padding(16)
             .frame(width: 320, height: 120, alignment: .topLeading)
             .background(CocsoTokens.Color.surfacePrimary(scheme == .darkAqua ? .dark : .light))
+            .environment(\.cocsoGlassUsesMaterial, true)
         let controller = NSHostingController(rootView: view)
         controller.view.appearance = NSAppearance(named: scheme)
         controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 120)
