@@ -24,41 +24,52 @@ extension View {
     /// Glass filling the view's bounds, extending under the safe area the way a
     /// bar's background should. For a floating shape use `ccGlass(in:)`.
     public func ccGlass() -> some View {
-        modifier(GlassSurface())
+        background { GlassPane(shape: Rectangle(), edge: false).ignoresSafeArea() }
     }
 
     /// Glass clipped to a shape — a floating pill or a card over a photo.
     public func ccGlass<S: InsettableShape>(in shape: S) -> some View {
-        modifier(GlassShape(shape: shape))
+        background { GlassPane(shape: shape, edge: true) }
     }
 }
 
-private struct GlassSurface: ViewModifier {
-    @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.cocsoBrand) private var brand
+/**
+ The pane itself: what every glass surface in the system is made of.
 
-    func body(content: Content) -> some View {
-        content
-            // The tint over the material, the material over whatever is
-            // beneath. Both `background`s ignore the safe area, so a bar placed
-            // with `safeAreaInset` reaches the screen's edge.
-            .background(CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand))
-            .background(.ultraThinMaterial)
-    }
-}
+ On iOS 26 and macOS 26 it is the platform's Liquid Glass — `glassEffect`, which
+ refracts and reflects what is beneath and answers the light around it — tinted
+ with `surface-glass`. Before that it is `.ultraThinMaterial` under the same
+ tint. The tint is the same on both, and that is the contrast promise: it is
+ opaque enough that `text-primary` clears AA on the pane over any backdrop, and
+ a tab bar cannot choose what scrolls beneath it. The mobile app drew its top
+ bar and tab capsule on this and, on iOS 26, they read as a different material
+ from the system's own; now they are the system's own.
 
-private struct GlassShape<S: InsettableShape>: ViewModifier {
+ `CCCard` and `CCButton` draw their glass variants on this pane too, with the
+ tint the recipe gives them, so one change here reaches every glass surface.
+ */
+struct GlassPane<S: Shape>: View {
     let shape: S
+    /// A hairline in `border-glass` on the shape's edge. Bars draw their own
+    /// on the inner edge instead; the recipe-backed views draw the recipe's.
+    let edge: Bool
+    var tint: SwiftUI.Color?
+
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.cocsoBrand) private var brand
 
-    func body(content: Content) -> some View {
-        content
-            .background(shape.fill(CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand)))
-            .background(.ultraThinMaterial, in: shape)
-            .overlay(
-                shape.strokeBorder(CocsoTokens.Color.borderGlass(colorScheme, brand: brand), lineWidth: 1)
-            )
+    var body: some View {
+        let fill = tint ?? CocsoTokens.Color.surfaceGlass(colorScheme, brand: brand)
+        ZStack {
+            if #available(iOS 26.0, macOS 26.0, *) {
+                Color.clear.glassEffect(.regular.tint(fill), in: shape)
+            } else {
+                shape.fill(fill).background(.ultraThinMaterial, in: shape)
+            }
+            if edge {
+                shape.stroke(CocsoTokens.Color.borderGlass(colorScheme, brand: brand), lineWidth: 1)
+            }
+        }
     }
 }
 

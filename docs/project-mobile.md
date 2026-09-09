@@ -195,7 +195,20 @@ tokens carry it, `surface-glass` (the tint: 80% white light, 60% black dark),
 `border-glass` (the edge), chosen so `text-primary` on the pane clears AA over
 any backdrop — a tab bar cannot choose its photo. The `card` and `button`
 recipes have a `glass` variant on all three platforms; the web adds a 16px
-`backdrop-filter`, SwiftUI puts `.ultraThinMaterial` under the tint.
+`backdrop-filter`.
+
+On SwiftUI every glass surface — `ccGlass`, `CCGlassBar`, the glass card and
+button — is one `GlassPane`. On iOS 26 and macOS 26 it is the platform's
+Liquid Glass (`glassEffect`, tinted with the token); before that,
+`.ultraThinMaterial` under the same tint. The tint is identical on both paths,
+which is what keeps the AA promise; the mobile app's top bar and tab capsule
+sit on this pane and, on iOS 26, are the system's own material. The CI SwiftUI
+job runs on macOS 26 so the render tests draw the Liquid Glass path — but an
+offscreen `cacheDisplay` does not capture Liquid Glass (it is composited), so
+the ink checks see the text and not the pane. The contrast promise was measured
+on an iOS 26 simulator instead: `text-primary` against every pane interior,
+both appearances, over a bright and a dark backdrop — worst case 8.5:1, most
+10–17:1. Re-measure the same way if the tint or the glass changes.
 
 `CCGlass` is the primitive the app-owned bars use: `ccGlass()` /
 `Modifier.ccGlass()` for the surface, and `CCGlassBar(edge:)` for a bar with

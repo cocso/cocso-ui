@@ -40,14 +40,16 @@ public struct CCCard<Content: View>: View {
             // it is given. A card that hugged its content sat in a list as a
             // ragged column of different widths, and every caller sized it.
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
-            // Glass: the recipe's tint (`surface-glass`) sits on the platform's
-            // blur, which is the one part of glass that is not a value — see
-            // `ccGlass`. The other variants put nothing under their fill.
-            .background(
-                variant == .glass ? AnyShapeStyle(.ultraThinMaterial) : AnyShapeStyle(.clear),
-                in: RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
-            )
+            // Glass is the system's pane (Liquid Glass on iOS 26, material
+            // before) with the recipe's tint — see `GlassPane`. The other
+            // variants are a plain fill.
+            .background {
+                if variant == .glass {
+                    GlassPane(shape: RoundedRectangle(cornerRadius: style.borderRadius ?? 0), edge: false, tint: style.bgColor)
+                } else {
+                    style.bgColor ?? CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand)
+                }
+            }
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
             // The recipe's border — the outlined variant. Without it a white card
             // on a white surface had no edge at all.
