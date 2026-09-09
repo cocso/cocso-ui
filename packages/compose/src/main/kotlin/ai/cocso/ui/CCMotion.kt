@@ -52,6 +52,13 @@ object CCMotion {
      * rather than seen.
      */
     const val pressedScale = 0.97f
+
+    /**
+     * The opacity a pressable without recipe colours dips to while pressed — a
+     * row, a tile, an icon. Deep enough to be seen on any fill, shallow enough
+     * that the content stays readable for the moment it lasts.
+     */
+    const val pressedOpacity = 0.72f
 }
 
 /**
