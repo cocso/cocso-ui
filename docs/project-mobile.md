@@ -335,6 +335,14 @@ alters what a package ships.
   `maven { url = uri("https://maven.pkg.github.com/cocso/cocso-ui") }`. GitHub
   Packages needs a token with `read:packages` even for a public repository;
   the composite build by path remains for a consumer that would rather not.
+- **A composite build must use this module's AGP exactly** (currently 8.11.2,
+  `agp` in `packages/compose/gradle/libs.versions.toml`). `includeBuild` puts
+  both projects in one Gradle build, and Gradle refuses "multiple versions of
+  the Android Gradle plugin" — `cocso/mobile` hit this raising its own AGP for
+  Play's targetSdk 36. Bump the two together. A Maven consumer is not coupled:
+  the published AAR declares `minCompileSdk=1` and
+  `minAndroidGradlePluginVersion=1.0.0`, so it asks nothing of the app's
+  toolchain.
 
 ## Roadmap
 

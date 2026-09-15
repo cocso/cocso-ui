@@ -17,7 +17,7 @@ version = providers.gradleProperty("VERSION_NAME").get()
 
 android {
     namespace = "ai.cocso.ui"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         // Matches the floor cocso/mobile targets.

@@ -2,7 +2,7 @@
 # catalog — this package is the design system, not the app, and carrying the
 # app's dependency set here would make it look like it needs them.
 [versions]
-agp = "8.7.3"
+agp = "8.11.2"
 kotlin = "2.0.21"
 compose-bom = "2024.12.01"
 junit = "4.13.2"
