@@ -198,6 +198,9 @@ fun CCButton(
                         text = title,
                         color = foreground,
                         fontSize = (style.fontSize?.value ?: 14f).sp,
+                        // The recipe's weight — 500, the web's. The label had
+                        // none and drew at 400.
+                        fontWeight = style.fontWeight,
                     )
                     if (suffix != null) {
                         Icon(suffix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))

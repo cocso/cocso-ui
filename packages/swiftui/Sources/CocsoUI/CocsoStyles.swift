@@ -162,6 +162,7 @@ public enum CCBadgeShape: String, CaseIterable, Sendable {
 }
 
 public struct CCBadgeStyle: Equatable, Sendable {
+    public var fontWeight: Font.Weight?
     public var bgColor: SwiftUI.Color?
     public var fontColor: SwiftUI.Color?
     public var borderWidth: CGFloat?
@@ -182,6 +183,7 @@ public struct CCBadgeStyle: Equatable, Sendable {
         brand: CocsoBrand = .base
     ) -> CCBadgeStyle {
         var style = CCBadgeStyle()
+        style.fontWeight = .medium
         if variant == .primary {
             style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
             style.fontColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
@@ -317,6 +319,7 @@ public enum CCButtonAlign: String, CaseIterable, Sendable {
 }
 
 public struct CCButtonStyle: Equatable, Sendable {
+    public var fontWeight: Font.Weight?
     public var bgColorPressed: SwiftUI.Color?
     public var fontColorPressed: SwiftUI.Color?
     public var bgColor: SwiftUI.Color?
@@ -342,6 +345,7 @@ public struct CCButtonStyle: Equatable, Sendable {
         brand: CocsoBrand = .base
     ) -> CCButtonStyle {
         var style = CCButtonStyle()
+        style.fontWeight = .medium
         if variant == .primary {
             style.bgColorPressed = CocsoTokens.Color.interactivePrimaryActive(scheme, brand: brand)
         }

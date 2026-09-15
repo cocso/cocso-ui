@@ -4,6 +4,13 @@ export const buttonRecipe = defineRecipe({
   name: "button",
   slots: ["root"] as const,
 
+  // The label's weight. The web set it from `button.tsx`'s `weight = "medium"`
+  // default and nowhere else, so neither mobile view could read it: SwiftUI and
+  // Compose drew the label at 400 while every web button was 500.
+  base: {
+    root: { fontWeight: "medium" },
+  },
+
   variants: {
     variant: {
       primary: {

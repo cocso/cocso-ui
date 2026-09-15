@@ -6,6 +6,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > badgeRecipe de
   "--cocso-badge-border-radius": "var(--cocso-radius-4)",
   "--cocso-badge-font-color": "var(--cocso-color-text-secondary)",
   "--cocso-badge-font-size": "12px",
+  "--cocso-badge-font-weight": "500",
   "--cocso-badge-padding": "4px 8px",
 }
 `;
@@ -17,6 +18,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > buttonRecipe d
   "--cocso-button-content-padding": "0 6px",
   "--cocso-button-font-color": "var(--cocso-color-text-on-primary)",
   "--cocso-button-font-size": "14px",
+  "--cocso-button-font-weight": "500",
   "--cocso-button-height": "36px",
   "--cocso-button-justify-content": "center",
   "--cocso-button-padding-inline": "12px",

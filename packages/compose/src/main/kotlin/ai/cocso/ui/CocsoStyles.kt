@@ -165,6 +165,7 @@ enum class CCBadgeShape {
 }
 
 data class CCBadgeStyle(
+    val fontWeight: FontWeight? = null,
     val bgColor: ComposeColor? = null,
     val fontColor: ComposeColor? = null,
     val borderWidth: Dp? = null,
@@ -184,6 +185,7 @@ fun cCBadgeStyle(
     shape: CCBadgeShape,
 ): CCBadgeStyle {
     var style = CCBadgeStyle()
+    style = style.copy(fontWeight = FontWeight.Medium)
     if (variant == CCBadgeVariant.primary) {
         style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())
         style = style.copy(fontColor = CocsoTokens.Color.textOnPrimary())
@@ -316,6 +318,7 @@ enum class CCButtonAlign {
 }
 
 data class CCButtonStyle(
+    val fontWeight: FontWeight? = null,
     val bgColorPressed: ComposeColor? = null,
     val fontColorPressed: ComposeColor? = null,
     val bgColor: ComposeColor? = null,
@@ -340,6 +343,7 @@ fun cCButtonStyle(
     align: CCButtonAlign,
 ): CCButtonStyle {
     var style = CCButtonStyle()
+    style = style.copy(fontWeight = FontWeight.Medium)
     if (variant == CCButtonVariant.primary) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.interactivePrimaryActive())
     }
