@@ -90,7 +90,8 @@ fun CCBadge(
             text = shown,
             color = ink,
             fontSize = (style.fontSize?.value ?: 12f).sp,
-            fontWeight = FontWeight.SemiBold,
+            // The recipe's weight — 500, the web's. This drew 600 by hand.
+            fontWeight = style.fontWeight,
         )
     }
 }

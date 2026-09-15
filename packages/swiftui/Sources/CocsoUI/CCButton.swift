@@ -99,10 +99,12 @@ public struct CCButton: View {
                 // The web's `prefix` / `suffix`: an icon either side of the label,
                 // at the label's size, in the label's colour.
                 HStack(spacing: CocsoTokens.Spacing.s4) {
-                    prefix?.font(.system(size: resolved.fontSize ?? 14, weight: .medium))
+                    // The recipe's weight — 500, the web's. The label had none
+                    // and drew at the system's 400.
+                    prefix?.font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
                     Text(title)
-                        .font(.system(size: resolved.fontSize ?? 14))
-                    suffix?.font(.system(size: resolved.fontSize ?? 14, weight: .medium))
+                        .font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
+                    suffix?.font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
                 }
                 // The recipe pads the label inside the button as well as
                 // the button itself; dropping it made every button narrower

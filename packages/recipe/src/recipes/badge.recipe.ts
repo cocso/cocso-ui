@@ -3,6 +3,12 @@ import { defineRecipe } from "../define-recipe";
 export const badgeRecipe = defineRecipe({
   name: "badge",
   slots: ["root"] as const,
+  // The web badge renders its label through `<Typography weight="medium">`, a
+  // value the recipe never carried, so the mobile badges each picked their
+  // own and drew 600.
+  base: {
+    root: { fontWeight: "medium" },
+  },
 
   variants: {
     variant: {

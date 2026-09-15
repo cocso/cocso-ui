@@ -5,6 +5,7 @@
   ],
   "combinations": {
     "variant=primary,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -28,6 +29,7 @@
       }
     },
     "variant=primary,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -50,6 +52,7 @@
       }
     },
     "variant=primary,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -73,6 +76,7 @@
       }
     },
     "variant=primary,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -96,6 +100,7 @@
       }
     },
     "variant=primary,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -118,6 +123,7 @@
       }
     },
     "variant=primary,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -141,6 +147,7 @@
       }
     },
     "variant=primary,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -164,6 +171,7 @@
       }
     },
     "variant=primary,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -186,6 +194,7 @@
       }
     },
     "variant=primary,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -209,6 +218,7 @@
       }
     },
     "variant=primary-subtle,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -232,6 +242,7 @@
       }
     },
     "variant=primary-subtle,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -254,6 +265,7 @@
       }
     },
     "variant=primary-subtle,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -277,6 +289,7 @@
       }
     },
     "variant=primary-subtle,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -300,6 +313,7 @@
       }
     },
     "variant=primary-subtle,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -322,6 +336,7 @@
       }
     },
     "variant=primary-subtle,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -345,6 +360,7 @@
       }
     },
     "variant=primary-subtle,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -368,6 +384,7 @@
       }
     },
     "variant=primary-subtle,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -390,6 +407,7 @@
       }
     },
     "variant=primary-subtle,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9019607843137255,
         "g": 0.9098039215686274,
@@ -413,6 +431,7 @@
       }
     },
     "variant=secondary,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -436,6 +455,7 @@
       }
     },
     "variant=secondary,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -458,6 +478,7 @@
       }
     },
     "variant=secondary,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -481,6 +502,7 @@
       }
     },
     "variant=secondary,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -504,6 +526,7 @@
       }
     },
     "variant=secondary,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -526,6 +549,7 @@
       }
     },
     "variant=secondary,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -549,6 +573,7 @@
       }
     },
     "variant=secondary,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -572,6 +597,7 @@
       }
     },
     "variant=secondary,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -594,6 +620,7 @@
       }
     },
     "variant=secondary,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9568627450980393,
         "g": 0.9607843137254902,
@@ -617,6 +644,7 @@
       }
     },
     "variant=success,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -640,6 +668,7 @@
       }
     },
     "variant=success,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -662,6 +691,7 @@
       }
     },
     "variant=success,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -685,6 +715,7 @@
       }
     },
     "variant=success,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -708,6 +739,7 @@
       }
     },
     "variant=success,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -730,6 +762,7 @@
       }
     },
     "variant=success,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -753,6 +786,7 @@
       }
     },
     "variant=success,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -776,6 +810,7 @@
       }
     },
     "variant=success,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -798,6 +833,7 @@
       }
     },
     "variant=success,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9176470588235294,
         "g": 0.9647058823529412,
@@ -821,6 +857,7 @@
       }
     },
     "variant=error,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -844,6 +881,7 @@
       }
     },
     "variant=error,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -866,6 +904,7 @@
       }
     },
     "variant=error,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -889,6 +928,7 @@
       }
     },
     "variant=error,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -912,6 +952,7 @@
       }
     },
     "variant=error,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -934,6 +975,7 @@
       }
     },
     "variant=error,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -957,6 +999,7 @@
       }
     },
     "variant=error,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -980,6 +1023,7 @@
       }
     },
     "variant=error,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -1002,6 +1046,7 @@
       }
     },
     "variant=error,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9921568627450981,
         "g": 0.9372549019607843,
@@ -1025,6 +1070,7 @@
       }
     },
     "variant=warning,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1048,6 +1094,7 @@
       }
     },
     "variant=warning,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1070,6 +1117,7 @@
       }
     },
     "variant=warning,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1093,6 +1141,7 @@
       }
     },
     "variant=warning,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1116,6 +1165,7 @@
       }
     },
     "variant=warning,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1138,6 +1188,7 @@
       }
     },
     "variant=warning,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1161,6 +1212,7 @@
       }
     },
     "variant=warning,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1184,6 +1236,7 @@
       }
     },
     "variant=warning,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1206,6 +1259,7 @@
       }
     },
     "variant=warning,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 1,
         "g": 0.9529411764705882,
@@ -1229,6 +1283,7 @@
       }
     },
     "variant=info,size=large,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1252,6 +1307,7 @@
       }
     },
     "variant=info,size=large,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1274,6 +1330,7 @@
       }
     },
     "variant=info,size=large,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1297,6 +1354,7 @@
       }
     },
     "variant=info,size=medium,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1320,6 +1378,7 @@
       }
     },
     "variant=info,size=medium,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1342,6 +1401,7 @@
       }
     },
     "variant=info,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1365,6 +1425,7 @@
       }
     },
     "variant=info,size=small,shape=square": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1388,6 +1449,7 @@
       }
     },
     "variant=info,size=small,shape=circle": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1410,6 +1472,7 @@
       }
     },
     "variant=info,size=small,shape=rounded": {
+      "fontWeight": 500,
       "bgColor": {
         "r": 0.9254901960784314,
         "g": 0.9490196078431372,
@@ -1433,6 +1496,7 @@
       }
     },
     "variant=outline,size=large,shape=square": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1457,6 +1521,7 @@
       }
     },
     "variant=outline,size=large,shape=circle": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1480,6 +1545,7 @@
       }
     },
     "variant=outline,size=large,shape=rounded": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1504,6 +1570,7 @@
       }
     },
     "variant=outline,size=medium,shape=square": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1528,6 +1595,7 @@
       }
     },
     "variant=outline,size=medium,shape=circle": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1551,6 +1619,7 @@
       }
     },
     "variant=outline,size=medium,shape=rounded": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1575,6 +1644,7 @@
       }
     },
     "variant=outline,size=small,shape=square": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1599,6 +1669,7 @@
       }
     },
     "variant=outline,size=small,shape=circle": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
@@ -1622,6 +1693,7 @@
       }
     },
     "variant=outline,size=small,shape=rounded": {
+      "fontWeight": 500,
       "fontColor": {
         "r": 0.07450980392156863,
         "g": 0.0784313725490196,
