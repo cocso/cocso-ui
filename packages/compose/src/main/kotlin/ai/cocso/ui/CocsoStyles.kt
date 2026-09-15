@@ -215,6 +215,7 @@ fun cCBadgeStyle(
         style = style.copy(fontColor = CocsoTokens.Color.feedbackInfoText())
     }
     if (variant == CCBadgeVariant.outline) {
+        style = style.copy(bgColor = ComposeColor.Transparent)
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
         style = style.copy(borderWidth = 1.dp)
         style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
@@ -387,6 +388,7 @@ fun cCButtonStyle(
         style = style.copy(fontColor = CocsoTokens.Color.textSecondary())
     }
     if (variant == CCButtonVariant.outline) {
+        style = style.copy(bgColor = ComposeColor.Transparent)
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
         style = style.copy(borderWidth = 1.dp)
         style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
@@ -416,6 +418,7 @@ fun cCButtonStyle(
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
     }
     if (variant == CCButtonVariant.errorGhost) {
+        style = style.copy(bgColor = ComposeColor.Transparent)
         style = style.copy(fontColor = CocsoTokens.Color.feedbackDangerText())
     }
     if (variant == CCButtonVariant.glass) {

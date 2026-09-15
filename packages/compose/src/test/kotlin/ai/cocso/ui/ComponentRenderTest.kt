@@ -11,11 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import android.graphics.BitmapFactory
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.runtime.SideEffect
+import android.view.View
+import android.graphics.Canvas
+import android.graphics.Bitmap
 import java.io.File
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
+import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.unit.dp
 import com.github.takahirom.roborazzi.captureRoboImage
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -105,6 +112,15 @@ class ComponentRenderTest {
         CCButton(title = "Secondary", onClick = {}, variant = CCButtonVariant.secondary)
         CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
         CCButton(title = "Glass", onClick = {}, variant = CCButtonVariant.glass)
+        // The see-through variants on a filled surface. On the page they look
+        // right whatever they fill with, because the page is `surface-primary`
+        // too — which is how Compose drew a white slab behind the outline and
+        // error-ghost buttons and a grey outline badge without a golden moving.
+        CCCard(variant = CCCardVariant.filled) {
+            CCButton(title = "Outline on fill", onClick = {}, variant = CCButtonVariant.outline)
+            CCButton(title = "Error ghost on fill", onClick = {}, variant = CCButtonVariant.errorGhost)
+            CCBadge(text = "Outline badge", variant = CCBadgeVariant.outline)
+        }
         // The spinner on the fill: a Material indicator in the system grey all
         // but vanished on the primary fill.
         CCButton(title = "Loading", onClick = {}, loading = true)
@@ -157,6 +173,70 @@ class ComponentRenderTest {
     fun everyComponentDrawsInDarkTheme() = render("components-dark") { everything() }
 
     /**
+     * A see-through variant shows the surface behind it.
+     *
+     * The outline and error-ghost buttons and the outline badge are transparent
+     * on the web and on SwiftUI. Compose filled them — `surface-primary` behind
+     * the buttons, `surface-secondary` behind the badge — and no golden moved:
+     * on the page those fills are the page colour, and on a filled card the
+     * difference sits inside Roborazzi's tolerance.
+     *
+     * So this does not go through a golden. A first attempt did, and passed with
+     * the defect put back: in verify mode `captureRoboImage(path)` compares and
+     * leaves `path` alone, so reading `path` read the committed image, not the
+     * render. This draws the live view into a bitmap and compares two pixels of
+     * that one render — inside each control, clear of its label and border,
+     * against the surface beside it.
+     */
+    @Test
+    fun seeThroughVariantsShowTheSurfaceBehindThem() {
+        var host: View? = null
+        composeRule.setContent {
+            val view = LocalView.current
+            SideEffect { host = view }
+            Column(
+                Modifier
+                    .width(320.dp)
+                    .background(CocsoTokens.Color.surfaceSecondary())
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
+                CCButton(title = "Ghost", onClick = {}, variant = CCButtonVariant.errorGhost)
+                Box(Modifier.width(240.dp)) {
+                    CCBadge(text = "Badge", variant = CCBadgeVariant.outline, modifier = Modifier.width(200.dp))
+                }
+            }
+        }
+        composeRule.waitForIdle()
+        // The Compose view itself, not its root: the root is the window's decor,
+        // with an action bar above the content that shifts every coordinate.
+        val view = requireNotNull(host)
+        val image = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(image))
+
+        val density = view.resources.displayMetrics.density
+        fun px(dp: Float) = (dp * density).toInt()
+        val surface = image.getPixel(px(4f), px(4f))
+        // Each point: a column clear of the label, at the control's vertical centre.
+        // Buttons are 36 tall with a centred label; the badge's label starts at
+        // its left edge, so its point sits past the label, inside the badge.
+        val points = listOf(
+            Triple("outline button", 48f, 12f + 18f),
+            Triple("error-ghost button", 48f, 12f + 36f + 12f + 18f),
+            Triple("outline badge", 180f, 12f + 36f + 12f + 36f + 12f + 10f),
+        )
+        for ((name, x, y) in points) {
+            val inside = image.getPixel(px(x), px(y))
+            assertEquals(
+                "$name fills its background instead of showing the surface: #%08X vs #%08X".format(inside, surface),
+                surface,
+                inside,
+            )
+        }
+    }
+
+    /**
      * The brand reaches the views. An overlay the views never read would leave
      * the app's own primary blue while every design-system view stayed black —
      * two primaries on one screen. The base default is black; under the cocso
@@ -164,15 +244,24 @@ class ComponentRenderTest {
      */
     @Test
     fun brandRecoloursThePrimaryButton() {
+        var host: View? = null
         composeRule.setContent {
+            val view = LocalView.current
+            SideEffect { host = view }
             CompositionLocalProvider(LocalCocsoBrand provides CocsoBrand.Cocso) {
                 CCButton(title = "Brand", onClick = {}, modifier = Modifier.width(200.dp))
             }
         }
         composeRule.waitForIdle()
-        val path = "src/test/screenshots/button-brand-cocso.png"
-        composeRule.onRoot().captureRoboImage(path)
-        val image = BitmapFactory.decodeFile(path)
+        // The golden still records the button, and its comparison is what
+        // catches a large change in appearance.
+        composeRule.onRoot().captureRoboImage("src/test/screenshots/button-brand-cocso.png")
+        // The colour is read from the live render. This used to decode the
+        // screenshot path after capturing, which in verify mode is the committed
+        // image, not this run — the assertion held whatever the view drew.
+        val view = requireNotNull(host)
+        val image = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(image))
         // A point inside the fill, away from the label.
         val px = image.getPixel(image.width / 8, image.height / 2)
         val r = (px shr 16) and 0xFF; val g = (px shr 8) and 0xFF; val b = px and 0xFF

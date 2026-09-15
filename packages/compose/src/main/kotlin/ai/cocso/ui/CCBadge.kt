@@ -48,7 +48,9 @@ fun CCBadge(
 
     // A variant that changes recolours on the web's colour curve.
     val fill by animateColorAsState(
-        style.bgColor ?: CocsoTokens.Color.surfaceSecondary(),
+        // An absent background is no background, as it is on SwiftUI. This
+        // filled `surface-secondary` and drew the outline badge grey.
+        style.bgColor ?: ComposeColor.Transparent,
         animationSpec = CCMotion.colour(),
         label = "badge-fill",
     )

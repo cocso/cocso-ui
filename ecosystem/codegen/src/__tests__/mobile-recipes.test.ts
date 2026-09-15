@@ -177,10 +177,10 @@ describe("The published files are what the generator produces", () => {
  */
 describe("Nothing is dropped without a decision", () => {
   const NO_PLATFORM_EQUIVALENT = [
-    // `transparent` and `currentColor` are absences, not colours: SwiftUI says
-    // `.clear` and Compose leaves the background unset.
-    "badge.bgColor",
-    "button.bgColor",
+    // `currentColor` is the ink the view sits in, which only the view knows.
+    // (`transparent` used to be here too, with the claim that "Compose leaves
+    // the background unset". It did not: it filled the outline badge grey and
+    // the outline buttons white. It now crosses as the platform's clear.)
     "link.color",
     // The recipe's `align` dimension already carries this, and the views read
     // it from there.
@@ -275,5 +275,33 @@ describe("Every colour a recipe writes is known to be one", () => {
     expect([...written].filter((name) => !COLOR_PROPERTIES.has(name))).toEqual(
       []
     );
+  });
+});
+
+/**
+ * `transparent` is a colour both platforms already have, and it has to arrive
+ * as one.
+ *
+ * Refused, it left each view to decide what an absent background means. SwiftUI
+ * decided clear and Compose decided `surface-secondary` for the badge and
+ * `surface-primary` for the button, so the outline badge was grey and the
+ * outline and error-ghost buttons were a white slab on Android — on iOS and the
+ * web, all three are see-through.
+ */
+describe("A transparent colour crosses as the platform's clear", () => {
+  it("emits SwiftUI.Color.clear and ComposeColor.Transparent, never a token", () => {
+    expect(output.swift).toContain("style.bgColor = SwiftUI.Color.clear");
+    expect(output.kotlin).toContain("bgColor = ComposeColor.Transparent");
+    expect(output.swift).not.toContain("CocsoTokens.Color.transparent");
+    expect(output.kotlin).not.toContain("CocsoTokens.Color.transparent");
+  });
+
+  it("reaches the outline badge and both see-through buttons", () => {
+    const badge = output.swift.match(/if variant == \.outline \{[\s\S]*?\n {8}\}/g) ?? [];
+    expect(badge.some((b) => b.includes("SwiftUI.Color.clear"))).toBe(true);
+    // Every block for the variant, not the first: the pressed-state layer is
+    // emitted before the variant layer, and it sets `bgColorPressed`.
+    const errorGhost = output.swift.match(/if variant == \.errorGhost \{[\s\S]*?\n {8}\}/g) ?? [];
+    expect(errorGhost.some((b) => b.includes("SwiftUI.Color.clear"))).toBe(true);
   });
 });

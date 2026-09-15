@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
@@ -80,7 +81,10 @@ fun CCButton(
     val background by animateColorAsState(
         (if (isPressed) style.bgColorPressed else null)
             ?: style.bgColor
-            ?: CocsoTokens.Color.surfacePrimary(),
+            // An absent background is no background, as it is on SwiftUI. This
+            // filled `surface-primary`: a white slab behind the outline and
+            // error-ghost buttons on any surface that was not white.
+            ?: ComposeColor.Transparent,
         animationSpec = CCMotion.colour(),
         label = "button-background",
     )

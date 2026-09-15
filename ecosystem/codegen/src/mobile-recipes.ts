@@ -133,6 +133,13 @@ function tokenIdentifier(value: string, scale: "color" | "radius"): string {
   return LEADING_DIGIT.test(ident) ? `${scale[0]}${ident}` : ident;
 }
 
+/**
+ * The token name a transparent colour carries. There is no
+ * `CocsoTokens.Color.transparent` — the token emitter skips it because both
+ * platforms already have one — so it renders as the platform's own constant.
+ */
+const TRANSPARENT = "transparent";
+
 type Emitted =
   | { kind: "color"; token: string; themed: boolean }
   | { kind: "length"; value: number }
@@ -227,8 +234,20 @@ function classifyProperty(
     if (typeof value !== "string") {
       return `${key} is not a token name`;
     }
-    if (value === "transparent" || value === "currentColor") {
-      return `${key} is \`${value}\`, which the platform expresses itself`;
+    // `transparent` crosses as the platform's clear colour. It used to be
+    // refused as something "the platform expresses itself", which left every
+    // view to read nil as transparent — and they did not agree: SwiftUI drew
+    // the outline badge and the outline and error-ghost buttons clear, while
+    // Compose filled them with `surface-secondary` and `surface-primary`, a
+    // grey badge and a white slab of a button on any non-white surface. Emitted
+    // explicitly, there is nothing left for a view to interpret.
+    if (value === "transparent") {
+      return { [key]: { kind: "color", themed: false, token: TRANSPARENT } };
+    }
+    // `currentColor` is not a colour but "the ink around me", which only the
+    // view knows — the link inherits it.
+    if (value === "currentColor") {
+      return `${key} is \`currentColor\`, the ink the view sits in`;
     }
     const token = tokenIdentifier(value, "color");
     return { [key]: { kind: "color", themed: themedColors.has(token), token } };
@@ -458,6 +477,9 @@ function swiftType(kind: Emitted["kind"]): string {
 function swiftValue(value: Emitted): string {
   switch (value.kind) {
     case "color":
+      if (value.token === TRANSPARENT) {
+        return "SwiftUI.Color.clear";
+      }
       return value.themed
         ? `CocsoTokens.Color.${value.token}(scheme, brand: brand)`
         : `CocsoTokens.Color.${value.token}`;
@@ -491,6 +513,9 @@ function kotlinType(kind: Emitted["kind"]): string {
 function kotlinValue(value: Emitted): string {
   switch (value.kind) {
     case "color":
+      if (value.token === TRANSPARENT) {
+        return "ComposeColor.Transparent";
+      }
       return value.themed
         ? `CocsoTokens.Color.${value.token}()`
         : `CocsoTokens.Color.${value.token}`;
