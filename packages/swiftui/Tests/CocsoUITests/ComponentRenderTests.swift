@@ -143,6 +143,15 @@ final class ComponentRenderTests: XCTestCase {
         CCButton("Secondary", variant: .secondary) {}
         CCButton("Outline", variant: .outline) {}
         CCButton("Glass", variant: .glass) {}
+        // The see-through variants on a filled surface, where a fallback fill
+        // would show; on the page it would not.
+        CCCard(variant: .filled) {
+            VStack(alignment: .leading, spacing: 8) {
+                CCButton("Outline on fill", variant: .outline) {}
+                CCButton("Error ghost on fill", variant: .errorGhost) {}
+                CCBadge("Outline badge", variant: .outline)
+            }
+        }
         CCButton("Loading", loading: true) {}
         CCBadge("Badge")
         CCBadge("Outline", variant: .outline)
@@ -212,6 +221,50 @@ final class ComponentRenderTests: XCTestCase {
         _ = CocsoTokens.Easing.default(CocsoTokens.Duration.fast)
         XCTAssertNil(CCMotion.colour(reduced: true), "reduced motion must animate nothing")
         XCTAssertNotNil(CCMotion.colour(reduced: false))
+    }
+
+    /// A see-through variant shows the surface behind it — the SwiftUI half of
+    /// the Compose test of the same name. SwiftUI was already right; this holds
+    /// the two platforms to the same answer. Two pixels of one live render:
+    /// inside each control, clear of its label, against the surface beside it.
+    @MainActor
+    func testSeeThroughVariantsShowTheSurfaceBehindThem() {
+        let surface = CocsoTokens.Color.surfaceSecondary(.light)
+        let view = VStack(alignment: .leading, spacing: 12) {
+            CCButton("Outline", variant: .outline) {}
+            CCButton("Ghost", variant: .errorGhost) {}
+            CCBadge("Badge", variant: .outline).frame(width: 200, alignment: .leading)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .frame(width: 320, alignment: .topLeading)
+        .background(surface)
+        .environment(\.cocsoGlassUsesMaterial, true)
+        let controller = NSHostingController(rootView: view)
+        controller.view.appearance = NSAppearance(named: .aqua)
+        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 150)
+        controller.view.layoutSubtreeIfNeeded()
+        guard let rep = controller.view.bitmapImageRepForCachingDisplay(in: controller.view.bounds) else {
+            return XCTFail("비트맵을 만들지 못했다")
+        }
+        controller.view.cacheDisplay(in: controller.view.bounds, to: rep)
+        let scale = CGFloat(rep.pixelsWide) / 320
+        func pixel(_ x: CGFloat, _ y: CGFloat) -> NSColor? {
+            rep.colorAt(x: Int(x * scale), y: Int(y * scale))?.usingColorSpace(.sRGB)
+        }
+        guard let background = pixel(4, 4) else { return XCTFail("표면 픽셀을 읽지 못했다") }
+        let points: [(String, CGFloat, CGFloat)] = [
+            ("outline button", 48, 12 + 18),
+            ("error-ghost button", 48, 12 + 36 + 12 + 18),
+            ("outline badge", 180, 12 + 36 + 12 + 36 + 12 + 10),
+        ]
+        for (name, x, y) in points {
+            guard let inside = pixel(x, y) else { return XCTFail("\(name) 픽셀을 읽지 못했다") }
+            let same = abs(inside.redComponent - background.redComponent) < 0.02
+                && abs(inside.greenComponent - background.greenComponent) < 0.02
+                && abs(inside.blueComponent - background.blueComponent) < 0.02
+            XCTAssertTrue(same, "\(name) fills its background instead of showing the surface: \(inside) vs \(background)")
+        }
     }
 
     @MainActor

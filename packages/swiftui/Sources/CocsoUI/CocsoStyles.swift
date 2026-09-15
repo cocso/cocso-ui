@@ -213,6 +213,7 @@ public struct CCBadgeStyle: Equatable, Sendable {
             style.fontColor = CocsoTokens.Color.feedbackInfoText(scheme, brand: brand)
         }
         if variant == .outline {
+            style.bgColor = SwiftUI.Color.clear
             style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
             style.borderWidth = 1
             style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
@@ -389,6 +390,7 @@ public struct CCButtonStyle: Equatable, Sendable {
             style.fontColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
         }
         if variant == .outline {
+            style.bgColor = SwiftUI.Color.clear
             style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
             style.borderWidth = 1
             style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
@@ -418,6 +420,7 @@ public struct CCButtonStyle: Equatable, Sendable {
             style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if variant == .errorGhost {
+            style.bgColor = SwiftUI.Color.clear
             style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
         }
         if variant == .glass {
