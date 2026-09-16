@@ -32,7 +32,7 @@ public enum CocsoBrandCocso {
             scheme == .dark ? SwiftUI.Color(hex: 0x0B50D0) : SwiftUI.Color(hex: 0x0B50D0)
         }
         public static func interactivePrimaryMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x256EF4) : SwiftUI.Color(hex: 0x256EF4)
+            scheme == .dark ? SwiftUI.Color(hex: 0x083891) : SwiftUI.Color(hex: 0xB1CEFB)
         }
         public static func primary100(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xD8E5FD) : SwiftUI.Color(hex: 0xD8E5FD)

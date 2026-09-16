@@ -15,7 +15,7 @@
   --cocso-color-interactive-primary: var(--cocso-color-info-500);
   --cocso-color-interactive-primary-hover: var(--cocso-color-info-600);
   --cocso-color-interactive-primary-active: var(--cocso-color-info-700);
-  --cocso-color-interactive-primary-muted: var(--cocso-color-info-500);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-info-200);
   --cocso-color-text-on-primary: var(--cocso-color-white);
 }
 
@@ -34,6 +34,6 @@
   --cocso-color-interactive-primary: #2260d3;
   --cocso-color-interactive-primary-hover: var(--cocso-color-info-600);
   --cocso-color-interactive-primary-active: var(--cocso-color-info-700);
-  --cocso-color-interactive-primary-muted: var(--cocso-color-info-500);
+  --cocso-color-interactive-primary-muted: var(--cocso-color-info-700);
   --cocso-color-text-on-primary: var(--cocso-color-white);
 }

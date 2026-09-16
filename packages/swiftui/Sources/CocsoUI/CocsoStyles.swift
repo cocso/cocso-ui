@@ -396,7 +396,7 @@ public struct CCButtonStyle: Equatable, Sendable {
             style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
         }
         if variant == .ghost {
-            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
+            style.bgColor = SwiftUI.Color.clear
             style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
         }
         if variant == .success {

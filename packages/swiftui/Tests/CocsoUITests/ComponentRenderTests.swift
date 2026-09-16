@@ -232,7 +232,8 @@ final class ComponentRenderTests: XCTestCase {
         let surface = CocsoTokens.Color.surfaceSecondary(.light)
         let view = VStack(alignment: .leading, spacing: 12) {
             CCButton("Outline", variant: .outline) {}
-            CCButton("Ghost", variant: .errorGhost) {}
+            CCButton("Ghost", variant: .ghost) {}
+            CCButton("Error ghost", variant: .errorGhost) {}
             CCBadge("Badge", variant: .outline).frame(width: 200, alignment: .leading)
         }
         .padding(.horizontal, 16)
@@ -242,7 +243,7 @@ final class ComponentRenderTests: XCTestCase {
         .environment(\.cocsoGlassUsesMaterial, true)
         let controller = NSHostingController(rootView: view)
         controller.view.appearance = NSAppearance(named: .aqua)
-        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 150)
+        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 210)
         controller.view.layoutSubtreeIfNeeded()
         guard let rep = controller.view.bitmapImageRepForCachingDisplay(in: controller.view.bounds) else {
             return XCTFail("비트맵을 만들지 못했다")
@@ -255,8 +256,9 @@ final class ComponentRenderTests: XCTestCase {
         guard let background = pixel(4, 4) else { return XCTFail("표면 픽셀을 읽지 못했다") }
         let points: [(String, CGFloat, CGFloat)] = [
             ("outline button", 48, 12 + 18),
-            ("error-ghost button", 48, 12 + 36 + 12 + 18),
-            ("outline badge", 180, 12 + 36 + 12 + 36 + 12 + 10),
+            ("ghost button", 48, 12 + 48 + 18),
+            ("error-ghost button", 48, 12 + 48 * 2 + 18),
+            ("outline badge", 180, 12 + 48 * 3 + 10),
         ]
         for (name, x, y) in points {
             guard let inside = pixel(x, y) else { return XCTFail("\(name) 픽셀을 읽지 못했다") }
