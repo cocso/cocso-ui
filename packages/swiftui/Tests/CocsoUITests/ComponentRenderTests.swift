@@ -238,12 +238,17 @@ final class ComponentRenderTests: XCTestCase {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .frame(width: 320, alignment: .topLeading)
+        // Height as well as width, and both given to the hosting view: without
+        // one, the rows are laid out at their ideal height and then centred in
+        // whatever the host is, so every point below the first was measured a
+        // few points out and the reference corner read transparent. It passed
+        // here and failed on CI, which is the same bug either way.
+        .frame(width: 320, height: 240, alignment: .topLeading)
         .background(surface)
         .environment(\.cocsoGlassUsesMaterial, true)
         let controller = NSHostingController(rootView: view)
         controller.view.appearance = NSAppearance(named: .aqua)
-        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 210)
+        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 240)
         controller.view.layoutSubtreeIfNeeded()
         guard let rep = controller.view.bitmapImageRepForCachingDisplay(in: controller.view.bounds) else {
             return XCTFail("비트맵을 만들지 못했다")
@@ -254,6 +259,9 @@ final class ComponentRenderTests: XCTestCase {
             rep.colorAt(x: Int(x * scale), y: Int(y * scale))?.usingColorSpace(.sRGB)
         }
         guard let background = pixel(4, 4) else { return XCTFail("표면 픽셀을 읽지 못했다") }
+        // A transparent corner means the rows are not where this thinks they
+        // are, and every comparison below would be against nothing.
+        XCTAssertEqual(background.alphaComponent, 1, accuracy: 0.01, "표면이 그려지지 않았다")
         let points: [(String, CGFloat, CGFloat)] = [
             ("outline button", 48, 12 + 18),
             ("ghost button", 48, 12 + 48 + 18),

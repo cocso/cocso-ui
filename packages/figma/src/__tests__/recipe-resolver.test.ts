@@ -154,13 +154,22 @@ describe("resolveForFigma — button fills", () => {
     expect(spec.strokeWeight).toBe(1);
   });
 
-  it("ghost variant has white bgColor", () => {
-    const spec = resolveForFigma(buttonRecipe, {
+  it("ghost variant has no fill, like error-ghost", () => {
+    // `transparent` is not a colour Figma paints; a see-through variant gets no
+    // fill at all. This asserted white, which is what the variant used to fill
+    // — invisible on the web's white page and a white slab anywhere else.
+    const ghost = resolveForFigma(buttonRecipe, {
       variant: "ghost",
       size: "medium",
       shape: "square",
     });
-    expect(spec.bgColor).toEqual({ r: 1, g: 1, b: 1 });
+    const errorGhost = resolveForFigma(buttonRecipe, {
+      variant: "error-ghost",
+      size: "medium",
+      shape: "square",
+    });
+    expect(ghost.bgColor).toBeUndefined();
+    expect(ghost.bgColor).toEqual(errorGhost.bgColor);
   });
 });
 
