@@ -31,7 +31,7 @@ object CocsoBrandCocso {
         @Composable
         @ReadOnlyComposable
         fun interactivePrimaryMuted(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF256EF4) else ComposeColor(0xFF256EF4)
+            if (isSystemInDarkTheme()) ComposeColor(0xFF083891) else ComposeColor(0xFFB1CEFB)
         @Composable
         @ReadOnlyComposable
         fun primary100(): ComposeColor =

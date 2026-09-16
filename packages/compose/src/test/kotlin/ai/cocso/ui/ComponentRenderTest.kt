@@ -202,7 +202,8 @@ class ComponentRenderTest {
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
-                CCButton(title = "Ghost", onClick = {}, variant = CCButtonVariant.errorGhost)
+                CCButton(title = "Ghost", onClick = {}, variant = CCButtonVariant.ghost)
+                CCButton(title = "Error ghost", onClick = {}, variant = CCButtonVariant.errorGhost)
                 Box(Modifier.width(240.dp)) {
                     CCBadge(text = "Badge", variant = CCBadgeVariant.outline, modifier = Modifier.width(200.dp))
                 }
@@ -223,8 +224,9 @@ class ComponentRenderTest {
         // its left edge, so its point sits past the label, inside the badge.
         val points = listOf(
             Triple("outline button", 48f, 12f + 18f),
-            Triple("error-ghost button", 48f, 12f + 36f + 12f + 18f),
-            Triple("outline badge", 180f, 12f + 36f + 12f + 36f + 12f + 10f),
+            Triple("ghost button", 48f, 12f + 48f + 18f),
+            Triple("error-ghost button", 48f, 12f + 48f * 2 + 18f),
+            Triple("outline badge", 180f, 12f + 48f * 3 + 10f),
         )
         for ((name, x, y) in points) {
             val inside = image.getPixel(px(x), px(y))

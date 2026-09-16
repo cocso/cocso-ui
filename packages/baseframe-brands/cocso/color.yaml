@@ -53,8 +53,13 @@ data:
       values: { light: $color.info-600, dark: $color.info-600 }
     $color.interactive.primary-active:
       values: { light: $color.info-700, dark: $color.info-700 }
+    # A step toward the dim end of the ramp, which is what "muted" says. This
+    # was `info-500` in both modes — the same value as `interactive.primary` in
+    # light, so a muted control was pixel-identical to a live one. The base has
+    # the relationship right (primary-950 against a mid primary-500); the brand
+    # overlay lost it.
     $color.interactive.primary-muted:
-      values: { light: $color.info-500, dark: $color.info-500 }
+      values: { light: $color.info-200, dark: $color.info-700 }
     # 채움이 두 테마 모두 파랑이므로 그 위 글자도 두 테마 모두 white 다.
     # 베이스는 다크에서 neutral-950 인데, 그것은 채움이 밝게 뒤집힐 때의 값이다.
     $color.text.on-primary:

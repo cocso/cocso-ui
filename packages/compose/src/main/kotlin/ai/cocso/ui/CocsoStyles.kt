@@ -394,7 +394,7 @@ fun cCButtonStyle(
         style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
     }
     if (variant == CCButtonVariant.ghost) {
-        style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
+        style = style.copy(bgColor = ComposeColor.Transparent)
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
     }
     if (variant == CCButtonVariant.success) {

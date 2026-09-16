@@ -27,6 +27,10 @@ const DARK_MIX_LIGHT_INFO =
   /interactivePrimary\(_ scheme: ColorScheme\)[\s\S]*?\.dark \? SwiftUI\.Color\(hex: 0x2260D3\) : SwiftUI\.Color\(hex: 0x256EF4\)/;
 const SWIFT_TEXT_PRIMARY_BODY =
   /public static func textPrimary\([^{]*\{([\s\S]*?)\n {8}\}/;
+// `name(_ scheme:) { scheme == .dark ? Color(hex: 0xA) : Color(hex: 0xB) }`.
+const SWIFT_SCHEME_BODY =
+  /public static func (\w+)\(_ scheme: ColorScheme\)[^{]*\{\s*scheme == \.dark \? SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\) : SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\)/g;
+const STATE_SUFFIXES = ["Hover", "Active", "Muted", "Subtle", "Disabled"];
 const WHITE_ON_PRIMARY_BOTH =
   /textOnPrimary\(_ scheme: ColorScheme\)[\s\S]*?0xFFFFFF\) : SwiftUI\.Color\(hex: 0xFFFFFF\)/;
 
@@ -89,6 +93,33 @@ describe.each(BRANDS)("brand %s", (brand) => {
 
   it("carries nothing it could not express", () => {
     expect(output.skipped).toEqual([]);
+  });
+
+  it("gives every state of a token a value you can tell from the resting one", () => {
+    // `interactive.primary-muted` was `info-500` — the same value the brand
+    // gives `interactive.primary` in light, so a muted control was pixel-for-
+    // pixel a live one. The base got this right and the overlay lost it, which
+    // no other test here could see: the overlay was internally consistent, it
+    // matched its snapshot, and both platforms agreed on the wrong colour.
+    const values = new Map<string, { dark: string; light: string }>();
+    for (const [, name, dark, light] of output.swift.matchAll(SWIFT_SCHEME_BODY)) {
+      values.set(name, { dark, light });
+    }
+    expect(values.size).toBeGreaterThan(0);
+    const states = [...values.keys()].filter((n) =>
+      STATE_SUFFIXES.some((s) => n.endsWith(s) && values.has(n.slice(0, -s.length)))
+    );
+    expect(states.length).toBeGreaterThan(0);
+    for (const state of states) {
+      const suffix = STATE_SUFFIXES.find((s) => state.endsWith(s)) as string;
+      const resting = state.slice(0, -suffix.length);
+      for (const scheme of ["dark", "light"] as const) {
+        expect(
+          values.get(state)?.[scheme],
+          `${state} is ${resting} in ${scheme}`
+        ).not.toBe(values.get(resting)?.[scheme]);
+      }
+    }
   });
 });
 

@@ -31,8 +31,12 @@ export const buttonRecipe = defineRecipe({
           },
         },
       },
+      // See-through, like `error-ghost`. It filled `surface-primary`, which is
+      // invisible on a white page and a white pill on any other surface — next
+      // to a transparent `error-ghost` the two read as different weights. The
+      // hover state still fills `surface-secondary`.
       ghost: {
-        root: { bgColor: "surface-primary", fontColor: "text-primary" },
+        root: { bgColor: "transparent", fontColor: "text-primary" },
       },
       success: {
         root: { bgColor: "interactive-success", fontColor: "text-on-success" },
