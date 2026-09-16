@@ -220,13 +220,15 @@ class ComponentRenderTest {
         fun px(dp: Float) = (dp * density).toInt()
         val surface = image.getPixel(px(4f), px(4f))
         // Each point: a column clear of the label, at the control's vertical centre.
-        // Buttons are 36 tall with a centred label; the badge's label starts at
-        // its left edge, so its point sits past the label, inside the badge.
+        // A button's row is the 48 of the touch target, with the 36-tall pill
+        // centred in it; the badge's label starts at its left edge, so its point
+        // sits past the label, inside the badge.
+        val row = 48f + 12f
         val points = listOf(
-            Triple("outline button", 48f, 12f + 18f),
-            Triple("ghost button", 48f, 12f + 48f + 18f),
-            Triple("error-ghost button", 48f, 12f + 48f * 2 + 18f),
-            Triple("outline badge", 180f, 12f + 48f * 3 + 10f),
+            Triple("outline button", 48f, 24f + 12f),
+            Triple("ghost button", 48f, 24f + 12f + row),
+            Triple("error-ghost button", 48f, 24f + 12f + row * 2),
+            Triple("outline badge", 180f, 12f + row * 3 + 10f),
         )
         for ((name, x, y) in points) {
             val inside = image.getPixel(px(x), px(y))

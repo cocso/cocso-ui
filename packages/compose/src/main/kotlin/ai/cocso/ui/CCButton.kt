@@ -117,10 +117,17 @@ fun CCButton(
 
     val crossfade: FiniteAnimationSpec<Float> = CCMotion.colour()
 
+    // Two boxes: the outer one is the target, the inner one is the button.
+    //
+    // The recipe's height is 28 at the smallest and 36 at the default, under the
+    // 48 a finger needs. Growing the pill to 48 would redraw every button; what
+    // grows here is the row it sits in, with the pill drawn at its own height in
+    // the middle of it. So the click, the focus and the press all belong to the
+    // outer box — a target that is only tall in layout is not a target.
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(style.height ?: 36.dp)
+            .ccMinimumTouchTarget()
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
@@ -135,79 +142,86 @@ fun CCButton(
             // primary button was solid black on Android and grey on iOS.
             .alpha(dim)
             .onFocusChanged { isFocused = it.isFocused }
-            // The recipe's border — the outline variant. Then the focus ring,
-            // only while focused: `Modifier.border(0.dp)` is not "none", it is
-            // `Dp.Hairline`, a one-pixel line. With it applied unconditionally
-            // every secondary and error button carried a permanent
-            // `focus-ring`-coloured edge; primary hid it by being the same colour.
-            .then(
-                style.borderColor?.let {
-                    Modifier.border(style.borderWidth ?: 1.dp, it, buttonShape)
-                } ?: Modifier
-            )
-            .then(
-                if (isFocused) {
-                    Modifier.border(2.dp, CocsoTokens.Color.focusRing(), buttonShape)
-                } else {
-                    Modifier
-                }
-            )
-            .clip(buttonShape)
-            // Glass goes through ccGlass: blurred when the app provides a haze
-            // state, the tint over the page surface when it does not. The
-            // pressed tint still comes from the recipe.
-            .then(
-                if (variant == CCButtonVariant.glass) {
-                    Modifier.ccGlass(buttonShape, tint = background)
-                } else {
-                    Modifier.background(background)
-                }
-            )
             .clickable(
                 enabled = enabled && !loading,
                 interactionSource = interactionSource,
                 indication = null,
                 role = Role.Button,
                 onClick = onClick,
-            )
-            .padding(horizontal = style.paddingInline ?: 0.dp),
-        contentAlignment = alignment,
+            ),
+        contentAlignment = Alignment.Center,
     ) {
-        // The label fades and the indicator fades in over it, rather than
-        // swapping on one frame.
-        Crossfade(targetState = loading, animationSpec = crossfade, label = "button-loading") { isLoading ->
-            if (isLoading) {
-                // The web's `Spinner`: white on the filled variants, `secondary`
-                // on the rest — the same glyph the design system draws alone.
-                CCSpinner(variant = buttonSpinnerVariant(variant), size = CCSpinnerSize.medium)
-            } else {
-                // The web's `prefix` / `suffix`: an icon either side of the label,
-                // at the label's size, in the label's colour.
-                Row(
-                    // The recipe pads the label inside the button as well as the
-                    // button itself; dropping it made every button narrower than
-                    // the web's by the difference.
-                    modifier = Modifier.padding(
-                        horizontal = style.contentPaddingX ?: 0.dp,
-                        vertical = style.contentPaddingY ?: 0.dp,
-                    ),
-                    horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s4),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    val glyph = (style.fontSize ?: 14.dp) + 2.dp
-                    if (prefix != null) {
-                        Icon(prefix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(style.height ?: 36.dp)
+                // The recipe's border — the outline variant. Then the focus ring,
+                // only while focused: `Modifier.border(0.dp)` is not "none", it is
+                // `Dp.Hairline`, a one-pixel line. With it applied unconditionally
+                // every secondary and error button carried a permanent
+                // `focus-ring`-coloured edge; primary hid it by being the same colour.
+                .then(
+                    style.borderColor?.let {
+                        Modifier.border(style.borderWidth ?: 1.dp, it, buttonShape)
+                    } ?: Modifier
+                )
+                .then(
+                    if (isFocused) {
+                        Modifier.border(2.dp, CocsoTokens.Color.focusRing(), buttonShape)
+                    } else {
+                        Modifier
                     }
-                    Text(
-                        text = title,
-                        color = foreground,
-                        fontSize = (style.fontSize?.value ?: 14f).sp,
-                        // The recipe's weight — 500, the web's. The label had
-                        // none and drew at 400.
-                        fontWeight = style.fontWeight,
-                    )
-                    if (suffix != null) {
-                        Icon(suffix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                )
+                .clip(buttonShape)
+                // Glass goes through ccGlass: blurred when the app provides a haze
+                // state, the tint over the page surface when it does not. The
+                // pressed tint still comes from the recipe.
+                .then(
+                    if (variant == CCButtonVariant.glass) {
+                        Modifier.ccGlass(buttonShape, tint = background)
+                    } else {
+                        Modifier.background(background)
+                    }
+                )
+                .padding(horizontal = style.paddingInline ?: 0.dp),
+            contentAlignment = alignment,
+        ) {
+            // The label fades and the indicator fades in over it, rather than
+            // swapping on one frame.
+            Crossfade(targetState = loading, animationSpec = crossfade, label = "button-loading") { isLoading ->
+                if (isLoading) {
+                    // The web's `Spinner`: white on the filled variants, `secondary`
+                    // on the rest — the same glyph the design system draws alone.
+                    CCSpinner(variant = buttonSpinnerVariant(variant), size = CCSpinnerSize.medium)
+                } else {
+                    // The web's `prefix` / `suffix`: an icon either side of the label,
+                    // at the label's size, in the label's colour.
+                    Row(
+                        // The recipe pads the label inside the button as well as the
+                        // button itself; dropping it made every button narrower than
+                        // the web's by the difference.
+                        modifier = Modifier.padding(
+                            horizontal = style.contentPaddingX ?: 0.dp,
+                            vertical = style.contentPaddingY ?: 0.dp,
+                        ),
+                        horizontalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s4),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        val glyph = (style.fontSize ?: 14.dp) + 2.dp
+                        if (prefix != null) {
+                            Icon(prefix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                        }
+                        Text(
+                            text = title,
+                            color = foreground,
+                            fontSize = (style.fontSize?.value ?: 14f).sp,
+                            // The recipe's weight — 500, the web's. The label had
+                            // none and drew at 400.
+                            fontWeight = style.fontWeight,
+                        )
+                        if (suffix != null) {
+                            Icon(suffix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                        }
                     }
                 }
             }

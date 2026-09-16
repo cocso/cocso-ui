@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsSelected
@@ -20,7 +21,10 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.geometry.Offset
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -50,6 +54,30 @@ class ComponentInteractionTest {
         var clicks = 0
         composeRule.setContent { CCButton(title = "Save", onClick = { clicks++ }) }
         composeRule.onNodeWithText("Save").performClick()
+        assertEquals(1, clicks)
+    }
+
+    @Test
+    fun everyButtonSizeIsATargetAFingerCanHit() {
+        // The recipe draws the pill at 28 to 48 by size, and the four under 48
+        // were a target Material says a finger misses. The row grows instead of
+        // the pill, so this asserts both halves: the node is 48 tall, and the
+        // strip above the pill clicks — a row that is only tall in layout is
+        // not a target, which is what a `Modifier.height` on the pill gave.
+        val sizes = listOf(
+            CCButtonSize.xSmall, CCButtonSize.small, CCButtonSize.medium,
+            CCButtonSize.large, CCButtonSize.xLarge,
+        )
+        var clicks = 0
+        composeRule.setContent {
+            Column { sizes.forEach { CCButton(title = it.name, onClick = { clicks++ }, size = it) } }
+        }
+        for (size in sizes) {
+            composeRule.onNodeWithText(size.name).assertHeightIsAtLeast(CCTouchTarget.minimum)
+        }
+        composeRule.onNodeWithText(CCButtonSize.xSmall.name).performTouchInput {
+            click(Offset(centerX, 1f))
+        }
         assertEquals(1, clicks)
     }
 
