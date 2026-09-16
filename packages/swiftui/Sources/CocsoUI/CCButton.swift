@@ -126,6 +126,62 @@ public struct CCButton: View {
             .frame(maxWidth: .infinity, alignment: alignment)
             .padding(.horizontal, resolved.paddingInline ?? 0)
             .frame(height: resolved.height)
+            .foregroundStyle(
+                (isPressed ? resolved.fontColorPressed : nil)
+                    ?? resolved.fontColor
+                    ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand)
+            )
+            // Glass is the system's pane (Liquid Glass on iOS 26, material before)
+            // with the recipe's tint, pressed tint included — see `GlassPane`. Every
+            // other variant is a plain fill.
+            .background {
+                let fill = (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
+                if variant == .glass {
+                    GlassPane(
+                        shape: resolved.borderRadiusFull == true
+                            ? AnyShape(Capsule())
+                            : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0)),
+                        edge: false,
+                        // A control: the glass answers the press on iOS 26. The
+                        // material path shows the press through the recipe's tint.
+                        interactive: true,
+                        tint: fill
+                    )
+                } else {
+                    fill
+                }
+            }
+            .clipShape(
+                // `shape: .circle` is a percentage radius in the recipe, which has
+                // no length to travel as; before it arrived as a flag this drew a
+                // square.
+                resolved.borderRadiusFull == true
+                    ? AnyShape(Capsule())
+                    : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
+            )
+            // The recipe's border — the outline variant. Until the generator carried
+            // compound borders this variant had no edge on either platform.
+            .overlay(recipeBorder(resolved))
+            .overlay(
+                RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
+                    .strokeBorder(
+                        CocsoTokens.Color.focusRing(colorScheme, brand: brand),
+                        lineWidth: isFocused ? 2 : 0
+                    )
+                    .padding(-2)
+            )
+            // The pressed colours arrive on the web's curve (`duration-fast`,
+            // `easing-default`) rather than on the frame the finger lands, and the
+            // button gives a little under it — the one thing a touch has that a
+            // pointer does not.
+            .animation(CCMotion.colour(reduced: reduceMotion), value: isPressed)
+            // The pill keeps the recipe's height; the row it sits in grows to
+            // the 44 a finger needs, and the shape makes all of it the button.
+            // This is inside the label on purpose: a `.plain` button is tapped
+            // where its label says it can be, so the same modifiers applied
+            // outside would have given the button a taller box and left the
+            // extra strip dead.
+            .ccMinimumTouchTarget()
         }
         .buttonStyle(.plain)
         .simultaneousGesture(
@@ -134,55 +190,6 @@ public struct CCButton: View {
             }
         )
         .focused($isFocused)
-        .foregroundStyle(
-            (isPressed ? resolved.fontColorPressed : nil)
-                ?? resolved.fontColor
-                ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand)
-        )
-        // Glass is the system's pane (Liquid Glass on iOS 26, material before)
-        // with the recipe's tint, pressed tint included — see `GlassPane`. Every
-        // other variant is a plain fill.
-        .background {
-            let fill = (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
-            if variant == .glass {
-                GlassPane(
-                    shape: resolved.borderRadiusFull == true
-                        ? AnyShape(Capsule())
-                        : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0)),
-                    edge: false,
-                    // A control: the glass answers the press on iOS 26. The
-                    // material path shows the press through the recipe's tint.
-                    interactive: true,
-                    tint: fill
-                )
-            } else {
-                fill
-            }
-        }
-        .clipShape(
-            // `shape: .circle` is a percentage radius in the recipe, which has
-            // no length to travel as; before it arrived as a flag this drew a
-            // square.
-            resolved.borderRadiusFull == true
-                ? AnyShape(Capsule())
-                : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
-        )
-        // The recipe's border — the outline variant. Until the generator carried
-        // compound borders this variant had no edge on either platform.
-        .overlay(recipeBorder(resolved))
-        .overlay(
-            RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
-                .strokeBorder(
-                    CocsoTokens.Color.focusRing(colorScheme, brand: brand),
-                    lineWidth: isFocused ? 2 : 0
-                )
-                .padding(-2)
-        )
-        // The pressed colours arrive on the web's curve (`duration-fast`,
-        // `easing-default`) rather than on the frame the finger lands, and the
-        // button gives a little under it — the one thing a touch has that a
-        // pointer does not.
-        .animation(CCMotion.colour(reduced: reduceMotion), value: isPressed)
         .scaleEffect(isPressed ? CCMotion.pressedScale : 1)
         .animation(CCMotion.movement(reduced: reduceMotion), value: isPressed)
         // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled

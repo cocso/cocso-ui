@@ -262,11 +262,14 @@ final class ComponentRenderTests: XCTestCase {
         // A transparent corner means the rows are not where this thinks they
         // are, and every comparison below would be against nothing.
         XCTAssertEqual(background.alphaComponent, 1, accuracy: 0.01, "표면이 그려지지 않았다")
+        // A button's row is the 44 of the touch target, with the 36-tall pill
+        // centred in it; 12 between rows.
+        let row: CGFloat = CCTouchTarget.minimum + 12
         let points: [(String, CGFloat, CGFloat)] = [
-            ("outline button", 48, 12 + 18),
-            ("ghost button", 48, 12 + 48 + 18),
-            ("error-ghost button", 48, 12 + 48 * 2 + 18),
-            ("outline badge", 180, 12 + 48 * 3 + 10),
+            ("outline button", 48, 12 + 22),
+            ("ghost button", 48, 12 + 22 + row),
+            ("error-ghost button", 48, 12 + 22 + row * 2),
+            ("outline badge", 180, 12 + row * 3 + 10),
         ]
         for (name, x, y) in points {
             guard let inside = pixel(x, y) else { return XCTFail("\(name) 픽셀을 읽지 못했다") }

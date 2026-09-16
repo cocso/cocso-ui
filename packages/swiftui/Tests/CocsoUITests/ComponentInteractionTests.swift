@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 import ViewInspector
 import XCTest
@@ -17,6 +18,22 @@ final class ComponentInteractionTests: XCTestCase {
         let view = CCButton("Save") { taps += 1 }
         try view.inspect().find(ViewType.Button.self).tap()
         XCTAssertEqual(taps, 1)
+    }
+
+    func testEveryButtonSizeIsATargetAFingerCanHit() {
+        // The recipe draws the pill at 28 to 48 points by size, and the four
+        // under 44 were a target the HIG says a finger misses. The row grows
+        // rather than the pill, so what is measured here is the box the button
+        // lays out — `fittingSize` is what a parent gives it.
+        for size in CCButtonSize.allCases {
+            let view = CCButton("Tap", size: size) {}.frame(width: 320)
+            let controller = NSHostingController(rootView: view)
+            let height = controller.view.fittingSize.height
+            XCTAssertGreaterThanOrEqual(
+                height, CCTouchTarget.minimum,
+                "\(size) lays out a \(height)-point target"
+            )
+        }
     }
 
     func testLoadingButtonSwallowsTheTap() throws {

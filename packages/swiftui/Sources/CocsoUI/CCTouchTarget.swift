@@ -10,14 +10,18 @@ import SwiftUI
 
  The visual box keeps the size the recipe gives it; only the hit area grows.
  */
-enum CCTouchTarget {
-    static let minimum: CGFloat = 44
+public enum CCTouchTarget {
+    public static let minimum: CGFloat = 44
 }
 
 extension View {
     /// Expands the tappable area to the platform minimum without resizing the
     /// drawn control.
-    func ccMinimumTouchTarget() -> some View {
+    ///
+    /// Public because an app builds controls the design system does not have —
+    /// an empty state's action, a row that is its own button — and the floor
+    /// they have to clear is this one, not a number they pick again.
+    public func ccMinimumTouchTarget() -> some View {
         frame(
             minWidth: CCTouchTarget.minimum,
             minHeight: CCTouchTarget.minimum
