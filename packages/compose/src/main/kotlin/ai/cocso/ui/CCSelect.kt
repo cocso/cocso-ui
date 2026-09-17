@@ -103,24 +103,32 @@ fun CCSelect(
         verticalArrangement = Arrangement.spacedBy(CocsoTokens.Spacing.s3),
     ) {
         CCTypography(label, type = CCTypographyType.body, size = CCTypographySize.small)
-        Box {
+        // Two boxes, as CCButton: the outer one is the target — 48dp tall, the
+        // one that is clicked, focused and pressed — and the field is drawn at
+        // the recipe's height in the middle of it. See CCTouchTarget.
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .widthIn(min = style.minWidth ?: 0.dp)
+                .ccMinimumTouchTarget()
+                .onFocusChanged { isFocused = it.isFocused }
+                .ccPressFeedback(interactionSource)
+                .clickable(
+                    enabled = enabled,
+                    interactionSource = interactionSource,
+                    indication = null,
+                    role = Role.DropdownList,
+                    onClick = { expanded = true },
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .widthIn(min = style.minWidth ?: 0.dp)
                     .height(style.height ?: 36.dp)
-                    .onFocusChanged { isFocused = it.isFocused }
-                    .ccPressFeedback(interactionSource)
                     .clip(shape)
                     .background(CocsoTokens.Color.surfacePrimary())
                     .border(borderWidth, borderColor, shape)
-                    .clickable(
-                        enabled = enabled,
-                        interactionSource = interactionSource,
-                        indication = null,
-                        role = Role.DropdownList,
-                        onClick = { expanded = true },
-                    )
                     // The recipe's right inset already leaves room for the glyph.
                     .padding(
                         start = style.paddingLeft ?: 12.dp,

@@ -12,6 +12,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -87,11 +88,11 @@ fun CCDialogPanel(
             CCTypography(title, type = CCTypographyType.heading, size = CCTypographySize.small)
             Spacer(Modifier.weight(1f))
             if (onDismiss != null) {
-                // The web's `DialogClose`: a 14dp cross, named for a screen reader.
-                Icon(
-                    imageVector = Icons.Filled.Close,
-                    contentDescription = CCStrings.close(),
-                    tint = CocsoTokens.Color.textSecondary(),
+                // The web's `DialogClose`: a 14dp cross, named for a screen reader,
+                // centred in its target — see CCTouchTarget. With the floor on
+                // the icon itself the vector was scaled to fill the 48dp target
+                // and the cross drew at twice the web's size.
+                Box(
                     modifier = Modifier
                         .ccPressFeedback(interactionSource)
                         .clickable(
@@ -101,7 +102,15 @@ fun CCDialogPanel(
                             onClick = onDismiss,
                         )
                         .ccMinimumTouchTarget(),
-                )
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = CCStrings.close(),
+                        tint = CocsoTokens.Color.textSecondary(),
+                        modifier = Modifier.size(14.dp),
+                    )
+                }
             }
         }
         if (message != null) {

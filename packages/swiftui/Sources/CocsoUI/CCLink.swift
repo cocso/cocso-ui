@@ -38,8 +38,10 @@ public struct CCLink: View {
                 // touch's hover. No scale: inline text in a paragraph would
                 // shift the line around it.
                 .opacity(isPressed ? CCMotion.pressedOpacity : 1)
-                .ccMinimumTouchTarget()
+                // The ring is on the text, as the web's is; the target grows
+                // around both.
                 .ccFocusRing(isFocused, in: RoundedRectangle(cornerRadius: CocsoTokens.Radius.r1))
+                .ccMinimumTouchTarget()
         }
         .buttonStyle(.plain)
         .focused($isFocused)

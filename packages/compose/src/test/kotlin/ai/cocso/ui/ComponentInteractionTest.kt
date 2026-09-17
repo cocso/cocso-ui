@@ -13,7 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertHeightIsAtLeast
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsSelected
@@ -79,6 +82,57 @@ class ComponentInteractionTest {
             click(Offset(centerX, 1f))
         }
         assertEquals(1, clicks)
+    }
+
+    @Test
+    // Tall enough that nothing is laid out below the screen, where a node
+    // measures zero high and would read as a failure of its own.
+    @Config(qualifiers = "w360dp-h3200dp")
+    fun everyClickableIsATargetAFingerCanHit() {
+        // Not per component but per clickable node, so a control added later is
+        // measured without anyone listing it. Three were quietly failing a floor
+        // they all appeared to apply: pagination's came after `size(32)`, where a
+        // minimum does nothing, and select had none. See CCTouchTarget.
+        composeRule.setContent {
+            Column {
+                CCButton(title = "Button", onClick = {}, size = CCButtonSize.xSmall)
+                CCCheckbox(label = "Checkbox", status = CCCheckboxStatus.off, onChange = {})
+                CCSwitch(label = "Switch", checked = false, onChange = {})
+                CCRadioGroup(label = "Radio", options = listOf(CCRadioOption("a", "A")), selection = "a", onSelectionChange = {})
+                CCSelect(label = "Select", options = listOf(CCSelectOption("a", "A")), selection = "a", onSelectionChange = {})
+                CCInput(label = "Input", value = "", onValueChange = {}, isSecure = true)
+                CCLink(title = "Link", onClick = {})
+                CCBreadcrumb(items = listOf(CCBreadcrumbItem("h", "Home"), CCBreadcrumbItem("x", "Here")), onSelect = {})
+                CCPagination(page = 2, totalPages = 3, onChange = {})
+                CCAlert(title = "Alert", onClose = {})
+                CCDialogPanel(title = "Dialog", onDismiss = {}) {}
+            }
+        }
+        val density = composeRule.density.density
+        val floor = CCTouchTarget.minimum.value
+        val showPassword = androidx.test.core.app.ApplicationProvider
+            .getApplicationContext<android.content.Context>()
+            .getString(R.string.cc_show_password)
+        val nodes = composeRule.onAllNodes(hasClickAction()).fetchSemanticsNodes()
+        assertTrue("found only ${nodes.size} clickables", nodes.size >= 14)
+        val short = nodes.mapNotNull { node ->
+            val width = node.size.width / density
+            val height = node.size.height / density
+            val name = node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.ContentDescription)?.joinToString()
+                ?: node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Text)?.joinToString()
+                ?: node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.EditableText)?.text
+            when {
+                // The text field is focused by the field it sits in, not by
+                // its own line of text.
+                node.config.contains(SemanticsActions.SetText) -> null
+                // The reveal button lives inside the 36dp field and cannot be
+                // taller than it; it is 48 wide.
+                name == showPassword -> if (width >= floor) null else "$name ${width}x$height"
+                width >= floor && height >= floor -> null
+                else -> "$name ${width}x$height"
+            }
+        }
+        assertEquals("clickables under ${floor}dp", emptyList<String>(), short)
     }
 
     @Test
@@ -155,6 +209,10 @@ class ComponentInteractionTest {
     }
 
     @Test
+    // Nine 48dp targets are 432dp wide — wider than the default test screen, and
+    // a tap on a target laid out past its edge lands on a neighbour. See the
+    // width note on CCPagination.
+    @Config(qualifiers = "w480dp-h800dp")
     fun paginationMovesAndTruncates() {
         var page = 3
         composeRule.setContent { CCPagination(page = page, totalPages = 10, onChange = { page = it }) }

@@ -88,23 +88,27 @@ public struct CCSelect: View {
                 .padding(.trailing, (style.paddingRight ?? 38) - (style.iconRight ?? 12) - 12)
                 .frame(minWidth: style.minWidth, maxWidth: .infinity)
                 .frame(height: style.height ?? 36)
-                .contentShape(Rectangle())
+                // The field is drawn here, inside the label, so the floor below
+                // grows the row around it rather than the field itself — and so
+                // the strip it adds is the menu's to tap, which it is not when
+                // applied outside (see `ccMinimumTouchTarget`).
+                .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
+                .clipShape(RoundedRectangle(cornerRadius: radius))
+                .overlay(
+                    RoundedRectangle(cornerRadius: radius)
+                        .strokeBorder(
+                            isFocused
+                                ? CocsoTokens.Color.focusRing(colorScheme, brand: brand)
+                                : style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
+                            lineWidth: isFocused ? 2 : 1
+                        )
+                        .animation(CCMotion.colour(reduced: reduceMotion), value: isFocused)
+                )
+                .ccMinimumTouchTarget()
             }
             .menuStyle(.button)
             .buttonStyle(CCPressStyle())
             .focused($isFocused)
-            .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
-            .clipShape(RoundedRectangle(cornerRadius: radius))
-            .overlay(
-                RoundedRectangle(cornerRadius: radius)
-                    .strokeBorder(
-                        isFocused
-                            ? CocsoTokens.Color.focusRing(colorScheme, brand: brand)
-                            : style.borderColor ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
-                        lineWidth: isFocused ? 2 : 1
-                    )
-                    .animation(CCMotion.colour(reduced: reduceMotion), value: isFocused)
-            )
             // The chosen title cross-fades in rather than swapping.
             .animation(CCMotion.colour(reduced: reduceMotion), value: selection)
         }

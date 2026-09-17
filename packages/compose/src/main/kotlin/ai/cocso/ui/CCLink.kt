@@ -50,7 +50,6 @@ fun CCLink(
         modifier = modifier
             .alpha(dim * pressed)
             .onFocusChanged { isFocused = it.isFocused }
-            .ccFocusRing(isFocused, RoundedCornerShape(CocsoTokens.Radius.r1))
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick)
             .ccMinimumTouchTarget(),
         contentAlignment = Alignment.Center,
@@ -60,6 +59,8 @@ fun CCLink(
             // `null` is `currentColor`: the surrounding ink.
             color = style.color ?: LocalContentColor.current,
             textDecoration = if (variant == CCLinkVariant.inline) TextDecoration.Underline else TextDecoration.None,
+            // The ring is on the text, as the web's is; the target grows around it.
+            modifier = Modifier.ccFocusRing(isFocused, RoundedCornerShape(CocsoTokens.Radius.r1)),
         )
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -107,16 +108,23 @@ fun CCAlert(
             }
         }
         if (onClose != null) {
-            Icon(
-                imageVector = Icons.Filled.Close,
-                contentDescription = CCStrings.close(),
-                tint = ink,
+            // The target is a box the glyph is centred in — see CCTouchTarget.
+            // With the floor on the icon itself the vector was scaled to fill
+            // it and the cross drew three times its size.
+            Box(
                 modifier = Modifier
                     .ccPressFeedback(interactionSource)
                     .clickable(interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClose)
-                    .ccMinimumTouchTarget()
-                    .size(16.dp),
-            )
+                    .ccMinimumTouchTarget(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = CCStrings.close(),
+                    tint = ink,
+                    modifier = Modifier.size(16.dp),
+                )
+            }
         }
     }
 }

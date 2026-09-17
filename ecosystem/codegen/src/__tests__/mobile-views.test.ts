@@ -322,6 +322,31 @@ describe("Views that animate honour reduced motion and use the motion tokens", (
  * default label parameter. Labels a caller passes are the caller's.
  */
 /**
+ * A SwiftUI touch floor sits inside the button's label.
+ *
+ * A `Button` or `Menu` is tapped where its label says it can be. The floor
+ * applied after `.buttonStyle(…)` still lays the button out at 44 points, so
+ * every size check passes — and leaves the added strip dead. Measured on an
+ * iOS 26 simulator: a tap 3 points inside the 44-point box did nothing with the
+ * floor outside and fired with it inside. `CCAlert`, `CCDialog` and `CCInput`
+ * had it outside. Offscreen tests cannot tap, so this reads the order.
+ */
+describe("SwiftUI touch floors sit inside the label", () => {
+  // `.buttonStyle(…)` / `.menuStyle(…)`, then only more modifiers (and
+  // comments), then the floor: the floor was applied to the finished button.
+  const FLOOR_AFTER_STYLE =
+    /\.(?:buttonStyle|menuStyle)\([^\n]*\)\n(?:[ \t]*(?:\.|\/\/|\)|\}\s*\)?$)[^\n]*\n)*?[ \t]*\.ccMinimumTouchTarget\(\)/gm;
+
+  it.each(swift)("%s", (name) => {
+    const source = readFileSync(path.join(SWIFT_DIR, `${name}.swift`), "utf-8");
+    expect(
+      [...source.matchAll(FLOOR_AFTER_STYLE)].map(([m]) => m.trim().split("\n")[0]),
+      `${name} applies ccMinimumTouchTarget() to a finished button`
+    ).toEqual([]);
+  });
+});
+
+/**
  * A recipe that can ask for a pill gets one with circular ends.
  *
  * `radius-full` is a length (1000) and `100%` arrives as a flag; either way the
