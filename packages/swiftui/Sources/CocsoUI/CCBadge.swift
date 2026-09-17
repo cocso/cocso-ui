@@ -38,7 +38,7 @@ public struct CCBadge: View {
         )
         Text(text)
             // The recipe's weight — 500, the web's. This drew 600 by hand.
-            .font(.system(size: style.fontSize ?? 12, weight: style.fontWeight ?? .regular))
+            .ccFont(size: style.fontSize ?? 12, weight: style.fontWeight ?? .regular)
             // A count that changes rolls its digits; a variant that changes
             // recolours. Both on the web's colour curve.
             .contentTransition(.numericText())

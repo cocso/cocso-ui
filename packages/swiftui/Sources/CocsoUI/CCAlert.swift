@@ -40,20 +40,20 @@ public struct CCAlert: View {
         // The web's `icon` before the text and `onClose` after it, both in the
         // alert's own ink.
         HStack(alignment: .top, spacing: CocsoTokens.Spacing.s5) {
-            icon?.font(.system(size: style.fontSize ?? 14, weight: .medium))
+            icon?.ccFont(size: style.fontSize ?? 14, weight: .medium)
             VStack(alignment: .leading, spacing: CocsoTokens.Spacing.s3) {
                 Text(title)
-                    .font(.system(size: style.fontSize ?? 14, weight: .semibold))
+                    .ccFont(size: style.fontSize ?? 14, weight: .semibold)
                 if let message {
                     Text(message)
-                        .font(.system(size: style.fontSize ?? 14))
+                        .ccFont(size: style.fontSize ?? 14)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             if let onClose {
                 Button(action: onClose) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 12, weight: .medium))
+                        .ccFont(size: 12, weight: .medium)
                         // Inside the label — see `ccMinimumTouchTarget`.
                         .ccMinimumTouchTarget()
                 }

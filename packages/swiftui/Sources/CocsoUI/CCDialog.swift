@@ -50,7 +50,7 @@ public struct CCDialogPanel<Actions: View>: View {
                     // The web's `DialogClose`: a 14pt cross, named for a screen reader.
                     Button(action: onDismiss) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 14, weight: .medium))
+                            .ccFont(size: 14, weight: .medium)
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                             // Inside the label — see `ccMinimumTouchTarget`.
                             .ccMinimumTouchTarget()

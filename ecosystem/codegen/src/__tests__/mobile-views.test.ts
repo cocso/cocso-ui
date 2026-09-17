@@ -322,6 +322,43 @@ describe("Views that animate honour reduced motion and use the motion tokens", (
  * default label parameter. Labels a caller passes are the caller's.
  */
 /**
+ * SwiftUI text follows Dynamic Type.
+ *
+ * `.font(.system(size:))` is a size in points that ignores the reader's setting,
+ * while Compose's `sp` follows it — the same label grew on Android and not on
+ * iOS. Views draw text through `ccFont`, which scales it (measured by
+ * `DynamicTypeTests` in a simulator, since macOS has no Dynamic Type); this keeps
+ * a fixed size from coming back. The exceptions draw text inside a shape that
+ * does not grow.
+ */
+describe("SwiftUI text follows Dynamic Type", () => {
+  const FIXED_FONT = /\.font\(\.system\(size:/g;
+  const FIXED_SHAPE: Record<string, string> = {
+    CCAvatar: "initials inside a fixed circle",
+    CCCheckbox: "the tick inside a fixed box",
+    CCTypography: "`ccFont` itself",
+  };
+  // Controls whose height holds a line of text: a floor, never a height.
+  const HOLDS_TEXT = ["CCButton", "CCInput", "CCSelect"];
+
+  it.each(swift)("%s", (name) => {
+    const source = readFileSync(path.join(SWIFT_DIR, `${name}.swift`), "utf-8");
+    const code = source.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
+    const fixed = [...code.matchAll(FIXED_FONT)].length;
+    if (name in FIXED_SHAPE) {
+      expect(fixed, `${name}: ${FIXED_SHAPE[name]}`).toBe(1);
+    } else {
+      expect(fixed, `${name} draws text at a fixed size`).toBe(0);
+    }
+    if (HOLDS_TEXT.includes(name)) {
+      expect(code, `${name} fixes the height of a control that holds text`).not.toMatch(
+        /\.frame\((?:width: [^,)]+, )?height:/
+      );
+    }
+  });
+});
+
+/**
  * A SwiftUI touch floor sits inside the button's label.
  *
  * A `Button` or `Menu` is tapped where its label says it can be. The floor

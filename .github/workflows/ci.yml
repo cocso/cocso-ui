@@ -278,3 +278,29 @@ jobs:
       - name: Build for iOS
         working-directory: packages/swiftui
         run: xcodebuild -scheme CocsoUI -destination 'generic/platform=iOS Simulator' -derivedDataPath .build/xcode build | grep -E "error:|BUILD (SUCCEEDED|FAILED)"
+
+      # Dynamic Type exists only on iOS — on macOS `@ScaledMetric` returns what it
+      # is given — so the suite that measures it runs in a simulator. The device
+      # is whichever iPhone the image has, not a name that the next image renames.
+      - name: Dynamic Type on iOS
+        working-directory: packages/swiftui
+        # A simulator that never finishes booting should fail the step, not
+        # hold the job.
+        timeout-minutes: 20
+        run: |
+          set -o pipefail
+          # An iPhone on the newest iOS runtime the image has — the one its
+          # Xcode ships with — rather than a name the next image renames.
+          # xcodebuild boots it.
+          DEVICE=$(xcrun simctl list devices available --json | python3 -c "
+          import json, re, sys
+          devices = json.load(sys.stdin)['devices']
+          def version(runtime):
+              return [int(n) for n in re.findall(r'iOS-(\\d+)-(\\d+)', runtime)[0]]
+          runtimes = sorted((r for r in devices if '.iOS-' in r), key=version, reverse=True)
+          print(next(d['udid'] for r in runtimes for d in devices[r] if d['name'].startswith('iPhone')))
+          ")
+          echo "Testing on $(xcrun simctl list devices | grep "$DEVICE")"
+          xcodebuild test -scheme CocsoUI -destination "id=$DEVICE" -derivedDataPath .build/xcode \
+            -only-testing:CocsoUITests/DynamicTypeTests \
+            | grep -E "error:|Test Case .*(passed|failed)|TEST (SUCCEEDED|FAILED)"

@@ -104,10 +104,10 @@ public struct CCButton: View {
                 HStack(spacing: CocsoTokens.Spacing.s4) {
                     // The recipe's weight — 500, the web's. The label had none
                     // and drew at the system's 400.
-                    prefix?.font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
+                    prefix?.ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
                     Text(title)
-                        .font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
-                    suffix?.font(.system(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular))
+                        .ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
+                    suffix?.ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
                 }
                 // The recipe pads the label inside the button as well as
                 // the button itself; dropping it made every button narrower
@@ -128,7 +128,10 @@ public struct CCButton: View {
             .animation(CCMotion.colour(reduced: reduceMotion), value: loading)
             .frame(maxWidth: .infinity, alignment: alignment)
             .padding(.horizontal, resolved.paddingInline ?? 0)
-            .frame(height: resolved.height)
+            // A floor, not a height: the label grows with Dynamic Type and the
+            // pill grows with it rather than clipping it. At the default size
+            // the label is shorter than every recipe height, so nothing moves.
+            .frame(minHeight: resolved.height)
             .foregroundStyle(
                 (isPressed ? resolved.fontColorPressed : nil)
                     ?? resolved.fontColor

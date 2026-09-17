@@ -50,14 +50,14 @@ public struct CCInput: View {
                     // 같은 이유로 직접 그린다.
                     if text.isEmpty && !placeholder.isEmpty {
                         Text(placeholder)
-                            .font(.system(size: style.fontSize ?? 14))
+                            .ccFont(size: style.fontSize ?? 14)
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                     }
                     field
                         // The system's bezel drew a box inside the box — visible
                         // on macOS renders, and not the web's single border.
                         .textFieldStyle(.plain)
-                        .font(.system(size: style.fontSize ?? 14))
+                        .ccFont(size: style.fontSize ?? 14)
                         .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                         .focused($isFocused)
                 }
@@ -79,7 +79,8 @@ public struct CCInput: View {
                 }
             }
             .padding(.horizontal, style.paddingX ?? 12)
-            .frame(height: style.height ?? 36)
+            // A floor, not a height — the value grows with Dynamic Type.
+            .frame(minHeight: style.height ?? 36)
             .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 4))
             .overlay(
@@ -96,14 +97,14 @@ public struct CCInput: View {
             // The web's `description`: help under the field, in the quieter ink.
             if let description {
                 Text(description)
-                    .font(.system(size: 12))
+                    .ccFont(size: 12)
                     .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
             }
             if let errorMessage {
                 // The text level, not the fill level: `feedback-danger` is
                 // 4.18:1 on a card in the light theme.
                 Text(errorMessage)
-                    .font(.system(size: 12))
+                    .ccFont(size: 12)
                     .foregroundStyle(CocsoTokens.Color.feedbackDangerText(colorScheme, brand: brand))
                     .transition(.move(edge: .top).combined(with: .opacity))
             }
