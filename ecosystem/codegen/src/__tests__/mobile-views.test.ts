@@ -130,6 +130,7 @@ describe("Views take their values from the generated styles", () => {
       "CCMotion",
       "CCPress",
       "CCShadow",
+      "CCShape",
       "CCStrings",
       "CCTouchTarget",
     ]);
@@ -320,6 +321,45 @@ describe("Views that animate honour reduced motion and use the motion tokens", (
  * string literal a user could hear in an accessibility label, value, state or
  * default label parameter. Labels a caller passes are the caller's.
  */
+/**
+ * A recipe that can ask for a pill gets one with circular ends.
+ *
+ * `radius-full` is a length (1000) and `100%` arrives as a flag; either way the
+ * SwiftUI view draws a pill. Drawn as `Capsule()` or as a `RoundedRectangle`
+ * with the recipe's radius, the ends are `.continuous` curves, which the web
+ * does not draw and which `CALayer.render(in:)` — the renderer the app's
+ * snapshot tests use — strokes with a short vertical bar at each end. Every
+ * outlined rounded badge in the app's goldens carried the bars. The views go
+ * through `CCRoundedShape`, which is circular and clamps the radius; this keeps
+ * a later edit from reaching for `Capsule()` again.
+ */
+describe("SwiftUI pills have circular ends", () => {
+  const RECIPES_DIR = path.join(repoRoot, "packages/recipe/src/recipes");
+  const pillRecipes = readdirSync(RECIPES_DIR)
+    .filter((f) => f.endsWith(".recipe.ts"))
+    .filter((f) => /radius-full|"100%"/.test(readFileSync(path.join(RECIPES_DIR, f), "utf-8")))
+    .map((f) => {
+      const name = f.replace(".recipe.ts", "");
+      return `CC${name[0].toUpperCase()}${name.slice(1)}`;
+    });
+
+  it("finds the recipes that can ask for a pill", () => {
+    expect(pillRecipes).toEqual(expect.arrayContaining(["CCBadge", "CCButton"]));
+  });
+
+  it.each(swift)("%s draws no continuous capsule", (name) => {
+    const source = readFileSync(path.join(SWIFT_DIR, `${name}.swift`), "utf-8");
+    // Comments may name the type; code may not.
+    const code = source.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
+    expect(code, `${name} uses Capsule()`).not.toMatch(/\bCapsule\(/);
+    if (pillRecipes.includes(name)) {
+      expect(code, `${name} builds a RoundedRectangle from the recipe's radius`).not.toMatch(
+        /RoundedRectangle\(cornerRadius: (?:style|resolved)\.borderRadius/
+      );
+    }
+  });
+});
+
 describe("Views speak through CCStrings, not literals", () => {
   // A word: letters inside the quotes, not an empty default and not an
   // interpolated number (`"\(Int(fraction * 100))%"`).

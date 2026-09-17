@@ -44,7 +44,7 @@ public struct CCAvatar: View {
         .clipShape(
             style.borderRadiusFull == true
                 ? AnyShape(Circle())
-                : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
+                : AnyShape(CCRoundedShape(radius: style.borderRadius ?? 0))
         )
         // The image carries no meaning the label does not; naming the element
         // once keeps a screen reader from announcing an unlabelled image.

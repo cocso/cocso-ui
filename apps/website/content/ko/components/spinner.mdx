@@ -33,7 +33,7 @@ description: 진행 중인 상태를 전달하는 애니메이션 로딩 인디�
 
 <Section>
   <Section.Title>Variant</Section.Title>
-  <Section.Text>일곱 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 어두운 배경에 스피너를 표시할 때는 `white`를 사용하세요.</Section.Text>
+  <Section.Text>여덟 가지 색상 변형이 시맨틱 의미에 매핑됩니다. 사진이나 어두운 스크림 위에는 `white` 를 쓰세요 — 두 테마 모두 흰색입니다. `on-primary` 는 primary 채움 위의 잉크로, 테마에 따라 채움을 따라갑니다. 로딩 중인 primary 버튼이 이것을 씁니다.</Section.Text>
   <ComponentExample name="spinner-variants" />
 </Section>
 
@@ -45,7 +45,7 @@ description: 진행 중인 상태를 전달하는 애니메이션 로딩 인디�
   <PropsTable
     data={[
       { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "스피너의 지름을 제어합니다. 인라인 인디케이터(예: 버튼 내부)에는 `small`을, 전체 섹션 로딩 상태에는 `large`를 사용하세요." },
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white"', default: '"primary"', description: "스피너 블레이드 색상을 제어합니다. 어두운 배경에서 충분한 대비를 위해 `white`를 사용하세요." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white" | "on-primary"', default: '"primary"', description: "스피너 블레이드 색상을 제어합니다. `white` 는 두 테마 모두 흰색이고, `on-primary` 는 primary 채움을 따라갑니다." },
       { name: "label", type: "string", default: '"Loading"', description: "`aria-label`을 통해 스크린 리더에 전달되는 텍스트입니다. 기본값은 `\"Loading\"`입니다. 주변 콘텐츠만으로 로딩 컨텍스트가 명확하지 않을 때는 구체적인 메시지를 제공하세요." },
     ]}
   />

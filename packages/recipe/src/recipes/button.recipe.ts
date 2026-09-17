@@ -56,6 +56,24 @@ export const buttonRecipe = defineRecipe({
       "error-ghost": {
         root: { bgColor: "transparent", fontColor: "feedback-danger-text" },
       },
+      // The entry to something that cannot be undone: `error-ghost` with an
+      // edge, so it reads as a control before it reads as a warning, and the
+      // red fill stays for the confirmation that follows. The app drew this
+      // border itself, and once buttons grew a touch target it could no longer
+      // find the pill to draw it on — the edge belongs to the recipe, where the
+      // views draw it on the pill and not the row.
+      "error-outline": {
+        root: {
+          bgColor: "transparent",
+          fontColor: "feedback-danger-text",
+          border: {
+            _type: "border" as const,
+            width: 1,
+            style: "solid" as const,
+            color: "feedback-danger-border" as const,
+          },
+        },
+      },
       // Glass: the tint of a pane over whatever is beneath, with the ink of the
       // page. For the floating controls — a composer's actions, a pill over a
       // photo. The web and SwiftUI blur what is beneath; Compose composites the
@@ -171,6 +189,9 @@ export const buttonRecipe = defineRecipe({
         "error-ghost": {
           root: { bgColor: "interactive-danger-subtle-hover" },
         },
+        "error-outline": {
+          root: { bgColor: "interactive-danger-subtle-hover" },
+        },
         glass: { root: { bgColor: "surface-glass-active" } },
       },
     },
@@ -196,6 +217,9 @@ export const buttonRecipe = defineRecipe({
         info: { root: { bgColor: "interactive-info-active" } },
         neutral: { root: { bgColor: "interactive-neutral-active" } },
         "error-ghost": {
+          root: { bgColor: "interactive-danger-subtle-active" },
+        },
+        "error-outline": {
           root: { bgColor: "interactive-danger-subtle-active" },
         },
         glass: { root: { bgColor: "surface-glass-active" } },

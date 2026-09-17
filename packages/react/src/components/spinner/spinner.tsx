@@ -10,7 +10,8 @@ export type SpinnerVariant =
   | "error"
   | "warning"
   | "info"
-  | "white";
+  | "white"
+  | "on-primary";
 export type SpinnerSize = "large" | "medium" | "small";
 
 import type { ComponentProps, CSSProperties } from "react";

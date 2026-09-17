@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,11 +60,7 @@ fun CCButton(
     suffix: ImageVector? = null,
 ) {
     val style = cCButtonStyle(variant = variant, size = size, shape = shape, align = align)
-    val buttonShape = if (style.borderRadiusFull == true) {
-        CircleShape
-    } else {
-        RoundedCornerShape(style.borderRadius ?: 0.dp)
-    }
+    val buttonShape = ccRoundedShape(style.borderRadius, style.borderRadiusFull)
     val interactionSource = remember { MutableInteractionSource() }
     // 웹의 `.button:focus-visible` 과 같은 링 (2.4.7).
     var isFocused by remember { mutableStateOf(false) }
@@ -229,8 +223,12 @@ fun CCButton(
     }
 }
 
-/** The web's `getButtonSpinnerVariant`: filled variants take the white spinner. */
+/** The web's `getButtonSpinnerVariant`: the label's colour, as a spinner. */
 internal fun buttonSpinnerVariant(variant: CCButtonVariant): CCSpinnerVariant = when (variant) {
-    CCButtonVariant.primary, CCButtonVariant.success, CCButtonVariant.error, CCButtonVariant.info -> CCSpinnerVariant.white
+    // The spinner stands where the label was, so it wears the label's colour:
+    // primary's follows its fill between themes; success, error and info are
+    // white in both.
+    CCButtonVariant.primary -> CCSpinnerVariant.onPrimary
+    CCButtonVariant.success, CCButtonVariant.error, CCButtonVariant.info -> CCSpinnerVariant.white
     else -> CCSpinnerVariant.secondary
 }

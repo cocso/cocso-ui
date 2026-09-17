@@ -13,6 +13,7 @@ export default function ButtonVariants() {
       <Button variant="info">Info</Button>
       <Button variant="neutral">Neutral</Button>
       <Button variant="error-ghost">Error Ghost</Button>
+      <Button variant="error-outline">Error Outline</Button>
     </div>
   );
 }

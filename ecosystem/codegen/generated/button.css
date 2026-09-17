@@ -77,6 +77,14 @@
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
 }
 
+.cocso-button:where(.cocso-button--variant-error-outline) {
+  --cocso-button-bg-color: var(--cocso-color-transparent);
+  --cocso-button-font-color: var(--cocso-color-feedback-danger-text);
+  --cocso-button-border: 1px solid var(--cocso-color-feedback-danger-border);
+  --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-subtle-hover);
+  --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
+}
+
 .cocso-button:where(.cocso-button--variant-glass) {
   --cocso-button-bg-color: var(--cocso-color-surface-glass);
   --cocso-button-font-color: var(--cocso-color-text-primary);

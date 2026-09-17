@@ -184,7 +184,7 @@ public struct CCGlassBar<Content: View>: View {
             .ignoresSafeArea()
         VStack(spacing: 16) {
             CCCard(variant: .glass) { Text("Glass card") }
-            Text("Pill").padding(.horizontal, 16).padding(.vertical, 8).ccGlass(in: Capsule())
+            Text("Pill").padding(.horizontal, 16).padding(.vertical, 8).ccGlass(in: CCRoundedShape.pill)
         }
         .padding()
         CCGlassBar {

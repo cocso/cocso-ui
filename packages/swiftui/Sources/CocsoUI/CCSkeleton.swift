@@ -33,7 +33,7 @@ public struct CCSkeleton: View {
         // no length to travel as; before it arrived as a flag this drew a square.
         let shape = style.borderRadiusFull == true
             ? AnyShape(Circle())
-            : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
+            : AnyShape(CCRoundedShape(radius: style.borderRadius ?? 0))
         return shape
             .fill(style.bgColor ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand))
             .frame(width: style.width, height: style.height ?? 16)

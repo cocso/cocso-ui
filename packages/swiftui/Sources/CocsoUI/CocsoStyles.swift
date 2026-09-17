@@ -295,6 +295,7 @@ public enum CCButtonVariant: String, CaseIterable, Sendable {
     case info
     case neutral
     case errorGhost
+    case errorOutline
     case glass
 }
 
@@ -378,6 +379,9 @@ public struct CCButtonStyle: Equatable, Sendable {
         if variant == .errorGhost {
             style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme, brand: brand)
         }
+        if variant == .errorOutline {
+            style.bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive(scheme, brand: brand)
+        }
         if variant == .glass {
             style.bgColorPressed = CocsoTokens.Color.surfaceGlassActive(scheme, brand: brand)
         }
@@ -422,6 +426,12 @@ public struct CCButtonStyle: Equatable, Sendable {
         if variant == .errorGhost {
             style.bgColor = SwiftUI.Color.clear
             style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
+        }
+        if variant == .errorOutline {
+            style.bgColor = SwiftUI.Color.clear
+            style.fontColor = CocsoTokens.Color.feedbackDangerText(scheme, brand: brand)
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.feedbackDangerBorder(scheme, brand: brand)
         }
         if variant == .glass {
             style.bgColor = CocsoTokens.Color.surfaceGlass(scheme, brand: brand)
@@ -1022,6 +1032,7 @@ public enum CCSpinnerVariant: String, CaseIterable, Sendable {
     case warning
     case info
     case white
+    case onPrimary
 }
 
 public enum CCSpinnerSize: String, CaseIterable, Sendable {
@@ -1066,7 +1077,10 @@ public struct CCSpinnerStyle: Equatable, Sendable {
             style.bladeColor = CocsoTokens.Color.feedbackInfo(scheme, brand: brand)
         }
         if variant == .white {
-            style.bladeColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
+            style.bladeColor = CocsoTokens.Color.white
+        }
+        if variant == .onPrimary {
+            style.bladeColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
         }
         if size == .large {
             style.blades = 10

@@ -253,6 +253,67 @@ const BORDER_TOKENS = [
   "border-strong",
 ] as const;
 
+/**
+ * The spinner a loading button shows where its label was.
+ *
+ * `white` was `surface-primary`, which is near-black in the dark theme: a
+ * spinner documented for dark backgrounds vanished on them, and the red, green
+ * and blue buttons — white labels in both themes — spun a dark one. Contrast
+ * alone would not have said so (dark blades on `danger-500` clear 3:1), so the
+ * first check is the name: white is white. The second is the table the three
+ * platforms' `getButtonSpinnerVariant` mirror, measured as a non-text graphic
+ * (WCAG 1.4.11) on each fill in both themes.
+ */
+const NON_TEXT = 3;
+const BUTTON_SPINNER = {
+  primary: "on-primary",
+  success: "white",
+  error: "white",
+  info: "white",
+} as const;
+
+describe("A loading button's spinner reads on its fill", () => {
+  const spinnerVariants = spinnerRecipe.variants.variant as Record<
+    string,
+    { root: SlotStyles }
+  >;
+  const buttonVariants = buttonRecipe.variants.variant as Record<
+    string,
+    { root: SlotStyles }
+  >;
+
+  it.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("white is white in the %s theme", (_theme, aliases) => {
+    const blade = spinnerVariants.white.root.bladeColor as string;
+    expect(resolve(blade, aliases)?.toLowerCase()).toBe("#ffffff");
+  });
+
+  describe.each([
+    ["light", LIGHT_ALIASES],
+    ["dark", DARK_ALIASES],
+  ])("%s theme", (_theme, aliases) => {
+    it.each(
+      Object.entries(BUTTON_SPINNER)
+    )("%s takes a spinner that clears 3:1", (button, spinner) => {
+      const fill = resolve(
+        buttonVariants[button].root.bgColor as string,
+        aliases
+      );
+      const blade = resolve(
+        spinnerVariants[spinner].root.bladeColor as string,
+        aliases
+      );
+      expect(fill).not.toBeNull();
+      expect(blade).not.toBeNull();
+      expect(contrast(fill as string, blade as string)).toBeGreaterThanOrEqual(
+        NON_TEXT
+      );
+    });
+  });
+});
+
 describe("Borders are distinguishable from the surfaces they sit on", () => {
   describe.each([
     ["light", LIGHT_ALIASES],
