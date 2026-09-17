@@ -1,4 +1,6 @@
+#if canImport(AppKit)
 import AppKit
+#endif
 import SwiftUI
 import ViewInspector
 import XCTest
@@ -20,6 +22,8 @@ final class ComponentInteractionTests: XCTestCase {
         XCTAssertEqual(taps, 1)
     }
 
+    // Measured through AppKit hosting; `DynamicTypeTests` measures on iOS.
+    #if canImport(AppKit)
     func testEveryButtonSizeIsATargetAFingerCanHit() {
         // The recipe draws the pill at 28 to 48 points by size, and the four
         // under 44 were a target the HIG says a finger misses. The row grows
@@ -57,6 +61,7 @@ final class ComponentInteractionTests: XCTestCase {
             )
         }
     }
+    #endif
 
     func testLoadingButtonSwallowsTheTap() throws {
         var taps = 0

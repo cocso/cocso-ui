@@ -69,7 +69,7 @@ public struct CCSelect: View {
             } label: {
                 HStack(spacing: 0) {
                     Text(chosen?.title ?? placeholder)
-                        .font(.system(size: style.fontSize ?? 14))
+                        .ccFont(size: style.fontSize ?? 14)
                         .foregroundStyle(
                             chosen == nil
                                 ? CocsoTokens.Color.textSecondary(colorScheme, brand: brand)
@@ -79,7 +79,7 @@ public struct CCSelect: View {
                     Spacer(minLength: CocsoTokens.Spacing.s5)
                     // The web's `SelectorIcon`, at the recipe's `iconRight`.
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 12, weight: .medium))
+                        .ccFont(size: 12, weight: .medium)
                         .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                         .padding(.trailing, style.iconRight ?? 12)
                 }
@@ -87,7 +87,8 @@ public struct CCSelect: View {
                 // The recipe's right inset already leaves room for the glyph.
                 .padding(.trailing, (style.paddingRight ?? 38) - (style.iconRight ?? 12) - 12)
                 .frame(minWidth: style.minWidth, maxWidth: .infinity)
-                .frame(height: style.height ?? 36)
+                // A floor, not a height — the title grows with Dynamic Type.
+                .frame(minHeight: style.height ?? 36)
                 // The field is drawn here, inside the label, so the floor below
                 // grows the row around it rather than the field itself — and so
                 // the strip it adds is the menu's to tap, which it is not when

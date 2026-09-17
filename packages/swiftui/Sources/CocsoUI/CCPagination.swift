@@ -93,7 +93,7 @@ public struct CCPagination: View {
         )
         Button(action: { onChange(number) }) {
             Text("\(number)")
-                .font(.system(size: style.fontSize ?? 14, weight: style.fontWeight ?? .regular))
+                .ccFont(size: style.fontSize ?? 14, weight: style.fontWeight ?? .regular)
                 .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                 .frame(width: style.width ?? 32, height: style.height ?? 32)
                 .background(style.bgColor ?? .clear)
@@ -118,7 +118,7 @@ public struct CCPagination: View {
         let style = CCPaginationStyle.resolve(pageState: enabled ? .inactive : .disabled, scheme: colorScheme, brand: brand)
         Button(action: action) {
             Image(systemName: glyph)
-                .font(.system(size: style.fontSize ?? 14, weight: .medium))
+                .ccFont(size: style.fontSize ?? 14, weight: .medium)
                 .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                 .frame(width: style.width ?? 32, height: style.height ?? 32)
                 .ccFocusRing(focused == focus, in: RoundedRectangle(cornerRadius: style.borderRadius ?? 8))

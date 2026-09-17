@@ -47,19 +47,19 @@ public struct CCBreadcrumb: View {
             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                 if index == items.count - 1 {
                     Text(item.title)
-                        .font(.system(size: fontSize, weight: .medium))
+                        .ccFont(size: fontSize, weight: .medium)
                         .foregroundStyle(CocsoTokens.Color.textPrimary(colorScheme, brand: brand))
                 } else {
                     Button(action: { onSelect(item) }) {
                         Text(item.title)
-                            .font(.system(size: fontSize))
+                            .ccFont(size: fontSize)
                             .foregroundStyle(style.fontColor ?? CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
                             .ccMinimumTouchTarget()
                     }
                     .buttonStyle(CCPressStyle())
                     .accessibilityAddTraits(.isLink)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: fontSize * 0.75, weight: .medium))
+                        .ccFont(size: fontSize * 0.75, weight: .medium)
                         .foregroundStyle(CocsoTokens.Color.textTertiary(colorScheme, brand: brand))
                         .accessibilityHidden(true)
                 }
