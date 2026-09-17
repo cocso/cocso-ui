@@ -33,7 +33,7 @@ description: An animated loading indicator that communicates an in-progress stat
 
 <Section>
   <Section.Title>Variant</Section.Title>
-  <Section.Text>Seven color variants map to semantic meanings. Use `white` when displaying the spinner on a dark background.</Section.Text>
+  <Section.Text>Eight color variants map to semantic meanings. Use `white` over a photo or a dark scrim — it stays white in both themes. `on-primary` is the ink on a primary fill and follows it between themes; it is what a loading primary button shows.</Section.Text>
   <ComponentExample name="spinner-variants" />
 </Section>
 
@@ -45,7 +45,7 @@ description: An animated loading indicator that communicates an in-progress stat
   <PropsTable
     data={[
       { name: "size", type: '"large" | "medium" | "small"', default: '"medium"', description: "Controls the diameter of the spinner. Use `small` for inline indicators (e.g., inside buttons) and `large` for full-section loading states." },
-      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white"', default: '"primary"', description: "Controls the spinner blade color. Use `white` when displaying on a dark background for sufficient contrast." },
+      { name: "variant", type: '"primary" | "secondary" | "success" | "error" | "warning" | "info" | "white" | "on-primary"', default: '"primary"', description: "Controls the spinner blade color. `white` is white in both themes; `on-primary` follows a primary fill." },
       { name: "label", type: "string", default: '"Loading"', description: "Text passed to screen readers via `aria-label`. Defaults to `\"Loading\"`. Provide a specific message when the loading context is not obvious from surrounding content." },
     ]}
   />

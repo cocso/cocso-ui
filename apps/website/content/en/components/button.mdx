@@ -36,7 +36,7 @@ description: A clickable element that triggers an action or event.
 <Section>
   <Section.Title>Variant</Section.Title>
   <Section.Text>
-    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>neutral</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning, and <code>error-ghost</code> is the low-emphasis destructive action used inside menus and list rows.
+    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>neutral</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning, and <code>error-ghost</code> is the low-emphasis destructive action used inside menus and list rows, and <code>error-outline</code> is the entry to an action that cannot be undone — keep the red fill (<code>error</code>) for the confirmation that follows.
   </Section.Text>
   <ComponentExample name="button-variants">
     ```tsx
@@ -55,6 +55,7 @@ description: A clickable element that triggers an action or event.
           <Button variant="info">Info</Button>
           <Button variant="neutral">Neutral</Button>
           <Button variant="error-ghost">Error Ghost</Button>
+          <Button variant="error-outline">Error Outline</Button>
         </div>
       );
     }
@@ -207,7 +208,7 @@ description: A clickable element that triggers an action or event.
     data={[
       {
         name: "variant",
-        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost"',
+        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost" | "error-outline" | "glass"',
         default: '"primary"',
         description: "Controls the background and text color to communicate the intent of the action. Use `primary` for the main call-to-action and `ghost` for minimal visual weight.",
       },

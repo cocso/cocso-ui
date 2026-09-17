@@ -60,7 +60,8 @@ public struct CCSwitch: View {
                     CCTypography(label, type: .body, size: .medium)
                 }
                 ZStack(alignment: isOn ? .trailing : .leading) {
-                    Capsule()
+                    // A pill with circular ends — see `CCRoundedShape`.
+                    CCRoundedShape.pill
                         .fill(
                             (isOn ? style.checkedBgColor : style.switchBgColor)
                                 ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand)
@@ -68,7 +69,7 @@ public struct CCSwitch: View {
                         // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지
                         // 보이지 않았다. 색은 레시피가 정한다.
                         .overlay(
-                            Capsule().strokeBorder(
+                            CCRoundedShape.pill.strokeBorder(
                                 style.borderColor
                                     ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
                                 lineWidth: 1
@@ -91,7 +92,7 @@ public struct CCSwitch: View {
                         .padding(.horizontal, inset)
                 }
                 .frame(width: track.width, height: track.height)
-                .ccFocusRing(isFocused, in: Capsule())
+                .ccFocusRing(isFocused, in: CCRoundedShape.pill)
                 // The thumb travels and the track recolours on the web's
                 // `transition: transform fast soft` — not on one frame.
                 .animation(CCMotion.movement(reduced: reduceMotion), value: isOn)

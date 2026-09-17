@@ -62,6 +62,7 @@ describe("Spinner", () => {
       "warning",
       "info",
       "white",
+      "on-primary",
     ] as const)('applies variant className for variant="%s"', (variant) => {
       render(<Spinner data-testid="spinner" variant={variant} />);
       expect(screen.getByTestId("spinner").className).toContain(

@@ -8,7 +8,7 @@ const meta = {
   parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['small', 'medium', 'large'] },
-    variant: { control: 'select', options: ['primary', 'secondary', 'success', 'error', 'warning', 'info', 'white'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'success', 'error', 'warning', 'info', 'white', 'on-primary'] },
   },
   args: {
     size: 'medium',
@@ -42,6 +42,9 @@ export const Variants: Story = {
       <Spinner variant="info" />
       <div style={{ backgroundColor: '#1e2124', padding: '8px', borderRadius: '6px' }}>
         <Spinner variant="white" />
+      </div>
+      <div style={{ backgroundColor: 'var(--cocso-color-interactive-primary)', padding: '8px', borderRadius: '6px' }}>
+        <Spinner variant="on-primary" />
       </div>
     </div>
   ),

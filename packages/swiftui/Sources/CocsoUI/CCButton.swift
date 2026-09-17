@@ -67,11 +67,14 @@ public struct CCButton: View {
         )
     }
 
-    /// The web's `getButtonSpinnerVariant`: the filled variants take the white
-    /// spinner, everything else the secondary one.
+    /// The web's `getButtonSpinnerVariant`: the label's colour, as a spinner.
     private var spinnerVariant: CCSpinnerVariant {
+        // The spinner stands where the label was, so it wears the label's
+        // colour: primary's follows its fill between themes, and the success,
+        // error and info labels are white in both.
         switch variant {
-        case .primary, .success, .error, .info: return .white
+        case .primary: return .onPrimary
+        case .success, .error, .info: return .white
         default: return .secondary
         }
     }
@@ -138,9 +141,7 @@ public struct CCButton: View {
                 let fill = (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
                 if variant == .glass {
                     GlassPane(
-                        shape: resolved.borderRadiusFull == true
-                            ? AnyShape(Capsule())
-                            : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0)),
+                        shape: Self.shape(resolved),
                         edge: false,
                         // A control: the glass answers the press on iOS 26. The
                         // material path shows the press through the recipe's tint.
@@ -151,19 +152,16 @@ public struct CCButton: View {
                     fill
                 }
             }
-            .clipShape(
-                // `shape: .circle` is a percentage radius in the recipe, which has
-                // no length to travel as; before it arrived as a flag this drew a
-                // square.
-                resolved.borderRadiusFull == true
-                    ? AnyShape(Capsule())
-                    : AnyShape(RoundedRectangle(cornerRadius: resolved.borderRadius ?? 0))
-            )
+            .clipShape(Self.shape(resolved))
             // The recipe's border — the outline variant. Until the generator carried
             // compound borders this variant had no edge on either platform.
-            .overlay(recipeBorder(resolved))
+            .overlay {
+                if let color = resolved.borderColor {
+                    Self.shape(resolved).strokeBorder(color, lineWidth: resolved.borderWidth ?? 1)
+                }
+            }
             .overlay(
-                RoundedRectangle(cornerRadius: (resolved.borderRadius ?? 0) + 2)
+                CCRoundedShape(radius: resolved.borderRadiusFull == true ? .greatestFiniteMagnitude : (resolved.borderRadius ?? 0) + 2)
                     .strokeBorder(
                         CocsoTokens.Color.focusRing(colorScheme, brand: brand),
                         lineWidth: isFocused ? 2 : 0
@@ -200,19 +198,12 @@ public struct CCButton: View {
         .accessibilityAddTraits(.isButton)
     }
 
-    /// `AnyShape` is not `InsettableShape`, so `strokeBorder` has to be called on
-    /// the concrete shape — and keeping it out of `body` keeps the type-checker
-    /// inside its time budget. Nothing when the variant has no border.
-    @ViewBuilder
-    private func recipeBorder(_ style: CCButtonStyle) -> some View {
-        if let color = style.borderColor {
-            if style.borderRadiusFull == true {
-                Capsule().strokeBorder(color, lineWidth: style.borderWidth ?? 1)
-            } else {
-                RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
-                    .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
-            }
-        }
+    /// `shape: .circle` is a percentage radius in the recipe, which has no length
+    /// to travel as, so it arrives as `borderRadiusFull` — before that it drew a
+    /// square. `rounded` is `radius-full`, a length the shape clamps to the same
+    /// pill. See `CCRoundedShape` for why neither is a `Capsule`.
+    private static func shape(_ style: CCButtonStyle) -> CCRoundedShape {
+        style.borderRadiusFull == true ? .pill : CCRoundedShape(radius: style.borderRadius ?? 0)
     }
 }
 

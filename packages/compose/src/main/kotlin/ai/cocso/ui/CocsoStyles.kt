@@ -294,6 +294,7 @@ enum class CCButtonVariant {
     info,
     neutral,
     errorGhost,
+    errorOutline,
     glass,
 }
 
@@ -376,6 +377,9 @@ fun cCButtonStyle(
     if (variant == CCButtonVariant.errorGhost) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive())
     }
+    if (variant == CCButtonVariant.errorOutline) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveDangerSubtleActive())
+    }
     if (variant == CCButtonVariant.glass) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.surfaceGlassActive())
     }
@@ -420,6 +424,12 @@ fun cCButtonStyle(
     if (variant == CCButtonVariant.errorGhost) {
         style = style.copy(bgColor = ComposeColor.Transparent)
         style = style.copy(fontColor = CocsoTokens.Color.feedbackDangerText())
+    }
+    if (variant == CCButtonVariant.errorOutline) {
+        style = style.copy(bgColor = ComposeColor.Transparent)
+        style = style.copy(fontColor = CocsoTokens.Color.feedbackDangerText())
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.feedbackDangerBorder())
     }
     if (variant == CCButtonVariant.glass) {
         style = style.copy(bgColor = CocsoTokens.Color.surfaceGlass())
@@ -999,6 +1009,7 @@ enum class CCSpinnerVariant {
     warning,
     info,
     white,
+    onPrimary,
 }
 
 enum class CCSpinnerSize {
@@ -1042,7 +1053,10 @@ fun cCSpinnerStyle(
         style = style.copy(bladeColor = CocsoTokens.Color.feedbackInfo())
     }
     if (variant == CCSpinnerVariant.white) {
-        style = style.copy(bladeColor = CocsoTokens.Color.surfacePrimary())
+        style = style.copy(bladeColor = CocsoTokens.Color.white)
+    }
+    if (variant == CCSpinnerVariant.onPrimary) {
+        style = style.copy(bladeColor = CocsoTokens.Color.textOnPrimary())
     }
     if (size == CCSpinnerSize.large) {
         style = style.copy(blades = 10)

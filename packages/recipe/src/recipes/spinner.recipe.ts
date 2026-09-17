@@ -12,7 +12,16 @@ export const spinnerRecipe = defineRecipe({
       error: { root: { bladeColor: "feedback-danger" } },
       warning: { root: { bladeColor: "feedback-warning" } },
       info: { root: { bladeColor: "feedback-info" } },
-      white: { root: { bladeColor: "surface-primary" } },
+      // White in both themes, which is what the name and the docs promise: a
+      // spinner over a photo or a dark scrim. It was `surface-primary`, which
+      // turns near-black in dark — invisible on exactly the backgrounds it is
+      // for, and dark on the red, green and blue button fills whose labels
+      // stay white.
+      white: { root: { bladeColor: "white" } },
+      // The ink on a primary fill, for the primary button's loading state. The
+      // base primary inverts in dark (a light fill under a dark label) and a
+      // brand's may not, so the colour is the token that already tracks both.
+      "on-primary": { root: { bladeColor: "text-on-primary" } },
     },
     size: {
       large: {

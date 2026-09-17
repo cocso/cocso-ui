@@ -48,29 +48,22 @@ public struct CCBadge: View {
             .padding(.horizontal, style.paddingX ?? 0)
             .padding(.vertical, style.paddingY ?? 0)
             .background(style.bgColor ?? .clear)
-            // A percentage radius has no length to travel as, so the recipe
-            // sends `borderRadiusFull` and a capsule is what it means here.
-            .clipShape(
-                style.borderRadiusFull == true
-                    ? AnyShape(Capsule())
-                    : AnyShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 0))
-            )
+            .clipShape(Self.shape(style))
             // The recipe's border — the outline variant.
-            .overlay(recipeBorder(style))
+            .overlay {
+                if let color = style.borderColor {
+                    Self.shape(style).strokeBorder(color, lineWidth: style.borderWidth ?? 1)
+                }
+            }
     }
 
-    /// `AnyShape` is not `InsettableShape`, so `strokeBorder` has to be called on
-    /// the concrete shape. Nothing when the variant has no border.
-    @ViewBuilder
-    private func recipeBorder(_ style: CCBadgeStyle) -> some View {
-        if let color = style.borderColor {
-            if style.borderRadiusFull == true {
-                Capsule().strokeBorder(color, lineWidth: style.borderWidth ?? 1)
-            } else {
-                RoundedRectangle(cornerRadius: style.borderRadius ?? 0)
-                    .strokeBorder(color, lineWidth: style.borderWidth ?? 1)
-            }
-        }
+    /// A percentage radius has no length to travel as, so the recipe sends
+    /// `borderRadiusFull` and a pill is what it means here. `rounded` sends
+    /// `radius-full`, a length far past half the badge's height, which the shape
+    /// clamps to the same pill — see `CCRoundedShape` for why neither is a
+    /// `Capsule` or a `RoundedRectangle`.
+    private static func shape(_ style: CCBadgeStyle) -> CCRoundedShape {
+        style.borderRadiusFull == true ? .pill : CCRoundedShape(radius: style.borderRadius ?? 0)
     }
 }
 

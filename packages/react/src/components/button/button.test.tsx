@@ -135,6 +135,7 @@ describe("Button variant className", () => {
     "info",
     "neutral",
     "error-ghost",
+    "error-outline",
     "glass",
   ] as const)('applies variant className for variant="%s"', (variant) => {
     render(<Button variant={variant}>Button</Button>);
@@ -192,6 +193,28 @@ describe("Button weight CSS variable", () => {
 });
 
 describe("Button loading spinner variant", () => {
+  // The spinner stands where the label was, so it wears the label's colour: the
+  // primary label follows its fill, the success/error/info labels are white in
+  // both themes, and the rest are ink on a light surface.
+  it.each([
+    ["primary", "on-primary"],
+    ["success", "white"],
+    ["error", "white"],
+    ["info", "white"],
+    ["outline", "secondary"],
+    ["error-outline", "secondary"],
+  ] as const)('variant="%s" takes the %s spinner', (variant, spinner) => {
+    render(
+      <Button loading variant={variant}>
+        Button
+      </Button>
+    );
+    const el = screen
+      .getByRole("button")
+      .querySelector('[aria-label="Loading"]');
+    expect(el?.className).toContain(`cocso-spinner--variant-${spinner}`);
+  });
+
   it.each([
     "secondary",
     "outline",

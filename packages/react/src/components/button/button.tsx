@@ -22,6 +22,7 @@ export type ButtonVariant =
   | "info"
   | "neutral"
   | "error-ghost"
+  | "error-outline"
   | "glass";
 
 export type ButtonShape = "square" | "circle" | "rounded" | "sharp";
@@ -44,9 +45,13 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "prefix"> {
 }
 
 function getButtonSpinnerVariant(variant: ButtonVariant): SpinnerVariant {
-  return ["primary", "success", "error", "info"].includes(variant)
-    ? "white"
-    : "secondary";
+  // The spinner takes the label's place, so it takes the label's colour. The
+  // primary label follows the fill (dark on the base theme's light dark-mode
+  // fill); the success, error and info labels are white in both themes.
+  if (variant === "primary") {
+    return "on-primary";
+  }
+  return ["success", "error", "info"].includes(variant) ? "white" : "secondary";
 }
 
 /** Polymorphic button component with variant, color, and size options. */
