@@ -16,6 +16,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -148,22 +149,30 @@ fun CCInput(
             val hidePassword = CCStrings.hidePassword()
             if (isSecure) {
                 // The two glyphs cross-fade rather than swap.
-                Crossfade(targetState = revealed, animationSpec = reveal, label = "input-reveal") { isRevealed ->
-                    Icon(
-                        imageVector = if (isRevealed) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                        contentDescription = if (isRevealed) hidePassword else showPassword,
-                        // One step back from the value, and it clears AA in both
-                        // themes; `text-tertiary` is 3.08:1 on white.
-                        tint = CocsoTokens.Color.textSecondary(),
-                        modifier = Modifier
-                            .ccPressFeedback(interactionSource)
-                            .clickable(
-                                interactionSource = interactionSource,
-                                indication = null,
-                                onClick = { revealed = !revealed },
-                            )
-                            .ccMinimumTouchTarget(),
-                    )
+                // The target is a box the glyph is centred in — see CCTouchTarget.
+                // The floor on the icon itself scaled the vector to fill it.
+                Box(
+                    modifier = Modifier
+                        .ccPressFeedback(interactionSource)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null,
+                            onClick = { revealed = !revealed },
+                        )
+                        .ccMinimumTouchTarget(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Crossfade(targetState = revealed, animationSpec = reveal, label = "input-reveal") { isRevealed ->
+                        Icon(
+                            imageVector = if (isRevealed) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                            contentDescription = if (isRevealed) hidePassword else showPassword,
+                            // One step back from the value, and it clears AA in both
+                            // themes; `text-tertiary` is 3.08:1 on white.
+                            tint = CocsoTokens.Color.textSecondary(),
+                            // The web's `ICON_SIZES.medium`.
+                            modifier = Modifier.size(16.dp),
+                        )
+                    }
                 }
             }
         }

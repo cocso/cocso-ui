@@ -26,6 +26,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.semantics.SemanticsNode
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -157,7 +160,10 @@ class ComponentRenderTest {
         CCDialogPanel(title = "Dialog", message = "message") { CCButton(title = "OK", onClick = {}) }
         CCLink(title = "Link", onClick = {})
         CCBreadcrumb(items = listOf(CCBreadcrumbItem("a", "Home"), CCBreadcrumbItem("b", "Here")), onSelect = {})
-        CCPagination(page = 3, totalPages = 10, onChange = {})
+        // Three pages: every 48dp target fits the 288dp this column has, and
+        // the truncation is `paginationSlots`'s to test, not the picture's. A
+        // ten-page run overflowed here once the targets reached their floor.
+        CCPagination(page = 2, totalPages = 3, onChange = {})
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             CCStockQuantityStatus(CCStockQuantityStatusQuantity.sufficient)
             CCStockQuantityStatus(CCStockQuantityStatusQuantity.normal)
@@ -270,5 +276,68 @@ class ComponentRenderTest {
         val px = image.getPixel(image.width / 8, image.height / 2)
         val r = (px shr 16) and 0xFF; val g = (px shr 8) and 0xFF; val b = px and 0xFF
         assertTrue("primary 가 파랑이 아니다: #%02X%02X%02X".format(r, g, b), b > 0xC0 && r < 0x60 && g in 0x50..0x90)
+    }
+
+    /**
+     * The other half of the touch floor: the target grows, the drawing does not.
+     *
+     * A floor applied to an icon grows the icon — its vector is scaled to fill
+     * the node — so the alert's close cross drew at nearly three times its size
+     * and the dialog's at twice, with every size assertion passing, because the
+     * target was exactly right. This reads the ink back out of each target.
+     */
+    @Test
+    fun targetsGrowButWhatIsDrawnInThemDoesNot() {
+        var host: View? = null
+        composeRule.setContent {
+            val view = LocalView.current
+            SideEffect { host = view }
+            Column(
+                Modifier.width(360.dp).background(CocsoTokens.Color.surfacePrimary()).padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                CCAlert(title = "Alert", onClose = {})
+                CCDialogPanel(title = "Dialog", onDismiss = {}) {}
+                CCPagination(page = 1, totalPages = 3, onChange = {})
+            }
+        }
+        composeRule.waitForIdle()
+        val view = requireNotNull(host)
+        val image = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(image))
+        val density = view.resources.displayMetrics.density
+        val close = view.context.getString(R.string.cc_close)
+        val page = view.context.getString(R.string.cc_page, 1)
+
+        // The extent, in dp, of the pixels inside a node that differ from its corner.
+        fun ink(node: SemanticsNode): Pair<Float, Float> {
+            val box = node.boundsInRoot
+            val left = box.left.toInt(); val top = box.top.toInt()
+            val right = box.right.toInt() - 1; val bottom = box.bottom.toInt() - 1
+            val ground = image.getPixel(left, top)
+            var minX = Int.MAX_VALUE; var maxX = -1; var minY = Int.MAX_VALUE; var maxY = -1
+            for (x in left..right) for (y in top..bottom) {
+                val p = image.getPixel(x, y)
+                val d = maxOf(
+                    kotlin.math.abs(((p shr 16) and 0xFF) - ((ground shr 16) and 0xFF)),
+                    kotlin.math.abs(((p shr 8) and 0xFF) - ((ground shr 8) and 0xFF)),
+                    kotlin.math.abs((p and 0xFF) - (ground and 0xFF)),
+                )
+                if (d > 48) { minX = minOf(minX, x); maxX = maxOf(maxX, x); minY = minOf(minY, y); maxY = maxOf(maxY, y) }
+            }
+            assertTrue("nothing drawn in ${node.config}", maxX >= 0)
+            return (maxX - minX + 1) / density to (maxY - minY + 1) / density
+        }
+
+        val targets = composeRule.onAllNodes(hasClickAction() and hasContentDescription(close)).fetchSemanticsNodes()
+        assertEquals(2, targets.size)
+        for (target in targets) {
+            val (w, h) = ink(target)
+            // A 14–16dp icon's cross is about 60% of its box.
+            assertTrue("close cross is ${w}x$h dp", w <= 16f && h <= 16f)
+        }
+        val active = composeRule.onAllNodes(hasClickAction() and hasContentDescription(page)).fetchSemanticsNodes().single()
+        val (w, h) = ink(active)
+        assertTrue("active page square is ${w}x$h dp, not the recipe's 32", w in 30f..34f && h in 30f..34f)
     }
 }

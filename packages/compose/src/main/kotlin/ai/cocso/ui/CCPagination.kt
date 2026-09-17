@@ -40,6 +40,12 @@ import kotlin.math.ceil
  * a 32dp square per page, the active one filled. The truncation is the web's —
  * first and last always shown, `maxVisible` around the current page, an
  * ellipsis where pages are skipped.
+ *
+ * **Width.** Each page and arrow is a 48dp target (see [CCTouchTarget]), so at
+ * the web's default `maxVisible = 5` a long run is nine targets and two gaps —
+ * about 430dp, wider than most phones. The default stays the web's; on a phone
+ * with more than seven pages pass `maxVisible = 1`, which is at most five
+ * targets and two ellipses, about 330dp.
  */
 @Composable
 fun CCPagination(
@@ -95,14 +101,13 @@ private fun PaginationPage(number: Int, active: Boolean, onClick: () -> Unit) {
     val pageLabel = CCStrings.page(number)
     // The web draws `.item:focus-visible` and scales the square on `:active`.
     var isFocused by remember { mutableStateOf(false) }
+    // Two boxes: the target, and the 32dp square drawn in it. The floor used to
+    // come after `size(32)` in one chain, where a minimum below a fixed size
+    // does nothing — every page answered a 32dp square. See CCTouchTarget.
     Box(
         modifier = Modifier
             .ccPressFeedback(interactionSource)
             .onFocusChanged { isFocused = it.isFocused }
-            .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
-            .clip(RoundedCornerShape(style.borderRadius ?: 8.dp))
-            .background(fill)
-            .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp))
             .ccMinimumTouchTarget()
             .clickable(interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick)
             .semantics {
@@ -111,12 +116,21 @@ private fun PaginationPage(number: Int, active: Boolean, onClick: () -> Unit) {
             },
         contentAlignment = Alignment.Center,
     ) {
-        Text(
-            text = number.toString(),
-            color = ink,
-            fontSize = (style.fontSize?.value ?: 14f).sp,
-            fontWeight = style.fontWeight,
-        )
+        Box(
+            modifier = Modifier
+                .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
+                .clip(RoundedCornerShape(style.borderRadius ?: 8.dp))
+                .background(fill)
+                .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                text = number.toString(),
+                color = ink,
+                fontSize = (style.fontSize?.value ?: 14f).sp,
+                fontWeight = style.fontWeight,
+            )
+        }
     }
 }
 
@@ -131,16 +145,22 @@ private fun PaginationArrow(
     val interactionSource = remember { MutableInteractionSource() }
     // The web draws `.arrow:focus-visible`; this drew nothing.
     var isFocused by remember { mutableStateOf(false) }
-    Icon(
-        imageVector = glyph,
-        contentDescription = label,
-        tint = style.fontColor ?: CocsoTokens.Color.textPrimary(),
+    // The target, and the 32dp square drawn in it — see PaginationPage.
+    Box(
         modifier = Modifier
             .ccPressFeedback(interactionSource)
             .onFocusChanged { isFocused = it.isFocused }
-            .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
-            .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp))
             .ccMinimumTouchTarget()
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null, role = Role.Button, onClick = onClick),
-    )
+        contentAlignment = Alignment.Center,
+    ) {
+        Icon(
+            imageVector = glyph,
+            contentDescription = label,
+            tint = style.fontColor ?: CocsoTokens.Color.textPrimary(),
+            modifier = Modifier
+                .size(width = style.width ?: 32.dp, height = style.height ?: 32.dp)
+                .ccFocusRing(isFocused, RoundedCornerShape(style.borderRadius ?: 8.dp)),
+        )
+    }
 }

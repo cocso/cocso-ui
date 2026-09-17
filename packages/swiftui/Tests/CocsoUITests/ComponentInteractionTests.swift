@@ -36,6 +36,28 @@ final class ComponentInteractionTests: XCTestCase {
         }
     }
 
+    func testEverySelectSizeIsATargetAFingerCanHit() {
+        // The select was the one control with no floor at all: 28 to 40 points
+        // by size, and its whole target was the field.
+        for size in CCSelectSize.allCases {
+            let view = CCSelect(
+                label: "Select",
+                options: [CCSelectOption(id: "a", title: "A")],
+                selection: .constant("a"),
+                size: size
+            )
+            .frame(width: 320)
+            let controller = NSHostingController(rootView: view)
+            // The field alone: the label above it is not part of the target.
+            let label = NSHostingController(rootView: CCTypography("Select", type: .body, size: .small).frame(width: 320))
+            let field = controller.view.fittingSize.height - label.view.fittingSize.height - CocsoTokens.Spacing.s3
+            XCTAssertGreaterThanOrEqual(
+                field, CCTouchTarget.minimum,
+                "\(size) lays out a \(field)-point target"
+            )
+        }
+    }
+
     func testLoadingButtonSwallowsTheTap() throws {
         var taps = 0
         let view = CCButton("Save", loading: true) { taps += 1 }

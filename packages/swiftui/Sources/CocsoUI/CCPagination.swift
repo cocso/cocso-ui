@@ -7,6 +7,12 @@ import SwiftUI
  `pagination.recipe.ts`: a 32-point square per page, the active one filled.
  The truncation is the web's — first and last always shown, `maxVisible`
  around the current page, an ellipsis where pages are skipped.
+
+ **Width.** Each page and arrow is a 44-point target (see `CCTouchTarget`), so
+ at the web's default `maxVisible: 5` a long run is nine targets and two gaps —
+ about 430 points, wider than any iPhone. The default stays the web's; on a
+ phone with more than seven pages pass `maxVisible: 1`, which is at most five
+ targets and two ellipses, about 300 points.
  */
 public struct CCPagination: View {
     private let page: Int

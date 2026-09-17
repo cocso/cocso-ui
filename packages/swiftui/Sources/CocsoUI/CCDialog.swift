@@ -52,9 +52,10 @@ public struct CCDialogPanel<Actions: View>: View {
                         Image(systemName: "xmark")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(CocsoTokens.Color.textSecondary(colorScheme, brand: brand))
+                            // Inside the label — see `ccMinimumTouchTarget`.
+                            .ccMinimumTouchTarget()
                     }
                     .buttonStyle(CCPressStyle())
-                    .ccMinimumTouchTarget()
                     .accessibilityLabel(CCStrings.close)
                 }
             }

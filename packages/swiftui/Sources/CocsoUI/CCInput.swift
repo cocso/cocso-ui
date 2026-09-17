@@ -70,10 +70,11 @@ public struct CCInput: View {
                             // The two glyphs cross-fade rather than swap.
                             .id(revealed)
                             .transition(.opacity)
+                            // Inside the label — see `ccMinimumTouchTarget`.
+                            .ccMinimumTouchTarget()
                     }
                     .animation(CCMotion.colour(reduced: reduceMotion), value: revealed)
                     .buttonStyle(CCPressStyle())
-                    .ccMinimumTouchTarget()
                     .accessibilityLabel(revealed ? CCStrings.hidePassword : CCStrings.showPassword)
                 }
             }
