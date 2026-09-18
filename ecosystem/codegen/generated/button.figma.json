@@ -13819,6 +13819,5571 @@
         }
       }
     },
+    "variant=surface,size=x-large,shape=square,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "center",
+      "borderRadius": 16,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-6"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "center",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "center",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=square,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "flex-start",
+      "borderRadius": 16,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-6"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "flex-start",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "flex-start",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=square,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "space-between",
+      "borderRadius": 16,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-6"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "space-between",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "space-between",
+          "borderRadius": 16,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-6"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=circle,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=circle,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=circle,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=rounded,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=rounded,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=rounded,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=sharp,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=sharp,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-large,shape=sharp,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 56,
+      "paddingInline": 16,
+      "contentPadding": "0 6px",
+      "fontSize": 16,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 56,
+          "paddingInline": 16,
+          "contentPadding": "0 6px",
+          "fontSize": 16,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=square,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=square,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=square,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=circle,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=circle,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=circle,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=rounded,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=rounded,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=rounded,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=sharp,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=sharp,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=large,shape=sharp,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 40,
+      "paddingInline": 14,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 40,
+          "paddingInline": 14,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=square,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=square,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=square,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=circle,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=circle,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=circle,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=rounded,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=rounded,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=rounded,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=sharp,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=sharp,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=medium,shape=sharp,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 36,
+      "paddingInline": 12,
+      "contentPadding": "0 6px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 36,
+          "paddingInline": 12,
+          "contentPadding": "0 6px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=square,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=square,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=square,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "borderRadius": 8,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-4"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "borderRadius": 8,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-4"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=circle,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=circle,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=circle,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=rounded,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=rounded,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=rounded,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=sharp,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=sharp,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=small,shape=sharp,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 32,
+      "paddingInline": 10,
+      "contentPadding": "0 2px",
+      "fontSize": 14,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 32,
+          "paddingInline": 10,
+          "contentPadding": "0 2px",
+          "fontSize": 14,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=square,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "center",
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-3"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "center",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "center",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=square,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "flex-start",
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-3"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "flex-start",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "flex-start",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=square,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "space-between",
+      "borderRadius": 6,
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-3"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "space-between",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "space-between",
+          "borderRadius": 6,
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-3"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=circle,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=circle,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=circle,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=rounded,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=rounded,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=rounded,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "borderRadius": 1000,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary",
+        "borderRadius": "radius-full"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "borderRadius": 1000,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary",
+            "borderRadius": "radius-full"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=sharp,align=center": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "center",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "center",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=sharp,align=start": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "flex-start",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "flex-start",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
+    "variant=surface,size=x-small,shape=sharp,align=between": {
+      "fontWeight": 500,
+      "bgColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "fontColor": {
+        "r": 0.07450980392156863,
+        "g": 0.0784313725490196,
+        "b": 0.08627450980392157
+      },
+      "strokeColor": {
+        "r": 0.9019607843137255,
+        "g": 0.9098039215686274,
+        "b": 0.9176470588235294
+      },
+      "strokeWeight": 1,
+      "height": 28,
+      "paddingInline": 8,
+      "contentPadding": "0",
+      "fontSize": 12,
+      "justifyContent": "space-between",
+      "_tokenRefs": {
+        "bgColor": "surface-primary",
+        "fontColor": "text-primary",
+        "strokeColor": "border-secondary"
+      },
+      "states": {
+        "hover": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9568627450980393,
+            "g": 0.9607843137254902,
+            "b": 0.9647058823529412
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "surface-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        },
+        "active": {
+          "fontWeight": 500,
+          "bgColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "fontColor": {
+            "r": 0.07450980392156863,
+            "g": 0.0784313725490196,
+            "b": 0.08627450980392157
+          },
+          "strokeColor": {
+            "r": 0.9019607843137255,
+            "g": 0.9098039215686274,
+            "b": 0.9176470588235294
+          },
+          "strokeWeight": 1,
+          "height": 28,
+          "paddingInline": 8,
+          "contentPadding": "0",
+          "fontSize": 12,
+          "justifyContent": "space-between",
+          "_tokenRefs": {
+            "bgColor": "interactive-secondary",
+            "fontColor": "text-primary",
+            "strokeColor": "border-secondary"
+          }
+        }
+      }
+    },
     "variant=ghost,size=x-large,shape=square,align=center": {
       "fontWeight": 500,
       "fontColor": {

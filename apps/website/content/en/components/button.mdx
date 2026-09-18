@@ -36,7 +36,7 @@ description: A clickable element that triggers an action or event.
 <Section>
   <Section.Title>Variant</Section.Title>
   <Section.Text>
-    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>neutral</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning, and <code>error-ghost</code> is the low-emphasis destructive action used inside menus and list rows, and <code>error-outline</code> is the entry to an action that cannot be undone — keep the red fill (<code>error</code>) for the confirmation that follows.
+    Use variants to communicate the intent of an action. <code>primary</code> is the default high-emphasis style; use <code>secondary</code>, <code>neutral</code>, <code>outline</code>, or <code>ghost</code> for lower emphasis. <code>surface</code> is the outline plus a card-coloured fill, for a button that has to sit above a page that is not white. State variants (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>) convey semantic meaning, and <code>error-ghost</code> is the low-emphasis destructive action used inside menus and list rows, and <code>error-outline</code> is the entry to an action that cannot be undone — keep the red fill (<code>error</code>) for the confirmation that follows.
   </Section.Text>
   <ComponentExample name="button-variants">
     ```tsx
@@ -48,6 +48,7 @@ description: A clickable element that triggers an action or event.
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
+          <Button variant="surface">Surface</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="success">Success</Button>
           <Button variant="error">Error</Button>
@@ -208,7 +209,7 @@ description: A clickable element that triggers an action or event.
     data={[
       {
         name: "variant",
-        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost" | "error-outline" | "glass"',
+        type: '"primary" | "secondary" | "outline" | "surface" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost" | "error-outline" | "glass"',
         default: '"primary"',
         description: "Controls the background and text color to communicate the intent of the action. Use `primary` for the main call-to-action and `ghost` for minimal visual weight.",
       },

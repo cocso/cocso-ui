@@ -15,6 +15,7 @@ export type ButtonVariant =
   | "primary"
   | "secondary"
   | "outline"
+  | "surface"
   | "ghost"
   | "success"
   | "error"

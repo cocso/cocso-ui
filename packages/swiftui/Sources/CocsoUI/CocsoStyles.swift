@@ -288,6 +288,7 @@ public enum CCButtonVariant: String, CaseIterable, Sendable {
     case primary
     case secondary
     case outline
+    case surface
     case ghost
     case success
     case error
@@ -358,6 +359,9 @@ public struct CCButtonStyle: Equatable, Sendable {
         if variant == .outline {
             style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme, brand: brand)
         }
+        if variant == .surface {
+            style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme, brand: brand)
+        }
         if variant == .ghost {
             style.bgColorPressed = CocsoTokens.Color.interactiveSecondary(scheme, brand: brand)
         }
@@ -395,6 +399,12 @@ public struct CCButtonStyle: Equatable, Sendable {
         }
         if variant == .outline {
             style.bgColor = SwiftUI.Color.clear
+            style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
+            style.borderWidth = 1
+            style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)
+        }
+        if variant == .surface {
+            style.bgColor = CocsoTokens.Color.surfacePrimary(scheme, brand: brand)
             style.fontColor = CocsoTokens.Color.textPrimary(scheme, brand: brand)
             style.borderWidth = 1
             style.borderColor = CocsoTokens.Color.borderSecondary(scheme, brand: brand)

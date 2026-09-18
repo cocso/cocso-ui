@@ -28,6 +28,14 @@
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary);
 }
 
+.cocso-button:where(.cocso-button--variant-surface) {
+  --cocso-button-bg-color: var(--cocso-color-surface-primary);
+  --cocso-button-font-color: var(--cocso-color-text-primary);
+  --cocso-button-border: 1px solid var(--cocso-color-border-secondary);
+  --cocso-button-bg-color-hover: var(--cocso-color-surface-secondary);
+  --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary);
+}
+
 .cocso-button:where(.cocso-button--variant-ghost) {
   --cocso-button-bg-color: var(--cocso-color-transparent);
   --cocso-button-font-color: var(--cocso-color-text-primary);
