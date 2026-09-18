@@ -154,8 +154,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF464C53) else ComposeColor(0xFFCDD1D5)
         @Composable
         @ReadOnlyComposable
-        fun borderSecondary(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF33363D) else ComposeColor(0xFFE6E8EA)
+        fun borderSecondary(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.borderSecondary()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF33363D) else ComposeColor(0xFFE6E8EA)
+        }
         @Composable
         @ReadOnlyComposable
         fun borderStrong(): ComposeColor =
@@ -170,8 +172,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF5C180A) else ComposeColor(0xFFF7AFA1)
         @Composable
         @ReadOnlyComposable
-        fun feedbackDangerSubtle(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF260903) else ComposeColor(0xFFFDEFEC)
+        fun feedbackDangerSubtle(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.feedbackDangerSubtle()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF260903) else ComposeColor(0xFFFDEFEC)
+        }
         @Composable
         @ReadOnlyComposable
         fun feedbackDangerText(): ComposeColor =
@@ -186,8 +190,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF052561) else ComposeColor(0xFFB1CEFB)
         @Composable
         @ReadOnlyComposable
-        fun feedbackInfoSubtle(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF020F27) else ComposeColor(0xFFECF2FE)
+        fun feedbackInfoSubtle(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.feedbackInfoSubtle()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF020F27) else ComposeColor(0xFFECF2FE)
+        }
         @Composable
         @ReadOnlyComposable
         fun feedbackInfoText(): ComposeColor =
@@ -206,8 +212,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF3FA654) else ComposeColor(0xFF3FA654)
         @Composable
         @ReadOnlyComposable
-        fun feedbackSuccessSubtle(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF0E2012) else ComposeColor(0xFFEAF6EC)
+        fun feedbackSuccessSubtle(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.feedbackSuccessSubtle()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF0E2012) else ComposeColor(0xFFEAF6EC)
+        }
         @Composable
         @ReadOnlyComposable
         fun feedbackSuccessText(): ComposeColor =
@@ -222,8 +230,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF422C00) else ComposeColor(0xFFFFC95C)
         @Composable
         @ReadOnlyComposable
-        fun feedbackWarningSubtle(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF241800) else ComposeColor(0xFFFFF3DB)
+        fun feedbackWarningSubtle(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.feedbackWarningSubtle()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF241800) else ComposeColor(0xFFFFF3DB)
+        }
         @Composable
         @ReadOnlyComposable
         fun feedbackWarningText(): ComposeColor =
@@ -398,12 +408,16 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF33363D) else ComposeColor(0xFFE6E8EA)
         @Composable
         @ReadOnlyComposable
-        fun surfacePrimary(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF131416) else ComposeColor(0xFFFFFFFF)
+        fun surfacePrimary(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.surfacePrimary()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF131416) else ComposeColor(0xFFFFFFFF)
+        }
         @Composable
         @ReadOnlyComposable
-        fun surfaceSecondary(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF1E2124) else ComposeColor(0xFFF4F5F6)
+        fun surfaceSecondary(): ComposeColor = when (LocalCocsoBrand.current) {
+            CocsoBrand.Cocso -> CocsoBrandCocso.Color.surfaceSecondary()
+            else -> if (isSystemInDarkTheme()) ComposeColor(0xFF1E2124) else ComposeColor(0xFFF4F5F6)
+        }
         @Composable
         @ReadOnlyComposable
         fun textDisabled(): ComposeColor =

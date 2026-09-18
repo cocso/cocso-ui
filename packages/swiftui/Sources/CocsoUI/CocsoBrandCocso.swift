@@ -22,6 +22,21 @@ public enum CocsoBrandCocso {
         /// Resolved against the view's colour scheme. Read these as
         /// `CocsoTokens.Color.textPrimary(scheme)`, with `scheme` from
         /// `@Environment(\.colorScheme)`.
+        public static func borderSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x3A3E46) : SwiftUI.Color(hex: 0xE6E8EA)
+        }
+        public static func feedbackDangerSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x493231) : SwiftUI.Color(hex: 0xFDEFEC)
+        }
+        public static func feedbackInfoSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x2B3951) : SwiftUI.Color(hex: 0xECF2FE)
+        }
+        public static func feedbackSuccessSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x293F34) : SwiftUI.Color(hex: 0xEAF6EC)
+        }
+        public static func feedbackWarningSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x413925) : SwiftUI.Color(hex: 0xFFF3DB)
+        }
         public static func interactivePrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x2260D3) : SwiftUI.Color(hex: 0x256EF4)
         }
@@ -66,6 +81,12 @@ public enum CocsoBrandCocso {
         }
         public static func primary950(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x020F27) : SwiftUI.Color(hex: 0x020F27)
+        }
+        public static func surfacePrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x1A1D21) : SwiftUI.Color(hex: 0xFFFFFF)
+        }
+        public static func surfaceSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x24282D) : SwiftUI.Color(hex: 0xF4F5F6)
         }
         public static func textOnPrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)
