@@ -102,12 +102,16 @@ describe.each(BRANDS)("brand %s", (brand) => {
     // no other test here could see: the overlay was internally consistent, it
     // matched its snapshot, and both platforms agreed on the wrong colour.
     const values = new Map<string, { dark: string; light: string }>();
-    for (const [, name, dark, light] of output.swift.matchAll(SWIFT_SCHEME_BODY)) {
+    for (const [, name, dark, light] of output.swift.matchAll(
+      SWIFT_SCHEME_BODY
+    )) {
       values.set(name, { dark, light });
     }
     expect(values.size).toBeGreaterThan(0);
     const states = [...values.keys()].filter((n) =>
-      STATE_SUFFIXES.some((s) => n.endsWith(s) && values.has(n.slice(0, -s.length)))
+      STATE_SUFFIXES.some(
+        (s) => n.endsWith(s) && values.has(n.slice(0, -s.length))
+      )
     );
     expect(states.length).toBeGreaterThan(0);
     for (const state of states) {
@@ -145,6 +149,91 @@ describe("brand cocso", () => {
     // The fill is blue in both themes, so the text on it is white in both. The
     // base flips text-on-primary dark because the base fill flips light.
     expect(output.swift).toMatch(WHITE_ON_PRIMARY_BOTH);
+  });
+});
+
+/**
+ * The brand's dark surfaces, measured.
+ *
+ * cocso lifts the dark page and card a step off the base's near-black, on the
+ * app's ask ("too dark"), and that moves everything drawn on them: the quiet
+ * ink loses contrast, the dividers and the feedback tints lose their lift, and
+ * the card can stop reading as a card. Each of those is a number, so each is
+ * asserted here rather than looked at once.
+ */
+describe("brand cocso dark surfaces", () => {
+  const output = buildBrand("cocso");
+  const values = new Map<string, string>();
+  for (const [, name, dark] of output.swift.matchAll(SWIFT_SCHEME_BODY)) {
+    values.set(name, dark);
+  }
+  const BASE = {
+    // The base's own dark values, for what the brand does not override.
+    textPrimary: "0xF4F5F6",
+    textSecondary: "0x8A949E",
+  };
+
+  function channels(hex: string): number[] {
+    const digits = hex.slice(2);
+    return [0, 2, 4].map(
+      (i) => Number.parseInt(digits.slice(i, i + 2), 16) / 255
+    );
+  }
+  function luminance(hex: string): number {
+    const [r, g, b] = channels(hex).map((c) =>
+      c <= 0.039_28 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+    );
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  function contrast(a: string, b: string): number {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  const card = () => values.get("surfacePrimary") as string;
+  const page = () => values.get("surfaceSecondary") as string;
+
+  it("overrides the surfaces it claims to", () => {
+    expect(card()).toBeDefined();
+    expect(page()).toBeDefined();
+    expect(values.get("borderSecondary")).toBeDefined();
+  });
+
+  it.each([
+    ["text-primary", BASE.textPrimary, 4.5],
+    // The quiet ink is the one with the least room: it is 5.25 on the base's
+    // dark page and every step of lift spends some of that.
+    ["text-secondary", BASE.textSecondary, 4.5],
+  ])("keeps %s above AA on both dark surfaces", (_name, ink, floor) => {
+    expect(contrast(card(), ink)).toBeGreaterThanOrEqual(floor);
+    expect(contrast(page(), ink)).toBeGreaterThanOrEqual(floor);
+  });
+
+  it("keeps the card distinct from the page, and the same way round", () => {
+    // Mobile draws a page lighter than its cards. Lose the order and a card
+    // sinks into the page; lose the gap and its edge disappears.
+    expect(luminance(page())).toBeGreaterThan(luminance(card()));
+    expect(contrast(card(), page())).toBeGreaterThanOrEqual(1.13);
+  });
+
+  it("keeps the divider visible on the lifted surfaces", () => {
+    // `border-secondary` reads 1.52 on the base's dark card. Lifting the card
+    // without lifting the divider drops it to 1.40.
+    const divider = values.get("borderSecondary") as string;
+    expect(contrast(card(), divider)).toBeGreaterThanOrEqual(1.5);
+    expect(contrast(page(), divider)).toBeGreaterThanOrEqual(1.3);
+  });
+
+  it.each([
+    "feedbackDangerSubtle",
+    "feedbackSuccessSubtle",
+    "feedbackWarningSubtle",
+    "feedbackInfoSubtle",
+  ])("%s lifts off both surfaces", (token) => {
+    // The base's dark tints are the ramp's *-950, which sit within 1.01–1.29
+    // of the lifted surfaces — an alert with no panel.
+    const tint = values.get(token) as string;
+    expect(contrast(page(), tint)).toBeGreaterThanOrEqual(1.2);
+    expect(contrast(card(), tint)).toBeGreaterThanOrEqual(1.35);
   });
 });
 

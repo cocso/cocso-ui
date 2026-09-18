@@ -164,8 +164,14 @@ public enum CocsoTokens {
         public static func borderPrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }
-        public static func borderSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
+        public static func borderSecondary(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.borderSecondary(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
+            }
         }
         public static func borderStrong(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x6D7882) : SwiftUI.Color(hex: 0x6D7882)
@@ -176,8 +182,14 @@ public enum CocsoTokens {
         public static func feedbackDangerBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x5C180A) : SwiftUI.Color(hex: 0xF7AFA1)
         }
-        public static func feedbackDangerSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x260903) : SwiftUI.Color(hex: 0xFDEFEC)
+        public static func feedbackDangerSubtle(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.feedbackDangerSubtle(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x260903) : SwiftUI.Color(hex: 0xFDEFEC)
+            }
         }
         public static func feedbackDangerText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF48771) : SwiftUI.Color(hex: 0xBD2C0F)
@@ -188,8 +200,14 @@ public enum CocsoTokens {
         public static func feedbackInfoBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x052561) : SwiftUI.Color(hex: 0xB1CEFB)
         }
-        public static func feedbackInfoSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x020F27) : SwiftUI.Color(hex: 0xECF2FE)
+        public static func feedbackInfoSubtle(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.feedbackInfoSubtle(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x020F27) : SwiftUI.Color(hex: 0xECF2FE)
+            }
         }
         public static func feedbackInfoText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x86AFF9) : SwiftUI.Color(hex: 0x0B50D0)
@@ -203,8 +221,14 @@ public enum CocsoTokens {
         public static func feedbackSuccessMuted(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x3FA654) : SwiftUI.Color(hex: 0x3FA654)
         }
-        public static func feedbackSuccessSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x0E2012) : SwiftUI.Color(hex: 0xEAF6EC)
+        public static func feedbackSuccessSubtle(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.feedbackSuccessSubtle(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x0E2012) : SwiftUI.Color(hex: 0xEAF6EC)
+            }
         }
         public static func feedbackSuccessText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x7EC88E) : SwiftUI.Color(hex: 0x267337)
@@ -215,8 +239,14 @@ public enum CocsoTokens {
         public static func feedbackWarningBorder(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x422C00) : SwiftUI.Color(hex: 0xFFC95C)
         }
-        public static func feedbackWarningSubtle(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x241800) : SwiftUI.Color(hex: 0xFFF3DB)
+        public static func feedbackWarningSubtle(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.feedbackWarningSubtle(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x241800) : SwiftUI.Color(hex: 0xFFF3DB)
+            }
         }
         public static func feedbackWarningText(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFB114) : SwiftUI.Color(hex: 0x8A5C00)
@@ -365,11 +395,23 @@ public enum CocsoTokens {
         public static func surfaceNeutral(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
         }
-        public static func surfacePrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0xFFFFFF)
+        public static func surfacePrimary(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.surfacePrimary(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x131416) : SwiftUI.Color(hex: 0xFFFFFF)
+            }
         }
-        public static func surfaceSecondary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x1E2124) : SwiftUI.Color(hex: 0xF4F5F6)
+        public static func surfaceSecondary(
+            _ scheme: ColorScheme,
+            brand: CocsoBrand = .base
+        ) -> SwiftUI.Color {
+            switch brand {
+            case .cocso: return CocsoBrandCocso.Color.surfaceSecondary(scheme)
+            default: return scheme == .dark ? SwiftUI.Color(hex: 0x1E2124) : SwiftUI.Color(hex: 0xF4F5F6)
+            }
         }
         public static func textDisabled(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x58616A) : SwiftUI.Color(hex: 0x8A949E)

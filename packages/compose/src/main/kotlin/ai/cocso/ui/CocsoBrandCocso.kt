@@ -18,6 +18,26 @@ object CocsoBrandCocso {
         // light tokens in a dark window by forgetting to pass a flag.
         @Composable
         @ReadOnlyComposable
+        fun borderSecondary(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF3A3E46) else ComposeColor(0xFFE6E8EA)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackDangerSubtle(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF493231) else ComposeColor(0xFFFDEFEC)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackInfoSubtle(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF2B3951) else ComposeColor(0xFFECF2FE)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackSuccessSubtle(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF293F34) else ComposeColor(0xFFEAF6EC)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackWarningSubtle(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF413925) else ComposeColor(0xFFFFF3DB)
+        @Composable
+        @ReadOnlyComposable
         fun interactivePrimary(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF2260D3) else ComposeColor(0xFF256EF4)
         @Composable
@@ -76,6 +96,14 @@ object CocsoBrandCocso {
         @ReadOnlyComposable
         fun primary950(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF020F27) else ComposeColor(0xFF020F27)
+        @Composable
+        @ReadOnlyComposable
+        fun surfacePrimary(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF1A1D21) else ComposeColor(0xFFFFFFFF)
+        @Composable
+        @ReadOnlyComposable
+        fun surfaceSecondary(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF24282D) else ComposeColor(0xFFF4F5F6)
         @Composable
         @ReadOnlyComposable
         fun textOnPrimary(): ComposeColor =
