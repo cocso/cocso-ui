@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'error', 'warning', 'info', 'neutral', 'error-ghost', 'error-outline', 'glass'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'surface', 'ghost', 'success', 'error', 'warning', 'info', 'neutral', 'error-ghost', 'error-outline', 'glass'] },
     size: { control: 'select', options: ['large', 'medium', 'small', 'x-small'] },
     shape: { control: 'select', options: ['square', 'rounded', 'circle', 'sharp'] },
     align: { control: 'select', options: ['center', 'start', 'between'] },
@@ -33,6 +33,7 @@ export const Variants: Story = {
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>
+      <Button variant="surface">Surface</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="success">Success</Button>
       <Button variant="error">Error</Button>

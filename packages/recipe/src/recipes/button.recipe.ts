@@ -31,6 +31,23 @@ export const buttonRecipe = defineRecipe({
           },
         },
       },
+      // `outline` with a fill of its own: a raised control on a surface that is
+      // not the page. `outline` and `ghost` are see-through, which reads as a
+      // white pill on a white page and as nothing on a tinted one — the mobile
+      // app was painting a white slab behind an outline button by hand, sized to
+      // the pill, and a label that grew past it left the slab showing.
+      surface: {
+        root: {
+          bgColor: "surface-primary",
+          fontColor: "text-primary",
+          border: {
+            _type: "border" as const,
+            width: 1,
+            style: "solid" as const,
+            color: "border-secondary" as const,
+          },
+        },
+      },
       // See-through, like `error-ghost`. It filled `surface-primary`, which is
       // invisible on a white page and a white pill on any other surface — next
       // to a transparent `error-ghost` the two read as different weights. The
@@ -180,6 +197,7 @@ export const buttonRecipe = defineRecipe({
           },
         },
         outline: { root: { bgColor: "surface-secondary" } },
+        surface: { root: { bgColor: "surface-secondary" } },
         ghost: { root: { bgColor: "surface-secondary" } },
         success: { root: { bgColor: "interactive-success-hover" } },
         error: { root: { bgColor: "interactive-danger-hover" } },
@@ -207,6 +225,7 @@ export const buttonRecipe = defineRecipe({
           },
         },
         outline: { root: { bgColor: "interactive-secondary" } },
+        surface: { root: { bgColor: "interactive-secondary" } },
         ghost: { root: { bgColor: "interactive-secondary" } },
         success: { root: { bgColor: "interactive-success-active" } },
         error: { root: { bgColor: "interactive-danger-active" } },

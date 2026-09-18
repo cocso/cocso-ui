@@ -36,7 +36,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
 <Section>
   <Section.Title>Variant</Section.Title>
   <Section.Text>
-    변형을 사용하여 액션의 의도를 전달합니다. <code>primary</code>는 기본 고강조 스타일이며, 낮은 강조를 위해 <code>secondary</code>, <code>neutral</code>, <code>outline</code>, <code>ghost</code>를 사용합니다. 상태 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)은 시맨틱 의미를 전달하며, <code>error-ghost</code>는 메뉴나 목록 행에서 쓰는 저강조 파괴적 액션이고, <code>error-outline</code>은 되돌릴 수 없는 동작으로 들어가는 버튼입니다 — 붉은 채움(<code>error</code>)은 그 뒤의 확인 단계에 남겨 둡니다.
+    변형을 사용하여 액션의 의도를 전달합니다. <code>primary</code>는 기본 고강조 스타일이며, 낮은 강조를 위해 <code>secondary</code>, <code>neutral</code>, <code>outline</code>, <code>ghost</code>를 사용합니다. <code>surface</code>는 테두리에 카드 색 채움을 더한 것으로, 페이지가 흰색이 아닌 곳에서 버튼이 떠 보여야 할 때 씁니다. 상태 변형(<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>)은 시맨틱 의미를 전달하며, <code>error-ghost</code>는 메뉴나 목록 행에서 쓰는 저강조 파괴적 액션이고, <code>error-outline</code>은 되돌릴 수 없는 동작으로 들어가는 버튼입니다 — 붉은 채움(<code>error</code>)은 그 뒤의 확인 단계에 남겨 둡니다.
   </Section.Text>
   <ComponentExample name="button-variants">
     ```tsx
@@ -48,6 +48,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
+          <Button variant="surface">Surface</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="success">Success</Button>
           <Button variant="error">Error</Button>
@@ -208,7 +209,7 @@ description: 액션 또는 이벤트를 트리거하는 클릭 가능한 요소�
     data={[
       {
         name: "variant",
-        type: '"primary" | "secondary" | "outline" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost" | "error-outline" | "glass"',
+        type: '"primary" | "secondary" | "outline" | "surface" | "ghost" | "success" | "error" | "warning" | "info" | "neutral" | "error-ghost" | "error-outline" | "glass"',
         default: '"primary"',
         description: "액션의 의도를 전달하기 위해 배경색과 텍스트 색상을 제어합니다. 주요 call-to-action에는 `primary`를, 시각적 비중을 줄이려면 `ghost`를 사용하세요.",
       },

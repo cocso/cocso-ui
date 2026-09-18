@@ -60,8 +60,11 @@ public struct CCTypography: View {
 
  macOS has no Dynamic Type, so there the size is the recipe's.
  */
-enum CCTypeScale {
-    static let ceiling: DynamicTypeSize = .accessibility1
+public enum CCTypeScale {
+    /// The largest size the design system's own text grows to. An app that
+    /// draws its own text next to a design-system control can read this to stop
+    /// at the same place.
+    public static let ceiling: DynamicTypeSize = .accessibility1
 }
 
 private struct CCScaledFont: ViewModifier {
@@ -83,7 +86,10 @@ extension View {
     /// `CCTypeScale.ceiling`. Use it for any text or text-like glyph a view
     /// draws; the exceptions are text inside a fixed graphic (an avatar's
     /// initials, a checkbox's tick), which must fit the shape it is drawn in.
-    func ccFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+    /// Public because an app draws text beside these controls — a screen title,
+    /// a row's value — and it should grow with them rather than on a scale of
+    /// its own.
+    public func ccFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
         // The clamp wraps the modifier, so the `@ScaledMetric` inside it reads
         // the clamped size.
         modifier(CCScaledFont(size: size, weight: weight))

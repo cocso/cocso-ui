@@ -121,6 +121,8 @@ class ComponentRenderTest {
         // error-ghost buttons and a grey outline badge without a golden moving.
         CCCard(variant = CCCardVariant.filled) {
             CCButton(title = "Outline on fill", onClick = {}, variant = CCButtonVariant.outline)
+            // The one variant that is meant to be opaque on a tinted surface.
+            CCButton(title = "Surface on fill", onClick = {}, variant = CCButtonVariant.surface)
             CCButton(title = "Error ghost on fill", onClick = {}, variant = CCButtonVariant.errorGhost)
             CCBadge(text = "Outline badge", variant = CCBadgeVariant.outline)
         }
@@ -210,6 +212,7 @@ class ComponentRenderTest {
                 CCButton(title = "Outline", onClick = {}, variant = CCButtonVariant.outline)
                 CCButton(title = "Ghost", onClick = {}, variant = CCButtonVariant.ghost)
                 CCButton(title = "Error ghost", onClick = {}, variant = CCButtonVariant.errorGhost)
+                CCButton(title = "Surface", onClick = {}, variant = CCButtonVariant.surface)
                 Box(Modifier.width(240.dp)) {
                     CCBadge(text = "Badge", variant = CCBadgeVariant.outline, modifier = Modifier.width(200.dp))
                 }
@@ -234,8 +237,18 @@ class ComponentRenderTest {
             Triple("outline button", 48f, 24f + 12f),
             Triple("ghost button", 48f, 24f + 12f + row),
             Triple("error-ghost button", 48f, 24f + 12f + row * 2),
-            Triple("outline badge", 180f, 12f + row * 3 + 10f),
+            Triple("outline badge", 180f, 12f + row * 4 + 10f),
         )
+        // The inverse: `surface` is the variant that fills, and a caller reaches
+        // for it exactly when the page is not white. If it ever goes see-through
+        // the row above stops being a fill and starts being an outline.
+        run {
+            val filled = image.getPixel(px(48f), px(24f + 12f + row * 3))
+            assertTrue(
+                "the surface button shows the page through it: #%08X".format(filled),
+                filled != surface,
+            )
+        }
         for ((name, x, y) in points) {
             val inside = image.getPixel(px(x), px(y))
             assertEquals(

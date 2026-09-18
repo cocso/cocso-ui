@@ -128,6 +128,7 @@ describe("Button variant className", () => {
     "primary",
     "secondary",
     "outline",
+    "surface",
     "ghost",
     "success",
     "error",

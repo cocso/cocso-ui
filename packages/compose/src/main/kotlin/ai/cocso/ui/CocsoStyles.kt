@@ -287,6 +287,7 @@ enum class CCButtonVariant {
     primary,
     secondary,
     outline,
+    surface,
     ghost,
     success,
     error,
@@ -356,6 +357,9 @@ fun cCButtonStyle(
     if (variant == CCButtonVariant.outline) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondary())
     }
+    if (variant == CCButtonVariant.surface) {
+        style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondary())
+    }
     if (variant == CCButtonVariant.ghost) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.interactiveSecondary())
     }
@@ -393,6 +397,12 @@ fun cCButtonStyle(
     }
     if (variant == CCButtonVariant.outline) {
         style = style.copy(bgColor = ComposeColor.Transparent)
+        style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
+        style = style.copy(borderWidth = 1.dp)
+        style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
+    }
+    if (variant == CCButtonVariant.surface) {
+        style = style.copy(bgColor = CocsoTokens.Color.surfacePrimary())
         style = style.copy(fontColor = CocsoTokens.Color.textPrimary())
         style = style.copy(borderWidth = 1.dp)
         style = style.copy(borderColor = CocsoTokens.Color.borderSecondary())
