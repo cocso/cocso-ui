@@ -81,6 +81,14 @@ public struct CCInput: View {
             .padding(.horizontal, style.paddingX ?? 12)
             // A floor, not a height — the value grows with Dynamic Type.
             .frame(minHeight: style.height ?? 36)
+            // The whole field takes the tap, not just the line of text. A
+            // `TextField` is only as tall as its text — measured on an iOS 26
+            // simulator, the `UITextField` filled 18.7 points of the 36-point
+            // field, and a tap on the inset above or below it reached the
+            // hosting view and focused nothing. The button beside it keeps its
+            // own tap: a child's gesture wins over the row's.
+            .contentShape(Rectangle())
+            .onTapGesture { isFocused = true }
             .background(CocsoTokens.Color.surfacePrimary(colorScheme, brand: brand))
             .clipShape(RoundedRectangle(cornerRadius: style.borderRadius ?? 4))
             .overlay(
