@@ -70,6 +70,17 @@ final class ComponentInteractionTests: XCTestCase {
         XCTAssertEqual(taps, 0)
     }
 
+    func testInputTakesTheTapAnywhereInItsField() throws {
+        // A `TextField` is only as tall as its text: measured on an iOS 26
+        // simulator the `UITextField` filled 18.7 points of the 36-point field,
+        // and a tap 3 points inside the field's top edge focused nothing — the
+        // ring stayed thin and no keyboard came up. The field row carries the
+        // tap now; this fails if that gesture is taken off.
+        let view = CCInput(label: "Email", text: .constant("name@cocso.ai"))
+        let row = try view.inspect().find(ViewType.HStack.self)
+        XCTAssertNoThrow(try row.callOnTapGesture())
+    }
+
     func testCheckboxTogglesOn() throws {
         var status: CCCheckboxStatus?
         let view = CCCheckbox(label: "Agree", status: .off) { status = $0 }
