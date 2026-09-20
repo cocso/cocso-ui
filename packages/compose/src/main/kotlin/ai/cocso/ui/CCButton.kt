@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color as ComposeColor
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.graphicsLayer
@@ -72,8 +71,12 @@ fun CCButton(
     // `easing-default`) rather than on the frame the finger lands, and the
     // button gives a little under it — the one thing a touch has that a
     // pointer does not.
+    // An inactive button is drawn, not faded: the recipe gives the fill and the
+    // ink, so the label keeps its contrast. Fading the whole control took the
+    // label down with the fill — 1.76:1.
     val background by animateColorAsState(
-        (if (isPressed) style.bgColorPressed else null)
+        (if (!enabled) style.bgColorDisabled else null)
+            ?: (if (isPressed) style.bgColorPressed else null)
             ?: style.bgColor
             // An absent background is no background, as it is on SwiftUI. This
             // filled `surface-primary`: a white slab behind the outline and
@@ -83,7 +86,8 @@ fun CCButton(
         label = "button-background",
     )
     val foreground by animateColorAsState(
-        (if (isPressed) style.fontColorPressed else null)
+        (if (!enabled) style.fontColorDisabled else null)
+            ?: (if (isPressed) style.fontColorPressed else null)
             ?: style.fontColor
             ?: CocsoTokens.Color.textPrimary(),
         animationSpec = CCMotion.colour(),
@@ -94,14 +98,6 @@ fun CCButton(
         animationSpec = CCMotion.movement(),
         label = "button-scale",
     )
-    // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
-    // button the same way rather than restating every variant.
-    val dim by animateFloatAsState(
-        if (enabled) 1f else 0.4f,
-        animationSpec = CCMotion.colour(),
-        label = "button-enabled",
-    )
-
     val alignment = when (align) {
         // `between` spreads content in CSS, which has no single alignment here.
         // It maps to start, and a caller wanting the spread lays it out itself.
@@ -130,11 +126,6 @@ fun CCButton(
             // no length to travel as; before it arrived as a flag this drew a
             // square.
             //
-            // This comes before `background`: a Compose modifier affects what is
-            // drawn after it in the chain, so `alpha` placed below the fill dimmed
-            // only the label and left the fill at full strength — a disabled
-            // primary button was solid black on Android and grey on iOS.
-            .alpha(dim)
             .onFocusChanged { isFocused = it.isFocused }
             .clickable(
                 enabled = enabled && !loading,

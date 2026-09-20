@@ -39,6 +39,13 @@ data:
       values:
         light: $color.neutral-400
         dark: $color.neutral-600
+    # 비활성 채움 위의 글자. `text.disabled` 는 페이지 위의 흐린 글자이고, 그
+    # 값을 비활성 채움 위에 올리면 라이트 2.51 · 다크 2.68 로 읽히지 않는다.
+    # 이 값은 그 채움 위에서 라이트 5.13 · 다크 6.03 이다.
+    $color.text.on-disabled:
+      values:
+        light: $color.neutral-600
+        dark: $color.neutral-300
     $color.text.on-primary:
       values:
         light: $color.white
@@ -197,6 +204,14 @@ data:
         light: $color.neutral-200
         dark: $color.neutral-700
     $color.interactive.neutral:
+      values:
+        light: $color.neutral-100
+        dark: $color.neutral-800
+    # 비활성 컨트롤의 채움. 지금까지 비활성은 컨트롤 전체에 불투명도 0.4 를
+    # 걸어 만들었고, 그러면 채움과 글자가 함께 바탕으로 녹아 글자가 1.76 까지
+    # 떨어졌다 — 첫 실행 화면의 버튼이 읽히지 않았다. 채움과 글자를 각각의
+    # 토큰으로 두면 대비를 값으로 정할 수 있다.
+    $color.interactive.disabled:
       values:
         light: $color.neutral-100
         dark: $color.neutral-800

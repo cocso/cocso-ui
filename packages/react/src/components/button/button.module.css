@@ -79,9 +79,22 @@
     outline-offset: 2px;
   }
 
+  /* Drawn, not faded. `opacity: 0.4` over the whole button took the label
+     down with the fill — a disabled primary button's label measured 1.76:1.
+     The recipe gives the inactive fill and its ink; a see-through variant has
+     no disabled fill and keeps its own background. */
   .button[disabled] {
+    --cocso-button-bg-color-disabled: inherit;
+    --cocso-button-font-color-disabled: inherit;
+    color: var(
+      --cocso-button-font-color-disabled,
+      var(--cocso-button-font-color)
+    );
     cursor: not-allowed;
-    opacity: 0.4;
+    background-color: var(
+      --cocso-button-bg-color-disabled,
+      var(--cocso-button-bg-color)
+    );
   }
 
   .svgOnly {

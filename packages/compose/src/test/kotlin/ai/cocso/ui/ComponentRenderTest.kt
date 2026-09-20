@@ -18,6 +18,7 @@ import android.graphics.Canvas
 import android.graphics.Bitmap
 import java.io.File
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.unit.dp
@@ -129,6 +130,8 @@ class ComponentRenderTest {
         // The spinner on the fill: a Material indicator in the system grey all
         // but vanished on the primary fill.
         CCButton(title = "Loading", onClick = {}, loading = true)
+        // Drawn rather than faded — the recipe's inactive fill and its ink.
+        CCButton(title = "Disabled", onClick = {}, enabled = false)
         CCBadge(text = "Badge")
         CCBadge(text = "Outline", variant = CCBadgeVariant.outline)
         CCCard { CCTypography("Card") }
@@ -289,6 +292,59 @@ class ComponentRenderTest {
         val px = image.getPixel(image.width / 8, image.height / 2)
         val r = (px shr 16) and 0xFF; val g = (px shr 8) and 0xFF; val b = px and 0xFF
         assertTrue("primary 가 파랑이 아니다: #%02X%02X%02X".format(r, g, b), b > 0xC0 && r < 0x60 && g in 0x50..0x90)
+    }
+
+    /**
+     * A disabled button is drawn, not faded.
+     *
+     * Every platform made an inactive control with `opacity: 0.4` over the whole
+     * button, which takes the label down with the fill: the app measured a
+     * disabled primary button's label at 1.76:1, on the two screens that open
+     * it. The recipe now gives the inactive fill and its ink, and this reads
+     * both back out of the pixels.
+     */
+    @Test
+    fun aDisabledButtonKeepsItsLabelReadable() {
+        var host: View? = null
+        composeRule.setContent {
+            val view = LocalView.current
+            SideEffect { host = view }
+            Column(
+                Modifier.width(320.dp).background(CocsoTokens.Color.surfacePrimary()).padding(16.dp),
+            ) {
+                CCButton(title = "Disabled", onClick = {}, enabled = false)
+            }
+        }
+        composeRule.waitForIdle()
+        val view = requireNotNull(host)
+        val image = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(image))
+
+        val bounds = composeRule.onNodeWithText("Disabled").fetchSemanticsNode().boundsInRoot
+        fun channels(pixel: Int) = listOf(16, 8, 0).map { ((pixel shr it) and 0xFF) / 255.0 }
+        fun luminance(pixel: Int): Double {
+            val (r, g, b) = channels(pixel).map { c ->
+                if (c <= 0.03928) c / 12.92 else Math.pow((c + 0.055) / 1.055, 2.4)
+            }
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b
+        }
+        // The fill, sampled inside the pill and clear of the label; and the ink,
+        // the darkest pixel the label draws.
+        val fill = image.getPixel(bounds.left.toInt() - 8, bounds.center.y.toInt())
+        var ink = fill
+        for (x in bounds.left.toInt() until bounds.right.toInt()) {
+            for (y in bounds.top.toInt() until bounds.bottom.toInt()) {
+                val pixel = image.getPixel(x, y)
+                if (luminance(pixel) < luminance(ink)) ink = pixel
+            }
+        }
+        val light = maxOf(luminance(fill), luminance(ink))
+        val dark = minOf(luminance(fill), luminance(ink))
+        val ratio = (light + 0.05) / (dark + 0.05)
+        assertTrue(
+            "the disabled label reads %.2f:1 on its fill (#%08X on #%08X)".format(ratio, ink, fill),
+            ratio >= 4.5,
+        )
     }
 
     /**

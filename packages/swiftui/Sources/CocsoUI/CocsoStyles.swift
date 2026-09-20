@@ -325,6 +325,8 @@ public struct CCButtonStyle: Equatable, Sendable {
     public var fontWeight: Font.Weight?
     public var bgColorPressed: SwiftUI.Color?
     public var fontColorPressed: SwiftUI.Color?
+    public var bgColorDisabled: SwiftUI.Color?
+    public var fontColorDisabled: SwiftUI.Color?
     public var bgColor: SwiftUI.Color?
     public var fontColor: SwiftUI.Color?
     public var borderWidth: CGFloat?
@@ -388,6 +390,53 @@ public struct CCButtonStyle: Equatable, Sendable {
         }
         if variant == .glass {
             style.bgColorPressed = CocsoTokens.Color.surfaceGlassActive(scheme, brand: brand)
+        }
+        if variant == .primary {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .secondary {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .success {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .error {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .warning {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .info {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .neutral {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .glass {
+            style.bgColorDisabled = CocsoTokens.Color.interactiveDisabled(scheme, brand: brand)
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .outline {
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .surface {
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .ghost {
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .errorGhost {
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
+        }
+        if variant == .errorOutline {
+            style.fontColorDisabled = CocsoTokens.Color.textOnDisabled(scheme, brand: brand)
         }
         if variant == .primary {
             style.bgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)

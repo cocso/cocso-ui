@@ -148,6 +148,7 @@
   --color-text-secondary: var(--cocso-color-text-secondary);
   --color-text-tertiary: var(--cocso-color-text-tertiary);
   --color-text-disabled: var(--cocso-color-text-disabled);
+  --color-text-on-disabled: var(--cocso-color-text-on-disabled);
   --color-text-on-primary: var(--cocso-color-text-on-primary);
   --color-text-on-success: var(--cocso-color-text-on-success);
   --color-text-on-danger: var(--cocso-color-text-on-danger);
@@ -177,6 +178,7 @@
   --color-interactive-secondary: var(--cocso-color-interactive-secondary);
   --color-interactive-secondary-hover: var(--cocso-color-interactive-secondary-hover);
   --color-interactive-neutral: var(--cocso-color-interactive-neutral);
+  --color-interactive-disabled: var(--cocso-color-interactive-disabled);
   --color-interactive-neutral-hover: var(--cocso-color-interactive-neutral-hover);
   --color-interactive-neutral-active: var(--cocso-color-interactive-neutral-active);
   --color-interactive-danger: var(--cocso-color-interactive-danger);

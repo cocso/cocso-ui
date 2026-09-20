@@ -302,6 +302,9 @@ public enum CocsoTokens {
         public static func interactiveDangerSubtleHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x260903) : SwiftUI.Color(hex: 0xFDEFEC)
         }
+        public static func interactiveDisabled(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x33363D) : SwiftUI.Color(hex: 0xE6E8EA)
+        }
         public static func interactiveInfo(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x256EF4) : SwiftUI.Color(hex: 0x256EF4)
         }
@@ -451,6 +454,9 @@ public enum CocsoTokens {
         }
         public static func textOnDanger(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)
+        }
+        public static func textOnDisabled(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0xB1B8BE) : SwiftUI.Color(hex: 0x58616A)
         }
         public static func textOnInfo(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF) : SwiftUI.Color(hex: 0xFFFFFF)

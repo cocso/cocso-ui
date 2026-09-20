@@ -278,6 +278,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0xFF260903) else ComposeColor(0xFFFDEFEC)
         @Composable
         @ReadOnlyComposable
+        fun interactiveDisabled(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF33363D) else ComposeColor(0xFFE6E8EA)
+        @Composable
+        @ReadOnlyComposable
         fun interactiveInfo(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF256EF4) else ComposeColor(0xFF256EF4)
         @Composable
@@ -440,6 +444,10 @@ object CocsoTokens {
         @ReadOnlyComposable
         fun textOnDanger(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFFFFFFFF) else ComposeColor(0xFFFFFFFF)
+        @Composable
+        @ReadOnlyComposable
+        fun textOnDisabled(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFFB1B8BE) else ComposeColor(0xFF58616A)
         @Composable
         @ReadOnlyComposable
         fun textOnInfo(): ComposeColor =

@@ -132,8 +132,12 @@ public struct CCButton: View {
             // pill grows with it rather than clipping it. At the default size
             // the label is shorter than every recipe height, so nothing moves.
             .frame(minHeight: resolved.height)
+            // An inactive button is drawn, not faded: the recipe gives the
+            // fill and the ink, so the label keeps its contrast. Fading the
+            // whole control took the label down with the fill — 1.76:1.
             .foregroundStyle(
-                (isPressed ? resolved.fontColorPressed : nil)
+                (isEnabled ? nil : resolved.fontColorDisabled)
+                    ?? (isPressed ? resolved.fontColorPressed : nil)
                     ?? resolved.fontColor
                     ?? CocsoTokens.Color.textPrimary(colorScheme, brand: brand)
             )
@@ -141,7 +145,10 @@ public struct CCButton: View {
             // with the recipe's tint, pressed tint included — see `GlassPane`. Every
             // other variant is a plain fill.
             .background {
-                let fill = (isPressed ? resolved.bgColorPressed : nil) ?? resolved.bgColor ?? .clear
+                let fill = (isEnabled ? nil : resolved.bgColorDisabled)
+                ?? (isPressed ? resolved.bgColorPressed : nil)
+                ?? resolved.bgColor
+                ?? .clear
                 if variant == .glass {
                     GlassPane(
                         shape: Self.shape(resolved),
@@ -193,9 +200,6 @@ public struct CCButton: View {
         .focused($isFocused)
         .scaleEffect(isPressed ? CCMotion.pressedScale : 1)
         .animation(CCMotion.movement(reduced: reduceMotion), value: isPressed)
-        // WCAG 1.4.3 exempts an inactive control, and the web dims a disabled
-        // button the same way rather than restating every variant.
-        .opacity(isEnabled ? 1 : 0.4)
         .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityLabel(title)
         .accessibilityAddTraits(.isButton)
