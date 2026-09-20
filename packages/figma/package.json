@@ -1,6 +1,6 @@
 {
   "name": "@cocso-ui/figma",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "scripts": {
     "generate": "tsx scripts/generate-tokens.ts",
