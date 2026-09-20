@@ -22,20 +22,40 @@ object CocsoBrandCocso {
             if (isSystemInDarkTheme()) ComposeColor(0xFF3A3E46) else ComposeColor(0xFFE6E8EA)
         @Composable
         @ReadOnlyComposable
+        fun feedbackDangerBorder(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFFDE3412) else ComposeColor(0xFFF7AFA1)
+        @Composable
+        @ReadOnlyComposable
         fun feedbackDangerSubtle(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF493231) else ComposeColor(0xFFFDEFEC)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackInfoBorder(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF256EF4) else ComposeColor(0xFFB1CEFB)
         @Composable
         @ReadOnlyComposable
         fun feedbackInfoSubtle(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF2B3951) else ComposeColor(0xFFECF2FE)
         @Composable
         @ReadOnlyComposable
+        fun feedbackSuccessBorder(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF228738) else ComposeColor(0xFFA9DAB4)
+        @Composable
+        @ReadOnlyComposable
         fun feedbackSuccessSubtle(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF293F34) else ComposeColor(0xFFEAF6EC)
         @Composable
         @ReadOnlyComposable
+        fun feedbackWarningBorder(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF9E6A00) else ComposeColor(0xFFFFC95C)
+        @Composable
+        @ReadOnlyComposable
         fun feedbackWarningSubtle(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF413925) else ComposeColor(0xFFFFF3DB)
+        @Composable
+        @ReadOnlyComposable
+        fun feedbackWarningText(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFFE49410) else ComposeColor(0xFF8A5C00)
         @Composable
         @ReadOnlyComposable
         fun interactivePrimary(): ComposeColor =
@@ -51,7 +71,7 @@ object CocsoBrandCocso {
         @Composable
         @ReadOnlyComposable
         fun interactivePrimaryMuted(): ComposeColor =
-            if (isSystemInDarkTheme()) ComposeColor(0xFF083891) else ComposeColor(0xFFB1CEFB)
+            if (isSystemInDarkTheme()) ComposeColor(0xFF1E2A45) else ComposeColor(0xFFB1CEFB)
         @Composable
         @ReadOnlyComposable
         fun primary100(): ComposeColor =

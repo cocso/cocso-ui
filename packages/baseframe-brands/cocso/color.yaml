@@ -58,8 +58,13 @@ data:
     # light, so a muted control was pixel-identical to a live one. The base has
     # the relationship right (primary-950 against a mid primary-500); the brand
     # overlay lost it.
+    #
+    # 다크가 `info-700` 이던 동안에는 `interactive.primary-active`(눌림)와
+    # 바이트 단위로 같았다 — 빈 입력칸 옆 보내기 버튼이 눌린 것처럼, 즉 살아
+    # 있는 것처럼 보였다. 채도를 뺀 남색은 활성(2.50)과도 눌림(1.35)과도
+    # 구별되고 페이지 위에서 1.04 로 가라앉는다.
     $color.interactive.primary-muted:
-      values: { light: $color.info-200, dark: $color.info-700 }
+      values: { light: $color.info-200, dark: "#1E2A45" }
     # 채움이 두 테마 모두 파랑이므로 그 위 글자도 두 테마 모두 white 다.
     # 베이스는 다크에서 neutral-950 인데, 그것은 채움이 밝게 뒤집힐 때의 값이다.
     $color.text.on-primary:
@@ -100,3 +105,24 @@ data:
       values: { light: $color.warning-50, dark: "#413925" }
     $color.feedback.info-subtle:
       values: { light: $color.info-50, dark: "#2B3951" }
+
+    # --- 다크에서 상태가 서로 구별되게 ---
+    #
+    # 되돌릴 수 없는 동작의 테두리. 베이스의 다크 값은 램프의 `*-800` 이고,
+    # 밝힌 표면 위에서 danger 는 페이지 1.12 · 카드 1.28 까지 내려가 규칙이
+    # 글자색 하나에만 걸렸다. 램프에서 세 칸 위인 `*-500` 이 네 색 모두
+    # 3:1(WCAG 1.4.11)을 처음 넘는 칸이다 — 페이지 3.19~3.26, 카드 3.64~3.72.
+    $color.feedback.danger-border:
+      values: { light: $color.danger-200, dark: $color.danger-500 }
+    $color.feedback.success-border:
+      values: { light: $color.success-200, dark: $color.success-500 }
+    $color.feedback.warning-border:
+      values: { light: $color.warning-200, dark: $color.warning-500 }
+    $color.feedback.info-border:
+      values: { light: $color.info-200, dark: $color.info-500 }
+    # 경고 글자. 다크에서 `interactive-warning` 과 같은 값(#FFB114)이라 카드 위
+    # 9.30 으로, 위험(danger-text 6.89)보다 35% 더 크게 외쳤다 — 게이트 화면에서
+    # "대기 중"이 "미충족"을 눌렀다. 한 단 낮춘다. 제안받은 #C78500 은 경고
+    # 패널(`feedback-warning-subtle`) 위에서 3.69 라 AA 에 못 미쳐 쓰지 못한다.
+    $color.feedback.warning-text:
+      values: { light: $color.warning-600, dark: "#E49410" }

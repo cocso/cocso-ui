@@ -29,7 +29,7 @@ const SWIFT_TEXT_PRIMARY_BODY =
   /public static func textPrimary\([^{]*\{([\s\S]*?)\n {8}\}/;
 // `name(_ scheme:) { scheme == .dark ? Color(hex: 0xA) : Color(hex: 0xB) }`.
 const SWIFT_SCHEME_BODY =
-  /public static func (\w+)\(_ scheme: ColorScheme\)[^{]*\{\s*scheme == \.dark \? SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\) : SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\)/g;
+  /public static func (\w+)\(\s*_ scheme: ColorScheme[^)]*\)[^{]*\{\s*(?:return )?scheme == \.dark \? SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\) : SwiftUI\.Color\(hex: (0x[0-9A-Fa-f]+)\)/g;
 const STATE_SUFFIXES = ["Hover", "Active", "Muted", "Subtle", "Disabled"];
 const WHITE_ON_PRIMARY_BOTH =
   /textOnPrimary\(_ scheme: ColorScheme\)[\s\S]*?0xFFFFFF\) : SwiftUI\.Color\(hex: 0xFFFFFF\)/;
@@ -89,6 +89,45 @@ describe.each(BRANDS)("brand %s", (brand) => {
     );
     const overlay = names(output.swift, SWIFT_NAMES);
     expect([...overlay].filter((n) => !base.has(n))).toEqual([]);
+  });
+
+  it("gives a token's states values you can tell apart from each other", () => {
+    // `interactive.primary-muted` and `interactive.primary-active` were the same
+    // byte in dark, so a disabled send button read as a pressed one — an
+    // inactive control that looks live. The resting-vs-state check above could
+    // not see it: both differed from `interactive.primary`.
+    const values = new Map<string, { dark: string; light: string }>();
+    for (const [, name, dark, light] of output.swift.matchAll(
+      SWIFT_SCHEME_BODY
+    )) {
+      values.set(name, { dark, light });
+    }
+    const groups = new Map<string, string[]>();
+    for (const name of values.keys()) {
+      const suffix = STATE_SUFFIXES.find((s) => name.endsWith(s));
+      if (!suffix) {
+        continue;
+      }
+      const resting = name.slice(0, -suffix.length);
+      if (!values.has(resting)) {
+        continue;
+      }
+      groups.set(resting, [...(groups.get(resting) ?? []), name]);
+    }
+    expect([...groups.keys()].length).toBeGreaterThan(0);
+    for (const [resting, states] of groups) {
+      for (const scheme of ["dark", "light"] as const) {
+        const seen = new Map<string, string>();
+        for (const state of states) {
+          const value = values.get(state)?.[scheme] as string;
+          expect(
+            seen.get(value),
+            `${state} is ${seen.get(value)} in ${scheme} (both states of ${resting})`
+          ).toBeUndefined();
+          seen.set(value, state);
+        }
+      }
+    }
   });
 
   it("carries nothing it could not express", () => {
@@ -172,6 +211,15 @@ describe("brand cocso dark surfaces", () => {
     textPrimary: "0xF4F5F6",
     textSecondary: "0x8A949E",
   };
+  // Everything else the brand leaves to the base, read from the base rather
+  // than copied here, so a base change moves these checks with it.
+  const baseDark = new Map<string, string>();
+  for (const [, name, dark] of fs.readFileSync(
+    path.join(REPO_ROOT, "packages/swiftui/Sources/CocsoUI/CocsoTokens.swift"),
+    "utf-8"
+  ).matchAll(SWIFT_SCHEME_BODY)) {
+    baseDark.set(name, dark);
+  }
 
   function channels(hex: string): number[] {
     const digits = hex.slice(2);
@@ -221,6 +269,36 @@ describe("brand cocso dark surfaces", () => {
     const divider = values.get("borderSecondary") as string;
     expect(contrast(card(), divider)).toBeGreaterThanOrEqual(1.5);
     expect(contrast(page(), divider)).toBeGreaterThanOrEqual(1.3);
+  });
+
+  it.each([
+    "feedbackDangerBorder",
+    "feedbackSuccessBorder",
+    "feedbackWarningBorder",
+    "feedbackInfoBorder",
+  ])("%s is a boundary you can see on both dark surfaces", (token) => {
+    // WCAG 1.4.11 asks 3:1 of a control's boundary. The base's dark values are
+    // the ramp's `*-800`: on the lifted surfaces danger measured 1.12 on the
+    // page, so "an irreversible action is entered through an outlined button"
+    // rested on the label's colour alone.
+    const border = values.get(token) as string;
+    expect(contrast(page(), border)).toBeGreaterThanOrEqual(3);
+    expect(contrast(card(), border)).toBeGreaterThanOrEqual(3);
+  });
+
+  it("does not let the warning ink outshout the danger ink", () => {
+    // Both are read on the same surfaces, and the gate screen puts them side by
+    // side: "waiting" in warning, "unmet" in danger. In dark the warning ink was
+    // `interactive-warning` — 9.30 on the card against danger's 6.89 — so the
+    // row the reader cannot act on shouted the louder.
+    const warning = values.get("feedbackWarningText") as string;
+    const danger = baseDark.get("feedbackDangerText") as string;
+    expect(contrast(card(), warning)).toBeLessThanOrEqual(
+      contrast(card(), danger)
+    );
+    // And it still has to be readable on its own panel.
+    const panel = values.get("feedbackWarningSubtle") as string;
+    expect(contrast(panel, warning)).toBeGreaterThanOrEqual(4.5);
   });
 
   it.each([

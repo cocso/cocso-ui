@@ -25,17 +25,32 @@ public enum CocsoBrandCocso {
         public static func borderSecondary(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x3A3E46) : SwiftUI.Color(hex: 0xE6E8EA)
         }
+        public static func feedbackDangerBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0xDE3412) : SwiftUI.Color(hex: 0xF7AFA1)
+        }
         public static func feedbackDangerSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x493231) : SwiftUI.Color(hex: 0xFDEFEC)
+        }
+        public static func feedbackInfoBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x256EF4) : SwiftUI.Color(hex: 0xB1CEFB)
         }
         public static func feedbackInfoSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x2B3951) : SwiftUI.Color(hex: 0xECF2FE)
         }
+        public static func feedbackSuccessBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x228738) : SwiftUI.Color(hex: 0xA9DAB4)
+        }
         public static func feedbackSuccessSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x293F34) : SwiftUI.Color(hex: 0xEAF6EC)
         }
+        public static func feedbackWarningBorder(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x9E6A00) : SwiftUI.Color(hex: 0xFFC95C)
+        }
         public static func feedbackWarningSubtle(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x413925) : SwiftUI.Color(hex: 0xFFF3DB)
+        }
+        public static func feedbackWarningText(_ scheme: ColorScheme) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0xE49410) : SwiftUI.Color(hex: 0x8A5C00)
         }
         public static func interactivePrimary(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x2260D3) : SwiftUI.Color(hex: 0x256EF4)
@@ -47,7 +62,7 @@ public enum CocsoBrandCocso {
             scheme == .dark ? SwiftUI.Color(hex: 0x0B50D0) : SwiftUI.Color(hex: 0x0B50D0)
         }
         public static func interactivePrimaryMuted(_ scheme: ColorScheme) -> SwiftUI.Color {
-            scheme == .dark ? SwiftUI.Color(hex: 0x083891) : SwiftUI.Color(hex: 0xB1CEFB)
+            scheme == .dark ? SwiftUI.Color(hex: 0x1E2A45) : SwiftUI.Color(hex: 0xB1CEFB)
         }
         public static func primary100(_ scheme: ColorScheme) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xD8E5FD) : SwiftUI.Color(hex: 0xD8E5FD)
