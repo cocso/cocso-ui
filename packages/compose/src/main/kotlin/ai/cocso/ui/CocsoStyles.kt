@@ -324,6 +324,8 @@ data class CCButtonStyle(
     val fontWeight: FontWeight? = null,
     val bgColorPressed: ComposeColor? = null,
     val fontColorPressed: ComposeColor? = null,
+    val bgColorDisabled: ComposeColor? = null,
+    val fontColorDisabled: ComposeColor? = null,
     val bgColor: ComposeColor? = null,
     val fontColor: ComposeColor? = null,
     val borderWidth: Dp? = null,
@@ -386,6 +388,53 @@ fun cCButtonStyle(
     }
     if (variant == CCButtonVariant.glass) {
         style = style.copy(bgColorPressed = CocsoTokens.Color.surfaceGlassActive())
+    }
+    if (variant == CCButtonVariant.primary) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.secondary) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.success) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.error) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.warning) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.info) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.neutral) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.glass) {
+        style = style.copy(bgColorDisabled = CocsoTokens.Color.interactiveDisabled())
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.outline) {
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.surface) {
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.ghost) {
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.errorGhost) {
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
+    }
+    if (variant == CCButtonVariant.errorOutline) {
+        style = style.copy(fontColorDisabled = CocsoTokens.Color.textOnDisabled())
     }
     if (variant == CCButtonVariant.primary) {
         style = style.copy(bgColor = CocsoTokens.Color.interactivePrimary())

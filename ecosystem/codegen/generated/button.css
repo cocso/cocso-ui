@@ -9,6 +9,8 @@
   --cocso-button-font-color: var(--cocso-color-text-on-primary);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-primary-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-primary-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-secondary) {
@@ -18,6 +20,8 @@
   --cocso-button-font-color-hover: var(--cocso-color-text-primary);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary-hover);
   --cocso-button-font-color-active: var(--cocso-color-text-primary);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-outline) {
@@ -26,6 +30,7 @@
   --cocso-button-border: 1px solid var(--cocso-color-border-secondary);
   --cocso-button-bg-color-hover: var(--cocso-color-surface-secondary);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-surface) {
@@ -34,6 +39,7 @@
   --cocso-button-border: 1px solid var(--cocso-color-border-secondary);
   --cocso-button-bg-color-hover: var(--cocso-color-surface-secondary);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-ghost) {
@@ -41,6 +47,7 @@
   --cocso-button-font-color: var(--cocso-color-text-primary);
   --cocso-button-bg-color-hover: var(--cocso-color-surface-secondary);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-secondary);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-success) {
@@ -48,6 +55,8 @@
   --cocso-button-font-color: var(--cocso-color-text-on-success);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-success-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-success-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-error) {
@@ -55,6 +64,8 @@
   --cocso-button-font-color: var(--cocso-color-text-on-danger);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-warning) {
@@ -62,6 +73,8 @@
   --cocso-button-font-color: var(--cocso-color-text-on-warning);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-warning-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-warning-hover);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-info) {
@@ -69,6 +82,8 @@
   --cocso-button-font-color: var(--cocso-color-text-on-info);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-info-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-info-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-neutral) {
@@ -76,6 +91,8 @@
   --cocso-button-font-color: var(--cocso-color-text-primary);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-neutral-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-neutral-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-error-ghost) {
@@ -83,6 +100,7 @@
   --cocso-button-font-color: var(--cocso-color-feedback-danger-text);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-subtle-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-error-outline) {
@@ -91,6 +109,7 @@
   --cocso-button-border: 1px solid var(--cocso-color-feedback-danger-border);
   --cocso-button-bg-color-hover: var(--cocso-color-interactive-danger-subtle-hover);
   --cocso-button-bg-color-active: var(--cocso-color-interactive-danger-subtle-active);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--variant-glass) {
@@ -99,6 +118,8 @@
   --cocso-button-border: 1px solid var(--cocso-color-border-glass);
   --cocso-button-bg-color-hover: var(--cocso-color-surface-glass-active);
   --cocso-button-bg-color-active: var(--cocso-color-surface-glass-active);
+  --cocso-button-bg-color-disabled: var(--cocso-color-interactive-disabled);
+  --cocso-button-font-color-disabled: var(--cocso-color-text-on-disabled);
 }
 
 .cocso-button:where(.cocso-button--size-x-large) {

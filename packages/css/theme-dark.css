@@ -25,6 +25,7 @@
   --cocso-color-text-secondary: var(--cocso-color-neutral-400);
   --cocso-color-text-tertiary: var(--cocso-color-neutral-500);
   --cocso-color-text-disabled: var(--cocso-color-neutral-600);
+  --cocso-color-text-on-disabled: var(--cocso-color-neutral-300);
   --cocso-color-text-on-primary: var(--cocso-color-neutral-950);
   --cocso-color-text-on-success: var(--cocso-color-white);
   --cocso-color-text-on-danger: var(--cocso-color-white);
@@ -54,6 +55,7 @@
   --cocso-color-interactive-secondary: var(--cocso-color-neutral-800);
   --cocso-color-interactive-secondary-hover: var(--cocso-color-neutral-700);
   --cocso-color-interactive-neutral: var(--cocso-color-neutral-800);
+  --cocso-color-interactive-disabled: var(--cocso-color-neutral-800);
   --cocso-color-interactive-neutral-hover: var(--cocso-color-neutral-700);
   --cocso-color-interactive-neutral-active: var(--cocso-color-neutral-600);
   --cocso-color-interactive-danger: var(--cocso-color-danger-500);

@@ -244,6 +244,72 @@ export const buttonRecipe = defineRecipe({
         glass: { root: { bgColor: "surface-glass-active" } },
       },
     },
+    // An inactive control, drawn rather than faded. Every platform made this
+    // with `opacity: 0.4` over the whole button, which takes the label down
+    // with the fill: a disabled primary button's label measured 1.76:1, and the
+    // two screens that open the app — the terms agreement and the dealer code —
+    // are where it showed. Separating the fill from the label puts the contrast
+    // in values: 5.13 in light, 6.03 in dark.
+    //
+    // The see-through variants keep their own background and change only their
+    // ink; a disabled `ghost` is still see-through, as it is on the web.
+    disabled: {
+      variant: {
+        primary: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        secondary: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        success: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        error: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        warning: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        info: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        neutral: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        glass: {
+          root: {
+            bgColor: "interactive-disabled",
+            fontColor: "text-on-disabled",
+          },
+        },
+        outline: { root: { fontColor: "text-on-disabled" } },
+        surface: { root: { fontColor: "text-on-disabled" } },
+        ghost: { root: { fontColor: "text-on-disabled" } },
+        "error-ghost": { root: { fontColor: "text-on-disabled" } },
+        "error-outline": { root: { fontColor: "text-on-disabled" } },
+      },
+    },
   },
 
   defaultVariants: {

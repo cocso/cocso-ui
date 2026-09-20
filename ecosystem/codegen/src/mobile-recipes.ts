@@ -391,11 +391,16 @@ function prepare(
 
   take(recipe.base);
 
-  // A state a finger can produce. `hover` has no touch equivalent, and the
-  // web's CSS overrides the recipe's `focus` with `focus-ring` anyway — the
-  // views draw that ring themselves. Both are refused by name rather than
-  // dropped, so a new state cannot arrive unnoticed.
-  const TOUCHABLE_STATES: Record<string, string> = { active: "Pressed" };
+  // A state the view can resolve to values. `active` is the press; `disabled`
+  // is the control the recipe draws rather than fades — both arrive as colours
+  // the view reads. `hover` has no touch equivalent, and the web's CSS
+  // overrides the recipe's `focus` with `focus-ring` anyway — the views draw
+  // that ring themselves. Both are refused by name rather than dropped, so a
+  // new state cannot arrive unnoticed.
+  const TOUCHABLE_STATES: Record<string, string> = {
+    active: "Pressed",
+    disabled: "Disabled",
+  };
   for (const [state, dimensions] of Object.entries(recipe.states ?? {})) {
     const suffix = TOUCHABLE_STATES[state];
     if (!suffix) {
