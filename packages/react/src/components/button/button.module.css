@@ -83,7 +83,14 @@
      down with the fill — a disabled primary button's label measured 1.76:1.
      The recipe gives the inactive fill and its ink; a see-through variant has
      no disabled fill and keeps its own background. */
-  .button[disabled] {
+  .button[disabled][aria-busy="true"] {
+    cursor: progress;
+  }
+
+  /* Only a button that is actually unavailable. `loading` also sets
+     `disabled` — a working button is not an inactive one, and the mobile
+     views keep the variant's fill under the spinner too. */
+  .button[disabled]:not([aria-busy="true"]) {
     --cocso-button-bg-color-disabled: inherit;
     --cocso-button-font-color-disabled: inherit;
     color: var(
