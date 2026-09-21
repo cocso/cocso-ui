@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color as ComposeColor
 import android.graphics.BitmapFactory
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.runtime.SideEffect
@@ -292,6 +295,47 @@ class ComponentRenderTest {
         val px = image.getPixel(image.width / 8, image.height / 2)
         val r = (px shr 16) and 0xFF; val g = (px shr 8) and 0xFF; val b = px and 0xFF
         assertTrue("primary 가 파랑이 아니다: #%02X%02X%02X".format(r, g, b), b > 0xC0 && r < 0x60 && g in 0x50..0x90)
+    }
+
+    /**
+     * A brand glyph beside a label keeps its own colour.
+     *
+     * The web colours a `prefix` by styling the node it is handed; here the
+     * icon is an `ImageVector` the view tints, so without an override a
+     * Kakao or Naver mark arrives in the label's ink and loses the brand.
+     */
+    @Test
+    fun aButtonDrawsItsPrefixInTheColourItIsGiven() {
+        val brand = ComposeColor(0xFFFEE500) // 카카오 노랑
+        var host: View? = null
+        composeRule.setContent {
+            val view = LocalView.current
+            SideEffect { host = view }
+            Column(Modifier.width(320.dp).background(CocsoTokens.Color.surfacePrimary()).padding(16.dp)) {
+                CCButton(
+                    title = "카카오로 시작하기",
+                    onClick = {},
+                    variant = CCButtonVariant.outline,
+                    prefix = Icons.Filled.Star,
+                    prefixColor = brand,
+                )
+            }
+        }
+        composeRule.waitForIdle()
+        val view = requireNotNull(host)
+        val image = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        view.draw(Canvas(image))
+        var found = false
+        for (x in 0 until image.width) {
+            for (y in 0 until image.height) {
+                val pixel = image.getPixel(x, y)
+                val r = (pixel shr 16) and 0xFF
+                val g = (pixel shr 8) and 0xFF
+                val b = pixel and 0xFF
+                if (r > 0xF0 && g > 0xD0 && b < 0x40) found = true
+            }
+        }
+        assertTrue("the prefix was not drawn in the colour it was given", found)
     }
 
     /**
