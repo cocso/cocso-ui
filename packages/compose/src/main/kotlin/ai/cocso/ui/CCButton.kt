@@ -56,7 +56,13 @@ fun CCButton(
     loading: Boolean = false,
     enabled: Boolean = true,
     prefix: ImageVector? = null,
+    // The web colours a `prefix` by styling the node it is given — a brand
+    // glyph keeps its own colour that way. Here the icon is an `ImageVector`,
+    // so the caller has nowhere to put that; these are that place. `null` is
+    // the label's ink, which is what an icon beside a label usually wants.
+    prefixColor: ComposeColor? = null,
     suffix: ImageVector? = null,
+    suffixColor: ComposeColor? = null,
 ) {
     val style = cCButtonStyle(variant = variant, size = size, shape = shape, align = align)
     val buttonShape = ccRoundedShape(style.borderRadius, style.borderRadiusFull)
@@ -194,7 +200,12 @@ fun CCButton(
                     ) {
                         val glyph = (style.fontSize ?: 14.dp) + 2.dp
                         if (prefix != null) {
-                            Icon(prefix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                            Icon(
+                                prefix,
+                                contentDescription = null,
+                                tint = prefixColor ?: foreground,
+                                modifier = Modifier.size(glyph),
+                            )
                         }
                         Text(
                             text = title,
@@ -205,7 +216,12 @@ fun CCButton(
                             fontWeight = style.fontWeight,
                         )
                         if (suffix != null) {
-                            Icon(suffix, contentDescription = null, tint = foreground, modifier = Modifier.size(glyph))
+                            Icon(
+                                suffix,
+                                contentDescription = null,
+                                tint = suffixColor ?: foreground,
+                                modifier = Modifier.size(glyph),
+                            )
                         }
                     }
                 }

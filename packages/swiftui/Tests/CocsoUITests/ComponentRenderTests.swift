@@ -228,6 +228,39 @@ final class ComponentRenderTests: XCTestCase {
     /// the two platforms to the same answer. Two pixels of one live render:
     /// inside each control, clear of its label, against the surface beside it.
     @MainActor
+    /// A brand glyph beside a label keeps its own colour — the web styles the
+    /// node it is handed, and `prefixColor` is where that goes here.
+    func testAButtonDrawsItsPrefixInTheColourItIsGiven() {
+        let brand = SwiftUI.Color(red: 254 / 255, green: 229 / 255, blue: 0) // 카카오 노랑
+        let view = CCButton(
+            "카카오로 시작하기",
+            variant: .outline,
+            prefix: Image(systemName: "star.fill"),
+            prefixColor: brand
+        ) {}
+            .padding(16)
+            .frame(width: 320, height: 90, alignment: .topLeading)
+            .background(CocsoTokens.Color.surfacePrimary(.light))
+        let controller = NSHostingController(rootView: view)
+        controller.view.appearance = NSAppearance(named: .aqua)
+        controller.view.frame = CGRect(x: 0, y: 0, width: 320, height: 90)
+        controller.view.layoutSubtreeIfNeeded()
+        guard let rep = controller.view.bitmapImageRepForCachingDisplay(in: controller.view.bounds) else {
+            return XCTFail("비트맵을 만들지 못했다")
+        }
+        controller.view.cacheDisplay(in: controller.view.bounds, to: rep)
+        var found = false
+        for x in stride(from: 0, to: rep.pixelsWide, by: 2) {
+            for y in stride(from: 0, to: rep.pixelsHigh, by: 2) {
+                guard let pixel = rep.colorAt(x: x, y: y)?.usingColorSpace(.sRGB) else { continue }
+                if pixel.redComponent > 0.94, pixel.greenComponent > 0.82, pixel.blueComponent < 0.25 {
+                    found = true
+                }
+            }
+        }
+        XCTAssertTrue(found, "the prefix was not drawn in the colour it was given")
+    }
+
     func testSeeThroughVariantsShowTheSurfaceBehindThem() {
         let surface = CocsoTokens.Color.surfaceSecondary(.light)
         let view = VStack(alignment: .leading, spacing: 12) {

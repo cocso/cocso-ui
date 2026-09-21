@@ -19,7 +19,9 @@ public struct CCButton: View {
     private let align: CCButtonAlign
     private let loading: Bool
     private let prefix: Image?
+    private let prefixColor: SwiftUI.Color?
     private let suffix: Image?
+    private let suffixColor: SwiftUI.Color?
     private let action: () -> Void
 
     @Environment(\.colorScheme) private var colorScheme
@@ -43,7 +45,13 @@ public struct CCButton: View {
         align: CCButtonAlign = .center,
         loading: Bool = false,
         prefix: Image? = nil,
+        // The web colours a `prefix` by styling the node it is given — a brand
+        // glyph keeps its own colour that way. Here the icon is an `Image`, so
+        // the caller has nowhere to put that; these are that place. `nil` is
+        // the label's ink, which is what an icon beside a label usually wants.
+        prefixColor: SwiftUI.Color? = nil,
         suffix: Image? = nil,
+        suffixColor: SwiftUI.Color? = nil,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -53,7 +61,9 @@ public struct CCButton: View {
         self.align = align
         self.loading = loading
         self.prefix = prefix
+        self.prefixColor = prefixColor
         self.suffix = suffix
+        self.suffixColor = suffixColor
         self.action = action
     }
 
@@ -102,12 +112,12 @@ public struct CCButton: View {
                 // The web's `prefix` / `suffix`: an icon either side of the label,
                 // at the label's size, in the label's colour.
                 HStack(spacing: CocsoTokens.Spacing.s4) {
+                    affix(prefix, colour: prefixColor, style: resolved)
                     // The recipe's weight — 500, the web's. The label had none
                     // and drew at the system's 400.
-                    prefix?.ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
                     Text(title)
                         .ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
-                    suffix?.ccFont(size: resolved.fontSize ?? 14, weight: resolved.fontWeight ?? .regular)
+                    affix(suffix, colour: suffixColor, style: resolved)
                 }
                 // The recipe pads the label inside the button as well as
                 // the button itself; dropping it made every button narrower
@@ -203,6 +213,21 @@ public struct CCButton: View {
         .animation(CCMotion.colour(reduced: reduceMotion), value: isEnabled)
         .accessibilityLabel(title)
         .accessibilityAddTraits(.isButton)
+    }
+
+    /// An icon beside the label, at the label's size. `colour` is the caller's
+    /// override — a brand glyph that has to stay its own colour — and `nil`
+    /// leaves it the label's ink, which is what the web's `currentColor` does.
+    @ViewBuilder
+    private func affix(_ image: Image?, colour: SwiftUI.Color?, style: CCButtonStyle) -> some View {
+        if let image {
+            let sized = image.ccFont(size: style.fontSize ?? 14, weight: style.fontWeight ?? .regular)
+            if let colour {
+                sized.foregroundStyle(colour)
+            } else {
+                sized
+            }
+        }
     }
 
     /// `shape: .circle` is a percentage radius in the recipe, which has no length
