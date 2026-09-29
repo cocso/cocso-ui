@@ -48,6 +48,12 @@ importers:
       '@storybook/test-runner':
         specifier: ^0.24.3
         version: 0.24.3(@types/node@25.5.2)(storybook@10.3.4(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@types/jest':
+        specifier: ^30.0.0
+        version: 30.0.0
+      '@types/jest-image-snapshot':
+        specifier: ^6.4.2
+        version: 6.4.2
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
@@ -3020,6 +3026,12 @@ packages:
   '@types/istanbul-reports@3.0.4':
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
 
+  '@types/jest-image-snapshot@6.4.2':
+    resolution: {integrity: sha512-w439RR3cs0GOMc8PMDqQwgazq85Rz4d8wt+rsM6i+4qYK5ziNZBVj7yMV6SzfLoq6D8FX4zltuWVWRtFmC1/Aw==}
+
+  '@types/jest@30.0.0':
+    resolution: {integrity: sha512-XTYugzhuwqWjws0CVz8QpM36+T+Dz5mTEBKhNs/esGLnCIlGdRy+Dq78NRjd7ls7r8BC8ZRMOrKlkO1hU0JOwA==}
+
   '@types/jsonfile@6.1.4':
     resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
@@ -3046,6 +3058,9 @@ packages:
 
   '@types/node@25.5.2':
     resolution: {integrity: sha512-tO4ZIRKNC+MDWV4qKVZe3Ql/woTnmHDr5JD8UI5hn2pwBrHEwOEMZK7WlNb5RKB6EoJ02gwmQS9OrjuFnZYdpg==}
+
+  '@types/pixelmatch@5.2.6':
+    resolution: {integrity: sha512-wC83uexE5KGuUODn6zkm9gMzTwdY5L0chiK+VrKcDfEjzxh1uadlWTvOmAbCpnM9zx/Ww3f8uKlYQVnO/TrqVg==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -9946,6 +9961,17 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
 
+  '@types/jest-image-snapshot@6.4.2':
+    dependencies:
+      '@types/jest': 30.0.0
+      '@types/pixelmatch': 5.2.6
+      ssim.js: 3.5.0
+
+  '@types/jest@30.0.0':
+    dependencies:
+      expect: 30.3.0
+      pretty-format: 30.3.0
+
   '@types/jsonfile@6.1.4':
     dependencies:
       '@types/node': 25.5.2
@@ -9975,6 +10001,10 @@ snapshots:
   '@types/node@25.5.2':
     dependencies:
       undici-types: 7.18.2
+
+  '@types/pixelmatch@5.2.6':
+    dependencies:
+      '@types/node': 25.5.2
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -12172,7 +12202,7 @@ snapshots:
       '@types/stack-utils': 2.0.3
       chalk: 4.1.2
       graceful-fs: 4.2.11
-      picomatch: 4.0.3
+      picomatch: 4.0.7
       pretty-format: 30.3.0
       slash: 3.0.0
       stack-utils: 2.0.6
@@ -12323,7 +12353,7 @@ snapshots:
       chalk: 4.1.2
       ci-info: 4.4.0
       graceful-fs: 4.2.11
-      picomatch: 4.0.3
+      picomatch: 4.0.7
 
   jest-validate@29.7.0:
     dependencies:
@@ -14987,7 +15017,7 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       acorn: 8.16.0
-      picomatch: 4.0.4
+      picomatch: 4.0.7
       webpack-virtual-modules: 0.6.2
 
   unrs-resolver@1.11.1:

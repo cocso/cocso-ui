@@ -58,3 +58,21 @@ export const Sides: Story = {
     </div>
   ),
 };
+
+/**
+ * The tooltip open, so the bubble and its arrow are under the pixel check.
+ * See `Open` in `dropdown.stories.tsx` for why `defaultOpen` and
+ * `parameters.overlay`.
+ */
+export const Open: Story = {
+  parameters: { overlay: true },
+  render: () => (
+    <Tooltip defaultOpen>
+      <Tooltip.Trigger render={<Button variant="outline">마우스를 올려보세요</Button>} />
+      <Tooltip.Content>
+        <Tooltip.Arrow />
+        툴팁 내용입니다.
+      </Tooltip.Content>
+    </Tooltip>
+  ),
+};

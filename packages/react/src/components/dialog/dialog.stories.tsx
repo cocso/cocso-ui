@@ -101,3 +101,26 @@ export const WithoutClose: Story = {
     </Dialog>
   ),
 };
+
+/**
+ * The dialog open, so the backdrop, the panel and the close control are under
+ * the pixel check. See `Open` in `dropdown.stories.tsx` for why `defaultOpen`
+ * and `parameters.overlay`.
+ */
+export const Open: Story = {
+  parameters: { overlay: true },
+  render: () => (
+    <Dialog defaultOpen>
+      <Dialog.Trigger render={<Button>다이얼로그 열기</Button>} />
+      <Dialog.Content>
+        <Dialog.Close />
+        <Dialog.Title>다이얼로그 제목</Dialog.Title>
+        <Dialog.Description>다이얼로그 설명 텍스트입니다.</Dialog.Description>
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '24px' }}>
+          <Dialog.Close render={<Button size="small" variant="outline">취소</Button>} />
+          <Button size="small">확인</Button>
+        </div>
+      </Dialog.Content>
+    </Dialog>
+  ),
+};

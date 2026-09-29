@@ -24,6 +24,8 @@
   "devDependencies": {
     "@storybook/react-vite": "^10.3.4",
     "@storybook/test-runner": "^0.24.3",
+    "@types/jest": "^30.0.0",
+    "@types/jest-image-snapshot": "^6.4.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "axe-playwright": "^2.2.2",

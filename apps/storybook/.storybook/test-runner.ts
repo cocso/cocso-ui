@@ -1,9 +1,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import type { TestRunnerConfig } from "@storybook/test-runner";
-import { waitForPageReady } from "@storybook/test-runner";
+import type { TestContext, TestRunnerConfig } from "@storybook/test-runner";
+import { getStoryContext, waitForPageReady } from "@storybook/test-runner";
 import { checkA11y, injectAxe } from "axe-playwright";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
+import type { Page } from "playwright";
 
 /**
  * Number of differing pixels tolerated before a story fails.
@@ -49,11 +50,80 @@ const HARNESS_RULES = {
   region: { enabled: false },
 };
 
+/**
+ * Whether a story declares itself an open overlay (`parameters.overlay`).
+ *
+ * An overlay's panel lives in a portal under `<body>`, and every such story in
+ * this repo used to screenshot its trigger and nothing else — the panel had no
+ * pixel coverage at all. A story that opens one needs two things the others do
+ * not, and both are per-story rather than global so no existing baseline moves:
+ *
+ * - Motion off. All four overlay modules animate on enter and all four already
+ *   branch on `prefers-reduced-motion: reduce` to `animation: none`, so the
+ *   deterministic frame is reached through the component's own affordance
+ *   rather than a sleep. Emulating it globally would instead change what the
+ *   Spinner and Skeleton baselines capture: those run a decorative animation
+ *   with no still frame, and under `reduce` the Spinner swaps to a different
+ *   animation entirely. Their current baselines are the default rendering, and
+ *   that is the one worth guarding.
+ * - A wider axe scope. `#storybook-root` cannot see a portal, so an overlay
+ *   checked against it is checked empty. Worse, an open Dialog marks the rest
+ *   of the document inert, so the scoped run would be inspecting a hidden
+ *   subtree and reporting on nothing.
+ */
+async function isOverlayStory(page: Page, context: TestContext) {
+  const { parameters } = await getStoryContext(page, context);
+  return parameters?.overlay === true;
+}
+
+/**
+ * Base UI's focus guards: `<span aria-hidden="true" tabindex="0">` sentinels it
+ * mounts around an open popup to keep Tab inside it.
+ *
+ * axe reports them under `aria-hidden-focus`, correctly by the letter of the
+ * rule, and they are upstream markup that nothing in this repo can change. They
+ * are excluded as nodes rather than by switching the rule off, so a genuine
+ * `aria-hidden-focus` defect in our own overlay content still fails the job —
+ * turning off a serious rule to get a green tick is how a check stops finding
+ * things.
+ *
+ * They also sit inside `#storybook-root`, not only in the portal, so narrowing
+ * the scope back would not have avoided them: any story that opens an overlay
+ * meets this, wherever axe is pointed.
+ */
+const BASE_UI_FOCUS_GUARD = "[data-base-ui-focus-guard]";
+
+/**
+ * The axe scope stays `#storybook-root` even for an overlay story, so the panel
+ * in the portal is still not checked. That is a gap, and it is deliberate for
+ * now rather than unnoticed: pointing axe at `body` was tried here and it
+ * immediately found a critical `aria-required-children` on all three pickers.
+ * They host a calendar inside `Dropdown.Content`, which is Base UI's
+ * `Menu.Popup` and so reports `role="menu"`, a role whose required `menuitem`
+ * children a grid of days does not have. Overriding the role to `dialog` only
+ * moves the failure — the popup keeps emitting `aria-orientation`, which
+ * `dialog` does not allow — so the fix is for the pickers to stop building on
+ * the menu primitive, which is a component change with its own visual risk and
+ * does not belong in a change about screenshots. Widen this to `body` in that
+ * change, where it will be the check proving the fix.
+ */
+async function axeContext(page: Page, context: TestContext) {
+  return (await isOverlayStory(page, context))
+    ? { exclude: [[BASE_UI_FOCUS_GUARD]], include: [["#storybook-root"]] }
+    : "#storybook-root";
+}
+
 const config: TestRunnerConfig = {
   setup() {
     expect.extend({ toMatchImageSnapshot });
   },
-  async preVisit(page) {
+  async preVisit(page, context) {
+    // Set on every story, not only the overlays: the runner reuses one page, so
+    // a value left behind by the previous story would leak into this one.
+    await page.emulateMedia({
+      reducedMotion: (await isOverlayStory(page, context)) ? "reduce" : null,
+    });
+
     if (!A11Y_ONLY) {
       return;
     }
@@ -75,7 +145,7 @@ const config: TestRunnerConfig = {
     await waitForPageReady(page);
 
     if (A11Y_ONLY) {
-      await checkA11y(page, "#storybook-root", {
+      await checkA11y(page, await axeContext(page, context), {
         axeOptions: { rules: HARNESS_RULES },
         detailedReport: true,
         detailedReportOptions: { html: true },

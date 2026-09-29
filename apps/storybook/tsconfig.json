@@ -18,5 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [".storybook"]
+  // An explicit glob, not the bare directory: TypeScript skips directories
+  // beginning with a dot when it expands one, so `[".storybook"]` matched
+  // nothing and `check-types` exited 2 on TS18003 — this app's typecheck had
+  // never read a file.
+  "include": [".storybook/**/*"]
 }
