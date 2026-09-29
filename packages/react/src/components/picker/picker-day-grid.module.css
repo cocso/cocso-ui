@@ -64,8 +64,21 @@
     color: var(--cocso-color-feedback-info-text);
   }
 
-  :global(.react-datepicker__day--outside-month) {
-    opacity: 0.4;
+  /* A day from the neighbouring month is still selectable — `aria-disabled` is
+     false and clicking it picks that date — so it owes AA like any other
+     control. `opacity: 0.4` did not give it that: opacity multiplies whatever
+     colour the cell already had, so the weekend red landed around 2:1 and axe
+     caught it the first time this panel was actually checked. A token carries
+     "not this month" at a legible contrast instead, the same move the disabled
+     button colours made when they stopped being a blanket opacity.
+
+     The class is repeated to outrank the weekend rules, which are two classes
+     (`.react-datepicker__day` plus the module's own `.sunday`) and live in a
+     different file — leaving them equal would decide this by bundle order. */
+  :global(
+      .react-datepicker__day--outside-month.react-datepicker__day--outside-month.react-datepicker__day--outside-month
+    ) {
+    color: var(--cocso-color-text-secondary);
   }
 
   :global(.react-datepicker__day--disabled) {

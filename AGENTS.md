@@ -136,6 +136,19 @@ When asked to review comments on a GitHub PR:
   painted with `feedback-danger` (the fill level, 4.18:1 on a card) and both
   date pickers using `surface-primary` as the foreground on an
   `interactive-primary` fill.
+- A panel that is not a menu MUST NOT be built on `Dropdown`. Its popup is Base
+  UI's `Menu.Popup` and reports `role="menu"`, whose required children are
+  `menuitem`s — so a calendar, a form or anything else inside it is a menu with
+  no items to a screen reader, and a critical `aria-required-children` to axe.
+  All three pickers did this. Use `Popover`, which is a labelled dialog.
+  Overriding the role on the menu popup does not work: it keeps emitting
+  `aria-orientation`, which `dialog` does not allow. The `accessibility` job
+  catches this, but only for a component that has an open-state story.
+- A CSS Module that overrides another component's module — a picker styling the
+  `Popover` panel it renders into — MUST win by specificity, not by order.
+  Modules are code-split per component, so which file loads first is a fact
+  about the consumer's bundle: at equal specificity the same component renders
+  differently in two apps. Name the class twice (`.content.content`).
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
