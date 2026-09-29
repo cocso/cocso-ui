@@ -1,0 +1,75 @@
+/* A CSS Module for the reason `picker-chrome.module.css` gives.
+
+   The month grid, shared by the pickers that show days — `DayPicker` and
+   `DateTimePicker`. `MonthPicker` draws months instead and has its own. The
+   weekend colours stay with each component: they hang off a module class the
+   component puts on the cell. */
+
+@layer components {
+  :global(.react-datepicker__day-names) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: var(--cocso-spacing-2);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  :global(.react-datepicker__day-name) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 1.7rem;
+    aspect-ratio: 1 / 1;
+    padding-inline: var(--cocso-spacing-3);
+    margin: 0;
+    font-weight: 500;
+    color: var(--cocso-color-text-primary);
+    text-align: center;
+  }
+
+  :global(.react-datepicker__day) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 1.7rem;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    font-family: var(--font-mono, "monospace"), monospace;
+    color: var(--cocso-color-text-primary);
+    text-align: center;
+    cursor: pointer;
+    border-radius: var(--cocso-radius-4);
+  }
+
+  /* `text-on-primary`, not `surface-primary`: the two happen to resolve to the
+     same values in the stock themes, so this read correctly by accident. It is
+     the foreground for an `interactive-primary` fill, and those two are a pair
+     — an app that rebrands the fill gets `text-on-primary` along with it, but
+     `surface-primary` keeps tracking the page instead. On a rebranded blue
+     fill that is 3.23:1 in the dark theme; `text-on-primary` is 5.70:1. */
+  :global(.react-datepicker__day.react-datepicker__day--selected) {
+    color: var(--cocso-color-text-on-primary);
+    background-color: var(--cocso-color-interactive-primary);
+  }
+
+  :global(.react-datepicker__day-name:nth-child(1)) {
+    color: var(--cocso-color-feedback-danger-text);
+  }
+
+  :global(.react-datepicker__day-name:nth-child(7)) {
+    color: var(--cocso-color-feedback-info-text);
+  }
+
+  :global(.react-datepicker__day--outside-month) {
+    opacity: 0.4;
+  }
+
+  :global(.react-datepicker__day--disabled) {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}

@@ -14,6 +14,8 @@ import { cn } from "../../cn";
 import { Button } from "../button";
 import { Dropdown } from "../dropdown";
 import { Typography } from "../typography";
+import "../picker/picker-chrome.module.css";
+import "../picker/picker-day-grid.module.css";
 import styles from "./date-time-picker.module.css";
 
 export interface DateTimePickerProps
