@@ -70,7 +70,12 @@ function buildDTS(format, input, output) {
   const isESM = format === "esm";
   return {
     input,
-    external,
+    // Declarations never carry styles. The JS builds hand CSS to postcss; this
+    // one has no such plugin, so a stylesheet reaches the parser as source and
+    // fails on its first selector. A component that binds one (`import styles
+    // from "./x.module.css"`) is covered by the ambient declaration; a
+    // stylesheet imported for its own sake — the pickers share two — is not.
+    external: (id, ...rest) => id.endsWith(".css") || external(id, ...rest),
     onwarn,
     output: [
       {

@@ -54,6 +54,22 @@ describe("The component guards can see everything they are meant to", () => {
     ).toEqual([]);
   });
 
+  it("has no CSS Module the component scans cannot reach", () => {
+    // The three scans read `src/components/<dir>/*.module.css`: one level, and
+    // only inside a directory. A module put directly under `src/components`
+    // satisfies the assertion above and is still invisible to every one of
+    // them — which is how a shared picker stylesheet took 116 contrast cases
+    // out of the suite without a single test turning red.
+    const modules = walk(join(SRC_DIR, COMPONENTS_DIR)).filter((path) =>
+      path.endsWith(".module.css")
+    );
+    expect(modules.length).toBeGreaterThan(10);
+    expect(
+      modules.filter((path) => path.split("/").length !== 2),
+      "a CSS Module sits where the component scans do not look: they read `<component>/<name>.module.css` and nothing else. Put it in a directory one level down, or widen all three scans and this assertion together."
+    ).toEqual([]);
+  });
+
   it("has no component outside src/components", () => {
     const components = OUTSIDE.filter(
       (path) =>
