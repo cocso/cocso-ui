@@ -12,7 +12,7 @@ import { useMemo, useState } from "react";
 import DatePicker from "react-datepicker";
 import { cn } from "../../cn";
 import { Button } from "../button";
-import { Dropdown } from "../dropdown";
+import { Popover } from "../popover";
 import { Typography } from "../typography";
 import "../picker/picker-chrome.module.css";
 import "../picker/picker-day-grid.module.css";
@@ -141,8 +141,8 @@ export function DateTimePicker({
 
   return (
     <div className={cn(styles.root, className)} ref={ref} {...props}>
-      <Dropdown onOpenChange={setOpen} open={open}>
-        <Dropdown.Trigger
+      <Popover onOpenChange={setOpen} open={open}>
+        <Popover.Trigger
           render={
             trigger ?? (
               <Button disabled={disabled} size="small" variant="outline">
@@ -153,7 +153,7 @@ export function DateTimePicker({
             )
           }
         />
-        <Dropdown.Content
+        <Popover.Content
           aria-label="Select date and time"
           className={styles.content}
         >
@@ -196,6 +196,7 @@ export function DateTimePicker({
 
                 <div className={styles.menu}>
                   <Button
+                    aria-label="Previous month"
                     className={styles.arrow}
                     disabled={prevMonthButtonDisabled}
                     onClick={decreaseMonth}
@@ -207,6 +208,7 @@ export function DateTimePicker({
                     <ArrowIOSBackwardIcon />
                   </Button>
                   <Button
+                    aria-label="Next month"
                     className={styles.arrow}
                     disabled={nextMonthButtonDisabled}
                     onClick={increaseMonth}
@@ -226,8 +228,8 @@ export function DateTimePicker({
             timeCaption={timeCaption}
             timeIntervals={timeIntervals}
           />
-        </Dropdown.Content>
-      </Dropdown>
+        </Popover.Content>
+      </Popover>
     </div>
   );
 }

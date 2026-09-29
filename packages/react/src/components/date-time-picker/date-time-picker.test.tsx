@@ -166,4 +166,27 @@ describe("DateTimePicker", () => {
       ).toBeInTheDocument();
     });
   });
+  describe("popup role", () => {
+    /**
+     * The calendar lived in a `Dropdown`, whose popup is Base UI's `Menu.Popup`
+     * and reports `role="menu"`. A menu's required children are `menuitem`s and
+     * a grid of days has none, so axe called it a critical
+     * `aria-required-children` and a screen reader announced a menu with
+     * nothing in it. The panel is a `Popover` now — a labelled dialog.
+     */
+    it("does not announce the calendar as a menu", async () => {
+      render(<DateTimePicker trigger={trigger} />);
+      await userEvent.click(
+        screen.getByRole("button", { name: "Select date and time" })
+      );
+
+      await waitFor(() => {
+        expect(document.querySelector(".react-datepicker")).toBeInTheDocument();
+      });
+      expect(document.querySelector('[role="menu"]')).toBeNull();
+      expect(
+        screen.getByRole("dialog", { name: "Select date and time" })
+      ).toBeInTheDocument();
+    });
+  });
 });

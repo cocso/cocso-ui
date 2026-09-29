@@ -4,11 +4,19 @@
     transform: translateZ(0);
   }
 
-  .content {
+  /* `.content` named twice, deliberately. These override `Popover`'s own
+     `.content`, which is one class in a different stylesheet, and CSS Modules
+     are code-split per component — which file loads first is a fact about the
+     consumer's bundle, not about this repo. At equal specificity the panel's
+     padding and corners would be decided by import order. `line-height` is
+     reset because the popover base sets 1.5 for prose and the calendar sizes
+     its own rows. */
+  .content.content {
     /* The calendar plus the time list, which the day picker does not carry. */
     min-width: 340px;
     padding: var(--cocso-spacing-7);
     overflow: hidden;
+    line-height: normal;
     border-radius: var(--cocso-radius-4);
   }
 

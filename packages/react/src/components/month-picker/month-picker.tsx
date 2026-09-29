@@ -12,7 +12,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { cn } from "../../cn";
 import { Button } from "../button";
-import { Dropdown } from "../dropdown";
+import { Popover } from "../popover";
 import { Typography } from "../typography";
 import "../picker/picker-chrome.module.css";
 import styles from "./month-picker.module.css";
@@ -51,8 +51,8 @@ export function MonthPicker({
 
   return (
     <div className={cn(styles.root, className)} ref={ref} {...props}>
-      <Dropdown onOpenChange={setOpen} open={open}>
-        <Dropdown.Trigger
+      <Popover onOpenChange={setOpen} open={open}>
+        <Popover.Trigger
           render={
             trigger ?? (
               <Button disabled={disabled} size="small" variant="outline">
@@ -61,7 +61,7 @@ export function MonthPicker({
             )
           }
         />
-        <Dropdown.Content aria-label="Select month" className={styles.content}>
+        <Popover.Content aria-label="Select month" className={styles.content}>
           <DatePicker
             dateFormat={dateFormat}
             disabled={disabled}
@@ -86,6 +86,7 @@ export function MonthPicker({
 
                 <div className={styles.menu}>
                   <Button
+                    aria-label="Previous year"
                     className={styles.arrow}
                     disabled={prevYearButtonDisabled}
                     onClick={decreaseYear}
@@ -97,6 +98,7 @@ export function MonthPicker({
                     <ArrowIOSBackwardIcon />
                   </Button>
                   <Button
+                    aria-label="Next year"
                     className={styles.arrow}
                     disabled={nextYearButtonDisabled}
                     onClick={increaseYear}
@@ -115,8 +117,8 @@ export function MonthPicker({
             showMonthYearPicker
             showPopperArrow={false}
           />
-        </Dropdown.Content>
-      </Dropdown>
+        </Popover.Content>
+      </Popover>
     </div>
   );
 }

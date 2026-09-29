@@ -12,7 +12,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { cn } from "../../cn";
 import { Button } from "../button";
-import { Dropdown } from "../dropdown";
+import { Popover } from "../popover";
 import { Typography } from "../typography";
 import "../picker/picker-chrome.module.css";
 import "../picker/picker-day-grid.module.css";
@@ -52,8 +52,8 @@ export function DayPicker({
 
   return (
     <div className={cn(styles.root, className)} ref={ref} {...props}>
-      <Dropdown onOpenChange={setOpen} open={open}>
-        <Dropdown.Trigger
+      <Popover onOpenChange={setOpen} open={open}>
+        <Popover.Trigger
           render={
             trigger ?? (
               <Button disabled={disabled} size="small" variant="outline">
@@ -62,7 +62,7 @@ export function DayPicker({
             )
           }
         />
-        <Dropdown.Content aria-label="Select date" className={styles.content}>
+        <Popover.Content aria-label="Select date" className={styles.content}>
           <DatePicker
             dateFormat={dateFormat}
             dayClassName={(date) => {
@@ -98,6 +98,7 @@ export function DayPicker({
 
                 <div className={styles.menu}>
                   <Button
+                    aria-label="Previous month"
                     className={styles.arrow}
                     disabled={prevMonthButtonDisabled}
                     onClick={decreaseMonth}
@@ -109,6 +110,7 @@ export function DayPicker({
                     <ArrowIOSBackwardIcon />
                   </Button>
                   <Button
+                    aria-label="Next month"
                     className={styles.arrow}
                     disabled={nextMonthButtonDisabled}
                     onClick={increaseMonth}
@@ -125,8 +127,8 @@ export function DayPicker({
             selected={value}
             showPopperArrow={false}
           />
-        </Dropdown.Content>
-      </Dropdown>
+        </Popover.Content>
+      </Popover>
     </div>
   );
 }

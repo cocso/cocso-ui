@@ -94,22 +94,20 @@ async function isOverlayStory(page: Page, context: TestContext) {
 const BASE_UI_FOCUS_GUARD = "[data-base-ui-focus-guard]";
 
 /**
- * The axe scope stays `#storybook-root` even for an overlay story, so the panel
- * in the portal is still not checked. That is a gap, and it is deliberate for
- * now rather than unnoticed: pointing axe at `body` was tried here and it
- * immediately found a critical `aria-required-children` on all three pickers.
- * They host a calendar inside `Dropdown.Content`, which is Base UI's
- * `Menu.Popup` and so reports `role="menu"`, a role whose required `menuitem`
- * children a grid of days does not have. Overriding the role to `dialog` only
- * moves the failure — the popup keeps emitting `aria-orientation`, which
- * `dialog` does not allow — so the fix is for the pickers to stop building on
- * the menu primitive, which is a component change with its own visual risk and
- * does not belong in a change about screenshots. Widen this to `body` in that
- * change, where it will be the check proving the fix.
+ * An overlay story is checked against `body`, not `#storybook-root`, because
+ * the panel is in a portal and a scoped run would be inspecting everything
+ * except the thing the story is about. An open Dialog also marks the rest of
+ * the document inert, so the scoped run would be reading a hidden subtree.
+ *
+ * This is the check that holds the pickers to their markup. Pointed at `body`
+ * it fails on a critical `aria-required-children` for as long as they host a
+ * calendar inside `Dropdown.Content` — Base UI's `Menu.Popup`, which reports
+ * `role="menu"`, a role whose required `menuitem` children a grid of days does
+ * not have. Swap any picker back to `Dropdown` and this job goes red.
  */
 async function axeContext(page: Page, context: TestContext) {
   return (await isOverlayStory(page, context))
-    ? { exclude: [[BASE_UI_FOCUS_GUARD]], include: [["#storybook-root"]] }
+    ? { exclude: [[BASE_UI_FOCUS_GUARD]], include: [["body"]] }
     : "#storybook-root";
 }
 
