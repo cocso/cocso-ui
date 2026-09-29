@@ -1,0 +1,241 @@
+@layer components {
+  .root {
+    display: inline-block;
+    transform: translateZ(0);
+  }
+
+  .content {
+    /* The calendar plus the time list, which the day picker does not carry. */
+    min-width: 340px;
+    padding: var(--cocso-spacing-7);
+    overflow: hidden;
+    border-radius: var(--cocso-radius-4);
+  }
+
+  .menu {
+    display: flex;
+    gap: var(--cocso-spacing-3);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow {
+    width: 24px;
+    height: 24px;
+  }
+
+  :global(.react-datepicker__day).sunday {
+    color: var(--cocso-color-feedback-danger-text);
+  }
+
+  :global(.react-datepicker__day).saturday {
+    color: var(--cocso-color-feedback-info-text);
+  }
+
+  /* The calendar and the time list sit side by side. react-datepicker floats
+     the time column, which collapses inside an inline-block whose month
+     container is full width — the list ended up under the grid and out of the
+     popover. A row lays both out from their own widths. */
+  :global(.react-datepicker) {
+    position: relative;
+    display: flex;
+    gap: var(--cocso-spacing-5);
+    padding-inline: 0;
+    font-size: 0.8rem;
+    color: var(--cocso-color-text-primary);
+    background-color: var(--cocso-color-surface-primary);
+  }
+
+  :global(.react-datepicker__aria-live) {
+    position: absolute;
+    top: auto;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  :global(.react-datepicker__sr-only) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  :global(.react-datepicker__month-container) {
+    flex: 1 1 auto;
+    padding-block: 0;
+  }
+
+  :global(.react-datepicker__header--custom) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: var(--cocso-spacing-5);
+  }
+
+  :global(.react-datepicker__day-names) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: var(--cocso-spacing-2);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  :global(.react-datepicker__month) {
+    gap: var(--cocso-spacing-2);
+  }
+
+  :global(.react-datepicker__week) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  :global(.react-datepicker__day-name) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 1.7rem;
+    aspect-ratio: 1 / 1;
+    padding-inline: var(--cocso-spacing-3);
+    margin: 0;
+    font-weight: 500;
+    color: var(--cocso-color-text-primary);
+    text-align: center;
+  }
+
+  :global(.react-datepicker__day) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 1.7rem;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    font-family: var(--font-mono, "monospace"), monospace;
+    color: var(--cocso-color-text-primary);
+    text-align: center;
+    cursor: pointer;
+    border-radius: var(--cocso-radius-4);
+  }
+
+  /* `text-on-primary`, not `surface-primary`: the two happen to resolve to the
+     same values in the stock themes, so this read correctly by accident. It is
+     the foreground for an `interactive-primary` fill, and those two are a pair
+     — an app that rebrands the fill gets `text-on-primary` along with it, but
+     `surface-primary` keeps tracking the page instead. On a rebranded blue
+     fill that is 3.23:1 in the dark theme; `text-on-primary` is 5.70:1. */
+  :global(.react-datepicker__day.react-datepicker__day--selected) {
+    color: var(--cocso-color-text-on-primary);
+    background-color: var(--cocso-color-interactive-primary);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(.react-datepicker__day:hover) {
+      background-color: var(--cocso-color-interactive-secondary);
+    }
+
+    :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
+      background-color: var(--cocso-color-interactive-primary-hover);
+    }
+  }
+
+  :global(.react-datepicker__day-name:nth-child(1)) {
+    color: var(--cocso-color-feedback-danger-text);
+  }
+
+  :global(.react-datepicker__day-name:nth-child(7)) {
+    color: var(--cocso-color-feedback-info-text);
+  }
+
+  :global(.react-datepicker__day--outside-month) {
+    opacity: 0.4;
+  }
+
+  :global(.react-datepicker__day--disabled) {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  /* The time list beside the calendar. react-datepicker lays it out as a
+     sibling column; these are its own class names, styled with the same
+     tokens as the day grid so the two halves read as one surface. */
+  :global(.react-datepicker__time-container) {
+    flex: 0 0 auto;
+    width: 88px;
+    padding-inline-start: var(--cocso-spacing-5);
+    border-inline-start: 1px solid var(--cocso-color-border-secondary);
+  }
+
+  :global(.react-datepicker__header--time) {
+    padding-bottom: var(--cocso-spacing-2);
+    font-weight: 500;
+    color: var(--cocso-color-text-primary);
+    text-align: center;
+  }
+
+  :global(.react-datepicker__time),
+  :global(.react-datepicker__time-box) {
+    width: 100%;
+    background-color: var(--cocso-color-surface-primary);
+  }
+
+  :global(.react-datepicker__time-list) {
+    max-height: 208px;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  :global(.react-datepicker__time-list-item) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--cocso-spacing-3);
+    font-family: var(--font-mono, "monospace"), monospace;
+    color: var(--cocso-color-text-primary);
+    cursor: pointer;
+    border-radius: var(--cocso-radius-4);
+  }
+
+  /* `text-on-primary` against `interactive-primary`, as the selected day is —
+     see the note above. */
+  :global(.react-datepicker__time-list-item--selected) {
+    color: var(--cocso-color-text-on-primary);
+    background-color: var(--cocso-color-interactive-primary);
+  }
+
+  :global(.react-datepicker__time-list-item--disabled) {
+    color: var(--cocso-color-text-on-disabled);
+    cursor: not-allowed;
+    background-color: var(--cocso-color-interactive-disabled);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(.react-datepicker__time-list-item:hover) {
+      background-color: var(--cocso-color-interactive-secondary);
+    }
+
+    :global(.react-datepicker__time-list-item--selected:hover) {
+      background-color: var(--cocso-color-interactive-primary-hover);
+    }
+
+    :global(.react-datepicker__time-list-item--disabled:hover) {
+      background-color: var(--cocso-color-interactive-disabled);
+    }
+  }
+}
