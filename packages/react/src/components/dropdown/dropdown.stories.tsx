@@ -42,3 +42,27 @@ export const WithIcons: Story = {
     </Dropdown>
   ),
 };
+
+/**
+ * The menu open, so the panel itself is under the pixel check.
+ *
+ * `defaultOpen` rather than a click in a `play` function: the panel is up at
+ * first paint, and the screenshot carries no hover or focus state that a
+ * pointer would have left on the trigger. `parameters.overlay` turns motion off
+ * for this story and widens the axe scope past `#storybook-root`, which cannot
+ * see a portal — see `.storybook/test-runner.ts`.
+ */
+export const Open: Story = {
+  parameters: { overlay: true },
+  render: () => (
+    <Dropdown defaultOpen>
+      <Dropdown.Trigger render={<Button variant="outline">메뉴 열기</Button>} />
+      <Dropdown.Content>
+        <Dropdown.Item prefix={<PencilIcon size={14} />}>편집</Dropdown.Item>
+        <Dropdown.Item prefix={<ContentCopyIcon size={14} />}>복사</Dropdown.Item>
+        <Dropdown.Item disabled prefix={<PersonIcon size={14} />}>비활성화</Dropdown.Item>
+        <Dropdown.Item prefix={<DeleteIcon size={14} />}>삭제</Dropdown.Item>
+      </Dropdown.Content>
+    </Dropdown>
+  ),
+};

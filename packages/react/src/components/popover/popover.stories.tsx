@@ -84,3 +84,21 @@ export const WithForm: Story = {
     </Popover>
   ),
 };
+
+/**
+ * The popover open, so the panel and its arrow are under the pixel check.
+ * See `Open` in `dropdown.stories.tsx` for why `defaultOpen` and
+ * `parameters.overlay`.
+ */
+export const Open: Story = {
+  parameters: { overlay: true },
+  render: () => (
+    <Popover defaultOpen>
+      <Popover.Trigger render={<Button variant="outline">팝오버 열기</Button>} />
+      <Popover.Content aria-label="팝오버">
+        <Popover.Arrow />
+        <p style={{ margin: 0 }}>팝오버 내용입니다.</p>
+      </Popover.Content>
+    </Popover>
+  ),
+};

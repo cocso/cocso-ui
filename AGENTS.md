@@ -311,6 +311,17 @@ Visual regression rules:
   ```
   The workflow pushes the regenerated baselines to whatever it checks out. `--ref` alone only selects which copy of the workflow file runs; the checkout follows the `branch` input, which now falls back to the dispatch ref rather than to `main`.
 - Any PR that adds or changes a story must regenerate baselines on its branch before merge. A story with no baseline is reported separately as new; it is not silently counted as passing.
+- A component that mounts a floating layer — one that renders a `Portal`, or is
+  built on one that does — MUST have a story that renders it open, marked
+  `parameters: { overlay: true }`. The job screenshots a story as it renders, so
+  an overlay without one contributes a picture of its trigger and nothing else:
+  Dialog, Dropdown, Popover, Tooltip and all three pickers were in exactly that
+  state, and `DateTimePicker` shipped with its time list stacked under the
+  calendar instead of beside it with every check green. The marker turns motion
+  off for the screenshot through the component's own
+  `prefers-reduced-motion: reduce` branch, rather than by waiting on an
+  animation. `packages/react/src/test/overlay-stories.test.ts` finds the
+  overlays itself and fails when one has no such story.
 - A story with a committed baseline MUST render deterministically. No `new Date()`, `Math.random()`, no remote resource — an `Avatar` story fetched a random-avatar service and failed the comparison when it served different bytes — or anything else that varies between the capture and the comparison — the DayPicker `Disabled` story rendered today's date as its trigger label, so it failed on every unrelated PR opened after the day the baseline was taken. Pin the value instead.
 
 All CI jobs must pass before a PR is merged.
