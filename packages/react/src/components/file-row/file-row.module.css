@@ -1,0 +1,81 @@
+@layer components {
+  .row {
+    /* Inherit the recipe's values so the row lines up with the `Input` beside
+       it by construction. Copied numbers were the original bug: 32/16/pill
+       measured off one app's field, against a recipe that says 32/10/radius-3. */
+    --cocso-input-height: inherit;
+    --cocso-input-padding-x: inherit;
+    --cocso-input-font-size: inherit;
+    --cocso-input-border-radius: inherit;
+
+    display: inline-flex;
+    gap: var(--cocso-spacing-4);
+    align-items: center;
+    width: fit-content;
+    height: var(--cocso-input-height);
+    padding-inline: var(--cocso-input-padding-x);
+    font-size: var(--cocso-input-font-size);
+    color: var(--cocso-color-text-secondary);
+    border-radius: var(--cocso-input-border-radius);
+
+    /* No fill. A row shows something already decided; it is not a box to type
+       in, and the edge is what says where it is.
+
+       `border-strong`, not `border-secondary`. The boundary is the only thing
+       marking the row's extent, which is what WCAG 1.4.11 asks 3:1 of:
+       `border-secondary` measures 1.23:1 on the light page and 1.52:1 on the
+       dark one, so the row would read as text floating in the layout. This
+       token is 4.51:1 and 4.09:1, and it is the same one `InputTrigger` uses
+       and the one the input recipe defaults `--cocso-input-border-color` to —
+       so the row and the field it sits beside draw the same edge. */
+    box-shadow: 0 0 0 1px var(--cocso-color-border-strong);
+  }
+
+  .row.stretch {
+    width: 100%;
+  }
+
+  /* `feedback-danger`, the fill-level token, used here as a boundary and not
+     as text — 4.56:1 light and 5.64:1 dark. Not `feedback-danger-border`,
+     which is `danger-200` at 1.81:1: that one tints a panel's edge, it does
+     not mark one. */
+  .row.error {
+    box-shadow: 0 0 0 1px var(--cocso-color-feedback-danger);
+  }
+
+  /* The edge quietens; the name does not.
+
+     `InputTrigger` dims its whole self with `opacity: 0.4` and that is correct
+     there — it is a `<button>`, and WCAG 1.4.3 exempts an inactive control, so
+     axe skips it. Copying it here failed: this row is a `<div>` of text, the
+     name is a plain `<span>`, and nothing about it is exempt. axe measured the
+     dimmed name and called it. The first version of this file had that bug and
+     the Disabled story caught it.
+
+     It would be the wrong thing even if it passed. A disabled row still has to
+     say which file it holds, so the name is the last thing that should fade.
+     `border-secondary` instead of `border-strong` is the signal — an inactive
+     component's boundary is exempt from 1.4.11, so the quiet edge is allowed
+     here where it was not in the resting state. Whatever is in `actions` is
+     disabled by the caller, which is what the prop documents. */
+  .row.disabled {
+    cursor: not-allowed;
+    box-shadow: 0 0 0 1px var(--cocso-color-border-secondary);
+  }
+
+  .name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: inherit;
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+    justify-content: center;
+  }
+}
