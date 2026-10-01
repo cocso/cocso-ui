@@ -56,7 +56,11 @@ export const Default: Story = {
 
 export const Disabled: Story = {
   render: () => {
-    const [date] = useState<Date | undefined>(new Date());
+    // Fixed, not `new Date()`: the trigger renders this month as text, and the
+    // story has a committed visual-regression baseline, so a live date fails
+    // the comparison the first time the month turns. `DayPicker` was pinned for
+    // this reason and this one was missed — it broke on 1 October.
+    const [date] = useState<Date | undefined>(new Date(2026, 0, 15));
     return (
       <MonthPicker
         disabled
