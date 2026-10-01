@@ -126,6 +126,17 @@ When asked to review comments on a GitHub PR:
   added after three components had done it: Checkbox (white glyph on a
   near-white fill, 1.09:1), Switch (a track that stayed bright in the dark
   theme) and StockQuantityStatus (`#D9D9D9` six times).
+- A `color` or `background-color` in a CSS Module MUST name a token —
+  `var(--cocso-color-…)`, or a component custom property the recipe emits — and
+  never a computed value. `color-mix()` is the one that looks safe and is not:
+  it names real tokens and tracks the theme, but `module-css-contrast.test.ts`
+  resolves a var chain to hex and cannot evaluate a mix, so text painted that
+  way is exempt from the AA check rather than passing it, and a mixed *fill*
+  is worse — the foreground above it is then measured against the page instead
+  of against what it sits on. Declare the value as a semantic token, which also
+  forces someone to decide what it does in the dark theme. The check asserts
+  this at the collector, because a colour it cannot read was never a case and
+  silence there is indistinguishable from a pass.
 - A CSS Module that names a semantic token as a text colour MUST clear WCAG AA
   against whatever it sits on — the fill its own rule block declares, or the
   page surfaces when it declares none. (`color` only: `fill` and `stroke` paint

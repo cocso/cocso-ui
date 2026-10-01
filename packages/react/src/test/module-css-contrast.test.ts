@@ -165,6 +165,48 @@ const FOREGROUND = /^\s*color:\s*var\(--cocso-color-([a-z0-9-]+)\)/;
 const BACKGROUND =
   /^\s*background(?:-color)?:\s*var\(--cocso-color-([a-z0-9-]+)\)/;
 
+/** Every `color:`, however it is written — not only the ones this can measure. */
+const ANY_FOREGROUND = /^\s*color:\s*([^;]+);/;
+
+/** Every fill, likewise. An unreadable fill is the worse of the two: the
+ * foreground in that block is then measured against the page instead of
+ * against what it actually sits on, which is a wrong answer rather than a
+ * missing one. */
+const ANY_BACKGROUND = /^\s*background(?:-color)?:\s*([^;]+);/;
+
+/**
+ * A `color:` value that is measured somewhere, and where.
+ *
+ * - `var(--cocso-color-…)` is resolved to hex and measured below.
+ * - `var(--cocso-<component>-…)` is a component custom property the recipe
+ *   emits, and `contrast.test.ts` in `@cocso-ui/recipe` resolves it there.
+ * - `currentColor` and friends introduce no colour of their own; whatever they
+ *   inherit from was itself declared somewhere these checks do look.
+ *
+ * Anything else — a hex, an `rgb()`, a `color-mix()`, a non-cocso custom
+ * property — is measured by nothing at all. That is not a hypothetical: a
+ * consumer styling a file row reached for
+ * `color-mix(in srgb, var(--cocso-color-surface-secondary) 55%, …)`, which no
+ * check in this repo can resolve. `color-mix` is the sharp case because it
+ * *looks* token-based — it names two real tokens and tracks the theme — while
+ * being opaque to every guard that reads these files.
+ */
+const INHERITED_FOREGROUND = new Set([
+  "currentColor",
+  "inherit",
+  "transparent",
+  "unset",
+  "none",
+]);
+
+function isMeasurable(value: string): boolean {
+  const trimmed = value.trim();
+  return (
+    INHERITED_FOREGROUND.has(trimmed) ||
+    /^var\(--cocso-[a-z0-9-]+\)$/.test(trimmed)
+  );
+}
+
 /**
  * Walk a module a rule block at a time, pairing each foreground with the fill
  * its own block declares. A brace on either side closes whatever was being
@@ -208,8 +250,9 @@ function declarationsIn(file: string, css: string): Declaration[] {
   return found;
 }
 
-function foregroundDeclarations(): Declaration[] {
-  const found: Declaration[] = [];
+/** Every CSS Module under `src/components`, as `[path, source]`. */
+function moduleSources(): [string, string][] {
+  const found: [string, string][] = [];
   for (const dir of readdirSync(COMPONENTS_DIR, { withFileTypes: true })) {
     if (!dir.isDirectory()) {
       continue;
@@ -218,22 +261,54 @@ function foregroundDeclarations(): Declaration[] {
       if (!entry.endsWith(".module.css")) {
         continue;
       }
-      found.push(
-        ...declarationsIn(
-          `${dir.name}/${entry}`,
-          readFileSync(join(COMPONENTS_DIR, dir.name, entry), "utf-8")
-        )
-      );
+      found.push([
+        `${dir.name}/${entry}`,
+        readFileSync(join(COMPONENTS_DIR, dir.name, entry), "utf-8"),
+      ]);
     }
   }
   return found;
 }
 
-const DECLARATIONS = foregroundDeclarations();
+const MODULE_SOURCES = moduleSources();
+
+const DECLARATIONS = MODULE_SOURCES.flatMap(([file, css]) =>
+  declarationsIn(file, css)
+);
 
 describe("CSS Module foregrounds clear AA on the surfaces they sit on", () => {
   it("finds foreground declarations to check", () => {
     expect(DECLARATIONS.length).toBeGreaterThan(10);
+  });
+
+  /**
+   * The check above only collects `color: var(--cocso-color-…)`. Everything
+   * else written as a `color:` slips past the collector, one step before the
+   * measuring starts — so it is not that such a foreground fails, it is that
+   * it is never a case. This asserts the collector sees every foreground
+   * there is, which is the only way the count above means anything.
+   */
+  it("has no colour that nothing can measure", () => {
+    const unmeasurable: string[] = [];
+    for (const [file, css] of MODULE_SOURCES) {
+      css.split("\n").forEach((text, index) => {
+        for (const [property, pattern] of [
+          ["color", ANY_FOREGROUND],
+          ["background", ANY_BACKGROUND],
+        ] as const) {
+          const match = text.match(pattern);
+          if (match && !isMeasurable(match[1])) {
+            unmeasurable.push(
+              `${file}:${index + 1} ${property}: ${match[1].trim()}`
+            );
+          }
+        }
+      });
+    }
+    expect(
+      unmeasurable,
+      "a `color:` is written in a form no contrast check can read. Name a semantic token (`var(--cocso-color-…)`), or declare it in the recipe so codegen emits a component custom property. A `color-mix()` counts as unreadable even though it names tokens: this check resolves a var chain to hex and cannot evaluate the mix, so the text would be exempt from AA rather than passing it."
+    ).toEqual([]);
   });
 
   const cases = DECLARATIONS.filter(
@@ -255,6 +330,17 @@ describe("CSS Module foregrounds clear AA on the surfaces they sit on", () => {
   }) => {
     const foreground = resolve(token, aliases);
     const background = resolve(surface, aliases);
+    // Not `return`. A token this cannot resolve used to drop out of the suite
+    // without a word, which reads from the outside exactly like a pass — the
+    // case was never checked and nothing said so.
+    expect(
+      foreground,
+      `${file}:${line} paints with \`${token}\`, which does not resolve to a colour. Add it to the token files, or stop painting text with it — a foreground this check cannot resolve is a foreground nothing measures.`
+    ).not.toBeNull();
+    expect(
+      background,
+      `${file}:${line} sits on \`${surface}\`, which does not resolve to a colour. SURFACES and any fill a rule block declares must name a real token.`
+    ).not.toBeNull();
     if (!(foreground && background)) {
       return;
     }
