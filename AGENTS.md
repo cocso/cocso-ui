@@ -256,7 +256,11 @@ When asked to review comments on a GitHub PR:
   were demos modelling a control nobody had named.
 - Every exported component MUST pass axe in a static render.
   `packages/react/src/test/a11y.test.tsx` runs it over each one in a
-  representative state. It is a floor, not an audit — keyboard order, focus
+  representative state, and fails when a component directory has no case —
+  against the directory listing, not against a count. A component that renders
+  into a portal MUST pass `"document"` as its scope: axe is otherwise pointed
+  at the render container, the panel is not in it, and the case passes having
+  read nothing. It is a floor, not an audit — keyboard order, focus
   movement and screen-reader output are outside what a jsdom render can see,
   and rules needing layout are disabled explicitly rather than left to pass
   silently. A component rendering an ARIA role MUST give it an accessible
