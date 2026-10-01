@@ -188,7 +188,7 @@ const ANY_BACKGROUND = /^\s*background(?:-color)?:\s*([^;]+);/;
  * consumer styling a file row reached for
  * `color-mix(in srgb, var(--cocso-color-surface-secondary) 55%, …)`, which no
  * check in this repo can resolve. `color-mix` is the sharp case because it
- * *looks* token-based — it names two real tokens and tracks the theme — while
+ * looks token-based — it names two real tokens and tracks the theme — while
  * being opaque to every guard that reads these files.
  */
 const INHERITED_FOREGROUND = new Set([
@@ -199,11 +199,12 @@ const INHERITED_FOREGROUND = new Set([
   "none",
 ]);
 
+const COCSO_CUSTOM_PROPERTY = /^var\(--cocso-[a-z0-9-]+\)$/;
+
 function isMeasurable(value: string): boolean {
   const trimmed = value.trim();
   return (
-    INHERITED_FOREGROUND.has(trimmed) ||
-    /^var\(--cocso-[a-z0-9-]+\)$/.test(trimmed)
+    INHERITED_FOREGROUND.has(trimmed) || COCSO_CUSTOM_PROPERTY.test(trimmed)
   );
 }
 
