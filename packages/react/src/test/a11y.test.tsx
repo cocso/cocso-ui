@@ -20,6 +20,7 @@
  * checks against the real token values.
  */
 
+import { DeleteIcon } from "@cocso-ui/react-icons";
 import { render } from "@testing-library/react";
 import axe from "axe-core";
 import type { ReactElement } from "react";
@@ -33,6 +34,7 @@ import { Breadcrumb } from "../components/breadcrumb";
 import { Button } from "../components/button";
 import { Card } from "../components/card";
 import { Checkbox } from "../components/checkbox";
+import { FileRow } from "../components/file-row";
 import { Input } from "../components/input";
 import { Link } from "../components/link";
 import { Pagination } from "../components/pagination";
@@ -87,6 +89,21 @@ const CASES: [string, () => ReactElement][] = [
   ["Button, loading", () => <Button loading>버튼</Button>],
   ["Card", () => <Card>내용</Card>],
   ["Checkbox", () => <Checkbox label="동의" />],
+  ["FileRow", () => <FileRow name="사업자등록증.pdf" />],
+  [
+    "FileRow, with actions",
+    () => (
+      <FileRow
+        actions={
+          <Button aria-label="삭제" size="x-small" svgOnly variant="ghost">
+            <DeleteIcon size={14} />
+          </Button>
+        }
+        href="/files/a.pdf"
+        name="사업자등록증.pdf"
+      />
+    ),
+  ],
   ["Input", () => <Input label="이름" placeholder="이름" />],
   ["Input, error", () => <Input error="필수 항목입니다" label="이름" />],
   [

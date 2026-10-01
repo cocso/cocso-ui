@@ -12,6 +12,7 @@ export * from "./components/day-picker";
 export * from "./components/dialog";
 export * from "./components/dropdown";
 export * from "./components/field";
+export * from "./components/file-row";
 export * from "./components/input";
 export * from "./components/input-trigger";
 export * from "./components/link";
