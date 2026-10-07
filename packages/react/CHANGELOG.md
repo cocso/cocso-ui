@@ -1,5 +1,18 @@
 # @cocso-ui/react
 
+## 1.9.1
+
+### Patch Changes
+
+- 269c88c: A page number wider than two digits no longer overruns its box. `Pagination` drew every item as a fixed 32px square, so a four-digit page overflowed it: the labels ran together with no gap between them and the current page's filled pill clipped its own number. Any catalogue past a thousand pages rendered that way.
+  
+  The arrow keeps its fixed square, since it holds an icon. The number's box now has a minimum rather than a fixed width, with inline padding and no wrapping — a single digit stays the same 32px square it has always been, and only a wider number grows the box: 32px at one digit, about 45 at four.
+- 269c88c: The Switch's off thumb draws a lighter edge. It used `text-secondary`, a text colour, which measured 5.13:1 against the off track — 1.7× what WCAG 1.4.11 asks of a boundary, so an 18px toggle read as heavy as the body text beside it and pulled the eye off the values it sat next to.
+  
+  It now uses `border-on-control`, a new semantic token for a boundary drawn on a control's own fill rather than on the page. It has to flip where `border-strong` does not, because the surface it sits on — the off track — is light in the light theme and dark in the dark one: `neutral-500` is 3.67:1 on the light track, `neutral-400` is 3.92:1 on the dark one. The inverse pairing fails both ways, which is why the existing `text-tertiary` could not serve it.
+  
+  The track's own border is unchanged. `neutral-500` is already the lightest step on the ramp that clears 3:1 against both the page and the grey band, so there is nothing lighter to move it to.
+
 ## 1.9.0
 
 ### Minor Changes
