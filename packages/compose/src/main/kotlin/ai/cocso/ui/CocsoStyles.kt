@@ -1245,7 +1245,7 @@ fun cCSwitchStyle(
         style = style.copy(thumbOffset = 2.dp)
     }
     if (checked == CCSwitchChecked.`false`) {
-        style = style.copy(thumbBorderColor = CocsoTokens.Color.textSecondary())
+        style = style.copy(thumbBorderColor = CocsoTokens.Color.borderOnControl())
     }
     if (variant == CCSwitchVariant.primary && checked == CCSwitchChecked.`true`) {
         style = style.copy(switchBgColor = CocsoTokens.Color.interactivePrimary())

@@ -53,7 +53,7 @@
 }
 
 .cocso-switch:where(.cocso-switch--checked-false) {
-  --cocso-switch-thumb-border-color: var(--cocso-color-text-secondary);
+  --cocso-switch-thumb-border-color: var(--cocso-color-border-on-control);
   --cocso-switch-switch-bg-color-hover: var(--cocso-color-interactive-secondary-hover);
 }
 

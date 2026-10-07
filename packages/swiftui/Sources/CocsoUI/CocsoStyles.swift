@@ -1273,7 +1273,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
             style.thumbOffset = 2
         }
         if checked == .`false` {
-            style.thumbBorderColor = CocsoTokens.Color.textSecondary(scheme, brand: brand)
+            style.thumbBorderColor = CocsoTokens.Color.borderOnControl(scheme, brand: brand)
         }
         if variant == .primary && checked == .`true` {
             style.switchBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)

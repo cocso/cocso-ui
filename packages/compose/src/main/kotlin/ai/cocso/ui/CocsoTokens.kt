@@ -150,6 +150,10 @@ object CocsoTokens {
             if (isSystemInDarkTheme()) ComposeColor(0x33FFFFFF) else ComposeColor(0x1A000000)
         @Composable
         @ReadOnlyComposable
+        fun borderOnControl(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF8A949E) else ComposeColor(0xFF6D7882)
+        @Composable
+        @ReadOnlyComposable
         fun borderPrimary(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0xFF464C53) else ComposeColor(0xFFCDD1D5)
         @Composable
