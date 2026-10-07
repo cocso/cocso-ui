@@ -16,7 +16,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--cocso-spacing-12);
     height: var(--cocso-spacing-12);
     font-size: var(--cocso-pagination-font-size);
     font-weight: var(--cocso-pagination-font-weight);
@@ -51,6 +50,27 @@
 
   .arrow:not(:disabled):active {
     --cocso-pagination-bg-color: var(--cocso-color-interactive-secondary);
+  }
+
+  /* The arrow holds an icon, so its box is fixed. */
+  .arrow {
+    width: var(--cocso-spacing-12);
+  }
+
+  /* The item holds a number, so its box follows the number.
+
+     Both shared one fixed 32px square and nothing stopped the label wrapping,
+     so a four-digit page broke across two lines inside a 32px box and the row
+     lost its baseline. A catalogue only has to pass a thousand pages for every
+     number after it to render that way.
+
+     `min-width` keeps a single digit the square it has always been — one digit
+     plus the padding is still under 32 — and only a wider number pushes the
+     box out: 32px at one digit, 41 at three, 50 at four. */
+  .item {
+    min-width: var(--cocso-spacing-12);
+    padding-inline: var(--cocso-spacing-4);
+    white-space: nowrap;
   }
 
   .arrow > svg {

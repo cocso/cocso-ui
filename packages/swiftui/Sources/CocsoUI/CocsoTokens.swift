@@ -161,6 +161,9 @@ public enum CocsoTokens {
         public static func borderGlass(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.2) : SwiftUI.Color(hex: 0x000000, opacity: 0.1)
         }
+        public static func borderOnControl(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x8A949E) : SwiftUI.Color(hex: 0x6D7882)
+        }
         public static func borderPrimary(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x464C53) : SwiftUI.Color(hex: 0xCDD1D5)
         }

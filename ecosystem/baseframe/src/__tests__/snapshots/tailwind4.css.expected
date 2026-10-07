@@ -165,6 +165,7 @@
   --color-border-primary: var(--cocso-color-border-primary);
   --color-border-secondary: var(--cocso-color-border-secondary);
   --color-border-strong: var(--cocso-color-border-strong);
+  --color-border-on-control: var(--cocso-color-border-on-control);
   --color-border-glass: var(--cocso-color-border-glass);
   --color-overlay-subtle: var(--cocso-color-overlay-subtle);
   --color-overlay-muted: var(--cocso-color-overlay-muted);

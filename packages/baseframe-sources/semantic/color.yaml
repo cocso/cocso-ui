@@ -148,6 +148,28 @@ data:
       values:
         light: $color.neutral-500
         dark: $color.neutral-500
+    # The same job as `strong`, but for a boundary drawn on a control's own fill
+    # rather than on the page — the `on-*` sense of `text-on-primary`.
+    #
+    # The Switch's thumb is the case. Its edge must clear 3:1 against the OFF
+    # track (`surface-neutral`, `#e6e8ea` light and `#33363d` dark), not against
+    # the page, and that surface sits at opposite ends of the ramp in the two
+    # themes — so unlike `strong` this one has to flip. The off track is light
+    # in the light theme, needing a darker edge, and dark in the dark theme,
+    # needing a lighter one.
+    #
+    # `neutral-500` is 3.67 on the light off track and `neutral-400` is 3.92 on
+    # the dark one. The reverse pairing fails both ways (400 gives 2.51 light,
+    # 500 gives 2.68 dark), which is why `text-tertiary` cannot serve: it is
+    # light 400 / dark 500, exactly inverted.
+    #
+    # It replaced `text-secondary` on the Switch thumb, which measured 5.13 —
+    # an 18px toggle reading as heavy as the body text beside it, loud enough
+    # to pull the eye off the prices it was sitting next to.
+    $color.border.on-control:
+      values:
+        light: $color.neutral-500
+        dark: $color.neutral-400
     # The edge of a glass surface. A tint of the opposite pole so it reads on
     # the glass whatever is behind it; the highlight a light catches on a pane.
     $color.border.glass:

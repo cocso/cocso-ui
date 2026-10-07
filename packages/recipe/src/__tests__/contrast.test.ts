@@ -484,5 +484,22 @@ describe("A control's boundary identifies it", () => {
       );
       expect(ratio).toBeGreaterThanOrEqual(3);
     });
+
+    /**
+     * `border-on-control` is drawn on a control's own fill, not on the page,
+     * so the pairs above would measure it against the wrong thing and report a
+     * number that happens to pass. Its surface is `surface-neutral` — the
+     * Switch's off track, which the thumb's edge has to be visible against,
+     * and which sits at opposite ends of the ramp in the two themes. That is
+     * why the token flips (light `neutral-500` 3.67, dark `neutral-400` 3.92)
+     * where `border-strong` does not.
+     */
+    it("border-on-control clears 3:1 on the control fill it is drawn on", () => {
+      const ratio = contrast(
+        resolve("border-on-control", aliases),
+        resolve("surface-neutral", aliases)
+      );
+      expect(ratio).toBeGreaterThanOrEqual(3);
+    });
   });
 });
