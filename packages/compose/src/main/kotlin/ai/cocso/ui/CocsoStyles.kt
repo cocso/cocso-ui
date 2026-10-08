@@ -1210,7 +1210,7 @@ fun cCSwitchStyle(
     var style = CCSwitchStyle()
     style = style.copy(thumbColor = CocsoTokens.Color.textOnPrimary())
     style = style.copy(switchBgColor = CocsoTokens.Color.surfaceNeutral())
-    style = style.copy(borderColor = CocsoTokens.Color.borderStrong())
+    style = style.copy(borderColor = CocsoTokens.Color.borderControlMuted())
     if (variant == CCSwitchVariant.primary) {
         style = style.copy(checkedBgColor = CocsoTokens.Color.interactivePrimary())
     }

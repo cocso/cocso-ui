@@ -87,6 +87,17 @@ data:
     $color.neutral-400:
       values:
         default: '#8A949E'
+    # Between 400 and 500, and the ramp's only half step. It exists because the
+    # gap there is the one place a boundary needs a value and cannot find one:
+    # a control's edge must clear 3:1 against the page, a card AND the control's
+    # own fill, and on the Switch's track those are #ffffff, #f4f5f6 and
+    # #e6e8ea. `neutral-400` gives 2.71 on that fill and `neutral-500` is 3.67 —
+    # legible, but heavy enough that an 18px toggle read as loudly as the body
+    # text beside it. This is the lightest value clearing all three: 3.75, 3.44,
+    # 3.06.
+    $color.neutral-450:
+      values:
+        default: '#7B858F'
     $color.neutral-500:
       values:
         default: '#6D7882'

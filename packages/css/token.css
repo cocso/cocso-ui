@@ -26,6 +26,7 @@
   --cocso-color-neutral-200: #cdd1d5;
   --cocso-color-neutral-300: #b1b8be;
   --cocso-color-neutral-400: #8a949e;
+  --cocso-color-neutral-450: #7b858f;
   --cocso-color-neutral-500: #6d7882;
   --cocso-color-neutral-600: #58616a;
   --cocso-color-neutral-700: #464c53;
@@ -189,6 +190,7 @@
   --cocso-color-border-secondary: var(--cocso-color-neutral-100);
   --cocso-color-border-strong: var(--cocso-color-neutral-500);
   --cocso-color-border-on-control: var(--cocso-color-neutral-500);
+  --cocso-color-border-control-muted: var(--cocso-color-neutral-450);
   --cocso-color-border-glass: var(--cocso-color-black-alpha-10);
   --cocso-color-overlay-subtle: var(--cocso-color-black-alpha-5);
   --cocso-color-overlay-muted: var(--cocso-color-black-alpha-10);

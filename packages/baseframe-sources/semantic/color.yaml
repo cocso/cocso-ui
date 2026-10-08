@@ -170,6 +170,29 @@ data:
       values:
         light: $color.neutral-500
         dark: $color.neutral-400
+    # A control's outer boundary where that boundary also encloses a fill of its
+    # own — so it has to clear 3:1 against the page, against a card, AND against
+    # what it encloses. `strong` is measured against the first two only, which
+    # is right for an Input (its fill is the page's colour) and not for the
+    # Switch, whose track is `surface-neutral`.
+    #
+    # Light `neutral-450` is the lightest value clearing all three: 3.75 on the
+    # page, 3.44 on a card, 3.06 on the track. `border-strong` cleared them at
+    # 4.51/4.13/3.67 — passing, but the reason the toggle read as heavily as the
+    # text beside it.
+    #
+    # Dark flips to `neutral-400`, and that is a fix rather than a preference:
+    # `border-strong` is `neutral-500` in the dark theme too, which measures
+    # 2.68 against the dark track (`#33363d`). The track's own boundary has been
+    # under the bar in the dark theme for as long as it has existed, because
+    # nothing measured a boundary against the thing it encloses.
+    #
+    # Distinct from `on-control`, which is for an edge drawn ON a control's fill
+    # — the thumb inside this same track — rather than around it.
+    $color.border.control-muted:
+      values:
+        light: $color.neutral-450
+        dark: $color.neutral-400
     # The edge of a glass surface. A tint of the opposite pole so it reads on
     # the glass whatever is behind it; the highlight a light catches on a pane.
     $color.border.glass:
