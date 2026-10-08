@@ -96,16 +96,16 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-primary",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -134,16 +134,16 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-primary",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -240,16 +240,16 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-primary",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -278,16 +278,16 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-primary",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -384,16 +384,16 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-primary",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -422,16 +422,16 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-primary",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -528,16 +528,16 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-success",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -566,16 +566,16 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-success",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -672,16 +672,16 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-success",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -710,16 +710,16 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-success",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -816,16 +816,16 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-success",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -854,16 +854,16 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-success",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -960,16 +960,16 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-danger",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -998,16 +998,16 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-danger",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1104,16 +1104,16 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-danger",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1142,16 +1142,16 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-danger",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1248,16 +1248,16 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-danger",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1286,16 +1286,16 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-danger",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1392,16 +1392,16 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-warning-active",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1430,16 +1430,16 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-warning-active",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1536,16 +1536,16 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-warning-active",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1574,16 +1574,16 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-warning-active",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1680,16 +1680,16 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-warning-active",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1718,16 +1718,16 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-warning-active",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1824,16 +1824,16 @@
       "thumbSize": 18,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-info",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -1862,16 +1862,16 @@
           "thumbSize": 18,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-info",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -1968,16 +1968,16 @@
       "thumbSize": 16,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-info",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -2006,16 +2006,16 @@
           "thumbSize": 16,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-info",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
@@ -2112,16 +2112,16 @@
       "thumbSize": 14,
       "thumbOffset": 2,
       "thumbBorderColor": {
-        "r": 0.34509803921568627,
-        "g": 0.3803921568627451,
-        "b": 0.41568627450980394
+        "r": 1,
+        "g": 0,
+        "b": 1
       },
       "_tokenRefs": {
         "thumbColor": "text-on-primary",
         "switchBgColor": "surface-neutral",
         "borderColor": "border-strong",
         "checkedBgColor": "interactive-info",
-        "thumbBorderColor": "text-secondary"
+        "thumbBorderColor": "border-on-control"
       },
       "states": {
         "hover": {
@@ -2150,16 +2150,16 @@
           "thumbSize": 14,
           "thumbOffset": 2,
           "thumbBorderColor": {
-            "r": 0.34509803921568627,
-            "g": 0.3803921568627451,
-            "b": 0.41568627450980394
+            "r": 1,
+            "g": 0,
+            "b": 1
           },
           "_tokenRefs": {
             "thumbColor": "text-on-primary",
             "switchBgColor": "interactive-secondary-hover",
             "borderColor": "border-strong",
             "checkedBgColor": "interactive-info",
-            "thumbBorderColor": "text-secondary"
+            "thumbBorderColor": "border-on-control"
           }
         }
       }
