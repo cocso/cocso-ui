@@ -1,6 +1,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import type { TestContext, TestRunnerConfig } from "@storybook/test-runner";
+import type {
+  PrepareContext,
+  TestContext,
+  TestRunnerConfig,
+} from "@storybook/test-runner";
 import { getStoryContext, waitForPageReady } from "@storybook/test-runner";
 import { checkA11y, injectAxe } from "axe-playwright";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
@@ -111,7 +115,56 @@ async function axeContext(page: Page, context: TestContext) {
     : "#storybook-root";
 }
 
+/**
+ * The first navigation of each worker, retried.
+ *
+ * The runner's own `prepare` calls `page.goto` once, on Playwright's default
+ * 30s navigation timeout, with no retry. Several workers open the static
+ * server at the same moment and one of them occasionally does not get a
+ * response in time; the suite then reports `Test suite failed to run —
+ * page.goto: Timeout 30000ms exceeded` while every test in it passes. It has
+ * landed twice recently, on `pagination` and on `accordion`, each time on a
+ * change that had nothing to do with either, and each time a re-run was green.
+ *
+ * A failure that is really "the server was slow to answer" should not read as
+ * a broken story, so this waits longer and tries again. A server that is
+ * genuinely down still fails, three attempts later, with the runner's own
+ * connection-refused message intact.
+ */
+const NAVIGATION_TIMEOUT_MS = 60_000;
+const NAVIGATION_ATTEMPTS = 3;
+
+async function prepare({
+  page,
+  browserContext,
+  testRunnerConfig,
+}: PrepareContext) {
+  const targetURL = process.env.TARGET_URL ?? "http://localhost:6006";
+  const iframeURL = new URL("iframe.html", targetURL).toString();
+
+  if (testRunnerConfig?.getHttpHeaders) {
+    const headers = await testRunnerConfig.getHttpHeaders(iframeURL);
+    await browserContext.setExtraHTTPHeaders(headers);
+  }
+
+  for (let attempt = 1; attempt <= NAVIGATION_ATTEMPTS; attempt += 1) {
+    try {
+      await page.goto(iframeURL, {
+        timeout: NAVIGATION_TIMEOUT_MS,
+        waitUntil: "load",
+      });
+      return;
+    } catch (error) {
+      if (attempt === NAVIGATION_ATTEMPTS) {
+        throw error;
+      }
+      await page.waitForTimeout(2000);
+    }
+  }
+}
+
 const config: TestRunnerConfig = {
+  prepare,
   setup() {
     expect.extend({ toMatchImageSnapshot });
   },
