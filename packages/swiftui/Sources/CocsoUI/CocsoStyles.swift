@@ -1238,7 +1238,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
         var style = CCSwitchStyle()
         style.thumbColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
         style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
-        style.borderColor = CocsoTokens.Color.borderStrong(scheme, brand: brand)
+        style.borderColor = CocsoTokens.Color.borderControlMuted(scheme, brand: brand)
         if variant == .primary {
             style.checkedBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }

@@ -94,6 +94,7 @@ public enum CocsoTokens {
         public static let neutral200: SwiftUI.Color = SwiftUI.Color(hex: 0xCDD1D5)
         public static let neutral300: SwiftUI.Color = SwiftUI.Color(hex: 0xB1B8BE)
         public static let neutral400: SwiftUI.Color = SwiftUI.Color(hex: 0x8A949E)
+        public static let neutral450: SwiftUI.Color = SwiftUI.Color(hex: 0x7B858F)
         public static let neutral50: SwiftUI.Color = SwiftUI.Color(hex: 0xF4F5F6)
         public static let neutral500: SwiftUI.Color = SwiftUI.Color(hex: 0x6D7882)
         public static let neutral600: SwiftUI.Color = SwiftUI.Color(hex: 0x58616A)
@@ -157,6 +158,9 @@ public enum CocsoTokens {
         }
         public static func alphaShadow3(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0x000000, opacity: 0.48) : SwiftUI.Color(hex: 0x000000, opacity: 0.12)
+        }
+        public static func borderControlMuted(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x8A949E) : SwiftUI.Color(hex: 0x7B858F)
         }
         public static func borderGlass(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xFFFFFF, opacity: 0.2) : SwiftUI.Color(hex: 0x000000, opacity: 0.1)

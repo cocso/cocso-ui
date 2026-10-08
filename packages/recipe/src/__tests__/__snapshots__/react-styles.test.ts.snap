@@ -117,7 +117,7 @@ exports[`resolveStyleMap snapshots for all recipe-aware recipes > stockQuantityS
 
 exports[`resolveStyleMap snapshots for all recipe-aware recipes > switchRecipe default variants 1`] = `
 {
-  "--cocso-switch-border-color": "var(--cocso-color-border-strong)",
+  "--cocso-switch-border-color": "var(--cocso-color-border-control-muted)",
   "--cocso-switch-checked-bg-color": "var(--cocso-color-interactive-primary)",
   "--cocso-switch-height": "20px",
   "--cocso-switch-switch-bg-color": "var(--cocso-color-interactive-primary)",

@@ -26,6 +26,7 @@
   --color-neutral-200: var(--cocso-color-neutral-200);
   --color-neutral-300: var(--cocso-color-neutral-300);
   --color-neutral-400: var(--cocso-color-neutral-400);
+  --color-neutral-450: var(--cocso-color-neutral-450);
   --color-neutral-500: var(--cocso-color-neutral-500);
   --color-neutral-600: var(--cocso-color-neutral-600);
   --color-neutral-700: var(--cocso-color-neutral-700);
@@ -166,6 +167,7 @@
   --color-border-secondary: var(--cocso-color-border-secondary);
   --color-border-strong: var(--cocso-color-border-strong);
   --color-border-on-control: var(--cocso-color-border-on-control);
+  --color-border-control-muted: var(--cocso-color-border-control-muted);
   --color-border-glass: var(--cocso-color-border-glass);
   --color-overlay-subtle: var(--cocso-color-overlay-subtle);
   --color-overlay-muted: var(--cocso-color-overlay-muted);

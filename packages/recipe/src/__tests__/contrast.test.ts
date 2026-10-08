@@ -501,5 +501,28 @@ describe("A control's boundary identifies it", () => {
       );
       expect(ratio).toBeGreaterThanOrEqual(3);
     });
+
+    /**
+     * A boundary that encloses a fill of its own has three neighbours, not
+     * two: the page, a card, and the thing inside it. The pairs above check
+     * the first two, which is right for an Input — its fill is the page's
+     * colour — and was never right for the Switch's track.
+     *
+     * Nothing measured that third surface, and the dark theme had been under
+     * the bar the whole time: `border-strong` is `neutral-500` in both themes
+     * and sits at 2.68 on the dark track. It reads as a pass for as long as
+     * you only ask it about the page.
+     */
+    it.each([
+      "surface-primary",
+      "surface-secondary",
+      "surface-neutral",
+    ])("border-control-muted clears 3:1 on %s", (surface) => {
+      const ratio = contrast(
+        resolve("border-control-muted", aliases),
+        resolve(surface, aliases)
+      );
+      expect(ratio).toBeGreaterThanOrEqual(3);
+    });
   });
 });

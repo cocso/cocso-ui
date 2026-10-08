@@ -78,6 +78,7 @@ object CocsoTokens {
         val neutral200: ComposeColor = ComposeColor(0xFFCDD1D5)
         val neutral300: ComposeColor = ComposeColor(0xFFB1B8BE)
         val neutral400: ComposeColor = ComposeColor(0xFF8A949E)
+        val neutral450: ComposeColor = ComposeColor(0xFF7B858F)
         val neutral50: ComposeColor = ComposeColor(0xFFF4F5F6)
         val neutral500: ComposeColor = ComposeColor(0xFF6D7882)
         val neutral600: ComposeColor = ComposeColor(0xFF58616A)
@@ -144,6 +145,10 @@ object CocsoTokens {
         @ReadOnlyComposable
         fun alphaShadow3(): ComposeColor =
             if (isSystemInDarkTheme()) ComposeColor(0x7A000000) else ComposeColor(0x1F000000)
+        @Composable
+        @ReadOnlyComposable
+        fun borderControlMuted(): ComposeColor =
+            if (isSystemInDarkTheme()) ComposeColor(0xFF8A949E) else ComposeColor(0xFF7B858F)
         @Composable
         @ReadOnlyComposable
         fun borderGlass(): ComposeColor =
