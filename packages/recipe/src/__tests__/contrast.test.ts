@@ -462,6 +462,82 @@ describe("Contrast — recipe fills against their foregrounds", () => {
  * 1.13:1 on a card, identifiable only once focused. `border-strong` itself was
  * 2.82:1 on a card, so even the token named `strong` did not clear the bar.
  */
+/**
+ * Boundaries that enclose a fill of their own, read off the recipes.
+ *
+ * A pair is skipped when it cannot say anything:
+ *
+ * - The border and the fill are the same token (a checked Checkbox), so there
+ *   is no internal edge to see; its visible edge is against the page, which
+ *   the pairs above already measure.
+ * - The fill is a page surface (an unchecked Checkbox, a Radio), so "against
+ *   what it encloses" is literally the same question as "against the page".
+ *
+ * What is left is a control drawing a boundary around a fill of a different
+ * colour. Today that is the Switch and nothing else, which is exactly why the
+ * defect lived so long — and why this is derived rather than enumerated.
+ */
+const PAGE_SURFACES = new Set(["surface-primary", "surface-secondary"]);
+
+const BORDER_KEY = /border.*color$/i;
+const FILL_KEY = /(^|[a-z])bgcolor$/i;
+
+/**
+ * Recipes whose root is a panel rather than a control. WCAG 1.4.11 asks 3:1 of
+ * the visual information needed to identify a *component* — a control, or a
+ * graphic carrying meaning. An Alert is a region of prose with a tinted edge;
+ * its border is decoration, and the text inside it is what the contrast rules
+ * apply to.
+ */
+const PANELS: Readonly<Record<string, string>> = {
+  alert: "a panel of prose, not a control — its tinted edge is decoration",
+};
+
+interface EnclosedPair {
+  border: string;
+  fill: string;
+  recipe: string;
+  where: string;
+}
+
+function collectEnclosedPairs(
+  node: unknown,
+  path: string,
+  recipe: string,
+  found: EnclosedPair[]
+) {
+  if (!node || typeof node !== "object") {
+    return;
+  }
+  const entries = Object.entries(node as Record<string, unknown>);
+  const borders = entries.filter(
+    ([key, value]) => BORDER_KEY.test(key) && typeof value === "string"
+  ) as [string, string][];
+  const fills = entries.filter(
+    ([key, value]) => FILL_KEY.test(key) && typeof value === "string"
+  ) as [string, string][];
+
+  for (const [, border] of borders) {
+    for (const [, fill] of fills) {
+      if (border === fill || PAGE_SURFACES.has(fill)) {
+        continue;
+      }
+      found.push({ border, fill, recipe, where: path || "base" });
+    }
+  }
+  for (const [key, value] of entries) {
+    collectEnclosedPairs(value, path ? `${path}.${key}` : key, recipe, found);
+  }
+}
+
+const ENCLOSED_FILL_PAIRS = RECIPES.filter(
+  (recipe) => !(recipe.name in PANELS)
+).flatMap((recipe) => {
+  const found: EnclosedPair[] = [];
+  collectEnclosedPairs(recipe, "", recipe.name, found);
+  return found;
+});
+
 describe("A control's boundary identifies it", () => {
   /** The border a control draws when it is doing nothing. */
   const RESTING_BOUNDARIES = ["border-strong"] as const;
@@ -523,6 +599,28 @@ describe("A control's boundary identifies it", () => {
         resolve(surface, aliases)
       );
       expect(ratio).toBeGreaterThanOrEqual(3);
+    });
+
+    /**
+     * The same question, asked of the recipes rather than of a token.
+     *
+     * The assertion above names `border-control-muted`, which is today's
+     * answer and not the rule. The rule is that a boundary enclosing a fill of
+     * its own has a third neighbour — and the next control to have one will be
+     * written with `border-strong`, the token that sat at 2.68 on the Switch's
+     * dark track for the whole life of the dark theme, and nothing here would
+     * say so. So the pairs are read off the recipes instead of listed.
+     */
+    it.each(ENCLOSED_FILL_PAIRS)("$recipe/$where: $border encloses $fill", ({
+      border,
+      fill,
+      recipe,
+    }) => {
+      const ratio = contrast(resolve(border, aliases), resolve(fill, aliases));
+      expect(
+        ratio,
+        `${recipe} draws \`${border}\` around a \`${fill}\` fill. A boundary must be visible against what it encloses, not only against the page — that is how the Switch's dark track went unnoticed at 2.68. Use a token clearing 3:1 on this fill, or add the recipe to PANELS with the reason it is not a control.`
+      ).toBeGreaterThanOrEqual(3);
     });
   });
 });

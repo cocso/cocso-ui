@@ -160,6 +160,17 @@ When asked to review comments on a GitHub PR:
   Modules are code-split per component, so which file loads first is a fact
   about the consumer's bundle: at equal specificity the same component renders
   differently in two apps. Name the class twice (`.content.content`).
+- A control's boundary MUST clear 3:1 against everything it touches, which
+  includes the fill it encloses when that fill is not the page's own colour.
+  `border-strong` was picked by measuring against the page and a card only,
+  which is right for an Input (its fill is the page) and was wrong for the
+  Switch's track: it measured 2.68 on the dark track and had been under the bar
+  for the entire life of the dark theme, because no check asked a boundary
+  about the thing inside it. Use `border-control-muted` for that case.
+  `contrast.test.ts` reads these pairs off the recipes rather than naming
+  tokens — a control added tomorrow with a fill of its own is caught without
+  anyone remembering this rule — and a recipe whose root is a panel rather than
+  a control is exempted by name, with the reason.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is
