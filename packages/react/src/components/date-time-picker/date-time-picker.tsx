@@ -171,6 +171,9 @@ export function DateTimePicker({
             }}
             disabled={disabled}
             filterTime={filterTime}
+            // Six weeks always, for the same reason as DayPicker: a five-week month made
+            // the panel shorter, and paging into a six-week one could flip it above the trigger.
+            fixedHeight
             inline
             locale={locale}
             maxDate={maxDate}

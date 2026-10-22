@@ -47,6 +47,34 @@ describe("DayPicker", () => {
     });
   });
 
+  describe("height", () => {
+    it("always renders six weeks so the panel does not change height between months", async () => {
+      // October 2026 spans five weeks, August 2026 six.
+      const { unmount } = render(
+        <DayPicker trigger={trigger} value={new Date(2026, 9, 15)} />
+      );
+      await userEvent.click(
+        screen.getByRole("button", { name: "Select date" })
+      );
+      await waitFor(() => {
+        expect(
+          document.querySelectorAll(".react-datepicker__week")
+        ).toHaveLength(6);
+      });
+      unmount();
+
+      render(<DayPicker trigger={trigger} value={new Date(2026, 7, 15)} />);
+      await userEvent.click(
+        screen.getByRole("button", { name: "Select date" })
+      );
+      await waitFor(() => {
+        expect(
+          document.querySelectorAll(".react-datepicker__week")
+        ).toHaveLength(6);
+      });
+    });
+  });
+
   describe("value prop", () => {
     it("accepts a value prop without throwing", () => {
       const date = new Date(2024, 0, 15);
