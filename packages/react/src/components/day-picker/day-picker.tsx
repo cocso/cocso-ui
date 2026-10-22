@@ -76,6 +76,11 @@ export function DayPicker({
               return "";
             }}
             disabled={disabled}
+            // Always draw six weeks. A month spans five or six rows, so the panel's
+            // height changed while paging months, and the Popover positioner, seeing a
+            // taller panel with too little room below, flipped it above the trigger
+            // mid-interaction. A fixed height keeps the panel where it opened.
+            fixedHeight
             inline
             locale={locale}
             maxDate={maxDate}
