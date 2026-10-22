@@ -39,9 +39,15 @@
     color: var(--cocso-color-feedback-info-text);
   }
 
+  /* Block and full width, not the library's inline-block. The panel has a
+     260px minimum and the calendar's own width is narrower, so an inline-block
+     calendar sat at the left of the panel and left the difference as a wide
+     empty band on the right. Filling the panel lets the header and the
+     week rows (already `space-between`) spread to both edges. */
   :global(.react-datepicker) {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: 100%;
     padding-inline: 0;
     font-size: 0.8rem;
     color: var(--cocso-color-text-primary);
