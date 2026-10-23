@@ -148,8 +148,12 @@ describe("DayPicker", () => {
       await userEvent.click(
         screen.getByRole("button", { name: "Choose year and month" })
       );
-      expect(document.querySelector(".react-datepicker")).toBeNull();
-      expect(screen.getByText("2026년")).toBeInTheDocument();
+      expect(
+        screen.queryByRole("button", { name: "Choose year and month" })
+      ).toBeNull();
+      expect(
+        screen.getByRole("button", { name: "Back to days" })
+      ).toHaveTextContent("2026년");
       expect(screen.getByRole("button", { name: "10월" })).toHaveAttribute(
         "aria-current",
         "date"

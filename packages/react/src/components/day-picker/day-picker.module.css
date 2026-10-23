@@ -32,9 +32,12 @@
   }
 
   /* The header's year and month, pressed to switch between the day grid and
-     the month grid. A bare button so the title reads as before; the hover
-     fill and focus ring say it can be pressed. */
+     the month grid. A bare button so the title reads as before; the caret,
+     hover fill and focus ring say it can be pressed. */
   .title {
+    display: inline-flex;
+    gap: var(--cocso-spacing-1);
+    align-items: center;
     padding-block: var(--cocso-spacing-1);
     padding-inline: var(--cocso-spacing-2);
     margin-inline-start: calc(var(--cocso-spacing-2) * -1);
@@ -54,6 +57,11 @@
   .monthView {
     display: flex;
     flex-direction: column;
+  }
+
+  /* `display: flex` would otherwise win over the `hidden` attribute. */
+  .monthView[hidden] {
+    display: none;
   }
 
   /* Same row as `.react-datepicker__header--custom`, which this view does

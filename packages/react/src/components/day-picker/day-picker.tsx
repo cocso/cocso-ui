@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  ArrowDropDownIcon,
+  ArrowDropUpIcon,
   ArrowIOSBackwardIcon,
   ArrowIOSForwardIcon,
 } from "@cocso-ui/react-icons";
@@ -139,82 +141,86 @@ export function DayPicker({
           }
         />
         <Popover.Content aria-label="Select date" className={styles.content}>
-          {view === "month" ? (
-            <div
-              className={styles.monthView}
-              style={{ minHeight: dayViewHeight }}
-            >
-              <div className={styles.monthHeader}>
-                <button
-                  aria-label="Back to days"
-                  className={styles.title}
-                  onClick={() => changeView("day")}
+          {/* Both views stay mounted and only `hidden` flips, so the pressed
+              button is never detached mid-press — a detached target can read
+              as a press outside the panel and close it. */}
+          <div
+            className={styles.monthView}
+            hidden={view !== "month"}
+            style={{ minHeight: dayViewHeight }}
+          >
+            <div className={styles.monthHeader}>
+              <button
+                aria-label="Back to days"
+                className={styles.title}
+                onClick={() => changeView("day")}
+                type="button"
+              >
+                <Typography size="small" type="body" weight="semibold">
+                  {viewDate.toLocaleDateString(locale.code ?? "ko-KR", {
+                    year: "numeric",
+                  })}
+                </Typography>
+                <ArrowDropUpIcon aria-hidden size={16} />
+              </button>
+
+              <div className={styles.menu}>
+                <Button
+                  aria-label="Previous year"
+                  className={styles.arrow}
+                  disabled={
+                    minDate !== undefined && year - 1 < minDate.getFullYear()
+                  }
+                  onClick={() => setViewDate(new Date(year - 1, 0, 1))}
+                  size="x-small"
+                  svgOnly
                   type="button"
+                  variant="outline"
                 >
-                  <Typography size="small" type="body" weight="semibold">
-                    {viewDate.toLocaleDateString(locale.code ?? "ko-KR", {
-                      year: "numeric",
-                    })}
-                  </Typography>
-                </button>
-
-                <div className={styles.menu}>
-                  <Button
-                    aria-label="Previous year"
-                    className={styles.arrow}
-                    disabled={
-                      minDate !== undefined && year - 1 < minDate.getFullYear()
-                    }
-                    onClick={() => setViewDate(new Date(year - 1, 0, 1))}
-                    size="x-small"
-                    svgOnly
-                    type="button"
-                    variant="outline"
-                  >
-                    <ArrowIOSBackwardIcon />
-                  </Button>
-                  <Button
-                    aria-label="Next year"
-                    className={styles.arrow}
-                    disabled={
-                      maxDate !== undefined && year + 1 > maxDate.getFullYear()
-                    }
-                    onClick={() => setViewDate(new Date(year + 1, 0, 1))}
-                    size="x-small"
-                    svgOnly
-                    type="button"
-                    variant="outline"
-                  >
-                    <ArrowIOSForwardIcon />
-                  </Button>
-                </div>
-              </div>
-
-              <div className={styles.monthGrid}>
-                {MONTHS.map((month) => {
-                  const current =
-                    value !== undefined &&
-                    value.getFullYear() === year &&
-                    value.getMonth() === month;
-                  const isViewed = viewDate.getMonth() === month;
-                  return (
-                    <button
-                      aria-current={current ? "date" : undefined}
-                      className={styles.monthCell}
-                      data-selected={current || undefined}
-                      disabled={monthDisabled(month)}
-                      key={month}
-                      onClick={() => jumpTo(year, month)}
-                      ref={isViewed ? currentMonthRef : undefined}
-                      type="button"
-                    >
-                      {format(new Date(year, month, 1), "LLL", { locale })}
-                    </button>
-                  );
-                })}
+                  <ArrowIOSBackwardIcon />
+                </Button>
+                <Button
+                  aria-label="Next year"
+                  className={styles.arrow}
+                  disabled={
+                    maxDate !== undefined && year + 1 > maxDate.getFullYear()
+                  }
+                  onClick={() => setViewDate(new Date(year + 1, 0, 1))}
+                  size="x-small"
+                  svgOnly
+                  type="button"
+                  variant="outline"
+                >
+                  <ArrowIOSForwardIcon />
+                </Button>
               </div>
             </div>
-          ) : (
+
+            <div className={styles.monthGrid}>
+              {MONTHS.map((month) => {
+                const current =
+                  value !== undefined &&
+                  value.getFullYear() === year &&
+                  value.getMonth() === month;
+                const isViewed = viewDate.getMonth() === month;
+                return (
+                  <button
+                    aria-current={current ? "date" : undefined}
+                    className={styles.monthCell}
+                    data-selected={current || undefined}
+                    disabled={monthDisabled(month)}
+                    key={month}
+                    onClick={() => jumpTo(year, month)}
+                    ref={isViewed ? currentMonthRef : undefined}
+                    type="button"
+                  >
+                    {format(new Date(year, month, 1), "LLL", { locale })}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <div hidden={view !== "day"}>
             <DatePicker
               dateFormat={dateFormat}
               dayClassName={(date) => {
@@ -270,6 +276,7 @@ export function DayPicker({
                         month: "long",
                       })}
                     </Typography>
+                    <ArrowDropDownIcon aria-hidden size={16} />
                   </button>
 
                   <div className={styles.menu}>
@@ -303,7 +310,7 @@ export function DayPicker({
               selected={value}
               showPopperArrow={false}
             />
-          )}
+          </div>
         </Popover.Content>
       </Popover>
     </div>
