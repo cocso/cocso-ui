@@ -130,6 +130,76 @@ describe("DayPicker", () => {
       ).not.toThrow();
     });
   });
+  describe("year and month view", () => {
+    const openAt = async (props: Parameters<typeof DayPicker>[0] = {}) => {
+      render(<DayPicker trigger={trigger} {...props} />);
+      await userEvent.click(
+        screen.getByRole("button", { name: "Select date" })
+      );
+      await waitFor(() => {
+        expect(document.querySelector(".react-datepicker")).toBeInTheDocument();
+      });
+    };
+
+    it("opens the month grid from the header and lands on the picked month", async () => {
+      const onValueChange = vi.fn();
+      await openAt({ onValueChange, value: new Date(2026, 9, 15) });
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Choose year and month" })
+      );
+      expect(document.querySelector(".react-datepicker")).toBeNull();
+      expect(screen.getByText("2026년")).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "10월" })).toHaveAttribute(
+        "aria-current",
+        "date"
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Previous year" })
+      );
+      await userEvent.click(screen.getByRole("button", { name: "3월" }));
+
+      expect(screen.getByText("2025년 3월")).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "Choose year and month" })
+      ).toHaveFocus();
+      // Moving around is not picking: the value stays until a day is chosen.
+      expect(onValueChange).not.toHaveBeenCalled();
+    });
+
+    it("returns to the days without moving when the year is pressed", async () => {
+      await openAt({ value: new Date(2026, 9, 15) });
+      await userEvent.click(
+        screen.getByRole("button", { name: "Choose year and month" })
+      );
+      await userEvent.click(
+        screen.getByRole("button", { name: "Back to days" })
+      );
+      expect(screen.getByText("2026년 10월")).toBeInTheDocument();
+    });
+
+    it("disables months and years outside minDate and maxDate", async () => {
+      await openAt({
+        maxDate: new Date(2026, 7, 31),
+        minDate: new Date(2026, 2, 10),
+        value: new Date(2026, 5, 1),
+      });
+      await userEvent.click(
+        screen.getByRole("button", { name: "Choose year and month" })
+      );
+
+      expect(screen.getByRole("button", { name: "2월" })).toBeDisabled();
+      expect(screen.getByRole("button", { name: "3월" })).toBeEnabled();
+      expect(screen.getByRole("button", { name: "8월" })).toBeEnabled();
+      expect(screen.getByRole("button", { name: "9월" })).toBeDisabled();
+      expect(
+        screen.getByRole("button", { name: "Previous year" })
+      ).toBeDisabled();
+      expect(screen.getByRole("button", { name: "Next year" })).toBeDisabled();
+    });
+  });
+
   describe("popup role", () => {
     /**
      * The calendar lived in a `Dropdown`, whose popup is Base UI's `Menu.Popup`
