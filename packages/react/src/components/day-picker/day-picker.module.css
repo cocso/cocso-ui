@@ -31,6 +31,85 @@
     height: 24px;
   }
 
+  /* The header's year and month, pressed to switch between the day grid and
+     the month grid. A bare button so the title reads as before; the caret,
+     hover fill and focus ring say it can be pressed. */
+  .title {
+    display: inline-flex;
+    gap: var(--cocso-spacing-1);
+    align-items: center;
+    padding-block: var(--cocso-spacing-1);
+    padding-inline: var(--cocso-spacing-2);
+    margin-inline-start: calc(var(--cocso-spacing-2) * -1);
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--cocso-radius-2);
+  }
+
+  .title:focus-visible,
+  .monthCell:focus-visible {
+    outline: 2px solid var(--cocso-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .monthView {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* `display: flex` would otherwise win over the `hidden` attribute. */
+  .monthView[hidden] {
+    display: none;
+  }
+
+  /* Same row as `.react-datepicker__header--custom`, which this view does
+     not render. */
+  .monthHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: var(--cocso-spacing-5);
+  }
+
+  /* Rows share whatever height the view was given, so the twelve months fill
+     the space the six weeks took. */
+  .monthGrid {
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: var(--cocso-spacing-3);
+  }
+
+  .monthCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--cocso-spacing-14);
+    font-size: var(--cocso-text-sm);
+    font-weight: var(--cocso-font-weight-medium);
+    color: var(--cocso-color-text-primary);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--cocso-radius-4);
+  }
+
+  /* `text-on-primary` with `interactive-primary`, as the selected day. */
+  .monthCell[data-selected] {
+    font-weight: var(--cocso-font-weight-semibold);
+    color: var(--cocso-color-text-on-primary);
+    background-color: var(--cocso-color-interactive-primary);
+  }
+
+  .monthCell:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
   :global(.react-datepicker__day).sunday {
     color: var(--cocso-color-feedback-danger-text);
   }
@@ -78,6 +157,15 @@
     }
 
     :global(.react-datepicker__day.react-datepicker__day--selected:hover) {
+      background-color: var(--cocso-color-interactive-primary-hover);
+    }
+
+    .title:hover,
+    .monthCell:not(:disabled):hover {
+      background-color: var(--cocso-color-interactive-secondary);
+    }
+
+    .monthCell[data-selected]:not(:disabled):hover {
       background-color: var(--cocso-color-interactive-primary-hover);
     }
   }
