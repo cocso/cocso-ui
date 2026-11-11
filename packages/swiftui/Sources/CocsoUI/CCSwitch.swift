@@ -64,28 +64,13 @@ public struct CCSwitch: View {
                     CCRoundedShape.pill
                         .fill(
                             (isOn ? style.checkedBgColor : style.switchBgColor)
-                                ?? CocsoTokens.Color.surfaceNeutral(colorScheme, brand: brand)
+                                ?? CocsoTokens.Color.interactiveControlOff(colorScheme, brand: brand)
                         )
-                        // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지
-                        // 보이지 않았다. 색은 레시피가 정한다.
-                        .overlay(
-                            CCRoundedShape.pill.strokeBorder(
-                                style.borderColor
-                                    ?? CocsoTokens.Color.borderStrong(colorScheme, brand: brand),
-                                lineWidth: 1
-                            )
-                        )
+                        // A filled track: the off fill clears 3:1 against the
+                        // page and the thumb on its own, so no outline is drawn.
                     Circle()
                         // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
                         .fill(style.thumbColor ?? CocsoTokens.Color.textOnPrimary(colorScheme, brand: brand))
-                        // 꺼진 상태에만 값이 온다 — 손잡이와 트랙이 1.23:1 이라
-                        // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다.
-                        .overlay(
-                            Circle().strokeBorder(
-                                style.thumbBorderColor ?? .clear,
-                                lineWidth: 1
-                            )
-                        )
                         .frame(width: thumb, height: thumb)
                         // The web's `--cocso-shadow-thumb`: the handle lifts off the track.
                         .ccShadow(CocsoTokens.Shadow.thumb(colorScheme))

@@ -474,8 +474,10 @@ describe("Contrast — recipe fills against their foregrounds", () => {
  *   what it encloses" is literally the same question as "against the page".
  *
  * What is left is a control drawing a boundary around a fill of a different
- * colour. Today that is the Switch and nothing else, which is exactly why the
- * defect lived so long — and why this is derived rather than enumerated.
+ * colour. The Switch was the only one, which is exactly why the defect lived
+ * so long — and why this is derived rather than enumerated. Its off track is
+ * now a solid fill with no boundary, so today the list is empty; the next
+ * control that draws one is caught without anyone adding it here.
  */
 const PAGE_SURFACES = new Set(["surface-primary", "surface-secondary"]);
 
@@ -597,6 +599,27 @@ describe("A control's boundary identifies it", () => {
       const ratio = contrast(
         resolve("border-control-muted", aliases),
         resolve(surface, aliases)
+      );
+      expect(ratio).toBeGreaterThanOrEqual(3);
+    });
+
+    /**
+     * The Switch's off track is a solid fill with no outline, so the fill
+     * itself is the boundary. It has to identify the control on the page and
+     * on a card, and the thumb has to be visible on it — the thumb's position
+     * is the control's state. Hover must not drop below the resting fill.
+     */
+    it.each([
+      ["interactive-control-off", "surface-primary"],
+      ["interactive-control-off", "surface-secondary"],
+      ["interactive-control-off", "text-on-primary"],
+      ["interactive-control-off-hover", "surface-primary"],
+      ["interactive-control-off-hover", "surface-secondary"],
+      ["interactive-control-off-hover", "text-on-primary"],
+    ])("%s clears 3:1 against %s", (fill, neighbour) => {
+      const ratio = contrast(
+        resolve(fill, aliases),
+        resolve(neighbour, aliases)
       );
       expect(ratio).toBeGreaterThanOrEqual(3);
     });

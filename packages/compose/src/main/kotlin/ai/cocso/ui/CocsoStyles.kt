@@ -1191,13 +1191,11 @@ enum class CCSwitchChecked {
 data class CCSwitchStyle(
     val thumbColor: ComposeColor? = null,
     val switchBgColor: ComposeColor? = null,
-    val borderColor: ComposeColor? = null,
     val checkedBgColor: ComposeColor? = null,
     val width: Dp? = null,
     val height: Dp? = null,
     val thumbSize: Dp? = null,
     val thumbOffset: Dp? = null,
-    val thumbBorderColor: ComposeColor? = null,
 )
 
 @Composable
@@ -1209,8 +1207,7 @@ fun cCSwitchStyle(
 ): CCSwitchStyle {
     var style = CCSwitchStyle()
     style = style.copy(thumbColor = CocsoTokens.Color.textOnPrimary())
-    style = style.copy(switchBgColor = CocsoTokens.Color.surfaceNeutral())
-    style = style.copy(borderColor = CocsoTokens.Color.borderControlMuted())
+    style = style.copy(switchBgColor = CocsoTokens.Color.interactiveControlOff())
     if (variant == CCSwitchVariant.primary) {
         style = style.copy(checkedBgColor = CocsoTokens.Color.interactivePrimary())
     }
@@ -1243,9 +1240,6 @@ fun cCSwitchStyle(
         style = style.copy(height = 18.dp)
         style = style.copy(thumbSize = 14.dp)
         style = style.copy(thumbOffset = 2.dp)
-    }
-    if (checked == CCSwitchChecked.`false`) {
-        style = style.copy(thumbBorderColor = CocsoTokens.Color.borderOnControl())
     }
     if (variant == CCSwitchVariant.primary && checked == CCSwitchChecked.`true`) {
         style = style.copy(switchBgColor = CocsoTokens.Color.interactivePrimary())

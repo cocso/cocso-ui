@@ -4,7 +4,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -77,7 +75,7 @@ fun CCSwitch(
     )
     val track by animateColorAsState(
         (if (checked) style.checkedBgColor else style.switchBgColor)
-            ?: CocsoTokens.Color.surfaceNeutral(),
+            ?: CocsoTokens.Color.interactiveControlOff(),
         animationSpec = CCMotion.colour(),
         label = "switch-track",
     )
@@ -85,11 +83,6 @@ fun CCSwitch(
         style.thumbColor ?: CocsoTokens.Color.textOnPrimary(),
         animationSpec = CCMotion.colour(),
         label = "switch-thumb-colour",
-    )
-    val thumbEdge by animateColorAsState(
-        style.thumbBorderColor ?: ComposeColor.Transparent,
-        animationSpec = CCMotion.colour(),
-        label = "switch-thumb-border",
     )
     val dim by animateFloatAsState(
         if (enabled) 1f else 0.4f,
@@ -130,14 +123,9 @@ fun CCSwitch(
             modifier = Modifier
                 .size(width = trackWidth, height = trackHeight)
                 .clip(CircleShape)
+                // A filled track: the off fill clears 3:1 against the page and
+                // the thumb on its own, so no outline is drawn.
                 .background(track)
-                // 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지 보이지
-                // 않았다. 색은 레시피가 정한다.
-                .border(
-                    1.dp,
-                    style.borderColor ?: CocsoTokens.Color.borderStrong(),
-                    CircleShape,
-                )
                 .ccFocusRing(isFocused, CircleShape)
                 .padding(horizontal = inset),
             contentAlignment = Alignment.CenterStart,
@@ -151,10 +139,6 @@ fun CCSwitch(
                     .clip(CircleShape)
                     // 레시피가 정한다. 세 플랫폼이 각자 고르던 자리였다.
                     .background(thumbFill)
-                    // 꺼진 상태에만 값이 온다 — 손잡이와 트랙이 1.23:1 이라
-                    // 경계가 필요하고, 켜진 트랙 위에서는 이미 18:1 이다. 켜지면
-                    // 투명으로 애니메이션되어 사라진다.
-                    .border(1.dp, thumbEdge, CircleShape)
             )
         }
         if (labelPosition == CCSwitchLabelPosition.Trailing) {

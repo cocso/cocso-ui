@@ -1294,7 +1294,9 @@ describe("resolveForFigma with state option", () => {
       { variant: "primary", size: "medium", checked: "false" },
       { state: "hover" }
     );
-    expect(hover._tokenRefs?.switchBgColor).toBe("interactive-secondary-hover");
+    expect(hover._tokenRefs?.switchBgColor).toBe(
+      "interactive-control-off-hover"
+    );
   });
 
   it("switch checked=true base resolves switchBgColor from compoundVariant", () => {
@@ -1312,7 +1314,7 @@ describe("resolveForFigma with state option", () => {
       size: "medium",
       checked: "false",
     });
-    expect(spec._tokenRefs?.switchBgColor).toBe("surface-neutral");
+    expect(spec._tokenRefs?.switchBgColor).toBe("interactive-control-off");
   });
 });
 
