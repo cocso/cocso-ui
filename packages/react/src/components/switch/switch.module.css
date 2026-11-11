@@ -25,9 +25,6 @@
     cursor: pointer;
     background-color: var(--cocso-switch-bg-color);
     border-radius: var(--cocso-radius-full);
-    /* 꺼진 트랙은 페이지와 1.23:1 이라 스위치가 어디 있는지 보이지 않았다.
-       테두리는 레시피가 정하고, 켜진 트랙에서는 그 자체가 이미 대비를 넘는다. */
-    box-shadow: 0 0 0 1px var(--cocso-switch-border-color);
     opacity: 1;
   }
 
@@ -58,11 +55,8 @@
     /* 레시피가 정한다 — 값은 그대로 `text-on-primary` 다. */
     background-color: var(--cocso-switch-thumb-color);
     border-radius: var(--cocso-radius-full);
-    /* 꺼진 상태에서만 값이 온다. 손잡이와 트랙이 1.23:1 이라 경계가 필요하고,
-       켜진 트랙 위에서는 이미 18:1 이라 필요 없다 (1.4.11). */
-    box-shadow:
-      0 0 0 1px var(--cocso-switch-thumb-border-color, transparent),
-      var(--cocso-shadow-thumb);
+    /* No ring: both tracks clear 3:1 against the thumb on their own. */
+    box-shadow: var(--cocso-shadow-thumb);
     transform: translate(var(--cocso-switch-thumb-offset), -50%);
     transition: transform var(--cocso-duration-fast) var(--cocso-easing-soft);
     will-change: transform;

@@ -120,4 +120,5 @@ export const colors = {
   textTertiary: "var(--cocso-color-text-tertiary)",
   textOnPrimary: "var(--cocso-color-text-on-primary)",
   surfaceNeutral: "var(--cocso-color-surface-neutral)",
+  interactiveControlOff: "var(--cocso-color-interactive-control-off)",
 };

@@ -1218,13 +1218,11 @@ public enum CCSwitchChecked: String, CaseIterable, Sendable {
 public struct CCSwitchStyle: Equatable, Sendable {
     public var thumbColor: SwiftUI.Color?
     public var switchBgColor: SwiftUI.Color?
-    public var borderColor: SwiftUI.Color?
     public var checkedBgColor: SwiftUI.Color?
     public var width: CGFloat?
     public var height: CGFloat?
     public var thumbSize: CGFloat?
     public var thumbOffset: CGFloat?
-    public var thumbBorderColor: SwiftUI.Color?
 
     /// Base, then each variant dimension, then compound
     /// variants — the order the CSS cascade encodes.
@@ -1237,8 +1235,7 @@ public struct CCSwitchStyle: Equatable, Sendable {
     ) -> CCSwitchStyle {
         var style = CCSwitchStyle()
         style.thumbColor = CocsoTokens.Color.textOnPrimary(scheme, brand: brand)
-        style.switchBgColor = CocsoTokens.Color.surfaceNeutral(scheme, brand: brand)
-        style.borderColor = CocsoTokens.Color.borderControlMuted(scheme, brand: brand)
+        style.switchBgColor = CocsoTokens.Color.interactiveControlOff(scheme, brand: brand)
         if variant == .primary {
             style.checkedBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)
         }
@@ -1271,9 +1268,6 @@ public struct CCSwitchStyle: Equatable, Sendable {
             style.height = 18
             style.thumbSize = 14
             style.thumbOffset = 2
-        }
-        if checked == .`false` {
-            style.thumbBorderColor = CocsoTokens.Color.borderOnControl(scheme, brand: brand)
         }
         if variant == .primary && checked == .`true` {
             style.switchBgColor = CocsoTokens.Color.interactivePrimary(scheme, brand: brand)

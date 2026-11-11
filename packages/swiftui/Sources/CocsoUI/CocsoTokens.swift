@@ -291,6 +291,12 @@ public enum CocsoTokens {
         public static func focusRing(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xF4F5F6) : SwiftUI.Color(hex: 0x131416)
         }
+        public static func interactiveControlOff(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0x8A949E) : SwiftUI.Color(hex: 0x7B858F)
+        }
+        public static func interactiveControlOffHover(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
+            scheme == .dark ? SwiftUI.Color(hex: 0xB1B8BE) : SwiftUI.Color(hex: 0x6D7882)
+        }
         public static func interactiveDanger(_ scheme: ColorScheme, brand _: CocsoBrand = .base) -> SwiftUI.Color {
             scheme == .dark ? SwiftUI.Color(hex: 0xDE3412) : SwiftUI.Color(hex: 0xDE3412)
         }

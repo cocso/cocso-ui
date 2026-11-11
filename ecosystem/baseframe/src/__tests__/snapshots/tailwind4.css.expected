@@ -184,6 +184,8 @@
   --color-interactive-disabled: var(--cocso-color-interactive-disabled);
   --color-interactive-neutral-hover: var(--cocso-color-interactive-neutral-hover);
   --color-interactive-neutral-active: var(--cocso-color-interactive-neutral-active);
+  --color-interactive-control-off: var(--cocso-color-interactive-control-off);
+  --color-interactive-control-off-hover: var(--cocso-color-interactive-control-off-hover);
   --color-interactive-danger: var(--cocso-color-interactive-danger);
   --color-interactive-danger-hover: var(--cocso-color-interactive-danger-hover);
   --color-interactive-danger-active: var(--cocso-color-interactive-danger-active);

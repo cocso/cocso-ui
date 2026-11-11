@@ -268,6 +268,27 @@ data:
       values:
         light: $color.neutral-300
         dark: $color.neutral-600
+    # The fill of a two-state control in its off state — the Switch's unchecked
+    # track. The track used to be `surface-neutral` (1.23:1 on the page) and
+    # drew its presence with two 1px rings instead: one around the track and
+    # one around the thumb. Side by side they read as one heavy dark outline.
+    #
+    # A filled track needs no ring. It has to clear 3:1 against the page, a
+    # card, and the thumb it carries (`text-on-primary`). Light `neutral-450`
+    # is the lightest value that does: 3.75 on white (page and thumb), 3.44 on
+    # `surface-secondary`; `neutral-400` is 2.82 on a card. Dark `neutral-400`
+    # is 5.98 against the `neutral-950` thumb and page, 5.25 on a card.
+    $color.interactive.control-off:
+      values:
+        light: $color.neutral-450
+        dark: $color.neutral-400
+    # Hover moves away from the page in both themes so it never drops below
+    # the off fill's contrast: light `neutral-500` 4.51 on white, dark
+    # `neutral-300` 9.19 against the dark thumb.
+    $color.interactive.control-off-hover:
+      values:
+        light: $color.neutral-500
+        dark: $color.neutral-300
     # Fixed-hue fills: a saturated accent reads on either surface as a filled
     # area, so these keep their value. They are fills, not text — Link painted
     # its label with interactive-info and its hover with interactive-info-active,

@@ -171,6 +171,12 @@ When asked to review comments on a GitHub PR:
   tokens — a control added tomorrow with a fill of its own is caught without
   anyone remembering this rule — and a recipe whose root is a panel rather than
   a control is exempted by name, with the reason.
+- Prefer a fill over an outline when a two-state control's off state needs to
+  be identifiable. The Switch used to outline a pale track and its thumb with
+  two 1px rings, which read as one heavy dark outline beside the label. Its off
+  track is now `interactive-control-off`, a solid fill clearing 3:1 against the
+  page, a card and the thumb, and it draws no ring. `contrast.test.ts` checks
+  that fill, and its hover, against all three.
 - Floating components (Dropdown, Popover, Tooltip) MUST set the overlay
   `z-index` on the `Positioner`, not the inner popup — the Positioner owns the
   stacking context via its `transform`, so a `z-index` on the popup alone is

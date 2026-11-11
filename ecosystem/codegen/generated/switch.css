@@ -2,8 +2,7 @@
 
 .cocso-switch {
   --cocso-switch-thumb-color: var(--cocso-color-text-on-primary);
-  --cocso-switch-switch-bg-color: var(--cocso-color-surface-neutral);
-  --cocso-switch-border-color: var(--cocso-color-border-control-muted);
+  --cocso-switch-switch-bg-color: var(--cocso-color-interactive-control-off);
 }
 
 .cocso-switch:where(.cocso-switch--variant-primary) {
@@ -52,11 +51,6 @@
   --cocso-switch-thumb-offset: 2px;
 }
 
-.cocso-switch:where(.cocso-switch--checked-false) {
-  --cocso-switch-thumb-border-color: var(--cocso-color-border-on-control);
-  --cocso-switch-switch-bg-color-hover: var(--cocso-color-interactive-secondary-hover);
-}
-
 .cocso-switch:where(.cocso-switch--variant-primary.cocso-switch--checked-true) {
   --cocso-switch-switch-bg-color: var(--cocso-color-interactive-primary);
 }
@@ -75,4 +69,8 @@
 
 .cocso-switch:where(.cocso-switch--variant-info.cocso-switch--checked-true) {
   --cocso-switch-switch-bg-color: var(--cocso-color-interactive-info);
+}
+
+.cocso-switch:where(.cocso-switch--checked-false) {
+  --cocso-switch-switch-bg-color-hover: var(--cocso-color-interactive-control-off-hover);
 }
