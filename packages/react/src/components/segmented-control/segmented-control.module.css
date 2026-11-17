@@ -19,12 +19,9 @@
     padding: var(--segmented-control-inset);
     background-color: var(--cocso-color-surface-secondary);
     border-radius: var(--cocso-radius-full);
-    /* The edge is what marks the control's extent, so it has to clear 3:1
-       against the page outside it and the fill inside it (WCAG 1.4.11).
-       `border-strong` does both: 4.51 / 4.13 on the light page and track,
-       4.09 / 3.59 on the dark ones. It is also the edge an `Input` draws, so
-       the control sits in a form as one of the fields. */
-    box-shadow: 0 0 0 1px var(--cocso-color-border-strong);
+    /* No edge: the track is the grey pill the web apps already draw, and the
+       selected segment is marked by the white pill and its heavier, darker
+       label. A ring here made every form that carries one look boxed in. */
   }
 
   .track.fit {
@@ -54,12 +51,10 @@
     inset-block: var(--segmented-control-inset);
     background-color: var(--cocso-color-surface-primary);
     border-radius: var(--cocso-radius-full);
-    /* A white pill on a near-white track is 1.09:1 — the selection would be
-       carried by font weight alone. The ring is `border-strong` again, which
-       clears 3:1 against the track and the pill in both themes. */
-    box-shadow:
-      0 0 0 1px var(--cocso-color-border-strong),
-      var(--cocso-shadow-xs);
+    /* The white pill on the grey track, lifted by a hairline shadow — the look
+       the web apps already had. The selected label also turns `text-primary`
+       and medium weight, so the choice does not rest on the pill alone. */
+    box-shadow: var(--cocso-shadow-xs);
     transition:
       inset-inline-start var(--cocso-duration-normal)
       var(--cocso-easing-default),

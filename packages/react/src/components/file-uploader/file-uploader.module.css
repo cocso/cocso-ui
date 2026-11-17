@@ -9,11 +9,9 @@
   /* The zone is a `<label>`, so a click anywhere on it opens the picker
      without a handler of its own.
 
-     `border-strong` on a `surface-secondary` fill. The dashed edge is the
-     only thing marking where a drop lands, so it is held to the control
-     boundary bar (3:1) against the page outside and the fill inside: 4.51 and
-     4.13 light, 4.09 and 3.59 dark. The `border-primary` the app stylesheet
-     used is a divider colour and does not clear it. */
+     A light dashed `border-primary` edge on a `surface-secondary` fill — the
+     drop zone the web apps already draw. The zone's prompt text and the plus
+     icon say what it is; the edge only outlines it. */
   .zone {
     position: relative;
     display: flex;
@@ -26,7 +24,7 @@
     text-align: center;
     cursor: pointer;
     background-color: var(--cocso-color-surface-secondary);
-    border: 1px dashed var(--cocso-color-border-strong);
+    border: 1px dashed var(--cocso-color-border-primary);
     border-radius: var(--cocso-radius-1);
     transition:
       border-color var(--cocso-duration-fast) var(--cocso-easing-default),
