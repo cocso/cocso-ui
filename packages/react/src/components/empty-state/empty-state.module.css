@@ -1,0 +1,25 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-4);
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--cocso-spacing-10);
+    padding-inline: var(--cocso-spacing-8);
+    text-align: center;
+
+    /* The light dashed frame the web apps already draw: decoration that marks
+       where the content goes, not a control boundary. */
+    border: 1px dashed var(--cocso-color-border-secondary);
+    border-radius: var(--cocso-radius-4);
+  }
+
+  .description {
+    max-inline-size: 28rem;
+  }
+
+  .action {
+    margin-block-start: var(--cocso-spacing-3);
+  }
+}

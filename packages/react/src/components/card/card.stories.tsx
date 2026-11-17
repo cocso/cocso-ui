@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../button";
 import { Card } from "./card";
 
 const meta = {
@@ -75,5 +76,48 @@ export const Paddings: Story = {
         Large padding
       </Card>
     </div>
+  ),
+};
+
+/**
+ * `Card.Header` keeps one height whether or not an action sits on its end;
+ * `gap` spaces the card's children.
+ */
+export const Composed: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+      <Card gap={16} style={{ width: 240 }} variant="outlined">
+        <Card.Header>
+          <Card.Title>Monthly revenue</Card.Title>
+          <Button size="small" variant="secondary">
+            Export
+          </Button>
+        </Card.Header>
+        <span>First line</span>
+        <span>Second line</span>
+      </Card>
+      <Card gap={16} style={{ width: 240 }} variant="outlined">
+        <Card.Header>
+          <Card.Title>No action</Card.Title>
+        </Card.Header>
+        <span>First line</span>
+        <span>Second line</span>
+      </Card>
+    </div>
+  ),
+};
+
+/** `render` swaps the element — here a button, so the whole card is the control. */
+export const AsButton: Story = {
+  render: () => (
+    <Card
+      gap={8}
+      render={<button type="button" />}
+      style={{ width: 240, textAlign: "start", font: "inherit" }}
+      variant="outlined"
+    >
+      <strong>Notice group</strong>
+      <span>Submitted on 2026-01-05</span>
+    </Card>
   ),
 };

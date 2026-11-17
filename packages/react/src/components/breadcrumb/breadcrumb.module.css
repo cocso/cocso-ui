@@ -32,4 +32,16 @@
     color: var(--cocso-color-text-tertiary);
     user-select: none;
   }
+
+  /* Links from `items`. They take the crumb colour rather than the browser's
+     link blue, and keep the underline that says they go somewhere. */
+  .link {
+    color: var(--cocso-breadcrumb-font-color);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .link:hover {
+    color: var(--cocso-color-text-primary);
+  }
 }

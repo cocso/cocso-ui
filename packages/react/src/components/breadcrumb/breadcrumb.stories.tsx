@@ -58,3 +58,19 @@ export const CustomSeparator: Story = {
     </Breadcrumb>
   ),
 };
+
+/**
+ * The path as data. Every step but the last links; the last is the current
+ * page. `renderLink` swaps the anchor for the app router's link.
+ */
+export const Items: Story = {
+  render: () => (
+    <Breadcrumb
+      items={[
+        { label: "Home", href: "#" },
+        { label: "Settlements", href: "#" },
+        { label: "January" },
+      ]}
+    />
+  ),
+};

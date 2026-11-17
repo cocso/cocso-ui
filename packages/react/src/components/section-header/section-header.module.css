@@ -1,0 +1,71 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-3);
+    min-inline-size: 0;
+  }
+
+  /* The row keeps one height whether or not it has actions, so the content
+     under a header does not move when a button comes and goes. */
+  .row {
+    display: flex;
+    gap: var(--cocso-spacing-5);
+    align-items: center;
+    justify-content: space-between;
+    min-block-size: var(--cocso-spacing-12);
+  }
+
+  .title {
+    flex: 1;
+    min-inline-size: 0;
+    margin: 0;
+    color: var(--cocso-color-text-primary);
+    word-break: keep-all;
+  }
+
+  .description {
+    margin: 0;
+    font-size: var(--cocso-text-xs);
+    color: var(--cocso-color-text-secondary);
+  }
+
+  .toggle {
+    flex-shrink: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--cocso-spacing-5);
+    align-items: center;
+  }
+
+  .actions[hidden] {
+    display: none;
+  }
+
+  /* The collapsed panel. Fixed to the viewport so a card's or a page's
+     overflow does not clip it; its place is measured off the toggle. It sits
+     on the popover layer like every other trigger-attached surface. */
+  .panel {
+    position: fixed;
+    z-index: var(--cocso-z-index-popover);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: var(--cocso-spacing-5);
+    background-color: var(--cocso-color-surface-primary);
+    border: 1px solid var(--cocso-color-border-secondary);
+    border-radius: var(--cocso-radius-4);
+    box-shadow: var(--cocso-shadow-popover);
+  }
+
+  /* Actions passed as one row of buttons still wrap inside the panel. */
+  .panel > * {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-inline-size: 100%;
+    white-space: normal;
+  }
+}

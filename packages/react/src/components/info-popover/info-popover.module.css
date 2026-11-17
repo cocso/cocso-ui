@@ -1,0 +1,46 @@
+@layer components {
+  /* A bare icon, but a full target: 24px clears WCAG 2.5.8 however small the
+     glyph is drawn. */
+  .trigger {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 24px;
+    min-block-size: 24px;
+    padding: 0;
+    color: var(--cocso-color-text-secondary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--cocso-radius-full);
+    transition: color var(--cocso-duration-fast) var(--cocso-easing-soft);
+  }
+
+  .trigger:hover,
+  .trigger[data-popup-open] {
+    color: var(--cocso-color-text-primary);
+  }
+
+  .trigger:focus-visible {
+    outline: 2px solid var(--cocso-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trigger {
+      transition: none;
+    }
+  }
+
+  /* Doubled so it beats `Popover`'s own module whichever loads first. */
+  .content.content {
+    inline-size: var(--cocso-info-popover-width);
+    max-inline-size: calc(100vw - var(--cocso-spacing-12));
+    font-weight: var(--cocso-font-weight-medium);
+    color: var(--cocso-color-text-primary);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+}

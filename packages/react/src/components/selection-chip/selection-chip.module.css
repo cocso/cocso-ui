@@ -1,0 +1,60 @@
+@layer components {
+  .chip {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-block: var(--cocso-spacing-2);
+    padding-inline: var(--cocso-spacing-5);
+    font-family: inherit;
+    font-size: var(--cocso-text-xs);
+    line-height: 1.5;
+    color: var(--cocso-color-text-secondary);
+    cursor: pointer;
+    background: none;
+
+    /* `border-strong`, not the `border-secondary` the app-internal version
+       used. The chip is a control and its edge is part of what identifies it,
+       which WCAG 1.4.11 asks 3:1 of: `border-secondary` is 1.23:1 on the light
+       page. Same token `FileRow` and `InputTrigger` draw their edge with. */
+    border: 1px solid var(--cocso-color-border-strong);
+    border-radius: var(--cocso-radius-full);
+    transition:
+      background-color var(--cocso-duration-fast) var(--cocso-easing-default),
+      border-color var(--cocso-duration-fast) var(--cocso-easing-default);
+  }
+
+  .chip:hover:not(:disabled) {
+    background-color: var(--cocso-color-surface-secondary);
+  }
+
+  .chip:focus-visible {
+    outline: 2px solid var(--cocso-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Semantic primary tokens rather than a fixed ramp step, so the chip follows
+     a rebranded primary and flips with the theme. The foreground is the `-text`
+     form of the role: `interactive-primary` is a fill and is never text. */
+  .chip.active {
+    color: var(--cocso-color-interactive-primary-text);
+    background-color: var(--cocso-color-interactive-primary-subtle);
+    border-color: var(--cocso-color-interactive-primary);
+  }
+
+  .chip.active:hover:not(:disabled) {
+    background-color: var(--cocso-color-interactive-primary-subtle);
+  }
+
+  /* WCAG 1.4.3 exempts an inactive control, and this is a real `<button
+     disabled>`, so dimming the whole chip is allowed here. */
+  .chip:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip {
+      transition: none;
+    }
+  }
+}

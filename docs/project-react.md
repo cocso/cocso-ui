@@ -21,7 +21,7 @@ React 19 (TypeScript), bundled via Rollup into CJS and ESM.
 
 ## In Scope
 
-- UI components: Accordion, Alert, Avatar, Badge, Breadcrumb, Button, Card, Checkbox, DateTimePicker, DayPicker, Dialog, Dropdown, Field, FileRow, Input, Link, MonthPicker, OneTimePasswordField, Pagination, Popover, Progress, RadioGroup, Select, Skeleton, Spinner, StockQuantityStatus, Switch, Tab, Toast, Tooltip, Typography.
+- UI components: Accordion, Alert, Avatar, Badge, Breadcrumb, Button, Card, Checkbox, CopyButton, DateTimePicker, DayPicker, Dialog, Dropdown, EmptyState, Field, FileRow, FileUploader, FormField, InfoPopover, Input, InputTrigger, Link, LoadingOverlay, MonthPicker, NumberInput, OneTimePasswordField, Pagination, Popover, Progress, RadioGroup, SectionHeader, SegmentedControl, Select, SelectionChip, Skeleton, Spinner, StockQuantityStatus, SummaryCard, Switch, Tab, Toast, Tooltip, Typography.
 - Design token integration via CSS custom properties from `@cocso-ui/css`.
 - Utility: `cn` helper for conditional className composition (clsx + tailwind-merge).
 - Dual package output: CJS (`dist/cjs/`) and ESM (`dist/esm/`).

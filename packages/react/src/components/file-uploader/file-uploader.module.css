@@ -1,0 +1,117 @@
+@layer components {
+  .uploader {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-5);
+    width: 100%;
+  }
+
+  /* The zone is a `<label>`, so a click anywhere on it opens the picker
+     without a handler of its own.
+
+     A light dashed `border-primary` edge on a `surface-secondary` fill — the
+     drop zone the web apps already draw. The zone's prompt text and the plus
+     icon say what it is; the edge only outlines it. */
+  .zone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-5);
+    align-items: center;
+    justify-content: center;
+    padding: var(--cocso-spacing-8);
+    color: var(--cocso-color-text-secondary);
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--cocso-color-surface-secondary);
+    border: 1px dashed var(--cocso-color-border-primary);
+    border-radius: var(--cocso-radius-1);
+    transition:
+      border-color var(--cocso-duration-fast) var(--cocso-easing-default),
+      background-color var(--cocso-duration-fast) var(--cocso-easing-default);
+  }
+
+  /* The input is focused, not the label, so the ring is drawn on the zone
+     while the input inside it shows keyboard focus. */
+  .zone:has(.input:focus-visible) {
+    outline: 2px solid var(--cocso-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .zone.compact {
+    flex-direction: row;
+    gap: var(--cocso-spacing-4);
+    padding-block: var(--cocso-spacing-5);
+    padding-inline: var(--cocso-spacing-7);
+    text-align: start;
+  }
+
+  /* Dragging over the zone. The edge goes solid in the primary colour — a
+     change of shape and of colour, so it reads in both themes. The fill takes
+     the primary tint and the text steps up to `text-primary`, which clears AA
+     on it (16.9:1 light, 14.8:1 dark); `text-secondary` on `surface-neutral`,
+     what the app stylesheet used, is 3.92:1 in the dark theme. */
+  .zone[data-drag-active="true"] {
+    color: var(--cocso-color-text-primary);
+    background-color: var(--cocso-color-interactive-primary-subtle);
+    border-color: var(--cocso-color-interactive-primary);
+    border-style: solid;
+  }
+
+  /* The edge quietens; the text does not. While disabled the zone shows only
+     the hint, and the hint is usually the reason it is disabled — so it keeps
+     `text-secondary` rather than fading. An inactive component's boundary is
+     exempt from 1.4.11, which is what lets `border-secondary` carry the
+     signal, as it does on `FileRow`. */
+  .zone[data-disabled="true"] {
+    cursor: not-allowed;
+    border-color: var(--cocso-color-border-secondary);
+  }
+
+  /* Visually hidden, not `display: none`: the input stays in the tab order
+     and in the accessibility tree, and the label's text is its name. */
+  .input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip-path: inset(50%);
+  }
+
+  .text {
+    word-break: keep-all;
+    text-wrap: balance;
+  }
+
+  /* The default zone puts the hint on its own line under the prompt. */
+  .zone:not(.compact) .prompt {
+    display: block;
+  }
+
+  .icon {
+    flex-shrink: 0;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: flex;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zone {
+      transition: none;
+    }
+  }
+}

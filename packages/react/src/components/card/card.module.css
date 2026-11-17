@@ -2,6 +2,7 @@
   .card {
     display: flex;
     flex-direction: column;
+    gap: var(--cocso-card-gap);
     padding: var(--cocso-card-padding);
     background-color: var(--cocso-card-bg-color);
     border: var(--cocso-card-border, none);
@@ -17,5 +18,26 @@
      one part CSS owns, and 16px is close to what SwiftUI's material draws. */
   .glass {
     backdrop-filter: blur(16px);
+  }
+
+  /* One height with or without an action on the end, so what follows does not
+     move when a button appears. The first child takes the free space. */
+  .header {
+    display: flex;
+    gap: var(--cocso-spacing-5);
+    align-items: center;
+    justify-content: space-between;
+    min-block-size: 32px;
+  }
+
+  .header > :first-child {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  /* Korean titles break between words, not inside them. */
+  .title {
+    margin: 0;
+    word-break: keep-all;
   }
 }

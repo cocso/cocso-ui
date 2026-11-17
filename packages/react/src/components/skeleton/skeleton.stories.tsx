@@ -62,3 +62,14 @@ export const ContentPlaceholder: Story = {
     </div>
   ),
 };
+
+/** `width` / `height` take pixels as numbers; `circle` is `variant="circular"`. */
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+      <Skeleton circle height={26} width={26} />
+      <Skeleton height={20} width={160} />
+      <Skeleton height={48} variant="rectangular" width="120px" />
+    </div>
+  ),
+};

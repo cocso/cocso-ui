@@ -1,0 +1,34 @@
+@layer components {
+  .overlay {
+    position: fixed;
+    inset: 0;
+
+    /* The dialog backdrop layer. Not `popover` or `tooltip`: those are for
+       surfaces attached to a trigger, and a page-wide block is not one. */
+    z-index: var(--cocso-z-index-overlay);
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-7);
+    align-items: center;
+    justify-content: center;
+    padding-inline: var(--cocso-spacing-10);
+
+    /* `surface-glass` is the translucent page tint that flips with the theme,
+       and is specified opaque enough for `text-primary` to clear AA over any
+       backdrop. No `color` is declared in this block: the text is painted by
+       `Typography` with semantic tokens. */
+    background-color: var(--cocso-color-surface-glass);
+    backdrop-filter: blur(2px);
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-3);
+    align-items: center;
+  }
+
+  .description {
+    text-align: center;
+  }
+}
