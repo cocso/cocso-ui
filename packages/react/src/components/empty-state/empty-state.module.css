@@ -1,0 +1,29 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-4);
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--cocso-spacing-10);
+    padding-inline: var(--cocso-spacing-8);
+    text-align: center;
+
+    /* `border-primary`, not the `border-secondary` the app-internal version
+       used. The frame is the whole point of the component — it is what says
+       "the content goes here, and it is empty" — and `border-secondary`
+       measures 1.23:1 on the light page, which is a frame nobody sees. The
+       frame is decoration, not a control boundary, so it is not held to the
+       3:1 of WCAG 1.4.11; it only has to be visible. */
+    border: 1px dashed var(--cocso-color-border-primary);
+    border-radius: var(--cocso-radius-4);
+  }
+
+  .description {
+    max-inline-size: 28rem;
+  }
+
+  .action {
+    margin-block-start: var(--cocso-spacing-3);
+  }
+}

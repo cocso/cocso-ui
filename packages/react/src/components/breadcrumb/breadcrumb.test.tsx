@@ -88,4 +88,63 @@ describe("Breadcrumb", () => {
       expect(breadcrumb.className).toContain("cocso-breadcrumb--size-md");
     });
   });
+
+  describe("items", () => {
+    const items = [
+      { label: "Home", href: "/" },
+      { label: "Products", href: "/products" },
+      { label: "Item", href: "/products/1" },
+    ];
+
+    it("links every step but the last", () => {
+      render(<Breadcrumb items={items} />);
+      expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+        "href",
+        "/"
+      );
+      expect(screen.getByRole("link", { name: "Products" })).toHaveAttribute(
+        "href",
+        "/products"
+      );
+      expect(screen.queryByRole("link", { name: "Item" })).toBeNull();
+    });
+
+    it('marks the last step aria-current="page"', () => {
+      render(<Breadcrumb items={items} />);
+      expect(screen.getByText("Item")).toHaveAttribute("aria-current", "page");
+    });
+
+    it("renders a step without href as text", () => {
+      render(<Breadcrumb items={[{ label: "Group" }, { label: "Current" }]} />);
+      expect(screen.queryByRole("link")).toBeNull();
+      expect(screen.getByText("Group")).toBeInTheDocument();
+    });
+
+    it("places a separator between steps only", () => {
+      render(<Breadcrumb items={items} separator="/" />);
+      expect(screen.getAllByText("/")).toHaveLength(2);
+    });
+
+    it("renders items instead of children", () => {
+      render(
+        <Breadcrumb items={[{ label: "From items" }]}>
+          <span>From children</span>
+        </Breadcrumb>
+      );
+      expect(screen.getByText("From items")).toBeInTheDocument();
+      expect(screen.queryByText("From children")).toBeNull();
+    });
+
+    it("renders links through renderLink", () => {
+      render(
+        <Breadcrumb
+          items={items}
+          renderLink={(props) => <a data-router-link="" {...props} />}
+        />
+      );
+      const link = screen.getByRole("link", { name: "Home" });
+      expect(link).toHaveAttribute("data-router-link");
+      expect(link).toHaveAttribute("href", "/");
+    });
+  });
 });

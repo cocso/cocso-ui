@@ -1,0 +1,63 @@
+@layer components {
+  /* The root carries the `input` recipe class, so the label's height and the
+     value's inset read the same `--cocso-input-*` the inputs beside them do.
+     Numbers copied off one field drift the first time the scale moves. */
+  .root {
+    display: flex;
+    gap: var(--cocso-spacing-5);
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Top-aligned, not centred: a control that grows to two lines (an uploader,
+     a list of chips) would otherwise pull its label down and break the left
+     edge of the form. The label centres its own text in an input-high box, so
+     a one-line row looks the same either way. */
+  .label {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--cocso-spacing-2);
+    align-items: center;
+    inline-size: var(--cocso-form-field-label-width, 128px);
+    min-block-size: var(--cocso-input-height);
+    font-size: var(--cocso-text-sm);
+    font-weight: var(--cocso-font-weight-medium);
+    color: var(--cocso-color-text-secondary);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  /* `feedback-danger-text`, not the fill-level `feedback-danger`, which is
+     below AA on a card in the light theme. */
+  .required {
+    color: var(--cocso-color-feedback-danger-text);
+  }
+
+  .root > :not(.label) {
+    min-inline-size: 0;
+  }
+
+  .value {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--cocso-input-height);
+    padding-inline: var(--cocso-input-padding-x);
+    font-size: var(--cocso-input-font-size);
+    color: var(--cocso-color-text-primary);
+  }
+
+  /* On a phone the label column would squeeze the control to ~200px, so the
+     label moves above it. */
+  @media (max-width: 767px) {
+    .root {
+      flex-direction: column;
+      gap: var(--cocso-spacing-3);
+      align-items: stretch;
+    }
+
+    .label {
+      inline-size: auto;
+      min-block-size: 0;
+    }
+  }
+}

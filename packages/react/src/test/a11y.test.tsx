@@ -36,25 +36,36 @@ import { Breadcrumb } from "../components/breadcrumb";
 import { Button } from "../components/button";
 import { Card } from "../components/card";
 import { Checkbox } from "../components/checkbox";
+import { CopyButton } from "../components/copy-button";
 import { DateTimePicker } from "../components/date-time-picker";
 import { DayPicker } from "../components/day-picker";
 import { Dialog } from "../components/dialog";
 import { Dropdown } from "../components/dropdown";
+import { EmptyState } from "../components/empty-state";
 import { Field } from "../components/field";
 import { FileRow } from "../components/file-row";
+import { FileUploader } from "../components/file-uploader";
+import { FormField } from "../components/form-field";
+import { InfoPopover } from "../components/info-popover";
 import { Input } from "../components/input";
 import { InputTrigger } from "../components/input-trigger";
 import { Link } from "../components/link";
+import { LoadingOverlay } from "../components/loading-overlay";
 import { MonthPicker } from "../components/month-picker";
+import { NumberInput } from "../components/number-input";
 import { OneTimePasswordField } from "../components/one-time-password-field";
 import { Pagination } from "../components/pagination";
 import { Popover } from "../components/popover";
 import { Progress } from "../components/progress";
 import { RadioGroup } from "../components/radio-group";
+import { SectionHeader } from "../components/section-header";
+import { SegmentedControl } from "../components/segmented-control";
 import { Select } from "../components/select";
+import { SelectionChip } from "../components/selection-chip";
 import { Skeleton } from "../components/skeleton";
 import { Spinner } from "../components/spinner";
 import { StockQuantityStatus } from "../components/stock-quantity-status";
+import { SummaryCard } from "../components/summary-card";
 import { Switch } from "../components/switch";
 import { Tab } from "../components/tab";
 import { Toaster } from "../components/toast";
@@ -217,6 +228,131 @@ const CASES: [string, () => ReactElement, Scope?][] = [
       <Field error="필수 항목입니다" htmlFor="name-2" label="이름">
         <Input id="name-2" />
       </Field>
+    ),
+  ],
+  ["CopyButton", () => <CopyButton text="ck_live_0000000000" />],
+  ["EmptyState", () => <EmptyState title="등록된 품목이 없습니다" />],
+  [
+    "EmptyState, with description and action",
+    () => (
+      <EmptyState
+        action={
+          <Button size="small" variant="outline">
+            품목 추가
+          </Button>
+        }
+        description="품목을 추가하면 정산에서 제외됩니다."
+        title="등록된 품목이 없습니다"
+      />
+    ),
+  ],
+  [
+    "FileUploader",
+    () => <FileUploader files={[]} onFilesChange={() => undefined} />,
+  ],
+  [
+    "FileUploader, compact with a chosen file",
+    () => (
+      <FileUploader
+        compact
+        files={[
+          {
+            file: new File(["x"], "사업자등록증.pdf", {
+              type: "application/pdf",
+            }),
+            name: "사업자등록증.pdf",
+            size: 1,
+          },
+        ]}
+        maxFiles={3}
+        onFilesChange={() => undefined}
+      />
+    ),
+  ],
+  [
+    "FormField",
+    () => (
+      <FormField>
+        <FormField.Label required>이름</FormField.Label>
+        <FormField.Input required />
+      </FormField>
+    ),
+  ],
+  [
+    "FormField, trigger",
+    () => (
+      <FormField>
+        <FormField.Label>시작월</FormField.Label>
+        <FormField.InputTrigger placeholder="월 선택" />
+      </FormField>
+    ),
+  ],
+  [
+    "InfoPopover, open",
+    () => (
+      <InfoPopover defaultOpen label="합산 기준">
+        같은 처방월의 금액은 합산됩니다.
+      </InfoPopover>
+    ),
+    "document",
+  ],
+  [
+    "LoadingOverlay",
+    () => (
+      <LoadingOverlay
+        description="창을 닫지 마세요."
+        message="업로드 중입니다"
+        open
+      />
+    ),
+  ],
+  [
+    "NumberInput",
+    () => (
+      <NumberInput
+        label="금액"
+        onValueChange={() => undefined}
+        value={1_234_567}
+      />
+    ),
+  ],
+  [
+    "SectionHeader",
+    () => (
+      <SectionHeader
+        actions={<Button size="x-small">추가</Button>}
+        defaultActionsOpen
+        description="설명"
+        title="의약품 관리"
+      />
+    ),
+  ],
+  [
+    "SegmentedControl",
+    () => (
+      <SegmentedControl
+        aria-label="집계 기간"
+        description="정산 기준 기간"
+        onChange={() => undefined}
+        options={[
+          { value: "day", label: "일별" },
+          { value: "week", label: "주별" },
+        ]}
+        value="week"
+      />
+    ),
+  ],
+  ["SelectionChip", () => <SelectionChip>전체 선택</SelectionChip>],
+  [
+    "SelectionChip, active",
+    () => <SelectionChip active>전체 선택</SelectionChip>,
+  ],
+  [
+    "SummaryCard",
+    () => (
+      <SummaryCard icon={<DeleteIcon />} label="총 CSO사 수">
+        <SummaryCard.Value count={128} href="/dealers" suffix="개" />
+      </SummaryCard>
     ),
   ],
   ["FileRow", () => <FileRow name="사업자등록증.pdf" />],

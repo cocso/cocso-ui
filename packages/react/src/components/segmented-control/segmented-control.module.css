@@ -1,0 +1,167 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cocso-spacing-3);
+    width: 100%;
+  }
+
+  .root.rootFit {
+    width: fit-content;
+  }
+
+  .track {
+    --segmented-control-inset: var(--cocso-spacing-2);
+
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: var(--segmented-control-inset);
+    background-color: var(--cocso-color-surface-secondary);
+    border-radius: var(--cocso-radius-full);
+    /* The edge is what marks the control's extent, so it has to clear 3:1
+       against the page outside it and the fill inside it (WCAG 1.4.11).
+       `border-strong` does both: 4.51 / 4.13 on the light page and track,
+       4.09 / 3.59 on the dark ones. It is also the edge an `Input` draws, so
+       the control sits in a form as one of the fields. */
+    box-shadow: 0 0 0 1px var(--cocso-color-border-strong);
+  }
+
+  .track.fit {
+    width: fit-content;
+  }
+
+  /* Heights match the `Input` sizes it sits beside: 32px is `small`, 28px is
+     `x-small`. A minimum, so a two-line option can grow the track. */
+  .track.medium {
+    min-height: 32px;
+  }
+
+  .track.small {
+    min-height: 28px;
+  }
+
+  /* Dims the control only. The description under it still has to be read. */
+  .track[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  /* The selected segment's fill. It is a sibling of the segments, not a
+     background on one, so it can slide between them. */
+  .indicator {
+    position: absolute;
+    inset-block: var(--segmented-control-inset);
+    background-color: var(--cocso-color-surface-primary);
+    border-radius: var(--cocso-radius-full);
+    /* A white pill on a near-white track is 1.09:1 — the selection would be
+       carried by font weight alone. The ring is `border-strong` again, which
+       clears 3:1 against the track and the pill in both themes. */
+    box-shadow:
+      0 0 0 1px var(--cocso-color-border-strong),
+      var(--cocso-shadow-xs);
+    transition:
+      inset-inline-start var(--cocso-duration-normal)
+      var(--cocso-easing-default),
+      width var(--cocso-duration-normal) var(--cocso-easing-default),
+      opacity var(--cocso-duration-fast) var(--cocso-easing-default);
+  }
+
+  /* Even split: positioned from the option count and selected index, on the
+     inline axis so it follows the writing direction. */
+  .even .indicator {
+    inset-inline-start: calc(
+      var(--segmented-control-inset) +
+      (100% - var(--segmented-control-inset) * 2) /
+      var(--segmented-control-count, 1) *
+      var(--segmented-control-index, 0)
+    );
+    width: calc(
+      (100% - var(--segmented-control-inset) * 2) /
+      var(--segmented-control-count, 1)
+    );
+  }
+
+  /* Content width: positioned from the selected segment's measured box. */
+  .fit .indicator {
+    inset-inline-start: var(--segmented-control-indicator-start, 0);
+    width: var(--segmented-control-indicator-size, 0);
+  }
+
+  .indicator.indicatorHidden {
+    opacity: 0;
+  }
+
+  .segment {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding-block: var(--cocso-spacing-2);
+    padding-inline: var(--cocso-spacing-7);
+    font-size: var(--cocso-text-sm);
+    line-height: 1.4;
+    color: var(--cocso-color-text-secondary);
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    border-radius: var(--cocso-radius-full);
+    transition: color var(--cocso-duration-fast) var(--cocso-easing-soft);
+  }
+
+  .fit .segment {
+    flex: none;
+  }
+
+  .twoLine .segment {
+    padding-block: var(--cocso-spacing-4);
+    line-height: 1.25;
+  }
+
+  .segment[data-checked] {
+    font-weight: var(--cocso-font-weight-medium);
+    color: var(--cocso-color-text-primary);
+  }
+
+  .segment:not([data-checked], [data-disabled]):hover {
+    color: var(--cocso-color-text-primary);
+  }
+
+  .segment:focus-visible {
+    outline: 2px solid var(--cocso-color-focus-ring);
+    outline-offset: 0;
+  }
+
+  .segment[data-disabled] {
+    cursor: not-allowed;
+  }
+
+  .label {
+    display: block;
+  }
+
+  .optionDescription {
+    display: block;
+    margin-block-start: var(--cocso-spacing-2);
+    font-size: var(--cocso-text-xs);
+    font-weight: var(--cocso-font-weight-regular);
+    color: var(--cocso-color-text-secondary);
+  }
+
+  .description {
+    font-size: var(--cocso-text-xs);
+    color: var(--cocso-color-text-secondary);
+  }
+
+  /* Motion is decoration here; the selection reads the same without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .indicator,
+    .segment {
+      transition: none;
+    }
+  }
+}
