@@ -13,9 +13,13 @@ import DatePicker from "react-datepicker";
 import { cn } from "../../cn";
 import { Button } from "../button";
 import { Popover } from "../popover";
-import { Typography } from "../typography";
 import "../picker/picker-chrome.module.css";
 import "../picker/picker-day-grid.module.css";
+import {
+  CalendarTitle,
+  useYearMonthView,
+  YearMonthView,
+} from "../picker/year-month-view";
 import styles from "./date-time-picker.module.css";
 
 export interface DateTimePickerProps
@@ -92,14 +96,25 @@ export function DateTimePicker({
   const [draft, setDraft] = useState<Date | null>(null);
   const selected = value ?? draft;
 
-  // The month to open on: `minDate`'s, if it is still ahead of today.
-  const openToDate = useMemo(() => {
+  // The month to open on: the selection's, else `minDate`'s if it is still
+  // ahead of today, else today's.
+  const openingMonth = () => {
     if (selected) {
-      return undefined;
+      return selected;
     }
     const now = new Date();
-    return minDate && minDate.getTime() > now.getTime() ? minDate : undefined;
-  }, [selected, minDate]);
+    return minDate && minDate.getTime() > now.getTime() ? minDate : now;
+  };
+  // The header opens a year-and-month grid, as in DayPicker — a date years
+  // away is a few clicks instead of one per month.
+  const calendar = useYearMonthView(openingMonth);
+
+  const handleOpenChange = (next: boolean) => {
+    setOpen(next);
+    if (next) {
+      calendar.reset(openingMonth());
+    }
+  };
 
   // A bound that only applies on the day it falls on: on any other day the
   // whole day is open. Without this a `minDate` of 3pm today would also cut
@@ -141,7 +156,7 @@ export function DateTimePicker({
 
   return (
     <div className={cn(styles.root, className)} ref={ref} {...props}>
-      <Popover onOpenChange={setOpen} open={open}>
+      <Popover onOpenChange={handleOpenChange} open={open}>
         <Popover.Trigger
           render={
             trigger ?? (
@@ -157,80 +172,100 @@ export function DateTimePicker({
           aria-label="Select date and time"
           className={styles.content}
         >
-          <DatePicker
-            dateFormat={dateFormat}
-            dayClassName={(date) => {
-              const day = date.getDay();
-              if (day === 0) {
-                return styles.sunday;
-              }
-              if (day === 6) {
-                return styles.saturday;
-              }
-              return "";
-            }}
-            disabled={disabled}
-            filterTime={filterTime}
-            // Six weeks always, for the same reason as DayPicker: a five-week month made
-            // the panel shorter, and paging into a six-week one could flip it above the trigger.
-            fixedHeight
-            inline
+          {/* Both views stay mounted and only `hidden` flips, so the pressed
+              button is never detached mid-press — a detached target can read
+              as a press outside the panel and close it. */}
+          <YearMonthView
+            currentMonthRef={calendar.currentMonthRef}
+            hidden={calendar.view !== "month"}
             locale={locale}
             maxDate={maxDate}
-            maxTime={bounds.maxTime}
             minDate={minDate}
-            minTime={bounds.minTime}
-            onChange={handleChange}
-            openToDate={openToDate}
-            renderCustomHeader={({
-              date,
-              decreaseMonth,
-              increaseMonth,
-              prevMonthButtonDisabled,
-              nextMonthButtonDisabled,
-            }) => (
-              <>
-                <Typography size="small" type="body" weight="semibold">
-                  {date.toLocaleDateString(locale.code ?? "ko-KR", {
-                    year: "numeric",
-                    month: "long",
-                  })}
-                </Typography>
-
-                <div className={styles.menu}>
-                  <Button
-                    aria-label="Previous month"
-                    className={styles.arrow}
-                    disabled={prevMonthButtonDisabled}
-                    onClick={decreaseMonth}
-                    size="x-small"
-                    svgOnly
-                    type="button"
-                    variant="outline"
-                  >
-                    <ArrowIOSBackwardIcon />
-                  </Button>
-                  <Button
-                    aria-label="Next month"
-                    className={styles.arrow}
-                    disabled={nextMonthButtonDisabled}
-                    onClick={increaseMonth}
-                    size="x-small"
-                    svgOnly
-                    type="button"
-                    variant="outline"
-                  >
-                    <ArrowIOSForwardIcon />
-                  </Button>
-                </div>
-              </>
-            )}
-            selected={selected ?? undefined}
-            showPopperArrow={false}
-            showTimeSelect
-            timeCaption={timeCaption}
-            timeIntervals={timeIntervals}
+            minHeight={calendar.dayViewHeight}
+            onBack={() => calendar.changeView("day")}
+            onPick={calendar.jumpTo}
+            onYearChange={calendar.setViewDate}
+            selected={selected}
+            viewDate={calendar.viewDate}
           />
+          <div hidden={calendar.view !== "day"}>
+            <DatePicker
+              dateFormat={dateFormat}
+              dayClassName={(date) => {
+                const day = date.getDay();
+                if (day === 0) {
+                  return styles.sunday;
+                }
+                if (day === 6) {
+                  return styles.saturday;
+                }
+                return "";
+              }}
+              disabled={disabled}
+              filterTime={filterTime}
+              // Six weeks always, for the same reason as DayPicker: a five-week month made
+              // the panel shorter, and paging into a six-week one could flip it above the trigger.
+              fixedHeight
+              inline
+              key={calendar.calendarKey}
+              locale={locale}
+              maxDate={maxDate}
+              maxTime={bounds.maxTime}
+              minDate={minDate}
+              minTime={bounds.minTime}
+              onChange={handleChange}
+              onMonthChange={calendar.setViewDate}
+              openToDate={calendar.viewDate}
+              renderCustomHeader={({
+                date,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }) => (
+                <>
+                  <CalendarTitle
+                    date={date}
+                    locale={locale}
+                    onPress={(panel) => calendar.openMonths(date, panel)}
+                    ref={calendar.titleRef}
+                  />
+
+                  <div className={styles.menu}>
+                    <Button
+                      aria-label="Previous month"
+                      className={styles.arrow}
+                      disabled={prevMonthButtonDisabled}
+                      onClick={decreaseMonth}
+                      size="x-small"
+                      svgOnly
+                      type="button"
+                      variant="outline"
+                    >
+                      <ArrowIOSBackwardIcon />
+                    </Button>
+                    <Button
+                      aria-label="Next month"
+                      className={styles.arrow}
+                      disabled={nextMonthButtonDisabled}
+                      onClick={increaseMonth}
+                      size="x-small"
+                      svgOnly
+                      type="button"
+                      variant="outline"
+                    >
+                      <ArrowIOSForwardIcon />
+                    </Button>
+                  </div>
+                </>
+              )}
+              selected={selected ?? undefined}
+              showPopperArrow={false}
+              showTimeSelect
+              timeCaption={timeCaption}
+              timeIntervals={timeIntervals}
+            />
+          </div>
         </Popover.Content>
       </Popover>
     </div>
