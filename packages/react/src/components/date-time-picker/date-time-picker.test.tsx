@@ -189,4 +189,64 @@ describe("DateTimePicker", () => {
       ).toBeInTheDocument();
     });
   });
+
+  describe("year and month view", () => {
+    it("opens the month grid from the header and lands on the picked month", async () => {
+      const onValueChange = vi.fn();
+      render(
+        <DateTimePicker
+          onValueChange={onValueChange}
+          trigger={trigger}
+          value={new Date(2026, 9, 15, 9, 0)}
+        />
+      );
+      await openPopover();
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Choose year and month" })
+      );
+      expect(
+        screen.getByRole("button", { name: "Back to days" })
+      ).toHaveTextContent("2026년");
+      expect(screen.getByRole("button", { name: "10월" })).toHaveAttribute(
+        "aria-current",
+        "date"
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Previous year" })
+      );
+      await userEvent.click(screen.getByRole("button", { name: "3월" }));
+
+      expect(screen.getByText("2025년 3월")).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "Choose year and month" })
+      ).toHaveFocus();
+      // Moving around is not picking: the value stays until a day and a time are chosen.
+      expect(onValueChange).not.toHaveBeenCalled();
+    });
+
+    it("disables months and years outside minDate and maxDate", async () => {
+      render(
+        <DateTimePicker
+          maxDate={new Date(2026, 7, 31)}
+          minDate={new Date(2026, 2, 10)}
+          trigger={trigger}
+          value={new Date(2026, 5, 1, 9, 0)}
+        />
+      );
+      await openPopover();
+      await userEvent.click(
+        screen.getByRole("button", { name: "Choose year and month" })
+      );
+
+      expect(screen.getByRole("button", { name: "2월" })).toBeDisabled();
+      expect(screen.getByRole("button", { name: "3월" })).toBeEnabled();
+      expect(screen.getByRole("button", { name: "9월" })).toBeDisabled();
+      expect(
+        screen.getByRole("button", { name: "Previous year" })
+      ).toBeDisabled();
+      expect(screen.getByRole("button", { name: "Next year" })).toBeDisabled();
+    });
+  });
 });
