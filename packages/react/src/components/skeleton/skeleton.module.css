@@ -1,46 +1,9 @@
 @layer components {
   .skeleton {
-    /* The edges fade from fully transparent to the fill, so the placeholder
-       melts into whatever surface it sits on instead of ending in a hard
-       outline. Two linear masks intersected fade all four sides; a side's fade
-       is capped at a quarter of that side so a 16px text line keeps its body.
-       `--cocso-skeleton-edge-fade: 0px` turns it off. */
-    --cocso-skeleton-edge-fade-size: min(
-      var(--cocso-skeleton-edge-fade, 12px),
-      25%
-    );
     width: var(--cocso-skeleton-width, 100%);
     height: var(--cocso-skeleton-height);
     background-color: var(--cocso-skeleton-bg-color);
     border-radius: var(--cocso-skeleton-border-radius);
-
-    mask-image:
-      linear-gradient(
-        to right,
-        transparent,
-        #000 var(--cocso-skeleton-edge-fade-size),
-        #000 calc(100% - var(--cocso-skeleton-edge-fade-size)),
-        transparent
-      ),
-      linear-gradient(
-        to bottom,
-        transparent,
-        #000 var(--cocso-skeleton-edge-fade-size),
-        #000 calc(100% - var(--cocso-skeleton-edge-fade-size)),
-        transparent
-      );
-    mask-composite: intersect;
-  }
-
-  /* A circle fades from its rim inward rather than along four straight
-     sides, which would leave its silhouette square. */
-  :global(.cocso-skeleton--variant-circular).skeleton {
-    mask-image: radial-gradient(
-      closest-side,
-      #000 calc(100% - var(--cocso-skeleton-edge-fade, 12px)),
-      transparent
-    );
-    mask-composite: add;
   }
 
   .pulse {
